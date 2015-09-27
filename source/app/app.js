@@ -1,4 +1,5 @@
-var app = require('app');  // Module to control application life.
+var app = require('app'), // Module to control application life.
+    path = require('path');
 var BrowserWindow = require('browser-window');  // Module to create native browser window.
 
 // Report crashes to our server.
@@ -25,7 +26,7 @@ app.on('ready', function() {
   console.log("READY");
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/source/public/index.html');
+  mainWindow.loadUrl('file://' + path.resolve(__dirname, '../public/index.html'));
 
   // Open the DevTools.
   //mainWindow.openDevTools();
