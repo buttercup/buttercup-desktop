@@ -22,6 +22,25 @@ module.exports = function(grunt) {
 		// 	}
 		// },
 
+		exec: {
+			start: {
+				command: 'electron ' + __dirname,
+				stdout: false,
+				stderr: false
+			}
+		},
+
+		jade: {
+			app: {
+				files: {
+					'source/public/index.html': ['source/resources/jade/index.jade'],
+				},
+				options: {
+					debug: false
+				}
+			}
+		},
+
 		mkdir: {
 			publicDir: {
 				options: {
@@ -83,8 +102,13 @@ module.exports = function(grunt) {
 
 	grunt.registerTask("build", [
 		"clean:publicDir",
-		"mkdir:publicDir"
+		"mkdir:publicDir",
+		"jade:app"
 		//"scantreeConcat:main"
+	]);
+
+	grunt.registerTask("start", [
+		"exec:start"
 	]);
 
 	//grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
