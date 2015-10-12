@@ -1,39 +1,36 @@
 /* global module, require */
 
 module.exports = function(grunt) {
-
 	"use strict";
 
 	require('load-grunt-tasks')(grunt);
 
 	grunt.initConfig({
-
 		clean: {
-			publicDir: ["source/public/**/*"]
+			publicDir: [
+				"source/public/js/**/*",
+				"source/public/index.html",
+				"source/public/css/**/*"
+			]
 		},
-
-		// copy: {
-		// 	development: {
-		// 		expand: true,
-		// 		src: 'development/pages/*.html',
-		// 		dest: 'build/',
-		// 		flatten: true,
-		// 		filter: 'isFile',
-		// 	}
-		// },
 
 		exec: {
 			start: {
 				command: 'electron ' + __dirname,
 				stdout: false,
 				stderr: false
+			},
+			jspm: {
+				command: 'jspm install',
+				stdout: true,
+				stderr: true
 			}
 		},
 
 		jade: {
 			app: {
 				files: {
-					'source/public/index.html': ['source/resources/jade/index.jade'],
+					'source/public/index.html': ['source/resources/jade/index.jade']
 				},
 				options: {
 					debug: false
@@ -49,9 +46,22 @@ module.exports = function(grunt) {
 						'source/public/css',
 						'source/public/js'
 					]
-				},
-			},
-		}
+				}
+			}
+		},
+
+		sync: {
+			scripts: {
+				files: [{
+					cwd: 'source/resources/js',
+					src: [
+						'**' /* Include everything */
+					],
+					dest: 'source/public/js'
+				}],
+				verbose: true
+			}
+		},
 
 		// jasmine: {
 		// 	main: {
@@ -73,38 +83,34 @@ module.exports = function(grunt) {
 		// 		jshintrc: ".jshintrc"
 		// 	}
 		// },
-		
-		// scantreeConcat: {
-		// 	main: {
-		// 		baseDir: "source/",
-		// 		scanDir: "source/",
-		// 		output: "build/sdk.js",
-		// 		options: {
-		// 			header: "partial/header.js",
-		// 			footer: "partial/footer.js"
-		// 		}
-		// 	}
-		// },
 
-		// watch: {
-		// 	scripts: {
-		// 		files: ['source/**/*.js', "development/**/*.html"],
-		// 		tasks: ['build', 'copy:development'],
-		// 		options: {
-		// 			spawn: false,
-		// 		}
-		// 	}
-		// }
-
+		watch: {
+			options: {
+				spawn: false
+			},
+			scripts: {
+				files: ['source/resources/js/**/*.js'],
+				tasks: ['sync']
+			},
+			jade: {
+				files: ['source/resources/jade/**/*.jade'],
+				tasks: ['jade:app']
+			}
+		}
 	});
 
 	grunt.registerTask("default", ["build", "start"]);
 
 	grunt.registerTask("build", [
 		"clean:publicDir",
-		"mkdir:publicDir",
-		"jade:app"
-		//"scantreeConcat:main"
+		"jade:app",
+		"sync:scripts"
+	]);
+
+	grunt.registerTask("setup", [
+		"build",
+		"exec:jspm",
+		"start"
 	]);
 
 	grunt.registerTask("start", [

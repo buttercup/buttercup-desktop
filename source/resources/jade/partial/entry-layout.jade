@@ -8,6 +8,11 @@ html
 				body {
 					background-color: white;
 				}
+		block scripts
+			script(src="jspm_packages/system.js")
+			script(src="js/config.js")
+			script.
+				System.import('./js/main');
 
 	body
 		block header

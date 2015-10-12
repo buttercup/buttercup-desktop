@@ -29,6 +29,23 @@
     "grunt-contrib-jade": "^0.15.0",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
+    "jspm": "^0.16.12",
     "load-grunt-tasks": "^3.3.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "source/public"
+    },
+    "configFile": "source/public/js/config.js",
+    "dependencies": {},
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "dependencies": {
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sync": "^0.4.1"
   }
 }
