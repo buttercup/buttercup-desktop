@@ -1,9 +1,9 @@
 "use strict";
 
-class Layout {
-    static render() {
-        document.querySelector('p').innerHTML = "Hi! I’m Coming from ES6.";
-    }
-}
+// Import Deps
+import Layout from 'app/views/layout';
+import Backbone from 'backbone';
 
-Layout.render();
+// Create Instances
+window.Layout = new Layout();
+Backbone.history.start();
