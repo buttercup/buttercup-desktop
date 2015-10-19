@@ -38,6 +38,17 @@ module.exports = function(grunt) {
 			}
 		},
 
+		sass: {
+			options: {
+				sourceMap: false
+			},
+			app: {
+				files: {
+					'source/public/css/style.css': 'source/resources/css/style.scss'
+				}
+			}
+		},
+
 		mkdir: {
 			publicDir: {
 				options: {
@@ -89,8 +100,12 @@ module.exports = function(grunt) {
 				spawn: false
 			},
 			scripts: {
-				files: ['source/resources/js/**/*.js'],
+				files: ['source/resources/js/**/*.*'],
 				tasks: ['sync']
+			},
+			styles: {
+				files: ['source/resources/css/**/*.scss'],
+				tasks: ['sass:app']
 			},
 			jade: {
 				files: ['source/resources/jade/**/*.jade'],
