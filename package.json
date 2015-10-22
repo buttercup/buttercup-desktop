@@ -1,5 +1,5 @@
 {
-  "name": "buttercup",
+  "name": "buttercup-client",
   "version": "0.0.1",
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
@@ -22,11 +22,12 @@
   },
   "homepage": "https://github.com/perry-mitchell/buttercup#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.3",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jade": "^0.15.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sync": "^0.4.1",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
     "grunt-sass": "^1.0.0",
@@ -51,7 +52,6 @@
     }
   },
   "dependencies": {
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-sync": "^0.4.1"
+    "buttercup": "^0.5.1"
   }
 }

@@ -1,8 +1,9 @@
 "use strict";
 
-var app = require('app'),
-    path = require('path'),
-    BrowserWindow = require('browser-window');
+var app             = require('app'),
+    path            = require('path'),
+    BrowserWindow   = require('browser-window'),
+    EventsManager   = require('./events')();
 
 // Global reference of the window object
 var mainWindow = null;
@@ -14,7 +15,10 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600
+    });
     mainWindow.loadUrl('file://' + path.resolve(__dirname, '../public/index.html'));
     mainWindow.openDevTools();
 
