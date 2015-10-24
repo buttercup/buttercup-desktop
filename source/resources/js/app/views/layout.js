@@ -19,7 +19,9 @@ export default Backbone.View.extend({
         // Render
         this.render();
         this.groups = new Groups();
-        this.groups.fetch();
+        this.groups.fetch({success: function(collection) {
+            console.log(collection.models);
+        }});
     },
 
     render: function () {

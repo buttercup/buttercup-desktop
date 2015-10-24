@@ -22,34 +22,21 @@ var ipc = require('ipc');
         return (typeof value === 'function') ? object[property]() : value;
     }
 
-    // Our Store is represented by a single JS object in *localStorage*. Create it
-    // with a meaningful name, like the name you'd give a table.
-    // window.Store is deprectated, use Backbone.LocalStorage instead
-    Backbone.Buttercup = window.Store = function(manager) {
-        //var store = this.localStorage().getItem(this.name);
-        //this.records = (store && store.split(",")) || [];
-        this.records = [];
+    Backbone.Buttercup = window.Store = function(namespace) {
+        this.namespace = namespace;
     };
 
     extend(Backbone.Buttercup.prototype, {
 
         // Save the current state of the **Store** to *localStorage*.
         save: function() {
-            //this.localStorage().setItem(this.name, this.records.join(","));
-            console.log('SAVING');
+            return ipc.sendSync('save');
         },
 
         // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
         // have an id of it's own.
         create: function(model) {
-            /*if (!model.id && model.id !== 0) {
-             model.id = guid();
-             model.set(model.idAttribute, model.id);
-             }
-             this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
-             this.records.push(model.id.toString());
-             */
-            console.log("Create shit", model);
+            model = ipc.sendSync('groups.create', model);
             this.save();
             return this.find(model);
         },
@@ -67,78 +54,28 @@ var ipc = require('ipc');
 
         // Retrieve a model from `this.data` by id.
         find: function(model) {
-            console.log("FINDING MODEL", model);
-            return null;
-            //return this.serializer.deserialize(this.localStorage().getItem(this._itemName(model.id)));
+            return ipc.sendSync('groups.find', model.id);
         },
 
         // Return the array of all models currently in storage.
         findAll: function() {
-            var result = [];
-            console.log("FINDING ALL");
-            // for (var i = 0, id, data; i < this.records.length; i++) {
-            //   id = this.records[i];
-            //   data = this.serializer.deserialize(this.localStorage().getItem(this._itemName(id)));
-            //   if (data != null) result.push(data);
-            // }
-            var groups = ipc.sendSync('groups.all', 'shit');
-            console.log(groups[0]);
-            /*ipc.on('groups.shit', function(reply) {
-                console.log(reply);
-            });*/
-
-            return result;
+            return ipc.sendSync('groups.all');
         },
 
         // Delete a model from `this.data`, returning it.
         destroy: function(model) {
-            this.localStorage().removeItem(this._itemName(model.id));
-            var modelId = model.id.toString();
-            for (var i = 0, id; i < this.records.length; i++) {
-                if (this.records[i] === modelId) {
-                    this.records.splice(i, 1);
-                }
-            }
+            ipc.sendSync('groups.delete', model.id);
             this.save();
             return model;
         },
 
         localStorage: function() {
             return localStorage;
-        },
-
-        // Clear localStorage for specific collection.
-        _clear: function() {
-            var local = this.localStorage(),
-                itemRe = new RegExp("^" + this.name + "-");
-
-            // Remove id-tracking item (e.g., "foo").
-            local.removeItem(this.name);
-
-            // Match all data items (e.g., "foo-ID") and remove.
-            for (var k in local) {
-                if (itemRe.test(k)) {
-                    local.removeItem(k);
-                }
-            }
-
-            this.records.length = 0;
-        },
-
-        // Size of localStorage.
-        _storageSize: function() {
-            return this.localStorage().length;
-        },
-
-        _itemName: function(id) {
-            return this.name+"-"+id;
         }
 
     });
 
-// localSync delegate to the model or collection's
-// *localStorage* property, which should be an instance of `Store`.
-// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
+
     Backbone.Buttercup.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
         var store = result(model, 'buttercup') || result(model.collection, 'buttercup');
 
@@ -166,42 +103,34 @@ var ipc = require('ipc');
             }
 
         } catch(error) {
-            if (error.code === 22 && store._storageSize() === 0)
-                errorMessage = "Private browsing is unsupported";
-            else
-                errorMessage = error.message;
+            errorMessage = error.message;
         }
 
         if (resp) {
             if (options && options.success) {
-                if (Backbone.VERSION === "0.9.10") {
-                    options.success(model, resp, options);
-                } else {
-                    options.success(resp);
-                }
+                options.success(resp);
             }
             if (syncDfd) {
                 syncDfd.resolve(resp);
             }
 
         } else {
-            errorMessage = errorMessage ? errorMessage
-                : "Record Not Found";
+            errorMessage = errorMessage ? errorMessage : "Record Not Found";
 
-            if (options && options.error)
-                if (Backbone.VERSION === "0.9.10") {
-                    options.error(model, errorMessage, options);
-                } else {
-                    options.error(errorMessage);
-                }
+            if (options && options.error) {
+                options.error(errorMessage);
+            }
 
-            if (syncDfd)
+            if (syncDfd) {
                 syncDfd.reject(errorMessage);
+            }
         }
 
         // add compatibility with $.ajax
         // always execute callback for success and error
-        if (options && options.complete) options.complete(resp);
+        if (options && options.complete) {
+            options.complete(resp);
+        }
 
         return syncDfd && syncDfd.promise();
     };
@@ -218,8 +147,8 @@ var ipc = require('ipc');
         return Backbone.ajaxSync;
     };
 
-// Override 'Backbone.sync' to default to localSync,
-// the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
+    // Override 'Backbone.sync' to default to localSync,
+    // the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
     Backbone.sync = function(method, model, options) {
         return Backbone.getSyncMethod(model, options).apply(this, [method, model, options]);
     };
