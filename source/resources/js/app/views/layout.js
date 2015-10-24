@@ -5,7 +5,6 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import Tpl from 'tpl/layout.html!text';
 import SidebarView from 'app/views/sidebar';
-import Groups from 'app/collections/groups';
 
 // Export View
 export default Backbone.View.extend({
@@ -18,10 +17,6 @@ export default Backbone.View.extend({
 
         // Render
         this.render();
-        this.groups = new Groups();
-        this.groups.fetch({success: function(collection) {
-            console.log(collection.models);
-        }});
     },
 
     render: function () {

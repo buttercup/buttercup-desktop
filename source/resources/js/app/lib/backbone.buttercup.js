@@ -36,7 +36,7 @@ var ipc = require('ipc');
         // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
         // have an id of it's own.
         create: function(model) {
-            model = ipc.sendSync('groups.create', model);
+            model = ipc.sendSync(this.namespace + '.create', model);
             this.save();
             return this.find(model);
         },
@@ -54,17 +54,17 @@ var ipc = require('ipc');
 
         // Retrieve a model from `this.data` by id.
         find: function(model) {
-            return ipc.sendSync('groups.find', model.id);
+            return ipc.sendSync(this.namespace + '.find', model.id);
         },
 
         // Return the array of all models currently in storage.
         findAll: function() {
-            return ipc.sendSync('groups.all');
+            return ipc.sendSync(this.namespace + '.all');
         },
 
         // Delete a model from `this.data`, returning it.
         destroy: function(model) {
-            ipc.sendSync('groups.delete', model.id);
+            ipc.sendSync(this.namespace + '.delete', model.id);
             this.save();
             return model;
         },

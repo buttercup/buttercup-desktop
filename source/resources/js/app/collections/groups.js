@@ -7,6 +7,6 @@ import Group from 'app/models/group';
 //model.save();
 
 export default Backbone.Collection.extend({
-    buttercup: new Backbone.Buttercup(),
+    buttercup: new Backbone.Buttercup('groups'),
     model: Group
 });
