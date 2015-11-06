@@ -17,8 +17,11 @@ System.config({
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "backbone": "npm:backbone@1.2.3",
+    "backbone.babysitter": "github:marionettejs/backbone.babysitter@0.1.10",
+    "backbone.wreqr": "github:marionettejs/backbone.wreqr@1.3.5",
     "core-js": "npm:core-js@1.2.1",
     "jquery": "github:components/jquery@2.1.4",
+    "marionette": "github:marionettejs/backbone.marionette@2.4.3",
     "text": "github:systemjs/plugin-text@0.0.2",
     "underscore": "npm:underscore@1.8.3",
     "github:jspm/nodelibs-assert@0.1.0": {

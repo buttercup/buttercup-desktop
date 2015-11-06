@@ -14,6 +14,9 @@ export default Backbone.View.extend({
         // Instances
         this.template = _.template(Tpl);
         this.sidebar = new SidebarView;
+        this.on('groupSelected', function (model) {
+            console.log('Selected model:', model);
+        });
 
         // Render
         this.render();

@@ -30,11 +30,13 @@
 
     function convertGroups(groups) {
         var parsedGroups = [];
+
         groups.forEach(function(group) {
             var parsedGroup = group.toObject();
             parsedGroup.groups = convertGroups(group.getGroups());
             parsedGroups.push(parsedGroup);
         });
+
         return parsedGroups;
     }
 
@@ -56,7 +58,6 @@
         // Get all groups
         ipc.on('groups.all', function (e) {
             e.returnValue = convertGroups(manager.getGroups());
-
         });
 
         // Get a group
