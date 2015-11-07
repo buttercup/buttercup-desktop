@@ -11,6 +11,10 @@ var SidebarGroupView = Backbone.View.extend({
     className: 'nav-group',
     tagName: 'ul',
 
+    initialize: function (options) {
+        this.options = options;
+    },
+
     render: function () {
         _.each(this.collection.models, (model) => {
             this.addGroup(model);
@@ -19,21 +23,24 @@ var SidebarGroupView = Backbone.View.extend({
     },
 
     addGroup: function(model) {
-        var view = new SidebarGroupItemView({model: model});
+        var view = new SidebarGroupItemView({
+            model: model,
+            parentView: this.options.parentView
+        });
         this.$el.append(view.render().el);
     }
 });
 
 var SidebarGroupItemView = Backbone.View.extend({
-    className: 'nav-group-item',
     tagName: 'li',
 
     events: {
-        'click .clickable': 'handleClick'
+        'click .nav-group-item': 'handleClick'
     },
 
-    initialize: function () {
+    initialize: function (options) {
         this.template = _.template(GroupItemTpl);
+        this.options = options;
     },
 
     render: function () {
@@ -43,7 +50,8 @@ var SidebarGroupItemView = Backbone.View.extend({
         // Render childs
         if (typeof this.model.groups !== "undefined" && this.model.groups.length > 0) {
             var groupView = new SidebarGroupView({
-                collection: this.model.groups
+                collection: this.model.groups,
+                parentView: this.options.parentView
             });
             this.$el.append(groupView.render().el);
         }
@@ -53,6 +61,8 @@ var SidebarGroupItemView = Backbone.View.extend({
 
     handleClick: function (e) {
         e.stopPropagation();
+        this.options.parentView.$('.nav-group-item').removeClass('active');
+        this.$(e.target).addClass('active');
         Layout.trigger('groupSelected', this.model);
     }
 });
@@ -75,7 +85,8 @@ export default Backbone.View.extend({
 
     addGroups: function(collection) {
         var groupView = new SidebarGroupView({
-            collection: collection
+            collection: collection,
+            parentView: this
         });
         this.$('nav').append(groupView.render().el);
     }
