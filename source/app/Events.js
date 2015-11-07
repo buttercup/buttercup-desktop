@@ -40,6 +40,12 @@
         return parsedGroups;
     }
 
+    function convertEntries(entries) {
+        return entries.map(function(entry) {
+            return entry.toObject();
+        });
+    }
+
     module.exports = function () {
         // Connect to workspace
         ipc.on('workspace.connect', function(event, arg) {
@@ -57,6 +63,15 @@
 
         // Get all groups
         ipc.on('groups.all', function (e) {
+
+            var group = findGroup("616abb37-683f-4544-9471-1a5f1aa89d7a", manager.getGroups());
+            /*var property = group.createEntry("Google");
+            property.setProperty("username", "sharareh");
+            property.setProperty("password", "d8s6d7s6w2$&@&");
+            manager.save();*/
+            console.log(convertEntries(group.getEntries()));
+
+
             e.returnValue = convertGroups(manager.getGroups());
         });
 
@@ -87,6 +102,12 @@
             } else {
                 e.returnValue = false;
             }
+        });
+
+        // Get all groups
+        ipc.on('entries.all', function (e, arg) {
+            var parent = findGroup(arg, manager.getGroups());
+            e.returnValue = convertEntries(parent.getEntries());
         });
     };
 })(module);

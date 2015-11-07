@@ -58,8 +58,8 @@ var ipc = require('ipc');
         },
 
         // Return the array of all models currently in storage.
-        findAll: function() {
-            return ipc.sendSync(this.namespace + '.all');
+        findAll: function(parentID) {
+            return ipc.sendSync(this.namespace + '.all', parentID);
         },
 
         // Delete a model from `this.data`, returning it.
@@ -77,7 +77,12 @@ var ipc = require('ipc');
 
 
     Backbone.Buttercup.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
-        var store = result(model, 'buttercup') || result(model.collection, 'buttercup');
+        var store = result(model, 'buttercup') || result(model.collection, 'buttercup'),
+            parentID = false;
+
+        if (typeof model.options !== "undefined" && "parentID" in model.options) {
+            parentID = model.options.parentID;
+        }
 
         var resp, errorMessage;
         //If $ is having Deferred - use it.
@@ -89,7 +94,7 @@ var ipc = require('ipc');
 
             switch (method) {
                 case "read":
-                    resp = model.id != undefined ? store.find(model) : store.findAll();
+                    resp = model.id != undefined ? store.find(model) : store.findAll(parentID);
                     break;
                 case "create":
                     resp = store.create(model);

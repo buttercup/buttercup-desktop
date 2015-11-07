@@ -79,7 +79,4 @@ export default Backbone.View.extend({
         });
         this.$('nav').append(groupView.render().el);
     }
-
-
-
 });

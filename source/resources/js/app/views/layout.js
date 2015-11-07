@@ -5,6 +5,7 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import Tpl from 'tpl/layout.html!text';
 import SidebarView from 'app/views/sidebar';
+import EntriesView from 'app/views/entries';
 
 // Export View
 export default Backbone.View.extend({
@@ -14,9 +15,8 @@ export default Backbone.View.extend({
         // Instances
         this.template = _.template(Tpl);
         this.sidebar = new SidebarView;
-        this.on('groupSelected', function (model) {
-            console.log('Selected model:', model);
-        });
+        this.entries = new EntriesView;
+        this.on('groupSelected', this.entries.setGroup, this.entries);
 
         // Render
         this.render();
@@ -24,6 +24,7 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template());
+        this.$('.pane-group').prepend(this.entries.render().el);
         this.$('.pane-group').prepend(this.sidebar.render().el);
     }
 });
