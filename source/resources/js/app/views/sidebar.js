@@ -61,9 +61,9 @@ var SidebarGroupItemView = Backbone.View.extend({
 
     handleClick: function (e) {
         e.stopPropagation();
-        this.options.parentView.$('.nav-group-item').removeClass('active');
-        this.$(e.target).addClass('active');
-        Layout.trigger('groupSelected', this.model);
+        //this.options.parentView.$('.nav-group-item').removeClass('active');
+        //this.$(e.target).addClass('active');
+        Buttercup.Events.trigger('groupSelected', this.model);
     }
 });
 
@@ -75,6 +75,7 @@ export default Backbone.View.extend({
         this.template = _.template(Tpl);
         this.groups = new Groups();
         this.groups.on('reset', this.addGroups, this);
+        Buttercup.Events.on('groupSelected', this.handleSelectedGroup, this);
     },
 
     render: function () {
@@ -89,5 +90,10 @@ export default Backbone.View.extend({
             parentView: this
         });
         this.$('nav').append(groupView.render().el);
+    },
+
+    handleSelectedGroup: function (model) {
+        this.$('.nav-group-item').removeClass('active');
+        this.$('.nav-group-item[data-id="'+model.id+'"]').addClass('active');
     }
 });

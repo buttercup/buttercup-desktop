@@ -16,15 +16,21 @@ export default Backbone.View.extend({
         this.template = _.template(Tpl);
         this.sidebar = new SidebarView;
         this.entries = new EntriesView;
-        this.on('groupSelected', this.entries.setGroup, this.entries);
+
+        Buttercup.Events.on('groupSelected', this.entries.setGroup, this.entries);
+        Buttercup.Events.on('groupLoaded', this.updateItemCount, this);
 
         // Render
         this.render();
     },
 
     render: function () {
-        this.$el.html(this.template());
+        this.$el.html(this.template(this.params));
         this.$('.pane-group').prepend(this.entries.render().el);
         this.$('.pane-group').prepend(this.sidebar.render().el);
+    },
+
+    updateItemCount: function (collection) {
+        this.$('.toolbar-footer h1').text(`${collection.length} entries`);
     }
 });

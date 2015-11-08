@@ -44,6 +44,8 @@ export default Backbone.View.extend({
 
     addEntries: function (collection) {
         var _this = this;
+
+        Buttercup.Events.trigger('groupLoaded', collection);
         this.$('.list-group-item').remove();
 
         _.each(collection.models, function (model) {
