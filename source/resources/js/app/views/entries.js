@@ -17,6 +17,7 @@ var EntryItemView = Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
+        this.$el.data('id', this.model.id);
         return this;
     }
 });
@@ -24,6 +25,10 @@ var EntryItemView = Backbone.View.extend({
 // Export View
 export default Backbone.View.extend({
     className: 'pane pane-sm',
+
+    events: {
+        'click .list-group-item': 'loadEntry'
+    },
 
     initialize: function () {
         this.template = _.template(Tpl);
@@ -58,5 +63,18 @@ export default Backbone.View.extend({
             model: model
         });
         this.$('ul').append(view.render().el);
+    },
+
+    loadEntry: function (e) {
+        var $el = this.$(e.currentTarget),
+            id = $el.data('id'),
+            model = this.collection.get(id);
+
+        // Changed active state
+        this.$('li').removeClass('selected');
+        $el.addClass('selected');
+
+        // Trigger event
+        Buttercup.Events.trigger('entrySelected', model);
     }
 });
