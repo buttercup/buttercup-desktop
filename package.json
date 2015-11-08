@@ -55,6 +55,6 @@
     }
   },
   "dependencies": {
-    "buttercup": "^0.6.0"
+    "buttercup": "0.6.1"
   }
 }

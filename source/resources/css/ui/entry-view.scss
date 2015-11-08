@@ -1,0 +1,14 @@
+.entry-view {
+    display: flex;
+    flex-direction: column;
+}
+
+.view-content {
+    flex: 1;
+    overflow: auto;
+}
+
+.view-footer {
+    display: none;
+    border-top: 1px solid $border-color;
+}

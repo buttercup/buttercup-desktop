@@ -1,32 +1,11 @@
 (function (module) {
-    "use strict";
+    'use strict';
 
     var Manager     = require('./manager'),
         Workspace   = require('./workspace'),
         ipc         = require('ipc');
 
     var manager = new Manager();
-
-    function findGroup(id, managedGroups) {
-        var len = managedGroups.length;
-
-        for (var i = 0; i < len; i += 1) {
-            var childs = managedGroups[i].getGroups();
-
-            if (managedGroups[i].getID() === id) {
-                return managedGroups[i];
-            }
-            else if (childs.length > 0) {
-                var result = findGroup(id, childs);
-
-                if (result) {
-                    return result;
-                }
-            }
-        }
-
-        return false;
-    }
 
     function convertGroups(groups) {
         var parsedGroups = [];
@@ -40,9 +19,11 @@
         return parsedGroups;
     }
 
-    function convertEntries(entries) {
+    function convertEntries(entries, parentGroup) {
         return entries.map(function(entry) {
-            return entry.toObject();
+            var parsedEntry = entry.toObject();
+            parsedEntry.parentID = parentGroup.getID();
+            return parsedEntry;
         });
     }
 
@@ -68,7 +49,7 @@
 
         // Get a group
         ipc.on('groups.find', function (e, arg) {
-            var group = findGroup(arg, manager.getGroups()),
+            var group = manager.findGroup(arg),
                 converted = false;
 
             if (group) {
@@ -86,7 +67,7 @@
 
         // Delete a group
         ipc.on('groups.delete', function (e, arg) {
-            var group = findGroup(arg, manager.getGroups());
+            var group = manager.findGroup(arg);
             if (group) {
                 group.delete();
                 e.returnValue = true;
@@ -97,8 +78,27 @@
 
         // Get all entries
         ipc.on('entries.all', function (e, arg) {
-            var parent = findGroup(arg, manager.getGroups());
-            e.returnValue = convertEntries(parent.getEntries());
+            var parent = manager.findGroup(arg);
+            e.returnValue = convertEntries(parent.getEntries(), parent);
+        });
+
+        // Find an entry
+        ipc.on('entries.find', function (e, arg) {
+            e.returnValue = manager.findEntry(arg).toObject();
+        });
+
+        // Edit an entry
+        ipc.on('entries.update', function (e, arg) {
+            var entry = manager.findEntry(arg.id),
+                editable = ['title', 'username', 'password'];
+
+            editable.forEach(function (key) {
+                if (arg.changed.hasOwnProperty(key)) {
+                    entry.setProperty(key, arg.changed[key]);
+                }
+            });
+            
+            e.returnValue = entry.toObject();
         });
     };
 })(module);

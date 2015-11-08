@@ -1,0 +1,24 @@
+<div class="padded-more view-content">
+    <% if(typeof blank !== "undefined" && blank === true) { %>
+    <h1>Welcome to Buttercup</h1>
+    <p>
+        This is a cup of butter.
+    </p>
+    <% } else { %>
+    <h1><%= title %></h1>
+    <form>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" class="form-control" placeholder="Username" value="<%= username %>" name="username">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="form-control" placeholder="Password" value="<%= password %>" name="password">
+        </div>
+    </form>
+    <% } %>
+</div>
+<div class="view-footer padded">
+    <button class="btn btn-primary btn-save">Save</button>
+    <button class="btn btn-default">Cancel</button>
+</div>

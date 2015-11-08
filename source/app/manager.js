@@ -21,6 +21,14 @@
         return this._archive.createGroup(title);
     };
 
+    Manager.prototype.findGroup = function(id) {
+        return this._archive.getGroupByID(id);
+    };
+
+    Manager.prototype.findEntry = function(id) {
+        return this._archive.getEntryByID(id);
+    };
+
     Manager.prototype.save = function() {
         this._workspace.save();
     };

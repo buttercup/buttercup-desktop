@@ -13,6 +13,7 @@ var EntryItemView = Backbone.View.extend({
 
     initialize: function () {
         this.template = _.template(EntryItemTpl);
+        this.model.on('sync', this.render, this);
     },
 
     render: function () {

@@ -28,41 +28,30 @@ var ipc = require('ipc');
 
     extend(Backbone.Buttercup.prototype, {
 
-        // Save the current state of the **Store** to *localStorage*.
         save: function() {
             return ipc.sendSync('save');
         },
 
-        // Add a model, giving it a (hopefully)-unique GUID, if it doesn't already
-        // have an id of it's own.
         create: function(model) {
-            model = ipc.sendSync(this.namespace + '.create', model);
+            var result = ipc.sendSync(this.namespace + '.create', model);
             this.save();
-            return this.find(model);
+            return result;
         },
 
-        // Update a model by replacing its copy in `this.data`.
         update: function(model) {
-            this.localStorage().setItem(this._itemName(model.id), this.serializer.serialize(model));
-            var modelId = model.id.toString();
-            if (!contains(this.records, modelId)) {
-                this.records.push(modelId);
-                this.save();
-            }
-            return this.find(model);
+            var result = ipc.sendSync(this.namespace + '.update', model);
+            this.save();
+            return result;
         },
 
-        // Retrieve a model from `this.data` by id.
         find: function(model) {
             return ipc.sendSync(this.namespace + '.find', model.id);
         },
 
-        // Return the array of all models currently in storage.
         findAll: function(parentID) {
             return ipc.sendSync(this.namespace + '.all', parentID);
         },
 
-        // Delete a model from `this.data`, returning it.
         destroy: function(model) {
             ipc.sendSync(this.namespace + '.delete', model.id);
             this.save();

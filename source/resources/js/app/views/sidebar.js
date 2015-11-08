@@ -61,9 +61,9 @@ var SidebarGroupItemView = Backbone.View.extend({
 
     handleClick: function (e) {
         e.stopPropagation();
-        //this.options.parentView.$('.nav-group-item').removeClass('active');
-        //this.$(e.target).addClass('active');
-        Buttercup.Events.trigger('groupSelected', this.model);
+        if (!this.$(e.currentTarget).hasClass('active')) {
+            Buttercup.Events.trigger('groupSelected', this.model);
+        }
     }
 });
 
@@ -72,6 +72,7 @@ export default Backbone.View.extend({
     className: 'pane-sm sidebar',
 
     initialize: function () {
+
         this.template = _.template(Tpl);
         this.groups = new Groups();
         this.groups.on('reset', this.addGroups, this);
