@@ -90,13 +90,23 @@
         // Edit an entry
         ipc.on('entries.update', function (e, arg) {
             var entry = manager.findEntry(arg.id),
-                editable = ['title', 'username', 'password'];
+                properties = ['title', 'username', 'password'],
+                attributes = arg.attributes,
+                meta = attributes.meta || {};
 
-            editable.forEach(function (key) {
-                if (arg.changed.hasOwnProperty(key)) {
-                    entry.setProperty(key, arg.changed[key]);
+            // Main Info
+            properties.forEach(function (prop) {
+                if (attributes.hasOwnProperty(prop)) {
+                    entry.setProperty(prop, attributes[prop]);
                 }
             });
+
+            // Meta
+            for (var metaKey in meta) {
+                if (meta.hasOwnProperty(metaKey)) {
+                    entry.setMeta(metaKey, meta[metaKey]);
+                }
+            }
             
             e.returnValue = entry.toObject();
         });

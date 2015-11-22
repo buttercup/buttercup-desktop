@@ -15,10 +15,17 @@
             <label>Password</label>
             <input type="text" class="form-control" placeholder="Password" value="<%= password %>" name="password">
         </div>
+
+        <hr>
+
+        <div class="form-group split-form-group">
+            <input type="text" class="form-control form-title" data-custom-field-title>
+            <input type="text" class="form-control form-value" data-custom-field-value>
+        </div>
     </form>
     <% } %>
 </div>
 <div class="view-footer padded">
     <button class="btn btn-primary btn-save">Save</button>
-    <button class="btn btn-default">Cancel</button>
+    <button class="btn btn-default btn-cancel">Cancel</button>
 </div>

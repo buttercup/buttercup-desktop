@@ -14,6 +14,7 @@ System.config({
   },
 
   map: {
+    "backbone-nested": "github:afeld/backbone-nested@2.0.4",
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "backbone": "npm:backbone@1.2.3",

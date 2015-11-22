@@ -12,3 +12,12 @@
     display: none;
     border-top: 1px solid $border-color;
 }
+
+.split-form-group {
+    display: flex;
+
+    .form-title {
+        width: 200px;
+        margin-right: .5rem;
+    }
+}

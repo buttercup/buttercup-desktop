@@ -40,6 +40,7 @@
     },
     "configFile": "source/resources/js/config.js",
     "dependencies": {
+      "afeld/backbone-nested": "github:afeld/backbone-nested@^2.0.4",
       "backbone.babysitter": "github:marionettejs/backbone.babysitter@^0.1.10",
       "backbone.wreqr": "github:marionettejs/backbone.wreqr@^1.3.5",
       "marionette": "github:marionettejs/backbone.marionette@^2.4.3",

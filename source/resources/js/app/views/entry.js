@@ -11,14 +11,15 @@ export default Backbone.View.extend({
 
     events: {
         'keyup input': 'setFieldsOnChange',
-        'click .btn-save': 'saveEntry'
+        'click .btn-save': 'saveEntry',
+        'click .btn-cancel': 'cancelChanges'
     },
 
     initialize: function () {
         this.template = _.template(Tpl);
         if (this.model) {
+            console.log(this.model);
             this.model.on('change', this.showHideActionBar, this);
-            this.model.on('sync', this.showHideActionBar, this);
         }
     },
 
@@ -28,23 +29,49 @@ export default Backbone.View.extend({
                 blank: true
             }
         ));
-        this.$fields = this.$('input');
         return this;
     },
 
     setFieldsOnChange: function (e) {
-        var $field = this.$(e.currentTarget);
-        this.model.set($field.attr('name'), $field.val());
+        $(e.currentTarget).attr('data-changed', true);
+        this.showHideActionBar(true);
     },
 
-    showHideActionBar: function () {
-        this.$('.view-footer').toggle(this.model.hasChanged());
+    showHideActionBar: function (showHideFlag) {
+        this.$('.view-footer').toggle(!!showHideFlag);
     },
 
     saveEntry: function () {
-        this.model.save({}, {
-            wait: true
+        var _this = this,
+            changed  = {
+                meta: {}
+            };
+
+        // Normal fields
+        this.$('input[name][data-changed]').each(function (index, field) {
+            changed[field.getAttribute('name')] = field.value;
         });
+
+        // Custom Fields
+        this.$('input[data-custom-field-title]').each(function (index, field) {
+            var $field = $(field),
+                $next  = $field.next('input[data-custom-field-value');
+            changed.meta[$field.val()] = $next.val();
+        });
+
+        // Set new attributes
+        this.model.set(changed);
+
+        this.model.save({}, {
+            wait: true,
+            success: () => {
+                this.showHideActionBar(false);
+            }
+        });
+    },
+
+    cancelChanges: function () {
+        this.render();
     },
 
     destroy: function () {
