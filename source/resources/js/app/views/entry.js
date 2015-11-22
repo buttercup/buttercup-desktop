@@ -55,8 +55,16 @@ export default Backbone.View.extend({
         // Custom Fields
         this.$('input[data-custom-field-title]').each(function (index, field) {
             var $field = $(field),
-                $next  = $field.next('input[data-custom-field-value');
-            changed.meta[$field.val()] = $next.val();
+                $next  = $field.next('input[data-custom-field-value'),
+                key    = $field.val(),
+                value  = $next.val();
+            if (key.length > 0 && value.length > 0) {
+                changed.meta[$field.val()] = $next.val();
+            }
+        });
+
+        this.$('[data-custom-field][data-changed]').each(function (index, field) {
+            changed.meta[field.getAttribute('data-custom-field')] = field.value;
         });
 
         // Set new attributes

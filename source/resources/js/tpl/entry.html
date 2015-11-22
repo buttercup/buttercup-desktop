@@ -18,6 +18,13 @@
 
         <hr>
 
+        <% _.each(meta, function (metaValue, metaKey) { %>
+        <div class="form-group">
+            <label><%= metaKey %></label>
+            <input type="text" class="form-control" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
+        </div>
+        <% }); %>
+
         <div class="form-group split-form-group">
             <input type="text" class="form-control form-title" data-custom-field-title>
             <input type="text" class="form-control form-value" data-custom-field-value>
