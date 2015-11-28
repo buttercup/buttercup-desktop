@@ -5,7 +5,7 @@
         This is a cup of butter.
     </p>
     <% } else { %>
-    <h1><%= title %></h1>
+    <h1 contenteditable="true"><%= title %></h1>
     <form>
         <div class="form-group">
             <label>Username</label>
@@ -16,12 +16,13 @@
             <input type="text" class="form-control" placeholder="Password" value="<%= password %>" name="password">
         </div>
 
+        <h6>Meta</h6>
         <hr>
 
         <% _.each(meta, function (metaValue, metaKey) { %>
-        <div class="form-group">
-            <label><%= metaKey %></label>
-            <input type="text" class="form-control" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
+        <div class="form-group split-form-group">
+            <label class="form-title"><%= metaKey %></label>
+            <input type="text" class="form-control form-value" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
         </div>
         <% }); %>
 
@@ -32,7 +33,14 @@
     </form>
     <% } %>
 </div>
-<div class="view-footer padded">
-    <button class="btn btn-primary btn-save">Save</button>
-    <button class="btn btn-default btn-cancel">Cancel</button>
+<% if (typeof blank === "undefined") {%>
+<div class="view-footer padded active">
+    <div class="left hidden">
+        <button class="btn btn-primary btn-save">Save</button>
+        <button class="btn btn-default btn-cancel">Cancel</button>
+    </div>
+    <div class="right">
+        <button class="btn btn-negative btn-remove"><span class="icon icon-trash"></span> Delete</button>
+    </div>
 </div>
+<% } %>

@@ -12,3 +12,18 @@
         margin-left: 25px;
     }
 }
+
+.btn-negative .icon {
+    color: #fff;
+}
+
+.hidden {
+    display: none;
+}
+
+h1[contenteditable]:focus {
+    border-color: #6db3fd;
+    box-shadow: 3px 3px 0 #6db3fd, -3px -3px 0 #6db3fd, -3px 3px 0 #6db3fd, 3px -3px 0 #6db3fd;
+    outline: none;
+    border-radius: 3px;
+}

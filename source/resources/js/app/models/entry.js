@@ -7,6 +7,11 @@ import BackboneButtercup from 'app/lib/backbone.buttercup';
 export default Backbone.NestedModel.extend({
     buttercup: new Backbone.Buttercup('entries'),
 
+    defaults: {
+        username: '',
+        password: ''
+    },
+
     parse: function(response) {
         for (var key in response.properties) {
             if (response.properties.hasOwnProperty(key)) {

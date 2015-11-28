@@ -12,14 +12,18 @@ export default Backbone.View.extend({
     events: {
         'keyup input': 'setFieldsOnChange',
         'click .btn-save': 'saveEntry',
-        'click .btn-cancel': 'cancelChanges'
+        'click .btn-cancel': 'cancelChanges',
+        'click .btn-remove': 'removeEntry',
+        'keypress h1': 'manageTitleChange'
     },
 
     initialize: function () {
         this.template = _.template(Tpl);
         if (this.model) {
-            console.log(this.model);
             this.model.on('change', this.showHideActionBar, this);
+            this.model.on('destroy', function () {
+                console.log("model destroyed");
+            });
         }
     },
 
@@ -38,14 +42,24 @@ export default Backbone.View.extend({
     },
 
     showHideActionBar: function (showHideFlag) {
-        this.$('.view-footer').toggle(!!showHideFlag);
+        this.$('.view-footer .left').toggle(!!showHideFlag);
+    },
+
+    manageTitleChange: function (e) {
+        this.showHideActionBar(true);
+        if (e.which === 13) {
+            e.preventDefault();
+            return false;
+        }
     },
 
     saveEntry: function () {
-        var _this = this,
-            changed  = {
-                meta: {}
-            };
+        var changed  = {
+            meta: {}
+        };
+
+        // Title field
+        changed.title = this.$('h1').text().trim();
 
         // Normal fields
         this.$('input[name][data-changed]').each(function (index, field) {
@@ -84,5 +98,14 @@ export default Backbone.View.extend({
 
     destroy: function () {
         this.$el.remove();
+    },
+
+    removeEntry: function () {
+        this.model.destroy({
+            wait: true,
+            success: () => {
+                this.destroy()
+            }
+        });
     }
 });

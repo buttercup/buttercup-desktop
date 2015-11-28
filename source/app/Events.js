@@ -77,6 +77,17 @@
         });
 
         // Get all entries
+        // Create a group
+        ipc.on('entries.create', function (e, arg) {
+            try {
+                var parentId = arg.collection.options.parentID,
+                    group = manager.findGroup(parentId);
+                e.returnValue = group.createEntry(arg.attributes.title).toObject();
+            } catch (e) {
+                e.returnValue = null;
+            }
+        });
+
         ipc.on('entries.all', function (e, arg) {
             var parent = manager.findGroup(arg);
             e.returnValue = convertEntries(parent.getEntries(), parent);
@@ -91,24 +102,34 @@
         ipc.on('entries.update', function (e, arg) {
             var entry = manager.findEntry(arg.id),
                 properties = ['title', 'username', 'password'],
-                attributes = arg.attributes,
-                meta = attributes.meta || {};
+                propertiesChanged = arg.changed || {},
+                metaChanged = arg._nestedChanges || {};
 
             // Main Info
             properties.forEach(function (prop) {
-                if (attributes.hasOwnProperty(prop)) {
-                    entry.setProperty(prop, attributes[prop]);
+                if (propertiesChanged.hasOwnProperty(prop)) {
+                    entry.setProperty(prop, propertiesChanged[prop]);
                 }
             });
 
             // Meta
-            for (var metaKey in meta) {
-                if (meta.hasOwnProperty(metaKey)) {
-                    entry.setMeta(metaKey, meta[metaKey]);
+            for (var metaKey in metaChanged) {
+                if (metaChanged.hasOwnProperty(metaKey)) {
+                    var key = metaKey.replace("meta.", "").trim(),
+                        value = metaChanged[metaKey].trim();
+                    if (key.length > 0 && value.length > 0) {
+                        entry.setMeta(key, value);
+                    }
                 }
             }
             
             e.returnValue = entry.toObject();
+        });
+
+        // Delete an entry
+        ipc.on('entries.delete', function (e, arg) {
+            manager.findEntry(arg).delete();
+            e.returnValue = true;
         });
     };
 })(module);

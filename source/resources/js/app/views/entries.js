@@ -25,14 +25,16 @@ var EntryItemView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'pane pane-sm',
+    className: 'pane pane-sm entry-view',
 
     events: {
-        'click .list-group-item': 'loadEntry'
+        'click .list-group-item': 'loadEntry',
+        'click .btn-add': 'createEntry'
     },
 
     initialize: function () {
         this.template = _.template(Tpl);
+        this._views = {};
     },
 
     render: function () {
@@ -41,11 +43,15 @@ export default Backbone.View.extend({
     },
 
     setGroup: function (model) {
+        this._views = {};
         this.collection = new Entries([], {
             parentID: model.id
         });
         this.collection.on('reset', this.addEntries, this);
+        this.collection.on('add', this.addEntry, this);
+        this.collection.on('remove', this.removeEntry, this);
         this.collection.fetch({reset: true});
+        this.$('.view-footer').addClass('active');
     },
 
     addEntries: function (collection) {
@@ -55,15 +61,21 @@ export default Backbone.View.extend({
         this.$('.list-group-item').remove();
 
         _.each(collection.models, function (model) {
-            _this.addEntry(model);
+            _this.addEntry.call(_this, model, false);
         });
     },
 
-    addEntry: function (model) {
+    addEntry: function (model, load) {
+        load = (load !== false);
         var view = new EntryItemView({
             model: model
         });
-        this.$('ul').append(view.render().el);
+        this.$('.list-entries').prepend(view.render().el);
+        this._views[model.get('id')] = view;
+
+        if (load) {
+            view.$el.trigger('click');
+        }
     },
 
     loadEntry: function (e) {
@@ -77,5 +89,17 @@ export default Backbone.View.extend({
 
         // Trigger event
         Buttercup.Events.trigger('entrySelected', model);
+    },
+
+    createEntry: function (e) {
+        this.collection.create({
+            title: 'Untitled'
+        }, {wait: true});
+    },
+
+    removeEntry: function (model) {
+        this._views[model.get('id')].$el.remove();
+        delete this._views[model.get('id')];
+        this.$('.list-entries > li:first').trigger('click');
     }
 });

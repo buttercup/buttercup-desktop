@@ -1,6 +1,7 @@
 .entry-view {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .view-content {
@@ -11,13 +12,36 @@
 .view-footer {
     display: none;
     border-top: 1px solid $border-color;
+    flex: 0 0 auto;
+
+    &.active {
+        display: flex;
+    }
+
+    > div {
+        flex: 1 0 50%;
+
+        &.right {
+            text-align: right;
+        }
+    }
+}
+
+.view-header {
+    flex: 0 0 auto;
+    border-bottom: 1px solid $border-color;
 }
 
 .split-form-group {
     display: flex;
 
     .form-title {
-        width: 200px;
+        min-width: 150px;
+        width: 150px;
         margin-right: .5rem;
+    }
+
+    label.form-title {
+        line-height: 32px;
     }
 }
