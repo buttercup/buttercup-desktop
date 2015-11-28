@@ -45,3 +45,21 @@
         line-height: 32px;
     }
 }
+
+.form-group {
+    position: relative;
+
+    .toggle-password {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        bottom: 0;
+        font-size: 20px;
+        color: lighten($gray-color, 50%);
+        cursor: pointer;
+
+        &.active {
+            color: $gray-color;
+        }
+    }
+}

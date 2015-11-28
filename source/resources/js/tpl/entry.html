@@ -13,7 +13,8 @@
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="text" class="form-control" placeholder="Password" value="<%= password %>" name="password">
+            <input type="password" class="form-control" placeholder="Password" value="<%= password %>" name="password">
+            <a href="#" class="toggle-password"><span class="icon icon-eye"></span></a>
         </div>
 
         <h6>Meta</h6>
@@ -25,12 +26,9 @@
             <input type="text" class="form-control form-value" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
         </div>
         <% }); %>
-
-        <div class="form-group split-form-group">
-            <input type="text" class="form-control form-title" data-custom-field-title>
-            <input type="text" class="form-control form-value" data-custom-field-value>
-        </div>
     </form>
+    <hr>
+    <a href="#" class="add-new-meta">Add New Meta...</a>
     <% } %>
 </div>
 <% if (typeof blank === "undefined") {%>

@@ -107,7 +107,7 @@
 
             // Main Info
             properties.forEach(function (prop) {
-                if (propertiesChanged.hasOwnProperty(prop)) {
+                if (propertiesChanged.hasOwnProperty(prop) && propertiesChanged[prop] !== entry.getProperty(prop)) {
                     entry.setProperty(prop, propertiesChanged[prop]);
                 }
             });
@@ -117,7 +117,7 @@
                 if (metaChanged.hasOwnProperty(metaKey)) {
                     var key = metaKey.replace("meta.", "").trim(),
                         value = metaChanged[metaKey].trim();
-                    if (key.length > 0 && value.length > 0) {
+                    if (key.length > 0 && value.length > 0 && value !== entry.getMeta(key)) {
                         entry.setMeta(key, value);
                     }
                 }

@@ -4,6 +4,18 @@
 import _ from 'underscore';
 import Backbone from 'backbone';
 import Tpl from 'tpl/entry.html!text';
+import Metatpl from 'tpl/entry-new-meta.html!text';
+
+// New Meta View
+var MetaEntryView = Backbone.View.extend({
+    className: 'form-group split-form-group',
+
+    render: function () {
+        this.template = _.template(Metatpl);
+        this.$el.html(this.template());
+        return this;
+    }
+});
 
 // Export View
 export default Backbone.View.extend({
@@ -14,7 +26,9 @@ export default Backbone.View.extend({
         'click .btn-save': 'saveEntry',
         'click .btn-cancel': 'cancelChanges',
         'click .btn-remove': 'removeEntry',
-        'keypress h1': 'manageTitleChange'
+        'keypress h1': 'manageTitleChange',
+        'click .toggle-password': 'togglePasswordField',
+        'click .add-new-meta': 'addNewMeta'
     },
 
     initialize: function () {
@@ -53,6 +67,21 @@ export default Backbone.View.extend({
         }
     },
 
+    togglePasswordField: function (e) {
+        e.preventDefault();
+        var $field = this.$('input[name=password]'),
+            type = $field.attr('type');
+
+        $(e.currentTarget).toggleClass('active', (type !== 'text'));
+        $field.attr('type', (type === 'text') ? 'password' : 'text');
+    },
+
+    addNewMeta: function (e) {
+        e.preventDefault();
+        var view = new MetaEntryView();
+        this.$('form').append(view.render().el);
+    },
+
     saveEntry: function () {
         var changed  = {
             meta: {}
@@ -87,7 +116,7 @@ export default Backbone.View.extend({
         this.model.save({}, {
             wait: true,
             success: () => {
-                this.showHideActionBar(false);
+                this.render();
             }
         });
     },
