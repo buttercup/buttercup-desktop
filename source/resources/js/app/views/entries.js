@@ -48,7 +48,7 @@ export default Backbone.View.extend({
         this.collection = new Entries([], {
             parentID: model.id
         });
-        this.collection.on('reset', this.addEntries, this);
+        this.collection.on('reset', this.groupLoaded, this);
         this.collection.on('add', this.addEntry, this);
         this.collection.on('remove', this.removeEntry, this);
         this.collection.fetch({reset: true});

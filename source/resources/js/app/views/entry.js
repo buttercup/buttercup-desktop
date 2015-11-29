@@ -28,7 +28,8 @@ export default Backbone.View.extend({
         'click .btn-remove': 'removeEntry',
         'keypress h1': 'manageTitleChange',
         'click .toggle-password': 'togglePasswordField',
-        'click .add-new-meta': 'addNewMeta'
+        'click .add-new-meta': 'addNewMeta',
+        'click .btn-remove-meta': 'removeMeta'
     },
 
     initialize: function () {
@@ -38,6 +39,7 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
+        this.removedMeta = [];
         return this;
     },
 
@@ -73,6 +75,15 @@ export default Backbone.View.extend({
         this.$('form').append(view.render().el);
     },
 
+    removeMeta: function (e) {
+        e.preventDefault();
+        var $el = $(e.currentTarget),
+            metaKey = $el.data('meta');
+        this.removedMeta.push(metaKey);
+        $el.parents('[data-custom-field-row]').remove();
+        this.showHideActionBar(true);
+    },
+
     saveEntry: function () {
         var changed  = {
             meta: {}
@@ -86,7 +97,13 @@ export default Backbone.View.extend({
             changed[field.getAttribute('name')] = field.value;
         });
 
-        // Custom Fields
+        // Removed Custom Fields
+        console.log(this.removedMeta);
+        this.removedMeta.forEach((key) => {
+            this.model.unset('meta.' + key);
+        });
+
+        // New Custom Fields
         this.$('input[data-custom-field-title]').each(function (index, field) {
             var $field = $(field),
                 $next  = $field.next('input[data-custom-field-value'),
@@ -97,6 +114,7 @@ export default Backbone.View.extend({
             }
         });
 
+        // Changed custom fields
         this.$('[data-custom-field][data-changed]').each(function (index, field) {
             changed.meta[field.getAttribute('data-custom-field')] = field.value;
         });

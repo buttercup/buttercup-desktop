@@ -103,7 +103,9 @@
             var entry = manager.findEntry(arg.id),
                 properties = ['title', 'username', 'password'],
                 propertiesChanged = arg.changed || {},
-                metaChanged = arg._nestedChanges || {};
+                metaChanged = arg._nestedChanges || {},
+                removedMetaList = arg._previousAttributes.meta,
+                entryObject = entry.toObject();
 
             // Main Info
             properties.forEach(function (prop) {
@@ -122,7 +124,14 @@
                     }
                 }
             }
-            
+
+            // Removed Meta
+            for (var removedMetaKey in entryObject.meta) {
+                if (entryObject.meta.hasOwnProperty(removedMetaKey) && !(removedMetaKey in removedMetaList)) {
+                    entry.deleteMeta(removedMetaKey);
+                }
+            }
+
             e.returnValue = entry.toObject();
         });
 
