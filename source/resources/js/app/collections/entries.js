@@ -27,7 +27,7 @@ export default Backbone.Collection.extend({
             return this;
         }
 
-        var pattern = new RegExp(letters,"gi");
+        var pattern = new RegExp(letters, "gi");
         return this.filter(function(data) {
             return pattern.test(data.get('title'));
         });

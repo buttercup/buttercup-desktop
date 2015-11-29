@@ -13,6 +13,7 @@ var MetaEntryView = Backbone.View.extend({
     render: function () {
         this.template = _.template(Metatpl);
         this.$el.html(this.template());
+        this.$el.attr('data-custom-field-row', true);
         return this;
     }
 });
@@ -79,9 +80,12 @@ export default Backbone.View.extend({
         e.preventDefault();
         var $el = $(e.currentTarget),
             metaKey = $el.data('meta');
-        this.removedMeta.push(metaKey);
+        if (metaKey) {
+            this.removedMeta.push(metaKey);
+            this.showHideActionBar(true);
+        }
         $el.parents('[data-custom-field-row]').remove();
-        this.showHideActionBar(true);
+
     },
 
     saveEntry: function () {
