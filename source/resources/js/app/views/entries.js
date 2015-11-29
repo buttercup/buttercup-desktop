@@ -29,7 +29,8 @@ export default Backbone.View.extend({
 
     events: {
         'click .list-group-item': 'loadEntry',
-        'click .btn-add': 'createEntry'
+        'click .btn-add': 'createEntry',
+        'keyup .search': 'search'
     },
 
     initialize: function () {
@@ -54,14 +55,16 @@ export default Backbone.View.extend({
         this.$('.view-footer').addClass('active');
     },
 
-    addEntries: function (collection) {
-        var _this = this;
-
+    groupLoaded: function (collection) {
         Buttercup.Events.trigger('groupLoaded', collection);
+        this.addEntries(collection);
+    },
+
+    addEntries: function (collection) {
         this.$('.list-group-item').remove();
 
-        _.each(collection.models, function (model) {
-            _this.addEntry.call(_this, model, false);
+        _.each(collection.models, (model) => {
+            this.addEntry.call(this, model, false);
         });
     },
 
@@ -101,5 +104,17 @@ export default Backbone.View.extend({
         this._views[model.get('id')].$el.remove();
         delete this._views[model.get('id')];
         this.$('.list-entries > li:first').trigger('click');
+    },
+
+    search: function (e) {
+        var $el = this.$(e.currentTarget),
+            result = this.collection.search($el.val());
+
+        if (result instanceof Entries !== true) {
+            result = {
+                models: result
+            }
+        }
+        this.addEntries(result);
     }
 });

@@ -1,10 +1,4 @@
 <div class="padded-more view-content">
-    <% if(typeof blank !== "undefined" && blank === true) { %>
-    <h1>Welcome to Buttercup</h1>
-    <p>
-        This is a cup of butter.
-    </p>
-    <% } else { %>
     <h1 contenteditable="true"><%= title %></h1>
     <form>
         <div class="form-group">
@@ -29,9 +23,7 @@
     </form>
     <hr>
     <a href="#" class="add-new-meta">Add New Meta...</a>
-    <% } %>
 </div>
-<% if (typeof blank === "undefined") {%>
 <div class="view-footer padded active">
     <div class="left hidden">
         <button class="btn btn-primary btn-save">Save</button>
@@ -41,4 +33,3 @@
         <button class="btn btn-negative btn-remove"><span class="icon icon-trash"></span> Delete</button>
     </div>
 </div>
-<% } %>

@@ -19,7 +19,7 @@ var MetaEntryView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'pane entry-view',
+    className: 'entry-view',
 
     events: {
         'keyup input': 'setFieldsOnChange',
@@ -33,20 +33,11 @@ export default Backbone.View.extend({
 
     initialize: function () {
         this.template = _.template(Tpl);
-        if (this.model) {
-            this.model.on('change', this.showHideActionBar, this);
-            this.model.on('destroy', function () {
-                console.log("model destroyed");
-            });
-        }
+        this.model.on('change', this.showHideActionBar, this);
     },
 
     render: function () {
-        this.$el.html(this.template(
-            this.model ? this.model.toJSON() : {
-                blank: true
-            }
-        ));
+        this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
 

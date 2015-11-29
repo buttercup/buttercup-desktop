@@ -17,7 +17,6 @@ export default Backbone.View.extend({
         this.template = _.template(Tpl);
         this.sidebar = new SidebarView;
         this.entries = new EntriesView;
-        this.entry   = new EntryView;
 
         Buttercup.Events.on('groupSelected', this.entries.setGroup, this.entries);
         Buttercup.Events.on('groupLoaded', this.updateItemCount, this);
@@ -29,9 +28,8 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.params));
-        this.$('.pane-group').append(this.sidebar.render().el);
-        this.$('.pane-group').append(this.entries.render().el);
-        this.$('.pane-group').append(this.entry.render().el);
+        this.$('.pane-group').prepend(this.entries.render().el);
+        this.$('.pane-group').prepend(this.sidebar.render().el);
     },
 
     updateItemCount: function (collection) {
@@ -39,10 +37,12 @@ export default Backbone.View.extend({
     },
 
     loadEntry: function (model) {
-        this.entry.destroy();
+        if (this.entry) {
+            this.entry.destroy();
+        }
         this.entry = new EntryView({
             model: model
         });
-        this.$('.pane-group').append(this.entry.render().el);
+        this.$('.pane-entry').html(this.entry.render().el);
     }
 });
