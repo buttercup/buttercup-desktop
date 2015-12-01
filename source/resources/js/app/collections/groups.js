@@ -5,5 +5,8 @@ import Group from 'app/models/group';
 
 export default Backbone.Collection.extend({
     buttercup: new Backbone.Buttercup('groups'),
-    model: Group
+    model: Group,
+    initialize: function(models, options) {
+        this.options = options;
+    }
 });

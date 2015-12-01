@@ -62,7 +62,23 @@
 
         // Create a group
         ipc.on('groups.create', function (e, arg) {
-            e.returnValue = manager.createGroup(arg.attributes.title).toObject();
+            var parent = null,
+                group;
+
+            try {
+                var parentId = arg.collection.options.parentID;
+                parent = manager.findGroup(parentId);
+            } catch (e) {}
+
+            if (parent !== null) {
+                group = parent.createGroup(arg.attributes.title);
+            } else {
+                group = manager.createGroup(arg.attributes.title);
+            }
+
+            group = group.toObject();
+            group.groups = [];
+            e.returnValue = group;
         });
 
         // Delete a group
