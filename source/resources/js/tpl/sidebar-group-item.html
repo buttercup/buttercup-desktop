@@ -3,6 +3,8 @@
     <% if (isNew) { %>
         <span data-title contenteditable><%= title %></span>
     <% } else { %>
-        <%= title %><a href="#" class="group-add">ADD</a>
+        <%= title %>
+        <a href="#" class="group-add">+</a>
+        <a href="#" class="group-remove">x</a>
     <% } %>
 </span>

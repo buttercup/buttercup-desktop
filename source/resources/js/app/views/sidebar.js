@@ -39,6 +39,7 @@ var SidebarGroupItemView = Backbone.View.extend({
     events: {
         'click .nav-group-item': 'handleClick',
         'click .group-add': 'addGroup',
+        'click .group-remove': 'removeGroup',
         'keydown [data-title]': 'handleTitleChange'
     },
 
@@ -110,6 +111,12 @@ var SidebarGroupItemView = Backbone.View.extend({
         e.preventDefault();
         e.stopPropagation();
         this.model.groups.add(new Group());
+    },
+
+    removeGroup: function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.model.destroy();
     },
 
     destroy: function () {
