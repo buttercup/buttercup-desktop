@@ -25,7 +25,7 @@ var EntryItemView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'pane pane-sm entry-view',
+    className: 'pane pane-md pane-entries pane-layout',
 
     events: {
         'click .list-group-item': 'loadEntry',
@@ -52,7 +52,7 @@ export default Backbone.View.extend({
         this.collection.on('add', this.addEntry, this);
         this.collection.on('remove', this.removeEntry, this);
         this.collection.fetch({reset: true});
-        this.$('.view-footer').addClass('active');
+        this.$('.pane-footer').addClass('active');
     },
 
     groupLoaded: function (collection) {

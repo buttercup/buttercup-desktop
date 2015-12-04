@@ -16,8 +16,9 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600
+        width: 1000,
+        height: 700,
+        'title-bar-style': 'hidden'
     });
     mainWindow.loadUrl('file://' + path.resolve(__dirname, '../public/index.html'));
     mainWindow.openDevTools();

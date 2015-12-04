@@ -6,9 +6,10 @@
 // --------------------------------------------------
 
 // Try to use the system's font on whatever platform the user is on.
-$font-family-default: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, "Segoe UI", sans-serif !default;
-$font-size-default: 13px !default;
-$font-weight: 500 !default;
+//$font-family-default: system, -apple-system, ".SFNSDisplay-Regular", "Helvetica Neue", Helvetica, "Segoe UI", sans-serif !default;
+$font-family-default: "Open Sans";
+$font-size-default: 14px !default;
+$font-weight: 400 !default;
 $font-weight-bold: 700 !default;
 $font-weight-light: 300 !default;
 $line-height-default: 1.6 !default;
@@ -43,6 +44,13 @@ $dark-color: #57acf5 !default;
 $active-color: #116cd6;
 $focus-input-color: lighten($primary-color, 10%)  !default;
 
+// Brand Colors
+$pane-background-color: #607D8B;
+$pane-border: darken($pane-background-color, 5%);
+$list-selected-background-color: #7599AA;
+$search-field-background-color: #49606B;
+$folder-list-blue: #607D8B;
+
 // Other
 // --------------------------------------------------
 
@@ -50,7 +58,7 @@ $focus-input-color: lighten($primary-color, 10%)  !default;
 $default-border-radius: 4px;
 
 // Padding
-$padding: 10px;
+$padding: 20px;
 $padding-mini: 3px;
 $padding-less: 5px;
 $padding-more: 20px;

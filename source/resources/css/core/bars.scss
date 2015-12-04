@@ -1,0 +1,22 @@
+//
+// Bars.css
+// --------------------------------------------------
+
+.toolbar {
+    min-height: 22px;
+    @include clearfix;
+}
+
+.toolbar-footer {
+    -webkit-app-region: drag;
+}
+
+// Simple centered title to go in the toolbar
+.title {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    color: #555;
+    cursor: default;
+}

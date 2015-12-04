@@ -1,22 +1,22 @@
 // Variables
-@import "variables.scss";
+@import "../../core/variables";
 
 // Mixins
-@import "mixins.scss";
+@import "../../core/mixins";
 
 // Normalize, Base, & Utilities CSS
 @import "normalize.scss";
-@import "base.scss";
+@import "../../core/base";
 @import "utilities.scss";
 
 // Components
 @import "buttons.scss";
 @import "button-groups.scss";
-@import "bars.scss";
+@import "../../core/bars";
 @import "forms.scss";
-@import "grid.scss";
+@import "../../core/grid";
 @import "images.scss";
-@import "lists.scss";
+@import "../../core/lists";
 @import "navs.scss";
 @import "icons.scss";
 @import "tables.scss";

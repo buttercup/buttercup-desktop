@@ -126,7 +126,7 @@ var SidebarGroupItemView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'pane-sm sidebar',
+    className: 'pane-sm pane-sidebar',
 
     events: {
         'click .group-add': 'addGroup'

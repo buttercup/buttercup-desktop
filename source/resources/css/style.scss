@@ -1,16 +1,21 @@
 // Import deps
-@import "libs/photon/photon";
+// @import "libs/photon/photon";
+@import "core/fonts";
+@import "core/variables";
+@import "core/mixins";
+@import "core/base";
+@import "core/bars";
+@import "core/grid";
+@import "core/lists";
 
 // Import custom
-@import "ui/entry-view";
+//@import "ui/entry-view";
+@import "ui/icons";
+@import "ui/entires-list";
+@import "ui/sidebar";
 
-// ...
-.nav-group {
-    padding-left: 0;
-
-    .nav-group {
-        margin-left: 25px;
-    }
+body {
+    //-webkit-app-region: drag;
 }
 
 .btn-negative .icon {
