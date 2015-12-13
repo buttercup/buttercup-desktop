@@ -38,20 +38,21 @@
                 //event.sender.send('workspace.connected', 'connected');
 
                 // Create the browser window.
-                var mainWindow = new BrowserWindow({
+                Buttercup.MainWindow = new BrowserWindow({
                     width: 1000,
                     height: 700,
                     'title-bar-style': 'hidden'
                 });
-                mainWindow.loadURL('file://' + path.resolve(__dirname, '../public/index.html'));
-                mainWindow.show();
+                Buttercup.MainWindow.loadURL(Buttercup.config.publicDir + '/index.html');
+                Buttercup.MainWindow.show();
                 //mainWindow.webContents.openDevTools();
 
                 // Emitted when the window is closed.
                 mainWindow.on('closed', function() {
-                    mainWindow = null;
+                    Buttercup.MainWindow = null;
                 });
 
+                // Close intro screen
                 Buttercup.IntroScreen.close();
             });
         });
