@@ -1,9 +1,12 @@
 (function (module) {
     'use strict';
 
-    var Manager     = require('./manager'),
-        Workspace   = require('./workspace'),
-        ipc         = require('ipc');
+    var Manager         = require('./manager'),
+        Workspace       = require('./workspace'),
+        path            = require('path'),
+        electron        = require('electron'),
+        BrowserWindow   = electron.BrowserWindow,
+        ipc             = electron.ipcMain;
 
     var manager = new Manager();
 
@@ -32,7 +35,24 @@
         ipc.on('workspace.connect', function(event, arg) {
             Workspace.load(arg.path, arg.password).then(function (workspace) {
                 manager.setWorkspace(workspace);
-                event.sender.send('workspace.connected', 'connected');
+                //event.sender.send('workspace.connected', 'connected');
+
+                // Create the browser window.
+                var mainWindow = new BrowserWindow({
+                    width: 1000,
+                    height: 700,
+                    'title-bar-style': 'hidden'
+                });
+                mainWindow.loadURL('file://' + path.resolve(__dirname, '../public/index.html'));
+                mainWindow.show();
+                //mainWindow.webContents.openDevTools();
+
+                // Emitted when the window is closed.
+                mainWindow.on('closed', function() {
+                    mainWindow = null;
+                });
+
+                Buttercup.IntroScreen.close();
             });
         });
 

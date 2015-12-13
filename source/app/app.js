@@ -1,12 +1,15 @@
 "use strict";
 
-var app             = require('app'),
+var electron        = require('electron'),
+    app             = electron.app,
+    BrowserWindow   = electron.BrowserWindow,
+    ipc             = electron.ipcMain,
     path            = require('path'),
-    BrowserWindow   = require('browser-window'),
     EventsManager   = require('./events')();
 
 // Global reference of the window object
 var mainWindow = null;
+global.Buttercup = {};
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -15,16 +18,16 @@ app.on('window-all-closed', function() {
 
 app.on('ready', function() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({
-        width: 1000,
-        height: 700,
-        'title-bar-style': 'hidden'
+    Buttercup.IntroScreen = new BrowserWindow({
+        width: 600,
+        height: 480/*,
+        'title-bar-style': 'hidden'*/
     });
-    mainWindow.loadUrl('file://' + path.resolve(__dirname, '../public/index.html'));
-    mainWindow.openDevTools();
+    Buttercup.IntroScreen.loadURL('file://' + path.resolve(__dirname, '../public/intro.html'));
+    Buttercup.IntroScreen.webContents.openDevTools();
 
     // Emitted when the window is closed.
-    mainWindow.on('closed', function() {
+    Buttercup.IntroScreen.on('closed', function() {
         mainWindow = null;
     });
 });

@@ -30,7 +30,8 @@ module.exports = function(grunt) {
         jade: {
             app: {
                 files: {
-                    'source/public/index.html': ['source/resources/jade/index.jade']
+                    'source/public/index.html': ['source/resources/jade/index.jade'],
+                    'source/public/intro.html': ['source/resources/jade/intro.jade']
                 },
                 options: {
                     debug: false

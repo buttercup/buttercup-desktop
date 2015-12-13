@@ -1,21 +1,21 @@
 "use strict";
 
 // Import Deps
-import Layout from 'app/views/layout';
-import Backbone from 'backbone';
 import _ from 'underscore';
-var ipc = require('ipc');
+import Backbone from 'backbone';
+import IntroScreen from 'app/views/intro-screen';
+import Layout from 'app/views/layout';
 
-ipc.send('workspace.connect', {
-    path: './myArchive.bcup',
-    password: 'sallar'
-});
+// Create Instances
+window.Buttercup = window.Buttercup || {};
+Buttercup.Events = _.extend({}, Backbone.Events);
 
-ipc.on('workspace.connected', function() {
-    // Create Instances
-    window.Buttercup = window.Buttercup || {};
-    Buttercup.Events = _.extend({}, Backbone.Events);
+// Decide what to load
+if (importScreen === true) {
+    Buttercup.IntroScreen = new IntroScreen();
+} else {
     Buttercup.Layout = new Layout();
+}
 
-    Backbone.history.start();
-});
+// Start histroy process
+Backbone.history.start();

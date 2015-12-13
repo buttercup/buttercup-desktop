@@ -1,5 +1,5 @@
 import Backbone from 'backbone';
-var ipc = require('ipc');
+var ipc = require('electron').ipcRenderer;
 
     function isObject(item) {
         return item === Object(item);

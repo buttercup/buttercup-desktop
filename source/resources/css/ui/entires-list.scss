@@ -21,6 +21,10 @@
         }
     }
 
+    .pane-footer {
+        border-top: 1px solid $pane-border;
+    }
+
     .list-group-item {
         color: #fff;
         border-bottom-color: $pane-border;
