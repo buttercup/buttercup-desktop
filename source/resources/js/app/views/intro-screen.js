@@ -13,7 +13,6 @@ const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const dialog = remote.dialog;
 
-
 // Export View
 export default Backbone.View.extend({
     el: '.window',
@@ -22,7 +21,8 @@ export default Backbone.View.extend({
         'click .block-list a': 'loadFromRecent',
         'click .cancel': 'togglePasswordForm',
         'submit .password-overlay form': 'loadArchive',
-        'click .archive-open': 'openArchive'
+        'click .archive-open': 'openArchive',
+        'click .archive-new': 'newArchive'
     },
 
     initialize: function () {
@@ -32,6 +32,12 @@ export default Backbone.View.extend({
         this.collection.on("reset", this.render, this);
         this.collection.on("add", this.render, this);
         this.collection.fetch({reset: true});
+
+        // Options
+        this.fileFilters = {
+            name: 'Buttercup Archives',
+            extensions: ['bcup']
+        };
 
         // Render
         this.render();
@@ -49,7 +55,7 @@ export default Backbone.View.extend({
 
     togglePasswordForm: function(id) {
         if (id) {
-            this.$('.password-overlay form').data('id');
+            this.$('.password-overlay form').data('id', id);
         }
         this.$('.main-screen').toggleClass('hide');
         this.$('.password-overlay').toggleClass('hide');
@@ -77,7 +83,13 @@ export default Backbone.View.extend({
             }
         });
 
-        return archive || new Archive({path: path});
+        if (!archive) {
+            archive = new Archive({path: path});
+            this.collection.add(archive);
+            archive.save();
+        }
+
+        return archive;
     },
 
     openArchive: function(e) {
@@ -87,24 +99,29 @@ export default Backbone.View.extend({
         var selectedFiles = dialog.showOpenDialog({
             title: 'Open Existing Archive...',
             properties: ['openFile', 'createDirectory'],
-            filters: [
-                {name: 'Buttercup Archives', extensions: ['bcup']}
-            ]
+            filters: this.fileFilers
         });
 
-        try {
+        if (typeof selectedFiles !== "undefined") {
             // Save to recent files
             var archive = this.getArchive(selectedFiles[0]);
-            if (archive.isNew()) {
-                this.collection.add(archive);
-                archive.save();
-            }
-
-            // Show password dialog
             this.togglePasswordForm(archive.id);
-        } catch (err) {
-            // TODO: Show error
-            console.log("Error...");
+        }
+    },
+
+    newArchive: function(e) {
+        e.preventDefault();
+
+        var filename = dialog.showSaveDialog({
+            filters: this.fileFilters
+        });
+
+        if (filename && filename.length > 0) {
+            ipc.send('workspace.new', {
+                path: filename,
+                password: "sallar"
+            });
+            this.getArchive(filename);
         }
     }
 });

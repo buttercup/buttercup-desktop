@@ -23,8 +23,8 @@ app.on('ready', function() {
     // Create the browser window.
     Buttercup.IntroScreen = new BrowserWindow({
         width: 700,
-        height: 500/*,
-        'title-bar-style': 'hidden'*/
+        height: 500,
+        'title-bar-style': 'hidden'
     });
     Buttercup.IntroScreen.loadURL(Buttercup.config.publicDir + '/intro.html');
     Buttercup.IntroScreen.webContents.openDevTools();
