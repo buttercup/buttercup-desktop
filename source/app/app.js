@@ -22,8 +22,8 @@ app.on('window-all-closed', function() {
 app.on('ready', function() {
     // Create the browser window.
     Buttercup.IntroScreen = new BrowserWindow({
-        width: 600,
-        height: 480/*,
+        width: 700,
+        height: 500/*,
         'title-bar-style': 'hidden'*/
     });
     Buttercup.IntroScreen.loadURL(Buttercup.config.publicDir + '/intro.html');

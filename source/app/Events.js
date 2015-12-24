@@ -45,10 +45,10 @@
                 });
                 Buttercup.MainWindow.loadURL(Buttercup.config.publicDir + '/index.html');
                 Buttercup.MainWindow.show();
-                //mainWindow.webContents.openDevTools();
+                Buttercup.MainWindow.webContents.openDevTools();
 
                 // Emitted when the window is closed.
-                mainWindow.on('closed', function() {
+                Buttercup.MainWindow.on('closed', function() {
                     Buttercup.MainWindow = null;
                 });
 

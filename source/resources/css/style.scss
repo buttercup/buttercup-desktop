@@ -1,18 +1,21 @@
 // Import deps
 // @import "libs/photon/photon";
-@import "core/fonts";
+/*@import "core/fonts";
 @import "core/variables";
 @import "core/mixins";
 @import "core/base";
 @import "core/bars";
 @import "core/grid";
-@import "core/lists";
+@import "core/lists";*/
+@import "../../../node_modules/foundation-apps/scss/foundation";
+
+@import "ui/password-overlay";
 
 // Import custom
 //@import "ui/entry-view";
-@import "ui/icons";
+/*@import "ui/icons";
 @import "ui/entires-list";
-@import "ui/sidebar";
+@import "ui/sidebar";*/
 
 body {
     //-webkit-app-region: drag;

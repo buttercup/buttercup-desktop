@@ -1,10 +1,37 @@
-<div class="window-content">
-    <div class="pane-group">
-        <div class="pane">
-            Create new
-        </div>
-        <div class="pane pane-sm">
-            <a href="#" data-filepath="./myArchive.bcup" data-password="sallar">myArchive.bcup</a>
-        </div>
+<div class="main-screen grid-block">
+    <div class="grid-block v-align align-center">
+            <div class="align-center">
+                <ul class="no-bullet">
+                    <li><a href="#" class="archive-open">Open...</a></li>
+                    <li><a href="#" class="archive-open">New Archive</a></li>
+                </ul>
+            </div>
     </div>
+    <div class="grid-content medium-5">
+        <section class="block-list">
+            <header>Recent Buttercups</header>
+            <ul>
+                <% _.each(recent, function(item) { %>
+                <li class="with-chevron">
+                    <a href="#" data-id="<%= item.id %>" data-password="sallar">
+                        <div><%= item.path.replace(/^.*[\\\/]/, '') %></div>
+                        <small><%= item.path %></small>
+                    </a>
+                </li>
+                <% }); %>
+            </ul>
+        </section>
+    </div>
+</div>
+<div class="password-overlay grid-block hide">
+    <form action="#">
+        <label class="text-center">
+            Enter your password to continue:
+            <span class="inline-label">
+                <input type="password" placeholder="Password">
+                <button type="submit" class="button">Continue</button>
+            </span>
+        </label>
+        <p class="text-center"><a href="#" class="cancel">&larr; Cancel</a></p>
+    </form>
 </div>
