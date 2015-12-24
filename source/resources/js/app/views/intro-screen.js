@@ -18,7 +18,7 @@ export default Backbone.View.extend({
     el: '.window',
 
     events: {
-        'click .block-list a': 'loadFromRecent',
+        'click .recent-files [data-id]': 'loadFromRecent',
         'click .cancel': 'togglePasswordForm',
         'submit .password-overlay form': 'loadArchive',
         'click .archive-open': 'openArchive',
@@ -34,10 +34,10 @@ export default Backbone.View.extend({
         this.collection.fetch({reset: true});
 
         // Options
-        this.fileFilters = {
+        this.fileFilters = [{
             name: 'Buttercup Archives',
             extensions: ['bcup']
-        };
+        }];
 
         // Render
         this.render();
