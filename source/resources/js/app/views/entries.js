@@ -25,7 +25,7 @@ var EntryItemView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'pane pane-md pane-entries pane-layout',
+    className: 'grid-block pane-entries medium-3',
 
     events: {
         'click .list-group-item': 'loadEntry',

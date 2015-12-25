@@ -8,7 +8,7 @@ import Metatpl from 'tpl/entry-new-meta.html!text';
 
 // New Meta View
 var MetaEntryView = Backbone.View.extend({
-    className: 'form-group split-form-group',
+    className: 'grid-block',
 
     render: function () {
         this.template = _.template(Metatpl);
@@ -20,7 +20,7 @@ var MetaEntryView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'entry-view',
+    className: 'grid-block vertical entry-view',
 
     events: {
         'keyup input': 'setFieldsOnChange',
@@ -50,7 +50,7 @@ export default Backbone.View.extend({
     },
 
     showHideActionBar: function (showHideFlag) {
-        this.$('.view-footer .left').toggle(!!showHideFlag);
+        this.$('.action-buttons').toggleClass('hide', !showHideFlag);
     },
 
     manageTitleChange: function (e) {
@@ -110,7 +110,7 @@ export default Backbone.View.extend({
         // New Custom Fields
         this.$('input[data-custom-field-title]').each(function (index, field) {
             var $field = $(field),
-                $next  = $field.next('input[data-custom-field-value'),
+                $next  = $field.parents('.grid-block').find('input[data-custom-field-value]'),
                 key    = $field.val(),
                 value  = $next.val();
             if (key.length > 0 && value.length > 0) {
