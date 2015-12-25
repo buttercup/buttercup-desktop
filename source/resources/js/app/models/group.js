@@ -6,14 +6,12 @@ import Groups from 'app/collections/groups';
 
 export default Backbone.Model.extend({
     buttercup: new Backbone.Buttercup('groups'),
-    parse: function(data) {
-        if (data.groups.length > 0) {
-            this.groups = new Groups(data.groups, {
-                parentID: data.id
+    initialize: function(model) {
+        if (model && model.groups) {
+            this.groups = new Groups(model.groups, {
+                parentID: model.id
             });
         }
-        delete data.groups;
-        return data;
     },
     defaults: {
         'title': 'Untitled'

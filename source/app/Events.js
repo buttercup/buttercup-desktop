@@ -75,6 +75,7 @@
 
         // Get all groups
         ipc.on('groups.all', function (e) {
+            console.log(JSON.stringify(convertGroups(manager.getGroups())));
             e.returnValue = convertGroups(manager.getGroups());
         });
 

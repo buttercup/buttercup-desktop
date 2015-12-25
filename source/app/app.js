@@ -27,7 +27,6 @@ app.on('ready', function() {
         'title-bar-style': 'hidden'
     });
     Buttercup.IntroScreen.loadURL(Buttercup.config.publicDir + '/intro.html');
-    Buttercup.IntroScreen.webContents.openDevTools();
 
     // Emitted when the window is closed.
     Buttercup.IntroScreen.on('closed', function() {
