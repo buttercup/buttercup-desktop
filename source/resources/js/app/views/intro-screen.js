@@ -65,9 +65,13 @@ export default Backbone.View.extend({
             inputType: "password",
             inputPlaceholder: "Archive’s password..."
         }, function(inputValue) {
+            if (inputValue === false || inputValue === undefined) {
+                return false;
+            }
+            
             if (inputValue === "") {
                 swal.showInputError("You need to write something!");
-                return false
+                return false;
             }
 
             ipc.on('workspace.error', function(e, error) {
