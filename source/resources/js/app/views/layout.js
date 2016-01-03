@@ -28,12 +28,12 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.params));
-        this.$('.pane-group').prepend(this.entries.render().el);
-        this.$('.pane-group').prepend(this.sidebar.render().el);
+        this.$('.panes').prepend(this.entries.render().el);
+        this.$('.panes').prepend(this.sidebar.render().el);
     },
 
     updateItemCount: function (collection) {
-        this.$('.toolbar-footer h1').text(`${collection.length} entries`);
+        this.$('.layout-footer .title').text(`${collection.length} entries`);
     },
 
     loadEntry: function (model) {

@@ -1,10 +1,36 @@
-<div class="window-content">
-    <div class="pane-group">
-        <div class="pane">
-            Create new
-        </div>
-        <div class="pane pane-sm">
-            <a href="#" data-filepath="./myArchive.bcup" data-password="sallar">myArchive.bcup</a>
-        </div>
+<div class="main-screen grid-block">
+    <div class="grid-block v-align align-center welcome">
+            <div class="align-center">
+                <header>
+                    <img src="img/logo.png" alt="Buttercup">
+                    <h3>Welcome to Buttercup</h3>
+                    <h5 class="subheader">Beta</h5>
+                </header>
+                <div class="block-list">
+                    <ul>
+                        <li>
+                            <a href="#" class="archive-open"><%= icon("hello") %> Open...</a>
+                        </li>
+                        <li>
+                            <a href="#" class="archive-new"><span class="icon-file-plus"></span> New Archive</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <div class="grid-content medium-5 recent-files">
+        <section class="block-list">
+            <header>Recent Buttercups</header>
+            <ul>
+                <% _.each(recent, function(item) { %>
+                <li class="with-chevron">
+                    <a href="#" data-id="<%= item.id %>" data-password="sallar">
+                        <div><%= filename(item.path) %></div>
+                        <small><%= item.path %></small>
+                    </a>
+                </li>
+                <% }); %>
+            </ul>
+        </section>
     </div>
 </div>

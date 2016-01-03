@@ -1,0 +1,30 @@
+.main-screen {
+
+    h3, h5 {
+        font-weight: 300;
+        text-align: center;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .recent-files {
+        background-color: $gray-light;
+        border-left: 1px solid $gray;
+        padding-top: 1em;
+    }
+
+    .welcome {
+        header {
+            margin-bottom: 2em;
+
+            > img {
+                height: 120px;
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    }
+
+}

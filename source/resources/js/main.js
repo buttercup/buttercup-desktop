@@ -5,6 +5,7 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import IntroScreen from 'app/views/intro-screen';
 import Layout from 'app/views/layout';
+import 'app/helpers';
 
 // Create Instances
 window.Buttercup = window.Buttercup || {};

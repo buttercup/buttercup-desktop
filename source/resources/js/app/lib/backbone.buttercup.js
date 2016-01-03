@@ -65,7 +65,7 @@ var ipc = require('electron').ipcRenderer;
     });
 
 
-    Backbone.Buttercup.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
+    Backbone.Buttercup.sync = Backbone.buttercupSync = function(method, model, options) {
         var store = result(model, 'buttercup') || result(model.collection, 'buttercup'),
             parentID = false;
 
@@ -129,22 +129,22 @@ var ipc = require('electron').ipcRenderer;
         return syncDfd && syncDfd.promise();
     };
 
-    Backbone.ajaxSync = Backbone.sync;
+    Backbone.ajaxSyncBackup = Backbone.sync;
 
-    Backbone.getSyncMethod = function(model, options) {
+    Backbone.getButtercupSyncMethod = function(model, options) {
         var forceAjaxSync = options && options.ajaxSync;
 
         if(!forceAjaxSync && (result(model, 'buttercup') || result(model.collection, 'buttercup'))) {
-            return Backbone.localSync;
+            return Backbone.buttercupSync;
         }
 
-        return Backbone.ajaxSync;
+        return Backbone.ajaxSyncBackup;
     };
 
     // Override 'Backbone.sync' to default to localSync,
     // the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
     Backbone.sync = function(method, model, options) {
-        return Backbone.getSyncMethod(model, options).apply(this, [method, model, options]);
+        return Backbone.getButtercupSyncMethod(model, options).apply(this, [method, model, options]);
     };
 
 export default Backbone;

@@ -1,38 +1,45 @@
-<div class="padded-more view-content">
+<section class="grid-content">
     <h1 contenteditable="true"><%= title %></h1>
     <form>
-        <div class="form-group">
-            <label>Username</label>
+        <label>
+            Username
             <input type="text" class="form-control" placeholder="Username" value="<%= username %>" name="username">
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" placeholder="Password" value="<%= password %>" name="password">
-            <a href="#" class="toggle-password"><span class="icon icon-eye"></span></a>
-        </div>
+        </label>
+        <label>
+            Password
+            <span class="inline-label">
+                <input type="password" class="form-control" placeholder="Password" value="<%= password %>" name="password">
+                <a href="#" class="toggle-password form-label"><span class="icon icon-eye"></span></a>
+            </span>
+        </label>
 
-        <h6>Meta</h6>
-        <hr>
+        <h5>Meta</h5>
 
         <% _.each(meta, function (metaValue, metaKey) { %>
-        <div class="form-group split-form-group" data-custom-field-row="<%= metaKey %>">
-            <label class="form-title"><%= metaKey %></label>
-            <input type="text" class="form-control form-value" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
-            <button class="btn-remove-meta btn btn-default" data-meta="<%= metaKey %>">
-                <span class="icon icon-trash"></span>
-            </button>
+        <div class="grid-block" data-custom-field-row="<%= metaKey %>">
+            <div class="grid-content medium-5">
+                <label class="form-title"><%= metaKey %></label>
+            </div>
+            <div class="grid-content medium-7">
+                <span class="inline-label">
+                    <input type="text" class="form-control form-value" value="<%= metaValue %>" data-custom-field="<%= metaKey %>">
+                    <button class="btn-remove-meta secondary button form-label" data-meta="<%= metaKey %>">
+                        X
+                    </button>
+                </span>
+            </div>
         </div>
         <% }); %>
     </form>
     <hr>
     <a href="#" class="add-new-meta">Add New Meta...</a>
-</div>
-<div class="view-footer padded active">
-    <div class="left hidden">
-        <button class="btn btn-primary btn-save">Save</button>
-        <button class="btn btn-default btn-cancel">Cancel</button>
+</section>
+<footer class="grid-content shrink clearfix">
+    <div class="float-left hide action-buttons"><!--hidden-->
+        <button class="primary button btn-save">Save</button>
+        <button class="secondary button btn-cancel">Cancel</button>
     </div>
-    <div class="right">
-        <button class="btn btn-negative btn-remove"><span class="icon icon-trash"></span> Delete</button>
+    <div class="float-right">
+        <button class="alert button btn-remove">Delete</button>
     </div>
-</div>
+</footer>

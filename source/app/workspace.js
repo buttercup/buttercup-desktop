@@ -5,8 +5,8 @@
 
     module.exports = {
         load: function(datasourcePath, password) {
-            var workspace = new Buttercup.Workspace();
-            var datasource = new Buttercup.FileDatasource(datasourcePath);
+            var workspace = new Buttercup.Workspace(),
+                datasource = new Buttercup.FileDatasource(datasourcePath);
 
             return datasource.load(password).then(function(archive) {
                 workspace
@@ -16,6 +16,13 @@
 
                 return workspace;
             });
+        },
+
+        save: function(datasourcePath, password) {
+            var archive = new Buttercup.Archive(),
+                datasource = new Buttercup.FileDatasource(datasourcePath);
+
+            return datasource.save(archive, password);
         }
     };
 })(module);

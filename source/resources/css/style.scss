@@ -1,34 +1,21 @@
 // Import deps
-// @import "libs/photon/photon";
 @import "core/fonts";
 @import "core/variables";
-@import "core/mixins";
-@import "core/base";
-@import "core/bars";
-@import "core/grid";
-@import "core/lists";
 
-// Import custom
-//@import "ui/entry-view";
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+@import "../../../node_modules/foundation-apps/scss/foundation";
+@import "libs/sweetalert";
 @import "ui/icons";
-@import "ui/entires-list";
-@import "ui/sidebar";
+@import "ui/intro-window";
 
-body {
-    //-webkit-app-region: drag;
-}
-
-.btn-negative .icon {
-    color: #fff;
-}
-
-.hidden {
-    display: none;
-}
-
-h1[contenteditable]:focus {
-    border-color: #6db3fd;
-    box-shadow: 3px 3px 0 #6db3fd, -3px -3px 0 #6db3fd, -3px 3px 0 #6db3fd, 3px -3px 0 #6db3fd;
-    outline: none;
-    border-radius: 3px;
+// Additions
+.block-list {
+    ul ul {
+        margin-left: 1rem;
+    }
 }

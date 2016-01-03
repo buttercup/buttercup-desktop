@@ -30,30 +30,42 @@
         });
     }
 
+    function loadWorkspace(path, password) {
+        return Workspace.load(path, password).then(function (workspace) {
+            manager.setWorkspace(workspace);
+            //event.sender.send('workspace.connected', 'connected');
+
+            // Create the browser window.
+            Buttercup.MainWindow = new BrowserWindow({
+                width: 1000,
+                height: 700,
+                'title-bar-style': 'hidden'
+            });
+            Buttercup.MainWindow.loadURL(Buttercup.config.publicDir + '/index.html');
+            Buttercup.MainWindow.show();
+            Buttercup.MainWindow.webContents.openDevTools();
+
+            // Emitted when the window is closed.
+            Buttercup.MainWindow.on('closed', function() {
+                Buttercup.MainWindow = null;
+            });
+
+            // Close intro screen
+            Buttercup.IntroScreen.close();
+        });
+    }
+
     module.exports = function () {
         // Connect to workspace
         ipc.on('workspace.connect', function(event, arg) {
-            Workspace.load(arg.path, arg.password).then(function (workspace) {
-                manager.setWorkspace(workspace);
-                //event.sender.send('workspace.connected', 'connected');
+            loadWorkspace(arg.path, arg.password).catch(function(err) {
+                event.sender.send("workspace.error", err.message);
+            });
+        });
 
-                // Create the browser window.
-                Buttercup.MainWindow = new BrowserWindow({
-                    width: 1000,
-                    height: 700,
-                    'title-bar-style': 'hidden'
-                });
-                Buttercup.MainWindow.loadURL(Buttercup.config.publicDir + '/index.html');
-                Buttercup.MainWindow.show();
-                //mainWindow.webContents.openDevTools();
-
-                // Emitted when the window is closed.
-                mainWindow.on('closed', function() {
-                    Buttercup.MainWindow = null;
-                });
-
-                // Close intro screen
-                Buttercup.IntroScreen.close();
+        ipc.on('workspace.new', function(event, arg) {
+            Workspace.save(arg.path, arg.password).then(function() {
+                loadWorkspace(arg.path, arg.password);
             });
         });
 
@@ -65,6 +77,7 @@
 
         // Get all groups
         ipc.on('groups.all', function (e) {
+            console.log(JSON.stringify(convertGroups(manager.getGroups())));
             e.returnValue = convertGroups(manager.getGroups());
         });
 
