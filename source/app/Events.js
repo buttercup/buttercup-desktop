@@ -31,7 +31,7 @@
     }
 
     function loadWorkspace(path, password) {
-        Workspace.load(path, password).then(function (workspace) {
+        return Workspace.load(path, password).then(function (workspace) {
             manager.setWorkspace(workspace);
             //event.sender.send('workspace.connected', 'connected');
 
@@ -58,7 +58,9 @@
     module.exports = function () {
         // Connect to workspace
         ipc.on('workspace.connect', function(event, arg) {
-            loadWorkspace(arg.path, arg.password);
+            loadWorkspace(arg.path, arg.password).catch(function(err) {
+                event.sender.send("workspace.error", err.message);
+            });
         });
 
         ipc.on('workspace.new', function(event, arg) {

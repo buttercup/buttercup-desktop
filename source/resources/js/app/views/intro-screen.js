@@ -6,6 +6,7 @@ import Backbone from 'backbone';
 import Tpl from 'tpl/intro.html!text';
 import Archives from 'app/collections/archives';
 import Archive from 'app/models/archive';
+import swal from 'sweetalert';
 
 // Electron
 const electron = require('electron');
@@ -19,8 +20,6 @@ export default Backbone.View.extend({
 
     events: {
         'click .recent-files [data-id]': 'loadFromRecent',
-        'click .cancel': 'togglePasswordForm',
-        'submit .password-overlay form': 'loadArchive',
         'click .archive-open': 'openArchive',
         'click .archive-new': 'newArchive'
     },
@@ -54,24 +53,32 @@ export default Backbone.View.extend({
     },
 
     togglePasswordForm: function(id) {
-        if (id) {
-            this.$('.password-overlay form').data('id', id);
-        }
-        this.$('.main-screen').toggleClass('hide');
-        this.$('.password-overlay').toggleClass('hide');
-    },
+        var model = this.collection.get(id);
 
-    loadArchive: function(e) {
-        e.preventDefault();
-        var $form = this.$(e.currentTarget),
-            model = this.collection.get($form.data('id'));
+        swal({
+            title: "Load Buttercup",
+            text: "Please enter your password:",
+            type: "input",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            animation: "pop",
+            inputType: "password",
+            inputPlaceholder: "Archive’s password..."
+        }, function(inputValue) {
+            if (inputValue === "") {
+                swal.showInputError("You need to write something!");
+                return false
+            }
 
-        ipc.send('workspace.connect', {
-            path: model.get('path'),
-            password: $form.find('input').val()
+            ipc.on('workspace.error', function(e, error) {
+                swal.showInputError("Invalid password.");
+            });
+
+            ipc.send('workspace.connect', {
+                path: model.get('path'),
+                password: inputValue
+            });
         });
-
-        // TODO: account for errors
     },
 
     getArchive: function(path) {

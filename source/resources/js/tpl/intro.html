@@ -9,7 +9,7 @@
                 <div class="block-list">
                     <ul>
                         <li>
-                            <a href="#" class="archive-open"><span class="icon-folder"></span> Open...</a>
+                            <a href="#" class="archive-open"><%= icon("hello") %> Open...</a>
                         </li>
                         <li>
                             <a href="#" class="archive-new"><span class="icon-file-plus"></span> New Archive</a>
@@ -25,7 +25,7 @@
                 <% _.each(recent, function(item) { %>
                 <li class="with-chevron">
                     <a href="#" data-id="<%= item.id %>" data-password="sallar">
-                        <div><%= item.path.replace(/^.*[\\\/]/, '') %></div>
+                        <div><%= filename(item.path) %></div>
                         <small><%= item.path %></small>
                     </a>
                 </li>
@@ -33,16 +33,4 @@
             </ul>
         </section>
     </div>
-</div>
-<div class="password-overlay grid-block hide">
-    <form action="#">
-        <label class="text-center">
-            Enter your password to continue:
-            <span class="inline-label">
-                <input type="password" placeholder="Password">
-                <button type="submit" class="button">Continue</button>
-            </span>
-        </label>
-        <p class="text-center"><a href="#" class="cancel">&larr; Cancel</a></p>
-    </form>
 </div>
