@@ -10,7 +10,9 @@ module.exports = function(grunt) {
             publicDir: [
                 "source/public/js/**/*",
                 "source/public/index.html",
-                "source/public/css/**/*"
+                "source/public/css/**/*",
+                "source/public/img/**/*",
+                "source/public/fonts/**/*"
             ]
         },
 
@@ -63,14 +65,24 @@ module.exports = function(grunt) {
         },
 
         sync: {
-            scripts: {
-                files: [{
-                    cwd: 'source/resources/js',
-                    src: [
-                        '**' /* Include everything */
-                    ],
-                    dest: 'source/public/js'
-                }],
+            assets: {
+                files: [
+                    {
+                        cwd: 'source/resources/js',
+                        src: ['**'],
+                        dest: 'source/public/js'
+                    },
+                    {
+                        cwd: 'source/resources/img',
+                        src: ['**'],
+                        dest: 'source/public/img'
+                    },
+                    {
+                        cwd: 'source/resources/fonts',
+                        src: ['**'],
+                        dest: 'source/public/fonts'
+                    }
+                ],
                 verbose: true
             }
         },
@@ -100,8 +112,8 @@ module.exports = function(grunt) {
             options: {
                 spawn: false
             },
-            scripts: {
-                files: ['source/resources/js/**/*.*'],
+            assets: {
+                files: ['source/resources/js/**/*.*', 'source/resources/img/**/*.*'],
                 tasks: ['sync']
             },
             styles: {
@@ -121,7 +133,7 @@ module.exports = function(grunt) {
         "clean:publicDir",
         "jade:app",
         "sass:app",
-        "sync:scripts"
+        "sync"
     ]);
 
     grunt.registerTask("setup", [

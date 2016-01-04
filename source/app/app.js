@@ -14,12 +14,8 @@ global.Buttercup = {
     }
 };
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function() {
-    app.quit();
-});
-
-app.on('ready', function() {
+// Intro Screen
+function openIntroScreen() {
     // Create the browser window.
     Buttercup.IntroScreen = new BrowserWindow({
         width: 700,
@@ -32,4 +28,13 @@ app.on('ready', function() {
     Buttercup.IntroScreen.on('closed', function() {
         Buttercup.IntroScreen = null;
     });
+}
+
+// Quit when all windows are closed.
+app.on('window-all-closed', function() {
+    openIntroScreen();
+});
+
+app.on('ready', function() {
+   openIntroScreen();
 });

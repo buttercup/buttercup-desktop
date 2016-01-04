@@ -52,12 +52,13 @@ export default Backbone.View.extend({
         this.togglePasswordForm(this.$(e.currentTarget).data('id'));
     },
 
-    togglePasswordForm: function(id) {
-        var model = this.collection.get(id);
+    togglePasswordForm: function(id, newArchive) {
+        var model = this.collection.get(id),
+            action = (newArchive === true) ? 'new' : 'connect';
 
         swal({
-            title: "Load Buttercup",
-            text: "Please enter your password:",
+            title: newArchive ? "New Archive" : "Load Buttercup",
+            text: newArchive ? "Please choose a safe password:" : "Enter your archive’s password:",
             type: "input",
             showCancelButton: true,
             closeOnConfirm: false,
@@ -78,7 +79,7 @@ export default Backbone.View.extend({
                 swal.showInputError("Invalid password.");
             });
 
-            ipc.send('workspace.connect', {
+            ipc.send('workspace.' + action, {
                 path: model.get('path'),
                 password: inputValue
             });
@@ -128,11 +129,8 @@ export default Backbone.View.extend({
         });
 
         if (filename && filename.length > 0) {
-            ipc.send('workspace.new', {
-                path: filename,
-                password: "sallar"
-            });
-            this.getArchive(filename);
+            var archive = this.getArchive(filename);
+            this.togglePasswordForm(archive.id, true);
         }
     }
 });
