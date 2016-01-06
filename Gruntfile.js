@@ -74,7 +74,7 @@ module.exports = function(grunt) {
                     },
                     {
                         cwd: 'source/resources/img',
-                        src: ['**'],
+                        src: ['**', '!icons/*'],
                         dest: 'source/public/img'
                     },
                     {
@@ -86,27 +86,6 @@ module.exports = function(grunt) {
                 verbose: true
             }
         },
-
-        // jasmine: {
-        // 	main: {
-        // 		src: 'build/sdk.js',
-        // 		options: {
-        // 			specs: ['tests/unit/**/*.js', 'tests/integration/**/*.js'],
-        // 			helpers: 'tests/helpers/*.js',
-        // 			junit: {
-        // 				path: "build/",
-        // 				consolidate: true
-        // 			}
-        // 		}
-        // 	}
-        // },
-
-        // jshint: {
-        // 	files: ['Gruntfile.js', 'source/**/*.js'],
-        // 	options: {
-        // 		jshintrc: ".jshintrc"
-        // 	}
-        // },
 
         watch: {
             options: {
@@ -124,16 +103,59 @@ module.exports = function(grunt) {
                 files: ['source/resources/jade/**/*.jade'],
                 tasks: ['jade:app']
             }
+        },
+
+        svg_sprite: {
+            complex: {
+                // Target basics
+                expand: true,
+                src: ['source/resources/img/icons/*.svg'],
+                dest: 'source/public/img/icons',
+
+                // Target options
+                options: {
+                    shape: {
+                        id: {
+                            generator: function(file) {
+                                return file.replace(/^.*[\\\/]/, '').replace('.svg', '');
+                            }
+                        }
+                    },
+                    mode: {
+                        symbol: {
+                            dest: './'
+                        }
+                    }
+                }
+            }
+        },
+        systemjs: {
+            options: {
+                sfx: true,
+                baseURL: "./source/public/js",
+                configFile: "./source/public/js/config.js",
+                minify: true,
+                build: {
+                    mangle: false
+                }
+            },
+            dist: {
+                files: [{
+                    "src":  "./source/public/js/main.js",
+                    "dest": "./source/public/js/dist/all.js"
+                }]
+            }
         }
     });
 
-    grunt.registerTask("default", ["build", "start"]);
+    grunt.registerTask("default", ["build", "watch"]);
 
     grunt.registerTask("build", [
         "clean:publicDir",
         "jade:app",
         "sass:app",
-        "sync"
+        "sync",
+        "svg_sprite"
     ]);
 
     grunt.registerTask("setup", [

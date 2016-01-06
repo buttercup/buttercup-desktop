@@ -27,10 +27,12 @@
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jade": "^0.15.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-sync": "^0.4.1",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
     "grunt-sass": "^1.0.0",
+    "grunt-svg-sprite": "^1.2.18",
+    "grunt-sync": "^0.4.1",
+    "grunt-systemjs-builder": "^0.2.5",
     "jspm": "^0.16.12",
     "load-grunt-tasks": "^3.3.0"
   },
