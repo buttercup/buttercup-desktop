@@ -1,116 +1,173 @@
 /* global module, require */
 
 module.exports = function(grunt) {
+    "use strict";
 
-	"use strict";
+    require('load-grunt-tasks')(grunt);
 
-	require('load-grunt-tasks')(grunt);
+    grunt.initConfig({
+        clean: {
+            publicDir: [
+                "source/public/js/**/*",
+                "source/public/index.html",
+                "source/public/css/**/*",
+                "source/public/img/**/*",
+                "source/public/fonts/**/*"
+            ]
+        },
 
-	grunt.initConfig({
+        exec: {
+            start: {
+                command: 'electron ' + __dirname,
+                stdout: false,
+                stderr: false
+            },
+            jspm: {
+                command: 'jspm install',
+                stdout: true,
+                stderr: true
+            }
+        },
 
-		clean: {
-			publicDir: ["source/public/**/*"]
-		},
+        jade: {
+            app: {
+                files: {
+                    'source/public/index.html': ['source/resources/jade/index.jade'],
+                    'source/public/intro.html': ['source/resources/jade/intro.jade']
+                },
+                options: {
+                    debug: false
+                }
+            }
+        },
 
-		// copy: {
-		// 	development: {
-		// 		expand: true,
-		// 		src: 'development/pages/*.html',
-		// 		dest: 'build/',
-		// 		flatten: true,
-		// 		filter: 'isFile',
-		// 	}
-		// },
+        sass: {
+            options: {
+                sourceMap: false
+            },
+            app: {
+                files: {
+                    'source/public/css/style.css': 'source/resources/css/style.scss'
+                }
+            }
+        },
 
-		exec: {
-			start: {
-				command: 'electron ' + __dirname,
-				stdout: false,
-				stderr: false
-			}
-		},
+        mkdir: {
+            publicDir: {
+                options: {
+                    mode: '0755',
+                    create: [
+                        'source/public/css',
+                        'source/public/js'
+                    ]
+                }
+            }
+        },
 
-		jade: {
-			app: {
-				files: {
-					'source/public/index.html': ['source/resources/jade/index.jade'],
-				},
-				options: {
-					debug: false
-				}
-			}
-		},
+        sync: {
+            assets: {
+                files: [
+                    {
+                        cwd: 'source/resources/js',
+                        src: ['**'],
+                        dest: 'source/public/js'
+                    },
+                    {
+                        cwd: 'source/resources/img',
+                        src: ['**', '!icons/*'],
+                        dest: 'source/public/img'
+                    },
+                    {
+                        cwd: 'source/resources/fonts',
+                        src: ['**'],
+                        dest: 'source/public/fonts'
+                    }
+                ],
+                verbose: true
+            }
+        },
 
-		mkdir: {
-			publicDir: {
-				options: {
-					mode: '0755',
-					create: [
-						'source/public/css',
-						'source/public/js'
-					]
-				},
-			},
-		}
+        watch: {
+            options: {
+                spawn: false
+            },
+            assets: {
+                files: ['source/resources/js/**/*.*', 'source/resources/img/**/*.*'],
+                tasks: ['sync']
+            },
+            styles: {
+                files: ['source/resources/css/**/*.scss'],
+                tasks: ['sass:app']
+            },
+            jade: {
+                files: ['source/resources/jade/**/*.jade'],
+                tasks: ['jade:app']
+            }
+        },
 
-		// jasmine: {
-		// 	main: {
-		// 		src: 'build/sdk.js',
-		// 		options: {
-		// 			specs: ['tests/unit/**/*.js', 'tests/integration/**/*.js'],
-		// 			helpers: 'tests/helpers/*.js',
-		// 			junit: {
-		// 				path: "build/",
-		// 				consolidate: true
-		// 			}
-		// 		}
-		// 	}
-		// },
+        svg_sprite: {
+            complex: {
+                // Target basics
+                expand: true,
+                src: ['source/resources/img/icons/*.svg'],
+                dest: 'source/public/img/icons',
 
-		// jshint: {
-		// 	files: ['Gruntfile.js', 'source/**/*.js'],
-		// 	options: {
-		// 		jshintrc: ".jshintrc"
-		// 	}
-		// },
-		
-		// scantreeConcat: {
-		// 	main: {
-		// 		baseDir: "source/",
-		// 		scanDir: "source/",
-		// 		output: "build/sdk.js",
-		// 		options: {
-		// 			header: "partial/header.js",
-		// 			footer: "partial/footer.js"
-		// 		}
-		// 	}
-		// },
+                // Target options
+                options: {
+                    shape: {
+                        id: {
+                            generator: function(file) {
+                                return file.replace(/^.*[\\\/]/, '').replace('.svg', '');
+                            }
+                        }
+                    },
+                    mode: {
+                        symbol: {
+                            dest: './'
+                        }
+                    }
+                }
+            }
+        },
+        systemjs: {
+            options: {
+                sfx: true,
+                baseURL: "./source/public/js",
+                configFile: "./source/public/js/config.js",
+                minify: true,
+                build: {
+                    mangle: false
+                }
+            },
+            dist: {
+                files: [{
+                    "src":  "./source/public/js/main.js",
+                    "dest": "./source/public/js/dist/all.js"
+                }]
+            }
+        }
+    });
 
-		// watch: {
-		// 	scripts: {
-		// 		files: ['source/**/*.js', "development/**/*.html"],
-		// 		tasks: ['build', 'copy:development'],
-		// 		options: {
-		// 			spawn: false,
-		// 		}
-		// 	}
-		// }
+    grunt.registerTask("default", ["build", "watch"]);
 
-	});
+    grunt.registerTask("build", [
+        "clean:publicDir",
+        "jade:app",
+        "sass:app",
+        "sync",
+        "svg_sprite"
+    ]);
 
-	grunt.registerTask("default", ["build", "start"]);
+    grunt.registerTask("setup", [
+        "build",
+        "exec:jspm",
+        "start"
+    ]);
 
-	grunt.registerTask("build", [
-		"clean:publicDir",
-		"mkdir:publicDir",
-		"jade:app"
-		//"scantreeConcat:main"
-	]);
+    grunt.registerTask("start", [
+        "exec:start"
+    ]);
 
-	grunt.registerTask("start", [
-		"exec:start"
-	]);
-
-	//grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
+    //grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
 
 };

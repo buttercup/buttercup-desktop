@@ -1,0 +1,29 @@
+// Import deps
+@import "core/fonts";
+@import "core/variables";
+
+html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+@import "../../../node_modules/foundation-apps/scss/foundation";
+@import "libs/sweetalert";
+@import "ui/icons";
+@import "ui/intro-window";
+
+// Additions
+.block-list {
+    ul ul {
+        margin-left: 1rem;
+    }
+}
+
+// Icons
+.icon {
+    width: 1.25rem;
+    height: 1.125rem;
+    vertical-align: -4px;
+    display: inline-block;
+}

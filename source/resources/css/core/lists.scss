@@ -1,0 +1,40 @@
+//
+// Lists.scss
+// --------------------------------------------------
+
+// List groups
+// These are to be used when shows list items that contain
+// more substanstial amounts of information. (headings, images, text, etc.)
+
+.list-group {
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    * {
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.list-group-item {
+    padding: $padding/2 $padding;
+    color: #414142;
+    border-bottom: 1px solid $border-color;
+
+    /*&:first-child {
+        border-top: 0;
+    }*/
+
+    &.selected {
+        color: #fff;
+        background-color: $active-color;
+    }
+}
+
+.list-group-header {
+    padding: 10px;
+}

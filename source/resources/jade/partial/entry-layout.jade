@@ -4,15 +4,12 @@ html
 		block title
 			title Buttercup
 		block styles
-			style(type="text/css").
-				body {
-					background-color: white;
-				}
+			link(type="text/css", href="css/style.css", rel="stylesheet")
+		block scripts
+			script(src="jspm_packages/system.js")
+			script(src="js/config.js")
+			script.
+				System.import('./js/main');
 
 	body
-		block header
-			h1 Buttercup
 		block body
-			p A password manager.
-		block footer
-			i Nothing to see here.

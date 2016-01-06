@@ -28,3 +28,7 @@ node_modules
 
 # IDEA
 .idea
+
+# PUBLIC
+source/public
+*.bcup

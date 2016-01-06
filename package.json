@@ -1,5 +1,5 @@
 {
-  "name": "buttercup",
+  "name": "buttercup-client",
   "version": "0.0.1",
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
@@ -22,13 +22,44 @@
   },
   "homepage": "https://github.com/perry-mitchell/buttercup#readme",
   "devDependencies": {
-    "electron-prebuilt": "^0.33.3",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jade": "^0.15.0",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
+    "grunt-sass": "^1.0.0",
+    "grunt-svg-sprite": "^1.2.18",
+    "grunt-sync": "^0.4.1",
+    "grunt-systemjs-builder": "^0.2.5",
+    "jspm": "^0.16.12",
     "load-grunt-tasks": "^3.3.0"
+  },
+  "jspm": {
+    "directories": {
+      "baseURL": "source/public"
+    },
+    "configFile": "source/resources/js/config.js",
+    "dependencies": {
+      "afeld/backbone-nested": "github:afeld/backbone-nested@^2.0.4",
+      "backbone.babysitter": "github:marionettejs/backbone.babysitter@^0.1.10",
+      "backbone.wreqr": "github:marionettejs/backbone.wreqr@^1.3.5",
+      "marionette": "github:marionettejs/backbone.marionette@^2.4.3",
+      "sweetalert": "npm:sweetalert@^1.1.3",
+      "text": "github:systemjs/plugin-text@^0.0.2",
+      "underscore": "npm:underscore@^1.8.3"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "backone": "npm:backbone@^1.2.3",
+      "core-js": "npm:core-js@^1.1.4",
+      "jquery": "github:components/jquery@^2.1.4"
+    }
+  },
+  "dependencies": {
+    "buttercup": "0.8.1",
+    "foundation-apps": "^1.2.0"
   }
 }
