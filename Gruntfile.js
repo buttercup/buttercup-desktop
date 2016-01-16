@@ -6,11 +6,20 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     var globalConfig = {
+        dist: {
+            electron_pkgr: "./node_modules/electron-packager/cli.js",
+            electron_ver: "0.36.1",
+            name: "Buttercup"
+        },
         package: false
     };
 
     grunt.initConfig({
         clean: {
+            dist: [
+                "dist/**/*",
+                "!dist/.gitignore"
+            ],
             publicDir: [
                 "source/public/js/**/*",
                 "source/public/index.html",
@@ -21,6 +30,21 @@ module.exports = function(grunt) {
         },
 
         exec: {
+            clean_dist: {
+                command: 'grunt clean:dist --force',
+                stdout: false,
+                stderr: false
+            },
+            dist_mac: {
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=x64 --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="^grunt" --icon=source/resources/img/icon.icns',
+                stdout: true,
+                stderr: true
+            },
+            dist_win: {
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=win32 --arch=x64 --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="^grunt"',
+                stdout: true,
+                stderr: true
+            },
             start: {
                 command: 'electron ' + __dirname,
                 stdout: false,
@@ -165,6 +189,13 @@ module.exports = function(grunt) {
         "sass:app",
         "sync",
         "svg_sprite"
+    ]);
+
+    grunt.registerTask("dist", [
+        "exec:clean_dist",
+        "package",
+        "exec:dist_mac",
+        "exec:dist_win"
     ]);
 
     grunt.registerTask("package", function() {
