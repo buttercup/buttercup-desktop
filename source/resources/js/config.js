@@ -14,12 +14,14 @@ System.config({
   },
 
   map: {
+    "afeld/backbone-nested": "github:afeld/backbone-nested@2.0.4",
     "babel": "npm:babel-core@5.8.25",
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "backbone": "npm:backbone@1.2.3",
     "backbone-nested": "github:afeld/backbone-nested@2.0.4",
     "backbone.babysitter": "github:marionettejs/backbone.babysitter@0.1.10",
     "backbone.wreqr": "github:marionettejs/backbone.wreqr@1.3.5",
+    "backone": "npm:backbone@1.2.3",
     "core-js": "npm:core-js@1.2.1",
     "jquery": "github:components/jquery@2.1.4",
     "marionette": "github:marionettejs/backbone.marionette@2.4.3",

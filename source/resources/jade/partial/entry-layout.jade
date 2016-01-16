@@ -6,10 +6,13 @@ html
 		block styles
 			link(type="text/css", href="css/style.css", rel="stylesheet")
 		block scripts
-			script(src="jspm_packages/system.js")
-			script(src="js/config.js")
-			script.
-				System.import('./js/main');
+			if !package
+				script(src="jspm_packages/system.js")
+				script(src="js/config.js")
+				script.
+					System.import('./js/main');
 
 	body
 		block body
+		if package
+			script(src="js/dist/all.js")
