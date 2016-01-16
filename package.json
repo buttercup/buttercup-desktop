@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/perry-mitchell/buttercup#readme",
   "devDependencies": {
+    "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",

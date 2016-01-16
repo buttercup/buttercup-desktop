@@ -37,6 +37,11 @@ module.exports = function(grunt) {
                 stdout: false,
                 stderr: false
             },
+            create_dmg: {
+                command: './node_modules/electron-installer-dmg/bin/electron-installer-dmg.js dist/Buttercup-darwin-x64/Buttercup.app "<%= globalConfig.dist.name %>" --out=dist/ --icon=source/resources/img/icon.icns --background=source/resources/img/dmg-background.png --overwrite',
+                stdout: true,
+                stderr: true
+            },
             dist_linux: {
                 command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=linux --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>"',
                 stdout: true,
@@ -204,9 +209,9 @@ module.exports = function(grunt) {
         "exec:clean_dist",
         "package",
         "exec:dist_mac",
+        "exec:create_dmg",
         "exec:dist_win",
         "exec:dist_linux"
-        //"exec:dist_win64"
     ]);
 
     grunt.registerTask("package", function() {
