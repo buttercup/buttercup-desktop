@@ -3,7 +3,8 @@
 module.exports = function(grunt) {
     "use strict";
 
-    require('load-grunt-tasks')(grunt);
+    require("load-grunt-tasks")(grunt);
+    require("time-grunt")(grunt);
 
     var globalConfig = {
         dist: {
