@@ -6,7 +6,8 @@
         path            = require('path'),
         electron        = require('electron'),
         BrowserWindow   = electron.BrowserWindow,
-        ipc             = electron.ipcMain;
+        ipc             = electron.ipcMain,
+        windowManager   = require('./WindowManager.js').getSharedInstance();
 
     var manager = new Manager();
 
@@ -36,22 +37,29 @@
             //event.sender.send('workspace.connected', 'connected');
 
             // Create the browser window.
-            Buttercup.MainWindow = new BrowserWindow({
+            var archiveWindow = new BrowserWindow({
                 width: 1000,
                 height: 700,
                 'title-bar-style': 'hidden'
             });
-            Buttercup.MainWindow.loadURL(Buttercup.config.publicDir + '/index.html');
-            Buttercup.MainWindow.show();
-            Buttercup.MainWindow.webContents.openDevTools();
+            archiveWindow.loadURL(Buttercup.config.publicDir + '/index.html');
+            archiveWindow.show();
+            archiveWindow.webContents.openDevTools();
 
             // Emitted when the window is closed.
-            Buttercup.MainWindow.on('closed', function() {
-                Buttercup.MainWindow = null;
+            archiveWindow.on('closed', function() {
+                windowManager.deregister(archiveWindow);
+                if (windowManager.getCountOfType("archive") <= 0) {
+                    windowManager.buildWindowOfType("intro");
+                }
             });
 
             // Close intro screen
-            Buttercup.IntroScreen.close();
+            windowManager.getWindowsOfType("intro").forEach(function(window) {
+                window.close();
+            });
+
+            windowManager.register("archive", archiveWindow);
         });
     }
 

@@ -5,7 +5,8 @@ var electron        = require('electron'),
     BrowserWindow   = electron.BrowserWindow,
     ipc             = electron.ipcMain,
     path            = require('path'),
-    EventsManager   = require('./events')();
+    EventsManager   = require('./events')(),
+    windowManager   = require('./WindowManager.js').getSharedInstance();
 
 // Global reference of the window object
 global.Buttercup = {
@@ -15,26 +16,34 @@ global.Buttercup = {
 };
 
 // Intro Screen
-function openIntroScreen() {
+windowManager.setBuildProcedure("intro", function openIntroScreen() {
     // Create the browser window.
-    Buttercup.IntroScreen = new BrowserWindow({
+    var introScreen = new BrowserWindow({
         width: 700,
         height: 500,
         'title-bar-style': 'hidden'
     });
-    Buttercup.IntroScreen.loadURL(Buttercup.config.publicDir + '/intro.html');
+    introScreen.loadURL(Buttercup.config.publicDir + '/intro.html');
 
     // Emitted when the window is closed.
-    Buttercup.IntroScreen.on('closed', function() {
-        Buttercup.IntroScreen = null;
+    introScreen.on('closed', function() {
+        // Deregister the intro screen
+        windowManager.deregister(introScreen);
+        if (windowManager.getCountOfType("archive") <= 0) {
+            // No archives open, exit app
+            app.quit();
+        }
     });
-}
+
+    return introScreen;
+});
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
-    openIntroScreen();
+
 });
 
 app.on('ready', function() {
-   openIntroScreen();
+   // Show intro
+   windowManager.buildWindowOfType("intro");
 });
