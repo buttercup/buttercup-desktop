@@ -5,6 +5,10 @@ module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
 
+    var globalConfig = {
+        package: false
+    };
+
     grunt.initConfig({
         clean: {
             publicDir: [
@@ -29,6 +33,8 @@ module.exports = function(grunt) {
             }
         },
 
+        globalConfig: globalConfig,
+
         jade: {
             app: {
                 files: {
@@ -36,6 +42,9 @@ module.exports = function(grunt) {
                     'source/public/intro.html': ['source/resources/jade/intro.jade']
                 },
                 options: {
+                    data: {
+                        package: '<%= globalConfig.package %>'
+                    },
                     debug: false
                 }
             }
@@ -158,15 +167,23 @@ module.exports = function(grunt) {
         "svg_sprite"
     ]);
 
-    grunt.registerTask("setup", [
-        "build",
-        "exec:jspm",
-        "start"
-    ]);
+    grunt.registerTask("package", function() {
+        globalConfig.package = true;
+        grunt.task.run([
+            "build",
+            "systemjs"
+        ]);
+    });
 
-    grunt.registerTask("start", [
-        "exec:start"
-    ]);
+    // grunt.registerTask("setup", [
+    //     "build",
+    //     "exec:jspm",
+    //     "start"
+    // ]);
+    //
+    // grunt.registerTask("start", [
+    //     "exec:start"
+    // ]);
 
     //grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
 
