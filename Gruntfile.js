@@ -81,17 +81,6 @@ module.exports = function(grunt) {
             }
         },
 
-        sass: {
-            options: {
-                sourceMap: false
-            },
-            app: {
-                files: {
-                    'source/public/css/style.css': 'source/resources/css/style.scss'
-                }
-            }
-        },
-
         mkdir: {
             publicDir: {
                 options: {
@@ -104,44 +93,14 @@ module.exports = function(grunt) {
             }
         },
 
-        sync: {
-            assets: {
-                files: [
-                    {
-                        cwd: 'source/resources/js',
-                        src: ['**'],
-                        dest: 'source/public/js'
-                    },
-                    {
-                        cwd: 'source/resources/img',
-                        src: ['**', '!icons/*'],
-                        dest: 'source/public/img'
-                    },
-                    {
-                        cwd: 'source/resources/fonts',
-                        src: ['**'],
-                        dest: 'source/public/fonts'
-                    }
-                ],
-                verbose: true
-            }
-        },
-
-        watch: {
+        sass: {
             options: {
-                spawn: false
+                sourceMap: false
             },
-            assets: {
-                files: ['source/resources/js/**/*.*', 'source/resources/img/**/*.*'],
-                tasks: ['sync']
-            },
-            styles: {
-                files: ['source/resources/css/**/*.scss'],
-                tasks: ['sass:app']
-            },
-            jade: {
-                files: ['source/resources/jade/**/*.jade'],
-                tasks: ['jade:app']
+            app: {
+                files: {
+                    'source/public/css/style.css': 'source/resources/css/style.scss'
+                }
             }
         },
 
@@ -169,6 +128,30 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        sync: {
+            assets: {
+                files: [
+                    {
+                        cwd: 'source/resources/js',
+                        src: ['**'],
+                        dest: 'source/public/js'
+                    },
+                    {
+                        cwd: 'source/resources/img',
+                        src: ['**', '!icons/*'],
+                        dest: 'source/public/img'
+                    },
+                    {
+                        cwd: 'source/resources/fonts',
+                        src: ['**'],
+                        dest: 'source/public/fonts'
+                    }
+                ],
+                verbose: true
+            }
+        },
+
         systemjs: {
             options: {
                 sfx: true,
@@ -185,7 +168,26 @@ module.exports = function(grunt) {
                     "dest": "./source/public/js/dist/all.js"
                 }]
             }
+        },
+
+        watch: {
+            options: {
+                spawn: false
+            },
+            assets: {
+                files: ['source/resources/js/**/*.*', 'source/resources/img/**/*.*'],
+                tasks: ['sync']
+            },
+            styles: {
+                files: ['source/resources/css/**/*.scss'],
+                tasks: ['sass:app']
+            },
+            jade: {
+                files: ['source/resources/jade/**/*.jade'],
+                tasks: ['jade:app']
+            }
         }
+
     });
 
     grunt.registerTask("default", ["build", "watch"]);
