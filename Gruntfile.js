@@ -9,6 +9,8 @@ module.exports = function(grunt) {
         dist: {
             electron_pkgr: "./node_modules/electron-packager/cli.js",
             electron_ver: "0.36.1",
+            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
+                "source/resources|jspm_packages|^dist/)",
             name: "Buttercup"
         },
         package: false
@@ -35,13 +37,18 @@ module.exports = function(grunt) {
                 stdout: false,
                 stderr: false
             },
+            dist_linux: {
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=linux --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>"',
+                stdout: true,
+                stderr: true
+            },
             dist_mac: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=x64 --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="^grunt" --icon=source/resources/img/icon.icns',
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.icns',
                 stdout: true,
                 stderr: true
             },
             dist_win: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=win32 --arch=x64 --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="^grunt"',
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=win32 --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.ico',
                 stdout: true,
                 stderr: true
             },
@@ -195,7 +202,9 @@ module.exports = function(grunt) {
         "exec:clean_dist",
         "package",
         "exec:dist_mac",
-        "exec:dist_win"
+        "exec:dist_win",
+        "exec:dist_linux"
+        //"exec:dist_win64"
     ]);
 
     grunt.registerTask("package", function() {
