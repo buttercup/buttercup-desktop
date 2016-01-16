@@ -4,23 +4,33 @@
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/perry-mitchell/buttercup.git"
+    "url": "git+https://github.com/buttercup-pw/buttercup.git"
   },
   "keywords": [
     "password",
     "vault",
     "manager"
   ],
-  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "author": "Sallar Kaboli <sallar.kaboli@gmail.com>",
+  "contributors": [
+      {
+          "name": "Perry Mitchell",
+          "email": "perry@perrymitchell.net"
+      },
+      {
+          "name": "Sallar Kaboli",
+          "email": "sallar.kaboli@gmail.com"
+      }
+  ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/perry-mitchell/buttercup/issues"
+    "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
-  "homepage": "https://github.com/perry-mitchell/buttercup#readme",
+  "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-clean": "^0.6.0",
