@@ -1,6 +1,7 @@
+
 // Import deps
-@import "core/fonts";
-@import "core/variables";
+@import "../../../node_modules/foundation-apps/scss/foundation";
+@import "libs/sweetalert";
 
 html {
     height: 100%;
@@ -8,10 +9,12 @@ html {
     overflow: hidden;
 }
 
-@import "../../../node_modules/foundation-apps/scss/foundation";
-@import "libs/sweetalert";
+@import "core/fonts";
+@import "core/variables";
+
 @import "ui/icons";
 @import "ui/intro-window";
+@import "ui/entries-list";
 
 // Additions
 .block-list {
