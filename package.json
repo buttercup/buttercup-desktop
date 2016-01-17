@@ -13,7 +13,8 @@
   "keywords": [
     "password",
     "vault",
-    "manager"
+    "manager",
+    "credentials"
   ],
   "author": "Sallar Kaboli <sallar.kaboli@gmail.com>",
   "contributors": [
@@ -32,6 +33,7 @@
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "devDependencies": {
+    "electron-builder": "^2.6.0",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
     "grunt": "^0.4.5",
@@ -39,6 +41,7 @@
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jade": "^0.15.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-deb": "^0.2.3",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
     "grunt-sass": "^1.0.0",
