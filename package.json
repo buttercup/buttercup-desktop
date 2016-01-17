@@ -13,7 +13,8 @@
   "keywords": [
     "password",
     "vault",
-    "manager"
+    "manager",
+    "credentials"
   ],
   "author": "Perry Mitchell <perry@perrymitchell.net>",
   "license": "GPL-3.0",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/perry-mitchell/buttercup#readme",
   "devDependencies": {
+    "electron-builder": "^2.6.0",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
     "grunt": "^0.4.5",

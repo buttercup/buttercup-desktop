@@ -11,7 +11,7 @@ module.exports = function(grunt) {
             electron_pkgr: "./node_modules/electron-packager/cli.js",
             electron_ver: "0.36.1",
             ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
-                "source/resources|jspm_packages|^dist/)",
+                "source/resources|jspm_packages|dist/Buttercup)",
             name: "Buttercup"
         },
         package: false
@@ -39,7 +39,17 @@ module.exports = function(grunt) {
                 stderr: false
             },
             create_dmg: {
-                command: './node_modules/electron-installer-dmg/bin/electron-installer-dmg.js dist/Buttercup-darwin-x64/Buttercup.app "<%= globalConfig.dist.name %>" --out=dist/ --icon=source/resources/img/icon.icns --background=source/resources/img/dmg-background.png --overwrite',
+                command: './node_modules/electron-builder/cli.js dist/Buttercup-darwin-x64/Buttercup.app --platform=osx --out=dist/ --config=installers.config.json',
+                stdout: true,
+                stderr: true
+            },
+            create_installer_win32: {
+                command: './node_modules/electron-builder/cli.js dist/Buttercup-win32-ia32 --platform=win --out=dist/ButtercupInstaller32/ --config=installers.config.json',
+                stdout: true,
+                stderr: true
+            },
+            create_installer_win64: {
+                command: './node_modules/electron-builder/cli.js dist/Buttercup-win32-x64 --platform=win --out=dist/ButtercupInstaller64/ --config=installers.config.json',
                 stdout: true,
                 stderr: true
             },
@@ -212,6 +222,8 @@ module.exports = function(grunt) {
         "exec:dist_mac",
         "exec:create_dmg",
         "exec:dist_win",
+        "exec:create_installer_win32",
+        "exec:create_installer_win64",
         "exec:dist_linux"
     ]);
 
