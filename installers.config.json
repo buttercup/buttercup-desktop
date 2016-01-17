@@ -1,0 +1,23 @@
+{
+    "osx": {
+        "title": "Buttercup",
+        "background": "source/resources/img/dmg-background.png",
+        "icon": "source/resources/img/icon.icns",
+        "icon-size": 80,
+        "contents": [
+            { "x": 438, "y": 364, "type": "link", "path": "/Applications" },
+            { "x": 192, "y": 364, "type": "file" }
+        ]
+    },
+    "win": {
+        "title": "Buttercup",
+        "version": "0.1.1",
+        "publisher": "Buttercup Co.",
+        "icon": "source/resources/img/icon.ico",
+        "verbosity": 1,
+        "fileAssociation": {
+            "extension": ".bcup",
+            "fileType": "Buttercup archive file"
+        }
+    }
+}
