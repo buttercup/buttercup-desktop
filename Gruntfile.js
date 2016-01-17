@@ -3,26 +3,10 @@
 module.exports = function(grunt) {
     "use strict";
 
-    require("load-grunt-tasks")(grunt);
-    require("time-grunt")(grunt);
-
-    var globalConfig = {
-        dist: {
-            electron_pkgr: "./node_modules/electron-packager/cli.js",
-            electron_ver: "0.36.1",
-            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
-                "source/resources|jspm_packages|^dist/)",
-            name: "Buttercup"
-        },
-        package: false
-    };
+    require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
         clean: {
-            dist: [
-                "dist/**/*",
-                "!dist/.gitignore"
-            ],
             publicDir: [
                 "source/public/js/**/*",
                 "source/public/index.html",
@@ -33,31 +17,6 @@ module.exports = function(grunt) {
         },
 
         exec: {
-            clean_dist: {
-                command: 'grunt clean:dist --force',
-                stdout: false,
-                stderr: false
-            },
-            create_dmg: {
-                command: './node_modules/electron-installer-dmg/bin/electron-installer-dmg.js dist/Buttercup-darwin-x64/Buttercup.app "<%= globalConfig.dist.name %>" --out=dist/ --icon=source/resources/img/icon.icns --background=source/resources/img/dmg-background.png --overwrite',
-                stdout: true,
-                stderr: true
-            },
-            dist_linux: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=linux --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>"',
-                stdout: true,
-                stderr: true
-            },
-            dist_mac: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.icns',
-                stdout: true,
-                stderr: true
-            },
-            dist_win: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=win32 --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.ico',
-                stdout: true,
-                stderr: true
-            },
             start: {
                 command: 'electron ' + __dirname,
                 stdout: false,
@@ -70,8 +29,6 @@ module.exports = function(grunt) {
             }
         },
 
-        globalConfig: globalConfig,
-
         jade: {
             app: {
                 files: {
@@ -79,22 +36,7 @@ module.exports = function(grunt) {
                     'source/public/intro.html': ['source/resources/jade/intro.jade']
                 },
                 options: {
-                    data: {
-                        package: '<%= globalConfig.package %>'
-                    },
                     debug: false
-                }
-            }
-        },
-
-        mkdir: {
-            publicDir: {
-                options: {
-                    mode: '0755',
-                    create: [
-                        'source/public/css',
-                        'source/public/js'
-                    ]
                 }
             }
         },
@@ -110,27 +52,14 @@ module.exports = function(grunt) {
             }
         },
 
-        svg_sprite: {
-            complex: {
-                // Target basics
-                expand: true,
-                src: ['source/resources/img/icons/*.svg'],
-                dest: 'source/public/img/icons',
-
-                // Target options
+        mkdir: {
+            publicDir: {
                 options: {
-                    shape: {
-                        id: {
-                            generator: function(file) {
-                                return file.replace(/^.*[\\\/]/, '').replace('.svg', '');
-                            }
-                        }
-                    },
-                    mode: {
-                        symbol: {
-                            dest: './'
-                        }
-                    }
+                    mode: '0755',
+                    create: [
+                        'source/public/css',
+                        'source/public/js'
+                    ]
                 }
             }
         },
@@ -158,24 +87,6 @@ module.exports = function(grunt) {
             }
         },
 
-        systemjs: {
-            options: {
-                sfx: true,
-                baseURL: "./source/public/js",
-                configFile: "./source/public/js/config.js",
-                minify: true,
-                build: {
-                    mangle: false
-                }
-            },
-            dist: {
-                files: [{
-                    "src":  "./source/public/js/main.js",
-                    "dest": "./source/public/js/dist/all.js"
-                }]
-            }
-        },
-
         watch: {
             options: {
                 spawn: false
@@ -192,8 +103,49 @@ module.exports = function(grunt) {
                 files: ['source/resources/jade/**/*.jade'],
                 tasks: ['jade:app']
             }
-        }
+        },
 
+        svg_sprite: {
+            complex: {
+                // Target basics
+                expand: true,
+                src: ['source/resources/img/icons/*.svg'],
+                dest: 'source/public/img/icons',
+
+                // Target options
+                options: {
+                    shape: {
+                        id: {
+                            generator: function(file) {
+                                return file.replace(/^.*[\\\/]/, '').replace('.svg', '');
+                            }
+                        }
+                    },
+                    mode: {
+                        symbol: {
+                            dest: './'
+                        }
+                    }
+                }
+            }
+        },
+        systemjs: {
+            options: {
+                sfx: true,
+                baseURL: "./source/public/js",
+                configFile: "./source/public/js/config.js",
+                minify: true,
+                build: {
+                    mangle: false
+                }
+            },
+            dist: {
+                files: [{
+                    "src":  "./source/public/js/main.js",
+                    "dest": "./source/public/js/dist/all.js"
+                }]
+            }
+        }
     });
 
     grunt.registerTask("default", ["build", "watch"]);
@@ -206,32 +158,15 @@ module.exports = function(grunt) {
         "svg_sprite"
     ]);
 
-    grunt.registerTask("dist", [
-        "exec:clean_dist",
-        "package",
-        "exec:dist_mac",
-        "exec:create_dmg",
-        "exec:dist_win",
-        "exec:dist_linux"
+    grunt.registerTask("setup", [
+        "build",
+        "exec:jspm",
+        "start"
     ]);
 
-    grunt.registerTask("package", function() {
-        globalConfig.package = true;
-        grunt.task.run([
-            "build",
-            "systemjs"
-        ]);
-    });
-
-    // grunt.registerTask("setup", [
-    //     "build",
-    //     "exec:jspm",
-    //     "start"
-    // ]);
-    //
-    // grunt.registerTask("start", [
-    //     "exec:start"
-    // ]);
+    grunt.registerTask("start", [
+        "exec:start"
+    ]);
 
     //grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
 
