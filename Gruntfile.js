@@ -74,64 +74,6 @@ module.exports = function(grunt) {
             ]
         },
 
-        // deb_package: {
-        //     options: {
-        //         maintainer: "Perry Mitchell <perry@perrymitchell.net>",
-        //         version: "0.1.1",
-        //         name: "buttercup",
-        //         short_description: "Buttercup credentials manager.",
-        //         long_description: "Buttercup passwords and credentials manager.",
-        //         target_architecture: "all",
-        //         category: "devel",
-        //         build_number: "1",
-        //         dependencies: [],           // List of the package dependencies
-        //         tmp_dir: '.tmp',            // The task working dir
-        //         output: './dist/'         // Where your .deb should be created
-        //     },
-        //     linux32: {
-        //         // Here you define what you want in your package
-        //         files: [{
-        //             cwd: './dist/Buttercup-linux-ia32',
-        //             src: '**/*',
-        //             dest: '/opt/buttercup'
-        //         }],
-        //         // The task will create the links as src: dest
-        //         links: {
-        //             '/usr/bin/buttercup': '/opt/buttercup/bin/buttercup'
-        //         },
-        //         // You can provide preinst, postinst, prerm and postrm script either by giving a file or what to put in it
-        //         scripts: {
-        //             preinst: {
-        //                 //src: './test_files/preinst.sh'
-        //             },
-        //             postinst: {
-        //                 //content: 'echo "postinst test"'
-        //             }
-        //         }
-        //     },
-        //     linux64: {
-        //         // Here you define what you want in your package
-        //         files: [{
-        //             cwd: './dist/Buttercup-linux-x64',
-        //             src: '**/*',
-        //             dest: '/opt/buttercup'
-        //         }],
-        //         // The task will create the links as src: dest
-        //         links: {
-        //             '/usr/bin/buttercup': '/opt/buttercup/bin/buttercup'
-        //         },
-        //         // You can provide preinst, postinst, prerm and postrm script either by giving a file or what to put in it
-        //         scripts: {
-        //             preinst: {
-        //                 //src: './test_files/preinst.sh'
-        //             },
-        //             postinst: {
-        //                 //content: 'echo "postinst test"'
-        //             }
-        //         }
-        //     }
-        // },
-
         exec: {
             clean_dist: {
                 command: 'grunt clean:dist --force',
