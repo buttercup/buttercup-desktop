@@ -6,18 +6,20 @@ module.exports = function(grunt) {
     require("load-grunt-tasks")(grunt);
     require("time-grunt")(grunt);
 
-    var globalConfig = {
-        dist: {
-            electron_pkgr: "./node_modules/electron-packager/cli.js",
-            electron_ver: "0.36.1",
-            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
-            "source/resources|jspm_packages|dist/Buttercup)",
-            name: "Buttercup"
-        },
-        package: false
-    };
+    var pkg = grunt.file.readJSON('package.json'),
+        globalConfig = {
+            dist: {
+                electron_pkgr: "./node_modules/electron-packager/cli.js",
+                electron_ver: "0.36.1",
+                ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
+                "source/resources|jspm_packages|dist/Buttercup)",
+                name: "Buttercup"
+            },
+            package: false
+        };
 
     grunt.initConfig({
+        pkg: pkg,
         clean: {
             dist: [
                 "dist/**/*",
@@ -158,7 +160,8 @@ module.exports = function(grunt) {
                 },
                 options: {
                     data: {
-                        package: '<%= globalConfig.package %>'
+                        package: '<%= globalConfig.package %>',
+                        version: '<%= pkg.version %>'
                     },
                     debug: false
                 }

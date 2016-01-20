@@ -126,7 +126,7 @@ var SidebarGroupItemView = Backbone.View.extend({
 
 // Export View
 export default Backbone.View.extend({
-    className: 'grid-block pane-sidebar medium-3',
+    className: 'grid-block sidebar medium-3',
 
     events: {
         'click .group-add': 'addGroup'
