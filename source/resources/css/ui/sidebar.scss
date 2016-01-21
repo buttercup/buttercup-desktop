@@ -48,14 +48,15 @@
 
         .chevron {
             position: absolute;
-            left: -12px;
-            top: 0;
+            left: -10px;
+            top: 14px;
             display: none;
             transition: transform 200ms;
+            line-height: 0;
 
             .icon {
-                width: 12px;
-                height: 12px;
+                width: 10px;
+                height: 10px;
             }
         }
 
