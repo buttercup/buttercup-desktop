@@ -23,19 +23,69 @@
 
 .custom-block-list {
     @include block-list-container(
-        $font-size: 1rem,
         $full-bleed: false
     );
 
+    ul ul {
+        margin-left: 1rem;
+        display: none;
+    }
+
     // Define what tag or class your list items are with this mixin
     li {
+        //font-weight: 500;
+        font-size: .9rem;
+        position: relative;
+
         @include block-list-item(
-            $color: #fff,
-            $color-hover: red,
+            $color: $gray-mystic,
+            $color-hover: $gray-mystic,
             $background: transparent, // Background color
-            $background-hover: #ccc,
+            $background-hover: transparent,
             $border: none,
-            $padding: 1rem 0
+            $padding: 10px 0
         );
+
+        .chevron {
+            position: absolute;
+            left: -12px;
+            top: 0;
+            display: none;
+            transition: transform 200ms;
+
+            .icon {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        .icon {
+            -webkit-filter: grayscale(1);
+            transition: -webkit-filter 200ms;
+        }
+
+        &.active {
+            > a {
+                color: #fff !important;
+                //font-weight: 500;
+
+                > .icon {
+                    -webkit-filter: none;
+                }
+            }
+        }
+
+        &.has-groups {
+            > .chevron {
+                display: block;
+            }
+
+            &.expanded {
+                > .chevron {
+                    transform: rotate(90deg);
+                    transform-origin: 50% 50%;
+                }
+            }
+        }
     }
 }

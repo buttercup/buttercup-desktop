@@ -37,7 +37,7 @@ var SidebarGroupItemView = Backbone.View.extend({
     tagName: 'li',
 
     events: {
-        'click .nav-group-item': 'handleClick',
+        'click a[data-id]': 'handleClick',
         'click .group-add': 'addGroup',
         'click .group-remove': 'removeGroup',
         'keydown [data-title]': 'handleTitleChange'
@@ -57,7 +57,7 @@ var SidebarGroupItemView = Backbone.View.extend({
 
         // Render childs
         if (!this.model.isNew()) {
-            if (typeof this.model.groups === "undefined" || this.model.groups.length === 0) {
+            if (typeof this.model.groups === "undefined") {
                 this.model.groups = new Groups([], {
                     parentID: this.model.id
                 });
@@ -68,6 +68,8 @@ var SidebarGroupItemView = Backbone.View.extend({
                 parentView: this.options.parentView
             });
             this.$el.append(this.groupView.render().el);
+            this.$el.toggleClass("has-groups", this.model.groups.size() > 0);
+            console.log(this.model);
         } else {
             window.setTimeout(() => {
                 this.$('[data-title]').trigger('focus');
@@ -102,9 +104,12 @@ var SidebarGroupItemView = Backbone.View.extend({
 
     handleClick: function (e) {
         e.stopPropagation();
-        if (!this.$(e.currentTarget).hasClass('active') && !this.model.isNew()) {
+        e.preventDefault();
+        if (!this.$(e.currentTarget).parent().hasClass('active') && !this.model.isNew()) {
             Buttercup.Events.trigger('groupSelected', this.model);
         }
+        this.$el.find("> ul").toggle();
+        this.$el.toggleClass("expanded");
     },
 
     addGroup: function (e) {
@@ -154,8 +159,8 @@ export default Backbone.View.extend({
     },
 
     handleSelectedGroup: function (model) {
-        this.$('.nav-group-item').removeClass('active');
-        this.$('.nav-group-item[data-id="'+model.id+'"]').addClass('active');
+        this.$('.active').removeClass('active');
+        this.$('a[data-id="'+model.id+'"]').parent().addClass('active');
     },
 
     addGroup: function (e) {

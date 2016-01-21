@@ -1,4 +1,15 @@
-<span class="clickable nav-group-item" data-id="<%= typeof id !== "undefined" ? id : '' %>">
+<span class="chevron">
+    <%= icon("next") %>
+</span>
+<a href="#" data-id="<%= typeof id !== "undefined" ? id : '' %>">
+    <%= icon("folder") %>
+    <% if (isNew) { %>
+        <span data-title contenteditable><%= title %></span>
+    <% } else { %>
+        <%= title %>
+    <% } %>
+</a>
+<!--<span class="clickable nav-group-item" data-id="<%= typeof id !== "undefined" ? id : '' %>">
     <span class="icon icon-folder"></span>
     <% if (isNew) { %>
         <span data-title contenteditable><%= title %></span>
@@ -7,4 +18,4 @@
         <a href="#" class="group-add">+</a>
         <a href="#" class="group-remove">x</a>
     <% } %>
-</span>
+</span>-->
