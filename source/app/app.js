@@ -5,7 +5,7 @@ var electron        = require('electron'),
     BrowserWindow   = electron.BrowserWindow,
     ipc             = electron.ipcMain,
     path            = require('path'),
-    EventsManager   = require('./events')(),
+    EventsManager   = require('./events.js')(),
     windowManager   = require('./WindowManager.js').getSharedInstance();
 
 // Global reference of the window object

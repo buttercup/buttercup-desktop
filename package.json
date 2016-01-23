@@ -1,6 +1,6 @@
 {
-  "name": "buttercup-client",
-  "version": "0.0.1-alpha",
+  "name": "buttercup-app",
+  "version": "0.0.5",
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
   "scripts": {
@@ -37,11 +37,12 @@
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
     "grunt": "^0.4.5",
+    "grunt-bump": "^0.7.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.1",
     "grunt-contrib-jade": "^0.15.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-deb": "^0.2.3",
     "grunt-exec": "^0.4.6",
     "grunt-mkdir": "^0.1.2",
     "grunt-sass": "^1.0.0",
@@ -50,11 +51,12 @@
     "grunt-systemjs-builder": "^0.2.5",
     "jspm": "^0.16.12",
     "load-grunt-tasks": "^3.3.0",
+    "makedeb": "0.0.4",
     "time-grunt": "^1.3.0"
   },
   "jspm": {
     "directories": {
-      "baseURL": "source/public"
+      "baseURL": "source/public/js"
     },
     "configFile": "source/resources/js/config.js",
     "dependencies": {
@@ -75,7 +77,7 @@
     }
   },
   "dependencies": {
-    "buttercup": "0.8.1",
+    "buttercup": "~0.12.0",
     "foundation-apps": "^1.2.0"
   }
 }

@@ -1,0 +1,15 @@
+before_install:
+  - npm install -g grunt-cli
+  - npm install
+before_script:
+  - export NODE_PATH=./node_modules/buttercup/node_modules/:./node_modules/:$NODE_PATH
+language: node_js
+node_js:
+  - "5.5"
+  - "5.4"
+  - "5.3"
+  - "5.2"
+  - "5.1"
+  - "4.2"
+  - "4.1"
+  - "0.12"

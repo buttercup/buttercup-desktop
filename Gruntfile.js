@@ -6,20 +6,88 @@ module.exports = function(grunt) {
     require("load-grunt-tasks")(grunt);
     require("time-grunt")(grunt);
 
-    var pkg = grunt.file.readJSON('package.json'),
-        globalConfig = {
-            dist: {
-                electron_pkgr: "./node_modules/electron-packager/cli.js",
-                electron_ver: "0.36.1",
-                ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
-                "source/resources|jspm_packages|dist/Buttercup)",
-                name: "Buttercup"
+    var makedeb = require("makedeb"),
+        path = require("path"),
+        fs = require("fs");
+
+    function createDebFiles() {
+        return [
+            {
+                arch: "ia32"
             },
-            package: false
-        };
+            {
+                arch: "x64"
+            }
+        ].reduce(function(prom, build) {
+            return prom.then(function() {
+                console.log("Creating deb for architecture: " + build.arch);
+                return makedeb({
+                    packageName: globalConfig.dist.name,
+                    version: globalConfig.package.version,
+                    buildDir: "./dist/Buttercup-linux-" + build.arch,
+                    outDir: "./dist/",
+                    installPath: "/usr/share/applications/buttercup",
+                    overwrite: true,
+                    // --
+                    maintainer: "perry@perrymitchell.net",
+                    section: "main", // taken from: https://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections
+                    priority: "optional",
+                    architecture: "all",
+                    essential: "no",
+                    packageDescription: "Buttercup password and credentials archive manager."
+                }).then(function(filePath) {
+                    var dir = path.dirname(filePath);
+                    fs.renameSync(
+                        filePath,
+                        path.join(dir, "buttercup-" + globalConfig.package.version + "-" + build.arch + ".deb")
+                    );
+                    console.log("Finished deb for: " + build.arch);
+                });
+            });
+        }, Promise.resolve());
+    }
+
+    var globalConfig = {
+        dist: {
+            electron_pkgr: "./node_modules/electron-packager/cli.js",
+            electron_ver: "0.36.1",
+            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
+                "source/resources|jspm_packages|dist/Buttercup)",
+            name: "Buttercup"
+        },
+        isPackage: false,
+        package: require("./package.json")
+    };
 
     grunt.initConfig({
-        pkg: pkg,
+        bump: {
+            options: {
+                files: [
+                    'package.json',
+                    'installers.config.json',
+                    'source/resources/buttercup.desktop'
+                ],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Build version: v%VERSION%',
+                commitFiles: [
+                    'package.json',
+                    'installers.config.json',
+                    'source/resources/buttercup.desktop'
+                ],
+                createTag: false,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: false,
+                pushTo: 'upstream',
+                gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+                globalReplace: false,
+                prereleaseName: false,
+                metadata: '',
+                regExp: /("?version"? ?[:=] ?"?)(\d+\.\d+\.\d+(-\.\d+)?(-\d+)?)("?)/i
+            }
+        },
+
         clean: {
             dist: [
                 "dist/**/*",
@@ -32,64 +100,6 @@ module.exports = function(grunt) {
                 "source/public/img/**/*",
                 "source/public/fonts/**/*"
             ]
-        },
-
-        deb_package: {
-            options: {
-                maintainer: "Perry Mitchell <perry@perrymitchell.net>",
-                version: "0.1.1",
-                name: "buttercup",
-                short_description: "Buttercup credentials manager.",
-                long_description: "Buttercup passwords and credentials manager.",
-                target_architecture: "all",
-                category: "devel",
-                build_number: "1",
-                dependencies: [],           // List of the package dependencies
-                tmp_dir: '.tmp',            // The task working dir
-                output: './dist/'         // Where your .deb should be created
-            },
-            linux32: {
-                // Here you define what you want in your package
-                files: [{
-                    cwd: './dist/Buttercup-linux-ia32',
-                    src: '**/*',
-                    dest: '/opt/buttercup'
-                }],
-                // The task will create the links as src: dest
-                links: {
-                    '/usr/bin/buttercup': '/opt/buttercup/bin/buttercup'
-                },
-                // You can provide preinst, postinst, prerm and postrm script either by giving a file or what to put in it
-                scripts: {
-                    preinst: {
-                        //src: './test_files/preinst.sh'
-                    },
-                    postinst: {
-                        //content: 'echo "postinst test"'
-                    }
-                }
-            },
-            linux64: {
-                // Here you define what you want in your package
-                files: [{
-                    cwd: './dist/Buttercup-linux-x64',
-                    src: '**/*',
-                    dest: '/opt/buttercup'
-                }],
-                // The task will create the links as src: dest
-                links: {
-                    '/usr/bin/buttercup': '/opt/buttercup/bin/buttercup'
-                },
-                // You can provide preinst, postinst, prerm and postrm script either by giving a file or what to put in it
-                scripts: {
-                    preinst: {
-                        //src: './test_files/preinst.sh'
-                    },
-                    postinst: {
-                        //content: 'echo "postinst test"'
-                    }
-                }
-            }
         },
 
         exec: {
@@ -128,6 +138,11 @@ module.exports = function(grunt) {
                 stdout: true,
                 stderr: true
             },
+            jspm_install: {
+                command: 'cd "' + __dirname + '" && jspm install',
+                stdout: true,
+                stderr: true
+            },
             rename_deb32: {
                 command: 'cd dist && mv buttercup_*.deb buttercup-linux32.deb',
                 stderr: true,
@@ -142,11 +157,6 @@ module.exports = function(grunt) {
                 command: 'electron ' + __dirname,
                 stdout: false,
                 stderr: false
-            },
-            jspm: {
-                command: 'jspm install',
-                stdout: true,
-                stderr: true
             }
         },
 
@@ -160,7 +170,7 @@ module.exports = function(grunt) {
                 },
                 options: {
                     data: {
-                        package: '<%= globalConfig.package %>',
+                        package: '<%= globalConfig.isPackage %>',
                         version: '<%= pkg.version %>'
                     },
                     debug: false
@@ -178,6 +188,11 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        nodeunit: {
+            all: ['tests/app/**/*.spec.js'],
+            options: {}
         },
 
         sass: {
@@ -233,6 +248,11 @@ module.exports = function(grunt) {
                         cwd: 'source/resources/fonts',
                         src: ['**'],
                         dest: 'source/public/fonts'
+                    },
+                    {
+                        cwd: 'source/resources',
+                        src: ['buttercup.desktop'],
+                        dest: 'source/public'
                     }
                 ],
                 verbose: true
@@ -284,7 +304,8 @@ module.exports = function(grunt) {
         "jade:app",
         "sass:app",
         "sync",
-        "svg_sprite"
+        "svg_sprite",
+        "exec:jspm_install"
     ]);
 
     grunt.registerTask("dist", [
@@ -300,34 +321,40 @@ module.exports = function(grunt) {
         "exec:dist_linux"
     ]);
 
-    grunt.registerTask("make-installers", [
-        "exec:create_dmg",
-        "exec:create_installer_win32",
-        "exec:create_installer_win64",
-        "deb_package:linux32",
-        "exec:rename_deb32",
-        "deb_package:linux64",
-        "exec:rename_deb64"
-    ]);
+    grunt.registerTask("make-deb", function() {
+        var done = this.async();
+        createDebFiles()
+            .then(done)
+            .catch(function(err) {
+                console.error("Make-deb failed");
+                console.log(err.message);
+            });
+    });
+
+    grunt.registerTask("make-installers", function() {
+        grunt.task.run([
+            "make-deb",
+            "exec:create_dmg",
+            "exec:create_installer_win32",
+            "exec:create_installer_win64"
+        ]);
+    });
 
     grunt.registerTask("package", function() {
-        globalConfig.package = true;
+        globalConfig.isPackage = true;
         grunt.task.run([
             "build",
             "systemjs"
         ]);
     });
 
-    // grunt.registerTask("setup", [
-    //     "build",
-    //     "exec:jspm",
-    //     "start"
-    // ]);
-    //
-    // grunt.registerTask("start", [
-    //     "exec:start"
-    // ]);
+    grunt.registerTask("start", [
+        "build",
+        "exec:start"
+    ]);
 
-    //grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
+    grunt.registerTask("test", [
+        "nodeunit"
+    ]);
 
 };
