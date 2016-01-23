@@ -60,6 +60,34 @@ module.exports = function(grunt) {
     };
 
     grunt.initConfig({
+        bump: {
+            options: {
+                files: [
+                    'package.json',
+                    'installers.config.json',
+                    'source/resources/buttercup.desktop'
+                ],
+                updateConfigs: [],
+                commit: true,
+                commitMessage: 'Build version: v%VERSION%',
+                commitFiles: [
+                    'package.json',
+                    'installers.config.json',
+                    'source/resources/buttercup.desktop'
+                ],
+                createTag: false,
+                tagName: 'v%VERSION%',
+                tagMessage: 'Version %VERSION%',
+                push: false,
+                pushTo: 'upstream',
+                gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
+                globalReplace: false,
+                prereleaseName: false,
+                metadata: '',
+                regExp: /("?version"? ?[:=] ?"?)(\d+\.\d+\.\d+(-\.\d+)?(-\d+)?)("?)/i
+            }
+        },
+
         clean: {
             dist: [
                 "dist/**/*",
