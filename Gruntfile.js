@@ -110,6 +110,11 @@ module.exports = function(grunt) {
                 stdout: true,
                 stderr: true
             },
+            jspm_install: {
+                command: 'cd "' + __dirname + '" && jspm install',
+                stdout: true,
+                stderr: true
+            },
             rename_deb32: {
                 command: 'cd dist && mv buttercup_*.deb buttercup-linux32.deb',
                 stderr: true,
@@ -265,7 +270,8 @@ module.exports = function(grunt) {
         "jade:app",
         "sass:app",
         "sync",
-        "svg_sprite"
+        "svg_sprite",
+        "exec:jspm_install"
     ]);
 
     grunt.registerTask("dist", [
@@ -296,11 +302,7 @@ module.exports = function(grunt) {
             "make-deb",
             "exec:create_dmg",
             "exec:create_installer_win32",
-            "exec:create_installer_win64"//,
-            //"deb_package:linux32",
-            //"exec:rename_deb32",
-            //"deb_package:linux64",
-            //"exec:rename_deb64"
+            "exec:create_installer_win64"
         ]);
     });
 

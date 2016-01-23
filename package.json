@@ -1,6 +1,6 @@
 {
-  "name": "buttercup-client",
-  "version": "0.0.1",
+  "name": "buttercup-app",
+  "version": "0.0.2",
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
   "scripts": {
@@ -44,7 +44,7 @@
   },
   "jspm": {
     "directories": {
-      "baseURL": "source/public"
+      "baseURL": "source/public/js"
     },
     "configFile": "source/resources/js/config.js",
     "dependencies": {
