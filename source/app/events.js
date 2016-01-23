@@ -34,7 +34,6 @@
     function loadWorkspace(path, password) {
         return Workspace.load(path, password).then(function (workspace) {
             manager.setWorkspace(workspace);
-            //event.sender.send('workspace.connected', 'connected');
 
             // Create the browser window.
             var archiveWindow = new BrowserWindow({
@@ -44,7 +43,7 @@
             });
             archiveWindow.loadURL(Buttercup.config.publicDir + '/index.html');
             archiveWindow.show();
-            archiveWindow.webContents.openDevTools();
+            //archiveWindow.webContents.openDevTools();
 
             // Emitted when the window is closed.
             archiveWindow.on('closed', function() {
