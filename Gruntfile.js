@@ -129,11 +129,6 @@ module.exports = function(grunt) {
                 command: 'electron ' + __dirname,
                 stdout: false,
                 stderr: false
-            },
-            jspm: {
-                command: 'jspm install',
-                stdout: true,
-                stderr: true
             }
         },
 
@@ -164,6 +159,11 @@ module.exports = function(grunt) {
                     ]
                 }
             }
+        },
+
+        nodeunit: {
+            all: ['tests/app/**/*.spec.js'],
+            options: {}
         },
 
         sass: {
@@ -314,16 +314,13 @@ module.exports = function(grunt) {
         ]);
     });
 
-    // grunt.registerTask("setup", [
-    //     "build",
-    //     "exec:jspm",
-    //     "start"
-    // ]);
-    //
-    // grunt.registerTask("start", [
-    //     "exec:start"
-    // ]);
+    grunt.registerTask("start", [
+        "build",
+        "exec:start"
+    ]);
 
-    //grunt.registerTask("test", ["jshint", "build", "jasmine:main"]);
+    grunt.registerTask("test", [
+        "nodeunit"
+    ]);
 
 };
