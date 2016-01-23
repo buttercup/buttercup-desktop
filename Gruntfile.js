@@ -26,11 +26,11 @@ module.exports = function(grunt) {
                     version: globalConfig.package.version,
                     buildDir: "./dist/Buttercup-linux-" + build.arch,
                     outDir: "./dist/",
-                    installPath: "/opt/buttercup",
+                    installPath: "/usr/share/applications/buttercup",
                     overwrite: true,
                     // --
                     maintainer: "perry@perrymitchell.net",
-                    section: "utils", // taken from: https://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections
+                    section: "main", // taken from: https://www.debian.org/doc/debian-policy/ch-archive.html#s-subsections
                     priority: "optional",
                     architecture: "all",
                     essential: "no",
@@ -219,6 +219,11 @@ module.exports = function(grunt) {
                         cwd: 'source/resources/fonts',
                         src: ['**'],
                         dest: 'source/public/fonts'
+                    },
+                    {
+                        cwd: 'source/resources',
+                        src: ['buttercup.desktop'],
+                        dest: 'source/public'
                     }
                 ],
                 verbose: true
