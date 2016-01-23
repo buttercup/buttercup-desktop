@@ -44,7 +44,7 @@
   },
   "jspm": {
     "directories": {
-      "baseURL": "source/public"
+      "baseURL": "source/public/js"
     },
     "configFile": "source/resources/js/config.js",
     "dependencies": {
