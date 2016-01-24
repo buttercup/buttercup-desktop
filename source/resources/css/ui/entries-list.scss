@@ -1,50 +1,90 @@
 .entries-list {
     background-color: $blue-shark;
+
+    header {
+        padding: 1rem;
+        border-bottom: 1px solid $white-05;
+
+        input {
+            margin: 0;
+            background-color: $blue-charcoal;
+            border-radius: 4px;
+            border: none !important;
+            color: #fff !important;
+            font-size: .9em;
+
+            &:hover {
+                background-color: $blue-charcoal;
+            }
+
+            &:focus {
+                background-color: darken($blue-charcoal, 5%);
+            }
+        }
+    }
+
+    footer {
+        padding: 1rem;
+        border-top: 1px solid $white-05;
+    }
 }
 
-// .pane-entries {
-//     background-color: $pane-background-color;
-//     border-radius: 10px;
-//
-//     // Search Box
-//     .pane-header {
-//         input {
-//             border: 0;
-//             background-color: $search-field-background-color;
-//             border-radius: 10px 10px 0 0;
-//             width: 100%;
-//             height: 50px;
-//             outline: none;
-//             color: #fff;
-//             padding: 0 $padding;
-//             font-weight: $font-weight-light;
-//
-//             &:focus {
-//                 background-color: darken($search-field-background-color, 5%);
-//             }
-//         }
-//     }
-//
-//     .pane-footer {
-//         border-top: 1px solid $pane-border;
-//     }
-//
-//     .list-group-item {
-//         color: #fff;
-//         border-bottom-color: $pane-border;
-//
-//         strong {
-//             font-weight: $font-weight;
-//         }
-//
-//         p {
-//             color: rgba(255,255,255,.8);
-//             font-size: 12px;
-//             font-weight: $font-weight-light;
-//         }
-//
-//         &.selected {
-//             background-color: $list-selected-background-color;
-//         }
-//     }
-// }
+// This is the block list container
+.entries-items {
+    // This gets you basic styles
+    @include block-list-container(
+        $font-size: 1rem,
+        $full-bleed: true
+    );
+    /*
+    &.with-icons {
+        @include block-list-icons(
+            $size: 0.8, // This should be a decimal point. 0.8 makes the icon 80% the size of its parent
+            $item-selector: 'li' // This should be whatever tag or class your block list uses for items
+        );
+    }*/
+
+    li {
+        @include block-list-item(
+            $color: #fff,
+            $color-hover: #fff,
+            $background: transparent,
+            $background-hover: darken($blue-shark, 3%),
+            $border: 1px solid $white-05,
+            $padding: 1rem
+        );
+
+        &:first-child {
+            border-top: none;
+        }
+
+        > a {
+            > span {
+                display: block;
+            }
+
+            > small {
+                color: $white-40;
+            }
+        }
+
+        &.selected {
+            > a {
+                background-color: $green-buttercup;
+
+                > small {
+                    color: $white-60;
+                }
+            }
+        }
+    }
+
+    /*
+    .block-list-label {
+        @include block-list-label(
+            $color: #999, // Color of label
+            $left-class: 'left', // Define a modifier class for left-aligned labels
+            $left-padding: 1rem // Padding to add when a label is left-aligned
+        );
+    }*/
+}

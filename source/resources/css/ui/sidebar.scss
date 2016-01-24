@@ -26,7 +26,7 @@
     }
 }
 
-.custom-block-list {
+.groups-list {
     @include block-list-container(
         $full-bleed: false
     );

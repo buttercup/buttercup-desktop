@@ -1,3 +1,6 @@
+// Base
+@import "core/fonts";
+@import "core/variables";
 
 // Import deps
 @import "../../../node_modules/foundation-apps/scss/foundation";
@@ -7,10 +10,8 @@ html {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    -webkit-user-select: none;
 }
-
-@import "core/fonts";
-@import "core/variables";
 
 //@import "ui/icons";
 @import "ui/intro-window";
@@ -47,6 +48,18 @@ html {
         @include button-style(
             $background: darken($blue-charcoal, 5%),
             $background-hover: darken($blue-charcoal, 10%),
+            $color: #fff,
+            $style: solid
+        );
+
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    &.secondary-action {
+        @include button-style(
+            $background: darken($blue-shark, 5%),
+            $background-hover: darken($blue-shark, 10%),
             $color: #fff,
             $style: solid
         );
