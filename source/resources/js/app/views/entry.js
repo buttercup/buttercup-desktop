@@ -8,7 +8,7 @@ import Metatpl from 'tpl/entry-new-meta.html!text';
 
 // New Meta View
 var MetaEntryView = Backbone.View.extend({
-    className: 'grid-block',
+    className: 'row',
 
     render: function () {
         this.template = _.template(Metatpl);

@@ -16,6 +16,7 @@ html {
 //@import "ui/icons";
 @import "ui/intro-window";
 @import "ui/entries-list";
+@import "ui/entry-view";
 @import "ui/sidebar";
 
 // Additions
@@ -39,32 +40,67 @@ html {
     @extend %button;
     @include button-size(
         $size: small,
-        $expand: true
+        $expand: false
     );
     border-radius: 20px;
     margin: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -1px;
+    }
 
     &.primary-action {
+        @include button-size($size: small, $expand: true);
         @include button-style(
             $background: darken($blue-charcoal, 5%),
             $background-hover: darken($blue-charcoal, 10%),
             $color: #fff,
             $style: solid
         );
-
-        text-transform: uppercase;
-        font-weight: 500;
     }
 
     &.secondary-action {
+        @include button-size($size: small, $expand: true);
         @include button-style(
             $background: darken($blue-shark, 5%),
             $background-hover: darken($blue-shark, 10%),
             $color: #fff,
             $style: solid
         );
-
-        text-transform: uppercase;
-        font-weight: 500;
     }
+
+    &.primary {
+        @include button-style(
+            $background: $green-buttercup,
+            $background-hover: darken($green-buttercup, 5%),
+            $color: #fff
+        );
+    }
+
+    &.secondary {
+        @include button-style(
+            $background: $gray-haze,
+            $background-hover: darken($gray-haze, 5%),
+            $color: $blue-charcoal
+        );
+    }
+
+    &.alert {
+        @include button-style(
+            $background: $red,
+            $background-hover: darken($red, 5%),
+            $color: #fff
+        )
+    }
+}
+
+// Forms
+input[type="text"],
+input[type="password"] {
+    margin: 0;
+    border-radius: 4px;
 }
