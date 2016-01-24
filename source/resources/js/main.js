@@ -11,6 +11,9 @@ import 'app/helpers';
 window.Buttercup = window.Buttercup || {};
 Buttercup.Events = _.extend({}, Backbone.Events);
 
+// Hide loading image
+$("#loading").hide();
+
 // Decide what to load
 if (importScreen === true) {
     Buttercup.IntroScreen = new IntroScreen();
