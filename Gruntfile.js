@@ -170,7 +170,8 @@ module.exports = function(grunt) {
                 },
                 options: {
                     data: {
-                        package: '<%= globalConfig.isPackage %>'
+                        package: '<%= globalConfig.isPackage %>',
+                        version: '<%= globalConfig.package.version %>'
                     },
                     debug: false
                 }

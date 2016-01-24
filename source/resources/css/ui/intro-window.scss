@@ -5,8 +5,8 @@
         text-align: center;
     }
 
-    h3 {
-        margin: 0;
+    h5 {
+        margin: .5rem 0 2rem;
     }
 
     .recent-files {
@@ -21,9 +21,13 @@
 
             > img {
                 height: 130px;
-                margin: 0 auto 1em;
+                margin: 0 auto;
                 display: block;
             }
+        }
+
+        > .grid-content {
+            margin: 0 2rem;
         }
     }
 

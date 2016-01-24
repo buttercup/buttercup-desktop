@@ -32,3 +32,4 @@ node_modules
 # PUBLIC
 source/public
 *.bcup
+.tmp

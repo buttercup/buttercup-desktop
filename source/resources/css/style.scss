@@ -1,17 +1,23 @@
-// Import deps
+// Base
 @import "core/fonts";
 @import "core/variables";
+
+// Import deps
+@import "../../../node_modules/foundation-apps/scss/foundation";
+@import "libs/sweetalert";
 
 html {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    -webkit-user-select: none;
 }
 
-@import "../../../node_modules/foundation-apps/scss/foundation";
-@import "libs/sweetalert";
-@import "ui/icons";
+//@import "ui/icons";
 @import "ui/intro-window";
+@import "ui/entries-list";
+@import "ui/entry-view";
+@import "ui/sidebar";
 
 // Additions
 .block-list {
@@ -26,4 +32,75 @@ html {
     height: 1.125rem;
     vertical-align: -4px;
     display: inline-block;
+    line-height: 1;
+}
+
+// Button
+.round-button {
+    @extend %button;
+    @include button-size(
+        $size: small,
+        $expand: false
+    );
+    border-radius: 20px;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    .icon {
+        width: 1em;
+        height: 1em;
+        vertical-align: -1px;
+    }
+
+    &.primary-action {
+        @include button-size($size: small, $expand: true);
+        @include button-style(
+            $background: darken($blue-charcoal, 5%),
+            $background-hover: darken($blue-charcoal, 10%),
+            $color: #fff,
+            $style: solid
+        );
+    }
+
+    &.secondary-action {
+        @include button-size($size: small, $expand: true);
+        @include button-style(
+            $background: darken($blue-shark, 5%),
+            $background-hover: darken($blue-shark, 10%),
+            $color: #fff,
+            $style: solid
+        );
+    }
+
+    &.primary {
+        @include button-style(
+            $background: $green-buttercup,
+            $background-hover: darken($green-buttercup, 5%),
+            $color: #fff
+        );
+    }
+
+    &.secondary {
+        @include button-style(
+            $background: $gray-haze,
+            $background-hover: darken($gray-haze, 5%),
+            $color: $blue-charcoal
+        );
+    }
+
+    &.alert {
+        @include button-style(
+            $background: $red,
+            $background-hover: darken($red, 5%),
+            $color: #fff
+        )
+    }
+}
+
+// Forms
+input[type="text"],
+input[type="password"] {
+    margin: 0;
+    border-radius: 4px;
 }
