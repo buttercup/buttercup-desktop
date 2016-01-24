@@ -69,7 +69,6 @@ var SidebarGroupItemView = Backbone.View.extend({
             });
             this.$el.append(this.groupView.render().el);
             this.$el.toggleClass("has-groups", this.model.groups.size() > 0);
-            console.log(this.model);
         } else {
             window.setTimeout(() => {
                 this.$('[data-title]').trigger('focus');
@@ -105,17 +104,21 @@ var SidebarGroupItemView = Backbone.View.extend({
     handleClick: function (e) {
         e.stopPropagation();
         e.preventDefault();
+
+        // Toggle Tree
+        this.toggleTree();
+
+        // Load the group if it isn’t already loaded
         if (!this.$(e.currentTarget).parent().hasClass('active') && !this.model.isNew()) {
             Buttercup.Events.trigger('groupSelected', this.model);
         }
-        this.$el.find("> ul").toggle();
-        this.$el.toggleClass("expanded");
     },
 
     addGroup: function (e) {
         e.preventDefault();
         e.stopPropagation();
         this.model.groups.add(new Group());
+        this.expandTree();
     },
 
     removeGroup: function(e) {
@@ -126,6 +129,16 @@ var SidebarGroupItemView = Backbone.View.extend({
 
     destroy: function () {
         this.$el.remove();
+    },
+
+    expandTree: function() {
+        this.$el.find("> ul").show();
+        this.$el.addClass("expanded has-groups");
+    },
+
+    toggleTree: function() {
+        this.$el.find("> ul").toggle();
+        this.$el.toggleClass("expanded");
     }
 });
 

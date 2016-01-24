@@ -18,14 +18,14 @@
   ],
   "author": "Sallar Kaboli <sallar.kaboli@gmail.com>",
   "contributors": [
-      {
-          "name": "Perry Mitchell",
-          "email": "perry@perrymitchell.net"
-      },
-      {
-          "name": "Sallar Kaboli",
-          "email": "sallar.kaboli@gmail.com"
-      }
+    {
+      "name": "Perry Mitchell",
+      "email": "perry@perrymitchell.net"
+    },
+    {
+      "name": "Sallar Kaboli",
+      "email": "sallar.kaboli@gmail.com"
+    }
   ],
   "license": "GPL-3.0",
   "bugs": {

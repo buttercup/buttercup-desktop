@@ -12,7 +12,7 @@ html {
 @import "core/fonts";
 @import "core/variables";
 
-@import "ui/icons";
+//@import "ui/icons";
 @import "ui/intro-window";
 @import "ui/entries-list";
 @import "ui/sidebar";
@@ -30,4 +30,28 @@ html {
     height: 1.125rem;
     vertical-align: -4px;
     display: inline-block;
+    line-height: 1;
+}
+
+// Button
+.round-button {
+    @extend %button;
+    @include button-size(
+        $size: small,
+        $expand: true
+    );
+    border-radius: 20px;
+    margin: 0;
+
+    &.primary-action {
+        @include button-style(
+            $background: darken($blue-charcoal, 5%),
+            $background-hover: darken($blue-charcoal, 10%),
+            $color: #fff,
+            $style: solid
+        );
+
+        text-transform: uppercase;
+        font-weight: 500;
+    }
 }

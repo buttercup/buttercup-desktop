@@ -19,6 +19,11 @@
             );
         }
     };
+
+    footer {
+        padding: 1rem;
+        border-top: 1px solid $white-05;
+    }
 }
 
 .custom-block-list {
@@ -33,9 +38,7 @@
 
     // Define what tag or class your list items are with this mixin
     li {
-        //font-weight: 500;
         font-size: .9rem;
-        position: relative;
 
         @include block-list-item(
             $color: $gray-mystic,
@@ -63,6 +66,43 @@
         .icon {
             -webkit-filter: grayscale(1);
             transition: -webkit-filter 200ms;
+        }
+
+        > a {
+            position: relative;
+
+            .menu {
+                position: absolute;
+                right: 0;
+                top: 12px;
+                pointer-events: none;
+                opacity: 0;
+                white-space: nowrap;
+                cursor: default;
+
+                > span, .icon{
+                    display: inline-block;
+                    width: .9rem;
+                    height: .9rem;
+                }
+
+                > span {
+                    opacity: .4;
+                    transition: opacity 200ms;
+                    cursor: pointer;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            &:hover {
+                .menu {
+                    pointer-events: all;
+                    opacity: 1;
+                }
+            }
         }
 
         &.active {
