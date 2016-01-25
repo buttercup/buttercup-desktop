@@ -50,7 +50,7 @@ module.exports = function(grunt) {
     var globalConfig = {
         dist: {
             electron_pkgr: "./node_modules/electron-packager/cli.js",
-            electron_ver: "0.36.1",
+            electron_ver: "0.36.5",
             ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
                 "source/resources|jspm_packages|dist/Buttercup)",
             name: "Buttercup"
