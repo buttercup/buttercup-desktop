@@ -7,7 +7,22 @@ Cross-platform, free and open-source password manager based on NodeJS.
 Buttercup is currently under heavy development, this document will be updated ASAP. Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
 
 ## Setup & Usage
-_How to use this thing_
+### Install Dependencies
+``` bash
+$ npm install -g electron-prebuilt jspm
+$ npm install
+```
+
+### Build and Run
+``` bash
+$ grunt build
+$ electron .
+```
+
+### Watch while development
+```bash
+$ grunt watch
+```
 
 ### Required software
 You will need the following things to build the project executables and installers:
