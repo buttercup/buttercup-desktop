@@ -264,10 +264,7 @@ module.exports = function(grunt) {
                 sfx: true,
                 baseURL: "./source/public/js",
                 configFile: "./source/public/js/config.js",
-                minify: true,
-                build: {
-                    mangle: false
-                }
+                minify: true
             },
             dist: {
                 files: [{
