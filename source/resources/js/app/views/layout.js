@@ -20,7 +20,7 @@ export default Backbone.View.extend({
         this.entries = new EntriesView;
 
         Buttercup.Events.on('groupSelected', this.entries.setGroup, this.entries);
-        Buttercup.Events.on('groupLoaded', this.updateItemCount, this);
+        Buttercup.Events.on('groupLoaded', this.handleSelectedGroup, this);
         Buttercup.Events.on('entrySelected', this.loadEntry, this);
 
         // Render
@@ -31,11 +31,12 @@ export default Backbone.View.extend({
         this.$el.html(this.template(this.params));
         this.$('.panes').prepend(this.entries.render().el);
         this.$('.panes').prepend(this.sidebar.render().el);
-        this.$('.pane-entry').html((new EmptyStateView()).render().el);
+        this.$('.pane-entry').html((new EmptyStateView({type: "entry"})).render().el);
     },
 
-    updateItemCount: function (collection) {
-        this.$('.layout-footer .title').text(`${collection.length} entries`);
+    handleSelectedGroup: function (collection) {
+        //this.$('.layout-footer .title').text(`${collection.length} entries`);
+        this.$('.pane-entries').toggleClass("active", (collection !== false));
     },
 
     loadEntry: function (model) {

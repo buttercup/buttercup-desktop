@@ -5,9 +5,10 @@
 
 .empty-state {
     text-align: center;
+    display: none;
 
     img {
-        margin: 0 auto;
+        margin: 0 auto 1rem;
         display: block;
     }
 
@@ -15,9 +16,10 @@
         color: $gray-nevada;
         margin: 0;
         font-weight: 300;
+        padding: 0 1rem;
     }
 
-    h4 {
-        margin-top: 1rem;
+    &.active {
+        display: block;
     }
 }

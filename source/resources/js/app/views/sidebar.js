@@ -7,6 +7,7 @@ import Tpl from 'tpl/sidebar.html!text';
 import GroupItemTpl from 'tpl/sidebar-group-item.html!text';
 import Groups from 'app/collections/groups';
 import Group from 'app/models/group';
+import EmptyStateView from 'app/views/empty-state';
 
 const SidebarGroupItemView = Backbone.View.extend({
     tagName: 'li',
@@ -155,28 +156,49 @@ export default Backbone.View.extend({
     initialize: function () {
         this.template = _.template(Tpl);
         this.groups = new Groups();
-        this.groups.on('reset', this.addGroups, this);
+        this.groups.on('reset', this.render, this);
+        this.groups.on('add', this.handleAdd, this);
+        this.groups.on('remove', this.handleRemove, this);
+        this.groups.fetch({reset: true});
+
         Buttercup.Events.on('groupSelected', this.handleSelectedGroup, this);
     },
 
     render: function () {
         this.$el.html(this.template());
-        this.groups.fetch({reset: true});
-        return this;
-    },
 
-    addGroups: function(collection) {
-        var groupView = new SidebarGroupView({
-            collection: collection,
-            parentView: this
-        });
-        this.$('nav').append(groupView.render().el);
-        this.$("a[data-id]:first").click();
+        if (this.groups.size()) {
+            var groupView = new SidebarGroupView({
+                collection: this.groups,
+                parentView: this
+            });
+            this.$('.groups').show();
+            this.$('nav').html(groupView.render().el);
+            this.$("a[data-id]:first").click();
+        } else {
+            this.$('.groups').hide();
+            this.$('.empty').html((new EmptyStateView({type: "groups"})).render().el);
+        }
+
+        return this;
     },
 
     handleSelectedGroup: function (model) {
         this.$('.active').removeClass('active');
         this.$('a[data-id="'+model.id+'"]').parent().addClass('active');
+    },
+
+    handleAdd: function() {
+        if (this.groups.size() === 1) {
+            this.render();
+        }
+    },
+
+    handleRemove: function() {
+        if (this.groups.size() === 0) {
+            this.render();
+            Buttercup.Events.trigger("groupLoaded", false);
+        }
     },
 
     addGroup: function (e) {

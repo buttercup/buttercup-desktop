@@ -9,12 +9,13 @@ export default Backbone.View.extend({
     template: _.template(Tpl),
     className: 'empty-state-container v-align',
 
-    initialize: function() {
-
+    initialize: function(options) {
+        this.options = options;
     },
 
     render: function() {
         this.$el.html(this.template());
+        this.$(`[data-id=${this.options.type}]`).addClass("active");
         return this;
     }
 
