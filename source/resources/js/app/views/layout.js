@@ -7,6 +7,7 @@ import Tpl from 'tpl/layout.html!text';
 import SidebarView from 'app/views/sidebar';
 import EntriesView from 'app/views/entries';
 import EntryView from 'app/views/entry';
+import EmptyStateView from 'app/views/empty-state';
 
 // Export View
 export default Backbone.View.extend({
@@ -30,6 +31,7 @@ export default Backbone.View.extend({
         this.$el.html(this.template(this.params));
         this.$('.panes').prepend(this.entries.render().el);
         this.$('.panes').prepend(this.sidebar.render().el);
+        this.$('.pane-entry').html((new EmptyStateView()).render().el);
     },
 
     updateItemCount: function (collection) {

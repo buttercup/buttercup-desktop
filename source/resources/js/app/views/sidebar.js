@@ -124,6 +124,7 @@ const SidebarGroupView = Backbone.View.extend({
     initialize: function (options) {
         this.options = options;
         this.collection.on('add', this.addGroup, this);
+        this.views = [];
     },
 
     render: function () {
@@ -139,6 +140,7 @@ const SidebarGroupView = Backbone.View.extend({
             parentView: this.options.parentView
         });
         this.$el.append(view.render().el);
+        this.views.push(view);
     }
 });
 
@@ -169,6 +171,7 @@ export default Backbone.View.extend({
             parentView: this
         });
         this.$('nav').append(groupView.render().el);
+        this.$("a[data-id]:first").click();
     },
 
     handleSelectedGroup: function (model) {

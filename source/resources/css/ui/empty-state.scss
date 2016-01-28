@@ -1,0 +1,23 @@
+.empty-state-container {
+    flex: 1;
+    justify-content: center;
+}
+
+.empty-state {
+    text-align: center;
+
+    img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    h4, h5 {
+        color: $gray-nevada;
+        margin: 0;
+        font-weight: 300;
+    }
+
+    h4 {
+        margin-top: 1rem;
+    }
+}
