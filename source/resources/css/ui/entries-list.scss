@@ -1,3 +1,11 @@
+.pane-entries {
+    display: none;
+
+    &.active {
+        display: flex;
+    }
+}
+
 .entries-list {
     background-color: $blue-shark;
 

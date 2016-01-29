@@ -40,6 +40,11 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
+        if (this.model.get("title") === "Untitled") {
+            setTimeout(() => {
+                this.$('input[name=title]').select();
+            }, 50);
+        }
         this.removedMeta = [];
         return this;
     },
@@ -94,7 +99,7 @@ export default Backbone.View.extend({
         };
 
         // Title field
-        changed.title = this.$('h1').text().trim();
+        //changed.title = this.$('h1').text().trim();
 
         // Normal fields
         this.$('input[name][data-changed]').each(function (index, field) {
@@ -102,7 +107,6 @@ export default Backbone.View.extend({
         });
 
         // Removed Custom Fields
-        console.log(this.removedMeta);
         this.removedMeta.forEach((key) => {
             this.model.unset('meta.' + key);
         });
@@ -145,7 +149,8 @@ export default Backbone.View.extend({
     removeEntry: function () {
         this.model.destroy({
             wait: true,
-            success: () => {
+            success: (model) => {
+                Buttercup.Events.trigger("entryRemoved", model);
                 this.destroy()
             }
         });

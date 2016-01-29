@@ -7,6 +7,7 @@ import Tpl from 'tpl/layout.html!text';
 import SidebarView from 'app/views/sidebar';
 import EntriesView from 'app/views/entries';
 import EntryView from 'app/views/entry';
+import EmptyStateView from 'app/views/empty-state';
 
 // Export View
 export default Backbone.View.extend({
@@ -19,7 +20,7 @@ export default Backbone.View.extend({
         this.entries = new EntriesView;
 
         Buttercup.Events.on('groupSelected', this.entries.setGroup, this.entries);
-        Buttercup.Events.on('groupLoaded', this.updateItemCount, this);
+        Buttercup.Events.on('groupLoaded', this.handleSelectedGroup, this);
         Buttercup.Events.on('entrySelected', this.loadEntry, this);
 
         // Render
@@ -30,19 +31,31 @@ export default Backbone.View.extend({
         this.$el.html(this.template(this.params));
         this.$('.panes').prepend(this.entries.render().el);
         this.$('.panes').prepend(this.sidebar.render().el);
+        this.showEmptyState();
     },
 
-    updateItemCount: function (collection) {
-        this.$('.layout-footer .title').text(`${collection.length} entries`);
+    handleSelectedGroup: function (collection) {
+        this.showEmptyState();
     },
 
     loadEntry: function (model) {
+        if (model === false) {
+            this.showEmptyState();
+        } else {
+            if (this.entry) {
+                this.entry.destroy();
+            }
+            this.entry = new EntryView({
+                model: model
+            });
+            this.$('.pane-entry').html(this.entry.render().el);
+        }
+    },
+
+    showEmptyState: function() {
         if (this.entry) {
             this.entry.destroy();
         }
-        this.entry = new EntryView({
-            model: model
-        });
-        this.$('.pane-entry').html(this.entry.render().el);
+        this.$('.pane-entry').html((new EmptyStateView({type: "entry"})).render().el);
     }
 });

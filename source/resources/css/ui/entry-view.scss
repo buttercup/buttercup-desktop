@@ -42,6 +42,12 @@
             @include grid-content;
             padding-right: 0;
         }
+
+        input[name=title] {
+            @extend h1;
+            height: 1.5em;
+            margin: 0;
+        }
     }
 
     .inline-label {
