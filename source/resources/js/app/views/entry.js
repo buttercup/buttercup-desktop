@@ -40,6 +40,11 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template(this.model.toJSON()));
+        if (this.model.get("title") === "Untitled") {
+            setTimeout(() => {
+                this.$('input[name=title]').select();
+            }, 50);
+        }
         this.removedMeta = [];
         return this;
     },
@@ -94,7 +99,7 @@ export default Backbone.View.extend({
         };
 
         // Title field
-        changed.title = this.$('h1').text().trim();
+        //changed.title = this.$('h1').text().trim();
 
         // Normal fields
         this.$('input[name][data-changed]').each(function (index, field) {
