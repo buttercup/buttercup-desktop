@@ -34,6 +34,7 @@ export default Backbone.View.extend({
     },
 
     initialize: function () {
+        Buttercup.Events.on('groupLoaded', this.handleGroupSelection, this);
         this.template = _.template(Tpl);
         this._views = {};
     },
@@ -103,7 +104,12 @@ export default Backbone.View.extend({
     removeEntry: function (model) {
         this._views[model.get('id')].$el.remove();
         delete this._views[model.get('id')];
-        this.$('.list-entries > li:first').trigger('click');
+
+        if (this.collection.size() > 0) {
+            this.$('.list-entries > li:first').trigger('click');
+        } else {
+            Buttercup.Events.trigger("entrySelected", false);
+        }
     },
 
     search: function (e) {
@@ -116,5 +122,9 @@ export default Backbone.View.extend({
             }
         }
         this.addEntries(result);
+    },
+
+    handleGroupSelection: function(group) {
+        this.$el.toggleClass("active", (group !== false));
     }
 });

@@ -31,21 +31,31 @@ export default Backbone.View.extend({
         this.$el.html(this.template(this.params));
         this.$('.panes').prepend(this.entries.render().el);
         this.$('.panes').prepend(this.sidebar.render().el);
-        this.$('.pane-entry').html((new EmptyStateView({type: "entry"})).render().el);
+        this.showEmptyState();
     },
 
     handleSelectedGroup: function (collection) {
-        //this.$('.layout-footer .title').text(`${collection.length} entries`);
-        this.$('.pane-entries').toggleClass("active", (collection !== false));
+        this.showEmptyState();
     },
 
     loadEntry: function (model) {
+        if (model === false) {
+            this.showEmptyState();
+        } else {
+            if (this.entry) {
+                this.entry.destroy();
+            }
+            this.entry = new EntryView({
+                model: model
+            });
+            this.$('.pane-entry').html(this.entry.render().el);
+        }
+    },
+
+    showEmptyState: function() {
         if (this.entry) {
             this.entry.destroy();
         }
-        this.entry = new EntryView({
-            model: model
-        });
-        this.$('.pane-entry').html(this.entry.render().el);
+        this.$('.pane-entry').html((new EmptyStateView({type: "entry"})).render().el);
     }
 });

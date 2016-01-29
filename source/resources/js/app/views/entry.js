@@ -102,7 +102,6 @@ export default Backbone.View.extend({
         });
 
         // Removed Custom Fields
-        console.log(this.removedMeta);
         this.removedMeta.forEach((key) => {
             this.model.unset('meta.' + key);
         });
@@ -145,7 +144,8 @@ export default Backbone.View.extend({
     removeEntry: function () {
         this.model.destroy({
             wait: true,
-            success: () => {
+            success: (model) => {
+                Buttercup.Events.trigger("entryRemoved", model);
                 this.destroy()
             }
         });
