@@ -6,6 +6,7 @@ import Backbone from 'backbone';
 import Tpl from 'tpl/entries.html!text';
 import EntryItemTpl from 'tpl/entry-list-item.html!text';
 import Entries from 'app/collections/entries';
+import EmptyStateView from 'app/views/empty-state';
 
 var EntryItemView = Backbone.View.extend({
     className: 'list-group-item',
@@ -41,6 +42,14 @@ export default Backbone.View.extend({
 
     render: function () {
         this.$el.html(this.template());
+
+        if (this.collection && this.collection.size() > 0) {
+            this.addEntries(this.collection);
+        } else {
+            this.$('.empty').html((new EmptyStateView({type: "entries"})).render().el);
+            this.$('.entries').hide();
+        }
+
         return this;
     },
 
@@ -58,11 +67,12 @@ export default Backbone.View.extend({
 
     groupLoaded: function (collection) {
         Buttercup.Events.trigger('groupLoaded', collection);
-        this.addEntries(collection);
+        this.render();
     },
 
     addEntries: function (collection) {
         this.$('.list-group-item').remove();
+        this.toggleEmptyState(collection.size() === 0);
 
         _.each(collection.models, (model) => {
             this.addEntry.call(this, model, false);
@@ -71,6 +81,7 @@ export default Backbone.View.extend({
 
     addEntry: function (model, load) {
         load = (load !== false);
+
         var view = new EntryItemView({
             model: model
         });
@@ -79,6 +90,10 @@ export default Backbone.View.extend({
 
         if (load) {
             view.$el.trigger('click');
+        }
+
+        if (this.collection.size() === 1) {
+            this.toggleEmptyState(false);
         }
     },
 
@@ -105,10 +120,11 @@ export default Backbone.View.extend({
         this._views[model.get('id')].$el.remove();
         delete this._views[model.get('id')];
 
-        if (this.collection.size() > 0) {
-            this.$('.list-entries > li:first').trigger('click');
-        } else {
+        if (this.collection.size() === 0) {
             Buttercup.Events.trigger("entrySelected", false);
+            this.toggleEmptyState(true);
+        } else {
+            this.$('.list-entries > li:first').trigger('click');
         }
     },
 
@@ -126,5 +142,11 @@ export default Backbone.View.extend({
 
     handleGroupSelection: function(group) {
         this.$el.toggleClass("active", (group !== false));
+    },
+
+    toggleEmptyState: function(flag) {
+        this.$('.entries').toggle(!flag);
+        this.$('.empty').toggle(flag);
     }
+
 });
