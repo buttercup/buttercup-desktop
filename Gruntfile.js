@@ -300,7 +300,7 @@ module.exports = function(grunt) {
         "clean:publicDir",
         "jade:app",
         "sass:app",
-        "sync",
+        "sync:assets",
         "svg_sprite",
         "exec:jspm_install"
     ]);
