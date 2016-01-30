@@ -11,7 +11,7 @@
     },
     "win": {
         "title": "Buttercup",
-        "version": "0.0.10+alpha",
+        "version": "0.0.11+alpha+alpha",
         "publisher": "Buttercup",
         "icon": "source/resources/img/icon.ico",
         "verbosity": 1,
