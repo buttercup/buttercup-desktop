@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Version=0.0.8
+Version=0.0.12+alpha
 Name=Buttercup
 GenericName=Cross-platform password manager
 Icon=/usr/share/applications/buttercup/resources/app/source/public/img/icon.png

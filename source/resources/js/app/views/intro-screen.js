@@ -58,18 +58,18 @@ export default Backbone.View.extend({
 
         swal({
             title: newArchive ? "New Archive" : "Load Buttercup",
-            text: newArchive ? "Please choose a safe password:" : "Enter your archive’s password:",
+            text: newArchive ? "Please choose a safe password:" : "Enter your archive's password:",
             type: "input",
             showCancelButton: true,
             closeOnConfirm: false,
             animation: "pop",
             inputType: "password",
-            inputPlaceholder: "Archive’s password..."
+            inputPlaceholder: "Archive's password..."
         }, function(inputValue) {
             if (inputValue === false || inputValue === undefined) {
                 return false;
             }
-            
+
             if (inputValue === "") {
                 swal.showInputError("You need to write something!");
                 return false;
