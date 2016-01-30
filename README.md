@@ -3,6 +3,8 @@ Cross-platform, free and open-source password manager based on NodeJS.
 
 [![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup)
 
+![Buttercup](http://perrymitchell.net/article/buttercup-first-release-0-1-0-alpha/buttercup-screen-2.png)
+
 ## Under Development
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
 The application is currently in alpha, and should be considered unstable.
@@ -25,7 +27,7 @@ $ grunt build
 $ electron .
 ```
 
-### Watch while development
+### Watch while developing
 ```bash
 $ grunt watch
 ```
