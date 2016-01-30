@@ -11,6 +11,11 @@ The application is currently in alpha, and should be considered unstable.
 
 Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
 
+## Encryption & Format
+Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at 1000 iterations.
+
+Because security with password storage is of the utmost importance, Buttercup will remain in alpha/beta release mode until some level of professional scrutiny has occurred. It is completely possible that security-related changes will occur, but this is inevitable and we handle every question and criticism with great care when it comes to the safety of using our software.
+
 ## Installing
 You can install a release of Buttercup by checking out the [releases page](https://github.com/buttercup-pw/buttercup/releases).
 
