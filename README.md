@@ -35,3 +35,11 @@ You will need the following things to build the project executables and installe
  * NSIS (makensis in homebrew)
  * dpkg
  * wine
+
+## Contributors
+### Creation
+ * Sallar (creator) ([@sallar](https://twitter.com/sallar))
+ * Perry (creator) ([@perry_mitchell](https://twitter.com/perry_mitchell))
+
+### Contributions
+ * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
