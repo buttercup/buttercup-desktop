@@ -83,7 +83,7 @@ module.exports = function(grunt) {
                 gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d',
                 globalReplace: false,
                 prereleaseName: false,
-                metadata: 'alpha',
+                metadata: '',
                 regExp: /("?version"? ?[:=] ?"?)(\d+\.\d+\.\d+(-\.\d+)?([+-][\w\d]+)?)("?)/i
             }
         },
