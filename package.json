@@ -1,6 +1,6 @@
 {
   "name": "buttercup-app",
-  "version": "0.0.12+alpha",
+  "version": "0.1.0+alpha",
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
   "scripts": {
