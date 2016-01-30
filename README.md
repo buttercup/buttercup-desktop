@@ -38,8 +38,8 @@ You will need the following things to build the project executables and installe
 
 ## Contributors
 ### Creation
- * Sallar (creator) ([@sallar](https://twitter.com/sallar))
- * Perry (creator) ([@perry_mitchell](https://twitter.com/perry_mitchell))
+ * Sallar ([@sallar](https://twitter.com/sallar))
+ * Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
 
 ### Contributions
  * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
