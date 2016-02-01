@@ -32,7 +32,7 @@ $ grunt build
 $ electron .
 ```
 
-### Watch while developing
+### Watch while development
 ```bash
 $ grunt watch
 ```
@@ -42,6 +42,13 @@ You will need the following things to build the project executables and installe
  * NSIS (makensis in homebrew)
  * dpkg
  * wine
+ 
+### Package
+To package Buttercup for all platforms and make installers:
+```bash
+$ grunt dist
+```
+This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
 
 ## Contributors
 ### Creation
