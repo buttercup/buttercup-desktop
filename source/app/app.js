@@ -52,7 +52,7 @@ app.on('ready', function() {
    if (process.platform == 'darwin') {
      var template = [
        {
-         label: name,
+         label: 'Buttercup',
          submenu: [
            {
              label: 'About Buttercup',
@@ -70,7 +70,7 @@ app.on('ready', function() {
              type: 'separator'
            },
            {
-             label: 'Hide ' + name,
+             label: 'Hide Buttercup',
              accelerator: 'Command+H',
              role: 'hide'
            },
