@@ -38,9 +38,12 @@ windowManager.setBuildProcedure("intro", function openIntroScreen() {
     return introScreen;
 });
 
-// Quit when all windows are closed.
+// When user closes all windows
 app.on('window-all-closed', function() {
-
+    // Reopen the Intro window
+    if (windowManager.getCountOfType("archive") <= 0) {
+        windowManager.buildWindowOfType("intro");
+    }
 });
 
 app.on('ready', function() {

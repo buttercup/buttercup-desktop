@@ -45,12 +45,9 @@
             archiveWindow.show();
             //archiveWindow.webContents.openDevTools();
 
-            // Emitted when the window is closed.
-            archiveWindow.on('closed', function() {
+            // Emitted when the window will close
+            archiveWindow.on('close', function() {
                 windowManager.deregister(archiveWindow);
-                if (windowManager.getCountOfType("archive") <= 0) {
-                    windowManager.buildWindowOfType("intro");
-                }
             });
 
             // Close intro screen
