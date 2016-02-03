@@ -5,6 +5,7 @@ import _ from 'underscore';
 import Backbone from 'backbone';
 import Tpl from 'tpl/entry.html!text';
 import Metatpl from 'tpl/entry-new-meta.html!text';
+import {confirmDialog} from 'app/tools/dialog';
 
 // New Meta View
 var MetaEntryView = Backbone.View.extend({
@@ -83,6 +84,7 @@ export default Backbone.View.extend({
 
     removeMeta: function (e) {
         e.preventDefault();
+
         var $el = $(e.currentTarget),
             metaKey = $el.data('meta');
         if (metaKey) {
@@ -90,16 +92,12 @@ export default Backbone.View.extend({
             this.showHideActionBar(true);
         }
         $el.parents('[data-custom-field-row]').remove();
-
     },
 
     saveEntry: function () {
         var changed  = {
             meta: {}
         };
-
-        // Title field
-        //changed.title = this.$('h1').text().trim();
 
         // Normal fields
         this.$('input[name][data-changed]').each(function (index, field) {
@@ -147,12 +145,19 @@ export default Backbone.View.extend({
     },
 
     removeEntry: function () {
-        this.model.destroy({
-            wait: true,
-            success: (model) => {
-                Buttercup.Events.trigger("entryRemoved", model);
-                this.destroy()
-            }
-        });
+        let result = confirmDialog(
+            `Delete ${this.model.get("title")}?`,
+            `Are you sure you want to delete this entry? This cannot be undone.`
+        );
+
+        if (result === true) {
+            this.model.destroy({
+                wait: true,
+                success: (model) => {
+                    Buttercup.Events.trigger("entryRemoved", model);
+                    this.destroy()
+                }
+            });
+        }
     }
 });

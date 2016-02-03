@@ -8,6 +8,7 @@ import GroupItemTpl from 'tpl/sidebar-group-item.html!text';
 import Groups from 'app/collections/groups';
 import Group from 'app/models/group';
 import EmptyStateView from 'app/views/empty-state';
+import {confirmDialog} from 'app/tools/dialog';
 
 const SidebarGroupItemView = Backbone.View.extend({
     tagName: 'li',
@@ -100,7 +101,15 @@ const SidebarGroupItemView = Backbone.View.extend({
     removeGroup: function(e) {
         e.preventDefault();
         e.stopPropagation();
-        this.model.destroy();
+
+        let result = confirmDialog(
+            `Delete ${this.model.get("title")}?`,
+            `Are you sure you want to delete this group? This cannot be undone.`
+        );
+
+        if (result === true) {
+            this.model.destroy();
+        }
     },
 
     destroy: function () {
