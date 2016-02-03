@@ -52,9 +52,8 @@ app.on('ready', function() {
     // Show intro
     windowManager.buildWindowOfType("intro");
 
-    // Show standard menu if on OS X
-    if (process.platform === 'darwin') {
-        var menu = Menu.buildFromTemplate(menuTemplate);
-        Menu.setApplicationMenu(menu);
-    }
+    // Show standard menu
+    Menu.setApplicationMenu(
+        Menu.buildFromTemplate(menuTemplate)
+    );
 });
