@@ -117,15 +117,18 @@ export default Backbone.View.extend({
     },
 
     removeEntry: function (model) {
-        this._views[model.get('id')].$el.remove();
-        delete this._views[model.get('id')];
-
-        if (this.collection.size() === 0) {
-            Buttercup.Events.trigger("entrySelected", false);
-            this.toggleEmptyState(true);
-        } else {
-            this.$('.list-entries > li:first').trigger('click');
-        }
+        var bbThis = this;
+        bbThis._views[model.get('id')].$el.addClass('shift');
+        bbThis._views[model.get('id')].$el.on('animationend', function(){
+            $(this).remove();
+            delete bbThis._views[model.get('id')];
+            if (bbThis.collection.size() === 0) {
+                Buttercup.Events.trigger("entrySelected", false);
+                bbThis.toggleEmptyState(true);
+            } else {
+                bbThis.$('.list-entries > li:first').trigger('click');
+            }
+        });
     },
 
     search: function (e) {

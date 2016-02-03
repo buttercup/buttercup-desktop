@@ -85,6 +85,18 @@
                 }
             }
         }
+
+        &.shift {
+            animation-duration: .5s;
+            animation-name: shift;
+        }
+
+        @keyframes shift {
+            to {
+                transform: translateX(300px);
+                opacity: 0%;
+            }
+        }
     }
 
     /*
