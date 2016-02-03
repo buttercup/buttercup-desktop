@@ -12,12 +12,12 @@ var EntryItemView = Backbone.View.extend({
     className: 'list-group-item',
     tagName: 'li',
 
-    initialize: function () {
+    initialize: function() {
         this.template = _.template(EntryItemTpl);
         this.model.on('sync', this.render, this);
     },
 
-    render: function () {
+    render: function() {
         this.$el.html(this.template(this.model.toJSON()));
         this.$el.data('id', this.model.id);
         return this;
@@ -34,13 +34,13 @@ export default Backbone.View.extend({
         'keyup .search': 'search'
     },
 
-    initialize: function () {
+    initialize: function() {
         Buttercup.Events.on('groupLoaded', this.handleGroupSelection, this);
         this.template = _.template(Tpl);
         this._views = {};
     },
 
-    render: function () {
+    render: function() {
         this.$el.html(this.template());
 
         if (this.collection && this.collection.size() > 0) {
@@ -53,7 +53,7 @@ export default Backbone.View.extend({
         return this;
     },
 
-    setGroup: function (model) {
+    setGroup: function(model) {
         this._views = {};
         this.collection = new Entries([], {
             parentID: model.id
@@ -65,12 +65,12 @@ export default Backbone.View.extend({
         this.$('.pane-footer').addClass('active');
     },
 
-    groupLoaded: function (collection) {
+    groupLoaded: function(collection) {
         Buttercup.Events.trigger('groupLoaded', collection);
         this.render();
     },
 
-    addEntries: function (collection) {
+    addEntries: function(collection) {
         this.$('.list-group-item').remove();
         this.toggleEmptyState(collection.size() === 0);
 
@@ -79,7 +79,7 @@ export default Backbone.View.extend({
         });
     },
 
-    addEntry: function (model, load) {
+    addEntry: function(model, load) {
         load = (load !== false);
 
         var view = new EntryItemView({
@@ -97,7 +97,7 @@ export default Backbone.View.extend({
         }
     },
 
-    loadEntry: function (e) {
+    loadEntry: function(e) {
         var $el = this.$(e.currentTarget),
             id = $el.data('id'),
             model = this.collection.get(id);
@@ -110,28 +110,31 @@ export default Backbone.View.extend({
         Buttercup.Events.trigger('entrySelected', model);
     },
 
-    createEntry: function (e) {
+    createEntry: function(e) {
         this.collection.create({
             title: 'Untitled'
         }, {wait: true});
     },
 
-    removeEntry: function (model) {
-        var bbThis = this;
-        bbThis._views[model.get('id')].$el.addClass('shift');
-        bbThis._views[model.get('id')].$el.on('animationend', function(){
-            $(this).remove();
-            delete bbThis._views[model.get('id')];
-            if (bbThis.collection.size() === 0) {
+    removeEntry: function(model) {
+        let id   = model.get('id'),
+            view = this._views[id];
+
+        view.$el.addClass('shift');
+        view.$el.on('animationend', () => {
+            view.remove();
+            delete this._views[id];
+
+            if (this.collection.size() === 0) {
                 Buttercup.Events.trigger("entrySelected", false);
-                bbThis.toggleEmptyState(true);
+                this.toggleEmptyState(true);
             } else {
-                bbThis.$('.list-entries > li:first').trigger('click');
+                this.$(".list-entries > li:first").trigger("click");
             }
         });
     },
 
-    search: function (e) {
+    search: function(e) {
         var $el = this.$(e.currentTarget),
             result = this.collection.search($el.val());
 
