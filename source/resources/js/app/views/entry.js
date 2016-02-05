@@ -156,19 +156,20 @@ export default Backbone.View.extend({
     },
 
     removeEntry: function () {
-        let result = confirmDialog(
+        confirmDialog(
             `Delete ${this.model.get("title")}?`,
-            `Are you sure you want to delete this entry? This cannot be undone.`
-        );
-
-        if (result === true) {
-            this.model.destroy({
-                wait: true,
-                success: (model) => {
-                    Buttercup.Events.trigger("entryRemoved", model);
-                    this.destroy()
+            `Are you sure you want to delete this entry? This cannot be undone.`,
+            (confirm) => {
+                if (confirm === true) {
+                    this.model.destroy({
+                        wait: true,
+                        success: (model) => {
+                            Buttercup.Events.trigger("entryRemoved", model);
+                            this.destroy()
+                        }
+                    });
                 }
-            });
-        }
+            }
+        );  
     }
 });
