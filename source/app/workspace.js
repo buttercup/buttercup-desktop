@@ -19,7 +19,7 @@
         },
 
         save: function(datasourcePath, password) {
-            var archive = new Buttercup.Archive(),
+            var archive = Buttercup.Archive.createWithDefaults(),
                 datasource = new Buttercup.FileDatasource(datasourcePath);
 
             return datasource.save(archive, password);
