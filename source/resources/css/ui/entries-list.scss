@@ -39,18 +39,12 @@
 
 // This is the block list container
 .entries-items {
-    // This gets you basic styles
+    overflow-x: hidden;
+
     @include block-list-container(
         $font-size: 1rem,
         $full-bleed: true
     );
-    /*
-    &.with-icons {
-        @include block-list-icons(
-            $size: 0.8, // This should be a decimal point. 0.8 makes the icon 80% the size of its parent
-            $item-selector: 'li' // This should be whatever tag or class your block list uses for items
-        );
-    }*/
 
     li {
         @include block-list-item(
@@ -87,24 +81,15 @@
         }
 
         &.shift {
-            animation-duration: .5s;
+            animation-duration: .4s;
             animation-name: shift;
         }
 
         @keyframes shift {
             to {
-                transform: translateX(300px);
+                transform: translateX(350px);
                 opacity: 0%;
             }
         }
     }
-
-    /*
-    .block-list-label {
-        @include block-list-label(
-            $color: #999, // Color of label
-            $left-class: 'left', // Define a modifier class for left-aligned labels
-            $left-padding: 1rem // Padding to add when a label is left-aligned
-        );
-    }*/
 }

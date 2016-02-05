@@ -8,7 +8,8 @@ var electron        = require('electron'),
     path            = require('path'),
     EventsManager   = require('./events.js')(),
     windowManager   = require('./WindowManager.js').getSharedInstance(),
-    menuTemplate    = require('./config/menu.js');
+    menuTemplate    = require('./config/menu.js'),
+    Platform        = require("./lib/platform");
 
 // Global reference of the window object
 global.Buttercup = {
@@ -52,9 +53,10 @@ app.on('ready', function() {
     // Show intro
     windowManager.buildWindowOfType("intro");
 
-    // Show standard menu if on OS X
-    if (process.platform === 'darwin') {
-        var menu = Menu.buildFromTemplate(menuTemplate);
-        Menu.setApplicationMenu(menu);
+    // Show standard menu
+    if (Platform.isOSX()) {
+        Menu.setApplicationMenu(
+            Menu.buildFromTemplate(menuTemplate)
+        );
     }
 });
