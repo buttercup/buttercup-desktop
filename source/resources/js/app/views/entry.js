@@ -83,7 +83,7 @@ export default Backbone.View.extend({
         var $field = this.$('input[name=password]'),
             type = $field.attr('type');
 
-        $field.val(generatePassword(8, true));
+        $field.val(generatePassword(12, false));
         $field.keyup();
     },
 
