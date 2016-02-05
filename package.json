@@ -76,7 +76,7 @@
     }
   },
   "dependencies": {
-    "buttercup": "~0.12.2",
+    "buttercup": "~0.13.0",
     "foundation-apps": "^1.2.0"
   }
 }
