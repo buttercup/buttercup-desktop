@@ -72,7 +72,7 @@ export default Backbone.View.extend({
 
     addEntries: function(collection) {
         this.$('.list-group-item').remove();
-        this.toggleEmptyState(collection.size() === 0);
+        this.toggleEmptyState(collection.models.length === 0);
 
         _.each(collection.models, (model) => {
             this.addEntry.call(this, model, false);
