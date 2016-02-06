@@ -6,6 +6,7 @@ import Backbone from 'backbone';
 import Tpl from 'tpl/entry.html!text';
 import Metatpl from 'tpl/entry-new-meta.html!text';
 import {confirmDialog} from 'app/tools/dialog';
+import {generatePassword} from 'app/tools/generate'
 
 // New Meta View
 var MetaEntryView = Backbone.View.extend({
@@ -30,6 +31,7 @@ export default Backbone.View.extend({
         'click .btn-remove': 'removeEntry',
         'keypress h1': 'manageTitleChange',
         'click .toggle-password': 'togglePasswordField',
+        'click .generate-password': 'generateRandomPassword',
         'click .add-new-meta': 'addNewMeta',
         'click .btn-remove-meta': 'removeMeta'
     },
@@ -74,6 +76,15 @@ export default Backbone.View.extend({
 
         $(e.currentTarget).toggleClass('active', (type !== 'text'));
         $field.attr('type', (type === 'text') ? 'password' : 'text');
+    },
+
+    generateRandomPassword: function (e) {
+        e.preventDefault();
+        var $field = this.$('input[name=password]'),
+            type = $field.attr('type');
+
+        $field.val(generatePassword(12, false));
+        $field.keyup();
     },
 
     addNewMeta: function (e) {
@@ -145,19 +156,20 @@ export default Backbone.View.extend({
     },
 
     removeEntry: function () {
-        let result = confirmDialog(
+        confirmDialog(
             `Delete ${this.model.get("title")}?`,
-            `Are you sure you want to delete this entry? This cannot be undone.`
-        );
-
-        if (result === true) {
-            this.model.destroy({
-                wait: true,
-                success: (model) => {
-                    Buttercup.Events.trigger("entryRemoved", model);
-                    this.destroy()
+            `Are you sure you want to delete this entry? This cannot be undone.`,
+            (confirm) => {
+                if (confirm === true) {
+                    this.model.destroy({
+                        wait: true,
+                        success: (model) => {
+                            Buttercup.Events.trigger("entryRemoved", model);
+                            this.destroy()
+                        }
+                    });
                 }
-            });
-        }
+            }
+        );  
     }
 });
