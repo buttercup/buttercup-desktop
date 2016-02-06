@@ -1,6 +1,8 @@
 "use strict";
 
-const passgen = require('password-generator');
+import passgen from 'password-generator';
+
+//const passgen = require('password-generator');
 
 const maxLength = 24,
     minLength = 18,

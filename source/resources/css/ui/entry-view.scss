@@ -56,11 +56,15 @@
         > .form-label {
             background-color: transparent;
             border: none;
-            opacity: .5;
-            transition: opacity 200ms;
 
-            &.active {
-                opacity: 1;
+
+            &.toggle-password {
+                opacity: .5;
+                transition: opacity 200ms;
+
+                &.active {
+                    opacity: 1;
+                }
             }
         }
     }
@@ -70,90 +74,3 @@
         border: none;
     }
 }
-
-/*
-.entry-view {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex: 1;
-}
-
-.pane-entry {
-    overflow: hidden;
-    display: flex;
-}
-
-.view-content {
-    flex: 1;
-    overflow: auto;
-}
-
-.view-footer {
-    display: none;
-    border-top: 1px solid $border-color;
-    flex: 0 0 auto;
-
-    &.active {
-        display: flex;
-    }
-
-    > div {
-        flex: 1 0 50%;
-
-        &.right {
-            text-align: right;
-        }
-    }
-}
-
-.view-header {
-    flex: 0 0 auto;
-    border-bottom: 1px solid $border-color;
-}
-
-.split-form-group {
-    display: flex;
-
-    .form-title {
-        min-width: 150px;
-        width: 150px;
-        margin-right: .5rem;
-    }
-
-    .form-value {
-        border-radius: 4px 0 0 4px;
-        border-right-width: 0;
-
-        &:last-child {
-            border-radius: 4px;
-            border-right-width: 1px;
-        }
-
-        & + .btn {
-            border-radius: 0 4px 4px 0;
-        }
-    }
-
-    label.form-title {
-        line-height: 32px;
-    }
-}
-
-.form-group {
-    position: relative;
-
-    .toggle-password {
-        display: block;
-        position: absolute;
-        right: 1rem;
-        bottom: 0;
-        font-size: 20px;
-        color: lighten($gray-color, 50%);
-        cursor: pointer;
-
-        &.active {
-            color: $gray-color;
-        }
-    }
-}*/
