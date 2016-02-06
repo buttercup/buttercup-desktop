@@ -23,6 +23,7 @@ System.config({
     "backbone.wreqr": "github:marionettejs/backbone.wreqr@1.3.5",
     "backone": "npm:backbone@1.2.3",
     "core-js": "npm:core-js@1.2.1",
+    "fuzzysearch": "npm:fuzzysearch@1.0.3",
     "jquery": "github:components/jquery@2.1.4",
     "marionette": "github:marionettejs/backbone.marionette@2.4.3",
     "sweetalert": "npm:sweetalert@1.1.3",
