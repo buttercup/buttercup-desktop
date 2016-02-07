@@ -106,3 +106,8 @@ input[type="password"] {
     margin: 0;
     border-radius: 4px;
 }
+
+// Outline
+a, button {
+    outline: none !important;
+}

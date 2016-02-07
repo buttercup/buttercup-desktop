@@ -7,10 +7,11 @@
         <span data-title contenteditable><%= title %></span>
     <% } else { %>
         <%= title %>
-
+        <% if (!isTrash) { %>
         <div class="menu">
             <span class="group-add"><%= icon("line-add-white") %></span>
             <span class="group-remove"><%= icon("line-remove-white") %></span>
         </div>
+        <% } %>
     <% } %>
 </a>

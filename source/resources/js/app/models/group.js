@@ -13,7 +13,18 @@ export default Backbone.Model.extend({
             });
         }
     },
+
     defaults: {
         'title': 'Untitled'
+    },
+
+    isTrash: function() {
+        let attr = this.get("attributes");
+
+        if (attr && "bc_group_role" in attr && attr.bc_group_role === "trash") {
+            return true;
+        }
+
+        return false;
     }
 });
