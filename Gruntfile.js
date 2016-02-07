@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                 return makedeb({
                     packageName: globalConfig.dist.name,
                     version: globalConfig.package.version,
-                    buildDir: "./dist/Buttercup-" + globalConfig.package.version + "-" + build.arch,
+                    buildDir: "./dist/Buttercup-linux-" + build.arch,
                     outDir: "./dist/",
                     installPath: "/usr/share/applications/buttercup",
                     overwrite: true,
