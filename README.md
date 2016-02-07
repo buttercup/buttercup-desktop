@@ -9,7 +9,7 @@ Cross-platform, free and open-source password manager based on NodeJS.
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
 The application is currently in alpha, and should be considered unstable.
 
-Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
+Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module. Check out the [release changelog](CHANGELOG.md) for more information on updates.
 
 ## Encryption & Format
 Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at 1000 iterations.
@@ -42,7 +42,7 @@ You will need the following things to build the project executables and installe
  * NSIS (makensis in homebrew)
  * dpkg
  * wine
- 
+
 ### Package
 To package Buttercup for all platforms and make installers:
 ```bash
