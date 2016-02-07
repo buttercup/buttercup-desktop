@@ -158,7 +158,7 @@ export default Backbone.View.extend({
     removeEntry: function () {
         confirmDialog(
             `Delete ${this.model.get("title")}?`,
-            `Are you sure you want to delete this entry? This cannot be undone.`,
+            `Are you sure you want to delete this entry?`,
             (confirm) => {
                 if (confirm === true) {
                     this.model.destroy({

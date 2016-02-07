@@ -10,13 +10,15 @@ import swal from 'sweetalert';
  * @return {boolean}
  */
 export function confirmDialog(message, detail, callback) {
-    swal({   
+    swal({
     	title: message,
-   		text: detail,  
-   		type: "warning",   
-   		showCancelButton: true,  
-   		confirmButtonColor: "#DD6B55",   
-   		confirmButtonText: "Delete",   
+   		text: detail,
+   		type: "warning",
+   		showCancelButton: true,
+   		confirmButtonColor: "#DD6B55",
+   		confirmButtonText: "Delete",
    		cancelButtonText: "Cancel"
-   	}, (confirm) => {callback(confirm)});
+   	}, (confirm) => {
+        callback(confirm)
+    });
 }

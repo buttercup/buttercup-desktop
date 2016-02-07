@@ -28,9 +28,15 @@ const SidebarGroupItemView = Backbone.View.extend({
 
     render: function () {
         // Render
-        var json = this.model.toJSON();
-        json.isNew = this.model.isNew();
-        this.$el.html(this.template(json));
+        this.$el.html(this.template(
+            _.extend(
+                this.model.toJSON(),
+                {
+                    isNew: this.model.isNew(),
+                    isTrash: this.model.isTrash()
+                }
+            )
+        ));
 
         // Render childs
         if (!this.model.isNew()) {
@@ -102,14 +108,15 @@ const SidebarGroupItemView = Backbone.View.extend({
         e.preventDefault();
         e.stopPropagation();
 
-        let result = confirmDialog(
+        confirmDialog(
             `Delete ${this.model.get("title")}?`,
-            `Are you sure you want to delete this group? This cannot be undone.`
+            `Are you sure you want to delete this group? This cannot be undone.`,
+            (result) => {
+                if (result === true) {
+                    this.model.destroy();
+                }
+            }
         );
-
-        if (result === true) {
-            this.model.destroy();
-        }
     },
 
     destroy: function () {
