@@ -1,7 +1,7 @@
 # Buttercup
 Cross-platform, free and open-source password manager based on NodeJS.
 
-[![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602)
+[![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Code Climate](https://codeclimate.com/github/buttercup-pw/buttercup/badges/gpa.svg)](https://codeclimate.com/github/buttercup-pw/buttercup) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602)
 
 ![Buttercup](http://perrymitchell.net/article/buttercup-first-release-0-1-0-alpha/buttercup-screen-2.png)
 
