@@ -10,6 +10,18 @@ module.exports = function(grunt) {
         path = require("path"),
         fs = require("fs");
 
+    var globalConfig = {
+        dist: {
+            electron_pkgr: "./node_modules/electron-packager/cli.js",
+            electron_ver: "0.36.5",
+            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
+                "source/resources|jspm_packages|dist/Buttercup)",
+            name: "Buttercup"
+        },
+        isPackage: false,
+        package: require("./package.json")
+    };
+
     function createDebFiles() {
         return [
             {
@@ -46,18 +58,6 @@ module.exports = function(grunt) {
             });
         }, Promise.resolve());
     }
-
-    var globalConfig = {
-        dist: {
-            electron_pkgr: "./node_modules/electron-packager/cli.js",
-            electron_ver: "0.36.5",
-            ignoreRexp: "(node_modules/(grunt|jspm|foundation|electron|load)|" +
-                "source/resources|jspm_packages|dist/Buttercup)",
-            name: "Buttercup"
-        },
-        isPackage: false,
-        package: require("./package.json")
-    };
 
     grunt.initConfig({
         bump: {
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
                 stderr: true
             },
             dist_mac: {
-                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.icns',
+                command: '<%= globalConfig.dist.electron_pkgr %> . "<%= globalConfig.dist.name %>" --platform=darwin --arch=all --version=<%= globalConfig.dist.electron_ver %> --out=dist/ --ignore="<%= globalConfig.dist.ignoreRexp %>" --icon=source/resources/img/icon.icns --overwrite',
                 stdout: true,
                 stderr: true
             },

@@ -3,6 +3,7 @@
 import _ from 'underscore';
 import Backbone from 'app/lib/backbone.buttercup';
 import Entry from 'app/models/entry';
+import fuzzysearch from 'fuzzysearch'
 
 export default Backbone.Collection.extend({
     buttercup: new Backbone.Buttercup('entries'),
@@ -27,9 +28,8 @@ export default Backbone.Collection.extend({
             return this;
         }
 
-        var pattern = new RegExp(letters, "gi");
         return this.filter(function(data) {
-            return pattern.test(data.get('title'));
+            return fuzzysearch(letters.toLowerCase(), data.get('title').toLowerCase());
         });
     }
 });

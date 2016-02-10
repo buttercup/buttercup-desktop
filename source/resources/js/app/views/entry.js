@@ -89,7 +89,7 @@ export default Backbone.View.extend({
         var $field = this.$('input[name=password]'),
             type = $field.attr('type');
 
-        $field.val(generatePassword(12, false));
+        $field.val(generatePassword());
         $field.keyup();
     },
 
@@ -164,7 +164,7 @@ export default Backbone.View.extend({
     removeEntry: function () {
         confirmDialog(
             `Delete ${this.model.get("title")}?`,
-            `Are you sure you want to delete this entry? This cannot be undone.`,
+            `Are you sure you want to delete this entry?`,
             (confirm) => {
                 if (confirm === true) {
                     this.model.destroy({
@@ -176,6 +176,6 @@ export default Backbone.View.extend({
                     });
                 }
             }
-        );  
+        );
     }
 });

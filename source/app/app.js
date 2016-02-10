@@ -27,6 +27,7 @@ windowManager.setBuildProcedure("intro", function openIntroScreen() {
         'title-bar-style': 'hidden'
     });
     introScreen.loadURL(Buttercup.config.publicDir + '/intro.html');
+    //introScreen.webContents.openDevTools();
 
     // Emitted when the window is closed.
     introScreen.on('closed', function() {
