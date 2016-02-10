@@ -78,6 +78,7 @@
   "dependencies": {
     "buttercup": "~0.13.0",
     "foundation-apps": "^1.2.0",
-    "password-generator": "^2.0.2"
+    "password-generator": "^2.0.2",
+    "zxcvbn": "^4.2.0"
   }
 }
