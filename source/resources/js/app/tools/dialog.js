@@ -19,7 +19,7 @@ export function confirmDialog(message, detail, button, callback) {
    		confirmButtonColor: "#DD6B55",
    		confirmButtonText: button,
    		cancelButtonText: "Cancel"
-   	}, (confirm) => {
+   	}, (confirm) =>	 {
         callback(confirm);
     });
 }

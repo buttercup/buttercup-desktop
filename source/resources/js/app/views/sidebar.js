@@ -111,6 +111,7 @@ const SidebarGroupItemView = Backbone.View.extend({
         confirmDialog(
             `Delete ${this.model.get("title")}?`,
             `Are you sure you want to delete this group? This cannot be undone.`,
+            "Delete",
             (result) => {
                 if (result === true) {
                     this.model.destroy();
