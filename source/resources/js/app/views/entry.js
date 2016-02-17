@@ -6,7 +6,8 @@ import Backbone from 'backbone';
 import Tpl from 'tpl/entry.html!text';
 import Metatpl from 'tpl/entry-new-meta.html!text';
 import {confirmDialog} from 'app/tools/dialog';
-import {generatePassword} from 'app/tools/generate'
+import {generatePassword} from 'app/tools/generate';
+import {strengthCheck} from 'app/tools/strength';
 
 // New Meta View
 var MetaEntryView = Backbone.View.extend({
@@ -26,6 +27,7 @@ export default Backbone.View.extend({
 
     events: {
         'keyup input': 'setFieldsOnChange',
+        'keyup input[name=password]': 'checkPasswordStrength',
         'click .btn-save': 'saveEntry',
         'click .btn-cancel': 'cancelChanges',
         'click .btn-remove': 'removeEntry',
@@ -55,6 +57,10 @@ export default Backbone.View.extend({
     setFieldsOnChange: function (e) {
         $(e.currentTarget).attr('data-changed', true);
         this.showHideActionBar(true);
+    },
+
+    checkPasswordStrength: function (e) {
+        $(e.currentTarget).css("border-bottom", "1px " + strengthCheck($(e.currentTarget).val()).color + " solid");
     },
 
     showHideActionBar: function (showHideFlag) {
