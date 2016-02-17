@@ -1,4 +1,6 @@
 # Buttercup
+
+[![Join the chat at https://gitter.im/buttercup-pw/buttercup](https://badges.gitter.im/buttercup-pw/buttercup.svg)](https://gitter.im/buttercup-pw/buttercup?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Cross-platform, free and open-source password manager based on NodeJS.
 
 [![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Code Climate](https://codeclimate.com/github/buttercup-pw/buttercup/badges/gpa.svg)](https://codeclimate.com/github/buttercup-pw/buttercup) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602)
