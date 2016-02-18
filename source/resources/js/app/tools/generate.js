@@ -38,7 +38,6 @@ export function generatePassword(length) {
     const randomLength = length || Math.floor(Math.random() * (maxLength - minLength)) + minLength;
     while (!isStrongEnough(password)) {
         password = passgen(randomLength, false, /[\w\d\?\-]/);
-        console.log(password);
     }
     return password;
 }

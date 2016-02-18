@@ -99,7 +99,6 @@ export default Backbone.View.extend({
                 "Generate",
                 (confirm) => {
                     if (confirm === true) {
-                        console.log("confirmed");
                         $field.first().val(generatePassword());
                     }
                 }
