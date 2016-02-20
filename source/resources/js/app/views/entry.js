@@ -88,8 +88,22 @@ export default Backbone.View.extend({
         e.preventDefault();
         var $field = this.$('input[name=password]'),
             type = $field.attr('type');
-
-        $field.val(generatePassword());
+        
+        if(!$field.val()){
+            $field.first().val(generatePassword());
+        }
+        else {
+            confirmDialog(
+                "Generate a new password?",
+                "This would replace your current password.",
+                "Generate",
+                (confirm) => {
+                    if (confirm === true) {
+                        $field.first().val(generatePassword());
+                    }
+                }
+            );            
+        }  
         $field.keyup();
     },
 
@@ -165,6 +179,7 @@ export default Backbone.View.extend({
         confirmDialog(
             `Delete ${this.model.get("title")}?`,
             `Are you sure you want to delete this entry?`,
+            "Delete",
             (confirm) => {
                 if (confirm === true) {
                     this.model.destroy({
@@ -176,6 +191,6 @@ export default Backbone.View.extend({
                     });
                 }
             }
-        );
+        );  
     }
 });
