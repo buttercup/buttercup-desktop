@@ -2,7 +2,7 @@
 
 import Backbone from 'backbone';
 import _ from 'underscore';
-import Tpl from 'tpl/empty-state.html!text';
+import Tpl from 'tpl/empty-state.html';
 
 export default Backbone.View.extend({
 

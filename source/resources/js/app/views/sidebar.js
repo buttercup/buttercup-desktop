@@ -3,8 +3,8 @@
 // Import Deps
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Tpl from 'tpl/sidebar.html!text';
-import GroupItemTpl from 'tpl/sidebar-group-item.html!text';
+import Tpl from 'tpl/sidebar.html';
+import GroupItemTpl from 'tpl/sidebar-group-item.html';
 import Groups from 'app/collections/groups';
 import Group from 'app/models/group';
 import EmptyStateView from 'app/views/empty-state';

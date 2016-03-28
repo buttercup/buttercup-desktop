@@ -3,7 +3,7 @@
 // Import Deps
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Tpl from 'tpl/layout.html!text';
+import Tpl from 'tpl/layout.html';
 import SidebarView from 'app/views/sidebar';
 import EntriesView from 'app/views/entries';
 import EntryView from 'app/views/entry';

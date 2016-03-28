@@ -3,8 +3,8 @@
 // Import Deps
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Tpl from 'tpl/entry.html!text';
-import Metatpl from 'tpl/entry-new-meta.html!text';
+import Tpl from 'tpl/entry.html';
+import Metatpl from 'tpl/entry-new-meta.html';
 import {confirmDialog} from 'app/tools/dialog';
 import {generatePassword} from 'app/tools/generate';
 import {strengthCheck} from 'app/tools/strength';

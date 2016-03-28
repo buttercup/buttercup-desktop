@@ -3,8 +3,8 @@
 // Import Deps
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Tpl from 'tpl/entries.html!text';
-import EntryItemTpl from 'tpl/entry-list-item.html!text';
+import Tpl from 'tpl/entries.html';
+import EntryItemTpl from 'tpl/entry-list-item.html';
 import Entries from 'app/collections/entries';
 import EmptyStateView from 'app/views/empty-state';
 

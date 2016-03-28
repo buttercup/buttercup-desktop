@@ -3,7 +3,7 @@
 // Import Deps
 import _ from 'underscore';
 import Backbone from 'backbone';
-import Tpl from 'tpl/intro.html!text';
+import Tpl from 'tpl/intro.html';
 import Archives from 'app/collections/archives';
 import Archive from 'app/models/archive';
 import swal from 'sweetalert';
