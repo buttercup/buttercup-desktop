@@ -1,0 +1,31 @@
+:global {
+    //@import 'base';
+    @import './vendor/normalize.scss';
+
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+    html,
+    body,
+    #root {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    #root {
+        display: flex;
+    }
+
+    .page-container {
+        flex: 1;
+        display: flex;
+    }
+}
