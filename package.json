@@ -4,8 +4,8 @@
   "description": "Buttercup password manager.",
   "main": "source/app/app.js",
   "scripts": {
-    "test": "grunt test",
-    "dev": "webpack-dev-server --color --progress"
+    "test": "xo",
+    "dev": "webpack-dev-server --color --progress --config=./webpack/webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -34,9 +34,12 @@
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "devDependencies": {
+    "babel-register": "^6.9.0",
     "electron-builder": "^2.6.0",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
+    "eslint-config-xo-react": "^0.8.0",
+    "eslint-plugin-react": "^5.2.2",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.7.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -52,65 +55,50 @@
     "jspm": "^0.16.12",
     "load-grunt-tasks": "^3.3.0",
     "makedeb": "0.0.4",
-    "time-grunt": "^1.3.0"
-  },
-  "jspm": {
-    "directories": {
-      "baseURL": "source/public/js"
-    },
-    "configFile": "source/resources/js/config.js",
-    "dependencies": {
-      "afeld/backbone-nested": "github:afeld/backbone-nested@^2.0.4",
-      "backbone.babysitter": "github:marionettejs/backbone.babysitter@^0.1.10",
-      "backbone.wreqr": "github:marionettejs/backbone.wreqr@^1.3.5",
-      "fuzzysearch": "npm:fuzzysearch@^1.0.3",
-      "marionette": "github:marionettejs/backbone.marionette@^2.4.3",
-      "sweetalert": "npm:sweetalert@^1.1.3",
-      "text": "github:systemjs/plugin-text@^0.0.2",
-      "underscore": "npm:underscore@^1.8.3"
-    },
-    "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "backone": "npm:backbone@^1.2.3",
-      "core-js": "npm:core-js@^1.1.4",
-      "jquery": "github:components/jquery@^2.1.4"
-    }
-  },
-  "dependencies": {
-    "babel-loader": "^6.2.4",
-    "babel-polyfill": "^6.7.4",
-    "babel-preset-es2015": "^6.6.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-preset-stage-1": "^6.5.0",
-    "backbone": "^1.3.2",
-    "backbone-nested": "^2.0.4",
-    "buttercup": "~0.19.0",
-    "css-loader": "^0.23.1",
-    "extract-text-webpack-plugin": "^1.0.1",
-    "file-loader": "^0.8.5",
-    "foundation-apps": "^1.2.0",
-    "fuzzysearch": "^1.0.3",
-    "jquery": "^2.2.2",
-    "password-generator": "^2.0.2",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-redux": "^4.4.2",
-    "react-router": "^2.0.1",
-    "react-router-redux": "^4.0.2",
-    "redux": "^3.4.0",
-    "redux-saga": "^0.9.5",
-    "sass-loader": "^3.2.0",
-    "style-loader": "^0.13.1",
-    "sweetalert": "^1.1.3",
-    "text-loader": "0.0.1",
-    "underscore": "^1.8.3",
-    "url-loader": "^0.5.7",
-    "webpack": "^1.12.14",
+    "react": "^15.2.0",
+    "react-dom": "^15.0.2",
+    "react-hot-loader": "^1.3.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.4.0",
+    "redux": "^3.5.2",
+    "redux-persist": "^3.1.1",
+    "redux-saga": "^0.10.5",
+    "time-grunt": "^1.3.0",
+    "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
-    "webpack-svgstore-plugin": "^2.1.4",
-    "yargs": "^4.4.0",
-    "zxcvbn": "^4.2.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "extends": "xo-react",
+    "esnext": true,
+    "space": 2,
+    "envs": [
+      "node",
+      "browser"
+    ],
+    "ignores": [
+      "**/Gruntfile.js",
+      "src/app/**"
+    ],
+    "rules": {
+      "xo/filename-case": "off",
+      "react/jsx-no-bind": "off",
+      "babel/object-curly-spacing": "off",
+      "yield-star-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": false
+        }
+      ],
+      "babel/generator-star-spacing": [
+        "error",
+        {
+          "before": true,
+          "after": false
+        }
+      ]
+    }
   }
 }

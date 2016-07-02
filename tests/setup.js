@@ -1,15 +1,9 @@
-(function(module) {
+'use strict';
 
-    "use strict";
+const path = require('path');
 
-    var path = require("path");
+const sourcePath = path.join(__dirname, '../source');
 
-    var sourcePath = path.join(__dirname + "/", "../source");
-
-    module.exports = {
-
-        WindowManager: require(sourcePath + "/app/WindowManager.js")
-
-    };
-
-})(module);
+module.exports = {
+  WindowManager: require(path.join(sourcePath, '/app/WindowManager.js'))
+};
