@@ -1,3 +1,4 @@
+import path from 'path';
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
 
@@ -11,7 +12,7 @@ const config = {
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    './src/frontend/index'
+    path.resolve(__dirname, '../src/frontend/index')
   ],
 
   output: {

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "xo",
     "dev": "npm-run-all hot-server start-hot",
-    "hot-server": "node -r babel-register server.js",
+    "hot-server": "node -r babel-register ./webpack/server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/app/app"
   },
   "repository": {
