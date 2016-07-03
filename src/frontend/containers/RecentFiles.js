@@ -10,8 +10,8 @@ const RecentFile = ({
 );
 
 RecentFile.propTypes = {
-  filename: PropTypes.string.required,
-  onClick: PropTypes.func.required
+  filename: PropTypes.number,
+  onClick: PropTypes.func
 };
 
 class ArchiveHistory extends Component {
@@ -36,9 +36,9 @@ class ArchiveHistory extends Component {
 
 ArchiveHistory.propTypes = {
   recentFiles: PropTypes.array,
-  onAddClick: PropTypes.func.required,
-  onClearClick: PropTypes.func.required,
-  onRemoveClick: PropTypes.func.required
+  onAddClick: PropTypes.func,
+  onClearClick: PropTypes.func,
+  onRemoveClick: PropTypes.func
 };
 
 const mapStateToProps = state => ({

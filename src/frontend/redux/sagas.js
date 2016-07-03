@@ -5,7 +5,7 @@ function get() {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(Math.random());
-    }, 2000);
+    }, 1);
   });
 }
 
