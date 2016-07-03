@@ -14,7 +14,7 @@ var electron        = require('electron'),
 // Global reference of the window object
 global.Buttercup = {
     config: {
-        publicDir: 'file://' + path.resolve(__dirname, '../public')
+        publicDir: 'file://' + path.resolve(__dirname, '../../dist')
     }
 };
 
@@ -42,6 +42,22 @@ windowManager.setBuildProcedure("intro", function openIntroScreen() {
     return introScreen;
 });
 
+const installExtensions = async () => {
+  if (process.env.NODE_ENV === 'development') {
+    const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
+    const extensions = [
+      'REACT_DEVELOPER_TOOLS',
+      'REDUX_DEVTOOLS'
+    ];
+    const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+    for (const name of extensions) {
+      try {
+        await installer.default(installer[name], forceDownload);
+      } catch (e) {} // eslint-disable-line
+    }
+  }
+};
+
 // When user closes all windows
 app.on('window-all-closed', function() {
     // Reopen the Intro window
@@ -50,7 +66,9 @@ app.on('window-all-closed', function() {
     }
 });
 
-app.on('ready', function() {
+app.on('ready', async function() {
+  await installExtensions();
+
     // Show intro
     windowManager.buildWindowOfType("intro");
 
