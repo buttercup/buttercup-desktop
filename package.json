@@ -5,7 +5,7 @@
   "main": "src/app/app.js",
   "scripts": {
     "test": "xo",
-    "dev": "npm-run-all hot-server start-hot",
+    "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./webpack/server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/app/app"
   },
@@ -50,6 +50,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "babel-register": "^6.9.0",
     "buttercup": "^0.19.0",
+    "concurrently": "^2.1.0",
     "electron-builder": "^2.6.0",
     "electron-devtools-installer": "^1.1.5",
     "electron-installer-dmg": "^0.1.0",
@@ -101,6 +102,7 @@
       "src/app/**"
     ],
     "rules": {
+      "no-trailing-spaces": "off",
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",
       "babel/object-curly-spacing": "off",
