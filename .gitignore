@@ -29,7 +29,9 @@ node_modules
 # IDEA
 .idea
 
-# PUBLIC
-source/public
+# App packaged
 *.bcup
-.tmp
+dist
+release
+main.js
+main.js.map

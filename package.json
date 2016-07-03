@@ -2,12 +2,17 @@
   "name": "buttercup-app",
   "version": "0.2.0",
   "description": "Buttercup password manager.",
-  "main": "src/app/app.js",
+  "main": "main.js",
   "scripts": {
     "test": "xo",
+    "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack/webpack.config.electron --progress --profile --colors",
+    "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack/webpack.config.production --progress --profile --colors",
+    "build": "npm run build-main && npm run build-renderer",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./webpack/server.js",
-    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/app/app"
+    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/app/app",
+    "package": "cross-env NODE_ENV=production node -r babel-register package.js",
+    "package-all": "npm run package -- --all"
   },
   "repository": {
     "type": "git",
@@ -35,6 +40,9 @@
     "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
+  "dependencies": {
+    "buttercup": "^0.19.0"
+  },
   "devDependencies": {
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -48,8 +56,9 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-    "buttercup": "^0.19.0",
     "concurrently": "^2.1.0",
+    "cross-env": "^1.0.8",
+    "del": "^2.2.1",
     "electron-builder": "^2.6.0",
     "electron-devtools-installer": "^1.1.5",
     "electron-installer-dmg": "^0.1.0",
@@ -70,8 +79,10 @@
     "grunt-svg-sprite": "^1.2.18",
     "grunt-sync": "^0.4.1",
     "grunt-systemjs-builder": "^0.2.5",
+    "json-loader": "^0.5.4",
     "load-grunt-tasks": "^3.3.0",
     "makedeb": "0.0.4",
+    "minimist": "^1.2.0",
     "react": "^15.2.0",
     "react-dom": "^15.0.2",
     "react-hot-loader": "^1.3.0",

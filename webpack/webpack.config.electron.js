@@ -1,3 +1,4 @@
+import path from 'path';
 import webpack from 'webpack';
 import baseConfig from './webpack.config.base';
 
@@ -10,8 +11,8 @@ export default {
 
   output: {
     ...baseConfig.output,
-    path: __dirname,
-    filename: './main.js'
+    path: path.resolve(__dirname, '..'),
+    filename: 'main.js'
   },
 
   plugins: [
@@ -40,6 +41,8 @@ export default {
 
   externals: [
     ...baseConfig.externals,
+    'buttercup',
+    'electron-devtools-installer',
     'source-map-support'
   ]
 };
