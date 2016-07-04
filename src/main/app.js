@@ -23,7 +23,12 @@ windowManager.setBuildProcedure('intro', () => {
     'height': 500,
     'title-bar-style': 'hidden'
   });
-  introScreen.loadURL(`${global.Buttercup.config.publicDir}/index.html`);
+
+  if (process.env.NODE_ENV === 'development') {
+    introScreen.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
+  } else {
+    introScreen.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
+  }
   // introScreen.webContents.openDevTools();
 
   // Emitted when the window is closed.

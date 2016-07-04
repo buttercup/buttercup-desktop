@@ -7,11 +7,11 @@ export default {
 
   devtool: 'source-map',
 
-  entry: ['babel-polyfill', './src/app/app'],
+  entry: ['babel-polyfill', './src/main/app'],
 
   output: {
     ...baseConfig.output,
-    path: path.resolve(__dirname, '..'),
+    path: path.resolve(__dirname, '../dist/'),
     filename: 'main.js'
   },
 

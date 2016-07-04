@@ -31,7 +31,4 @@ node_modules
 
 # App packaged
 *.bcup
-dist
 release
-main.js
-main.js.map

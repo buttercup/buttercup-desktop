@@ -12,7 +12,7 @@ const config = {
   entry: [
     'babel-polyfill',
     'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    path.resolve(__dirname, '../src/frontend/index')
+    path.resolve(__dirname, '../src/renderer/index')
   ],
 
   output: {
