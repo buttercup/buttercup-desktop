@@ -22,33 +22,36 @@ You can install a release of Buttercup by checking out the [releases page](https
 ## Setup & Usage
 ### Install Dependencies
 ``` bash
-$ npm install -g electron-prebuilt jspm
 $ npm install
 ```
 
-### Build and Run
+### Running in development environment
 ``` bash
-$ grunt build
-$ electron .
+$ npm run dev
 ```
 
-### Watch while development
+### Building libraries before releasing
 ```bash
-$ grunt watch
+$ npm run build
 ```
 
 ### Required software
 You will need the following things to build the project executables and installers:
  * NSIS (makensis in homebrew)
  * dpkg
- * wine
+ * wine ([install guide in homebrew](https://www.davidbaumgold.com/tutorials/wine-mac/#part-1:-install-homebrew))
 
 ### Package
 To package Buttercup for all platforms and make installers:
 ```bash
-$ grunt dist
+$ npm run release-all
 ```
 This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
+
+To package only for the current platform:
+```bash
+$ npm run release
+```
 
 ## Contributors
 ### Creation
@@ -57,3 +60,6 @@ This may take a while depending on how fast your computer is. All apps and insta
 
 ### Contributions
  * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+
+## License
+Released under [GNU/GPL Version 3](LICENSE)

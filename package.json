@@ -63,6 +63,7 @@
     "electron-devtools-installer": "^1.1.5",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
+    "electron-prebuilt": "^1.2.5",
     "eslint-config-xo-react": "^0.8.0",
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.14.0",
@@ -108,7 +109,9 @@
     ],
     "ignores": [
       "**/Gruntfile.js",
-      "src/app/**"
+      "src/main/**",
+      "webpack/**",
+      "release/**"
     ],
     "rules": {
       "no-trailing-spaces": "off",
