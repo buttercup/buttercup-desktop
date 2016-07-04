@@ -32,3 +32,4 @@ node_modules
 # App packaged
 *.bcup
 release
+.DS_Store

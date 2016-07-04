@@ -2,7 +2,6 @@
 // https://raw.githubusercontent.com/chentsulin/electron-react-boilerplate/
 'use strict';
 
-require('babel-polyfill');
 const os = require('os');
 const exec = require('child_process').exec;
 const webpack = require('webpack');
@@ -24,10 +23,11 @@ const DEFAULT_OPTS = {
   name: appName,
   asar: shouldUseAsar,
   ignore: [
-    '^/test($|/)',
-    '^/tools($|/)',
+    '^/tests($|/)',
+    '^/webpack($|/)',
     '^/release($|/)',
-    '^/main.development.js'
+    '^/src($|/)',
+    '/.map$/'
   ].concat(devDeps.map(name => `/node_modules/${name}($|/)`))
   .concat(
     deps.filter(name => !electronCfg.externals.includes(name))
