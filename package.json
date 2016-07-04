@@ -10,7 +10,7 @@
     "build": "npm run build-main && npm run build-renderer",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./webpack/server.js",
-    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/app/app",
+    "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/main/app",
     "package": "cross-env NODE_ENV=production node -r babel-register package.js",
     "package-all": "npm run package -- --all"
   },

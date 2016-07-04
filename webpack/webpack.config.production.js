@@ -1,3 +1,4 @@
+import path from 'path';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig from './webpack.config.base';
@@ -7,11 +8,13 @@ const config = {
 
   devtool: 'source-map',
 
-  entry: './src/app/app',
+  entry: [
+    'babel-polyfill',
+    path.resolve(__dirname, '../src/renderer/index')
+  ],
 
   output: {
     ...baseConfig.output,
-
     publicPath: '../dist/'
   },
 
