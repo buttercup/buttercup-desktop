@@ -1,17 +1,18 @@
 {
   "name": "buttercup-app",
+  "productName": "Buttercup",
   "version": "0.2.0",
   "description": "Buttercup password manager.",
   "main": "dist/main.js",
   "scripts": {
     "test": "xo",
-    "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack/webpack.config.electron --progress --profile --colors",
-    "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack/webpack.config.production --progress --profile --colors",
+    "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config tools/webpack.config.electron --progress --profile --colors",
+    "build-renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config tools/webpack.config.production --progress --profile --colors",
     "build": "npm run build-main && npm run build-renderer",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
-    "hot-server": "node -r babel-register ./webpack/server.js",
+    "hot-server": "node -r babel-register ./tools/server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/main/app",
-    "package": "cross-env NODE_ENV=production node -r babel-register -r babel-polyfill package.js",
+    "package": "cross-env NODE_ENV=production node -r babel-register -r babel-polyfill tools/package.js",
     "package-all": "npm run package -- --all"
   },
   "repository": {
@@ -64,6 +65,7 @@
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
     "electron-prebuilt": "^1.2.5",
+    "electron-winstaller": "^2.3.1",
     "eslint-config-xo-react": "^0.8.0",
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.14.0",
@@ -92,6 +94,7 @@
     "redux": "^3.5.2",
     "redux-persist": "^3.1.1",
     "redux-saga": "^0.10.5",
+    "rimraf": "^2.5.3",
     "time-grunt": "^1.3.0",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",

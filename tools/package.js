@@ -8,9 +8,9 @@ const webpack = require('webpack');
 const packager = require('electron-packager');
 const del = require('del');
 const argv = require('minimist')(process.argv.slice(2));
-const pkg = require('./package.json');
-const electronCfg = require('./webpack/webpack.config.electron');
-const cfg = require('./webpack/webpack.config.production');
+const pkg = require('../package.json');
+const electronCfg = require('./webpack.config.electron');
+const cfg = require('./webpack.config.production');
 
 const deps = Object.keys(pkg.dependencies);
 const devDeps = Object.keys(pkg.devDependencies);
@@ -19,7 +19,7 @@ const shouldUseAsar = argv.asar || argv.a || false;
 const shouldBuildAll = argv.all || false;
 
 const DEFAULT_OPTS = {
-  dir: './',
+  dir: '../',
   name: appName,
   asar: shouldUseAsar,
   ignore: [
