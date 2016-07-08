@@ -61,6 +61,7 @@
     "cross-env": "^1.0.8",
     "del": "^2.2.1",
     "electron-builder": "^2.6.0",
+    "electron-debug": "^1.0.1",
     "electron-devtools-installer": "^1.1.5",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
@@ -112,11 +113,11 @@
     ],
     "ignores": [
       "**/Gruntfile.js",
-      "src/main/**",
-      "webpack/**",
+      "tools/**",
       "release/**"
     ],
     "rules": {
+      "space-before-function-paren": "off",
       "no-trailing-spaces": "off",
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",

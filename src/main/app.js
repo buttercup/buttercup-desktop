@@ -1,51 +1,18 @@
 import path from 'path';
 import { app, BrowserWindow, Menu } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
-import WindowManager from './WindowManager';
-import eventsManager from './events';
 import menuTemplate from './config/menu';
 import Platform from './lib/platform';
+import WindowManager from './lib/window-manager';
+
+const __DEV__ = (process.env.NODE_ENV === 'development');
+
+if (__DEV__) {
+  require('electron-debug')(); // eslint-disable-line global-require
+}
 
 const windowManager = WindowManager.getSharedInstance();
-eventsManager();
-
-// Global reference of the window object
-global.Buttercup = {
-  config: {
-    publicDir: `file://${path.resolve(__dirname, '../../dist')}`
-  }
-};
-
-// Intro Screen
-windowManager.setBuildProcedure('intro', () => {
-  // Create the browser window.
-  const introScreen = new BrowserWindow({
-    'width': 700,
-    'height': 500,
-    'title-bar-style': 'hidden'
-  });
-
-  if (process.env.NODE_ENV === 'development') {
-    introScreen.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
-  } else {
-    introScreen.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
-  }
-  // introScreen.webContents.openDevTools();
-
-  // Emitted when the window is closed.
-  introScreen.on('closed', () => {
-    // Deregister the intro screen
-    windowManager.deregister(introScreen);
-    if (windowManager.getCountOfType('archive') <= 0) {
-      // No archives open, exit app
-      app.quit();
-    }
-  });
-
-  return introScreen;
-});
-
 const installExtensions = async () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (__DEV__) {
     const installer = require('electron-devtools-installer'); // eslint-disable global-require
 
     const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
@@ -62,12 +29,32 @@ const installExtensions = async () => {
   }
 };
 
-// When user closes all windows
-app.on('window-all-closed', () => {
-  // Reopen the Intro window
-  if (windowManager.getCountOfType('archive') <= 0) {
-    windowManager.buildWindowOfType('intro');
+// Intro Screen
+windowManager.setBuildProcedure('intro', () => {
+  // Create the browser window.
+  const introScreen = new BrowserWindow({
+    'width': 700,
+    'height': 500,
+    'title-bar-style': 'hidden'
+  });
+
+  if (__DEV__) {
+    introScreen.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
+    introScreen.webContents.openDevTools();
+  } else {
+    introScreen.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
   }
+
+  // Emitted when the window is closed.
+  introScreen.on('closed', () => {
+    // Deregister the intro screen
+    windowManager.deregister(introScreen);
+    if (windowManager.getCountOfType('archive') <= 0) {
+      app.quit();
+    }
+  });
+
+  return introScreen;
 });
 
 app.on('ready', async () => {
@@ -81,5 +68,13 @@ app.on('ready', async () => {
     Menu.setApplicationMenu(
       Menu.buildFromTemplate(menuTemplate)
     );
+  }
+});
+
+// When user closes all windows
+app.on('window-all-closed', () => {
+  // Reopen the Intro window
+  if (windowManager.getCountOfType('archive') <= 0) {
+    windowManager.buildWindowOfType('intro');
   }
 });
