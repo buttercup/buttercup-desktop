@@ -1,0 +1,10 @@
+{
+  "name": "buttercup-app",
+  "dependencies": {},
+  "globalDependencies": {
+    "electron": "registry:env/electron#0.37.6+20160416165306",
+    "node": "registry:dt/node#6.0.0+20160621231320",
+    "react": "registry:dt/react#0.14.0+20160630100702",
+    "redux": "registry:dt/redux#3.5.2+20160703092728"
+  }
+}

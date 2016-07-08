@@ -33,3 +33,4 @@ node_modules
 *.bcup
 release
 .DS_Store
+typings
