@@ -1,12 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { removeRecent } from '../redux/modules/recents';
+import { removeRecent, clearRecent } from '../redux/modules/recents';
 
 const RecentFile = ({
   filename,
   onClick
 }) => (
-  <li onClick={onClick}>{filename}</li>
+  <li>
+    {filename}
+    <button onClick={onClick}>&times;</button>
+  </li>
 );
 
 RecentFile.propTypes = {
@@ -18,6 +21,7 @@ class ArchiveHistory extends Component {
   render() {
     return (
       <div>
+        <button onClick={this.props.onClearClick}>Clear Recents</button>
         <ul>
           {this.props.recentFiles.map(filename =>
             <RecentFile
@@ -34,7 +38,8 @@ class ArchiveHistory extends Component {
 
 ArchiveHistory.propTypes = {
   recentFiles: PropTypes.array,
-  onRemoveClick: PropTypes.func
+  onRemoveClick: PropTypes.func,
+  onClearClick: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -42,9 +47,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onRemoveClick: filename => {
-    dispatch(removeRecent(filename));
-  }
+  onRemoveClick: filename => dispatch(removeRecent(filename)),
+  onClearClick: () => dispatch(clearRecent())
 });
 
 export default connect(
