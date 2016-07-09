@@ -1,6 +1,10 @@
+// Constants ->
+
 const ADD = 'buttercup/recents/ADD';
 const REMOVE = 'buttercup/recents/REMOVE';
 const CLEAR = 'buttercup/recents/CLEAR';
+
+// Reducers ->
 
 export default function recentFilesReducer(state = [], action) {
   switch (action.type) {
@@ -15,8 +19,10 @@ export default function recentFilesReducer(state = [], action) {
   }
 }
 
+// Action Creators ->
+
 export function addRecent(filename) {
-  return { type: 'ADD_REQUEST', filename };
+  return { type: ADD, filename };
 }
 
 export function removeRecent(filename) {

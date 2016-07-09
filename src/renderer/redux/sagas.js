@@ -1,19 +1,13 @@
 import { takeLatest } from 'redux-saga';
-import { put } from 'redux-saga/effects';
+import { createNewFileSaga, openFileSaga, NEW, OPEN } from './modules/files';
 
-function get() {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(Math.random());
-    }, 1);
-  });
-}
-
-function *test() {
-  const filename = yield get();
-  yield put({type: 'buttercup/recents/ADD', filename});
-}
-
+/**
+ * Root Saga
+ * listens to async actions and call appropriate generators
+ */
 export default function *rootSaga() {
-  yield *takeLatest('ADD_REQUEST', test);
+  yield [
+    takeLatest(NEW, createNewFileSaga),
+    takeLatest(OPEN, openFileSaga)
+  ];
 }

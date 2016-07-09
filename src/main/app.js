@@ -7,7 +7,7 @@ import WindowManager from './lib/window-manager';
 const __DEV__ = (process.env.NODE_ENV === 'development');
 
 if (__DEV__) {
-  require('electron-debug')(); // eslint-disable-line global-require
+  require('electron-debug')({showDevTools: true}); // eslint-disable-line global-require
 }
 
 const windowManager = WindowManager.getSharedInstance();
@@ -40,7 +40,6 @@ windowManager.setBuildProcedure('intro', () => {
 
   if (__DEV__) {
     introScreen.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
-    introScreen.webContents.openDevTools();
   } else {
     introScreen.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
   }
