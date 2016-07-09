@@ -10,7 +10,7 @@ const RecentFile = ({
 );
 
 RecentFile.propTypes = {
-  filename: PropTypes.number,
+  filename: PropTypes.string,
   onClick: PropTypes.func
 };
 

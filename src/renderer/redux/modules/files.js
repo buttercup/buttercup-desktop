@@ -1,4 +1,5 @@
 import { put } from 'redux-saga/effects';
+import { showOpenDialog } from '../../system/dialog';
 import { addRecent } from './recents';
 
 // Constants ->
@@ -8,13 +9,8 @@ export const NEW = 'buttercup/files/NEW';
 
 // Action Creators ->
 
-export function createNewFile() {
-  return { type: NEW };
-}
-
-export function openFile() {
-  return { type: OPEN };
-}
+export const createNewFile = () => ({ type: NEW });
+export const openFile = () => ({ type: OPEN });
 
 // Sagas ->
 
@@ -23,5 +19,6 @@ export function *createNewFileSaga() {
 }
 
 export function *openFileSaga() {
-  yield put(addRecent(Math.random()));
+  const filename = showOpenDialog();
+  yield put(addRecent(filename[0]));
 }

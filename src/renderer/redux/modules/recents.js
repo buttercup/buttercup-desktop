@@ -21,14 +21,6 @@ export default function recentFilesReducer(state = [], action) {
 
 // Action Creators ->
 
-export function addRecent(filename) {
-  return { type: ADD, filename };
-}
-
-export function removeRecent(filename) {
-  return { type: REMOVE, filename };
-}
-
-export function clearRecent() {
-  return { type: CLEAR };
-}
+export const addRecent = filename => ({ type: ADD, filename });
+export const removeRecent = filename => ({ type: REMOVE, filename });
+export const clearRecent = () => ({ type: CLEAR });

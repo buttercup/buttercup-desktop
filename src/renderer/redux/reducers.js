@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
-import recentFiles from './modules/recentFiles';
+import recentFiles from './modules/recents';
 
-const rootReducer = combineReducers({
+export default combineReducers({
   recentFiles
 });
-
-export default rootReducer;
