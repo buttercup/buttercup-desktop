@@ -10,7 +10,6 @@ const dialogOptions = {
   }]
 };
 
-
 /**
  * Present an open dialog box
  * and return the filename if selected

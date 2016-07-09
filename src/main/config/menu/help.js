@@ -1,12 +1,11 @@
-"use strict";
-
-const electron = require("electron");
+/* eslint-disable import/no-extraneous-dependencies */
+const electron = require('electron');
 
 module.exports = [
-    {
-        label: "Learn More",
-        click: () => {
-            electron.shell.openExternal("http://buttercup.pw")
-        }
+  {
+    label: 'Learn More',
+    click: () => {
+      electron.shell.openExternal('https://buttercup.pw');
     }
+  }
 ];
