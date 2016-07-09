@@ -1,5 +1,5 @@
 import { put } from 'redux-saga/effects';
-import { showOpenDialog } from '../../system/dialog';
+import { showOpenDialog, showSaveDialog } from '../../system/dialog';
 import { addRecent } from './recents';
 
 // Constants ->
@@ -15,10 +15,15 @@ export const openFile = () => ({ type: OPEN });
 // Sagas ->
 
 export function *createNewFileSaga() {
-  yield put(addRecent(Math.random()));
+  const filename = showSaveDialog();
+  if (filename) {
+    yield put(addRecent(filename));
+  }
 }
 
 export function *openFileSaga() {
   const filename = showOpenDialog();
-  yield put(addRecent(filename[0]));
+  if (filename) {
+    yield put(addRecent(filename[0]));
+  }
 }

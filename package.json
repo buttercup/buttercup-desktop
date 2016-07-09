@@ -45,6 +45,7 @@
     "buttercup": "^0.19.0"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
