@@ -9,7 +9,9 @@
 	},
 	"exclude": [
 		"node_modules",
-		"dist"
+		"dist",
+		".idea",
+		".tmp"
 	],
 	"rootDir": "./src",
 	"sourceRoot": "./src"

@@ -24,6 +24,6 @@ export function *createNewFileSaga() {
 export function *openFileSaga() {
   const filename = showOpenDialog();
   if (filename) {
-    yield put(addRecent(filename[0]));
+    yield put(addRecent(filename));
   }
 }
