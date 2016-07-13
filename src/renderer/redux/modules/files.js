@@ -30,6 +30,6 @@ export function *openFileSaga() {
   if (filename) {
     const workspace = yield loadWorkspace(filename, 'sallar');
     console.log('LOADED!', workspace);
-    yield put(addRecent(filename[0]));
+    yield put(addRecent(filename));
   }
 }
