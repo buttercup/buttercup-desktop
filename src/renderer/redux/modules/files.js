@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 import { showOpenDialog, showSaveDialog } from '../../system/dialog';
-import { addRecent } from './recents';
 import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
+import { addRecent } from './recents';
 
 // Constants ->
 

@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "dependencies": {
-    "buttercup": "^0.19.0"
+    "buttercup-web": "^0.7.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.1",
@@ -58,7 +58,6 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
-    "buttercup-web": "^0.7.0",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
     "del": "^2.2.1",
@@ -113,12 +112,16 @@
       "tools/**",
       "release/**"
     ],
+    "globals": [
+      "Buttercup"
+    ],
     "rules": {
       "space-before-function-paren": "off",
       "no-trailing-spaces": "off",
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",
       "babel/object-curly-spacing": "off",
+      "import/no-extraneous-dependencies": "off",
       "yield-star-spacing": [
         "error",
         {

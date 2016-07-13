@@ -42,7 +42,7 @@ function createWorkspace(content, password) {
       .setPassword(password);
     
     return workspace;
-  })
+  });
 }
 
 /**
@@ -67,7 +67,6 @@ export function loadWorkspace(filename, password) {
 export function newWorkspace(filename, password) {
   const archive = Buttercup.Archive.createWithDefaults();
   const dataSource = new Buttercup.TextDatasource('');
-  console.log("hi");
 
   // Save the datasource and load it up.
   return dataSource.save(archive, password).then(content => {
