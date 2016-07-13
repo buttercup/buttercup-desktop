@@ -3,6 +3,7 @@ import { app, BrowserWindow, Menu } from 'electron'; // eslint-disable-line impo
 import menuTemplate from './config/menu';
 import Platform from './lib/platform';
 import WindowManager from './lib/window-manager';
+import './lib/buttercup';
 
 const __DEV__ = (process.env.NODE_ENV === 'development');
 

@@ -52,6 +52,11 @@ const config = {
     })
   ],
 
+  externals: [
+    ...baseConfig.externals,
+    //'buttercup-web'
+  ],
+
   target: 'electron-renderer'
 };
 
