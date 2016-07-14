@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { openFile, createNewFile } from '../redux/modules/files'; 
 import { showOpenDialog, showSaveDialog } from '../system/dialog';
@@ -7,20 +8,24 @@ class FileOpener extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.onAddClick}>Open...</button>
-        <button onClick={this.props.onNewClick}>Create a new archive...</button>
+        <FlatButton
+          onClick={this.props.onOpenClick}
+          label="Open..."
+          primary
+          />
+        <FlatButton onClick={this.props.onNewClick} label="Create a new archive..."/>
       </div>
     );
   }
 }
 
 FileOpener.propTypes = {
-  onAddClick: PropTypes.func,
+  onOpenClick: PropTypes.func,
   onNewClick: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({
-  onAddClick: () => {
+  onOpenClick: () => {
     showOpenDialog(filename => dispatch(openFile(filename)));
   },
   onNewClick: () => {
