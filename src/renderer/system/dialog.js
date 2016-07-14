@@ -13,36 +13,34 @@ const dialogOptions = {
  * Present an open dialog box
  * and return the filename if selected
  * 
- * @returns {string|boolean}
+ * @param {Function} fn Callback
+ * @returns {void}
  */
-export function showOpenDialog () {
+export function showOpenDialog (fn) {
   const filename = dialog.showOpenDialog(currentWindow, {
     ...dialogOptions,
     title: 'Load a Buttercup Archive'
   });
   
   if (filename && filename.length > 0) {
-    return filename[0];
+    fn(filename[0]);
   }
-
-  return false;
 }
 
 /**
  * Present a save dialog box
  * and return the filename if saved
  * 
- * @returns {string|boolean}
+ * @param {Function} fn Callback
+ * @returns {void}
  */
-export function showSaveDialog() {
+export function showSaveDialog(fn) {
   const filename = dialog.showSaveDialog(currentWindow, {
     ...dialogOptions,
     title: 'Create a New Buttercup Archive'
   });
 
   if (typeof filename === 'string' && filename.length > 0) {
-    return filename;
+    fn(filename);
   }
-
-  return false;
 }

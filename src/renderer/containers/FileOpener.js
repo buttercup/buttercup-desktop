@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { openFile, createNewFile } from '../redux/modules/files'; 
+import { showOpenDialog, showSaveDialog } from '../system/dialog';
 
 class FileOpener extends Component {
   render() {
@@ -19,8 +20,12 @@ FileOpener.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onAddClick: () => dispatch(openFile()),
-  onNewClick: () => dispatch(createNewFile())
+  onAddClick: () => {
+    showOpenDialog(filename => dispatch(openFile(filename)));
+  },
+  onNewClick: () => {
+    showSaveDialog(filename => dispatch(createNewFile(filename)));
+  }
 });
 
 export default connect(
