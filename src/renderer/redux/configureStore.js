@@ -12,7 +12,9 @@ export default function configureStore(initialState) {
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
-  persistStore(store);
+  persistStore(store, {
+    whitelist: ['recentFiles']
+  });
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers

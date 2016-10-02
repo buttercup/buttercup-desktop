@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "dependencies": {
-    "buttercup-web": "^0.7.1"
+    "buttercup-web": "^0.8.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.1",
@@ -90,6 +90,7 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.4.0",
     "react-tap-event-plugin": "^1.0.0",
+    "react-treebeard": "^1.1.4",
     "redux": "^3.5.2",
     "redux-persist": "^3.1.1",
     "redux-saga": "^0.10.5",

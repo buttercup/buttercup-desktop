@@ -22,6 +22,18 @@ export function *createNewFileSaga(action) {
 
 export function *openFileSaga(action) {
   const workspace = yield call(loadWorkspace, action.filename, 'sallar');
-  console.log('LOADED!', workspace);
+  const arch = workspace.getArchive();
+  const groupToObject = function(groups) {
+    return groups.map(group => {
+      const obj = group.toObject();
+      const sub = group.getGroups();
+      if (sub.length > 0) {
+        obj.children = groupToObject(sub);
+      }
+      return obj;
+    });
+  };
+  const res = groupToObject(arch.getGroups());
+  console.log(JSON.stringify(res, undefined, 2));
   yield put(addRecent(action.filename));
 }
