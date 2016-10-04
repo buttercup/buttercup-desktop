@@ -1,0 +1,47 @@
+.f-no-select {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.m-tree {
+  position: relative;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.m-draggable {
+  position: absolute;
+  opacity: 0.8;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.m-node.placeholder > * {
+  visibility: hidden;
+}
+.m-node.placeholder {
+  border: 1px dashed #ccc;
+}
+.m-node .inner {
+  position: relative;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.m-node .collapse {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+.m-node .caret-right:before {
+  content: '\25B8';
+}
+.m-node .caret-down:before {
+  content: '\25BE';
+}
