@@ -1,13 +1,10 @@
 import React, { PropTypes } from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const App = props => {
   return (
-    <MuiThemeProvider>
-      <div>
-        {props.children}
-      </div>
-    </MuiThemeProvider>
+    <div>
+      {props.children}
+    </div>
   );
 };
 

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import FlatButton from 'material-ui/FlatButton';
 import { connect } from 'react-redux';
 import { openFile, createNewFile } from '../redux/modules/files'; 
 import { showOpenDialog, showSaveDialog } from '../system/dialog';
@@ -8,12 +7,8 @@ class FileOpener extends Component {
   render() {
     return (
       <div>
-        <FlatButton
-          onClick={this.props.onOpenClick}
-          label="Open..."
-          primary
-          />
-        <FlatButton onClick={this.props.onNewClick} label="Create a new archive..."/>
+        <button onClick={this.props.onOpenClick}>Open...</button>
+        <button onClick={this.props.onNewClick}>Create a new archive...</button>
       </div>
     );
   }
