@@ -23,7 +23,7 @@ const config = {
   module: {
     ...baseConfig.module,
     loaders: [
-      ...baseConfig.module.loaders,
+      ...baseConfig.module.loaders/*,
 
       {
         test: /\.global\.css$/,
@@ -39,7 +39,7 @@ const config = {
           'style-loader',
           'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
         ]
-      }
+      }*/
     ]
   },
 

@@ -1,38 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Treebeard } from 'react-treebeard';
+import TreeView from '../components/TreeView';
 import { removeRecent, clearRecent } from '../redux/modules/groups';
 
 class Groups extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleOnToggle = this.handleOnToggle.bind(this);
-  }
-
-  handleOnToggle(node, toggled) {
-    if (this.state.cursor) {
-      this.state.cursor.active = false;
-    }
-    node.active = true;
-    if (node.children.length > 0) {
-      node.toggled = toggled;
-    }
-    this.setState({ cursor: node });
-  }
-
   render() {
     return (
-      <Treebeard
-        data={this.props.groups}
-        onToggle={this.handleOnToggle}
+      <TreeView
+        tree={this.props.groups}
         />
     );
   }
 }
 
 Groups.propTypes = {
-  groups: PropTypes.array,
+  groups: PropTypes.object,
   onRemoveClick: PropTypes.func,
   onClearClick: PropTypes.func
 };

@@ -1,6 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
 import { addRecent } from './recents';
+import { resetGroups } from './groups';
 
 // Constants ->
 
@@ -34,6 +35,9 @@ export function *openFileSaga(action) {
     });
   };
   const res = groupToObject(arch.getGroups());
-  console.log(JSON.stringify(res, undefined, 2));
+  yield put(resetGroups({
+    title: 'Buttercup',
+    children: res
+  }));
   yield put(addRecent(action.filename));
 }
