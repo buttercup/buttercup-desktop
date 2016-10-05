@@ -8,7 +8,7 @@ import configureStore from './redux/configureStore';
 
 const store = configureStore({
   recentFiles: [],
-  groups: {}
+  groups: []
 });
 
 render(

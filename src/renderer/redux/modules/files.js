@@ -28,16 +28,15 @@ export function *openFileSaga(action) {
     return groups.map(group => {
       const obj = group.toObject();
       const sub = group.getGroups();
+      obj.children = [];
       if (sub.length > 0) {
         obj.children = groupToObject(sub);
       }
+      obj.name = obj.title;
       return obj;
     });
   };
   const res = groupToObject(arch.getGroups());
-  yield put(resetGroups({
-    title: 'Buttercup',
-    children: res
-  }));
+  yield put(resetGroups(res));
   yield put(addRecent(action.filename));
 }

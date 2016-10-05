@@ -1,44 +1,43 @@
 import React, { Component, PropTypes } from 'react';
-import Tree from 'react-ui-tree';
 import 'style!raw!./TreeView.css';
+import Tree, { TreeNode } from 'rc-tree';
 
 class TreeView extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  handleChange() {
-
-  }
-
-  onClickNode() {
-
-  }
-
-  renderNode(node) {
-    return (
-      <span>
-        {node.title}
-      </span>
-    );
-  }
-
   render() {
+    const loop = children => {
+      if (!children) {
+        return null;
+      }
+
+      return children.map(node => {
+        const label = (
+          <span>
+            {node.title}
+            <button onClick={() => this.props.onRemoveClick(node.id)}>&times;</button>
+          </span>
+        );
+        return (
+          <TreeNode
+            key={node.id}
+            title={label}
+            >
+            {loop(node.children)}
+          </TreeNode>
+        );
+      });
+    };
+
     return (
-      <Tree
-        paddingLeft={20}
-        tree={this.props.tree}
-        onChange={this.handleChange}
-        isNodeCollapsed={this.isNodeCollapsed}
-        renderNode={this.renderNode}
-        />
+      <Tree defaultExpandAll showLine={false}>
+        {loop(this.props.groups)}
+      </Tree>
     );
   }
 }
 
 TreeView.propTypes = {
-  tree: PropTypes.object
+  groups: PropTypes.array,
+  onRemoveClick: PropTypes.func
 };
 
 export default TreeView;
