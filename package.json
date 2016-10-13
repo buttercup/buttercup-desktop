@@ -42,7 +42,8 @@
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "dependencies": {
-    "buttercup-web": "^0.8.0"
+    "buttercup-web": "^0.8.0",
+    "electron": "^1.4.3"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.1",
@@ -67,7 +68,6 @@
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.0",
     "electron-packager": "^5.2.0",
-    "electron-prebuilt": "^1.4.2",
     "electron-winstaller": "^2.3.1",
     "eslint-config-xo-react": "^0.8.0",
     "eslint-plugin-react": "^5.2.2",
@@ -85,6 +85,7 @@
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
     "raw-loader": "^0.5.1",
+    "rc-tree": "^1.3.9",
     "react": "^15.3.2",
     "react-dom": "^15.2.0",
     "react-hot-loader": "^1.3.0",
@@ -92,7 +93,6 @@
     "react-router": "^2.4.0",
     "redux": "^3.5.2",
     "redux-persist": "^3.1.1",
-    "rc-tree": "^1.3.9",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.3",
     "style-loader": "^0.13.1",

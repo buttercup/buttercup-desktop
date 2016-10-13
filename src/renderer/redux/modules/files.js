@@ -1,6 +1,7 @@
 import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
 import { addRecent } from './recents';
-import { resetGroups } from './groups';
+import { reloadGroups } from './groups';
+import { setWorkspace } from './workspace';
 
 // Constants ->
 
@@ -11,8 +12,12 @@ export const NEW = 'buttercup/files/NEW';
 
 export function createNewFile(filename) {
   return dispatch => {
-    return newWorkspace(filename, 'sallar').then(() => {
-      dispatch(addRecent(filename));
+    return newWorkspace(filename, 'sallar').then(workspace => {
+      return Promise.all([
+        dispatch(setWorkspace(workspace)),
+        dispatch(addRecent(filename)),
+        dispatch(reloadGroups())
+      ]);
     });
   };
 }
@@ -20,21 +25,11 @@ export function createNewFile(filename) {
 export function openFile(filename) {
   return dispatch => {
     return loadWorkspace(filename, 'sallar').then(workspace => {
-      const arch = workspace.getArchive();
-      const groupToObject = function(groups) {
-        return groups.map(group => {
-          const obj = group.toObject();
-          const sub = group.getGroups();
-          obj.children = [];
-          if (sub.length > 0) {
-            obj.children = groupToObject(sub);
-          }
-          obj.name = obj.title;
-          return obj;
-        });
-      };
-      const res = groupToObject(arch.getGroups());
-      dispatch(resetGroups(res));
+      return Promise.all([
+        dispatch(setWorkspace(workspace)),
+        dispatch(addRecent(filename)),
+        dispatch(reloadGroups())
+      ]);
     });
   };
 }

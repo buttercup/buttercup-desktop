@@ -1,5 +1,3 @@
-import { call, put } from 'redux-saga/effects';
-
 // Constants ->
 
 const RESET = 'buttercup/groups/RESET';
@@ -23,11 +21,26 @@ export default function groupsReducer(state = [], action) {
 export const resetGroups = groups => ({ type: RESET, payload: groups });
 export const removeGroup = groupId => ({ type: REMOVE, id: groupId });
 
-// Saga ->
-
-/*export function *deleteGroupSaga(action) {
-  const workspace = yield call(newWorkspace, action.filename, 'sallar');
-  console.log('NEW!', workspace);
-  yield put(addRecent(action.filename));
+export function reloadGroups() {
+  return (dispatch, getState) => {
+    const { workspace } = getState();
+    if (!workspace) {
+      return null;
+    }
+    const arch = workspace.getArchive();
+    const groupToObject = function(groups) {
+      return groups.map(group => {
+        const obj = group.toObject();
+        const sub = group.getGroups();
+        obj.children = [];
+        if (sub.length > 0) {
+          obj.children = groupToObject(sub);
+        }
+        obj.name = obj.title;
+        return obj;
+      });
+    };
+    const res = groupToObject(arch.getGroups());
+    dispatch(resetGroups(res));
+  };
 }
-*/
