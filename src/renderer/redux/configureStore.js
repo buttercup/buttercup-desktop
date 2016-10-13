@@ -1,14 +1,12 @@
 import { applyMiddleware, createStore, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import createSagaMiddleware, {END} from 'redux-saga';
+import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import sagas from './sagas';
 
 export default function configureStore(initialState) {
-  const sagaMiddleware = createSagaMiddleware();
   const store = createStore(rootReducer, initialState, compose(
     autoRehydrate(),
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 
@@ -22,9 +20,6 @@ export default function configureStore(initialState) {
       store.replaceReducer(require('./reducers'));
     });
   }
-
-  store.rootTask = sagaMiddleware.run(sagas);
-  store.close = () => store.dispatch(END);
 
   return store;
 }
