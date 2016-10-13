@@ -19,7 +19,32 @@ export default function groupsReducer(state = [], action) {
 // Action Creators ->
 
 export const resetGroups = groups => ({ type: RESET, payload: groups });
-export const removeGroup = groupId => ({ type: REMOVE, id: groupId });
+
+export function removeGroup(id) {
+  return (dispatch, getState) => {
+    const { workspace } = getState();
+    if (!workspace) {
+      return null;
+    }
+    const arch = workspace.getArchive();
+    const group = arch.getGroupByID(id);
+    group.delete();
+    dispatch(reloadGroups());
+  };
+}
+
+export function addGroup(parentId) {
+  return (dispatch, getState) => {
+    const { workspace } = getState();
+    if (!workspace) {
+      return null;
+    }
+    const arch = workspace.getArchive();
+    const group = arch.getGroupByID(parentId);
+    group.createGroup('Temporary Assignment');
+    dispatch(reloadGroups());
+  };
+}
 
 export function reloadGroups() {
   return (dispatch, getState) => {

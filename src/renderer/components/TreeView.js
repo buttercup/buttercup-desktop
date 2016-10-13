@@ -14,6 +14,7 @@ class TreeView extends Component {
           <span>
             {node.title}
             <button onClick={() => this.props.onRemoveClick(node.id)}>&times;</button>
+            <button onClick={() => this.props.onAddClick(node.id)}>+</button>
           </span>
         );
         return (
@@ -37,7 +38,8 @@ class TreeView extends Component {
 
 TreeView.propTypes = {
   groups: PropTypes.array,
-  onRemoveClick: PropTypes.func
+  onRemoveClick: PropTypes.func,
+  onAddClick: PropTypes.func
 };
 
 export default TreeView;
