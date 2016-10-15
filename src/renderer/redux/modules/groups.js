@@ -1,4 +1,4 @@
-import { getGroups, createGroup, deleteGroup, saveGroup, moveGroup } from '../../system/buttercup/groups';
+import * as groupTools from '../../system/buttercup/groups';
 
 // Constants ->
 
@@ -33,7 +33,7 @@ export function removeGroup(id) {
       return null;
     }
     
-    deleteGroup(workspace, id);
+    groupTools.deleteGroup(workspace, id);
     dispatch(reloadGroups());
   };
 }
@@ -46,7 +46,7 @@ export function addGroup(parentId, title = 'Untitled') {
       return null;
     }
     
-    createGroup(workspace, parentId, title);
+    groupTools.createGroup(workspace, parentId, title);
     dispatch(reloadGroups());
   };
 }
@@ -59,7 +59,7 @@ export function saveGroupTitle(id, title) {
       return null;
     }
     
-    saveGroup(workspace, id, title);
+    groupTools.saveGroup(workspace, id, title);
     dispatch(reloadGroups());
   };
 }
@@ -72,7 +72,7 @@ export function reloadGroups() {
       return null;
     }
     
-    const groups = getGroups(workspace);
+    const groups = groupTools.getGroups(workspace);
     dispatch(resetGroups(groups));
   };
 }
@@ -85,7 +85,7 @@ export function moveGroupToParent(groupId, parentId) {
       return null;
     }
     
-    moveGroup(workspace, groupId, parentId);
+    groupTools.moveGroup(workspace, groupId, parentId);
     dispatch(reloadGroups());
   };
 }
