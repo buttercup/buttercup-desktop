@@ -1375,26 +1375,27 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-buttercup-web@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.8.0.tgz#affbe7cb046478f51f1711a551359affd7d9c715"
+buttercup-web:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.9.0.tgz#424e48be97899937a761e70e340fca6168e7102b"
   dependencies:
     babel-core "^6.10.4"
     babel-loader "^6.2.4"
     babel-preset-es2015 "^6.9.0"
-    buttercup "~0.20.1"
+    buttercup "~0.24.0"
     crypto-browserify "^3.11.0"
     json-loader "^0.5.4"
     uglifyjs "^2.4.10"
     webpack "^1.12.14"
 
-buttercup@~0.20.1:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.20.1.tgz#e1a38c90d4718d689c41925dc5d5f6b103a79791"
+buttercup@~0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.24.0.tgz#6a3f810d8afe4e00158914f3c10287841a27f1ac"
   dependencies:
     clone "~1.0.2"
     gzip-js "~0.3.2"
-    iocane "~0.3.0"
+    iocane "~0.4.0"
+    node-fetch "~1.6.3"
     uuid "~2.0.1"
     webdav-fs "~0.4.0"
 
@@ -3828,9 +3829,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-iocane@~0.3.0:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.3.1.tgz#62b402be5fd89fbac3fe5b7e3c40254fdbd6068b"
+iocane@~0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.4.0.tgz#04120e02ea8d4774f4035848dbce729a38b61a67"
   dependencies:
     hash_file "^0.1.1"
     pbkdf2 "~3.0.4"
@@ -4813,7 +4814,7 @@ nested-error-stacks@^1.0.1:
   dependencies:
     inherits "~2.0.1"
 
-node-fetch@^1.0.1, node-fetch@^1.3.3:
+node-fetch@^1.0.1, node-fetch@^1.3.3, node-fetch@~1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
   dependencies:

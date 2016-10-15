@@ -7,15 +7,9 @@
  */
 export function getGroups(workspace) {
   const arch = workspace.getArchive();
-  const groupToObject = function(groups) {
-    return groups.map(group => {
-      const obj = group.toObject();
-      const sub = group.getGroups();
-      obj.children = groupToObject(sub);
-      return obj;
-    });
-  };
-  return groupToObject(arch.getGroups());
+  return arch.getGroups().map(
+    group => group.toObject(Buttercup.ManagedGroup.OutputFlag.Groups)
+  );
 }
 
 /**

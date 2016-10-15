@@ -44,9 +44,9 @@
   "dependencies": {
     "@types/electron": "^1.4.24",
     "@types/node": "^6.0.45",
-    "@types/redux": "^3.6.31",
     "@types/react": "^0.14.41",
-    "buttercup-web": "^0.8.0",
+    "@types/redux": "^3.6.31",
+    "buttercup-web": "^0.9.0",
     "electron": "^1.4.3"
   },
   "devDependencies": {

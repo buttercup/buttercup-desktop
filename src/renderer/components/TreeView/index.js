@@ -66,7 +66,7 @@ class TreeView extends Component {
                 />
             }
             >
-            {loop(node.children)}
+            {loop(node.groups)}
           </TreeNode>
         );
       });
