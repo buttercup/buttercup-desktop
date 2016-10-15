@@ -51,6 +51,7 @@ class TreeView extends Component {
     return (
       <Tree
         defaultExpandAll
+        selectable={false}
         showLine={false}
         expandedKeys={this.state.expandedKeys}
         onExpand={(...args) => this.onExpand(...args)}
