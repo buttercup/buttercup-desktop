@@ -19,15 +19,20 @@ class TreeView extends Component {
     });
   }
 
-  onAddClick(id) {
-    const { onAddClick } = this.props;
+  onAddClick(e, id) {
+    e.stopPropagation();
     this.setState({
       expandedKeys: [
         ...this.state.expandedKeys,
         id
       ]
     });
-    onAddClick(id);
+    this.props.onAddClick(id);
+  }
+
+  onRemoveClick(e, id) {
+    e.stopPropagation();
+    this.props.onRemoveClick(id);
   }
 
   render() {
@@ -40,7 +45,14 @@ class TreeView extends Component {
         return (
           <TreeNode
             key={node.id}
-            title={<TreeLabel {...this.props} {...node} onAddClick={id => this.onAddClick(id)}/>}
+            title={
+              <TreeLabel
+                {...node}
+                {...this.props}
+                onAddClick={(e, id) => this.onAddClick(e, id)}
+                onRemoveClick={(e, id) => this.onRemoveClick(e, id)}
+                />
+            }
             >
             {loop(node.children)}
           </TreeNode>
@@ -51,7 +63,6 @@ class TreeView extends Component {
     return (
       <Tree
         defaultExpandAll
-        selectable={false}
         showLine={false}
         expandedKeys={this.state.expandedKeys}
         onExpand={(...args) => this.onExpand(...args)}

@@ -8,12 +8,20 @@ class TreeLabel extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   componentDidMount() {
     if (this._input) {
       this._input.focus();
       this._input.select();
+    }
+  }
+
+  handleBlur(e) {
+    const { onRemoveClick, id } = this.props;
+    if (this.state.title.toLowerCase() === 'untitled') {
+      onRemoveClick(e, id);
     }
   }
 
@@ -26,7 +34,7 @@ class TreeLabel extends Component {
     if (e.keyCode === 13) {
       onSaveClick(id, this.state.title);
     } else if (e.keyCode === 27) {
-      onRemoveClick(id);
+      onRemoveClick(e, id);
     }
   }
 
@@ -40,6 +48,7 @@ class TreeLabel extends Component {
         value={this.state.title}
         onChange={this.handleChange}
         onKeyUp={this.handleKeyUp}
+        onBlur={this.handleBlur}
         ref={c => {
           this._input = c;
         }}
@@ -49,8 +58,8 @@ class TreeLabel extends Component {
     return (
       <span>
         {titleLabel}
-        <button onClick={() => onRemoveClick(id)}>&times;</button>
-        {editMode ? null : <button onClick={() => onAddClick(id)}>+</button>}
+        <button onClick={e => onRemoveClick(e, id)}>&times;</button>
+        {editMode ? null : <button onClick={e => onAddClick(e, id)}>+</button>}
       </span>
     );
   }  
