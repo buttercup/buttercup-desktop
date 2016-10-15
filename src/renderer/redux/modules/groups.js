@@ -1,4 +1,4 @@
-import { getGroups, createGroup, deleteGroup, saveGroup } from '../../system/buttercup/groups';
+import { getGroups, createGroup, deleteGroup, saveGroup, moveGroup } from '../../system/buttercup/groups';
 
 // Constants ->
 
@@ -74,5 +74,18 @@ export function reloadGroups() {
     
     const groups = getGroups(workspace);
     dispatch(resetGroups(groups));
+  };
+}
+
+export function moveGroupToParent(groupId, parentId) {
+  return (dispatch, getState) => {
+    const { workspace } = getState();
+
+    if (!workspace) {
+      return null;
+    }
+    
+    moveGroup(workspace, groupId, parentId);
+    dispatch(reloadGroups());
   };
 }

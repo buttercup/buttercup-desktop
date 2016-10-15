@@ -65,3 +65,15 @@ export function saveGroup(workspace, groupId, title) {
 
   group.setTitle(title);
 }
+
+export function moveGroup(workspace, groupId, parentId) {
+  const arch = workspace.getArchive();
+  const group = arch.getGroupByID(groupId);
+  const parent = arch.getGroupByID(parentId);
+
+  if (!group || !parent) {
+    throw new Error('Group has not been found.');
+  } 
+
+  group.moveToGroup(parent);
+}
