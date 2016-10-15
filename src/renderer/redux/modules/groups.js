@@ -1,3 +1,5 @@
+import { getGroups, createGroup, deleteGroup } from '../../system/buttercup/groups';
+
 // Constants ->
 
 const RESET = 'buttercup/groups/RESET';
@@ -18,30 +20,33 @@ export default function groupsReducer(state = [], action) {
 
 // Action Creators ->
 
-export const resetGroups = groups => ({ type: RESET, payload: groups });
+export const resetGroups = groups => ({
+  type: RESET,
+  payload: groups
+});
 
 export function removeGroup(id) {
   return (dispatch, getState) => {
     const { workspace } = getState();
+
     if (!workspace) {
       return null;
     }
-    const arch = workspace.getArchive();
-    const group = arch.getGroupByID(id);
-    group.delete();
+    
+    deleteGroup(workspace, id);
     dispatch(reloadGroups());
   };
 }
 
-export function addGroup(parentId) {
+export function addGroup(parentId, title = 'Untitled') {
   return (dispatch, getState) => {
     const { workspace } = getState();
+
     if (!workspace) {
       return null;
     }
-    const arch = workspace.getArchive();
-    const group = arch.getGroupByID(parentId);
-    group.createGroup('Temporary Assignment');
+    
+    createGroup(workspace, parentId, title);
     dispatch(reloadGroups());
   };
 }
@@ -49,23 +54,12 @@ export function addGroup(parentId) {
 export function reloadGroups() {
   return (dispatch, getState) => {
     const { workspace } = getState();
+
     if (!workspace) {
       return null;
     }
-    const arch = workspace.getArchive();
-    const groupToObject = function(groups) {
-      return groups.map(group => {
-        const obj = group.toObject();
-        const sub = group.getGroups();
-        obj.children = [];
-        if (sub.length > 0) {
-          obj.children = groupToObject(sub);
-        }
-        obj.name = obj.title;
-        return obj;
-      });
-    };
-    const res = groupToObject(arch.getGroups());
-    dispatch(resetGroups(res));
+    
+    const groups = getGroups(workspace);
+    dispatch(resetGroups(groups));
   };
 }

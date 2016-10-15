@@ -1,7 +1,7 @@
 import React from 'react';
 import RecentFiles from '../containers/RecentFiles';
 import FileOpener from '../containers/FileOpener';
-import Groups from '../containers/Groups';
+import TreeView from '../containers/TreeView';
 
 const IntroScreen = () => {
   return (
@@ -10,7 +10,7 @@ const IntroScreen = () => {
       <RecentFiles/>
       <br/>
       <br/>
-      <Groups/>
+      <TreeView/>
     </div>
   );
 };
