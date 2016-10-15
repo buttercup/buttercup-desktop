@@ -54,3 +54,14 @@ export function deleteGroup(workspace, groupId) {
 
   group.delete();
 }
+
+export function saveGroup(workspace, groupId, title) {
+  const arch = workspace.getArchive();
+  const group = arch.getGroupByID(groupId);
+
+  if (!group) {
+    throw new Error('Group has not been found.');
+  } 
+
+  group.setTitle(title);
+}

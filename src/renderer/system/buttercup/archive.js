@@ -74,3 +74,7 @@ export function newWorkspace(filename, password) {
     return createWorkspace(content, password);
   });
 }
+
+export function saveWorkspace(workspace) {
+  return workspace.save();
+}
