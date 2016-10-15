@@ -47,7 +47,8 @@
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
     "buttercup-web": "^0.9.0",
-    "electron": "^1.4.3"
+    "electron": "^1.4.3",
+    "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.1",
@@ -128,6 +129,7 @@
       "no-trailing-spaces": "off",
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",
+      "babel/new-cap": "off",
       "babel/object-curly-spacing": "off",
       "import/no-extraneous-dependencies": "off",
       "yield-star-spacing": [

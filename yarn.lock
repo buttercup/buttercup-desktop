@@ -3748,7 +3748,7 @@ image-size@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.0.tgz#be7aed1c37b5ac3d9ba1d66a24b4c47ff8397651"
 
-immutable@^3.7.6:
+immutable, immutable@^3.7.6:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
@@ -6191,6 +6191,10 @@ rx@2.3.24:
 sax@>=0.6.0, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+
+seamless-immutable:
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/seamless-immutable/-/seamless-immutable-6.1.4.tgz#1bf0aba7991cc861951a81d11b68761f7480f859"
 
 semver-diff@^2.0.0:
   version "2.1.0"
