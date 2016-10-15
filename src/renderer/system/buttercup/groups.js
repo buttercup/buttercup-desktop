@@ -49,6 +49,14 @@ export function deleteGroup(workspace, groupId) {
   group.delete();
 }
 
+/**
+ * Save group title
+ * 
+ * @export
+ * @param {Buttercup.Workspace} workspace
+ * @param {string} groupId
+ * @param {string} title
+ */
 export function saveGroup(workspace, groupId, title) {
   const arch = workspace.getArchive();
   const group = arch.getGroupByID(groupId);
@@ -60,6 +68,14 @@ export function saveGroup(workspace, groupId, title) {
   group.setTitle(title);
 }
 
+/**
+ * Move group to another parent
+ * 
+ * @export
+ * @param {Buttercup.Workspace} workspace
+ * @param {string} groupId
+ * @param {string} parentId
+ */
 export function moveGroup(workspace, groupId, parentId) {
   const arch = workspace.getArchive();
   const group = arch.getGroupByID(groupId);
