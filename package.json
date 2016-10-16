@@ -46,7 +46,7 @@
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
-    "buttercup-web": "^0.9.0",
+    "buttercup-web": "0.10.0",
     "electron": "^1.4.3",
     "seamless-immutable": "^6.1.4"
   },
