@@ -1,23 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import RecentFiles from '../containers/RecentFiles';
-import FileOpener from '../containers/FileOpener';
+import Intro from '../components/Intro';
 import TreeView from '../containers/TreeView';
 
-class IntroScreen extends Component {
+class Workspace extends Component {
   render() {
     const { ui } = this.props;
     return (
       <div>
-        {!ui.archiveOpen && <FileOpener/>}
-        {!ui.archiveOpen && <RecentFiles/>}
-        {ui.archiveOpen && <TreeView/>}
+        {ui.archiveOpen ? <TreeView/> : <Intro/>}
       </div>
     );
   }
 }
 
-IntroScreen.propTypes = {
+Workspace.propTypes = {
   ui: PropTypes.object
 };
 
-export default IntroScreen;
+export default Workspace;
