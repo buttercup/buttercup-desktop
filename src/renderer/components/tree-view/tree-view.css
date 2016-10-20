@@ -165,11 +165,16 @@
 }
 .rc-tree-icon__open {
   margin-right: 2px;
-  background-position: -110px -16px;
+  /*background-position: -110px -16px;*/
   vertical-align: top;
+
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDggNDgiPiAgICA8cGF0aCBmaWxsPSIjRkZBMDAwIiBkPSJNMzgsMTJIMjJsLTQtNEg4Yy0yLjIsMC00LDEuOC00LDR2MjRjMCwyLjIsMS44LDQsNCw0aDMxYzEuNywwLDMtMS4zLDMtM1YxNkM0MiwxMy44LDQwLjIsMTIsMzgsMTJ6Ii8+ICAgIDxwYXRoIGZpbGw9IiNGRkNBMjgiIGQ9Ik00Mi4yLDE4SDE1LjNjLTEuOSwwLTMuNiwxLjQtMy45LDMuM0w4LDQwaDMxLjdjMS45LDAsMy42LTEuNCwzLjktMy4zbDIuNS0xNEM0Ni42LDIwLjMsNDQuNywxOCw0Mi4yLDE4eiIvPjwvc3ZnPg==) !important;
+  background-size: 16px 16px;
 }
 .rc-tree-icon__close {
   margin-right: 2px;
-  background-position: -110px 0;
+  /*background-position: -110px 0;*/
   vertical-align: top;
+  background-size: 16px 16px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNDggNDgiPiAgICA8cGF0aCBmaWxsPSIjRkZBMDAwIiBkPSJNNDAsMTJIMjJsLTQtNEg4Yy0yLjIsMC00LDEuOC00LDR2OGg0MHYtNEM0NCwxMy44LDQyLjIsMTIsNDAsMTJ6Ii8+ICAgIDxwYXRoIGZpbGw9IiNGRkNBMjgiIGQ9Ik00MCwxMkg4Yy0yLjIsMC00LDEuOC00LDR2MjBjMCwyLjIsMS44LDQsNCw0aDMyYzIuMiwwLDQtMS44LDQtNFYxNkM0NCwxMy44LDQyLjIsMTIsNDAsMTJ6Ii8+PC9zdmc+) !important;
 }
