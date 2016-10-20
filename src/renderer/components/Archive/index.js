@@ -1,6 +1,6 @@
 import React from 'react';
-import TreeView from '../../containers/TreeView';
-import Entries from '../../containers/Archive/Entries';
+import TreeView from '../../containers/tree-view';
+import Entries from '../../containers/archive/entries';
 
 export default () => (
   <div>

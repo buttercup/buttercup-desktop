@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import 'style!raw!./TreeView.css';
+import 'style!raw!./tree-view.css';
 import Tree, { TreeNode } from 'rc-tree';
-import TreeLabel from './TreeLabel';
+import TreeLabel from './tree-label';
 
 class TreeView extends Component {
   constructor() {

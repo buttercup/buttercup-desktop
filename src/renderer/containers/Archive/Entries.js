@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Entries from '../../components/Archive/Entries';
+import Entries from '../../components/archive/entries';
 import { getCurrentEntries } from '../../redux/modules/entries';
 
 export default connect(

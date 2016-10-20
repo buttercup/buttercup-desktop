@@ -1,6 +1,6 @@
 import React from 'react';
-import RecentFiles from '../containers/RecentFiles';
-import FileOpener from '../containers/FileOpener';
+import RecentFiles from '../containers/recent-files';
+import FileOpener from '../containers/file-opener';
 
 const Intro = () => (
   <div>

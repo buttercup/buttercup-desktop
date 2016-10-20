@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import TreeView from '../components/TreeView';
+import TreeView from '../components/tree-view';
 import { addGroup, removeGroup, saveGroupTitle, moveGroupToParent, loadGroup } from '../redux/modules/groups';
 
 export default connect(
