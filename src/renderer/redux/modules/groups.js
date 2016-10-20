@@ -1,7 +1,9 @@
 import * as groupTools from '../../system/buttercup/groups';
+import { loadEntries } from './entries';
 
 // Constants ->
 
+export const GROUP_SELECTED = 'buttercup/groups/SELECTED';
 const RESET = 'buttercup/groups/RESET';
 const REMOVE = 'buttercup/groups/REMOVE';
 
@@ -92,6 +94,10 @@ export function moveGroupToParent(groupId, parentId) {
 
 export function loadGroup(groupId) {
   return dispatch => {
-    console.log(groupId, 'is sick');
+    dispatch({
+      type: GROUP_SELECTED,
+      payload: groupId 
+    });
+    dispatch(loadEntries(groupId));
   };
 }
