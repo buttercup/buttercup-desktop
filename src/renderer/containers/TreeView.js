@@ -1,19 +1,16 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/TreeView';
-import { addGroup, removeGroup, saveGroupTitle, moveGroupToParent } from '../redux/modules/groups';
-
-const mapStateToProps = state => ({
-  groups: state.groups
-});
-
-const mapDispatchToProps = dispatch => ({
-  onAddClick: id => dispatch(addGroup(id)),
-  onRemoveClick: id => dispatch(removeGroup(id)),
-  onSaveClick: (id, title) => dispatch(saveGroupTitle(id, title)),
-  onDrop: (groupId, newParentId) => dispatch(moveGroupToParent(groupId, newParentId))
-});
+import { addGroup, removeGroup, saveGroupTitle, moveGroupToParent, loadGroup } from '../redux/modules/groups';
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => ({
+    groups: state.groups
+  }),
+  {
+    onAddClick: addGroup,
+    onRemoveClick: removeGroup,
+    onSaveClick: saveGroupTitle,
+    onDrop: moveGroupToParent,
+    onGroupSelect: loadGroup
+  }
 )(TreeView, 'TreeView');

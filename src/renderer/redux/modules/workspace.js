@@ -1,3 +1,5 @@
+import { reloadGroups } from './groups';
+
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
 
 export default function workspaceReducer(state = null, action) {
@@ -9,4 +11,10 @@ export default function workspaceReducer(state = null, action) {
   }
 }
 
-export const setWorkspace = workspace => ({ type: SET_WORKSPACE, payload: workspace });
+export const setWorkspace = workspace => dispatch => {
+  dispatch({
+    type: SET_WORKSPACE,
+    payload: workspace
+  });
+  dispatch(reloadGroups());
+};

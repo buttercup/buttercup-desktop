@@ -31,6 +31,10 @@ class TreeView extends Component {
     this.props.onDrop(dragKey, dropKey);
   }
 
+  onSelect([selectedGroupId]) {
+    this.props.onGroupSelect(selectedGroupId);
+  }
+
   onAddClick(e, id) {
     e.stopPropagation();
     this.setState({
@@ -78,6 +82,7 @@ class TreeView extends Component {
         draggable
         showLine={false}
         expandedKeys={this.state.expandedKeys}
+        onSelect={(...args) => this.onSelect(...args)}
         onExpand={(...args) => this.onExpand(...args)}
         onDrop={(...args) => this.onDrop(...args)}
         >
@@ -91,6 +96,7 @@ TreeView.propTypes = {
   groups: PropTypes.array,
   onRemoveClick: PropTypes.func,
   onAddClick: PropTypes.func,
+  onGroupSelect: PropTypes.func,
   onDrop: PropTypes.func
 };
 

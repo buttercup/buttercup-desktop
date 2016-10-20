@@ -89,3 +89,9 @@ export function moveGroupToParent(groupId, parentId) {
     dispatch(reloadGroups());
   };
 }
+
+export function loadGroup(groupId) {
+  return dispatch => {
+    console.log(groupId, 'is sick');
+  };
+}
