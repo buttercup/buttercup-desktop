@@ -30,9 +30,8 @@ function shownIds(state = [], action) {
 
 // Action Creators ->
 
-export const loadEntries = groupId => (dispatch, getState) => {
-  const { workspace } = getState();
-  const entries = entryTools.loadEntries(workspace, groupId);
+export const loadEntries = groupId => dispatch => {
+  const entries = entryTools.loadEntries(groupId);
   dispatch({
     type: LOADED,
     payload: entries

@@ -28,66 +28,36 @@ export const resetGroups = groups => ({
 });
 
 export function removeGroup(id) {
-  return (dispatch, getState) => {
-    const { workspace } = getState();
-
-    if (!workspace) {
-      return null;
-    }
-    
-    groupTools.deleteGroup(workspace, id);
+  return dispatch => {
+    groupTools.deleteGroup(id);
     dispatch(reloadGroups());
   };
 }
 
 export function addGroup(parentId, title = 'Untitled') {
-  return (dispatch, getState) => {
-    const { workspace } = getState();
-
-    if (!workspace) {
-      return null;
-    }
-    
-    groupTools.createGroup(workspace, parentId, title);
+  return dispatch => {
+    groupTools.createGroup(parentId, title);
     dispatch(reloadGroups());
   };
 }
 
 export function saveGroupTitle(id, title) {
-  return (dispatch, getState) => {
-    const { workspace } = getState();
-
-    if (!workspace || !title) {
-      return null;
-    }
-    
-    groupTools.saveGroup(workspace, id, title);
+  return dispatch => {
+    groupTools.saveGroup(id, title);
     dispatch(reloadGroups());
   };
 }
 
 export function reloadGroups() {
-  return (dispatch, getState) => {
-    const { workspace } = getState();
-
-    if (!workspace) {
-      return null;
-    }
-    
-    const groups = groupTools.getGroups(workspace);
+  return dispatch => {
+    const groups = groupTools.getGroups();
     dispatch(resetGroups(groups));
   };
 }
 
 export function moveGroupToParent(groupId, parentId) {
-  return (dispatch, getState) => {
-    const { workspace } = getState();
-
-    if (!workspace) {
-      return null;
-    }
-    
-    groupTools.moveGroup(workspace, groupId, parentId);
+  return dispatch => {
+    groupTools.moveGroup(groupId, parentId);
     dispatch(reloadGroups());
   };
 }

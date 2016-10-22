@@ -1,12 +1,13 @@
+import { saveWorkspace as save, getArchive } from './archive'; 
+
 /**
  * Return recursive groups JSON structure
  * 
  * @export
- * @param {Buttercup.Workspace} workspace
  * @returns {Object} JSON structure
  */
-export function getGroups(workspace) {
-  const arch = workspace.getArchive();
+export function getGroups() {
+  const arch = getArchive();
   return arch.getGroups().map(
     group => group.toObject(Buttercup.ManagedGroup.OutputFlag.Groups)
   );
@@ -16,12 +17,11 @@ export function getGroups(workspace) {
  * Create a new group under a parent group
  * 
  * @export
- * @param {Buttercup.Workspace} workspace
  * @param {string} parentId
  * @param {string} groupName
  */
-export function createGroup(workspace, parentId, groupName) {
-  const arch = workspace.getArchive();
+export function createGroup(parentId, groupName) {
+  const arch = getArchive();
   const group = arch.getGroupByID(parentId);
 
   if (!group) {
@@ -29,17 +29,19 @@ export function createGroup(workspace, parentId, groupName) {
   }
   
   group.createGroup(groupName);
+  if (groupName.toLowerCase() !== 'untitled') {
+    save();
+  }
 }
 
 /**
  * Delete a group
  * 
  * @export
- * @param {Buttercup.Workspace} workspace
  * @param {string} groupId
  */
-export function deleteGroup(workspace, groupId) {
-  const arch = workspace.getArchive();
+export function deleteGroup(groupId) {
+  const arch = getArchive();
   const group = arch.getGroupByID(groupId);
 
   if (!group) {
@@ -47,18 +49,18 @@ export function deleteGroup(workspace, groupId) {
   } 
 
   group.delete();
+  save();
 }
 
 /**
  * Save group title
  * 
  * @export
- * @param {Buttercup.Workspace} workspace
  * @param {string} groupId
  * @param {string} title
  */
-export function saveGroup(workspace, groupId, title) {
-  const arch = workspace.getArchive();
+export function saveGroup(groupId, title) {
+  const arch = getArchive();
   const group = arch.getGroupByID(groupId);
 
   if (!group) {
@@ -66,18 +68,18 @@ export function saveGroup(workspace, groupId, title) {
   } 
 
   group.setTitle(title);
+  save();
 }
 
 /**
  * Move group to another parent
  * 
  * @export
- * @param {Buttercup.Workspace} workspace
  * @param {string} groupId
  * @param {string} parentId
  */
-export function moveGroup(workspace, groupId, parentId) {
-  const arch = workspace.getArchive();
+export function moveGroup(groupId, parentId) {
+  const arch = getArchive();
   const group = arch.getGroupByID(groupId);
   const parent = arch.getGroupByID(parentId);
 
@@ -86,4 +88,5 @@ export function moveGroup(workspace, groupId, parentId) {
   } 
 
   group.moveToGroup(parent);
+  save();
 }

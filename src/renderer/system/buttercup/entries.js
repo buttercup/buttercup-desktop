@@ -1,5 +1,7 @@
-export function loadEntries(workspace, groupId) {
-  const arch = workspace.getArchive();
+import { getArchive } from './archive';
+
+export function loadEntries(groupId) {
+  const arch = getArchive();
   const group = arch.getGroupByID(groupId);
 
   if (!group) {

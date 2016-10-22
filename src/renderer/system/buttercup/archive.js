@@ -1,5 +1,7 @@
 import { ipcRenderer as ipc } from 'electron';
 
+let __curentWorkspace = null;
+
 /**
  * Read text file from disk
  * 
@@ -54,7 +56,15 @@ function createWorkspace(content, password) {
  */
 export function loadWorkspace(filename, password) {
   const content = readTextFile(filename);
-  return createWorkspace(content, password);
+  return createWorkspace(content, password).then(workspace => {
+    __curentWorkspace = {
+      instance: workspace,
+      filename
+    };
+    return {
+      path: filename
+    };
+  });
 }
 
 /**
@@ -71,10 +81,32 @@ export function newWorkspace(filename, password) {
   // Save the datasource and load it up.
   return dataSource.save(archive, password).then(content => {
     writeTextFile(filename, content);
-    return createWorkspace(content, password);
+    return createWorkspace(content, password).then(workspace => {
+      __curentWorkspace = {
+        instance: workspace,
+        filename
+      };
+      return {
+        path: filename
+      };
+    });
   });
 }
 
-export function saveWorkspace(workspace) {
-  return workspace.save();
+export function getWorkspace() {
+  if (__curentWorkspace === null) {
+    throw new Error('Workspace has not been set yet.');
+  }
+  return __curentWorkspace;
+}
+
+export function getArchive() {
+  return getWorkspace().instance.getArchive(); 
+}
+
+export function saveWorkspace() {
+  const workspace = getWorkspace();
+  return workspace.instance.save().then(content => {
+    ipc.send('write-archive', { filename: workspace.filename, content });
+  });
 }

@@ -1,20 +1,36 @@
+import Immutable from 'seamless-immutable';
+import { combineReducers } from 'redux';
 import { reloadGroups } from './groups';
 
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
 
-export default function workspaceReducer(state = null, action) {
+const initialState = Immutable({
+  path: null,
+  provider: 'filesystem' 
+});
+
+function archive(state = initialState, action) {
   switch (action.type) {
-    case SET_WORKSPACE: 
-      return action.payload;
+    case SET_WORKSPACE:
+      return state.merge({
+        path: action.payload.path,
+        provider: action.payload.provider || 'filesystem'
+      });
     default:
       return state;
   }
 }
 
-export const setWorkspace = workspace => dispatch => {
+export const setWorkspace = archivePath => dispatch => {
   dispatch({
     type: SET_WORKSPACE,
-    payload: workspace
+    payload: {
+      path: archivePath
+    }
   });
   dispatch(reloadGroups());
 };
+
+export default combineReducers({
+  archive
+});

@@ -10,18 +10,18 @@ export const NEW = 'buttercup/files/NEW';
 // Action Creators ->
 
 export const createNewFile = filename => dispatch => {
-  return newWorkspace(filename, 'sallar').then(workspace => {
+  return newWorkspace(filename, 'sallar').then(() => {
     return Promise.all([
-      dispatch(setWorkspace(workspace)),
+      dispatch(setWorkspace(filename)),
       dispatch(addRecent(filename))
     ]);
   });
 };
 
 export const openFile = filename => dispatch => {
-  return loadWorkspace(filename, 'sallar').then(workspace => {
+  return loadWorkspace(filename, 'sallar').then(() => {
     return Promise.all([
-      dispatch(setWorkspace(workspace)),
+      dispatch(setWorkspace(filename)),
       dispatch(addRecent(filename))
     ]);
   });
