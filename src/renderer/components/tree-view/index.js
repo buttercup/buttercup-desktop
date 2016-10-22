@@ -32,7 +32,9 @@ class TreeView extends Component {
   }
 
   onSelect([selectedGroupId]) {
-    this.props.onGroupSelect(selectedGroupId);
+    if (typeof selectedGroupId === 'string') {
+      this.props.onGroupSelect(selectedGroupId);
+    }
   }
 
   onAddClick(e, id) {

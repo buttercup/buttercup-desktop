@@ -1,5 +1,4 @@
 import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
-import { addRecent } from './recents';
 import { setWorkspace } from './workspace';
 
 // Constants ->
@@ -11,18 +10,12 @@ export const NEW = 'buttercup/files/NEW';
 
 export const createNewFile = filename => dispatch => {
   return newWorkspace(filename, 'sallar').then(() => {
-    return Promise.all([
-      dispatch(setWorkspace(filename)),
-      dispatch(addRecent(filename))
-    ]);
+    dispatch(setWorkspace(filename));
   });
 };
 
 export const openFile = filename => dispatch => {
   return loadWorkspace(filename, 'sallar').then(() => {
-    return Promise.all([
-      dispatch(setWorkspace(filename)),
-      dispatch(addRecent(filename))
-    ]);
+    dispatch(setWorkspace(filename));
   });
 };

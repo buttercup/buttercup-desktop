@@ -1,3 +1,5 @@
+import { SET_WORKSPACE } from './workspace';
+
 // Constants ->
 
 const ADD = 'buttercup/recents/ADD';
@@ -9,10 +11,13 @@ const CLEAR = 'buttercup/recents/CLEAR';
 export default function recentFilesReducer(state = [], action) {
   switch (action.type) {
     case ADD:
-      if (state.indexOf(action.filename) === -1) {
-        return [action.filename, ...state];
+    case SET_WORKSPACE: {
+      const filename = action.filename || action.payload.path;
+      if (state.indexOf(filename) === -1) {
+        return [filename, ...state];
       }
       return state;
+    }
     case REMOVE:
       return state.filter(filename => filename !== action.filename);
     case CLEAR:
