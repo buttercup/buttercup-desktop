@@ -4,30 +4,13 @@ import Tree, { TreeNode } from 'rc-tree';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      expandedKeys: [],
-      autoExpandParent: true
-    };
-  }
-
   onExpand(expandedKeys) {
-    this.setState({
-      expandedKeys,
-      autoExpandParent: false
-    });
+    this.props.onExpand(expandedKeys);
   }
 
   onDrop(info) {
     const dropKey = info.node.props.eventKey;
     const dragKey = info.dragNode.props.eventKey;
-    this.setState({
-      expandedKeys: [
-        ...this.state.expandedKeys,
-        dropKey
-      ]
-    });
     this.props.onDrop(dragKey, dropKey);
   }
 
@@ -39,12 +22,6 @@ class TreeView extends Component {
 
   onAddClick(e, id) {
     e.stopPropagation();
-    this.setState({
-      expandedKeys: [
-        ...this.state.expandedKeys,
-        id
-      ]
-    });
     this.props.onAddClick(id);
   }
 
@@ -83,7 +60,8 @@ class TreeView extends Component {
         defaultExpandAll
         draggable
         showLine={false}
-        expandedKeys={this.state.expandedKeys}
+        selectedKeys={this.props.selectedKeys}
+        expandedKeys={this.props.expandedKeys}
         onSelect={(...args) => this.onSelect(...args)}
         onExpand={(...args) => this.onExpand(...args)}
         onDrop={(...args) => this.onDrop(...args)}
@@ -95,11 +73,14 @@ class TreeView extends Component {
 }
 
 TreeView.propTypes = {
+  expandedKeys: PropTypes.array,
+  selectedKeys: PropTypes.array,
   groups: PropTypes.array,
   onRemoveClick: PropTypes.func,
   onAddClick: PropTypes.func,
   onGroupSelect: PropTypes.func,
-  onDrop: PropTypes.func
+  onDrop: PropTypes.func,
+  onExpand: PropTypes.func
 };
 
 export default TreeView;

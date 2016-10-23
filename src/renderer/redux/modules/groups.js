@@ -4,6 +4,8 @@ import { loadEntries } from './entries';
 // Constants ->
 
 export const GROUP_SELECTED = 'buttercup/groups/SELECTED';
+export const GROUP_ADD_CHILD = 'buttercup/groups/ADD_CHILD';
+export const GROUP_MOVE = 'buttercup/groups/MOVE';
 const RESET = 'buttercup/groups/RESET';
 const REMOVE = 'buttercup/groups/REMOVE';
 
@@ -38,6 +40,13 @@ export function addGroup(parentId, title = 'Untitled') {
   return dispatch => {
     groupTools.createGroup(parentId, title);
     dispatch(reloadGroups());
+    dispatch({
+      type: GROUP_ADD_CHILD,
+      payload: {
+        parentId,
+        title
+      }
+    });
   };
 }
 
@@ -59,6 +68,13 @@ export function moveGroupToParent(groupId, parentId) {
   return dispatch => {
     groupTools.moveGroup(groupId, parentId);
     dispatch(reloadGroups());
+    dispatch({
+      type: GROUP_MOVE,
+      payload: {
+        parentId,
+        groupId
+      }
+    });
   };
 }
 

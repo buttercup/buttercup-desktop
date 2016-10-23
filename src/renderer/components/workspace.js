@@ -4,11 +4,11 @@ import Archive from '../components/archive';
 
 class Workspace extends Component {
   render() {
-    const { ui } = this.props;
+    const { workspace } = this.props;
     return (
       <div>
-        {ui.archiveOpen ?
-          <Archive/> : <Intro/>
+        {workspace.archive.path === null ?
+          <Intro/> : <Archive/>
         }
       </div>
     );
@@ -16,7 +16,7 @@ class Workspace extends Component {
 }
 
 Workspace.propTypes = {
-  ui: PropTypes.object
+  workspace: PropTypes.object
 };
 
 export default Workspace;

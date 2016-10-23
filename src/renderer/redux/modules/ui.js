@@ -1,15 +1,6 @@
-import Immutable from 'seamless-immutable';
-import { SET_WORKSPACE } from './workspace';
+import { combineReducers } from 'redux';
+import treeReducer from './tree';
 
-const initial = Immutable({
-  archiveOpen: false
+export default combineReducers({
+  tree: treeReducer
 });
-
-export default function uiReducer(state = initial, action) {
-  switch (action.type) {
-    case SET_WORKSPACE:
-      return state.set('archiveOpen', true);
-    default:
-      return state;
-  }
-}
