@@ -1,9 +1,18 @@
 import React, { Component, PropTypes } from 'react';
+import EntryForm from '../../containers/archive/entry-form';
 
 class Entry extends Component {
+  handleSubmit(values) {
+    console.log(values);
+  }
+
   render() {
+    if (!this.props.entry) {
+      return null;
+    }
+    
     return (
-      <pre>{JSON.stringify(this.props.entry, undefined, 2)}</pre>
+      <EntryForm onSubmit={this.handleSubmit}/>
     );
   }
 }

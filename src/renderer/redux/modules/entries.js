@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { initialize } from 'redux-form';
 import * as entryTools from '../../system/buttercup/entries';
 import { GROUP_SELECTED } from './groups';
 
@@ -41,6 +42,17 @@ function currentEntry(state = null, action) {
   }
 }
 
+// Selectors ->
+
+export const getCurrentEntries = state =>
+  state.shownIds.map(id => state.byId[id]);
+
+export const getCurrentEntry = state =>
+  state.byId[state.currentEntry];
+
+export const getEntry = (state, entryId) =>
+  state.byId[entryId];
+
 // Action Creators ->
 
 export const loadEntries = groupId => dispatch => {
@@ -51,18 +63,13 @@ export const loadEntries = groupId => dispatch => {
   });
 };
 
-export const selectEntry = entryId => ({
-  type: ENTRIES_SELECTED,
-  payload: entryId
-});
-
-// Selectors ->
-
-export const getCurrentEntries = state =>
-  state.shownIds.map(id => state.byId[id]);
-
-export const getCurrentEntry = state =>
-  state.byId[state.currentEntry];
+export const selectEntry = entryId => (dispatch, getState) => {
+  dispatch({
+    type: ENTRIES_SELECTED,
+    payload: entryId
+  });
+  dispatch(initialize('editForm', getEntry(getState().entries, entryId)));
+};
 
 export default combineReducers({
   byId,

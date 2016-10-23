@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 import recentFiles from './modules/recents';
 import groups from './modules/groups';
 import workspace from './modules/workspace';
@@ -10,5 +11,6 @@ export default combineReducers({
   recentFiles,
   groups,
   ui,
-  entries
+  entries,
+  form: formReducer
 });
