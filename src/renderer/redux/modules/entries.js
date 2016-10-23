@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import { initialize } from 'redux-form';
+import deepAssign from 'deep-assign';
 import * as entryTools from '../../system/buttercup/entries';
 import { GROUP_SELECTED } from './groups';
 
 export const ENTRIES_LOADED = 'buttercup/entries/LOADED'; 
 export const ENTRIES_SELECTED = 'buttercup/entries/SELECTED'; 
+export const ENTRIES_UPDATED = 'buttercup/entries/UPDATED'; 
 
 // Reducers ->
 
@@ -17,6 +19,11 @@ function byId(state = {}, action) {
       });
       return nextState;
     }
+    case ENTRIES_UPDATED:
+      return {
+        ...state,
+        [action.payload.id]: deepAssign(state[action.payload.id], action.payload)
+      };
     default:
       return state;
   }
@@ -68,8 +75,18 @@ export const selectEntry = entryId => (dispatch, getState) => {
     type: ENTRIES_SELECTED,
     payload: entryId
   });
-  dispatch(initialize('editForm', getEntry(getState().entries, entryId)));
+  dispatch(
+    initialize(
+      'editForm',
+      getEntry(getState().entries, entryId)
+    )
+  );
 };
+
+export const updateEntry = newValues => ({
+  type: ENTRIES_UPDATED,
+  payload: newValues
+});
 
 export default combineReducers({
   byId,

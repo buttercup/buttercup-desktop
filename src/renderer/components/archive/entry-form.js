@@ -1,5 +1,31 @@
 import React, { Component, PropTypes } from 'react';
-import { Field } from 'redux-form';
+import { Field, FieldArray } from 'redux-form';
+
+const renderMeta = ({fields, meta: {touched, error}}) => (
+  <ul>
+    <li>
+      <button type="button" onClick={() => fields.push({})}>Add Meta</button>
+      {touched && error && <span>{error}</span>}
+    </li>
+    {fields.map((member, index) => 
+      <li key={index}>
+        <Field
+          name={`${member}.key`}
+          type="text"
+          component="input"
+          placeholder="Key"
+          />
+        <Field
+          name={`${member}.value`}
+          type="text"
+          component="input"
+          placeholder="Value"
+          />
+        <button onClick={() => fields.remove(index)}>&times;</button>
+      </li>
+    )}
+  </ul>
+);
 
 class EntryForm extends Component {
   render() {
@@ -18,6 +44,7 @@ class EntryForm extends Component {
           <label htmlFor="properties.password">Password</label>
           <Field name="properties.password" component="input" type="password"/>
         </div>
+        <FieldArray name="meta" component={renderMeta}/>
         {dirty && <button type="submit">Submit</button>}
       </form>
     );

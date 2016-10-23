@@ -9,6 +9,17 @@ export function loadEntries(groupId) {
   }
 
   return group.getEntries().map(
-    entry => entry.toObject()
+    entry => {
+      const obj = entry.toObject();
+      return Object.assign(
+        obj,
+        {
+          meta: Object.keys(obj.meta).map(metaKey => ({
+            key: metaKey,
+            value: obj.meta[metaKey]
+          }))
+        }
+      );
+    }
   );
 }
