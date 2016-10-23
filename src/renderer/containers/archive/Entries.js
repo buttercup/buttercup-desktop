@@ -1,10 +1,13 @@
 import { connect } from 'react-redux';
 import Entries from '../../components/archive/entries';
-import { getCurrentEntries } from '../../redux/modules/entries';
+import { getCurrentEntries, selectEntry, getCurrentEntry } from '../../redux/modules/entries';
 
 export default connect(
   state => ({
-    entries: getCurrentEntries(state.entries)
+    entries: getCurrentEntries(state.entries),
+    currentEntry: getCurrentEntry(state.entries)
   }),
-  null
+  {
+    onSelectEntry: selectEntry
+  }
 )(Entries, 'Entries');
