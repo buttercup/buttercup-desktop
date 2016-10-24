@@ -1,13 +1,21 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/tree-view';
-import { addGroup, removeGroup, saveGroupTitle, moveGroupToParent, loadGroup } from '../redux/modules/groups';
+import {
+  getGroups,
+  getCurrentGroup,
+  addGroup,
+  removeGroup,
+  saveGroupTitle,
+  moveGroupToParent,
+  loadGroup
+} from '../redux/modules/groups';
 import { setExpandedKeys } from '../redux/modules/tree';
 
 export default connect(
   state => ({
-    groups: state.groups,
+    groups: getGroups(state.groups),
     expandedKeys: state.ui.tree.expandedKeys,
-    selectedKeys: state.ui.tree.selectedKeys
+    selectedKeys: [getCurrentGroup(state.groups)]
   }),
   {
     onAddClick: addGroup,

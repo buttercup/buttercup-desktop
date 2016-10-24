@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import * as groupTools from '../../system/buttercup/groups';
 import { loadEntries } from './entries';
 
@@ -11,7 +12,16 @@ const REMOVE = 'buttercup/groups/REMOVE';
 
 // Reducers ->
 
-export default function groupsReducer(state = [], action) {
+function currentGroupReducer(state = null, action) {
+  switch (action.type) {
+    case GROUP_SELECTED:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+function groupsReducer(state = [], action) {
   switch (action.type) {
     case RESET:
       return action.payload;
@@ -87,3 +97,16 @@ export function loadGroup(groupId) {
     dispatch(loadEntries(groupId));
   };
 }
+
+// Selectors -> 
+
+export const getGroups = state =>
+  state.byId;
+
+export const getCurrentGroup = state =>
+  state.currentGroup;
+
+export default combineReducers({
+  byId: groupsReducer,
+  currentGroup: currentGroupReducer
+});

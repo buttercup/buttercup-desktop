@@ -1,13 +1,11 @@
 import Immutable from 'seamless-immutable';
-import { GROUP_ADD_CHILD, GROUP_MOVE, GROUP_SELECTED } from './groups';
+import { GROUP_ADD_CHILD, GROUP_MOVE } from './groups';
 
 export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
 export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
-export const TREE_SET_SELECTED_KEYS = 'buttercup/ui/TREE_SET_SELECTED_KEYS';
 
 const initialTreeState = Immutable({
-  expandedKeys: [],
-  selectedKeys: []
+  expandedKeys: []
 });
 
 function addChild(state, groupId) {
@@ -27,9 +25,6 @@ export default function tree(state = initialTreeState, action) {
       return addChild(state, action.payload);
     case TREE_SET_EXPANDED_KEYS:
       return state.set('expandedKeys', action.payload);
-    case GROUP_SELECTED:
-    case TREE_SET_SELECTED_KEYS:
-      return state.set('selectedKeys', Array.isArray(action.payload) ? action.payload : [action.payload]);
     default:
       return state;
   }
@@ -43,9 +38,4 @@ export const setExpandedKeys = keys => ({
 export const addExpandedKey = key => ({
   type: TREE_ADD_EXPANDED_KEY,
   payload: key
-});
-
-export const setSelectedKeys = keys => ({
-  type: TREE_SET_SELECTED_KEYS,
-  payload: keys
 });
