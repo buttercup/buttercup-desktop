@@ -12,12 +12,15 @@ class Entry extends Component {
   }
 
   render() {
-    if (!this.props.entry) {
-      return null;
+    let showForm = false;
+    if (this.props.entry) {
+      showForm = true;
     }
     
     return (
-      <EntryForm onSubmit={this.handleSubmit}/>
+      <div>
+        {showForm && <EntryForm onSubmit={this.handleSubmit}/>}
+      </div>
     );
   }
 }

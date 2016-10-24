@@ -6,7 +6,7 @@ import { GROUP_SELECTED } from './groups';
 
 export const ENTRIES_LOADED = 'buttercup/entries/LOADED'; 
 export const ENTRIES_SELECTED = 'buttercup/entries/SELECTED'; 
-export const ENTRIES_UPDATED = 'buttercup/entries/UPDATED'; 
+export const ENTRIES_UPDATE_REQUEST = 'buttercup/entries/UPDATE_REQUEST'; 
 
 // Reducers ->
 
@@ -19,7 +19,7 @@ function byId(state = {}, action) {
       });
       return nextState;
     }
-    case ENTRIES_UPDATED:
+    case ENTRIES_UPDATE_REQUEST:
       return {
         ...state,
         [action.payload.id]: deepAssign(state[action.payload.id], action.payload)
@@ -43,6 +43,7 @@ function currentEntry(state = null, action) {
     case ENTRIES_SELECTED:
       return action.payload;
     case GROUP_SELECTED:
+    case 'redux-form/DESTROY':
       return null;
     default:
       return state;
@@ -71,22 +72,29 @@ export const loadEntries = groupId => dispatch => {
 };
 
 export const selectEntry = entryId => (dispatch, getState) => {
-  dispatch({
-    type: ENTRIES_SELECTED,
-    payload: entryId
-  });
-  dispatch(
-    initialize(
-      'editForm',
-      getEntry(getState().entries, entryId)
-    )
-  );
+  const state = getState().entries;
+  const currentEntry = getCurrentEntry(state); 
+  if (!currentEntry || currentEntry.id !== entryId) {
+    dispatch({
+      type: ENTRIES_SELECTED,
+      payload: entryId
+    });
+    dispatch(
+      initialize(
+        'editForm',
+        getEntry(state, entryId)
+      )
+    );
+  }
 };
 
-export const updateEntry = newValues => ({
-  type: ENTRIES_UPDATED,
-  payload: newValues
-});
+export const updateEntry = newValues => dispatch => {
+  dispatch({
+    type: ENTRIES_UPDATE_REQUEST,
+    payload: newValues
+  });
+  entryTools.updateEntry(newValues);
+};
 
 export default combineReducers({
   byId,
