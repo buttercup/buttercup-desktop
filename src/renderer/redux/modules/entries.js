@@ -9,6 +9,7 @@ export const ENTRIES_SELECTED = 'buttercup/entries/SELECTED';
 export const ENTRIES_UPDATE = 'buttercup/entries/UPDATE'; 
 export const ENTRIES_CREATE_REQUEST = 'buttercup/entries/CREATE_REQUEST'; 
 export const ENTRIES_CREATE = 'buttercup/entries/CREATE'; 
+export const ENTRIES_DELETE = 'buttercup/entries/DELETE'; 
 
 // Reducers ->
 
@@ -31,6 +32,11 @@ function byId(state = {}, action) {
         ...state,
         [action.payload.id]: action.payload
       };
+    case ENTRIES_DELETE: {
+      const nextState = {...state};
+      delete nextState[action.payload];
+      return nextState;
+    }
     default:
       return state;
   }
@@ -42,6 +48,8 @@ function shownIds(state = [], action) {
       return action.payload.map(entry => entry.id);
     case ENTRIES_CREATE:
       return [...state, action.payload.id];
+    case ENTRIES_DELETE:
+      return state.filter(id => id !== action.payload);
     default:
       return state;
   }
@@ -52,6 +60,7 @@ function currentEntry(state = null, action) {
     case ENTRIES_SELECTED:
       return action.payload;
     case GROUP_SELECTED:
+    case ENTRIES_DELETE:
     case 'redux-form/DESTROY':
       return null;
     default:
@@ -125,6 +134,14 @@ export const updateEntry = newValues => (dispatch, getState) => {
       console.error(err);
     });
   }
+};
+
+export const deleteEntry = entryId => dispatch => {
+  dispatch({
+    type: ENTRIES_DELETE,
+    payload: entryId
+  });
+  entryTools.deleteEntry(entryId);
 };
 
 export default combineReducers({

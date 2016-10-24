@@ -93,3 +93,15 @@ export function createEntry(newValues, groupId) {
 
   return Promise.resolve(entryToObj(entry));
 }
+
+export function deleteEntry(entryId) {
+  const arch = getArchive();
+  const entry = arch.getEntryByID(entryId);
+
+  if (!entry) {
+    throw new Error('Entry has not been found');
+  }
+
+  entry.delete();
+  save();
+}

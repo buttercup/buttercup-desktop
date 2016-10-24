@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import EntryForm from '../../containers/archive/entry-form';
+import { showConfirmDialog } from '../../system/dialog';
 
 class Entry extends Component {
   constructor(props) {
@@ -11,6 +12,14 @@ class Entry extends Component {
     this.props.onSave(values);
   }
 
+  handleDeleteClick(id) {
+    showConfirmDialog('Are you sure?', resp => {
+      if (resp === 0) {
+        this.props.onDelete(id);
+      }
+    });
+  }
+
   render() {
     let showForm = false;
     if (this.props.entry) {
@@ -20,6 +29,7 @@ class Entry extends Component {
     return (
       <div>
         {showForm && <EntryForm onSubmit={this.handleSubmit}/>}
+        {showForm && <button onClick={() => this.handleDeleteClick(this.props.entry.id)}>Delete</button>}
       </div>
     );
   }
@@ -27,7 +37,8 @@ class Entry extends Component {
 
 Entry.propTypes = {
   entry: PropTypes.object,
-  onSave: PropTypes.func
+  onSave: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default Entry;

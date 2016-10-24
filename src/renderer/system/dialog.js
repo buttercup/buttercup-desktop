@@ -44,3 +44,10 @@ export function showSaveDialog(fn) {
     fn(filename);
   }
 }
+
+export function showConfirmDialog(message, fn) {
+  const buttons = ['Yes', 'No'];
+  dialog.showMessageBox(currentWindow, {message, buttons}, resp => {
+    fn(resp);
+  });
+}
