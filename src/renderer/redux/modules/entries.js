@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 import { initialize } from 'redux-form';
 import deepAssign from 'deep-assign';
 import * as entryTools from '../../system/buttercup/entries';
-import { GROUP_SELECTED } from './groups';
+import { GROUP_SELECTED, getCurrentGroup } from './groups';
 
 export const ENTRIES_LOADED = 'buttercup/entries/LOADED'; 
 export const ENTRIES_SELECTED = 'buttercup/entries/SELECTED'; 
-export const ENTRIES_UPDATE_REQUEST = 'buttercup/entries/UPDATE_REQUEST'; 
+export const ENTRIES_UPDATE = 'buttercup/entries/UPDATE'; 
+export const ENTRIES_CREATE_REQUEST = 'buttercup/entries/CREATE_REQUEST'; 
+export const ENTRIES_CREATE = 'buttercup/entries/CREATE'; 
 
 // Reducers ->
 
@@ -19,10 +21,15 @@ function byId(state = {}, action) {
       });
       return nextState;
     }
-    case ENTRIES_UPDATE_REQUEST:
+    case ENTRIES_UPDATE:
       return {
         ...state,
         [action.payload.id]: deepAssign(state[action.payload.id], action.payload)
+      };
+    case ENTRIES_CREATE:
+      return {
+        ...state,
+        [action.payload.id]: action.payload
       };
     default:
       return state;
@@ -33,6 +40,8 @@ function shownIds(state = [], action) {
   switch (action.type) {
     case ENTRIES_LOADED:
       return action.payload.map(entry => entry.id);
+    case ENTRIES_CREATE:
+      return [...state, action.payload.id];
     default:
       return state;
   }
@@ -88,12 +97,34 @@ export const selectEntry = entryId => (dispatch, getState) => {
   }
 };
 
-export const updateEntry = newValues => dispatch => {
-  dispatch({
-    type: ENTRIES_UPDATE_REQUEST,
-    payload: newValues
-  });
-  entryTools.updateEntry(newValues);
+export const updateEntry = newValues => (dispatch, getState) => {
+  const state = getState();
+  const currentGroup = getCurrentGroup(state.groups); // @TODO: this should be object not string
+
+  if (typeof newValues.id === 'string') {
+    dispatch({
+      type: ENTRIES_UPDATE,
+      payload: newValues
+    });
+    entryTools.updateEntry(newValues);
+  } else {
+    if (currentGroup === null) {
+      return null;
+    }
+    dispatch({
+      type: ENTRIES_CREATE_REQUEST,
+      payload: newValues
+    });
+    entryTools.createEntry(newValues, currentGroup).then(entryObj => {
+      dispatch({
+        type: ENTRIES_CREATE,
+        payload: entryObj
+      });
+      dispatch(selectEntry(entryObj.id));
+    }).catch(err => {
+      console.error(err);
+    });
+  }
 };
 
 export default combineReducers({

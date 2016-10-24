@@ -1,5 +1,18 @@
 import { saveWorkspace as save, getArchive } from './archive';
 
+function entryToObj(entry) {
+  const obj = entry.toObject();
+  return Object.assign(
+    obj,
+    {
+      meta: Object.keys(obj.meta).map(metaKey => ({
+        key: metaKey,
+        value: obj.meta[metaKey]
+      }))
+    }
+  );
+}
+
 export function loadEntries(groupId) {
   const arch = getArchive();
   const group = arch.getGroupByID(groupId);
@@ -8,20 +21,7 @@ export function loadEntries(groupId) {
     throw new Error('Group has not been found.');
   }
 
-  return group.getEntries().map(
-    entry => {
-      const obj = entry.toObject();
-      return Object.assign(
-        obj,
-        {
-          meta: Object.keys(obj.meta).map(metaKey => ({
-            key: metaKey,
-            value: obj.meta[metaKey]
-          }))
-        }
-      );
-    }
-  );
+  return group.getEntries().map(entry => entryToObj(entry));
 }
 
 export function updateEntry(entryObj) {
@@ -66,4 +66,30 @@ export function updateEntry(entryObj) {
 
   // Save workspace
   save();
+}
+
+export function createEntry(newValues, groupId) {
+  const arch = getArchive();
+  const group = arch.getGroupByID(groupId);
+
+  if (!group) {
+    throw new Error('Group has not been found.');
+  }
+
+
+  const entry = group.createEntry(newValues.properties.title);
+
+  ['username', 'password'].forEach(key => {
+    if (typeof newValues.properties[key] !== 'undefined') {
+      entry.setProperty(key, newValues.properties[key]);
+    }
+  });
+
+  (newValues.meta || []).forEach(meta => {
+    entry.setMeta(meta.key, meta.value);
+  });
+
+  save();
+
+  return Promise.resolve(entryToObj(entry));
 }
