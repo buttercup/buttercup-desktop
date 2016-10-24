@@ -22,13 +22,20 @@ export function getGroups() {
  */
 export function createGroup(parentId, groupName) {
   const arch = getArchive();
-  const group = arch.getGroupByID(parentId);
+  let group = null;
+
+  if (parentId === null) {
+    group = arch;
+  } else {
+    group = arch.getGroupByID(parentId);
+  }
 
   if (!group) {
     throw new Error('Group has not been found.');
   }
   
   group.createGroup(groupName);
+  
   if (groupName.toLowerCase() !== 'untitled') {
     save();
   }

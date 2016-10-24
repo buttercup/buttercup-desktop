@@ -56,18 +56,21 @@ class TreeView extends Component {
     };
 
     return (
-      <Tree
-        defaultExpandAll
-        draggable
-        showLine={false}
-        selectedKeys={this.props.selectedKeys}
-        expandedKeys={this.props.expandedKeys}
-        onSelect={(...args) => this.onSelect(...args)}
-        onExpand={(...args) => this.onExpand(...args)}
-        onDrop={(...args) => this.onDrop(...args)}
-        >
-        {loop(this.props.groups)}
-      </Tree>
+      <div>
+        <button onClick={e => this.onAddClick(e, null)}>+</button>
+        <Tree
+          defaultExpandAll
+          draggable
+          showLine={false}
+          selectedKeys={this.props.selectedKeys}
+          expandedKeys={this.props.expandedKeys}
+          onSelect={(...args) => this.onSelect(...args)}
+          onExpand={(...args) => this.onExpand(...args)}
+          onDrop={(...args) => this.onDrop(...args)}
+          >
+          {loop(this.props.groups)}
+        </Tree>
+      </div>
     );
   }
 }
