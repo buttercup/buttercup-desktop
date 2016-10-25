@@ -5,6 +5,8 @@ class Entries extends Component {
     const { entries, currentEntry } = this.props;
     return (
       <div>
+        <hr/>
+        <button onClick={this.props.handleAddEntry}>Add Entry</button>
         <ul>
           {entries.map(entry => 
             <li
@@ -17,7 +19,6 @@ class Entries extends Component {
             </li>
           )}
         </ul>
-        <button onClick={this.props.handleAddEntry}>Add Entry</button>
       </div>
     );
   }

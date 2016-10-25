@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import EntryForm from '../../containers/archive/entry-form';
 import { showConfirmDialog } from '../../system/dialog';
+import EntryView from './entry-view';
 
 class Entry extends Component {
   handleDeleteClick(id) {
@@ -42,6 +43,7 @@ class Entry extends Component {
   renderViewMode() {
     return (
       <div>
+        <EntryView entry={this.props.entry}/>
         <button onClick={this.props.handleEditMode}>Edit</button>
       </div>
     );
@@ -63,6 +65,7 @@ class Entry extends Component {
 
     return (
       <div>
+        <hr/>
         {content}
       </div>
     );
