@@ -1,4 +1,6 @@
 import { remote } from 'electron';
+import { default as swal } from 'sweetalert2';
+import 'style!raw!sweetalert2/dist/sweetalert2.css';
 
 const { dialog } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -49,5 +51,16 @@ export function showConfirmDialog(message, fn) {
   const buttons = ['Yes', 'No'];
   dialog.showMessageBox(currentWindow, {message, buttons}, resp => {
     fn(resp);
+  });
+}
+
+export function showPasswordDialog(preConfirm) {
+  return swal({
+    title: 'Master Password',
+    input: 'password',
+    showCancelButton: true,
+    animation: false,
+    inputPlaceholder: 'Password',
+    preConfirm
   });
 }
