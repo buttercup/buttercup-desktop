@@ -5,7 +5,8 @@ import { getCurrentEntries, selectEntry, getCurrentEntry, changeMode } from '../
 export default connect(
   state => ({
     entries: getCurrentEntries(state.entries),
-    currentEntry: getCurrentEntry(state.entries)
+    currentEntry: getCurrentEntry(state.entries),
+    currentGroup: state.groups.currentGroup
   }),
   {
     onSelectEntry: selectEntry,

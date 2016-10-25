@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 
 class Entries extends Component {
   render() {
-    const { entries, currentEntry } = this.props;
+    const { entries, currentEntry, currentGroup } = this.props;
     return (
       <div>
         <hr/>
-        <button onClick={this.props.handleAddEntry}>Add Entry</button>
+        <button onClick={this.props.handleAddEntry} disabled={Boolean(currentGroup) !== true}>Add Entry</button>
         <ul>
           {entries.map(entry => 
             <li
@@ -27,6 +27,7 @@ class Entries extends Component {
 Entries.propTypes = {
   entries: PropTypes.array,
   currentEntry: PropTypes.object,
+  currentGroup: PropTypes.string,
   onSelectEntry: PropTypes.func,
   handleAddEntry: PropTypes.func
 };
