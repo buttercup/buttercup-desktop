@@ -62,6 +62,11 @@ function currentEntry(state = null, action) {
     case GROUP_SELECTED:
     case ENTRIES_DELETE:
       return null;
+    case ENTRIES_CHANGE_MODE:
+      if (action.payload === 'new') {
+        return null;
+      }
+      return state;
     default:
       return state;
   }
@@ -74,6 +79,8 @@ function mode(state = 'view', action) {
         return action.payload;
       } 
       return state;
+    case ENTRIES_SELECTED:
+      return 'view';
     default:
       return state;
   }

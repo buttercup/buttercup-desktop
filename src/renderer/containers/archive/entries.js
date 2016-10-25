@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Entries from '../../components/archive/entries';
-import { getCurrentEntries, selectEntry, getCurrentEntry } from '../../redux/modules/entries';
+import { getCurrentEntries, selectEntry, getCurrentEntry, changeMode } from '../../redux/modules/entries';
 
 export default connect(
   state => ({
@@ -8,6 +8,7 @@ export default connect(
     currentEntry: getCurrentEntry(state.entries)
   }),
   {
-    onSelectEntry: selectEntry
+    onSelectEntry: selectEntry,
+    handleAddEntry: changeMode('new')
   }
 )(Entries, 'Entries');

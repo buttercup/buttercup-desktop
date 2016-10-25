@@ -22,11 +22,20 @@ class Entry extends Component {
 
   renderEditMode() {
     return (
-      <div>
-        <EntryForm onSubmit={values => this.props.onEditEntry(values)}/>
-        <button onClick={() => this.handleDeleteClick(this.props.entry.id)}>Delete</button>
-        <button onClick={this.props.handleViewMode}>Cancel</button>
-      </div>
+      <EntryForm
+        onSubmit={values => this.props.onEditEntry(values)}
+        onCancel={this.props.handleViewMode}
+        onDelete={() => this.handleDeleteClick(this.props.entry.id)}
+        />
+    );
+  }
+
+  renderNewMode() {
+    return (
+      <EntryForm
+        onSubmit={values => this.props.onNewEntry(values)}
+        onCancel={this.props.handleViewMode}
+        />
     );
   }
 
@@ -42,12 +51,14 @@ class Entry extends Component {
     const { entry, mode } = this.props;
     let content = null;
 
-    if (entry) {
+    if (entry && mode !== 'new') {
       if (mode === 'edit') {
         content = this.renderEditMode();
       } else if (mode === 'view') {
         content = this.renderViewMode();
       }
+    } else if (!entry && mode === 'new') {
+      content = this.renderNewMode();
     }
 
     return (
@@ -62,6 +73,7 @@ Entry.propTypes = {
   mode: PropTypes.string,
   entry: PropTypes.object,
   onEditEntry: PropTypes.func,
+  onNewEntry: PropTypes.func,
   onDelete: PropTypes.func,
   handleEditMode: PropTypes.func,
   handleViewMode: PropTypes.func,

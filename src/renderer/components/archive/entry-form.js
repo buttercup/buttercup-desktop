@@ -28,8 +28,18 @@ const renderMeta = ({fields, meta: {touched, error}}) => (
 );
 
 class EntryForm extends Component {
+  onCancelClick(e) {
+    e.preventDefault();
+    this.props.onCancel();
+  }
+  
+  onDeleteClick(e) {
+    e.preventDefault();
+    this.props.onDelete();
+  }
+
   render() {
-    const { handleSubmit, dirty } = this.props;
+    const { handleSubmit, dirty, onDelete } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -46,6 +56,8 @@ class EntryForm extends Component {
         </div>
         <FieldArray name="meta" component={renderMeta}/>
         {dirty && <button type="submit">Submit</button>}
+        <button onClick={e => this.onCancelClick(e)}>Cancel</button>
+        {onDelete && <button onClick={e => this.onDeleteClick(e)}>Delete</button>}
       </form>
     );
   }
@@ -54,7 +66,9 @@ class EntryForm extends Component {
 EntryForm.propTypes = {
   entry: PropTypes.object,
   dirty: PropTypes.bool,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  onCancel: PropTypes.func,
+  onDelete: PropTypes.func
 };
 
 export default EntryForm;
