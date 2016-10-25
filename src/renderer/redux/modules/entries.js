@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { initialize } from 'redux-form';
 import deepAssign from 'deep-assign';
 import * as entryTools from '../../system/buttercup/entries';
 import { GROUP_SELECTED, getCurrentGroup } from './groups';
@@ -10,6 +9,7 @@ export const ENTRIES_UPDATE = 'buttercup/entries/UPDATE';
 export const ENTRIES_CREATE_REQUEST = 'buttercup/entries/CREATE_REQUEST'; 
 export const ENTRIES_CREATE = 'buttercup/entries/CREATE'; 
 export const ENTRIES_DELETE = 'buttercup/entries/DELETE'; 
+export const ENTRIES_CHANGE_MODE = 'buttercup/entries/CHANGE_MODE'; 
 
 // Reducers ->
 
@@ -61,8 +61,19 @@ function currentEntry(state = null, action) {
       return action.payload;
     case GROUP_SELECTED:
     case ENTRIES_DELETE:
-    case 'redux-form/DESTROY':
       return null;
+    default:
+      return state;
+  }
+}
+
+function mode(state = 'view', action) {
+  switch (action.type) {
+    case ENTRIES_CHANGE_MODE:
+      if (['edit', 'view', 'new'].indexOf(action.payload) !== -1) {
+        return action.payload;
+      } 
+      return state;
     default:
       return state;
   }
@@ -97,43 +108,43 @@ export const selectEntry = entryId => (dispatch, getState) => {
       type: ENTRIES_SELECTED,
       payload: entryId
     });
-    dispatch(
-      initialize(
-        'editForm',
-        getEntry(state, entryId)
-      )
-    );
   }
 };
 
-export const updateEntry = newValues => (dispatch, getState) => {
+export const changeMode = mode => () => ({
+  type: ENTRIES_CHANGE_MODE,
+  payload: mode
+});
+
+export const updateEntry = newValues => dispatch => {
+  dispatch({
+    type: ENTRIES_UPDATE,
+    payload: newValues
+  });
+  entryTools.updateEntry(newValues);
+  dispatch(changeMode('view')());
+};
+
+export const newEntry = newValues => (dispatch, getState) => {
   const state = getState();
   const currentGroup = getCurrentGroup(state.groups); // @TODO: this should be object not string
 
-  if (typeof newValues.id === 'string') {
-    dispatch({
-      type: ENTRIES_UPDATE,
-      payload: newValues
-    });
-    entryTools.updateEntry(newValues);
-  } else {
-    if (currentGroup === null) {
-      return null;
-    }
-    dispatch({
-      type: ENTRIES_CREATE_REQUEST,
-      payload: newValues
-    });
-    entryTools.createEntry(newValues, currentGroup).then(entryObj => {
-      dispatch({
-        type: ENTRIES_CREATE,
-        payload: entryObj
-      });
-      dispatch(selectEntry(entryObj.id));
-    }).catch(err => {
-      console.error(err);
-    });
+  if (currentGroup === null) {
+    return null;
   }
+  dispatch({
+    type: ENTRIES_CREATE_REQUEST,
+    payload: newValues
+  });
+  entryTools.createEntry(newValues, currentGroup).then(entryObj => {
+    dispatch({
+      type: ENTRIES_CREATE,
+      payload: entryObj
+    });
+    dispatch(selectEntry(entryObj.id));
+  }).catch(err => {
+    console.error(err);
+  });
 };
 
 export const deleteEntry = entryId => dispatch => {
@@ -147,5 +158,6 @@ export const deleteEntry = entryId => dispatch => {
 export default combineReducers({
   byId,
   shownIds,
-  currentEntry
+  currentEntry,
+  mode
 });
