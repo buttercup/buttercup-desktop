@@ -76,7 +76,6 @@ export function createEntry(newValues, groupId) {
     throw new Error('Group has not been found.');
   }
 
-
   const entry = group.createEntry(newValues.properties.title);
 
   ['username', 'password'].forEach(key => {

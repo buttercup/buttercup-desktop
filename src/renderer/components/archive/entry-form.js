@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, FieldArray } from 'redux-form';
 
-const renderMeta = ({fields, meta: {touched, error}}) => (
+const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types
   <ul>
     <li>
       <button type="button" onClick={() => fields.push({})}>Add Meta</button>
