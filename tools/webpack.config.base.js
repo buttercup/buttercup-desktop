@@ -2,15 +2,23 @@ import path from 'path';
 
 export default {
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      loaders: ['babel-loader'],
-      exclude: /node_modules/
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader',
-      exclude: /node_modules/
-    }]
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel-loader'],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(svg|ttf|woff2)$/,
+        loader: 'url-loader',
+        exclude: /node_modules/
+      }
+    ]
   },
   output: {
     path: path.join(__dirname, '../dist'),

@@ -1,0 +1,31 @@
+@import './variables';
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: normal;
+  src: url('./font/OpenSans-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-weight: bold;
+  src: url('./font/OpenSans-Bold.woff2') format('woff2');
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+  font: 1em/1.5 $body-font-family;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+}
+

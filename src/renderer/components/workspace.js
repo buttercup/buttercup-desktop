@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Intro from '../components/intro';
 import Archive from '../components/archive';
+import './styles/workspace.global.scss';
 import styles from './styles/commons.scss';
 
 class Workspace extends Component {

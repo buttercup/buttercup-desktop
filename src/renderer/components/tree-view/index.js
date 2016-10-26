@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Tree, { TreeNode } from 'rc-tree';
 import cx from 'classnames';
-import 'style!raw!./tree-view.css';
+//import 'style!raw!./tree-view.css';
 import styles from '../styles/commons.scss';
+import '../styles/tree-view.global.scss';
 import localStyles from '../styles/tree-view.scss';
 import TreeLabel from './tree-label';
 
