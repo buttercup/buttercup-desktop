@@ -3,13 +3,19 @@ import Column from '../column';
 import localStyles from '../styles/entries.scss';
 
 class Entries extends Component {
+  handleChange(e) {
+    this.props.onFilterChange(e.target.value);
+  }
+
   render() {
     const { entries, currentEntry, currentGroup, handleAddEntry } = this.props;
-    const addButton = (<button onClick={handleAddEntry} disabled={Boolean(currentGroup) !== true}>Add Entry</button>);
+    const addButton = <button onClick={handleAddEntry} disabled={Boolean(currentGroup) !== true}>Add Entry</button>;
+    const filterNode = <input type="search" onChange={e => this.handleChange(e)}/>;
 
     return (
       <Column
         className={[localStyles.entriesList]}
+        header={filterNode}
         footer={addButton}
         >
         <ul>
@@ -30,10 +36,12 @@ class Entries extends Component {
 }
 
 Entries.propTypes = {
+  filter: PropTypes.string,
   entries: PropTypes.array,
   currentEntry: PropTypes.object,
   currentGroup: PropTypes.string,
   onSelectEntry: PropTypes.func,
+  onFilterChange: PropTypes.func,
   handleAddEntry: PropTypes.func
 };
 

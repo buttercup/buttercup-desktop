@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import deepAssign from 'deep-assign';
 import * as entryTools from '../../system/buttercup/entries';
+import { filterByText } from '../../system/utils';
 import { GROUP_SELECTED, getCurrentGroup } from './groups';
 
 export const ENTRIES_LOADED = 'buttercup/entries/LOADED'; 
@@ -10,6 +11,7 @@ export const ENTRIES_CREATE_REQUEST = 'buttercup/entries/CREATE_REQUEST';
 export const ENTRIES_CREATE = 'buttercup/entries/CREATE'; 
 export const ENTRIES_DELETE = 'buttercup/entries/DELETE'; 
 export const ENTRIES_CHANGE_MODE = 'buttercup/entries/CHANGE_MODE'; 
+export const ENTRIES_SET_FILTER = 'buttercup/entries/SET_FILTER'; 
 
 // Reducers ->
 
@@ -86,10 +88,21 @@ function mode(state = 'view', action) {
   }
 }
 
+function filter(state = '', action) {
+  switch (action.type) {
+    case ENTRIES_SET_FILTER:
+      return action.payload;
+    case GROUP_SELECTED:
+      return state;
+    default:
+      return state;
+  }
+}
+
 // Selectors ->
 
 export const getCurrentEntries = state =>
-  state.shownIds.map(id => state.byId[id]);
+  filterByText(state.shownIds.map(id => state.byId[id]), state.filter);
 
 export const getCurrentEntry = state =>
   state.byId[state.currentEntry];
@@ -162,9 +175,15 @@ export const deleteEntry = entryId => dispatch => {
   entryTools.deleteEntry(entryId);
 };
 
+export const setFilter = filter => ({
+  type: ENTRIES_SET_FILTER,
+  payload: filter
+});
+
 export default combineReducers({
   byId,
   shownIds,
   currentEntry,
-  mode
+  mode,
+  filter
 });
