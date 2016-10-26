@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import 'style!raw!./tree-view.css';
 import Tree, { TreeNode } from 'rc-tree';
+import cx from 'classnames';
+import 'style!raw!./tree-view.css';
+import styles from '../styles/commons.scss';
+import localStyles from '../styles/tree-view.scss';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
@@ -56,7 +59,7 @@ class TreeView extends Component {
     };
 
     return (
-      <div>
+      <div className={cx(styles.flexColumn30, localStyles.treeView)}>
         <button onClick={e => this.onAddClick(e, null)}>+</button>
         <Tree
           defaultExpandAll

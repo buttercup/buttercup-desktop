@@ -23,7 +23,7 @@ const config = {
   module: {
     ...baseConfig.module,
     loaders: [
-      ...baseConfig.module.loaders/*,
+      ...baseConfig.module.loaders,
 
       {
         test: /\.global\.css$/,
@@ -34,12 +34,13 @@ const config = {
       },
 
       {
-        test: /^((?!\.global).)*\.css$/,
+        test: /^((?!\.global).)*\.scss$/,
         loaders: [
           'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+          'sass-loader'
         ]
-      }*/
+      }
     ]
   },
 
@@ -53,8 +54,7 @@ const config = {
   ],
 
   externals: [
-    ...baseConfig.externals,
-    //'buttercup-web'
+    ...baseConfig.externals
   ],
 
   target: 'electron-renderer'

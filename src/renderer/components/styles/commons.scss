@@ -1,0 +1,28 @@
+:global(html) {
+  height: 100%;
+}
+
+:global(body) {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 100%;
+}
+
+:global(#root) {
+  display: flex;
+  flex: 1;
+}
+
+.flexContainer {
+  flex: 1;
+  display: flex;
+}
+
+.flexColumn {
+  flex: 1;
+}
+
+.flexColumn30 {
+  flex: 0 0 30%;
+}
