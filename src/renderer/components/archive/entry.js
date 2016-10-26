@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import EntryForm from '../../containers/archive/entry-form';
 import { showConfirmDialog } from '../../system/dialog';
-import styles from '../styles/commons.scss';
+import Column from '../column';
 import EntryView from './entry-view';
 
 class Entry extends Component {
@@ -65,9 +65,9 @@ class Entry extends Component {
     }
 
     return (
-      <div className={styles.flexColumn}>
+      <Column>
         {content}
-      </div>
+      </Column>
     );
   }
 }

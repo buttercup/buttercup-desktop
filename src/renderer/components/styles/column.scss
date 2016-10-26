@@ -1,0 +1,12 @@
+.column {
+  flex-direction: column;
+  display: flex;
+
+  header, footer {
+    flex: 0 0 40px;
+  }
+
+  .content {
+    flex: 1;
+  }
+}

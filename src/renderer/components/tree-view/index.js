@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Tree, { TreeNode } from 'rc-tree';
-import cx from 'classnames';
-//import 'style!raw!./tree-view.css';
-import styles from '../styles/commons.scss';
 import '../styles/tree-view.global.scss';
 import localStyles from '../styles/tree-view.scss';
+import Column from '../column';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
@@ -60,8 +58,10 @@ class TreeView extends Component {
     };
 
     return (
-      <div className={cx(styles.flexColumn30, localStyles.treeView)}>
-        <button onClick={e => this.onAddClick(e, null)}>+</button>
+      <Column
+        footer={<button onClick={e => this.onAddClick(e, null)}>Add Group</button>}
+        className={[localStyles.treeView]}
+        >
         <Tree
           defaultExpandAll
           draggable
@@ -74,7 +74,7 @@ class TreeView extends Component {
           >
           {loop(this.props.groups)}
         </Tree>
-      </div>
+      </Column>
     );
   }
 }

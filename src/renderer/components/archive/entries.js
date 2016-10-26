@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import styles from '../styles/commons.scss';
+import Column from '../column';
 import localStyles from '../styles/entries.scss';
 
 class Entries extends Component {
   render() {
-    const { entries, currentEntry, currentGroup } = this.props;
+    const { entries, currentEntry, currentGroup, handleAddEntry } = this.props;
+    const addButton = (<button onClick={handleAddEntry} disabled={Boolean(currentGroup) !== true}>Add Entry</button>);
+
     return (
-      <div className={cx(styles.flexColumn30, localStyles.entriesList)}>
-        <button onClick={this.props.handleAddEntry} disabled={Boolean(currentGroup) !== true}>Add Entry</button>
+      <Column
+        className={[localStyles.entriesList]}
+        footer={addButton}
+        >
         <ul>
           {entries.map(entry => 
             <li
@@ -21,7 +24,7 @@ class Entries extends Component {
             </li>
           )}
         </ul>
-      </div>
+      </Column>
     );
   }
 }
