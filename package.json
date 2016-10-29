@@ -51,6 +51,7 @@
     "seamless-immutable": "^6.1.4"
   },
   "devDependencies": {
+    "babel-core": "^6.18.0",
     "babel-eslint": "^6.1.1",
     "babel-loader": "^6.2.4",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -80,6 +81,7 @@
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
     "fuse.js": "^2.5.0",
     "grunt": "^0.4.5",
@@ -93,6 +95,7 @@
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
     "node-sass": "^3.10.1",
+    "npm-install-webpack-plugin": "^4.0.4",
     "raw-loader": "^0.5.1",
     "rc-tree": "^1.3.9",
     "react": "^15.3.2",
