@@ -20,7 +20,7 @@ Column.propTypes = {
   children: PropTypes.node,
   header: PropTypes.node,
   footer: PropTypes.node,
-  className: PropTypes.array
+  className: PropTypes.object
 };
 
 const styles = {

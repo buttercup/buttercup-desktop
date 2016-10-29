@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { style } from 'glamor';
+import { style, merge, $ } from 'glamor';
 import Column from '../column';
 
 class Entries extends Component {
@@ -18,15 +18,18 @@ class Entries extends Component {
         header={filterNode}
         footer={addButton}
         >
-        <ul>
+        <ul className={styles.list}>
           {entries.map(entry => 
             <li
               key={entry.id}
+              className={merge(
+                styles.item,
+                (currentEntry && entry.id === currentEntry.id) && styles.activeItem
+              )}
               onClick={() => this.props.onSelectEntry(entry.id)}
-              style={{color: (currentEntry && entry.id === currentEntry.id) ? 'red' : ''}}
               >
               <strong>{entry.properties.title}</strong>
-              <br/>{entry.properties.username}
+              <small>{entry.properties.username}</small>
             </li>
           )}
         </ul>
@@ -49,6 +52,27 @@ const styles = {
   column: style({
     backgroundColor: '#31353D',
     color: '#fff'
+  }),
+  list: style({
+    listStyle: 'none',
+    margin: 0,
+    padding: 0
+  }),
+  item: merge(
+    {
+      padding: '.7em 1em',
+      cursor: 'pointer'
+    },
+    $(' strong, small', {
+      display: 'block',
+      fontWeight: 'normal'
+    }),
+    $(' small', {
+      opacity: 0.5
+    })
+  ),
+  activeItem: style({
+    backgroundColor: '#00B7AC'
   })
 };
 
