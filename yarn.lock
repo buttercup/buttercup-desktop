@@ -3071,7 +3071,7 @@ faye-websocket@~0.4.3:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/faye-websocket/-/faye-websocket-0.4.4.tgz#c14c5b3bf14d7417ffbfd990c0a7495cd9f337bc"
 
-fbjs@^0.8.4:
+fbjs@^0.8.4, fbjs@^0.8.5:
   version "0.8.5"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.5.tgz#f69ba8a876096cb1b9bffe4d7c1e71c19d39d008"
   dependencies:
@@ -3413,6 +3413,12 @@ getpass@^0.1.1:
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.6.tgz#283ffd9fc1256840875311c1b60e8c40187110e6"
   dependencies:
     assert-plus "^1.0.0"
+
+glamor@^2.17.14:
+  version "2.17.14"
+  resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.17.14.tgz#5ffedc85e4bcc2421d7e286f9d0c32b5f73c721b"
+  dependencies:
+    fbjs "^0.8.5"
 
 glob-base@^0.3.0:
   version "0.3.0"

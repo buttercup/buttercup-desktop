@@ -3,6 +3,7 @@ import Tree, { TreeNode } from 'rc-tree';
 import { style } from 'glamor';
 import '../styles/tree-view.global.scss';
 import Column from '../column';
+import Button from '../button';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
@@ -59,7 +60,9 @@ class TreeView extends Component {
 
     return (
       <Column
-        footer={<button onClick={e => this.onAddClick(e, null)}>Add Group</button>}
+        footer={
+          <Button onClick={e => this.onAddClick(e, null)} full primary>New Group</Button>
+        }
         className={styles.column}
         >
         <Tree

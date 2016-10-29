@@ -1,16 +1,17 @@
 import React, { PropTypes } from 'react';
 import { style, merge } from 'glamor';
 import { flex, stretch } from './styles';
+import { spacing } from './styles/variables';
 
 const Column = ({children, footer = null, header = null, className = null}) => (
   <div className={merge(styles.column, className)}>
-    {header && <header className={styles.bar}>
+    {header && <header className={merge(styles.bar, styles.header)}>
       {header}
     </header>}
     <section className={stretch}>
     {children}
     </section>
-    <footer className={styles.bar}>
+    <footer className={merge(styles.bar, styles.footer)}>
       {footer}
     </footer>
   </div>
@@ -26,7 +27,15 @@ Column.propTypes = {
 const styles = {
   column: merge(flex, {flexDirection: 'column'}),
   bar: style({
-    flex: '0 0 40px'
+    border: '0 solid rgba(255,255,255,.05)',
+    flex: 0,
+    padding: spacing.ONE
+  }),
+  header: style({
+    borderBottomWidth: '1px'
+  }),
+  footer: style({
+    borderTopWidth: '1px'
   })
 };
 

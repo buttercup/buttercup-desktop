@@ -66,6 +66,7 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "classnames": "^2.2.5",
+    "color": "^0.11.3",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
     "css-loader": "^0.25.0",
