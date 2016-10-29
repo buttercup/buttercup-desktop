@@ -34,7 +34,7 @@ const shouldUseAsar = argv.asar || argv.a || false;
 const shouldBuildAll = argv.all || false;
 
 const DEFAULT_OPTS = {
-  dir: '../',
+  dir: './',
   name: appName,
   asar: shouldUseAsar,
   ignore: [
