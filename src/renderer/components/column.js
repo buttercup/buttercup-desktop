@@ -1,17 +1,16 @@
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
-import styles from './styles/commons.scss';
-import localStyles from './styles/column.scss';
+import { style, merge } from 'glamor';
+import { flex, stretch } from './styles';
 
-const Column = ({children, className = [], footer = null, header = null}) => (
-  <div className={cx([styles.flexColumn, ...className, localStyles.column])}>
-    {header && <header>
+const Column = ({children, footer = null, header = null, className = null}) => (
+  <div className={merge(styles.column, className)}>
+    {header && <header className={styles.bar}>
       {header}
     </header>}
-    <section className={localStyles.content}>
+    <section className={stretch}>
     {children}
     </section>
-    <footer>
+    <footer className={styles.bar}>
       {footer}
     </footer>
   </div>
@@ -22,6 +21,13 @@ Column.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
   className: PropTypes.array
+};
+
+const styles = {
+  column: merge(flex, {flexDirection: 'column'}),
+  bar: style({
+    flex: '0 0 40px'
+  })
 };
 
 export default Column;

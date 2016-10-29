@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Tree, { TreeNode } from 'rc-tree';
+import { style } from 'glamor';
 import '../styles/tree-view.global.scss';
-import localStyles from '../styles/tree-view.scss';
 import Column from '../column';
 import TreeLabel from './tree-label';
 
@@ -60,7 +60,7 @@ class TreeView extends Component {
     return (
       <Column
         footer={<button onClick={e => this.onAddClick(e, null)}>Add Group</button>}
-        className={[localStyles.treeView]}
+        className={styles.column}
         >
         <Tree
           defaultExpandAll
@@ -88,6 +88,13 @@ TreeView.propTypes = {
   onGroupSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onExpand: PropTypes.func
+};
+
+const styles = {
+  column: style({
+    backgroundColor: '#292C33',
+    color: '#fff'
+  })
 };
 
 export default TreeView;

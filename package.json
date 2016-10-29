@@ -84,6 +84,7 @@
     "file-loader": "^0.9.0",
     "fs-extra": "^0.30.0",
     "fuse.js": "^2.5.0",
+    "glamor": "^2.17.14",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.7.0",
     "grunt-contrib-clean": "^0.6.0",
@@ -137,6 +138,7 @@
     ],
     "rules": {
       "space-before-function-paren": "off",
+      "no-use-before-define": "off",
       "no-trailing-spaces": "off",
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",

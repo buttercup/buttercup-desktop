@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { style } from 'glamor';
 import Column from '../column';
-import localStyles from '../styles/entries.scss';
 
 class Entries extends Component {
   handleChange(e) {
@@ -14,7 +14,7 @@ class Entries extends Component {
 
     return (
       <Column
-        className={[localStyles.entriesList]}
+        className={styles.column}
         header={filterNode}
         footer={addButton}
         >
@@ -43,6 +43,13 @@ Entries.propTypes = {
   onSelectEntry: PropTypes.func,
   onFilterChange: PropTypes.func,
   handleAddEntry: PropTypes.func
+};
+
+const styles = {
+  column: style({
+    backgroundColor: '#31353D',
+    color: '#fff'
+  })
 };
 
 export default Entries;
