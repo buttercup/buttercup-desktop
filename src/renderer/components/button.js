@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react';
 import { style, merge } from 'glamor';
-import { spacing, colors } from './styles/variables';
+import { spacing } from './styles/variables';
 
-const Button = ({children, full, primary, secondary, disabled, ...rest}) => (
+const Button = ({children, full, primary, secondary, disabled, className, ...rest}) => (
   <button
     className={merge(
       styles.button,
       full && styles.full,
       primary && styles.primary,
       secondary && styles.secondary,
-      disabled && styles.disabled
+      disabled && styles.disabled,
+      className
     )}
     {...rest}
     disabled={disabled}
@@ -23,7 +24,8 @@ Button.propTypes = {
   full: PropTypes.bool,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  className: PropTypes.object
 };
 
 const styles = {

@@ -61,7 +61,13 @@ class TreeView extends Component {
     return (
       <Column
         footer={
-          <Button onClick={e => this.onAddClick(e, null)} full primary>New Group</Button>
+          <Button
+            onClick={e => this.onAddClick(e, null)}
+            full
+            className={style({
+              backgroundColor: 'rgba(0,0,0,.25)'
+            })}
+            >New Group</Button>
         }
         className={styles.column}
         >

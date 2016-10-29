@@ -16,7 +16,9 @@ class Entries extends Component {
         onClick={handleAddEntry}
         disabled={Boolean(currentGroup) !== true}
         full
-        secondary
+        className={style({
+          backgroundColor: 'rgba(0,0,0,.25)'
+        })}
         >Add Entry</Button>
     );
     const filterNode = <input type="search" onChange={e => this.handleChange(e)}/>;
