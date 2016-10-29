@@ -1,5 +1,6 @@
 export const spacing = {
   ONE: '12px',
+  TWO: '20px',
   HALF: '6px'
 };
 

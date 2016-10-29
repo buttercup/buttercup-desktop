@@ -3,10 +3,11 @@ import { style } from 'glamor';
 import Column from '../column';
 import Button from '../button';
 import List from './entries-list';
+import SearchField from './search-field';
 
 class Entries extends Component {
-  handleChange(e) {
-    this.props.onFilterChange(e.target.value);
+  handleChange(value) {
+    this.props.onFilterChange(value);
   }
 
   render() {
@@ -21,7 +22,7 @@ class Entries extends Component {
         })}
         >Add Entry</Button>
     );
-    const filterNode = <input type="search" onChange={e => this.handleChange(e)}/>;
+    const filterNode = <SearchField onChange={e => this.handleChange(e)}/>;
 
     return (
       <Column
