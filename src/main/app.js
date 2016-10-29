@@ -5,15 +5,13 @@ import Platform from './lib/platform';
 import WindowManager from './lib/window-manager';
 import './lib/buttercup';
 
-const __DEV__ = (process.env.NODE_ENV === 'development');
-
-if (__DEV__) {
+if (process.env.NODE_ENV === 'development') {
   require('electron-debug')({showDevTools: true}); // eslint-disable-line global-require
 }
 
 const windowManager = WindowManager.getSharedInstance();
 const installExtensions = async () => {
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     const installer = require('electron-devtools-installer'); // eslint-disable global-require
 
     const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
@@ -39,7 +37,7 @@ windowManager.setBuildProcedure('intro', () => {
     'title-bar-style': 'hidden'
   });
 
-  if (__DEV__) {
+  if (process.env.NODE_ENV === 'development') {
     introScreen.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
   } else {
     introScreen.loadURL(`file://${path.resolve(__dirname, './index.html')}`);

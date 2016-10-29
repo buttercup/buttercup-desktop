@@ -6,7 +6,7 @@ import baseConfig from './webpack.config.base';
 const config = {
   ...baseConfig,
 
-  devtool: 'source-map',
+  devtool: null,
 
   entry: [
     'babel-polyfill',
@@ -25,18 +25,18 @@ const config = {
       ...baseConfig.module.loaders,
 
       {
-        test: /\.global\.css$/,
+        test: /\.global\.scss$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader'
+          'css-loader!sass-loader'
         )
       },
 
       {
-        test: /^((?!\.global).)*\.css$/,
+        test: /^((?!\.global).)*\.scss$/,
         loader: ExtractTextPlugin.extract(
           'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
         )
       }
     ]
@@ -50,7 +50,7 @@ const config = {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
-        screw_ie8: true, // eslint camelcase: 0
+        screw_ie8: true, // eslint-disable-line camelcase
         warnings: false
       }
     }),

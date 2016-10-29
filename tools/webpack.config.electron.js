@@ -5,9 +5,12 @@ import baseConfig from './webpack.config.base';
 export default {
   ...baseConfig,
 
-  devtool: 'source-map',
+  devtool: null,
 
-  entry: ['babel-polyfill', './src/main/app'],
+  entry: [
+    'babel-polyfill',
+    path.resolve(__dirname, '../src/main/app')
+  ],
 
   output: {
     ...baseConfig.output,
@@ -41,7 +44,6 @@ export default {
 
   externals: [
     ...baseConfig.externals,
-    'buttercup',
     'electron-devtools-installer',
     'source-map-support'
   ]
