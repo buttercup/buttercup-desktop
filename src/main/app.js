@@ -1,20 +1,21 @@
+/* eslint-disable no-unused-expressions */
 import path from 'path';
-import { app, BrowserWindow, Menu } from 'electron'; // eslint-disable-line import/no-extraneous-dependencies
+import { app, BrowserWindow, Menu } from 'electron';
 import pkg from '../../package.json';
 import menuTemplate from './config/menu';
 import WindowManager from './lib/window-manager';
-import createRPC from './rpc';
+import createRPC from './lib/rpc';
 import './lib/buttercup';
 
 const windowManager = WindowManager.getSharedInstance();
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')({showDevTools: true}); // eslint-disable-line global-require
+  require('electron-debug')({showDevTools: true});
 }
 
 const installExtensions = async () => {
   if (process.env.NODE_ENV === 'development') {
-    const installer = require('electron-devtools-installer'); // eslint-disable global-require
+    const installer = require('electron-devtools-installer');
 
     const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
     const extensions = [

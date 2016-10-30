@@ -6,5 +6,6 @@ export const spacing = {
 
 export const colors = {
   DARK_PRIMARY: '#292C33',
-  DARK_SECONDARY: '#31353D'
+  DARK_SECONDARY: '#31353D',
+  BRAND_PRIMARY: '#00B7AC'
 };

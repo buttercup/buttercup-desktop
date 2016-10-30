@@ -2,7 +2,9 @@ $treePrefixCls: 'rc-tree';
 
 .#{$treePrefixCls} {
   margin: 0;
-  padding: 5px;
+  padding: 0;
+  -webkit-app-region: no-drag;
+  
   li {
     padding: 0;
     margin: 0;
@@ -22,38 +24,45 @@ $treePrefixCls: 'rc-tree';
         opacity: 0.8;
       }
     }
+
     &.drag-over-gap-top {
       > .draggable {
         border-top: 2px blue solid;
       }
     }
+
     &.drag-over-gap-bottom {
       > .draggable {
         border-bottom: 2px blue solid;
       }
     }
+
     &.filter-node {
       > .#{$treePrefixCls}-node-content-wrapper {
         color: #a60000!important;
         font-weight: bold!important;
       }
     }
+
     ul {
       margin: 0;
       padding: 0 0 0 18px;
+
       &.#{$treePrefixCls}-line {
         background: url("https://t.alipayobjects.com/images/T13BtfXl0mXXXXXXXX.gif") 0 0 repeat-y;
       }
     }
+
     .#{$treePrefixCls}-node-content-wrapper {
       display: inline-block;
-      padding: 1px 3px 0 0;
+      // padding: 1px 3px 0 0;
       margin: 0;
       cursor: pointer;
-      height: 17px;
+      // height: 17px;
       text-decoration: none;
       vertical-align: top;
     }
+
     span {
       &.#{$treePrefixCls}-switcher,
       &.#{$treePrefixCls}-checkbox,
@@ -115,42 +124,6 @@ $treePrefixCls: 'rc-tree';
           background: none;
         }
       }
-      &.#{$treePrefixCls}-checkbox {
-        width: 13px;
-        height: 13px;
-        margin: 0 3px;
-        background-position: 0 0;
-        &-checked {
-          background-position: -14px 0;
-        }
-        &-indeterminate {
-          background-position: -14px -28px;
-        }
-        &-disabled {
-          background-position: 0 -56px;
-        }
-        &.#{$treePrefixCls}-checkbox-checked.#{$treePrefixCls}-checkbox-disabled {
-          background-position: -14px -56px;
-        }
-        &.#{$treePrefixCls}-checkbox-indeterminate.#{$treePrefixCls}-checkbox-disabled {
-          position: relative;
-          background: #ccc;
-          border-radius: 3px;
-          &::after {
-            content: ' ';
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            position: absolute;
-            left: 3px;
-            top: 5px;
-            width: 5px;
-            height: 0;
-            border: 2px solid #fff;
-            border-top: 0;
-            border-left: 0;
-          }
-        }
-      }
     }
   }
   &-child-tree {
@@ -168,9 +141,10 @@ $treePrefixCls: 'rc-tree';
     }
   }
   &-node-selected {
-    background-color: #ffe6b0;
-    border: 1px #ffb951 solid;
-    opacity: 0.8;
+    // background-color: #ffe6b0;
+    // border: 1px #ffb951 solid;
+    // opacity: 0.8;
+    color: #00B7AC
   }
   &-icon__open {
     margin-right: 2px;

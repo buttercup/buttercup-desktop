@@ -102,7 +102,8 @@ TreeView.propTypes = {
 const styles = {
   column: style({
     backgroundColor: '#292C33',
-    color: '#fff'
+    color: '#fff',
+    paddingTop: '3em'
   })
 };
 
