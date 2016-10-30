@@ -6,8 +6,8 @@
   "main": "dist/main.js",
   "scripts": {
     "test": "xo",
-    "build:main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config tools/webpack.config.electron --progress --profile --colors",
-    "build:renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config tools/webpack.config.production --progress --profile --colors",
+    "build:main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config ./config/webpack.config.electron --progress --profile --colors",
+    "build:renderer": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config ./config/webpack.config.production --progress --profile --colors",
     "build": "npm run build:main && npm run build:renderer",
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./tools/server.js",

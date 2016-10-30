@@ -2,8 +2,7 @@ import express from 'express';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-
-import config from './webpack.config.development';
+import config from '../config/webpack.config.development';
 
 const app = express();
 const compiler = webpack(config);
@@ -34,6 +33,6 @@ process.on('SIGTERM', () => {
   console.log('Stopping dev server');
   wdm.close();
   server.close(() => {
-    process.exit(0); /* eslint no-process-exit: off */
+    process.exit(0); // eslint-disable-line xo/no-process-exit
   });
 });
