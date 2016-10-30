@@ -8,6 +8,7 @@
   z-index: 1;
   box-sizing: border-box;
   background-clip: padding-box;
+  -webkit-app-region: no-drag;
 
   &:hover {
     transition: all 2s ease;

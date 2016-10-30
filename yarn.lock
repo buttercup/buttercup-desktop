@@ -2456,6 +2456,10 @@ electron-packager@^8.1.0:
     sanitize-filename "^1.6.0"
     semver "^5.3.0"
 
+electron-rpc:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/electron-rpc/-/electron-rpc-2.0.1.tgz#0495f1dcf32597320f8661190cff2304a07bddc4"
+
 electron-winstaller@^2.3.4:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/electron-winstaller/-/electron-winstaller-2.3.4.tgz#fc7087d62ffcb28fe2d4bf21a1b16c8ca55f61a5"
@@ -7006,15 +7010,15 @@ utils-merge@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.0.tgz#0294fb922bb9375153541c4f7096231f287c8af8"
 
+uuid, uuid@^2.0.1, uuid@^2.0.2, uuid@~2.0.1:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
+
 uuid-1345@^0.99.6:
   version "0.99.6"
   resolved "https://registry.yarnpkg.com/uuid-1345/-/uuid-1345-0.99.6.tgz#b1270ae015a7721c7adec6c46ec169c6098aed40"
   dependencies:
     macaddress "^0.2.7"
-
-uuid@^2.0.1, uuid@^2.0.2, uuid@~2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.1"

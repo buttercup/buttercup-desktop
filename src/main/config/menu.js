@@ -1,9 +1,14 @@
+const app = require('electron').app;
 const Platform = require('../lib/platform');
 
 module.exports = [
-  {
-    label: Platform.isOSX() ? 'Buttercup' : 'File',
+  Platform.isOSX() ? {
+    label: app.getName(),
     submenu: require('./menu/app')
+  } : [],
+  {
+    label: Platform.isOSX() ? 'Archive' : 'File',
+    submenu: require('./menu/file')
   },
   {
     label: 'Edit',

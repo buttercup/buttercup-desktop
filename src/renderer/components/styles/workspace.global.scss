@@ -20,6 +20,7 @@ body {
   display: flex;
   height: 100%;
   font: 1em/1.5 'Open Sans';
+  -webkit-app-region: drag;
 }
 
 #root {
@@ -36,4 +37,5 @@ body {
 }
 input, button, textarea, :focus {
     outline: none; // @TODO: a11y
+    -webkit-app-region: no-drag;
 }

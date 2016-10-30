@@ -1,5 +1,5 @@
 import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
-import { showPasswordDialog } from '../../system/dialog';
+import { showOpenDialog, showSaveDialog, showPasswordDialog } from '../../system/dialog';
 import { setWorkspace } from './workspace';
 
 // Constants ->
@@ -34,3 +34,12 @@ export const createNewFile = filename => dispatch => {
 export const openFile = filename => dispatch => {
   fileAction(filename, dispatch, loadWorkspace);
 };
+
+export const newArchive = () => dispatch => {
+  showSaveDialog(filename => dispatch(createNewFile(filename)));
+};
+
+export const openArchive = () => dispatch => {
+  showOpenDialog(filename => dispatch(openFile(filename)));
+};
+

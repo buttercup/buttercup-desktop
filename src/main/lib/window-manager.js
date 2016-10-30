@@ -22,8 +22,8 @@ const WindowManager = function() {
  * @see setBuildProcedure
  * @returns {BrowserWindow}
  */
-WindowManager.prototype.buildWindowOfType = function(type) {
-  const window = (this._buildProcedures[type])();
+WindowManager.prototype.buildWindowOfType = function(type, fn = null) {
+  const window = (this._buildProcedures[type])(fn);
   this.register(type, window);
   return window;
 };
