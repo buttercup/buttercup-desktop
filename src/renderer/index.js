@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import rpc from './system/rpc';
+import { getWorkspace } from './system/buttercup/archive';
 import configureStore from './redux/configureStore';
 import * as archiveActions from './redux/modules/files';
 import WorkspaceContainer from './containers/workspace';
@@ -20,6 +21,10 @@ rpc.on('new-archive', () => {
 
 rpc.on('open-archive', () => {
   store.dispatch(archiveActions.openArchive());
+});
+
+rpc.on('is-in-workspace', () => {
+  rpc.emit('in-workspace', getWorkspace() !== null);
 });
 
 render(

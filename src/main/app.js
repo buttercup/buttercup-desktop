@@ -50,6 +50,7 @@ windowManager.setBuildProcedure('main', callback => {
   }
 
   const rpc = createRPC(win);
+  win.rpc = rpc;
 
   win.once('ready-to-show', () => {
     win.show();

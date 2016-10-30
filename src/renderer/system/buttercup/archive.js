@@ -95,7 +95,7 @@ export function newWorkspace(filename, password) {
 
 export function getWorkspace() {
   if (__curentWorkspace === null) {
-    throw new Error('Workspace has not been set yet.');
+    return null;
   }
   return __curentWorkspace;
 }
