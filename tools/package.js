@@ -25,7 +25,7 @@ const devDeps = Object
   .map(toNodePath);
 
 const depsExternal = Object
-  .keys(pkg.dependencies)
+  .keys(pkg.dependencies || {})
   .filter(name => !electronCfg.externals.includes(name))
   .map(toNodePath);
 
@@ -38,9 +38,12 @@ const DEFAULT_OPTS = {
   name: appName,
   asar: shouldUseAsar,
   ignore: [
-    '^/test($|/)',
-    '^/release($|/)',
-    '^/main.development.js'
+    '/tests($|/)',
+    '/release($|/)',
+    '/src($|/)',
+    '/tools($|/)',
+    '/config($|/)',
+    '.map$'
   ]
   .concat(devDeps)
   .concat(depsExternal)
