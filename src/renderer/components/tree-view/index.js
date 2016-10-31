@@ -1,10 +1,15 @@
+import { remote } from 'electron';
 import React, { Component, PropTypes } from 'react';
+import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import { style } from 'glamor';
 import '../styles/tree-view.global.scss';
 import Column from '../column';
 import Button from '../button';
 import TreeLabel from './tree-label';
+
+const { Menu, MenuItem } = remote;
+const currentWindow = remote.getCurrentWindow();
 
 class TreeView extends Component {
   onExpand(expandedKeys) {
@@ -24,13 +29,37 @@ class TreeView extends Component {
   }
 
   onAddClick(e, id) {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     this.props.onAddClick(id);
   }
 
   onRemoveClick(e, id) {
-    e.stopPropagation();
+    if (e) {
+      e.stopPropagation();
+    }
     this.props.onRemoveClick(id);
+  }
+
+  onRightClick(info) {
+    const { eventKey: groupId, isTrash } = info.node.props;
+
+    if (isTrash) {
+      return;
+    }
+
+    const menu = new Menu();
+    menu.append(new MenuItem({
+      label: 'Add Group', 
+      click: () => this.onAddClick(null, groupId)
+    }));
+    menu.append(new MenuItem({
+      label: 'Delete',
+      click: () => this.onRemoveClick(null, groupId)
+    }));
+
+    menu.popup(currentWindow);
   }
 
   render() {
@@ -42,7 +71,9 @@ class TreeView extends Component {
       return children.map(node => {
         return (
           <TreeNode
+            isTrash={node.isTrash}
             key={node.id}
+            className={cx({'is-trash': node.isTrash, 'node': true})}
             title={
               <TreeLabel
                 {...node}
@@ -80,6 +111,7 @@ class TreeView extends Component {
           onSelect={(...args) => this.onSelect(...args)}
           onExpand={(...args) => this.onExpand(...args)}
           onDrop={(...args) => this.onDrop(...args)}
+          onRightClick={(...args) => this.onRightClick(...args)}
           >
           {loop(this.props.groups)}
         </Tree>

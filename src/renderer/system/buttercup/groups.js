@@ -9,7 +9,9 @@ import { saveWorkspace as save, getArchive } from './archive';
 export function getGroups() {
   const arch = getArchive();
   return arch.getGroups().map(
-    group => group.toObject(Buttercup.ManagedGroup.OutputFlag.Groups)
+    group => Object.assign(group.toObject(Buttercup.ManagedGroup.OutputFlag.Groups), {
+      isTrash: group.isTrash()
+    })
   );
 }
 

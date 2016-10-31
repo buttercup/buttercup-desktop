@@ -25,7 +25,7 @@ Column.propTypes = {
 };
 
 const styles = {
-  column: merge(flex, {flexDirection: 'column'}),
+  column: merge(flex, {flexDirection: 'column', width: '100%'}),
   bar: style({
     border: '0 solid rgba(255,255,255,.05)',
     flex: 0,

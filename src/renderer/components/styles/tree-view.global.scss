@@ -54,19 +54,20 @@ $treePrefixCls: 'rc-tree';
     }
 
     .#{$treePrefixCls}-node-content-wrapper {
-      display: inline-block;
-      // padding: 1px 3px 0 0;
       margin: 0;
       cursor: pointer;
-      // height: 17px;
       text-decoration: none;
-      vertical-align: top;
+      display: inline-block;
+      width: calc(100% - 18px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: .9em;
     }
 
     span {
       &.#{$treePrefixCls}-switcher,
-      &.#{$treePrefixCls}-checkbox,
       &.#{$treePrefixCls}-iconEle {
+        background-size: 16px 16px;
         line-height: 16px;
         margin-right: 2px;
         width: 16px;
@@ -76,56 +77,42 @@ $treePrefixCls: 'rc-tree';
         border: 0 none;
         cursor: pointer;
         outline: none;
-        background-color: transparent;
         background-repeat: no-repeat;
-        background-attachment: scroll;
-        background-image: url("https://t.alipayobjects.com/images/T1.ANfXhXtXXXXXXXX.png");
       }
-      &.#{$treePrefixCls}-icon_loading {
-        margin-right: 2px;
-        vertical-align: top;
-        background: url(https://t.alipayobjects.com/images/rmsweb/T1YxhiXgJbXXXXXXXX.gif) no-repeat scroll 0 0 transparent;
-      }
+
       &.#{$treePrefixCls}-switcher {
+        position: relative;
+        vertical-align: text-top;
+
+        &:before {
+          content: "";
+          border: 4px solid transparent;
+          border-left-color: #fff;
+          position: absolute;
+          top: 4px;
+          left: 10px;
+        }
+
         &.#{$treePrefixCls}-switcher-noop {
           cursor: auto;
         }
-        &.#{$treePrefixCls}-roots_open {
-          background-position: -93px -56px;
-        }
-        &.#{$treePrefixCls}-roots_close {
-          background-position: -75px -56px;
-        }
-        &.#{$treePrefixCls}-center_open {
-          background-position: -92px -18px;
-        }
-        &.#{$treePrefixCls}-center_close {
-          background-position: -74px -18px;
-        }
-        &.#{$treePrefixCls}-bottom_open {
-          background-position: -92px -36px;
-        }
-        &.#{$treePrefixCls}-bottom_close {
-          background-position: -74px -36px;
-        }
         &.#{$treePrefixCls}-noline_open {
-          background-position: -92px -72px;
+          &:before {
+            transform: rotate(45deg);
+            transform-origin: 0;
+          }
         }
-        &.#{$treePrefixCls}-noline_close {
-          background-position: -74px -72px;
-        }
-        &.#{$treePrefixCls}-center_docu {
-          background-position: -56px -18px;
-        }
-        &.#{$treePrefixCls}-bottom_docu {
-          background-position: -56px -36px;
-        }
-        &.#{$treePrefixCls}-noline_docu {
-          background: none;
-        }
+        &.#{$treePrefixCls}-noline_close { }
+      }
+    }
+
+    &.is-trash {
+      > .#{$treePrefixCls}-node-content-wrapper > span.#{$treePrefixCls}-iconEle {
+        background-image: url(./img/trash-full.svg) !important;
       }
     }
   }
+
   &-child-tree {
     display: none;
     &-open {
@@ -141,21 +128,12 @@ $treePrefixCls: 'rc-tree';
     }
   }
   &-node-selected {
-    // background-color: #ffe6b0;
-    // border: 1px #ffb951 solid;
-    // opacity: 0.8;
     color: #00B7AC
   }
   &-icon__open {
-    margin-right: 2px;
-    vertical-align: top;
     background-image: url(./img/folder-open.svg) !important;
-    background-size: 16px 16px;
   }
   &-icon__close {
-    margin-right: 2px;
-    vertical-align: top;
     background-image: url(./img/folder.svg) !important;
-    background-size: 16px 16px;
   }
 }

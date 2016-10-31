@@ -39,7 +39,7 @@ class TreeLabel extends Component {
   }
 
   render() {
-    const { title, id } = this.props;
+    const { title, id, isTrash } = this.props;
     const { onAddClick, onRemoveClick } = this.props;
     
     const editMode = title.toLowerCase() === 'untitled';
@@ -55,11 +55,13 @@ class TreeLabel extends Component {
         />
       ) : title;
 
+      /*{!isTrash && <button onClick={e => onRemoveClick(e, id)}>&times;</button>}
+        {(editMode || isTrash) ? null : <button onClick={e => onAddClick(e, id)}>+</button>}*/
+
     return (
       <span>
         {titleLabel}
-        <button onClick={e => onRemoveClick(e, id)}>&times;</button>
-        {editMode ? null : <button onClick={e => onAddClick(e, id)}>+</button>}
+        
       </span>
     );
   }  
@@ -68,6 +70,7 @@ class TreeLabel extends Component {
 TreeLabel.propTypes = {
   title: PropTypes.string,
   id: PropTypes.string,
+  isTrash: PropTypes.bool,
   onAddClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
   onSaveClick: PropTypes.func
