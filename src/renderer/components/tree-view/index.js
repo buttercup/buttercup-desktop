@@ -111,7 +111,7 @@ class TreeView extends Component {
           draggable
           showLine={false}
           selectedKeys={this.props.selectedKeys}
-          defaultExpandedKeys={this.props.expandedKeys}
+          expandedKeys={this.props.expandedKeys}
           onSelect={(...args) => this.onSelect(...args)}
           onExpand={(...args) => this.onExpand(...args)}
           onDrop={(...args) => this.onDrop(...args)}
