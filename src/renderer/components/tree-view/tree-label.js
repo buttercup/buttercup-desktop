@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { style } from 'glamor';
 
 class TreeLabel extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class TreeLabel extends Component {
   }
 
   render() {
-    const { title } = this.props;
+    const { title, onRightClick } = this.props;
     
     const editMode = title.toLowerCase() === 'untitled';
     const titleLabel = editMode ? (
@@ -58,7 +59,7 @@ class TreeLabel extends Component {
       {(editMode || isTrash) ? null : <button onClick={e => onAddClick(e, id)}>+</button>} */
 
     return (
-      <span>
+      <span onContextMenu={() => onRightClick()} className={styles.node}>
         {titleLabel}
       </span>
     );
@@ -71,7 +72,17 @@ TreeLabel.propTypes = {
   isTrash: PropTypes.bool,
   onAddClick: PropTypes.func,
   onRemoveClick: PropTypes.func,
-  onSaveClick: PropTypes.func
+  onSaveClick: PropTypes.func,
+  onRightClick: PropTypes.func
+};
+
+const styles = {
+  node: style({
+    display: 'block',
+    width: '100%',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
+  })
 };
 
 export default TreeLabel;

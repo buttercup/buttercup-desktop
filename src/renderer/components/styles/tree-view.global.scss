@@ -59,8 +59,6 @@ $treePrefixCls: 'rc-tree';
       text-decoration: none;
       display: inline-block;
       width: calc(100% - 18px);
-      text-overflow: ellipsis;
-      overflow: hidden;
       font-size: .9em;
 
       input {
@@ -89,7 +87,6 @@ $treePrefixCls: 'rc-tree';
 
       &.#{$treePrefixCls}-switcher {
         position: relative;
-        vertical-align: text-top;
 
         &:before {
           content: "";
@@ -118,6 +115,12 @@ $treePrefixCls: 'rc-tree';
         background-image: url(./img/trash-full.svg) !important;
       }
     }
+  }
+
+  &-title {
+    display: inline-block;
+    width: calc(100% - 18px);
+    vertical-align: middle;
   }
 
   &-child-tree {

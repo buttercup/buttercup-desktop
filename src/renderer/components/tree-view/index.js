@@ -43,7 +43,7 @@ class TreeView extends Component {
   }
 
   onRightClick(info) {
-    const { eventKey: groupId, isTrash } = info.node.props;
+    const { id: groupId, isTrash } = info;
 
     if (isTrash) {
       return;
@@ -78,6 +78,7 @@ class TreeView extends Component {
               <TreeLabel
                 {...node}
                 {...this.props}
+                onRightClick={() => this.onRightClick(node)}
                 onAddClick={(e, id) => this.onAddClick(e, id)}
                 onRemoveClick={(e, id) => this.onRemoveClick(e, id)}
                 />
@@ -111,7 +112,6 @@ class TreeView extends Component {
           onSelect={(...args) => this.onSelect(...args)}
           onExpand={(...args) => this.onExpand(...args)}
           onDrop={(...args) => this.onDrop(...args)}
-          onRightClick={(...args) => this.onRightClick(...args)}
           >
           {loop(this.props.groups)}
         </Tree>
