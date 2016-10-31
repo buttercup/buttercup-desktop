@@ -62,6 +62,13 @@ $treePrefixCls: 'rc-tree';
       text-overflow: ellipsis;
       overflow: hidden;
       font-size: .9em;
+
+      input {
+        outline: none;
+        border: 1px solid rgba(#00B7AC, .5);
+        border-radius: 2px;
+        background-color: transparent;
+      }
     }
 
     span {

@@ -39,8 +39,7 @@ class TreeLabel extends Component {
   }
 
   render() {
-    const { title, id, isTrash } = this.props;
-    const { onAddClick, onRemoveClick } = this.props;
+    const { title } = this.props;
     
     const editMode = title.toLowerCase() === 'untitled';
     const titleLabel = editMode ? (
@@ -55,13 +54,12 @@ class TreeLabel extends Component {
         />
       ) : title;
 
-      /*{!isTrash && <button onClick={e => onRemoveClick(e, id)}>&times;</button>}
-        {(editMode || isTrash) ? null : <button onClick={e => onAddClick(e, id)}>+</button>}*/
+    /* {!isTrash && <button onClick={e => onRemoveClick(e, id)}>&times;</button>}
+      {(editMode || isTrash) ? null : <button onClick={e => onAddClick(e, id)}>+</button>} */
 
     return (
       <span>
         {titleLabel}
-        
       </span>
     );
   }  
