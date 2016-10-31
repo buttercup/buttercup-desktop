@@ -107,6 +107,12 @@ $treePrefixCls: 'rc-tree';
       > .#{$treePrefixCls}-node-content-wrapper > span.#{$treePrefixCls}-iconEle {
         background-image: url(./img/trash-full.svg) !important;
       }
+
+      &.is-empty {
+        > .#{$treePrefixCls}-node-content-wrapper > span.#{$treePrefixCls}-iconEle {
+          background-image: url(./img/trash-empty.svg) !important;
+        }
+      }
     }
   }
 

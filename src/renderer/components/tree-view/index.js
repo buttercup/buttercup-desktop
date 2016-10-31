@@ -73,7 +73,11 @@ class TreeView extends Component {
           <TreeNode
             isTrash={node.isTrash}
             key={node.id}
-            className={cx({'is-trash': node.isTrash, 'node': true})}
+            className={cx({
+              'is-trash': node.isTrash,
+              'is-empty': node.groups.length === 0,
+              'node': true}
+            )}
             title={
               <TreeLabel
                 {...node}
@@ -104,11 +108,10 @@ class TreeView extends Component {
         className={styles.column}
         >
         <Tree
-          defaultExpandAll
           draggable
           showLine={false}
           selectedKeys={this.props.selectedKeys}
-          expandedKeys={this.props.expandedKeys}
+          defaultExpandedKeys={this.props.expandedKeys}
           onSelect={(...args) => this.onSelect(...args)}
           onExpand={(...args) => this.onExpand(...args)}
           onDrop={(...args) => this.onDrop(...args)}
