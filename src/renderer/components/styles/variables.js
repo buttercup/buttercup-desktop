@@ -13,5 +13,7 @@ export const colors = {
   GRAY_LIGHT_DARKER: '#E4E9F2',
   RED: '#EB5767',
   RED_DARKER: '#E84054',
-  BLACK_20: 'rgba(0,0,0,.2)'
+  BLACK_20: 'rgba(0,0,0,.20)',
+  BLACK_25: 'rgba(0,0,0,.25)',
+  BLACK_35: 'rgba(0,0,0,.35)'
 };

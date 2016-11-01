@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { style } from 'glamor';
-import { spacing } from '../styles/variables';
+import { spacing, colors } from '../styles/variables';
 
 class SearchField extends Component {
   constructor(props) {
@@ -59,13 +59,16 @@ const styles = {
   }),
   field: style({
     width: '100%',
-    backgroundColor: 'rgba(0,0,0,.25)',
+    backgroundColor: colors.BLACK_25,
     border: 0,
     borderRadius: '5px',
     outline: 'none',
     padding: `${spacing.HALF} ${spacing.TWO}`,
     boxSizing: 'border-box !important',
-    fontSize: '.8em'
+    fontSize: '.8em',
+    ':focus': {
+      backgroundColor: colors.BLACK_35
+    }
   }),
   clear: style({ // eslint-disable-line quote-props
     width: '12px',

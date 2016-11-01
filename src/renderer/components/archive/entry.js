@@ -58,9 +58,8 @@ class Entry extends Component {
     return {
       content: <EntryForm
         onSubmit={values => this.props.onNewEntry(values)}
-        onCancel={this.props.handleViewMode}
         />,
-      footer: null
+      footer: <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
     };
   }
 

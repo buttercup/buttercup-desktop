@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { style } from 'glamor';
+import PlusIcon from 'react-icons/lib/md/add';
 import Column from '../column';
 import Button from '../button';
 import List from './entries-list';
@@ -17,6 +18,7 @@ class Entries extends Component {
         onClick={handleAddEntry}
         disabled={Boolean(currentGroup) !== true}
         full
+        icon={<PlusIcon/>}
         className={style({
           backgroundColor: 'rgba(0,0,0,.25)'
         })}

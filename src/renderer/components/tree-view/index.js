@@ -3,6 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import { style } from 'glamor';
+import PlusIcon from 'react-icons/lib/md/add';
 import '../styles/tree-view.global.scss';
 import Column from '../column';
 import Button from '../button';
@@ -100,6 +101,7 @@ class TreeView extends Component {
           <Button
             onClick={e => this.onAddClick(e, null)}
             full
+            icon={<PlusIcon/>}
             className={style({
               backgroundColor: 'rgba(0,0,0,.25)'
             })}
