@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { style, merge } from 'glamor';
+import TrashIcon from 'react-icons/lib/fa/trash-o';
+import EditIcon from 'react-icons/lib/fa/edit';
 import EntryForm from '../../containers/archive/entry-form';
 import { showConfirmDialog } from '../../system/dialog';
+import { flex } from '../styles';
 import Column from '../column';
+import Button from '../button';
 import EntryView from './entry-view';
 import EmptyView from './entry-empty';
 
@@ -30,7 +35,22 @@ class Entry extends Component {
         onCancel={this.props.handleViewMode}
         onDelete={() => this.handleDeleteClick(this.props.entry.id)}
         />,
-      footer: null
+      footer: (
+        <div className={flex}>
+          <div className={styles.split}>
+            <Button onClick={this.props.handleViewMode} secondary>
+              Cancel
+            </Button>
+          </div>
+          <div className={styles.splitRight}>
+            <Button
+              onClick={() => this.handleDeleteClick(this.props.entry.id)}
+              icon={<TrashIcon/>}
+              danger
+              >Delete</Button>
+          </div>
+        </div>
+      )
     };
   }
 
@@ -47,7 +67,7 @@ class Entry extends Component {
   renderViewMode() {
     return {
       content: <EntryView entry={this.props.entry}/>,
-      footer: <button onClick={this.props.handleEditMode}>Edit</button>
+      footer: <Button onClick={this.props.handleEditMode} secondary icon={<EditIcon/>}>Edit</Button>
     };
   }
 
@@ -77,7 +97,7 @@ class Entry extends Component {
     const { content, footer } = fn.call(this);
 
     return (
-      <Column footer={footer}>
+      <Column light footer={footer}>
         {content}
       </Column>
     );
@@ -93,6 +113,19 @@ Entry.propTypes = {
   handleEditMode: PropTypes.func,
   handleViewMode: PropTypes.func,
   initializeForm: PropTypes.func
+};
+
+const styles = {
+  split: style({
+    flex: '0 0 50%'
+  }),
+  splitRight: merge(
+    flex,
+    {
+      flex: '0 0 50%',
+      justifyContent: 'flex-end'
+    }
+  )
 };
 
 export default Entry;

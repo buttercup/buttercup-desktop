@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { style, merge, $ } from 'glamor';
-import { spacing } from '../styles/variables';
+import { spacing, colors } from '../styles/variables';
 
 const List = ({entries, currentEntry, onSelectEntry}) => (
   <ul className={styles.list}>
@@ -33,20 +33,26 @@ const styles = {
     padding: 0
   }),
   item: merge(
-    {
+    style({
       padding: `${spacing.HALF} ${spacing.ONE}`,
-      cursor: 'pointer'
-    },
+      cursor: 'pointer !important',
+      transition: 'background-color ease .2s',
+      ':hover': {
+        backgroundColor: colors.BLACK_20
+      }
+    }),
     $(' strong, small', {
       display: 'block',
-      fontWeight: 'normal'
+      fontWeight: 'normal',
+      cursor: 'inherit'
     }),
     $(' small', {
-      opacity: 0.5
+      opacity: 0.5,
+      cursor: 'inherit'
     })
   ),
   activeItem: style({
-    backgroundColor: '#00B7AC'
+    backgroundColor: `${colors.BRAND_PRIMARY} !important`
   })
 };
 

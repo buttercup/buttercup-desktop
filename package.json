@@ -102,6 +102,7 @@
     "react": "^15.3.2",
     "react-dom": "^15.2.0",
     "react-hot-loader": "^1.3.0",
+    "react-icons": "^2.2.1",
     "react-redux": "^4.4.5",
     "react-split-pane": "^0.1.51",
     "redux": "^3.5.2",
@@ -140,6 +141,7 @@
     ],
     "rules": {
       "space-before-function-paren": "off",
+      "quote-props": "off",
       "no-use-before-define": "off",
       "no-trailing-spaces": "off",
       "xo/filename-case": "off",
