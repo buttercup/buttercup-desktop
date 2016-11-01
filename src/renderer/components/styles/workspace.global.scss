@@ -6,6 +6,12 @@
 
 @font-face {
   font-family: 'Open Sans';
+  font-weight: 300;
+  src: url('./font/OpenSans-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
   font-weight: bold;
   src: url('./font/OpenSans-Bold.woff2') format('woff2');
 }

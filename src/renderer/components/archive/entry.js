@@ -3,6 +3,7 @@ import EntryForm from '../../containers/archive/entry-form';
 import { showConfirmDialog } from '../../system/dialog';
 import Column from '../column';
 import EntryView from './entry-view';
+import EmptyView from './entry-empty';
 
 class Entry extends Component {
   handleDeleteClick(id) {
@@ -23,49 +24,60 @@ class Entry extends Component {
   }
 
   renderEditMode() {
-    return (
-      <EntryForm
+    return {
+      content: <EntryForm
         onSubmit={values => this.props.onEditEntry(values)}
         onCancel={this.props.handleViewMode}
         onDelete={() => this.handleDeleteClick(this.props.entry.id)}
-        />
-    );
+        />,
+      footer: null
+    };
   }
 
   renderNewMode() {
-    return (
-      <EntryForm
+    return {
+      content: <EntryForm
         onSubmit={values => this.props.onNewEntry(values)}
         onCancel={this.props.handleViewMode}
-        />
-    );
+        />,
+      footer: null
+    };
   }
 
   renderViewMode() {
-    return (
-      <div>
-        <EntryView entry={this.props.entry}/>
-        <button onClick={this.props.handleEditMode}>Edit</button>
-      </div>
-    );
+    return {
+      content: <EntryView entry={this.props.entry}/>,
+      footer: <button onClick={this.props.handleEditMode}>Edit</button>
+    };
+  }
+
+  renderIdleMode() {
+    return {
+      content: <EmptyView/>,
+      footer: null
+    };
   }
 
   render() {
     const { entry, mode } = this.props;
-    let content = null;
+    let fn = null;
 
     if (entry && mode !== 'new') {
       if (mode === 'edit') {
-        content = this.renderEditMode();
+        fn = this.renderEditMode;
       } else if (mode === 'view') {
-        content = this.renderViewMode();
+        fn = this.renderViewMode;
       }
     } else if (!entry && mode === 'new') {
-      content = this.renderNewMode();
+      fn = this.renderNewMode;
+    } else {
+      fn = this.renderIdleMode;
     }
 
+    const { content, footer } = fn.call(this);
+
     return (
-      <Column>
+      <Column footer={footer}>
         {content}
       </Column>
     );
