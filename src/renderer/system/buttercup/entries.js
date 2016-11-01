@@ -15,7 +15,7 @@ function entryToObj(entry) {
 
 export function loadEntries(groupId) {
   const arch = getArchive();
-  const group = arch.getGroupByID(groupId);
+  const group = arch.findGroupByID(groupId);
 
   if (!group) {
     throw new Error('Group has not been found.');
@@ -70,7 +70,7 @@ export function updateEntry(entryObj) {
 
 export function createEntry(newValues, groupId) {
   const arch = getArchive();
-  const group = arch.getGroupByID(groupId);
+  const group = arch.findGroupByID(groupId);
 
   if (!group) {
     throw new Error('Group has not been found.');

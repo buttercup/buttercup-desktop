@@ -9,7 +9,7 @@ import { saveWorkspace as save, getArchive } from './archive';
 export function getGroups() {
   const arch = getArchive();
   return arch.getGroups().map(
-    group => Object.assign(group.toObject(Buttercup.ManagedGroup.OutputFlag.Groups), {
+    group => Object.assign(group.toObject(Buttercup.Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
     })
   );
@@ -29,7 +29,7 @@ export function createGroup(parentId, groupName) {
   if (parentId === null) {
     group = arch;
   } else {
-    group = arch.getGroupByID(parentId);
+    group = arch.findGroupByID(parentId);
   }
 
   if (!group) {
@@ -51,7 +51,7 @@ export function createGroup(parentId, groupName) {
  */
 export function deleteGroup(groupId) {
   const arch = getArchive();
-  const group = arch.getGroupByID(groupId);
+  const group = arch.findGroupByID(groupId);
 
   if (!group) {
     throw new Error('Group has not been found.');
@@ -70,7 +70,7 @@ export function deleteGroup(groupId) {
  */
 export function saveGroup(groupId, title) {
   const arch = getArchive();
-  const group = arch.getGroupByID(groupId);
+  const group = arch.findGroupByID(groupId);
 
   if (!group) {
     throw new Error('Group has not been found.');
@@ -89,8 +89,8 @@ export function saveGroup(groupId, title) {
  */
 export function moveGroup(groupId, parentId) {
   const arch = getArchive();
-  const group = arch.getGroupByID(groupId);
-  const parent = arch.getGroupByID(parentId);
+  const group = arch.findGroupByID(groupId);
+  const parent = arch.findGroupByID(parentId);
 
   if (!group || !parent) {
     throw new Error('Group has not been found.');
