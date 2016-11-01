@@ -4,14 +4,15 @@ import * as entryTools from '../../system/buttercup/entries';
 import { filterByText } from '../../system/utils';
 import { GROUP_SELECTED, getCurrentGroup } from './groups';
 
-export const ENTRIES_LOADED = 'buttercup/entries/LOADED'; 
+export const ENTRIES_LOADED = 'buttercup/entries/LOADED';
 export const ENTRIES_SELECTED = 'buttercup/entries/SELECTED'; 
-export const ENTRIES_UPDATE = 'buttercup/entries/UPDATE'; 
+export const ENTRIES_UPDATE = 'buttercup/entries/UPDATE';
 export const ENTRIES_CREATE_REQUEST = 'buttercup/entries/CREATE_REQUEST'; 
-export const ENTRIES_CREATE = 'buttercup/entries/CREATE'; 
-export const ENTRIES_DELETE = 'buttercup/entries/DELETE'; 
+export const ENTRIES_CREATE = 'buttercup/entries/CREATE';
+export const ENTRIES_DELETE = 'buttercup/entries/DELETE';
+export const ENTRIES_MOVE = 'buttercup/entries/MOVE';
 export const ENTRIES_CHANGE_MODE = 'buttercup/entries/CHANGE_MODE'; 
-export const ENTRIES_SET_FILTER = 'buttercup/entries/SET_FILTER'; 
+export const ENTRIES_SET_FILTER = 'buttercup/entries/SET_FILTER';
 
 // Reducers ->
 
@@ -52,6 +53,8 @@ function shownIds(state = [], action) {
       return [...state, action.payload.id];
     case ENTRIES_DELETE:
       return state.filter(id => id !== action.payload);
+    case ENTRIES_MOVE:
+      return state.filter(id => id !== action.payload.entryId);
     default:
       return state;
   }
@@ -165,6 +168,17 @@ export const newEntry = newValues => (dispatch, getState) => {
   }).catch(err => {
     console.error(err);
   });
+};
+
+export const moveEntry = (entryId, groupId) => (dispatch) => {
+  dispatch({
+    type: ENTRIES_MOVE,
+    payload: {
+      entryId,
+      groupId
+    }
+  });
+  entryTools.moveEntry(entryId, groupId);
 };
 
 export const deleteEntry = entryId => dispatch => {

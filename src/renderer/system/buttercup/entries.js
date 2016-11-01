@@ -104,3 +104,16 @@ export function deleteEntry(entryId) {
   entry.delete();
   save();
 }
+
+export function moveEntry(entryId, groupId) {
+  const arch = getArchive();
+  const entry = arch.getEntryByID(entryId);
+  const group = arch.findGroupByID(groupId);
+
+  if (!entry || !group) {
+    throw new Error('Entry has not been found');
+  }
+
+  entry.moveToGroup(group);
+  save();
+}

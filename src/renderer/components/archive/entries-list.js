@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { style, merge, $ } from 'glamor';
 import { spacing, colors } from '../styles/variables';
 
-const List = ({entries, currentEntry, onSelectEntry}) => (
+const List = ({entries, currentEntry, onSelectEntry, onRightClick}) => (
   <ul className={styles.list}>
     {entries.map(entry => 
       <li
@@ -12,6 +12,7 @@ const List = ({entries, currentEntry, onSelectEntry}) => (
           (currentEntry && entry.id === currentEntry.id) && styles.activeItem
         )}
         onClick={() => onSelectEntry(entry.id)}
+        onContextMenu={() => onRightClick(entry)}
         >
         <strong>{entry.properties.title}</strong>
         <small>{entry.properties.username}</small>
@@ -23,7 +24,8 @@ const List = ({entries, currentEntry, onSelectEntry}) => (
 List.propTypes = {
   entries: PropTypes.array,
   currentEntry: PropTypes.object,
-  onSelectEntry: PropTypes.func
+  onSelectEntry: PropTypes.func,
+  onRightClick: PropTypes.func
 };
 
 const styles = {

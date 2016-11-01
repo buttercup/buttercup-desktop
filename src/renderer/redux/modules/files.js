@@ -17,7 +17,6 @@ const fileAction = (filename, dispatch, fn) => {
     dispatch(setWorkspace(filename));
   })
   .catch(err => {
-    console.log(err);
     dispatch({
       type: CANCELLED,
       payload: {

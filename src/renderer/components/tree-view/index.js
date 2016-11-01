@@ -1,16 +1,13 @@
-import { remote } from 'electron';
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import { style } from 'glamor';
 import PlusIcon from 'react-icons/lib/md/add';
+import { showContextMenu } from '../../system/menu';
 import '../styles/tree-view.global.scss';
 import Column from '../column';
 import Button from '../button';
 import TreeLabel from './tree-label';
-
-const { Menu, MenuItem } = remote;
-const currentWindow = remote.getCurrentWindow();
 
 class TreeView extends Component {
   onExpand(expandedKeys) {
@@ -50,17 +47,16 @@ class TreeView extends Component {
       return;
     }
 
-    const menu = new Menu();
-    menu.append(new MenuItem({
-      label: 'Add Group', 
-      click: () => this.onAddClick(null, groupId)
-    }));
-    menu.append(new MenuItem({
-      label: 'Delete',
-      click: () => this.onRemoveClick(null, groupId)
-    }));
-
-    menu.popup(currentWindow);
+    showContextMenu([
+      {
+        label: 'Add Group', 
+        click: () => this.onAddClick(null, groupId)
+      },
+      {
+        label: 'Delete',
+        click: () => this.onRemoveClick(null, groupId)
+      }
+    ]);
   }
 
   render() {
