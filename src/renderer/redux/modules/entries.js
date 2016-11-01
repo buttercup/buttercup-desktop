@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import deepAssign from 'deep-assign';
 import * as entryTools from '../../system/buttercup/entries';
 import { filterByText } from '../../system/utils';
+import { showConfirmDialog } from '../../system/dialog';
 import { GROUP_SELECTED, getCurrentGroup } from './groups';
 
 export const ENTRIES_LOADED = 'buttercup/entries/LOADED';
@@ -170,7 +171,7 @@ export const newEntry = newValues => (dispatch, getState) => {
   });
 };
 
-export const moveEntry = (entryId, groupId) => (dispatch) => {
+export const moveEntry = (entryId, groupId) => dispatch => {
   dispatch({
     type: ENTRIES_MOVE,
     payload: {
@@ -182,11 +183,15 @@ export const moveEntry = (entryId, groupId) => (dispatch) => {
 };
 
 export const deleteEntry = entryId => dispatch => {
-  dispatch({
-    type: ENTRIES_DELETE,
-    payload: entryId
+  showConfirmDialog('Are you sure?', resp => {
+    if (resp === 0) {
+      dispatch({
+        type: ENTRIES_DELETE,
+        payload: entryId
+      });
+      entryTools.deleteEntry(entryId);
+    }
   });
-  entryTools.deleteEntry(entryId);
 };
 
 export const setFilter = filter => ({

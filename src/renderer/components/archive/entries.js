@@ -13,12 +13,8 @@ class Entries extends Component {
   }
 
   onRightClick(entry) {
-    const { groups, currentGroup, onEntryMove } = this.props;
+    const { groups, currentGroup, onEntryMove, onDelete } = this.props;
     showContextMenu([
-      {
-        label: 'Edit'
-      },
-      { type: 'separator' },
       {
         label: 'Move to Group',
         submenu: createMenuFromGroups(groups, currentGroup, groupId => {
@@ -26,7 +22,10 @@ class Entries extends Component {
         })
       },
       {
-        label: 'Move to Trash'
+        label: 'Move to Trash',
+        click() {
+          onDelete(entry.id);
+        }
       }
     ]);
   }
@@ -70,6 +69,7 @@ Entries.propTypes = {
   onSelectEntry: PropTypes.func,
   onFilterChange: PropTypes.func,
   onEntryMove: PropTypes.func,
+  onDelete: PropTypes.func,
   handleAddEntry: PropTypes.func
 };
 

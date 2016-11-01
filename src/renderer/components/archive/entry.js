@@ -3,7 +3,6 @@ import { style, merge } from 'glamor';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import EntryForm from '../../containers/archive/entry-form';
-import { showConfirmDialog } from '../../system/dialog';
 import { flex } from '../styles';
 import Column from '../column';
 import Button from '../button';
@@ -11,14 +10,6 @@ import EntryView from './entry-view';
 import EmptyView from './entry-empty';
 
 class Entry extends Component {
-  handleDeleteClick(id) {
-    showConfirmDialog('Are you sure?', resp => {
-      if (resp === 0) {
-        this.props.onDelete(id);
-      }
-    });
-  }
-
   componentWillReceiveProps(nextProps) {
     const { mode, entry, initializeForm } = this.props;
     if (nextProps.mode !== mode) {
@@ -32,8 +23,6 @@ class Entry extends Component {
     return {
       content: <EntryForm
         onSubmit={values => this.props.onEditEntry(values)}
-        onCancel={this.props.handleViewMode}
-        onDelete={() => this.handleDeleteClick(this.props.entry.id)}
         />,
       footer: (
         <div className={flex}>
@@ -44,7 +33,7 @@ class Entry extends Component {
           </div>
           <div className={styles.splitRight}>
             <Button
-              onClick={() => this.handleDeleteClick(this.props.entry.id)}
+              onClick={() => this.props.onDelete(this.props.entry.id)}
               icon={<TrashIcon/>}
               danger
               >Delete</Button>

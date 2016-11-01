@@ -15,6 +15,7 @@ export default connect(
     onSelectEntry: entries.selectEntry,
     onEntryMove: entries.moveEntry,
     onFilterChange: entries.setFilter,
+    onDelete: entries.deleteEntry,
     handleAddEntry: entries.changeMode('new')
   }
 )(Entries, 'Entries');
