@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import deepAssign from 'deep-assign';
+import clone from 'lodash/cloneDeep';
 import * as entryTools from '../../system/buttercup/entries';
 import { filterByText } from '../../system/utils';
 import { showConfirmDialog } from '../../system/dialog';
@@ -29,7 +29,7 @@ function byId(state = {}, action) {
     case ENTRIES_UPDATE:
       return {
         ...state,
-        [action.payload.id]: deepAssign(state[action.payload.id], action.payload)
+        [action.payload.id]: clone(action.payload)
       };
     case ENTRIES_CREATE:
       return {

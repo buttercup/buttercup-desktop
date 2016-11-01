@@ -93,6 +93,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "json-loader": "^0.5.4",
     "load-grunt-tasks": "^3.3.0",
+    "lodash": "^4.16.6",
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
     "node-sass": "^3.10.1",
