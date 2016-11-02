@@ -29,6 +29,10 @@ body {
   -webkit-app-region: drag;
 }
 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 #root {
   display: flex;
   flex: 1;

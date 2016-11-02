@@ -1,7 +1,8 @@
 export const spacing = {
   ONE: '12px',
   TWO: '20px',
-  HALF: '6px'
+  HALF: '6px',
+  FORM_INPUT_HEIGHT: '35px'
 };
 
 export const colors = {
@@ -13,6 +14,8 @@ export const colors = {
   GRAY_LIGHT_DARKER: '#E4E9F2',
   RED: '#EB5767',
   RED_DARKER: '#E84054',
+  BLACK_5: 'rgba(0,0,0,.05)',
+  BLACK_10: 'rgba(0,0,0,.10)',
   BLACK_20: 'rgba(0,0,0,.20)',
   BLACK_25: 'rgba(0,0,0,.25)',
   BLACK_35: 'rgba(0,0,0,.35)'

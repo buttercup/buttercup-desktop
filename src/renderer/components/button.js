@@ -11,6 +11,7 @@ const Button = ({children, full, primary, secondary, danger, disabled, className
       secondary && styles.secondary,
       danger && styles.danger,
       disabled && styles.disabled,
+      !children && styles.icon,
       className
     )}
     {...rest}
@@ -33,21 +34,26 @@ Button.propTypes = {
 
 const styles = {
   button: merge(
-    {
+    style({
       display: 'inline-block',
       borderRadius: '20px',
       fontSize: '.75em',
       textTransform: 'uppercase',
       padding: `${spacing.HALF} ${spacing.ONE}`,
       border: 0,
-      cursor: 'pointer',
+      cursor: 'pointer !important',
       outline: 'none',
-      transition: 'background-color .2s ease'
-    },
+      transition: 'background-color .2s ease',
+      backgroundColor: colors.GRAY_LIGHT,
+      ':hover': {
+        backgroundColor: colors.GRAY_LIGHT_DARKER
+      }
+    }),
     $(' svg', {
       fontSize: '14px',
       verticalAlign: '-3px !important',
-      marginRight: '2px'
+      marginRight: '2px',
+      cursor: 'pointer !important'
     })
   ),
   full: style({
@@ -64,10 +70,7 @@ const styles = {
     }
   }),
   secondary: style({
-    backgroundColor: colors.GRAY_LIGHT,
-    ':hover': {
-      backgroundColor: colors.GRAY_LIGHT_DARKER
-    }
+    
   }),
   danger: style({
     backgroundColor: colors.RED,
@@ -75,6 +78,12 @@ const styles = {
     ':hover': {
       backgroundColor: colors.RED_DARKER
     }
+  }),
+  icon: style({
+    width: '30px',
+    height: '30px',
+    borderRadius: '50%',
+    padding: `${spacing.HALF} 0`
   })
 };
 
