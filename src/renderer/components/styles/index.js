@@ -40,6 +40,7 @@ export const formRow = merge(
   $(' .input-wrapper', {
     flex: 1,
     height: spacing.FORM_INPUT_HEIGHT,
+    lineHeight: spacing.FORM_INPUT_HEIGHT,
     marginRight: spacing.HALF
   })
 );
@@ -53,4 +54,15 @@ export const formInput = style({
   ':focus': {
     borderColor: colors.BRAND_PRIMARY
   }
+});
+
+export const metaWrapper = style({
+  marginBottom: spacing.ONE
+});
+
+export const heading = style({
+  color: colors.BLACK_35,
+  textTransform: 'uppercase',
+  borderBottom: `1px solid ${colors.BLACK_5}`,
+  margin: '3em 0 0'
 });

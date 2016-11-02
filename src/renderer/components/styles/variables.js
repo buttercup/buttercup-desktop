@@ -2,7 +2,9 @@ export const spacing = {
   ONE: '12px',
   TWO: '20px',
   HALF: '6px',
-  FORM_INPUT_HEIGHT: '35px'
+  FORM_INPUT_HEIGHT: '35px',
+  FORM_COPYABLE_HEIGHT: '23px',
+  FORM_COPYABLE_MARGIN: '5px'
 };
 
 export const colors = {

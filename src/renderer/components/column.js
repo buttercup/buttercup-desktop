@@ -3,12 +3,19 @@ import { style, merge } from 'glamor';
 import { flex, stretch } from './styles';
 import { spacing } from './styles/variables';
 
-const Column = ({children, footer = null, header = null, className = null, light = false}) => (
+const Column = ({
+  children,
+  footer = null,
+  header = null,
+  className = null,
+  contentClassName = null,
+  light = false
+}) => (
   <div className={merge(styles.column, className)}>
     {header && <header className={merge(styles.bar, styles.header)}>
       {header}
     </header>}
-    <section className={stretch}>
+    <section className={merge(stretch, contentClassName)}>
     {children}
     </section>
     {footer && <footer className={merge(styles.bar, styles.footer, light && {borderColor: 'rgba(0,0,0,.05)'})}>
@@ -22,6 +29,7 @@ Column.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
   className: PropTypes.object,
+  contentClassName: PropTypes.object,
   light: PropTypes.bool
 };
 

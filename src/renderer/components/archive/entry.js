@@ -93,7 +93,7 @@ class Entry extends Component {
     const { content, footer } = fn.call(this);
 
     return (
-      <Column light footer={footer}>
+      <Column light footer={footer} contentClassName={styles.content}>
         {content}
       </Column>
     );
@@ -113,6 +113,9 @@ Entry.propTypes = {
 };
 
 const styles = {
+  content: style({
+    padding: '1em'
+  }),
   split: style({
     flex: '0 0 50%'
   }),
