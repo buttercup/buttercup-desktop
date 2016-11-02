@@ -10,6 +10,10 @@ const Copyable = ({children}) => (
   </span>
 );
 
+Copyable.propTypes = {
+  children: PropTypes.node
+};
+
 const styles = {
   span: merge(
     style({
