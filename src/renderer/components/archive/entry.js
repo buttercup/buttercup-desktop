@@ -20,16 +20,24 @@ class Entry extends Component {
   }
 
   renderEditMode() {
+    let ref;
     return {
       content: <EntryForm
+        ref={form => {
+          ref = form;
+        }}
         onSubmit={values => this.props.onEditEntry(values)}
         />,
       footer: (
         <div className={flex}>
           <div className={styles.split}>
-            <Button onClick={this.props.handleViewMode} secondary>
-              Cancel
-            </Button>
+            <Button
+              onClick={() => ref.submit()}
+              disabled={!this.props.dirty}
+              primary
+              >Save</Button>
+            {' '}
+            <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
           </div>
           <div className={styles.splitRight}>
             <Button
@@ -93,6 +101,7 @@ class Entry extends Component {
 }
 
 Entry.propTypes = {
+  dirty: PropTypes.bool,
   mode: PropTypes.string,
   entry: PropTypes.object,
   onEditEntry: PropTypes.func,

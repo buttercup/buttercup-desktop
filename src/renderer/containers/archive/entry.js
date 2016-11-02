@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
-import { initialize } from 'redux-form';
+import { initialize, isDirty } from 'redux-form';
 import Entry from '../../components/archive/entry';
 import { getCurrentEntry, updateEntry, newEntry, deleteEntry, changeMode } from '../../redux/modules/entries';
 
 export default connect(
   state => ({
     entry: getCurrentEntry(state.entries),
-    mode: state.entries.mode
+    mode: state.entries.mode,
+    dirty: isDirty('editForm')(state)
   }),
   {
     onEditEntry: updateEntry,

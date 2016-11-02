@@ -60,7 +60,8 @@ const styles = {
     width: '100%'
   }),
   disabled: style({
-    opacity: 0.5
+    opacity: 0.5,
+    cursor: 'default'
   }),
   primary: style({
     backgroundColor: colors.BRAND_PRIMARY,

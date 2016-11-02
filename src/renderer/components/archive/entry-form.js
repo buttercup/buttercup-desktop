@@ -43,7 +43,7 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
 
 class EntryForm extends Component {
   render() {
-    const { handleSubmit, dirty } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={formRow}>
@@ -60,7 +60,6 @@ class EntryForm extends Component {
         </div>
         <h6 className={styles.heading}>Custom Fields:</h6>
         <FieldArray name="meta" component={renderMeta}/>
-        {dirty && <button type="submit">Submit</button>}
       </form>
     );
   }
