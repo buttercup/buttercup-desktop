@@ -52,11 +52,25 @@ class Entry extends Component {
   }
 
   renderNewMode() {
+    let ref;
     return {
       content: <EntryForm
+        ref={form => {
+          ref = form;
+        }}
         onSubmit={values => this.props.onNewEntry(values)}
         />,
-      footer: <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+      footer: (
+        <div>
+          <Button
+            onClick={() => ref.submit()}
+            disabled={!this.props.dirty}
+            primary
+            >Save</Button>
+          {' '}
+          <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+        </div>
+      )
     };
   }
 
