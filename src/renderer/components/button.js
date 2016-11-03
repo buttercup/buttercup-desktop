@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { style, merge, $ } from 'glamor';
 import { spacing, colors } from './styles/variables';
 
-const Button = ({children, full, primary, secondary, danger, disabled, className, icon, ...rest}) => (
+const Button = ({children, full, primary, secondary, danger, disabled, dark, className, icon, ...rest}) => (
   <button
     className={merge(
       styles.button,
@@ -10,6 +10,7 @@ const Button = ({children, full, primary, secondary, danger, disabled, className
       primary && styles.primary,
       secondary && styles.secondary,
       danger && styles.danger,
+      dark && styles.dark,
       disabled && styles.disabled,
       !children && styles.icon,
       className
@@ -28,6 +29,7 @@ Button.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   danger: PropTypes.bool,
+  dark: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.object
 };
@@ -72,6 +74,13 @@ const styles = {
   }),
   secondary: style({
     
+  }),
+  dark: style({
+    backgroundColor: colors.BLACK_25,
+    color: '#fff',
+    ':hover': {
+      backgroundColor: colors.BLACK_35
+    }
   }),
   danger: style({
     backgroundColor: colors.RED,

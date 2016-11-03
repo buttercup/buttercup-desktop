@@ -12,6 +12,12 @@ class Copyable extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.children !== this.props.children) {
+      this.setState({concealed: true});
+    }
+  }
+
   showContextMenu() {
     const { type } = this.props;
     const items = [

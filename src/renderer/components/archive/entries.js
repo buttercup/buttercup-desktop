@@ -37,10 +37,8 @@ class Entries extends Component {
         onClick={handleAddEntry}
         disabled={Boolean(currentGroup) !== true}
         full
+        dark
         icon={<PlusIcon/>}
-        className={style({
-          backgroundColor: 'rgba(0,0,0,.25)'
-        })}
         >Add Entry</Button>
     );
     const filterNode = <SearchField onChange={e => this.handleChange(e)}/>;
