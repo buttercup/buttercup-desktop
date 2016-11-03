@@ -1,28 +1,78 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { clipboard } from 'electron';
 import { style, merge, $ } from 'glamor';
 import { spacing, colors } from '../styles/variables';
+import { showContextMenu } from '../../system/menu';
 
-const Copyable = ({children}) => (
-  <span className={styles.span}>
-    <span>{children}</span>
-    <button className={styles.button} onClick={() => clipboard.writeText(children)}>Copy</button>
-  </span>
-);
+class Copyable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      concealed: true
+    };
+  }
+
+  showContextMenu() {
+    const { type } = this.props;
+    const items = [
+      {
+        label: 'Copy to Clipboard',
+        click: () => this.handleCopy()
+      }
+    ];
+
+    if ((type || '').toLowerCase() === 'password') {
+      items.push({
+        label: 'Reveal Password',
+        type: 'checkbox',
+        checked: !this.state.concealed,
+        click: () => {
+          this.setState({concealed: !this.state.concealed});
+        }
+      });
+    }
+
+    showContextMenu(items);
+  }
+
+  handleCopy() {
+    clipboard.writeText(this.props.children);
+  }
+
+  renderPassword(content) {
+    return (<span className={styles.password}>{this.state.concealed ? '●'.repeat(content.length) : content}</span>);
+  }
+
+  render() {
+    const { children, type } = this.props;
+    if (!children) {
+      return null;
+    }
+    
+    return (
+      <div className={styles.wrapper} onContextMenu={() => this.showContextMenu()}>
+        <div className={styles.content}>
+          <span>{type === 'password' ? this.renderPassword(children) : children}</span>
+          <button className={styles.button} onClick={() => this.handleCopy()}>Copy</button>
+        </div>
+      </div>
+    );
+  }
+}
 
 Copyable.propTypes = {
-  children: PropTypes.node
+  children: PropTypes.node,
+  type: PropTypes.string
 };
 
 const styles = {
-  span: merge(
+  wrapper: merge(
     style({
       display: 'inline-block',
       border: `1px dashed transparent`,
-      height: spacing.FORM_COPYABLE_HEIGHT,
-      lineHeight: spacing.FORM_COPYABLE_HEIGHT,
-      margin: `${spacing.FORM_COPYABLE_MARGIN} 0`,
       paddingLeft: spacing.HALF,
+      marginLeft: '1px',
+      lineHeight: 1,
       borderRadius: '5px',
       ':hover': {
         borderColor: colors.BLACK_25
@@ -32,6 +82,11 @@ const styles = {
       display: 'inline-block'
     })
   ),
+  content: style({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }),
   button: style({
     height: '20px',
     lineHeight: 1,
@@ -41,6 +96,9 @@ const styles = {
     marginLeft: spacing.HALF,
     display: 'none',
     cursor: 'pointer'
+  }),
+  password: style({
+    // fontFamily: 'Hack'
   })
 };
 

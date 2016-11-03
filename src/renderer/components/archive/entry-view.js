@@ -8,7 +8,7 @@ const EntryView = ({entry}) => (
       <div className={formRow} key={key}>
         <div className="label-wrapper">{key}</div>
         <div className="input-wrapper">
-          <Copyable>{entry.properties[key]}</Copyable>
+          <Copyable type={key}>{entry.properties[key]}</Copyable>
         </div>
       </div>
     ))}
