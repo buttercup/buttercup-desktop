@@ -2,14 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
-import { formRow, formInput, metaWrapper, heading } from '../styles';
+import { formRow, metaWrapper, heading } from '../styles';
 import Button from '../button';
-
-const Input = field => (
-  <div className="input-wrapper">
-    <input {...field.input} id={field.name} type={field.type} placeholder={field.placeholder} className={formInput}/>
-  </div>
-);
+import Input from './entry-input';
 
 const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types
   <div>

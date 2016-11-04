@@ -39,7 +39,7 @@ export const formRow = merge(
   }),
   $(' .input-wrapper', {
     flex: 1,
-    height: spacing.FORM_INPUT_HEIGHT,
+    minHeight: spacing.FORM_INPUT_HEIGHT,
     lineHeight: spacing.FORM_INPUT_HEIGHT,
     marginRight: spacing.HALF
   })
@@ -47,7 +47,7 @@ export const formRow = merge(
 
 export const formInput = style({
   width: '100%',
-  height: '100%',
+  height: spacing.FORM_INPUT_HEIGHT,
   paddingLeft: spacing.HALF,
   border: `2px solid transparent`,
   borderRadius: '4px',

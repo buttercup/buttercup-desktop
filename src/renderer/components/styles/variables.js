@@ -20,5 +20,10 @@ export const colors = {
   BLACK_10: 'rgba(0,0,0,.10)',
   BLACK_20: 'rgba(0,0,0,.20)',
   BLACK_25: 'rgba(0,0,0,.25)',
-  BLACK_35: 'rgba(0,0,0,.35)'
+  BLACK_35: 'rgba(0,0,0,.35)',
+  LEVEL_4: '#5CAB7D',
+  LEVEL_3: '#8FBC94',
+  LEVEL_2: '#FFBC42',
+  LEVEL_1: '#E71D36',
+  LEVEL_0: '#E71D36'
 };
