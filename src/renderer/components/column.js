@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
-import { style, merge } from 'glamor';
-import { flex, stretch } from './styles';
-import { spacing } from './styles/variables';
+import cx from 'classnames';
+import styles from '../styles/column';
 
 const Column = ({
   children,
@@ -11,14 +10,14 @@ const Column = ({
   contentClassName = null,
   light = false
 }) => (
-  <div className={merge(styles.column, className)}>
-    {header && <header className={merge(styles.bar, styles.header)}>
+  <div className={cx(styles.column, className)}>
+    {header && <header className={cx(styles.bar, styles.header)}>
       {header}
     </header>}
-    <section className={merge(stretch, contentClassName)}>
+    <section className={cx(styles.content, contentClassName)}>
     {children}
     </section>
-    {footer && <footer className={merge(styles.bar, styles.footer, light && {borderColor: 'rgba(0,0,0,.05)'})}>
+    {footer && <footer className={cx(styles.bar, styles.footer, light && styles.light)}>
       {footer}
     </footer>}
   </div>
@@ -28,24 +27,9 @@ Column.propTypes = {
   children: PropTypes.node,
   header: PropTypes.node,
   footer: PropTypes.node,
-  className: PropTypes.object,
-  contentClassName: PropTypes.object,
+  className: PropTypes.string,
+  contentClassName: PropTypes.string,
   light: PropTypes.bool
-};
-
-const styles = {
-  column: merge(flex, {flexDirection: 'column', width: '100%'}),
-  bar: style({
-    border: '0 solid rgba(255,255,255,.05)',
-    flex: 0,
-    padding: spacing.ONE
-  }),
-  header: style({
-    borderBottomWidth: '1px'
-  }),
-  footer: style({
-    borderTopWidth: '1px'
-  })
 };
 
 export default Column;

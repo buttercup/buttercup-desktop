@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
-import { formRow, metaWrapper, heading } from '../styles';
+import { formRow, metaWrapper, heading, labelWrapper } from '../../styles/entry-form';
+import { wrapper as inputWrapper } from '../../styles/entry-input';
 import Copyable from './copyable';
 
 const EntryView = ({entry}) => (
   <div>
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className="label-wrapper">{key}</div>
-        <div className="input-wrapper">
+        <div className={labelWrapper}>{key}</div>
+        <div className={inputWrapper}>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </div>
       </div>
@@ -16,8 +17,8 @@ const EntryView = ({entry}) => (
     <div className={metaWrapper}>
       {entry.meta.map(meta => (
         <div className={formRow} key={meta.key}>
-          <div className="label-wrapper">{meta.key}</div>
-          <div className="input-wrapper">
+          <div className={labelWrapper}>{meta.key}</div>
+          <div className={inputWrapper}>
             <Copyable>{meta.value}</Copyable>
           </div>
         </div>

@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { style, merge } from 'glamor';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import EntryForm from '../../containers/archive/entry-form';
-import { flex } from '../styles';
+import styles from '../../styles/entry';
 import Column from '../column';
 import Button from '../button';
 import EntryView from './entry-view';
@@ -29,8 +28,8 @@ class Entry extends Component {
         onSubmit={values => this.props.onEditEntry(values)}
         />,
       footer: (
-        <div className={flex}>
-          <div className={styles.split}>
+        <div className={styles.splitter}>
+          <div>
             <Button
               onClick={() => ref.submit()}
               disabled={!this.props.dirty}
@@ -39,7 +38,7 @@ class Entry extends Component {
             {' '}
             <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
           </div>
-          <div className={styles.splitRight}>
+          <div>
             <Button
               onClick={() => this.props.onDelete(this.props.entry.id)}
               icon={<TrashIcon/>}
@@ -124,22 +123,6 @@ Entry.propTypes = {
   handleEditMode: PropTypes.func,
   handleViewMode: PropTypes.func,
   initializeForm: PropTypes.func
-};
-
-const styles = {
-  content: style({
-    padding: '1em'
-  }),
-  split: style({
-    flex: '0 0 50%'
-  }),
-  splitRight: merge(
-    flex,
-    {
-      flex: '0 0 50%',
-      justifyContent: 'flex-end'
-    }
-  )
 };
 
 export default Entry;

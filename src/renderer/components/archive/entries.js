@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { style } from 'glamor';
 import PlusIcon from 'react-icons/lib/md/add';
 import { showContextMenu, createMenuFromGroups } from '../../system/menu';
 import Column from '../column';
 import Button from '../button';
+import styles from '../../styles/entries';
 import List from './entries-list';
 import SearchField from './search-field';
 
@@ -45,10 +45,7 @@ class Entries extends Component {
 
     return (
       <Column
-        className={style({
-          backgroundColor: '#31353D',
-          color: '#fff'
-        })}
+        className={styles.column}
         header={filterNode}
         footer={addButton}
         >

@@ -1,8 +1,7 @@
 import React, { PropTypes, Component } from 'react';
-import { style, merge, $ } from 'glamor';
-import { spacing, colors } from '../styles/variables';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
+import styles from '../../styles/copyable';
 
 class Copyable extends Component {
   constructor(props) {
@@ -46,7 +45,7 @@ class Copyable extends Component {
   }
 
   renderPassword(content) {
-    return (<span className={styles.password}>{this.state.concealed ? '●'.repeat(content.length) : content}</span>);
+    return (<span>{this.state.concealed ? '●'.repeat(content.length) : content}</span>);
   }
 
   render() {
@@ -69,43 +68,6 @@ class Copyable extends Component {
 Copyable.propTypes = {
   children: PropTypes.node,
   type: PropTypes.string
-};
-
-const styles = {
-  wrapper: merge(
-    style({
-      display: 'inline-block',
-      border: `1px dashed transparent`,
-      paddingLeft: spacing.HALF,
-      marginLeft: '1px',
-      lineHeight: 1,
-      borderRadius: '5px',
-      ':hover': {
-        borderColor: colors.BLACK_25
-      }
-    }),
-    $(':hover button', {
-      display: 'inline-block'
-    })
-  ),
-  content: style({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }),
-  button: style({
-    height: '20px',
-    lineHeight: 1,
-    fontSize: '10px',
-    verticalAlign: 'top',
-    padding: '0 5px',
-    marginLeft: spacing.HALF,
-    display: 'none',
-    cursor: 'pointer'
-  }),
-  password: style({
-    // fontFamily: 'Hack'
-  })
 };
 
 export default Copyable;

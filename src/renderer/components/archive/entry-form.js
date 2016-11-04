@@ -2,16 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
-import { formRow, metaWrapper, heading } from '../styles';
+import styles from '../../styles/entry-form';
 import Button from '../button';
 import Input from './entry-input';
 
 const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types
   <div>
-    <div className={metaWrapper}>
+    <div className={styles.metaWrapper}>
       {fields.map((member, index) => 
-        <div className={formRow} key={index}>
-          <div className="label-wrapper">
+        <div className={styles.formRow} key={index}>
+          <div className={styles.labelWrapper}>
             <Field
               name={`${member}.key`}
               type="text"
@@ -45,19 +45,19 @@ class EntryForm extends Component {
     const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <div className={formRow}>
-          <label className="label-wrapper" htmlFor="properties.title">Title</label>
+        <div className={styles.formRow}>
+          <label className={styles.labelWrapper} htmlFor="properties.title">Title</label>
           <Field name="properties.title" component={Input} type="text" placeholder="Untitled"/>
         </div>
-        <div className={formRow}>
-          <label className="label-wrapper" htmlFor="properties.username">Username</label>
+        <div className={styles.formRow}>
+          <label className={styles.labelWrapper} htmlFor="properties.username">Username</label>
           <Field name="properties.username" component={Input} type="text" placeholder="@username..."/>
         </div>
-        <div className={formRow}>
-          <label className="label-wrapper" htmlFor="properties.password">Password</label>
+        <div className={styles.formRow}>
+          <label className={styles.labelWrapper} htmlFor="properties.password">Password</label>
           <Field name="properties.password" component={Input} type="password" placeholder="Secure password..."/>
         </div>
-        <h6 className={heading}>Custom Fields:</h6>
+        <h6 className={styles.heading}>Custom Fields:</h6>
         <FieldArray name="meta" component={renderMeta}/>
       </form>
     );

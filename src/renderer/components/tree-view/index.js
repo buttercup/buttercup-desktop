@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
-import { style } from 'glamor';
 import PlusIcon from 'react-icons/lib/md/add';
 import { showContextMenu } from '../../system/menu';
-import '../styles/tree-view.global.scss';
+import '../../styles/tree-view.global';
+import styles from '../../styles/tree-view';
 import Column from '../column';
 import Button from '../button';
 import TreeLabel from './tree-label';
@@ -128,14 +128,6 @@ TreeView.propTypes = {
   onGroupSelect: PropTypes.func,
   onDrop: PropTypes.func,
   onExpand: PropTypes.func
-};
-
-const styles = {
-  column: style({
-    backgroundColor: '#292C33',
-    color: '#fff',
-    paddingTop: '3em'
-  })
 };
 
 export default TreeView;

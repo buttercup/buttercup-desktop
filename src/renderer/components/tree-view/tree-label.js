@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { style, merge } from 'glamor';
-import { colors } from '../styles/variables';
+import cx from 'classnames';
+import styles from '../../styles/tree-label';
 
 class TreeLabel extends Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class TreeLabel extends Component {
     const editMode = title.toLowerCase() === 'untitled';
     const titleLabel = editMode ? (
       <input
-        className={merge(styles.node, styles.input)}
+        className={cx(styles.node, styles.input)}
         value={this.state.title}
         onChange={this.handleChange}
         onKeyUp={this.handleKeyUp}
@@ -76,23 +76,6 @@ TreeLabel.propTypes = {
   onRemoveClick: PropTypes.func,
   onSaveClick: PropTypes.func,
   onRightClick: PropTypes.func
-};
-
-const styles = {
-  node: style({
-    display: 'block',
-    width: '100%',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
-  }),
-
-  input: style({
-    border: 'none',
-    outline: 'none',
-    borderRadius: '2px',
-    backgroundColor: colors.DARK_SECONDARY,
-    boxSizing: 'border-box'
-  })
 };
 
 export default TreeLabel;

@@ -1,21 +1,15 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
+import 'glamor/reset';
 import Intro from '../components/intro';
 import Archive from '../components/archive';
-import './styles/workspace.global.scss';
-import { flex } from './styles';
+import '../styles/workspace.global.scss';
 
-class Workspace extends Component {
-  render() {
-    const { workspace } = this.props;
-    return (
-      <div className={flex}>
-        {workspace.archive.path === null ?
-          <Intro/> : <Archive/>
-        }
-      </div>
-    );
+const Workspace = ({workspace}) => {
+  if (workspace.archive.path === null) {
+    return <Intro/>;
   }
-}
+  return <Archive/>;
+};
 
 Workspace.propTypes = {
   workspace: PropTypes.object
