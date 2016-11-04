@@ -18,9 +18,13 @@ module.exports = [
     role: 'cut'
   },
   {
-    label: 'Copy',
+    label: 'Copy Password',
     accelerator: 'CmdOrCtrl+C',
-    role: 'copy'
+    click(item, focusedWindow) {
+      if (focusedWindow) {
+        focusedWindow.rpc.emit('copy-current-password');
+      }
+    }
   },
   {
     label: 'Paste',

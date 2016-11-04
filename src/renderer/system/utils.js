@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js';
+import { clipboard } from 'electron';
 
 export function filterByText(list, filterText) {
   if (filterText === '' || !filterText) {
@@ -10,3 +11,7 @@ export function filterByText(list, filterText) {
   });
   return fuse.search(filterText);
 }
+
+export function copyToClipboard(text) {
+  clipboard.writeText(text);
+} 

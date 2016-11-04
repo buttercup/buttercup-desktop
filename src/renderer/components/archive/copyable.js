@@ -1,8 +1,8 @@
 import React, { PropTypes, Component } from 'react';
-import { clipboard } from 'electron';
 import { style, merge, $ } from 'glamor';
 import { spacing, colors } from '../styles/variables';
 import { showContextMenu } from '../../system/menu';
+import { copyToClipboard } from '../../system/utils';
 
 class Copyable extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Copyable extends Component {
   }
 
   handleCopy() {
-    clipboard.writeText(this.props.children);
+    copyToClipboard(this.props.children);
   }
 
   renderPassword(content) {
