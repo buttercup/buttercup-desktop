@@ -1,0 +1,16 @@
+@import './variables';
+
+.node {
+  display: block;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.input {
+  border: none;
+  outline: none;
+  border-radius: 2px;
+  background-color: $dark-secondary;
+  box-sizing: border-box;
+}

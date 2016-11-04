@@ -1,0 +1,43 @@
+@import './variables';
+
+.barWrapper {
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  position: relative;
+  margin-top: 5px;
+  background-color: $gray;
+}
+
+.barContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+}
+
+.input {
+  width: 100%;
+  height: $form-input-height;
+  padding-left: $spacing-half;
+  border: 2px solid transparent;
+  border-radius: 4px;
+
+  &:focus {
+    border-color: $brand-primary;
+  }
+}
+
+.wrapper {
+  flex: 1;
+  min-height: $form-input-height;
+  line-height: $form-input-height;
+  margin-right: $spacing-half;
+}
+
+.level0 {}
+.level1 { background-color: $LEVEL_1 } 
+.level2 { background-color: $LEVEL_2 } 
+.level3 { background-color: $LEVEL_3 } 
+.level4 { background-color: $LEVEL_4 } 

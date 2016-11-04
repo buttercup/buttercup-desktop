@@ -1,0 +1,32 @@
+@import './variables';
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  > li {
+    padding: $spacing-half $spacing-one;
+    cursor: pointer !important;
+    transition: background-color ease .2s;
+
+    &.active {
+      background-color: $brand-primary !important;
+    }
+
+    &:hover {
+      background-color: $black-20;
+    }
+
+    strong, small {
+      display: block;
+      font-weight: normal;
+      cursor: inherit;
+    }
+
+    small {
+      font-weight: 300;
+      opacity: .7;
+    }
+  }
+}
