@@ -45,6 +45,7 @@ body {
     user-select: none;
     cursor: default;
 }
+
 input, button, textarea, :focus {
     outline: none; // @TODO: a11y
     -webkit-app-region: no-drag;

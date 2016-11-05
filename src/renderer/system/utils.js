@@ -1,3 +1,4 @@
+import path from 'path';
 import Fuse from 'fuse.js';
 import { clipboard } from 'electron';
 
@@ -15,3 +16,7 @@ export function filterByText(list, filterText) {
 export function copyToClipboard(text) {
   clipboard.writeText(text);
 } 
+
+export function parsePath(filepath) {
+  return path.parse(filepath);
+}

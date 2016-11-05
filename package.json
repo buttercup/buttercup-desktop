@@ -41,7 +41,9 @@
     "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
-  "dependencies": {},
+  "dependencies": {
+    "fsevents": "^1.0.15"
+  },
   "devDependencies": {
     "@types/electron": "^1.4.24",
     "@types/node": "^6.0.45",

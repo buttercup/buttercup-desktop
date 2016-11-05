@@ -1,4 +1,5 @@
 @import './variables';
+@import './common';
 
 .formRow {
   display: flex;
@@ -29,11 +30,4 @@
 
 .metaWrapper {
   margin-bottom: $spacing-one;
-}
-
-.heading {
-  color: $black-35;
-  text-transform: uppercase;
-  border-bottom: 1px solid $black-5;
-  margin: 3em 0 0;
 }

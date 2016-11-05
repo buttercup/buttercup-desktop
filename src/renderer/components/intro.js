@@ -1,9 +1,10 @@
 import React from 'react';
 import RecentFiles from '../containers/recent-files';
 import FileOpener from '../containers/file-opener';
+import { wrapper } from '../styles/intro';
 
 const Intro = () => (
-  <div>
+  <div className={wrapper}>
     <FileOpener/>
     <RecentFiles/>
   </div>

@@ -1,0 +1,12 @@
+@import './variables';
+@import './common';
+
+.wrapper {
+  @extend %flex;
+
+  > div {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+

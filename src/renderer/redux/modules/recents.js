@@ -1,3 +1,4 @@
+import { showConfirmDialog } from '../../system/dialog';
 import { SET_WORKSPACE } from './workspace';
 
 // Constants ->
@@ -31,4 +32,10 @@ export default function recentFilesReducer(state = [], action) {
 
 export const addRecent = filename => ({ type: ADD, filename });
 export const removeRecent = filename => ({ type: REMOVE, filename });
-export const clearRecent = () => ({ type: CLEAR });
+export const clearRecent = () => dispatch => {
+  showConfirmDialog('Are you sure you want to clear the history?', resp => {
+    if (resp === 0) {
+      dispatch({ type: CLEAR });
+    }
+  });
+};
