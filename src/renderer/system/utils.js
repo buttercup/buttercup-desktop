@@ -1,6 +1,8 @@
 import path from 'path';
 import Fuse from 'fuse.js';
-import { clipboard } from 'electron';
+import { clipboard, remote } from 'electron';
+
+const currentWindow = remote.getCurrentWindow();
 
 export function filterByText(list, filterText) {
   if (filterText === '' || !filterText) {
@@ -19,4 +21,8 @@ export function copyToClipboard(text) {
 
 export function parsePath(filepath) {
   return path.parse(filepath);
+}
+
+export function setWindowSize(width, height) {
+  currentWindow.setSize(width, height, false);
 }

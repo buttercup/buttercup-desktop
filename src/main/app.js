@@ -35,8 +35,8 @@ const installExtensions = async () => {
 windowManager.setBuildProcedure('main', callback => {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 950,
-    height: 700,
+    width: 870,
+    height: 550,
     minWidth: 680,
     minHeight: 500,
     title: pkg.productName,

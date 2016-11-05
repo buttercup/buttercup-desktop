@@ -16,6 +16,7 @@
     padding: $spacing-half 0;
     position: relative;
     border-bottom: 1px dotted $gray;
+    cursor: pointer !important;
 
     &:hover {
       .remove {

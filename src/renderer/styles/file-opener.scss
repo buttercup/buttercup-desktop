@@ -1,0 +1,22 @@
+@import './variables';
+@import './common';
+
+.container {
+  @extend %flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: $spacing-one;
+}
+
+.logo {
+  text-align: center;
+  border-bottom: 1px solid $gray-light;
+  padding-bottom: $spacing-half;
+  width: 100%;
+
+  figcaption {
+    font-weight: 300;
+    color: $gray;
+  }
+}

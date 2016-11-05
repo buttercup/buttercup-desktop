@@ -43,7 +43,7 @@ body {
 :not(input):not(textarea)::before {
     -webkit-user-select: none;
     user-select: none;
-    cursor: default;
+    /*cursor: default;*/
 }
 
 input, button, textarea, :focus {

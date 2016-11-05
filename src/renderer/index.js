@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
-import { copyToClipboard } from './system/utils';
+import { copyToClipboard, setWindowSize } from './system/utils';
 import configureStore from './redux/configureStore';
 import * as archiveActions from './redux/modules/files';
 import * as entryActions from './redux/modules/entries';
@@ -12,6 +12,8 @@ import WorkspaceContainer from './containers/workspace';
 
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore();
+
+setWindowSize(870, 550);
 
 rpc.on('ready', () => {
   rpc.emit('init');

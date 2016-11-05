@@ -1,5 +1,6 @@
 import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
+import { setWindowSize } from '../../system/utils';
 import { reloadGroups } from './groups';
 
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
@@ -22,6 +23,8 @@ function archive(state = initialState, action) {
 }
 
 export const setWorkspace = archivePath => dispatch => {
+  setWindowSize(950, 700);
+
   dispatch({
     type: SET_WORKSPACE,
     payload: {
