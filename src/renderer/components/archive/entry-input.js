@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import zxcvbn from 'zxcvbn';
-import cx from 'classnames';
+import Meter from '../meter';
 import styles from '../../styles/entry-input';
 
 const BareInput = ({input, name, placeholder, meta}) => {
@@ -23,31 +22,13 @@ BareInput.propTypes = {
   meta: PropTypes.object
 };
 
-const Informer = ({input}) => {
-  const result = zxcvbn(input); 
-  return (
-    <div className={styles.barWrapper}>
-      <div
-        className={cx(styles.barContent, styles[`level${result.score}`])}
-        style={{
-          right: `${100 - (result.score * 25)}%`
-        }}
-        />
-    </div>
-  );
-};
-
-Informer.propTypes = {
-  input: PropTypes.string
-};
-
 class Input extends Component {
   render() {
     const { type, input } = this.props;
     return (
       <div className={styles.wrapper}>
         <BareInput {...this.props}/>
-        {type === 'password' && <Informer input={input.value}/>}
+        {type === 'password' && <Meter input={input.value}/>}
       </div>
     );
   }
