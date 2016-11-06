@@ -2,7 +2,7 @@
   "name": "buttercup-app",
   "productName": "Buttercup",
   "version": "0.3.0",
-  "description": "Buttercup password manager.",
+  "description": "Free and Open Source password vault",
   "main": "dist/main.js",
   "scripts": {
     "test": "xo",
@@ -12,8 +12,35 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./tools/server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/main/app",
-    "package": "cross-env NODE_ENV=production node -r babel-register -r babel-polyfill ./tools/package.js",
-    "package:all": "npm run package -- --all"
+    "release:linux": "build --linux",
+    "release:mac": "build --mac",
+    "release:win": "build --win",
+    "release:all": "npm run release:mac && npm run release:linux && npm run release:win",
+    "release": "build"
+  },
+  "build": {
+    "appId": "pw.buttercup",
+    "mac": {
+      "category": "public.app-category.productivity"
+    },
+    "dmg": {
+        "contents": [
+            { "x": 438, "y": 364, "type": "link", "path": "/Applications" },
+            { "x": 192, "y": 364, "type": "file" }
+        ]
+    },
+    "fileAssociations": {
+      "ext": "bcup",
+      "name": "Buttercup Archive",
+      "icon": "icon.icns"
+    },
+    "files": [
+      "dist/**",
+      "package.json"
+    ]
+  },
+  "directories": {
+    "output": "release"
   },
   "repository": {
     "type": "git",
@@ -41,9 +68,9 @@
     "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "7zip-bin-mac": "^1.0.1",
     "@types/electron": "^1.4.24",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -71,7 +98,7 @@
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
     "electron": "^1.4.4",
-    "electron-builder": "^7.12.2",
+    "electron-builder": "^7.23.2",
     "electron-debug": "^1.0.1",
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
@@ -83,8 +110,8 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "fsevents": "^1.0.15",
     "fs-extra": "^0.30.0",
+    "fsevents": "^1.0.15",
     "fuse.js": "^2.5.0",
     "glamor": "^2.17.14",
     "grunt": "^0.4.5",

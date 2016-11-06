@@ -24,6 +24,11 @@ You can install a release of Buttercup by checking out the [releases page](https
 ``` bash
 $ npm install
 ```
+Or if you're using [Yarn](https://github.com/yarnpkg/yarn):
+
+``` bash
+$ yarn
+``` 
 
 ### Running in development environment
 ``` bash
@@ -35,22 +40,30 @@ $ npm run dev
 $ npm run build
 ```
 
-### Required software
-You will need the following things to build the project executables and installers:
- * NSIS (makensis in homebrew)
- * dpkg
- * wine ([install guide in homebrew](https://www.davidbaumgold.com/tutorials/wine-mac/#part-1:-install-homebrew))
+## Package & Release
+
+### Install Dependencies
+You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform. 
 
 ### Package
-To package Buttercup for all platforms and make installers:
-```bash
-$ npm run release-all
+To package the app and make installers for all supported platforms:
+
+``` bash
+$ npm run release:all
 ```
 This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
 
 To package only for the current platform:
-```bash
+
+``` bash
 $ npm run release
+```
+
+Or for a specific platform: 
+``` bash
+$ npm run release:mac
+$ npm run release:win
+$ npm run release:linux
 ```
 
 ## Contributors

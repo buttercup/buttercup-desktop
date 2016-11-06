@@ -1,6 +1,5 @@
 import { remote } from 'electron';
 import { default as swal } from 'sweetalert2';
-//import 'style!raw!sweetalert2/dist/sweetalert2.css';
 import '../styles/lib/sweetalert.global';
 import styles from '../styles/sweetalert';
 
