@@ -70,7 +70,6 @@
   "homepage": "https://github.com/buttercup-pw/buttercup#readme",
   "dependencies": {},
   "devDependencies": {
-    "7zip-bin-mac": "^1.0.1",
     "@types/electron": "^1.4.24",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
