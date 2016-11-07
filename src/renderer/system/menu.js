@@ -24,7 +24,7 @@ export function createMenuFromGroups(groups = [], currentGroup, fn) {
     }
     return {
       label: group.title,
-      enabled: group.id !== currentGroup,
+      enabled: (group.id !== currentGroup || group.groups.length > 0),
       click: () => fn(group.id),
       submenu: group.groups.length > 0 ?
         createMenuFromGroups(
