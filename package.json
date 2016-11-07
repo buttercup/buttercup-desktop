@@ -19,7 +19,8 @@
     "release": "build"
   },
   "build": {
-    "appId": "pw.buttercup",
+    "appId": "pw.buttercup.desktop",
+    "copyright": "Copyright © 2016 Buttercup and Contributors",
     "mac": {
       "category": "public.app-category.productivity"
     },
@@ -30,7 +31,9 @@
         ]
     },
     "linux": {
-      "target": ["rpm", "AppImage", "deb"]
+      "target": ["rpm", "AppImage", "deb"],
+      "packageCategory": "utils",
+      "synopsis": "Free and Open Source password vault"
     },
     "fileAssociations": {
       "ext": "bcup",

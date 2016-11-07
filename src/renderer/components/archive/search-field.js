@@ -21,12 +21,20 @@ class SearchField extends Component {
     this.props.onChange(value);
   }
 
+  handleKeyUp(e) {
+    if (e.which === 27) {
+      this.handleClearClick();
+      e.target.blur();
+    }
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
         <input
           type="text"
           onChange={e => this.handleChange(e.target.value)}
+          onKeyUp={e => this.handleKeyUp(e)}
           className={styles.field}
           placeholder="Search..."
           ref={input => {

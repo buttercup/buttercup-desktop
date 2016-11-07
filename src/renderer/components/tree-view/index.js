@@ -3,6 +3,7 @@ import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import PlusIcon from 'react-icons/lib/md/add';
 import { showContextMenu } from '../../system/menu';
+import { isOSX } from '../../system/utils';
 import '../../styles/tree-view.global';
 import styles from '../../styles/tree-view';
 import Column from '../column';
@@ -101,7 +102,7 @@ class TreeView extends Component {
             icon={<PlusIcon/>}
             >New Group</Button>
         }
-        className={styles.column}
+        className={cx(styles.column, isOSX() && styles.mac)}
         >
         <Tree
           draggable
