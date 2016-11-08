@@ -1,5 +1,12 @@
-# Buttercup
-Cross-platform, free and open-source password manager based on NodeJS.
+<h1 align="center">
+  <br/>
+  <img src="https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/buttercup-desktop.svg" alt="Buttercup Desktop">
+  <br/>
+  <br/>
+  <br/>
+</h1>
+
+> Cross-platform, free and open-source password manager based on NodeJS.
 
 [![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Code Climate](https://codeclimate.com/github/buttercup-pw/buttercup/badges/gpa.svg)](https://codeclimate.com/github/buttercup-pw/buttercup) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup-pw/buttercup)
 
@@ -47,14 +54,14 @@ $ npm run build
 To package the app and make installers for all supported platforms:
 
 ``` bash
-$ npm run release:all
+$ npm run release
 ```
 This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
 
 To package only for the current platform:
 
 ``` bash
-$ npm run release
+$ npm run release:current
 ```
 
 Or for a specific platform: 
