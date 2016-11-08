@@ -24,7 +24,7 @@ When you're done, submit a pull request and for one of the maintainers to check 
 
 ### Tests
 
-We've written tests and you can run them to assure the stability of the code, just try `grunt build`. If you're adding a new functionality please write a test for it.
+We've written tests and you can run them to assure the stability of the code, just try running `npm test`. If you're adding a new functionality please include tests for it.
 
 ### Documentation
 

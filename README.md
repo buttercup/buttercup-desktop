@@ -11,39 +11,37 @@ The application is currently in alpha, and should be considered unstable.
 
 Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module. Check out the [release changelog](CHANGELOG.md) for more information on updates.
 
+## Download & Install
+[Click here to automatically download](https://download.buttercup.pw) the latest release for your OS, or checkout the [releases page](https://github.com/buttercup-pw/buttercup/releases) to download different builds and versions.
+
 ## Encryption & Format
 Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at 1000 iterations.
 
 Because security with password storage is of the utmost importance, Buttercup will remain in alpha/beta release mode until some level of professional scrutiny has occurred. It is completely possible that security-related changes will occur, but this is inevitable and we handle every question and criticism with great care when it comes to the safety of using our software.
 
-## Installing
-You can install a release of Buttercup by checking out the [releases page](https://github.com/buttercup-pw/buttercup/releases).
+## Development
+If you're interested in developing Buttercup:
 
-## Setup & Usage
-### Install Dependencies
+### Install Dependencies & Run
 ``` bash
-$ npm install
-```
-Or if you're using [Yarn](https://github.com/yarnpkg/yarn):
-
-``` bash
+## Install
+$ npm install 
+# or 
 $ yarn
-``` 
 
-### Running in development environment
-``` bash
+## Run
 $ npm run dev
-```
-
-### Building libraries before releasing
-```bash
-$ npm run build
 ```
 
 ## Package & Release
 
 ### Install Dependencies
 You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform. 
+
+### Building libraries before releasing
+```bash
+$ npm run build
+```
 
 ### Package
 To package the app and make installers for all supported platforms:
@@ -73,6 +71,8 @@ $ npm run release:linux
 
 ### Contributions
  * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+
+> We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
 
 ## License
 Released under [GNU/GPL Version 3](LICENSE)
