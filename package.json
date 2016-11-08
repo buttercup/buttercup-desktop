@@ -1,5 +1,5 @@
 {
-  "name": "buttercup-app",
+  "name": "buttercup",
   "productName": "Buttercup",
   "version": "0.3.0",
   "description": "Free and Open Source password vault",
@@ -12,11 +12,11 @@
     "dev": "concurrently --kill-others \"npm run hot-server\" \"npm run start-hot\"",
     "hot-server": "node -r babel-register ./tools/server.js",
     "start-hot": "cross-env HOT=1 NODE_ENV=development electron -r babel-register -r babel-polyfill ./src/main/app",
-    "release:linux": "build --linux",
+    "release:linux": "build --linux --ia32 --x64",
     "release:mac": "build --mac",
-    "release:win": "build --win",
-    "release:all": "npm run release:mac && npm run release:linux && npm run release:win",
-    "release": "build"
+    "release:win": "build --win --ia32 --x64",
+    "release": "build --mac --linux --win --ia32 --x64",
+    "release:current": "build"
   },
   "build": {
     "appId": "pw.buttercup.desktop",
