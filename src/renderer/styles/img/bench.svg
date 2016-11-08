@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="180px" height="180px" viewBox="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.1 (12005) - http://www.bohemiancoding.com/sketch -->
+    <title>Bench</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="-6" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.105 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="-4" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.105 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="-4" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.105 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="-7" dy="-7" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.105 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="-4" in="SourceAlpha" result="shadowOffsetInner1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetInner1" result="shadowBlurInner1"></feGaussianBlur>
+            <feComposite in="shadowBlurInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.105 0" in="shadowInnerInner1" type="matrix" result="shadowMatrixInner1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+                <feMergeNode in="shadowMatrixInner1"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Bench" sketch:type="MSLayerGroup" transform="translate(6.000000, 23.000000)">
+            <rect id="Rectangle-1132-Copy" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF" sketch:type="MSShapeGroup" x="28.2678571" y="96" width="110.553571" height="11"></rect>
+            <rect id="Rectangle-1132-Copy-2" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF" sketch:type="MSShapeGroup" x="28.2678571" y="84" width="110.553571" height="7"></rect>
+            <rect id="Rectangle-1132-Copy-3" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF" sketch:type="MSShapeGroup" x="28" y="72" width="110.553571" height="7"></rect>
+            <rect id="Rectangle-1132-Copy-6" fill="#D4AEAE" filter="url(#filter-1)" sketch:type="MSShapeGroup" x="30.2678571" y="99" width="110.553571" height="11"></rect>
+            <rect id="Rectangle-1132-Copy-4" fill="#D4AEAE" filter="url(#filter-2)" sketch:type="MSShapeGroup" x="30.2678571" y="87" width="110.553571" height="7"></rect>
+            <rect id="Rectangle-1132-Copy-5" fill="#D4AEAE" filter="url(#filter-3)" sketch:type="MSShapeGroup" x="30" y="75" width="110.553571" height="7"></rect>
+            <rect id="Rectangle-1132-Copy-9" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup" x="28.2678571" y="96" width="110.553571" height="11"></rect>
+            <rect id="Rectangle-1132-Copy-7" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup" x="28.2678571" y="84" width="110.553571" height="7"></rect>
+            <rect id="Rectangle-1132-Copy-8" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup" x="28" y="72" width="110.553571" height="7"></rect>
+            <ellipse id="Oval-951" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#FFFFFF" sketch:type="MSShapeGroup" cx="141.821429" cy="13.4693878" rx="13.4821429" ry="13.4693878"></ellipse>
+            <ellipse id="Oval-951-Copy" fill="#F8B163" filter="url(#filter-4)" sketch:type="MSShapeGroup" cx="145.821429" cy="16.4693878" rx="13.4821429" ry="13.4693878"></ellipse>
+            <ellipse id="Oval-951-Copy-2" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup" cx="141.821429" cy="13.4693878" rx="13.4821429" ry="13.4693878"></ellipse>
+            <path d="M120.25,13.4693878 L114.857143,13.4693878" id="Line" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+            <path d="M128.339286,26.9387755 L124.52596,30.7521014" id="Line-Copy-18" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+            <path d="M141.91389,34.9247522 L141.91389,40.3125073" id="Line" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-288-Copy-4" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="29" y="78" width="5" height="7"></rect>
+            <rect id="Rectangle-288-Copy-5" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="134" y="78" width="5" height="7"></rect>
+            <rect id="Rectangle-288" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="29" y="90" width="5" height="7"></rect>
+            <rect id="Rectangle-288-Copy-3" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="134" y="90" width="5" height="7"></rect>
+            <rect id="Rectangle-288-Copy" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="29" y="106" width="5" height="20"></rect>
+            <rect id="Rectangle-288-Copy-2" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="#D4AEAE" sketch:type="MSShapeGroup" x="134" y="106" width="5" height="20"></rect>
+            <path d="M165.041196,132.897437 C142.574437,125.183049 113.810032,120.551543 82.4557045,120.551543 C51.4781504,120.551543 23.0286479,125.072408 0.682858528,132.620672 L165.041196,132.897437 Z" id="Oval-946" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+            <path d="M165.041196,136.345894 C142.574437,128.631506 113.810032,124 82.4557045,124 C51.4781504,124 23.0286479,128.520865 0.682858528,136.069129 L165.041196,136.345894 Z" id="Oval-946-Copy" fill="#5FDC76" filter="url(#filter-5)" sketch:type="MSShapeGroup"></path>
+            <path d="M165.041196,132.897437 C142.574437,125.183049 113.810032,120.551543 82.4557045,120.551543 C51.4781504,120.551543 23.0286479,125.072408 0.682858528,132.620672 L165.041196,132.897437 Z" id="Oval-946-Copy-2" stroke="#535353" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

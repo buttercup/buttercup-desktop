@@ -1,0 +1,30 @@
+@import './variables';
+@import './common';
+
+.column {
+  @extend %flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.content {
+  @extend %stretch;
+}
+
+.bar {
+  border: 0 solid rgba(#fff, .05);
+  flex: 0;
+  padding: $spacing-one;
+
+  &.light {
+    border-color: $black-5;
+  }
+}
+
+.header {
+  border-bottom-width: 1px;
+}
+
+.footer {
+  border-top-width: 1px;
+}

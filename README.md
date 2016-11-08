@@ -3,7 +3,7 @@ Cross-platform, free and open-source password manager based on NodeJS.
 
 [![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Code Climate](https://codeclimate.com/github/buttercup-pw/buttercup/badges/gpa.svg)](https://codeclimate.com/github/buttercup-pw/buttercup) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup-pw/buttercup)
 
-![Buttercup](http://perrymitchell.net/article/buttercup-first-release-0-1-0-alpha/buttercup-screen-2.png)
+![Buttercup](https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/screen.png)
 
 ## Under Development
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
@@ -22,33 +22,49 @@ You can install a release of Buttercup by checking out the [releases page](https
 ## Setup & Usage
 ### Install Dependencies
 ``` bash
-$ npm install -g electron-prebuilt jspm
 $ npm install
 ```
+Or if you're using [Yarn](https://github.com/yarnpkg/yarn):
 
-### Build and Run
 ``` bash
-$ grunt build
-$ electron .
+$ yarn
+``` 
+
+### Running in development environment
+``` bash
+$ npm run dev
 ```
 
-### Watch while development
+### Building libraries before releasing
 ```bash
-$ grunt watch
+$ npm run build
 ```
 
-### Required software
-You will need the following things to build the project executables and installers:
- * NSIS (makensis in homebrew)
- * dpkg
- * wine
+## Package & Release
+
+### Install Dependencies
+You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform. 
 
 ### Package
-To package Buttercup for all platforms and make installers:
-```bash
-$ grunt dist
+To package the app and make installers for all supported platforms:
+
+``` bash
+$ npm run release:all
 ```
 This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
+
+To package only for the current platform:
+
+``` bash
+$ npm run release
+```
+
+Or for a specific platform: 
+``` bash
+$ npm run release:mac
+$ npm run release:win
+$ npm run release:linux
+```
 
 ## Contributors
 ### Creation
@@ -57,3 +73,6 @@ This may take a while depending on how fast your computer is. All apps and insta
 
 ### Contributions
  * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+
+## License
+Released under [GNU/GPL Version 3](LICENSE)

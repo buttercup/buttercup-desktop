@@ -1,0 +1,54 @@
+@import './variables';
+@import './common'; 
+
+.container {
+  background-color: $gray-light;
+  padding: $spacing-one;
+  overflow-y: auto;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 $spacing-one;
+
+  > li {
+    padding: $spacing-half 0;
+    position: relative;
+    border-bottom: 1px dotted $gray;
+    cursor: pointer !important;
+
+    &:hover {
+      .remove {
+        opacity: 1;
+      }
+    }
+  }
+
+  .remove {
+    position: absolute;
+    cursor: pointer;
+    right: 0;
+    top: calc(50% - (16px / 2));
+    opacity: 0;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}
+
+.fileInfo {
+  > span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:last-child {
+      font-weight: 300;
+      font-size: .75em;
+      color: $gray-dark;
+    }
+  }
+}

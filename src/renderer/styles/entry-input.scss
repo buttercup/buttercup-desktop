@@ -1,0 +1,20 @@
+@import './variables';
+
+.input {
+  width: 100%;
+  height: $form-input-height;
+  padding-left: $spacing-half;
+  border: 2px solid transparent;
+  border-radius: 4px;
+
+  &:focus {
+    border-color: $brand-primary;
+  }
+}
+
+.wrapper {
+  flex: 1;
+  min-height: $form-input-height;
+  line-height: $form-input-height;
+  margin-right: $spacing-half;
+}

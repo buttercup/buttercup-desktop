@@ -1,0 +1,17 @@
+@import './common';
+
+.splitter {
+  @extend %flex;
+
+  > div {
+    flex: 0 0 50%;
+    &:last-child {
+      @extend %flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.content {
+  padding: 1em;
+}
