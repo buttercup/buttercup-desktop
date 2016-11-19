@@ -25,13 +25,26 @@
       "category": "public.app-category.productivity"
     },
     "dmg": {
-        "contents": [
-            { "x": 438, "y": 364, "type": "link", "path": "/Applications" },
-            { "x": 192, "y": 364, "type": "file" }
-        ]
+      "contents": [
+        {
+          "x": 438,
+          "y": 364,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 192,
+          "y": 364,
+          "type": "file"
+        }
+      ]
     },
     "linux": {
-      "target": ["rpm", "AppImage", "deb"],
+      "target": [
+        "rpm",
+        "AppImage",
+        "deb"
+      ],
       "packageCategory": "utils",
       "synopsis": "Free and Open Source password vault"
     },
@@ -79,7 +92,12 @@
     "@types/electron": "^1.4.24",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
+    "@types/react-dom": "^0.14.18",
+    "@types/react-redux": "^4.4.32",
     "@types/redux": "^3.6.31",
+    "@types/redux-devtools": "^3.0.34",
+    "@types/redux-thunk": "^2.1.31",
+    "@types/webpack": "^2.0.0",
     "babel-core": "^6.18.0",
     "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",
@@ -115,6 +133,7 @@
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "fixed-data-table-2": "^0.7.7",
     "fs-extra": "^0.30.0",
     "fuse.js": "^2.5.0",
     "glamor": "^2.17.14",
@@ -124,16 +143,19 @@
     "grunt-contrib-jade": "^0.15.0",
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
+    "humanize": "0.0.9",
     "json-loader": "^0.5.4",
     "load-grunt-tasks": "^3.3.0",
     "lodash": "^4.16.6",
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
+    "node-noop": "^1.0.0",
     "node-sass": "^3.10.1",
     "npm-install-webpack-plugin": "^4.0.4",
     "raw-loader": "^0.5.1",
     "rc-tree": "^1.3.9",
     "react": "^15.3.2",
+    "react-dimensions": "^1.3.0",
     "react-dom": "^15.2.0",
     "react-hot-loader": "^1.3.0",
     "react-icons": "^2.2.1",
@@ -151,6 +173,7 @@
     "time-grunt": "^1.3.0",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.3",
+    "webdav-fs": "^1.0.0-rc2",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-dev-server": "^1.14.1",

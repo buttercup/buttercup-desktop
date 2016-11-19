@@ -1,4 +1,5 @@
 import path from 'path';
+import webpack from 'webpack';
 
 export default {
   module: {
@@ -10,13 +11,16 @@ export default {
       },
       {
         test: /\.json$/,
-        loader: 'json-loader',
-        exclude: /node_modules/
+        loader: 'json-loader'
       },
       {
         test: /\.(svg|ttf|woff2)$/,
         loader: 'url-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css'
       }
     ]
   },
@@ -30,7 +34,7 @@ export default {
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [
-
+    new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, 'node-noop')
   ],
   externals: [
     
