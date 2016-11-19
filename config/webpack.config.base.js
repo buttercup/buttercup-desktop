@@ -14,7 +14,7 @@ export default {
         loader: 'json-loader'
       },
       {
-        test: /\.(svg|ttf|woff2)$/,
+        test: /\.(svg|ttf|woff|woff2)$/,
         loader: 'url-loader',
         exclude: /node_modules/
       },

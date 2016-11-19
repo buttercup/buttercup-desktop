@@ -1,84 +1,78 @@
 import path from 'path';
-import humanize from 'humanize';
 import React, { Component, PropTypes } from 'react';
 import Dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
+import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 import 'fixed-data-table/dist/fixed-data-table.css';
 
-const TextCell = ({rowIndex, data, col, ...props}) => (
-  <Cell {...props}>
-    {data[rowIndex][col]}
-  </Cell>
-);
-
-const DateCell = ({rowIndex, data, ...props}) => (
-  <Cell {...props}>
-    {data[rowIndex].mtime ? humanize.date('d M', data[rowIndex].mtime) : ''}
-  </Cell>
-);
-
-const SizeCell = ({rowIndex, data, ...props}) => (
-  <Cell {...props}>
-    {humanize.filesize(data[rowIndex].size)}
-  </Cell>
-);
-
-const IconCell = ({rowIndex, data, ...props}) => {
-  let ext = path.extname(data[rowIndex].name);
-  ext = ext ? ext.toLowerCase().replace('.', '') : null;
-  return (
-    <Cell {...props}>
-      {data[rowIndex].type === 'directory' ?
-        'Directory' :
-        <img src={`/icons/document-file-${ext}.svg`} width="30"/>
-      }
-    </Cell>
-  );
-};
-
 class FileManager extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedIndex: null
+    };
+  }
+
   componentDidMount() {
     this.props.handleNavigate('/');
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.contents !== this.props.contents) {
+      this.setState({selectedIndex: null});
+    }
+  }
+
+  handleRowClick(e, index) {
+    this.setState({selectedIndex: index});
+  }
+
   handleRowDoubleClick(e, index) {
-    const p = path.resolve(this.props.currentPath, this.props.contents[index].name);
-    this.props.handleNavigate(p);
+    const { currentPath, contents } = this.props;
+    const pathToNavigate = path.resolve(currentPath, contents[index].name);
+    this.props.handleNavigate(pathToNavigate);
   }
 
   render() {
-    const { currentPath, contents, containerWidth, containerHeight } = this.props;
+    const { contents, containerWidth, containerHeight } = this.props;
+    const { selectedIndex } = this.state;
     return (
       <Table
-        rowHeight={50}
-        headerHeight={50}
+        rowHeight={40}
+        headerHeight={40}
         rowsCount={contents.length}
         width={containerWidth}
         height={containerHeight}
+        onRowClick={(...args) => this.handleRowClick(...args)}
         onRowDoubleClick={(...args) => this.handleRowDoubleClick(...args)}
+        onColumnResizeEndCallback={(...args) => this.handleColumnResizeEnd(...args)}
         >
         <Column
+          columnKey="icon"
           header={<Cell/>}
-          cell={<IconCell data={contents}/>}
-          width={100}
+          cell={<IconCell data={contents} selectedIndex={selectedIndex}/>}
+          width={50}
           fixed
           />
         <Column
+          columnKey="name"
           header={<Cell>Name</Cell>}
-          cell={<TextCell data={contents} col="name"/>}
+          cell={<TextCell data={contents} col="name" selectedIndex={selectedIndex}/>}
           fixed
           flexGrow={2}
           width={200}
           />
         <Column
+          columnKey="size"
           header={<Cell>Size</Cell>}
-          cell={<SizeCell data={contents}/>}
+          cell={<SizeCell data={contents} selectedIndex={selectedIndex}/>}
           width={100}
           fixed
           />
         <Column
+          columnKey="mtime"
           header={<Cell>Date</Cell>}
-          cell={<DateCell data={contents}/>}
+          cell={<DateCell data={contents} selectedIndex={selectedIndex}/>}
           width={100}
           fixed
           />
