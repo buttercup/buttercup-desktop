@@ -34,7 +34,8 @@ export default {
     packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, 'node-noop')
+    new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, 'node-noop'),
+    new webpack.IgnorePlugin(/vertx/)
   ],
   externals: [
     

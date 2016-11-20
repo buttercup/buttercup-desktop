@@ -46,7 +46,8 @@ const config = {
     ...baseConfig.plugins,
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'global.GENTLY': false
     }),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
