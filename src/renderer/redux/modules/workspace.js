@@ -23,7 +23,7 @@ function archive(state = initialState, action) {
 }
 
 export const setWorkspace = archivePath => dispatch => {
-  setWindowSize(950, 700);
+  setWindowSize(950, 700, 'dark');
 
   dispatch({
     type: SET_WORKSPACE,
