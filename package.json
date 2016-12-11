@@ -1,9 +1,9 @@
 {
   "name": "buttercup",
   "productName": "Buttercup",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Free and Open Source password vault",
-  "main": "dist/main.js",
+  "main": "app/main.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 mocha --retries 2 --compilers js:babel-register --recursive --require ./test/setup.js test/**/*.spec.js",
     "build:main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config ./config/webpack.config.electron --progress --profile --colors",
@@ -51,12 +51,8 @@
     "fileAssociations": {
       "ext": "bcup",
       "name": "Buttercup Archive",
-      "icon": "icon.icns"
-    },
-    "files": [
-      "dist/**",
-      "package.json"
-    ]
+      "icon": "./build/icon.icns"
+    }
   },
   "directories": {
     "output": "release"
@@ -71,7 +67,7 @@
     "manager",
     "credentials"
   ],
-  "author": "Sallar Kaboli <sallar.kaboli@gmail.com>",
+  "author": "Buttercup <info@buttercup.pw>",
   "contributors": [
     {
       "name": "Perry Mitchell",
@@ -86,7 +82,7 @@
   "bugs": {
     "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
-  "homepage": "https://github.com/buttercup-pw/buttercup#readme",
+  "homepage": "https://buttercup.pw",
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.34",
@@ -121,13 +117,11 @@
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
     "electron": "^1.4.12",
-    "electron-builder": "^7.23.2",
-    "electron-debug": "^1.0.1",
+    "electron-builder": "^10.6.1",
+    "electron-debug": "^1.1.0",
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
-    "electron-packager": "^8.1.0",
     "electron-rpc": "^2.0.1",
-    "electron-winstaller": "^2.3.4",
     "enzyme": "^2.6.0",
     "eslint-config-xo-react": "^0.8.0",
     "eslint-plugin-react": "^5.2.2",

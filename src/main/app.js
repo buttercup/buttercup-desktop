@@ -46,7 +46,7 @@ windowManager.setBuildProcedure('main', callback => {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    win.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
+    win.loadURL(`file://${path.resolve(__dirname, '../../app/index.html')}`);
   } else {
     win.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
   }
