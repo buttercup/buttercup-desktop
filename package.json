@@ -90,7 +90,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.34",
-    "@types/electron": "^1.4.24",
+    "@types/electron": "^1.4.29",
     "@types/mocha": "^2.2.33",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -120,7 +120,7 @@
     "css-loader": "^0.25.0",
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
-    "electron": "^1.4.4",
+    "electron": "^1.4.12",
     "electron-builder": "^7.23.2",
     "electron-debug": "^1.0.1",
     "electron-devtools-installer": "2.0.1",

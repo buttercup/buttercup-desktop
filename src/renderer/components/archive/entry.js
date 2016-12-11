@@ -106,7 +106,7 @@ class Entry extends Component {
     const { content, footer } = fn.call(this);
 
     return (
-      <Column light footer={footer} contentClassName={styles.content}>
+      <Column light footer={footer} className={styles.column} contentClassName={styles.content}>
         {content}
       </Column>
     );

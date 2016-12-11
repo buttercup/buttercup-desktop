@@ -23,8 +23,11 @@ export function parsePath(filepath) {
   return path.parse(filepath);
 }
 
-export function setWindowSize(width, height) {
+export function setWindowSize(width, height, vibrancy) {
   currentWindow.setSize(width, height, false);
+  if (typeof vibrancy !== 'undefined') {
+    currentWindow.setVibrancy(vibrancy);
+  }
 }
 
 export function isOSX() {
