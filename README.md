@@ -10,7 +10,7 @@
 
 [![Buttercup](https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/badge.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup-pw/buttercup.svg?branch=master)](https://travis-ci.org/buttercup-pw/buttercup) [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Code Climate](https://codeclimate.com/github/buttercup-pw/buttercup/badges/gpa.svg)](https://codeclimate.com/github/buttercup-pw/buttercup) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup-pw/buttercup)
 
-![Buttercup](https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/screen.png)
+![Buttercup](https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/screen-0.4.0.png)
 
 ## Under Development
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
@@ -56,7 +56,7 @@ To package the app and make installers for all supported platforms:
 ``` bash
 $ npm run release
 ```
-This may take a while depending on how fast your computer is. All apps and installers will be in `dist` directory.
+This may take a while depending on how fast your computer is. All apps and installers will be in `app` directory.
 
 To package only for the current platform:
 

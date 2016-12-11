@@ -19,7 +19,7 @@
     <script>
       (function() {
         const script = document.createElement('script');
-        script.src = (process.env.HOT) ? 'http://localhost:3000/dist/bundle.js' : './bundle.js';
+        script.src = (process.env.HOT) ? 'http://localhost:3000/app/bundle.js' : './bundle.js';
         document.write(script.outerHTML);
       }());
     </script>

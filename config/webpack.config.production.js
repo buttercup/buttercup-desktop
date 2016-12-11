@@ -15,7 +15,7 @@ const config = {
 
   output: {
     ...baseConfig.output,
-    publicPath: '../dist/'
+    publicPath: '../app/'
   },
 
   module: {
