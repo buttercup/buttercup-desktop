@@ -1,5 +1,12 @@
 # Buttercup release changelog
 
+## 0.4.0
+_11/12/2016_
+
+  * **New:** UI vibrancy effect for macOS
+  * Upgraded core
+  * Build process improvements
+
 ## 0.3.0
 _08/10/2016_
 
