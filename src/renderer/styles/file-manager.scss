@@ -4,3 +4,13 @@
   background: $brand-primary;
   color: #fff;
 }
+
+.wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.managerWrapper {
+  flex: 1;
+  display: flex;
+}

@@ -1,15 +1,16 @@
 import { combineReducers } from 'redux';
 
-
 import webdavFs from 'webdav-fs';
 import anyFs from 'any-fs';
 
-const wfs = webdavFs('', 'buttercup', '');
+const wfs = webdavFs('https://storage.perry.cx/remote.php/webdav', 'buttercup', '***REMOVED***');
 const afs = anyFs(wfs);
 
 // Constants ->
 const SET_CURRENT_PATH = 'buttercup/manager/SET_CURRENT_PATH';
 const SET_CONTENTS = 'buttercup/manager/SET_CONTENTS';
+const LOADING_STARTED = 'buttercup/manager/LOADING_STARTED';
+const LOADING_FINISHED = 'buttercup/manager/LOADING_FINISHED';
 
 // Reducers ->
 function currentPath(state = '', action) {
@@ -30,6 +31,17 @@ function contents(state = [], action) {
   }
 }
 
+function loading(state = false, action) {
+  switch (action.type) {
+    case LOADING_STARTED:
+      return true;
+    case LOADING_FINISHED:
+      return false;
+    default:
+      return state;
+  }
+}
+
 // Action Creators ->
 
 export const setCurrentPath = path => ({
@@ -44,6 +56,9 @@ export const setContents = contents => ({
 
 export const navigate = path => dispatch => {
   dispatch(setCurrentPath(path));
+  dispatch({
+    type: LOADING_STARTED
+  });
 
   afs.readDirectory(path).then(result => {
     const files = result.map(item => ({
@@ -58,10 +73,14 @@ export const navigate = path => dispatch => {
     }
 
     dispatch(setContents(files));
+    dispatch({
+      type: LOADING_FINISHED
+    });
   });
 };
 
 export default combineReducers({
   contents,
-  currentPath
+  currentPath,
+  loading
 });
