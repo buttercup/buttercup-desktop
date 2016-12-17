@@ -41,11 +41,12 @@ windowManager.setBuildProcedure('main', callback => {
     minHeight: 500,
     title: pkg.productName,
     titleBarStyle: 'hidden-inset',
-    show: process.env.NODE_ENV === 'development'
+    show: process.env.NODE_ENV === 'development',
+    vibrancy: 'light'
   });
 
   if (process.env.NODE_ENV === 'development') {
-    win.loadURL(`file://${path.resolve(__dirname, '../../dist/index.html')}`);
+    win.loadURL(`file://${path.resolve(__dirname, '../../app/index.html')}`);
   } else {
     win.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
   }

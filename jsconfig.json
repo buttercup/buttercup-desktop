@@ -10,6 +10,8 @@
 	"exclude": [
 		"node_modules",
 		"dist",
+		"app",
+		"release",
 		".idea",
 		".tmp"
 	],

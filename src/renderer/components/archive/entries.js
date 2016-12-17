@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
+import cx from 'classnames';
+import { isOSX } from '../../system/utils';
 import { showContextMenu, createMenuFromGroups } from '../../system/menu';
 import Column from '../column';
 import Button from '../button';
@@ -45,7 +47,7 @@ class Entries extends Component {
 
     return (
       <Column
-        className={styles.column}
+        className={cx(styles.column, isOSX() && styles.mac)}
         header={filterNode}
         footer={addButton}
         >

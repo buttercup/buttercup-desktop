@@ -1,7 +1,8 @@
 before_install:
-  - npm install
+  - rm -rf yarn.lock
+install:
 before_script:
   - export NODE_PATH=./node_modules/buttercup/node_modules/:./node_modules/:$NODE_PATH
 language: node_js
 node_js:
-  - "6.1"
+  - 6
