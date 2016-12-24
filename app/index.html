@@ -4,14 +4,20 @@
     <meta charset="utf-8">
     <title>Buttercup</title>
     <script>
-      (function() {
-        if (!process.env.HOT) {
+      if (process.env.NODE_ENV === 'production') {
+        (function() {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = './globals.css';
+          document.write(link.outerHTML);
+        }());
+        (function() {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
           link.href = './style.css';
           document.write(link.outerHTML);
-        }
-      }());
+        }());
+      }
     </script>
   </head>
   <body>

@@ -3,6 +3,9 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig from './webpack.config.base';
 
+const extractAssets = new ExtractTextPlugin('style.css');
+const extractGlobals = new ExtractTextPlugin('globals.css');
+
 const config = {
   ...baseConfig,
 
@@ -26,7 +29,7 @@ const config = {
 
       {
         test: /\.global\.scss$/,
-        loader: ExtractTextPlugin.extract(
+        loader: extractGlobals.extract(
           'style-loader',
           'css-loader!sass-loader'
         )
@@ -34,7 +37,7 @@ const config = {
 
       {
         test: /^((?!\.global).)*\.scss$/,
-        loader: ExtractTextPlugin.extract(
+        loader: extractAssets.extract(
           'style-loader',
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
         )
@@ -55,7 +58,8 @@ const config = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true })
+    extractAssets,
+    extractGlobals
   ],
 
   target: 'electron-renderer'
