@@ -37,7 +37,7 @@ $ npm install
 $ yarn
 
 ## Run
-$ npm run dev
+$ npm run start
 ```
 
 ## Package & Release
