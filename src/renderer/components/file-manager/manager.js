@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react';
 import Dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
-import 'fixed-data-table/dist/fixed-data-table.css';
+import 'fixed-data-table-2/dist/fixed-data-table.css';
 
 class Manager extends Component {
   constructor(props) {

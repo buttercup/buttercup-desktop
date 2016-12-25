@@ -1,6 +1,5 @@
 import path from 'path';
 import webpack from 'webpack';
-import NpmInstallPlugin from 'npm-install-webpack-plugin';
 import baseConfig from './webpack.config.base';
 
 const config = {
@@ -53,10 +52,6 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
       'global.GENTLY': false
-    }),
-    new NpmInstallPlugin({
-      dev: true,
-      peerDependencies: true
     })
   ],
 

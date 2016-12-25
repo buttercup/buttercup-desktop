@@ -2557,6 +2557,10 @@ electron@^1.4.12:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
+element-resize-event@^2.0.4:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/element-resize-event/-/element-resize-event-2.0.7.tgz#8b63953715967cd2241620245573e79e684e07b0"
+
 elliptic@^6.0.0:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/elliptic/-/elliptic-6.3.2.tgz#e4c81e0829cf0a65ab70e998b8232723b5c1bc48"
@@ -4600,6 +4604,10 @@ lodash.create@3.1.1:
     lodash._basecreate "^3.0.0"
     lodash._isiterateecall "^3.0.0"
 
+lodash.debounce@^4.0.6:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
 lodash.deburr@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.deburr/-/lodash.deburr-3.2.0.tgz#6da8f54334a366a7cf4c4c76ef8d80aa1b365ed5"
@@ -6031,6 +6039,13 @@ react-addons-test-utils@^15.4.0:
 react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
+
+react-dimensions@^2.0.0-alpha1:
+  version "2.0.0-alpha1"
+  resolved "https://registry.yarnpkg.com/react-dimensions/-/react-dimensions-2.0.0-alpha1.tgz#03c1a5265f0786311547954674379da90749d001"
+  dependencies:
+    element-resize-event "^2.0.4"
+    lodash.debounce "^4.0.6"
 
 react-dom@^15.4.0:
   version "15.4.0"
