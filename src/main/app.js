@@ -64,6 +64,10 @@ windowManager.setBuildProcedure('main', callback => {
     }
   });
 
+  win.once('closed', () => {
+    windowManager.deregister(win);
+  });
+
   return win;
 });
 
@@ -80,6 +84,15 @@ app.on('ready', async () => {
 });
 
 // When user closes all windows
-app.on('window-all-closed', () => {
-  // windowManager.buildWindowOfType('main');
+// Do nothing here.
+// if we don't register this callback,
+// the default action will be triggered,
+// which is quitting the app.
+app.on('window-all-closed', () => {});
+
+// Create a new window if all windows are closed.
+app.on('activate', () => {
+  if (windowManager.getCountOfType('main') === 0) {
+    windowManager.buildWindowOfType('main');
+  }
 });
