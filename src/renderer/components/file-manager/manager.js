@@ -2,8 +2,9 @@ import path from 'path';
 import React, { Component, PropTypes } from 'react';
 import Dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
-import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
+import styles from '../../styles/file-manager';
+import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
 class Manager extends Component {
   constructor(props) {
@@ -38,9 +39,16 @@ class Manager extends Component {
     const { selectedIndex } = this.state;
     return (
       <Table
-        rowHeight={40}
+        rowHeight={35}
         headerHeight={40}
         rowsCount={contents.length}
+        rowClassNameGetter={index => {
+          const item = contents[index];
+          if (item.type !== 'directory' && path.extname(item.name).toLowerCase() !== '.bcup') {
+            return styles.disabled;
+          }
+          return selectedIndex === index ? styles.selected : null;
+        }}
         width={containerWidth}
         height={containerHeight}
         onRowClick={(...args) => this.handleRowClick(...args)}
@@ -51,7 +59,7 @@ class Manager extends Component {
           columnKey="icon"
           header={<Cell/>}
           cell={<IconCell data={contents} selectedIndex={selectedIndex}/>}
-          width={50}
+          width={40}
           fixed
           />
         <Column
@@ -81,7 +89,7 @@ class Manager extends Component {
   }
 }
 
-Manager.propTypes = {
+export const propTypes = {
   containerWidth: PropTypes.number,
   containerHeight: PropTypes.number,
   currentPath: PropTypes.string.isRequired,
@@ -90,6 +98,8 @@ Manager.propTypes = {
   handleSelectCurrentPath: PropTypes.func,
   handleCreateNewDirectory: PropTypes.func
 };
+
+Manager.propTypes = propTypes;
 
 export default Dimensions({
   elementResize: true

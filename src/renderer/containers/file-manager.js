@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import FileManager from '../components/file-manager';
-import { navigate } from '../redux/modules/file-manager'; 
+import * as managerTools from '../redux/modules/file-manager'; 
 
 export default connect(
   state => ({
@@ -8,6 +8,7 @@ export default connect(
     contents: state.manager.contents
   }),
   {
-    handleNavigate: navigate
+    handleNavigate: managerTools.navigate,
+    handleCreateNewDirectory: managerTools.addDirectory
   }
 )(FileManager);

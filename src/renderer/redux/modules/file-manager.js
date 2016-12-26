@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import webdavFs from 'webdav-fs';
 import anyFs from 'any-fs';
 
-const wfs = webdavFs('https://storage.perry.cx/remote.php/webdav', 'buttercup', '***REMOVED***');
+const wfs = webdavFs('https://storage.perry.cx/remote.php/webdav', 'buttercup', 'Q3IahV1SYvSdtE1M18w3');
 const afs = anyFs(wfs);
 
 // Constants ->
@@ -11,6 +11,7 @@ const SET_CURRENT_PATH = 'buttercup/manager/SET_CURRENT_PATH';
 const SET_CONTENTS = 'buttercup/manager/SET_CONTENTS';
 const LOADING_STARTED = 'buttercup/manager/LOADING_STARTED';
 const LOADING_FINISHED = 'buttercup/manager/LOADING_FINISHED';
+const ADD_DIRECTORY = 'buttercup/manager/ADD_DIRECTORY';
 
 // Reducers ->
 function currentPath(state = '', action) {
@@ -26,6 +27,16 @@ function contents(state = [], action) {
   switch (action.type) {
     case SET_CONTENTS:
       return action.payload;
+    case ADD_DIRECTORY:
+      return [
+        ...state,
+        {
+          name: 'Untitled',
+          type: 'directory',
+          size: 0,
+          mtime: null
+        }
+      ];
     default:
       return state;
   }
@@ -78,6 +89,10 @@ export const navigate = path => dispatch => {
     });
   });
 };
+
+export const addDirectory = () => ({
+  type: ADD_DIRECTORY
+});
 
 export default combineReducers({
   contents,

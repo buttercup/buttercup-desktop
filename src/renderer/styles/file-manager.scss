@@ -1,8 +1,17 @@
 @import './variables';
 
+.cell {
+  font-size: .8rem;
+  cursor: pointer;
+}
+
 .selected {
-  background: $brand-primary;
+  background: $brand-primary !important;
   color: #fff;
+}
+
+.disabled {
+  color: $gray-dark;
 }
 
 .wrapper {
