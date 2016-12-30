@@ -1,5 +1,11 @@
 # Buttercup release changelog
 
+## 0.5.0
+_30/12/2016_
+
+  * New! Auto updater is here! Buttercup will update itself when a new version is available.
+  * Some visual changes and eye candy 🍭
+
 ## 0.4.1
 _30/12/2016_
 
