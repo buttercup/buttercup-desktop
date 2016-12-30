@@ -13,7 +13,7 @@ import WorkspaceContainer from './containers/workspace';
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore();
 
-setWindowSize(870, 550);
+setWindowSize(870, 550, 'light');
 
 rpc.on('ready', () => {
   rpc.emit('init');

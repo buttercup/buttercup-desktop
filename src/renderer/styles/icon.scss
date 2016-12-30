@@ -1,0 +1,225 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('./font/icomoon.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-document-file-bcup:before {
+  content: "\e943";
+}
+.icon-document:before {
+  content: "\e900";
+}
+.icon-folder:before {
+  content: "\e901";
+}
+.icon-document-file-numbers:before {
+  content: "\e902";
+}
+.icon-document-file-pages:before {
+  content: "\e903";
+}
+.icon-document-file-app:before {
+  content: "\e904";
+}
+.icon-document-file-png:before {
+  content: "\e905";
+}
+.icon-document-file-pdf:before {
+  content: "\e906";
+}
+.icon-document-file-mp3:before {
+  content: "\e907";
+}
+.icon-document-file-mp4:before {
+  content: "\e908";
+}
+.icon-document-file-mov:before {
+  content: "\e909";
+}
+.icon-document-file-jpg:before {
+  content: "\e90a";
+}
+.icon-document-file-key:before {
+  content: "\e90b";
+}
+.icon-document-file-html:before {
+  content: "\e90c";
+}
+.icon-document-file-css:before {
+  content: "\e90d";
+}
+.icon-document-file-java:before {
+  content: "\e90e";
+}
+.icon-document-file-psd:before {
+  content: "\e90f";
+}
+.icon-document-file-ai:before {
+  content: "\e910";
+}
+.icon-document-file-bmp:before {
+  content: "\e911";
+}
+.icon-document-file-dwg:before {
+  content: "\e912";
+}
+.icon-document-file-eps:before {
+  content: "\e913";
+}
+.icon-document-file-tiff:before {
+  content: "\e914";
+}
+.icon-document-file-ots:before {
+  content: "\e915";
+}
+.icon-document-file-php:before {
+  content: "\e916";
+}
+.icon-document-file-py:before {
+  content: "\e917";
+}
+.icon-document-file-c:before {
+  content: "\e918";
+}
+.icon-document-file-sql:before {
+  content: "\e919";
+}
+.icon-document-file-rb:before {
+  content: "\e91a";
+}
+.icon-document-file-cpp:before {
+  content: "\e91b";
+}
+.icon-document-file-tga:before {
+  content: "\e91c";
+}
+.icon-document-file-dxf:before {
+  content: "\e91d";
+}
+.icon-document-file-doc:before {
+  content: "\e91e";
+}
+.icon-document-file-odt:before {
+  content: "\e91f";
+}
+.icon-document-file-xls:before {
+  content: "\e920";
+}
+.icon-document-file-docx:before {
+  content: "\e921";
+}
+.icon-document-file-ppt:before {
+  content: "\e922";
+}
+.icon-document-file-asp:before {
+  content: "\e923";
+}
+.icon-document-file-ics:before {
+  content: "\e924";
+}
+.icon-document-file-dat:before {
+  content: "\e925";
+}
+.icon-document-file-xml:before {
+  content: "\e926";
+}
+.icon-document-file-yml:before {
+  content: "\e927";
+}
+.icon-document-file-h:before {
+  content: "\e928";
+}
+.icon-document-file-exe:before {
+  content: "\e929";
+}
+.icon-document-file-avi:before {
+  content: "\e92a";
+}
+.icon-document-file-odp:before {
+  content: "\e92b";
+}
+.icon-document-file-dotx:before {
+  content: "\e92c";
+}
+.icon-document-file-xlsx:before {
+  content: "\e92d";
+}
+.icon-document-file-ods:before {
+  content: "\e92e";
+}
+.icon-document-file-pps:before {
+  content: "\e92f";
+}
+.icon-document-file-dot:before {
+  content: "\e930";
+}
+.icon-document-file-txt:before {
+  content: "\e931";
+}
+.icon-document-file-rtf:before {
+  content: "\e932";
+}
+.icon-document-file-m4v:before {
+  content: "\e933";
+}
+.icon-document-file-flv:before {
+  content: "\e934";
+}
+.icon-document-file-mpg:before {
+  content: "\e935";
+}
+.icon-document-file-qt:before {
+  content: "\e936";
+}
+.icon-document-file-mid:before {
+  content: "\e937";
+}
+.icon-document-file-3gp:before {
+  content: "\e938";
+}
+.icon-document-file-aiff:before {
+  content: "\e939";
+}
+.icon-document-file-aac:before {
+  content: "\e93a";
+}
+.icon-document-file-wav:before {
+  content: "\e93b";
+}
+.icon-document-file-zip:before {
+  content: "\e93c";
+}
+.icon-document-file-ott:before {
+  content: "\e93d";
+}
+.icon-document-file-tgz:before {
+  content: "\e93e";
+}
+.icon-document-file-dmg:before {
+  content: "\e93f";
+}
+.icon-document-file-iso:before {
+  content: "\e940";
+}
+.icon-document-file-rar:before {
+  content: "\e941";
+}
+.icon-document-file-gif:before {
+  content: "\e942";
+}

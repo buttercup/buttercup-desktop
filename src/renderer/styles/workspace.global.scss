@@ -50,3 +50,7 @@ input, button, textarea, :focus {
     outline: none; // @TODO: a11y
     -webkit-app-region: no-drag;
 }
+
+.public_fixedDataTableCell_main {
+  background-color: transparent !important;
+}

@@ -1,0 +1,27 @@
+@import './variables';
+
+.cell {
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.selected {
+  background: $brand-primary !important;
+  color: #fff;
+}
+
+.disabled {
+  color: $gray-dark;
+}
+
+.wrapper {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.managerWrapper {
+  flex: 1;
+}
