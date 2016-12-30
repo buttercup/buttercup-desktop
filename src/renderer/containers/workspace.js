@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
-
-const mapStateToProps = state => ({
-  workspace: state.workspace
-});
+import { installUpdate } from '../redux/modules/ui';
 
 export default connect(
-  mapStateToProps,
-  null
+  state => ({
+    workspace: state.workspace,
+    update: state.ui.update
+  }),
+  {
+    installUpdate
+  }
 )(Workspace, 'Workspace');

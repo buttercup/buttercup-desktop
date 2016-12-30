@@ -33,7 +33,7 @@ body {
   box-sizing: border-box;
 }
 
-#root {
+#root, #root > div {
   display: flex;
   flex: 1;
 }
