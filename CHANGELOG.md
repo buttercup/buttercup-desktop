@@ -1,5 +1,10 @@
 # Buttercup release changelog
 
+## 0.4.1
+_30/12/2016_
+
+  * Fix: Clicking on dock icon focuses existing window or creates a new one
+
 ## 0.4.0
 _11/12/2016_
 
