@@ -144,6 +144,7 @@
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
     "mocha": "^3.1.2",
+    "ms": "^0.7.2",
     "node-sass": "^3.10.1",
     "npm-install-webpack-plugin": "^4.0.4",
     "raw-loader": "^0.5.1",

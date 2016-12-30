@@ -8,6 +8,7 @@ import { copyToClipboard, setWindowSize } from './system/utils';
 import configureStore from './redux/configureStore';
 import * as archiveActions from './redux/modules/files';
 import * as entryActions from './redux/modules/entries';
+import * as uiAction from './redux/modules/ui';
 import WorkspaceContainer from './containers/workspace';
 
 window.__defineGetter__('rpc', () => rpc);
@@ -36,6 +37,10 @@ rpc.on('copy-current-password', () => {
   if (currentEntry) {
     copyToClipboard(currentEntry.properties.password || '');
   }
+});
+
+rpc.on('update-available', updateData => {
+  store.dispatch(uiAction.pushUpdate(updateData));
 });
 
 render(

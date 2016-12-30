@@ -4,6 +4,7 @@ import { app, BrowserWindow, Menu } from 'electron';
 import pkg from '../../package.json';
 import menuTemplate from './config/menu';
 import WindowManager from './lib/window-manager';
+import AutoUpdater from './lib/updater';
 import createRPC from './lib/rpc';
 import './lib/buttercup';
 
@@ -59,6 +60,10 @@ windowManager.setBuildProcedure('main', callback => {
   });
 
   rpc.on('init', () => {
+    if (process.env.NODE_ENV !== 'development') {
+      AutoUpdater(win);
+    }
+
     if (callback) {
       callback(win, rpc);
     }
