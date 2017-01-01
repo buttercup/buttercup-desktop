@@ -45,7 +45,7 @@ class Copyable extends Component {
   }
 
   renderPassword(content) {
-    return (<span>{this.state.concealed ? '●'.repeat(content.length) : content}</span>);
+    return (<span>{this.state.concealed ? '●'.repeat(10) : content}</span>);
   }
 
   render() {
