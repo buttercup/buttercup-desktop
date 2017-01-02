@@ -20,6 +20,10 @@ rpc.on('ready', () => {
   rpc.emit('init');
 });
 
+rpc.on('open-file', path => {
+  store.dispatch(archiveActions.openFile(path));
+});
+
 rpc.on('new-archive', () => {
   store.dispatch(archiveActions.newArchive());
 });
