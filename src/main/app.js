@@ -4,11 +4,14 @@ import { app, BrowserWindow, Menu } from 'electron';
 import pkg from '../../package.json';
 import menuTemplate from './config/menu';
 import WindowManager from './lib/window-manager';
+import Platform from './lib/platform';
 import AutoUpdater from './lib/updater';
 import createRPC from './lib/rpc';
 import './lib/buttercup';
 
 const windowManager = WindowManager.getSharedInstance();
+let appIsReady = false;
+let initialFile = null;
 
 /**
  * Open File helper using Buttercup
@@ -17,7 +20,8 @@ const windowManager = WindowManager.getSharedInstance();
  * @param {BrowserWindow} win
  */
 function openFile(filePath, win) {
-  filePath = decodeURI(filePath.replace('file://', ''));
+  filePath = decodeURI(filePath.replace(Platform.isWindows() ? /^file:[\/]{2,3}/ : 'file://', ''));
+  filePath = path.normalize(filePath);
   if (path.extname(filePath).toLowerCase() !== '.bcup') {
     return;
   }
@@ -107,17 +111,34 @@ windowManager.setBuildProcedure('main', callback => {
   return win;
 });
 
-// In case user tries to open a file using Buttercup
+// In case user tries to open a file using Buttercup (on Mac)
 app.on('open-file', (e, filePath) => {
   e.preventDefault();
-  openFile(filePath);
+  if (appIsReady === true) {
+    openFile(filePath);
+  } else {
+    initialFile = filePath;
+  }
 });
+
+// Open file using Buttercup (on Windows)
+if (Platform.isWindows() && typeof process.argv[1] === 'string') {
+  initialFile = process.argv[1];
+}
 
 app.on('ready', async () => {
   await installExtensions();
+  appIsReady = true;
 
   // Show intro
-  windowManager.buildWindowOfType('main');
+  windowManager.buildWindowOfType('main', win => {
+    // If the app has been started in order to open a file
+    // launch that file after the main window has been created.
+    if (initialFile) {
+      openFile(initialFile, win);
+      initialFile = null;
+    }
+  });
 
   // Show standard menu
   Menu.setApplicationMenu(
@@ -126,11 +147,12 @@ app.on('ready', async () => {
 });
 
 // When user closes all windows
-// Do nothing here.
-// if we don't register this callback,
-// the default action will be triggered,
-// which is quitting the app.
-app.on('window-all-closed', () => {});
+// On Windows, the command practice is to quit the app.
+app.on('window-all-closed', () => {
+  if (Platform.isWindows()) {
+    app.quit();
+  }
+});
 
 // Create a new window if all windows are closed.
 app.on('activate', () => {
