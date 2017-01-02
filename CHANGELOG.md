@@ -1,5 +1,11 @@
 # Buttercup release changelog
 
+## 0.6.0
+_02/01/2017_
+
+  * New! Opening `.bcup` files with Buttercup is now possible!
+  * Fixed: Security concern regarding concealed password display length
+
 ## 0.5.0
 _30/12/2016_
 
