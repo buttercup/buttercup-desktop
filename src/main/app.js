@@ -10,6 +10,31 @@ import './lib/buttercup';
 
 const windowManager = WindowManager.getSharedInstance();
 
+/**
+ * Open File helper using Buttercup
+ * 
+ * @param {String} filePath
+ * @param {BrowserWindow} win
+ */
+function openFile(filePath, win) {
+  filePath = decodeURI(filePath.replace('file://', ''));
+  if (path.extname(filePath).toLowerCase() !== '.bcup') {
+    return;
+  }
+  if (!win) {
+    win = BrowserWindow.getFocusedWindow();
+  }
+  // If there's a window and it's in intro state
+  if (win && win.getTitle() === 'intro') {
+    win.rpc.emit('open-file', filePath);
+    return;
+  }
+  // Otherwise just create a new window
+  windowManager.buildWindowOfType('main', (win, rpc) => {
+    rpc.emit('open-file', filePath);
+  });
+}
+
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')({showDevTools: true});
 }
@@ -55,6 +80,12 @@ windowManager.setBuildProcedure('main', callback => {
   const rpc = createRPC(win);
   win.rpc = rpc;
 
+  // When user drops a file on the window
+  win.webContents.on('will-navigate', (e, url) => {
+    e.preventDefault();
+    openFile(url, win);
+  });
+
   win.once('ready-to-show', () => {
     win.show();
   });
@@ -74,6 +105,12 @@ windowManager.setBuildProcedure('main', callback => {
   });
 
   return win;
+});
+
+// In case user tries to open a file using Buttercup
+app.on('open-file', (e, filePath) => {
+  e.preventDefault();
+  openFile(filePath);
 });
 
 app.on('ready', async () => {
