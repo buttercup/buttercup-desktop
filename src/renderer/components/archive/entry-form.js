@@ -35,7 +35,14 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
         </div>
       )}
     </div>
-    <Button onClick={() => fields.push({})} icon={<PlusIcon/>}>Add New Field</Button>
+    <Button
+      onClick={e => {
+        fields.push({});
+        e.stopPropagation();
+        e.preventDefault();
+      }}
+      icon={<PlusIcon/>}
+      >Add New Field</Button>
     {touched && error && <span>{error}</span>}
   </div>
 );
@@ -44,7 +51,15 @@ class EntryForm extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        onKeyDown={e => {
+          if (e.which === 13) {
+            e.preventDefault();
+            return false;
+          }
+        }}
+        >
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">Title</label>
           <Field name="properties.title" component={Input} type="text" placeholder="Untitled"/>
