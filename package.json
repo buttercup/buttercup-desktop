@@ -157,7 +157,7 @@
     "react-redux": "^4.4.6",
     "react-split-pane": "^0.1.51",
     "redux": "^3.5.2",
-    "redux-form": "^6.1.1",
+    "redux-form": "^6.4.3",
     "redux-persist": "^3.1.1",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.3",
