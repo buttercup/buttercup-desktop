@@ -12,6 +12,8 @@ export function getGroups() {
     group => Object.assign(group.toObject(Buttercup.Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
     })
+  ).sort(
+    group => group.isTrash ? 1 : -1
   );
 }
 
