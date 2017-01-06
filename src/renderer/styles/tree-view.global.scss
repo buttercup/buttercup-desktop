@@ -114,6 +114,12 @@ $treePrefixCls: 'rc-tree';
         }
       }
     }
+
+    &.is-empty {
+      .#{$treePrefixCls}-switcher {
+        opacity: 0;
+      }
+    }
   }
 
   &-title {
