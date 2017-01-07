@@ -3,41 +3,16 @@ import path from 'path';
 import { app, BrowserWindow, Menu } from 'electron';
 import pkg from '../../package.json';
 import menuTemplate from './config/menu';
-import WindowManager from './lib/window-manager';
-import Platform from './lib/platform';
+import { getWindowManager } from './lib/window-manager';
+import { loadFile } from './lib/files';
+import { isWindows } from './lib/platform';
 import AutoUpdater from './lib/updater';
 import createRPC from './lib/rpc';
 import './lib/buttercup';
 
-const windowManager = WindowManager.getSharedInstance();
+const windowManager = getWindowManager();
 let appIsReady = false;
 let initialFile = null;
-
-/**
- * Open File helper using Buttercup
- * 
- * @param {String} filePath
- * @param {BrowserWindow} win
- */
-function openFile(filePath, win) {
-  filePath = decodeURI(filePath.replace(Platform.isWindows() ? /^file:[\/]{2,3}/ : 'file://', ''));
-  filePath = path.normalize(filePath);
-  if (path.extname(filePath).toLowerCase() !== '.bcup') {
-    return;
-  }
-  if (!win) {
-    win = BrowserWindow.getFocusedWindow();
-  }
-  // If there's a window and it's in intro state
-  if (win && win.getTitle() === 'intro') {
-    win.rpc.emit('open-file', filePath);
-    return;
-  }
-  // Otherwise just create a new window
-  windowManager.buildWindowOfType('main', (win, rpc) => {
-    rpc.emit('open-file', filePath);
-  });
-}
 
 if (process.env.NODE_ENV === 'development') {
   require('electron-debug')({showDevTools: true});
@@ -87,14 +62,14 @@ windowManager.setBuildProcedure('main', callback => {
   // When user drops a file on the window
   win.webContents.on('will-navigate', (e, url) => {
     e.preventDefault();
-    openFile(url, win);
+    loadFile(url, win);
   });
 
   win.once('ready-to-show', () => {
     win.show();
   });
 
-  rpc.on('init', () => {
+  rpc.once('init', () => {
     if (process.env.NODE_ENV !== 'development') {
       AutoUpdater(win);
     }
@@ -115,14 +90,14 @@ windowManager.setBuildProcedure('main', callback => {
 app.on('open-file', (e, filePath) => {
   e.preventDefault();
   if (appIsReady === true) {
-    openFile(filePath);
+    loadFile(filePath);
   } else {
     initialFile = filePath;
   }
 });
 
 // Open file using Buttercup (on Windows)
-if (Platform.isWindows() && typeof process.argv[1] === 'string') {
+if (isWindows() && typeof process.argv[1] === 'string') {
   initialFile = process.argv[1];
 }
 
@@ -135,7 +110,7 @@ app.on('ready', async () => {
     // If the app has been started in order to open a file
     // launch that file after the main window has been created.
     if (initialFile) {
-      openFile(initialFile, win);
+      loadFile(initialFile, win);
       initialFile = null;
     }
   });
@@ -149,7 +124,7 @@ app.on('ready', async () => {
 // When user closes all windows
 // On Windows, the command practice is to quit the app.
 app.on('window-all-closed', () => {
-  if (Platform.isWindows()) {
+  if (isWindows()) {
     app.quit();
   }
 });

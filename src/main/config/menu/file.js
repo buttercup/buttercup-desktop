@@ -1,36 +1,18 @@
-const WindowManager = require('../../lib/window-manager');
+import { getWindowManager } from '../../lib/window-manager';
+import { openFile, newFile } from '../../lib/files';
 
-const windowManager = WindowManager.getSharedInstance(); 
-
-function conditionalEmmit(focusedWindow, action) {
-  if (focusedWindow) {
-    focusedWindow.rpc.emit('is-in-workspace');
-    focusedWindow.rpc.once('in-workspace', inWorkspace => {
-      if (inWorkspace) {
-        windowManager.buildWindowOfType('main', (win, rpc) => {
-          rpc.emit(action);
-        });
-      } else {
-        focusedWindow.rpc.emit(action);
-      }
-    });
-  } else {
-    windowManager.buildWindowOfType('main', (win, rpc) => {
-      rpc.emit(action);
-    });
-  }
-}
+const windowManager = getWindowManager();
 
 module.exports = [
   {
     label: 'New Archive',
     accelerator: 'CmdOrCtrl+N',
-    click: (item, focusedWindow) => conditionalEmmit(focusedWindow, 'new-archive')
+    click: (item, focusedWindow) => newFile(focusedWindow)
   },
   {
     label: 'Open Archive',
     accelerator: 'CmdOrCtrl+O',
-    click: (item, focusedWindow) => conditionalEmmit(focusedWindow, 'open-archive')
+    click: (item, focusedWindow) => openFile(focusedWindow)
   },
   {
     type: 'separator'

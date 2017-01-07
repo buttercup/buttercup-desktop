@@ -24,12 +24,8 @@ rpc.on('open-file', path => {
   store.dispatch(archiveActions.openFile(path));
 });
 
-rpc.on('new-archive', () => {
-  store.dispatch(archiveActions.newArchive());
-});
-
-rpc.on('open-archive', () => {
-  store.dispatch(archiveActions.openArchive());
+rpc.on('new-file', path => {
+  store.dispatch(archiveActions.createNewFile(path));
 });
 
 rpc.on('is-in-workspace', () => {
