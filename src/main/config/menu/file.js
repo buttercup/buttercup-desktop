@@ -18,6 +18,17 @@ module.exports = [
     type: 'separator'
   },
   {
+    label: 'Import',
+    submenu: [
+      {
+        label: 'From KeePass archive'
+      }
+    ]
+  },
+  {
+    type: 'separator'
+  },
+  {
     label: 'Open New Window',
     accelerator: 'CmdOrCtrl+Shift+N',
     click: () => {
