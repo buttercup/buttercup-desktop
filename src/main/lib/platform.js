@@ -1,17 +1,17 @@
-class Platform {
-
-  static isOSX() {
-    return process.platform === 'darwin';
-  }
-
-  static isWindows() {
-    return process.platform === 'win32';
-  }
-
-  static isLinux() {
-    return process.platform === 'linux';
-  }
-
+export function isOSX() {
+  return process.platform === 'darwin';
 }
 
-module.exports = Platform;
+export function isWindows() {
+  return process.platform === 'win32';
+}
+
+export function isLinux() {
+  return process.platform === 'linux';
+}
+
+export default {
+  isOSX,
+  isWindows,
+  isLinux
+};
