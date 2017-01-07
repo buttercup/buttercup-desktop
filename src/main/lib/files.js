@@ -2,12 +2,19 @@ import path from 'path';
 import { BrowserWindow, dialog } from 'electron';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
+import { importKeepass } from './buttercup/import';
 
 const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [{
     name: 'Buttercup Archives',
     extensions: ['bcup']
+  }]
+};
+const keepassDialogOptions = {
+  filters: [{
+    name: 'KeePass Archives',
+    extensions: ['kdbx']
   }]
 };
 
@@ -97,6 +104,33 @@ export function openFile(focusedWindow) {
     return;
   }
   showOpenDialog(focusedWindow);
+}
+
+export function openKeepassFile(focusedWindow) {
+  let showKeepassDialog = function(focusedWindow) {
+    const filename = dialog.showOpenDialog(focusedWindow, {
+      ...keepassDialogOptions,
+      title: 'Load a Keepass archive'
+    });
+    
+    if (filename && filename.length > 0) {
+      // loadFile(filename[0], focusedWindow);
+      importKeepass(filename[0], "password") // @todo password input
+        .then(function(history) {
+          focusedWindow.rpc.emit('import-history', { history });
+        });
+    }
+  };
+  if (!focusedWindow) {
+    focusedWindow = BrowserWindow.getFocusedWindow();
+  }
+  if (!focusedWindow) {
+    windowManager.buildWindowOfType('main', win => {
+      showKeepassDialog(win);
+    });
+    return;
+  }
+  showKeepassDialog(focusedWindow);
 }
 
 /**

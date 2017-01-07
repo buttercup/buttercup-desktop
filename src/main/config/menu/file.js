@@ -1,5 +1,5 @@
 import { getWindowManager } from '../../lib/window-manager';
-import { openFile, newFile } from '../../lib/files';
+import { openFile, openKeepassFile, newFile } from '../../lib/files';
 
 const windowManager = getWindowManager();
 
@@ -21,7 +21,8 @@ module.exports = [
     label: 'Import',
     submenu: [
       {
-        label: 'From KeePass archive'
+        label: 'From KeePass archive',
+        click: (item, focusedWindow) => openKeepassFile(focusedWindow)
       }
     ]
   },
