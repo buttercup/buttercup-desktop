@@ -125,11 +125,13 @@ export function openKeepassFile(focusedWindow) {
           .then(history => {
             focusedWindow.rpc.emit('import-history', { history });
           }).catch(err => {
-            dialog.showMessageBox(focusedWindow, {
-              buttons: ['OK'],
-              title: 'Import failed.',
-              message: err
-            });
+            setTimeout(() => {
+              dialog.showMessageBox(focusedWindow, {
+                buttons: ['OK'],
+                title: 'Import failed.',
+                message: `Importing from KeePass archive failed: ${err.message}`
+              });
+            }, 10);
           });
       });
     }

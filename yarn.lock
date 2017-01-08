@@ -314,7 +314,7 @@ asar-electron-builder@^0.13.5:
     minimatch "^3.0.2"
     mkdirp "^0.5.1"
 
-"asmcrypto.js@github:antelle/asmcrypto.js#v0.0.10-alpha-fix-4":
+asmcrypto.js@antelle/asmcrypto.js#v0.0.10-alpha-fix-4:
   version "0.0.10-alpha-fix-4"
   resolved "https://codeload.github.com/antelle/asmcrypto.js/tar.gz/cfcd4e843157bbed6d9bc4fd792817e5e01766ae"
 
@@ -1338,9 +1338,9 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-buttercup-importer@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.6.0.tgz#0f07df0b6894ccf22db986c574482bc313a9a13f"
+buttercup-importer@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.6.1.tgz#c866f60431d3e1d00e6d2fc2a34389ed5c034fbc"
   dependencies:
     buttercup "~0.33.0"
     kdbxweb "~0.2.1"
