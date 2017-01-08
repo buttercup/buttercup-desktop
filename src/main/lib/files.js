@@ -106,21 +106,35 @@ export function openFile(focusedWindow) {
   showOpenDialog(focusedWindow);
 }
 
+/**
+ * Import a KeePass archive
+ * 
+ * @param {BrowserWindow} focusedWindow
+ */
 export function openKeepassFile(focusedWindow) {
-  let showKeepassDialog = function(focusedWindow) {
+  const showKeepassDialog = function(focusedWindow) {
     const filename = dialog.showOpenDialog(focusedWindow, {
       ...keepassDialogOptions,
       title: 'Load a Keepass archive'
     });
     
     if (filename && filename.length > 0) {
-      // loadFile(filename[0], focusedWindow);
-      importKeepass(filename[0], "password") // @todo password input
-        .then(function(history) {
-          focusedWindow.rpc.emit('import-history', { history });
-        });
+      focusedWindow.rpc.emit('import-history-prompt');
+      focusedWindow.rpc.once('import-history-prompt-resp', password => {
+        importKeepass(filename[0], password)
+          .then(history => {
+            focusedWindow.rpc.emit('import-history', { history });
+          }).catch(err => {
+            dialog.showMessageBox(focusedWindow, {
+              buttons: ['OK'],
+              title: 'Import failed.',
+              message: err
+            });
+          });
+      });
     }
   };
+
   if (!focusedWindow) {
     focusedWindow = BrowserWindow.getFocusedWindow();
   }

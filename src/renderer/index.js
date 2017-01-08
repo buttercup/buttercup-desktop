@@ -3,7 +3,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import rpc from './system/rpc';
-import { getWorkspace, getArchive, saveWorkspace } from './system/buttercup/archive';
+import { getWorkspace } from './system/buttercup/archive';
+import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
 import { copyToClipboard, setWindowSize } from './system/utils';
 import configureStore from './redux/configureStore';
 import * as archiveActions from './redux/modules/files';
@@ -14,8 +15,6 @@ import WorkspaceContainer from './containers/workspace';
 
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore();
-
-const { Archive } = window.Buttercup;
 
 setWindowSize(870, 550);
 
@@ -42,15 +41,18 @@ rpc.on('copy-current-password', () => {
   }
 });
 
-rpc.on('import-history', (request) => {
-  let { history } = request,
-    tempArchive = Archive.createFromHistory(history);
-  let mainArchive = getArchive();
-  tempArchive.getGroups().forEach(function(group) {
-    group.moveTo(mainArchive);
-  });
-  saveWorkspace();
+rpc.on('import-history', request => {
+  importHistoryFromRequest(request);
   store.dispatch(groupActions.reloadGroups());
+});
+
+rpc.on('import-history-prompt', () => {
+  showHistoryPasswordPrompt()
+    .then(result => {
+      rpc.emit('import-history-prompt-resp', result);
+    }).catch(() => {
+      rpc.emit('import-history-prompt-resp', null);
+    });
 });
 
 rpc.on('update-available', updateData => {

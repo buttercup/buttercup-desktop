@@ -33,6 +33,6 @@ export default {
 
   ],
   externals: [
-    
+    'buttercup-importer'
   ]
 };
