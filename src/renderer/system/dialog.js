@@ -13,7 +13,7 @@ export function showConfirmDialog(message, fn) {
   });
 }
 
-export function showPasswordDialog(preConfirm) {
+export function showPasswordDialog(preConfirm, options = {}) {
   return swal({
     title: 'Master Password',
     input: 'password',
@@ -26,6 +26,7 @@ export function showPasswordDialog(preConfirm) {
     cancelButtonText: 'Nevermind',
     inputPlaceholder: 'Password',
     inputClass: styles.input,
+    ...options,
     preConfirm
   });
 }

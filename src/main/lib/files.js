@@ -2,12 +2,19 @@ import path from 'path';
 import { BrowserWindow, dialog } from 'electron';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
+import { importKeepass } from './buttercup/import';
 
 const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [{
     name: 'Buttercup Archives',
     extensions: ['bcup']
+  }]
+};
+const keepassDialogOptions = {
+  filters: [{
+    name: 'KeePass Archives',
+    extensions: ['kdbx']
   }]
 };
 
@@ -97,6 +104,49 @@ export function openFile(focusedWindow) {
     return;
   }
   showOpenDialog(focusedWindow);
+}
+
+/**
+ * Import a KeePass archive
+ * 
+ * @param {BrowserWindow} focusedWindow
+ */
+export function openKeepassFile(focusedWindow) {
+  const showKeepassDialog = function(focusedWindow) {
+    const filename = dialog.showOpenDialog(focusedWindow, {
+      ...keepassDialogOptions,
+      title: 'Load a Keepass archive'
+    });
+    
+    if (filename && filename.length > 0) {
+      focusedWindow.rpc.emit('import-history-prompt');
+      focusedWindow.rpc.once('import-history-prompt-resp', password => {
+        importKeepass(filename[0], password)
+          .then(history => {
+            focusedWindow.rpc.emit('import-history', { history });
+          }).catch(err => {
+            setTimeout(() => {
+              dialog.showMessageBox(focusedWindow, {
+                buttons: ['OK'],
+                title: 'Import failed.',
+                message: `Importing from KeePass archive failed: ${err.message}`
+              });
+            }, 10);
+          });
+      });
+    }
+  };
+
+  if (!focusedWindow) {
+    focusedWindow = BrowserWindow.getFocusedWindow();
+  }
+  if (!focusedWindow) {
+    windowManager.buildWindowOfType('main', win => {
+      showKeepassDialog(win);
+    });
+    return;
+  }
+  showKeepassDialog(focusedWindow);
 }
 
 /**
