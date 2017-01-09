@@ -5,7 +5,7 @@ import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
 import styles from '../../styles/copyable';
-import Button from '../Button';
+import Button from '../button';
 
 class Copyable extends Component {
   constructor(props) {
