@@ -35,9 +35,13 @@ rpc.on('is-in-workspace', () => {
 });
 
 rpc.on('copy-current-password', () => {
+  const selection = window.getSelection().toString();
   const currentEntry = entryActions.getCurrentEntry(store.getState().entries);
-  if (currentEntry) {
-    copyToClipboard(currentEntry.properties.password || '');
+
+  if (selection !== '') {
+    copyToClipboard(selection);
+  } else if (currentEntry) {
+    copyToClipboard(currentEntry.properties.password);
   }
 });
 

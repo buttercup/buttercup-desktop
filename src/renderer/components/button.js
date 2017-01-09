@@ -30,7 +30,7 @@ Button.propTypes = {
   danger: PropTypes.bool,
   dark: PropTypes.bool,
   disabled: PropTypes.bool,
-  className: PropTypes.object
+  className: PropTypes.any
 };
 
 export default Button;
