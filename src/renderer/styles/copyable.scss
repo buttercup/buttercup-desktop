@@ -1,35 +1,38 @@
 @import './variables';
 
 .wrapper {
-  display: inline-block;
-  border: 1px dashed transparent;
   padding-left: $spacing-half;
-  margin-left: 1px;
-  line-height: 1;
-  border-radius: 5px;
+  margin-left: 2px;
+  display: flex;
+  line-height: 1.35;
 
   &:hover {
-    border-color: $black-25;
-
     button {
-      display: inline-block;
+      opacity: 1;
     }
   }
 }
 
 .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
+  word-break: break-all;
+  padding: 8px 0 6px;
+}
+
+.buttons {
+  flex: 0 1;
+  margin-left: $spacing-half;
+  white-space: nowrap;
 }
 
 .button {
-  height: 20px;
-  line-height: 1;
-  font-size: 10px;
-  vertical-align: top;
-  padding: 0 5px;
-  margin-left: $spacing-half;
-  display: none;
-  cursor: pointer;
+  opacity: 0;
+
+  &:first-child {
+    margin-right: 2px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }

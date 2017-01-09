@@ -1,7 +1,11 @@
 import React, { PropTypes, Component } from 'react';
+import CopyIcon from 'react-icons/lib/fa/copy';
+import EyeIcon from 'react-icons/lib/fa/eye';
+import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
 import styles from '../../styles/copyable';
+import Button from '../Button';
 
 class Copyable extends Component {
   constructor(props) {
@@ -31,13 +35,15 @@ class Copyable extends Component {
         label: 'Reveal Password',
         type: 'checkbox',
         checked: !this.state.concealed,
-        click: () => {
-          this.setState({concealed: !this.state.concealed});
-        }
+        click: () => this.handleReveal()
       });
     }
 
     showContextMenu(items);
+  }
+
+  handleReveal() {
+    this.setState({concealed: !this.state.concealed});
   }
 
   handleCopy() {
@@ -56,9 +62,23 @@ class Copyable extends Component {
     
     return (
       <div className={styles.wrapper} onContextMenu={() => this.showContextMenu()}>
-        <div className={styles.content}>
-          <span>{type === 'password' ? this.renderPassword(children) : children}</span>
-          <button className={styles.button} onClick={() => this.handleCopy()}>Copy</button>
+        <div className={styles.content} role="content">
+          {type === 'password' ? this.renderPassword(children) : children}
+        </div>
+        <div className={styles.buttons}>
+          <Button
+            icon={<CopyIcon/>}
+            title="Copy"
+            className={styles.button}
+            onClick={() => this.handleCopy()}
+            />
+          {(type || '').toLowerCase() === 'password' &&
+            <Button
+              icon={this.state.concealed ? <EyeIcon/> : <EyeSlashIcon/>}
+              title={this.state.concealed ? 'Reveal' : 'Hide'}
+              className={styles.button}
+              onClick={() => this.handleReveal()}
+              />}
         </div>
       </div>
     );
