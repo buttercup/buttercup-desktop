@@ -29,7 +29,7 @@ module.exports = [
           if (!focusedWindow) {
             return;
           }
-          if (focusedWindow.getTitle() === 'intro') {
+          if (focusedWindow.isIntro()) {
             dialog.showMessageBox(focusedWindow, {
               buttons: ['OK'],
               title: 'Importing is not available',

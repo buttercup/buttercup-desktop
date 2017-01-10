@@ -1,3 +1,4 @@
+import path from 'path';
 import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
 import { setWindowSize } from '../../system/utils';
@@ -24,7 +25,7 @@ function archive(state = initialState, action) {
 
 export const setWorkspace = archivePath => dispatch => {
   setWindowSize(950, 700, 'dark');
-  window.document.title = 'archive';
+  window.document.title = `${path.basename(archivePath)} - Buttercup`;
 
   dispatch({
     type: SET_WORKSPACE,
