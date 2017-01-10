@@ -59,6 +59,10 @@ windowManager.setBuildProcedure('main', callback => {
   const rpc = createRPC(win);
   win.rpc = rpc;
 
+  win.isIntro = function() {
+    return win.getTitle().toLowerCase().match(/welcome/i) !== null;
+  };
+
   // When user drops a file on the window
   win.webContents.on('will-navigate', (e, url) => {
     e.preventDefault();

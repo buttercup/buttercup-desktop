@@ -76,7 +76,7 @@ export function loadFile(filePath, win, isNew = false) {
     win = BrowserWindow.getFocusedWindow();
   }
   // If there's a window and it's in intro state
-  if (win && win.getTitle() === 'intro') {
+  if (win && win.isIntro()) {
     win.rpc.emit(emitAction, filePath);
     return;
   }
