@@ -1,6 +1,6 @@
 <h1 align="center">
   <br/>
-  <img src="https://dl.dropboxusercontent.com/u/16657557/Works/Buttercup/buttercup-desktop.svg" alt="Buttercup Desktop">
+  <img src="https://raw.githubusercontent.com/buttercup-pw/buttercup/master/build/badge.svg" alt="Buttercup Desktop">
   <br/>
   <br/>
   <br/>
@@ -16,7 +16,7 @@
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
 The application is currently in alpha, and should be considered unstable.
 
-Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module. Check out the [release changelog](CHANGELOG.md) for more information on updates.
+Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
 
 ## Download & Install
 [Click here to automatically download](https://download.buttercup.pw) the latest release for your OS, or checkout the [releases page](https://github.com/buttercup-pw/buttercup/releases) to download different builds and versions.
@@ -77,7 +77,8 @@ $ npm run release:linux
  * Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
 
 ### Contributions
- * Mohammad Amiri (logo) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+ * Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+ * Arash Asghari (Brand & Identity) ([@_arashasghari](https://twitter.com/_arashasghari))
 
 > We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
 

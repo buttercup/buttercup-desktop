@@ -13,12 +13,13 @@
 .logo {
   text-align: center;
   border-bottom: 1px solid $gray-light;
-  padding-bottom: $spacing-half;
+  padding-bottom: $spacing-one;
   width: 100%;
 
   figcaption {
     font-weight: 300;
     color: $gray;
+    margin-top: -5px;
   }
 }
 

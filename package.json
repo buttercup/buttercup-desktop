@@ -1,7 +1,7 @@
 {
   "name": "buttercup",
   "productName": "Buttercup",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Free and Open Source password vault",
   "main": "app/main.js",
   "scripts": {
@@ -20,24 +20,29 @@
   },
   "build": {
     "appId": "pw.buttercup.desktop",
-    "copyright": "Copyright © 2016 Buttercup and Contributors",
+    "copyright": "Copyright © 2015-2017 Buttercup and Contributors",
     "mac": {
       "category": "public.app-category.productivity"
     },
     "dmg": {
+      "background": "./build/background@2x.png",
       "contents": [
         {
-          "x": 438,
-          "y": 364,
+          "x": 396,
+          "y": 345,
           "type": "link",
           "path": "/Applications"
         },
         {
-          "x": 192,
-          "y": 364,
+          "x": 396,
+          "y": 110,
           "type": "file"
         }
-      ]
+      ],
+      "window": {
+        "width": 660,
+        "height": 480
+      }
     },
     "linux": {
       "target": [
@@ -46,7 +51,7 @@
         "deb"
       ],
       "packageCategory": "utils",
-      "synopsis": "Free and Open Source password vault"
+      "synopsis": "Free and Open Source Password Vault"
     },
     "fileAssociations": {
       "ext": "bcup",
