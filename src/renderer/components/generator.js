@@ -5,8 +5,6 @@ import Popover from 'react-popover';
 import styles from '../styles/generator';
 import Button from './button';
 
-console.log(generateWords);
-
 class Generator extends Component {
   constructor(props) {
     super(props);
@@ -61,43 +59,63 @@ class Generator extends Component {
     });
   }
 
+  onGenerate() {
+    const { onGenerate, autoClose = true } = this.props;
+    if (onGenerate) {
+      onGenerate(this.state.currentPassword);
+    }
+    if (autoClose) {
+      this.setState({
+        isOpen: false
+      });
+    }
+  }
+
   renderBody() {
-    const { onGenerate } = this.props;
     return (
       <div className={styles.wrapper}>
         <pre className={styles.password}>{this.state.currentPassword}</pre>
         <input type="radio" checked={this.state.type === 'characters'} onChange={() => this.changeType('characters')}/> Characters<br/>
         <input type="radio" checked={this.state.type === 'words'} onChange={() => this.changeType('words')}/> Words<br/>
-        {this.state.type === 'characters' && <fieldset>
+        {this.state.type === 'characters' && <fieldset className={styles.set}>
           <legend>Options</legend>
           <input type="range" value={this.state.length} min="10" max="30" onChange={e => this.changeLength(e)}/><br/>
-          <input
-            type="checkbox"
-            disabled={this.state.memorable}
-            checked={this.state.letters}
-            onChange={() => this.toggleOption('letters')}
-            /> Letters<br/>
-          <input
-            type="checkbox"
-            disabled={this.state.memorable}
-            checked={this.state.numbers}
-            onChange={() => this.toggleOption('numbers')}
-            /> Numbers<br/>
-          <input
-            type="checkbox"
-            disabled={this.state.memorable}
-            checked={this.state.symbols}
-            onChange={() => this.toggleOption('symbols')}
-            /> Symbols<br/>
-          <input
-            type="checkbox"
-            checked={this.state.memorable}
-            onChange={() => this.toggleOption('memorable')}
-            /> 
-          Memorable
+          <label>
+            <input
+              type="checkbox"
+              disabled={this.state.memorable}
+              checked={this.state.letters}
+              onChange={() => this.toggleOption('letters')}
+              /> Letters
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              disabled={this.state.memorable}
+              checked={this.state.numbers}
+              onChange={() => this.toggleOption('numbers')}
+              /> Numbers
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              disabled={this.state.memorable}
+              checked={this.state.symbols}
+              onChange={() => this.toggleOption('symbols')}
+              /> Symbols
+          </label>
+          <label>
+            <input
+              type="checkbox"
+              checked={this.state.memorable}
+              onChange={() => this.toggleOption('memorable')}
+              /> Memorable
+          </label>
         </fieldset>}
-        <Button onClick={() => this.generatePassword()} primary>Generate</Button>
-        <Button onClick={() => onGenerate(this.state.currentPassword)} dark>Use This Password</Button>
+        <div className={styles.buttons}>
+          <Button onClick={() => this.generatePassword()} primary>Generate</Button>
+          <Button onClick={() => this.onGenerate()} dark>Use This</Button>
+        </div>
       </div>
     );
   }
@@ -117,7 +135,8 @@ class Generator extends Component {
 
 Generator.propTypes = {
   children: PropTypes.node,
-  onGenerate: PropTypes.func.isRequired
+  onGenerate: PropTypes.func.isRequired,
+  autoClose: PropTypes.bool
 };
 
 export default Generator;

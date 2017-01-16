@@ -6,6 +6,22 @@
   padding: $spacing-one;
   color: #fff;
   border-radius: 5px;
+  font-weight: 300;
+
+  label {
+    display: block;
+  }
+}
+
+.set {
+  border-color: $white-50;
+  border-radius: 3px;
+
+  legend {
+    text-transform: uppercase;
+    padding: 0 $spacing-half;
+    font-size: .8em;
+  }
 }
 
 .password {
@@ -15,4 +31,20 @@
   background-color: $black-25;
   border-radius: 3px;
   overflow-x: auto;
+  font-weight: 400;
+}
+
+.buttons {
+  display: flex;
+  margin-top: $spacing-one;
+  align-items: flex-start;
+  flex-direction: row;
+  
+  button {
+    width: 50%;
+
+    &:first-child {
+      margin-right: $spacing-half;
+    }
+  }
 }

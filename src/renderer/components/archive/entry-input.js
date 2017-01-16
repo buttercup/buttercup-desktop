@@ -26,7 +26,8 @@ BareInput.propTypes = {
 class Input extends Component {
 
   receivePassword(newPassword) {
-    console.log(newPassword);
+    const { input: { onChange } } = this.props;
+    onChange(newPassword);
   }
 
   render() {
