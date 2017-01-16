@@ -2,7 +2,19 @@ import React, { PropTypes } from 'react';
 import cx from 'classnames';
 import styles from '../styles/button';
 
-const Button = ({children, full, primary, secondary, danger, disabled, dark, className, icon, ...rest}) => (
+const Button = ({
+  children,
+  type,
+  full,
+  primary,
+  secondary,
+  danger,
+  disabled,
+  dark,
+  className,
+  icon,
+  ...rest
+}) => (
   <button
     className={cx(
       styles.button,
@@ -14,6 +26,7 @@ const Button = ({children, full, primary, secondary, danger, disabled, dark, cla
       !children && styles.icon,
       className
     )}
+    type={type || 'button'}
     {...rest}
     disabled={disabled}
     >
@@ -22,6 +35,7 @@ const Button = ({children, full, primary, secondary, danger, disabled, dark, cla
 );
 
 Button.propTypes = {
+  type: PropTypes.string,
   children: PropTypes.node,
   icon: PropTypes.node,
   full: PropTypes.bool,

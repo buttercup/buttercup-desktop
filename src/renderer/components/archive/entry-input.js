@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Meter from '../meter';
+import Generator from '../generator';
 import styles from '../../styles/entry-input';
 
 const BareInput = ({input, name, placeholder, meta}) => {
@@ -23,11 +24,17 @@ BareInput.propTypes = {
 };
 
 class Input extends Component {
+
+  receivePassword(newPassword) {
+    console.log(newPassword);
+  }
+
   render() {
     const { type, input } = this.props;
     return (
       <div className={styles.wrapper}>
         <BareInput {...this.props}/>
+        {type === 'password' && <Generator onGenerate={pwd => this.receivePassword(pwd)}>hello</Generator>}
         {type === 'password' && <Meter input={input.value}/>}
       </div>
     );

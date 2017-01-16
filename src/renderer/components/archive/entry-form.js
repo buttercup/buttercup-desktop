@@ -26,10 +26,7 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
             placeholder="New Field"
             />
           <Button
-            onClick={e => {
-              e.preventDefault();
-              fields.remove(index);
-            }}
+            onClick={() => fields.remove(index)}
             icon={<RemoveIcon/>}
             />
         </div>
@@ -53,12 +50,6 @@ class EntryForm extends Component {
     return (
       <form
         onSubmit={handleSubmit}
-        onKeyDown={e => {
-          if (e.which === 13) {
-            e.preventDefault();
-            return false;
-          }
-        }}
         >
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">Title</label>

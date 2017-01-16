@@ -1,0 +1,18 @@
+@import './common';
+
+.wrapper {
+  width: 300px;
+  background: $dark-secondary;
+  padding: $spacing-one;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.password {
+  font-size: .9rem;
+  padding: $spacing-half;
+  margin: 0;
+  background-color: $black-25;
+  border-radius: 3px;
+  overflow-x: auto;
+}

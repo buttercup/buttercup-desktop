@@ -10,8 +10,7 @@ export default {
       },
       {
         test: /\.json$/,
-        loader: 'json-loader',
-        exclude: /node_modules/
+        loader: 'json-loader'
       },
       {
         test: /\.(svg|ttf|woff2)$/,
