@@ -4,7 +4,7 @@ import { app, BrowserWindow, Menu } from 'electron';
 import pkg from '../../package.json';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
-import { loadFile } from './lib/files';
+import { loadFile, openFile, newFile } from './lib/files';
 import { isWindows } from './lib/platform';
 import AutoUpdater from './lib/updater';
 import createRPC from './lib/rpc';
@@ -67,6 +67,14 @@ windowManager.setBuildProcedure('main', callback => {
   win.webContents.on('will-navigate', (e, url) => {
     e.preventDefault();
     loadFile(url, win);
+  });
+
+  rpc.on('open-file-dialog', () => {
+    openFile();
+  });
+
+  rpc.on('new-file-dialog', () => {
+    newFile();
   });
 
   win.once('ready-to-show', () => {

@@ -34,3 +34,11 @@ export const createNewFile = filename => dispatch => {
 export const openFile = filename => dispatch => {
   fileAction(filename, dispatch, loadWorkspace);
 };
+
+export const newArchive = () => () => {
+  window.rpc.emit('new-file-dialog');
+};
+
+export const openArchive = () => () => {
+  window.rpc.emit('open-file-dialog');
+};
