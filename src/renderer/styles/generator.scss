@@ -30,8 +30,26 @@
   margin: 0;
   background-color: $black-25;
   border-radius: 3px;
-  overflow-x: auto;
+  overflow: hidden;
   font-weight: 400;
+}
+
+.rangeLabel {
+  display: flex !important;
+
+  span {
+    flex: 0;
+    background-color: $black-25;
+    padding: 0 3px;
+    border-radius: 3px;
+    font-family: monospace;
+    width: 30px;
+    margin-left: $spacing-half;
+  }
+
+  input {
+    flex: 1;
+  }
 }
 
 .buttons {
@@ -46,5 +64,18 @@
     &:first-child {
       margin-right: $spacing-half;
     }
+  }
+}
+
+.types {
+  margin: $spacing-one 0;
+  font-size: .9rem;
+
+  label {
+    display: block;
+  }
+
+  small {
+    color: $gray-dark;
   }
 }

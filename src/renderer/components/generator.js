@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
+import MagicIcon from 'react-icons/lib/fa/magic';
 import { generate, generateWords } from 'buttercup-generator';
 import Popover from 'react-popover';
-// import cx from 'classnames';
+import cx from 'classnames';
 import styles from '../styles/generator';
 import Button from './button';
 
@@ -11,7 +12,7 @@ class Generator extends Component {
     this.state = {
       isOpen: false,
       type: 'characters',
-      length: 20,
+      length: 30,
       symbols: true,
       numbers: true,
       letters: true,
@@ -75,11 +76,34 @@ class Generator extends Component {
     return (
       <div className={styles.wrapper}>
         <pre className={styles.password}>{this.state.currentPassword}</pre>
-        <input type="radio" checked={this.state.type === 'characters'} onChange={() => this.changeType('characters')}/> Characters<br/>
-        <input type="radio" checked={this.state.type === 'words'} onChange={() => this.changeType('words')}/> Words<br/>
+        <div className={styles.types}>
+          <label>
+            <input
+              type="radio"
+              checked={this.state.type === 'characters'}
+              onChange={() => this.changeType('characters')}
+              /> Characters <small>(Recommended)</small>
+          </label>
+          <label>
+            <input
+              type="radio"
+              checked={this.state.type === 'words'}
+              onChange={() => this.changeType('words')}
+              /> Words
+          </label>
+        </div>
         {this.state.type === 'characters' && <fieldset className={styles.set}>
           <legend>Options</legend>
-          <input type="range" value={this.state.length} min="10" max="30" onChange={e => this.changeLength(e)}/><br/>
+          <label className={styles.rangeLabel}>
+            <input
+              type="range"
+              value={this.state.length}
+              min="20"
+              max="50"
+              onChange={e => this.changeLength(e)}
+              />
+            <span>{this.state.length}</span>
+          </label>
           <label>
             <input
               type="checkbox"
@@ -121,12 +145,18 @@ class Generator extends Component {
   }
 
   render() {
+    const { className, activeClassName } = this.props;
     return (
       <Popover isOpen={this.state.isOpen} body={this.renderBody()} preferPlace="below">
-        <div onClick={() => {
-          this.setState({isOpen: !this.state.isOpen});
-        }}>
-          {this.props.children}
+        <div
+          className={cx(className, this.state.isOpen ? activeClassName : null)}
+          onClick={() => {
+            this.setState({
+              isOpen: !this.state.isOpen
+            });
+          }}
+          >
+          <MagicIcon/>
         </div>
       </Popover>
     );
@@ -136,7 +166,9 @@ class Generator extends Component {
 Generator.propTypes = {
   children: PropTypes.node,
   onGenerate: PropTypes.func.isRequired,
-  autoClose: PropTypes.bool
+  autoClose: PropTypes.bool,
+  className: PropTypes.any,
+  activeClassName: PropTypes.any
 };
 
 export default Generator;

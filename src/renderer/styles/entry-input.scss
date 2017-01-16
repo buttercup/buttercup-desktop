@@ -12,9 +12,35 @@
   }
 }
 
+.password {
+  padding-right: 2.2rem;
+}
+
 .wrapper {
   flex: 1;
   min-height: $form-input-height;
   line-height: $form-input-height;
   margin-right: $spacing-half;
+  position: relative;
+}
+
+.generator {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 2px;
+
+  svg {
+    display: block;
+  }
+
+  &:hover {
+    background-color: $gray-light;
+  }
+}
+
+.generatorActive {
+  background-color: $gray !important;
 }
