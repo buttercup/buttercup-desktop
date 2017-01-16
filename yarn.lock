@@ -1338,6 +1338,13 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
+buttercup-generator@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/buttercup-generator/-/buttercup-generator-0.0.1.tgz#4dbb2717608dfaab9ed6f3b69b2989c4151776aa"
+  dependencies:
+    mngen "^1.0.0"
+    password-generator "^2.1.0"
+
 buttercup-importer@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.6.1.tgz#c866f60431d3e1d00e6d2fc2a34389ed5c034fbc"
@@ -1956,6 +1963,12 @@ css-selector-tokenizer@^0.6.0:
 css-stringify@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/css-stringify/-/css-stringify-1.0.5.tgz#b0d042946db2953bb9d292900a6cb5f6d0122031"
+
+css-vendor@^0.3.1:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/css-vendor/-/css-vendor-0.3.8.tgz#6421cfd3034ce664fe7673972fd0119fc28941fa"
+  dependencies:
+    is-in-browser "^1.0.2"
 
 css-what@2.1:
   version "2.1.0"
@@ -3854,6 +3867,10 @@ is-glob@^3.0.0:
   dependencies:
     is-extglob "^2.1.0"
 
+is-in-browser@^1.0.2:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/is-in-browser/-/is-in-browser-1.1.3.tgz#56ff4db683a078c6082eb95dad7dc62e1d04f835"
+
 is-js-type@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/is-js-type/-/is-js-type-2.0.0.tgz#73617006d659b4eb4729bba747d28782df0f7e22"
@@ -4414,6 +4431,12 @@ lodash.create@3.1.1:
     lodash._basecreate "^3.0.0"
     lodash._isiterateecall "^3.0.0"
 
+lodash.debounce@^3.0.0:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-3.1.1.tgz#812211c378a94cc29d5aa4e3346cf0bfce3a7df5"
+  dependencies:
+    lodash._getnative "^3.0.0"
+
 lodash.deburr@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.deburr/-/lodash.deburr-3.2.0.tgz#6da8f54334a366a7cf4c4c76ef8d80aa1b365ed5"
@@ -4524,6 +4547,12 @@ lodash.templatesettings@^4.0.0:
   resolved "https://registry.yarnpkg.com/lodash.templatesettings/-/lodash.templatesettings-4.1.0.tgz#2b4d4e95ba440d915ff08bc899e4553666713316"
   dependencies:
     lodash._reinterpolate "~3.0.0"
+
+lodash.throttle@^3.0.3:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-3.0.4.tgz#bc4f471fb328e4d6fdc6df2b3d3caf113f0f89c9"
+  dependencies:
+    lodash.debounce "^3.0.0"
 
 lodash.upperfirst@^4.2.0:
   version "4.3.1"
@@ -4659,7 +4688,7 @@ memory-fs@^0.3.0, memory-fs@~0.3.0:
     errno "^0.1.3"
     readable-stream "^2.0.1"
 
-meow@^3.1.0, meow@^3.4.2, meow@^3.7.0:
+meow@^3.1.0, meow@^3.3.0, meow@^3.4.2, meow@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/meow/-/meow-3.7.0.tgz#72cb668b425228290abbfa856892587308a801fb"
   dependencies:
@@ -4763,6 +4792,12 @@ mkdirp@0.5.1, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+mngen@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/mngen/-/mngen-1.0.0.tgz#f158ad17f8170b481c5c8d54132302641d28e6a5"
+  dependencies:
+    meow "^3.3.0"
 
 mocha@^3.1.2:
   version "3.1.2"
@@ -5095,7 +5130,7 @@ object-keys@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/object-keys/-/object-keys-0.4.0.tgz#28a6aae7428dd2c3a92f3d95f21335dd204e0336"
 
-object.assign@^4.0.4:
+object.assign@^4.0.1, object.assign@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/object.assign/-/object.assign-4.0.4.tgz#b1c9cc044ef1b9fe63606fc141abbb32e14730cc"
   dependencies:
@@ -5166,7 +5201,7 @@ opener@^1.4.1:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.4.2.tgz#b32582080042af8680c389a499175b4c54fff523"
 
-optimist@^0.6.1, optimist@~0.6.0, optimist@~0.6.1:
+optimist@0.6.1, optimist@^0.6.1, optimist@~0.6.0, optimist@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
   dependencies:
@@ -5270,6 +5305,12 @@ parse5@^1.5.1:
 parseurl@~1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
+
+password-generator@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/password-generator/-/password-generator-2.1.0.tgz#d7580432951b69851e3d8d0a98fb1dc60b5c56da"
+  dependencies:
+    optimist "0.6.1"
 
 path-array@^1.0.0:
   version "1.0.1"
@@ -5835,6 +5876,15 @@ react-icons@^2.2.1:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.1.tgz#354d725d60acf341d09fd50c6398ae7b97d7f157"
   dependencies:
     react-icon-base "2.0.3"
+
+react-popover@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/react-popover/-/react-popover-0.4.4.tgz#37d06e13504a01c14f7580f644341381672f36b6"
+  dependencies:
+    css-vendor "^0.3.1"
+    debug "^2.1.3"
+    lodash.throttle "^3.0.3"
+    object.assign "^4.0.1"
 
 react-proxy@^1.1.7:
   version "1.1.8"

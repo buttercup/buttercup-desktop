@@ -1,3 +1,5 @@
+@import './common';
+
 @font-face {
   font-family: 'Open Sans';
   font-weight: normal;
@@ -54,4 +56,14 @@ body {
 input, button, textarea, :focus {
     outline: none; // @TODO: a11y
     -webkit-app-region: no-drag;
+}
+
+.Popover-body {
+  display: inline-flex;
+  padding: 0;
+  flex-direction: column;
+}
+
+.Popover-tip {
+  fill: $dark-secondary;
 }
