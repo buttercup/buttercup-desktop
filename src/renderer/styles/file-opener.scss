@@ -18,7 +18,7 @@
 
   figcaption {
     font-weight: 300;
-    color: $gray;
+    color: $gray-dark;
     margin-top: -5px;
   }
 }
@@ -26,8 +26,5 @@
 .mac {
   .logo {
     border-color: $black-10;
-  }
-  figcaption {
-    color: $gray-dark;
   }
 }
