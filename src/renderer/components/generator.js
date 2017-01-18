@@ -3,6 +3,7 @@ import MagicIcon from 'react-icons/lib/fa/magic';
 import { generate, generateWords } from 'buttercup-generator';
 import Popover from 'react-popover';
 import cx from 'classnames';
+import { selectElementContents } from '../system/utils';
 import styles from '../styles/generator';
 import Button from './button';
 
@@ -75,7 +76,11 @@ class Generator extends Component {
   renderBody() {
     return (
       <div className={styles.wrapper}>
-        <pre className={styles.password}>{this.state.currentPassword}</pre>
+        <pre
+          className={styles.password}
+          role="content"
+          onClick={e => selectElementContents(e.target)}
+          >{this.state.currentPassword}</pre>
         <div className={styles.types}>
           <label>
             <input
