@@ -103,7 +103,7 @@ class Generator extends Component {
             <input
               type="range"
               value={this.state.length}
-              min="20"
+              min="10"
               max="50"
               onChange={e => this.changeLength(e)}
               />
