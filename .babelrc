@@ -1,6 +1,19 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "plugins": ["add-module-exports"],
+  "presets": [
+    ["es2015", {
+      "modules": false
+    }],
+    ["env", {
+      "targets": {
+        "electron": 1.4,
+        "modules": false
+      }
+    }],
+    "react"
+    ],
+  "plugins": [
+    "transform-object-rest-spread"
+  ],
   "env": {
   	"production": {
   		"presets": ["react-optimize"],
@@ -11,7 +24,9 @@
   		]
   	},
     "development": {
-      "presets": ["react-hmre"]
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
     },
     "test": {
       "plugins": [

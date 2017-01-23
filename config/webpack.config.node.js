@@ -7,9 +7,9 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss']
   },
   module: {
-    loaders: devConfigs.module.loaders.slice(1)  // remove babel-loader
+    rules: devConfigs.module.rules.slice(1)  // remove babel-loader
   }
 };

@@ -1,16 +1,16 @@
-import path from 'path';
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import baseConfig from './webpack.config.base';
+const { resolve } = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const baseConfig = require('./webpack.config.base');
 
-const config = {
+module.exports = {
   ...baseConfig,
 
   devtool: null,
 
   entry: [
     'babel-polyfill',
-    path.resolve(__dirname, '../src/renderer/index')
+    resolve(__dirname, '../src/renderer/index')
   ],
 
   output: {
@@ -21,23 +21,23 @@ const config = {
   module: {
     ...baseConfig.module,
 
-    loaders: [
-      ...baseConfig.module.loaders,
+    rules: [
+      ...baseConfig.module.rules,
 
       {
         test: /\.global\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader!sass-loader'
-        )
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader!sass-loader'
+        })
       },
 
       {
         test: /^((?!\.global).)*\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
-        )
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass-loader'
+        })
       }
     ]
   },
@@ -54,10 +54,11 @@ const config = {
         warnings: false
       }
     }),
-    new ExtractTextPlugin('style.css', { allChunks: true })
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true
+    })
   ],
 
   target: 'electron-renderer'
 };
-
-export default config;

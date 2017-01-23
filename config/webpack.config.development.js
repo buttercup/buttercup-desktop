@@ -1,20 +1,26 @@
-import path from 'path';
-import webpack from 'webpack';
-import NpmInstallPlugin from 'npm-install-webpack-plugin';
-import baseConfig from './webpack.config.base';
+const { resolve } = require('path');
+const webpack = require('webpack');
+const baseConfig = require('./webpack.config.base');
 
-const config = {
+module.exports = {
   ...baseConfig,
-
-  debug: true,
 
   devtool: 'cheap-module-eval-source-map',
 
   entry: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr',
-    path.resolve(__dirname, '../src/renderer/index')
+    'react-hot-loader/patch',
+    'webpack-dev-server/client?http://localhost:3000/',
+    'webpack/hot/only-dev-server',
+    resolve(__dirname, '../src/renderer/index')
   ],
+
+  devServer: {
+    hot: true,
+    contentBase: baseConfig.output.path,
+    publicPath: '/app',
+    port: 3000,
+    stats: 'minimal'
+  },
 
   output: {
     ...baseConfig.output,
@@ -23,12 +29,12 @@ const config = {
 
   module: {
     ...baseConfig.module,
-    loaders: [
-      ...baseConfig.module.loaders,
+    rules: [
+      ...baseConfig.module.rules,
 
       {
         test: /\.global\.scss$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader?sourceMap',
           'sass-loader'
@@ -37,7 +43,7 @@ const config = {
 
       {
         test: /^((?!\.global).)*\.scss$/,
-        loaders: [
+        use: [
           'style-loader',
           'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
           'sass-loader'
@@ -49,13 +55,12 @@ const config = {
   plugins: [
     ...baseConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
-    new NpmInstallPlugin({
-      dev: true,
-      peerDependencies: true
+    new webpack.LoaderOptionsPlugin({
+      debug: true
     })
   ],
 
@@ -65,5 +70,3 @@ const config = {
 
   target: 'electron-renderer'
 };
-
-export default config;
