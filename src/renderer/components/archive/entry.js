@@ -26,6 +26,7 @@ class Entry extends Component {
           ref = form;
         }}
         onSubmit={values => this.props.onEditEntry(values)}
+        onKeyUp={this.handleKeyUp}
         />,
       footer: (
         <div className={styles.splitter}>
@@ -111,7 +112,16 @@ class Entry extends Component {
       </Column>
     );
   }
+
+  handleKeyUp(e) {
+    if (e.keyCode === 13) {
+      ref.submit();
+    }
+  }
+
 }
+
+
 
 Entry.propTypes = {
   dirty: PropTypes.bool,
