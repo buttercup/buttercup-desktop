@@ -1,33 +1,23 @@
-import path from 'path';
-import webpack from 'webpack';
-import baseConfig from './webpack.config.base';
+const { resolve } = require('path');
+const webpack = require('webpack');
+const baseConfig = require('./webpack.config.base');
 
-export default {
+module.exports = {
   ...baseConfig,
 
-  devtool: null,
+  devtool: false,
 
   entry: [
-    'babel-polyfill',
-    path.resolve(__dirname, '../src/main/app')
+    resolve(__dirname, '../src/main/app')
   ],
 
   output: {
     ...baseConfig.output,
-    path: path.resolve(__dirname, '../app/'),
+    path: resolve(__dirname, '../app/'),
     filename: 'main.js'
   },
 
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    }),
-    /* new webpack.BannerPlugin(
-      'require("source-map-support").install();',
-      { raw: true, entryOnly: false }
-    ),*/
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')

@@ -1,12 +1,13 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = {
   ...baseConfig,
 
-  devtool: null,
+  devtool: false,
 
   entry: [
     'babel-polyfill',
@@ -48,12 +49,7 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        screw_ie8: true, // eslint-disable-line camelcase
-        warnings: false
-      }
-    }),
+    new BabiliPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
       allChunks: true
