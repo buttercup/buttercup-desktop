@@ -1,9 +1,9 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
-module.exports = {
-  ...baseConfig,
+module.exports = merge(baseConfig, {
 
   devtool: false,
 
@@ -12,7 +12,6 @@ module.exports = {
   ],
 
   output: {
-    ...baseConfig.output,
     path: resolve(__dirname, '../app/'),
     filename: 'main.js'
   },
@@ -20,7 +19,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     })
   ],
@@ -33,8 +32,7 @@ module.exports = {
   },
 
   externals: [
-    ...baseConfig.externals,
     'electron-devtools-installer',
     'source-map-support'
   ]
-};
+});

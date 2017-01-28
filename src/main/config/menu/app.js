@@ -1,11 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const electron = require('electron');
-const Platform = require('../../lib/platform');
+import { app } from 'electron';
+import { isOSX } from '../../lib/platform';
 
-const app = electron.app;
-let menuItems = [];
+let menuItems = []; // eslint-disable-line import/no-mutable-exports
 
-if (Platform.isOSX()) {
+if (isOSX()) {
   menuItems = [
     {
       label: 'About Buttercup',
@@ -66,4 +64,4 @@ if (Platform.isOSX()) {
   ];
 }
 
-module.exports = menuItems;
+export default menuItems;

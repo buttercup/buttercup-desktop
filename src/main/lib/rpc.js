@@ -1,7 +1,6 @@
-// Copied from https://github.com/zeit/hyper/
-const {EventEmitter} = require('events');
-const {ipcMain} = require('electron');
-const uuid = require('uuid');
+import { EventEmitter } from 'events';
+import { ipcMain } from 'electron';
+import uuid from 'uuid';
 
 class Server extends EventEmitter {
 
@@ -52,6 +51,6 @@ class Server extends EventEmitter {
 
 }
 
-module.exports = win => {
+export default win => {
   return new Server(win);
 };

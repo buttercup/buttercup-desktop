@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-const electron = require('electron');
+import { shell } from 'electron';
 
-module.exports = [
+export default [
   {
     label: 'Learn More',
     click: () => {
-      electron.shell.openExternal('https://buttercup.pw');
+      shell.openExternal('https://buttercup.pw');
     }
   }
 ];

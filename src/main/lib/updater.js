@@ -3,11 +3,11 @@
 import { autoUpdater } from 'electron';
 import ms from 'ms';
 import pkg from '../../../package.json';
-import Platform from './platform';
+import { isOSX } from './platform';
 
 // accepted values: `osx`, `win32`
 // https://nuts.gitbook.com/update-windows.html
-const platform = Platform.isOSX() ? 'osx' : process.platform;
+const platform = isOSX() ? 'osx' : process.platform;
 const FEED_URL = `https://download.buttercup.pw/update/${platform}`;
 let isInit = false;
 
@@ -29,7 +29,7 @@ function init() {
   isInit = true;
 }
 
-module.exports = function (win) {
+export default function(win) {
   const { rpc } = win;
 
   if (!isInit) {
@@ -51,4 +51,4 @@ module.exports = function (win) {
   win.on('close', () => {
     autoUpdater.removeListener('update-downloaded', onupdate);
   });
-};
+}

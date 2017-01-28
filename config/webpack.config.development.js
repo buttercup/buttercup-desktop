@@ -1,11 +1,10 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
-module.exports = {
-  ...baseConfig,
-
-  devtool: 'cheap-module-eval-source-map',
+module.exports = merge(baseConfig, {
+  devtool: 'inline-source-map',
 
   entry: [
     'react-hot-loader/patch',
@@ -23,15 +22,11 @@ module.exports = {
   },
 
   output: {
-    ...baseConfig.output,
     publicPath: 'http://localhost:3000/app/'
   },
 
   module: {
-    ...baseConfig.module,
     rules: [
-      ...baseConfig.module.rules,
-
       {
         test: /\.global\.scss$/,
         use: [
@@ -53,7 +48,6 @@ module.exports = {
   },
 
   plugins: [
-    ...baseConfig.plugins,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
@@ -65,8 +59,7 @@ module.exports = {
   ],
 
   externals: [
-    ...baseConfig.externals
   ],
 
   target: 'electron-renderer'
-};
+});

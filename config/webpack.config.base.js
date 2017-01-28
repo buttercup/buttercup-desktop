@@ -20,7 +20,8 @@ module.exports = {
   },
   output: {
     path: join(__dirname, '../app'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    libraryTarget: 'commonjs2'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss']

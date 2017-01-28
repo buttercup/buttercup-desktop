@@ -4,7 +4,7 @@ import { openFile, openKeepassFile, newFile } from '../../lib/files';
 
 const windowManager = getWindowManager();
 
-module.exports = [
+export default [
   {
     label: 'New Archive',
     accelerator: 'CmdOrCtrl+N',

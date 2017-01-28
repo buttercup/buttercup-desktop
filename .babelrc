@@ -7,7 +7,8 @@
         "chrome": 54
       },
       "useBuiltIns": true,
-      "modules": false
+      "modules": false,
+      "loose": true
     }]
   ],
   "plugins": [

@@ -1,6 +1,6 @@
-const Platform = require('../../lib/platform');
+import { isOSX } from '../../lib/platform';
 
-module.exports = [
+export default [
   {
     label: 'Reload',
     accelerator: 'CmdOrCtrl+R',
@@ -13,7 +13,7 @@ module.exports = [
   {
     label: 'Toggle Full Screen',
     accelerator: (() => {
-      if (Platform.isOSX()) {
+      if (isOSX()) {
         return 'Ctrl+Command+F';
       }
       return 'F11';
@@ -27,7 +27,7 @@ module.exports = [
   {
     label: 'Toggle Developer Tools',
     accelerator: (function() {
-      if (Platform.isOSX()) {
+      if (isOSX()) {
         return 'Alt+Command+I';
       }
       return 'Ctrl+Shift+I';

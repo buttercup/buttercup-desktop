@@ -1,30 +1,23 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 
-module.exports = {
-  ...baseConfig,
-
+module.exports = merge(baseConfig, {
   devtool: false,
 
   entry: [
-    'babel-polyfill',
     resolve(__dirname, '../src/renderer/index')
   ],
 
   output: {
-    ...baseConfig.output,
     publicPath: '../app/'
   },
 
   module: {
-    ...baseConfig.module,
-
     rules: [
-      ...baseConfig.module.rules,
-
       {
         test: /\.global\.scss$/,
         loader: ExtractTextPlugin.extract({
@@ -44,12 +37,11 @@ module.exports = {
   },
 
   plugins: [
-    ...baseConfig.plugins,
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new BabiliPlugin(),
+    // new BabiliPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
       allChunks: true
@@ -57,4 +49,4 @@ module.exports = {
   ],
 
   target: 'electron-renderer'
-};
+});
