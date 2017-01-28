@@ -1,3 +1,4 @@
+@import './lib/normalize';
 @import './common';
 
 @font-face {
@@ -27,8 +28,11 @@ body {
   padding: 0;
   display: flex;
   height: 100%;
-  font: 1em/1.5 'Open Sans';
   -webkit-app-region: drag;
+}
+
+body, button, input, select, textarea {
+  font: 1em/1.5 'Open Sans';
 }
 
 *, *:before, *:after {

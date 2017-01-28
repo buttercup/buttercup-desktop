@@ -11,6 +11,7 @@
   border: none;
   outline: none;
   border-radius: 2px;
-  background-color: $dark-secondary;
+  background-color: rgba($dark-secondary, .5);
   box-sizing: border-box;
+  color: #fff;
 }

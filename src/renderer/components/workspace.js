@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import 'glamor/reset';
 import Intro from '../components/intro';
 import Archive from '../components/archive';
 import '../styles/workspace.global.scss';
