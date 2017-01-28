@@ -8,9 +8,6 @@ class TreeLabel extends Component {
     this.state = {
       title: props.title
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
   componentDidMount() {
@@ -48,9 +45,9 @@ class TreeLabel extends Component {
       <input
         className={cx(styles.node, styles.input)}
         value={this.state.title}
-        onChange={this.handleChange}
-        onKeyUp={this.handleKeyUp}
-        onBlur={this.handleBlur}
+        onChange={e => this.handleChange(e)}
+        onKeyUp={e => this.handleKeyUp(e)}
+        onBlur={e => this.handleBlur(e)}
         ref={c => {
           this._input = c;
         }}
