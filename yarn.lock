@@ -772,7 +772,7 @@ babel-plugin-react-transform@^2.0.2:
   dependencies:
     lodash "^4.6.1"
 
-babel-plugin-syntax-async-functions@^6.13.0, babel-plugin-syntax-async-functions@^6.8.0:
+babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
 
@@ -828,7 +828,7 @@ babel-plugin-syntax-trailing-function-commas@^6.13.0, babel-plugin-syntax-traili
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-trailing-function-commas/-/babel-plugin-syntax-trailing-function-commas-6.13.0.tgz#2b84b7d53dd744f94ff1fad7669406274b23f541"
 
-babel-plugin-transform-async-generator-functions@^6.17.0, babel-plugin-transform-async-generator-functions@^6.22.0:
+babel-plugin-transform-async-generator-functions@^6.17.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-transform-async-generator-functions/-/babel-plugin-transform-async-generator-functions-6.22.0.tgz#a720a98153a7596f204099cd5409f4b3c05bab46"
   dependencies:
@@ -2807,9 +2807,9 @@ electron-rpc@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/electron-rpc/-/electron-rpc-2.0.1.tgz#0495f1dcf32597320f8661190cff2304a07bddc4"
 
-electron@^1.4.12:
-  version "1.4.12"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.4.12.tgz#ae6641aa1db01dd04e41c56639ca7b84b888767a"
+electron@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.5.0.tgz#d783d5ca8c89fd781b04c6ca75652c55bbdb80d5"
   dependencies:
     electron-download "^3.0.1"
     extract-zip "^1.0.3"

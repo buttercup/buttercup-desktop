@@ -6,7 +6,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        include: [
+          join(__dirname, '../src'),
+          join(__dirname, '../node_modules/buttercup-generator')
+        ]
       },
       {
         test: /\.(svg|ttf|woff2)$/,
