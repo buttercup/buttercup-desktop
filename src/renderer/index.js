@@ -1,7 +1,7 @@
 import 'buttercup-web';
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
+import { AppContainer } from 'react-hot-loader';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
@@ -11,7 +11,7 @@ import * as archiveActions from './redux/modules/files';
 import * as entryActions from './redux/modules/entries';
 import * as uiAction from './redux/modules/ui';
 import * as groupActions from './redux/modules/groups';
-import WorkspaceContainer from './containers/workspace';
+import Root from './containers/root';
 
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore();
@@ -64,8 +64,21 @@ rpc.on('update-available', updateData => {
 });
 
 render(
-  <Provider store={store}>
-    <WorkspaceContainer/>
-  </Provider>,
+  <AppContainer>
+    <Root store={store} history={history}/>
+  </AppContainer>,
   document.getElementById('root')
 );
+
+if (module.hot) {
+  module.hot.accept('./containers/root', () => {
+    const NewRoot = require('./containers/root').default;
+
+    render(
+      <AppContainer>
+        <NewRoot store={store}/>
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
+}

@@ -1,21 +1,38 @@
 {
-  "presets": ["es2015", "stage-0", "react"],
-  "plugins": ["add-module-exports"],
+  "presets": [
+    "react",
+    ["env", {
+      "targets": {
+        "node": 7.4,
+        "chrome": 54
+      },
+      "useBuiltIns": true,
+      "modules": false,
+      "loose": true
+    }]
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-strict-mode"
+  ],
   "env": {
   	"production": {
   		"presets": ["react-optimize"],
   		"plugins": [
-  			"babel-plugin-transform-remove-console",
-  			"babel-plugin-transform-remove-debugger",
-  			"babel-plugin-dev-expression"
+  			"transform-remove-console",
+  			"transform-remove-debugger",
+  			"dev-expression"
   		]
   	},
-    "development": {
-      "presets": ["react-hmre"]
-    },
-    "test": {
+    "node": {
       "plugins": [
-        ["webpack-loaders", { "config": "./config/webpack.config.node.js", "verbose": false }]
+        "transform-es2015-modules-commonjs",
+        "add-module-exports"
+      ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
       ]
     }
   }

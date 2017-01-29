@@ -1,31 +1,37 @@
-const app = require('electron').app;
-const Platform = require('../lib/platform');
+import { app } from 'electron';
+import { isOSX } from '../lib/platform';
+import appMenu from './menu/app';
+import fileMenu from './menu/file';
+import editMenu from './menu/edit';
+import viewMenu from './menu/view';
+import windowMenu from './menu/window';
+import helpMenu from './menu/help';
 
-module.exports = [
-  Platform.isOSX() ? {
+export default [
+  isOSX() ? {
     label: app.getName(),
-    submenu: require('./menu/app')
+    submenu: appMenu
   } : [],
   {
-    label: Platform.isOSX() ? 'Archive' : 'File',
-    submenu: require('./menu/file')
+    label: isOSX() ? 'Archive' : 'File',
+    submenu: fileMenu
   },
   {
     label: 'Edit',
-    submenu: require('./menu/edit')
+    submenu: editMenu
   },
   {
     label: 'View',
-    submenu: require('./menu/view')
+    submenu: viewMenu
   },
   {
     label: 'Window',
     role: 'window',
-    submenu: require('./menu/window')
+    submenu: windowMenu
   },
   {
     label: 'Help',
     role: 'help',
-    submenu: require('./menu/help')
+    submenu: helpMenu
   }
 ];

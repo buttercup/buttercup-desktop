@@ -1,16 +1,15 @@
-import path from 'path';
+const { join } = require('path');
 
-export default {
+module.exports = {
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        loaders: ['babel-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [
+          join(__dirname, '../src'),
+          join(__dirname, '../node_modules/buttercup-generator')
+        ]
       },
       {
         test: /\.(svg|ttf|woff2)$/,
@@ -20,13 +19,12 @@ export default {
     ]
   },
   output: {
-    path: path.join(__dirname, '../app'),
+    path: join(__dirname, '../app'),
     filename: 'bundle.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.scss'],
-    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
+    extensions: ['.js', '.jsx', '.json', '.scss']
   },
   plugins: [
 
