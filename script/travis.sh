@@ -9,7 +9,6 @@ fi
 node --version
 npm --version
 
-# rm -rf yarn.lock
 npm install
 npm run build && npm run release:mac
 npm test
