@@ -34,11 +34,6 @@
       "plugins": [
         "react-hot-loader/babel"
       ]
-    },
-    "test": {
-      "plugins": [
-        ["webpack-loaders", { "config": "./config/webpack.config.node.js", "verbose": false }]
-      ]
     }
   }
 }

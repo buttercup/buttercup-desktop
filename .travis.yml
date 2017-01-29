@@ -1,8 +1,18 @@
-before_install:
-  - rm -rf yarn.lock
-install:
-before_script:
-  - export NODE_PATH=./node_modules/buttercup/node_modules/:./node_modules/:$NODE_PATH
+os:
+  - osx
+
 language: node_js
+
 node_js:
-  - 6
+  - 7
+
+script: ./script/travis-build.sh
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
