@@ -100,6 +100,7 @@
     "babel-loader": "^6.2.10",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-plugin-transform-remove-console": "^6.8.0",

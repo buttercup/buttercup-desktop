@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { showConfirmDialog } from '../../system/dialog';
 import * as groupTools from '../../system/buttercup/groups';
 import { loadEntries } from './entries';
 
@@ -100,6 +101,13 @@ export function loadGroup(groupId) {
     dispatch(loadEntries(groupId));
   };
 }
+
+export const emptyTrash = () => dispatch => {
+  showConfirmDialog('Are you sure you want to empty Trash?', () => {
+    groupTools.emptyTrash();
+    dispatch(reloadGroups());
+  });
+};
 
 // Selectors -> 
 

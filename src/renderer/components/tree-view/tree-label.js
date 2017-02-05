@@ -54,11 +54,8 @@ class TreeLabel extends Component {
         />
       ) : title;
 
-    /* {!isTrash && <button onClick={e => onRemoveClick(e, id)}>&times;</button>}
-      {(editMode || isTrash) ? null : <button onClick={e => onAddClick(e, id)}>+</button>} */
-
     return (
-      <span onContextMenu={() => onRightClick()} className={styles.node}>
+      <span onContextMenu={onRightClick} className={styles.node}>
         {titleLabel}
       </span>
     );
