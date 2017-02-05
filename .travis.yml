@@ -7,7 +7,3 @@ node_js:
   - 7
 
 script: ./script/travis.sh
-
-cache:
-  directories:
-    - node_modules

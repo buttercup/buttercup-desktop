@@ -101,3 +101,13 @@ export function moveGroup(groupId, parentId) {
   group.moveToGroup(parent);
   save();
 }
+
+/**
+ * Empty Trash Group
+ * @export
+ */
+export function emptyTrash() {
+  const arch = getArchive();
+  arch.emptyTrash();
+  save();
+}

@@ -7,7 +7,8 @@ import {
   removeGroup,
   saveGroupTitle,
   moveGroupToParent,
-  loadGroup
+  loadGroup,
+  emptyTrash
 } from '../redux/modules/groups';
 import { setExpandedKeys } from '../redux/modules/tree';
 
@@ -21,6 +22,7 @@ export default connect(
     onAddClick: addGroup,
     onRemoveClick: removeGroup,
     onSaveClick: saveGroupTitle,
+    onEmptyTrash: emptyTrash,
     onDrop: moveGroupToParent,
     onGroupSelect: loadGroup,
     onExpand: setExpandedKeys
