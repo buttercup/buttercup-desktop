@@ -2,10 +2,10 @@ import React, { PropTypes, Component } from 'react';
 import CopyIcon from 'react-icons/lib/fa/copy';
 import EyeIcon from 'react-icons/lib/fa/eye';
 import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
+import { Button } from 'buttercup-ui';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
 import styles from '../../styles/copyable';
-import Button from '../button';
 
 class Copyable extends Component {
   constructor(props) {

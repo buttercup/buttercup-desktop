@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
+import { Button } from 'buttercup-ui';
 import styles from '../../styles/entry-form';
-import Button from '../button';
 import Input from './entry-input';
 
 const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types

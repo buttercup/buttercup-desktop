@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
+import { Button } from 'buttercup-ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
-import Button from '../button';
 import EntryView from './entry-view';
 import EmptyView from './entry-empty';
 

@@ -114,6 +114,7 @@
     "babili-webpack-plugin": "^0.0.8",
     "buttercup-generator": "^0.0.1",
     "buttercup-importer": "^0.6.1",
+    "buttercup-ui": "^0.1.0",
     "buttercup-web": "~0.17.2",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",

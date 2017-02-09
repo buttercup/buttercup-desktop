@@ -3,9 +3,9 @@ import MagicIcon from 'react-icons/lib/fa/magic';
 import { generate, generateWords } from 'buttercup-generator';
 import Popover from 'react-popover';
 import cx from 'classnames';
+import { Button } from 'buttercup-ui';
 import { selectElementContents } from '../system/utils';
 import styles from '../styles/generator';
-import Button from './button';
 
 class Generator extends Component {
   constructor(props) {

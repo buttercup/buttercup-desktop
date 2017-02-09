@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
 import FolderIcon from 'react-icons/lib/fa/folder-open-o';
 import FileIcon from 'react-icons/lib/fa/file-text-o';
+import { Button } from 'buttercup-ui';
 import { isOSX } from '../system/utils';
 import pkg from '../../../package.json';
 import logo from '../styles/img/logo.svg';
 import styles from '../styles/file-opener';
-import Button from './button';
 
 class FileOpener extends Component {
   render() {
