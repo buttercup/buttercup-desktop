@@ -1726,9 +1726,9 @@ builtin-status-codes@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/builtin-status-codes/-/builtin-status-codes-3.0.0.tgz#85982878e21b98e1c66425e03d0174788f569ee8"
 
-buttercup-generator@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/buttercup-generator/-/buttercup-generator-0.0.1.tgz#4dbb2717608dfaab9ed6f3b69b2989c4151776aa"
+buttercup-generator@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/buttercup-generator/-/buttercup-generator-0.0.2.tgz#14e89c62c664c992a326bbba22fe069d40c33d7b"
   dependencies:
     mngen "^1.0.0"
     password-generator "^2.1.0"
@@ -1741,13 +1741,15 @@ buttercup-importer@^0.6.1:
     kdbxweb "~0.2.1"
     xml2js "~0.4.13"
 
-buttercup-ui@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.1.0.tgz#cb0f653f49ec7f9d27cdcc9e60c8e679892d8ff4"
+buttercup-ui@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.2.0.tgz#91df731fa731968b3bd845dead030d5f4af438bd"
   dependencies:
+    buttercup-generator "^0.0.2"
     classnames "^2.2.5"
     react "^15.4.2"
     react-dom "^15.4.2"
+    react-popover "^0.4.4"
     styled-components "^1.4.3"
 
 buttercup-web@~0.17.2:

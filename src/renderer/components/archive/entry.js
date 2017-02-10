@@ -36,7 +36,7 @@ class Entry extends Component {
               primary
               >Save</Button>
             {' '}
-            <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+            <Button onClick={this.props.handleViewMode}>Cancel</Button>
           </div>
           <div>
             <Button
@@ -67,7 +67,7 @@ class Entry extends Component {
             primary
             >Save</Button>
           {' '}
-          <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+          <Button onClick={this.props.handleViewMode}>Cancel</Button>
         </div>
       )
     };
@@ -76,7 +76,7 @@ class Entry extends Component {
   renderViewMode() {
     return {
       content: <EntryView entry={this.props.entry}/>,
-      footer: <Button onClick={this.props.handleEditMode} secondary icon={<EditIcon/>}>Edit</Button>
+      footer: <Button onClick={this.props.handleEditMode} icon={<EditIcon/>}>Edit</Button>
     };
   }
 
