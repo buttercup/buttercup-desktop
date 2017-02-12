@@ -1,23 +1,23 @@
 import path from 'path';
-import Immutable from 'seamless-immutable';
 import { combineReducers } from 'redux';
 import { setWindowSize } from '../../system/utils';
 import { reloadGroups } from './groups';
 
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
 
-const initialState = Immutable({
+const initialState = {
   path: null,
   provider: 'filesystem' 
-});
+};
 
 function archive(state = initialState, action) {
   switch (action.type) {
     case SET_WORKSPACE:
-      return state.merge({
+      return {
+        ...state,
         path: action.payload.path,
         provider: action.payload.provider || 'filesystem'
-      });
+      };
     default:
       return state;
   }

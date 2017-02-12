@@ -72,7 +72,7 @@ export function reloadGroups() {
   return dispatch => {
     const groups = groupTools.getGroups();
     dispatch(resetGroups(groups));
-    if (groups.length) {
+    if (groups.length > 0) {
       dispatch(loadGroup(groups[0].id));
     }
   };

@@ -6,7 +6,7 @@ import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile, openFile, newFile } from './lib/files';
 import { isWindows } from './lib/platform';
-import AutoUpdater from './lib/updater';
+import startAutoUpdate from './lib/updater';
 import createRPC from './lib/rpc';
 import './lib/buttercup';
 
@@ -31,7 +31,7 @@ const installExtensions = async () => {
     for (const name of extensions) {
       try {
         await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-      } catch (e) {} // eslint-disable-line xo/catch-error-name
+      } catch (err) {}
     }
   }
 };
@@ -83,7 +83,7 @@ windowManager.setBuildProcedure('main', callback => {
 
   rpc.once('init', () => {
     if (process.env.NODE_ENV !== 'development') {
-      AutoUpdater(win);
+      startAutoUpdate(win);
     }
 
     if (callback) {
