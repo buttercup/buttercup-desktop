@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import cx from 'classnames';
-import { Generator, Button } from 'buttercup-ui';
+import { Generator, Meter } from 'buttercup-ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
-import Meter from '../meter';
 import styles from '../../styles/entry-input';
 
 const BareInput = ({input, name, placeholder, type}) => {
