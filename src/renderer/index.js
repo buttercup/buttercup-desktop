@@ -6,7 +6,7 @@ import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
 import { copyToClipboard, setWindowSize } from './system/utils';
-import configureStore from './redux/configureStore';
+import configureStore from './redux/configure-store';
 import * as archiveActions from './redux/modules/files';
 import * as entryActions from './redux/modules/entries';
 import * as uiAction from './redux/modules/ui';

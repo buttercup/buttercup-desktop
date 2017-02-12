@@ -127,7 +127,10 @@
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
     "electron-rpc": "^2.0.1",
+    "eslint": "^3.15.0",
     "eslint-config-xo-react": "^0.8.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "2.0.0-rc.0",
     "file-loader": "^0.9.0",
@@ -162,7 +165,6 @@
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.3",
     "sass-loader": "^4.0.2",
-    "seamless-immutable": "^6.1.4",
     "spectron": "^3.5.0",
     "style-loader": "^0.13.1",
     "sweetalert2": "^5.3.8",
@@ -171,25 +173,35 @@
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0",
     "webpack-merge": "^2.6.0",
-    "xo": "^0.16.0"
+    "xo": "^0.17.1"
   },
   "xo": {
+    "parser": "babel-eslint",
     "extends": "xo-react",
     "esnext": true,
     "space": 2,
     "envs": [
       "node",
       "browser",
-      "mocha"
+      "ava",
+      "electron"
     ],
     "ignores": [
       "**/Gruntfile.js",
       "tools/**",
-      "release/**"
+      "release/**",
+      "app/**"
     ],
     "globals": [
       "Buttercup"
     ],
+    "settings": {
+      "import/resolver": {
+        "webpack": {
+          "config": "./config/webpack.config.production.js"
+        }
+      }
+    },
     "rules": {
       "no-unused-expressions": "off",
       "space-before-function-paren": "off",
@@ -199,22 +211,11 @@
       "xo/filename-case": "off",
       "react/jsx-no-bind": "off",
       "babel/new-cap": "off",
-      "babel/object-curly-spacing": "off",
+      "object-curly-spacing": "off",
       "import/no-extraneous-dependencies": "off",
-      "yield-star-spacing": [
-        "error",
-        {
-          "before": true,
-          "after": false
-        }
-      ],
-      "babel/generator-star-spacing": [
-        "error",
-        {
-          "before": true,
-          "after": false
-        }
-      ]
+      "import/prefer-default-export": "off",
+      "import/extensions": "off",
+      "import/no-unassigned-import": "off"
     }
   }
 }

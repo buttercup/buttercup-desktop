@@ -14,7 +14,7 @@ const BareInput = ({input, name, placeholder, type}) => {
       placeholder={placeholder}
       className={cx(styles.input, isPassword ? styles.password : null)}
       />
-    );
+  );
 };
 
 BareInput.propTypes = {

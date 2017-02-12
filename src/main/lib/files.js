@@ -19,7 +19,7 @@ const keepassDialogOptions = {
 };
 
 function normalizePath(filePath) {
-  filePath = decodeURI(filePath.replace(isWindows() ? /^file:[\/]{2,3}/ : 'file://', ''));
+  filePath = decodeURI(filePath.replace(isWindows() ? /^file:[/]{2,3}/ : 'file://', ''));
   filePath = path.normalize(filePath);
   return filePath;
 }

@@ -1,6 +1,6 @@
 import path from 'path';
-import Fuse from 'fuse.js';
 import { clipboard, remote } from 'electron';
+import Fuse from 'fuse.js';
 
 const currentWindow = remote.getCurrentWindow();
 
