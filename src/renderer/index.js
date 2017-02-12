@@ -1,4 +1,4 @@
-import 'buttercup-web'; // eslint-disable-line import/no-unassigned-import
+import 'buttercup-web';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';

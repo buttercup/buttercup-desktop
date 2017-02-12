@@ -88,9 +88,7 @@
     "url": "https://github.com/buttercup-pw/buttercup/issues"
   },
   "homepage": "https://buttercup.pw",
-  "dependencies": {
-    "eslint": "^3.15.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/electron": "^1.4.29",
     "@types/node": "^6.0.45",
@@ -129,6 +127,7 @@
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
     "electron-rpc": "^2.0.1",
+    "eslint": "^3.15.0",
     "eslint-config-xo-react": "^0.8.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
