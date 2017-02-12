@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
+import { Button } from 'buttercup-ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
-import Button from '../button';
 import EntryView from './entry-view';
 import EmptyView from './entry-empty';
 
@@ -36,7 +36,7 @@ class Entry extends Component {
               primary
               >Save</Button>
             {' '}
-            <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+            <Button onClick={this.props.handleViewMode}>Cancel</Button>
           </div>
           <div>
             <Button
@@ -67,7 +67,7 @@ class Entry extends Component {
             primary
             >Save</Button>
           {' '}
-          <Button onClick={this.props.handleViewMode} secondary>Cancel</Button>
+          <Button onClick={this.props.handleViewMode}>Cancel</Button>
         </div>
       )
     };
@@ -76,7 +76,7 @@ class Entry extends Component {
   renderViewMode() {
     return {
       content: <EntryView entry={this.props.entry}/>,
-      footer: <Button onClick={this.props.handleEditMode} secondary icon={<EditIcon/>}>Edit</Button>
+      footer: <Button onClick={this.props.handleEditMode} icon={<EditIcon/>}>Edit</Button>
     };
   }
 

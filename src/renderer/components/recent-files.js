@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import DeleteIcon from 'react-icons/lib/ti/delete-outline';
 import HistoryIcon from 'react-icons/lib/go/history';
+import { Button } from 'buttercup-ui';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
-import Button from './button';
 
 const File = ({filename, onClick, onRemoveClick}) => {
   const { base, dir } = parsePath(filename);

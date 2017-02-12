@@ -7,7 +7,7 @@ const UpdateNotice = ({available, version, installing, onClick}) => {
   }
   return (
     <div className={styles.wrapper} onClick={onClick}>
-      {installing ? 'Installing...' : `Buttercup ${version} is downloaded. Click here to install now.`}
+      {installing ? 'Installing...' : `Buttercup ${version} is available. Click here to install now.`}
     </div>
   );
 };

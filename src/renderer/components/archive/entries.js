@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import cx from 'classnames';
+import { Button } from 'buttercup-ui';
 import { isOSX } from '../../system/utils';
 import { showContextMenu, createMenuFromGroups } from '../../system/menu';
 import Column from '../column';
-import Button from '../button';
 import styles from '../../styles/entries';
 import List from './entries-list';
 import SearchField from './search-field';
