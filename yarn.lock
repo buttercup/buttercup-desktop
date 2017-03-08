@@ -36,7 +36,13 @@
   version "6.0.62"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.62.tgz#85222c077b54f25b57417bb708b9f877bda37f89"
 
-"@types/react@^0.14.41":
+"@types/rc-tree@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@types/rc-tree/-/rc-tree-1.4.2.tgz#909ebe4a841928d2baf1079ffa91477b4e53e427"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^0.14.41":
   version "0.14.57"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-0.14.57.tgz#1878a8654fafdd1d381b8457292b6433498c5b62"
 
@@ -92,6 +98,12 @@ acorn@^2.1.0, acorn@^2.4.0:
 acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
+
+add-dom-event-listener@1.x:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/add-dom-event-listener/-/add-dom-event-listener-1.0.2.tgz#8faed2c41008721cf111da1d30d995b85be42bed"
+  dependencies:
+    object-assign "4.x"
 
 ajv-keywords@^1.0.0, ajv-keywords@^1.1.1:
   version "1.5.1"
@@ -5080,7 +5092,7 @@ lodash.kebabcase@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.kebabcase/-/lodash.kebabcase-4.1.1.tgz#8489b1cb0d29ff88195cceca448ff6d6cc295c36"
 
-lodash.keys@^3.0.0:
+lodash.keys@^3.0.0, lodash.keys@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
   dependencies:
@@ -6585,13 +6597,21 @@ rc-animate@2.x:
   dependencies:
     css-animation "^1.3.0"
 
-rc-tree@^1.3.9:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-1.4.2.tgz#e1ef4a14a24d3bbc57c1273873a3a86db6fb94df"
+rc-tree@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-1.4.5.tgz#5712ccabff0eec5073fbd5b717f4c930d003ce7b"
   dependencies:
     classnames "2.x"
     object-assign "4.x"
     rc-animate "2.x"
+    rc-util "^4.0.2"
+
+rc-util@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/rc-util/-/rc-util-4.0.2.tgz#5804f8b141a13c8c14d7c265a7d21d298195af46"
+  dependencies:
+    add-dom-event-listener "1.x"
+    shallowequal "^0.2.2"
 
 rc@^1.0.1, rc@^1.1.2, rc@^1.1.6, rc@~1.1.6:
   version "1.1.6"
@@ -7243,6 +7263,12 @@ sha.js@^2.3.6:
   resolved "https://registry.yarnpkg.com/sha.js/-/sha.js-2.4.8.tgz#37068c2c476b6baf402d14a49c67f597921f634f"
   dependencies:
     inherits "^2.0.1"
+
+shallowequal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-0.2.2.tgz#1e32fd5bcab6ad688a4812cb0cc04efc75c7014e"
+  dependencies:
+    lodash.keys "^3.1.2"
 
 shelljs@^0.7.0, shelljs@^0.7.5:
   version "0.7.6"
