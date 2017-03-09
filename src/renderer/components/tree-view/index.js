@@ -31,12 +31,12 @@ class TreeView extends Component {
         { type: 'separator' },
         {
           label: 'Move to Root',
-          click: () => this.props.onDrop(groupId, null)
+          click: () => this.props.onMoveGroup(groupId, null)
         },
         {
           label: 'Move to Group',
           submenu: createMenuFromGroups(groups, groupId, selectedGroupId => {
-            this.props.onDrop(groupId, selectedGroupId);
+            this.props.onMoveGroup(groupId, selectedGroupId);
           }, false)
         },
         { type: 'separator' },
@@ -69,7 +69,7 @@ class TreeView extends Component {
   handleDrop = info => {
     const dropKey = info.node.props.eventKey;
     const dragKey = info.dragNode.props.eventKey;
-    this.props.onDrop(dragKey, dropKey);
+    this.props.onMoveGroup(dragKey, dropKey);
   }
 
   handleSelect = ([selectedGroupId]) => {
@@ -147,7 +147,7 @@ TreeView.propTypes = {
   onAddClick: PropTypes.func,
   onGroupSelect: PropTypes.func,
   onEmptyTrash: PropTypes.func,
-  onDrop: PropTypes.func,
+  onMoveGroup: PropTypes.func,
   onExpand: PropTypes.func
 };
 
