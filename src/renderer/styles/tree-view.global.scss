@@ -1,3 +1,4 @@
+@import 'variables';
 $treePrefixCls: 'rc-tree';
 
 .#{$treePrefixCls} {
@@ -27,13 +28,13 @@ $treePrefixCls: 'rc-tree';
 
     &.drag-over-gap-top {
       > .draggable {
-        border-top: 2px blue solid;
+        border-top: 5px $brand-primary solid;
       }
     }
 
     &.drag-over-gap-bottom {
       > .draggable {
-        border-bottom: 2px blue solid;
+        border-bottom: 5px $brand-primary solid;
       }
     }
 
