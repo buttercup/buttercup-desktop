@@ -92,7 +92,7 @@ export function saveGroup(groupId, title) {
 export function moveGroup(groupId, parentId) {
   const arch = getArchive();
   const group = arch.findGroupByID(groupId);
-  const parent = arch.findGroupByID(parentId);
+  const parent = parentId ? arch.findGroupByID(parentId) : arch;
 
   if (!group || !parent) {
     throw new Error('Group has not been found.');

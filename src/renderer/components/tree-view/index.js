@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from 'buttercup-ui';
-import { showContextMenu } from '../../system/menu';
+import { showContextMenu, createMenuFromGroups } from '../../system/menu';
 import { isOSX } from '../../system/utils';
 import '../../styles/tree-view.global';
 import styles from '../../styles/tree-view';
@@ -12,8 +12,8 @@ import Column from '../column';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
-  handleRightClick = info => {
-    const { id: groupId, isTrash } = info;
+  handleRightClick = (node, groups) => {
+    const { id: groupId, isTrash } = node;
 
     if (isTrash) {
       showContextMenu([
@@ -28,6 +28,18 @@ class TreeView extends Component {
           label: 'Add Group', 
           click: () => this.handleAddClick(null, groupId)
         },
+        { type: 'separator' },
+        {
+          label: 'Move to Root',
+          click: () => this.props.onDrop(groupId, null)
+        },
+        {
+          label: 'Move to Group',
+          submenu: createMenuFromGroups(groups, groupId, selectedGroupId => {
+            this.props.onDrop(groupId, selectedGroupId);
+          }, false)
+        },
+        { type: 'separator' },
         {
           label: 'Delete',
           click: () => this.handleRemoveClick(null, groupId)
@@ -67,6 +79,7 @@ class TreeView extends Component {
   }
 
   render() {
+    const { groups } = this.props;
     const loop = children => {
       if (!children) {
         return null;
@@ -86,7 +99,7 @@ class TreeView extends Component {
               <TreeLabel
                 {...node}
                 {...this.props}
-                onRightClick={() => this.handleRightClick(node)}
+                onRightClick={() => this.handleRightClick(node, groups)}
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
                 />
@@ -119,7 +132,7 @@ class TreeView extends Component {
           onExpand={this.handleExpand}
           onDrop={this.handleDrop}
           >
-          {loop(this.props.groups)}
+          {loop(groups)}
         </Tree>
       </Column>
     );
