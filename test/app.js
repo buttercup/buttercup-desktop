@@ -4,7 +4,8 @@ import { Application } from 'spectron';
 
 test.beforeEach(async t => {
   t.context.app = new Application({
-    path: path.join(__dirname, '../release/mac/Buttercup.app/Contents/MacOS/Buttercup')
+    path: require('electron'),
+    args: [path.join(__dirname, '../app')]
   });
 
   await t.context.app.start();

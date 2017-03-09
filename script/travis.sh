@@ -9,5 +9,5 @@ fi
 node --version
 npm --version
 
-npm run build && npm run release:mac
+npm run build
 npm test

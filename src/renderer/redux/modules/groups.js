@@ -78,9 +78,9 @@ export function reloadGroups() {
   };
 }
 
-export function moveGroupToParent(groupId, parentId) {
+export function moveGroupToParent(groupId, parentId, dropToGap) {
   return dispatch => {
-    groupTools.moveGroup(groupId, parentId);
+    groupTools.moveGroup(groupId, parentId, dropToGap);
     dispatch(reloadGroups());
     dispatch({
       type: GROUP_MOVE,

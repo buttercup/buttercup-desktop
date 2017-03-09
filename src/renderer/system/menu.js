@@ -1,15 +1,10 @@
 import { remote } from 'electron';
 
-const { Menu, MenuItem } = remote;
+const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
 
 export function createMenu(items = []) {
-  const menu = new Menu();
-  const menuItems = items.map(item => new MenuItem(item));
-  menuItems.forEach(item => {
-    menu.append(item);
-  });
-  return menu;
+  return Menu.buildFromTemplate(items);
 }
 
 export function showContextMenu(items = []) {
@@ -17,26 +12,35 @@ export function showContextMenu(items = []) {
   menu.popup(currentWindow);
 }
 
-export function createMenuFromGroups(groups = [], currentGroup, fn) {
-  return createMenu(groups.filter(group => !group.isTrash).map(group => {
-    if (group.type) {
-      return group;
-    }
-    return {
-      label: group.title,
-      enabled: (group.id !== currentGroup || group.groups.length > 0),
-      click: () => fn(group.id),
-      submenu: group.groups.length > 0 ?
-        createMenuFromGroups(
-          [{
-            ...group,
-            title: `Move to ${group.title}`,
-            groups: []
-          }, {
-            type: 'separator'
-          }]
-          .concat(group.groups), currentGroup, fn) :
-        null
-    };
-  }));
+export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToSelf = true) {
+  return createMenu(
+    groups
+      .filter(group => {
+        if (group.id === currentGroup && allowMoveToSelf === false) {
+          return false;
+        }
+        return !group.isTrash;
+      })
+      .map(group => {
+        if (group.type) {
+          return group;
+        }
+        return {
+          label: group.title,
+          enabled: (group.id !== currentGroup || group.groups.length > 0),
+          click: () => fn(group.id),
+          submenu: group.groups.length > 0 ?
+            createMenuFromGroups(
+              [{
+                ...group,
+                title: `Move to ${group.title}`,
+                groups: []
+              }, {
+                type: 'separator'
+              }]
+              .concat(group.groups), currentGroup, fn, allowMoveToSelf) :
+            null
+        };
+      })
+  );
 }

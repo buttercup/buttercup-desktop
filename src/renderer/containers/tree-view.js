@@ -23,7 +23,7 @@ export default connect(
     onRemoveClick: removeGroup,
     onSaveClick: saveGroupTitle,
     onEmptyTrash: emptyTrash,
-    onDrop: moveGroupToParent,
+    onMoveGroup: moveGroupToParent,
     onGroupSelect: loadGroup,
     onExpand: setExpandedKeys
   }
