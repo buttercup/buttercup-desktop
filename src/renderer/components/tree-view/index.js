@@ -69,7 +69,7 @@ class TreeView extends Component {
   handleDrop = info => {
     const dropKey = info.node.props.eventKey;
     const dragKey = info.dragNode.props.eventKey;
-    this.props.onMoveGroup(dragKey, dropKey);
+    this.props.onMoveGroup(dragKey, dropKey, info.dropToGap);
   }
 
   handleSelect = ([selectedGroupId]) => {
