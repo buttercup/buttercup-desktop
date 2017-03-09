@@ -84,21 +84,26 @@ export function saveGroup(groupId, title) {
 
 /**
  * Move group to another parent
- * 
+ *
  * @export
  * @param {string} groupId
  * @param {string} parentId
  */
-export function moveGroup(groupId, parentId) {
+export function moveGroup(groupId, parentId, dropToGap) {
   const arch = getArchive();
   const group = arch.findGroupByID(groupId);
-  const parent = parentId ? arch.findGroupByID(parentId) : arch;
+  const parent = arch.findGroupByID(parentId);
 
   if (!group || !parent) {
     throw new Error('Group has not been found.');
-  } 
+  }
 
-  group.moveToGroup(parent);
+  if (dropToGap && isRootGroup(parent)) {
+    group.moveTo(arch);
+  } else {
+    group.moveToGroup(parent);
+  }
+
   save();
 }
 
@@ -110,4 +115,14 @@ export function emptyTrash() {
   const arch = getArchive();
   arch.emptyTrash();
   save();
+}
+
+function isRootGroup(group) {
+  const rootGroups = getArchive().getGroups();
+  for (let i = 0; i < rootGroups.length; ++i) {
+    if (group.getID() === rootGroups[i].getID()) {
+      return true;
+    }
+  }
+  return false;
 }
