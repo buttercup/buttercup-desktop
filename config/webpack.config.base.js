@@ -12,9 +12,13 @@ module.exports = {
         ]
       },
       {
-        test: /\.(svg|ttf|woff2)$/,
+        test: /\.(svg|ttf|woff|woff2)$/,
         loader: 'url-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   },
@@ -30,6 +34,6 @@ module.exports = {
 
   ],
   externals: [
-    'buttercup-importer'
+    'buttercup-importer', 'dropbox', 'webdav'
   ]
 };
