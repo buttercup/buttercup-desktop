@@ -7,36 +7,20 @@ import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
 class Manager extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedIndex: null
-    };
-  }
-
   componentDidMount() {
-    this.props.handleNavigate('/');
+    this.props.handleNavigate(null);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.contents !== this.props.contents) {
-      this.setState({ selectedIndex: null });
-    }
+  handleRowClick = (e, index) => {
+    this.props.handleSelectIndex(index);
   }
 
-  handleRowClick(e, index) {
-    this.setState({ selectedIndex: index });
-  }
-
-  handleRowDoubleClick(e, index) {
-    const { currentPath, contents } = this.props;
-    const pathToNavigate = path.resolve(currentPath, contents[index].name);
-    this.props.handleNavigate(pathToNavigate);
+  handleRowDoubleClick = (e, index) => {
+    this.props.handleNavigate(index);
   }
 
   render() {
-    const { contents, containerWidth, containerHeight } = this.props;
-    const { selectedIndex } = this.state;
+    const { contents, containerWidth, containerHeight, selectedIndex } = this.props;
     return (
       <Table
         rowHeight={35}
@@ -51,9 +35,8 @@ class Manager extends Component {
         }}
         width={containerWidth}
         height={containerHeight}
-        onRowClick={(...args) => this.handleRowClick(...args)}
-        onRowDoubleClick={(...args) => this.handleRowDoubleClick(...args)}
-        onColumnResizeEndCallback={(...args) => this.handleColumnResizeEnd(...args)}
+        onRowClick={this.handleRowClick}
+        onRowDoubleClick={this.handleRowDoubleClick}
         >
         <Column
           columnKey="icon"
@@ -92,11 +75,13 @@ class Manager extends Component {
 export const propTypes = {
   containerWidth: PropTypes.number,
   containerHeight: PropTypes.number,
+  selectedIndex: PropTypes.number,
+  selectFile: PropTypes.object,
   currentPath: PropTypes.string.isRequired,
   contents: PropTypes.array.isRequired,
   handleNavigate: PropTypes.func,
-  handleSelectCurrentPath: PropTypes.func,
-  handleCreateNewDirectory: PropTypes.func
+  handleCreateNewDirectory: PropTypes.func,
+  handleSelectIndex: PropTypes.func
 };
 
 Manager.propTypes = propTypes;

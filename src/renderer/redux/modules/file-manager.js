@@ -1,3 +1,4 @@
+import path from 'path';
 import { combineReducers } from 'redux';
 
 import webdavFs from 'webdav-fs';
@@ -12,6 +13,7 @@ const SET_CONTENTS = 'buttercup/manager/SET_CONTENTS';
 const LOADING_STARTED = 'buttercup/manager/LOADING_STARTED';
 const LOADING_FINISHED = 'buttercup/manager/LOADING_FINISHED';
 const ADD_DIRECTORY = 'buttercup/manager/ADD_DIRECTORY';
+const SELECT_FILE_INDEX = 'buttercup/manager/SELECT_FILE_INDEX';
 
 // Reducers ->
 function currentPath(state = '', action) {
@@ -53,6 +55,17 @@ function loading(state = false, action) {
   }
 }
 
+function selectedIndex(state = null, action) {
+  switch (action.type) {
+    case SELECT_FILE_INDEX:
+      return action.payload;
+    case SET_CURRENT_PATH:
+      return null;
+    default:
+      return state;
+  }
+}
+
 // Action Creators ->
 
 export const setCurrentPath = path => ({
@@ -65,13 +78,20 @@ export const setContents = contents => ({
   payload: contents
 });
 
-export const navigate = path => dispatch => {
-  dispatch(setCurrentPath(path));
+export const navigate = index => (dispatch, getState) => {
+  let pathToNavigate = '/';
+
+  if (index !== null) {
+    const state = getState().manager;
+    pathToNavigate = path.resolve(state.currentPath, state.contents[index].name);
+  }
+
+  dispatch(setCurrentPath(pathToNavigate));
   dispatch({
     type: LOADING_STARTED
   });
 
-  afs.readDirectory(path).then(result => {
+  afs.readDirectory(pathToNavigate).then(result => {
     const files = result.map(item => ({
       name: item.name,
       type: item.isFile() ? 'file' : 'directory',
@@ -79,7 +99,7 @@ export const navigate = path => dispatch => {
       mtime: item.mtime
     }));
 
-    if (path !== '/') {
+    if (pathToNavigate !== '/') {
       files.unshift({ name: '..', type: 'directory', size: 0, mtime: null });
     }
 
@@ -90,12 +110,21 @@ export const navigate = path => dispatch => {
   });
 };
 
+export const setSelectedIndex = index => ({
+  type: SELECT_FILE_INDEX,
+  payload: index
+});
+
 export const addDirectory = () => ({
   type: ADD_DIRECTORY
 });
 
+export const getSelectedPath = state =>
+  state.selectedIndex === null ? null : state.contents[state.selectedIndex];
+
 export default combineReducers({
   contents,
   currentPath,
+  selectedIndex,
   loading
 });
