@@ -93,18 +93,17 @@ export function saveGroup(groupId, title) {
 export function moveGroup(groupId, parentId, dropToGap = false) {
   const arch = getArchive();
   const group = arch.findGroupByID(groupId);
-  const parent = parentId ? arch.findGroupByID(parentId) : arch;
+  let parent = parentId ? arch.findGroupByID(parentId) : arch;
+
+  if (dropToGap) {
+    parent = findParentGroup(parentId, arch);
+  }
 
   if (!group || !parent) {
     throw new Error('Group has not been found.');
   }
 
-  if (dropToGap && isRootGroup(parent)) {
-    group.moveTo(arch);
-  } else {
-    group.moveToGroup(parent);
-  }
-
+  group.moveToGroup(parent);
   save();
 }
 
@@ -119,14 +118,19 @@ export function emptyTrash() {
 }
 
 /**
- * Check if a Group is a Root Group
+ * Find a Group's parent Group
+ * @param {String} groupId Group ID to comapre
  * @param {Buttercup.Group} group Group Object
  */
-function isRootGroup(group) {
-  const rootGroups = getArchive().getGroups();
-  for (let i = 0; i < rootGroups.length; i += 1) {
-    if (group.getID() === rootGroups[i].getID()) {
-      return true;
+function findParentGroup(groupId, group) {
+  const groups = group.getGroups();
+  for (const subGroup of groups) {
+    if (subGroup.getID() === groupId) {
+      return group;
+    }
+    const findInChildren = findParentGroup(groupId, subGroup);
+    if (findInChildren !== false) {
+      return findInChildren;
     }
   }
   return false;

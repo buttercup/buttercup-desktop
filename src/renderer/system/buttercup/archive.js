@@ -6,7 +6,7 @@ import {
   Archive
 } from 'buttercup-web';
 
-let __curentWorkspace = null;
+let __currentWorkspace = null;
 
 /**
  * Read text file from disk
@@ -66,7 +66,7 @@ function createWorkspace(content, password) {
 export function loadWorkspace(filename, password) {
   const content = readTextFile(filename);
   return createWorkspace(content, password).then(workspace => {
-    __curentWorkspace = {
+    __currentWorkspace = {
       instance: workspace,
       filename
     };
@@ -94,7 +94,7 @@ export function newWorkspace(filename, password) {
     .then(content => {
       writeTextFile(filename, content);
       return createWorkspace(content, password).then(workspace => {
-        __curentWorkspace = {
+        __currentWorkspace = {
           instance: workspace,
           filename
         };
@@ -106,10 +106,10 @@ export function newWorkspace(filename, password) {
 }
 
 export function getWorkspace() {
-  if (__curentWorkspace === null) {
+  if (__currentWorkspace === null) {
     return null;
   }
-  return __curentWorkspace;
+  return __currentWorkspace;
 }
 
 export function getArchive() {
