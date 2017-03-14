@@ -1,7 +1,6 @@
 import { showPasswordDialog } from '../dialog';
 import { getArchive, saveWorkspace } from './archive';
-
-const { Archive } = window.Buttercup;
+import { Archive } from "buttercup-web";
 
 export function importHistoryFromRequest(request) {
   const { history } = request;
