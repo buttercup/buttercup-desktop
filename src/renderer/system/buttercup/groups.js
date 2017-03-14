@@ -1,3 +1,4 @@
+import { Group } from 'buttercup-web';
 import { saveWorkspace as save, getArchive } from './archive'; 
 
 /**
@@ -9,7 +10,7 @@ import { saveWorkspace as save, getArchive } from './archive';
 export function getGroups() {
   const arch = getArchive();
   return arch.getGroups().map(
-    group => Object.assign(group.toObject(Buttercup.Group.OutputFlag.Groups), {
+    group => Object.assign(group.toObject(Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
     })
   ).sort(

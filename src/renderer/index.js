@@ -1,4 +1,4 @@
-import 'buttercup-web';
+import Buttercup from 'buttercup-web';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -12,6 +12,9 @@ import * as entryActions from './redux/modules/entries';
 import * as uiAction from './redux/modules/ui';
 import * as groupActions from './redux/modules/groups';
 import Root from './containers/root';
+
+// Make crypto faster!
+Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore();

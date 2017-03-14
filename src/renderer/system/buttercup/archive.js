@@ -1,4 +1,10 @@
 import { ipcRenderer as ipc } from 'electron';
+import {
+  Workspace,
+  createCredentials,
+  TextDatasource,
+  Archive
+} from 'buttercup-web';
 
 let __curentWorkspace = null;
 
@@ -32,19 +38,22 @@ function writeTextFile(filename, content) {
  * @returns {Promise.<Buttercup.Workspace>}
  */
 function createWorkspace(content, password) {
-  const workspace = new Buttercup.Workspace();
-  const datasource = new Buttercup.TextDatasource(content);
+  const workspace = new Workspace();
+  const datasource = new TextDatasource(content);
+  const passwordCredentials = createCredentials.fromPassword(password);
 
   // Load the datasource
-  return datasource.load(password).then(archive => {
-    // Fill up the datasource
-    workspace
-      .setArchive(archive)
-      .setDatasource(datasource)
-      .setPassword(password);
-    
-    return workspace;
-  });
+  return datasource
+    .load(passwordCredentials)
+    .then(archive => {
+      // Fill up the datasource
+      workspace.setPrimaryArchive(
+        archive,
+        datasource,
+        passwordCredentials
+      );
+      return workspace;
+    });
 }
 
 /**
@@ -75,22 +84,25 @@ export function loadWorkspace(filename, password) {
  * @returns {Promise.<Buttercup.Workspace>}
  */
 export function newWorkspace(filename, password) {
-  const archive = Buttercup.Archive.createWithDefaults();
-  const dataSource = new Buttercup.TextDatasource('');
+  const archive = Archive.createWithDefaults();
+  const dataSource = new TextDatasource('');
+  const passwordCredentials = createCredentials.fromPassword(password);
 
   // Save the datasource and load it up.
-  return dataSource.save(archive, password).then(content => {
-    writeTextFile(filename, content);
-    return createWorkspace(content, password).then(workspace => {
-      __curentWorkspace = {
-        instance: workspace,
-        filename
-      };
-      return {
-        path: filename
-      };
+  return dataSource
+    .save(archive, passwordCredentials)
+    .then(content => {
+      writeTextFile(filename, content);
+      return createWorkspace(content, password).then(workspace => {
+        __curentWorkspace = {
+          instance: workspace,
+          filename
+        };
+        return {
+          path: filename
+        };
+      });
     });
-  });
 }
 
 export function getWorkspace() {
@@ -101,12 +113,14 @@ export function getWorkspace() {
 }
 
 export function getArchive() {
-  return getWorkspace().instance.getArchive(); 
+  return getWorkspace().instance.primary.archive;
 }
 
 export function saveWorkspace() {
   const workspace = getWorkspace();
-  return workspace.instance.save().then(content => {
+  return workspace.instance.save().then(contents => {
+    // workspace saves an array of archives, but we only want the first (only) one
+    const content = contents[0];
     ipc.send('write-archive', { filename: workspace.filename, content });
   });
 }
