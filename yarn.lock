@@ -1727,11 +1727,11 @@ buttercup-generator@^0.0.2:
     mngen "^1.0.0"
     password-generator "^2.1.0"
 
-buttercup-importer@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.6.1.tgz#c866f60431d3e1d00e6d2fc2a34389ed5c034fbc"
+buttercup-importer@~0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.7.0.tgz#64126d7a5588d0af0008497e9f6795df09869bcd"
   dependencies:
-    buttercup "~0.33.0"
+    buttercup "~0.35.0"
     kdbxweb "~0.2.1"
     xml2js "~0.4.13"
 
@@ -1748,20 +1748,20 @@ buttercup-ui@^0.3.1:
     styled-components "^1.4.3"
     zxcvbn "^4.4.2"
 
-buttercup-web@~0.17.2:
-  version "0.17.3"
-  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.17.3.tgz#4be8294b90fefa00b7e1cf1b13914f8754be7b61"
+buttercup-web@~0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.23.0.tgz#27832be11b3dc81a0442dbbfa90093d19c9df9d6"
   dependencies:
-    buttercup "~0.33.2"
+    buttercup "~0.35.0"
 
-buttercup@~0.33.0, buttercup@~0.33.2:
-  version "0.33.2"
-  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.33.2.tgz#2b9dab2a7c68f4520f91eb1a32789cff5364ffeb"
+buttercup@~0.35.0:
+  version "0.35.0"
+  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.35.0.tgz#eecdc4f9d82497052f049b36c03470ac7afa3cbf"
   dependencies:
     clone "~1.0.2"
     debug "^2.3.3"
     gzip-js "~0.3.2"
-    iocane "~0.5.0"
+    iocane "~0.6.0"
     node-fetch "~1.6.3"
     uuid "~2.0.1"
     webdav-fs "~0.4.0"
@@ -4307,9 +4307,9 @@ invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
 
-iocane@~0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.5.0.tgz#221e74b70eb393957031851293e9846a9c1a292a"
+iocane@~0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.6.0.tgz#4e77cc7cb6f40c674ccf5bc40e0d8c73bd93cb22"
   dependencies:
     debug "^2.3.2"
     hash_file "^0.1.1"
