@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = merge(baseConfig, {
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
 
   entry: [
     'react-hot-loader/patch',
@@ -60,6 +60,10 @@ module.exports = merge(baseConfig, {
 
   externals: [
   ],
+
+  node: {
+    __dirname: false
+  },
 
   target: 'electron-renderer'
 });

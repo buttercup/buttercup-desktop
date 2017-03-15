@@ -8,6 +8,7 @@ import Column from '../column';
 import styles from '../../styles/entries';
 import List from './entries-list';
 import SearchField from './search-field';
+import SortButton from './sort-button';
 
 class Entries extends Component {
   handleChange(value) {
@@ -43,7 +44,12 @@ class Entries extends Component {
         icon={<PlusIcon/>}
         >Add Entry</Button>
     );
-    const filterNode = <SearchField onChange={e => this.handleChange(e)}/>;
+    const filterNode = (
+      <div className={styles.searchWrapper}>
+        <SearchField onChange={e => this.handleChange(e)}/>
+        <SortButton/>
+      </div>
+    );
 
     return (
       <Column
