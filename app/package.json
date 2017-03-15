@@ -1,6 +1,6 @@
 {
   "name": "buttercup",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "productName": "Buttercup",
   "main": "./main.js",
   "description": "Free and Open Source password vault",
