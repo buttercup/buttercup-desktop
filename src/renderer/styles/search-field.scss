@@ -2,6 +2,7 @@
 
 .wrapper {
   position: relative;
+  flex: 1;
 
   &:before {
     display: block;
@@ -23,6 +24,8 @@
   outline: none;
   padding: $spacing-half $spacing-two;
   font-size: .8em;
+  display: block;
+  cursor: text !important;
 
   &:focus {
     background-color: $black-35;

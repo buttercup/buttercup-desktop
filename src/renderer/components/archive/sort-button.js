@@ -1,8 +1,8 @@
 import path from 'path';
 import React, { PropTypes } from 'react';
-import { Button } from 'buttercup-ui';
 import SortIcon from 'react-icons/lib/md/sort';
 import { showContextMenu } from '../../system/menu';
+import { Button } from 'buttercup-ui';
 
 const SORT_MODES = [
   {
@@ -48,13 +48,11 @@ function showMenu(mode, onChange) {
 } 
 
 const SortButton = ({ mode, onChange }) => (
-  <div>
-    <Button
-      dark
-      onClick={() => showMenu(mode, onChange)}
-      icon={<SortIcon/>}
-      />
-  </div>
+  <Button
+    transparent
+    onClick={() => showMenu(mode, onChange)}
+    icon={<SortIcon/>}
+    />
 );
 
 SortButton.propTypes = {

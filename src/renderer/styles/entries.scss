@@ -1,3 +1,5 @@
+@import './variables';
+
 .column {
   background-color: #31353D;
   color: #fff
@@ -10,4 +12,9 @@
 .searchWrapper {
   display: flex;
   flex-direction: row;
+  margin-right: -$spacing-half;
+
+  button {
+    color: #fff;
+  }
 }

@@ -1739,9 +1739,9 @@ buttercup-importer@~0.7.0:
     kdbxweb "~0.2.1"
     xml2js "~0.4.13"
 
-buttercup-ui@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.3.1.tgz#be98b75236d96407739a910e77f410cc23d3e0be"
+buttercup-ui@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.3.2.tgz#a2374d0c81362c92b1db17ca3db514dcd427df8d"
   dependencies:
     buttercup-generator "^0.0.2"
     classnames "^2.2.5"
@@ -7599,8 +7599,8 @@ style-loader@^0.13.1:
     loader-utils "^0.2.7"
 
 styled-components@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.3.tgz#83fa44e553882aaa3ddc4363ccc435814d690706"
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.4.tgz#c944de423d8ae2363f2ba4ff8fc26d367e7dfa8f"
   dependencies:
     buffer "^5.0.2"
     css-to-react-native "^1.0.6"
