@@ -1,8 +1,8 @@
 import path from 'path';
 import React, { PropTypes } from 'react';
 import SortIcon from 'react-icons/lib/md/sort';
-import { showContextMenu } from '../../system/menu';
 import { Button } from 'buttercup-ui';
+import { showContextMenu } from '../../system/menu';
 
 const SORT_MODES = [
   {
