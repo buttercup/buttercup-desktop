@@ -4,32 +4,62 @@ import { Button } from 'buttercup-ui';
 import SortIcon from 'react-icons/lib/md/sort';
 import { showContextMenu } from '../../system/menu';
 
-export default () => (
+const SORT_MODES = [
+  {
+    mode: 'title-asc',
+    label: 'Title: Ascending',
+    icon: 'sort-alpha-asc',
+    enabled: true
+  },
+  {
+    mode: 'title-desc',
+    label: 'Title: Descending',
+    icon: 'sort-alpha-desc',
+    enabled: true
+  },
+  null,
+  {
+    mode: 'time-desc',
+    label: 'Time: Descending',
+    icon: 'sort-time-desc',
+    enabled: false
+  },
+  {
+    mode: 'time-desc',
+    label: 'Time: Descending',
+    icon: 'sort-time-desc',
+    enabled: false
+  }
+];
+
+function showMenu(mode, onChange) {
+  showContextMenu(
+    SORT_MODES.map(
+      sort => (sort ? {
+        type: 'checkbox',
+        checked: mode === sort.mode,
+        label: sort.label,
+        enabled: sort.enabled,
+        icon: path.resolve(__dirname, `./resources/icons/${sort.icon}.png`),
+        click: () => onChange(sort.mode)
+      } : { type: 'separator' })
+    )
+  );
+} 
+
+const SortButton = ({ mode, onChange }) => (
   <div>
     <Button
       dark
-      onClick={() => {
-        showContextMenu([
-          {
-            type: 'radio',
-            checked: true,
-            label: 'Sort Ascending',
-            icon: path.resolve(__dirname, './resources/icons/az@2x.png')
-          },
-          {
-            type: 'radio',
-            checked: false,
-            label: 'Sort Descending',
-            icon: path.resolve(__dirname, './resources/icons/za@2x.png')
-          },
-          { type: 'separator' },
-          {
-            label: 'Last Accessed',
-            icon: path.resolve(__dirname, './resources/icons/clock@2x.png')
-          }
-        ]);
-      }}
+      onClick={() => showMenu(mode, onChange)}
       icon={<SortIcon/>}
       />
   </div>
 );
+
+SortButton.propTypes = {
+  mode: PropTypes.string,
+  onChange: PropTypes.func.isRequired
+};
+
+export default SortButton;

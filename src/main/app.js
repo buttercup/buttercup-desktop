@@ -15,7 +15,9 @@ let appIsReady = false;
 let initialFile = null;
 
 if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')({showDevTools: true});
+  require('electron-debug')({
+    showDevTools: true
+  });
 }
 
 const installExtensions = async () => {

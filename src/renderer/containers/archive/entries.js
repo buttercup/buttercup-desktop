@@ -7,6 +7,7 @@ export default connect(
   state => ({
     groups: getGroups(state.groups),
     filter: state.entries.filter,
+    sortMode: state.entries.sortMode,
     entries: entries.getCurrentEntries(state.entries),
     currentEntry: entries.getCurrentEntry(state.entries),
     currentGroup: state.groups.currentGroup
@@ -15,6 +16,7 @@ export default connect(
     onSelectEntry: entries.selectEntry,
     onEntryMove: entries.moveEntry,
     onFilterChange: entries.setFilter,
+    onSortModeChange: entries.setSortMode,
     onDelete: entries.deleteEntry,
     handleAddEntry: entries.changeMode('new')
   }

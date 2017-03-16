@@ -1,5 +1,6 @@
 import path from 'path';
 import { clipboard, remote } from 'electron';
+import { sortBy } from 'lodash';
 import Fuse from 'fuse.js';
 
 const currentWindow = remote.getCurrentWindow();
@@ -14,6 +15,15 @@ export function filterByText(list, filterText) {
   });
   return fuse.search(filterText);
 }
+
+export function sortByKey(list, sortKey) {
+  const [key, order] = sortKey.split('-');
+  if (!key || !order) {
+    return list;
+  }
+  const sorted = sortBy(list, o => o.properties[key]);
+  return order === 'asc' ? sorted : sorted.reverse();
+} 
 
 export function copyToClipboard(text) {
   clipboard.writeText(text);

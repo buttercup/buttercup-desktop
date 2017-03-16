@@ -11,8 +11,12 @@ import SearchField from './search-field';
 import SortButton from './sort-button';
 
 class Entries extends Component {
-  handleChange(value) {
+  handleFilterChange = value => {
     this.props.onFilterChange(value);
+  }
+
+  handleSortModeChange = newMode => {
+    this.props.onSortModeChange(newMode);
   }
 
   onRightClick(entry) {
@@ -34,7 +38,7 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry } = this.props;
+    const { currentGroup, handleAddEntry, sortMode } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
@@ -46,8 +50,8 @@ class Entries extends Component {
     );
     const filterNode = (
       <div className={styles.searchWrapper}>
-        <SearchField onChange={e => this.handleChange(e)}/>
-        <SortButton/>
+        <SearchField onChange={this.handleFilterChange}/>
+        <SortButton mode={sortMode} onChange={this.handleSortModeChange}/>
       </div>
     );
 
@@ -65,12 +69,14 @@ class Entries extends Component {
 
 Entries.propTypes = {
   filter: PropTypes.string,
+  sortMode: PropTypes.string,
   entries: PropTypes.array,
   groups: PropTypes.array,
   currentEntry: PropTypes.object,
   currentGroup: PropTypes.string,
   onSelectEntry: PropTypes.func,
   onFilterChange: PropTypes.func,
+  onSortModeChange: PropTypes.func,
   onEntryMove: PropTypes.func,
   onDelete: PropTypes.func,
   handleAddEntry: PropTypes.func

@@ -121,6 +121,7 @@
     "css-loader": "^0.25.0",
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
+    "devtron": "^1.4.0",
     "electron": "1.5.0",
     "electron-builder": "^10.6.1",
     "electron-debug": "^1.1.0",
