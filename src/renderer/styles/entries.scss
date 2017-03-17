@@ -1,3 +1,5 @@
+@import './variables';
+
 .column {
   background-color: #31353D;
   color: #fff
@@ -5,4 +7,14 @@
 
 .mac {
   background-color: rgba(#31353D, .8);
+}
+
+.searchWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-right: -$spacing-half;
+
+  button {
+    color: #fff;
+  }
 }

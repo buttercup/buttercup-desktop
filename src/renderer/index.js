@@ -17,9 +17,9 @@ import Root from './containers/root';
 Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
-const store = configureStore();
-
 setWindowSize(870, 550);
+
+const store = configureStore();
 
 rpc.on('ready', () => {
   rpc.emit('init');

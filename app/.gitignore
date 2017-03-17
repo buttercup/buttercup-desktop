@@ -1,4 +1,4 @@
-*
-!.gitignore
-!index.html
-!package.json
+node_modules
+*.js
+*.css
+yarn.lock

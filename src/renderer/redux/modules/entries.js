@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import clone from 'lodash/cloneDeep';
 import * as entryTools from '../../system/buttercup/entries';
-import { filterByText } from '../../system/utils';
+import { filterByText, sortByKey } from '../../system/utils';
 import { showConfirmDialog } from '../../system/dialog';
 import { GROUP_SELECTED, getCurrentGroup } from './groups';
 
@@ -14,6 +14,7 @@ export const ENTRIES_DELETE = 'buttercup/entries/DELETE';
 export const ENTRIES_MOVE = 'buttercup/entries/MOVE';
 export const ENTRIES_CHANGE_MODE = 'buttercup/entries/CHANGE_MODE'; 
 export const ENTRIES_SET_FILTER = 'buttercup/entries/SET_FILTER';
+export const ENTRIES_SET_SORT = 'buttercup/entries/SET_SORT';
 
 // Reducers ->
 
@@ -103,10 +104,26 @@ function filter(state = '', action) {
   }
 }
 
+function sortMode(state = 'title-asc', action) {
+  switch (action.type) {
+    case ENTRIES_SET_SORT:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 // Selectors ->
 
-export const getCurrentEntries = state =>
-  filterByText(state.shownIds.map(id => state.byId[id]), state.filter);
+export const getCurrentEntries = state => {
+  const { filter, sortMode } = state;
+  const mapped = state.shownIds.map(id => state.byId[id]);
+  if (filter && filter.length > 0) {
+    return filterByText(mapped, filter);
+  }
+
+  return sortByKey(mapped, sortMode);
+};
 
 export const getCurrentEntry = state =>
   state.byId[state.currentEntry];
@@ -199,10 +216,16 @@ export const setFilter = filter => ({
   payload: filter
 });
 
+export const setSortMode = sortKey => ({
+  type: ENTRIES_SET_SORT,
+  payload: sortKey
+});
+
 export default combineReducers({
   byId,
   shownIds,
   currentEntry,
   mode,
-  filter
+  filter,
+  sortMode
 });

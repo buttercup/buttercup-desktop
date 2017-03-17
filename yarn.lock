@@ -59,6 +59,10 @@ accepts@~1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
+accessibility-developer-tools@^2.11.0:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/accessibility-developer-tools/-/accessibility-developer-tools-2.12.0.tgz#3da0cce9d6ec6373964b84f35db7cfc3df7ab514"
+
 acorn-dynamic-import@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-2.0.1.tgz#23f671eb6e650dab277fef477c321b1178a8cca2"
@@ -1735,9 +1739,9 @@ buttercup-importer@~0.7.0:
     kdbxweb "~0.2.1"
     xml2js "~0.4.13"
 
-buttercup-ui@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.3.1.tgz#be98b75236d96407739a910e77f410cc23d3e0be"
+buttercup-ui@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.3.2.tgz#a2374d0c81362c92b1db17ca3db514dcd427df8d"
   dependencies:
     buttercup-generator "^0.0.2"
     classnames "^2.2.5"
@@ -2665,6 +2669,14 @@ detect-indent@^4.0.0:
 dev-null@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dev-null/-/dev-null-0.1.1.tgz#5a205ce3c2b2ef77b6238d6ba179eb74c6a0e818"
+
+devtron@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/devtron/-/devtron-1.4.0.tgz#b5e748bd6e95bbe70bfcc68aae6fe696119441e1"
+  dependencies:
+    accessibility-developer-tools "^2.11.0"
+    highlight.js "^9.3.0"
+    humanize-plus "^1.8.1"
 
 dezalgo@^1.0.0:
   version "1.0.3"
@@ -4078,6 +4090,10 @@ hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
+highlight.js@^9.3.0:
+  version "9.10.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.10.0.tgz#f9f0b14c0be00f0e4fb1e577b749fed9e6f52f55"
+
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
@@ -4163,6 +4179,10 @@ http-signature@~1.1.0:
 https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
+
+humanize-plus@^1.8.1:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/humanize-plus/-/humanize-plus-1.8.2.tgz#a65b34459ad6367adbb3707a82a3c9f916167030"
 
 hyphenate-style-name@^1.0.1:
   version "1.0.2"
@@ -7579,8 +7599,8 @@ style-loader@^0.13.1:
     loader-utils "^0.2.7"
 
 styled-components@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.3.tgz#83fa44e553882aaa3ddc4363ccc435814d690706"
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.4.tgz#c944de423d8ae2363f2ba4ff8fc26d367e7dfa8f"
   dependencies:
     buffer "^5.0.2"
     css-to-react-native "^1.0.6"
