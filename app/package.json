@@ -8,6 +8,6 @@
   "homepage": "https://buttercup.pw",
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
-    "buttercup-importer": "0.6.1"
+    "buttercup-importer": "0.7.0"
   }
 }
