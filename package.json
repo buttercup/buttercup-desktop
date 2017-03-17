@@ -12,11 +12,12 @@
     "start": "concurrently --kill-others \"npm run start:renderer\" \"npm run start:main\"",
     "start:renderer": "webpack-dev-server --config ./config/webpack.config.development --progress",
     "start:main": "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
-    "release:linux": "build --linux --x64",
-    "release:mac": "build --mac",
-    "release:win": "build --win --x64",
-    "release": "build --mac --linux --win --x64",
-    "release:current": "build"
+    "release": "rimraf ./app/node_modules && npm run build && npm run package",
+    "package:linux": "build --linux --x64",
+    "package:mac": "build --mac",
+    "package:win": "build --win --x64",
+    "package": "build --mac --linux --win --x64",
+    "package:current": "build"
   },
   "build": {
     "appId": "pw.buttercup.desktop",
