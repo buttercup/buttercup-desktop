@@ -62,14 +62,14 @@ This may take a while depending on how fast your computer is. All apps and insta
 To package only for the current platform:
 
 ``` bash
-$ npm run release:current
+$ npm run package:current
 ```
 
 Or for a specific platform: 
 ``` bash
-$ npm run release:mac
-$ npm run release:win
-$ npm run release:linux
+$ npm run package:mac
+$ npm run package:win
+$ npm run package:linux
 ```
 
 ## Contributors
