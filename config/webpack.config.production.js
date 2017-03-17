@@ -36,6 +36,10 @@ module.exports = merge(baseConfig, {
     ]
   },
 
+  node: {
+    __dirname: false
+  },
+
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
