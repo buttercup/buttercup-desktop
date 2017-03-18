@@ -6,13 +6,13 @@ import { showContextMenu } from '../../system/menu';
 
 const SORT_MODES = [
   {
-    mode: 'title-asc',
+    mode: 'properties.title-asc',
     label: 'Title: Ascending',
     icon: 'sort-alpha-asc',
     enabled: true
   },
   {
-    mode: 'title-desc',
+    mode: 'properties.title-desc',
     label: 'Title: Descending',
     icon: 'sort-alpha-desc',
     enabled: true

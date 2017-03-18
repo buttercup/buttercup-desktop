@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { showConfirmDialog } from '../../system/dialog';
 import * as groupTools from '../../system/buttercup/groups';
+import { sortRecursivelyByKey } from '../../system/utils';
 import { loadEntries } from './entries';
 
 // Constants ->
@@ -71,9 +72,17 @@ export function saveGroupTitle(id, title) {
 export function reloadGroups() {
   return dispatch => {
     const groups = groupTools.getGroups();
-    dispatch(resetGroups(groups));
-    if (groups.length > 0) {
-      dispatch(loadGroup(groups[0].id));
+    const trashGroups = groups.filter(g => g.isTrash);
+    const rest = groups.filter(g => !g.isTrash);
+    const sortedGroups = [
+      ...sortRecursivelyByKey(rest, 'title-asc', 'groups'),
+      ...trashGroups
+    ];
+
+    dispatch(resetGroups(sortedGroups));
+    
+    if (sortedGroups.length > 0) {
+      dispatch(loadGroup(sortedGroups[0].id));
     }
   };
 }
