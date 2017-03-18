@@ -1,3 +1,4 @@
+import path from 'path';
 import { remote } from 'electron';
 
 const { Menu } = remote;
@@ -7,8 +8,10 @@ export function createMenu(items = []) {
   return Menu.buildFromTemplate(items);
 }
 
-export function showContextMenu(items = []) {
-  const menu = createMenu(items);
+export function showContextMenu(menu = []) {
+  if (Array.isArray(menu)) {
+    menu = createMenu(menu);
+  }
   menu.popup(currentWindow);
 }
 
@@ -43,4 +46,30 @@ export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToS
         };
       })
   );
+}
+
+export function createSortMenu(sortDefinition = [], currentMode, onChange) {
+  if (sortDefinition.length === 0) {
+    throw new Error('Sort definition not found');
+  }
+
+  if (!Array.isArray(sortDefinition[0])) {
+    sortDefinition = [sortDefinition];
+  }
+
+  return createMenu(sortDefinition.reduce((prev, curr) => {
+    return prev.concat(
+      curr.map(sort => ({
+        type: 'checkbox',
+        checked: currentMode === sort.mode,
+        label: sort.label,
+        enabled: (typeof sort.enabled === 'undefined') ? true : sort.enabled,
+        icon: path.resolve(__dirname, `./resources/icons/${sort.icon}.png`),
+        click: () => onChange(sort.mode)
+      })),
+      {
+        type: 'separator'
+      }
+    );
+  }, []));
 }

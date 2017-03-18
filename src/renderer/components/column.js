@@ -8,9 +8,10 @@ const Column = ({
   header = null,
   className = null,
   contentClassName = null,
-  light = false
+  light = false,
+  ...rest
 }) => (
-  <div className={cx(styles.column, className)}>
+  <div className={cx(styles.column, className)} {...rest}>
     {header && <header className={cx(styles.bar, styles.header)}>
       {header}
     </header>}

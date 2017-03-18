@@ -1,11 +1,10 @@
-import path from 'path';
 import React, { PropTypes } from 'react';
 import SortIcon from 'react-icons/lib/md/sort';
 import { Button } from 'buttercup-ui';
-import { showContextMenu } from '../../system/menu';
+import { showContextMenu, createSortMenu } from '../../system/menu';
 
 const SORT_MODES = [
-  {
+  [{
     mode: 'properties.title-asc',
     label: 'Title: Ascending',
     icon: 'sort-alpha-asc',
@@ -16,9 +15,8 @@ const SORT_MODES = [
     label: 'Title: Descending',
     icon: 'sort-alpha-desc',
     enabled: true
-  },
-  null,
-  {
+  }],
+  [{
     mode: 'time-desc',
     label: 'Time: Descending',
     icon: 'sort-time-desc',
@@ -29,21 +27,12 @@ const SORT_MODES = [
     label: 'Time: Descending',
     icon: 'sort-time-desc',
     enabled: false
-  }
+  }]
 ];
 
 function showMenu(mode, onChange) {
   showContextMenu(
-    SORT_MODES.map(
-      sort => (sort ? {
-        type: 'checkbox',
-        checked: mode === sort.mode,
-        label: sort.label,
-        enabled: sort.enabled,
-        icon: path.resolve(__dirname, `./resources/icons/${sort.icon}.png`),
-        click: () => onChange(sort.mode)
-      } : { type: 'separator' })
-    )
+    createSortMenu(SORT_MODES, mode, onChange)
   );
 } 
 
