@@ -15,8 +15,13 @@ class TreeView extends Component {
   handleColumnRightClick() {
     const { sortMode, onSortModeChange } = this.props;
 
-    showContextMenu(
-      createSortMenu(
+    showContextMenu([
+      {
+        label: 'New Group',
+        click: () => this.handleAddClick()
+      },
+      { type: 'separator' },
+      ...createSortMenu(
         [
           {
             mode: 'title-asc',
@@ -32,7 +37,7 @@ class TreeView extends Component {
         sortMode,
         newMode => onSortModeChange(newMode)
       )
-    );
+    ]);
   }
 
   handleRightClick = (node, groups, e) => {

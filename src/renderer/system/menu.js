@@ -5,7 +5,10 @@ const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
 
 export function createMenu(items = []) {
-  return Menu.buildFromTemplate(items);
+  return Menu.buildFromTemplate(items.map(item => ({
+    ...item,
+    icon: item.icon ? path.resolve(__dirname, `./resources/icons/${item.icon}.png`) : null
+  })));
 }
 
 export function showContextMenu(menu = []) {
@@ -57,19 +60,19 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
     sortDefinition = [sortDefinition];
   }
 
-  return createMenu(sortDefinition.reduce((prev, curr) => {
+  return sortDefinition.reduce((prev, curr) => {
     return prev.concat(
       curr.map(sort => ({
         type: 'checkbox',
         checked: currentMode === sort.mode,
         label: sort.label,
         enabled: (typeof sort.enabled === 'undefined') ? true : sort.enabled,
-        icon: path.resolve(__dirname, `./resources/icons/${sort.icon}.png`),
+        icon: sort.icon,
         click: () => onChange(sort.mode)
       })),
       {
         type: 'separator'
       }
     );
-  }, []));
+  }, []);
 }
