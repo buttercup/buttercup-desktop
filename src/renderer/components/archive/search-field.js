@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 
 class SearchField extends Component {
@@ -41,6 +42,9 @@ class SearchField extends Component {
             this.textInput = input;
           }}
           />
+        <span className={styles.icon}>
+          <SearchIcon/>
+        </span>
         {this.state.value !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()}></span>}
       </div>
     );
