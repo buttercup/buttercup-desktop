@@ -4,7 +4,7 @@ import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from 'buttercup-ui';
-import { showContextMenu, createMenuFromGroups } from '../../system/menu';
+import { showContextMenu, createMenuFromGroups, createSortMenu } from '../../system/menu';
 import { isOSX } from '../../system/utils';
 import '../../styles/tree-view.global';
 import styles from '../../styles/tree-view';
@@ -12,8 +12,39 @@ import Column from '../column';
 import TreeLabel from './tree-label';
 
 class TreeView extends Component {
-  handleRightClick = (node, groups) => {
+  handleColumnRightClick() {
+    const { sortMode, onSortModeChange } = this.props;
+
+    showContextMenu([
+      {
+        label: 'New Group',
+        click: () => this.handleAddClick()
+      },
+      { type: 'separator' },
+      ...createSortMenu(
+        [
+          {
+            mode: 'title-asc',
+            label: 'Title: Ascending',
+            icon: 'sort-alpha-asc'
+          },
+          {
+            mode: 'title-desc',
+            label: 'Title: Descending',
+            icon: 'sort-alpha-desc'
+          }
+        ],
+        sortMode,
+        newMode => onSortModeChange(newMode)
+      )
+    ]);
+  }
+
+  handleRightClick = (node, groups, e) => {
     const { id: groupId, isTrash } = node;
+
+    // Prevent righ click from propagation to parent
+    e.stopPropagation();
 
     if (isTrash) {
       showContextMenu([
@@ -80,6 +111,7 @@ class TreeView extends Component {
 
   render() {
     const { groups } = this.props;
+
     const loop = children => {
       if (!children) {
         return null;
@@ -99,7 +131,7 @@ class TreeView extends Component {
               <TreeLabel
                 {...node}
                 {...this.props}
-                onRightClick={() => this.handleRightClick(node, groups)}
+                onRightClick={e => this.handleRightClick(node, groups, e)}
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
                 />
@@ -122,6 +154,7 @@ class TreeView extends Component {
             >New Group</Button>
         }
         className={cx(styles.column, isOSX() && styles.mac)}
+        onContextMenu={this.handleColumnRightClick.bind(this)}
         >
         <Tree
           draggable
@@ -143,11 +176,13 @@ TreeView.propTypes = {
   expandedKeys: PropTypes.array,
   selectedKeys: PropTypes.array,
   groups: PropTypes.array,
+  sortMode: PropTypes.string,
   onRemoveClick: PropTypes.func,
   onAddClick: PropTypes.func,
   onGroupSelect: PropTypes.func,
   onEmptyTrash: PropTypes.func,
   onMoveGroup: PropTypes.func,
+  onSortModeChange: PropTypes.func,
   onExpand: PropTypes.func
 };
 

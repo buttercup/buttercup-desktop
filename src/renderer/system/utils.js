@@ -1,6 +1,6 @@
 import path from 'path';
 import { clipboard, remote } from 'electron';
-import { sortBy } from 'lodash';
+import { sortBy, at } from 'lodash';
 import Fuse from 'fuse.js';
 
 const currentWindow = remote.getCurrentWindow();
@@ -21,9 +21,21 @@ export function sortByKey(list, sortKey) {
   if (!key || !order) {
     return list;
   }
-  const sorted = sortBy(list, o => o.properties[key]);
+  const sorted = sortBy(list, o => at(o, key));
   return order === 'asc' ? sorted : sorted.reverse();
-} 
+}
+
+export function sortRecursivelyByKey(list, sortKey, childrenKey) {
+  if (!sortKey || !childrenKey) {
+    throw new Error('Insufficient data provided for sorting');
+  }
+  return sortByKey(list, sortKey).map(item => {
+    return {
+      ...item,
+      [childrenKey]: sortRecursivelyByKey(item[childrenKey], sortKey, childrenKey)
+    };
+  });
+}
 
 export function copyToClipboard(text) {
   clipboard.writeText(text);

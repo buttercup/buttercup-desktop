@@ -13,8 +13,6 @@ export function getGroups() {
     group => Object.assign(group.toObject(Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
     })
-  ).sort(
-    group => group.isTrash ? 1 : -1
   );
 }
 

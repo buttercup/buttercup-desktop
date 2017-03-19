@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { showConfirmDialog } from '../../system/dialog';
 import * as groupTools from '../../system/buttercup/groups';
+import { sortRecursivelyByKey } from '../../system/utils';
 import { loadEntries } from './entries';
 
 // Constants ->
@@ -8,12 +9,13 @@ import { loadEntries } from './entries';
 export const GROUP_SELECTED = 'buttercup/groups/SELECTED';
 export const GROUP_ADD_CHILD = 'buttercup/groups/ADD_CHILD';
 export const GROUP_MOVE = 'buttercup/groups/MOVE';
+export const GROUPS_SET_SORT = 'buttercup/groups/SET_SORT';
 const RESET = 'buttercup/groups/RESET';
 const REMOVE = 'buttercup/groups/REMOVE';
 
 // Reducers ->
 
-function currentGroupReducer(state = null, action) {
+function currentGroup(state = null, action) {
   switch (action.type) {
     case GROUP_SELECTED:
       return action.payload;
@@ -22,12 +24,21 @@ function currentGroupReducer(state = null, action) {
   }
 }
 
-function groupsReducer(state = [], action) {
+function groups(state = [], action) {
   switch (action.type) {
     case RESET:
       return action.payload;
     case REMOVE:
       return [];
+    default:
+      return state;
+  }
+}
+
+function sortMode(state = 'title-asc', action) {
+  switch (action.type) {
+    case GROUPS_SET_SORT:
+      return action.payload;
     default:
       return state;
   }
@@ -72,6 +83,7 @@ export function reloadGroups() {
   return dispatch => {
     const groups = groupTools.getGroups();
     dispatch(resetGroups(groups));
+    
     if (groups.length > 0) {
       dispatch(loadGroup(groups[0].id));
     }
@@ -109,15 +121,27 @@ export const emptyTrash = () => dispatch => {
   });
 };
 
+export const setSortMode = sortKey => ({
+  type: GROUPS_SET_SORT,
+  payload: sortKey
+});
+
 // Selectors -> 
 
-export const getGroups = state =>
-  state.byId;
+export const getGroups = state => {
+  const trashGroups = state.byId.filter(g => g.isTrash);
+  const rest = state.byId.filter(g => !g.isTrash);
+  return [
+    ...sortRecursivelyByKey(rest, state.sortMode, 'groups'),
+    ...trashGroups
+  ];
+};
 
 export const getCurrentGroup = state =>
   state.currentGroup;
 
 export default combineReducers({
-  byId: groupsReducer,
-  currentGroup: currentGroupReducer
+  byId: groups,
+  currentGroup,
+  sortMode
 });

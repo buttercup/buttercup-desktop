@@ -1,30 +1,23 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/tree-view';
-import {
-  getGroups,
-  getCurrentGroup,
-  addGroup,
-  removeGroup,
-  saveGroupTitle,
-  moveGroupToParent,
-  loadGroup,
-  emptyTrash
-} from '../redux/modules/groups';
+import * as groupTools from '../redux/modules/groups';
 import { setExpandedKeys } from '../redux/modules/tree';
 
 export default connect(
   state => ({
-    groups: getGroups(state.groups),
+    groups: groupTools.getGroups(state.groups),
+    sortMode: state.groups.sortMode,
     expandedKeys: state.ui.tree.expandedKeys,
-    selectedKeys: [getCurrentGroup(state.groups)]
+    selectedKeys: [groupTools.getCurrentGroup(state.groups)]
   }),
   {
-    onAddClick: addGroup,
-    onRemoveClick: removeGroup,
-    onSaveClick: saveGroupTitle,
-    onEmptyTrash: emptyTrash,
-    onMoveGroup: moveGroupToParent,
-    onGroupSelect: loadGroup,
+    onAddClick: groupTools.addGroup,
+    onRemoveClick: groupTools.removeGroup,
+    onSaveClick: groupTools.saveGroupTitle,
+    onEmptyTrash: groupTools.emptyTrash,
+    onMoveGroup: groupTools.moveGroupToParent,
+    onGroupSelect: groupTools.loadGroup,
+    onSortModeChange: groupTools.setSortMode,
     onExpand: setExpandedKeys
   }
 )(TreeView, 'TreeView');
