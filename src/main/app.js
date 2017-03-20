@@ -20,6 +20,22 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+// Crash reporter for alpha and beta releases
+// After we come out of beta, we should be rolling our own
+// Crash reporter server using Mozilla Socorro
+// https://github.com/mozilla/socorro
+// This process is fail-safe. Even if the URL stops working
+// The app has already crashed. lol.
+if (process.env.NODE_ENV !== 'development') {
+  const { crashReporter } = require('electron');
+  crashReporter.start({
+    productName: app.getName(),
+    companyName: 'Buttercup LLC',
+    submitURL: 'https://electron-crash-reporter.appspot.com/5642489998344192/create/',
+    uploadToServer: true
+  });
+}
+
 const installExtensions = async () => {
   if (process.env.NODE_ENV === 'development') {
     const installer = require('electron-devtools-installer');
