@@ -2,7 +2,7 @@ import path from 'path';
 import { BrowserWindow, dialog } from 'electron';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
-import { importKeepass } from './buttercup/import';
+import { importKeepass } from './buttercup';
 
 const windowManager = getWindowManager();
 const dialogOptions = {

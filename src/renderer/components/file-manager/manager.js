@@ -1,4 +1,6 @@
 import path from 'path';
+import webdavFs from 'webdav-fs';
+import anyFs from 'any-fs';
 import React, { Component, PropTypes } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
@@ -6,21 +8,58 @@ import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
+const afs = anyFs(wfs);
+
 class Manager extends Component {
+  state = {
+    currentPath: '/',
+    contents: [],
+    selectedIndex: null,
+    selectedPath: null
+  };
+
+  navigate = index => {
+    const { currentPath, contents } = this.state;
+    let pathToNavigate = '/';
+
+    if (index !== null) {
+      pathToNavigate = path.resolve(currentPath, contents[index].name);
+    }
+
+    this.setState({ currentPath: pathToNavigate });
+
+    afs.readDirectory(pathToNavigate).then(result => {
+      const files = result.map(item => ({
+        name: item.name,
+        type: item.isFile() ? 'file' : 'directory',
+        size: item.size,
+        mtime: item.mtime
+      }));
+
+      if (pathToNavigate !== '/') {
+        files.unshift({ name: '..', type: 'directory', size: 0, mtime: null });
+      }
+
+      this.setState({ contents: files });
+    });
+  }
+
   componentDidMount() {
-    this.props.handleNavigate(null);
+    this.navigate(null);
   }
 
   handleRowClick = (e, index) => {
-    this.props.handleSelectIndex(index);
+    this.setState({ selectedIndex: index });
   }
 
   handleRowDoubleClick = (e, index) => {
-    this.props.handleNavigate(index);
+    this.navigate(index);
   }
 
   render() {
-    const { contents, containerWidth, containerHeight, selectedIndex } = this.props;
+    const { containerWidth, containerHeight } = this.props;
+    const { contents, selectedIndex } = this.state;
+
     return (
       <Table
         rowHeight={35}
@@ -74,14 +113,7 @@ class Manager extends Component {
 
 export const propTypes = {
   containerWidth: PropTypes.number,
-  containerHeight: PropTypes.number,
-  selectedIndex: PropTypes.number,
-  selectFile: PropTypes.object,
-  currentPath: PropTypes.string.isRequired,
-  contents: PropTypes.array.isRequired,
-  handleNavigate: PropTypes.func,
-  handleCreateNewDirectory: PropTypes.func,
-  handleSelectIndex: PropTypes.func
+  containerHeight: PropTypes.number
 };
 
 Manager.propTypes = propTypes;

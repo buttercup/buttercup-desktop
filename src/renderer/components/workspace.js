@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react';
-// import Intro from '../components/intro';
+import Intro from '../components/intro';
 import Archive from '../components/archive';
-import FileManager from '../containers/file-manager';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
 
 const Workspace = ({workspace, update, installUpdate}) => {
   return (
     <div>
-      {(workspace.archive.path === null) ? <FileManager/> : <Archive/>}
+      {(workspace.archive.path === null) ? <Intro/> : <Archive/>}
       <UpdateNotice {...update} onClick={() => installUpdate()}/>
     </div>
   );

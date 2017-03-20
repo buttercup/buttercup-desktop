@@ -29,7 +29,7 @@ function init() {
   isInit = true;
 }
 
-export default function(win) {
+export function startAutoUpdate(win) {
   const { rpc } = win;
 
   if (!isInit) {

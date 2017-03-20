@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-expressions */
-import path from 'path';
-import { app, BrowserWindow, Menu } from 'electron';
-import pkg from '../../package.json';
+import { app, Menu } from 'electron';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
-import { loadFile, openFile, newFile } from './lib/files';
+import { loadFile } from './lib/files';
 import { isWindows } from './lib/platform';
-import startAutoUpdate from './lib/updater';
-import createRPC from './lib/rpc';
-import './lib/buttercup';
+
+import './actions';
+import './windows';
 
 const windowManager = getWindowManager();
 let appIsReady = false;
@@ -53,68 +50,6 @@ const installExtensions = async () => {
     }
   }
 };
-
-// Intro Screen
-windowManager.setBuildProcedure('main', callback => {
-  // Create the browser window.
-  const win = new BrowserWindow({
-    width: 870,
-    height: 550,
-    minWidth: 680,
-    minHeight: 500,
-    title: pkg.productName,
-    titleBarStyle: 'hidden-inset',
-    show: process.env.NODE_ENV === 'development',
-    vibrancy: 'light'
-  });
-
-  if (process.env.NODE_ENV === 'development') {
-    win.loadURL(`file://${path.resolve(__dirname, '../../app/index.html')}`);
-  } else {
-    win.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
-  }
-
-  const rpc = createRPC(win);
-  win.rpc = rpc;
-
-  win.isIntro = function() {
-    return win.getTitle().toLowerCase().match(/welcome/i) !== null;
-  };
-
-  // When user drops a file on the window
-  win.webContents.on('will-navigate', (e, url) => {
-    e.preventDefault();
-    loadFile(url, win);
-  });
-
-  rpc.on('open-file-dialog', () => {
-    openFile();
-  });
-
-  rpc.on('new-file-dialog', () => {
-    newFile();
-  });
-
-  win.once('ready-to-show', () => {
-    win.show();
-  });
-
-  rpc.once('init', () => {
-    if (process.env.NODE_ENV !== 'development') {
-      startAutoUpdate(win);
-    }
-
-    if (callback) {
-      callback(win, rpc);
-    }
-  });
-
-  win.once('closed', () => {
-    windowManager.deregister(win);
-  });
-
-  return win;
-});
 
 // In case user tries to open a file using Buttercup (on Mac)
 app.on('open-file', (e, filePath) => {

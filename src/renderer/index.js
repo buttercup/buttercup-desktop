@@ -23,6 +23,7 @@ const store = configureStore();
 
 rpc.on('ready', () => {
   rpc.emit('init');
+  sallar();
 });
 
 rpc.on('open-file', path => {
@@ -85,3 +86,8 @@ if (module.hot) {
     );
   });
 }
+
+window.sallar = () => {
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('show-file-manager');
+};

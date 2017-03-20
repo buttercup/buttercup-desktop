@@ -5,7 +5,6 @@ import groups from './modules/groups';
 import workspace from './modules/workspace';
 import ui from './modules/ui';
 import entries from './modules/entries';
-import manager from './modules/file-manager';
 
 export default combineReducers({
   workspace,
@@ -13,6 +12,5 @@ export default combineReducers({
   groups,
   ui,
   entries,
-  manager,
   form: formReducer
 });

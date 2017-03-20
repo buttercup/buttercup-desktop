@@ -8,7 +8,7 @@
         if (!process.env.HOT) {
           const link = document.createElement('link');
           link.rel = 'stylesheet';
-          link.href = './style.css';
+          link.href = '../dist/style.css';
           document.write(link.outerHTML);
         }
       }());
@@ -18,7 +18,7 @@
     <div id="root"></div>
     <script>
       const script = document.createElement('script');
-      script.src = (process.env.HOT) ? 'http://localhost:3000/app/bundle.js' : './bundle.js';
+      script.src = (process.env.HOT) ? 'http://localhost:3000/app/main.bundle.js' : '../dist/main.bundle.js';
       document.head.appendChild(script);
     </script>
   </body>
