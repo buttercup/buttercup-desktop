@@ -6,11 +6,18 @@ import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
+import { isButtercupFile } from '../../system/utils';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
 const afs = anyFs(wfs);
 
 class Manager extends Component {
+  static propTypes = {
+    containerWidth: PropTypes.number,
+    containerHeight: PropTypes.number,
+    onSelectFile: PropTypes.func
+  };
+
   state = {
     currentPath: '/',
     contents: [],
@@ -23,10 +30,15 @@ class Manager extends Component {
     let pathToNavigate = '/';
 
     if (index !== null) {
-      pathToNavigate = path.resolve(currentPath, contents[index].name);
+      const fileObj = contents[index].name;
+      if (fileObj.type !== 'directory') {
+        return;
+      }
+      pathToNavigate = path.resolve(currentPath, fileObj.name);
     }
 
     this.setState({ currentPath: pathToNavigate });
+    this.setSelectedFile(null);
 
     afs.readDirectory(pathToNavigate).then(result => {
       const files = result.map(item => ({
@@ -49,11 +61,18 @@ class Manager extends Component {
   }
 
   handleRowClick = (e, index) => {
-    this.setState({ selectedIndex: index });
+    this.setSelectedFile(index);
   }
 
   handleRowDoubleClick = (e, index) => {
     this.navigate(index);
+  }
+
+  setSelectedFile(index) {
+    this.setState({ selectedIndex: index });
+    if (this.props.onSelectFile) {
+      this.props.onSelectFile(this.state.contents[index] || null);
+    }
   }
 
   render() {
@@ -67,7 +86,7 @@ class Manager extends Component {
         rowsCount={contents.length}
         rowClassNameGetter={index => {
           const item = contents[index];
-          if (item.type !== 'directory' && path.extname(item.name).toLowerCase() !== '.bcup') {
+          if (item.type !== 'directory' && !isButtercupFile(item)) {
             return styles.disabled;
           }
           return selectedIndex === index ? styles.selected : null;
@@ -110,13 +129,6 @@ class Manager extends Component {
     );
   }
 }
-
-export const propTypes = {
-  containerWidth: PropTypes.number,
-  containerHeight: PropTypes.number
-};
-
-Manager.propTypes = propTypes;
 
 export default dimensions({
   elementResize: true

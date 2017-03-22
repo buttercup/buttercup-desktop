@@ -1,23 +1,39 @@
 import React, { Component } from 'react';
+import { Button } from 'buttercup-ui';
+import { isButtercupFile } from '../../system/utils';
 import styles from '../../styles/file-manager';
-import Manager, { propTypes } from './manager';
+import Manager from './manager';
+import '../../styles/workspace.global.scss';
 
 class FileManager extends Component {
+  state = {
+    selectedFile: null
+  };
+
+  handleSelectFile = file => {
+    this.setState({
+      selectedFile: isButtercupFile(file) ? file : null
+    });
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.managerWrapper}>
-          <Manager {...this.props}/>
+          <Manager onSelectFile={this.handleSelectFile}/>
         </div>
-        <div style={{ flex: '0 0 50px' }}>
-          <button onClick={() => this.props.handleCreateNewDirectory()}>New Folder</button>
-          <button>Open</button>
+        <div className={styles.footer}>
+          <div>
+            <Button dark>New Folder</Button>
+          </div>
+          <div>
+            <Button >Nevermind</Button>{' '}
+            <Button primary disabled={this.state.selectedFile === null}>Open in Buttercup</Button>
+          </div>
         </div>
       </div>
     );
   }
 }
-
-FileManager.propTypes = propTypes;
 
 export default FileManager;

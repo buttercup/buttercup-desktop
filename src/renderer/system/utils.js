@@ -72,3 +72,10 @@ export function isWindows() {
 export function isLinux() {
   return process.platform === 'linux';
 }
+
+export function isButtercupFile(fileObj) {
+  if (fileObj === null) {
+    return false;
+  }
+  return fileObj.type === 'file' && path.extname(fileObj.name).toLowerCase() === '.bcup';
+}

@@ -3,6 +3,16 @@
 <head>
   <meta charset="utf-8">
   <title>File Manager</title>
+  <script>
+    (function () {
+      if (!process.env.HOT) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '../dist/styles/fileManager.css';
+        document.write(link.outerHTML);
+      }
+    }());
+  </script>
 </head>
 
 <body>
