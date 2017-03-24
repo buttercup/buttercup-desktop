@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import { sortRecursivelyByKey } from '../utils/collection';
 
 import {
   GROUPS_SELECTED,
@@ -38,20 +37,6 @@ function sortMode(state = 'title-asc', action) {
       return state;
   }
 }
-
-// Selectors -> 
-
-export const getGroups = state => {
-  const trashGroups = state.byId.filter(g => g.isTrash);
-  const rest = state.byId.filter(g => !g.isTrash);
-  return [
-    ...sortRecursivelyByKey(rest, state.sortMode, 'groups'),
-    ...trashGroups
-  ];
-};
-
-export const getCurrentGroup = state =>
-  state.currentGroup;
 
 export default combineReducers({
   byId: groups,

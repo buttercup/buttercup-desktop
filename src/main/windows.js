@@ -71,7 +71,7 @@ windowManager.setBuildProcedure('file-manager', (callback, options) => {
     height: 450,
     modal: true,
     show: false,
-    resizable: false,
+    resizable: true,
     ...options
   });
 

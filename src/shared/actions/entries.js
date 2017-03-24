@@ -1,13 +1,11 @@
 import * as entryTools from '../../renderer/system/buttercup/entries';
 import { showConfirmDialog } from '../../renderer/system/dialog';
-import { getCurrentEntry } from '../reducers/entries';
-import { getCurrentGroup } from '../reducers/groups';
+import { getCurrentGroupId } from '../selectors';
 
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
   ENTRIES_UPDATE,
-  ENTRIES_CREATE_REQUEST,
   ENTRIES_CREATE,
   ENTRIES_DELETE,
   ENTRIES_MOVE,
@@ -16,24 +14,15 @@ import {
   ENTRIES_SET_SORT,
 } from './types';
 
-export const loadEntries = groupId => dispatch => {
-  const entries = entryTools.loadEntries(groupId);
-  dispatch({
-    type: ENTRIES_LOADED,
-    payload: entries
-  });
-};
+export const loadEntries = groupId => ({
+  type: ENTRIES_LOADED,
+  payload: entryTools.loadEntries(groupId)
+});
 
-export const selectEntry = entryId => (dispatch, getState) => {
-  const state = getState().entries;
-  const currentEntry = getCurrentEntry(state);
-  if (!currentEntry || currentEntry.id !== entryId) {
-    dispatch({
-      type: ENTRIES_SELECTED,
-      payload: entryId
-    });
-  }
-};
+export const selectEntry = entryId => ({
+  type: ENTRIES_SELECTED,
+  payload: entryId
+});
 
 export const changeMode = mode => () => ({
   type: ENTRIES_CHANGE_MODE,
@@ -50,17 +39,13 @@ export const updateEntry = newValues => dispatch => {
 };
 
 export const newEntry = newValues => (dispatch, getState) => {
-  const state = getState();
-  const currentGroup = getCurrentGroup(state.groups); // @TODO: this should be object not string
+  const currentGroupId = getCurrentGroupId(getState());
 
-  if (currentGroup === null) {
+  if (!currentGroupId) {
     return null;
   }
-  dispatch({
-    type: ENTRIES_CREATE_REQUEST,
-    payload: newValues
-  });
-  entryTools.createEntry(newValues, currentGroup).then(entryObj => {
+  
+  entryTools.createEntry(newValues, currentGroupId).then(entryObj => {
     dispatch({
       type: ENTRIES_CREATE,
       payload: entryObj

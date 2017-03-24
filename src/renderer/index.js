@@ -5,9 +5,9 @@ import { AppContainer } from 'react-hot-loader';
 import { getInitialStateRenderer } from 'electron-redux';
 import configureStore from '../shared/store/configure-store';
 import * as archiveActions from '../shared/actions/files';
-import * as entryActions from '../shared/actions/entries';
 import * as uiAction from '../shared/actions/ui';
 import * as groupActions from '../shared/actions/groups';
+import { getCurrentEntry } from '../shared/selectors';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
@@ -19,6 +19,8 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
 setWindowSize(870, 550);
+
+window.__ID__ = 'sallar';
 
 const initialState = getInitialStateRenderer();
 const store = configureStore(initialState, 'renderer');
@@ -41,14 +43,14 @@ rpc.on('is-in-workspace', () => {
 });
 
 rpc.on('copy-current-password', () => {
-  // const selection = window.getSelection().toString();
-  // const currentEntry = entryActions.getCurrentEntry(store.getState().entries);
+  const selection = window.getSelection().toString();
+  const currentEntry = getCurrentEntry(store.getState());
 
-  // if (selection !== '') {
-  //   copyToClipboard(selection);
-  // } else if (currentEntry) {
-  //   copyToClipboard(currentEntry.properties.password);
-  // }
+  if (selection !== '') {
+    copyToClipboard(selection);
+  } else if (currentEntry) {
+    copyToClipboard(currentEntry.properties.password);
+  }
 });
 
 rpc.on('import-history', request => {

@@ -1,9 +1,7 @@
 import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWorkspace } from './workspace';
-import {
-  FILES_CANCELLED,
-} from './types';
+import { FILES_CANCELLED } from './types';
 
 // Action Creators ->
 

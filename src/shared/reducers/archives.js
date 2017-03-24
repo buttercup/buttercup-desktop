@@ -1,15 +1,18 @@
-import { ARCHIVES_ADD } from '../actions/types';
+import uiReducer from './ui';
 
-export default function archivesReducer(state = {}, action) {
-  switch (action.type) {
-    case ARCHIVES_ADD:
-      return {
-        ...state,
-        [action.payload.id]: action.payload
-      };
-    default:
-      return state;
-  }
+function itemReducer(state = {}, action) {
+  return {
+    ui: uiReducer(state.ui, action)
+  };
 }
 
-export const getArchive = (state, archiveId) => state[archiveId];
+export default function archivesReducer(state = {}, action) {
+  const archiveId = (action.meta && action.meta.archiveId) || window.__ID__;
+  if (archiveId) {
+    return {
+      ...state,
+      [archiveId]: itemReducer(state[archiveId], action)
+    };
+  }
+  return state;
+}

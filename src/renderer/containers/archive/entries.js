@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 import Entries from '../../components/archive/entries';
-import { getGroups } from '../../../shared/reducers/groups';
-import { getCurrentEntries, getCurrentEntry } from '../../../shared/reducers/entries';
+import { getGroups, getCurrentEntry, getEntries } from '../../../shared/selectors';
 import * as entries from '../../../shared/actions/entries';
 
 export default connect(
   state => ({
-    groups: getGroups(state.groups),
+    groups: getGroups(state),
     filter: state.entries.filter,
     sortMode: state.entries.sortMode,
-    entries: getCurrentEntries(state.entries),
-    currentEntry: getCurrentEntry(state.entries),
+    entries: getEntries(state),
+    currentEntry: getCurrentEntry(state),
     currentGroup: state.groups.currentGroup
   }),
   {

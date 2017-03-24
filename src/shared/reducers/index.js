@@ -3,7 +3,6 @@ import { reducer as form } from 'redux-form';
 import recentFiles from './recents';
 import groups from './groups';
 import workspace from './workspace';
-import ui from './ui';
 import entries from './entries';
 import archives from './archives';
 
@@ -18,7 +17,6 @@ export default function getRootReducer(scope = 'main') {
       workspace,
       recentFiles,
       groups,
-      ui,
       entries,
       form,
     };

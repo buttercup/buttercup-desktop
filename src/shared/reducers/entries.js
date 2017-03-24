@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import clone from 'lodash/cloneDeep';
-import { filterByText, sortByKey } from '../utils/collection';
 import {
   GROUPS_SELECTED,
   ENTRIES_LOADED,
@@ -110,24 +109,6 @@ function sortMode(state = 'properties.title-asc', action) {
       return state;
   }
 }
-
-// Selectors ->
-
-export const getCurrentEntries = state => {
-  const { filter, sortMode } = state;
-  const mapped = state.shownIds.map(id => state.byId[id]);
-  if (filter && filter.length > 0) {
-    return filterByText(mapped, filter);
-  }
-
-  return sortByKey(mapped, sortMode);
-};
-
-export const getCurrentEntry = state =>
-  state.byId[state.currentEntry];
-
-export const getEntry = (state, entryId) =>
-  state.byId[entryId];
 
 export default combineReducers({
   byId,

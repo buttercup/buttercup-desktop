@@ -7,7 +7,7 @@ const currentWindow = remote.getCurrentWindow();
 export function createMenu(items = []) {
   return Menu.buildFromTemplate(items.map(item => ({
     ...item,
-    icon: item.icon ? path.resolve(__dirname, `./resources/icons/${item.icon}.png`) : null
+    icon: item.icon ? path.resolve(__dirname, `../resources/icons/${item.icon}.png`) : null
   })));
 }
 
