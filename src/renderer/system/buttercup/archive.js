@@ -71,6 +71,7 @@ export function loadWorkspace(filename, password) {
       filename
     };
     return {
+      id: getArchive().getID(),
       path: filename
     };
   });
@@ -99,6 +100,7 @@ export function newWorkspace(filename, password) {
           filename
         };
         return {
+          id: archive.getID(),
           path: filename
         };
       });

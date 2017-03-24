@@ -48,12 +48,12 @@ class RecentFiles extends Component {
       <div className={styles.container} onContextMenu={() => this.showContextMenu()}>
         <h6 className={styles.heading}>Recent Archives:</h6>
         <ul className={styles.list}>
-          {this.props.recentFiles.map(filename =>
+          {this.props.recentFiles.map(archive =>
             <File
-              filename={filename}
-              key={filename}
-              onClick={() => this.props.onClick(filename)}
-              onRemoveClick={() => this.props.onRemoveClick(filename)}
+              filename={archive.path}
+              key={archive.id}
+              onClick={() => this.props.onClick(archive.path)}
+              onRemoveClick={() => this.props.onRemoveClick(archive.id)}
               />
           )}
         </ul>

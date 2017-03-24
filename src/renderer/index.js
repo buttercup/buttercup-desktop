@@ -20,7 +20,7 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 window.__defineGetter__('rpc', () => rpc);
 setWindowSize(870, 550);
 
-window.__ID__ = 'sallar';
+window.__ID__ = null;
 
 const initialState = getInitialStateRenderer();
 const store = configureStore(initialState, 'renderer');

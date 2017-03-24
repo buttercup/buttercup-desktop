@@ -3,12 +3,19 @@ import { filterByText, sortByKey, sortRecursivelyByKey } from '../utils/collecti
 
 // Archive
 
-export const getActiveArchive = state => state.settingsByArchiveKey[window.__ID__];
+export const getAllArchives = state => Object.values(state.archives.byId);
+export const getAllSettings = state => state.settingsByArchiveId;
+export const getCurrentArchiveId = state => state.archives.currentArchive;
+export const getCurrentArchiveSettings = createSelector(
+  getAllSettings,
+  getCurrentArchiveId,
+  (settings, archiveId) => settings[archiveId]
+);
 
 // Tree ->
 
 export const getExpandedKeys = createSelector(
-  getActiveArchive,
+  getCurrentArchiveSettings,
   archive => archive.ui.treeExpandedKeys
 );
 

@@ -20,10 +20,6 @@ export const GROUPS_SET_SORT = 'buttercup/groups/SET_SORT';
 export const GROUPS_RESET = 'buttercup/groups/RESET';
 export const GROUPS_REMOVE = 'buttercup/groups/REMOVE';
 
-export const RECENTS_ADD = 'buttercup/recents/ADD';
-export const RECENTS_REMOVE = 'buttercup/recents/REMOVE';
-export const RECENTS_CLEAR = 'buttercup/recents/CLEAR';
-
 export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
 export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
 
@@ -34,3 +30,4 @@ export const UPDATE_INSTALL = 'buttercup/ui/UPDATE_INSTALL';
 
 export const ARCHIVES_ADD = 'buttercup/archives/ADD';
 export const ARCHIVES_REMOVE = 'buttercup/archives/REMOVE';
+export const ARCHIVES_SET_CURRENT = 'buttercup/archives/SET_CURRENT';

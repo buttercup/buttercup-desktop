@@ -1,6 +1,7 @@
 import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWorkspace } from './workspace';
+import { addArchive, setCurrentArchive } from './archives';
 import { FILES_CANCELLED } from './types';
 
 // Action Creators ->
@@ -8,7 +9,10 @@ import { FILES_CANCELLED } from './types';
 const fileAction = (filename, dispatch, fn) => {
   showPasswordDialog(password => {
     return fn(filename, password);
-  }).then(() => {
+  }).then(info => {
+    window.__ID__ = info.id;
+    dispatch(setCurrentArchive(info.id));
+    dispatch(addArchive(info.id, 'file', '', info.path));
     dispatch(setWorkspace(filename));
   })
     .catch(err => {

@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
-import { removeRecent, clearRecent } from '../../shared/actions/recents';
+import { removeArchive } from '../../shared/actions/archives';
+import { getAllArchives } from '../../shared/selectors';
 import { openFile } from '../../shared/actions/files';
 import RecentFiles from '../components/recent-files';
 
 export default connect(
   state => ({
-    recentFiles: state.recentFiles
+    recentFiles: getAllArchives(state)
   }),
   {
-    onRemoveClick: removeRecent,
-    onClearClick: clearRecent,
+    onRemoveClick: removeArchive,
+    onClearClick: () => {}, // @TODO: CLEAR ARCHIVES
     onClick: openFile
   }
 )(RecentFiles);
