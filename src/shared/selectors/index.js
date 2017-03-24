@@ -3,7 +3,7 @@ import { filterByText, sortByKey, sortRecursivelyByKey } from '../utils/collecti
 
 // Archive
 
-export const getActiveArchive = state => state.archives[window.__ID__];
+export const getActiveArchive = state => state.settingsByArchiveKey[window.__ID__];
 
 // Tree ->
 

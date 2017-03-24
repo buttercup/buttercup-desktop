@@ -4,11 +4,11 @@ import recentFiles from './recents';
 import groups from './groups';
 import workspace from './workspace';
 import entries from './entries';
-import archives from './archives';
+import settingsByArchiveKey from './settings';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
-    archives
+    settingsByArchiveKey
   };
 
   if (scope === 'renderer') {
