@@ -2,7 +2,6 @@ import { app, BrowserWindow } from 'electron';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
 import { createRPC } from './lib/rpc';
-import { startAutoUpdate } from './lib/updater';
 import { loadFile, openFile, newFile } from './lib/files';
 
 const windowManager = getWindowManager();
@@ -50,10 +49,6 @@ export function setupWindows() {
     });
 
     rpc.once('init', () => {
-      if (process.env.NODE_ENV !== 'development') {
-        startAutoUpdate(win);
-      }
-
       if (callback) {
         callback(win, rpc);
       }

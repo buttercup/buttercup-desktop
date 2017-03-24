@@ -7,10 +7,10 @@ import { isWindows } from './lib/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
-global.store = configureStore(global.state, 'main');
+const store = configureStore(global.state, 'main');
 
-setupWindows();
-setupActions();
+setupWindows(store);
+setupActions(store);
 
 const windowManager = getWindowManager();
 let appIsReady = false;

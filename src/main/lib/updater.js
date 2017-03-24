@@ -10,7 +10,7 @@ import { isOSX } from './platform';
 // https://nuts.gitbook.com/update-windows.html
 const platform = isOSX() ? 'osx' : process.platform;
 const FEED_URL = `https://download.buttercup.pw/update/${platform}`;
-let isInit = false;
+let hasInitialized = false;
 
 function init() {
   autoUpdater.setFeedURL(`${FEED_URL}/${pkg.version}`);
@@ -27,30 +27,24 @@ function init() {
     autoUpdater.checkForUpdates();
   }, ms('30m'));
 
-  isInit = true;
+  hasInitialized = true;
 }
 
-export function startAutoUpdate(win) {
-  const { rpc } = win;
-
-  if (!isInit) {
+export function startAutoUpdate(store) {
+  if (!hasInitialized) {
     init();
   }
 
   const onupdate = (e, releaseNotes, releaseName) => {
-    global.store.dispatch(pushUpdate({
+    store.dispatch(pushUpdate({
       releaseNotes,
       releaseName
     }));
   };
 
   autoUpdater.on('update-downloaded', onupdate);
+}
 
-  rpc.once('quit-and-install', () => {
-    autoUpdater.quitAndInstall();
-  });
-
-  win.on('close', () => {
-    autoUpdater.removeListener('update-downloaded', onupdate);
-  });
+export function installUpdates() {
+  autoUpdater.quitAndInstall();
 }
