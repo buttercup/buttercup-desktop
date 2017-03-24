@@ -16,7 +16,7 @@ export const getCurrentArchiveSettings = createSelector(
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
-  archive => archive.ui.treeExpandedKeys
+  archive => archive ? archive.ui.treeExpandedKeys : []
 );
 
 // Entries ->

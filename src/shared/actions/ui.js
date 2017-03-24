@@ -1,3 +1,4 @@
+import { createLocalAction } from '../utils/redux';
 import {
   UPDATE_AVAILABLE,
   UPDATE_INSTALL,
@@ -17,12 +18,5 @@ export const installUpdate = () => dispatch => {
   window.rpc.emit('quit-and-install');
 };
 
-export const setExpandedKeys = keys => ({
-  type: TREE_SET_EXPANDED_KEYS,
-  payload: keys
-});
-
-export const addExpandedKey = key => ({
-  type: TREE_ADD_EXPANDED_KEY,
-  payload: key
-});
+export const setExpandedKeys = createLocalAction(TREE_SET_EXPANDED_KEYS);
+export const addExpandedKeys = createLocalAction(TREE_ADD_EXPANDED_KEY);
