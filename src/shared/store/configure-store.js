@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import { createLogger } from 'redux-logger';
@@ -11,7 +10,6 @@ import {
   replayActionRenderer,
 } from 'electron-redux';
 import getRootReducer from '../reducers';
-// import DevTools from '../../renderer/main/components/DevTools';
 
 /**
  * @param  {Object} initialState
@@ -19,11 +17,6 @@ import getRootReducer from '../reducers';
  * @return {Object} store
  */
 export default function configureStore(initialState, scope = 'main') {
-  const logger = createLogger({
-    level: scope === 'main' ? undefined : 'info',
-    collapsed: true,
-  });
-
   let middleware = [
     thunk,
     promise,
@@ -33,8 +26,18 @@ export default function configureStore(initialState, scope = 'main') {
     middleware = [
       forwardToMain,
       ...middleware,
-      logger,
     ];
+
+    if (process.env.NODE_ENV === 'development') {
+      const logger = createLogger({
+        level: 'info',
+        collapsed: true,
+      });
+      middleware = [
+        ...middleware,
+        logger
+      ];
+    }
   }
 
   if (scope === 'main') {
@@ -50,13 +53,7 @@ export default function configureStore(initialState, scope = 'main') {
   ];
 
   if (process.env.NODE_ENV === 'development' && scope === 'renderer') {
-    // enhanced.push(DevTools.instrument());
     enhanced.push(window.devToolsExtension ? window.devToolsExtension() : f => f);
-    enhanced.push(persistState(
-      window.location.href.match(
-        /[?&]debug_session=([^&]+)\b/
-      )
-    ));
   }
 
   const rootReducer = getRootReducer(scope);

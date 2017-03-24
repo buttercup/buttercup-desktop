@@ -7,7 +7,7 @@ function itemReducer(state = {}, action) {
 }
 
 export default function archivesReducer(state = {}, action) {
-  const archiveId = (action.meta && action.meta.archiveId) || window.__ID__;
+  const archiveId = (action.meta && action.meta.archiveId) || global.__ID__;
   if (archiveId) {
     return {
       ...state,

@@ -170,7 +170,6 @@
     "react-split-pane": "^0.1.51",
     "redux": "^3.5.2",
     "redux-actions": "^2.0.1",
-    "redux-devtools": "^3.3.2",
     "redux-form": "^6.4.3",
     "redux-logger": "^3.0.0",
     "redux-persist": "^3.1.1",

@@ -7010,20 +7010,6 @@ redux-actions@^2.0.1:
     lodash "^4.13.1"
     reduce-reducers "^0.1.0"
 
-redux-devtools-instrument@^1.0.1:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/redux-devtools-instrument/-/redux-devtools-instrument-1.8.0.tgz#db1840ed3d8152af6792913698e3424c119de9aa"
-  dependencies:
-    lodash "^4.2.0"
-    symbol-observable "^1.0.2"
-
-redux-devtools@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/redux-devtools/-/redux-devtools-3.3.2.tgz#f427f71964e2b3785b68834b6e4fe99d8da75b5e"
-  dependencies:
-    lodash "^4.2.0"
-    redux-devtools-instrument "^1.0.1"
-
 redux-form@^6.4.3:
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.5.0.tgz#8c75ea77018afbabaa02f1389cf6b0e10787c5b8"
