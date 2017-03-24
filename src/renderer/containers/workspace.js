@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
-import { installUpdate } from '../redux/modules/ui';
+import { installUpdate } from '../../shared/actions/ui';
 
 export default connect(
   state => ({

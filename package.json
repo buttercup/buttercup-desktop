@@ -130,6 +130,7 @@
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
+    "electron-redux": "^1.2.5",
     "electron-rpc": "^2.0.1",
     "eslint": "^3.15.0",
     "eslint-config-xo-react": "^0.8.0",
@@ -168,8 +169,12 @@
     "react-redux": "^4.4.6",
     "react-split-pane": "^0.1.51",
     "redux": "^3.5.2",
+    "redux-actions": "^2.0.1",
+    "redux-devtools": "^3.3.2",
     "redux-form": "^6.4.3",
+    "redux-logger": "^3.0.0",
     "redux-persist": "^3.1.1",
+    "redux-promise": "^0.5.3",
     "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.3",
     "sass-loader": "^4.0.2",
@@ -212,6 +217,7 @@
       }
     },
     "rules": {
+      "comma-dangle": "off",
       "no-unused-expressions": "off",
       "space-before-function-paren": "off",
       "quote-props": "off",

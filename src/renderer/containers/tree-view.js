@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/tree-view';
-import * as groupTools from '../redux/modules/groups';
-import { setExpandedKeys } from '../redux/modules/tree';
+import * as groupTools from '../../shared/actions/groups';
+import { getGroups, getCurrentGroup } from '../../shared/reducers/groups';
+import { setExpandedKeys } from '../../shared/actions/tree';
 
 export default connect(
   state => ({
-    groups: groupTools.getGroups(state.groups),
+    groups: getGroups(state.groups),
     sortMode: state.groups.sortMode,
     expandedKeys: state.ui.tree.expandedKeys,
-    selectedKeys: [groupTools.getCurrentGroup(state.groups)]
+    selectedKeys: [getCurrentGroup(state.groups)]
   }),
   {
     onAddClick: groupTools.addGroup,

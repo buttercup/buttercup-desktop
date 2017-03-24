@@ -23,9 +23,7 @@ class FileManager extends Component {
           <Manager onSelectFile={this.handleSelectFile}/>
         </div>
         <div className={styles.footer}>
-          <div>
-            <Button dark>New Folder</Button>
-          </div>
+          <div></div>
           <div>
             <Button >Nevermind</Button>{' '}
             <Button primary disabled={this.state.selectedFile === null}>Open in Buttercup</Button>

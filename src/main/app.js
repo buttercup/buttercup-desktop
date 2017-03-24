@@ -7,6 +7,9 @@ import { isWindows } from './lib/platform';
 import './actions';
 import './windows';
 
+import configureStore from '../shared/store/configure-store';
+const store = configureStore(global.state, 'main');
+
 const windowManager = getWindowManager();
 let appIsReady = false;
 let initialFile = null;

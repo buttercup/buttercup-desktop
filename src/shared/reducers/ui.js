@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
+import { UPDATE_AVAILABLE, UPDATE_INSTALL } from '../actions/types';
 import treeReducer from './tree';
-
-const UPDATE_AVAILABLE = 'buttercup/ui/UPDATE_AVAILABLE';
-const UPDATE_INSTALL = 'buttercup/ui/UPDATE_INSTALL';
 
 const initialState = {
   installing: false,
@@ -29,18 +27,6 @@ function update(state = initialState, action) {
       return state;
   }
 }
-
-export const pushUpdate = updateObj => ({
-  ...updateObj,
-  type: UPDATE_AVAILABLE
-});
-
-export const installUpdate = () => dispatch => {
-  dispatch({
-    type: UPDATE_INSTALL
-  });
-  window.rpc.emit('quit-and-install');
-};
 
 export default combineReducers({
   tree: treeReducer,

@@ -1,7 +1,9 @@
-import { GROUP_ADD_CHILD, GROUP_MOVE } from './groups';
-
-export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
-export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
+import {
+  GROUPS_ADD_CHILD,
+  GROUPS_MOVE,
+  TREE_ADD_EXPANDED_KEY,
+  TREE_SET_EXPANDED_KEYS,
+} from '../actions/types';
 
 const initialTreeState = {
   expandedKeys: []
@@ -19,8 +21,8 @@ function addChild(state, groupId) {
 
 export default function tree(state = initialTreeState, action) {
   switch (action.type) {
-    case GROUP_ADD_CHILD:
-    case GROUP_MOVE:
+    case GROUPS_ADD_CHILD:
+    case GROUPS_MOVE:
       return addChild(state, action.payload.parentId);
     case TREE_ADD_EXPANDED_KEY:
       return addChild(state, action.payload);
@@ -33,13 +35,3 @@ export default function tree(state = initialTreeState, action) {
       return state;
   }
 }
-
-export const setExpandedKeys = keys => ({
-  type: TREE_SET_EXPANDED_KEYS,
-  payload: keys
-});
-
-export const addExpandedKey = key => ({
-  type: TREE_ADD_EXPANDED_KEY,
-  payload: key
-});

@@ -1,12 +1,9 @@
-import { newWorkspace, loadWorkspace } from '../../system/buttercup/archive';
-import { showPasswordDialog } from '../../system/dialog';
+import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
+import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWorkspace } from './workspace';
-
-// Constants ->
-
-export const OPEN = 'buttercup/files/OPEN';
-export const NEW = 'buttercup/files/NEW';
-export const CANCELLED = 'buttercup/files/CANCELLED';
+import {
+  FILES_CANCELLED,
+} from './types';
 
 // Action Creators ->
 
@@ -16,15 +13,15 @@ const fileAction = (filename, dispatch, fn) => {
   }).then(() => {
     dispatch(setWorkspace(filename));
   })
-  .catch(err => {
-    dispatch({
-      type: CANCELLED,
-      payload: {
-        filename,
-        reason: err
-      }
+    .catch(err => {
+      dispatch({
+        type: FILES_CANCELLED,
+        payload: {
+          filename,
+          reason: err
+        }
+      });
     });
-  });
 };
 
 export const createNewFile = filename => dispatch => {
