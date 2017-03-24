@@ -1,8 +1,9 @@
+import path from 'path';
 import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { showPasswordDialog } from '../../renderer/system/dialog';
-import { setWorkspace } from './workspace';
+import { setWindowSize } from '../../renderer/system/utils';
+import { reloadGroups } from './groups';
 import { addArchive, setCurrentArchive } from './archives';
-import { FILES_CANCELLED } from './types';
 
 // Action Creators ->
 
@@ -10,20 +11,13 @@ const fileAction = (filename, dispatch, fn) => {
   showPasswordDialog(password => {
     return fn(filename, password);
   }).then(info => {
-    window.__ID__ = info.id;
+    // @TODO: Crazy Town
     dispatch(setCurrentArchive(info.id));
     dispatch(addArchive(info.id, 'file', '', info.path));
-    dispatch(setWorkspace(filename));
-  })
-    .catch(err => {
-      dispatch({
-        type: FILES_CANCELLED,
-        payload: {
-          filename,
-          reason: err
-        }
-      });
-    });
+    dispatch(reloadGroups());
+    setWindowSize(950, 700, 'dark');
+    window.document.title = `${path.basename(info.path)} - Buttercup`;
+  });
 };
 
 export const createNewFile = filename => dispatch => {

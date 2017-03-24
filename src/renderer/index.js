@@ -5,7 +5,6 @@ import { AppContainer } from 'react-hot-loader';
 import { getInitialStateRenderer } from 'electron-redux';
 import configureStore from '../shared/store/configure-store';
 import * as archiveActions from '../shared/actions/files';
-import * as uiAction from '../shared/actions/ui';
 import * as groupActions from '../shared/actions/groups';
 import { getCurrentEntry } from '../shared/selectors';
 import rpc from './system/rpc';
@@ -65,10 +64,6 @@ rpc.on('import-history-prompt', () => {
     }).catch(() => {
       rpc.emit('import-history-prompt-resp', null);
     });
-});
-
-rpc.on('update-available', updateData => {
-  store.dispatch(uiAction.pushUpdate(updateData));
 });
 
 render(

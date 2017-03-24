@@ -1,11 +1,19 @@
 import { createSelector } from 'reselect';
 import { filterByText, sortByKey, sortRecursivelyByKey } from '../utils/collection';
 
-// Archive
+// Archive ->
 
-export const getAllArchives = state => Object.values(state.archives.byId);
+export const getAllArchives = state => Object.values(state.archives);
+export const getCurrentArchiveId = state => state.currentArchive;
+export const getCurrentArchive = createSelector(
+  state => state.archives,
+  getCurrentArchiveId,
+  (archives, archiveId) => archives[archiveId] || null
+);
+
+// Settings ->
+
 export const getAllSettings = state => state.settingsByArchiveId;
-export const getCurrentArchiveId = state => state.archives.currentArchive;
 export const getCurrentArchiveSettings = createSelector(
   getAllSettings,
   getCurrentArchiveId,

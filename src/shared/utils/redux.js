@@ -9,3 +9,12 @@ export const createLocalAction = type => payload => (dispatch, getState) => {
     }
   });
 };
+
+export const createIdentityReducer = (type, initialState) => (store = initialState, action) => {
+  switch (action.type) {
+    case type:
+      return action.payload;
+    default:
+      return store;
+  }
+};

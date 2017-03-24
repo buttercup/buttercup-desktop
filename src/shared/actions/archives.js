@@ -1,3 +1,4 @@
+import { createAction } from 'redux-actions';
 import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT } from './types';
 
 export const addArchive = (id, type, credentials, path) => ({
@@ -10,12 +11,5 @@ export const addArchive = (id, type, credentials, path) => ({
   }
 });
 
-export const setCurrentArchive = archiveId => ({
-  type: ARCHIVES_SET_CURRENT,
-  payload: archiveId
-});
-
-export const removeArchive = archiveId => ({
-  type: ARCHIVES_REMOVE,
-  payload: archiveId
-});
+export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
+export const removeArchive = createAction(ARCHIVES_REMOVE);

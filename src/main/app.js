@@ -1,14 +1,16 @@
 import { app, Menu } from 'electron';
+import configureStore from '../shared/store/configure-store';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
 import { isWindows } from './lib/platform';
+import { setupActions } from './actions';
+import { setupWindows } from './windows';
 
-import './actions';
-import './windows';
+global.store = configureStore(global.state, 'main');
 
-import configureStore from '../shared/store/configure-store';
-const store = configureStore(global.state, 'main');
+setupWindows();
+setupActions();
 
 const windowManager = getWindowManager();
 let appIsReady = false;

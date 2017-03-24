@@ -3,6 +3,7 @@
 import { autoUpdater } from 'electron';
 import ms from 'ms';
 import pkg from '../../../package.json';
+import { pushUpdate } from '../../shared/actions/update';
 import { isOSX } from './platform';
 
 // accepted values: `osx`, `win32`
@@ -37,9 +38,10 @@ export function startAutoUpdate(win) {
   }
 
   const onupdate = (e, releaseNotes, releaseName) => {
-    rpc.emit('update-available', {
-      releaseNotes, releaseName
-    });
+    global.store.dispatch(pushUpdate({
+      releaseNotes,
+      releaseName
+    }));
   };
 
   autoUpdater.on('update-downloaded', onupdate);

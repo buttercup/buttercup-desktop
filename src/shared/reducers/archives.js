@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import { createIdentityReducer } from '../utils/redux';
 import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT } from '../actions/types';
 
-function archivesReducer(state = [], action) {
+export default function archivesReducer(state = [], action) {
   switch (action.type) {
     case ARCHIVES_ADD:
       return {
@@ -18,16 +18,7 @@ function archivesReducer(state = [], action) {
   }
 }
 
-function currentArchive(state = null, action) {
-  switch (action.type) {
-    case ARCHIVES_SET_CURRENT: 
-      return action.payload;
-    default:
-      return state;
-  }
-}
-
-export default combineReducers({
-  byId: archivesReducer,
-  currentArchive
-});
+export const currentArchive = createIdentityReducer(
+  ARCHIVES_SET_CURRENT,
+  null
+);

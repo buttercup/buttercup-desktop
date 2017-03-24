@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
-// import { installUpdate } from '../../shared/actions/ui';
+import { installUpdate } from '../../shared/actions/update';
+import { getCurrentArchive } from '../../shared/selectors';
 
 export default connect(
   state => ({
-    workspace: state.workspace,
-    update: null, // state.ui.update
+    currentArchive: getCurrentArchive(state),
+    update: state.update,
   }),
   {
-    // installUpdate
+    installUpdate
   }
 )(Workspace, 'Workspace');

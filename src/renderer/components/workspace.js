@@ -4,17 +4,17 @@ import Archive from '../components/archive';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
 
-const Workspace = ({workspace, update, installUpdate}) => {
+const Workspace = ({ currentArchive, update, installUpdate}) => {
   return (
     <div>
-      {(workspace.archive.path === null) ? <Intro/> : <Archive/>}
+      {(currentArchive === null) ? <Intro/> : <Archive/>}
       <UpdateNotice {...update} onClick={() => installUpdate()}/>
     </div>
   );
 };
 
 Workspace.propTypes = {
-  workspace: PropTypes.object,
+  currentArchive: PropTypes.object,
   update: PropTypes.object,
   installUpdate: PropTypes.func
 };

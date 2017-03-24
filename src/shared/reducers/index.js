@@ -1,21 +1,22 @@
 import { combineReducers } from 'redux';
 import { reducer as form } from 'redux-form';
 import groups from './groups';
-import workspace from './workspace';
 import entries from './entries';
 import settingsByArchiveId from './settings';
-import archives from './archives';
+import archives, { currentArchive } from './archives';
+import update from './update';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
     settingsByArchiveId,
     archives,
+    update,
   };
 
   if (scope === 'renderer') {
     reducers = {
       ...reducers,
-      workspace,
+      currentArchive,
       groups,
       entries,
       form,
