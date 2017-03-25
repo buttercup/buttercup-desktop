@@ -13,7 +13,7 @@ const state = loadStateFromDisk();
 const store = configureStore(state, 'main');
 store.subscribe(throttle(() => {
   saveStateToDisk(store.getState());
-}, 200));
+}, 100));
 
 setupWindows(store);
 setupActions(store);

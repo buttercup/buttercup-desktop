@@ -4,7 +4,6 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  installing: false,
   available: false,
   version: null,
   notes: null
@@ -22,7 +21,9 @@ export default function update(state = initialState, action) {
     case UPDATE_INSTALL:
       return {
         ...state,
-        installing: true
+        available: false,
+        version: null,
+        notes: null
       };
     default:
       return state;
