@@ -3,7 +3,6 @@
 import { autoUpdater } from 'electron';
 import ms from 'ms';
 import pkg from '../../../package.json';
-import { pushUpdate } from '../../shared/actions/update';
 import { isOSX } from './platform';
 
 // accepted values: `osx`, `win32`
@@ -30,19 +29,15 @@ function init() {
   hasInitialized = true;
 }
 
-export function startAutoUpdate(store) {
+export function startAutoUpdate(cb) {
   if (!hasInitialized) {
     init();
   }
 
-  const onupdate = (e, releaseNotes, releaseName) => {
-    store.dispatch(pushUpdate({
-      releaseNotes,
-      releaseName
-    }));
-  };
-
-  autoUpdater.on('update-downloaded', onupdate);
+  autoUpdater.on(
+    'update-downloaded',
+    (e, releaseNotes, releaseName) => cb(releaseNotes, releaseName)
+  );
 }
 
 export function installUpdates() {

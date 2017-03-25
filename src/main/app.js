@@ -1,32 +1,18 @@
 import { app, Menu } from 'electron';
-import { throttle } from 'lodash';
+import pify from 'pify';
+import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
-import { loadStateFromDisk, saveStateToDisk } from './lib/prefs';
 import { isWindows } from './lib/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
-const state = loadStateFromDisk();
-const store = configureStore(state, 'main');
-store.subscribe(throttle(() => {
-  saveStateToDisk(store.getState());
-}, 100));
-
-setupWindows(store);
-setupActions(store);
-
+const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 let appIsReady = false;
 let initialFile = null;
-
-if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')({
-    showDevTools: true
-  });
-}
 
 // Crash reporter for alpha and beta releases
 // After we come out of beta, we should be rolling our own
@@ -45,20 +31,22 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const installExtensions = async () => {
-  if (process.env.NODE_ENV === 'development') {
-    const installer = require('electron-devtools-installer');
+  require('electron-debug')({
+    showDevTools: true
+  });
 
-    const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
-    const extensions = [
-      'REACT_DEVELOPER_TOOLS',
-      'REDUX_DEVTOOLS'
-    ];
+  const installer = require('electron-devtools-installer');
 
-    for (const name of extensions) {
-      try {
-        await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-      } catch (err) {}
-    }
+  const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
+  const extensions = [
+    'REACT_DEVELOPER_TOOLS',
+    'REDUX_DEVTOOLS'
+  ];
+
+  for (const name of extensions) {
+    try {
+      await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
+    } catch (err) {}
   }
 };
 
@@ -78,7 +66,24 @@ if (isWindows() && typeof process.argv[1] === 'string') {
 }
 
 app.on('ready', async () => {
-  await installExtensions();
+  if (process.env.NODE_ENV === 'development') {
+    // Install Dev Extensions
+    await installExtensions();
+  }
+
+  // Create Store
+  const state = await storage.get('state');
+  const store = configureStore(state, 'main');
+
+  // Persist Store to Disk
+  store.subscribe(async () => {
+    storage.set('state', store.getState());
+  });
+
+  // Setup Windows & IPC Actions
+  setupWindows(store);
+  setupActions(store);
+
   appIsReady = true;
 
   // Show intro

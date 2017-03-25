@@ -1,5 +1,6 @@
 import { ipcMain as ipc, BrowserWindow } from 'electron';
 import fs from 'fs-extra';
+import { pushUpdate } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
 
@@ -7,7 +8,12 @@ const windowManager = getWindowManager();
 
 export function setupActions(store) {
   if (process.env.NODE_ENV !== 'development') {
-    startAutoUpdate(store);
+    startAutoUpdate((releaseNotes, releaseName) => {
+      store.dispatch(pushUpdate({
+        releaseNotes,
+        releaseName
+      }));
+    });
 
     ipc.on('quit-and-install', () => {
       installUpdates();
