@@ -1,5 +1,4 @@
 const { join } = require('path');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 module.exports = {
   module: {
@@ -32,7 +31,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json', '.scss']
   },
   plugins: [
-    new LodashModuleReplacementPlugin()
   ],
   externals: [
     'buttercup-importer', 'zxcvbn', 'dropbox', 'webdav'

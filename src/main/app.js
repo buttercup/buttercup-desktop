@@ -1,13 +1,19 @@
 import { app, Menu } from 'electron';
+import { throttle } from 'lodash';
 import configureStore from '../shared/store/configure-store';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
+import { loadStateFromDisk, saveStateToDisk } from './lib/prefs';
 import { isWindows } from './lib/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
-const store = configureStore(global.state, 'main');
+const state = loadStateFromDisk();
+const store = configureStore(state, 'main');
+store.subscribe(throttle(() => {
+  saveStateToDisk(store.getState());
+}, 200));
 
 setupWindows(store);
 setupActions(store);

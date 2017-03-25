@@ -12,9 +12,9 @@ const fileAction = (filename, dispatch, fn) => {
     return fn(filename, password);
   }).then(info => {
     // @TODO: Crazy Town
+    dispatch(reloadGroups());
     dispatch(setCurrentArchive(info.id));
     dispatch(addArchive(info.id, 'file', '', info.path));
-    dispatch(reloadGroups());
     setWindowSize(950, 700, 'dark');
     window.document.title = `${path.basename(info.path)} - Buttercup`;
   });
