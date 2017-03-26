@@ -13,7 +13,10 @@ const File = ({filename, onClick, onRemoveClick}) => {
       onContextMenu={e => {
         e.stopPropagation();
         showContextMenu([{
-          label: `Remove ${base} from recents...`,
+          label: `Open ${base}`,
+          click: onClick
+        }, {
+          label: `Remove ${base} from history`,
           click: onRemoveClick
         }]);
       }}
@@ -37,18 +40,28 @@ class RecentFiles extends Component {
   showContextMenu() {
     showContextMenu([
       {
-        label: 'Clear History...',
+        label: 'Clear History',
         click: this.props.onClearClick
       }
     ]);
   }
 
+  renderEmptyState() {
+    return <div className={styles.container}></div>;
+  }
+
   render() {
+    const { recentFiles } = this.props;
+    
+    if (recentFiles.length === 0) {
+      return this.renderEmptyState();
+    }
+
     return (
       <div className={styles.container} onContextMenu={() => this.showContextMenu()}>
-        <h6 className={styles.heading}>Recent Archives:</h6>
+        <h6 className={styles.heading}>History:</h6>
         <ul className={styles.list}>
-          {this.props.recentFiles.map(archive =>
+          {recentFiles.map(archive =>
             <File
               filename={archive.path}
               key={archive.id}
@@ -57,7 +70,7 @@ class RecentFiles extends Component {
               />
           )}
         </ul>
-        <Button onClick={this.props.onClearClick} icon={<HistoryIcon/>}>Clear History</Button>
+        <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon/>}>Clear History</Button>
       </div>
     );
   }

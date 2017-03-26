@@ -1,5 +1,5 @@
 import { createIdentityReducer } from '../utils/redux';
-import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT } from '../actions/types';
+import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT, ARCHIVES_CLEAR } from '../actions/types';
 
 export default function archivesReducer(state = [], action) {
   switch (action.type) {
@@ -13,6 +13,8 @@ export default function archivesReducer(state = [], action) {
       delete nextState[action.payload];
       return nextState;
     }
+    case ARCHIVES_CLEAR:
+      return [];
     default:
       return state;
   }

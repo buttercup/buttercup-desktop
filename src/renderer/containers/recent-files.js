@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { removeArchive } from '../../shared/actions/archives';
-import { getAllArchives } from '../../shared/selectors';
+import { removeArchive, clearArchives } from '../../shared/actions/archives';
 import { openFile } from '../../shared/actions/files';
+import { getAllArchives } from '../../shared/selectors';
 import RecentFiles from '../components/recent-files';
 
 export default connect(
@@ -10,7 +10,7 @@ export default connect(
   }),
   {
     onRemoveClick: removeArchive,
-    onClearClick: () => {}, // @TODO: CLEAR ARCHIVES
+    onClearClick: clearArchives,
     onClick: openFile
   }
 )(RecentFiles);

@@ -1,5 +1,6 @@
 import { app, Menu } from 'electron';
 import pify from 'pify';
+import { throttle } from 'lodash';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import menuTemplate from './config/menu';
@@ -76,9 +77,9 @@ app.on('ready', async () => {
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
-  store.subscribe(async () => {
+  store.subscribe(throttle(() => {
     storage.set('state', store.getState());
-  });
+  }, 100));
 
   // Setup Windows & IPC Actions
   setupWindows(store);
