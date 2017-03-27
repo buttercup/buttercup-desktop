@@ -14,7 +14,7 @@ module.exports = merge(baseConfig, {
   },
 
   output: {
-    publicPath: '../app/'
+    publicPath: '../dist/'
   },
 
   module: {
@@ -48,7 +48,7 @@ module.exports = merge(baseConfig, {
     }),
     // new BabiliPlugin(),
     new ExtractTextPlugin({
-      filename: 'styles/[name].css',
+      filename: '[name].css',
       allChunks: true
     })
   ],

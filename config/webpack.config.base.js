@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         test: /\.(svg|ttf|woff|woff2)$/,
-        loader: 'url-loader',
+        loader: 'file-loader',
         exclude: /node_modules/
       },
       {

@@ -140,7 +140,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "2.0.0-rc.0",
-    "file-loader": "^0.9.0",
+    "file-loader": "^0.10.1",
     "fixed-data-table-2": "^0.7.12",
     "fs-extra": "^0.30.0",
     "fuse.js": "^2.5.0",

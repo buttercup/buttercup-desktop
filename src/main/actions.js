@@ -8,16 +8,20 @@ const windowManager = getWindowManager();
 
 export function setupActions(store) {
   if (process.env.NODE_ENV !== 'development') {
-    startAutoUpdate((releaseNotes, releaseName) => {
-      store.dispatch(pushUpdate({
-        releaseNotes,
-        releaseName
-      }));
-    });
+    try {
+      startAutoUpdate((releaseNotes, releaseName) => {
+        store.dispatch(pushUpdate({
+          releaseNotes,
+          releaseName
+        }));
+      });
 
-    ipc.on('quit-and-install', () => {
-      installUpdates();
-    });
+      ipc.on('quit-and-install', () => {
+        installUpdates();
+      });
+    } catch (err) {
+      console.warn('Auto update failed.');
+    }
   }
 
   ipc.on('read-archive', (event, arg) => {
