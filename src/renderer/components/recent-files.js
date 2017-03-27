@@ -5,6 +5,7 @@ import { Button } from 'buttercup-ui';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
+import EmptyView from './empty-view';
 
 const File = ({filename, onClick, onRemoveClick}) => {
   const { base, dir } = parsePath(filename);
@@ -47,7 +48,11 @@ class RecentFiles extends Component {
   }
 
   renderEmptyState() {
-    return <div className={styles.container}></div>;
+    return (
+      <div className={styles.container}>
+        <EmptyView caption="No archives yet."/>
+      </div>
+    );
   }
 
   render() {

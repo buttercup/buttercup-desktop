@@ -5,8 +5,9 @@ import { Button } from 'buttercup-ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
+import EmptyView from '../empty-view';
+import bench from '../../styles/img/bench.svg';
 import EntryView from './entry-view';
-import EmptyView from './entry-empty';
 
 class Entry extends Component {
   componentWillReceiveProps(nextProps) {
@@ -82,7 +83,7 @@ class Entry extends Component {
 
   renderIdleMode() {
     return {
-      content: <EmptyView/>,
+      content: <EmptyView caption="Select or Create an Entry" imageSrc={bench}/>,
       footer: null
     };
   }
