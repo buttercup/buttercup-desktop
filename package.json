@@ -170,7 +170,7 @@
     "react-hot-loader": "3.0.0-beta.6",
     "react-icons": "^2.2.1",
     "react-redux": "^4.4.6",
-    "react-split-pane": "^0.1.51",
+    "react-split-pane": "^0.1.61",
     "redux": "^3.5.2",
     "redux-actions": "^2.0.1",
     "redux-form": "^6.4.3",

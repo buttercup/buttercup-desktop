@@ -20,11 +20,16 @@ export const getCurrentArchiveSettings = createSelector(
   (settings, archiveId) => settings[archiveId]
 );
 
-// Tree ->
+// UI ->
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
   archive => archive ? archive.ui.treeExpandedKeys : []
+);
+
+export const getColumnSizes = createSelector(
+  getCurrentArchiveSettings,
+  archive => archive ? archive.ui.columnSizes : null
 );
 
 // Entries ->

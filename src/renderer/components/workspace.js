@@ -4,10 +4,17 @@ import Archive from '../components/archive';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
 
-const Workspace = ({ currentArchive, update, installUpdate}) => {
+const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, columnSizes }) => {
   return (
     <div>
-      {(currentArchive === null) ? <Intro/> : <Archive/>}
+      {
+        (currentArchive === null) ?
+          <Intro/> :
+          <Archive
+            columnSizes={columnSizes}
+            onColumnSizeChange={setColumnSize}
+            />
+      }
       <UpdateNotice {...update} onClick={() => installUpdate()}/>
     </div>
   );
@@ -16,7 +23,9 @@ const Workspace = ({ currentArchive, update, installUpdate}) => {
 Workspace.propTypes = {
   currentArchive: PropTypes.object,
   update: PropTypes.object,
-  installUpdate: PropTypes.func
+  columnSizes: PropTypes.object,
+  installUpdate: PropTypes.func,
+  setColumnSize: PropTypes.func,
 };
 
 export default Workspace;

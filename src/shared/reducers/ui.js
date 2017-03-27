@@ -4,6 +4,7 @@ import {
   GROUPS_MOVE,
   TREE_ADD_EXPANDED_KEY,
   TREE_SET_EXPANDED_KEYS,
+  COLUMN_SIZE_SET,
 } from '../actions/types';
 
 function treeExpandedKeys(state = [], action) {
@@ -26,6 +27,22 @@ function treeExpandedKeys(state = [], action) {
   }
 }
 
+function columnSizes(state = {tree: 230, entries: 230}, action) {
+  if (!action.payload || !action.payload.name || !action.payload.size) {
+    return state;
+  }
+  switch (action.type) {
+    case COLUMN_SIZE_SET:
+      return {
+        ...state,
+        [action.payload.name]: action.payload.size
+      };
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   treeExpandedKeys,
+  columnSizes
 });
