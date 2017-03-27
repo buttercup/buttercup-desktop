@@ -6,6 +6,7 @@ import { getInitialStateRenderer } from 'electron-redux';
 import configureStore from '../shared/store/configure-store';
 import * as archiveActions from '../shared/actions/files';
 import * as groupActions from '../shared/actions/groups';
+import * as uiActions from '../shared/actions/ui';
 import { getCurrentEntry } from '../shared/selectors';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
@@ -18,8 +19,6 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
 setWindowSize(870, 550);
-
-window.__ID__ = null;
 
 const initialState = getInitialStateRenderer();
 const store = configureStore(initialState, 'renderer');
@@ -50,6 +49,10 @@ rpc.on('copy-current-password', () => {
   } else if (currentEntry) {
     copyToClipboard(currentEntry.properties.password);
   }
+});
+
+rpc.on('size-change', size => {
+  store.dispatch(uiActions.setWindowSize(size));
 });
 
 rpc.on('import-history', request => {

@@ -32,6 +32,11 @@ export const getColumnSizes = createSelector(
   archive => archive ? archive.ui.columnSizes : null
 );
 
+export const getWindowSize = createSelector(
+  getCurrentArchiveSettings,
+  archive => archive ? archive.ui.windowSize : [950, 700]
+);
+
 // Entries ->
 
 export const getAllEntries = state => state.entries.byId;

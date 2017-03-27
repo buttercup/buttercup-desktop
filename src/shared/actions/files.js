@@ -2,12 +2,13 @@ import path from 'path';
 import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWindowSize } from '../../renderer/system/utils';
+import { getWindowSize } from '../selectors';
 import { reloadGroups } from './groups';
 import { addArchive, setCurrentArchive } from './archives';
 
 // Action Creators ->
 
-const fileAction = (filename, dispatch, fn) => {
+const fileAction = (filename, dispatch, getState, fn) => {
   showPasswordDialog(password => {
     return fn(filename, password);
   }).then(info => {
@@ -15,17 +16,23 @@ const fileAction = (filename, dispatch, fn) => {
     dispatch(reloadGroups());
     dispatch(setCurrentArchive(info.id));
     dispatch(addArchive(info.id, 'file', '', info.path));
-    setWindowSize(950, 700, 'dark');
+    
+    // @TODO: Fix this
+    setTimeout(() => {
+      const [width, height] = getWindowSize(getState());
+      setWindowSize(width, height, 'dark');
+    }, 10);
+
     window.document.title = `${path.basename(info.path)} - Buttercup`;
   });
 };
 
-export const createNewFile = filename => dispatch => {
-  fileAction(filename, dispatch, newWorkspace);
+export const createNewFile = filename => (dispatch, getState) => {
+  fileAction(filename, dispatch, getState, newWorkspace);
 };
 
-export const openFile = filename => dispatch => {
-  fileAction(filename, dispatch, loadWorkspace);
+export const openFile = filename => (dispatch, getState) => {
+  fileAction(filename, dispatch, getState, loadWorkspace);
 };
 
 export const newArchive = () => () => {

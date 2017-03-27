@@ -23,6 +23,7 @@ export const GROUPS_REMOVE = 'buttercup/groups/REMOVE';
 export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
 export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
 export const COLUMN_SIZE_SET = 'buttercup/ui/COLUMN_SIZE_SET';
+export const WINDOW_SIZE_SET = 'buttercup/ui/WINDOW_SIZE_SET';
 
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
 

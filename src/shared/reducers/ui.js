@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
+import { createIdentityReducer } from '../utils/redux';
 import {
   GROUPS_ADD_CHILD,
   GROUPS_MOVE,
   TREE_ADD_EXPANDED_KEY,
   TREE_SET_EXPANDED_KEYS,
   COLUMN_SIZE_SET,
+  WINDOW_SIZE_SET,
 } from '../actions/types';
 
 function treeExpandedKeys(state = [], action) {
@@ -42,7 +44,13 @@ function columnSizes(state = {tree: 230, entries: 230}, action) {
   }
 }
 
+export const windowSize = createIdentityReducer(
+  WINDOW_SIZE_SET,
+  [950, 700]
+);
+
 export default combineReducers({
   treeExpandedKeys,
-  columnSizes
+  columnSizes,
+  windowSize
 });

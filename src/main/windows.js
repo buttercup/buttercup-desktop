@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from 'electron';
+import { throttle } from 'lodash';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
 import { createRPC } from './lib/rpc';
@@ -53,6 +54,10 @@ export function setupWindows() {
         callback(win, rpc);
       }
     });
+
+    win.on('resize', throttle(() => {
+      rpc.emit('size-change', win.getSize());
+    }, 2000));
 
     win.once('closed', () => {
       windowManager.deregister(win);
