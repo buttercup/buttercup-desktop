@@ -2,6 +2,12 @@ import { Workspace, Archive, createCredentials } from 'buttercup-web';
 import { IpcDatasource } from './ipc-datasource';
 
 let __currentWorkspace = null;
+export const archiveTypes = {
+  FILE: 'ipc',
+  DROPBOX: 'dropbox',
+  OWNCLOUD: 'owncloud',
+  WEBDAV: 'webdav'
+};
 
 function createWorkspace(datasource, passwordCredentials) {
   const workspace = new Workspace();
@@ -25,26 +31,35 @@ function createDefaults(datasource, passwordCredentials) {
   return datasource.save(archive, passwordCredentials);
 }
 
-export async function loadWorkspace(filename, password, isNew) {
-  const passwordCredentials = createCredentials.fromPassword(password);
-  const datasource = IpcDatasource.fromObject({
-    type: 'ipc',
-    path: filename
-  });
+function createDatasourceFromConfig(config) {
+  switch (config.type) {
+    case archiveTypes.FILE:
+      return IpcDatasource.fromObject({
+        type: config.type,
+        path: config.path
+      });
+    default:
+      throw new Error('Datasource type has not been recognized.');
+  }
+}
 
-  if (isNew) {
+export async function loadWorkspace(config, masterPassword, isNew) {
+  const passwordCredentials = createCredentials.fromPassword(masterPassword);
+  const datasource = createDatasourceFromConfig(config);
+
+  if (isNew === true) {
     await createDefaults(datasource, passwordCredentials);
   }
 
   const workspace = await createWorkspace(datasource, passwordCredentials);
   __currentWorkspace = {
     instance: workspace,
-    filename
+    config
   };
 
   return {
     id: getArchive().getID(),
-    path: filename
+    ...config
   };
 }
 

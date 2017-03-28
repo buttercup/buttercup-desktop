@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
-import * as archiveActions from '../shared/actions/files';
+import { loadArchiveFromFile } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
 import { getCurrentEntry } from '../shared/selectors';
@@ -23,15 +23,14 @@ const store = configureStore({}, 'renderer');
 
 rpc.on('ready', () => {
   rpc.emit('init');
-  // sallar();
 });
 
 rpc.on('open-file', path => {
-  store.dispatch(archiveActions.openFile(path));
+  store.dispatch(loadArchiveFromFile(path));
 });
 
 rpc.on('new-file', path => {
-  store.dispatch(archiveActions.createNewFile(path));
+  store.dispatch(loadArchiveFromFile(path, true));
 });
 
 rpc.on('is-in-workspace', () => {
@@ -69,7 +68,7 @@ rpc.on('import-history-prompt', () => {
 
 render(
   <AppContainer>
-    <Root store={store} history={history}/>
+    <Root store={store}/>
   </AppContainer>,
   document.getElementById('root')
 );
@@ -86,8 +85,3 @@ if (module.hot) {
     );
   });
 }
-
-window.sallar = () => {
-  const { ipcRenderer } = require('electron');
-  ipcRenderer.send('show-file-manager');
-};

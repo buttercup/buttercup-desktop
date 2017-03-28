@@ -56,9 +56,9 @@ class RecentFiles extends Component {
   }
 
   render() {
-    const { recentFiles } = this.props;
+    const { archives } = this.props;
     
-    if (recentFiles.length === 0) {
+    if (archives.length === 0) {
       return this.renderEmptyState();
     }
 
@@ -66,11 +66,11 @@ class RecentFiles extends Component {
       <div className={styles.container} onContextMenu={() => this.showContextMenu()}>
         <h6 className={styles.heading}>History:</h6>
         <ul className={styles.list}>
-          {recentFiles.map(archive =>
+          {archives.map(archive =>
             <File
               filename={archive.path}
               key={archive.id}
-              onClick={() => this.props.onClick(archive.path)}
+              onClick={() => this.props.onClick(archive)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
               />
           )}
@@ -82,7 +82,7 @@ class RecentFiles extends Component {
 }
 
 RecentFiles.propTypes = {
-  recentFiles: PropTypes.array,
+  archives: PropTypes.array,
   onRemoveClick: PropTypes.func,
   onClearClick: PropTypes.func,
   onClick: PropTypes.func
