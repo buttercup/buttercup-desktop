@@ -2946,14 +2946,6 @@ electron-macos-sign@~1.4.0:
     minimist "^1.2.0"
     plist "^2.0.1"
 
-electron-redux@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/electron-redux/-/electron-redux-1.2.5.tgz#b7a453d28daec41c3d656cca1a7485a983699542"
-  dependencies:
-    debug "^2.3.3"
-    flux-standard-action "^1.0.0"
-    redux "^3.4.0"
-
 electron-rpc@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/electron-rpc/-/electron-rpc-2.0.1.tgz#0495f1dcf32597320f8661190cff2304a07bddc4"
@@ -3635,18 +3627,6 @@ flat-cache@^1.2.1:
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
-
-flux-standard-action@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/flux-standard-action/-/flux-standard-action-0.6.1.tgz#6f34211b94834ea1c3cc30f4e7afad3d0fbf71a2"
-  dependencies:
-    lodash.isplainobject "^3.2.0"
-
-flux-standard-action@^1.0.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/flux-standard-action/-/flux-standard-action-1.2.0.tgz#d2d41612dde4cebddd11a76cfead8e84fc69ebdc"
-  dependencies:
-    lodash "^4.0.0"
 
 fmix@^0.1.0:
   version "0.1.0"
@@ -5097,10 +5077,6 @@ lodash._basecopy@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash._basecopy/-/lodash._basecopy-3.0.1.tgz#8da0e6a876cf344c0ad8a54882111dd3c5c7ca36"
 
-lodash._basefor@^3.0.0:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/lodash._basefor/-/lodash._basefor-3.0.3.tgz#7550b4e9218ef09fad24343b612021c79b4c20c2"
-
 lodash._baseget@^3.0.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/lodash._baseget/-/lodash._baseget-3.7.2.tgz#1b6ae1d5facf3c25532350a13c1197cb8bb674f4"
@@ -5219,14 +5195,6 @@ lodash.isequal@^4.4.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
-lodash.isplainobject@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-3.2.0.tgz#9a8238ae16b200432960cd7346512d0123fbf4c5"
-  dependencies:
-    lodash._basefor "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.keysin "^3.0.0"
-
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -5240,13 +5208,6 @@ lodash.keys@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash.keys/-/lodash.keys-3.1.2.tgz#4dbc0472b156be50a0b286855d1bd0b0c656098a"
   dependencies:
     lodash._getnative "^3.0.0"
-    lodash.isarguments "^3.0.0"
-    lodash.isarray "^3.0.0"
-
-lodash.keysin@^3.0.0:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.keysin/-/lodash.keysin-3.0.8.tgz#22c4493ebbedb1427962a54b445b2c8a767fb47f"
-  dependencies:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
@@ -7050,6 +7011,12 @@ redux-actions@^2.0.1:
     lodash "^4.13.1"
     reduce-reducers "^0.1.0"
 
+redux-electron-store@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/redux-electron-store/-/redux-electron-store-0.4.1.tgz#b9f92b4299be97b0a5920f03c899a7f9285c3e1c"
+  dependencies:
+    lodash "^4.13.1"
+
 redux-form@^6.4.3:
   version "6.5.0"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.5.0.tgz#8c75ea77018afbabaa02f1389cf6b0e10787c5b8"
@@ -7075,17 +7042,11 @@ redux-persist@^3.1.1:
     json-stringify-safe "^5.0.1"
     lodash "^4.11.1"
 
-redux-promise@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/redux-promise/-/redux-promise-0.5.3.tgz#e97e6c9d3bf376eacb79babe6d906da20112d6d8"
-  dependencies:
-    flux-standard-action "^0.6.1"
-
 redux-thunk@^2.1.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
-redux@^3.4.0, redux@^3.5.2:
+redux@^3.5.2:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:

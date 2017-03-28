@@ -7,7 +7,8 @@ export const addArchive = (id, type, credentials, path) => ({
     id,
     type,
     credentials,
-    path
+    path,
+    lastAccessed: (new Date()).getTime()
   }
 });
 

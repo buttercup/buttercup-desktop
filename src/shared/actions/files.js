@@ -8,23 +8,18 @@ import { addArchive, setCurrentArchive } from './archives';
 
 // Action Creators ->
 
-const fileAction = (filename, dispatch, getState, fn) => {
-  showPasswordDialog(password => {
+const fileAction = async (filename, dispatch, getState, fn) => {
+  const info = await showPasswordDialog(password => {
     return fn(filename, password);
-  }).then(info => {
-    // @TODO: Crazy Town
-    dispatch(reloadGroups());
-    dispatch(setCurrentArchive(info.id));
-    dispatch(addArchive(info.id, 'file', '', info.path));
-    
-    // @TODO: Fix this
-    setTimeout(() => {
-      const [width, height] = getWindowSize(getState());
-      setWindowSize(width, height, 'dark');
-    }, 10);
-
-    window.document.title = `${path.basename(info.path)} - Buttercup`;
   });
+
+  dispatch(setCurrentArchive(info.id));
+  dispatch(reloadGroups());
+  dispatch(addArchive(info.id, 'file', '', info.path));
+
+  const [width, height] = getWindowSize(getState());
+  setWindowSize(width, height, 'dark');
+  window.document.title = `${path.basename(info.path)} - Buttercup`;
 };
 
 export const createNewFile = filename => (dispatch, getState) => {

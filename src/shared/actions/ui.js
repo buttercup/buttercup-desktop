@@ -1,4 +1,5 @@
 import { createLocalAction } from '../utils/redux';
+
 import {
   TREE_ADD_EXPANDED_KEY,
   TREE_SET_EXPANDED_KEYS,

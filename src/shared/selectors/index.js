@@ -1,9 +1,14 @@
 import { createSelector } from 'reselect';
-import { filterByText, sortByKey, sortRecursivelyByKey } from '../utils/collection';
+import { filterByText, sortByKey, sortRecursivelyByKey, sortByLastAccessed } from '../utils/collection';
 
 // Archive ->
 
 export const getAllArchives = state => Object.values(state.archives);
+export const getSortedArchives = createSelector(
+  getAllArchives,
+  archives => sortByLastAccessed(archives)
+);
+
 export const getCurrentArchiveId = state => state.currentArchive;
 export const getCurrentArchive = createSelector(
   state => state.archives,

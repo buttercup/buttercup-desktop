@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { removeArchive, clearArchives } from '../../shared/actions/archives';
 import { openFile } from '../../shared/actions/files';
-import { getAllArchives } from '../../shared/selectors';
+import { getSortedArchives } from '../../shared/selectors';
 import RecentFiles from '../components/recent-files';
 
 export default connect(
   state => ({
-    recentFiles: getAllArchives(state)
+    recentFiles: getSortedArchives(state)
   }),
   {
     onRemoveClick: removeArchive,

@@ -2,7 +2,6 @@ import Buttercup from 'buttercup-web';
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { getInitialStateRenderer } from 'electron-redux';
 import configureStore from '../shared/store/configure-store';
 import * as archiveActions from '../shared/actions/files';
 import * as groupActions from '../shared/actions/groups';
@@ -20,8 +19,7 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 window.__defineGetter__('rpc', () => rpc);
 setWindowSize(870, 550);
 
-const initialState = getInitialStateRenderer();
-const store = configureStore(initialState, 'renderer');
+const store = configureStore({}, 'renderer');
 
 rpc.on('ready', () => {
   rpc.emit('init');

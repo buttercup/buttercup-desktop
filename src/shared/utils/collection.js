@@ -21,6 +21,10 @@ export function sortByKey(list, sortKey) {
   return order === 'asc' ? sorted : sorted.reverse();
 }
 
+export function sortByLastAccessed(list) {
+  return sortBy(list, o => o.lastAccessed).reverse();
+}
+
 export function sortRecursivelyByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
     throw new Error('Insufficient data provided for sorting');
