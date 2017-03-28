@@ -3,7 +3,6 @@ import { getCurrentArchiveId } from '../selectors';
 export const createLocalAction = type => payload => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
   if (!archiveId) {
-    console.log('blow');
     return;
   }
   dispatch({

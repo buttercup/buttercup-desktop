@@ -29,14 +29,6 @@ function writeTextFile(filename, content) {
   ipc.sendSync('write-archive', { filename, content });
 }
 
-/**
- * Return a Buttercup workspace
- * using content and password
- * 
- * @param {string} content
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
 function createWorkspace(content, password) {
   const workspace = new Workspace();
   const datasource = new TextDatasource(content);
@@ -56,15 +48,28 @@ function createWorkspace(content, password) {
     });
 }
 
-/**
- * Load a workspace from existing file
- * 
- * @param {string} filename
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
-export function loadWorkspace(filename, password) {
-  const content = readTextFile(filename);
+function createDefaults(filename, password) {
+  const archive = Archive.createWithDefaults();
+  const passwordCredentials = createCredentials.fromPassword(password);
+  const dataSource = new TextDatasource('');
+  
+  return dataSource
+    .save(archive, passwordCredentials)
+    .then(content => {
+      writeTextFile(filename, content);
+      return content;
+    });
+}
+
+export async function loadWorkspace(filename, password, isNew) {
+  let content;
+
+  if (isNew) {
+    content = await createDefaults(filename, password);
+  } else {
+    content = readTextFile(filename);
+  }
+
   return createWorkspace(content, password).then(workspace => {
     __currentWorkspace = {
       instance: workspace,
@@ -75,36 +80,6 @@ export function loadWorkspace(filename, password) {
       path: filename
     };
   });
-}
-
-/**
- * Create a new workspace and write to disk 
- * 
- * @param {string} filename
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
-export function newWorkspace(filename, password) {
-  const archive = Archive.createWithDefaults();
-  const dataSource = new TextDatasource('');
-  const passwordCredentials = createCredentials.fromPassword(password);
-
-  // Save the datasource and load it up.
-  return dataSource
-    .save(archive, passwordCredentials)
-    .then(content => {
-      writeTextFile(filename, content);
-      return createWorkspace(content, password).then(workspace => {
-        __currentWorkspace = {
-          instance: workspace,
-          filename
-        };
-        return {
-          id: archive.getID(),
-          path: filename
-        };
-      });
-    });
 }
 
 export function getWorkspace() {

@@ -1,5 +1,5 @@
 import path from 'path';
-import { newWorkspace, loadWorkspace } from '../../renderer/system/buttercup/archive';
+import { loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWindowSize } from '../../renderer/system/utils';
 import { getWindowSize } from '../selectors';
@@ -8,26 +8,24 @@ import { addArchive, setCurrentArchive } from './archives';
 
 // Action Creators ->
 
-const fileAction = async (filename, dispatch, getState, fn) => {
-  const info = await showPasswordDialog(password => {
-    return fn(filename, password);
-  });
-
-  dispatch(setCurrentArchive(info.id));
+const loadArchive = archive => (dispatch, getState) => {
+  dispatch(setCurrentArchive(archive.id));
   dispatch(reloadGroups());
-  dispatch(addArchive(info.id, 'file', '', info.path));
+  dispatch(addArchive(archive.id, 'file', '', archive.path));
 
   const [width, height] = getWindowSize(getState());
   setWindowSize(width, height, 'dark');
-  window.document.title = `${path.basename(info.path)} - Buttercup`;
+  window.document.title = `${path.basename(archive.path)} - Buttercup`;
 };
 
-export const createNewFile = filename => (dispatch, getState) => {
-  fileAction(filename, dispatch, getState, newWorkspace);
+export const createNewFile = filename => async dispatch => {
+  const archive = await showPasswordDialog(password => loadWorkspace(filename, password, true));
+  dispatch(loadArchive(archive));
 };
 
-export const openFile = filename => (dispatch, getState) => {
-  fileAction(filename, dispatch, getState, loadWorkspace);
+export const openFile = filename => async dispatch => {
+  const archive = await showPasswordDialog(password => loadWorkspace(filename, password));
+  dispatch(loadArchive(archive));
 };
 
 export const newArchive = () => () => {
