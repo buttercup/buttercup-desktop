@@ -16,9 +16,8 @@ export const removeArchive = createAction(ARCHIVES_REMOVE);
 export const clearArchives = createAction(ARCHIVES_CLEAR);
 
 export const loadArchive = payload => async (dispatch, getState) => {
-  const { isNew, ...config } = payload;
   const archive = await showPasswordDialog(
-    password => loadWorkspace(config, password, isNew)
+    password => loadWorkspace(payload, password)
   );
 
   dispatch(setCurrentArchive(archive.id));
@@ -31,10 +30,26 @@ export const loadArchive = payload => async (dispatch, getState) => {
   window.document.title = `${path.basename(archive.path)} - Buttercup`;
 };
 
-export const loadArchiveFromFile = (filename, isNew = false) => dispatch => {
+export const loadArchiveFromFile = (path, isNew = false) => dispatch => {
   dispatch(loadArchive({
     type: archiveTypes.FILE,
-    path: filename,
-    isNew
+    isNew,
+    path,
+    datasource: {
+      path
+    }
+  }));
+};
+
+export const loadArchiveFromOwnCloud = (endpoint, path, credentials, isNew = false) => dispatch => {
+  dispatch(loadArchive({
+    type: archiveTypes.OWNCLOUD,
+    isNew,
+    path,
+    credentials,
+    datasource: {
+      endpoint,
+      path
+    }
   }));
 };

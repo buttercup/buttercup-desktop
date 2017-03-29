@@ -1,5 +1,5 @@
-import { Workspace, Archive, createCredentials } from 'buttercup-web';
-import { IpcDatasource } from './ipc-datasource';
+import { Workspace, Archive, createCredentials, DatasourceAdapter } from 'buttercup-web';
+import './ipc-datasource';
 
 let __currentWorkspace = null;
 export const archiveTypes = {
@@ -12,11 +12,9 @@ export const archiveTypes = {
 function createWorkspace(datasource, passwordCredentials) {
   const workspace = new Workspace();
 
-  // Load the datasource
   return datasource
     .load(passwordCredentials)
     .then(archive => {
-      // Fill up the datasource
       workspace.setPrimaryArchive(
         archive,
         datasource,
@@ -31,30 +29,46 @@ function createDefaults(datasource, passwordCredentials) {
   return datasource.save(archive, passwordCredentials);
 }
 
-function createDatasourceFromConfig(config) {
-  switch (config.type) {
-    case archiveTypes.FILE:
-      return IpcDatasource.fromObject({
-        type: config.type,
-        path: config.path
-      });
-    default:
-      throw new Error('Datasource type has not been recognized.');
+async function parseConfig(config, passwordCredentials) {
+  let { credentials, datasource, encryptedCredentials, isNew, ...rest } = config;
+
+  if (typeof encryptedCredentials === 'string') {
+    credentials = await createCredentials.fromSecureString(encryptedCredentials, passwordCredentials);
+    datasource = credentials.getValueOrFail('datasource');
+  } else {
+    datasource = {
+      type: config.type,
+      ...datasource
+    };
+    encryptedCredentials = createCredentials(rest.type, credentials);
+    encryptedCredentials.setValue('datasource', datasource);
+    encryptedCredentials = await encryptedCredentials.toSecureString(passwordCredentials);
   }
+
+  return {
+    isNew,
+    credentials,
+    datasource,
+    config: {
+      ...rest,
+      encryptedCredentials
+    }
+  };
 }
 
-export async function loadWorkspace(config, masterPassword, isNew) {
+export async function loadWorkspace(masterConfig, masterPassword) {
   const passwordCredentials = createCredentials.fromPassword(masterPassword);
-  const datasource = createDatasourceFromConfig(config);
+  const { isNew, credentials, datasource, config } = await parseConfig(masterConfig, masterPassword);
+  const dsInstance = DatasourceAdapter.objectToDatasource(datasource, credentials);
 
   if (isNew === true) {
-    await createDefaults(datasource, passwordCredentials);
+    await createDefaults(dsInstance, passwordCredentials);
   }
 
-  const workspace = await createWorkspace(datasource, passwordCredentials);
+  const workspace = await createWorkspace(dsInstance, passwordCredentials);
   __currentWorkspace = {
     instance: workspace,
-    config
+    ...config
   };
 
   return {
