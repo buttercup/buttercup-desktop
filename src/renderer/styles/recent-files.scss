@@ -50,6 +50,11 @@
       font-weight: 300;
       font-size: .75em;
       color: $gray-dark;
+
+      > svg {
+        font-size: 14px;
+        vertical-align: -3px !important;
+      }
     }
   }
 }

@@ -53,3 +53,15 @@ export const loadArchiveFromOwnCloud = (endpoint, path, credentials, isNew = fal
     }
   }));
 };
+
+export const loadArchiveFromDropbox = (path, token, isNew = false) => dispatch => {
+  dispatch(loadArchive({
+    type: archiveTypes.DROPBOX,
+    isNew,
+    path,
+    datasource: {
+      token,
+      path
+    }
+  }));
+};

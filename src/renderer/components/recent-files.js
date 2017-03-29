@@ -1,14 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import DeleteIcon from 'react-icons/lib/ti/delete-outline';
 import HistoryIcon from 'react-icons/lib/go/history';
+import CloudIcon from 'react-icons/lib/md/cloud-queue';
+import DropboxIcon from 'react-icons/lib/fa/dropbox';
+import LaptopIcon from 'react-icons/lib/md/laptop-mac';
 import { Button } from 'buttercup-ui';
+import { archiveTypes } from '../system/buttercup/archive';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
 
-const File = ({filename, onClick, onRemoveClick}) => {
-  const { base, dir } = parsePath(filename);
+function getIcon(type) {
+  switch (type) {
+    case archiveTypes.OWNCLOUD:
+    case archiveTypes.WEBDAV:
+      return <CloudIcon/>;
+    case archiveTypes.DROPBOX:
+      return <DropboxIcon/>;
+    default:
+      return <LaptopIcon/>;
+  }
+}
+
+const File = ({archive, onClick, onRemoveClick}) => {
+  const { base, dir } = parsePath(archive.path);
   return (
     <li
       onContextMenu={e => {
@@ -24,7 +40,7 @@ const File = ({filename, onClick, onRemoveClick}) => {
       >
       <div onClick={onClick} className={styles.fileInfo}>
         <span>{base}</span>
-        <span>{dir}</span>
+        <span>{getIcon(archive.type)} {dir}</span>
       </div>
       <span onClick={onRemoveClick} className={styles.remove}><DeleteIcon/></span>
     </li>
@@ -32,7 +48,7 @@ const File = ({filename, onClick, onRemoveClick}) => {
 };
 
 File.propTypes = {
-  filename: PropTypes.string,
+  archive: PropTypes.object,
   onClick: PropTypes.func,
   onRemoveClick: PropTypes.func
 };
@@ -68,7 +84,7 @@ class RecentFiles extends Component {
         <ul className={styles.list}>
           {archives.map(archive =>
             <File
-              filename={archive.path}
+              archive={archive}
               key={archive.id}
               onClick={() => this.props.onClick(archive)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
