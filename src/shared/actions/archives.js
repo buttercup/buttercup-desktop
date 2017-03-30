@@ -1,6 +1,7 @@
 import path from 'path';
 import { createAction } from 'redux-actions';
-import { loadWorkspace, archiveTypes } from '../../renderer/system/buttercup/archive';
+import { loadWorkspace } from '../../renderer/system/buttercup/archive';
+import { archiveTypes } from '../buttercup/types';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWindowSize } from '../../renderer/system/utils';
 import { getWindowSize } from '../selectors';
@@ -30,7 +31,7 @@ export const loadArchive = payload => async (dispatch, getState) => {
   window.document.title = `${path.basename(archive.path)} - Buttercup`;
 };
 
-export const loadArchiveFromFile = (path, isNew = false) => dispatch => {
+export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
   dispatch(loadArchive({
     type: archiveTypes.FILE,
     isNew,
@@ -41,7 +42,7 @@ export const loadArchiveFromFile = (path, isNew = false) => dispatch => {
   }));
 };
 
-export const loadArchiveFromOwnCloud = (endpoint, path, credentials, isNew = false) => dispatch => {
+export const loadArchiveFromOwnCloud = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
   dispatch(loadArchive({
     type: archiveTypes.OWNCLOUD,
     isNew,
@@ -54,7 +55,20 @@ export const loadArchiveFromOwnCloud = (endpoint, path, credentials, isNew = fal
   }));
 };
 
-export const loadArchiveFromDropbox = (path, token, isNew = false) => dispatch => {
+export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
+  dispatch(loadArchive({
+    type: archiveTypes.WEBDAV,
+    isNew,
+    path,
+    credentials,
+    datasource: {
+      endpoint,
+      path
+    }
+  }));
+};
+
+export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
   dispatch(loadArchive({
     type: archiveTypes.DROPBOX,
     isNew,
@@ -64,4 +78,24 @@ export const loadArchiveFromDropbox = (path, token, isNew = false) => dispatch =
       path
     }
   }));
+};
+
+export const loadArchiveFromSource = payload => dispatch => {
+  const { type, ...config } = payload;
+  switch (type) {
+    case archiveTypes.DROPBOX:
+      dispatch(loadArchiveFromDropbox(config));
+      break;
+    case archiveTypes.OWNCLOUD:
+      dispatch(loadArchiveFromOwnCloud(config));
+      break;
+    case archiveTypes.WEBDAV:
+      dispatch(loadArchiveFromOwnCloud(config));
+      break;
+    case archiveTypes.FILE:
+      dispatch(loadArchiveFromFile(config));
+      break;
+    default:
+      return;
+  }
 };

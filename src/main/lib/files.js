@@ -1,5 +1,6 @@
 import path from 'path';
 import { BrowserWindow, dialog } from 'electron';
+import { archiveTypes } from '../../shared/buttercup/types';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
 import { importKeepass } from './buttercup';
@@ -67,8 +68,11 @@ function showSaveDialog(focusedWindow) {
  * @param {BrowserWindow} win
  */
 export function loadFile(filePath, win, isNew = false) {
-  const emitAction = isNew ? 'new-file' : 'open-file';
-  filePath = normalizePath(filePath);
+  const payload = {
+    type: archiveTypes.FILE,
+    path: normalizePath(filePath),
+    isNew
+  };
   if (path.extname(filePath).toLowerCase() !== '.bcup') {
     return;
   }
@@ -77,12 +81,12 @@ export function loadFile(filePath, win, isNew = false) {
   }
   // If there's a window and it's in intro state
   if (win && win.isIntro()) {
-    win.rpc.emit(emitAction, filePath);
+    win.rpc.emit('load-archive', payload);
     return;
   }
   // Otherwise just create a new window
   windowManager.buildWindowOfType('main', (win, rpc) => {
-    rpc.emit(emitAction, filePath);
+    rpc.emit('load-archive', payload);
   });
 }
 

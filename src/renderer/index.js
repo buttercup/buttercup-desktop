@@ -3,7 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
-import { loadArchiveFromFile } from '../shared/actions/archives';
+import { loadArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
 import { getCurrentEntry } from '../shared/selectors';
@@ -25,12 +25,8 @@ rpc.on('ready', () => {
   rpc.emit('init');
 });
 
-rpc.on('open-file', path => {
-  store.dispatch(loadArchiveFromFile(path));
-});
-
-rpc.on('new-file', path => {
-  store.dispatch(loadArchiveFromFile(path, true));
+rpc.on('load-archive', payload => {
+  store.dispatch(loadArchiveFromSource(payload));
 });
 
 rpc.on('is-in-workspace', () => {

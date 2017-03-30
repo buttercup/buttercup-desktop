@@ -2,12 +2,6 @@ import { Workspace, Archive, createCredentials, DatasourceAdapter } from 'butter
 import './ipc-datasource';
 
 let __currentWorkspace = null;
-export const archiveTypes = {
-  FILE: 'ipc',
-  DROPBOX: 'dropbox',
-  OWNCLOUD: 'owncloud',
-  WEBDAV: 'webdav'
-};
 
 function createWorkspace(datasource, passwordCredentials) {
   const workspace = new Workspace();
