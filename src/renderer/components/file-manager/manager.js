@@ -1,28 +1,27 @@
 import path from 'path';
-import webdavFs from 'webdav-fs';
-import anyFs from 'any-fs';
 import React, { Component, PropTypes } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { isButtercupFile } from '../../system/utils';
+import { getFsInstance } from '../../system/auth';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
-
-const afs = anyFs(wfs);
 
 class Manager extends Component {
   static propTypes = {
     containerWidth: PropTypes.number,
     containerHeight: PropTypes.number,
-    onSelectFile: PropTypes.func
+    onSelectFile: PropTypes.func,
+    token: PropTypes.string
   };
 
   state = {
     currentPath: '/',
     contents: [],
     selectedIndex: null,
-    selectedPath: null
+    selectedPath: null,
+    token: null
   };
 
   navigate = index => {
@@ -30,17 +29,18 @@ class Manager extends Component {
     let pathToNavigate = '/';
 
     if (index !== null) {
-      const fileObj = contents[index].name;
+      const fileObj = contents[index];
       if (fileObj.type !== 'directory') {
         return;
       }
       pathToNavigate = path.resolve(currentPath, fileObj.name);
+      console.log(pathToNavigate);
     }
 
     this.setState({ currentPath: pathToNavigate });
     this.setSelectedFile(null);
 
-    afs.readDirectory(pathToNavigate).then(result => {
+    this.fs.readDirectory(pathToNavigate, { mode: 'stat' }).then(result => {
       const files = result.map(item => ({
         name: item.name,
         type: item.isFile() ? 'file' : 'directory',
@@ -57,7 +57,15 @@ class Manager extends Component {
   }
 
   componentDidMount() {
-    this.navigate(null);
+    const { token } = this.props;
+
+    if (token) {
+      this.fs = getFsInstance('dropbox', { token });
+      if (!this.fs) {
+        return;
+      }
+      this.navigate(null);
+    }
   }
 
   handleRowClick = (e, index) => {
@@ -65,6 +73,7 @@ class Manager extends Component {
   }
 
   handleRowDoubleClick = (e, index) => {
+    console.log('hey!', index);
     this.navigate(index);
   }
 
@@ -88,6 +97,8 @@ class Manager extends Component {
           const item = contents[index];
           if (item.type !== 'directory' && !isButtercupFile(item)) {
             return styles.disabled;
+          } else if (item.type === 'directory') {
+            return;
           }
           return selectedIndex === index ? styles.selected : null;
         }}
