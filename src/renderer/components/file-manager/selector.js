@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'buttercup-ui';
 import styles from '../../styles/file-manager';
-import { isButtercupFile } from '../../system/utils';
 import Manager from './manager';
 
 class Selector extends Component {
   static propTypes = {
-    fs: PropTypes.object
+    fs: PropTypes.object,
+    onSelect: PropTypes.func
   };
   
   state = {
@@ -16,7 +16,7 @@ class Selector extends Component {
 
   handleSelectFile = file => {
     this.setState({
-      selectedFile: isButtercupFile(file) ? file : null
+      selectedFile: file
     });
   }
 
@@ -30,7 +30,11 @@ class Selector extends Component {
           <div></div>
           <div>
             <Link to="/"><Button>Nevermind</Button></Link>{' '}
-            <Button primary disabled={this.state.selectedFile === null}>Open in Buttercup</Button>
+            <Button
+              primary
+              disabled={this.state.selectedFile === null}
+              onClick={() => this.props.onSelect(this.state.selectedFile)}
+              >Open in Buttercup</Button>
           </div>
         </div>
       </div>

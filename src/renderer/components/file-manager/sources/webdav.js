@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'buttercup-ui';
 import { getFsInstance } from '../../../system/auth';
+import { emitActionToParentAndClose } from '../../../system/utils';
 import Selector from '../selector';
 
 class Webdav extends Component {
@@ -11,6 +12,19 @@ class Webdav extends Component {
     password: '',
     established: false
   };
+
+  handleSelect = path => {
+    emitActionToParentAndClose('load-archive', {
+      type: 'webdav',
+      path,
+      endpoint: this.state.endpoint,
+      credentials: {
+        username: this.state.username,
+        password: this.state.password
+      },
+      isNew: false
+    });
+  }
 
   handleInputChange = e => {
     this.setState({
@@ -33,7 +47,7 @@ class Webdav extends Component {
   render() {
     if (this.state.established) {
       return (
-        <Selector fs={this.fs}/>
+        <Selector fs={this.fs} onSelect={this.handleSelect}/>
       );
     }
 

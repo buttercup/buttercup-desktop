@@ -32,7 +32,6 @@ class Manager extends Component {
         return;
       }
       pathToNavigate = path.resolve(currentPath, fileObj.name);
-      console.log(pathToNavigate);
     }
 
     this.setState({ currentPath: pathToNavigate });
@@ -69,8 +68,12 @@ class Manager extends Component {
 
   setSelectedFile(index) {
     this.setState({ selectedIndex: index });
-    if (this.props.onSelectFile) {
-      this.props.onSelectFile(this.state.contents[index] || null);
+
+    const file = this.state.contents[index] || null;
+    const { onSelectFile } = this.props;
+
+    if (onSelectFile && file && isButtercupFile(file)) {
+      onSelectFile(path.resolve(this.state.currentPath, file.name));
     }
   }
 

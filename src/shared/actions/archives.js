@@ -90,7 +90,7 @@ export const loadArchiveFromSource = payload => dispatch => {
       dispatch(loadArchiveFromOwnCloud(config));
       break;
     case archiveTypes.WEBDAV:
-      dispatch(loadArchiveFromOwnCloud(config));
+      dispatch(loadArchiveFromWebdav(config));
       break;
     case archiveTypes.FILE:
       dispatch(loadArchiveFromFile(config));

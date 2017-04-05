@@ -45,3 +45,10 @@ export function isButtercupFile(fileObj) {
   }
   return fileObj.type === 'file' && path.extname(fileObj.name).toLowerCase() === '.bcup';
 }
+
+export function emitActionToParentAndClose(name, payload) {
+  const win = remote.getCurrentWindow();
+  const rpc = win.getParentWindow().rpc;
+  rpc.emit(name, payload);
+  win.close();
+}

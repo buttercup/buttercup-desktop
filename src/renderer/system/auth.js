@@ -33,7 +33,7 @@ export function authenticateDropbox() {
 
       if (match !== null && match.length > 0) {
         foundToken = match[1];
-        authWin.close();
+        setTimeout(() => authWin.close(), 200);
       }
     };
 
