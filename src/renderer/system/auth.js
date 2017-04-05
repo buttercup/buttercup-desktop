@@ -1,4 +1,5 @@
 import { remote } from 'electron';
+import url from 'url';
 import webdavFs from 'webdav-fs';
 import dropboxFs from 'dropbox-fs';
 import anyFs from 'any-fs';
@@ -15,7 +16,9 @@ export function authenticateDropbox() {
       show: false,
       webPreferences: {
         nodeIntegration: false,
-        webSecurity: false
+        webSecurity: false,
+        allowRunningInsecureContent: true,
+        allowDisplayingInsecureContent: true
       }
     });
 
@@ -42,7 +45,6 @@ export function authenticateDropbox() {
       } else {
         reject('Auth unsuccessful.');
       }
-      authWin.destroy();
     });
   });
 }
@@ -55,7 +57,7 @@ export function getFsInstance(type, settings) {
       }));
     case 'owncloud':
       return anyFs(webdavFs(
-        `${settings.endpoint}/remote.php/webdav`,
+        url.resolve(settings.endpoint, '/remote.php/webdav'),
         settings.username,
         settings.password
       ));

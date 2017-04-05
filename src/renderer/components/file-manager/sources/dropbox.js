@@ -1,20 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Button } from 'buttercup-ui';
-import { authenticateDropbox } from '../../../system/auth';
-import Manager from '../manager';
-
+import { authenticateDropbox, getFsInstance } from '../../../system/auth';
+import Selector from '../selector';
 
 class Dropbox extends Component {
-
   state = {
-    accessToken: null
+    established: false
   };
 
   handleAuthClick = () => {
     authenticateDropbox()
       .then(token => {
+        this.fs = getFsInstance('dropbox', { token });
         this.setState({
-          accessToken: token
+          established: true
         });
       })
       .catch(err => {
@@ -23,14 +22,9 @@ class Dropbox extends Component {
   }
 
   render() {
-    if (this.state.accessToken) {
+    if (this.state.established) {
       return (
-        <Manager
-          onSelectFile={file => {
-            console.log(file);
-          }}
-          token={this.state.accessToken}
-          />
+        <Selector fs={this.fs}/>
       );
     }
 

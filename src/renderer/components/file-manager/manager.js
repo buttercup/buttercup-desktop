@@ -5,7 +5,6 @@ import { Table, Column, Cell } from 'fixed-data-table-2';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { isButtercupFile } from '../../system/utils';
-import { getFsInstance } from '../../system/auth';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
 class Manager extends Component {
@@ -13,15 +12,14 @@ class Manager extends Component {
     containerWidth: PropTypes.number,
     containerHeight: PropTypes.number,
     onSelectFile: PropTypes.func,
-    token: PropTypes.string
+    fs: PropTypes.object
   };
 
   state = {
     currentPath: '/',
     contents: [],
     selectedIndex: null,
-    selectedPath: null,
-    token: null
+    selectedPath: null
   };
 
   navigate = index => {
@@ -57,15 +55,8 @@ class Manager extends Component {
   }
 
   componentDidMount() {
-    const { token } = this.props;
-
-    if (token) {
-      this.fs = getFsInstance('dropbox', { token });
-      if (!this.fs) {
-        return;
-      }
-      this.navigate(null);
-    }
+    this.fs = this.props.fs;
+    this.navigate(null);
   }
 
   handleRowClick = (e, index) => {
@@ -73,7 +64,6 @@ class Manager extends Component {
   }
 
   handleRowDoubleClick = (e, index) => {
-    console.log('hey!', index);
     this.navigate(index);
   }
 

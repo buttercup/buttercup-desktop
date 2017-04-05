@@ -1,37 +1,18 @@
-import React, { Component } from 'react';
-import { Button } from 'buttercup-ui';
-import { isButtercupFile } from '../../system/utils';
-import styles from '../../styles/file-manager';
-import Manager from './manager';
+import React from 'react';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import '../../styles/workspace.global.scss';
+import Manager from './manager';
+import TypeSelector from './type-selector';
+import Dropbox from './sources/dropbox';
+import Webdav from './sources/webdav';
 
-class FileManager extends Component {
-  state = {
-    selectedFile: null
-  };
-
-  handleSelectFile = file => {
-    this.setState({
-      selectedFile: isButtercupFile(file) ? file : null
-    });
-  }
-
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.managerWrapper}>
-          <Manager onSelectFile={this.handleSelectFile}/>
-        </div>
-        <div className={styles.footer}>
-          <div></div>
-          <div>
-            <Button >Nevermind</Button>{' '}
-            <Button primary disabled={this.state.selectedFile === null}>Open in Buttercup</Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default FileManager;
+export default () => (
+  <Router>
+    <div>
+      <Route exact path="/" component={TypeSelector}/>
+      <Route path="/manager" component={Manager}/>
+      <Route path="/dropbox" component={Dropbox}/>
+      <Route path="/webdav" component={Webdav}/>
+    </div>
+  </Router>
+);
