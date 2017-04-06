@@ -1,17 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Button } from 'buttercup-ui';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
-import { emitActionToParentAndClose } from '../../../system/utils';
-import Selector from '../selector';
+import { isButtercupFile } from '../../../system/utils';
+import Manager from '../manager';
 
 class Dropbox extends Component {
+  static propTypes = {
+    onSelect: PropTypes.func
+  };
+
   state = {
     established: false,
     token: null
   };
 
   handleSelect = path => {
-    emitActionToParentAndClose('load-archive', {
+    if (!path || !isButtercupFile(path)) {
+      this.props.onSelect(null);
+      return;
+    }
+    this.props.onSelect({
       type: 'dropbox',
       token: this.state.token,
       isNew: false,
@@ -33,10 +41,14 @@ class Dropbox extends Component {
       });
   }
 
+  componentDidMount() {
+    this.props.onSelect(null);
+  }
+
   render() {
     if (this.state.established) {
       return (
-        <Selector fs={this.fs} onSelect={this.handleSelect}/>
+        <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
       );
     }
 

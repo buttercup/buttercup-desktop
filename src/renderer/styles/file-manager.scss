@@ -14,36 +14,6 @@
   color: $gray-dark;
 }
 
-.wrapper {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-}
-
-.managerWrapper {
-  flex: 1;
-  display: flex;
-}
-
-.footer {
-  flex: 0 0 50px;
-  padding: $spacing-one;
-  align-items: center;
-  background-color: $gray-light;
-  display: flex;
-  flex-direction: row;
-
-  > div {
-    flex: 0 0 50%;
-
-    &:last-child {
-      text-align: right;
-    }
-  }
-}
-
 :global {
   .public_fixedDataTable_main {
     border-width: 0;
@@ -51,5 +21,4 @@
   .public_fixedDataTableCell_main {
     background-color: transparent !important;
   }
-
 }

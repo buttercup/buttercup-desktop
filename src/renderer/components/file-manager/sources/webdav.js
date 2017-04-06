@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Button } from 'buttercup-ui';
 import { getFsInstance } from '../../../system/auth';
-import { emitActionToParentAndClose } from '../../../system/utils';
-import Selector from '../selector';
+import { isButtercupFile } from '../../../system/utils';
+import Manager from '../manager';
 
 class Webdav extends Component {
+  static propTypes = {
+    onSelect: PropTypes.func
+  };
 
   state = {
     endpoint: '',
@@ -14,7 +17,11 @@ class Webdav extends Component {
   };
 
   handleSelect = path => {
-    emitActionToParentAndClose('load-archive', {
+    if (!path || !isButtercupFile(path)) {
+      this.props.onSelect(null);
+      return;
+    }
+    this.props.onSelect({
       type: 'webdav',
       path,
       endpoint: this.state.endpoint,
@@ -44,10 +51,14 @@ class Webdav extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.onSelect(null);
+  }
+
   render() {
     if (this.state.established) {
       return (
-        <Selector fs={this.fs} onSelect={this.handleSelect}/>
+        <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
       );
     }
 

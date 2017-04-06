@@ -33,19 +33,22 @@ export function authenticateDropbox() {
 
       if (match !== null && match.length > 0) {
         foundToken = match[1];
-        setTimeout(() => authWin.close(), 200);
+        authWin.hide();
       }
     };
 
-    authWin.webContents.on('will-navigate', (e, url) => navigateCb(url));
-    authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) => navigateCb(newUrl));
-    authWin.on('close', () => {
+    const closeCb = () => {
       if (foundToken) {
         resolve(foundToken);
       } else {
         reject('Auth unsuccessful.');
       }
-    });
+    };
+
+    authWin.webContents.on('will-navigate', (e, url) => navigateCb(url));
+    authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) => navigateCb(newUrl));
+    authWin.on('hide', closeCb);
+    authWin.on('close', closeCb);
   });
 }
 

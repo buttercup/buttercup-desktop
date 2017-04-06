@@ -4,7 +4,6 @@ import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
-import { isButtercupFile } from '../../system/utils';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
 class Manager extends Component {
@@ -34,9 +33,6 @@ class Manager extends Component {
       pathToNavigate = path.resolve(currentPath, fileObj.name);
     }
 
-    this.setState({ currentPath: pathToNavigate });
-    this.setSelectedFile(null);
-
     this.fs.readDirectory(pathToNavigate, { mode: 'stat' }).then(result => {
       const files = result.map(item => ({
         name: item.name,
@@ -49,7 +45,11 @@ class Manager extends Component {
         files.unshift({ name: '..', type: 'directory', size: 0, mtime: null });
       }
 
-      this.setState({ contents: files });
+      this.setSelectedFile(null);
+      this.setState({
+        currentPath: pathToNavigate,
+        contents: files
+      });
     });
   }
 
@@ -72,8 +72,8 @@ class Manager extends Component {
     const file = this.state.contents[index] || null;
     const { onSelectFile } = this.props;
 
-    if (onSelectFile && file && isButtercupFile(file)) {
-      onSelectFile(path.resolve(this.state.currentPath, file.name));
+    if (onSelectFile) {
+      onSelectFile(file ? path.resolve(this.state.currentPath, file.name) : null);
     }
   }
 
@@ -87,12 +87,6 @@ class Manager extends Component {
         headerHeight={40}
         rowsCount={contents.length}
         rowClassNameGetter={index => {
-          const item = contents[index];
-          if (item.type !== 'directory' && !isButtercupFile(item)) {
-            return styles.disabled;
-          } else if (item.type === 'directory') {
-            return;
-          }
           return selectedIndex === index ? styles.selected : null;
         }}
         width={containerWidth}
