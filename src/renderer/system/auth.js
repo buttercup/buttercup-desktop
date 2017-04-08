@@ -17,8 +17,7 @@ export function authenticateDropbox() {
       webPreferences: {
         nodeIntegration: false,
         webSecurity: false,
-        allowRunningInsecureContent: true,
-        allowDisplayingInsecureContent: true
+        sandbox: true
       }
     });
 

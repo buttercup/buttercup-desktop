@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Button } from 'buttercup-ui';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
+import { Flex } from '../tools';
 import { isButtercupFile } from '../../../system/utils';
 import Manager from '../manager';
 
@@ -53,7 +54,9 @@ class Dropbox extends Component {
     }
 
     return (
-      <Button onClick={this.handleAuthClick}>Authenticate</Button>
+      <Flex align="center" justify="center" flexAuto>
+        <Button onClick={this.handleAuthClick}>Authenticate</Button>
+      </Flex>
     );
   }
 }

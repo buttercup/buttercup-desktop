@@ -3,14 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import dropboxLogo from '../../styles/img/logos/dropbox.svg';
 import ownCloud from '../../styles/img/logos/owncloud.svg';
-
-const Wrapper = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-`;
+import { Flex } from './tools';
 
 const LogoLink = styled(Link)`
   display: flex;
@@ -19,10 +12,10 @@ const LogoLink = styled(Link)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: 1px solid #ededed;
+  border: 1px solid var(--gray);
   margin: 5px;
   border-radius: 5px;
-  color: #777;
+  color: var(--gray-dark);
   text-decoration: none;
 
   img {
@@ -31,7 +24,7 @@ const LogoLink = styled(Link)`
 `;
 
 const TypeSelector = () => (
-  <Wrapper>
+  <Flex wrap flexAuto align="center" justify="center">
     <LogoLink to="/dropbox">
       <img src={dropboxLogo}/>
     </LogoLink>
@@ -39,7 +32,7 @@ const TypeSelector = () => (
       <img src={ownCloud}/>
     </LogoLink>
     <LogoLink to="/webdav">Generic WebDAV</LogoLink>
-  </Wrapper>
+  </Flex>
 );
 
 export default TypeSelector;
