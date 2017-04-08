@@ -72,7 +72,7 @@ export function setupWindows() {
       height: 450,
       modal: true,
       show: false,
-      resizable: true,
+      resizable: false,
       ...options
     });
 

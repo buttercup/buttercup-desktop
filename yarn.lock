@@ -1758,12 +1758,14 @@ buttercup-importer@~0.7.0:
     kdbxweb "~0.2.1"
     xml2js "~0.4.13"
 
-buttercup-ui@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.3.2.tgz#a2374d0c81362c92b1db17ca3db514dcd427df8d"
+buttercup-ui@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.4.0.tgz#093e5259ad8179290b1a3fa2e0ebd3f907854b16"
   dependencies:
     buttercup-generator "^0.0.2"
     classnames "^2.2.5"
+    filter-react-dom-props "^0.0.2"
+    polished "^1.0.2"
     react "^15.4.2"
     react-dom "^15.4.2"
     react-icons "^2.2.3"
@@ -3574,6 +3576,10 @@ fill-range@^2.1.0:
 filled-array@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/filled-array/-/filled-array-1.1.0.tgz#c3c4f6c663b923459a9aa29912d2d031f1507f84"
+
+filter-react-dom-props@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/filter-react-dom-props/-/filter-react-dom-props-0.0.2.tgz#d5c1e5a89c13534cebe3930a22afa9ae3238813b"
 
 finalhandler@0.5.0:
   version "0.5.0"
@@ -6248,7 +6254,7 @@ pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
 
-polished@^1.0.0:
+polished@^1.0.0, polished@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/polished/-/polished-1.0.2.tgz#8adb00d57c4be81ddd03e0aaa3bafb8a9bdb4057"
 
