@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from 'buttercup-ui';
 import styled from 'styled-components';
 import '../../styles/workspace.global.scss';
-import { emitActionToParentAndClose } from '../../system/utils';
-import { Flex, Box } from './tools';
+import { emitActionToParentAndClose, closeCurrentWindow } from '../../system/utils';
+import { Flex } from './tools';
 import TypeSelector from './type-selector';
 import Dropbox from './sources/dropbox';
 import Webdav from './sources/webdav';
@@ -34,6 +34,10 @@ export default class FileManager extends Component {
     emitActionToParentAndClose('load-archive', this.state.selectedConfig);
   }
 
+  handleClose() {
+    closeCurrentWindow();
+  }
+
   render() {
     return (
       <Router>
@@ -41,13 +45,20 @@ export default class FileManager extends Component {
           <Flex flexAuto>
             <Route exact path="/" component={TypeSelector}/>
             <Route path="/dropbox" render={() => <Dropbox onSelect={this.handleSelectFile}/>}/>
+            <Route path="/owncloud" render={() => <Webdav owncloud onSelect={this.handleSelectFile}/>}/>
             <Route path="/webdav" render={() => <Webdav onSelect={this.handleSelectFile}/>}/>
           </Flex>
           <Footer>
-            <Box width="50%"/>
+            <Flex align="center" width="50%">
+              <Button onClick={this.handleClose}>Cancel</Button>
+            </Flex>
             <Flex justify="flex-end" align="center" width="50%">
               <ButtonRow>
-                <Link to="/"><Button>Nevermind</Button></Link>
+                <NavLink
+                  exact
+                  to="/"
+                  activeStyle={{display: 'none'}}
+                  ><Button transparent>Go Back</Button></NavLink>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}

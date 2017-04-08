@@ -1,12 +1,24 @@
 import React, { Component, PropTypes } from 'react';
-import { Button } from 'buttercup-ui';
+import InfoIcon from 'react-icons/lib/md/info-outline';
+import { Button, SmallType, Input } from 'buttercup-ui';
+import styled from 'styled-components';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
+import { Flex } from '../tools';
 import Manager from '../manager';
+
+const Form = styled.form`
+  width: 80%;
+  
+  input {
+    margin-bottom: var(--spacing-half);
+  }
+`;
 
 class Webdav extends Component {
   static propTypes = {
-    onSelect: PropTypes.func
+    onSelect: PropTypes.func,
+    owncloud: PropTypes.bool
   };
 
   state = {
@@ -22,7 +34,7 @@ class Webdav extends Component {
       return;
     }
     this.props.onSelect({
-      type: 'webdav',
+      type: this.props.owncloud ? 'owncloud' : 'webdav',
       path,
       endpoint: this.state.endpoint,
       credentials: {
@@ -40,7 +52,7 @@ class Webdav extends Component {
   }
 
   handleConnect = () => {
-    const fs = getFsInstance('webdav', this.state);
+    const fs = getFsInstance(this.props.owncloud ? 'owncloud' : 'webdav', this.state);
     fs.readDirectory('/').then(() => {
       this.fs = fs;
       this.setState({
@@ -58,17 +70,48 @@ class Webdav extends Component {
   render() {
     if (this.state.established) {
       return (
-        <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
+        <Flex flexAuto>
+          <Manager fs={this.fs} onSelectFile={this.handleSelect} />
+        </Flex>
       );
     }
 
+    const title = this.props.owncloud ? 'OwnCloud' : 'WebDAV';
+
     return (
-      <form>
-        <input type="text" name="endpoint" onChange={this.handleInputChange} value={this.state.endpoint}/>
-        <input type="text" name="username" onChange={this.handleInputChange} value={this.state.username}/>
-        <input type="password" name="password" onChange={this.handleInputChange} value={this.state.password}/>
-        <Button onClick={this.handleConnect}>Connect</Button>
-      </form>
+      <Flex align="center" justify="center" flexColumn flexAuto>
+        <h2>Connect to {title} Server</h2>
+        <Form>
+          <Input
+            bordered
+            type="text"
+            name="endpoint"
+            placeholder="https://..."
+            onChange={this.handleInputChange}
+            value={this.state.endpoint}
+            />
+          <Input
+            bordered
+            type="text"
+            name="username"
+            placeholder={`${title} Username...`}
+            onChange={this.handleInputChange}
+            value={this.state.username}
+            />
+          <Input
+            bordered
+            type="password"
+            name="password"
+            placeholder={`${title} Password...`}
+            onChange={this.handleInputChange}
+            value={this.state.password}
+            />
+          <Button onClick={this.handleConnect} full primary>Connect</Button>
+          <SmallType border center>
+            <InfoIcon /> Enter your {title} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.
+          </SmallType>
+        </Form>
+      </Flex>
     );
   }
 }

@@ -13,6 +13,10 @@ const DropboxButton = styled(Button)`
   color: #fff !important;
 `;
 
+const Wrapper = styled(Center)`
+  width: 80%;
+`;
+
 class Dropbox extends Component {
   static propTypes = {
     onSelect: PropTypes.func
@@ -65,7 +69,7 @@ class Dropbox extends Component {
 
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
-        <Center>
+        <Wrapper>
           <h2>Connect to Dropbox</h2>
           <DropboxButton
             large
@@ -76,7 +80,7 @@ class Dropbox extends Component {
             <InfoIcon/> Connect Buttercup to your Dropbox account to read and save your archives.<br/>
             We won't save your Dropbox username or password.
           </SmallType>
-        </Center>
+        </Wrapper>
       </Flex>
     );
   }

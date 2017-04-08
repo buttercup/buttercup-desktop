@@ -49,3 +49,7 @@ export function emitActionToParentAndClose(name, payload) {
   rpc.emit(name, payload);
   win.close();
 }
+
+export function closeCurrentWindow() {
+  remote.getCurrentWindow().close();
+}
