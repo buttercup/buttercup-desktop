@@ -1,9 +1,17 @@
 import React, { Component, PropTypes } from 'react';
-import { Button } from 'buttercup-ui';
+import styled from 'styled-components';
+import DropboxIcon from 'react-icons/lib/fa/dropbox';
+import InfoIcon from 'react-icons/lib/md/info-outline';
+import { Button, SmallType, Center } from 'buttercup-ui';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
 import { Flex } from '../tools';
 import { isButtercupFile } from '../../../system/utils';
 import Manager from '../manager';
+
+const DropboxButton = styled(Button)`
+  background-color: #007ee5 !important;
+  color: #fff !important;
+`;
 
 class Dropbox extends Component {
   static propTypes = {
@@ -38,7 +46,7 @@ class Dropbox extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
+        console.error(err);
       });
   }
 
@@ -49,13 +57,26 @@ class Dropbox extends Component {
   render() {
     if (this.state.established) {
       return (
-        <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
+        <Flex flexAuto>
+          <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
+        </Flex>
       );
     }
 
     return (
-      <Flex align="center" justify="center" flexAuto>
-        <Button onClick={this.handleAuthClick}>Authenticate</Button>
+      <Flex align="center" justify="center" flexColumn flexAuto>
+        <Center>
+          <h2>Connect to Dropbox</h2>
+          <DropboxButton
+            large
+            onClick={this.handleAuthClick}
+            icon={<DropboxIcon/>}
+            >Authenticate with Dropbox</DropboxButton>
+          <SmallType border>
+            <InfoIcon/> Connect Buttercup to your Dropbox account to read and save your archives.<br/>
+            We won't save your Dropbox username or password.
+          </SmallType>
+        </Center>
       </Flex>
     );
   }

@@ -840,6 +840,12 @@ babel-plugin-minify-type-constructors@^0.0.3:
   dependencies:
     babel-helper-is-void-0 "^0.0.1"
 
+babel-plugin-polished@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-polished/-/babel-plugin-polished-1.0.3.tgz#ef50944d251a09f1d86eace0ed0686c640253134"
+  dependencies:
+    polished "^1.0.0"
+
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
@@ -6241,6 +6247,10 @@ plur@^2.0.0, plur@^2.1.2:
 pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
+
+polished@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-1.0.2.tgz#8adb00d57c4be81ddd03e0aaa3bafb8a9bdb4057"
 
 portfinder@^1.0.9:
   version "1.0.12"

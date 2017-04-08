@@ -66,12 +66,6 @@ class Copyable extends Component {
           {type === 'password' ? this.renderPassword(children) : children}
         </div>
         <div className={styles.buttons}>
-          <Button
-            icon={<CopyIcon/>}
-            title="Copy"
-            className={styles.button}
-            onClick={() => this.handleCopy()}
-            />
           {(type || '').toLowerCase() === 'password' &&
             <Button
               icon={this.state.concealed ? <EyeIcon/> : <EyeSlashIcon/>}
@@ -79,6 +73,12 @@ class Copyable extends Component {
               className={styles.button}
               onClick={() => this.handleReveal()}
               />}
+          <Button
+            icon={<CopyIcon/>}
+            title="Copy"
+            className={styles.button}
+            onClick={() => this.handleCopy()}
+            />
         </div>
       </div>
     );
