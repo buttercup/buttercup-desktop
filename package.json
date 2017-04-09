@@ -169,7 +169,7 @@
     "sass-loader": "^4.0.2",
     "spectron": "^3.5.0",
     "style-loader": "^0.13.1",
-    "sweetalert2": "^5.3.8",
+    "sweetalert2": "^6.6.0",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.3",
     "webpack": "2.2.0",
