@@ -1,5 +1,6 @@
 import path from 'path';
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { Input } from 'buttercup-ui';
 import { Cell } from 'fixed-data-table-2';
 import humanize from 'humanize';
 import Icon from '../icon';
@@ -14,12 +15,81 @@ const propTypes = {
   className: PropTypes.any
 };
 
-export const TextCell = ({ rowIndex, data, col, ...props }) => (
-  <Cell className={styles.cell} {...props}>
-    {data[rowIndex][col]}
-  </Cell>
-);
-TextCell.propTypes = propTypes;
+class NewFileInput extends Component {
+  state = {
+    name: ''
+  };
+
+  static propTypes = {
+    onSaveFile: PropTypes.func,
+    onDismissFile: PropTypes.func
+  };
+
+  handleChange = e => {
+    this.setState({
+      name: e.target.value
+    });
+  }
+
+  handleBlur = () => {
+    this.props.onDismissFile();
+  }
+
+  handleSubmit = () => {
+    this.props.onSaveFile(this.state.name);
+  }
+
+  handleKeyup = e => {
+    switch (e.which) {
+      case 27: // ESC Key
+        this.handleBlur();
+        break;
+      case 13: // Return Key
+        this.handleSubmit();
+        break;
+      default:
+        break;
+    }
+  }
+
+  componentDidMount() {
+    if (this.ref) {
+      this.ref.select();
+    }
+  }
+
+  render() {
+    return (
+      <Input
+        onChange={this.handleChange}
+        onKeyUp={this.handleKeyup}
+        onBlur={this.handleBlur}
+        value={this.state.name}
+        innerRef={ref => {
+          this.ref = ref;
+        }}
+        />
+    );
+  }
+}
+
+export const TextCell = ({ rowIndex, data, col, onSaveFile, onDismissFile, ...props }) => {
+  const item = data[rowIndex];
+  if (item.isNew) {
+    return <NewFileInput onSaveFile={onSaveFile} onDismissFile={onDismissFile} />;
+  }
+  return (
+    <Cell className={styles.cell} {...props}>
+      {item[col]}
+    </Cell>
+  );
+};
+
+TextCell.propTypes = {
+  ...propTypes,
+  onSaveFile: PropTypes.func,
+  handleDismissFile: PropTypes.func
+};
 
 export const DateCell = ({ rowIndex, data, ...props }) => (
   <Cell className={styles.cell} {...props}>
@@ -30,7 +100,7 @@ DateCell.propTypes = propTypes;
 
 export const SizeCell = ({ rowIndex, data, ...props }) => (
   <Cell className={styles.cell} {...props}>
-    {data[rowIndex].size > 0 ? humanize.filesize(data[rowIndex].size) : null}
+    {humanize.filesize(data[rowIndex].size)}
   </Cell>
 );
 SizeCell.propTypes = propTypes;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from 'buttercup-ui';
 import { Flex } from 'styled-flexbox';
@@ -19,9 +19,27 @@ const Footer = styled(Flex)`
   background-color: var(--gray-light);
 `;
 
+const PathRenderer = ({ pathName, ...props }) => {
+  switch (pathName) {
+    case '/dropbox':
+      return <Dropbox {...props}/>;
+    case '/owncloud':
+      return <Webdav owncloud {...props}/>;
+    case '/webdav':
+      return <Webdav owncloud {...props}/>;
+    default:
+      return null;
+  }
+};
+
+PathRenderer.propTypes = {
+  pathName: PropTypes.string
+};
+
 export default class FileManager extends Component {
   state = {
-    selectedConfig: null
+    selectedConfig: null,
+    creatable: false
   };
 
   handleSelectFile = config => {
@@ -34,8 +52,28 @@ export default class FileManager extends Component {
     emitActionToParentAndClose('load-archive', this.state.selectedConfig);
   }
 
+  handleCreateClick = () => {
+    document.dispatchEvent(new Event('new-archive-clicked'));
+  }
+
+  toggleCreateButton = toggle => {
+    this.setState({
+      creatable: toggle
+    });
+  }
+
   handleClose() {
     closeCurrentWindow();
+  }
+
+  renderPath = ({ match }) => {
+    return (
+      <PathRenderer
+        pathName={match.path}
+        onSelect={this.handleSelectFile} 
+        toggleCreateButton={this.toggleCreateButton}
+        />
+    );
   }
 
   render() {
@@ -44,21 +82,29 @@ export default class FileManager extends Component {
         <Wrapper flexAuto flexColumn>
           <Flex flexAuto>
             <Route exact path="/" component={TypeSelector}/>
-            <Route path="/dropbox" render={() => <Dropbox onSelect={this.handleSelectFile}/>}/>
-            <Route path="/owncloud" render={() => <Webdav owncloud onSelect={this.handleSelectFile}/>}/>
-            <Route path="/webdav" render={() => <Webdav onSelect={this.handleSelectFile}/>}/>
+            <Route path="/dropbox" render={this.renderPath} />
+            <Route path="/webdav" render={this.renderPath} />
+            <Route path="/owncloud" render={this.renderPath} />
           </Flex>
           <Footer>
             <Flex align="center" width="50%">
-              <Button onClick={this.handleClose}>Cancel</Button>
-            </Flex>
-            <Flex justify="flex-end" align="center" width="50%">
               <ButtonRow>
+                <Button onClick={this.handleClose}>Cancel</Button>
                 <NavLink
                   exact
                   to="/"
-                  activeStyle={{display: 'none'}}
-                  ><Button transparent>Go Back</Button></NavLink>
+                  activeStyle={{ display: 'none' }}
+                  >
+                  <Button>Go Back</Button>
+                </NavLink>
+              </ButtonRow>
+            </Flex>
+            <Flex justify="flex-end" align="center" width="50%">
+              <ButtonRow>
+                <Button
+                  disabled={!this.state.creatable}
+                  onClick={this.handleCreateClick}
+                  >New Archive</Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}

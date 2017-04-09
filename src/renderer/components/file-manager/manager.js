@@ -11,6 +11,7 @@ class Manager extends Component {
     containerWidth: PropTypes.number,
     containerHeight: PropTypes.number,
     onSelectFile: PropTypes.func,
+    toggleCreateButton: PropTypes.func,
     fs: PropTypes.object
   };
 
@@ -53,9 +54,34 @@ class Manager extends Component {
     });
   }
 
+  handleCreateNewFile = () => {
+    const { contents } = this.state;
+    this.setState({
+      contents: [
+        {
+          name: 'untitled.bcup',
+          type: 'file',
+          size: 0,
+          mtime: null,
+          isNew: true
+        },
+        ...contents
+      ]
+    });
+  };
+
   componentDidMount() {
     this.fs = this.props.fs;
     this.navigate(null);
+    this.props.toggleCreateButton(true);
+
+    // I am so sorry :(
+    document.addEventListener('new-archive-clicked', this.handleCreateNewFile);
+  }
+
+  componentWillUnmount() {
+    this.props.toggleCreateButton(false);
+    document.removeEventListener('new-archive-clicked', this.handleCreateNewFile);
   }
 
   handleRowClick = (e, index) => {
@@ -64,6 +90,28 @@ class Manager extends Component {
 
   handleRowDoubleClick = (e, index) => {
     this.navigate(index);
+  }
+
+  handleSaveFile = fileName => {
+    this.setState({
+      contents: this.state.contents.map(item => {
+        if (item.isNew) {
+          return {
+            ...item,
+            name: `${fileName}.bcup`,
+            isNew: false,
+            mtime: (new Date()).getTime()
+          };
+        }
+        return item;
+      })
+    });
+  }
+
+  handleDismissFile = () => {
+    this.setState({
+      contents: this.state.contents.filter(item => !item.isNew)
+    });
   }
 
   setSelectedFile(index) {
@@ -104,7 +152,14 @@ class Manager extends Component {
         <Column
           columnKey="name"
           header={<Cell>Name</Cell>}
-          cell={<TextCell data={contents} col="name"/>}
+          cell={
+            <TextCell
+              data={contents}
+              col="name"
+              onSaveFile={this.handleSaveFile}
+              onDismissFile={this.handleDismissFile}
+              />
+          }
           fixed
           flexGrow={2}
           width={200}
