@@ -19,7 +19,9 @@ const Wrapper = styled(Center)`
 
 class Dropbox extends Component {
   static propTypes = {
-    onSelect: PropTypes.func
+    onSelect: PropTypes.func,
+    onCreateClick: PropTypes.func,
+    toggleCreateButton: PropTypes.func
   };
 
   state = {
@@ -27,16 +29,16 @@ class Dropbox extends Component {
     token: null
   };
 
-  handleSelect = path => {
-    if (!path || !isButtercupFile(path)) {
+  handleSelect = (filePath, isNew) => {
+    if (!filePath || !isButtercupFile(filePath)) {
       this.props.onSelect(null);
       return;
     }
     this.props.onSelect({
       type: 'dropbox',
       token: this.state.token,
-      isNew: false,
-      path
+      path: filePath,
+      isNew
     });
   }
 
@@ -62,7 +64,11 @@ class Dropbox extends Component {
     if (this.state.established) {
       return (
         <Flex flexAuto>
-          <Manager fs={this.fs} onSelectFile={this.handleSelect}/>
+          <Manager
+            fs={this.fs}
+            onSelectFile={this.handleSelect}
+            toggleCreateButton={this.props.toggleCreateButton}
+            />
         </Flex>
       );
     }

@@ -75,7 +75,7 @@ class NewFileInput extends Component {
 
 export const TextCell = ({ rowIndex, data, col, onSaveFile, onDismissFile, ...props }) => {
   const item = data[rowIndex];
-  if (item.isNew) {
+  if (item.editing) {
     return <NewFileInput onSaveFile={onSaveFile} onDismissFile={onDismissFile} />;
   }
   return (

@@ -6,6 +6,18 @@ import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
+function sortContent(list) {
+  const folders = list.filter(item => item.type === 'directory');
+  const files = list.filter(item => item.type === 'file' && !item.editing);
+  const newFile = list.filter(item => item.editing);
+
+  return [
+    ...folders,
+    ...newFile,
+    ...files
+  ];
+}
+
 class Manager extends Component {
   static propTypes = {
     containerWidth: PropTypes.number,
@@ -39,7 +51,8 @@ class Manager extends Component {
         name: item.name,
         type: item.isFile() ? 'file' : 'directory',
         size: item.size,
-        mtime: item.mtime
+        mtime: item.mtime,
+        isNew: false
       }));
 
       if (pathToNavigate !== '/') {
@@ -49,7 +62,7 @@ class Manager extends Component {
       this.setSelectedFile(null);
       this.setState({
         currentPath: pathToNavigate,
-        contents: files
+        contents: sortContent(files)
       });
     });
   }
@@ -57,16 +70,17 @@ class Manager extends Component {
   handleCreateNewFile = () => {
     const { contents } = this.state;
     this.setState({
-      contents: [
+      contents: sortContent([
         {
           name: 'untitled.bcup',
           type: 'file',
           size: 0,
           mtime: null,
-          isNew: true
+          isNew: true,
+          editing: true
         },
         ...contents
-      ]
+      ])
     });
   };
 
@@ -85,6 +99,9 @@ class Manager extends Component {
   }
 
   handleRowClick = (e, index) => {
+    if (this.state.contents.findIndex(item => item.editing) > -1) {
+      return;
+    }
     this.setSelectedFile(index);
   }
 
@@ -99,7 +116,7 @@ class Manager extends Component {
           return {
             ...item,
             name: `${fileName}.bcup`,
-            isNew: false,
+            editing: false,
             mtime: (new Date()).getTime()
           };
         }
@@ -121,13 +138,17 @@ class Manager extends Component {
     const { onSelectFile } = this.props;
 
     if (onSelectFile) {
-      onSelectFile(file ? path.resolve(this.state.currentPath, file.name) : null);
+      onSelectFile(
+        file ? path.resolve(this.state.currentPath, file.name) : null,
+        file ? file.isNew || false : null
+      );
     }
   }
 
   render() {
     const { containerWidth, containerHeight } = this.props;
     const { contents, selectedIndex } = this.state;
+    const scrollIndex = contents.findIndex(item => item.editing);
 
     return (
       <Table
@@ -137,6 +158,7 @@ class Manager extends Component {
         rowClassNameGetter={index => {
           return selectedIndex === index ? styles.selected : null;
         }}
+        scrollToRow={scrollIndex}
         width={containerWidth}
         height={containerHeight}
         onRowClick={this.handleRowClick}

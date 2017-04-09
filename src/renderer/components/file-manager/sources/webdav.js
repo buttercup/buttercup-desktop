@@ -18,6 +18,7 @@ const Form = styled.form`
 class Webdav extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
+    toggleCreateButton: PropTypes.func,
     owncloud: PropTypes.bool
   };
 
@@ -28,20 +29,20 @@ class Webdav extends Component {
     established: false
   };
 
-  handleSelect = path => {
-    if (!path || !isButtercupFile(path)) {
+  handleSelect = (filePath, isNew) => {
+    if (!filePath || !isButtercupFile(filePath)) {
       this.props.onSelect(null);
       return;
     }
     this.props.onSelect({
       type: this.props.owncloud ? 'owncloud' : 'webdav',
-      path,
+      path: filePath,
       endpoint: this.state.endpoint,
       credentials: {
         username: this.state.username,
         password: this.state.password
       },
-      isNew: false
+      isNew
     });
   }
 
@@ -71,7 +72,11 @@ class Webdav extends Component {
     if (this.state.established) {
       return (
         <Flex flexAuto>
-          <Manager fs={this.fs} onSelectFile={this.handleSelect} />
+          <Manager
+            fs={this.fs}
+            onSelectFile={this.handleSelect}
+            toggleCreateButton={this.props.toggleCreateButton}
+            />
         </Flex>
       );
     }
