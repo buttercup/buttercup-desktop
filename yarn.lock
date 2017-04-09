@@ -6641,7 +6641,7 @@ promise@~2.0:
   dependencies:
     is-promise "~1"
 
-prop-types@^15.5.2:
+prop-types@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.4.tgz#2ed3692716a5060f8cc020946d8238e7419d92c0"
   dependencies:
@@ -6888,15 +6888,6 @@ react@^15.4.0, react@^15.4.2:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-
-react@^15.5.3:
-  version "15.5.3"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.5.3.tgz#84055382c025dec4e3b902bb61a8697cc79c1258"
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.2"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
@@ -7853,11 +7844,11 @@ styled-components@^1.4.3, styled-components@^1.4.4:
     is-plain-object "^2.0.1"
     supports-color "^3.1.2"
 
-styled-flexbox@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/styled-flexbox/-/styled-flexbox-0.1.0.tgz#ee53a937b4ad6f113aa99d48461a756c6feedef1"
+styled-flexbox@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/styled-flexbox/-/styled-flexbox-0.1.2.tgz#b884fa2fe06bde50213abf1a05d40bf8439c0e82"
   dependencies:
-    react "^15.5.3"
+    prop-types "^15.5.4"
     styled-components "^1.4.4"
 
 sumchecker@^1.2.0:
