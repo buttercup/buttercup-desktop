@@ -26,7 +26,7 @@ const PathRenderer = ({ pathName, ...props }) => {
     case '/owncloud':
       return <Webdav owncloud {...props}/>;
     case '/webdav':
-      return <Webdav owncloud {...props}/>;
+      return <Webdav {...props}/>;
     default:
       return null;
   }
@@ -64,6 +64,14 @@ export default class FileManager extends Component {
 
   handleClose() {
     closeCurrentWindow();
+  }
+
+  componentDidMount() {
+    document.addEventListener('keyup', e => {
+      if (e.which === 27 && e.target.tagName.toLowerCase() !== 'input') {
+        this.handleClose();
+      }
+    });
   }
 
   renderPath = ({ match }) => {

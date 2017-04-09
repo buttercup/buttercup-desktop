@@ -40,6 +40,7 @@ class NewFileInput extends Component {
   }
 
   handleKeyup = e => {
+    e.stopPropagation();
     switch (e.which) {
       case 27: // ESC Key
         this.handleBlur();
