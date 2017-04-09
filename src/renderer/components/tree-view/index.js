@@ -103,8 +103,8 @@ class TreeView extends Component {
     this.props.onMoveGroup(dragKey, dropKey, info.dropToGap);
   }
 
-  handleSelect = ([selectedGroupId]) => {
-    if (typeof selectedGroupId === 'string') {
+  handleSelect = ([selectedGroupId], { node }) => {
+    if (typeof selectedGroupId === 'string' && !node.props.isNew) {
       this.props.onGroupSelect(selectedGroupId);
     }
   }
@@ -121,6 +121,7 @@ class TreeView extends Component {
         return (
           <TreeNode
             isTrash={node.isTrash}
+            isNew={node.isNew}
             key={node.id}
             className={cx({
               'is-trash': node.isTrash,
@@ -130,10 +131,11 @@ class TreeView extends Component {
             title={
               <TreeLabel
                 {...node}
-                {...this.props}
                 onRightClick={e => this.handleRightClick(node, groups, e)}
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
+                onSaveClick={this.props.onSaveClick}
+                onDismissClick={this.props.onDismissClick}
                 />
             }
             >
@@ -178,6 +180,8 @@ TreeView.propTypes = {
   groups: PropTypes.array,
   sortMode: PropTypes.string,
   onRemoveClick: PropTypes.func,
+  onSaveClick: PropTypes.func,
+  onDismissClick: PropTypes.func,
   onAddClick: PropTypes.func,
   onGroupSelect: PropTypes.func,
   onEmptyTrash: PropTypes.func,

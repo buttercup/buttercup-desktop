@@ -15,6 +15,7 @@ export default connect(
     onAddClick: groupTools.addGroup,
     onRemoveClick: groupTools.removeGroup,
     onSaveClick: groupTools.saveGroupTitle,
+    onDismissClick: groupTools.dismissNewGroup,
     onEmptyTrash: groupTools.emptyTrash,
     onMoveGroup: groupTools.moveGroupToParent,
     onGroupSelect: groupTools.loadGroup,

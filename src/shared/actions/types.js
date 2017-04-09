@@ -14,7 +14,8 @@ export const FILES_NEW = 'buttercup/files/NEW';
 export const FILES_CANCELLED = 'buttercup/files/CANCELLED';
 
 export const GROUPS_SELECTED = 'buttercup/groups/SELECTED';
-export const GROUPS_ADD_CHILD = 'buttercup/groups/ADD_CHILD';
+export const GROUPS_ADD_NEW_CHILD = 'buttercup/groups/ADD_CHILD';
+export const GROUPS_DISMISS_NEW_CHILD = 'buttercup/groups/DISMISS_CHILD';
 export const GROUPS_MOVE = 'buttercup/groups/MOVE';
 export const GROUPS_SET_SORT = 'buttercup/groups/SET_SORT';
 export const GROUPS_RESET = 'buttercup/groups/RESET';

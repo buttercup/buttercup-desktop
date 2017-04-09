@@ -36,3 +36,29 @@ export function sortRecursivelyByKey(list, sortKey, childrenKey) {
     };
   });
 }
+
+export function deepFilter(list, key, fn) {
+  return list
+    .filter(fn)
+    .map(item => ({
+      ...item,
+      [key]: deepFilter(item[key], key, fn)
+    }));
+}
+
+export function deepAdd(list, id, key, newItem) {
+  if (id === null) {
+    return [
+      newItem,
+      ...list
+    ];
+  }
+  return list.map(item => {
+    return {
+      ...item,
+      [key]: (item.id === id) ?
+        [newItem, ...item[key]] :
+        deepAdd(item[key], id, key, newItem)
+    };
+  });
+}

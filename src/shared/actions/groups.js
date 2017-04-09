@@ -1,13 +1,15 @@
 import { showConfirmDialog } from '../../renderer/system/dialog';
 import * as groupTools from '../../renderer/system/buttercup/groups';
 import { loadEntries } from './entries';
+import { addExpandedKeys } from './ui';
 
 import {
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
   GROUPS_RESET,
   GROUPS_MOVE,
-  GROUPS_ADD_CHILD,
+  GROUPS_ADD_NEW_CHILD,
+  GROUPS_DISMISS_NEW_CHILD,
 } from './types';
 
 export const resetGroups = groups => ({
@@ -22,23 +24,23 @@ export function removeGroup(id) {
   };
 }
 
-export function addGroup(parentId, title = 'Untitled') {
+export function addGroup(parentId) {
   return dispatch => {
-    groupTools.createGroup(parentId, title);
-    dispatch(reloadGroups());
+    dispatch(addExpandedKeys(parentId));
     dispatch({
-      type: GROUPS_ADD_CHILD,
-      payload: {
-        parentId,
-        title
-      }
+      type: GROUPS_ADD_NEW_CHILD,
+      payload: parentId
     });
   };
 }
 
-export function saveGroupTitle(id, title) {
+export const dismissNewGroup = () => ({
+  type: GROUPS_DISMISS_NEW_CHILD
+});
+
+export function saveGroupTitle(parentId, title) {
   return dispatch => {
-    groupTools.saveGroup(id, title);
+    groupTools.createGroup(parentId, title);
     dispatch(reloadGroups());
   };
 }

@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import { createIdentityReducer } from '../utils/redux';
 import {
-  GROUPS_ADD_CHILD,
-  GROUPS_MOVE,
   TREE_ADD_EXPANDED_KEY,
   TREE_SET_EXPANDED_KEYS,
   COLUMN_SIZE_SET,
@@ -11,12 +9,6 @@ import {
 
 function treeExpandedKeys(state = [], action) {
   switch (action.type) {
-    case GROUPS_ADD_CHILD:
-    case GROUPS_MOVE:
-      return [
-        ...state,
-        action.payload.parentId
-      ];
     case TREE_ADD_EXPANDED_KEY:
       return [
         ...state,

@@ -1,6 +1,9 @@
 import { combineReducers } from 'redux';
+import { deepAdd, deepFilter } from '../utils/collection';
 
 import {
+  GROUPS_ADD_NEW_CHILD,
+  GROUPS_DISMISS_NEW_CHILD,
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
   GROUPS_RESET,
@@ -20,6 +23,15 @@ function currentGroup(state = null, action) {
 
 function groups(state = [], action) {
   switch (action.type) {
+    case GROUPS_ADD_NEW_CHILD:
+      return deepAdd(state, action.payload, 'groups', {
+        id: Math.random().toString(),
+        parentId: action.payload,
+        title: '',
+        isNew: true
+      });
+    case GROUPS_DISMISS_NEW_CHILD:
+      return deepFilter(state, 'groups', group => !group.isNew);
     case GROUPS_RESET:
       return action.payload;
     case GROUPS_REMOVE:
