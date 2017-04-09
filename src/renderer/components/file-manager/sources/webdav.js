@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from 'buttercup-ui';
+import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
-import { Flex } from '../tools';
 import Manager from '../manager';
 
 const Form = styled.form`

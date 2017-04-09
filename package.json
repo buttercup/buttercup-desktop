@@ -185,6 +185,7 @@
     "spectron": "^3.5.0",
     "style-loader": "^0.13.1",
     "styled-components": "^1.4.4",
+    "styled-flexbox": "^0.1.0",
     "sweetalert2": "^5.3.8",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.3",

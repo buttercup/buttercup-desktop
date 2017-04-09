@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 import dropboxLogo from '../../styles/img/logos/dropbox.svg';
 import ownCloud from '../../styles/img/logos/owncloud.svg';
-import { Flex } from './tools';
 
 const LogoLink = styled(Link)`
   display: flex;

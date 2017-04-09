@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Center } from 'buttercup-ui';
+import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
-import { Flex } from '../tools';
 import { isButtercupFile } from '../../../system/utils';
 import Manager from '../manager';
 
