@@ -26,6 +26,7 @@ export function showPasswordDialog(preConfirm, options = {}) {
     cancelButtonText: 'Nevermind',
     inputPlaceholder: 'Password',
     inputClass: styles.input,
+    buttonsStyling: false,
     ...options,
     preConfirm
   });
