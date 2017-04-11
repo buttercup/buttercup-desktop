@@ -13,7 +13,7 @@ const Icon = ({ name, size = 32 }) => {
     <i
       className={cx(styles.icon, styles[className])}
       style={{ fontSize: `${size}px` }}
-      ></i>
+      />
   );
 };
 

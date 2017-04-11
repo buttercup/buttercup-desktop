@@ -1,4 +1,4 @@
-export const archiveTypes = {
+export const ArchiveTypes = {
   FILE: 'ipc',
   DROPBOX: 'dropbox',
   OWNCLOUD: 'owncloud',

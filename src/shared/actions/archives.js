@@ -1,7 +1,7 @@
 import path from 'path';
 import { createAction } from 'redux-actions';
 import { loadWorkspace } from '../../renderer/system/buttercup/archive';
-import { archiveTypes } from '../buttercup/types';
+import { ArchiveTypes } from '../buttercup/types';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { setWindowSize } from '../../renderer/system/utils';
 import { getWindowSize } from '../selectors';
@@ -33,7 +33,7 @@ export const loadArchive = payload => async (dispatch, getState) => {
 
 export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
   dispatch(loadArchive({
-    type: archiveTypes.FILE,
+    type: ArchiveTypes.FILE,
     isNew,
     path,
     datasource: {
@@ -44,7 +44,7 @@ export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
 
 export const loadArchiveFromOwnCloud = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
   dispatch(loadArchive({
-    type: archiveTypes.OWNCLOUD,
+    type: ArchiveTypes.OWNCLOUD,
     isNew,
     path,
     credentials,
@@ -57,7 +57,7 @@ export const loadArchiveFromOwnCloud = ({ path, endpoint, credentials, isNew = f
 
 export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
   dispatch(loadArchive({
-    type: archiveTypes.WEBDAV,
+    type: ArchiveTypes.WEBDAV,
     isNew,
     path,
     credentials,
@@ -70,7 +70,7 @@ export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = fal
 
 export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
   dispatch(loadArchive({
-    type: archiveTypes.DROPBOX,
+    type: ArchiveTypes.DROPBOX,
     isNew,
     path,
     datasource: {
@@ -83,16 +83,16 @@ export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispat
 export const loadArchiveFromSource = payload => dispatch => {
   const { type, ...config } = payload;
   switch (type) {
-    case archiveTypes.DROPBOX:
+    case ArchiveTypes.DROPBOX:
       dispatch(loadArchiveFromDropbox(config));
       break;
-    case archiveTypes.OWNCLOUD:
+    case ArchiveTypes.OWNCLOUD:
       dispatch(loadArchiveFromOwnCloud(config));
       break;
-    case archiveTypes.WEBDAV:
+    case ArchiveTypes.WEBDAV:
       dispatch(loadArchiveFromWebdav(config));
       break;
-    case archiveTypes.FILE:
+    case ArchiveTypes.FILE:
       dispatch(loadArchiveFromFile(config));
       break;
     default:

@@ -1,6 +1,6 @@
 import path from 'path';
 import { BrowserWindow, dialog } from 'electron';
-import { archiveTypes } from '../../shared/buttercup/types';
+import { ArchiveTypes } from '../../shared/buttercup/types';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
 import { importKeepass } from './buttercup';
@@ -69,7 +69,7 @@ function showSaveDialog(focusedWindow) {
  */
 export function loadFile(filePath, win, isNew = false) {
   const payload = {
-    type: archiveTypes.FILE,
+    type: ArchiveTypes.FILE,
     path: normalizePath(filePath),
     isNew
   };
