@@ -1,41 +1,7 @@
 import path from 'path';
 import { clipboard, remote } from 'electron';
-import { sortBy, at } from 'lodash';
-import Fuse from 'fuse.js';
 
 const currentWindow = remote.getCurrentWindow();
-
-export function filterByText(list, filterText) {
-  if (filterText === '' || !filterText) {
-    return list;
-  }
-  
-  const fuse = new Fuse(list, {
-    keys: ['properties.title', 'properties.username']
-  });
-  return fuse.search(filterText);
-}
-
-export function sortByKey(list, sortKey) {
-  const [key, order] = sortKey.split('-');
-  if (!key || !order) {
-    return list;
-  }
-  const sorted = sortBy(list, o => at(o, key));
-  return order === 'asc' ? sorted : sorted.reverse();
-}
-
-export function sortRecursivelyByKey(list, sortKey, childrenKey) {
-  if (!sortKey || !childrenKey) {
-    throw new Error('Insufficient data provided for sorting');
-  }
-  return sortByKey(list, sortKey).map(item => {
-    return {
-      ...item,
-      [childrenKey]: sortRecursivelyByKey(item[childrenKey], sortKey, childrenKey)
-    };
-  });
-}
 
 export function copyToClipboard(text) {
   clipboard.writeText(text);
@@ -71,4 +37,19 @@ export function isWindows() {
 
 export function isLinux() {
   return process.platform === 'linux';
+}
+
+export function isButtercupFile(filePath) {
+  return path.extname(filePath).toLowerCase() === '.bcup';
+}
+
+export function emitActionToParentAndClose(name, payload) {
+  const win = remote.getCurrentWindow();
+  const rpc = win.getParentWindow().rpc;
+  rpc.emit(name, payload);
+  win.close();
+}
+
+export function closeCurrentWindow() {
+  remote.getCurrentWindow().close();
 }

@@ -1,0 +1,24 @@
+@import './variables';
+
+.cell {
+  font-size: .8rem;
+  cursor: pointer;
+}
+
+.selected {
+  background: $brand-primary !important;
+  color: #fff;
+}
+
+.disabled {
+  color: $gray-dark;
+}
+
+:global {
+  .public_fixedDataTable_main {
+    border-width: 0;
+  }
+  .public_fixedDataTableCell_main {
+    background-color: transparent !important;
+  }
+}

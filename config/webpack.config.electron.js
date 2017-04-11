@@ -12,15 +12,13 @@ module.exports = merge(baseConfig, {
   ],
 
   output: {
-    path: resolve(__dirname, '../app/'),
-    filename: 'main.js'
+    path: resolve(__dirname, '../app/dist/'),
+    filename: 'app.js'
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV)
-      }
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
 

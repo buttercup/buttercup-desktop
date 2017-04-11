@@ -6,12 +6,15 @@ const baseConfig = require('./webpack.config.base');
 module.exports = merge(baseConfig, {
   devtool: 'cheap-module-eval-source-map',
 
-  entry: [
-    'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:3000/',
-    'webpack/hot/only-dev-server',
-    resolve(__dirname, '../src/renderer/index')
-  ],
+  entry: {
+    main: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:3000/',
+      'webpack/hot/only-dev-server',
+      resolve(__dirname, '../src/renderer/index')
+    ],
+    fileManager: resolve(__dirname, '../src/renderer/file-manager')
+  },
 
   devServer: {
     hot: true,

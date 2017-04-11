@@ -22,8 +22,8 @@ class WindowManager {
    * @see setBuildProcedure
    * @returns {BrowserWindow}
    */
-  buildWindowOfType(type, fn = null) {
-    const window = (this._buildProcedures[type])(fn);
+  buildWindowOfType(type, fn = null, options = {}) {
+    const window = (this._buildProcedures[type])(fn, options);
     this.register(type, window);
     return window;
   }

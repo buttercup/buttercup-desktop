@@ -12,24 +12,27 @@ module.exports = {
         ]
       },
       {
-        test: /\.(svg|ttf|woff2)$/,
-        loader: 'url-loader',
+        test: /\.(svg|png|ttf|woff|woff2)$/,
+        loader: 'file-loader',
         exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   },
   output: {
-    path: join(__dirname, '../app'),
-    filename: 'bundle.js',
+    path: join(__dirname, '../app/dist'),
+    filename: '[name].bundle.js',
     libraryTarget: 'commonjs2'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.scss']
   },
   plugins: [
-
   ],
   externals: [
-    'buttercup-importer'
+    'buttercup-importer', 'zxcvbn', 'dropbox', 'webdav'
   ]
 };

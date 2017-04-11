@@ -8,12 +8,13 @@ const baseConfig = require('./webpack.config.base');
 module.exports = merge(baseConfig, {
   devtool: false,
 
-  entry: [
-    resolve(__dirname, '../src/renderer/index')
-  ],
+  entry: {
+    main: resolve(__dirname, '../src/renderer/index'),
+    fileManager: resolve(__dirname, '../src/renderer/file-manager')
+  },
 
   output: {
-    publicPath: '../app/'
+    publicPath: '../dist/'
   },
 
   module: {
@@ -47,7 +48,7 @@ module.exports = merge(baseConfig, {
     }),
     // new BabiliPlugin(),
     new ExtractTextPlugin({
-      filename: 'style.css',
+      filename: '[name].css',
       allChunks: true
     })
   ],

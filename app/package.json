@@ -1,13 +1,16 @@
 {
   "name": "buttercup",
-  "version": "0.11.1",
+  "version": "0.12.0",
   "productName": "Buttercup",
-  "main": "./main.js",
+  "main": "./dist/app.js",
   "description": "Free and Open Source password vault",
   "license": "GPL-3.0",
   "homepage": "https://buttercup.pw",
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
-    "buttercup-importer": "0.7.0"
+    "buttercup-importer": "~0.7.1",
+    "dropbox": "^2.3.0",
+    "webdav": "~0.5.0",
+    "zxcvbn": "^4.4.2"
   }
 }

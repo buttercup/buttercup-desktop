@@ -1,0 +1,15 @@
+@import './variables';
+@import './common';
+
+.wrapper {
+  @extend %flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.caption {
+  color: $gray-dark;
+  font-weight: 300;
+}

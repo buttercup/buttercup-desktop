@@ -1,52 +1,14 @@
-import { ipcRenderer as ipc } from 'electron';
-import {
-  Workspace,
-  createCredentials,
-  TextDatasource,
-  Archive
-} from 'buttercup-web';
+import { Workspace, Archive, createCredentials, DatasourceAdapter } from 'buttercup-web';
+import './ipc-datasource';
 
 let __currentWorkspace = null;
 
-/**
- * Read text file from disk
- * 
- * @param {string} filename
- * @returns {string} File content
- */
-function readTextFile(filename) {
-  return ipc.sendSync('read-archive', filename);
-}
-
-/**
- * Write a text file to disk
- * 
- * @param {string} filename
- * @param {string} content
- * @returns {void}
- */
-function writeTextFile(filename, content) {
-  ipc.sendSync('write-archive', { filename, content });
-}
-
-/**
- * Return a Buttercup workspace
- * using content and password
- * 
- * @param {string} content
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
-function createWorkspace(content, password) {
+function createWorkspace(datasource, passwordCredentials) {
   const workspace = new Workspace();
-  const datasource = new TextDatasource(content);
-  const passwordCredentials = createCredentials.fromPassword(password);
 
-  // Load the datasource
   return datasource
     .load(passwordCredentials)
     .then(archive => {
-      // Fill up the datasource
       workspace.setPrimaryArchive(
         archive,
         datasource,
@@ -56,53 +18,57 @@ function createWorkspace(content, password) {
     });
 }
 
-/**
- * Load a workspace from existing file
- * 
- * @param {string} filename
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
-export function loadWorkspace(filename, password) {
-  const content = readTextFile(filename);
-  return createWorkspace(content, password).then(workspace => {
-    __currentWorkspace = {
-      instance: workspace,
-      filename
-    };
-    return {
-      path: filename
-    };
-  });
+function createDefaults(datasource, passwordCredentials) {
+  const archive = Archive.createWithDefaults();
+  return datasource.save(archive, passwordCredentials);
 }
 
-/**
- * Create a new workspace and write to disk 
- * 
- * @param {string} filename
- * @param {string} password
- * @returns {Promise.<Buttercup.Workspace>}
- */
-export function newWorkspace(filename, password) {
-  const archive = Archive.createWithDefaults();
-  const dataSource = new TextDatasource('');
-  const passwordCredentials = createCredentials.fromPassword(password);
+async function parseConfig(config, passwordCredentials) {
+  let { credentials, datasource, encryptedCredentials, isNew, ...rest } = config;
 
-  // Save the datasource and load it up.
-  return dataSource
-    .save(archive, passwordCredentials)
-    .then(content => {
-      writeTextFile(filename, content);
-      return createWorkspace(content, password).then(workspace => {
-        __currentWorkspace = {
-          instance: workspace,
-          filename
-        };
-        return {
-          path: filename
-        };
-      });
-    });
+  if (typeof encryptedCredentials === 'string') {
+    credentials = await createCredentials.fromSecureString(encryptedCredentials, passwordCredentials);
+    datasource = credentials.getValueOrFail('datasource');
+  } else {
+    datasource = {
+      type: config.type,
+      ...datasource
+    };
+    encryptedCredentials = createCredentials(rest.type, credentials);
+    encryptedCredentials.setValue('datasource', datasource);
+    encryptedCredentials = await encryptedCredentials.toSecureString(passwordCredentials);
+  }
+
+  return {
+    isNew,
+    credentials,
+    datasource,
+    config: {
+      ...rest,
+      encryptedCredentials
+    }
+  };
+}
+
+export async function loadWorkspace(masterConfig, masterPassword) {
+  const passwordCredentials = createCredentials.fromPassword(masterPassword);
+  const { isNew, credentials, datasource, config } = await parseConfig(masterConfig, masterPassword);
+  const dsInstance = DatasourceAdapter.objectToDatasource(datasource, credentials);
+
+  if (isNew === true) {
+    await createDefaults(dsInstance, passwordCredentials);
+  }
+
+  const workspace = await createWorkspace(dsInstance, passwordCredentials);
+  __currentWorkspace = {
+    instance: workspace,
+    ...config
+  };
+
+  return {
+    id: getArchive().getID(),
+    ...config
+  };
 }
 
 export function getWorkspace() {
@@ -117,10 +83,5 @@ export function getArchive() {
 }
 
 export function saveWorkspace() {
-  const workspace = getWorkspace();
-  return workspace.instance.save().then(contents => {
-    // workspace saves an array of archives, but we only want the first (only) one
-    const content = contents[0];
-    ipc.send('write-archive', { filename: workspace.filename, content });
-  });
+  return getWorkspace().instance.save();
 }

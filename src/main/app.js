@@ -1,24 +1,19 @@
-/* eslint-disable no-unused-expressions */
-import path from 'path';
-import { app, BrowserWindow, Menu } from 'electron';
-import pkg from '../../package.json';
+import { app, Menu } from 'electron';
+import pify from 'pify';
+import { throttle } from 'lodash';
+import jsonStorage from 'electron-json-storage';
+import configureStore from '../shared/store/configure-store';
 import menuTemplate from './config/menu';
 import { getWindowManager } from './lib/window-manager';
-import { loadFile, openFile, newFile } from './lib/files';
+import { loadFile } from './lib/files';
 import { isWindows } from './lib/platform';
-import startAutoUpdate from './lib/updater';
-import createRPC from './lib/rpc';
-import './lib/buttercup';
+import { setupActions } from './actions';
+import { setupWindows } from './windows';
 
+const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 let appIsReady = false;
 let initialFile = null;
-
-if (process.env.NODE_ENV === 'development') {
-  require('electron-debug')({
-    showDevTools: true
-  });
-}
 
 // Crash reporter for alpha and beta releases
 // After we come out of beta, we should be rolling our own
@@ -37,84 +32,24 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 const installExtensions = async () => {
-  if (process.env.NODE_ENV === 'development') {
-    const installer = require('electron-devtools-installer');
+  require('electron-debug')({
+    showDevTools: true
+  });
 
-    const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
-    const extensions = [
-      'REACT_DEVELOPER_TOOLS',
-      'REDUX_DEVTOOLS'
-    ];
+  const installer = require('electron-devtools-installer');
 
-    for (const name of extensions) {
-      try {
-        await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-      } catch (err) {}
-    }
+  const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
+  const extensions = [
+    'REACT_DEVELOPER_TOOLS',
+    'REDUX_DEVTOOLS'
+  ];
+
+  for (const name of extensions) {
+    try {
+      await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
+    } catch (err) {}
   }
 };
-
-// Intro Screen
-windowManager.setBuildProcedure('main', callback => {
-  // Create the browser window.
-  const win = new BrowserWindow({
-    width: 870,
-    height: 550,
-    minWidth: 680,
-    minHeight: 500,
-    title: pkg.productName,
-    titleBarStyle: 'hidden-inset',
-    show: process.env.NODE_ENV === 'development',
-    vibrancy: 'light'
-  });
-
-  if (process.env.NODE_ENV === 'development') {
-    win.loadURL(`file://${path.resolve(__dirname, '../../app/index.html')}`);
-  } else {
-    win.loadURL(`file://${path.resolve(__dirname, './index.html')}`);
-  }
-
-  const rpc = createRPC(win);
-  win.rpc = rpc;
-
-  win.isIntro = function() {
-    return win.getTitle().toLowerCase().match(/welcome/i) !== null;
-  };
-
-  // When user drops a file on the window
-  win.webContents.on('will-navigate', (e, url) => {
-    e.preventDefault();
-    loadFile(url, win);
-  });
-
-  rpc.on('open-file-dialog', () => {
-    openFile();
-  });
-
-  rpc.on('new-file-dialog', () => {
-    newFile();
-  });
-
-  win.once('ready-to-show', () => {
-    win.show();
-  });
-
-  rpc.once('init', () => {
-    if (process.env.NODE_ENV !== 'development') {
-      startAutoUpdate(win);
-    }
-
-    if (callback) {
-      callback(win, rpc);
-    }
-  });
-
-  win.once('closed', () => {
-    windowManager.deregister(win);
-  });
-
-  return win;
-});
 
 // In case user tries to open a file using Buttercup (on Mac)
 app.on('open-file', (e, filePath) => {
@@ -132,7 +67,24 @@ if (isWindows() && typeof process.argv[1] === 'string') {
 }
 
 app.on('ready', async () => {
-  await installExtensions();
+  if (process.env.NODE_ENV === 'development') {
+    // Install Dev Extensions
+    await installExtensions();
+  }
+
+  // Create Store
+  const state = await storage.get('state');
+  const store = configureStore(state, 'main');
+
+  // Persist Store to Disk
+  store.subscribe(throttle(() => {
+    storage.set('state', store.getState());
+  }, 100));
+
+  // Setup Windows & IPC Actions
+  setupWindows(store);
+  setupActions(store);
+
   appIsReady = true;
 
   // Show intro

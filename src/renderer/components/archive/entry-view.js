@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import { formRow, metaWrapper, heading, labelWrapper } from '../../styles/entry-form';
 import { wrapper as inputWrapper } from '../../styles/entry-input';
+import bubbleImage from '../../styles/img/info-bubble.svg';
+import EmptyView from '../empty-view';
 import Copyable from './copyable';
 
 const EntryView = ({entry}) => (
@@ -14,16 +16,22 @@ const EntryView = ({entry}) => (
       </div>
     ))}
     <h6 className={heading}>Custom Fields:</h6>
-    <div className={metaWrapper}>
-      {entry.meta.map(meta => (
-        <div className={formRow} key={meta.key}>
-          <div className={labelWrapper}>{meta.key}</div>
-          <div className={inputWrapper}>
-            <Copyable>{meta.value}</Copyable>
+    {entry.meta.length > 0 ?
+      (<div className={metaWrapper}>
+        {entry.meta.map(meta => (
+          <div className={formRow} key={meta.key}>
+            <div className={labelWrapper}>{meta.key}</div>
+            <div className={inputWrapper}>
+              <Copyable>{meta.value}</Copyable>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>) :
+      (<EmptyView
+        caption="No custom fields yet. Why not add one?"
+        imageSrc={bubbleImage}
+        />)
+    }
   </div>
 );
 

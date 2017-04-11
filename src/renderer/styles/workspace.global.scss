@@ -74,3 +74,12 @@ input, button, textarea, :focus {
 .Popover-tip {
   fill: $dark-secondary;
 }
+
+:root {
+  --spacing-half: 6px;
+  --spacing-one: 12px;
+  --spacing-two: 20px;
+  --gray-light: #F5F7FA;
+  --gray: #E4E9F2;
+  --gray-dark: #777;
+}
