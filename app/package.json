@@ -8,7 +8,7 @@
   "homepage": "https://buttercup.pw",
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
-    "buttercup-importer": "0.7.0",
+    "buttercup-importer": "~0.7.1",
     "dropbox": "^2.3.0",
     "webdav": "~0.5.0",
     "zxcvbn": "^4.4.2"
