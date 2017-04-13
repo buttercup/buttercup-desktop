@@ -1,11 +1,65 @@
 import React, { PropTypes, Component } from 'react';
+import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 import CopyIcon from 'react-icons/lib/fa/copy';
 import EyeIcon from 'react-icons/lib/fa/eye';
 import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
-import { Button } from 'buttercup-ui';
+import { Button, ButtonRow } from 'buttercup-ui';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
-import styles from '../../styles/copyable';
+
+const PasswordBase = ({ className, password, concealed, ...props }) => {
+  const splitted = password.split(/(\d+)/g);
+  return (
+    <span className={className} {...props} >
+      {concealed ? '●'.repeat(10) : splitted.map(
+        (chunk, i) => <span key={i} className={/^\d+$/.test(chunk) ? 'num' : 'str'}>{chunk}</span>
+      )}
+    </span>
+  );
+};
+
+PasswordBase.propTypes = {
+  className: PropTypes.string,
+  password: PropTypes.string,
+  concealed: PropTypes.bool
+};
+
+const Password = styled(PasswordBase)`
+  font-family: Anonymous;
+  font-size: 14px;
+  font-weight: bold;
+  vertical-align: 2px;
+
+  .num {
+    color: var(--brand-primary-darker);
+  }
+`;
+
+const HiddenButtonRow = styled(ButtonRow)`
+  > button {
+    opacity: 0;
+    margin-right: 2px;
+  }
+`;
+
+const Wrapper = styled(Flex)`
+  padding-left: var(--spacing-half);
+  margin-left: 2px;
+  line-height: 1.35;
+
+  &:hover {
+    button {
+      opacity: 1;
+    }
+  }
+`;
+
+const Content = styled.div`
+  flex: 1;
+  word-break: break-all;
+  padding: 8px 0 6px;
+`;
 
 class Copyable extends Component {
   constructor(props) {
@@ -51,7 +105,7 @@ class Copyable extends Component {
   }
 
   renderPassword(content) {
-    return (<span role="content">{this.state.concealed ? '●'.repeat(10) : content}</span>);
+    return (<Password role="content" password={content} concealed={this.state.concealed}/>);
   }
 
   render() {
@@ -61,26 +115,24 @@ class Copyable extends Component {
     }
     
     return (
-      <div className={styles.wrapper} onContextMenu={() => this.showContextMenu()}>
-        <div className={styles.content} role="content">
+      <Wrapper onContextMenu={() => this.showContextMenu()}>
+        <Content role="content">
           {type === 'password' ? this.renderPassword(children) : children}
-        </div>
-        <div className={styles.buttons}>
+        </Content>
+        <HiddenButtonRow>
           {(type || '').toLowerCase() === 'password' &&
             <Button
               icon={this.state.concealed ? <EyeIcon/> : <EyeSlashIcon/>}
               title={this.state.concealed ? 'Reveal' : 'Hide'}
-              className={styles.button}
               onClick={() => this.handleReveal()}
               />}
           <Button
             icon={<CopyIcon/>}
             title="Copy"
-            className={styles.button}
             onClick={() => this.handleCopy()}
             />
-        </div>
-      </div>
+        </HiddenButtonRow>
+      </Wrapper>
     );
   }
 }

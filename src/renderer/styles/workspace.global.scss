@@ -19,6 +19,12 @@
   src: url('./font/OpenSans-Bold.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Anonymous';
+  font-weight: bold;
+  src: url('./font/Anonymous-Bold.woff2') format('woff2');
+}
+
 html {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
@@ -82,4 +88,6 @@ input, button, textarea, :focus {
   --gray-light: #F5F7FA;
   --gray: #E4E9F2;
   --gray-dark: #777;
+  --brand-primary: #00B7AC;
+  --brand-primary-darker: #179E94;
 }
