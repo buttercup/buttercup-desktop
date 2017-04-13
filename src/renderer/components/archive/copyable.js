@@ -29,7 +29,6 @@ const Password = styled(PasswordBase)`
   font-family: Anonymous;
   font-size: 14px;
   font-weight: bold;
-  vertical-align: 2px;
 
   .num {
     color: var(--brand-primary-darker);
@@ -46,7 +45,7 @@ const HiddenButtonRow = styled(ButtonRow)`
 const Wrapper = styled(Flex)`
   padding-left: var(--spacing-half);
   margin-left: 2px;
-  line-height: 1.35;
+  line-height: 1.2;
 
   &:hover {
     button {
@@ -59,6 +58,7 @@ const Content = styled.div`
   flex: 1;
   word-break: break-all;
   padding: 8px 0 6px;
+  font-size: 0.95rem;
 `;
 
 class Copyable extends Component {
