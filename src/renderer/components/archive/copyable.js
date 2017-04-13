@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import CopyIcon from 'react-icons/lib/fa/copy';
+import CopyIcon from 'react-icons/lib/go/clippy';
 import EyeIcon from 'react-icons/lib/fa/eye';
 import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
 import { Button, ButtonRow } from 'buttercup-ui';
