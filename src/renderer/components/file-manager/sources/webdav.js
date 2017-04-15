@@ -72,7 +72,7 @@ class Webdav extends Component {
       });
     }).catch(err => {
       console.error(err);
-      showDialog(`Connection to ${this.state.endpoint} failed. Please check your credentials and try again.`);
+      showDialog(`Connection to ${endpoint} failed. Please check your credentials and try again.`);
     });
   }
 
