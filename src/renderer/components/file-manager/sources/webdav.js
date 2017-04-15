@@ -5,6 +5,7 @@ import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
+import { showDialog } from '../../../system/dialog';
 import Manager from '../manager';
 
 const Form = styled.form`
@@ -53,7 +54,17 @@ class Webdav extends Component {
   }
 
   handleConnect = () => {
-    const fs = getFsInstance(this.props.owncloud ? 'owncloud' : 'webdav', this.state);
+    const { endpoint, username, password } = this.state;
+
+    if (!endpoint || !username || !password) {
+      return;
+    }
+
+    const fs = getFsInstance(
+      this.props.owncloud ? 'owncloud' : 'webdav',
+      { endpoint, username, password }
+    );
+
     fs.readDirectory('/').then(() => {
       this.fs = fs;
       this.setState({
@@ -61,6 +72,7 @@ class Webdav extends Component {
       });
     }).catch(err => {
       console.error(err);
+      showDialog(`Connection to ${this.state.endpoint} failed. Please check your credentials and try again.`);
     });
   }
 

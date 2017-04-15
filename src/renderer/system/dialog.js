@@ -13,6 +13,13 @@ export function showConfirmDialog(message, fn) {
   });
 }
 
+export function showDialog(message, type = 'error') {
+  dialog.showMessageBox(currentWindow, {
+    type,
+    message
+  });
+}
+
 export function showPasswordDialog(preConfirm, options = {}) {
   return swal({
     title: 'Master Password',
