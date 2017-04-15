@@ -26,8 +26,12 @@ class NewFileInput extends Component {
   };
 
   handleChange = e => {
+    const name = e.target.value;
+    if (/[\\/:+@]/.test(name)) {
+      return;
+    }
     this.setState({
-      name: e.target.value
+      name
     });
   }
 
@@ -36,7 +40,12 @@ class NewFileInput extends Component {
   }
 
   handleSubmit = () => {
-    this.props.onSaveFile(this.state.name);
+    let { name } = this.state;
+    name = name.trim().replace(/\.bcup$/, '').trim();
+    if (name.length === 0) {
+      return;
+    }
+    this.props.onSaveFile(name);
   }
 
   handleKeyup = e => {
@@ -111,7 +120,7 @@ export const IconCell = ({ rowIndex, data, ...props }) => {
   ext = ext ? ext.toLowerCase().replace('.', '') : null;
   return (
     <Cell className={styles.cell} {...props}>
-      <Icon name={data[rowIndex].type === 'directory' ? 'folder' : `document-file-${ext}`} size={20}/>
+      <Icon name={data[rowIndex].type === 'directory' ? 'folder' : `document-file-${ext}`} size={20} />
     </Cell>
   );
 };
