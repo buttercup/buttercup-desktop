@@ -1776,9 +1776,9 @@ buttercup-importer@~0.7.1:
     kdbxweb "~1.0.1"
     xml2js "~0.4.13"
 
-buttercup-ui@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.5.0.tgz#132f9fab70674b0749ea8d3e61c6e49f3f547daa"
+buttercup-ui@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/buttercup-ui/-/buttercup-ui-0.5.1.tgz#bc99743583eae083fb288db7496a8a3af641b60e"
   dependencies:
     buttercup-generator "^0.0.2"
     classnames "^2.2.5"

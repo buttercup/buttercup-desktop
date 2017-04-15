@@ -6,6 +6,7 @@ import { Button, SmallType, Center } from 'buttercup-ui';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
+import { showDialog } from '../../../system/dialog';
 import Manager from '../manager';
 
 const DropboxButton = styled(Button)`
@@ -53,6 +54,7 @@ class Dropbox extends Component {
       })
       .catch(err => {
         console.error(err);
+        showDialog(`Connection to Dropbox server failed. Please try again later.`);
       });
   }
 
