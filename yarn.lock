@@ -1791,11 +1791,11 @@ buttercup-ui@^0.5.1:
     styled-components "^1.4.4"
     zxcvbn "^4.4.2"
 
-buttercup-web@~0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.23.0.tgz#27832be11b3dc81a0442dbbfa90093d19c9df9d6"
+buttercup-web@^0.25.2:
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.25.2.tgz#7d805e2c49f54f2ef51cdcf12908d71c0c9c47d8"
   dependencies:
-    buttercup "~0.35.0"
+    buttercup "~0.37.1"
 
 buttercup@~0.35.0:
   version "0.35.0"
@@ -1803,6 +1803,18 @@ buttercup@~0.35.0:
   dependencies:
     clone "~1.0.2"
     debug "^2.3.3"
+    gzip-js "~0.3.2"
+    iocane "~0.6.0"
+    node-fetch "~1.6.3"
+    uuid "~2.0.1"
+    webdav-fs "~0.4.0"
+
+buttercup@~0.37.1:
+  version "0.37.1"
+  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.37.1.tgz#0b11c74f72342bfc3754cc4215106b53e17d8d9f"
+  dependencies:
+    clone "~1.0.2"
+    debug "~2.3.3"
     gzip-js "~0.3.2"
     iocane "~0.6.0"
     node-fetch "~1.6.3"
@@ -2617,6 +2629,12 @@ debug@2.2.0, debug@~2.2.0:
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.2.0.tgz#f87057e995b1a1f6ae6a4960664137bc56f039da"
   dependencies:
     ms "0.7.1"
+
+debug@~2.3.3:
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.3.3.tgz#40c453e67e6e13c901ddec317af8986cda9eff8c"
+  dependencies:
+    ms "0.7.2"
 
 debuglog@^1.0.1:
   version "1.0.1"
