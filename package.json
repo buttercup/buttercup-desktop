@@ -118,7 +118,7 @@
     "babili-webpack-plugin": "^0.0.8",
     "buttercup-importer": "~0.7.1",
     "buttercup-ui": "^0.5.1",
-    "buttercup-web": "^0.25.2",
+    "buttercup-web": "~0.25.2",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
