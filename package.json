@@ -198,50 +198,5 @@
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0",
     "webpack-merge": "^2.6.0"
-  },
-  "xo": {
-    "parser": "babel-eslint",
-    "extends": "xo-react",
-    "esnext": true,
-    "space": 2,
-    "envs": [
-      "node",
-      "browser",
-      "ava",
-      "electron"
-    ],
-    "ignores": [
-      "**/Gruntfile.js",
-      "tools/**",
-      "release/**",
-      "app/**"
-    ],
-    "globals": [
-      "Buttercup"
-    ],
-    "settings": {
-      "import/resolver": {
-        "webpack": {
-          "config": "./config/webpack.config.production.js"
-        }
-      }
-    },
-    "rules": {
-      "comma-dangle": "off",
-      "no-unused-expressions": "off",
-      "space-before-function-paren": "off",
-      "quote-props": "off",
-      "no-use-before-define": "off",
-      "no-trailing-spaces": "off",
-      "xo/filename-case": "off",
-      "react/jsx-no-bind": "off",
-      "react/jsx-space-before-closing": "off",
-      "babel/new-cap": "off",
-      "object-curly-spacing": "off",
-      "import/no-extraneous-dependencies": "off",
-      "import/prefer-default-export": "off",
-      "import/extensions": "off",
-      "import/no-unassigned-import": "off"
-    }
   }
 }
