@@ -1,0 +1,18 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "standard",
+    "standard-react"
+  ],
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "semi": ["error", "always"],
+    "space-before-function-paren": ["error", "never"],
+    "jsx-quotes": "off",
+    "comma-dangle": "off"
+  }
+}

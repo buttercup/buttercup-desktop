@@ -22,11 +22,11 @@ const Footer = styled(Flex)`
 const PathRenderer = ({ pathName, ...props }) => {
   switch (pathName) {
     case '/dropbox':
-      return <Dropbox {...props}/>;
+      return <Dropbox {...props} />;
     case '/owncloud':
-      return <Webdav owncloud {...props}/>;
+      return <Webdav owncloud {...props} />;
     case '/webdav':
-      return <Webdav {...props}/>;
+      return <Webdav {...props} />;
     default:
       return null;
   }
@@ -78,7 +78,7 @@ export default class FileManager extends Component {
     return (
       <PathRenderer
         pathName={match.path}
-        onSelect={this.handleSelectFile} 
+        onSelect={this.handleSelectFile}
         toggleCreateButton={this.toggleCreateButton}
         />
     );
@@ -89,7 +89,7 @@ export default class FileManager extends Component {
       <Router>
         <Wrapper flexAuto flexColumn>
           <Flex flexAuto>
-            <Route exact path="/" component={TypeSelector}/>
+            <Route exact path="/" component={TypeSelector} />
             <Route path="/dropbox" render={this.renderPath} />
             <Route path="/webdav" render={this.renderPath} />
             <Route path="/owncloud" render={this.renderPath} />

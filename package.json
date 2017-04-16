@@ -17,7 +17,8 @@
     "package:mac": "build --mac",
     "package:win": "build --win --x64",
     "package": "build --mac --linux --win --x64",
-    "package:current": "build"
+    "package:current": "build",
+    "lint": "eslint ./src ./config"
   },
   "build": {
     "appId": "pw.buttercup.desktop",
@@ -134,11 +135,15 @@
     "electron-installer-dmg": "^0.1.2",
     "electron-json-storage": "^3.0.2",
     "electron-rpc": "^2.0.1",
-    "eslint": "^3.15.0",
-    "eslint-config-xo-react": "^0.8.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^4.3.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "2.0.0-rc.0",
     "file-loader": "^0.10.1",
     "fixed-data-table-2": "^0.7.12",
@@ -192,8 +197,7 @@
     "webdav-fs": "^1.0.0-rc7",
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0",
-    "webpack-merge": "^2.6.0",
-    "xo": "^0.17.1"
+    "webpack-merge": "^2.6.0"
   },
   "xo": {
     "parser": "babel-eslint",

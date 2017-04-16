@@ -34,13 +34,13 @@ function showMenu(mode, onChange) {
   showContextMenu(
     createSortMenu(SORT_MODES, mode, onChange)
   );
-} 
+}
 
 const SortButton = ({ mode, onChange }) => (
   <Button
     transparent
     onClick={() => showMenu(mode, onChange)}
-    icon={<SortIcon/>}
+    icon={<SortIcon />}
     />
 );
 

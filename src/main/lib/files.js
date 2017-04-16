@@ -28,7 +28,7 @@ function normalizePath(filePath) {
 /**
  * Present an open dialog box
  * and return the filename if selected
- * 
+ *
  * @param {BrowserWindow} focusedWindow
  * @returns {void}
  */
@@ -37,7 +37,7 @@ function showOpenDialog(focusedWindow) {
     ...dialogOptions,
     title: 'Load a Buttercup Archive'
   });
-  
+
   if (filename && filename.length > 0) {
     loadFile(filename[0], focusedWindow);
   }
@@ -46,7 +46,7 @@ function showOpenDialog(focusedWindow) {
 /**
  * Present a save dialog box
  * and return the filename if saved
- * 
+ *
  * @param {BrowserWindow} focusedWindow
  * @returns {void}
  */
@@ -63,7 +63,7 @@ function showSaveDialog(focusedWindow) {
 
 /**
  * Open File helper using Buttercup
- * 
+ *
  * @param {String} filePath
  * @param {BrowserWindow} win
  */
@@ -93,7 +93,7 @@ export function loadFile(filePath, win, isNew = false) {
 /**
  * Open a file in current window or a new window
  * if the current window is already a loaded archive
- * 
+ *
  * @param {BrowserWindow} focusedWindow
  * @returns {void}
  */
@@ -112,7 +112,7 @@ export function openFile(focusedWindow) {
 
 /**
  * Import a KeePass archive
- * 
+ *
  * @param {BrowserWindow} focusedWindow
  */
 export function openKeepassFile(focusedWindow) {
@@ -121,7 +121,7 @@ export function openKeepassFile(focusedWindow) {
       ...keepassDialogOptions,
       title: 'Load a Keepass archive'
     });
-    
+
     if (filename && filename.length > 0) {
       focusedWindow.rpc.emit('import-history-prompt');
       focusedWindow.rpc.once('import-history-prompt-resp', password => {
@@ -156,7 +156,7 @@ export function openKeepassFile(focusedWindow) {
 /**
  * Create a new file and open it in Buttercup
  * then ask the user for a password
- * 
+ *
  * @param {BrowserWindow} focusedWindow
  * @returns {void}
  */

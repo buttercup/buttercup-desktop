@@ -21,12 +21,10 @@ BareInput.propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string,
   input: PropTypes.object,
-  meta: PropTypes.object,
   type: PropTypes.string
 };
 
 export default class Input extends Component {
-
   static propTypes = {
     type: PropTypes.string,
     input: PropTypes.object
@@ -52,19 +50,19 @@ export default class Input extends Component {
     const { type, input } = this.props;
     return (
       <div className={styles.wrapper}>
-        <BareInput {...this.props}/>
-        {type === 'password' && 
+        <BareInput {...this.props} />
+        {type === 'password' &&
           <Generator
             onGenerate={pwd => this.receivePassword(pwd)}
             isOpen={this.state.isGeneratorOpen}
             preferPlace="below"
             >
             <div className={cx(styles.generator, this.state.isGeneratorOpen && styles.generatorActive)}>
-              <MagicIcon onClick={this.handleGeneratorToggle.bind(this)}/>
+              <MagicIcon onClick={() => this.handleGeneratorToggle()} />
             </div>
           </Generator>
         }
-        {type === 'password' && <Meter input={input.value}/>}
+        {type === 'password' && <Meter input={input.value} />}
       </div>
     );
   }

@@ -166,8 +166,8 @@ class Manager extends Component {
         >
         <Column
           columnKey="icon"
-          header={<Cell/>}
-          cell={<IconCell data={contents}/>}
+          header={<Cell />}
+          cell={<IconCell data={contents} />}
           width={40}
           fixed
           />
@@ -189,14 +189,14 @@ class Manager extends Component {
         <Column
           columnKey="size"
           header={<Cell>Size</Cell>}
-          cell={<SizeCell data={contents}/>}
+          cell={<SizeCell data={contents} />}
           width={100}
           fixed
           />
         <Column
           columnKey="mtime"
           header={<Cell>Date</Cell>}
-          cell={<DateCell data={contents}/>}
+          cell={<DateCell data={contents} />}
           width={100}
           fixed
           />

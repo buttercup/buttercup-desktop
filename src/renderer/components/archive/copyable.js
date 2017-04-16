@@ -105,7 +105,7 @@ class Copyable extends Component {
   }
 
   renderPassword(content) {
-    return (<Password role="content" password={content} concealed={this.state.concealed}/>);
+    return (<Password role="content" password={content} concealed={this.state.concealed} />);
   }
 
   render() {
@@ -113,7 +113,7 @@ class Copyable extends Component {
     if (!children) {
       return null;
     }
-    
+
     return (
       <Wrapper onContextMenu={() => this.showContextMenu()}>
         <Content role="content">
@@ -122,12 +122,12 @@ class Copyable extends Component {
         <HiddenButtonRow>
           {(type || '').toLowerCase() === 'password' &&
             <Button
-              icon={this.state.concealed ? <EyeIcon/> : <EyeSlashIcon/>}
+              icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
               title={this.state.concealed ? 'Reveal' : 'Hide'}
               onClick={() => this.handleReveal()}
               />}
           <Button
-            icon={<CopyIcon/>}
+            icon={<CopyIcon />}
             title="Copy"
             onClick={() => this.handleCopy()}
             />

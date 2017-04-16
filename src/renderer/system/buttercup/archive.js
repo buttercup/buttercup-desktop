@@ -86,12 +86,12 @@ export function saveWorkspace() {
   const workspace = getWorkspace().instance;
   return workspace
     .localDiffersFromRemote()
-    .then(differs => differs ?
-      workspace.mergeSaveablesFromRemote().then(() => true) :
-      false
+    .then(differs => differs
+      ? workspace.mergeSaveablesFromRemote().then(() => true)
+      : false
     )
-    .then(shouldSave => shouldSave ?
-      workspace.save() :
-      null
+    .then(shouldSave => shouldSave
+      ? workspace.save()
+      : null
     );
 }

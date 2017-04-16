@@ -1,5 +1,4 @@
 class Client {
-
   constructor() {
     const electron = window.require('electron');
     const EventEmitter = window.require('events');
@@ -56,7 +55,6 @@ class Client {
     this.removeAllListeners();
     this.ipc.removeAllListeners();
   }
-
 }
 
 export default new Client();

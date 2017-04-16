@@ -38,20 +38,20 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, sortMode } = this.props;
+    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
         disabled={Boolean(currentGroup) !== true}
         full
         dark
-        icon={<PlusIcon/>}
+        icon={<PlusIcon />}
         >Add Entry</Button>
     );
     const filterNode = (
       <div className={styles.searchWrapper}>
-        <SearchField onChange={this.handleFilterChange}/>
-        <SortButton mode={sortMode} onChange={this.handleSortModeChange}/>
+        <SearchField onChange={this.handleFilterChange} filter={filter} />
+        <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
       </div>
     );
 
@@ -61,7 +61,12 @@ class Entries extends Component {
         header={filterNode}
         footer={addButton}
         >
-        <List {...this.props} onRightClick={entry => this.onRightClick(entry)}/>
+        <List
+          entries={this.props.entries}
+          currentEntry={this.props.currentEntry}
+          onSelectEntry={this.props.onSelectEntry}
+          onRightClick={entry => this.onRightClick(entry)}
+          />
       </Column>
     );
   }

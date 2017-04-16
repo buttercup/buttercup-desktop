@@ -5,7 +5,7 @@ const EmptyView = ({ caption, imageSrc }) => {
   return (
     <div className={styles.wrapper}>
       <figure>
-        {imageSrc && <img src={imageSrc}/>}
+        {imageSrc && <img src={imageSrc} />}
         <figcaption className={styles.caption}>{caption}</figcaption>
       </figure>
     </div>
