@@ -5,7 +5,8 @@
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
-    "test": "ava",
+    "test": "ava && yarn lint",
+    "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
     "build": "npm run build:main && npm run build:renderer",
@@ -17,8 +18,7 @@
     "package:mac": "build --mac",
     "package:win": "build --win --x64",
     "package": "build --mac --linux --win --x64",
-    "package:current": "build",
-    "lint": "eslint ./src ./config"
+    "package:current": "build"
   },
   "build": {
     "appId": "pw.buttercup.desktop",
