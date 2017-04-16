@@ -3,7 +3,7 @@ import styles from '../../styles/entries-list';
 
 const List = ({entries, currentEntry, onSelectEntry, onRightClick}) => (
   <ul className={styles.list}>
-    {entries.map(entry => 
+    {entries.map(entry =>
       <li
         key={entry.id}
         className={(currentEntry && entry.id === currentEntry.id) && styles.active}

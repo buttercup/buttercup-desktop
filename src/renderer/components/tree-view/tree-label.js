@@ -9,12 +9,8 @@ class TreeLabel extends Component {
 
   static propTypes = {
     title: PropTypes.string,
-    id: PropTypes.string,
     parentId: PropTypes.string,
-    isTrash: PropTypes.bool,
     isNew: PropTypes.bool,
-    onAddClick: PropTypes.func,
-    onRemoveClick: PropTypes.func,
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onRightClick: PropTypes.func
@@ -63,7 +59,7 @@ class TreeLabel extends Component {
         ) : title}
       </span>
     );
-  }  
+  }
 }
 
 export default TreeLabel;

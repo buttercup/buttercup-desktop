@@ -64,7 +64,7 @@ rpc.on('import-history-prompt', () => {
 
 render(
   <AppContainer>
-    <Root store={store}/>
+    <Root store={store} />
   </AppContainer>,
   document.getElementById('root')
 );
@@ -75,7 +75,7 @@ if (module.hot) {
 
     render(
       <AppContainer>
-        <NewRoot store={store}/>
+        <NewRoot store={store} />
       </AppContainer>,
       document.getElementById('root')
     );

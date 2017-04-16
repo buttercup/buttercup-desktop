@@ -13,13 +13,8 @@ class SearchField extends Component {
   handleClearClick() {
     if (this.textInput) {
       this.textInput.value = '';
-      this.handleChange('');
+      this.props.onChange('');
     }
-  }
-
-  handleChange(value) {
-    this.setState({value});
-    this.props.onChange(value);
   }
 
   handleKeyUp(e) {
@@ -30,11 +25,13 @@ class SearchField extends Component {
   }
 
   render() {
+    const { filter, onChange } = this.props;
     return (
       <div className={styles.wrapper}>
         <input
           type="text"
-          onChange={e => this.handleChange(e.target.value)}
+          value={filter}
+          onChange={e => onChange(e.target.value)}
           onKeyUp={e => this.handleKeyUp(e)}
           className={styles.field}
           placeholder="Search..."
@@ -43,16 +40,17 @@ class SearchField extends Component {
           }}
           />
         <span className={styles.icon}>
-          <SearchIcon/>
+          <SearchIcon />
         </span>
-        {this.state.value !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()}></span>}
+        {this.state.value !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()} />}
       </div>
     );
   }
 }
 
 SearchField.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  filter: PropTypes.string
 };
 
 export default SearchField;

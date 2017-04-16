@@ -56,9 +56,9 @@ export function deepAdd(list, id, key, newItem) {
   return list.map(item => {
     return {
       ...item,
-      [key]: (item.id === id) ?
-        [newItem, ...item[key]] :
-        deepAdd(item[key], id, key, newItem)
+      [key]: (item.id === id)
+        ? [newItem, ...item[key]]
+        : deepAdd(item[key], id, key, newItem)
     };
   });
 }

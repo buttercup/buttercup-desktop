@@ -35,8 +35,8 @@ export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToS
           label: group.title,
           enabled: (group.id !== currentGroup || group.groups.length > 0),
           click: () => fn(group.id),
-          submenu: group.groups.length > 0 ?
-            createMenuFromGroups(
+          submenu: group.groups.length > 0
+            ? createMenuFromGroups(
               [{
                 ...group,
                 title: `Move to ${group.title}`,
@@ -44,8 +44,8 @@ export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToS
               }, {
                 type: 'separator'
               }]
-              .concat(group.groups), currentGroup, fn, allowMoveToSelf) :
-            null
+              .concat(group.groups), currentGroup, fn, allowMoveToSelf)
+            : null
         };
       })
   );

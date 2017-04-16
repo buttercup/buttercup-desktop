@@ -3,7 +3,6 @@ import { ipcMain } from 'electron';
 import uuid from 'uuid';
 
 class Server extends EventEmitter {
-
   constructor(win) {
     super();
     this.win = win;
@@ -48,7 +47,6 @@ class Server extends EventEmitter {
       this.destroyed = true;
     }
   }
-
 }
 
 export function createRPC(win) {

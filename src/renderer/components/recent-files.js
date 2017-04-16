@@ -15,11 +15,11 @@ function getIcon(type) {
   switch (type) {
     case ArchiveTypes.OWNCLOUD:
     case ArchiveTypes.WEBDAV:
-      return <CloudIcon/>;
+      return <CloudIcon />;
     case ArchiveTypes.DROPBOX:
-      return <DropboxIcon/>;
+      return <DropboxIcon />;
     default:
-      return <LaptopIcon/>;
+      return <LaptopIcon />;
   }
 }
 
@@ -42,7 +42,7 @@ const File = ({archive, onClick, onRemoveClick}) => {
         <span>{base}</span>
         <span>{getIcon(archive.type)} {dir}</span>
       </div>
-      <span onClick={onRemoveClick} className={styles.remove}><DeleteIcon/></span>
+      <span onClick={onRemoveClick} className={styles.remove}><DeleteIcon /></span>
     </li>
   );
 };
@@ -66,14 +66,14 @@ class RecentFiles extends Component {
   renderEmptyState() {
     return (
       <div className={styles.container}>
-        <EmptyView caption="No archives yet."/>
+        <EmptyView caption="No archives yet." />
       </div>
     );
   }
 
   render() {
     const { archives } = this.props;
-    
+
     if (archives.length === 0) {
       return this.renderEmptyState();
     }
@@ -91,7 +91,7 @@ class RecentFiles extends Component {
               />
           )}
         </ul>
-        <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon/>}>Clear History</Button>
+        <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
       </div>
     );
   }

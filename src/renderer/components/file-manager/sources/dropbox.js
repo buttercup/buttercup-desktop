@@ -21,7 +21,6 @@ const Wrapper = styled(Center)`
 class Dropbox extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
-    onCreateClick: PropTypes.func,
     toggleCreateButton: PropTypes.func
   };
 
@@ -82,10 +81,10 @@ class Dropbox extends Component {
           <DropboxButton
             large
             onClick={this.handleAuthClick}
-            icon={<DropboxIcon/>}
+            icon={<DropboxIcon />}
             >Authenticate with Dropbox</DropboxButton>
           <SmallType border>
-            <InfoIcon/> Connect Buttercup to your Dropbox account to read and save your archives.<br/>
+            <InfoIcon /> Connect Buttercup to your Dropbox account to read and save your archives.<br />
             We won't save your Dropbox username or password.
           </SmallType>
         </Wrapper>

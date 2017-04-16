@@ -16,7 +16,6 @@ UpdateNotice.propTypes = {
   available: PropTypes.bool,
   installing: PropTypes.bool,
   version: PropTypes.string,
-  notes: PropTypes.string,
   onClick: PropTypes.func
 };
 

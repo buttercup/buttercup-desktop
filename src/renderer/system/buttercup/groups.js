@@ -1,9 +1,9 @@
 import { Group } from 'buttercup-web';
-import { saveWorkspace as save, getArchive } from './archive'; 
+import { saveWorkspace as save, getArchive } from './archive';
 
 /**
  * Return recursive groups JSON structure
- * 
+ *
  * @export
  * @returns {Object} JSON structure
  */
@@ -18,7 +18,7 @@ export function getGroups() {
 
 /**
  * Create a new group under a parent group
- * 
+ *
  * @export
  * @param {string} parentId
  * @param {string} groupName
@@ -36,9 +36,9 @@ export function createGroup(parentId, groupName) {
   if (!group) {
     throw new Error('Group has not been found.');
   }
-  
+
   group.createGroup(groupName);
-  
+
   if (groupName.toLowerCase() !== 'untitled') {
     save();
   }
@@ -46,7 +46,7 @@ export function createGroup(parentId, groupName) {
 
 /**
  * Delete a group
- * 
+ *
  * @export
  * @param {string} groupId
  */
@@ -56,7 +56,7 @@ export function deleteGroup(groupId) {
 
   if (!group) {
     throw new Error('Group has not been found.');
-  } 
+  }
 
   group.delete();
   save();
@@ -64,7 +64,7 @@ export function deleteGroup(groupId) {
 
 /**
  * Save group title
- * 
+ *
  * @export
  * @param {string} groupId
  * @param {string} title
@@ -75,7 +75,7 @@ export function saveGroup(groupId, title) {
 
   if (!group) {
     throw new Error('Group has not been found.');
-  } 
+  }
 
   group.setTitle(title);
   save();

@@ -5,8 +5,8 @@ import FileOpener from '../containers/file-opener';
 
 const Intro = () => (
   <Flex flexAuto>
-    <FileOpener/>
-    <RecentFiles/>
+    <FileOpener />
+    <RecentFiles />
   </Flex>
 );
 

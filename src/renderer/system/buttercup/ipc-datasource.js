@@ -8,7 +8,6 @@ const registerDatasource = DatasourceAdapter.registerDatasource;
  * @augments TextDatasource
  */
 export class IpcDatasource extends TextDatasource {
-
   constructor(filePath) {
     super('');
     this.path = filePath;
@@ -44,7 +43,6 @@ export class IpcDatasource extends TextDatasource {
       path: this.path
     };
   }
-
 }
 
 IpcDatasource.fromObject = obj => {

@@ -96,6 +96,6 @@ export const loadArchiveFromSource = payload => dispatch => {
       dispatch(loadArchiveFromFile(config));
       break;
     default:
-      return;
+      break;
   }
 };

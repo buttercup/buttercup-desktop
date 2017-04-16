@@ -37,11 +37,11 @@ const LogoLink = styled(Link)`
 const TypeSelector = () => (
   <Flex wrap flexAuto align="center" justify="center">
     <LogoLink to="/dropbox">
-      <img src={dropboxLogo}/>
+      <img src={dropboxLogo} />
       <span>Dropbox</span>
     </LogoLink>
     <LogoLink to="/owncloud">
-      <img src={ownCloud}/>
+      <img src={ownCloud} />
       <span>OwnCloud</span>
     </LogoLink>
     <LogoLink to="/webdav">

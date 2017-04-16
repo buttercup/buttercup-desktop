@@ -8,14 +8,14 @@ const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, colum
   return (
     <div>
       {
-        (currentArchive === null) ?
-          <Intro/> :
-          <Archive
+        (currentArchive === null)
+          ? <Intro />
+          : <Archive
             columnSizes={columnSizes}
             onColumnSizeChange={setColumnSize}
             />
       }
-      <UpdateNotice {...update} onClick={() => installUpdate()}/>
+      <UpdateNotice {...update} onClick={() => installUpdate()} />
     </div>
   );
 };

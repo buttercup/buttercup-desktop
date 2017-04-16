@@ -5,7 +5,8 @@
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
-    "test": "ava",
+    "test": "ava && yarn lint",
+    "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
     "build": "npm run build:main && npm run build:renderer",
@@ -134,11 +135,15 @@
     "electron-installer-dmg": "^0.1.2",
     "electron-json-storage": "^3.0.2",
     "electron-rpc": "^2.0.1",
-    "eslint": "^3.15.0",
-    "eslint-config-xo-react": "^0.8.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-config-standard-react": "^4.3.0",
     "eslint-import-resolver-webpack": "^0.8.1",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^5.2.2",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1",
     "extract-text-webpack-plugin": "2.0.0-rc.0",
     "file-loader": "^0.10.1",
     "fixed-data-table-2": "^0.7.12",
@@ -192,52 +197,6 @@
     "webdav-fs": "^1.0.0-rc7",
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0",
-    "webpack-merge": "^2.6.0",
-    "xo": "^0.17.1"
-  },
-  "xo": {
-    "parser": "babel-eslint",
-    "extends": "xo-react",
-    "esnext": true,
-    "space": 2,
-    "envs": [
-      "node",
-      "browser",
-      "ava",
-      "electron"
-    ],
-    "ignores": [
-      "**/Gruntfile.js",
-      "tools/**",
-      "release/**",
-      "app/**"
-    ],
-    "globals": [
-      "Buttercup"
-    ],
-    "settings": {
-      "import/resolver": {
-        "webpack": {
-          "config": "./config/webpack.config.production.js"
-        }
-      }
-    },
-    "rules": {
-      "comma-dangle": "off",
-      "no-unused-expressions": "off",
-      "space-before-function-paren": "off",
-      "quote-props": "off",
-      "no-use-before-define": "off",
-      "no-trailing-spaces": "off",
-      "xo/filename-case": "off",
-      "react/jsx-no-bind": "off",
-      "react/jsx-space-before-closing": "off",
-      "babel/new-cap": "off",
-      "object-curly-spacing": "off",
-      "import/no-extraneous-dependencies": "off",
-      "import/prefer-default-export": "off",
-      "import/extensions": "off",
-      "import/no-unassigned-import": "off"
-    }
+    "webpack-merge": "^2.6.0"
   }
 }

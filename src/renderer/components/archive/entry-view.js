@@ -16,8 +16,8 @@ const EntryView = ({entry}) => (
       </div>
     ))}
     <h6 className={heading}>Custom Fields:</h6>
-    {entry.meta.length > 0 ?
-      (<div className={metaWrapper}>
+    {entry.meta.length > 0
+      ? (<div className={metaWrapper}>
         {entry.meta.map(meta => (
           <div className={formRow} key={meta.key}>
             <div className={labelWrapper}>{meta.key}</div>
@@ -26,8 +26,8 @@ const EntryView = ({entry}) => (
             </div>
           </div>
         ))}
-      </div>) :
-      (<EmptyView
+      </div>)
+      : (<EmptyView
         caption="No custom fields yet. Why not add one?"
         imageSrc={bubbleImage}
         />)

@@ -5,7 +5,7 @@ export default function archivesReducer(state = [], action) {
   switch (action.type) {
     case ARCHIVES_ADD:
       return {
-        ...state, 
+        ...state,
         [action.payload.id]: action.payload
       };
     case ARCHIVES_REMOVE: {

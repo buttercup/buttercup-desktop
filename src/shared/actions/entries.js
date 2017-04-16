@@ -44,7 +44,7 @@ export const newEntry = newValues => (dispatch, getState) => {
   if (!currentGroupId) {
     return null;
   }
-  
+
   entryTools.createEntry(newValues, currentGroupId).then(entryObj => {
     dispatch({
       type: ENTRIES_CREATE,

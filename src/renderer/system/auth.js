@@ -40,7 +40,7 @@ export function authenticateDropbox() {
       if (foundToken) {
         resolve(foundToken);
       } else {
-        reject('Auth unsuccessful.');
+        reject(new Error('Auth unsuccessful.'));
       }
     };
 

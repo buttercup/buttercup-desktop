@@ -16,7 +16,7 @@ const Column = ({
       {header}
     </header>}
     <section className={cx(styles.content, contentClassName)}>
-    {children}
+      {children}
     </section>
     {footer && <footer className={cx(styles.bar, styles.footer, light && styles.light)}>
       {footer}

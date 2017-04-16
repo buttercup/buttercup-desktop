@@ -3,6 +3,6 @@ import { render } from 'react-dom';
 import FileManager from './components/file-manager';
 
 render(
-  <FileManager/>,
+  <FileManager />,
   document.getElementById('root')
 );

@@ -56,7 +56,7 @@ class TreeView extends Component {
     } else {
       showContextMenu([
         {
-          label: 'Add Group', 
+          label: 'Add Group',
           click: () => this.handleAddClick(null, groupId)
         },
         { type: 'separator' },
@@ -152,11 +152,11 @@ class TreeView extends Component {
             onClick={this.handleAddClick}
             dark
             full
-            icon={<PlusIcon/>}
+            icon={<PlusIcon />}
             >New Group</Button>
         }
         className={cx(styles.column, isOSX() && styles.mac)}
-        onContextMenu={this.handleColumnRightClick.bind(this)}
+        onContextMenu={() => this.handleColumnRightClick()}
         >
         <Tree
           draggable

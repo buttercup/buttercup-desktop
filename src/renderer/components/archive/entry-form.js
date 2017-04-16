@@ -9,7 +9,7 @@ import Input from './entry-input';
 const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types
   <div>
     <div className={styles.metaWrapper}>
-      {fields.map((member, index) => 
+      {fields.map((member, index) =>
         <div className={styles.formRow} key={index}>
           <div className={styles.labelWrapper}>
             <Field
@@ -27,7 +27,7 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
             />
           <Button
             onClick={() => fields.remove(index)}
-            icon={<RemoveIcon/>}
+            icon={<RemoveIcon />}
             />
         </div>
       )}
@@ -38,7 +38,7 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
         e.stopPropagation();
         e.preventDefault();
       }}
-      icon={<PlusIcon/>}
+      icon={<PlusIcon />}
       >Add New Field</Button>
     {touched && error && <span>{error}</span>}
   </div>
@@ -53,26 +53,24 @@ class EntryForm extends Component {
         >
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">Title</label>
-          <Field name="properties.title" component={Input} type="text" placeholder="Untitled"/>
+          <Field name="properties.title" component={Input} type="text" placeholder="Untitled" />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.username">Username</label>
-          <Field name="properties.username" component={Input} type="text" placeholder="@username..."/>
+          <Field name="properties.username" component={Input} type="text" placeholder="@username..." />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.password">Password</label>
-          <Field name="properties.password" component={Input} type="password" placeholder="Secure password..."/>
+          <Field name="properties.password" component={Input} type="password" placeholder="Secure password..." />
         </div>
         <h6 className={styles.heading}>Custom Fields:</h6>
-        <FieldArray name="meta" component={renderMeta}/>
+        <FieldArray name="meta" component={renderMeta} />
       </form>
     );
   }
 }
 
 EntryForm.propTypes = {
-  entry: PropTypes.object,
-  dirty: PropTypes.bool,
   handleSubmit: PropTypes.func
 };
 

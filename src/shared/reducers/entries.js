@@ -81,7 +81,7 @@ function mode(state = 'view', action) {
     case ENTRIES_CHANGE_MODE:
       if (['edit', 'view', 'new'].indexOf(action.payload) !== -1) {
         return action.payload;
-      } 
+      }
       return state;
     case ENTRIES_SELECTED:
       return 'view';

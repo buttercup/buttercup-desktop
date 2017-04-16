@@ -42,7 +42,7 @@ class Entry extends Component {
           <div>
             <Button
               onClick={() => this.props.onDelete(this.props.entry.id)}
-              icon={<TrashIcon/>}
+              icon={<TrashIcon />}
               danger
               >Delete</Button>
           </div>
@@ -76,14 +76,14 @@ class Entry extends Component {
 
   renderViewMode() {
     return {
-      content: <EntryView entry={this.props.entry}/>,
-      footer: <Button onClick={this.props.handleEditMode} icon={<EditIcon/>}>Edit</Button>
+      content: <EntryView entry={this.props.entry} />,
+      footer: <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>Edit</Button>
     };
   }
 
   renderIdleMode() {
     return {
-      content: <EmptyView caption="Select or Create an Entry" imageSrc={bench}/>,
+      content: <EmptyView caption="Select or Create an Entry" imageSrc={bench} />,
       footer: null
     };
   }

@@ -5,7 +5,7 @@ const currentWindow = remote.getCurrentWindow();
 
 export function copyToClipboard(text) {
   clipboard.writeText(text);
-} 
+}
 
 // http://stackoverflow.com/a/6150060/172805
 export function selectElementContents(el) {
