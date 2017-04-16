@@ -83,5 +83,15 @@ export function getArchive() {
 }
 
 export function saveWorkspace() {
-  return getWorkspace().instance.save();
+  const workspace = getWorkspace().instance;
+  return workspace
+    .localDiffersFromRemote()
+    .then(differs => differs ?
+      workspace.mergeSaveablesFromRemote().then(() => true) :
+      false
+    )
+    .then(shouldSave => shouldSave ?
+      workspace.save() :
+      null
+    );
 }
