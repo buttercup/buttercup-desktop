@@ -6,20 +6,21 @@ import configureStore from '../shared/store/configure-store';
 import { loadArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
-import { getCurrentEntry } from '../shared/selectors';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
-import { copyToClipboard, setWindowSize } from './system/utils';
+import { setWindowSize } from './system/utils';
+import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
-setWindowSize(870, 550);
-
 const store = configureStore({}, 'renderer');
+
+setWindowSize(870, 550);
+setupShortcuts(store);
 
 rpc.on('ready', () => {
   rpc.emit('init');
@@ -31,17 +32,6 @@ rpc.on('load-archive', payload => {
 
 rpc.on('is-in-workspace', () => {
   rpc.emit('in-workspace', getWorkspace() !== null);
-});
-
-rpc.on('copy-current-password', () => {
-  const selection = window.getSelection().toString();
-  const currentEntry = getCurrentEntry(store.getState());
-
-  if (selection !== '') {
-    copyToClipboard(selection);
-  } else if (currentEntry) {
-    copyToClipboard(currentEntry.properties.password);
-  }
 });
 
 rpc.on('size-change', size => {

@@ -18,13 +18,9 @@ export default [
     role: 'cut'
   },
   {
-    label: 'Copy Password',
+    label: 'Copy',
     accelerator: 'CmdOrCtrl+C',
-    click(item, focusedWindow) {
-      if (focusedWindow) {
-        focusedWindow.rpc.emit('copy-current-password');
-      }
-    }
+    role: 'copy'
   },
   {
     label: 'Paste',
