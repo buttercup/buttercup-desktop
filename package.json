@@ -162,6 +162,7 @@
     "lodash": "^4.16.6",
     "makedeb": "0.0.4",
     "minimist": "^1.2.0",
+    "mousetrap": "^1.6.1",
     "ms": "^0.7.2",
     "node-noop": "^1.0.0",
     "node-sass": "^3.10.1",
