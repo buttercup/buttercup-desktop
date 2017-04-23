@@ -2,15 +2,14 @@ import { saveWorkspace as save, getArchive } from './archive';
 
 function entryToObj(entry) {
   const obj = entry.toObject();
-  return Object.assign(
-    obj,
-    {
-      meta: Object.keys(obj.meta).map(metaKey => ({
-        key: metaKey,
-        value: obj.meta[metaKey]
-      }))
-    }
-  );
+  return {
+    ...obj,
+    isInTrash: entry.isInTrash(),
+    meta: Object.keys(obj.meta).map(metaKey => ({
+      key: metaKey,
+      value: obj.meta[metaKey]
+    }))
+  };
 }
 
 export function loadEntries(groupId) {

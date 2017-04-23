@@ -30,6 +30,7 @@ class Entries extends Component {
       },
       {
         label: 'Move to Trash',
+        enabled: !entry.isInTrash,
         click() {
           onDelete(entry.id);
         }
