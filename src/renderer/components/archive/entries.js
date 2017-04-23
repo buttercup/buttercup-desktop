@@ -29,7 +29,7 @@ class Entries extends Component {
         })
       },
       {
-        label: 'Move to Trash',
+        label: entry.isInTrash ? 'Delete Permanently' : 'Move to Trash',
         click() {
           onDelete(entry.id);
         }
