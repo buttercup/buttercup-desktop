@@ -56,7 +56,7 @@ class TreeLabel extends Component {
               this._input = c;
             }}
             />
-        ) : title}
+        ) : (title.trim() || <i>Untitled</i>)}
       </span>
     );
   }
