@@ -7,6 +7,10 @@ export function copyToClipboard(text) {
   clipboard.writeText(text);
 }
 
+export function readClipboard() {
+  return clipboard.readText();
+}
+
 // http://stackoverflow.com/a/6150060/172805
 export function selectElementContents(el) {
   const range = document.createRange();
