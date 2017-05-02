@@ -156,6 +156,7 @@
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
     "humanize": "^0.0.9",
+    "is-error": "^2.2.1",
     "jsdom": "^9.8.3",
     "json-loader": "^0.5.4",
     "load-grunt-tasks": "^3.3.0",
