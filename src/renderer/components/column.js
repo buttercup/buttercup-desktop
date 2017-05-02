@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import cx from 'classnames';
 import styles from '../styles/column';
 
@@ -15,9 +16,9 @@ const Column = ({
     {header && <header className={cx(styles.bar, styles.header)}>
       {header}
     </header>}
-    <section className={cx(styles.content, contentClassName)}>
+    <Scrollbars className={cx(styles.content, contentClassName)}>
       {children}
-    </section>
+    </Scrollbars>
     {footer && <footer className={cx(styles.bar, styles.footer, light && styles.light)}>
       {footer}
     </footer>}
