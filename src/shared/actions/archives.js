@@ -1,4 +1,5 @@
 import path from 'path';
+import isError from 'is-error';
 import { createAction } from 'redux-actions';
 import { loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { ArchiveTypes } from '../buttercup/types';
@@ -18,7 +19,14 @@ export const clearArchives = createAction(ARCHIVES_CLEAR);
 
 export const loadArchive = payload => async (dispatch, getState) => {
   const archive = await showPasswordDialog(
-    password => loadWorkspace(payload, password)
+    password => loadWorkspace(payload, password).catch(err => {
+      const unknownMessage = 'An unknown error has occurred';
+      return Promise.reject(
+        isError(err)
+          ? err.message || unknownMessage
+          : unknownMessage
+      );
+    })
   );
 
   dispatch(setCurrentArchive(archive.id));
