@@ -3,19 +3,13 @@ import { BrowserWindow, dialog } from 'electron';
 import { ArchiveTypes } from '../../shared/buttercup/types';
 import { isWindows } from './platform';
 import { getWindowManager } from './window-manager';
-import { importKeepass } from './buttercup';
+import { importArchive } from './buttercup';
 
 const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [{
     name: 'Buttercup Archives',
     extensions: ['bcup']
-  }]
-};
-const keepassDialogOptions = {
-  filters: [{
-    name: 'KeePass Archives',
-    extensions: ['kdbx']
   }]
 };
 
@@ -111,46 +105,89 @@ export function openFile(focusedWindow) {
 }
 
 /**
- * Import a KeePass archive
- *
  * @param {BrowserWindow} focusedWindow
+ * @param {string} type
  */
-export function openKeepassFile(focusedWindow) {
-  const showKeepassDialog = function(focusedWindow) {
-    const filename = dialog.showOpenDialog(focusedWindow, {
-      ...keepassDialogOptions,
-      title: 'Load a Keepass archive'
-    });
-
-    if (filename && filename.length > 0) {
-      focusedWindow.rpc.emit('import-history-prompt');
-      focusedWindow.rpc.once('import-history-prompt-resp', password => {
-        importKeepass(filename[0], password)
-          .then(history => {
-            focusedWindow.rpc.emit('import-history', { history });
-          }).catch(err => {
-            setTimeout(() => {
-              dialog.showMessageBox(focusedWindow, {
-                buttons: ['OK'],
-                title: 'Import failed.',
-                message: `Importing from KeePass archive failed: ${err.message}`
-              });
-            }, 10);
-          });
-      });
+const showImportDialog = function(focusedWindow, type) {
+  const types = {
+    '1pif': {
+      password: false,
+      name: '1Password'
+    },
+    'kdbx': {
+      password: true,
+      name: 'KeePass'
     }
   };
+  const typeInfo = types[type];
+
+  if (!Object.keys(types).includes(type)) {
+    throw new Error('Invalid import type requested');
+  }
+
+  const handleError = err => {
+    setTimeout(() => {
+      dialog.showMessageBox(focusedWindow, {
+        title: 'Import Failed',
+        message: `Importing from ${typeInfo.name} archive failed: ${err.message}`
+      });
+    }, 10);
+  };
+
+  const handleSuccess = history => {
+    focusedWindow.rpc.emit('import-history', { history });
+  };
+
+  const [ filename ] = dialog.showOpenDialog(focusedWindow, {
+    filters: [{
+      name: `${typeInfo.name} Archives`,
+      extensions: [type]
+    }],
+    title: `Load a ${typeInfo.name} archive`
+  });
+
+  if (!filename) {
+    return;
+  }
+
+  if (typeInfo.password) {
+    focusedWindow.rpc.emit('import-history-prompt');
+    focusedWindow.rpc.once('import-history-prompt-resp', password => {
+      importArchive(type, filename, password)
+        .then(handleSuccess)
+        .catch(handleError);
+    });
+  } else {
+    importArchive(type, filename)
+      .then(handleSuccess)
+      .catch(handleError);
+  }
+};
+
+/**
+ * @param {BrowserWindow} focusedWindow
+ * @param {string} type
+ */
+export function openFileForImporting(focusedWindow, type) {
+  if (focusedWindow && focusedWindow.isIntro()) {
+    dialog.showMessageBox(focusedWindow, {
+      title: 'Importing is not available',
+      message: 'To import an archive file, you must unlock a Buttercup archive first.'
+    });
+    return;
+  }
 
   if (!focusedWindow) {
     focusedWindow = BrowserWindow.getFocusedWindow();
   }
+
   if (!focusedWindow) {
     windowManager.buildWindowOfType('main', win => {
-      showKeepassDialog(win);
+      showImportDialog(win, type);
     });
     return;
   }
-  showKeepassDialog(focusedWindow);
+  showImportDialog(focusedWindow, type);
 }
 
 /**
