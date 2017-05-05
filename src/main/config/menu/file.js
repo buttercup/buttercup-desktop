@@ -1,6 +1,5 @@
-import { dialog } from 'electron';
 import { getWindowManager } from '../../lib/window-manager';
-import { openFile, openKeepassFile, newFile } from '../../lib/files';
+import { openFile, openFileForImporting, newFile } from '../../lib/files';
 
 const windowManager = getWindowManager();
 
@@ -24,21 +23,12 @@ export default [
     label: 'Import',
     submenu: [
       {
-        label: 'From KeePass archive',
-        click: (item, focusedWindow) => {
-          if (!focusedWindow) {
-            return;
-          }
-          if (focusedWindow.isIntro()) {
-            dialog.showMessageBox(focusedWindow, {
-              buttons: ['OK'],
-              title: 'Importing is not available',
-              message: 'To import a KeePass archive file, you need to unlock a Buttercup archive first.'
-            });
-            return;
-          }
-          openKeepassFile(focusedWindow);
-        }
+        label: 'From KeePass archive (.kdbx)',
+        click: (item, focusedWindow) => openFileForImporting(focusedWindow, 'kdbx')
+      },
+      {
+        label: 'From 1Password archive (.1pif)',
+        click: (item, focusedWindow) => openFileForImporting(focusedWindow, '1pif')
       }
     ]
   },

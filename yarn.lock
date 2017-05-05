@@ -1779,12 +1779,14 @@ buttercup-generator@^0.0.2:
     mngen "^1.0.0"
     password-generator "^2.1.0"
 
-buttercup-importer@~0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.7.1.tgz#168794bf6a7e2b5085057b9ed1900333450239d8"
+buttercup-importer@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.8.0.tgz#4e13385173ca90ce4d0421c8b7e81e4f1fcf605c"
   dependencies:
-    buttercup "~0.35.0"
+    buttercup "~0.38.1"
+    is-dir "~1.0.0"
     kdbxweb "~1.0.1"
+    pify "~2.3.0"
     xml2js "~0.4.13"
 
 buttercup-ui@^0.5.1:
@@ -1808,18 +1810,6 @@ buttercup-web@~0.25.2:
   dependencies:
     buttercup "~0.37.1"
 
-buttercup@~0.35.0:
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.35.0.tgz#eecdc4f9d82497052f049b36c03470ac7afa3cbf"
-  dependencies:
-    clone "~1.0.2"
-    debug "^2.3.3"
-    gzip-js "~0.3.2"
-    iocane "~0.6.0"
-    node-fetch "~1.6.3"
-    uuid "~2.0.1"
-    webdav-fs "~0.4.0"
-
 buttercup@~0.37.1:
   version "0.37.1"
   resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.37.1.tgz#0b11c74f72342bfc3754cc4215106b53e17d8d9f"
@@ -1830,6 +1820,20 @@ buttercup@~0.37.1:
     iocane "~0.6.0"
     node-fetch "~1.6.3"
     uuid "~2.0.1"
+    webdav-fs "~0.4.0"
+
+buttercup@~0.38.1:
+  version "0.38.1"
+  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.38.1.tgz#f42224dd75ac486829a020d6ce3c4c55667ba364"
+  dependencies:
+    clone "~1.0.2"
+    debug "~2.3.3"
+    gzip-js "~0.3.2"
+    iocane "~0.7.0"
+    node-fetch "~1.6.3"
+    string-hash "^1.1.3"
+    uuid "~2.0.1"
+    verror "~1.9.0"
     webdav-fs "~0.4.0"
 
 bytes@2.3.0:
@@ -2320,7 +2324,7 @@ core-js@^2.0.0, core-js@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
 
-core-util-is@~1.0.0:
+core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
@@ -2637,7 +2641,7 @@ debug@0.7.4, debug@~0.7.0:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
 
-debug@2, debug@2.6.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.3.2, debug@^2.3.3, debug@^2.5.2:
+debug@2, debug@2.6.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.3.2, debug@^2.5.2:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
@@ -3541,6 +3545,10 @@ extract-zip@^1.0.3, extract-zip@^1.6.0:
 extsprintf@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+
+extsprintf@^1.2.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -4494,6 +4502,14 @@ iocane@~0.6.0:
     hash_file "^0.1.1"
     pbkdf2 "~3.0.4"
 
+iocane@~0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.7.0.tgz#f832e61b0f3975d14ef7a79db79134b0b02c4ca7"
+  dependencies:
+    debug "^2.3.2"
+    hash_file "^0.1.1"
+    pbkdf2 "~3.0.4"
+
 ipaddr.js@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.2.0.tgz#8aba49c9192799585bdd643e0ccb50e8ae777ba4"
@@ -4546,6 +4562,10 @@ is-ci@^1.0.10, is-ci@^1.0.7:
 is-date-object@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-date-object/-/is-date-object-1.0.1.tgz#9aa20eb6aeebbff77fbd33e74ca01b33581d3a16"
+
+is-dir@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-dir/-/is-dir-1.0.0.tgz#41d37f495fccacc05a4778d66e83024c292ba3ff"
 
 is-dotfile@^1.0.0:
   version "1.0.2"
@@ -6167,7 +6187,7 @@ performance-now@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
-pify@^2.0.0, pify@^2.3.0:
+pify@^2.0.0, pify@^2.3.0, pify@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
 
@@ -7713,6 +7733,10 @@ strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
 
+string-hash@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/string-hash/-/string-hash-1.1.3.tgz#e8aafc0ac1855b4666929ed7dd1275df5d6c811b"
+
 string-width@^1.0.1, string-width@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-1.0.2.tgz#118bdf5b8cdc51a2a7e70d211e07e2b0b9b107d3"
@@ -8412,6 +8436,14 @@ verror@1.3.6:
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
   dependencies:
     extsprintf "1.0.2"
+
+verror@~1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/verror/-/verror-1.9.0.tgz#107a8a2d14c33586fc4bb830057cd2d19ae2a6ee"
+  dependencies:
+    assert-plus "^1.0.0"
+    core-util-is "1.0.2"
+    extsprintf "^1.2.0"
 
 vm-browserify@0.0.4:
   version "0.0.4"
