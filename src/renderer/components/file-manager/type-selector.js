@@ -4,15 +4,18 @@ import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import { brands } from '../../../shared/buttercup/brands';
 
+const Wrapper = styled(Flex)`
+  padding: var(--spacing-two) var(--spacing-one) 0;
+`;
+
 const LogoLink = styled(Link)`
   display: flex;
-  width: 180px;
-  height: 140px;
+  flex: 0 1 calc((100% / 2) - 20px);
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: var(--spacing-two);
   border: 1px solid var(--gray);
-  margin: 5px;
   border-radius: 5px;
   color: var(--gray-dark);
   text-decoration: none;
@@ -33,7 +36,7 @@ const LogoLink = styled(Link)`
 `;
 
 const TypeSelector = () => (
-  <Flex wrap flexAuto align="center" justify="center">
+  <Wrapper wrap flexAuto alignContent="stretch" justify="space-around">
     {
       Object.keys(brands).map(brand => (
         <LogoLink key={brand} to={`/${brand}`}>
@@ -42,7 +45,7 @@ const TypeSelector = () => (
         </LogoLink>
       ))
     }
-  </Flex>
+  </Wrapper>
 );
 
 export default TypeSelector;

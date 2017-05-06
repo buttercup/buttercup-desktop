@@ -7811,9 +7811,9 @@ styled-components@^1.4.4:
     is-plain-object "^2.0.1"
     supports-color "^3.1.2"
 
-styled-flexbox@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/styled-flexbox/-/styled-flexbox-0.1.2.tgz#b884fa2fe06bde50213abf1a05d40bf8439c0e82"
+styled-flexbox@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/styled-flexbox/-/styled-flexbox-0.2.0.tgz#1d892d47a5a18377d436526413e9ae6a1f661651"
   dependencies:
     prop-types "^15.5.4"
     styled-components "^1.4.4"
