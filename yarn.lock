@@ -158,9 +158,9 @@ ansi-styles@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-1.0.0.tgz#cb102df1c56f5123eab8b67cd7b98027a0279178"
 
-any-fs@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/any-fs/-/any-fs-0.2.0.tgz#2e71314b32344df1cab868a5e0f5bcc6ab173d5a"
+any-fs@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/any-fs/-/any-fs-0.3.0.tgz#3f2247a9181cd03f9db45d88c6670063330b5892"
   dependencies:
     pify "^2.3.0"
 
