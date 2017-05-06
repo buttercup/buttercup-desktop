@@ -3,13 +3,6 @@ import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 
 class SearchField extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: ''
-    };
-  }
-
   handleClearClick() {
     if (this.textInput) {
       this.textInput.value = '';
@@ -42,7 +35,7 @@ class SearchField extends Component {
         <span className={styles.icon}>
           <SearchIcon />
         </span>
-        {this.state.value !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()} />}
+        {filter !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()} />}
       </div>
     );
   }

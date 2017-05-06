@@ -1,3 +1,4 @@
+import { createAction } from 'redux-actions';
 import { showConfirmDialog } from '../../renderer/system/dialog';
 import * as groupTools from '../../renderer/system/buttercup/groups';
 import { loadEntries } from './entries';
@@ -8,14 +9,15 @@ import {
   GROUPS_SET_SORT,
   GROUPS_RESET,
   GROUPS_MOVE,
+  GROUPS_RENAME,
   GROUPS_ADD_NEW_CHILD,
-  GROUPS_DISMISS_NEW_CHILD,
+  GROUPS_DISMISS,
 } from './types';
 
-export const resetGroups = groups => ({
-  type: GROUPS_RESET,
-  payload: groups
-});
+export const resetGroups = createAction(GROUPS_RESET);
+export const renameGroup = createAction(GROUPS_RENAME);
+export const dismissNewGroup = createAction(GROUPS_DISMISS);
+export const setSortMode = createAction(GROUPS_SET_SORT);
 
 export function removeGroup(id) {
   return dispatch => {
@@ -34,13 +36,13 @@ export function addGroup(parentId) {
   };
 }
 
-export const dismissNewGroup = () => ({
-  type: GROUPS_DISMISS_NEW_CHILD
-});
-
-export function saveGroupTitle(parentId, title) {
+export function saveGroup(isNew, groupId, title) {
   return dispatch => {
-    groupTools.createGroup(parentId, title);
+    if (isNew) {
+      groupTools.createGroup(groupId, title);
+    } else {
+      groupTools.saveGroup(groupId, title);
+    }
     dispatch(reloadGroups());
   };
 }
@@ -86,8 +88,3 @@ export const emptyTrash = () => dispatch => {
     dispatch(reloadGroups());
   });
 };
-
-export const setSortMode = sortKey => ({
-  type: GROUPS_SET_SORT,
-  payload: sortKey
-});

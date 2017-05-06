@@ -15,7 +15,9 @@ export function showContextMenu(menu = []) {
   if (Array.isArray(menu)) {
     menu = createMenu(menu);
   }
-  menu.popup(currentWindow);
+  menu.popup(currentWindow, {
+    async: true
+  });
 }
 
 export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToSelf = true) {
