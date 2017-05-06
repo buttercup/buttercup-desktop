@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Scrollbars } from 'react-custom-scrollbars';
 import DeleteIcon from 'react-icons/lib/ti/delete-outline';
 import HistoryIcon from 'react-icons/lib/go/history';
 import CloudIcon from 'react-icons/lib/md/cloud-queue';
@@ -79,20 +80,22 @@ class RecentFiles extends Component {
     }
 
     return (
-      <div className={styles.container} onContextMenu={() => this.showContextMenu()}>
-        <h6 className={styles.heading}>History:</h6>
-        <ul className={styles.list}>
-          {archives.map(archive =>
-            <File
-              archive={archive}
-              key={archive.id}
-              onClick={() => this.props.onClick(archive)}
-              onRemoveClick={() => this.props.onRemoveClick(archive.id)}
-              />
-          )}
-        </ul>
-        <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
-      </div>
+      <Scrollbars className={styles.container} onContextMenu={() => this.showContextMenu()}>
+        <div className={styles.content}>
+          <h6 className={styles.heading}>History:</h6>
+          <ul className={styles.list}>
+            {archives.map(archive =>
+              <File
+                archive={archive}
+                key={archive.id}
+                onClick={() => this.props.onClick(archive)}
+                onRemoveClick={() => this.props.onRemoveClick(archive.id)}
+                />
+            )}
+          </ul>
+          <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
+        </div>
+      </Scrollbars>
     );
   }
 }
