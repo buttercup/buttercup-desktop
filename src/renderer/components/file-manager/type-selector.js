@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import dropboxLogo from '../../styles/img/logos/dropbox.svg';
-import ownCloud from '../../styles/img/logos/owncloud.png';
-import webDAV from '../../styles/img/logos/webdav.png';
+import { brands } from '../../../shared/buttercup/brands';
 
 const LogoLink = styled(Link)`
   display: flex;
@@ -36,18 +34,14 @@ const LogoLink = styled(Link)`
 
 const TypeSelector = () => (
   <Flex wrap flexAuto align="center" justify="center">
-    <LogoLink to="/dropbox">
-      <img src={dropboxLogo} />
-      <span>Dropbox</span>
-    </LogoLink>
-    <LogoLink to="/owncloud">
-      <img src={ownCloud} />
-      <span>OwnCloud</span>
-    </LogoLink>
-    <LogoLink to="/webdav">
-      <img src={webDAV} />
-      <span>WebDAV</span>
-    </LogoLink>
+    {
+      Object.keys(brands).map(brand => (
+        <LogoLink key={brand} to={`/${brand}`}>
+          <img src={brands[brand].logo} />
+          <span>{brands[brand].name}</span>
+        </LogoLink>
+      ))
+    }
   </Flex>
 );
 

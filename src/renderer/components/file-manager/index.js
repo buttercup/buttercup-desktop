@@ -3,6 +3,7 @@ import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from 'buttercup-ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
+import { brands } from '../../../shared/buttercup/brands';
 import '../../styles/workspace.global.scss';
 import { emitActionToParentAndClose, closeCurrentWindow } from '../../system/utils';
 import TypeSelector from './type-selector';
@@ -24,7 +25,9 @@ const PathRenderer = ({ pathName, ...props }) => {
     case '/dropbox':
       return <Dropbox {...props} />;
     case '/owncloud':
-      return <Webdav owncloud {...props} />;
+      return <Webdav brand="owncloud" {...props} />;
+    case '/nextcloud':
+      return <Webdav brand="nextcloud" {...props} />;
     case '/webdav':
       return <Webdav {...props} />;
     default:
@@ -90,9 +93,11 @@ export default class FileManager extends Component {
         <Wrapper flexAuto flexColumn>
           <Flex flexAuto>
             <Route exact path="/" component={TypeSelector} />
-            <Route path="/dropbox" render={this.renderPath} />
-            <Route path="/webdav" render={this.renderPath} />
-            <Route path="/owncloud" render={this.renderPath} />
+            {
+              Object.keys(brands).map(brand => (
+                <Route key={brand} path={`/${brand}`} render={this.renderPath} />
+              ))
+            }
           </Flex>
           <Footer>
             <Flex align="center" width="50%">
