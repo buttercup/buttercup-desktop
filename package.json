@@ -59,10 +59,10 @@
       "ext": "bcup",
       "name": "Buttercup Archive",
       "icon": "./build/icon.icns"
+    },
+    "directories": {
+      "output": "release"
     }
-  },
-  "directories": {
-    "output": "release"
   },
   "repository": {
     "type": "git",
@@ -128,8 +128,8 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "1.5.0",
-    "electron-builder": "^10.6.1",
+    "electron": "^1.6.6",
+    "electron-builder": "^17.3.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
