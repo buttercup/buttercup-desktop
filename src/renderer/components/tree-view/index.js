@@ -108,7 +108,8 @@ class TreeView extends Component {
   }
 
   handleSelect = ([selectedGroupId], { node }) => {
-    if (typeof selectedGroupId === 'string' && !node.props.isNew) {
+    const { isNew, isRenaming } = node.props;
+    if (typeof selectedGroupId === 'string' && !isNew && !isRenaming) {
       this.props.onGroupSelect(selectedGroupId);
     }
   }
@@ -126,6 +127,7 @@ class TreeView extends Component {
           <TreeNode
             isTrash={node.isTrash}
             isNew={node.isNew}
+            isRenaming={node.isRenaming}
             key={node.id}
             className={cx({
               'is-trash': node.isTrash,
