@@ -1804,23 +1804,11 @@ buttercup-ui@^0.5.1:
     styled-components "^1.4.4"
     zxcvbn "^4.4.2"
 
-buttercup-web@~0.25.2:
-  version "0.25.2"
-  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.25.2.tgz#7d805e2c49f54f2ef51cdcf12908d71c0c9c47d8"
+buttercup-web@^0.26.0:
+  version "0.26.0"
+  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.26.0.tgz#0e9b0a313713740c5dc70d0a61f7262910638991"
   dependencies:
-    buttercup "~0.37.1"
-
-buttercup@~0.37.1:
-  version "0.37.1"
-  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.37.1.tgz#0b11c74f72342bfc3754cc4215106b53e17d8d9f"
-  dependencies:
-    clone "~1.0.2"
-    debug "~2.3.3"
-    gzip-js "~0.3.2"
-    iocane "~0.6.0"
-    node-fetch "~1.6.3"
-    uuid "~2.0.1"
-    webdav-fs "~0.4.0"
+    buttercup "~0.38.1"
 
 buttercup@~0.38.1:
   version "0.38.1"
@@ -4493,14 +4481,6 @@ invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
-
-iocane@~0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/iocane/-/iocane-0.6.0.tgz#4e77cc7cb6f40c674ccf5bc40e0d8c73bd93cb22"
-  dependencies:
-    debug "^2.3.2"
-    hash_file "^0.1.1"
-    pbkdf2 "~3.0.4"
 
 iocane@~0.7.0:
   version "0.7.0"

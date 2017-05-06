@@ -50,22 +50,9 @@ export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
   }));
 };
 
-export const loadArchiveFromOwnCloud = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
+export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
   dispatch(loadArchive({
-    type: ArchiveTypes.OWNCLOUD,
-    isNew,
-    path,
-    credentials,
-    datasource: {
-      endpoint,
-      path
-    }
-  }));
-};
-
-export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }) => dispatch => {
-  dispatch(loadArchive({
-    type: ArchiveTypes.WEBDAV,
+    type,
     isNew,
     path,
     credentials,
@@ -95,10 +82,9 @@ export const loadArchiveFromSource = payload => dispatch => {
       dispatch(loadArchiveFromDropbox(config));
       break;
     case ArchiveTypes.OWNCLOUD:
-      dispatch(loadArchiveFromOwnCloud(config));
-      break;
+    case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
-      dispatch(loadArchiveFromWebdav(config));
+      dispatch(loadArchiveFromWebdav(config, type));
       break;
     case ArchiveTypes.FILE:
       dispatch(loadArchiveFromFile(config));
