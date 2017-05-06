@@ -1,63 +1,54 @@
 import React, { Component, PropTypes } from 'react';
-import cx from 'classnames';
-import styles from '../../styles/tree-label';
+import styled from 'styled-components';
+import LabelEditor from './tree-label-edit';
+
+const Node = styled.div`
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
 
 class TreeLabel extends Component {
-  state = {
-    title: 'Untitled'
-  };
-
   static propTypes = {
-    title: PropTypes.string,
-    parentId: PropTypes.string,
-    isNew: PropTypes.bool,
+    node: PropTypes.object,
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onRightClick: PropTypes.func
   };
 
-  handleBlur() {
+  handleSave = title => {
+    const { isNew, parentId, id } = this.props.node;
+    this.props.onSaveClick(
+      isNew,
+      isNew ? parentId : id,
+      title
+    );
+  }
+
+  handleDismiss = () => {
     this.props.onDismissClick();
   }
 
-  handleChange(e) {
-    this.setState({title: e.target.value});
-  }
-
-  handleKeyUp(e) {
-    const { onSaveClick, onDismissClick, parentId } = this.props;
-    if (e.keyCode === 13) {
-      onSaveClick(parentId, this.state.title);
-    } else if (e.keyCode === 27) {
-      onDismissClick();
-    }
-  }
-
-  componentDidMount() {
-    if (this._input) {
-      this._input.focus();
-      this._input.select();
-    }
-  }
-
   render() {
-    const { title, isNew, onRightClick } = this.props;
+    const { node, onRightClick } = this.props;
+    const { title, isNew, isRenaming } = node;
+
+    if (isNew || isRenaming) {
+      return (
+        <Node>
+          <LabelEditor
+            node={node}
+            onSave={this.handleSave}
+            onDismiss={this.handleDismiss}
+            />
+        </Node>
+      );
+    }
 
     return (
-      <span onContextMenu={onRightClick} className={styles.node}>
-        {isNew ? (
-          <input
-            className={cx(styles.node, styles.input)}
-            value={this.state.title}
-            onChange={e => this.handleChange(e)}
-            onKeyUp={e => this.handleKeyUp(e)}
-            onBlur={e => this.handleBlur(e)}
-            ref={c => {
-              this._input = c;
-            }}
-            />
-        ) : (title.trim() || <i>Untitled</i>)}
-      </span>
+      <Node onContextMenu={onRightClick}>
+        {(title.trim() || <i>Untitled</i>)}
+      </Node>
     );
   }
 }

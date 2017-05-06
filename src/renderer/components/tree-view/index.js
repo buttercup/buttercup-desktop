@@ -59,6 +59,10 @@ class TreeView extends Component {
           label: 'Add Group',
           click: () => this.handleAddClick(null, groupId)
         },
+        {
+          label: 'Rename',
+          click: () => this.props.onRenameClick(groupId)
+        },
         { type: 'separator' },
         {
           label: 'Move to Root',
@@ -104,7 +108,8 @@ class TreeView extends Component {
   }
 
   handleSelect = ([selectedGroupId], { node }) => {
-    if (typeof selectedGroupId === 'string' && !node.props.isNew) {
+    const { isNew, isRenaming } = node.props;
+    if (typeof selectedGroupId === 'string' && !isNew && !isRenaming) {
       this.props.onGroupSelect(selectedGroupId);
     }
   }
@@ -122,6 +127,7 @@ class TreeView extends Component {
           <TreeNode
             isTrash={node.isTrash}
             isNew={node.isNew}
+            isRenaming={node.isRenaming}
             key={node.id}
             className={cx({
               'is-trash': node.isTrash,
@@ -130,7 +136,7 @@ class TreeView extends Component {
             )}
             title={
               <TreeLabel
-                {...node}
+                node={node}
                 onRightClick={e => this.handleRightClick(node, groups, e)}
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
@@ -183,6 +189,7 @@ TreeView.propTypes = {
   onSaveClick: PropTypes.func,
   onDismissClick: PropTypes.func,
   onAddClick: PropTypes.func,
+  onRenameClick: PropTypes.func,
   onGroupSelect: PropTypes.func,
   onEmptyTrash: PropTypes.func,
   onMoveGroup: PropTypes.func,
