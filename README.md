@@ -27,6 +27,15 @@ Buttercup uses a delta-system to manage archive changes and save conflicts. The 
 
 Because security with password storage is of the utmost importance, Buttercup will remain in alpha/beta release mode until some level of professional scrutiny has occurred. It is completely possible that security-related changes will occur, but this is inevitable and we handle every question and criticism with great care when it comes to the safety of using our software.
 
+## Features
+Buttercup supports loading and saving credentials archives both locally and remotely. Remote archives can be stored in a variety of service providers like Dropbox, ownCloud and Nextcloud (and others that support WebDAV, such as Yandex).
+
+Archives store groups and entries in a simple hierarchy. Both groups and entries can be moved into other groups. Deleted items are trashed before being removed permanently.
+
+Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
+
+You can import from other password managers (such as 1Password and KeePass) by opening your archive and choosing Import from the menu.
+
 ## Development
 If you're interested in developing Buttercup:
 
