@@ -30,8 +30,9 @@ export default class LabelEditor extends Component {
   }
 
   handleKeyUp(e) {
-    if (e.keyCode === 13) {
-      this.props.onSave(this.state.title);
+    const title = this.state.title.trim();
+    if (e.keyCode === 13 && title !== '') {
+      this.props.onSave(title);
     } else if (e.keyCode === 27) {
       this.props.onDismiss();
     }
