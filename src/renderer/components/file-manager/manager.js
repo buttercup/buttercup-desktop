@@ -75,7 +75,7 @@ class Manager extends Component {
           name: 'untitled.bcup',
           type: 'file',
           size: 0,
-          mtime: null,
+          mtime: new Date(),
           isNew: true,
           editing: true
         },
