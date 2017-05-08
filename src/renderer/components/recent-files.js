@@ -66,7 +66,7 @@ class RecentFiles extends Component {
 
   renderEmptyState() {
     return (
-      <div className={styles.container}>
+      <div className={styles.emptyContainer}>
         <EmptyView caption="No archives yet." />
       </div>
     );
