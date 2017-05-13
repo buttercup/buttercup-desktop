@@ -16,8 +16,10 @@ const Column = ({
     {header && <header className={cx(styles.bar, styles.header)}>
       {header}
     </header>}
-    <Scrollbars className={cx(styles.content, contentClassName)}>
-      {children}
+    <Scrollbars>
+      <section className={cx(styles.content, contentClassName)}>
+        {children}
+      </section>
     </Scrollbars>
     {footer && <footer className={cx(styles.bar, styles.footer, light && styles.light)}>
       {footer}
