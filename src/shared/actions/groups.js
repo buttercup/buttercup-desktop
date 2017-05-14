@@ -83,8 +83,10 @@ export function loadGroup(groupId) {
 }
 
 export const emptyTrash = () => dispatch => {
-  showConfirmDialog('Are you sure you want to empty Trash?', () => {
-    groupTools.emptyTrash();
-    dispatch(reloadGroups());
+  showConfirmDialog('Are you sure you want to empty Trash?', resp => {
+    if (resp === 0) {
+      groupTools.emptyTrash();
+      dispatch(reloadGroups());
+    }
   });
 };
