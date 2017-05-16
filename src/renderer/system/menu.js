@@ -1,5 +1,7 @@
 import path from 'path';
 import { remote } from 'electron';
+import capitalize from 'lodash/capitalize';
+import { copyToClipboard } from './utils';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -72,9 +74,40 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
         icon: sort.icon,
         click: () => onChange(sort.mode)
       })),
-      {
-        type: 'separator'
-      }
+      { type: 'separator' }
     );
   }, []);
+}
+
+export function createCopyMenu(entry, currentEntry) {
+  const url = entry.meta.find(meta => /^url$/i.test(meta.key));
+  const meta = entry.meta.filter(meta => meta !== url);
+  const props = [
+    {
+      label: 'Username',
+      click: () => copyToClipboard(entry.properties.username)
+    },
+    {
+      label: 'Password',
+      accelerator: currentEntry.id === entry.id ? 'CmdOrCtrl+C' : null,
+      click: () => copyToClipboard(entry.properties.password)
+    }
+  ];
+
+  // If URL is found, include it
+  if (url) {
+    props.push({
+      label: 'URL',
+      click: () => copyToClipboard(url.value)
+    });
+  }
+
+  return createMenu([
+    ...props,
+    { type: 'separator' },
+    ...meta.map(meta => ({
+      label: capitalize(meta.key),
+      click: () => copyToClipboard(meta.value)
+    }))
+  ]);
 }
