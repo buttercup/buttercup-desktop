@@ -138,6 +138,7 @@
     "electron-installer-dmg": "^0.1.2",
     "electron-json-storage": "^3.0.2",
     "electron-rpc": "^2.0.1",
+    "electron-unhandled": "^0.1.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^4.3.0",
