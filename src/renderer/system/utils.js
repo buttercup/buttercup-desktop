@@ -1,5 +1,5 @@
 import path from 'path';
-import { clipboard, remote } from 'electron';
+import { clipboard, remote, shell } from 'electron';
 
 const currentWindow = remote.getCurrentWindow();
 
@@ -9,6 +9,10 @@ export function copyToClipboard(text) {
 
 export function readClipboard() {
   return clipboard.readText();
+}
+
+export function openUrl(url) {
+  shell.openExternal(url);
 }
 
 // http://stackoverflow.com/a/6150060/172805

@@ -1,7 +1,7 @@
 import path from 'path';
 import { remote } from 'electron';
 import capitalize from 'lodash/capitalize';
-import { copyToClipboard } from './utils';
+import { copyToClipboard, openUrl } from './utils';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -89,7 +89,9 @@ export function createCopyMenu(entry, currentEntry) {
     },
     {
       label: 'Password',
-      accelerator: currentEntry.id === entry.id ? 'CmdOrCtrl+C' : null,
+      accelerator: (currentEntry && currentEntry.id === entry.id)
+        ? 'CmdOrCtrl+C'
+        : null,
       click: () => copyToClipboard(entry.properties.password)
     }
   ];
@@ -102,12 +104,26 @@ export function createCopyMenu(entry, currentEntry) {
     });
   }
 
-  return createMenu([
-    ...props,
-    { type: 'separator' },
-    ...meta.map(meta => ({
-      label: capitalize(meta.key),
-      click: () => copyToClipboard(meta.value)
-    }))
-  ]);
+  const menu = [
+    {
+      label: 'Copy To Clipboard',
+      submenu: [
+        ...props,
+        { type: 'separator' },
+        ...meta.map(meta => ({
+          label: capitalize(meta.key),
+          click: () => copyToClipboard(meta.value)
+        }))
+      ]
+    }
+  ];
+
+  if (url) {
+    menu.push({
+      label: 'Open URL in Browser',
+      click: () => openUrl(url.value)
+    });
+  }
+
+  return menu;
 }

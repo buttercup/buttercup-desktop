@@ -22,10 +22,7 @@ class Entries extends Component {
   onRightClick(entry) {
     const { groups, currentGroup, currentEntry, onEntryMove, onDelete } = this.props;
     showContextMenu([
-      {
-        label: 'Copy to Clipboard',
-        submenu: createCopyMenu(entry, currentEntry)
-      },
+      ...createCopyMenu(entry, currentEntry),
       { type: 'separator' },
       {
         label: 'Move to Group',
