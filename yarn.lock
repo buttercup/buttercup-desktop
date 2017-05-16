@@ -2021,6 +2021,10 @@ clean-css@^3.1.9:
     commander "2.8.x"
     source-map "0.4.x"
 
+clean-stack@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/clean-stack/-/clean-stack-1.2.0.tgz#a465128d62c31fb1a3606d00abfe59dcf652f568"
+
 clean-yaml-object@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/clean-yaml-object/-/clean-yaml-object-0.1.0.tgz#63fb110dc2ce1a84dc21f6d9334876d010ae8b68"
@@ -3089,6 +3093,12 @@ electron-rpc@^2.0.1:
 electron-to-chromium@^1.2.0, electron-to-chromium@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.2.1.tgz#63ac7579a1c5bedb296c8607621f2efc9a54b968"
+
+electron-unhandled@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/electron-unhandled/-/electron-unhandled-0.1.1.tgz#ff26ec781cccb130b295d43bf406c1ebc05fe1d5"
+  dependencies:
+    clean-stack "^1.2.0"
 
 electron@^1.6.6:
   version "1.6.6"
