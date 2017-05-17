@@ -80,18 +80,18 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
 }
 
 export function createCopyMenu(entry, currentEntry) {
+  const showKeys = (currentEntry && currentEntry.id === entry.id);
   const url = entry.meta.find(meta => /^url$/i.test(meta.key));
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [
     {
       label: 'Username',
+      accelerator: showKeys ? 'CmdOrCtrl+B' : null,
       click: () => copyToClipboard(entry.properties.username)
     },
     {
       label: 'Password',
-      accelerator: (currentEntry && currentEntry.id === entry.id)
-        ? 'CmdOrCtrl+C'
-        : null,
+      accelerator: showKeys ? 'CmdOrCtrl+C' : null,
       click: () => copyToClipboard(entry.properties.password)
     }
   ];
