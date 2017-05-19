@@ -83,7 +83,11 @@ class Entry extends Component {
 
   renderIdleMode() {
     return {
-      content: <EmptyView caption="Select or Create an Entry" imageSrc={bench} />,
+      content: <EmptyView
+        caption="Select or Create an Entry"
+        className={styles.emptyView}
+        imageSrc={bench}
+        />,
       footer: null
     };
   }
