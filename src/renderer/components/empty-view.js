@@ -7,13 +7,17 @@ const Caption = styled.figcaption`
   font-weight: 300;
 `;
 
+const Figure = styled.figure`
+  text-align: center;
+`;
+
 const EmptyView = ({ caption, imageSrc, className }) => {
   return (
     <Flex align="center" justify="center" flexAuto className={className}>
-      <figure>
+      <Figure>
         {imageSrc && <img src={imageSrc} />}
         <Caption>{caption}</Caption>
-      </figure>
+      </Figure>
     </Flex>
   );
 };
