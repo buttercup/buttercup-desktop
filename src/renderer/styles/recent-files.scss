@@ -9,6 +9,7 @@
 .emptyContainer {
   @extend .container;
   flex: 1;
+  display: flex;
 }
 
 .content {

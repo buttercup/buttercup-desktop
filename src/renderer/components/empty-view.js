@@ -1,19 +1,30 @@
 import React, { PropTypes } from 'react';
-import styles from '../styles/empty-view';
+import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 
-const EmptyView = ({ caption, imageSrc }) => {
+const Caption = styled.figcaption`
+  color: var(--gray-dark);
+  font-weight: 300;
+`;
+
+const Figure = styled.figure`
+  text-align: center;
+`;
+
+const EmptyView = ({ caption, imageSrc, className }) => {
   return (
-    <div className={styles.wrapper}>
-      <figure>
+    <Flex align="center" justify="center" flexAuto className={className}>
+      <Figure>
         {imageSrc && <img src={imageSrc} />}
-        <figcaption className={styles.caption}>{caption}</figcaption>
-      </figure>
-    </div>
+        <Caption>{caption}</Caption>
+      </Figure>
+    </Flex>
   );
 };
 
 EmptyView.propTypes = {
   caption: PropTypes.string,
+  className: PropTypes.string,
   imageSrc: PropTypes.string
 };
 
