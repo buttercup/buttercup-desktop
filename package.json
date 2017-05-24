@@ -95,6 +95,7 @@
   "homepage": "https://buttercup.pw",
   "dependencies": {},
   "devDependencies": {
+    "@buttercup/ui": "^0.6.0",
     "@types/electron": "^1.4.29",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -121,7 +122,6 @@
     "babel-register": "^6.18.0",
     "babili-webpack-plugin": "^0.0.8",
     "buttercup-importer": "^0.8.0",
-    "buttercup-ui": "^0.5.1",
     "buttercup-web": "~0.25.2",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",

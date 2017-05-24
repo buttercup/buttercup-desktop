@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
 
