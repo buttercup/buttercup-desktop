@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import cx from 'classnames';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import { isOSX } from '../../system/utils';
 import { showContextMenu, createMenuFromGroups, createCopyMenu } from '../../system/menu';
 import Column from '../column';

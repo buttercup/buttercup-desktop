@@ -4,28 +4,11 @@ import { Flex } from 'styled-flexbox';
 import CopyIcon from 'react-icons/lib/go/clippy';
 import EyeIcon from 'react-icons/lib/fa/eye';
 import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
-import { Button, ButtonRow } from 'buttercup-ui';
+import { Button, ButtonRow, ColoredDigits } from '@buttercup/ui';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
 
-const PasswordBase = ({ className, password, concealed, ...props }) => {
-  const splitted = password.split(/(\d+)/g);
-  return (
-    <span className={className} {...props} >
-      {concealed ? '●'.repeat(10) : splitted.map(
-        (chunk, i) => <span key={i} className={/^\d+$/.test(chunk) ? 'num' : 'str'}>{chunk}</span>
-      )}
-    </span>
-  );
-};
-
-PasswordBase.propTypes = {
-  className: PropTypes.string,
-  password: PropTypes.string,
-  concealed: PropTypes.bool
-};
-
-const Password = styled(PasswordBase)`
+const Password = styled(ColoredDigits)`
   font-family: Anonymous;
   font-size: 14px;
   font-weight: bold;
@@ -105,7 +88,7 @@ class Copyable extends Component {
   }
 
   renderPassword(content) {
-    return (<Password role="content" password={content} concealed={this.state.concealed} />);
+    return (<Password role="content" value={content} concealed={this.state.concealed} />);
   }
 
   render() {

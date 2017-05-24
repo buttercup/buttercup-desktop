@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
-import { Button, SmallType, Center } from 'buttercup-ui';
+import { Button, SmallType, Center } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';

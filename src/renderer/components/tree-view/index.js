@@ -3,7 +3,7 @@ import { isString } from 'lodash';
 import cx from 'classnames';
 import Tree, { TreeNode } from 'rc-tree';
 import PlusIcon from 'react-icons/lib/md/add';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import { showContextMenu, createMenuFromGroups, createSortMenu } from '../../system/menu';
 import { isOSX } from '../../system/utils';
 import '../../styles/tree-view.global';
