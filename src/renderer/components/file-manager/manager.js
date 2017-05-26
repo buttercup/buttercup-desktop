@@ -1,4 +1,4 @@
-import url from 'url';
+import path from 'path';
 import React, { Component, PropTypes } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
@@ -43,7 +43,7 @@ class Manager extends Component {
       if (fileObj.type !== 'directory') {
         return;
       }
-      pathToNavigate = url.resolve(currentPath, fileObj.name);
+      pathToNavigate = path.posix.resolve(currentPath, fileObj.name);
     }
 
     this.fs.readDirectory(pathToNavigate, { mode: 'stat' }).then(result => {
@@ -139,7 +139,7 @@ class Manager extends Component {
 
     if (onSelectFile) {
       onSelectFile(
-        file ? url.resolve(this.state.currentPath, file.name) : null,
+        file ? path.posix.resolve(this.state.currentPath, file.name) : null,
         file ? file.isNew || false : null
       );
     }
