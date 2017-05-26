@@ -117,6 +117,10 @@ const showImportDialog = function(focusedWindow, type) {
     'kdbx': {
       password: true,
       name: 'KeePass'
+    },
+    'csv': {
+      password: false,
+      name: 'LastPass'
     }
   };
   const typeInfo = types[type];
