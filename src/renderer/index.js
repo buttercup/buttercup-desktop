@@ -13,13 +13,17 @@ import { setWindowSize } from './system/utils';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
+// Unhandled rejections
+const unhandled = require('electron-unhandled');
+unhandled();
+
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
 
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore({}, 'renderer');
 
-setWindowSize(870, 550);
+setWindowSize(870, 550, 'light');
 setupShortcuts(store);
 
 rpc.on('ready', () => {

@@ -1,6 +1,6 @@
 import path from 'path';
 import React, { Component, PropTypes } from 'react';
-import { Input } from 'buttercup-ui';
+import { Input } from '@buttercup/ui';
 import { Cell } from 'fixed-data-table-2';
 import humanize from 'humanize';
 import Icon from '../icon';

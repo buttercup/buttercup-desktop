@@ -46,6 +46,15 @@ export function deepFilter(list, key, fn) {
     }));
 }
 
+export function deepMap(list, key, fn) {
+  return list
+    .map(fn)
+    .map(item => ({
+      ...item,
+      [key]: deepMap(item[key], key, fn)
+    }));
+}
+
 export function deepAdd(list, id, key, newItem) {
   if (id === null) {
     return [

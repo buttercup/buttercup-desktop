@@ -32,4 +32,14 @@ export const setupShortcuts = store => {
       }, ms('15s'));
     }
   });
+
+  /**
+   * Copy username to clipboard
+   */
+  Mousetrap.bind('mod+b', () => {
+    const currentEntry = getCurrentEntry(store.getState());
+    if (currentEntry) {
+      copyToClipboard(currentEntry.properties.username);
+    }
+  });
 };

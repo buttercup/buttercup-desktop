@@ -71,16 +71,6 @@ input, button, textarea, :focus {
     -webkit-app-region: no-drag;
 }
 
-.Popover-body {
-  display: inline-flex;
-  padding: 0;
-  flex-direction: column;
-}
-
-.Popover-tip {
-  fill: $dark-secondary;
-}
-
 :root {
   --spacing-half: 6px;
   --spacing-one: 12px;
@@ -88,6 +78,7 @@ input, button, textarea, :focus {
   --gray-light: #F5F7FA;
   --gray: #E4E9F2;
   --gray-dark: #777;
+  --black-5: rgba(0,0,0,.05);
   --brand-primary: #00B7AC;
   --brand-primary-darker: #179E94;
 }

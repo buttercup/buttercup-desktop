@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import url from 'url';
 import InfoIcon from 'react-icons/lib/md/info-outline';
-import { Button, SmallType, Input } from 'buttercup-ui';
+import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { brands } from '../../../../shared/buttercup/brands';

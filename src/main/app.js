@@ -10,8 +10,13 @@ import { isWindows } from './lib/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
+// Unhandled rejections
+const unhandled = require('electron-unhandled');
+unhandled();
+
 const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
+
 let appIsReady = false;
 let initialFile = null;
 

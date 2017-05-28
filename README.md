@@ -14,20 +14,42 @@
 ![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/ff7ebf7e/screenshot/0.4.0.png)
 
 ## Under Development
+
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
 The application is currently in alpha, and should be considered unstable.
 
 Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
 
 ## Download & Install
-[Click here to automatically download](https://download.buttercup.pw) the latest release for your OS, or checkout the [releases page](https://github.com/buttercup-pw/buttercup/releases) to download different builds and versions.
+
+[Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup/releases) to download different builds and versions.
+
+If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
+
+``` bash
+$ brew cask install buttercup
+```
+
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (only 64bit versions).
 
 ## Encryption & Format
+
 Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at between 200-250k iterations.
 
 Because security with password storage is of the utmost importance, Buttercup will remain in alpha/beta release mode until some level of professional scrutiny has occurred. It is completely possible that security-related changes will occur, but this is inevitable and we handle every question and criticism with great care when it comes to the safety of using our software.
 
+## Features
+
+Buttercup supports loading and saving credentials archives both locally and remotely. Remote archives can be stored in a variety of service providers like Dropbox, ownCloud and Nextcloud (and others that support WebDAV, such as Yandex).
+
+Archives store groups and entries in a simple hierarchy. Both groups and entries can be moved into other groups. Deleted items are trashed before being removed permanently.
+
+Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
+
+You can import from other password managers (such as 1Password and KeePass) by opening your archive and choosing Import from the menu.
+
 ## Development
+
 If you're interested in developing Buttercup:
 
 ### Install Dependencies & Run
@@ -44,14 +66,17 @@ $ npm run start
 ## Package & Release
 
 ### Install Dependencies
+
 You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform. 
 
 ### Building libraries before releasing
+
 ```bash
 $ npm run build
 ```
 
 ### Package
+
 To package the app and make installers for all supported platforms:
 
 ``` bash
@@ -73,15 +98,19 @@ $ npm run package:linux
 ```
 
 ## Contributors
+
 ### Creation
+
  * Sallar ([@sallar](https://twitter.com/sallar))
  * Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
 
 ### Contributions
+
  * Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
  * Arash Asghari (Brand & Identity) ([@_arashasghari](https://twitter.com/_arashasghari))
 
 > We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
 
 ## License
+
 Released under [GNU/GPL Version 3](LICENSE)

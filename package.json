@@ -1,7 +1,7 @@
 {
   "name": "buttercup",
   "productName": "Buttercup",
-  "version": "0.13.0",
+  "version": "0.16.1",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "package:linux": "build --linux --x64",
     "package:mac": "build --mac",
     "package:win": "build --win --x64",
-    "package": "build --mac --linux --win --x64",
+    "package": "build --mac --linux --win --x64 -p always",
     "package:current": "build"
   },
   "build": {
@@ -46,6 +46,9 @@
         "height": 480
       }
     },
+    "nsis": {
+      "perMachine": true
+    },
     "linux": {
       "target": [
         "rpm",
@@ -59,14 +62,14 @@
       "ext": "bcup",
       "name": "Buttercup Archive",
       "icon": "./build/icon.icns"
+    },
+    "directories": {
+      "output": "release"
     }
-  },
-  "directories": {
-    "output": "release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buttercup-pw/buttercup.git"
+    "url": "git+https://github.com/buttercup/buttercup.git"
   },
   "keywords": [
     "password",
@@ -87,11 +90,12 @@
   ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/buttercup-pw/buttercup/issues"
+    "url": "https://github.com/buttercup/buttercup/issues"
   },
   "homepage": "https://buttercup.pw",
   "dependencies": {},
   "devDependencies": {
+    "@buttercup/ui": "^0.6.0",
     "@types/electron": "^1.4.29",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -117,9 +121,8 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",
     "babili-webpack-plugin": "^0.0.8",
-    "buttercup-importer": "^0.8.0",
-    "buttercup-ui": "^0.5.1",
-    "buttercup-web": "^0.26.0",
+    "buttercup-importer": "~0.9.1",
+    "buttercup-web": "~0.29.0",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
@@ -128,13 +131,14 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "1.5.0",
-    "electron-builder": "^10.6.1",
+    "electron": "^1.6.6",
+    "electron-builder": "^17.3.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "2.0.1",
     "electron-installer-dmg": "^0.1.2",
     "electron-json-storage": "^3.0.2",
     "electron-rpc": "^2.0.1",
+    "electron-unhandled": "^0.1.1",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^4.3.0",

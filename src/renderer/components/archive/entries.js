@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import cx from 'classnames';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import { isOSX } from '../../system/utils';
-import { showContextMenu, createMenuFromGroups } from '../../system/menu';
+import { showContextMenu, createMenuFromGroups, createCopyMenu } from '../../system/menu';
 import Column from '../column';
 import styles from '../../styles/entries';
 import List from './entries-list';
@@ -20,8 +20,10 @@ class Entries extends Component {
   }
 
   onRightClick(entry) {
-    const { groups, currentGroup, onEntryMove, onDelete } = this.props;
+    const { groups, currentGroup, currentEntry, onEntryMove, onDelete } = this.props;
     showContextMenu([
+      ...createCopyMenu(entry, currentEntry),
+      { type: 'separator' },
       {
         label: 'Move to Group',
         submenu: createMenuFromGroups(groups, currentGroup, groupId => {

@@ -5,7 +5,7 @@ import HistoryIcon from 'react-icons/lib/go/history';
 import CloudIcon from 'react-icons/lib/md/cloud-queue';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import LaptopIcon from 'react-icons/lib/md/laptop-mac';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import { ArchiveTypes } from '../../shared/buttercup/types';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
@@ -66,7 +66,7 @@ class RecentFiles extends Component {
 
   renderEmptyState() {
     return (
-      <div className={styles.container}>
+      <div className={styles.emptyContainer}>
         <EmptyView caption="No archives yet." />
       </div>
     );

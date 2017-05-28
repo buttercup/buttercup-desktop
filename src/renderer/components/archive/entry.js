@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import { Button } from 'buttercup-ui';
+import { Button } from '@buttercup/ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
@@ -83,7 +83,11 @@ class Entry extends Component {
 
   renderIdleMode() {
     return {
-      content: <EmptyView caption="Select or Create an Entry" imageSrc={bench} />,
+      content: <EmptyView
+        caption="Select or Create an Entry"
+        className={styles.emptyView}
+        imageSrc={bench}
+        />,
       footer: null
     };
   }

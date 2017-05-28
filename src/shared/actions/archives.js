@@ -18,25 +18,27 @@ export const removeArchive = createAction(ARCHIVES_REMOVE);
 export const clearArchives = createAction(ARCHIVES_CLEAR);
 
 export const loadArchive = payload => async (dispatch, getState) => {
-  const archive = await showPasswordDialog(
-    password => loadWorkspace(payload, password).catch(err => {
-      const unknownMessage = 'An unknown error has occurred';
-      return Promise.reject(
-        isError(err)
-          ? err.message || unknownMessage
-          : unknownMessage
-      );
-    })
-  );
+  try {
+    const archive = await showPasswordDialog(
+      password => loadWorkspace(payload, password).catch(err => {
+        const unknownMessage = 'An unknown error has occurred';
+        return Promise.reject(
+          isError(err)
+            ? err.message || unknownMessage
+            : unknownMessage
+        );
+      })
+    );
 
-  dispatch(setCurrentArchive(archive.id));
-  dispatch(reloadGroups());
-  dispatch(addArchive(archive));
+    dispatch(setCurrentArchive(archive.id));
+    dispatch(reloadGroups());
+    dispatch(addArchive(archive));
 
-  // Changes to interface:
-  const [width, height] = getWindowSize(getState());
-  setWindowSize(width, height, 'dark');
-  window.document.title = `${path.basename(archive.path)} - Buttercup`;
+    // Changes to interface:
+    const [width, height] = getWindowSize(getState());
+    setWindowSize(width, height, 'dark');
+    window.document.title = `${path.basename(archive.path)} - Buttercup`;
+  } catch (err) { }
 };
 
 export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {

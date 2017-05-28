@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
-import { deepAdd, deepFilter } from '../utils/collection';
+import { deepAdd, deepFilter, deepMap } from '../utils/collection';
 
 import {
   GROUPS_ADD_NEW_CHILD,
-  GROUPS_DISMISS_NEW_CHILD,
+  GROUPS_DISMISS,
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
   GROUPS_RESET,
-  GROUPS_REMOVE
+  GROUPS_REMOVE,
+  GROUPS_RENAME
 } from '../actions/types';
 
 // Reducers ->
@@ -30,12 +31,26 @@ function groups(state = [], action) {
         title: '',
         isNew: true
       });
-    case GROUPS_DISMISS_NEW_CHILD:
-      return deepFilter(state, 'groups', group => !group.isNew);
+    case GROUPS_DISMISS:
+      const newState = deepFilter(state, 'groups', group => !group.isNew);
+      return deepMap(newState, 'groups', item => ({
+        ...item,
+        isRenaming: false
+      }));
     case GROUPS_RESET:
       return action.payload;
     case GROUPS_REMOVE:
       return [];
+    case GROUPS_RENAME:
+      return deepMap(state, 'groups', item => {
+        if (item.id === action.payload) {
+          return {
+            ...item,
+            isRenaming: true
+          };
+        }
+        return item;
+      });
     default:
       return state;
   }

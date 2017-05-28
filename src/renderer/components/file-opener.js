@@ -44,7 +44,7 @@ class FileOpener extends Component {
       <Container flexColumn justify="center">
         <LogoContainer flexColumn align="center" justify="center">
           <img src={logo} alt="Buttercup" width="130" />
-          <Small>v{pkg.version}-alpha</Small>
+          <Small>v{pkg.version}</Small>
         </LogoContainer>
         <Box>
           <div>
