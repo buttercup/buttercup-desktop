@@ -29,6 +29,10 @@ export default [
       {
         label: 'From 1Password archive (.1pif)',
         click: (item, focusedWindow) => openFileForImporting(focusedWindow, '1pif')
+      },
+      {
+        label: 'From LastPass archive (.csv)',
+        click: (item, focusedWindow) => openFileForImporting(focusedWindow, 'csv')
       }
     ]
   },
