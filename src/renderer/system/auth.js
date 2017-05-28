@@ -1,5 +1,4 @@
 import { remote } from 'electron';
-import url from 'url';
 import webdavFs from 'webdav-fs';
 import dropboxFs from 'dropbox-fs';
 import anyFs from 'any-fs';
@@ -57,12 +56,6 @@ export function getFsInstance(type, settings) {
       return anyFs(dropboxFs({
         apiKey: settings.token
       }));
-    case 'owncloud':
-      return anyFs(webdavFs(
-        url.resolve(settings.endpoint, '/remote.php/webdav'),
-        settings.username,
-        settings.password
-      ));
     case 'webdav':
       return anyFs(webdavFs(
         settings.endpoint,

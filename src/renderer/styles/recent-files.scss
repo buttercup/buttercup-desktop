@@ -2,7 +2,7 @@
 @import './common'; 
 
 .container {
-  background-color: $white-50;
+  background-color: $white-60;
   border-left: 1px solid $black-10;
 }
 
@@ -31,43 +31,46 @@
     position: relative;
     border-bottom: 1px dotted $gray;
     cursor: pointer !important;
-
-    &:hover {
-      .remove {
-        opacity: 1;
-      }
-    }
-  }
-
-  .remove {
-    position: absolute;
-    cursor: pointer;
-    right: 0;
-    top: calc(50% - (16px / 2));
-    opacity: 0;
-
-    svg {
-      cursor: pointer;
-    }
   }
 }
 
 .fileInfo {
-  > span {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  display: flex;
+  align-items: center;
 
-    &:last-child {
+  figure {
+    margin: 0;
+    padding: 0;
+    flex: 0 0 2rem;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  section {
+    font-size: .9em;
+    flex: 1;
+    min-width: 0;
+    padding-left: $spacing-one;
+
+    div {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    div:last-child {
       font-weight: 300;
-      font-size: .75em;
+      font-size: .8em;
       color: $gray-dark;
-
-      > svg {
-        font-size: 14px;
-        vertical-align: -3px !important;
-      }
     }
   }
 }

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
+import url from 'url';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
+import { brands } from '../../../../shared/buttercup/brands';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
 import { showDialog } from '../../../system/dialog';
@@ -20,7 +22,7 @@ class Webdav extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
     toggleCreateButton: PropTypes.func,
-    owncloud: PropTypes.bool
+    brand: PropTypes.string
   };
 
   state = {
@@ -31,12 +33,14 @@ class Webdav extends Component {
   };
 
   handleSelect = (filePath, isNew) => {
+    const { onSelect, brand } = this.props;
+
     if (!filePath || !isButtercupFile(filePath)) {
-      this.props.onSelect(null);
+      onSelect(null);
       return;
     }
     this.props.onSelect({
-      type: this.props.owncloud ? 'owncloud' : 'webdav',
+      type: brand || 'webdav',
       path: filePath,
       endpoint: this.state.endpoint,
       credentials: {
@@ -53,17 +57,28 @@ class Webdav extends Component {
     });
   }
 
-  handleConnect = () => {
-    const { endpoint, username, password } = this.state;
+  handleConnect = e => {
+    if (e) {
+      e.preventDefault();
+    }
+
+    let { endpoint, username, password } = this.state;
+    const { brand } = this.props;
 
     if (!endpoint || !username || !password) {
       return;
     }
 
-    const fs = getFsInstance(
-      this.props.owncloud ? 'owncloud' : 'webdav',
-      { endpoint, username, password }
-    );
+    endpoint = endpoint.substr(-1) !== '/' ? `${endpoint}/` : endpoint;
+    endpoint = ['owncloud', 'nextcloud'].includes(brand)
+      ? url.resolve(endpoint, './remote.php/webdav')
+      : endpoint;
+
+    const fs = getFsInstance('webdav', {
+      endpoint,
+      username,
+      password
+    });
 
     fs.readDirectory('/').then(() => {
       this.fs = fs;
@@ -93,12 +108,12 @@ class Webdav extends Component {
       );
     }
 
-    const title = this.props.owncloud ? 'OwnCloud' : 'WebDAV';
+    const title = brands[this.props.brand || 'webdav'].name;
 
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
         <h2>Connect to {title} Server</h2>
-        <Form>
+        <Form onSubmit={this.handleConnect}>
           <Input
             bordered
             type="text"
@@ -123,7 +138,7 @@ class Webdav extends Component {
             onChange={this.handleInputChange}
             value={this.state.password}
             />
-          <Button onClick={this.handleConnect} full primary>Connect</Button>
+          <Button type="submit" onClick={this.handleConnect} full primary>Connect</Button>
           <SmallType border center>
             <InfoIcon /> Enter your {title} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.
           </SmallType>
