@@ -1803,15 +1803,22 @@ buttercup-generator@^0.0.2:
     mngen "^1.0.0"
     password-generator "^2.1.0"
 
-buttercup-importer@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.8.0.tgz#4e13385173ca90ce4d0421c8b7e81e4f1fcf605c"
+buttercup-importer@~0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/buttercup-importer/-/buttercup-importer-0.9.1.tgz#38ebbde5f7493b5c847ca0b1a682e5a430aa56c9"
   dependencies:
     buttercup "~0.38.1"
+    csvjson "^4.3.3"
     is-dir "~1.0.0"
     kdbxweb "~1.0.1"
     pify "~2.3.0"
     xml2js "~0.4.13"
+
+buttercup-web@~0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/buttercup-web/-/buttercup-web-0.29.0.tgz#f4834d023f6bd16f67ee747112dc5ad57dbaba4c"
+  dependencies:
+    buttercup "~0.40.0"
 
 buttercup@~0.38.1:
   version "0.38.1"
@@ -1826,6 +1833,21 @@ buttercup@~0.38.1:
     uuid "~2.0.1"
     verror "~1.9.0"
     webdav-fs "~0.4.0"
+
+buttercup@~0.40.0:
+  version "0.40.0"
+  resolved "https://registry.yarnpkg.com/buttercup/-/buttercup-0.40.0.tgz#d92579455359a23112011feeff2dd9e4518c25b6"
+  dependencies:
+    clone "~1.0.2"
+    debug "~2.3.3"
+    eventemitter3 "~2.0.3"
+    gzip-js "~0.3.2"
+    iocane "~0.7.0"
+    node-fetch "~1.6.3"
+    string-hash "^1.1.3"
+    uuid "~2.0.1"
+    verror "~1.9.0"
+    webdav-fs "~1.0.0"
 
 bytes@2.3.0:
   version "2.3.0"
@@ -2624,6 +2646,10 @@ cssom@0.3.x, "cssom@>= 0.3.0 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
+csvjson@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/csvjson/-/csvjson-4.3.3.tgz#057a6ef03950b333f521291964ee7abc402a7362"
+
 cuint@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cuint/-/cuint-0.2.2.tgz#408086d409550c2631155619e9fa7bcadc3b991b"
@@ -2662,7 +2688,7 @@ debug@0.7.4, debug@~0.7.0:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-0.7.4.tgz#06e1ea8082c2cb14e39806e22e2f6f757f92af39"
 
-debug@2, debug@2.6.6, debug@^2.1.3, debug@^2.3.2, debug@^2.6.1, debug@^2.6.3:
+debug@2, debug@2.6.6, debug@^2.3.2, debug@^2.6.1, debug@^2.6.3:
   version "2.6.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.6.tgz#a9fa6fbe9ca43cf1e79f73b75c0189cbb7d6db5a"
   dependencies:
@@ -2674,7 +2700,7 @@ debug@2.2.0, debug@~2.2.0:
   dependencies:
     ms "0.7.1"
 
-debug@^2.1.1, debug@^2.2.0:
+debug@^2.1.1, debug@^2.1.3, debug@^2.2.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
@@ -3495,6 +3521,10 @@ eventemitter2@~0.4.13:
 eventemitter3@1.x.x:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-1.2.0.tgz#1c86991d816ad1e504750e73874224ecf3bec508"
+
+eventemitter3@~2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
 
 events-to-array@^1.0.1:
   version "1.0.2"
@@ -4897,17 +4927,13 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-istanbul-lib-coverage@^1.0.0-alpha, istanbul-lib-coverage@^1.0.0-alpha.0, istanbul-lib-coverage@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.0.2.tgz#87a0c015b6910651cb3b184814dfb339337e25e1"
+istanbul-lib-coverage@^1.0.0-alpha, istanbul-lib-coverage@^1.0.0-alpha.0, istanbul-lib-coverage@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.1.0.tgz#caca19decaef3525b5d6331d701f3f3b7ad48528"
 
 istanbul-lib-coverage@^1.0.0-alpha.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.0.1.tgz#f263efb519c051c5f1f3343034fc40e7b43ff212"
-
-istanbul-lib-coverage@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-coverage/-/istanbul-lib-coverage-1.1.0.tgz#caca19decaef3525b5d6331d701f3f3b7ad48528"
 
 istanbul-lib-hook@^1.0.0-alpha.4:
   version "1.0.0"
@@ -4915,19 +4941,7 @@ istanbul-lib-hook@^1.0.0-alpha.4:
   dependencies:
     append-transform "^0.4.0"
 
-istanbul-lib-instrument@^1.1.0-alpha.3:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-1.7.0.tgz#b8e0dc25709bb44e17336ab47b7bb5c97c23f659"
-  dependencies:
-    babel-generator "^6.18.0"
-    babel-template "^6.16.0"
-    babel-traverse "^6.18.0"
-    babel-types "^6.18.0"
-    babylon "^6.13.0"
-    istanbul-lib-coverage "^1.0.2"
-    semver "^5.3.0"
-
-istanbul-lib-instrument@^1.7.1:
+istanbul-lib-instrument@^1.1.0-alpha.3, istanbul-lib-instrument@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/istanbul-lib-instrument/-/istanbul-lib-instrument-1.7.1.tgz#169e31bc62c778851a99439dd99c3cc12184d360"
   dependencies:
@@ -8730,12 +8744,27 @@ webdav-fs@~0.4.0:
     streamifier "^0.1.1"
     xml2js "^0.4.13"
 
+webdav-fs@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/webdav-fs/-/webdav-fs-1.0.0.tgz#a6ed3d39a64804938b34840d91c4651d193c709e"
+  dependencies:
+    webdav "~0.6.0"
+
 webdav@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/webdav/-/webdav-0.5.0.tgz#ecd6ac80fab43b26172c6903234912a07018c54b"
   dependencies:
     brototype "0.0.5"
     deepmerge "^1.3.1"
+    node-fetch "^1.6.3"
+    xml2js "^0.4.17"
+
+webdav@~0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/webdav/-/webdav-0.6.0.tgz#fe281a0ce6c6abddb04565aaa3237c689d74b911"
+  dependencies:
+    deepmerge "^1.3.1"
+    lodash "^4.17.4"
     node-fetch "^1.6.3"
     xml2js "^0.4.17"
 
