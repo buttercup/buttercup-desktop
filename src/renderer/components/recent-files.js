@@ -1,28 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Scrollbars } from 'react-custom-scrollbars';
-import DeleteIcon from 'react-icons/lib/ti/delete-outline';
 import HistoryIcon from 'react-icons/lib/go/history';
-import CloudIcon from 'react-icons/lib/md/cloud-queue';
-import DropboxIcon from 'react-icons/lib/fa/dropbox';
-import LaptopIcon from 'react-icons/lib/md/laptop-mac';
 import { Button } from '@buttercup/ui';
-import { ArchiveTypes } from '../../shared/buttercup/types';
+import { brands } from '../../shared/buttercup/brands';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
-
-function getIcon(type) {
-  switch (type) {
-    case ArchiveTypes.OWNCLOUD:
-    case ArchiveTypes.WEBDAV:
-      return <CloudIcon />;
-    case ArchiveTypes.DROPBOX:
-      return <DropboxIcon />;
-    default:
-      return <LaptopIcon />;
-  }
-}
+import Column from './column';
 
 const File = ({archive, onClick, onRemoveClick}) => {
   const { base, dir } = parsePath(archive.path);
@@ -31,7 +15,7 @@ const File = ({archive, onClick, onRemoveClick}) => {
       onContextMenu={e => {
         e.stopPropagation();
         showContextMenu([{
-          label: `Open ${base}`,
+          label: `Unlock ${base}`,
           click: onClick
         }, {
           label: `Remove ${base} from history`,
@@ -40,10 +24,14 @@ const File = ({archive, onClick, onRemoveClick}) => {
       }}
       >
       <div onClick={onClick} className={styles.fileInfo}>
-        <span>{base}</span>
-        <span>{getIcon(archive.type)} {dir}</span>
+        <figure>
+          <img src={brands[archive.type].icon} />
+        </figure>
+        <section>
+          <div>{base}</div>
+          <div className='path'>{dir}</div>
+        </section>
       </div>
-      <span onClick={onRemoveClick} className={styles.remove}><DeleteIcon /></span>
     </li>
   );
 };
@@ -55,7 +43,14 @@ File.propTypes = {
 };
 
 class RecentFiles extends Component {
-  showContextMenu() {
+  static propTypes = {
+    archives: PropTypes.array,
+    onRemoveClick: PropTypes.func,
+    onClearClick: PropTypes.func,
+    onClick: PropTypes.func
+  };
+
+  showContextMenu = () => {
     showContextMenu([
       {
         label: 'Clear History',
@@ -79,8 +74,12 @@ class RecentFiles extends Component {
       return this.renderEmptyState();
     }
 
+    const footer = (
+      <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
+    );
+
     return (
-      <Scrollbars className={styles.container} onContextMenu={() => this.showContextMenu()}>
+      <Column light footer={footer} className={styles.container} onContextMenu={this.showContextMenu}>
         <div className={styles.content}>
           <h6 className={styles.heading}>History:</h6>
           <ul className={styles.list}>
@@ -90,21 +89,13 @@ class RecentFiles extends Component {
                 key={archive.id}
                 onClick={() => this.props.onClick(archive)}
                 onRemoveClick={() => this.props.onRemoveClick(archive.id)}
-                />
+              />
             )}
           </ul>
-          <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
         </div>
-      </Scrollbars>
+      </Column>
     );
   }
 }
-
-RecentFiles.propTypes = {
-  archives: PropTypes.array,
-  onRemoveClick: PropTypes.func,
-  onClearClick: PropTypes.func,
-  onClick: PropTypes.func
-};
 
 export default RecentFiles;
