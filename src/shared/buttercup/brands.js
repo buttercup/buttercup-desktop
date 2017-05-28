@@ -10,26 +10,31 @@ import { ArchiveTypes } from './types';
 
 export const brands = {
   [ArchiveTypes.DROPBOX]: {
+    remote: true,
     name: 'Dropbox',
     logo: dropboxLogo,
     icon: dropboxLogoSquare
   },
   [ArchiveTypes.OWNCLOUD]: {
+    remote: true,
     name: 'OwnCloud',
     logo: ownCloud,
     icon: ownCloudSquare
   },
   [ArchiveTypes.NEXTCLOUD]: {
+    remote: true,
     name: 'Nextcloud',
     logo: nextCloud,
     icon: nextCloudSquare,
   },
   [ArchiveTypes.WEBDAV]: {
+    remote: true,
     name: 'WebDAV',
     logo: webDAV,
     icon: webDAV,
   },
   [ArchiveTypes.FILE]: {
+    remote: false,
     name: 'File System',
     logo: '',
     icon: fileSystemLogo
