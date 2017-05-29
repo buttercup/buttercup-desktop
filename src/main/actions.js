@@ -1,12 +1,15 @@
 import { ipcMain as ipc, BrowserWindow } from 'electron';
 import fs from 'fs-extra';
-import { pushUpdate } from '../shared/actions/update';
+import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
 
 const windowManager = getWindowManager();
 
 export function setupActions(store) {
+  // Clear update notice
+  store.dispatch(updateInstalled());
+
   if (process.env.NODE_ENV !== 'development') {
     try {
       startAutoUpdate((releaseNotes, releaseName) => {
