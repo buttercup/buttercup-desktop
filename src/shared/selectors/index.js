@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import {
   filterByText,
   sortByKey,
-  sortRecursivelyByKey,
+  sortDeepByKey,
   sortByLastAccessed,
   deepFindById
 } from '../utils/collection';
@@ -96,7 +96,7 @@ export const getGroups = createSelector(
     const trashGroups = groups.filter(g => g.isTrash);
     const rest = groups.filter(g => !g.isTrash);
     return [
-      ...sortRecursivelyByKey(rest, sortMode, 'groups'),
+      ...sortDeepByKey(rest, sortMode, 'groups'),
       ...trashGroups
     ];
   }

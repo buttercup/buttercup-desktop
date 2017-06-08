@@ -25,14 +25,14 @@ export function sortByLastAccessed(list) {
   return sortBy(list, o => o.lastAccessed).reverse();
 }
 
-export function sortRecursivelyByKey(list, sortKey, childrenKey) {
+export function sortDeepByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
     throw new Error('Insufficient data provided for sorting');
   }
   return sortByKey(list, sortKey).map(item => {
     return {
       ...item,
-      [childrenKey]: sortRecursivelyByKey(item[childrenKey], sortKey, childrenKey)
+      [childrenKey]: sortDeepByKey(item[childrenKey], sortKey, childrenKey)
     };
   });
 }
