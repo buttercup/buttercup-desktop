@@ -71,3 +71,16 @@ export function deepAdd(list, id, key, newItem) {
     };
   });
 }
+
+export function deepFindById(list, id, key) {
+  for (const item of list) {
+    if (item.id === id) {
+      return item;
+    }
+    const resultInChild = deepFindById(item[key], id, key);
+    if (resultInChild !== null) {
+      return resultInChild;
+    }
+  }
+  return null;
+}

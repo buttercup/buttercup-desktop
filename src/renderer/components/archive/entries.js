@@ -44,7 +44,7 @@ class Entries extends Component {
     const addButton = (
       <Button
         onClick={handleAddEntry}
-        disabled={Boolean(currentGroup) !== true}
+        disabled={currentGroup === null || currentGroup.isTrash}
         full
         dark
         icon={<PlusIcon />}
@@ -80,7 +80,7 @@ Entries.propTypes = {
   entries: PropTypes.array,
   groups: PropTypes.array,
   currentEntry: PropTypes.object,
-  currentGroup: PropTypes.string,
+  currentGroup: PropTypes.object,
   onSelectEntry: PropTypes.func,
   onFilterChange: PropTypes.func,
   onSortModeChange: PropTypes.func,

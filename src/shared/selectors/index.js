@@ -1,5 +1,11 @@
 import { createSelector } from 'reselect';
-import { filterByText, sortByKey, sortRecursivelyByKey, sortByLastAccessed } from '../utils/collection';
+import {
+  filterByText,
+  sortByKey,
+  sortRecursivelyByKey,
+  sortByLastAccessed,
+  deepFindById
+} from '../utils/collection';
 
 // Archive ->
 
@@ -77,12 +83,11 @@ export const getEntries = createSelector(
 export const getAllGroups = state => state.groups.byId;
 export const getCurrentGroupId = state => state.groups.currentGroup;
 
-// @TODO: This doesn't work yet.
-// export const getCurrentGroup = createSelector(
-//   getAllGroups,
-//   getCurrentGroupId,
-//   (groups, groupId) => groups[groupId]
-// );
+export const getCurrentGroup = createSelector(
+  getAllGroups,
+  getCurrentGroupId,
+  (groups, groupId) => deepFindById(groups, groupId, 'groups')
+);
 
 export const getGroups = createSelector(
   getAllGroups,
