@@ -25,14 +25,14 @@ export function sortByLastAccessed(list) {
   return sortBy(list, o => o.lastAccessed).reverse();
 }
 
-export function sortRecursivelyByKey(list, sortKey, childrenKey) {
+export function sortDeepByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
     throw new Error('Insufficient data provided for sorting');
   }
   return sortByKey(list, sortKey).map(item => {
     return {
       ...item,
-      [childrenKey]: sortRecursivelyByKey(item[childrenKey], sortKey, childrenKey)
+      [childrenKey]: sortDeepByKey(item[childrenKey], sortKey, childrenKey)
     };
   });
 }
@@ -70,4 +70,17 @@ export function deepAdd(list, id, key, newItem) {
         : deepAdd(item[key], id, key, newItem)
     };
   });
+}
+
+export function deepFindById(list, id, key) {
+  for (const item of list) {
+    if (item.id === id) {
+      return item;
+    }
+    const resultInChild = deepFindById(item[key], id, key);
+    if (resultInChild !== null) {
+      return resultInChild;
+    }
+  }
+  return null;
 }
