@@ -10,6 +10,12 @@ Before you start, read the **README.md** file for info on the project and how to
 
 We have some functionalities in mind and we have issued them and there is a *milestone* label available on the issue. If there is a bug or a feature that is not listed in the **issues** page or there is no one assigned to the issue, feel free to fix/add it! Although it's better to discuss it in the issue or create a new issue for it so there is no conflicting code.
 
+### Filing issues
+
+Before starting work on a larger idea not discussed in an issue we recommend starting one to iron out your approach to implementation. PRs with conflicting ideas regarding architecture or other aspects of the project may be rejected. We appreciate any and all ideas you contribute providing they're discussed in a respectful and constructive manner.
+
+Issues created that are not relevant to this project will be closed immediately - this is purely for efficiency as we don't have time to address and or move all of them to their correct place.
+
 ### Writing some code!
 
 Contributing to a project on Github is pretty straight forward. If this is you're first time, these are the steps you should take.
