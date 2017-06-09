@@ -73,7 +73,7 @@ export function deepAdd(list, id, key, newItem) {
 }
 
 export function deepFindById(list, id, key) {
-  if (!list || !Array.isArray(list)) {
+  if (!Array.isArray(list)) {
     return null;
   }
 
