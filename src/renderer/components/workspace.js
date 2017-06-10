@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Intro from '../components/intro';
 import Archive from '../components/archive';
 import '../styles/workspace.global.scss';

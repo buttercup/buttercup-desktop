@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { formRow, metaWrapper, heading, labelWrapper } from '../../styles/entry-form';
 import { wrapper as inputWrapper } from '../../styles/entry-input';
 import bubbleImage from '../../styles/img/info-bubble.svg';

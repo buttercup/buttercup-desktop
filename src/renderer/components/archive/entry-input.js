@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import cx from 'classnames';
 import { Generator, Meter } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
