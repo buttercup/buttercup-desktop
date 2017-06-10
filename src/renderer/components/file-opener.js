@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Flex, Box } from 'styled-flexbox';
 import styled from 'styled-components';
 import pkg from '../../../package.json';
@@ -54,8 +55,10 @@ class FileOpener extends Component {
                 <img src={folder} />
               </NavIcon>
               <NavText>
-                <span>Open Archive</span>
-                <Small>Load your offline archive</Small>
+                <FormattedMessage id="opener.open" defaultMessage="Open Archive" />
+                <Small>
+                  <FormattedMessage id="opener.open.desc" defaultMessage="Load your offline archive" />
+                </Small>
               </NavText>
             </NavRow>
             <NavRow onClick={this.props.onNewClick}>
@@ -63,8 +66,10 @@ class FileOpener extends Component {
                 <img src={fileAdd} />
               </NavIcon>
               <NavText>
-                <span>New Archive</span>
-                <Small>Create an offline archive</Small>
+                <FormattedMessage id="opener.new" defaultMessage="New Archive" />
+                <Small>
+                  <FormattedMessage id="opener.new.desc" defaultMessage="Create an offline archive" />
+                </Small>
               </NavText>
             </NavRow>
             <NavRow onClick={this.props.onCloudClick}>
@@ -72,8 +77,10 @@ class FileOpener extends Component {
                 <img src={cloudAdd} />
               </NavIcon>
               <NavText>
-                <span>Load from Cloud Services</span>
-                <Small>Connect to Dropbox, OwnCloud, etc.</Small>
+                <FormattedMessage id="opener.from.cloud" defaultMessage="Load from Cloud Services" />
+                <Small>
+                  <FormattedMessage id="opener.from.cloud.desc" defaultMessage="Connect to Dropbox, OwnCloud, etc." />
+                </Small>
               </NavText>
             </NavRow>
           </div>

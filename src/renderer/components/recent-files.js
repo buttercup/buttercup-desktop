@@ -77,13 +77,15 @@ class RecentFiles extends Component {
     }
 
     const footer = (
-      <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
+      <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>
+        <FormattedMessage id="recents.clear" defaultMessage="Clear History" />
+      </Button>
     );
 
     return (
       <Column light footer={footer} className={styles.container} onContextMenu={this.showContextMenu}>
         <div className={styles.content}>
-          <h6 className={styles.heading}><FormattedMessage id="history" defaultMessage="History" />:</h6>
+          <h6 className={styles.heading}><FormattedMessage id="recents.history" defaultMessage="History" />:</h6>
           <ul className={styles.list}>
             {archives.map(archive =>
               <File
