@@ -16,7 +16,13 @@
     "polished",
     "transform-object-rest-spread",
     "transform-strict-mode",
-    "transform-class-properties"
+    "transform-class-properties",
+    // [
+    //   "react-intl",
+    //   {
+    //     "messagesDir": "./i18n/"
+    //   }
+    // ]
   ],
   "env": {
   	"production": {
