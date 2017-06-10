@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import { Flex, Box } from 'styled-flexbox';
 import styled from 'styled-components';
 import pkg from '../../../package.json';

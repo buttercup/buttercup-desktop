@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import HistoryIcon from 'react-icons/lib/go/history';
 import { Button } from '@buttercup/ui';
 import { brands } from '../../shared/buttercup/brands';

@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { isString } from 'lodash';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';

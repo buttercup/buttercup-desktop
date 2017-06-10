@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 

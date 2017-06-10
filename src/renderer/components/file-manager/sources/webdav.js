@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import url from 'url';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from '@buttercup/ui';

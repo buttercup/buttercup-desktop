@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { throttle } from 'lodash';
 import SplitPane from 'react-split-pane';
 import TreeView from '../../containers/tree-view';

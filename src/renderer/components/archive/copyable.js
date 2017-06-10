@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import CopyIcon from 'react-icons/lib/go/clippy';
