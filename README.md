@@ -30,7 +30,7 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (only 64bit versions).
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball, [AUR (Arch)](https://aur.archlinux.org/packages/buttercup/))** (only 64bit versions). 
 
 ## Encryption & Format
 
