@@ -5,7 +5,7 @@ import {
   sortDeepByKey,
   sortByLastAccessed,
   deepFindById
-} from '../utils/collection';
+} from './utils/collection';
 
 // Archive ->
 
