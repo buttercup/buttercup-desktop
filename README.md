@@ -30,7 +30,7 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup/).
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
 
 ## Encryption & Format
 
@@ -55,7 +55,7 @@ If you're interested in developing Buttercup:
 ### Install Dependencies & Run
 
 ``` bash
-$ npm install 
+$ npm install
 $ npm run start
 ```
 
@@ -63,7 +63,7 @@ $ npm run start
 
 ### Install Dependencies
 
-You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform. 
+You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform.
 
 ### Building libraries before releasing
 
@@ -86,7 +86,7 @@ To package only for the current platform:
 $ npm run package:current
 ```
 
-Or for a specific platform: 
+Or for a specific platform:
 ``` bash
 $ npm run package:mac
 $ npm run package:win
