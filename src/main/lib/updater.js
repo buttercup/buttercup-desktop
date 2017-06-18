@@ -5,6 +5,9 @@ import log from 'electron-log';
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 
+// Enable pre-releases
+autoUpdater.allowPrerelease = true;
+
 export function startAutoUpdate(cb) {
   autoUpdater.on('update-downloaded', ({ version, releaseNotes }) => cb(releaseNotes, version));
   autoUpdater.checkForUpdates();
