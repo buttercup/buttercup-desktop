@@ -22,7 +22,7 @@ Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) 
 
 ## Download & Install
 
-[Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup/releases) to download different builds and versions.
+[Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup-desktop/releases) to download different builds and versions.
 
 If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
 
@@ -53,13 +53,9 @@ You can import from other password managers (such as 1Password and KeePass) by o
 If you're interested in developing Buttercup:
 
 ### Install Dependencies & Run
-``` bash
-## Install
-$ npm install 
-# or 
-$ yarn
 
-## Run
+``` bash
+$ npm install 
 $ npm run start
 ```
 
@@ -71,7 +67,7 @@ You will need some extra dependencies to build for different platforms on a sing
 
 ### Building libraries before releasing
 
-```bash
+``` bash
 $ npm run build
 ```
 

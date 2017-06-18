@@ -69,7 +69,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buttercup/buttercup.git"
+    "url": "git+https://github.com/buttercup/buttercup-desktop.git"
   },
   "keywords": [
     "password",
@@ -90,7 +90,7 @@
   ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/buttercup/buttercup/issues"
+    "url": "https://github.com/buttercup/buttercup-desktop/issues"
   },
   "homepage": "https://buttercup.pw",
   "dependencies": {},
