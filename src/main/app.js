@@ -1,5 +1,6 @@
 import { app, Menu } from 'electron';
 import pify from 'pify';
+import log from 'electron-log';
 import { throttle } from 'lodash';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
@@ -9,6 +10,8 @@ import { loadFile } from './lib/files';
 import { isWindows } from './lib/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
+
+log.info('Buttercup starting up...');
 
 // Unhandled rejections
 const unhandled = require('electron-unhandled');

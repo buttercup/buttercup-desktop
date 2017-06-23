@@ -1,43 +1,16 @@
-// Borrowed from:
-// https://github.com/zeit/hyper/blob/master/app/auto-updater.js
-import { autoUpdater } from 'electron';
-import ms from 'ms';
-import pkg from '../../../package.json';
-import { isOSX } from './platform';
+import { autoUpdater } from 'electron-updater';
+import log from 'electron-log';
 
-// accepted values: `osx`, `win32`
-// https://nuts.gitbook.com/update-windows.html
-const platform = isOSX() ? 'osx' : process.platform;
-const FEED_URL = `https://download.buttercup.pw/update/${platform}`;
-let hasInitialized = false;
+// Set logger
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
 
-function init() {
-  autoUpdater.setFeedURL(`${FEED_URL}/${pkg.version}`);
-
-  autoUpdater.on('error', (err, msg) => {
-    console.error('Error fetching updates', msg + ' (' + err.stack + ')');
-  });
-
-  setTimeout(() => {
-    autoUpdater.checkForUpdates();
-  }, ms('15s'));
-
-  setInterval(() => {
-    autoUpdater.checkForUpdates();
-  }, ms('30m'));
-
-  hasInitialized = true;
-}
+// Enable pre-releases
+autoUpdater.allowPrerelease = true;
 
 export function startAutoUpdate(cb) {
-  if (!hasInitialized) {
-    init();
-  }
-
-  autoUpdater.on(
-    'update-downloaded',
-    (e, releaseNotes, releaseName) => cb(releaseNotes, releaseName)
-  );
+  autoUpdater.on('update-downloaded', ({ version, releaseNotes }) => cb(releaseNotes, version));
+  autoUpdater.checkForUpdates();
 }
 
 export function installUpdates() {
