@@ -10,7 +10,7 @@
   "dependencies": {
     "buttercup-importer": "~0.9.1",
     "dropbox": "^2.3.0",
-    "webdav": "~0.5.0",
+    "webdav": "~0.10.0",
     "zxcvbn": "^4.4.2"
   }
 }
