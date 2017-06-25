@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const BabiliPlugin = require('babili-webpack-plugin');
+const BabiliPlugin = require('babili-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = merge(baseConfig, {
@@ -46,7 +46,7 @@ module.exports = merge(baseConfig, {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    // new BabiliPlugin(),
+    new BabiliPlugin(),
     new ExtractTextPlugin({
       filename: '[name].css',
       allChunks: true
