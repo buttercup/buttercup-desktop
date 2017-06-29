@@ -3,13 +3,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
+import { getSharedArchiveManager } from '../shared/buttercup/archive';
+import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import { loadArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
 import rpc from './system/rpc';
 import { getWorkspace } from './system/buttercup/archive';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
-import { setWindowSize } from './system/utils';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
@@ -23,6 +24,10 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore({}, 'renderer');
 
+// temp
+global.archiveManager = getSharedArchiveManager();
+
+linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
 rpc.on('ready', () => {
@@ -32,6 +37,14 @@ rpc.on('ready', () => {
 rpc.on('load-archive', payload => {
   store.dispatch(loadArchiveFromSource(payload));
 });
+
+window.test = () => {
+  store.dispatch(loadArchiveFromSource({
+    type: 'ipc',
+    path: '/Users/sallar/Desktop/sallar.bcup',
+    isNew: false
+  }));
+};
 
 rpc.on('is-in-workspace', () => {
   rpc.emit('in-workspace', getWorkspace() !== null);

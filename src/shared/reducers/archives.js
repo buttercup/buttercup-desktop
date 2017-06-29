@@ -1,20 +1,31 @@
 import { createIdentityReducer } from '../utils/redux';
-import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT, ARCHIVES_CLEAR } from '../actions/types';
+import {
+  ARCHIVES_ADD,
+  ARCHIVES_REMOVE,
+  ARCHIVES_UNLOCK,
+  ARCHIVES_SET_CURRENT,
+} from '../actions/types';
 
 export default function archivesReducer(state = [], action) {
   switch (action.type) {
     case ARCHIVES_ADD:
-      return {
+      return [
         ...state,
-        [action.payload.id]: action.payload
-      };
+        action.payload
+      ];
     case ARCHIVES_REMOVE: {
-      const nextState = {...state};
-      delete nextState[action.payload];
-      return nextState;
+      return state.filter(archive => archive.id !== action.payload);
     }
-    case ARCHIVES_CLEAR:
-      return [];
+    case ARCHIVES_UNLOCK:
+      return state.map(archive => {
+        if (archive.id === action.payload) {
+          return {
+            ...archive,
+            status: 'unlocked'
+          };
+        }
+        return archive;
+      });
     default:
       return state;
   }

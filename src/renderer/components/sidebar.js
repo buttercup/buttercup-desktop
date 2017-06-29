@@ -18,16 +18,17 @@ const Wrapper = styled.div`
 `;
 
 const File = ({archive, onClick, onRemoveClick}) => {
-  const { base, dir } = parsePath(archive.path);
+  // const { base, dir } = parsePath(archive.path);
+  const { name } = archive;
   return (
     <li
       onContextMenu={e => {
         e.stopPropagation();
         showContextMenu([{
-          label: `Unlock ${base}`,
+          label: `Unlock ${name}`,
           click: onClick
         }, {
-          label: `Remove ${base} from history`,
+          label: `Remove ${name} from history`,
           click: onRemoveClick
         }]);
       }}
@@ -37,8 +38,8 @@ const File = ({archive, onClick, onRemoveClick}) => {
           <img src={brands[archive.type].icon} />
         </figure>
         <section>
-          <div>{base}</div>
-          <div className='path'>{dir}</div>
+          <div>{name}</div>
+          {/*<div className='path'>{dir}</div>*/}
         </section>
       </div>
     </li>
@@ -79,9 +80,9 @@ class RecentFiles extends Component {
   render() {
     const { archives } = this.props;
 
-    if (archives.length === 0) {
-      return this.renderEmptyState();
-    }
+    // if (archives.length === 0) {
+    //   return this.renderEmptyState();
+    // }
 
     const footer = (
       <Button dark full onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>

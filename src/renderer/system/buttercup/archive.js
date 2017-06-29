@@ -1,5 +1,5 @@
 import { Workspace, Archive, createCredentials, DatasourceAdapter } from 'buttercup-web';
-import './ipc-datasource';
+// import './ipc-datasource';
 
 let __currentWorkspace = null;
 
@@ -51,24 +51,35 @@ async function parseConfig(config, passwordCredentials) {
 }
 
 export async function loadWorkspace(masterConfig, masterPassword) {
+  // const { isNew, credentials, datasource, config } = await parseConfig(masterConfig, masterPassword);
+  // const dsInstance = DatasourceAdapter.objectToDatasource(datasource, credentials);
+
   const passwordCredentials = createCredentials.fromPassword(masterPassword);
-  const { isNew, credentials, datasource, config } = await parseConfig(masterConfig, masterPassword);
-  const dsInstance = DatasourceAdapter.objectToDatasource(datasource, credentials);
+  const { credentials, datasource, type, path } = masterConfig;
+  const encryptedCredentials = createCredentials(type, credentials);
+  encryptedCredentials.setValue('datasource', {
+    type,
+    ...datasource
+  });
 
-  if (isNew === true) {
-    await createDefaults(dsInstance, passwordCredentials);
-  }
+  console.log(passwordCredentials, encryptedCredentials);
 
-  const workspace = await createWorkspace(dsInstance, passwordCredentials);
-  __currentWorkspace = {
-    instance: workspace,
-    ...config
-  };
 
-  return {
-    id: getArchive().getID(),
-    ...config
-  };
+
+  // if (isNew === true) {
+  //   await createDefaults(dsInstance, passwordCredentials);
+  // }
+
+  // const workspace = await createWorkspace(dsInstance, passwordCredentials);
+  // __currentWorkspace = {
+  //   instance: workspace,
+  //   ...config
+  // };
+
+  // return {
+  //   id: getArchive().getID(),
+  //   ...config
+  // };
 }
 
 export function getWorkspace() {
