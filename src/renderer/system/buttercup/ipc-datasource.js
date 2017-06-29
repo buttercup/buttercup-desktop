@@ -1,4 +1,4 @@
-import { ipcRenderer as ipc } from 'electron';
+import fs from 'fs';
 import { TextDatasource, DatasourceAdapter } from 'buttercup-web';
 
 const registerDatasource = DatasourceAdapter.registerDatasource;
@@ -15,7 +15,7 @@ export class IpcDatasource extends TextDatasource {
 
   load(password) {
     return Promise
-      .resolve(ipc.sendSync('read-archive', this.path))
+      .resolve(fs.readFileSync(this.path, 'utf8'))
       .then(content => {
         this.setContent(content);
         return super.load(password);
@@ -26,10 +26,7 @@ export class IpcDatasource extends TextDatasource {
     return super
       .save(archive, password)
       .then(encryptedContent => {
-        ipc.sendSync('write-archive', {
-          filename: this.path,
-          content: encryptedContent
-        });
+        fs.writeFileSync(this.path, encryptedContent, 'utf8');
       });
   }
 
