@@ -23,7 +23,6 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 window.__defineGetter__('rpc', () => rpc);
 const store = configureStore({}, 'renderer');
 
-setWindowSize(870, 550, 'light');
 setupShortcuts(store);
 
 rpc.on('ready', () => {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { removeArchive, clearArchives, loadArchive } from '../../shared/actions/archives';
 import { getSortedArchives } from '../../shared/selectors';
-import RecentFiles from '../components/recent-files';
+import ArchiveList from '../components/sidebar';
 
 export default connect(
   state => ({
@@ -12,4 +12,4 @@ export default connect(
     onClearClick: clearArchives,
     onClick: loadArchive
   }
-)(RecentFiles);
+)(ArchiveList);

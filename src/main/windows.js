@@ -12,14 +12,14 @@ export function setupWindows() {
   windowManager.setBuildProcedure('main', callback => {
     // Create the browser window.
     const win = new BrowserWindow({
-      width: 870,
-      height: 550,
+      width: 950,
+      height: 700,
       minWidth: 680,
       minHeight: 500,
       title: app.getName(),
       titleBarStyle: 'hidden-inset',
       show: process.env.NODE_ENV === 'development',
-      vibrancy: 'light'
+      vibrancy: 'dark'
     });
 
     win.loadURL(getPathToFile('views/index.html'));

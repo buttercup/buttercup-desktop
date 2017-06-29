@@ -2,12 +2,20 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import HistoryIcon from 'react-icons/lib/go/history';
 import { Button } from '@buttercup/ui';
+import styled from 'styled-components';
 import { brands } from '../../shared/buttercup/brands';
 import styles from '../styles/recent-files';
 import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
 import Column from './column';
+
+const Wrapper = styled.div`
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  display: flex;
+`;
 
 const File = ({archive, onClick, onRemoveClick}) => {
   const { base, dir } = parsePath(archive.path);
@@ -76,25 +84,27 @@ class RecentFiles extends Component {
     }
 
     const footer = (
-      <Button onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
+      <Button dark full onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
     );
 
     return (
-      <Column light footer={footer} className={styles.container} onContextMenu={this.showContextMenu}>
-        <div className={styles.content}>
-          <h6 className={styles.heading}>History:</h6>
-          <ul className={styles.list}>
-            {archives.map(archive =>
-              <File
-                archive={archive}
-                key={archive.id}
-                onClick={() => this.props.onClick(archive)}
-                onRemoveClick={() => this.props.onRemoveClick(archive.id)}
-              />
-            )}
-          </ul>
-        </div>
-      </Column>
+      <Wrapper>
+        <Column footer={footer} onContextMenu={this.showContextMenu}>
+          <div className={styles.content}>
+            <h6 className={styles.heading}>History:</h6>
+            <ul className={styles.list}>
+              {archives.map(archive =>
+                <File
+                  archive={archive}
+                  key={archive.id}
+                  onClick={() => this.props.onClick(archive)}
+                  onRemoveClick={() => this.props.onRemoveClick(archive.id)}
+                />
+              )}
+            </ul>
+          </div>
+        </Column>
+      </Wrapper>
     );
   }
 }

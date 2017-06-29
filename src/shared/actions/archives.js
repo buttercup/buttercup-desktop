@@ -32,12 +32,12 @@ export const loadArchive = payload => async (dispatch, getState) => {
 
     dispatch(setCurrentArchive(archive.id));
     dispatch(reloadGroups());
-    dispatch(addArchive(archive));
+    // dispatch(addArchive(archive));
 
     // Changes to interface:
-    const [width, height] = getWindowSize(getState());
-    setWindowSize(width, height, 'dark');
-    window.document.title = `${path.basename(archive.path)} - Buttercup`;
+    // const [width, height] = getWindowSize(getState());
+    // setWindowSize(width, height, 'dark');
+    // window.document.title = `${path.basename(archive.path)} - Buttercup`;
   } catch (err) { }
 };
 
