@@ -1,8 +1,8 @@
 import { getSharedArchiveManager } from './archive';
 import {
-  addArchive,
-  removeArchive,
-  unlockArchive,
+  addArchiveToStore,
+  removeArchiveFromStore,
+  unlockArchiveInStore,
 } from '../actions/archives.js';
 
 export function linkArchiveManagerToStore(store) {
@@ -11,19 +11,19 @@ export function linkArchiveManagerToStore(store) {
   // attach listeners
   archiveManager.on('sourceAdded', function __handleNewSource(sourceInfo) {
     console.log('Source added', sourceInfo);
-    store.dispatch(addArchive(sourceInfo));
+    store.dispatch(addArchiveToStore(sourceInfo));
   });
   archiveManager.on('sourceRehydrated', function __handleRehydratedSource(sourceInfo) {
     console.log('Source rehydrated', sourceInfo);
-    store.dispatch(addArchive(sourceInfo));
+    store.dispatch(addArchiveToStore(sourceInfo));
   });
   archiveManager.on('sourceUnlocked', function __handleUnlockedSource(sourceInfo) {
     console.log('Source unlocked', sourceInfo);
-    store.dispatch(unlockArchive(sourceInfo.id));
+    store.dispatch(unlockArchiveInStore(sourceInfo.id));
   });
   archiveManager.on('sourceRemoved', function __handleRemovedSource(sourceInfo) {
     console.log('Source removed', sourceInfo);
-    store.dispatch(removeArchive(sourceInfo.id));
+    store.dispatch(removeArchiveFromStore(sourceInfo.id));
   });
 
   // rehydrate

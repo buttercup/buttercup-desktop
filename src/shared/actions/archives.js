@@ -1,63 +1,54 @@
-import path from 'path';
 import isError from 'is-error';
 import { createAction } from 'redux-actions';
-import { loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { ArchiveTypes } from '../buttercup/types';
 import { showPasswordDialog } from '../../renderer/system/dialog';
-import { setWindowSize } from '../../renderer/system/utils';
-import { getWindowSize } from '../selectors';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_ADD,
   ARCHIVES_REMOVE,
   ARCHIVES_UNLOCK,
-  ARCHIVES_SET_CURRENT,
-  ARCHIVES_SET
+  ARCHIVES_SET_CURRENT
 } from './types';
 
-import { addArchiveToArchiveManager } from '../buttercup/archive';
+import {
+  addArchiveToArchiveManager,
+  removeArchiveFromArchiveManager,
+  unlockArchiveInArchiveManager
+} from '../buttercup/archive';
 
-export const addArchive = createAction(ARCHIVES_ADD);
+// Store Actions
+export const addArchiveToStore = createAction(ARCHIVES_ADD);
+export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
+export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
-export const removeArchive = createAction(ARCHIVES_REMOVE);
-export const unlockArchive = createAction(ARCHIVES_UNLOCK);
-export const resetArchives = createAction(ARCHIVES_SET);
+
+// Impure Buttercup actions
+export const removeArchive = payload => () => {
+  return removeArchiveFromArchiveManager(payload);
+};
+
+export const unlockArchive = payload => () => {
+  return showPasswordDialog(
+    password => unlockArchiveInArchiveManager(payload, password)
+  );
+};
 
 export const loadArchive = payload => async (dispatch, getState) => {
   try {
-    // loadWorkspace(payload, 'sallar');
+    // try to load archive by showing a password dialog
+    const archiveId = await showPasswordDialog(
+      password => addArchiveToArchiveManager(payload, password).catch(err => {
+        const unknownMessage = 'An unknown error has occurred';
+        return Promise.reject(
+          isError(err)
+            ? err.message || unknownMessage
+            : unknownMessage
+        );
+      })
+    );
 
-    addArchiveToArchiveManager(payload, 'sallar');
-
-    // const pass = 'sallar';
-    // const archiveCredentials = createCredentials.fromPassword(pass);
-    // const sourceCredentials = createCredentials("webdav");
-    // sourceCredentials.username = "webdavuser";
-    // sourceCredentials.password = "webdavpass";
-    // sourceCredentials.setValue("datasource", JSON.stringify({
-    //   type: "webdav"
-    // }));
-
-    // const id = await archiveManager.addSource("filename", sourceCredentials, archiveCredentials, isNew);
-
-    // const source = archiveManager.sources[id];
-    // source.workspace.primary.archive;
-    // archiveManager.unlock(id, password);
-
-    // const archive = await showPasswordDialog(
-    //   password => loadWorkspace(payload, password).catch(err => {
-    //     const unknownMessage = 'An unknown error has occurred';
-    //     return Promise.reject(
-    //       isError(err)
-    //         ? err.message || unknownMessage
-    //         : unknownMessage
-    //     );
-    //   })
-    // );
-
-    // dispatch(setCurrentArchive(archive.id));
+    dispatch(setCurrentArchive(archiveId));
     // dispatch(reloadGroups());
-    // dispatch(addArchive(archive));
 
     // Changes to interface:
     // const [width, height] = getWindowSize(getState());

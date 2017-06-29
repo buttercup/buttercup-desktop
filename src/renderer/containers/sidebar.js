@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { removeArchive, clearArchives, loadArchive } from '../../shared/actions/archives';
+import { removeArchive, unlockArchive, loadArchive } from '../../shared/actions/archives';
 import { getSortedArchives } from '../../shared/selectors';
 import ArchiveList from '../components/sidebar';
 
@@ -9,7 +9,7 @@ export default connect(
   }),
   {
     onRemoveClick: removeArchive,
-    onClearClick: clearArchives,
+    onUnlockClick: unlockArchive,
     onClick: loadArchive
   }
 )(ArchiveList);

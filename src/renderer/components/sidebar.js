@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const File = ({archive, onClick, onRemoveClick}) => {
+const File = ({ archive, onUnlockClick, onClick, onRemoveClick }) => {
   // const { base, dir } = parsePath(archive.path);
   const { name } = archive;
   return (
@@ -26,9 +26,9 @@ const File = ({archive, onClick, onRemoveClick}) => {
         e.stopPropagation();
         showContextMenu([{
           label: `Unlock ${name}`,
-          click: onClick
+          click: onUnlockClick
         }, {
-          label: `Remove ${name} from history`,
+          label: `Remove ${name} from Buttercup`,
           click: onRemoveClick
         }]);
       }}
@@ -49,13 +49,15 @@ const File = ({archive, onClick, onRemoveClick}) => {
 File.propTypes = {
   archive: PropTypes.object,
   onClick: PropTypes.func,
-  onRemoveClick: PropTypes.func
+  onRemoveClick: PropTypes.func,
+  onUnlockClick: PropTypes.func
 };
 
 class RecentFiles extends Component {
   static propTypes = {
     archives: PropTypes.array,
     onRemoveClick: PropTypes.func,
+    onUnlockClick: PropTypes.func,
     onClearClick: PropTypes.func,
     onClick: PropTypes.func
   };
@@ -99,6 +101,7 @@ class RecentFiles extends Component {
                   archive={archive}
                   key={archive.id}
                   onClick={() => this.props.onClick(archive)}
+                  onUnlockClick={() => this.props.onUnlockClick(archive.id)}
                   onRemoveClick={() => this.props.onRemoveClick(archive.id)}
                 />
               )}

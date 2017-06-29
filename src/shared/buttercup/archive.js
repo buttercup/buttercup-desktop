@@ -33,7 +33,7 @@ export function removeArchiveFromArchiveManager(archiveId) {
   return manager.remove(archiveId);
 }
 
-export function unlockArchive(archiveId, masterPassword) {
+export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
   const manager = getSharedArchiveManager();
   return manager.unlock(archiveId, masterPassword);
 }
