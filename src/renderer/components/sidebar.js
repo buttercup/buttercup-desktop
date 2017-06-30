@@ -100,7 +100,7 @@ class RecentFiles extends Component {
                 <File
                   archive={archive}
                   key={archive.id}
-                  onClick={() => this.props.onClick(archive)}
+                  onClick={() => this.props.onClick(archive.id)}
                   onUnlockClick={() => this.props.onUnlockClick(archive.id)}
                   onRemoveClick={() => this.props.onRemoveClick(archive.id)}
                 />

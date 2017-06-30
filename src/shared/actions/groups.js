@@ -1,14 +1,14 @@
 import { createAction } from 'redux-actions';
 import { showConfirmDialog } from '../../renderer/system/dialog';
-import * as groupTools from '../../renderer/system/buttercup/groups';
+import * as groupTools from '../buttercup/groups';
 import { loadEntries } from './entries';
 import { addExpandedKeys } from './ui';
+import { getCurrentArchiveId } from '../selectors';
 
 import {
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
   GROUPS_RESET,
-  GROUPS_MOVE,
   GROUPS_RENAME,
   GROUPS_ADD_NEW_CHILD,
   GROUPS_DISMISS,
@@ -19,73 +19,67 @@ export const renameGroup = createAction(GROUPS_RENAME);
 export const dismissNewGroup = createAction(GROUPS_DISMISS);
 export const setSortMode = createAction(GROUPS_SET_SORT);
 
-export function removeGroup(id) {
-  return dispatch => {
-    groupTools.deleteGroup(id);
-    dispatch(reloadGroups());
-  };
-}
+export const removeGroup = groupId => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+  groupTools.deleteGroup(archiveId, groupId);
+  dispatch(reloadGroups());
+};
 
-export function addGroup(parentId) {
-  return dispatch => {
-    dispatch(addExpandedKeys(parentId));
-    dispatch({
-      type: GROUPS_ADD_NEW_CHILD,
-      payload: parentId
-    });
-  };
-}
+export const addGroup = parentId => dispatch => {
+  dispatch(addExpandedKeys(parentId));
+  dispatch({
+    type: GROUPS_ADD_NEW_CHILD,
+    payload: parentId
+  });
+};
 
-export function saveGroup(isNew, groupId, title) {
-  return dispatch => {
-    if (isNew) {
-      groupTools.createGroup(groupId, title);
-    } else {
-      groupTools.saveGroup(groupId, title);
-    }
-    dispatch(reloadGroups());
-  };
-}
+export const saveGroup = (isNew, groupId, title) => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+  if (isNew) {
+    groupTools.createGroup(archiveId, groupId, title);
+  } else {
+    groupTools.saveGroup(archiveId, groupId, title);
+  }
+  dispatch(reloadGroups());
+};
 
-export function reloadGroups() {
-  return dispatch => {
-    const groups = groupTools.getGroups();
-    dispatch(resetGroups(groups));
+export const reloadGroups = () => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+  const groups = groupTools.getGroups(archiveId);
+  dispatch(resetGroups(groups));
 
-    if (groups.length > 0) {
-      dispatch(loadGroup(groups[0].id));
-    }
-  };
-}
+  if (groups.length > 0) {
+    // dispatch(loadGroup(groups[0].id));
+  }
+};
 
-export function moveGroupToParent(groupId, parentId, dropToGap) {
-  return dispatch => {
-    groupTools.moveGroup(groupId, parentId, dropToGap);
-    dispatch(reloadGroups());
-    dispatch({
-      type: GROUPS_MOVE,
-      payload: {
-        parentId,
-        groupId
-      }
-    });
-  };
-}
+export const moveGroupToParent = (groupId, parentId, dropToGap) => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+  groupTools.moveGroup(archiveId, groupId, parentId, dropToGap);
+  dispatch(reloadGroups());
+  // dispatch({
+  //   type: GROUPS_MOVE,
+  //   payload: {
+  //     parentId,
+  //     groupId
+  //   }
+  // });
+};
 
-export function loadGroup(groupId) {
-  return dispatch => {
-    dispatch({
-      type: GROUPS_SELECTED,
-      payload: groupId
-    });
-    dispatch(loadEntries(groupId));
-  };
-}
+export const loadGroup = groupId => (dispatch, getState) => {
+  // const archiveId = getCurrentArchiveId(getState());
+  dispatch({
+    type: GROUPS_SELECTED,
+    payload: groupId
+  });
+  // dispatch(loadEntries(archiveId, groupId));
+};
 
-export const emptyTrash = () => dispatch => {
+export const emptyTrash = () => (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
   showConfirmDialog('Are you sure you want to empty Trash?', resp => {
     if (resp === 0) {
-      groupTools.emptyTrash();
+      groupTools.emptyTrash(archiveId);
       dispatch(reloadGroups());
     }
   });

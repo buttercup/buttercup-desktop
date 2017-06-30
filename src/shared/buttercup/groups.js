@@ -1,14 +1,8 @@
 import { Group } from 'buttercup-web';
-import { saveWorkspace as save, getArchive } from './archive';
+import { getArchive, saveWorkspace } from './archive';
 
-/**
- * Return recursive groups JSON structure
- *
- * @export
- * @returns {Object} JSON structure
- */
-export function getGroups() {
-  const arch = getArchive();
+export function getGroups(archiveId) {
+  const arch = getArchive(archiveId);
   return arch.getGroups().map(
     group => Object.assign(group.toObject(Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
@@ -16,15 +10,8 @@ export function getGroups() {
   );
 }
 
-/**
- * Create a new group under a parent group
- *
- * @export
- * @param {string} parentId
- * @param {string} groupName
- */
-export function createGroup(parentId, groupName) {
-  const arch = getArchive();
+export function createGroup(archiveId, parentId, groupName) {
+  const arch = getArchive(archiveId);
   let group = null;
 
   if (parentId === null) {
@@ -40,18 +27,12 @@ export function createGroup(parentId, groupName) {
   group.createGroup(groupName);
 
   if (groupName.toLowerCase() !== 'untitled') {
-    save();
+    saveWorkspace(archiveId);
   }
 }
 
-/**
- * Delete a group
- *
- * @export
- * @param {string} groupId
- */
-export function deleteGroup(groupId) {
-  const arch = getArchive();
+export function deleteGroup(archiveId, groupId) {
+  const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
@@ -59,18 +40,11 @@ export function deleteGroup(groupId) {
   }
 
   group.delete();
-  save();
+  saveWorkspace(archiveId);
 }
 
-/**
- * Save group title
- *
- * @export
- * @param {string} groupId
- * @param {string} title
- */
-export function saveGroup(groupId, title) {
-  const arch = getArchive();
+export function saveGroup(archiveId, groupId, title) {
+  const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
@@ -78,18 +52,11 @@ export function saveGroup(groupId, title) {
   }
 
   group.setTitle(title);
-  save();
+  saveWorkspace(archiveId);
 }
 
-/**
- * Move group to another parent
- *
- * @export
- * @param {string} groupId
- * @param {string} parentId
- */
-export function moveGroup(groupId, parentId, dropToGap = false) {
-  const arch = getArchive();
+export function moveGroup(archiveId, groupId, parentId, dropToGap = false) {
+  const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
   let parent = parentId ? arch.findGroupByID(parentId) : arch;
 
@@ -102,24 +69,15 @@ export function moveGroup(groupId, parentId, dropToGap = false) {
   }
 
   group.moveToGroup(parent);
-  save();
+  saveWorkspace(archiveId);
 }
 
-/**
- * Empty Trash Group
- * @export
- */
-export function emptyTrash() {
-  const arch = getArchive();
+export function emptyTrash(archiveId) {
+  const arch = getArchive(archiveId);
   arch.emptyTrash();
-  save();
+  saveWorkspace(archiveId);
 }
 
-/**
- * Find a Group's parent Group
- * @param {String} groupId Group ID to comapre
- * @param {Buttercup.Group} group Group Object
- */
 function findParentGroup(groupId, group) {
   const groups = group.getGroups();
   for (const subGroup of groups) {

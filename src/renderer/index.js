@@ -5,7 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
 import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
-import { loadArchiveFromSource } from '../shared/actions/archives';
+import { addArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
 import rpc from './system/rpc';
@@ -15,8 +15,8 @@ import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
 // Unhandled rejections
-const unhandled = require('electron-unhandled');
-unhandled();
+// const unhandled = require('electron-unhandled');
+// unhandled();
 
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
@@ -35,11 +35,11 @@ rpc.on('ready', () => {
 });
 
 rpc.on('load-archive', payload => {
-  store.dispatch(loadArchiveFromSource(payload));
+  store.dispatch(addArchiveFromSource(payload));
 });
 
 window.test = () => {
-  store.dispatch(loadArchiveFromSource({
+  store.dispatch(addArchiveFromSource({
     type: 'ipc',
     path: '/Users/sallar/Desktop/sallar.bcup',
     isNew: false

@@ -23,6 +23,11 @@ export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
 
 // Impure Buttercup actions
+export const loadArchive = payload => dispatch => {
+  dispatch(setCurrentArchive(payload));
+  dispatch(reloadGroups());
+};
+
 export const removeArchive = payload => () => {
   return removeArchiveFromArchiveManager(payload);
 };
@@ -33,7 +38,7 @@ export const unlockArchive = payload => () => {
   );
 };
 
-export const loadArchive = payload => async (dispatch, getState) => {
+export const addArchive = payload => async (dispatch, getState) => {
   try {
     // try to load archive by showing a password dialog
     const archiveId = await showPasswordDialog(
@@ -47,8 +52,8 @@ export const loadArchive = payload => async (dispatch, getState) => {
       })
     );
 
-    dispatch(setCurrentArchive(archiveId));
-    // dispatch(reloadGroups());
+    // Load the newly added archive
+    dispatch(loadArchive(archiveId));
 
     // Changes to interface:
     // const [width, height] = getWindowSize(getState());
@@ -57,8 +62,8 @@ export const loadArchive = payload => async (dispatch, getState) => {
   } catch (err) { }
 };
 
-export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
-  dispatch(loadArchive({
+export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
+  dispatch(addArchive({
     type: ArchiveTypes.FILE,
     isNew,
     path,
@@ -68,8 +73,8 @@ export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
   }));
 };
 
-export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
-  dispatch(loadArchive({
+export const addArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
+  dispatch(addArchive({
     type,
     isNew,
     path,
@@ -81,8 +86,8 @@ export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = fal
   }));
 };
 
-export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
-  dispatch(loadArchive({
+export const addArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
+  dispatch(addArchive({
     type: ArchiveTypes.DROPBOX,
     isNew,
     path,
@@ -93,19 +98,19 @@ export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispat
   }));
 };
 
-export const loadArchiveFromSource = payload => dispatch => {
+export const addArchiveFromSource = payload => dispatch => {
   const { type, ...config } = payload;
   switch (type) {
     case ArchiveTypes.DROPBOX:
-      dispatch(loadArchiveFromDropbox(config));
+      dispatch(addArchiveFromDropbox(config));
       break;
     case ArchiveTypes.OWNCLOUD:
     case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
-      dispatch(loadArchiveFromWebdav(config, type));
+      dispatch(addArchiveFromWebdav(config, type));
       break;
     case ArchiveTypes.FILE:
-      dispatch(loadArchiveFromFile(config));
+      dispatch(addArchiveFromFile(config));
       break;
     default:
       break;

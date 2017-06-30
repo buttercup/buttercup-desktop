@@ -1,8 +1,5 @@
 import path from 'path';
-import {
-  ArchiveManager,
-  createCredentials
-} from 'buttercup-web';
+import { ArchiveManager, createCredentials } from 'buttercup-web';
 import ElectronStorageInterface from './storage';
 import './ipc-datasource';
 
@@ -43,4 +40,28 @@ export function getSharedArchiveManager() {
     __sharedManager = new ArchiveManager(new ElectronStorageInterface());
   }
   return __sharedManager;
+}
+
+export function getArchive(archiveId) {
+  const manager = getSharedArchiveManager();
+  const sourceIndex = manager.indexOfSource(archiveId);
+  const source = manager.sources[sourceIndex];
+  return source.workspace.primary.archive;
+}
+
+export function saveWorkspace(archiveId) {
+  const manager = getSharedArchiveManager();
+  const sourceIndex = manager.indexOfSource(archiveId);
+  const { workspace } = manager.sources[sourceIndex];
+
+  return workspace
+    .localDiffersFromRemote()
+    .then(differs => differs
+      ? workspace.mergeSaveablesFromRemote().then(() => true)
+      : false
+    )
+    .then(shouldSave => shouldSave
+      ? workspace.save()
+      : null
+    );
 }
