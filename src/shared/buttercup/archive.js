@@ -32,7 +32,7 @@ export function removeArchiveFromArchiveManager(archiveId) {
 
 export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
   const manager = getSharedArchiveManager();
-  return manager.unlock(archiveId, masterPassword);
+  return manager.unlock(archiveId, masterPassword).then(() => archiveId);
 }
 
 export function getSharedArchiveManager() {

@@ -32,9 +32,11 @@ export const removeArchive = payload => () => {
   return removeArchiveFromArchiveManager(payload);
 };
 
-export const unlockArchive = payload => () => {
+export const unlockArchive = payload => dispatch => {
   return showPasswordDialog(
     password => unlockArchiveInArchiveManager(payload, password)
+  ).then(
+    archiveId => dispatch(loadArchive(archiveId))
   );
 };
 

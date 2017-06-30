@@ -15,9 +15,14 @@ import {
 } from './types';
 
 export const selectEntry = createAction(ENTRIES_SELECTED);
-export const changeMode = createAction(ENTRIES_CHANGE_MODE);
+// export const changeMode = createAction(ENTRIES_CHANGE_MODE);
 export const setFilter = createAction(ENTRIES_SET_FILTER);
 export const setSortMode = createAction(ENTRIES_SET_SORT);
+
+export const changeMode = mode => () => ({
+  type: ENTRIES_CHANGE_MODE,
+  payload: mode
+});
 
 export const loadEntries = (archiveId, groupId) => ({
   type: ENTRIES_LOADED,
