@@ -9,8 +9,7 @@ import { addArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import * as uiActions from '../shared/actions/ui';
 import rpc from './system/rpc';
-import { getWorkspace } from './system/buttercup/archive';
-import { importHistoryFromRequest, showHistoryPasswordPrompt } from './system/buttercup/import';
+import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
@@ -45,10 +44,6 @@ window.test = () => {
     isNew: false
   }));
 };
-
-rpc.on('is-in-workspace', () => {
-  rpc.emit('in-workspace', getWorkspace() !== null);
-});
 
 rpc.on('size-change', size => {
   store.dispatch(uiActions.setWindowSize(size));
