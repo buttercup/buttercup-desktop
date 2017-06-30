@@ -5,7 +5,6 @@ import { Button } from '@buttercup/ui';
 import styled from 'styled-components';
 import { brands } from '../../shared/buttercup/brands';
 import styles from '../styles/recent-files';
-import { parsePath } from '../system/utils';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
 import Column from './column';

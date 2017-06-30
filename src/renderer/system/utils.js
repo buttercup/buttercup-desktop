@@ -24,10 +24,6 @@ export function selectElementContents(el) {
   sel.addRange(range);
 }
 
-export function parsePath(filepath) {
-  return path.parse(filepath);
-}
-
 export function setWindowSize(width, height, vibrancy) {
   currentWindow.setSize(width, height, false);
   if (typeof vibrancy !== 'undefined') {
