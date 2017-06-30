@@ -58,15 +58,28 @@ class RecentFiles extends Component {
     archives: PropTypes.array,
     onRemoveClick: PropTypes.func,
     onUnlockClick: PropTypes.func,
-    onClearClick: PropTypes.func,
+    onOpenClick: PropTypes.func,
+    onNewClick: PropTypes.func,
+    onCloudClick: PropTypes.func,
     onClick: PropTypes.func
   };
 
-  showContextMenu = () => {
+  showCreateMenu = () => {
     showContextMenu([
       {
-        label: 'Clear History',
-        click: this.props.onClearClick
+        label: 'Open Archive File',
+        accelerator: 'CmdOrCtrl+O',
+        click: this.props.onOpenClick
+      },
+      {
+        label: 'New Archive File',
+        accelerator: 'CmdOrCtrl+N',
+        click: this.props.onNewClick
+      },
+      {
+        label: 'Connect Cloud Sources',
+        accelerator: 'CmdOrCtrl+Shift+C',
+        click: this.props.onCloudClick
       }
     ]);
   }
@@ -87,12 +100,19 @@ class RecentFiles extends Component {
     // }
 
     const footer = (
-      <Button dark full onClick={() => this.props.onClearClick()} icon={<HistoryIcon />}>Clear History</Button>
+      <Button
+        dark
+        full
+        onClick={this.showCreateMenu}
+        icon={<HistoryIcon />}
+        >
+        Add Archive
+      </Button>
     );
 
     return (
       <Wrapper>
-        <Column footer={footer} onContextMenu={this.showContextMenu}>
+        <Column footer={footer}>
           <div className={styles.content}>
             <h6 className={styles.heading}>History:</h6>
             <ul className={styles.list}>
