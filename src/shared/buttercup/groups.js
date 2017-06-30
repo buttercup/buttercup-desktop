@@ -12,13 +12,9 @@ export function getGroups(archiveId) {
 
 export function createGroup(archiveId, parentId, groupName) {
   const arch = getArchive(archiveId);
-  let group = null;
-
-  if (parentId === null) {
-    group = arch;
-  } else {
-    group = arch.findGroupByID(parentId);
-  }
+  const group = (parentId === null)
+    ? arch
+    : arch.findGroupByID(parentId);
 
   if (!group) {
     throw new Error('Group has not been found.');

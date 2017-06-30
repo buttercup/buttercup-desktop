@@ -4,7 +4,6 @@ import * as groupTools from '../buttercup/groups';
 import { loadEntries } from './entries';
 import { addExpandedKeys } from './ui';
 import { getCurrentArchiveId } from '../selectors';
-
 import {
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
@@ -49,7 +48,7 @@ export const reloadGroups = () => (dispatch, getState) => {
   dispatch(resetGroups(groups));
 
   if (groups.length > 0) {
-    // dispatch(loadGroup(groups[0].id));
+    dispatch(loadGroup(groups[0].id));
   }
 };
 
@@ -67,12 +66,12 @@ export const moveGroupToParent = (groupId, parentId, dropToGap) => (dispatch, ge
 };
 
 export const loadGroup = groupId => (dispatch, getState) => {
-  // const archiveId = getCurrentArchiveId(getState());
+  const archiveId = getCurrentArchiveId(getState());
   dispatch({
     type: GROUPS_SELECTED,
     payload: groupId
   });
-  // dispatch(loadEntries(archiveId, groupId));
+  dispatch(loadEntries(archiveId, groupId));
 };
 
 export const emptyTrash = () => (dispatch, getState) => {

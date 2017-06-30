@@ -1,4 +1,4 @@
-import { saveWorkspace as save, getArchive } from './archive';
+import { saveWorkspace, getArchive } from './archive';
 
 function entryToObj(entry) {
   const obj = entry.toObject();
@@ -12,8 +12,8 @@ function entryToObj(entry) {
   };
 }
 
-export function loadEntries(groupId) {
-  const arch = getArchive();
+export function loadEntries(archiveId, groupId) {
+  const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
@@ -23,8 +23,8 @@ export function loadEntries(groupId) {
   return group.getEntries().map(entry => entryToObj(entry));
 }
 
-export function updateEntry(entryObj) {
-  const arch = getArchive();
+export function updateEntry(archiveId, entryObj) {
+  const arch = getArchive(archiveId);
   const entry = arch.getEntryByID(entryObj.id);
 
   if (!entry) {
@@ -64,11 +64,11 @@ export function updateEntry(entryObj) {
   });
 
   // Save workspace
-  save();
+  saveWorkspace(archiveId);
 }
 
-export function createEntry(newValues, groupId) {
-  const arch = getArchive();
+export function createEntry(archiveId, groupId, newValues) {
+  const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
@@ -87,13 +87,13 @@ export function createEntry(newValues, groupId) {
     entry.setMeta(meta.key, meta.value);
   });
 
-  save();
+  saveWorkspace(archiveId);
 
   return Promise.resolve(entryToObj(entry));
 }
 
-export function deleteEntry(entryId) {
-  const arch = getArchive();
+export function deleteEntry(archiveId, entryId) {
+  const arch = getArchive(archiveId);
   const entry = arch.getEntryByID(entryId);
 
   if (!entry) {
@@ -101,11 +101,11 @@ export function deleteEntry(entryId) {
   }
 
   entry.delete();
-  save();
+  saveWorkspace(archiveId);
 }
 
-export function moveEntry(entryId, groupId) {
-  const arch = getArchive();
+export function moveEntry(archiveId, entryId, groupId) {
+  const arch = getArchive(archiveId);
   const entry = arch.getEntryByID(entryId);
   const group = arch.findGroupByID(groupId);
 
@@ -114,5 +114,5 @@ export function moveEntry(entryId, groupId) {
   }
 
   entry.moveToGroup(group);
-  save();
+  saveWorkspace(archiveId);
 }
