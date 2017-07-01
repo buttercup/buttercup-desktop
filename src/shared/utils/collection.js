@@ -88,3 +88,16 @@ export function deepFindById(list, id, key) {
   }
   return null;
 }
+
+export function deepFindParentById(list, id, key, currentId = null) {
+  for (const item of list) {
+    if (item.id === id) {
+      return currentId;
+    }
+    const findInChildren = deepFindParentById(item[key], id, key, item.id);
+    if (findInChildren !== false) {
+      return findInChildren;
+    }
+  }
+  return false;
+}

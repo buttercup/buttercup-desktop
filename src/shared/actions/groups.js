@@ -9,6 +9,7 @@ import {
   GROUPS_SET_SORT,
   GROUPS_RESET,
   GROUPS_RENAME,
+  GROUPS_MOVE,
   GROUPS_ADD_NEW_CHILD,
   GROUPS_DISMISS,
 } from './types';
@@ -52,17 +53,17 @@ export const reloadGroups = () => (dispatch, getState) => {
   }
 };
 
-export const moveGroupToParent = (groupId, parentId, dropToGap) => (dispatch, getState) => {
+export const moveGroupToParent = (groupId, parentId, gapDrop) => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  groupTools.moveGroup(archiveId, groupId, parentId, dropToGap);
-  dispatch(reloadGroups());
-  // dispatch({
-  //   type: GROUPS_MOVE,
-  //   payload: {
-  //     parentId,
-  //     groupId
-  //   }
-  // });
+  groupTools.moveGroup(archiveId, groupId, parentId, gapDrop);
+  dispatch({
+    type: GROUPS_MOVE,
+    payload: {
+      parentId,
+      groupId,
+      gapDrop
+    }
+  });
 };
 
 export const loadGroup = groupId => (dispatch, getState) => {
