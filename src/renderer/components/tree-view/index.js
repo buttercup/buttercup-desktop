@@ -142,6 +142,7 @@ class TreeView extends Component {
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
                 onSaveClick={this.props.onSaveClick}
+                onCreateNew={this.props.onCreateNew}
                 onDismissClick={this.props.onDismissClick}
                 />
             }
@@ -188,6 +189,7 @@ TreeView.propTypes = {
   sortMode: PropTypes.string,
   onRemoveClick: PropTypes.func,
   onSaveClick: PropTypes.func,
+  onCreateNew: PropTypes.func,
   onDismissClick: PropTypes.func,
   onAddClick: PropTypes.func,
   onRenameClick: PropTypes.func,

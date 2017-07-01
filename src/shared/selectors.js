@@ -3,9 +3,9 @@ import {
   filterByText,
   sortByKey,
   sortDeepByKey,
-  sortByLastAccessed,
-  deepFindById
+  sortByLastAccessed
 } from './utils/collection';
+import { denormalizeGroups } from './buttercup/groups';
 
 // Archive ->
 
@@ -80,13 +80,19 @@ export const getEntries = createSelector(
 
 // Groups ->
 
-export const getAllGroups = state => state.groups.byId;
+export const getAllGroups = state => denormalizeGroups(state.groups.shownIds, state.groups.byId);
+export const getDismissableGroupIds = state => Object.keys(state.groups.byId)
+  .filter(groupId => state.groups.byId[groupId].isNew);
+export const getGroupsById = state => state.groups.byId;
 export const getCurrentGroupId = state => state.groups.currentGroup;
+export const getCurrentGroup = state => state.groups.currentGroup ? state.groups.byId[state.groups.currentGroup] : null;
+export const getTrashGroupId = state => Object.keys(state.groups.byId)
+  .find(groupId => state.groups.byId[groupId].isTrash);
 
-export const getCurrentGroup = createSelector(
-  getAllGroups,
-  getCurrentGroupId,
-  (groups, groupId) => deepFindById(groups, groupId, 'groups')
+export const getTrashChildrenIds = createSelector(
+  getGroupsById,
+  getTrashGroupId,
+  (groups, trashGroup) => groups[trashGroup].groups
 );
 
 export const getGroups = createSelector(

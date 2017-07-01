@@ -177,6 +177,7 @@
     "ms": "^0.7.2",
     "node-noop": "^1.0.0",
     "node-sass": "^3.10.1",
+    "normalizr": "^3.2.3",
     "pify": "^2.3.0",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",

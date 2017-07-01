@@ -1,14 +1,13 @@
 import { combineReducers } from 'redux';
-import { deepAdd, deepFilter, deepMap, deepFindById, deepFindParentById } from '../utils/collection';
 import {
   GROUPS_ADD_NEW_CHILD,
   GROUPS_DISMISS,
   GROUPS_SELECTED,
   GROUPS_SET_SORT,
   GROUPS_RESET,
-  GROUPS_REMOVE,
   GROUPS_RENAME,
-  GROUPS_MOVE
+  GROUPS_MOVE,
+  GROUPS_UPDATE,
 } from '../actions/types';
 
 // Reducers ->
@@ -22,62 +21,125 @@ function currentGroup(state = null, action) {
   }
 }
 
-function groups(state = [], action) {
+function byId(state = {}, action) {
   switch (action.type) {
-    case GROUPS_ADD_NEW_CHILD:
-      return deepAdd(state, action.payload, 'groups', {
-        id: Math.random().toString(),
-        parentId: action.payload,
-        title: '',
-        isNew: true
-      });
-    case GROUPS_DISMISS: {
-      const newState = deepFilter(state, 'groups', group => !group.isNew);
-      return deepMap(newState, 'groups', item => ({
-        ...item,
-        isRenaming: false
-      }));
-    }
-    case GROUPS_MOVE: {
-      let { groupId, parentId, gapDrop } = action.payload;
-      const group = deepFindById(state, groupId, 'groups');
-      const newState = deepFilter(state, 'groups', group => group.id !== groupId);
-      if (gapDrop) {
-        parentId = deepFindParentById(state, parentId, 'groups');
-      }
-      if (parentId === null) {
-        return [
+    case GROUPS_ADD_NEW_CHILD: {
+      const { group, parentId } = action.payload;
+      let newState = {...state};
+      if (parentId !== null) {
+        newState = {
           ...newState,
-          group
-        ];
-      }
-      return deepMap(newState, 'groups', item => {
-        if (item.id === parentId) {
-          return {
-            ...item,
+          [parentId]: {
+            ...newState[parentId],
             groups: [
-              ...item.groups,
-              group
+              ...newState[parentId].groups,
+              group.id
             ]
-          };
+          }
+        };
+      }
+      return {
+        ...newState,
+        [group.id]: group
+      };
+    }
+    case GROUPS_DISMISS:
+      return Object.keys(state).reduce((newState, id) => {
+        if (id === action.payload) {
+          return newState;
         }
-        return item;
-      });
+        newState[id] = {
+          ...state[id],
+          groups: state[id].groups.filter(groupId => groupId !== action.payload)
+        };
+        return newState;
+      }, {});
+    case GROUPS_MOVE: {
+      const { groupId, fromParentId, toParentId } = action.payload;
+
+      if (toParentId === fromParentId) {
+        return state;
+      }
+
+      let newState = {...state};
+
+      if (fromParentId) {
+        newState = {
+          ...newState,
+          [fromParentId]: {
+            ...newState[fromParentId],
+            groups: newState[fromParentId].groups.filter(id => id !== groupId)
+          }
+        };
+      }
+
+      if (toParentId) {
+        newState = {
+          ...newState,
+          [toParentId]: {
+            ...newState[toParentId],
+            groups: [
+              ...newState[toParentId].groups,
+              groupId
+            ]
+          }
+        };
+      }
+
+      return newState;
     }
     case GROUPS_RESET:
-      return action.payload;
-    case GROUPS_REMOVE:
-      return [];
+      return action.payload.entities.groups;
     case GROUPS_RENAME:
-      return deepMap(state, 'groups', item => {
-        if (item.id === action.payload) {
-          return {
-            ...item,
-            isRenaming: true
-          };
+      return {
+        ...state,
+        [action.payload]: {
+          ...state[action.payload],
+          isRenaming: true
         }
-        return item;
-      });
+      };
+    case GROUPS_UPDATE:
+      return {
+        ...state,
+        [action.payload.id]: action.payload
+      };
+    default:
+      return state;
+  }
+}
+
+function shownIds(state = [], action) {
+  switch (action.type) {
+    case GROUPS_ADD_NEW_CHILD:
+      if (!action.payload.parentId) {
+        return [
+          ...state,
+          action.payload.group.id
+        ];
+      }
+      return state;
+    case GROUPS_MOVE: {
+      const { groupId, fromParentId, toParentId } = action.payload;
+
+      if (toParentId === fromParentId) {
+        return state;
+      }
+
+      if (!fromParentId) {
+        return state.filter(id => id !== groupId);
+      }
+      if (!toParentId) {
+        return [
+          ...state,
+          groupId
+        ];
+      }
+      return state;
+    }
+    case GROUPS_DISMISS:
+      return state.filter(id => id !== action.payload);
+    case GROUPS_RESET:
+      return action.payload.result;
     default:
       return state;
   }
@@ -93,7 +155,8 @@ function sortMode(state = 'title-asc', action) {
 }
 
 export default combineReducers({
-  byId: groups,
+  byId,
+  shownIds,
   currentGroup,
   sortMode
 });

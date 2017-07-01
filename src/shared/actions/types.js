@@ -14,13 +14,14 @@ export const FILES_NEW = 'buttercup/files/NEW';
 export const FILES_CANCELLED = 'buttercup/files/CANCELLED';
 
 export const GROUPS_SELECTED = 'buttercup/groups/SELECTED';
-export const GROUPS_ADD_NEW_CHILD = 'buttercup/groups/ADD_CHILD';
+export const GROUPS_ADD_NEW_CHILD = 'buttercup/groups/ADD_NEW_CHILD';
 export const GROUPS_DISMISS = 'buttercup/groups/DISMISS';
 export const GROUPS_MOVE = 'buttercup/groups/MOVE';
 export const GROUPS_SET_SORT = 'buttercup/groups/SET_SORT';
 export const GROUPS_RESET = 'buttercup/groups/RESET';
 export const GROUPS_REMOVE = 'buttercup/groups/REMOVE';
 export const GROUPS_RENAME = 'buttercup/groups/RENAME';
+export const GROUPS_UPDATE = 'buttercup/groups/UPDATE';
 
 export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
 export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
