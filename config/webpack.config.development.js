@@ -9,8 +9,8 @@ module.exports = merge(baseConfig, {
   entry: {
     main: [
       'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:3000/',
-      'webpack/hot/only-dev-server',
+      // 'webpack-dev-server/client?http://localhost:3000/',
+      // 'webpack/hot/only-dev-server',
       resolve(__dirname, '../src/renderer/index')
     ],
     fileManager: resolve(__dirname, '../src/renderer/file-manager')

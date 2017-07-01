@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from 'electron';
-import { throttle } from 'lodash';
+import debounce from 'lodash/debounce';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
 import { createRPC } from './lib/rpc';
@@ -55,7 +55,7 @@ export function setupWindows() {
       }
     });
 
-    win.on('resize', throttle(() => {
+    win.on('resize', debounce(() => {
       rpc.emit('size-change', win.getSize());
     }, 2000));
 

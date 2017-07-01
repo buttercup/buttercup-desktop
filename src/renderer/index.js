@@ -7,7 +7,7 @@ import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import { addArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
-import * as uiActions from '../shared/actions/ui';
+import { setWindowSize } from '../shared/actions/settings';
 import rpc from './system/rpc';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
@@ -46,7 +46,7 @@ window.test = () => {
 };
 
 rpc.on('size-change', size => {
-  store.dispatch(uiActions.setWindowSize(size));
+  store.dispatch(setWindowSize(size));
 });
 
 rpc.on('import-history', request => {

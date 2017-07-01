@@ -1,19 +1,20 @@
-export default [
-  {
-    label: 'Minimize',
-    accelerator: 'CmdOrCtrl+M',
-    role: 'minimize'
-  },
-  {
-    label: 'Close',
-    accelerator: 'CmdOrCtrl+W',
-    role: 'close'
-  },
-  {
-    type: 'separator'
-  },
-  {
-    label: 'Bring All to Front',
-    role: 'front'
-  }
+import { isOSX } from '../../lib/platform';
+
+const menu = [
+  { role: 'minimize' },
+  { role: 'close' },
+  { type: 'separator' },
+  { role: 'front' }
 ];
+
+if (isOSX()) {
+  menu.push(
+    { role: 'close' },
+    { role: 'minimize' },
+    { role: 'zoom' },
+    { type: 'separator' },
+    { role: 'front' }
+  );
+}
+
+export default menu;
