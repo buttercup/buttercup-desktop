@@ -6,7 +6,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
 import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
-import { addArchiveFromSource } from '../shared/actions/archives';
+import { addArchiveFromSource, loadOrUnlockArchive } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import { setWindowSize } from '../shared/actions/settings';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
@@ -31,6 +31,10 @@ ipc.send('init');
 
 ipc.on('load-archive', (e, payload) => {
   store.dispatch(addArchiveFromSource(payload));
+});
+
+ipc.on('set-current-archive', (e, payload) => {
+  store.dispatch(loadOrUnlockArchive(payload));
 });
 
 window.test = () => {

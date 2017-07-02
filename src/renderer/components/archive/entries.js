@@ -45,7 +45,7 @@ class Entries extends Component {
     const addButton = (
       <Button
         onClick={handleAddEntry}
-        disabled={currentGroup === null || currentGroup.isTrash}
+        disabled={!currentGroup || currentGroup.isTrash}
         full
         dark
         icon={<PlusIcon />}

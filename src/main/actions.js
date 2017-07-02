@@ -3,6 +3,7 @@ import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
 import { openFile, newFile } from './lib/files';
+import { addArchivesToMenu } from './menu';
 
 const windowManager = getWindowManager();
 
@@ -35,5 +36,9 @@ export function setupActions(store) {
 
   ipc.on('new-file-dialog', () => {
     newFile();
+  });
+
+  ipc.on('archive-list-updated', (e, payload) => {
+    addArchivesToMenu(payload);
   });
 }

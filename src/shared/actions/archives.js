@@ -1,6 +1,7 @@
 import isError from 'is-error';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
+import { updateApplicationMenu } from '../buttercup/store';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
@@ -9,7 +10,7 @@ import {
   ARCHIVES_UNLOCK,
   ARCHIVES_SET_CURRENT
 } from './types';
-
+import { getArchive } from '../selectors';
 import {
   addArchiveToArchiveManager,
   removeArchiveFromArchiveManager,
@@ -23,9 +24,10 @@ export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
 
 // Impure Buttercup actions
-export const loadArchive = payload => dispatch => {
+export const loadArchive = payload => (dispatch, getState) => {
   dispatch(setCurrentArchive(payload));
   dispatch(reloadGroups());
+  updateApplicationMenu(getState());
 };
 
 export const removeArchive = payload => () => {
@@ -38,6 +40,18 @@ export const unlockArchive = payload => dispatch => {
   ).then(
     archiveId => dispatch(loadArchive(archiveId))
   );
+};
+
+export const loadOrUnlockArchive = payload => (dispatch, getState) => {
+  const archive = getArchive(getState(), payload);
+  if (!archive) {
+    return;
+  }
+  if (archive.status === 'locked') {
+    dispatch(unlockArchive(payload));
+  } else {
+    dispatch(loadArchive(payload));
+  }
 };
 
 export const addArchive = payload => async (dispatch, getState) => {

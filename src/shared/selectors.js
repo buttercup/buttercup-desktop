@@ -2,18 +2,14 @@ import { createSelector } from 'reselect';
 import {
   filterByText,
   sortByKey,
-  sortDeepByKey,
-  sortByLastAccessed
+  sortDeepByKey
 } from './utils/collection';
 import { denormalizeGroups } from './buttercup/groups';
 
 // Archive ->
 
-export const getAllArchives = state => Object.values(state.archives);
-export const getSortedArchives = createSelector(
-  getAllArchives,
-  archives => sortByLastAccessed(archives)
-);
+export const getAllArchives = state => sortByKey(Object.values(state.archives), 'name-asc');
+export const getArchive = (state, archiveId) => state.archives.find(archive => archive.id === archiveId);
 
 export const getCurrentArchiveId = state => state.currentArchive;
 export const getCurrentArchive = createSelector(

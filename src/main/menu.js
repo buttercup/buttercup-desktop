@@ -1,9 +1,11 @@
-import { app, shell } from 'electron';
+import { app, shell, Menu } from 'electron';
 import { isOSX } from './lib/platform';
 import { openFile, openFileForImporting, newFile } from './lib/files';
+import { getWindowManager } from './lib/window-manager';
+import { getMainWindow } from './utils/window';
 import pkg from '../../package.json';
 
-const template = [
+const defaultTemplate = [
   {
     label: isOSX() ? 'Archive' : 'File',
     submenu: [
@@ -16,6 +18,15 @@ const template = [
         label: 'Open Archive',
         accelerator: 'CmdOrCtrl+O',
         click: (item, focusedWindow) => openFile(focusedWindow)
+      },
+      {
+        label: 'Connect Cloud Sources',
+        accelerator: 'CmdOrCtrl+Shift+C',
+        click: (item, focusedWindow) => {
+          getWindowManager().buildWindowOfType('file-manager', null, {
+            parent: getMainWindow(focusedWindow)
+          });
+        }
       },
       {
         type: 'separator'
@@ -106,7 +117,7 @@ const template = [
 ];
 
 if (isOSX()) {
-  template.unshift({
+  defaultTemplate.unshift({
     label: app.getName(),
     submenu: [
       { role: 'about' },
@@ -122,7 +133,7 @@ if (isOSX()) {
   });
 
   // Edit
-  template[2].submenu.push(
+  defaultTemplate[2].submenu.push(
     { type: 'separator' },
     {
       label: 'Speech',
@@ -134,7 +145,7 @@ if (isOSX()) {
   );
 
   // Window
-  template[4].submenu.push(
+  defaultTemplate[4].submenu.push(
     { role: 'close' },
     { role: 'minimize' },
     { role: 'zoom' },
@@ -143,4 +154,39 @@ if (isOSX()) {
   );
 }
 
-export default template;
+export function setApplicationMenu(template = defaultTemplate) {
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+}
+
+export function addArchivesToMenu({ archives, currentArchiveId }) {
+  if (!archives) {
+    return;
+  }
+
+  const indexToUpdate = isOSX() ? 4 : 3;
+  const template = defaultTemplate.map((item, i) => {
+    if (i === indexToUpdate) {
+      return {
+        ...item,
+        submenu: [
+          ...item.submenu,
+          { type: 'separator' },
+          ...archives.map((archive, index) => ({
+            label: archive.name,
+            accelerator: `CmdOrCtrl+${index + 1}`,
+            type: 'checkbox',
+            click: () => {
+              const win = getMainWindow();
+              if (win) {
+                win.webContents.send('set-current-archive', archive.id);
+              }
+            },
+            checked: (archive.id === currentArchiveId)
+          }))
+        ]
+      };
+    }
+    return item;
+  });
+  setApplicationMenu(template);
+}
