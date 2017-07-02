@@ -49,8 +49,8 @@ export function isButtercupFile(filePath) {
 
 export function emitActionToParentAndClose(name, payload) {
   const win = remote.getCurrentWindow();
-  const rpc = win.getParentWindow().rpc;
-  rpc.emit(name, payload);
+  const ipc = win.getParentWindow().webContents;
+  ipc.send(name, payload);
   win.close();
 }
 

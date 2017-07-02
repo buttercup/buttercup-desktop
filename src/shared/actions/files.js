@@ -1,11 +1,11 @@
 import { ipcRenderer } from 'electron';
 
 export const newArchive = () => () => {
-  window.rpc.emit('new-file-dialog');
+  ipcRenderer.send('new-file-dialog');
 };
 
 export const openArchive = () => () => {
-  window.rpc.emit('open-file-dialog');
+  ipcRenderer.send('open-file-dialog');
 };
 
 export const openFileManager = () => () => {

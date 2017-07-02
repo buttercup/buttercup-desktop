@@ -1,5 +1,6 @@
 import Buttercup from 'buttercup-web';
 import React from 'react';
+import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
@@ -8,7 +9,6 @@ import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import { addArchiveFromSource } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import { setWindowSize } from '../shared/actions/settings';
-import rpc from './system/rpc';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
@@ -19,8 +19,6 @@ import Root from './containers/root';
 
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
-
-window.__defineGetter__('rpc', () => rpc);
 const store = configureStore({}, 'renderer');
 
 // temp
@@ -29,11 +27,9 @@ global.archiveManager = getSharedArchiveManager();
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
-rpc.on('ready', () => {
-  rpc.emit('init');
-});
+ipc.send('init');
 
-rpc.on('load-archive', payload => {
+ipc.on('load-archive', (e, payload) => {
   store.dispatch(addArchiveFromSource(payload));
 });
 
@@ -45,21 +41,21 @@ window.test = () => {
   }));
 };
 
-rpc.on('size-change', size => {
+ipc.on('size-change', size => {
   store.dispatch(setWindowSize(size));
 });
 
-rpc.on('import-history', request => {
+ipc.on('import-history', (e, request) => {
   importHistoryFromRequest(request);
   store.dispatch(groupActions.reloadGroups());
 });
 
-rpc.on('import-history-prompt', () => {
+ipc.on('import-history-prompt', () => {
   showHistoryPasswordPrompt()
     .then(result => {
-      rpc.emit('import-history-prompt-resp', result);
+      ipc.send('import-history-prompt-resp', result);
     }).catch(() => {
-      rpc.emit('import-history-prompt-resp', null);
+      ipc.send('import-history-prompt-resp', null);
     });
 });
 

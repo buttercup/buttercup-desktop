@@ -1,9 +1,8 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import debounce from 'lodash/debounce';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
-import { createRPC } from './lib/rpc';
-import { loadFile, openFile, newFile } from './lib/files';
+import { loadFile } from './lib/files';
 
 const windowManager = getWindowManager();
 
@@ -24,39 +23,24 @@ export function setupWindows() {
 
     win.loadURL(getPathToFile('views/index.html'));
 
-    const rpc = createRPC(win);
-    win.rpc = rpc;
-
-    win.isIntro = () => {
-      return win.getTitle().toLowerCase().match(/welcome/i) !== null;
-    };
-
     // When user drops a file on the window
     win.webContents.on('will-navigate', (e, url) => {
       e.preventDefault();
       loadFile(url, win);
     });
 
-    rpc.on('open-file-dialog', () => {
-      openFile();
-    });
-
-    rpc.on('new-file-dialog', () => {
-      newFile();
-    });
-
     win.once('ready-to-show', () => {
       win.show();
     });
 
-    rpc.once('init', () => {
+    ipc.once('init', () => {
       if (callback) {
-        callback(win, rpc);
+        callback(win);
       }
     });
 
     win.on('resize', debounce(() => {
-      rpc.emit('size-change', win.getSize());
+      win.webContents.send('size-change', win.getSize());
     }, 2000));
 
     win.once('closed', () => {
