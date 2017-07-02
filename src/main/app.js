@@ -4,7 +4,7 @@ import log from 'electron-log';
 import { throttle } from 'lodash';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
-import menuTemplate from './config/menu';
+import menuTemplate from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
 import { isWindows } from './lib/platform';

@@ -3,21 +3,24 @@ import debounce from 'lodash/debounce';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
+import { config } from '../shared/config';
 
 const windowManager = getWindowManager();
 
 export function setupWindows() {
   // Intro Screen
   windowManager.setBuildProcedure('main', callback => {
+    const [width, height] = config.get('window.size', [950, 700]);
     // Create the browser window.
     const win = new BrowserWindow({
-      width: 950,
-      height: 700,
+      width,
+      height,
       minWidth: 680,
       minHeight: 500,
       title: app.getName(),
       titleBarStyle: 'hidden-inset',
       show: process.env.NODE_ENV === 'development',
+      darkTheme: true,
       vibrancy: 'dark'
     });
 
@@ -40,7 +43,7 @@ export function setupWindows() {
     });
 
     win.on('resize', debounce(() => {
-      win.webContents.send('size-change', win.getSize());
+      config.set('window.size', win.getSize());
     }, 2000));
 
     win.once('closed', () => {

@@ -1,7 +1,10 @@
 import Buttercup from 'buttercup-web';
-import storage from 'electron-json-storage';
+import Store from 'electron-store';
 
 const { StorageInterface } = Buttercup.storage;
+const storage = new Store({
+  name: 'archives'
+});
 
 /**
  * Interface for localStorage
@@ -14,12 +17,8 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   getAllKeys() {
     return new Promise((resolve, reject) => {
-      storage.keys((err, keys) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(keys.filter(key => key.startsWith('buttercup-')).map(key => key.substr(10)));
-      });
+      const values = [...storage];
+      resolve(values.map(val => val[0]));
     });
   }
 
@@ -30,12 +29,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   getValue(name) {
     return new Promise((resolve, reject) => {
-      storage.get(`buttercup-${name}`, (err, result) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(result.value);
-      });
+      resolve(storage.get(name));
     });
   }
 
@@ -46,12 +40,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   removeKey(key) {
     return new Promise((resolve, reject) => {
-      storage.remove(`buttercup-${key}`, err => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve();
-      });
+      resolve(storage.delete(key));
     });
   }
 
@@ -63,12 +52,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   setValue(name, value) {
     return new Promise((resolve, reject) => {
-      storage.set(`buttercup-${name}`, { value }, err => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve();
-      });
+      resolve(storage.set(name, value));
     });
   }
 }

@@ -143,6 +143,7 @@
     "electron-json-storage": "^3.0.6",
     "electron-log": "^2.2.6",
     "electron-rpc": "^2.0.1",
+    "electron-store": "^1.2.0",
     "electron-unhandled": "^0.2.0",
     "electron-updater": "^2.3.0",
     "eslint": "^3.19.0",
