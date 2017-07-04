@@ -50,6 +50,10 @@ class Avatar extends Component {
     });
   }
 
+  handlePickerClose = () => {
+    this.setState({ isPickerOpen: false });
+  }
+
   handleColorChange = color => {
     this.props.onUpdate({
       ...this.props.archive,
@@ -67,7 +71,11 @@ class Avatar extends Component {
         <CogButton className="cog" onClick={this.handleClick}>
           <CogIcon />
         </CogButton>
-        <Portal closeOnOutsideClick isOpened={this.state.isPickerOpen}>
+        <Portal
+          closeOnOutsideClick
+          isOpened={this.state.isPickerOpen}
+          onClose={this.handlePickerClose}
+          >
           <Picker left={this.state.left} top={this.state.top}>
             <GithubPicker triangle="top-left" onChange={this.handleColorChange} />
           </Picker>
