@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import HistoryIcon from 'react-icons/lib/go/history';
+import ArchiveIcon from 'react-icons/lib/md/add';
 import LockOpen from 'react-icons/lib/md/lock-open';
 import LockClosed from 'react-icons/lib/md/lock-outline';
 import { Button } from '@buttercup/ui';
@@ -9,10 +9,11 @@ import { brands } from '../../shared/buttercup/brands';
 import { isOSX } from '../../shared/utils/platform';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
-import Column from './column';
+import Avatar from './avatar';
+import BaseColumn from './column';
 
-const Wrapper = styled.div`
-  width: var(--sidebar-width);
+const Column = styled(BaseColumn)`
+  width: ${props => props.condenced ? 'var(--sidebar-width-condenced)' : 'var(--sidebar-width)'};
   height: 100%;
   background-color: ${isOSX() ? 'transparent' : 'var(--sidebar-bg)'};
   display: flex;
@@ -38,9 +39,9 @@ const FileItem = styled.li`
   figure {
     margin: 0;
     padding: 0;
-    flex: 0 0 2rem;
-    width: 2rem;
-    height: 2rem;
+    flex: 0 0 3rem;
+    width: 3rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +49,8 @@ const FileItem = styled.li`
     img {
       width: 100%;
       display: block;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, .2);
     }
   }
 
@@ -81,7 +84,7 @@ const FileItem = styled.li`
   }
 `;
 
-const File = ({ archive, onClick, onRemoveClick, active, index }) => {
+const File = ({ archive, onClick, onRemoveClick, onArchiveUpdate, active, index, condenced }) => {
   // const { base, dir } = parsePath(archive.path);
   const { name } = archive;
   return (
@@ -105,16 +108,17 @@ const File = ({ archive, onClick, onRemoveClick, active, index }) => {
         }]);
       }}
       >
-      <figure>
+      {/*<figure>
         <img src={brands[archive.type].icon} />
-      </figure>
-      <section>
+      </figure>*/}
+      <Avatar archive={archive} onUpdate={onArchiveUpdate} />
+      {!condenced && <section>
         <div>{name}</div>
         <span className='status'>
           {archive.status === 'locked' ? <LockClosed /> : <LockOpen />}
           {archive.status}
         </span>
-      </section>
+      </section>}
     </FileItem>
   );
 };
@@ -122,18 +126,23 @@ const File = ({ archive, onClick, onRemoveClick, active, index }) => {
 File.propTypes = {
   archive: PropTypes.object,
   active: PropTypes.bool,
+  condenced: PropTypes.bool,
+  index: PropTypes.number,
   onClick: PropTypes.func,
-  onRemoveClick: PropTypes.func
+  onRemoveClick: PropTypes.func,
+  onArchiveUpdate: PropTypes.func
 };
 
 class RecentFiles extends Component {
   static propTypes = {
+    condenced: PropTypes.bool,
     archives: PropTypes.array,
     currentArchiveId: PropTypes.string,
     onRemoveClick: PropTypes.func,
     onOpenClick: PropTypes.func,
     onNewClick: PropTypes.func,
     onCloudClick: PropTypes.func,
+    onArchiveUpdate: PropTypes.func,
     onClick: PropTypes.func
   };
 
@@ -166,7 +175,7 @@ class RecentFiles extends Component {
   }
 
   render() {
-    const { archives, currentArchiveId } = this.props;
+    const { archives, currentArchiveId, condenced } = this.props;
 
     // if (archives.length === 0) {
     //   return this.renderEmptyState();
@@ -177,29 +186,29 @@ class RecentFiles extends Component {
         dark
         full
         onClick={this.showCreateMenu}
-        icon={<HistoryIcon />}
+        icon={<ArchiveIcon />}
         >
-        Add Archive
+        {condenced ? ' ' : 'Add Archive'}
       </Button>
     );
 
     return (
-      <Wrapper>
-        <Column footer={footer}>
-          <ArchiveList>
-            {archives.map((archive, i) =>
-              <File
-                active={archive.id === currentArchiveId}
-                archive={archive}
-                key={archive.id}
-                index={i}
-                onClick={() => this.props.onClick(archive.id)}
-                onRemoveClick={() => this.props.onRemoveClick(archive.id)}
-              />
-            )}
-          </ArchiveList>
-        </Column>
-      </Wrapper>
+      <Column footer={footer} condenced={condenced}>
+        <ArchiveList>
+          {archives.map((archive, i) =>
+            <File
+              active={archive.id === currentArchiveId}
+              archive={archive}
+              key={archive.id}
+              index={i}
+              condenced={condenced}
+              onArchiveUpdate={this.props.onArchiveUpdate}
+              onClick={() => this.props.onClick(archive.id)}
+              onRemoveClick={() => this.props.onRemoveClick(archive.id)}
+            />
+          )}
+        </ArchiveList>
+      </Column>
     );
   }
 }

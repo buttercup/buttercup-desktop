@@ -8,7 +8,8 @@ import {
   ARCHIVES_ADD,
   ARCHIVES_REMOVE,
   ARCHIVES_UNLOCK,
-  ARCHIVES_SET_CURRENT
+  ARCHIVES_SET_CURRENT,
+  ARCHIVES_UPDATE
 } from './types';
 import { getArchive } from '../selectors';
 import {
@@ -22,6 +23,7 @@ export const addArchiveToStore = createAction(ARCHIVES_ADD);
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
 export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
+export const updateArchive = createAction(ARCHIVES_UPDATE);
 
 // Impure Buttercup actions
 export const loadArchive = payload => (dispatch, getState) => {

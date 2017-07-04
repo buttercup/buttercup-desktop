@@ -4,6 +4,7 @@ import {
   ARCHIVES_REMOVE,
   ARCHIVES_UNLOCK,
   ARCHIVES_SET_CURRENT,
+  ARCHIVES_UPDATE,
 } from '../actions/types';
 
 export default function archivesReducer(state = [], action) {
@@ -22,6 +23,16 @@ export default function archivesReducer(state = [], action) {
           return {
             ...archive,
             status: 'unlocked'
+          };
+        }
+        return archive;
+      });
+    case ARCHIVES_UPDATE:
+      return state.map(archive => {
+        if (archive.id === action.payload.id) {
+          return {
+            ...archive,
+            ...action.payload
           };
         }
         return archive;

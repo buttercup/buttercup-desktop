@@ -39,3 +39,4 @@ export const ARCHIVES_UNLOCK = 'buttercup/archives/UNLOCK';
 export const ARCHIVES_CLEAR = 'buttercup/archives/CLEAR';
 export const ARCHIVES_SET = 'buttercup/archives/SET';
 export const ARCHIVES_SET_CURRENT = 'buttercup/archives/SET_CURRENT';
+export const ARCHIVES_UPDATE = 'buttercup/archives/UPDATE';

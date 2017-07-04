@@ -14,7 +14,7 @@ const Primary = styled(Box)`
 const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, columnSizes }) => {
   return (
     <Flex flexAuto>
-      <Sidebar />
+      <Sidebar condenced={false} />
       <Primary flexAuto>
         <Archive
           columnSizes={columnSizes}
