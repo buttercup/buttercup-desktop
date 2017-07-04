@@ -1,7 +1,7 @@
 import path from 'path';
 import { BrowserWindow, dialog, ipcMain as ipc } from 'electron';
 import { ArchiveTypes } from '../../shared/buttercup/types';
-import { isWindows } from './platform';
+import { isWindows } from '../../shared/utils/platform';
 import { getWindowManager } from './window-manager';
 import { importArchive } from './buttercup';
 import { getMainWindow } from '../utils/window';

@@ -34,10 +34,7 @@ export const getExpandedKeys = createSelector(
   archive => archive ? archive.ui.treeExpandedKeys : []
 );
 
-export const getColumnSizes = createSelector(
-  getCurrentArchiveSettings,
-  archive => archive ? archive.ui.columnSizes : null
-);
+export const getColumnSizes = state => state.settings.columnSizes;
 
 export const getWindowSize = createSelector(
   getCurrentArchiveSettings,

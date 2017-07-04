@@ -31,18 +31,6 @@ export function setWindowSize(width, height, vibrancy) {
   }
 }
 
-export function isOSX() {
-  return process.platform === 'darwin';
-}
-
-export function isWindows() {
-  return process.platform === 'win32';
-}
-
-export function isLinux() {
-  return process.platform === 'linux';
-}
-
 export function isButtercupFile(filePath) {
   return path.extname(filePath).toLowerCase() === '.bcup';
 }

@@ -1,4 +1,4 @@
-import { app, Menu } from 'electron';
+import { app } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import { throttle } from 'lodash';
@@ -7,7 +7,7 @@ import configureStore from '../shared/store/configure-store';
 import { setApplicationMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
-import { isWindows } from './lib/platform';
+import { isWindows } from '../shared/utils/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 

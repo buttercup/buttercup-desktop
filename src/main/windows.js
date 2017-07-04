@@ -21,7 +21,7 @@ export function setupWindows() {
       titleBarStyle: 'hidden-inset',
       show: process.env.NODE_ENV === 'development',
       darkTheme: true,
-      vibrancy: 'dark'
+      vibrancy: 'ultra-dark'
     });
 
     win.loadURL(getPathToFile('views/index.html'));

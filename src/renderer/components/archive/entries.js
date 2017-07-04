@@ -1,15 +1,29 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
-import cx from 'classnames';
+import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
-import { isOSX } from '../../system/utils';
+import { isOSX } from '../../../shared/utils/platform';
 import { showContextMenu, createMenuFromGroups, createCopyMenu } from '../../system/menu';
-import Column from '../column';
-import styles from '../../styles/entries';
+import BaseColumn from '../column';
 import List from './entries-list';
 import SearchField from './search-field';
 import SortButton from './sort-button';
+
+const Column = styled(BaseColumn)`
+  background-color: ${isOSX() ? 'var(--entries-bg-mac)' : 'var(--entries-bg)'};
+  color: #fff;
+`;
+
+const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-right: calc(-1 * var(--spacing-half));
+
+  button {
+    color: #fff;
+  }
+`;
 
 class Entries extends Component {
   handleFilterChange = value => {
@@ -52,15 +66,14 @@ class Entries extends Component {
         >Add Entry</Button>
     );
     const filterNode = (
-      <div className={styles.searchWrapper}>
+      <SearchWrapper>
         <SearchField onChange={this.handleFilterChange} filter={filter} />
         <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
-      </div>
+      </SearchWrapper>
     );
 
     return (
       <Column
-        className={cx(styles.column, isOSX() && styles.mac)}
         header={filterNode}
         footer={addButton}
         >

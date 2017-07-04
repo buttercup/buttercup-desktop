@@ -1,9 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import HistoryIcon from 'react-icons/lib/go/history';
+import LockOpen from 'react-icons/lib/md/lock-open';
+import LockClosed from 'react-icons/lib/md/lock-outline';
 import { Button } from '@buttercup/ui';
 import styled from 'styled-components';
 import { brands } from '../../shared/buttercup/brands';
+import { isOSX } from '../../shared/utils/platform';
 import { showContextMenu } from '../system/menu';
 import EmptyView from './empty-view';
 import Column from './column';
@@ -11,7 +14,7 @@ import Column from './column';
 const Wrapper = styled.div`
   width: var(--sidebar-width);
   height: 100%;
-  background-color: var(--sidebar-bg);
+  background-color: ${isOSX() ? 'transparent' : 'var(--sidebar-bg)'};
   display: flex;
 `;
 
@@ -27,6 +30,10 @@ const FileItem = styled.li`
   background-color: ${props => props.active ? 'rgba(255, 255, 255, .1)' : 'transparent'};
   padding: var(--spacing-half) var(--spacing-one);
   cursor: ${props => props.locked ? 'pointer' : 'default'} !important;
+
+  &:active {
+    background-color: rgba(255, 255, 255, .2);
+  }
 
   figure {
     margin: 0;
@@ -50,6 +57,13 @@ const FileItem = styled.li`
     color: ${props => props.locked ? 'var(--red)' : 'var(--gray-dark)'};
     text-transform: uppercase;
     display: block;
+
+    svg {
+      vertical-align: -2px !important;
+      margin-right: 3px;
+      height: 12px;
+      width: 12px;
+    }
   }
 
   section {
@@ -96,7 +110,10 @@ const File = ({ archive, onClick, onRemoveClick, active, index }) => {
       </figure>
       <section>
         <div>{name}</div>
-        <span className='status'>{archive.status}</span>
+        <span className='status'>
+          {archive.status === 'locked' ? <LockClosed /> : <LockOpen />}
+          {archive.status}
+        </span>
       </section>
     </FileItem>
   );

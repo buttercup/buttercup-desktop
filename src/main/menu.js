@@ -1,5 +1,5 @@
 import { app, shell, Menu } from 'electron';
-import { isOSX } from './lib/platform';
+import { isOSX } from '../shared/utils/platform';
 import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { getMainWindow } from './utils/window';
