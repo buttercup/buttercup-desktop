@@ -9,6 +9,7 @@ import update from './update';
 export default function getRootReducer(scope = 'main') {
   let reducers = {
     settingsByArchiveId,
+    currentArchive,
     archives,
     update,
     settings,
@@ -17,7 +18,6 @@ export default function getRootReducer(scope = 'main') {
   if (scope === 'renderer') {
     reducers = {
       ...reducers,
-      currentArchive,
       groups,
       entries,
       form,

@@ -1,7 +1,7 @@
 import isError from 'is-error';
+import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
-import { updateApplicationMenu } from '../buttercup/store';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
@@ -12,7 +12,7 @@ import {
   ARCHIVES_SET_CURRENT,
   ARCHIVES_UPDATE
 } from './types';
-import { getArchive } from '../selectors';
+import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
   addArchiveToArchiveManager,
   removeArchiveFromArchiveManager,
@@ -29,9 +29,12 @@ export const updateArchive = createAction(ARCHIVES_UPDATE);
 
 // Impure Buttercup actions
 export const loadArchive = payload => (dispatch, getState) => {
+  if (payload === getCurrentArchiveId(getState())) {
+    return;
+  }
   dispatch(setCurrentArchive(payload));
   dispatch(reloadGroups());
-  updateApplicationMenu(getState());
+  ipc.send('archive-list-updated');
 };
 
 export const removeArchive = payload => () => {

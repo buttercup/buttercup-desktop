@@ -23,7 +23,6 @@ export default function archivesReducer(state = [], action) {
     }
     case ARCHIVES_LOCK:
     case ARCHIVES_UNLOCK:
-    console.log(action.type);
       return state.map(archive => {
         if (archive.id === action.payload) {
           return {

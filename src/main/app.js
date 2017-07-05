@@ -4,7 +4,7 @@ import log from 'electron-log';
 import { throttle } from 'lodash';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
-import { setApplicationMenu } from './menu';
+import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
 import { isWindows } from '../shared/utils/platform';
@@ -92,6 +92,7 @@ app.on('ready', async () => {
   // Setup Windows & IPC Actions
   setupWindows(store);
   setupActions(store);
+  setupMenu(store);
 
   appIsReady = true;
 
@@ -104,9 +105,6 @@ app.on('ready', async () => {
       initialFile = null;
     }
   });
-
-  // Show standard menu
-  setApplicationMenu();
 });
 
 // When user closes all windows

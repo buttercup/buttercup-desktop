@@ -1,5 +1,6 @@
 import { app, shell, Menu } from 'electron';
 import { isOSX } from '../shared/utils/platform';
+import { getCurrentArchiveId, getAllArchives } from '../shared/selectors';
 import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { getMainWindow } from './utils/window';
@@ -152,16 +153,12 @@ if (isOSX()) {
     { type: 'separator' },
     { role: 'front' }
   );
-}
+};
 
-export function setApplicationMenu(template = defaultTemplate) {
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-}
-
-export function addArchivesToMenu({ archives, currentArchiveId }) {
-  if (!archives) {
-    return;
-  }
+export function setupMenu(store) {
+  const state = store.getState();
+  const archives = getAllArchives(state);
+  const currentArchiveId = getCurrentArchiveId(state);
 
   const indexToUpdate = isOSX() ? 4 : 3;
   const template = defaultTemplate.map((item, i) => {
@@ -188,5 +185,5 @@ export function addArchivesToMenu({ archives, currentArchiveId }) {
     }
     return item;
   });
-  setApplicationMenu(template);
+  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }

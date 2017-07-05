@@ -6,7 +6,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
 import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
-import { addArchiveFromSource, loadOrUnlockArchive } from '../shared/actions/archives';
+import { addArchiveFromSource, loadOrUnlockArchive, setCurrentArchive } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
 import { setWindowSize } from '../shared/actions/settings';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
@@ -26,6 +26,9 @@ global.archiveManager = getSharedArchiveManager();
 
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
+
+// Reset current archive
+store.dispatch(setCurrentArchive(null));
 
 ipc.send('init');
 
