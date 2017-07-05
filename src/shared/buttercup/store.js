@@ -3,6 +3,7 @@ import { getSharedArchiveManager } from './archive';
 import {
   addArchiveToStore,
   removeArchiveFromStore,
+  lockArchiveInStore,
   unlockArchiveInStore,
 } from '../actions/archives.js';
 import { getAllArchives, getCurrentArchiveId } from '../selectors';
@@ -23,7 +24,7 @@ export function linkArchiveManagerToStore(store) {
     updateApplicationMenu(store.getState());
   });
   archiveManager.on('sourceRehydrated', function __handleRehydratedSource(sourceInfo) {
-    store.dispatch(addArchiveToStore(sourceInfo));
+    store.dispatch(lockArchiveInStore(sourceInfo.id));
     updateApplicationMenu(store.getState());
   });
   archiveManager.on('sourceUnlocked', function __handleUnlockedSource(sourceInfo) {

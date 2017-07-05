@@ -35,6 +35,7 @@ export const UPDATE_INSTALL = 'buttercup/ui/UPDATE_INSTALL';
 
 export const ARCHIVES_ADD = 'buttercup/archives/ADD';
 export const ARCHIVES_REMOVE = 'buttercup/archives/REMOVE';
+export const ARCHIVES_LOCK = 'buttercup/archives/LOCK';
 export const ARCHIVES_UNLOCK = 'buttercup/archives/UNLOCK';
 export const ARCHIVES_CLEAR = 'buttercup/archives/CLEAR';
 export const ARCHIVES_SET = 'buttercup/archives/SET';

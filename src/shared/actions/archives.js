@@ -7,6 +7,7 @@ import { reloadGroups } from './groups';
 import {
   ARCHIVES_ADD,
   ARCHIVES_REMOVE,
+  ARCHIVES_LOCK,
   ARCHIVES_UNLOCK,
   ARCHIVES_SET_CURRENT,
   ARCHIVES_UPDATE
@@ -22,6 +23,7 @@ import {
 export const addArchiveToStore = createAction(ARCHIVES_ADD);
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
 export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
+export const lockArchiveInStore = createAction(ARCHIVES_LOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
 export const updateArchive = createAction(ARCHIVES_UPDATE);
 
@@ -33,6 +35,7 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => () => {
+  // @todo: unload archive
   return removeArchiveFromArchiveManager(payload);
 };
 
@@ -57,27 +60,18 @@ export const loadOrUnlockArchive = payload => (dispatch, getState) => {
 };
 
 export const addArchive = payload => async (dispatch, getState) => {
-  try {
-    // try to load archive by showing a password dialog
-    const archiveId = await showPasswordDialog(
-      password => addArchiveToArchiveManager(payload, password).catch(err => {
-        const unknownMessage = 'An unknown error has occurred';
-        return Promise.reject(
-          isError(err)
-            ? err.message || unknownMessage
-            : unknownMessage
-        );
-      })
-    );
-
-    // Load the newly added archive
-    dispatch(loadArchive(archiveId));
-
-    // Changes to interface:
-    // const [width, height] = getWindowSize(getState());
-    // setWindowSize(width, height, 'dark');
-    // window.document.title = `${path.basename(archive.path)} - Buttercup`;
-  } catch (err) { }
+  return showPasswordDialog(
+    password => addArchiveToArchiveManager(payload, password).catch(err => {
+      const unknownMessage = 'An unknown error has occurred';
+      return Promise.reject(
+        isError(err)
+          ? err.message || unknownMessage
+          : unknownMessage
+      );
+    })
+  ).then(
+    archiveId => dispatch(loadArchive(archiveId))
+  );
 };
 
 export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
