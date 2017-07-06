@@ -33,6 +33,7 @@ export default function configureStore(initialState, scope = 'main') {
     settingsByArchiveId: true,
     archives: true,
     update: true,
+    settings: true
   };
 
   if (scope === 'renderer') {

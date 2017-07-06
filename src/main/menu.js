@@ -1,6 +1,7 @@
 import { app, shell, Menu } from 'electron';
 import { isOSX } from '../shared/utils/platform';
-import { getCurrentArchiveId, getAllArchives } from '../shared/selectors';
+import { getCurrentArchiveId, getAllArchives, getSetting } from '../shared/selectors';
+import { setSetting } from '../shared/actions/settings';
 import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { getMainWindow } from './utils/window';
@@ -76,6 +77,7 @@ const defaultTemplate = [
   {
     label: 'View',
     submenu: [
+      { type: 'separator' },
       { role: 'reload' },
       { role: 'forcereload' },
       { role: 'toggledevtools' },
@@ -159,10 +161,27 @@ export function setupMenu(store) {
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
+  let condenced = Boolean(getSetting(state, 'condencedSidebar'));
 
-  const indexToUpdate = isOSX() ? 4 : 3;
   const template = defaultTemplate.map((item, i) => {
-    if (i === indexToUpdate) {
+    if (i === (isOSX() ? 3 : 2)) {
+      return {
+        ...item,
+        submenu: [
+          {
+            label: 'Condenced Sidebar',
+            type: 'checkbox',
+            checked: condenced,
+            accelerator: 'CmdOrCtrl+B',
+            click: () => {
+              condenced = !condenced;
+              store.dispatch(setSetting('condencedSidebar', condenced));
+            }
+          },
+          ...item.submenu
+        ]
+      };
+    } else if (i === (isOSX() ? 4 : 3)) {
       return {
         ...item,
         submenu: [
@@ -185,5 +204,6 @@ export function setupMenu(store) {
     }
     return item;
   });
+
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }

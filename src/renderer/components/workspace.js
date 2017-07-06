@@ -11,10 +11,10 @@ const Primary = styled(Box)`
   position: relative;
 `;
 
-const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, columnSizes }) => {
+const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, columnSizes, condencedSidebar }) => {
   return (
     <Flex flexAuto>
-      <Sidebar condenced={false} />
+      <Sidebar condenced={condencedSidebar} />
       <Primary flexAuto>
         <Archive
           columnSizes={columnSizes}
@@ -30,6 +30,7 @@ Workspace.propTypes = {
   currentArchive: PropTypes.object,
   update: PropTypes.object,
   columnSizes: PropTypes.object,
+  condencedSidebar: PropTypes.bool,
   installUpdate: PropTypes.func,
   setColumnSize: PropTypes.func,
 };

@@ -27,18 +27,11 @@ export const getCurrentArchiveSettings = createSelector(
   (settings, archiveId) => settings[archiveId]
 );
 
-// UI ->
+export const getSetting = (state, key) => state.settings[key];
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
   archive => archive ? archive.ui.treeExpandedKeys : []
-);
-
-export const getColumnSizes = state => state.settings.columnSizes;
-
-export const getWindowSize = createSelector(
-  getCurrentArchiveSettings,
-  archive => archive ? archive.ui.windowSize : [950, 700]
 );
 
 // Entries ->

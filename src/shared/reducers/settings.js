@@ -1,7 +1,5 @@
-import { combineReducers } from 'redux';
 import uiReducer from './ui';
-import { createIdentityReducer } from '../utils/redux';
-import { ARCHIVES_REMOVE, COLUMN_SIZE_SET, WINDOW_SIZE_SET } from '../actions/types';
+import { ARCHIVES_REMOVE, COLUMN_SIZE_SET, SETTING_SET } from '../actions/types';
 
 function itemReducer(state = {}, action) {
   return {
@@ -25,24 +23,27 @@ export function settingsByArchiveId(state = {}, action) {
   return state;
 }
 
-function columnSizes(state = { tree: 230, entries: 230 }, action) {
+const DEFAULT_SETTINGS = {
+  columnSizes: { tree: 230, entries: 230 },
+  condencedSidebar: false
+};
+
+export function settings(state = DEFAULT_SETTINGS, action) {
   switch (action.type) {
     case COLUMN_SIZE_SET:
       return {
         ...state,
-        [action.payload.name]: action.payload.size
+        columnSizes: {
+          ...state.columnSizes,
+          [action.payload.name]: action.payload.size
+        }
+      };
+    case SETTING_SET:
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value
       };
     default:
       return state;
   }
 }
-
-const windowSize = createIdentityReducer(
-  WINDOW_SIZE_SET,
-  [950, 700]
-);
-
-export const settings = combineReducers({
-  columnSizes,
-  windowSize
-});

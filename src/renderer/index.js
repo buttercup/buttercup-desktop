@@ -8,7 +8,6 @@ import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import { addArchiveFromSource, loadOrUnlockArchive, setCurrentArchive } from '../shared/actions/archives';
 import * as groupActions from '../shared/actions/groups';
-import { setWindowSize } from '../shared/actions/settings';
 import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
@@ -38,18 +37,6 @@ ipc.on('load-archive', (e, payload) => {
 
 ipc.on('set-current-archive', (e, payload) => {
   store.dispatch(loadOrUnlockArchive(payload));
-});
-
-window.test = () => {
-  store.dispatch(addArchiveFromSource({
-    type: 'ipc',
-    path: '/Users/sallar/Desktop/sallar.bcup',
-    isNew: false
-  }));
-};
-
-ipc.on('size-change', size => {
-  store.dispatch(setWindowSize(size));
 });
 
 ipc.on('import-history', (e, request) => {
