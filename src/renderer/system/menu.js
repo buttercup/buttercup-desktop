@@ -13,12 +13,12 @@ export function createMenu(items = []) {
   })));
 }
 
-export function showContextMenu(menu = []) {
+export function showContextMenu(menu = [], async = true) {
   if (Array.isArray(menu)) {
     menu = createMenu(menu);
   }
   menu.popup(currentWindow, {
-    async: true
+    async
   });
 }
 
