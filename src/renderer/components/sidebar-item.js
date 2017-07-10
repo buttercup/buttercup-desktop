@@ -17,30 +17,13 @@ const Wrapper = styled.li`
   padding: var(--spacing-half) var(--spacing-one);
   cursor: ${props => props.locked ? 'pointer' : 'default'} !important;
 
-  figure {
-    margin: 0;
-    padding: 0;
-    flex: 0 0 3rem;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      width: 100%;
-      display: block;
-      border-radius: 50%;
-      border: 3px solid rgba(255, 255, 255, .2);
-    }
-  }
-
   .status {
     font-weight: 300;
     font-size: .75em;
     color: ${props => props.locked ? 'var(--red)' : 'var(--gray-dark)'};
     text-transform: uppercase;
     display: block;
+    margin-top: .3em;
 
     svg {
       vertical-align: -2px !important;
@@ -85,6 +68,27 @@ const Avatar = styled.div`
   }
 `;
 
+const Icon = styled.figure`
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 18px;
+  height: 18px;
+  transform: translate(20%, 20%);
+
+  img {
+    width: 14px;
+    display: block;
+  }
+`;
+
 const PickerWrapper = styled.div`
   position: fixed;
   top: ${props => props.top + 20}px;
@@ -115,13 +119,13 @@ class SidebarItem extends Component {
       accelerator: `CmdOrCtrl+${this.props.index + 1}`,
       click: this.props.onClick
     }, {
-      label: `Remove ${name}`,
-      click: this.props.onRemoveClick
+      label: 'Change Color',
+      click: this.showColorPopup
     }, {
       type: 'separator'
     }, {
-      label: 'Change Color',
-      click: this.showColorPopup
+      label: `Remove ${name}`,
+      click: this.props.onRemoveClick
     }]);
   }
 
@@ -168,6 +172,9 @@ class SidebarItem extends Component {
             this.avatarRef = ref;
           }}>
           <span>{briefName}</span>
+          {condenced && brands[type].remote && <Icon>
+            <img src={brands[type].icon} alt={brands[type].name} />
+          </Icon>}
           <Portal
             closeOnOutsideClick
             isOpened={this.state.isPickerOpen}
@@ -182,7 +189,7 @@ class SidebarItem extends Component {
           <div>{formattedName}</div>
           <span className='status'>
             {locked ? <LockClosed /> : <LockOpen />}
-            {status}
+            {brands[type].name}
           </span>
         </section>}
       </Wrapper>
