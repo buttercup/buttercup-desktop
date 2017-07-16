@@ -1,6 +1,6 @@
 import path from 'path';
-import { BrowserWindow, dialog, ipcMain as ipc } from 'electron';
-import { ArchiveTypes } from '../../shared/buttercup/types';
+import { dialog, ipcMain as ipc } from 'electron';
+import { ArchiveTypes, ImportTypeInfo } from '../../shared/buttercup/types';
 import { isWindows } from '../../shared/utils/platform';
 import { getWindowManager } from './window-manager';
 import { importArchive } from './buttercup';
@@ -114,25 +114,12 @@ export function newFile(focusedWindow) {
 /**
  * @param {BrowserWindow} focusedWindow
  * @param {string} type
+ * @param {string} archiveId
  */
-const showImportDialog = function(focusedWindow, type) {
-  const types = {
-    '1pif': {
-      password: false,
-      name: '1Password'
-    },
-    'kdbx': {
-      password: true,
-      name: 'KeePass'
-    },
-    'csv': {
-      password: false,
-      name: 'LastPass'
-    }
-  };
-  const typeInfo = types[type];
+const showImportDialog = function(focusedWindow, type, archiveId) {
+  const typeInfo = ImportTypeInfo[type];
 
-  if (!Object.keys(types).includes(type)) {
+  if (!typeInfo) {
     throw new Error('Invalid import type requested');
   }
 
@@ -146,57 +133,42 @@ const showImportDialog = function(focusedWindow, type) {
   };
 
   const handleSuccess = history => {
-    focusedWindow.webContents.send('import-history', { history });
+    focusedWindow.webContents.send('import-history', { history, archiveId });
   };
 
-  const [ filename ] = dialog.showOpenDialog(focusedWindow, {
+  dialog.showOpenDialog(focusedWindow, {
     filters: [{
       name: `${typeInfo.name} Archives`,
-      extensions: [type]
+      extensions: [typeInfo.extension]
     }],
     title: `Load a ${typeInfo.name} archive`
-  });
-
-  if (!filename) {
-    return;
-  }
-
-  if (typeInfo.password) {
-    focusedWindow.webContents.send('import-history-prompt');
-    ipc.once('import-history-prompt-resp', password => {
-      importArchive(type, filename, password)
+  }, ([ filename ]) => {
+    if (typeInfo.password) {
+      focusedWindow.webContents.send('import-history-prompt', type);
+      ipc.once('import-history-prompt-resp', (e, password) => {
+        importArchive(type, filename, password)
+          .then(handleSuccess)
+          .catch(handleError);
+      });
+    } else {
+      importArchive(type, filename)
         .then(handleSuccess)
         .catch(handleError);
-    });
-  } else {
-    importArchive(type, filename)
-      .then(handleSuccess)
-      .catch(handleError);
-  }
+    }
+  });
 };
 
 /**
  * @param {BrowserWindow} focusedWindow
  * @param {string} type
+ * @param {string} archiveId
  */
-export function openFileForImporting(focusedWindow, type) {
-  // if (focusedWindow && focusedWindow.isIntro()) {
-  //   dialog.showMessageBox(focusedWindow, {
-  //     title: 'Importing is not available',
-  //     message: 'To import an archive file, you must unlock a Buttercup archive first.'
-  //   });
-  //   return;
-  // }
+export function openFileForImporting(focusedWindow, type, archiveId) {
+  focusedWindow = getMainWindow(focusedWindow);
 
   if (!focusedWindow) {
-    focusedWindow = BrowserWindow.getFocusedWindow();
+    throw new Error('Import function should not be running without the main window running.');
   }
 
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main', win => {
-      showImportDialog(win, type);
-    });
-    return;
-  }
-  showImportDialog(focusedWindow, type);
+  showImportDialog(focusedWindow, type, archiveId);
 }

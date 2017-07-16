@@ -6,9 +6,13 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
 import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
-import { addArchiveFromSource, loadOrUnlockArchive, setCurrentArchive } from '../shared/actions/archives';
-import * as groupActions from '../shared/actions/groups';
-import { importHistoryFromRequest, showHistoryPasswordPrompt } from '../shared/buttercup/import';
+import {
+  addArchiveFromSource,
+  loadOrUnlockArchive,
+  setCurrentArchive,
+  importHistoryIntoArchive
+} from '../shared/actions/archives';
+import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
@@ -39,13 +43,12 @@ ipc.on('set-current-archive', (e, payload) => {
   store.dispatch(loadOrUnlockArchive(payload));
 });
 
-ipc.on('import-history', (e, request) => {
-  importHistoryFromRequest(request);
-  store.dispatch(groupActions.reloadGroups());
+ipc.on('import-history', (e, payload) => {
+  store.dispatch(importHistoryIntoArchive(payload));
 });
 
-ipc.on('import-history-prompt', () => {
-  showHistoryPasswordPrompt()
+ipc.on('import-history-prompt', (e, payload) => {
+  showHistoryPasswordPrompt(payload)
     .then(result => {
       ipc.send('import-history-prompt-resp', result);
     }).catch(() => {

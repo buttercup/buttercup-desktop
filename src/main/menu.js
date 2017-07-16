@@ -2,6 +2,7 @@ import { app, shell, Menu } from 'electron';
 import { isOSX } from '../shared/utils/platform';
 import { getCurrentArchiveId, getAllArchives, getSetting } from '../shared/selectors';
 import { setSetting } from '../shared/actions/settings';
+import { ImportTypeInfo } from '../shared/buttercup/types';
 import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { getMainWindow } from './utils/window';
@@ -35,23 +36,7 @@ const defaultTemplate = [
       },
       // @TODO: Gray out this option dynamically
       // when target is not available
-      {
-        label: 'Import',
-        submenu: [
-          {
-            label: 'From KeePass archive (.kdbx)',
-            click: (item, focusedWindow) => openFileForImporting(focusedWindow, 'kdbx')
-          },
-          {
-            label: 'From 1Password archive (.1pif)',
-            click: (item, focusedWindow) => openFileForImporting(focusedWindow, '1pif')
-          },
-          {
-            label: 'From LastPass archive (.csv)',
-            click: (item, focusedWindow) => openFileForImporting(focusedWindow, 'csv')
-          }
-        ]
-      },
+      {},
       {
         type: 'separator'
       },
@@ -164,44 +149,72 @@ export function setupMenu(store) {
   let condenced = Boolean(getSetting(state, 'condencedSidebar'));
 
   const template = defaultTemplate.map((item, i) => {
-    if (i === (isOSX() ? 3 : 2)) {
-      return {
-        ...item,
-        submenu: [
-          {
-            label: 'Condenced Sidebar',
-            type: 'checkbox',
-            checked: condenced,
-            accelerator: 'CmdOrCtrl+B',
-            click: () => {
-              condenced = !condenced;
-              store.dispatch(setSetting('condencedSidebar', condenced));
+    // OSX has one more menu item
+    const index = isOSX() ? i : i + 1;
+
+    switch (index) {
+      // Archive / File Menu:
+      case 1:
+        return {
+          ...item,
+          submenu: item.submenu.map((sub, i) => {
+            if (i === 4) {
+              return {
+                label: 'Import',
+                submenu: Object.entries(ImportTypeInfo).map(([typeKey, type]) => ({
+                  label: `From ${type.name} archive (.${type.extension})`,
+                  submenu: archives.map(archive => ({
+                    label: `To ${archive.name}`,
+                    enabled: archive.status === 'unlocked',
+                    click: (item, focusedWindow) => openFileForImporting(focusedWindow, typeKey, archive.id)
+                  }))
+                }))
+              };
             }
-          },
-          ...item.submenu
-        ]
-      };
-    } else if (i === (isOSX() ? 4 : 3)) {
-      return {
-        ...item,
-        submenu: [
-          ...item.submenu,
-          { type: 'separator' },
-          ...archives.map((archive, index) => ({
-            label: archive.name,
-            accelerator: `CmdOrCtrl+${index + 1}`,
-            type: 'checkbox',
-            click: () => {
-              const win = getMainWindow();
-              if (win) {
-                win.webContents.send('set-current-archive', archive.id);
+            return sub;
+          })
+        };
+      // View Menu:
+      case 3:
+        return {
+          ...item,
+          submenu: [
+            {
+              label: 'Condenced Sidebar',
+              type: 'checkbox',
+              checked: condenced,
+              accelerator: 'CmdOrCtrl+B',
+              click: () => {
+                condenced = !condenced;
+                store.dispatch(setSetting('condencedSidebar', condenced));
               }
             },
-            checked: (archive.id === currentArchiveId)
-          }))
-        ]
-      };
+            ...item.submenu
+          ]
+        };
+      // Window Menu:
+      case 4:
+        return {
+          ...item,
+          submenu: [
+            ...item.submenu,
+            { type: 'separator' },
+            ...archives.map((archive, index) => ({
+              label: archive.name,
+              accelerator: `CmdOrCtrl+${index + 1}`,
+              type: 'checkbox',
+              click: () => {
+                const win = getMainWindow();
+                if (win) {
+                  win.webContents.send('set-current-archive', archive.id);
+                }
+              },
+              checked: (archive.id === currentArchiveId)
+            }))
+          ]
+        };
     }
+
     return item;
   });
 

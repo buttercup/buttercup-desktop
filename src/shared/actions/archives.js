@@ -1,7 +1,10 @@
+// @ts-check
+
 import isError from 'is-error';
 import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
+import { importHistory } from '../buttercup/import';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
@@ -130,4 +133,10 @@ export const addArchiveFromSource = payload => dispatch => {
     default:
       break;
   }
+};
+
+export const importHistoryIntoArchive = payload => (dispatch, getState) => {
+  const { archiveId, history } = payload;
+  importHistory(archiveId, history);
+  dispatch(reloadGroups());
 };

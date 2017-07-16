@@ -1,23 +1,24 @@
 import { Archive } from 'buttercup-web';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { getArchive, saveWorkspace } from './archive';
+import { ImportTypeInfo } from './types';
 
-export function importHistoryFromRequest(request) {
-  const { history } = request;
+export function importHistory(archiveId, history) {
   const tempArchive = Archive.createFromHistory(history);
-  const mainArchive = getArchive();
+  const mainArchive = getArchive(archiveId);
 
   tempArchive.getGroups().forEach(group => {
     group.moveTo(mainArchive);
   });
 
-  saveWorkspace();
+  saveWorkspace(archiveId);
 }
 
-export function showHistoryPasswordPrompt() {
+export function showHistoryPasswordPrompt(type) {
+  const typeInfo = ImportTypeInfo[type];
   return showPasswordDialog(null, {
-    title: 'KeePass Password',
-    confirmButtonText: 'Import KeePass Archive',
+    title: `${typeInfo.name} Archive Password`,
+    confirmButtonText: `Import ${typeInfo.name} Archive`,
     cancelButtonText: 'Cancel Import'
   });
 }
