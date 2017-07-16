@@ -2,7 +2,7 @@ import { ipcMain as ipc, BrowserWindow } from 'electron';
 import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
-import { openFile, newFile } from './lib/files';
+import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
 
 const windowManager = getWindowManager();
@@ -40,5 +40,10 @@ export function setupActions(store) {
 
   ipc.on('archive-list-updated', (e, payload) => {
     setupMenu(store);
+  });
+
+  ipc.on('show-import-dialog', (e, payload) => {
+    const { type, archiveId } = payload;
+    openFileForImporting(undefined, type, archiveId);
   });
 }

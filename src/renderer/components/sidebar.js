@@ -31,7 +31,8 @@ class RecentFiles extends Component {
     onNewClick: PropTypes.func,
     onCloudClick: PropTypes.func,
     onArchiveUpdate: PropTypes.func,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    showImportDialog: PropTypes.func
   };
 
   showCreateMenu = () => {
@@ -93,6 +94,7 @@ class RecentFiles extends Component {
               onArchiveUpdate={this.props.onArchiveUpdate}
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
+              showImportDialog={this.props.showImportDialog}
             />
           )}
         </ArchiveList>

@@ -142,7 +142,11 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
       extensions: [typeInfo.extension]
     }],
     title: `Load a ${typeInfo.name} archive`
-  }, ([ filename ]) => {
+  }, (files) => {
+    if (!files) {
+      return;
+    }
+    const [ filename ] = files;
     if (typeInfo.password) {
       focusedWindow.webContents.send('import-history-prompt', type);
       ipc.once('import-history-prompt-resp', (e, password) => {

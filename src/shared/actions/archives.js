@@ -140,3 +140,7 @@ export const importHistoryIntoArchive = payload => (dispatch, getState) => {
   importHistory(archiveId, history);
   dispatch(reloadGroups());
 };
+
+export const showImportDialog = payload => () => {
+  ipc.send('show-import-dialog', payload);
+};

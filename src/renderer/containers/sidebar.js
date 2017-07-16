@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { removeArchive, loadOrUnlockArchive, updateArchive } from '../../shared/actions/archives';
+import { removeArchive, loadOrUnlockArchive, updateArchive, showImportDialog } from '../../shared/actions/archives';
 import { openArchive, newArchive, openFileManager } from '../../shared/actions/files';
 import { getAllArchives, getCurrentArchiveId } from '../../shared/selectors';
 import ArchiveList from '../components/sidebar';
@@ -15,6 +15,7 @@ export default connect(
     onOpenClick: openArchive,
     onNewClick: newArchive,
     onArchiveUpdate: updateArchive,
-    onCloudClick: openFileManager
+    onCloudClick: openFileManager,
+    showImportDialog
   }
 )(ArchiveList);

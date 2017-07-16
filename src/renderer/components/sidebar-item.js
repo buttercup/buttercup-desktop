@@ -7,6 +7,7 @@ import LockClosed from 'react-icons/lib/md/lock-outline';
 import { GithubPicker } from 'react-color';
 import Portal from 'react-portal';
 import { brands } from '../../shared/buttercup/brands';
+import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
 
 const Wrapper = styled.li`
@@ -103,7 +104,8 @@ class SidebarItem extends Component {
     index: PropTypes.number,
     onClick: PropTypes.func,
     onRemoveClick: PropTypes.func,
-    onArchiveUpdate: PropTypes.func
+    onArchiveUpdate: PropTypes.func,
+    showImportDialog: PropTypes.func
   };
 
   state = {
@@ -113,7 +115,7 @@ class SidebarItem extends Component {
   };
 
   handleContextMenu = () => {
-    const { status, name } = this.props.archive;
+    const { status, name, id } = this.props.archive;
     showContextMenu([{
       label: `${status === 'locked' ? 'Unlock' : 'Open'} ${name}`,
       accelerator: `CmdOrCtrl+${this.props.index + 1}`,
@@ -121,6 +123,18 @@ class SidebarItem extends Component {
     }, {
       label: 'Change Color',
       click: this.showColorPopup
+    }, {
+      type: 'separator'
+    }, {
+      label: 'Import',
+      submenu: Object.entries(ImportTypeInfo).map(([type, typeInfo]) => ({
+        label: `From ${typeInfo.name} archive (.${typeInfo.extension})`,
+        enabled: (status === 'unlocked'),
+        click: () => this.props.showImportDialog({
+          type,
+          archiveId: id
+        })
+      }))
     }, {
       type: 'separator'
     }, {
