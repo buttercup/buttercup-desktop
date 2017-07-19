@@ -4,13 +4,20 @@
 language: node_js
 
 node_js:
-  - 7
+  - 8
+
+env:
+  - CXX=g++-4.8
 
 script: ./script/travis.sh
-
-before_install:
-  - rm yarn.lock
 
 branches:
   only:
   - master
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8

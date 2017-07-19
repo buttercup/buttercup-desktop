@@ -55,7 +55,7 @@ const installExtensions = async () => {
   for (const name of extensions) {
     try {
       await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-    } catch (err) {}
+    } catch (err) { }
   }
 };
 
@@ -81,7 +81,13 @@ app.on('ready', async () => {
   }
 
   // Create Store
-  const state = await storage.get('state');
+  let state = {};
+  try {
+    state = await storage.get('state');
+    log.info('Restoring state...', state);
+  } catch (err) {
+    log.error('Unable to read state json file', err);
+  }
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
