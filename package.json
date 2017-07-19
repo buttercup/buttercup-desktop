@@ -6,7 +6,7 @@
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
-    "test": "ava && yarn lint",
+    "test": "ava && npm run lint",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
