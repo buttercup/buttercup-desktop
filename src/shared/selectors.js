@@ -15,7 +15,7 @@ export const getCurrentArchiveId = state => state.currentArchive;
 export const getCurrentArchive = createSelector(
   state => state.archives,
   getCurrentArchiveId,
-  (archives, archiveId) => archives[archiveId] || null
+  (archives, archiveId) => archives.find(archive => archive.id === archiveId) || null
 );
 
 // Settings ->

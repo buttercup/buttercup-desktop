@@ -6,8 +6,9 @@ import Archive from '../components/archive';
 import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
+import EmptyView, { NoArchiveSelected } from './empty-view';
 
-const Primary = styled(Box)`
+const Primary = styled(Flex)`
   position: relative;
 `;
 
@@ -16,10 +17,14 @@ const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, colum
     <Flex flexAuto>
       <Sidebar condenced={condencedSidebar} />
       <Primary flexAuto>
-        <Archive
-          columnSizes={columnSizes}
-          onColumnSizeChange={setColumnSize}
-          />
+        <Choose>
+          <When condition={currentArchive === null}>
+            <NoArchiveSelected />
+          </When>
+          <Otherwise>
+            <Archive columnSizes={columnSizes} onColumnSizeChange={setColumnSize} />
+          </Otherwise>
+        </Choose>
       </Primary>
       <UpdateNotice {...update} onClick={() => installUpdate()} />
     </Flex>

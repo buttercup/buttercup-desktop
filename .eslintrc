@@ -1,8 +1,12 @@
 {
   "parser": "babel-eslint",
+  "plugins": [
+    "jsx-control-statements"
+  ],
   "extends": [
     "standard",
-    "standard-react"
+    "standard-react",
+    "plugin:jsx-control-statements/recommended"
   ],
   "env": {
     "node": true,

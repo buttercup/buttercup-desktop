@@ -16,7 +16,8 @@
     "polished",
     "transform-object-rest-spread",
     "transform-strict-mode",
-    "transform-class-properties"
+    "transform-class-properties",
+    "jsx-control-statements"
   ],
   "env": {
   	"production": {
