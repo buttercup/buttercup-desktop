@@ -6,9 +6,9 @@ const Input = styled.input`
   border: none;
   outline: none;
   border-radius: 2px;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: #fff;
   box-sizing: border-box;
-  color: #fff;
+  color: #222;
 `;
 
 export default class LabelEditor extends Component {
