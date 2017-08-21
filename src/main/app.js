@@ -95,7 +95,7 @@ app.on('ready', async () => {
 
   // Persist Store to Disk
   store.subscribe(throttle(() => {
-    // storage.set('state', store.getState());
+    storage.set('state', store.getState());
   }, 100));
 
   // Setup Windows & IPC Actions
