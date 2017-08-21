@@ -55,7 +55,7 @@ const installExtensions = async () => {
   for (const name of extensions) {
     try {
       await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-    } catch (err) {}
+    } catch (err) { }
   }
 };
 
@@ -81,16 +81,21 @@ app.on('ready', async () => {
   }
 
   // Create Store
-  const state = await storage.get('state');
-
-  // Temporary bridge to new format
-  // @TODO: remove this!
-  if (state.archives && !Array.isArray(state.archives)) {
-    log.info('Updating old state format to new.');
-    state.archives = [];
-    state.settingsByArchiveId = {};
+  let state = {};
+  try {
+    state = await storage.get('state');
+    log.info('Restoring state...', state);
+    
+    // Temporary bridge to new format
+    // @TODO: remove this!
+    if (state.archives && !Array.isArray(state.archives)) {
+      log.info('Updating old state format to new.');
+      state.archives = [];
+      state.settingsByArchiveId = {};
+    }
+  } catch (err) {
+    log.error('Unable to read state json file', err);
   }
-
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
