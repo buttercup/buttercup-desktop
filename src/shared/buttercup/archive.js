@@ -32,7 +32,15 @@ export function removeArchiveFromArchiveManager(archiveId) {
 
 export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
   const manager = getSharedArchiveManager();
-  return manager.unlock(archiveId, masterPassword).then(() => archiveId);
+  return manager
+    .unlock(archiveId, masterPassword)
+    .then(() => archiveId)
+    .catch(err => {
+      if (err.message && err.message.includes('ENOENT')) {
+        throw new Error('Archive source was not found.');
+      }
+      throw err;
+    });
 }
 
 export function getSharedArchiveManager() {
