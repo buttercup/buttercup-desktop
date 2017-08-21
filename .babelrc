@@ -25,7 +25,8 @@
   		"plugins": [
   			"transform-remove-console",
   			"transform-remove-debugger",
-  			"dev-expression"
+        "dev-expression",
+        "jsx-control-statements"
   		]
   	},
     "node": {

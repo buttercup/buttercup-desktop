@@ -82,11 +82,20 @@ app.on('ready', async () => {
 
   // Create Store
   const state = await storage.get('state');
+
+  // Temporary bridge to new format
+  // @TODO: remove this!
+  if (state.archives && !Array.isArray(state.archives)) {
+    log.info('Updating old state format to new.');
+    state.archives = [];
+    state.settingsByArchiveId = {};
+  }
+
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
   store.subscribe(throttle(() => {
-    storage.set('state', store.getState());
+    // storage.set('state', store.getState());
   }, 100));
 
   // Setup Windows & IPC Actions

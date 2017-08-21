@@ -33,6 +33,6 @@ module.exports = {
   plugins: [
   ],
   externals: [
-    'buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'electron-config', 'conf'
+    'buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf'
   ]
 };
