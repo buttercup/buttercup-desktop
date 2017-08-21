@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
+import AddArchiveButton from '../containers/add-archive-button';
 
 const Caption = styled.figcaption`
   color: var(--gray-dark);
@@ -33,7 +34,7 @@ EmptyView.propTypes = {
 
 export default EmptyView;
 
-const WhiteFlex = styled(Flex)`
+const ColoredFlex = styled(Flex)`
   background-color: RGBA(20, 20, 20, .8);
   color: #fff;
 `;
@@ -43,11 +44,22 @@ const Title = styled.h3`
 `;
 
 export const NoArchiveSelected = () => (
-  <WhiteFlex align="center" justify="center" flexAuto>
+  <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
       <Title>Welcome back to Buttercup.</Title>
       <Caption>Unlock an archive to begin ({isOSX() ? '⌘' : 'Ctrl'}+1).</Caption>
     </Figure>
-  </WhiteFlex>
+  </ColoredFlex>
+);
+
+export const WelcomeScreen = () => (
+  <ColoredFlex align="center" justify="center" flexColumn flexAuto>
+    <Figure>
+      <img src={logo} />
+      <Title>Welcome to Buttercup.</Title>
+      <Caption>You haven't added have any archives yet. Why not add one?</Caption>
+    </Figure>
+    <AddArchiveButton />
+  </ColoredFlex>
 );
