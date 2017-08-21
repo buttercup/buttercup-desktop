@@ -18,7 +18,7 @@ export function groupToObject(group) {
   const obj = group.toObject();
   return {
     ...obj,
-    isTrash: group.isTrash,
+    isTrash: group.isTrash(),
     groups: obj.groups.map(g => g.id)
   };
 }
