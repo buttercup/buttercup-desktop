@@ -71,7 +71,9 @@ export const getDismissableGroupIds = state => Object.keys(state.groups.byId)
   .filter(groupId => state.groups.byId[groupId].isNew);
 export const getGroupsById = state => state.groups.byId;
 export const getCurrentGroupId = state => state.groups.currentGroup;
-export const getCurrentGroup = state => state.groups.currentGroup ? state.groups.byId[state.groups.currentGroup] : null;
+export const getCurrentGroup = state => state.groups.currentGroup
+  ? state.groups.byId[state.groups.currentGroup]
+  : null;
 export const getTrashGroupId = state => Object.keys(state.groups.byId)
   .find(groupId => state.groups.byId[groupId].isTrash);
 

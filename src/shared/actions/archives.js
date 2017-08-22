@@ -41,7 +41,6 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => () => {
-  // @todo: unload archive
   return removeArchiveFromArchiveManager(payload);
 };
 
