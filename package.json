@@ -60,7 +60,7 @@
         "AppImage",
         "deb"
       ],
-      "packageCategory": "utils",
+      "category": "Utility",
       "synopsis": "Free and Open Source Password Vault"
     },
     "fileAssociations": {

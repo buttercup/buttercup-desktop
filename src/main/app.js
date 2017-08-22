@@ -85,10 +85,11 @@ app.on('ready', async () => {
   try {
     state = await storage.get('state');
     log.info('Restoring state...', state);
-    
+
     // Temporary bridge to new format
     // @TODO: remove this!
     if (state.archives && !Array.isArray(state.archives)) {
+      storage.set('state.backup', state);
       log.info('Updating old state format to new.');
       state.archives = [];
       state.settingsByArchiveId = {};
