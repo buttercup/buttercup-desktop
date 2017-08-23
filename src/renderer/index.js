@@ -17,8 +17,8 @@ import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
 
 // Unhandled rejections
-// const unhandled = require('electron-unhandled');
-// unhandled();
+const unhandled = require('electron-unhandled');
+unhandled();
 
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
