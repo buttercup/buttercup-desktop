@@ -1,30 +1,53 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Intro from '../components/intro';
+import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 import Archive from '../components/archive';
+import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
+import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 
-const Workspace = ({ currentArchive, update, installUpdate, setColumnSize, columnSizes }) => {
+const Primary = styled(Flex)`
+  position: relative;
+`;
+
+const Workspace = ({
+  currentArchive,
+  archivesCount,
+  update,
+  installUpdate,
+  setColumnSize,
+  columnSizes,
+  condencedSidebar
+}) => {
   return (
-    <div>
-      {
-        (currentArchive === null)
-          ? <Intro />
-          : <Archive
-            columnSizes={columnSizes}
-            onColumnSizeChange={setColumnSize}
-            />
-      }
+    <Flex flexAuto>
+      {archivesCount > 0 && <Sidebar condenced={condencedSidebar} />}
+      <Primary flexAuto>
+        <Choose>
+          <When condition={archivesCount === 0}>
+            <WelcomeScreen />
+          </When>
+          <When condition={archivesCount > 0 && currentArchive === null}>
+            <NoArchiveSelected />
+          </When>
+          <Otherwise>
+            <Archive columnSizes={columnSizes} onColumnSizeChange={setColumnSize} />
+          </Otherwise>
+        </Choose>
+      </Primary>
       <UpdateNotice {...update} onClick={() => installUpdate()} />
-    </div>
+    </Flex>
   );
 };
 
 Workspace.propTypes = {
   currentArchive: PropTypes.object,
+  archivesCount: PropTypes.number,
   update: PropTypes.object,
   columnSizes: PropTypes.object,
+  condencedSidebar: PropTypes.bool,
   installUpdate: PropTypes.func,
   setColumnSize: PropTypes.func,
 };

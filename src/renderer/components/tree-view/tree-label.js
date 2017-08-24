@@ -14,16 +14,17 @@ class TreeLabel extends Component {
     node: PropTypes.object,
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
+    onCreateNew: PropTypes.func,
     onRightClick: PropTypes.func
   };
 
   handleSave = title => {
     const { isNew, parentId, id } = this.props.node;
-    this.props.onSaveClick(
-      isNew,
-      isNew ? parentId : id,
-      title
-    );
+    if (isNew) {
+      this.props.onCreateNew(parentId, id, title);
+    } else {
+      this.props.onSaveClick(id, title);
+    }
   }
 
   handleDismiss = () => {

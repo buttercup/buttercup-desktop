@@ -1,13 +1,13 @@
-import { app, Menu } from 'electron';
+import { app } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import { throttle } from 'lodash';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
-import menuTemplate from './config/menu';
+import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
-import { isWindows } from './lib/platform';
+import { isWindows } from '../shared/utils/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
@@ -85,6 +85,15 @@ app.on('ready', async () => {
   try {
     state = await storage.get('state');
     log.info('Restoring state...', state);
+
+    // Temporary bridge to new format
+    // @TODO: remove this!
+    if (state.archives && !Array.isArray(state.archives)) {
+      storage.set('state.backup', state);
+      log.info('Updating old state format to new.');
+      state.archives = [];
+      state.settingsByArchiveId = {};
+    }
   } catch (err) {
     log.error('Unable to read state json file', err);
   }
@@ -98,6 +107,7 @@ app.on('ready', async () => {
   // Setup Windows & IPC Actions
   setupWindows(store);
   setupActions(store);
+  setupMenu(store);
 
   appIsReady = true;
 
@@ -110,11 +120,6 @@ app.on('ready', async () => {
       initialFile = null;
     }
   });
-
-  // Show standard menu
-  Menu.setApplicationMenu(
-    Menu.buildFromTemplate(menuTemplate)
-  );
 });
 
 // When user closes all windows

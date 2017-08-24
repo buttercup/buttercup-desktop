@@ -1,48 +1,86 @@
-import path from 'path';
+// @ts-check
+
 import isError from 'is-error';
+import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
-import { loadWorkspace } from '../../renderer/system/buttercup/archive';
 import { ArchiveTypes } from '../buttercup/types';
+import { importHistory } from '../buttercup/import';
 import { showPasswordDialog } from '../../renderer/system/dialog';
-import { setWindowSize } from '../../renderer/system/utils';
-import { getWindowSize } from '../selectors';
 import { reloadGroups } from './groups';
-import { ARCHIVES_ADD, ARCHIVES_REMOVE, ARCHIVES_SET_CURRENT, ARCHIVES_CLEAR } from './types';
+import {
+  ARCHIVES_ADD,
+  ARCHIVES_REMOVE,
+  ARCHIVES_LOCK,
+  ARCHIVES_UNLOCK,
+  ARCHIVES_SET_CURRENT,
+  ARCHIVES_UPDATE
+} from './types';
+import { getArchive, getCurrentArchiveId } from '../selectors';
+import {
+  addArchiveToArchiveManager,
+  removeArchiveFromArchiveManager,
+  unlockArchiveInArchiveManager
+} from '../buttercup/archive';
 
-export const addArchive = createAction(ARCHIVES_ADD, payload => ({
-  ...payload,
-  lastAccessed: (new Date()).getTime()
-}));
+// Store Actions
+export const addArchiveToStore = createAction(ARCHIVES_ADD);
+export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
+export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
+export const lockArchiveInStore = createAction(ARCHIVES_LOCK);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
-export const removeArchive = createAction(ARCHIVES_REMOVE);
-export const clearArchives = createAction(ARCHIVES_CLEAR);
+export const updateArchive = createAction(ARCHIVES_UPDATE);
 
-export const loadArchive = payload => async (dispatch, getState) => {
-  try {
-    const archive = await showPasswordDialog(
-      password => loadWorkspace(payload, password).catch(err => {
-        const unknownMessage = 'An unknown error has occurred';
-        return Promise.reject(
-          isError(err)
-            ? err.message || unknownMessage
-            : unknownMessage
-        );
-      })
-    );
-
-    dispatch(setCurrentArchive(archive.id));
-    dispatch(reloadGroups());
-    dispatch(addArchive(archive));
-
-    // Changes to interface:
-    const [width, height] = getWindowSize(getState());
-    setWindowSize(width, height, 'dark');
-    window.document.title = `${path.basename(archive.path)} - Buttercup`;
-  } catch (err) { }
+// Impure Buttercup actions
+export const loadArchive = payload => (dispatch, getState) => {
+  if (payload === getCurrentArchiveId(getState())) {
+    return;
+  }
+  dispatch(setCurrentArchive(payload));
+  dispatch(reloadGroups());
+  ipc.send('archive-list-updated');
 };
 
-export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
-  dispatch(loadArchive({
+export const removeArchive = payload => () => {
+  return removeArchiveFromArchiveManager(payload);
+};
+
+export const unlockArchive = payload => dispatch => {
+  return showPasswordDialog(
+    password => unlockArchiveInArchiveManager(payload, password)
+  ).then(
+    archiveId => dispatch(loadArchive(archiveId))
+  );
+};
+
+export const loadOrUnlockArchive = payload => (dispatch, getState) => {
+  const archive = getArchive(getState(), payload);
+  if (!archive) {
+    return;
+  }
+  if (archive.status === 'locked') {
+    dispatch(unlockArchive(payload));
+  } else {
+    dispatch(loadArchive(payload));
+  }
+};
+
+export const addArchive = payload => async (dispatch, getState) => {
+  return showPasswordDialog(
+    password => addArchiveToArchiveManager(payload, password).catch(err => {
+      const unknownMessage = 'An unknown error has occurred';
+      return Promise.reject(
+        isError(err)
+          ? err.message || unknownMessage
+          : unknownMessage
+      );
+    })
+  ).then(
+    archiveId => dispatch(loadArchive(archiveId))
+  );
+};
+
+export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
+  dispatch(addArchive({
     type: ArchiveTypes.FILE,
     isNew,
     path,
@@ -52,8 +90,8 @@ export const loadArchiveFromFile = ({ path, isNew = false }) => dispatch => {
   }));
 };
 
-export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
-  dispatch(loadArchive({
+export const addArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
+  dispatch(addArchive({
     type,
     isNew,
     path,
@@ -65,8 +103,8 @@ export const loadArchiveFromWebdav = ({ path, endpoint, credentials, isNew = fal
   }));
 };
 
-export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
-  dispatch(loadArchive({
+export const addArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
+  dispatch(addArchive({
     type: ArchiveTypes.DROPBOX,
     isNew,
     path,
@@ -77,21 +115,31 @@ export const loadArchiveFromDropbox = ({ path, token, isNew = false }) => dispat
   }));
 };
 
-export const loadArchiveFromSource = payload => dispatch => {
+export const addArchiveFromSource = payload => dispatch => {
   const { type, ...config } = payload;
   switch (type) {
     case ArchiveTypes.DROPBOX:
-      dispatch(loadArchiveFromDropbox(config));
+      dispatch(addArchiveFromDropbox(config));
       break;
     case ArchiveTypes.OWNCLOUD:
     case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
-      dispatch(loadArchiveFromWebdav(config, type));
+      dispatch(addArchiveFromWebdav(config, type));
       break;
     case ArchiveTypes.FILE:
-      dispatch(loadArchiveFromFile(config));
+      dispatch(addArchiveFromFile(config));
       break;
     default:
       break;
   }
+};
+
+export const importHistoryIntoArchive = payload => (dispatch, getState) => {
+  const { archiveId, history } = payload;
+  importHistory(archiveId, history);
+  dispatch(reloadGroups());
+};
+
+export const showImportDialog = payload => () => {
+  ipc.send('show-import-dialog', payload);
 };

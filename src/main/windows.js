@@ -1,35 +1,30 @@
-import { app, BrowserWindow } from 'electron';
-import { throttle } from 'lodash';
+import { app, BrowserWindow, ipcMain as ipc } from 'electron';
+import debounce from 'lodash/debounce';
 import { getWindowManager } from './lib/window-manager';
 import { getPathToFile } from './lib/utils';
-import { createRPC } from './lib/rpc';
-import { loadFile, openFile, newFile } from './lib/files';
+import { loadFile } from './lib/files';
+import { config } from '../shared/config';
 
 const windowManager = getWindowManager();
 
 export function setupWindows() {
   // Intro Screen
   windowManager.setBuildProcedure('main', callback => {
+    const [width, height] = config.get('window.size', [950, 700]);
     // Create the browser window.
     const win = new BrowserWindow({
-      width: 870,
-      height: 550,
+      width,
+      height,
       minWidth: 680,
       minHeight: 500,
       title: app.getName(),
       titleBarStyle: 'hidden-inset',
       show: process.env.NODE_ENV === 'development',
-      vibrancy: 'light'
+      darkTheme: true,
+      vibrancy: 'ultra-dark'
     });
 
     win.loadURL(getPathToFile('views/index.html'));
-
-    const rpc = createRPC(win);
-    win.rpc = rpc;
-
-    win.isIntro = () => {
-      return win.getTitle().toLowerCase().match(/welcome/i) !== null;
-    };
 
     // When user drops a file on the window
     win.webContents.on('will-navigate', (e, url) => {
@@ -37,26 +32,18 @@ export function setupWindows() {
       loadFile(url, win);
     });
 
-    rpc.on('open-file-dialog', () => {
-      openFile();
-    });
-
-    rpc.on('new-file-dialog', () => {
-      newFile();
-    });
-
     win.once('ready-to-show', () => {
       win.show();
     });
 
-    rpc.once('init', () => {
+    ipc.once('init', () => {
       if (callback) {
-        callback(win, rpc);
+        callback(win);
       }
     });
 
-    win.on('resize', throttle(() => {
-      rpc.emit('size-change', win.getSize());
+    win.on('resize', debounce(() => {
+      config.set('window.size', win.getSize());
     }, 2000));
 
     win.once('closed', () => {

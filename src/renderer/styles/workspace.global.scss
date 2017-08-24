@@ -37,6 +37,7 @@ body {
   padding: 0;
   display: flex;
   height: 100%;
+  overflow: hidden;
   -webkit-app-region: drag;
 }
 
@@ -48,7 +49,7 @@ body, button, input, select, textarea {
   box-sizing: border-box;
 }
 
-#root, #root > div {
+#root {
   display: flex;
   flex: 1;
 }
@@ -75,6 +76,15 @@ input, button, textarea, :focus {
   --spacing-half: 6px;
   --spacing-one: 12px;
   --spacing-two: 20px;
+  --sidebar-width: 250px;
+  --sidebar-width-condenced: 75px;
+  --sidebar-bg: RGBA(33, 37, 43, .9);
+  --groups-bg: #292C33;
+  --groups-bg-mac: rgba(0,0,0,.2);
+  --entries-bg: #31353D;
+  /*--entries-bg-mac: rgba(49, 53, 61, 0.4);*/
+  --entries-bg-mac: rgba(0, 0, 0, .35);
+  --red: #EB5767;
   --gray-light: #F5F7FA;
   --gray: #E4E9F2;
   --gray-dark: #777;

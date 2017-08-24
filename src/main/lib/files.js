@@ -1,9 +1,10 @@
 import path from 'path';
-import { BrowserWindow, dialog } from 'electron';
-import { ArchiveTypes } from '../../shared/buttercup/types';
-import { isWindows } from './platform';
+import { dialog, ipcMain as ipc } from 'electron';
+import { ArchiveTypes, ImportTypeInfo } from '../../shared/buttercup/types';
+import { isWindows } from '../../shared/utils/platform';
 import { getWindowManager } from './window-manager';
 import { importArchive } from './buttercup';
+import { getMainWindow } from '../utils/window';
 
 const windowManager = getWindowManager();
 const dialogOptions = {
@@ -27,14 +28,14 @@ function normalizePath(filePath) {
  * @returns {void}
  */
 function showOpenDialog(focusedWindow) {
-  const filename = dialog.showOpenDialog(focusedWindow, {
+  dialog.showOpenDialog(focusedWindow, {
     ...dialogOptions,
     title: 'Load a Buttercup Archive'
+  }, filename => {
+    if (filename && filename.length > 0) {
+      loadFile(filename[0], focusedWindow);
+    }
   });
-
-  if (filename && filename.length > 0) {
-    loadFile(filename[0], focusedWindow);
-  }
 }
 
 /**
@@ -45,14 +46,14 @@ function showOpenDialog(focusedWindow) {
  * @returns {void}
  */
 function showSaveDialog(focusedWindow) {
-  const filename = dialog.showSaveDialog(focusedWindow, {
+  dialog.showSaveDialog(focusedWindow, {
     ...dialogOptions,
     title: 'Create a New Buttercup Archive'
+  }, filename => {
+    if (typeof filename === 'string' && filename.length > 0) {
+      loadFile(filename, focusedWindow, true);
+    }
   });
-
-  if (typeof filename === 'string' && filename.length > 0) {
-    loadFile(filename, focusedWindow, true);
-  }
 }
 
 /**
@@ -71,17 +72,11 @@ export function loadFile(filePath, win, isNew = false) {
     return;
   }
   if (!win) {
-    win = BrowserWindow.getFocusedWindow();
+    win = getMainWindow();
   }
-  // If there's a window and it's in intro state
-  if (win && win.isIntro()) {
-    win.rpc.emit('load-archive', payload);
-    return;
+  if (win) {
+    win.webContents.send('load-archive', payload);
   }
-  // Otherwise just create a new window
-  windowManager.buildWindowOfType('main', (win, rpc) => {
-    rpc.emit('load-archive', payload);
-  });
 }
 
 /**
@@ -92,40 +87,39 @@ export function loadFile(filePath, win, isNew = false) {
  * @returns {void}
  */
 export function openFile(focusedWindow) {
+  focusedWindow = getMainWindow(focusedWindow);
   if (!focusedWindow) {
-    focusedWindow = BrowserWindow.getFocusedWindow();
-  }
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main', win => {
-      showOpenDialog(win);
-    });
+    windowManager.buildWindowOfType('main', win => showOpenDialog(win));
     return;
   }
   showOpenDialog(focusedWindow);
 }
 
 /**
+ * Create a new file and open it in Buttercup
+ * then ask the user for a password
+ *
+ * @param {BrowserWindow} focusedWindow
+ * @returns {void}
+ */
+export function newFile(focusedWindow) {
+  focusedWindow = getMainWindow(focusedWindow);
+  if (!focusedWindow) {
+    windowManager.buildWindowOfType('main', win => showSaveDialog(win));
+    return;
+  }
+  showSaveDialog(focusedWindow);
+}
+
+/**
  * @param {BrowserWindow} focusedWindow
  * @param {string} type
+ * @param {string} archiveId
  */
-const showImportDialog = function(focusedWindow, type) {
-  const types = {
-    '1pif': {
-      password: false,
-      name: '1Password'
-    },
-    'kdbx': {
-      password: true,
-      name: 'KeePass'
-    },
-    'csv': {
-      password: false,
-      name: 'LastPass'
-    }
-  };
-  const typeInfo = types[type];
+const showImportDialog = function(focusedWindow, type, archiveId) {
+  const typeInfo = ImportTypeInfo[type];
 
-  if (!Object.keys(types).includes(type)) {
+  if (!typeInfo) {
     throw new Error('Invalid import type requested');
   }
 
@@ -139,75 +133,46 @@ const showImportDialog = function(focusedWindow, type) {
   };
 
   const handleSuccess = history => {
-    focusedWindow.rpc.emit('import-history', { history });
+    focusedWindow.webContents.send('import-history', { history, archiveId });
   };
 
-  const [ filename ] = dialog.showOpenDialog(focusedWindow, {
+  dialog.showOpenDialog(focusedWindow, {
     filters: [{
       name: `${typeInfo.name} Archives`,
-      extensions: [type]
+      extensions: [typeInfo.extension]
     }],
     title: `Load a ${typeInfo.name} archive`
-  });
-
-  if (!filename) {
-    return;
-  }
-
-  if (typeInfo.password) {
-    focusedWindow.rpc.emit('import-history-prompt');
-    focusedWindow.rpc.once('import-history-prompt-resp', password => {
-      importArchive(type, filename, password)
+  }, (files) => {
+    if (!files) {
+      return;
+    }
+    const [ filename ] = files;
+    if (typeInfo.password) {
+      focusedWindow.webContents.send('import-history-prompt', type);
+      ipc.once('import-history-prompt-resp', (e, password) => {
+        importArchive(type, filename, password)
+          .then(handleSuccess)
+          .catch(handleError);
+      });
+    } else {
+      importArchive(type, filename)
         .then(handleSuccess)
         .catch(handleError);
-    });
-  } else {
-    importArchive(type, filename)
-      .then(handleSuccess)
-      .catch(handleError);
-  }
+    }
+  });
 };
 
 /**
  * @param {BrowserWindow} focusedWindow
  * @param {string} type
+ * @param {string} archiveId
  */
-export function openFileForImporting(focusedWindow, type) {
-  if (focusedWindow && focusedWindow.isIntro()) {
-    dialog.showMessageBox(focusedWindow, {
-      title: 'Importing is not available',
-      message: 'To import an archive file, you must unlock a Buttercup archive first.'
-    });
-    return;
-  }
+export function openFileForImporting(focusedWindow, type, archiveId) {
+  focusedWindow = getMainWindow(focusedWindow);
 
   if (!focusedWindow) {
-    focusedWindow = BrowserWindow.getFocusedWindow();
+    throw new Error('Import function should not be running without the main window running.');
   }
 
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main', win => {
-      showImportDialog(win, type);
-    });
-    return;
-  }
-  showImportDialog(focusedWindow, type);
-}
-
-/**
- * Create a new file and open it in Buttercup
- * then ask the user for a password
- *
- * @param {BrowserWindow} focusedWindow
- * @returns {void}
- */
-export function newFile(focusedWindow) {
-  if (!focusedWindow) {
-    focusedWindow = BrowserWindow.getFocusedWindow();
-  }
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main', win => showSaveDialog(win));
-    return;
-  }
-  showSaveDialog(focusedWindow);
+  showImportDialog(focusedWindow, type, archiveId);
 }

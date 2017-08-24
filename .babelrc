@@ -16,7 +16,8 @@
     "polished",
     "transform-object-rest-spread",
     "transform-strict-mode",
-    "transform-class-properties"
+    "transform-class-properties",
+    "jsx-control-statements"
   ],
   "env": {
   	"production": {
@@ -24,7 +25,8 @@
   		"plugins": [
   			"transform-remove-console",
   			"transform-remove-debugger",
-  			"dev-expression"
+        "dev-expression",
+        "jsx-control-statements"
   		]
   	},
     "node": {
@@ -35,7 +37,7 @@
     },
     "development": {
       "plugins": [
-        "react-hot-loader/babel"
+        // "react-hot-loader/babel"
       ]
     }
   }

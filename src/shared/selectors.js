@@ -2,24 +2,20 @@ import { createSelector } from 'reselect';
 import {
   filterByText,
   sortByKey,
-  sortDeepByKey,
-  sortByLastAccessed,
-  deepFindById
-} from '../utils/collection';
+  sortDeepByKey
+} from './utils/collection';
+import { denormalizeGroups } from './buttercup/groups';
 
 // Archive ->
 
-export const getAllArchives = state => Object.values(state.archives);
-export const getSortedArchives = createSelector(
-  getAllArchives,
-  archives => sortByLastAccessed(archives)
-);
-
+export const getArchivesCount = state => state.archives.length;
+export const getAllArchives = state => sortByKey(Object.values(state.archives), 'name-asc');
+export const getArchive = (state, archiveId) => state.archives.find(archive => archive.id === archiveId);
 export const getCurrentArchiveId = state => state.currentArchive;
 export const getCurrentArchive = createSelector(
   state => state.archives,
   getCurrentArchiveId,
-  (archives, archiveId) => archives[archiveId] || null
+  (archives, archiveId) => archives.find(archive => archive.id === archiveId) || null
 );
 
 // Settings ->
@@ -31,21 +27,11 @@ export const getCurrentArchiveSettings = createSelector(
   (settings, archiveId) => settings[archiveId]
 );
 
-// UI ->
+export const getSetting = (state, key) => state.settings[key];
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
   archive => archive ? archive.ui.treeExpandedKeys : []
-);
-
-export const getColumnSizes = createSelector(
-  getCurrentArchiveSettings,
-  archive => archive ? archive.ui.columnSizes : null
-);
-
-export const getWindowSize = createSelector(
-  getCurrentArchiveSettings,
-  archive => archive ? archive.ui.windowSize : [950, 700]
 );
 
 // Entries ->
@@ -80,13 +66,21 @@ export const getEntries = createSelector(
 
 // Groups ->
 
-export const getAllGroups = state => state.groups.byId;
+export const getAllGroups = state => denormalizeGroups(state.groups.shownIds, state.groups.byId);
+export const getDismissableGroupIds = state => Object.keys(state.groups.byId)
+  .filter(groupId => state.groups.byId[groupId].isNew);
+export const getGroupsById = state => state.groups.byId;
 export const getCurrentGroupId = state => state.groups.currentGroup;
+export const getCurrentGroup = state => state.groups.currentGroup
+  ? state.groups.byId[state.groups.currentGroup]
+  : null;
+export const getTrashGroupId = state => Object.keys(state.groups.byId)
+  .find(groupId => state.groups.byId[groupId].isTrash);
 
-export const getCurrentGroup = createSelector(
-  getAllGroups,
-  getCurrentGroupId,
-  (groups, groupId) => deepFindById(groups, groupId, 'groups')
+export const getTrashChildrenIds = createSelector(
+  getGroupsById,
+  getTrashGroupId,
+  (groups, trashGroup) => groups[trashGroup].groups
 );
 
 export const getGroups = createSelector(

@@ -24,27 +24,11 @@ export function selectElementContents(el) {
   sel.addRange(range);
 }
 
-export function parsePath(filepath) {
-  return path.parse(filepath);
-}
-
 export function setWindowSize(width, height, vibrancy) {
   currentWindow.setSize(width, height, false);
   if (typeof vibrancy !== 'undefined') {
     currentWindow.setVibrancy(vibrancy);
   }
-}
-
-export function isOSX() {
-  return process.platform === 'darwin';
-}
-
-export function isWindows() {
-  return process.platform === 'win32';
-}
-
-export function isLinux() {
-  return process.platform === 'linux';
 }
 
 export function isButtercupFile(filePath) {
@@ -53,8 +37,8 @@ export function isButtercupFile(filePath) {
 
 export function emitActionToParentAndClose(name, payload) {
   const win = remote.getCurrentWindow();
-  const rpc = win.getParentWindow().rpc;
-  rpc.emit(name, payload);
+  const ipc = win.getParentWindow().webContents;
+  ipc.send(name, payload);
   win.close();
 }
 

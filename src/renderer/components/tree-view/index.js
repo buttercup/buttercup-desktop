@@ -3,14 +3,20 @@ import { isString } from 'lodash';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
+import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
 import { showContextMenu, createMenuFromGroups, createSortMenu } from '../../system/menu';
-import { isOSX } from '../../system/utils';
+import { isOSX } from '../../../shared/utils/platform';
 import '../../styles/tree-view.global';
-import styles from '../../styles/tree-view';
-import Column from '../column';
+import BaseColumn from '../column';
 import TreeLabel from './tree-label';
+
+const Column = styled(BaseColumn)`
+  background-color: ${isOSX() ? 'var(--groups-bg-mac)' : 'var(--groups-bg)'};
+  color: #fff;
+  padding-top: var(--spacing-one);
+`;
 
 class TreeView extends Component {
   handleColumnRightClick() {
@@ -142,6 +148,7 @@ class TreeView extends Component {
                 onAddClick={this.handleAddClick}
                 onRemoveClick={this.handleRemoveClick}
                 onSaveClick={this.props.onSaveClick}
+                onCreateNew={this.props.onCreateNew}
                 onDismissClick={this.props.onDismissClick}
                 />
             }
@@ -162,7 +169,6 @@ class TreeView extends Component {
             icon={<PlusIcon />}
             >New Group</Button>
         }
-        className={cx(styles.column, isOSX() && styles.mac)}
         onContextMenu={() => this.handleColumnRightClick()}
         >
         <Tree
@@ -188,6 +194,7 @@ TreeView.propTypes = {
   sortMode: PropTypes.string,
   onRemoveClick: PropTypes.func,
   onSaveClick: PropTypes.func,
+  onCreateNew: PropTypes.func,
   onDismissClick: PropTypes.func,
   onAddClick: PropTypes.func,
   onRenameClick: PropTypes.func,
