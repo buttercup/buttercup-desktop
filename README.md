@@ -11,7 +11,7 @@
 [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
  [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup/buttercup)
 
-![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/ff7ebf7e/screenshot/0.4.0.png)
+![image](https://user-images.githubusercontent.com/768052/29536730-9db58428-86c7-11e7-9bef-418a8cd14830.png)
 
 ## Under Development
 
