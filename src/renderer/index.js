@@ -24,9 +24,6 @@ unhandled();
 Buttercup.Web.HashingTools.patchCorePBKDF();
 const store = configureStore({}, 'renderer');
 
-// temp
-global.archiveManager = getSharedArchiveManager();
-
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
