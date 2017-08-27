@@ -4,7 +4,6 @@ import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
-import { getSharedArchiveManager } from '../shared/buttercup/archive';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import {
   addArchiveFromSource,
@@ -23,9 +22,6 @@ unhandled();
 // Make crypto faster!
 Buttercup.Web.HashingTools.patchCorePBKDF();
 const store = configureStore({}, 'renderer');
-
-// temp
-global.archiveManager = getSharedArchiveManager();
 
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
