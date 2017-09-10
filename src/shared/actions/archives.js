@@ -49,7 +49,7 @@ export const unlockArchive = payload => dispatch => {
     password => unlockArchiveInArchiveManager(payload, password)
   ).then(
     archiveId => dispatch(loadArchive(archiveId))
-  );
+  ).catch(() => {});
 };
 
 export const loadOrUnlockArchive = payload => (dispatch, getState) => {
@@ -76,7 +76,7 @@ export const addArchive = payload => async (dispatch, getState) => {
     })
   ).then(
     archiveId => dispatch(loadArchive(archiveId))
-  );
+  ).catch(() => {});
 };
 
 export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
