@@ -26,7 +26,7 @@ export class IpcDatasource extends TextDatasource {
     return super
       .save(archive, password)
       .then(encryptedContent => {
-        fs.writeFileSync(this.path, encryptedContent, 'utf8');
+        return fs.writeFileSync(this.path, encryptedContent, 'utf8');
       });
   }
 

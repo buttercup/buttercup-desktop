@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, ipcMain as ipc } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import { throttle } from 'lodash';
@@ -7,6 +7,7 @@ import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
+import { getMainWindow } from './utils/window';
 import { isWindows } from '../shared/utils/platform';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
@@ -22,6 +23,7 @@ const windowManager = getWindowManager();
 
 let appIsReady = false;
 let initialFile = null;
+let isSaving = false;
 
 // Crash reporter for alpha and beta releases
 // After we come out of beta, we should be rolling our own
@@ -134,5 +136,28 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   if (windowManager.getCountOfType('main') === 0) {
     windowManager.buildWindowOfType('main');
+  }
+});
+
+// Prevent quitting if a file is being saved
+// to prevent data loss
+ipc.on('workspace-save-started', () => {
+  isSaving = true;
+});
+
+ipc.on('workspace-save-finished', () => {
+  isSaving = false;
+});
+
+app.on('before-quit', e => {
+  const mainWindow = getMainWindow();
+  mainWindow.webContents.send('will-quit');
+
+  if (isSaving === true) {
+    e.preventDefault();
+    ipc.once('workspace-save-finished', () => {
+      isSaving = false;
+      app.quit();
+    });
   }
 });

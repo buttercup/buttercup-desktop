@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
 import { installUpdate } from '../../shared/actions/update';
 import { setColumnSize } from '../../shared/actions/settings';
-import { getCurrentArchive, getSetting, getArchivesCount } from '../../shared/selectors';
+import { getCurrentArchive, getSetting, getUIState, getArchivesCount } from '../../shared/selectors';
 
 export default connect(
   state => ({
@@ -11,6 +11,8 @@ export default connect(
     currentArchive: getCurrentArchive(state),
     archivesCount: getArchivesCount(state),
     update: state.update,
+    savingArchive: getUIState(state, 'savingArchive'),
+    isExiting: getUIState(state, 'isExiting')
   }),
   {
     setColumnSize,

@@ -5,6 +5,7 @@ import entries from './entries';
 import { settings, settingsByArchiveId } from './settings';
 import archives, { currentArchive } from './archives';
 import update from './update';
+import uiState from './ui-state';
 
 export default function getRootReducer(scope = 'main') {
   let reducers = {
@@ -21,6 +22,7 @@ export default function getRootReducer(scope = 'main') {
       groups,
       entries,
       form,
+      uiState
     };
   }
 

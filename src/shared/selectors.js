@@ -28,6 +28,7 @@ export const getCurrentArchiveSettings = createSelector(
 );
 
 export const getSetting = (state, key) => state.settings[key];
+export const getUIState = (state, key) => state.uiState[key];
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
