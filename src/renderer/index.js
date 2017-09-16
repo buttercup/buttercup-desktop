@@ -11,6 +11,7 @@ import {
   setCurrentArchive,
   importHistoryIntoArchive
 } from '../shared/actions/archives';
+import { setUIState } from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import Root from './containers/root';
@@ -50,6 +51,10 @@ ipc.on('import-history-prompt', (e, payload) => {
     }).catch(() => {
       ipc.send('import-history-prompt-resp', null);
     });
+});
+
+ipc.on('will-quit', () => {
+  store.dispatch(setUIState('isExiting', true));
 });
 
 render(

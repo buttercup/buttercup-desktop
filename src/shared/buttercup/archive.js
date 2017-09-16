@@ -62,6 +62,8 @@ export function saveWorkspace(archiveId) {
   const sourceIndex = manager.indexOfSource(archiveId);
   const { workspace } = manager.sources[sourceIndex];
 
+  manager.emit('savingStarted');
+
   return workspace
     .localDiffersFromRemote()
     .then(differs => differs
@@ -71,5 +73,7 @@ export function saveWorkspace(archiveId) {
     .then(shouldSave => shouldSave
       ? workspace.save()
       : null
-    );
+    ).then(() => {
+      manager.emit('savingFinished');
+    });
 }
