@@ -21,6 +21,13 @@ export function showDialog(message, type = 'error') {
 }
 
 export function showPasswordDialog(preConfirm, options = {}) {
+  const defaultFunc = password => Promise.resolve(password);
+  if (typeof preConfirm === 'object') {
+    options = preConfirm;
+    preConfirm = defaultFunc;
+  } else if (typeof preConfirm === 'undefined') {
+    preConfirm = defaultFunc;
+  }
   return swal({
     title: 'Master Password',
     input: 'password',

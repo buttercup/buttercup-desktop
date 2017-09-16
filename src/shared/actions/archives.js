@@ -65,18 +65,37 @@ export const loadOrUnlockArchive = payload => (dispatch, getState) => {
 };
 
 export const addArchive = payload => async (dispatch, getState) => {
-  return showPasswordDialog(
-    password => addArchiveToArchiveManager(payload, password).catch(err => {
-      const unknownMessage = 'An unknown error has occurred';
-      return Promise.reject(
-        isError(err)
-          ? err.message || unknownMessage
-          : unknownMessage
-      );
-    })
-  ).then(
-    archiveId => dispatch(loadArchive(archiveId))
-  ).catch(() => {});
+  const { isNew } = payload;
+  const dispatchLoad = archiveId => dispatch(loadArchive(archiveId));
+  const addToArchive = password => addArchiveToArchiveManager(payload, password).catch(err => {
+    const unknownMessage = 'An unknown error has occurred';
+    return Promise.reject(
+      isError(err)
+        ? err.message || unknownMessage
+        : unknownMessage
+    );
+  });
+
+  // If it's not a new archive,
+  // show the password dialog only once.
+  if (isNew === false) {
+    return showPasswordDialog(addToArchive)
+      .then(dispatchLoad)
+      .catch(() => {});
+  }
+
+  // Otherwise show a confirmation too.
+  return showPasswordDialog()
+    .then(firstPassword => showPasswordDialog(password => {
+      if (firstPassword !== password) {
+        return Promise.reject(new Error('Your passwords don\'t match.'));
+      }
+      return addToArchive(password);
+    }, {
+      title: 'Confirm Password'
+    }))
+    .then(dispatchLoad)
+    .catch(() => {});
 };
 
 export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
