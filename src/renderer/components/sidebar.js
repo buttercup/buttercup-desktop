@@ -15,7 +15,7 @@ const Column = styled(BaseColumn)`
 `;
 
 const ArchiveList = styled.ul`
-  margin: calc(var(--spacing-one) * 3) 0 0 0;
+  margin: ${!isOSX() ? 'var(--spacing-one)' : 'calc(var(--spacing-one) * 3)'} 0 0 0;
   padding: 0;
 `;
 
