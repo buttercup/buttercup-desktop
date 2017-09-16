@@ -20,8 +20,11 @@ import Root from './containers/root';
 const unhandled = require('electron-unhandled');
 unhandled();
 
-// Make crypto faster!
+// Alter some Buttercup internals
 Buttercup.Web.HashingTools.patchCorePBKDF();
+Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
+
+// Create store
 const store = configureStore({}, 'renderer');
 
 linkArchiveManagerToStore(store);
