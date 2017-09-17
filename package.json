@@ -126,7 +126,7 @@
     "babel-register": "^6.18.0",
     "babili-webpack-plugin": "^0.1.1",
     "buttercup-importer": "~0.9.2",
-    "buttercup-web": "~0.32.1",
+    "buttercup-web": "~0.39.0",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
