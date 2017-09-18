@@ -25,7 +25,8 @@ export function settingsByArchiveId(state = {}, action) {
 
 const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
-  condencedSidebar: true
+  condencedSidebar: true,
+  menubarVisibility: true
 };
 
 export function settings(state = DEFAULT_SETTINGS, action) {
