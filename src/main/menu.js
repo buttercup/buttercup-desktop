@@ -147,6 +147,10 @@ export function setupMenu(store) {
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
   let condenced = Boolean(getSetting(state, 'condencedSidebar'));
+  let menubarVisible = getSetting(state, 'menubarVisible');
+
+  // Default should be safe (always on) in case it isn't set.
+  menubarVisible = typeof menubarVisible === 'boolean' ? menubarVisible : true;
 
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
@@ -189,6 +193,18 @@ export function setupMenu(store) {
                 store.dispatch(setSetting('condencedSidebar', condenced));
               }
             },
+            ...(isOSX() ? [
+              {
+                label: 'Auto-hide Menubar',
+                type: 'checkbox',
+                checked: !menubarVisible,
+                click: () => {
+                  menubarVisible = !menubarVisible;
+                  getMainWindow().setMenuBarVisibility(menubarVisible);
+                  store.dispatch(setSetting('menubarVisible', menubarVisible));
+                }
+              }
+            ] : []),
             ...item.submenu
           ]
         };

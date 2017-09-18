@@ -1,13 +1,14 @@
 import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import debounce from 'lodash/debounce';
 import { getWindowManager } from './lib/window-manager';
+import { getSetting } from '../shared/selectors';
 import { getPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
 import { config } from '../shared/config';
 
 const windowManager = getWindowManager();
 
-export function setupWindows() {
+export function setupWindows(store) {
   // Intro Screen
   windowManager.setBuildProcedure('main', callback => {
     const [width, height] = config.get('window.size', [950, 700]);
@@ -23,6 +24,10 @@ export function setupWindows() {
       darkTheme: true,
       vibrancy: 'ultra-dark'
     });
+
+    // Set initial menu bar visibility
+    const menubarVisible = getSetting(store.getState(), 'menubarVisible');
+    win.setMenuBarVisibility(typeof menubarVisible === 'boolean' ? menubarVisible : true);
 
     win.loadURL(getPathToFile('views/index.html'));
 
