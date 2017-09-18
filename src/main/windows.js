@@ -24,6 +24,8 @@ export function setupWindows() {
       vibrancy: 'ultra-dark'
     });
 
+    win.setMenuBarVisibility(false);
+
     win.loadURL(getPathToFile('views/index.html'));
 
     // When user drops a file on the window
