@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { isOSX } from '../../shared/utils/platform';
+import { isOSX, isHighSierra } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
 import EmptyView from './empty-view';
 import BaseColumn from './column';
 import SidebarItem from './sidebar-item';
+
+// Temporary fix for High Sierra. See #339
+const usesBigPadding = isOSX() && !isHighSierra();
 
 const Column = styled(BaseColumn)`
   width: ${props => props.condenced ? 'var(--sidebar-width-condenced)' : 'var(--sidebar-width)'};
@@ -15,7 +18,7 @@ const Column = styled(BaseColumn)`
 `;
 
 const ArchiveList = styled.ul`
-  margin: ${!isOSX() ? 'var(--spacing-one)' : 'calc(var(--spacing-one) * 3)'} 0 0 0;
+  margin: ${usesBigPadding ? 'calc(var(--spacing-one) * 3)' : 'var(--spacing-one)'} 0 0 0;
   padding: 0;
 `;
 

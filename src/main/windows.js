@@ -19,7 +19,8 @@ export function setupWindows(store) {
       minWidth: 680,
       minHeight: 500,
       title: app.getName(),
-      titleBarStyle: 'hidden-inset',
+      // Temporary fix for High Sierra. See #339
+      titleBarStyle: process.platform === 'darwin' && Number(require('os').release().split('.')[0]) >= 17 ? null : 'hiddenInset',
       show: process.env.NODE_ENV === 'development',
       darkTheme: true,
       vibrancy: 'ultra-dark'
