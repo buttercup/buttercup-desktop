@@ -21,30 +21,5 @@
       script.src = (process.env.HOT) ? 'http://localhost:3000/app/main.bundle.js' : '../dist/main.bundle.js';
       document.head.appendChild(script);
     </script>
-    <!-- Piwik -->
-    <script type="text/javascript">
-      try {
-        let _paq = [];
-        _paq.push(['setCustomVariable', 1, 'Version', require('electron').remote.app.getVersion(), 'visit']);
-        _paq.push([
-          'setCustomVariable',
-          2,
-          'Production',
-          process.env.NODE_ENV !== 'development' ? 'Yes' : 'No',
-          'page'
-        ]);
-        _paq.push(['trackPageView']);
-        (function() {
-          let u="https://analytics.buttercup.pw/";
-          _paq.push(['setTrackerUrl', u+'piwik.php']);
-          _paq.push(['setSiteId', '2']);
-          let d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-          g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-        })();
-      } catch (err) {
-        console.warn('Analytics install failed.');
-      }
-    </script>
-    <!-- End Piwik Code -->
   </body>
 </html>
