@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain as ipc } from 'electron';
 import debounce from 'lodash/debounce';
+import { isHighSierra } from '../shared/utils/platform';
 import { getWindowManager } from './lib/window-manager';
 import { getSetting } from '../shared/selectors';
 import { getPathToFile } from './lib/utils';
@@ -19,7 +20,8 @@ export function setupWindows(store) {
       minWidth: 680,
       minHeight: 500,
       title: app.getName(),
-      titleBarStyle: 'hidden-inset',
+      // Temporary fix for High Sierra. See #339
+      titleBarStyle: isHighSierra() ? null : 'hiddenInset',
       show: process.env.NODE_ENV === 'development',
       darkTheme: true,
       vibrancy: 'ultra-dark'

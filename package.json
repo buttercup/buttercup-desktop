@@ -1,7 +1,7 @@
 {
   "name": "buttercup",
   "productName": "Buttercup",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -135,8 +135,8 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "^1.6.11",
-    "electron-builder": "^19.11.1",
+    "electron": "^1.7.8",
+    "electron-builder": "^19.31.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-installer-dmg": "^0.1.2",
