@@ -34,6 +34,7 @@ setupShortcuts(store);
 store.dispatch(setCurrentArchive(null));
 
 ipc.send('init');
+ipc.send('track', navigator.userAgent);
 
 ipc.on('load-archive', (e, payload) => {
   store.dispatch(addArchiveFromSource(payload));
