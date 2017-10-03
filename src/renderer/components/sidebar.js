@@ -11,14 +11,20 @@ import SidebarItem from './sidebar-item';
 const usesBigPadding = isOSX() && !isHighSierra();
 
 const Column = styled(BaseColumn)`
-  width: ${props => props.condenced ? 'var(--sidebar-width-condenced)' : 'var(--sidebar-width)'};
+  width: ${props =>
+    props.condenced
+      ? 'var(--sidebar-width-condenced)'
+      : 'var(--sidebar-width)'};
   height: 100%;
   background-color: ${isOSX() ? 'transparent' : 'var(--sidebar-bg)'};
   display: flex;
 `;
 
 const ArchiveList = styled.ul`
-  margin: ${usesBigPadding ? 'calc(var(--spacing-one) * 3)' : 'var(--spacing-one)'} 0 0 0;
+  margin: ${usesBigPadding
+      ? 'calc(var(--spacing-one) * 3)'
+      : 'var(--spacing-one)'}
+    0 0 0;
   padding: 0;
 `;
 
@@ -49,7 +55,7 @@ class RecentFiles extends Component {
     return (
       <Column footer={footer} condenced={condenced}>
         <ArchiveList>
-          {archives.map((archive, i) =>
+          {archives.map((archive, i) => (
             <SidebarItem
               active={archive.id === currentArchiveId}
               archive={archive}
@@ -61,7 +67,7 @@ class RecentFiles extends Component {
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
               showImportDialog={this.props.showImportDialog}
             />
-          )}
+          ))}
         </ArchiveList>
       </Column>
     );

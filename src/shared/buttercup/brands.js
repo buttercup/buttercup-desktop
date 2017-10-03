@@ -23,13 +23,13 @@ export const brands = {
     remote: true,
     name: 'Nextcloud',
     logo: nextCloud,
-    icon: nextCloudSquare,
+    icon: nextCloudSquare
   },
   [ArchiveTypes.WEBDAV]: {
     remote: true,
     name: 'WebDAV',
     logo: webDAV,
-    icon: webDAV,
+    icon: webDAV
   },
   [ArchiveTypes.FILE]: {
     remote: false,

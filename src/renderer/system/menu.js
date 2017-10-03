@@ -7,10 +7,14 @@ const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
 
 export function createMenu(items = []) {
-  return Menu.buildFromTemplate(items.map(item => ({
-    ...item,
-    icon: item.icon ? path.resolve(__dirname, `../resources/icons/${item.icon}.png`) : null
-  })));
+  return Menu.buildFromTemplate(
+    items.map(item => ({
+      ...item,
+      icon: item.icon
+        ? path.resolve(__dirname, `../resources/icons/${item.icon}.png`)
+        : null
+    }))
+  );
 }
 
 export function showContextMenu(menu = [], async = true) {
@@ -22,7 +26,12 @@ export function showContextMenu(menu = [], async = true) {
   });
 }
 
-export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToSelf = true) {
+export function createMenuFromGroups(
+  groups = [],
+  currentGroup,
+  fn,
+  allowMoveToSelf = true
+) {
   return createMenu(
     groups
       .filter(group => {
@@ -37,19 +46,26 @@ export function createMenuFromGroups(groups = [], currentGroup, fn, allowMoveToS
         }
         return {
           label: group.title,
-          enabled: (group.id !== currentGroup || group.groups.length > 0),
+          enabled: group.id !== currentGroup || group.groups.length > 0,
           click: () => fn(group.id),
-          submenu: group.groups.length > 0
-            ? createMenuFromGroups(
-              [{
-                ...group,
-                title: `Move to ${group.title}`,
-                groups: []
-              }, {
-                type: 'separator'
-              }]
-              .concat(group.groups), currentGroup, fn, allowMoveToSelf)
-            : null
+          submenu:
+            group.groups.length > 0
+              ? createMenuFromGroups(
+                  [
+                    {
+                      ...group,
+                      title: `Move to ${group.title}`,
+                      groups: []
+                    },
+                    {
+                      type: 'separator'
+                    }
+                  ].concat(group.groups),
+                  currentGroup,
+                  fn,
+                  allowMoveToSelf
+                )
+              : null
         };
       })
   );
@@ -70,7 +86,7 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
         type: 'checkbox',
         checked: currentMode === sort.mode,
         label: sort.label,
-        enabled: (typeof sort.enabled === 'undefined') ? true : sort.enabled,
+        enabled: typeof sort.enabled === 'undefined' ? true : sort.enabled,
         icon: sort.icon,
         click: () => onChange(sort.mode)
       })),
@@ -80,7 +96,7 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
 }
 
 export function createCopyMenu(entry, currentEntry) {
-  const showKeys = (currentEntry && currentEntry.id === entry.id);
+  const showKeys = currentEntry && currentEntry.id === entry.id;
   const url = entry.meta.find(meta => /^url$/i.test(meta.key));
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [

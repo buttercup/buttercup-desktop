@@ -29,7 +29,9 @@ export function setupWindows(store) {
 
     // Set initial menu bar visibility
     const menubarVisible = getSetting(store.getState(), 'menubarVisible');
-    win.setMenuBarVisibility(typeof menubarVisible === 'boolean' ? menubarVisible : true);
+    win.setMenuBarVisibility(
+      typeof menubarVisible === 'boolean' ? menubarVisible : true
+    );
 
     win.loadURL(getPathToFile('views/index.html'));
 
@@ -49,9 +51,12 @@ export function setupWindows(store) {
       }
     });
 
-    win.on('resize', debounce(() => {
-      config.set('window.size', win.getSize());
-    }, 2000));
+    win.on(
+      'resize',
+      debounce(() => {
+        config.set('window.size', win.getSize());
+      }, 2000)
+    );
 
     win.once('closed', () => {
       windowManager.deregister(win);

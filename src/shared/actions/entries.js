@@ -11,7 +11,7 @@ import {
   ENTRIES_MOVE,
   ENTRIES_CHANGE_MODE,
   ENTRIES_SET_FILTER,
-  ENTRIES_SET_SORT,
+  ENTRIES_SET_SORT
 } from './types';
 
 export const selectEntry = createAction(ENTRIES_SELECTED);
@@ -47,15 +47,18 @@ export const newEntry = newValues => (dispatch, getState) => {
     return null;
   }
 
-  entryTools.createEntry(archiveId, currentGroupId, newValues).then(entryObj => {
-    dispatch({
-      type: ENTRIES_CREATE,
-      payload: entryObj
+  entryTools
+    .createEntry(archiveId, currentGroupId, newValues)
+    .then(entryObj => {
+      dispatch({
+        type: ENTRIES_CREATE,
+        payload: entryObj
+      });
+      dispatch(selectEntry(entryObj.id));
+    })
+    .catch(err => {
+      console.error(err);
     });
-    dispatch(selectEntry(entryObj.id));
-  }).catch(err => {
-    console.error(err);
-  });
 };
 
 export const moveEntry = (entryId, groupId) => (dispatch, getState) => {

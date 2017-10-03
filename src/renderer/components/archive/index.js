@@ -13,16 +13,22 @@ const Archive = ({ onColumnSizeChange, columnSizes }) => (
     minSize={150}
     maxSize={500}
     defaultSize={columnSizes ? columnSizes.tree : 230}
-    onChange={throttle(size => onColumnSizeChange({name: 'tree', size}), 1000)}
-    >
+    onChange={throttle(
+      size => onColumnSizeChange({ name: 'tree', size }),
+      1000
+    )}
+  >
     <TreeView />
     <SplitPane
       split="vertical"
       minSize={150}
       maxSize={500}
       defaultSize={columnSizes ? columnSizes.entries : 230}
-      onChange={throttle(size => onColumnSizeChange({name: 'entries', size}), 1000)}
-      >
+      onChange={throttle(
+        size => onColumnSizeChange({ name: 'entries', size }),
+        1000
+      )}
+    >
       <Entries />
       <Entry />
     </SplitPane>
@@ -31,7 +37,7 @@ const Archive = ({ onColumnSizeChange, columnSizes }) => (
 
 Archive.propTypes = {
   columnSizes: PropTypes.object,
-  onColumnSizeChange: PropTypes.func,
+  onColumnSizeChange: PropTypes.func
 };
 
 export default Archive;

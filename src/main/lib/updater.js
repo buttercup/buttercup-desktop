@@ -9,7 +9,9 @@ autoUpdater.logger.transports.file.level = 'info';
 autoUpdater.allowPrerelease = true;
 
 export function startAutoUpdate(cb) {
-  autoUpdater.on('update-downloaded', ({ version, releaseNotes }) => cb(releaseNotes, version));
+  autoUpdater.on('update-downloaded', ({ version, releaseNotes }) =>
+    cb(releaseNotes, version)
+  );
   autoUpdater.checkForUpdates();
 }
 

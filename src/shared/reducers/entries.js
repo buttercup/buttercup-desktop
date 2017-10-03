@@ -10,7 +10,7 @@ import {
   ENTRIES_MOVE,
   ENTRIES_CHANGE_MODE,
   ENTRIES_SET_FILTER,
-  ENTRIES_SET_SORT,
+  ENTRIES_SET_SORT
 } from '../actions/types';
 
 // Reducers ->
@@ -18,7 +18,7 @@ import {
 function byId(state = {}, action) {
   switch (action.type) {
     case ENTRIES_LOADED: {
-      const nextState = {...state};
+      const nextState = { ...state };
       action.payload.forEach(entry => {
         nextState[entry.id] = entry;
       });
@@ -35,7 +35,7 @@ function byId(state = {}, action) {
         [action.payload.id]: action.payload
       };
     case ENTRIES_DELETE: {
-      const nextState = {...state};
+      const nextState = { ...state };
       delete nextState[action.payload];
       return nextState;
     }

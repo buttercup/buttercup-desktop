@@ -10,24 +10,17 @@ import getRootReducer from '../reducers';
  * @return {Object} store
  */
 export default function configureStore(initialState, scope = 'main') {
-  let middleware = [
-    thunk,
-  ];
+  let middleware = [thunk];
 
   if (scope === 'renderer' && process.env.NODE_ENV === 'development') {
     const logger = createLogger({
       level: 'info',
-      collapsed: true,
+      collapsed: true
     });
-    middleware = [
-      ...middleware,
-      logger
-    ];
+    middleware = [...middleware, logger];
   }
 
-  const enhanced = [
-    applyMiddleware(...middleware),
-  ];
+  const enhanced = [applyMiddleware(...middleware)];
 
   const filter = {
     settingsByArchiveId: true,
@@ -37,17 +30,23 @@ export default function configureStore(initialState, scope = 'main') {
   };
 
   if (scope === 'renderer') {
-    enhanced.push(electronEnhancer({
-      filter,
-      dispatchProxy: a => store.dispatch(a),
-    }));
+    enhanced.push(
+      electronEnhancer({
+        filter,
+        dispatchProxy: a => store.dispatch(a)
+      })
+    );
     if (process.env.NODE_ENV === 'development') {
-      enhanced.push(window.devToolsExtension ? window.devToolsExtension() : f => f);
+      enhanced.push(
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+      );
     }
   } else {
-    enhanced.push(electronEnhancer({
-      dispatchProxy: a => store.dispatch(a),
-    }));
+    enhanced.push(
+      electronEnhancer({
+        dispatchProxy: a => store.dispatch(a)
+      })
+    );
   }
 
   const rootReducer = getRootReducer(scope);

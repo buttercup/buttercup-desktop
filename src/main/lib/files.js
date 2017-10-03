@@ -8,14 +8,18 @@ import { getMainWindow } from '../utils/window';
 
 const windowManager = getWindowManager();
 const dialogOptions = {
-  filters: [{
-    name: 'Buttercup Archives',
-    extensions: ['bcup']
-  }]
+  filters: [
+    {
+      name: 'Buttercup Archives',
+      extensions: ['bcup']
+    }
+  ]
 };
 
 function normalizePath(filePath) {
-  filePath = decodeURI(filePath.replace(isWindows() ? /^file:[/]{2,3}/ : 'file://', ''));
+  filePath = decodeURI(
+    filePath.replace(isWindows() ? /^file:[/]{2,3}/ : 'file://', '')
+  );
   filePath = path.normalize(filePath);
   return filePath;
 }
@@ -28,14 +32,18 @@ function normalizePath(filePath) {
  * @returns {void}
  */
 function showOpenDialog(focusedWindow) {
-  dialog.showOpenDialog(focusedWindow, {
-    ...dialogOptions,
-    title: 'Load a Buttercup Archive'
-  }, filename => {
-    if (filename && filename.length > 0) {
-      loadFile(filename[0], focusedWindow);
+  dialog.showOpenDialog(
+    focusedWindow,
+    {
+      ...dialogOptions,
+      title: 'Load a Buttercup Archive'
+    },
+    filename => {
+      if (filename && filename.length > 0) {
+        loadFile(filename[0], focusedWindow);
+      }
     }
-  });
+  );
 }
 
 /**
@@ -46,14 +54,18 @@ function showOpenDialog(focusedWindow) {
  * @returns {void}
  */
 function showSaveDialog(focusedWindow) {
-  dialog.showSaveDialog(focusedWindow, {
-    ...dialogOptions,
-    title: 'Create a New Buttercup Archive'
-  }, filename => {
-    if (typeof filename === 'string' && filename.length > 0) {
-      loadFile(filename, focusedWindow, true);
+  dialog.showSaveDialog(
+    focusedWindow,
+    {
+      ...dialogOptions,
+      title: 'Create a New Buttercup Archive'
+    },
+    filename => {
+      if (typeof filename === 'string' && filename.length > 0) {
+        loadFile(filename, focusedWindow, true);
+      }
     }
-  });
+  );
 }
 
 /**
@@ -136,30 +148,36 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
     focusedWindow.webContents.send('import-history', { history, archiveId });
   };
 
-  dialog.showOpenDialog(focusedWindow, {
-    filters: [{
-      name: `${typeInfo.name} Archives`,
-      extensions: [typeInfo.extension]
-    }],
-    title: `Load a ${typeInfo.name} archive`
-  }, (files) => {
-    if (!files) {
-      return;
-    }
-    const [ filename ] = files;
-    if (typeInfo.password) {
-      focusedWindow.webContents.send('import-history-prompt', type);
-      ipc.once('import-history-prompt-resp', (e, password) => {
-        importArchive(type, filename, password)
+  dialog.showOpenDialog(
+    focusedWindow,
+    {
+      filters: [
+        {
+          name: `${typeInfo.name} Archives`,
+          extensions: [typeInfo.extension]
+        }
+      ],
+      title: `Load a ${typeInfo.name} archive`
+    },
+    files => {
+      if (!files) {
+        return;
+      }
+      const [filename] = files;
+      if (typeInfo.password) {
+        focusedWindow.webContents.send('import-history-prompt', type);
+        ipc.once('import-history-prompt-resp', (e, password) => {
+          importArchive(type, filename, password)
+            .then(handleSuccess)
+            .catch(handleError);
+        });
+      } else {
+        importArchive(type, filename)
           .then(handleSuccess)
           .catch(handleError);
-      });
-    } else {
-      importArchive(type, filename)
-        .then(handleSuccess)
-        .catch(handleError);
+      }
     }
-  });
+  );
 };
 
 /**
@@ -171,7 +189,9 @@ export function openFileForImporting(focusedWindow, type, archiveId) {
   focusedWindow = getMainWindow(focusedWindow);
 
   if (!focusedWindow) {
-    throw new Error('Import function should not be running without the main window running.');
+    throw new Error(
+      'Import function should not be running without the main window running.'
+    );
   }
 
   showImportDialog(focusedWindow, type, archiveId);

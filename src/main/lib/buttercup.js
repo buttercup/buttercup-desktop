@@ -1,4 +1,8 @@
-import { importFromKDBX, importFrom1PIF, importFromLastPass } from 'buttercup-importer';
+import {
+  importFromKDBX,
+  importFrom1PIF,
+  importFromLastPass
+} from 'buttercup-importer';
 import { ImportTypes } from '../../shared/buttercup/types';
 
 /**
@@ -12,7 +16,9 @@ import { ImportTypes } from '../../shared/buttercup/types';
 export function importArchive(type, filename, password) {
   switch (type) {
     case ImportTypes.KEEPASS:
-      return importFromKDBX(filename, password).then(archive => archive.getHistory());
+      return importFromKDBX(filename, password).then(archive =>
+        archive.getHistory()
+      );
     case ImportTypes.ONE_PASSWORD:
       return importFrom1PIF(filename).then(archive => archive.getHistory());
     case ImportTypes.LASTPASS:

@@ -22,10 +22,12 @@ export function setupActions(store) {
 
   if (process.env.NODE_ENV !== 'development') {
     startAutoUpdate((releaseNotes, releaseName) => {
-      store.dispatch(pushUpdate({
-        releaseNotes,
-        releaseName
-      }));
+      store.dispatch(
+        pushUpdate({
+          releaseNotes,
+          releaseName
+        })
+      );
     });
 
     ipc.on('quit-and-install', () => {
@@ -63,7 +65,10 @@ export function setupActions(store) {
       ua: payload,
       cvar: JSON.stringify({
         '1': ['version', app.getVersion()],
-        '2': ['production', process.env.NODE_ENV === 'development' ? 'No' : 'Yes']
+        '2': [
+          'production',
+          process.env.NODE_ENV === 'development' ? 'No' : 'Yes'
+        ]
       })
     });
   });

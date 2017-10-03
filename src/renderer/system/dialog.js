@@ -8,7 +8,7 @@ const currentWindow = remote.getCurrentWindow();
 
 export function showConfirmDialog(message, fn) {
   const buttons = ['Yes', 'No'];
-  dialog.showMessageBox(currentWindow, {message, buttons}, resp => {
+  dialog.showMessageBox(currentWindow, { message, buttons }, resp => {
     fn(resp);
   });
 }

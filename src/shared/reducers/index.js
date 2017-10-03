@@ -13,7 +13,7 @@ export default function getRootReducer(scope = 'main') {
     currentArchive,
     archives,
     update,
-    settings,
+    settings
   };
 
   if (scope === 'renderer') {

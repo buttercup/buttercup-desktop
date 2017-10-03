@@ -47,7 +47,8 @@ export function updateEntry(archiveId, entryObj) {
 
   // Remove Meta
   for (const metaKey in sourceMeta) {
-    if (sourceMeta.hasOwnProperty(metaKey)) { // eslint-disable-line no-prototype-builtins
+    if (sourceMeta.hasOwnProperty(metaKey)) {
+      // eslint-disable-line no-prototype-builtins
       const keys = meta.map(metaObj => metaObj.key);
       if (keys.indexOf(metaKey) === -1) {
         entry.deleteMeta(metaKey);
@@ -58,7 +59,10 @@ export function updateEntry(archiveId, entryObj) {
   // Update/Add meta
   meta.forEach(metaObj => {
     const source = entry.getMeta(metaObj.key);
-    if (source === undefined || (source !== undefined && source !== metaObj.value)) {
+    if (
+      source === undefined ||
+      (source !== undefined && source !== metaObj.value)
+    ) {
       entry.setMeta(metaObj.key, metaObj.value);
     }
   });

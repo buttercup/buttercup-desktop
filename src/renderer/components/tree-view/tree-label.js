@@ -25,11 +25,11 @@ class TreeLabel extends Component {
     } else {
       this.props.onSaveClick(id, title);
     }
-  }
+  };
 
   handleDismiss = () => {
     this.props.onDismissClick();
-  }
+  };
 
   render() {
     const { node, onRightClick } = this.props;
@@ -42,14 +42,14 @@ class TreeLabel extends Component {
             node={node}
             onSave={this.handleSave}
             onDismiss={this.handleDismiss}
-            />
+          />
         </Node>
       );
     }
 
     return (
       <Node onContextMenu={onRightClick}>
-        {(title.trim() || <i>Untitled</i>)}
+        {title.trim() || <i>Untitled</i>}
       </Node>
     );
   }

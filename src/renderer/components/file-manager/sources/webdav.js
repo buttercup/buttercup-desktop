@@ -13,7 +13,7 @@ import Manager from '../manager';
 
 const Form = styled.form`
   width: 80%;
-  
+
   input {
     margin-bottom: var(--spacing-half);
   }
@@ -50,13 +50,13 @@ class Webdav extends Component {
       },
       isNew
     });
-  }
+  };
 
   handleInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   handleConnect = e => {
     if (e) {
@@ -81,16 +81,21 @@ class Webdav extends Component {
       password
     });
 
-    fs.readDirectory('/').then(() => {
-      this.fs = fs;
-      this.setState({
-        established: true
+    fs
+      .readDirectory('/')
+      .then(() => {
+        this.fs = fs;
+        this.setState({
+          established: true
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        showDialog(
+          `Connection to ${endpoint} failed. Please check your credentials and try again.`
+        );
       });
-    }).catch(err => {
-      console.error(err);
-      showDialog(`Connection to ${endpoint} failed. Please check your credentials and try again.`);
-    });
-  }
+  };
 
   componentDidMount() {
     this.props.onSelect(null);
@@ -104,7 +109,7 @@ class Webdav extends Component {
             fs={this.fs}
             onSelectFile={this.handleSelect}
             toggleCreateButton={this.props.toggleCreateButton}
-            />
+          />
         </Flex>
       );
     }
@@ -122,7 +127,7 @@ class Webdav extends Component {
             placeholder="https://..."
             onChange={this.handleInputChange}
             value={this.state.endpoint}
-            />
+          />
           <Input
             bordered
             type="text"
@@ -130,7 +135,7 @@ class Webdav extends Component {
             placeholder={`${title} Username...`}
             onChange={this.handleInputChange}
             value={this.state.username}
-            />
+          />
           <Input
             bordered
             type="password"
@@ -138,10 +143,14 @@ class Webdav extends Component {
             placeholder={`${title} Password...`}
             onChange={this.handleInputChange}
             value={this.state.password}
-            />
-          <Button type="submit" onClick={this.handleConnect} full primary>Connect</Button>
+          />
+          <Button type="submit" onClick={this.handleConnect} full primary>
+            Connect
+          </Button>
           <SmallType border center>
-            <InfoIcon /> Enter your {title} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.
+            <InfoIcon /> Enter your {title} Endpoint Address, Username and
+            Password to connect and choose a Buttercup Archive. We{' '}
+            <strong>will save</strong> your credentials and encrypt it.
           </SmallType>
         </Form>
       </Flex>

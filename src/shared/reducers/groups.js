@@ -7,7 +7,7 @@ import {
   GROUPS_RESET,
   GROUPS_RENAME,
   GROUPS_MOVE,
-  GROUPS_UPDATE,
+  GROUPS_UPDATE
 } from '../actions/types';
 
 // Reducers ->
@@ -25,16 +25,13 @@ function byId(state = {}, action) {
   switch (action.type) {
     case GROUPS_ADD_NEW_CHILD: {
       const { group, parentId } = action.payload;
-      let newState = {...state};
+      let newState = { ...state };
       if (parentId !== null) {
         newState = {
           ...newState,
           [parentId]: {
             ...newState[parentId],
-            groups: [
-              ...newState[parentId].groups,
-              group.id
-            ]
+            groups: [...newState[parentId].groups, group.id]
           }
         };
       }
@@ -61,7 +58,7 @@ function byId(state = {}, action) {
         return state;
       }
 
-      let newState = {...state};
+      let newState = { ...state };
 
       if (fromParentId) {
         newState = {
@@ -78,10 +75,7 @@ function byId(state = {}, action) {
           ...newState,
           [toParentId]: {
             ...newState[toParentId],
-            groups: [
-              ...newState[toParentId].groups,
-              groupId
-            ]
+            groups: [...newState[toParentId].groups, groupId]
           }
         };
       }
@@ -112,10 +106,7 @@ function shownIds(state = [], action) {
   switch (action.type) {
     case GROUPS_ADD_NEW_CHILD:
       if (!action.payload.parentId) {
-        return [
-          ...state,
-          action.payload.group.id
-        ];
+        return [...state, action.payload.group.id];
       }
       return state;
     case GROUPS_MOVE: {
@@ -129,10 +120,7 @@ function shownIds(state = [], action) {
         return state.filter(id => id !== groupId);
       }
       if (!toParentId) {
-        return [
-          ...state,
-          groupId
-        ];
+        return [...state, groupId];
       }
       return state;
     }

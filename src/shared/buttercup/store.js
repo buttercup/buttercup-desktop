@@ -4,7 +4,7 @@ import {
   addArchiveToStore,
   removeArchiveFromStore,
   lockArchiveInStore,
-  unlockArchiveInStore,
+  unlockArchiveInStore
 } from '../actions/archives.js';
 import { setSavingArchive } from '../actions/ui-state';
 
@@ -16,16 +16,22 @@ export function linkArchiveManagerToStore(store) {
     ipc.send('archive-list-updated');
   });
 
-  archiveManager.on('sourceRehydrated', function __handleRehydratedSource(sourceInfo) {
+  archiveManager.on('sourceRehydrated', function __handleRehydratedSource(
+    sourceInfo
+  ) {
     store.dispatch(lockArchiveInStore(sourceInfo.id));
     ipc.send('archive-list-updated');
   });
 
-  archiveManager.on('sourceUnlocked', function __handleUnlockedSource(sourceInfo) {
+  archiveManager.on('sourceUnlocked', function __handleUnlockedSource(
+    sourceInfo
+  ) {
     store.dispatch(unlockArchiveInStore(sourceInfo.id));
   });
 
-  archiveManager.on('sourceRemoved', function __handleRemovedSource(sourceInfo) {
+  archiveManager.on('sourceRemoved', function __handleRemovedSource(
+    sourceInfo
+  ) {
     store.dispatch(removeArchiveFromStore(sourceInfo.id));
     ipc.send('archive-list-updated');
   });

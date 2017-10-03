@@ -1,6 +1,11 @@
 import { connect } from 'react-redux';
 import Entries from '../../components/archive/entries';
-import { getGroups, getCurrentEntry, getEntries, getCurrentGroup } from '../../../shared/selectors';
+import {
+  getGroups,
+  getCurrentEntry,
+  getEntries,
+  getCurrentGroup
+} from '../../../shared/selectors';
 import * as entries from '../../../shared/actions/entries';
 
 export default connect(

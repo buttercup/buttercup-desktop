@@ -44,7 +44,9 @@ export function authenticateDropbox() {
     };
 
     authWin.webContents.on('will-navigate', (e, url) => navigateCb(url));
-    authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) => navigateCb(newUrl));
+    authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) =>
+      navigateCb(newUrl)
+    );
     authWin.on('hide', closeCb);
     authWin.on('close', closeCb);
   });
@@ -53,15 +55,15 @@ export function authenticateDropbox() {
 export function getFsInstance(type, settings) {
   switch (type) {
     case 'dropbox':
-      return anyFs(dropboxFs({
-        apiKey: settings.token
-      }));
+      return anyFs(
+        dropboxFs({
+          apiKey: settings.token
+        })
+      );
     case 'webdav':
-      return anyFs(webdavFs(
-        settings.endpoint,
-        settings.username,
-        settings.password
-      ));
+      return anyFs(
+        webdavFs(settings.endpoint, settings.username, settings.password)
+      );
     default:
       return null;
   }

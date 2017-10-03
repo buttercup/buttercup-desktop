@@ -10,10 +10,13 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
 
   const passwordCredentials = createCredentials.fromPassword(masterPassword);
   const sourceCredentials = createCredentials(type, credentials);
-  sourceCredentials.setValue('datasource', JSON.stringify({
-    type,
-    ...datasource
-  }));
+  sourceCredentials.setValue(
+    'datasource',
+    JSON.stringify({
+      type,
+      ...datasource
+    })
+  );
 
   const manager = getSharedArchiveManager();
 
@@ -66,14 +69,12 @@ export function saveWorkspace(archiveId) {
 
   return workspace
     .localDiffersFromRemote()
-    .then(differs => differs
-      ? workspace.mergeSaveablesFromRemote().then(() => true)
-      : false
+    .then(
+      differs =>
+        differs ? workspace.mergeSaveablesFromRemote().then(() => true) : false
     )
-    .then(shouldSave => shouldSave
-      ? workspace.save()
-      : null
-    ).then(() => {
+    .then(shouldSave => (shouldSave ? workspace.save() : null))
+    .then(() => {
       manager.emit('savingFinished');
     });
 }

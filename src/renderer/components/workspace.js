@@ -19,13 +19,13 @@ const SavingDialog = styled(Flex)`
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, .4);
+  background-color: rgba(0, 0, 0, 0.4);
 `;
 
 const SavingDialogText = styled.div`
   color: #fff;
   text-align: center;
-  background-color: rgba(0, 0, 0, .9);
+  background-color: rgba(0, 0, 0, 0.9);
   border-radius: 10px;
   padding: var(--spacing-half) var(--spacing-one);
 
@@ -57,7 +57,10 @@ const Workspace = ({
             <NoArchiveSelected />
           </When>
           <Otherwise>
-            <Archive columnSizes={columnSizes} onColumnSizeChange={setColumnSize} />
+            <Archive
+              columnSizes={columnSizes}
+              onColumnSizeChange={setColumnSize}
+            />
           </Otherwise>
         </Choose>
       </Primary>
@@ -66,7 +69,9 @@ const Workspace = ({
         <SavingDialog align="center" justify="center">
           <SavingDialogText>
             <img width="64" src={spinner} alt="Loading" />
-            <p>Your archive is being saved.<br />Exiting automatically...</p>
+            <p>
+              Your archive is being saved.<br />Exiting automatically...
+            </p>
           </SavingDialogText>
         </SavingDialog>
       </If>
@@ -83,7 +88,7 @@ Workspace.propTypes = {
   savingArchive: PropTypes.bool,
   isExiting: PropTypes.bool,
   installUpdate: PropTypes.func,
-  setColumnSize: PropTypes.func,
+  setColumnSize: PropTypes.func
 };
 
 export default Workspace;

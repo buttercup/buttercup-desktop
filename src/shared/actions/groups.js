@@ -19,10 +19,12 @@ import {
   GROUPS_MOVE,
   GROUPS_ADD_NEW_CHILD,
   GROUPS_DISMISS,
-  GROUPS_UPDATE,
+  GROUPS_UPDATE
 } from './types';
 
-export const resetGroups = createAction(GROUPS_RESET, payload => groupTools.normalizeGroups(payload));
+export const resetGroups = createAction(GROUPS_RESET, payload =>
+  groupTools.normalizeGroups(payload)
+);
 export const renameGroup = createAction(GROUPS_RENAME);
 export const setSortMode = createAction(GROUPS_SET_SORT);
 export const dismissGroup = createAction(GROUPS_DISMISS);
@@ -30,15 +32,18 @@ export const updateGroup = createAction(GROUPS_UPDATE);
 export const moveGroup = createAction(GROUPS_MOVE);
 export const setCurrentGroup = createAction(GROUPS_SELECTED);
 export const addNewGroup = createAction(GROUPS_ADD_NEW_CHILD);
-export const addTemporaryGroup = createAction(GROUPS_ADD_NEW_CHILD, payload => ({
-  parentId: payload,
-  group: {
-    id: uuid.v4(),
+export const addTemporaryGroup = createAction(
+  GROUPS_ADD_NEW_CHILD,
+  payload => ({
     parentId: payload,
-    title: '',
-    isNew: true
-  }
-}));
+    group: {
+      id: uuid.v4(),
+      parentId: payload,
+      title: '',
+      isNew: true
+    }
+  })
+);
 
 export const dismissNewGroups = () => (dispatch, getState) => {
   const ids = getDismissableGroupIds(getState());
@@ -60,11 +65,13 @@ export const removeGroup = groupId => (dispatch, getState) => {
     const fromParentId = groupTools.findParentId(allGroups, groupId);
     const toParentId = getTrashGroupId(state);
 
-    dispatch(moveGroup({
-      fromParentId,
-      toParentId,
-      groupId
-    }));
+    dispatch(
+      moveGroup({
+        fromParentId,
+        toParentId,
+        groupId
+      })
+    );
   }
 };
 
@@ -74,15 +81,20 @@ export const addGroup = parentId => dispatch => {
   dispatch(addTemporaryGroup(parentId));
 };
 
-export const createNewGroup = (parentId, temporaryGroupId, title) => (dispatch, getState) => {
+export const createNewGroup = (parentId, temporaryGroupId, title) => (
+  dispatch,
+  getState
+) => {
   const archiveId = getCurrentArchiveId(getState());
   const group = groupTools.createGroup(archiveId, parentId, title);
 
   dispatch(dismissNewGroups());
-  dispatch(addNewGroup({
-    parentId,
-    group
-  }));
+  dispatch(
+    addNewGroup({
+      parentId,
+      group
+    })
+  );
 };
 
 export const saveGroupTitle = (groupId, title) => (dispatch, getState) => {
@@ -101,12 +113,17 @@ export const reloadGroups = () => (dispatch, getState) => {
   }
 };
 
-export const moveGroupToParent = (groupId, parentId, gapDrop) => (dispatch, getState) => {
+export const moveGroupToParent = (groupId, parentId, gapDrop) => (
+  dispatch,
+  getState
+) => {
   const state = getState();
   const archiveId = getCurrentArchiveId(state);
   const allGroups = getGroupsById(state);
   const fromParentId = groupTools.findParentId(allGroups, groupId);
-  const toParentId = gapDrop ? groupTools.findParentId(allGroups, parentId) : parentId;
+  const toParentId = gapDrop
+    ? groupTools.findParentId(allGroups, parentId)
+    : parentId;
 
   groupTools.moveGroup(archiveId, groupId, toParentId);
   dispatch({

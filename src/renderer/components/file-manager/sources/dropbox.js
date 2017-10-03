@@ -41,7 +41,7 @@ class Dropbox extends Component {
       path: filePath,
       isNew
     });
-  }
+  };
 
   handleAuthClick = () => {
     authenticateDropbox()
@@ -54,9 +54,11 @@ class Dropbox extends Component {
       })
       .catch(err => {
         console.error(err);
-        showDialog(`Connection to Dropbox server failed. Please try again later.`);
+        showDialog(
+          `Connection to Dropbox server failed. Please try again later.`
+        );
       });
-  }
+  };
 
   componentDidMount() {
     this.props.onSelect(null);
@@ -70,7 +72,7 @@ class Dropbox extends Component {
             fs={this.fs}
             onSelectFile={this.handleSelect}
             toggleCreateButton={this.props.toggleCreateButton}
-            />
+          />
         </Flex>
       );
     }
@@ -83,9 +85,12 @@ class Dropbox extends Component {
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
-            >Authenticate with Dropbox</DropboxButton>
+          >
+            Authenticate with Dropbox
+          </DropboxButton>
           <SmallType border>
-            <InfoIcon /> Connect Buttercup to your Dropbox account to read and save your archives.<br />
+            <InfoIcon /> Connect Buttercup to your Dropbox account to read and
+            save your archives.<br />
             We won't save your Dropbox username or password.
           </SmallType>
         </Wrapper>

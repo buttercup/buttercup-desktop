@@ -5,7 +5,7 @@ import {
   ARCHIVES_LOCK,
   ARCHIVES_UNLOCK,
   ARCHIVES_SET_CURRENT,
-  ARCHIVES_UPDATE,
+  ARCHIVES_UPDATE
 } from '../actions/types';
 
 export default function archivesReducer(state = [], action) {
@@ -14,10 +14,7 @@ export default function archivesReducer(state = [], action) {
       if (state.find(archive => archive.id === action.payload.id)) {
         return state;
       }
-      return [
-        ...state,
-        action.payload
-      ];
+      return [...state, action.payload];
     case ARCHIVES_REMOVE: {
       return state.filter(archive => archive.id !== action.payload);
     }
@@ -47,7 +44,4 @@ export default function archivesReducer(state = [], action) {
   }
 }
 
-export const currentArchive = createIdentityReducer(
-  ARCHIVES_SET_CURRENT,
-  null
-);
+export const currentArchive = createIdentityReducer(ARCHIVES_SET_CURRENT, null);

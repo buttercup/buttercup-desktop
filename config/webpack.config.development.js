@@ -30,11 +30,7 @@ module.exports = merge(baseConfig, {
     rules: [
       {
         test: /\.global\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader?sourceMap',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader?sourceMap', 'sass-loader']
       },
 
       {
@@ -59,8 +55,7 @@ module.exports = merge(baseConfig, {
     })
   ],
 
-  externals: [
-  ],
+  externals: [],
 
   node: {
     __dirname: false

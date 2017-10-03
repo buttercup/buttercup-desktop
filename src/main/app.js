@@ -36,7 +36,8 @@ if (process.env.NODE_ENV !== 'development') {
   crashReporter.start({
     productName: app.getName(),
     companyName: 'Buttercup LLC',
-    submitURL: 'https://electron-crash-reporter.appspot.com/5642489998344192/create/',
+    submitURL:
+      'https://electron-crash-reporter.appspot.com/5642489998344192/create/',
     uploadToServer: true
   });
 }
@@ -49,15 +50,12 @@ const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
 
   const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
-  const extensions = [
-    'REACT_DEVELOPER_TOOLS',
-    'REDUX_DEVTOOLS'
-  ];
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
   for (const name of extensions) {
     try {
       await installer.default(installer[name], forceDownload); // eslint-disable-line babel/no-await-in-loop
-    } catch (err) { }
+    } catch (err) {}
   }
 };
 
@@ -102,9 +100,11 @@ app.on('ready', async () => {
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
-  store.subscribe(throttle(() => {
-    storage.set('state', store.getState());
-  }, 100));
+  store.subscribe(
+    throttle(() => {
+      storage.set('state', store.getState());
+    }, 100)
+  );
 
   // Setup Windows & IPC Actions
   setupWindows(store);

@@ -45,11 +45,11 @@ export const removeArchive = payload => () => {
 };
 
 export const unlockArchive = payload => dispatch => {
-  return showPasswordDialog(
-    password => unlockArchiveInArchiveManager(payload, password)
-  ).then(
-    archiveId => dispatch(loadArchive(archiveId))
-  ).catch(() => {});
+  return showPasswordDialog(password =>
+    unlockArchiveInArchiveManager(payload, password)
+  )
+    .then(archiveId => dispatch(loadArchive(archiveId)))
+    .catch(() => {});
 };
 
 export const loadOrUnlockArchive = payload => (dispatch, getState) => {
@@ -67,14 +67,13 @@ export const loadOrUnlockArchive = payload => (dispatch, getState) => {
 export const addArchive = payload => async (dispatch, getState) => {
   const { isNew } = payload;
   const dispatchLoad = archiveId => dispatch(loadArchive(archiveId));
-  const addToArchive = password => addArchiveToArchiveManager(payload, password).catch(err => {
-    const unknownMessage = 'An unknown error has occurred';
-    return Promise.reject(
-      isError(err)
-        ? err.message || unknownMessage
-        : unknownMessage
-    );
-  });
+  const addToArchive = password =>
+    addArchiveToArchiveManager(payload, password).catch(err => {
+      const unknownMessage = 'An unknown error has occurred';
+      return Promise.reject(
+        isError(err) ? err.message || unknownMessage : unknownMessage
+      );
+    });
 
   // If it's not a new archive,
   // show the password dialog only once.
@@ -86,52 +85,70 @@ export const addArchive = payload => async (dispatch, getState) => {
 
   // Otherwise show a confirmation too.
   return showPasswordDialog()
-    .then(firstPassword => showPasswordDialog(password => {
-      if (firstPassword !== password) {
-        return Promise.reject(new Error('Your passwords don\'t match.'));
-      }
-      return addToArchive(password);
-    }, {
-      title: 'Confirm Password'
-    }))
+    .then(firstPassword =>
+      showPasswordDialog(
+        password => {
+          if (firstPassword !== password) {
+            return Promise.reject(new Error("Your passwords don't match."));
+          }
+          return addToArchive(password);
+        },
+        {
+          title: 'Confirm Password'
+        }
+      )
+    )
     .then(dispatchLoad)
     .catch(() => {});
 };
 
 export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
-  dispatch(addArchive({
-    type: ArchiveTypes.FILE,
-    isNew,
-    path,
-    datasource: {
-      path
-    }
-  }));
+  dispatch(
+    addArchive({
+      type: ArchiveTypes.FILE,
+      isNew,
+      path,
+      datasource: {
+        path
+      }
+    })
+  );
 };
 
-export const addArchiveFromWebdav = ({ path, endpoint, credentials, isNew = false }, type) => dispatch => {
-  dispatch(addArchive({
-    type,
-    isNew,
-    path,
-    credentials,
-    datasource: {
-      endpoint,
-      path
-    }
-  }));
+export const addArchiveFromWebdav = (
+  { path, endpoint, credentials, isNew = false },
+  type
+) => dispatch => {
+  dispatch(
+    addArchive({
+      type,
+      isNew,
+      path,
+      credentials,
+      datasource: {
+        endpoint,
+        path
+      }
+    })
+  );
 };
 
-export const addArchiveFromDropbox = ({ path, token, isNew = false }) => dispatch => {
-  dispatch(addArchive({
-    type: ArchiveTypes.DROPBOX,
-    isNew,
-    path,
-    datasource: {
-      token,
-      path
-    }
-  }));
+export const addArchiveFromDropbox = ({
+  path,
+  token,
+  isNew = false
+}) => dispatch => {
+  dispatch(
+    addArchive({
+      type: ArchiveTypes.DROPBOX,
+      isNew,
+      path,
+      datasource: {
+        token,
+        path
+      }
+    })
+  );
 };
 
 export const addArchiveFromSource = payload => dispatch => {

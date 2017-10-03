@@ -42,14 +42,17 @@ export default class LabelEditor extends Component {
   componentDidMount() {
     const { isNew, title } = this.props.node;
 
-    this.setState({
-      title: isNew ? 'Untitled' : title
-    }, () => {
-      if (this._input) {
-        this._input.focus();
-        this._input.select();
+    this.setState(
+      {
+        title: isNew ? 'Untitled' : title
+      },
+      () => {
+        if (this._input) {
+          this._input.focus();
+          this._input.select();
+        }
       }
-    });
+    );
   }
 
   render() {

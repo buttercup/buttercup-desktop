@@ -1,7 +1,9 @@
 import { BrowserWindow } from 'electron';
 import { getWindowManager } from '../lib/window-manager';
 
-export function getMainWindow(focusedWindow = BrowserWindow.getFocusedWindow()) {
+export function getMainWindow(
+  focusedWindow = BrowserWindow.getFocusedWindow()
+) {
   if (focusedWindow) {
     return focusedWindow;
   }

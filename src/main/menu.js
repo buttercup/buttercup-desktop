@@ -1,6 +1,10 @@
 import { app, shell, Menu } from 'electron';
 import { isOSX } from '../shared/utils/platform';
-import { getCurrentArchiveId, getAllArchives, getSetting } from '../shared/selectors';
+import {
+  getCurrentArchiveId,
+  getAllArchives,
+  getSetting
+} from '../shared/selectors';
 import { setSetting } from '../shared/actions/settings';
 import { ImportTypeInfo } from '../shared/buttercup/types';
 import { openFile, openFileForImporting, newFile } from './lib/files';
@@ -73,10 +77,7 @@ const defaultTemplate = [
   {
     label: 'Window',
     role: 'window',
-    submenu: [
-      { role: 'minimize' },
-      { role: 'close' }
-    ]
+    submenu: [{ role: 'minimize' }, { role: 'close' }]
   },
   {
     label: 'Help',
@@ -97,7 +98,9 @@ const defaultTemplate = [
       {
         label: `View Changelog For v${pkg.version}`,
         click: () => {
-          shell.openExternal(`https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`);
+          shell.openExternal(
+            `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
+          );
         }
       }
     ]
@@ -125,10 +128,7 @@ if (isOSX()) {
     { type: 'separator' },
     {
       label: 'Speech',
-      submenu: [
-        { role: 'startspeaking' },
-        { role: 'stopspeaking' }
-      ]
+      submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
     }
   );
 
@@ -140,7 +140,7 @@ if (isOSX()) {
     { type: 'separator' },
     { role: 'front' }
   );
-};
+}
 
 export function setupMenu(store) {
   const state = store.getState();
@@ -165,12 +165,15 @@ export function setupMenu(store) {
             if (i === 4) {
               return {
                 label: 'Import',
-                submenu: Object.entries(ImportTypeInfo).map(([typeKey, type]) => ({
+                submenu: Object.entries(
+                  ImportTypeInfo
+                ).map(([typeKey, type]) => ({
                   label: `From ${type.name} archive (.${type.extension})`,
                   submenu: archives.map(archive => ({
                     label: `To ${archive.name}`,
                     enabled: archive.status === 'unlocked',
-                    click: (item, focusedWindow) => openFileForImporting(focusedWindow, typeKey, archive.id)
+                    click: (item, focusedWindow) =>
+                      openFileForImporting(focusedWindow, typeKey, archive.id)
                   }))
                 }))
               };
@@ -193,18 +196,22 @@ export function setupMenu(store) {
                 store.dispatch(setSetting('condencedSidebar', condenced));
               }
             },
-            ...(isOSX() ? [
-              {
-                label: 'Auto-hide Menubar',
-                type: 'checkbox',
-                checked: !menubarVisible,
-                click: () => {
-                  menubarVisible = !menubarVisible;
-                  getMainWindow().setMenuBarVisibility(menubarVisible);
-                  store.dispatch(setSetting('menubarVisible', menubarVisible));
-                }
-              }
-            ] : []),
+            ...(isOSX()
+              ? [
+                  {
+                    label: 'Auto-hide Menubar',
+                    type: 'checkbox',
+                    checked: !menubarVisible,
+                    click: () => {
+                      menubarVisible = !menubarVisible;
+                      getMainWindow().setMenuBarVisibility(menubarVisible);
+                      store.dispatch(
+                        setSetting('menubarVisible', menubarVisible)
+                      );
+                    }
+                  }
+                ]
+              : []),
             ...item.submenu
           ]
         };
@@ -225,7 +232,7 @@ export function setupMenu(store) {
                   win.webContents.send('set-current-archive', archive.id);
                 }
               },
-              checked: (archive.id === currentArchiveId)
+              checked: archive.id === currentArchiveId
             }))
           ]
         };
