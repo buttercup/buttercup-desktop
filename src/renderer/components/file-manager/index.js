@@ -6,7 +6,10 @@ import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { brands } from '../../../shared/buttercup/brands';
 import '../../styles/workspace.global.scss';
-import { emitActionToParentAndClose, closeCurrentWindow } from '../../system/utils';
+import {
+  emitActionToParentAndClose,
+  closeCurrentWindow
+} from '../../system/utils';
 import TypeSelector from './type-selector';
 import Dropbox from './sources/dropbox';
 import Webdav from './sources/webdav';
@@ -50,21 +53,21 @@ export default class FileManager extends Component {
     this.setState({
       selectedConfig: config
     });
-  }
+  };
 
   handleOpenClick = () => {
     emitActionToParentAndClose('load-archive', this.state.selectedConfig);
-  }
+  };
 
   handleCreateClick = () => {
     document.dispatchEvent(new Event('new-archive-clicked'));
-  }
+  };
 
   toggleCreateButton = toggle => {
     this.setState({
       creatable: toggle
     });
-  }
+  };
 
   handleClose() {
     closeCurrentWindow();
@@ -84,9 +87,9 @@ export default class FileManager extends Component {
         pathName={match.path}
         onSelect={this.handleSelectFile}
         toggleCreateButton={this.toggleCreateButton}
-        />
+      />
     );
-  }
+  };
 
   render() {
     return (
@@ -94,21 +97,15 @@ export default class FileManager extends Component {
         <Wrapper flexAuto flexColumn>
           <Flex flexAuto>
             <Route exact path="/" component={TypeSelector} />
-            {
-              Object.keys(brands).map(brand => (
-                <Route key={brand} path={`/${brand}`} render={this.renderPath} />
-              ))
-            }
+            {Object.keys(brands).map(brand => (
+              <Route key={brand} path={`/${brand}`} render={this.renderPath} />
+            ))}
           </Flex>
           <Footer>
             <Flex align="center" width="50%">
               <ButtonRow>
                 <Button onClick={this.handleClose}>Cancel</Button>
-                <NavLink
-                  exact
-                  to="/"
-                  activeStyle={{ display: 'none' }}
-                  >
+                <NavLink exact to="/" activeStyle={{ display: 'none' }}>
                   <Button>Go Back</Button>
                 </NavLink>
               </ButtonRow>
@@ -118,12 +115,16 @@ export default class FileManager extends Component {
                 <Button
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
-                  >New Archive</Button>
+                >
+                  New Archive
+                </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
-                  >Open in Buttercup</Button>
+                >
+                  Open in Buttercup
+                </Button>
               </ButtonRow>
             </Flex>
           </Footer>

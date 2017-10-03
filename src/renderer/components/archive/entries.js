@@ -4,7 +4,11 @@ import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
 import { isOSX } from '../../../shared/utils/platform';
-import { showContextMenu, createMenuFromGroups, createCopyMenu } from '../../system/menu';
+import {
+  showContextMenu,
+  createMenuFromGroups,
+  createCopyMenu
+} from '../../system/menu';
 import BaseColumn from '../column';
 import List from './entries-list';
 import SearchField from './search-field';
@@ -28,14 +32,20 @@ const SearchWrapper = styled.div`
 class Entries extends Component {
   handleFilterChange = value => {
     this.props.onFilterChange(value);
-  }
+  };
 
   handleSortModeChange = newMode => {
     this.props.onSortModeChange(newMode);
-  }
+  };
 
   onRightClick(entry) {
-    const { groups, currentGroup, currentEntry, onEntryMove, onDelete } = this.props;
+    const {
+      groups,
+      currentGroup,
+      currentEntry,
+      onEntryMove,
+      onDelete
+    } = this.props;
     showContextMenu([
       ...createCopyMenu(entry, currentEntry),
       { type: 'separator' },
@@ -63,7 +73,9 @@ class Entries extends Component {
         full
         dark
         icon={<PlusIcon />}
-        >Add Entry</Button>
+      >
+        Add Entry
+      </Button>
     );
     const filterNode = (
       <SearchWrapper>
@@ -73,16 +85,13 @@ class Entries extends Component {
     );
 
     return (
-      <Column
-        header={filterNode}
-        footer={addButton}
-        >
+      <Column header={filterNode} footer={addButton}>
         <List
           entries={this.props.entries}
           currentEntry={this.props.currentEntry}
           onSelectEntry={this.props.onSelectEntry}
           onRightClick={entry => this.onRightClick(entry)}
-          />
+        />
       </Column>
     );
   }

@@ -23,7 +23,7 @@ class WindowManager {
    * @returns {BrowserWindow}
    */
   buildWindowOfType(type, fn = null, options = {}) {
-    const window = (this._buildProcedures[type])(fn, options);
+    const window = this._buildProcedures[type](fn, options);
     this.register(type, window);
     return window;
   }
@@ -49,7 +49,7 @@ class WindowManager {
    */
   getCountOfType(type) {
     return this._windows.reduce((count, currentObj) => {
-      return (currentObj.type === type) ? count + 1 : count;
+      return currentObj.type === type ? count + 1 : count;
     }, 0);
   }
 

@@ -1,21 +1,20 @@
 import { createSelector } from 'reselect';
-import {
-  filterByText,
-  sortByKey,
-  sortDeepByKey
-} from './utils/collection';
+import { filterByText, sortByKey, sortDeepByKey } from './utils/collection';
 import { denormalizeGroups } from './buttercup/groups';
 
 // Archive ->
 
 export const getArchivesCount = state => state.archives.length;
-export const getAllArchives = state => sortByKey(Object.values(state.archives), 'name-asc');
-export const getArchive = (state, archiveId) => state.archives.find(archive => archive.id === archiveId);
+export const getAllArchives = state =>
+  sortByKey(Object.values(state.archives), 'name-asc');
+export const getArchive = (state, archiveId) =>
+  state.archives.find(archive => archive.id === archiveId);
 export const getCurrentArchiveId = state => state.currentArchive;
 export const getCurrentArchive = createSelector(
   state => state.archives,
   getCurrentArchiveId,
-  (archives, archiveId) => archives.find(archive => archive.id === archiveId) || null
+  (archives, archiveId) =>
+    archives.find(archive => archive.id === archiveId) || null
 );
 
 // Settings ->
@@ -32,7 +31,7 @@ export const getUIState = (state, key) => state.uiState[key];
 
 export const getExpandedKeys = createSelector(
   getCurrentArchiveSettings,
-  archive => archive ? archive.ui.treeExpandedKeys : []
+  archive => (archive ? archive.ui.treeExpandedKeys : [])
 );
 
 // Entries ->
@@ -67,16 +66,22 @@ export const getEntries = createSelector(
 
 // Groups ->
 
-export const getAllGroups = state => denormalizeGroups(state.groups.shownIds, state.groups.byId);
-export const getDismissableGroupIds = state => Object.keys(state.groups.byId)
-  .filter(groupId => state.groups.byId[groupId].isNew);
+export const getAllGroups = state =>
+  denormalizeGroups(state.groups.shownIds, state.groups.byId);
+export const getDismissableGroupIds = state =>
+  Object.keys(state.groups.byId).filter(
+    groupId => state.groups.byId[groupId].isNew
+  );
 export const getGroupsById = state => state.groups.byId;
 export const getCurrentGroupId = state => state.groups.currentGroup;
-export const getCurrentGroup = state => state.groups.currentGroup
-  ? state.groups.byId[state.groups.currentGroup]
-  : null;
-export const getTrashGroupId = state => Object.keys(state.groups.byId)
-  .find(groupId => state.groups.byId[groupId].isTrash);
+export const getCurrentGroup = state =>
+  state.groups.currentGroup
+    ? state.groups.byId[state.groups.currentGroup]
+    : null;
+export const getTrashGroupId = state =>
+  Object.keys(state.groups.byId).find(
+    groupId => state.groups.byId[groupId].isTrash
+  );
 
 export const getTrashChildrenIds = createSelector(
   getGroupsById,
@@ -90,9 +95,6 @@ export const getGroups = createSelector(
   (groups, sortMode) => {
     const trashGroups = groups.filter(g => g.isTrash);
     const rest = groups.filter(g => !g.isTrash);
-    return [
-      ...sortDeepByKey(rest, sortMode, 'groups'),
-      ...trashGroups
-    ];
+    return [...sortDeepByKey(rest, sortMode, 'groups'), ...trashGroups];
   }
 );

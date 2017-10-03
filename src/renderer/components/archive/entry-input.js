@@ -5,7 +5,7 @@ import { Generator, Meter } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
 import styles from '../../styles/entry-input';
 
-const BareInput = ({input, name, placeholder, type}) => {
+const BareInput = ({ input, name, placeholder, type }) => {
   const isPassword = type === 'password';
   return (
     <input
@@ -14,7 +14,7 @@ const BareInput = ({input, name, placeholder, type}) => {
       type="text"
       placeholder={placeholder}
       className={cx(styles.input, isPassword ? styles.password : null)}
-      />
+    />
   );
 };
 
@@ -29,11 +29,11 @@ export default class Input extends Component {
   static propTypes = {
     type: PropTypes.string,
     input: PropTypes.object
-  }
+  };
 
   state = {
     isGeneratorOpen: false
-  }
+  };
 
   handleGeneratorToggle() {
     this.setState({
@@ -52,17 +52,22 @@ export default class Input extends Component {
     return (
       <div className={styles.wrapper}>
         <BareInput {...this.props} />
-        {type === 'password' &&
+        {type === 'password' && (
           <Generator
             onGenerate={pwd => this.receivePassword(pwd)}
             isOpen={this.state.isGeneratorOpen}
             preferPlace="below"
+          >
+            <div
+              className={cx(
+                styles.generator,
+                this.state.isGeneratorOpen && styles.generatorActive
+              )}
             >
-            <div className={cx(styles.generator, this.state.isGeneratorOpen && styles.generatorActive)}>
               <MagicIcon onClick={() => this.handleGeneratorToggle()} />
             </div>
           </Generator>
-        }
+        )}
         {type === 'password' && <Meter input={input.value} />}
       </div>
     );

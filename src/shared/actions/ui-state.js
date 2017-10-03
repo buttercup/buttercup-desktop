@@ -8,4 +8,5 @@ export const setUIState = (key, value) => ({
   }
 });
 
-export const setSavingArchive = isSaving => setUIState('savingArchive', isSaving);
+export const setSavingArchive = isSaving =>
+  setUIState('savingArchive', isSaving);

@@ -52,7 +52,8 @@ ipc.on('import-history-prompt', (e, payload) => {
   showHistoryPasswordPrompt(payload)
     .then(result => {
       ipc.send('import-history-prompt-resp', result);
-    }).catch(() => {
+    })
+    .catch(() => {
       ipc.send('import-history-prompt-resp', null);
     });
 });

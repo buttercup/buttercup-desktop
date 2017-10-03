@@ -32,11 +32,16 @@ class SearchField extends Component {
           ref={input => {
             this.textInput = input;
           }}
-          />
+        />
         <span className={styles.icon}>
           <SearchIcon />
         </span>
-        {filter !== '' && <span className={styles.clear} onClick={() => this.handleClearClick()} />}
+        {filter !== '' && (
+          <span
+            className={styles.clear}
+            onClick={() => this.handleClearClick()}
+          />
+        )}
       </div>
     );
   }

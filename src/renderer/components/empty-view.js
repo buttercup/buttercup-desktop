@@ -35,7 +35,7 @@ EmptyView.propTypes = {
 export default EmptyView;
 
 const ColoredFlex = styled(Flex)`
-  background-color: RGBA(20, 20, 20, .8);
+  background-color: RGBA(20, 20, 20, 0.8);
   color: #fff;
 `;
 
@@ -48,7 +48,9 @@ export const NoArchiveSelected = () => (
     <Figure>
       <img src={logo} />
       <Title>Welcome back to Buttercup.</Title>
-      <Caption>Unlock an archive to begin ({isOSX() ? '⌘' : 'Ctrl'}+1).</Caption>
+      <Caption>
+        Unlock an archive to begin ({isOSX() ? '⌘' : 'Ctrl'}+1).
+      </Caption>
     </Figure>
   </ColoredFlex>
 );
@@ -58,7 +60,9 @@ export const WelcomeScreen = () => (
     <Figure>
       <img src={logo} />
       <Title>Welcome to Buttercup.</Title>
-      <Caption>You haven't added have any archives yet. Why not add one?</Caption>
+      <Caption>
+        You haven't added have any archives yet. Why not add one?
+      </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>

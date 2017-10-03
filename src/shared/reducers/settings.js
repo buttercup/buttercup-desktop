@@ -1,5 +1,9 @@
 import uiReducer from './ui';
-import { ARCHIVES_REMOVE, COLUMN_SIZE_SET, SETTING_SET } from '../actions/types';
+import {
+  ARCHIVES_REMOVE,
+  COLUMN_SIZE_SET,
+  SETTING_SET
+} from '../actions/types';
 
 function itemReducer(state = {}, action) {
   return {
@@ -16,7 +20,7 @@ export function settingsByArchiveId(state = {}, action) {
     };
   }
   if (action.type === ARCHIVES_REMOVE && state[action.payload]) {
-    const newState = {...state};
+    const newState = { ...state };
     delete newState[action.payload];
     return newState;
   }

@@ -35,8 +35,8 @@ export function findParentId(groups, groupId) {
 
 export function getGroups(archiveId) {
   const arch = getArchive(archiveId);
-  return arch.getGroups().map(
-    group => Object.assign(group.toObject(Group.OutputFlag.Groups), {
+  return arch.getGroups().map(group =>
+    Object.assign(group.toObject(Group.OutputFlag.Groups), {
       isTrash: group.isTrash()
     })
   );

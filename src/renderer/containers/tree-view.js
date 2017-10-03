@@ -1,7 +1,11 @@
 import { connect } from 'react-redux';
 import TreeView from '../components/tree-view';
 import * as groupTools from '../../shared/actions/groups';
-import { getGroups, getCurrentGroupId, getExpandedKeys } from '../../shared/selectors';
+import {
+  getGroups,
+  getCurrentGroupId,
+  getExpandedKeys
+} from '../../shared/selectors';
 import { setExpandedKeys } from '../../shared/actions/ui';
 
 export default connect(

@@ -14,20 +14,16 @@ export class IpcDatasource extends TextDatasource {
   }
 
   load(password) {
-    return Promise
-      .resolve(fs.readFileSync(this.path, 'utf8'))
-      .then(content => {
-        this.setContent(content);
-        return super.load(password);
-      });
+    return Promise.resolve(fs.readFileSync(this.path, 'utf8')).then(content => {
+      this.setContent(content);
+      return super.load(password);
+    });
   }
 
   save(archive, password) {
-    return super
-      .save(archive, password)
-      .then(encryptedContent => {
-        return fs.writeFileSync(this.path, encryptedContent, 'utf8');
-      });
+    return super.save(archive, password).then(encryptedContent => {
+      return fs.writeFileSync(this.path, encryptedContent, 'utf8');
+    });
   }
 
   /**

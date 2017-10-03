@@ -34,20 +34,23 @@ class NewFileInput extends Component {
     this.setState({
       name
     });
-  }
+  };
 
   handleBlur = () => {
     this.props.onDismissFile();
-  }
+  };
 
   handleSubmit = () => {
     let { name } = this.state;
-    name = name.trim().replace(/\.bcup$/, '').trim();
+    name = name
+      .trim()
+      .replace(/\.bcup$/, '')
+      .trim();
     if (name.length === 0) {
       return;
     }
     this.props.onSaveFile(name);
-  }
+  };
 
   handleKeyup = e => {
     e.stopPropagation();
@@ -61,7 +64,7 @@ class NewFileInput extends Component {
       default:
         break;
     }
-  }
+  };
 
   componentDidMount() {
     if (this.ref) {
@@ -79,15 +82,24 @@ class NewFileInput extends Component {
         innerRef={ref => {
           this.ref = ref;
         }}
-        />
+      />
     );
   }
 }
 
-export const TextCell = ({ rowIndex, data, col, onSaveFile, onDismissFile, ...props }) => {
+export const TextCell = ({
+  rowIndex,
+  data,
+  col,
+  onSaveFile,
+  onDismissFile,
+  ...props
+}) => {
   const item = data[rowIndex];
   if (item.editing) {
-    return <NewFileInput onSaveFile={onSaveFile} onDismissFile={onDismissFile} />;
+    return (
+      <NewFileInput onSaveFile={onSaveFile} onDismissFile={onDismissFile} />
+    );
   }
   return (
     <Cell className={styles.cell} {...props}>
@@ -121,7 +133,14 @@ export const IconCell = ({ rowIndex, data, ...props }) => {
   ext = ext ? ext.toLowerCase().replace('.', '') : null;
   return (
     <Cell className={styles.cell} {...props}>
-      <Icon name={data[rowIndex].type === 'directory' ? 'folder' : `document-file-${ext}`} size={20} />
+      <Icon
+        name={
+          data[rowIndex].type === 'directory'
+            ? 'folder'
+            : `document-file-${ext}`
+        }
+        size={20}
+      />
     </Cell>
   );
 };

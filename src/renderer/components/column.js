@@ -11,7 +11,7 @@ const Wrapper = styled(Flex)`
 const Content = styled(Box)``;
 
 const Bar = styled.section`
-  border: 0 solid rgba(255, 255, 255, .05);
+  border: 0 solid rgba(255, 255, 255, 0.05);
   flex: 0;
   padding: var(--spacing-one);
 
@@ -39,7 +39,7 @@ const Column = ({
 }) => (
   <Wrapper flexColumn className={className} {...rest}>
     {header && <Header>{header}</Header>}
-    <Scrollbars style={{display: 'flex'}}>
+    <Scrollbars style={{ display: 'flex' }}>
       <Content flexAuto className={contentClassName}>
         {children}
       </Content>

@@ -27,7 +27,7 @@ const LogoLink = styled(Link)`
   span {
     margin-top: var(--spacing-one);
     color: var(--gray-dark);
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
 
   &:hover {
@@ -37,14 +37,14 @@ const LogoLink = styled(Link)`
 
 const TypeSelector = () => (
   <Wrapper wrap flexAuto alignContent="stretch" justify="space-around">
-    {
-      Object.keys(brands).filter(brand => brands[brand].remote).map(brand => (
+    {Object.keys(brands)
+      .filter(brand => brands[brand].remote)
+      .map(brand => (
         <LogoLink key={brand} to={`/${brand}`}>
           <img src={brands[brand].logo} />
           <span>{brands[brand].name}</span>
         </LogoLink>
-      ))
-    }
+      ))}
   </Wrapper>
 );
 

@@ -14,17 +14,18 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   color: #fff;
-  background-color: ${props => props.active ? 'rgba(255, 255, 255, .1)' : 'transparent'};
+  background-color: ${props =>
+    props.active ? 'rgba(255, 255, 255, .1)' : 'transparent'};
   padding: var(--spacing-half) var(--spacing-one);
-  cursor: ${props => props.locked ? 'pointer' : 'default'} !important;
+  cursor: ${props => (props.locked ? 'pointer' : 'default')} !important;
 
   .status {
     font-weight: 300;
-    font-size: .75em;
-    color: ${props => props.locked ? 'var(--red)' : 'var(--gray-dark)'};
+    font-size: 0.75em;
+    color: ${props => (props.locked ? 'var(--red)' : 'var(--gray-dark)')};
     text-transform: uppercase;
     display: block;
-    margin-top: .3em;
+    margin-top: 0.3em;
 
     svg {
       vertical-align: -2px !important;
@@ -35,7 +36,7 @@ const Wrapper = styled.li`
   }
 
   section {
-    font-size: .9em;
+    font-size: 0.9em;
     flex: 1;
     min-width: 0;
     padding-left: var(--spacing-one);
@@ -53,7 +54,7 @@ const Avatar = styled.div`
   width: 3rem;
   height: 3rem;
   border-radius: 50px;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: ${props => props.color};
   font-weight: 400;
   font-size: 1rem;
@@ -116,32 +117,40 @@ class SidebarItem extends Component {
 
   handleContextMenu = () => {
     const { status, name, id } = this.props.archive;
-    showContextMenu([{
-      label: `${status === 'locked' ? 'Unlock' : 'Open'} ${name}`,
-      accelerator: `CmdOrCtrl+${this.props.index + 1}`,
-      click: this.props.onClick
-    }, {
-      label: 'Change Color',
-      click: this.showColorPopup
-    }, {
-      type: 'separator'
-    }, {
-      label: 'Import',
-      submenu: Object.entries(ImportTypeInfo).map(([type, typeInfo]) => ({
-        label: `From ${typeInfo.name} archive (.${typeInfo.extension})`,
-        enabled: (status === 'unlocked'),
-        click: () => this.props.showImportDialog({
-          type,
-          archiveId: id
-        })
-      }))
-    }, {
-      type: 'separator'
-    }, {
-      label: `Remove ${name}`,
-      click: this.props.onRemoveClick
-    }]);
-  }
+    showContextMenu([
+      {
+        label: `${status === 'locked' ? 'Unlock' : 'Open'} ${name}`,
+        accelerator: `CmdOrCtrl+${this.props.index + 1}`,
+        click: this.props.onClick
+      },
+      {
+        label: 'Change Color',
+        click: this.showColorPopup
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Import',
+        submenu: Object.entries(ImportTypeInfo).map(([type, typeInfo]) => ({
+          label: `From ${typeInfo.name} archive (.${typeInfo.extension})`,
+          enabled: status === 'unlocked',
+          click: () =>
+            this.props.showImportDialog({
+              type,
+              archiveId: id
+            })
+        }))
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: `Remove ${name}`,
+        click: this.props.onRemoveClick
+      }
+    ]);
+  };
 
   showColorPopup = () => {
     const el = this.avatarRef;
@@ -149,21 +158,21 @@ class SidebarItem extends Component {
     const targetRect = el.getBoundingClientRect();
     this.setState({
       isPickerOpen: true,
-      top: (targetRect.top - bodyRect.top) + el.clientHeight - 10,
+      top: targetRect.top - bodyRect.top + el.clientHeight - 10,
       left: targetRect.left - bodyRect.left
     });
-  }
+  };
 
   handlePickerClose = () => {
     this.setState({ isPickerOpen: false });
-  }
+  };
 
   handleColorChange = color => {
     this.props.onArchiveUpdate({
       ...this.props.archive,
       color: color.hex
     });
-  }
+  };
 
   render() {
     const { archive, onClick, active, condenced } = this.props;
@@ -179,33 +188,43 @@ class SidebarItem extends Component {
         active={active}
         onContextMenu={this.handleContextMenu}
         onClick={onClick}
-        >
+      >
         <Avatar
           color={color || '#000000'}
           innerRef={ref => {
             this.avatarRef = ref;
-          }}>
+          }}
+        >
           <span>{briefName}</span>
-          {condenced && brands[type].remote && <Icon>
-            <img src={brands[type].icon} alt={brands[type].name} />
-          </Icon>}
+          {condenced &&
+            brands[type].remote && (
+              <Icon>
+                <img src={brands[type].icon} alt={brands[type].name} />
+              </Icon>
+            )}
           <Portal
             closeOnOutsideClick
             isOpened={this.state.isPickerOpen}
             onClose={this.handlePickerClose}
-            >
+          >
             <PickerWrapper left={this.state.left} top={this.state.top}>
-              <GithubPicker width={212} triangle="top-left" onChange={this.handleColorChange} />
+              <GithubPicker
+                width={212}
+                triangle="top-left"
+                onChange={this.handleColorChange}
+              />
             </PickerWrapper>
           </Portal>
         </Avatar>
-        {!condenced && <section>
-          <div>{formattedName}</div>
-          <span className='status'>
-            {locked ? <LockClosed /> : <LockOpen />}
-            {brands[type].name}
-          </span>
-        </section>}
+        {!condenced && (
+          <section>
+            <div>{formattedName}</div>
+            <span className="status">
+              {locked ? <LockClosed /> : <LockOpen />}
+              {brands[type].name}
+            </span>
+          </section>
+        )}
       </Wrapper>
     );
   }

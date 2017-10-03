@@ -6,7 +6,11 @@ import Tree, { TreeNode } from 'rc-tree';
 import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
-import { showContextMenu, createMenuFromGroups, createSortMenu } from '../../system/menu';
+import {
+  showContextMenu,
+  createMenuFromGroups,
+  createSortMenu
+} from '../../system/menu';
 import { isOSX } from '../../../shared/utils/platform';
 import '../../styles/tree-view.global';
 import BaseColumn from '../column';
@@ -77,9 +81,14 @@ class TreeView extends Component {
         },
         {
           label: 'Move to Group',
-          submenu: createMenuFromGroups(groups, groupId, selectedGroupId => {
-            this.props.onMoveGroup(groupId, selectedGroupId);
-          }, false)
+          submenu: createMenuFromGroups(
+            groups,
+            groupId,
+            selectedGroupId => {
+              this.props.onMoveGroup(groupId, selectedGroupId);
+            },
+            false
+          )
         },
         { type: 'separator' },
         {
@@ -88,38 +97,38 @@ class TreeView extends Component {
         }
       ]);
     }
-  }
+  };
 
   handleAddClick = (e, id) => {
     if (e) {
       e.stopPropagation();
     }
     this.props.onAddClick(isString(id) ? id : null);
-  }
+  };
 
   handleRemoveClick = (e, id = null) => {
     if (e) {
       e.stopPropagation();
     }
     this.props.onRemoveClick(isString(id) ? id : null);
-  }
+  };
 
   handleExpand = expandedKeys => {
     this.props.onExpand(expandedKeys);
-  }
+  };
 
   handleDrop = info => {
     const dropKey = info.node.props.eventKey;
     const dragKey = info.dragNode.props.eventKey;
     this.props.onMoveGroup(dragKey, dropKey, info.dropToGap);
-  }
+  };
 
   handleSelect = ([selectedGroupId], { node }) => {
     const { isNew, isRenaming } = node.props;
     if (typeof selectedGroupId === 'string' && !isNew && !isRenaming) {
       this.props.onGroupSelect(selectedGroupId);
     }
-  }
+  };
 
   render() {
     const { groups } = this.props;
@@ -139,8 +148,8 @@ class TreeView extends Component {
             className={cx({
               'is-trash': node.isTrash,
               'is-empty': node.groups.length === 0,
-              'node': true}
-            )}
+              node: true
+            })}
             title={
               <TreeLabel
                 node={node}
@@ -150,9 +159,9 @@ class TreeView extends Component {
                 onSaveClick={this.props.onSaveClick}
                 onCreateNew={this.props.onCreateNew}
                 onDismissClick={this.props.onDismissClick}
-                />
+              />
             }
-            >
+          >
             {loop(node.groups)}
           </TreeNode>
         );
@@ -162,15 +171,12 @@ class TreeView extends Component {
     return (
       <Column
         footer={
-          <Button
-            onClick={this.handleAddClick}
-            dark
-            full
-            icon={<PlusIcon />}
-            >New Group</Button>
+          <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
+            New Group
+          </Button>
         }
         onContextMenu={() => this.handleColumnRightClick()}
-        >
+      >
         <Tree
           draggable
           showLine={false}
@@ -179,7 +185,7 @@ class TreeView extends Component {
           onSelect={this.handleSelect}
           onExpand={this.handleExpand}
           onDrop={this.handleDrop}
-          >
+        >
           {loop(groups)}
         </Tree>
       </Column>

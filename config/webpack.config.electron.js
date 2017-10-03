@@ -4,12 +4,9 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = merge(baseConfig, {
-
   devtool: false,
 
-  entry: [
-    resolve(__dirname, '../src/main/app')
-  ],
+  entry: [resolve(__dirname, '../src/main/app')],
 
   output: {
     path: resolve(__dirname, '../app/dist/'),
@@ -29,8 +26,5 @@ module.exports = merge(baseConfig, {
     __filename: false
   },
 
-  externals: [
-    'electron-devtools-installer',
-    'source-map-support'
-  ]
+  externals: ['electron-devtools-installer', 'source-map-support']
 });

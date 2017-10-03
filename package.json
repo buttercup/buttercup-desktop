@@ -6,6 +6,8 @@
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
+    "format": "prettier --write \"{src,config,test}/**/*.js\"",
+    "precommit": "lint-staged",
     "test": "ava && npm run lint",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
@@ -24,6 +26,12 @@
     "package:win": "build --win --x64",
     "package": "build --mac --linux --win --x64 -p always",
     "package:current": "build"
+  },
+  "lint-staged": {
+    "{src,config,test}/**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "build": {
     "appId": "pw.buttercup.desktop",
@@ -147,6 +155,7 @@
     "electron-unhandled": "^0.2.0",
     "electron-updater": "^2.3.0",
     "eslint": "^3.19.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^4.3.0",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -168,10 +177,12 @@
     "grunt-contrib-nodeunit": "^0.4.1",
     "grunt-contrib-watch": "^0.6.1",
     "humanize": "^0.0.9",
+    "husky": "^0.14.3",
     "is-error": "^2.2.1",
     "jsdom": "^9.8.3",
     "json-loader": "^0.5.4",
     "jsx-control-statements": "^3.2.5",
+    "lint-staged": "^4.2.3",
     "load-grunt-tasks": "^3.3.0",
     "lodash": "^4.16.6",
     "makedeb": "0.0.4",
@@ -183,6 +194,7 @@
     "normalizr": "^3.2.3",
     "pify": "^2.3.0",
     "piwik-tracker": "^1.1.2",
+    "prettier": "1.7.4",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
     "rc-tree": "^1.3.9",

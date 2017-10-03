@@ -7,10 +7,12 @@ import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
 
-const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-line react/prop-types
+const renderMeta = (
+  { fields, meta: { touched, error } } // eslint-disable-line react/prop-types
+) => (
   <div>
     <div className={styles.metaWrapper}>
-      {fields.map((member, index) =>
+      {fields.map((member, index) => (
         <div className={styles.formRow} key={index}>
           <div className={styles.labelWrapper}>
             <Field
@@ -18,20 +20,17 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
               type="text"
               component="input"
               placeholder="Label"
-              />
+            />
           </div>
           <Field
             name={`${member}.value`}
             type="text"
             component={Input}
             placeholder="New Field"
-            />
-          <Button
-            onClick={() => fields.remove(index)}
-            icon={<RemoveIcon />}
-            />
+          />
+          <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
         </div>
-      )}
+      ))}
     </div>
     <Button
       onClick={e => {
@@ -40,7 +39,9 @@ const renderMeta = ({fields, meta: {touched, error}}) => ( // eslint-disable-lin
         e.preventDefault();
       }}
       icon={<PlusIcon />}
-      >Add New Field</Button>
+    >
+      Add New Field
+    </Button>
     {touched && error && <span>{error}</span>}
   </div>
 );
@@ -49,20 +50,39 @@ class EntryForm extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
-      <form
-        onSubmit={handleSubmit}
-        >
+      <form onSubmit={handleSubmit}>
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.title">Title</label>
-          <Field name="properties.title" component={Input} type="text" placeholder="Untitled" />
+          <label className={styles.labelWrapper} htmlFor="properties.title">
+            Title
+          </label>
+          <Field
+            name="properties.title"
+            component={Input}
+            type="text"
+            placeholder="Untitled"
+          />
         </div>
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.username">Username</label>
-          <Field name="properties.username" component={Input} type="text" placeholder="@username..." />
+          <label className={styles.labelWrapper} htmlFor="properties.username">
+            Username
+          </label>
+          <Field
+            name="properties.username"
+            component={Input}
+            type="text"
+            placeholder="@username..."
+          />
         </div>
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.password">Password</label>
-          <Field name="properties.password" component={Input} type="password" placeholder="Secure password..." />
+          <label className={styles.labelWrapper} htmlFor="properties.password">
+            Password
+          </label>
+          <Field
+            name="properties.password"
+            component={Input}
+            type="password"
+            placeholder="Secure password..."
+          />
         </div>
         <h6 className={styles.heading}>Custom Fields:</h6>
         <FieldArray name="meta" component={renderMeta} />

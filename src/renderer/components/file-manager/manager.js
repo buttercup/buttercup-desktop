@@ -12,11 +12,7 @@ function sortContent(list) {
   const files = list.filter(item => item.type === 'file' && !item.editing);
   const newFile = list.filter(item => item.editing);
 
-  return [
-    ...folders,
-    ...newFile,
-    ...files
-  ];
+  return [...folders, ...newFile, ...files];
 }
 
 class Manager extends Component {
@@ -66,7 +62,7 @@ class Manager extends Component {
         contents: sortContent(files)
       });
     });
-  }
+  };
 
   handleCreateNewFile = () => {
     const { contents } = this.state;
@@ -96,7 +92,10 @@ class Manager extends Component {
 
   componentWillUnmount() {
     this.props.toggleCreateButton(false);
-    document.removeEventListener('new-archive-clicked', this.handleCreateNewFile);
+    document.removeEventListener(
+      'new-archive-clicked',
+      this.handleCreateNewFile
+    );
   }
 
   handleRowClick = (e, index) => {
@@ -104,11 +103,11 @@ class Manager extends Component {
       return;
     }
     this.setSelectedFile(index);
-  }
+  };
 
   handleRowDoubleClick = (e, index) => {
     this.navigate(index);
-  }
+  };
 
   handleSaveFile = fileName => {
     this.setState({
@@ -118,19 +117,19 @@ class Manager extends Component {
             ...item,
             name: `${fileName}.bcup`,
             editing: false,
-            mtime: (new Date()).getTime()
+            mtime: new Date().getTime()
           };
         }
         return item;
       })
     });
-  }
+  };
 
   handleDismissFile = () => {
     this.setState({
       contents: this.state.contents.filter(item => !item.isNew)
     });
-  }
+  };
 
   setSelectedFile(index) {
     this.setState({ selectedIndex: index });
@@ -164,14 +163,14 @@ class Manager extends Component {
         height={containerHeight}
         onRowClick={this.handleRowClick}
         onRowDoubleClick={this.handleRowDoubleClick}
-        >
+      >
         <Column
           columnKey="icon"
           header={<Cell />}
           cell={<IconCell data={contents} />}
           width={40}
           fixed
-          />
+        />
         <Column
           columnKey="name"
           header={<Cell>Name</Cell>}
@@ -181,26 +180,26 @@ class Manager extends Component {
               col="name"
               onSaveFile={this.handleSaveFile}
               onDismissFile={this.handleDismissFile}
-              />
+            />
           }
           fixed
           flexGrow={2}
           width={200}
-          />
+        />
         <Column
           columnKey="size"
           header={<Cell>Size</Cell>}
           cell={<SizeCell data={contents} />}
           width={100}
           fixed
-          />
+        />
         <Column
           columnKey="mtime"
           header={<Cell>Date</Cell>}
           cell={<DateCell data={contents} />}
           width={100}
           fixed
-          />
+        />
       </Table>
     );
   }

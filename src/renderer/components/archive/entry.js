@@ -23,12 +23,14 @@ class Entry extends Component {
   renderEditMode() {
     let ref;
     return {
-      content: <EntryForm
-        ref={form => {
-          ref = form;
-        }}
-        onSubmit={values => this.props.onEditEntry(values)}
-        />,
+      content: (
+        <EntryForm
+          ref={form => {
+            ref = form;
+          }}
+          onSubmit={values => this.props.onEditEntry(values)}
+        />
+      ),
       footer: (
         <div className={styles.splitter}>
           <div>
@@ -36,8 +38,9 @@ class Entry extends Component {
               onClick={() => ref.submit()}
               disabled={!this.props.dirty}
               primary
-              >Save</Button>
-            {' '}
+            >
+              Save
+            </Button>{' '}
             <Button onClick={this.props.handleViewMode}>Cancel</Button>
           </div>
           <div>
@@ -45,7 +48,9 @@ class Entry extends Component {
               onClick={() => this.props.onDelete(this.props.entry.id)}
               icon={<TrashIcon />}
               danger
-              >Delete</Button>
+            >
+              Delete
+            </Button>
           </div>
         </div>
       )
@@ -55,20 +60,23 @@ class Entry extends Component {
   renderNewMode() {
     let ref;
     return {
-      content: <EntryForm
-        ref={form => {
-          ref = form;
-        }}
-        onSubmit={values => this.props.onNewEntry(values)}
-        />,
+      content: (
+        <EntryForm
+          ref={form => {
+            ref = form;
+          }}
+          onSubmit={values => this.props.onNewEntry(values)}
+        />
+      ),
       footer: (
         <div>
           <Button
             onClick={() => ref.submit()}
             disabled={!this.props.dirty}
             primary
-            >Save</Button>
-          {' '}
+          >
+            Save
+          </Button>{' '}
           <Button onClick={this.props.handleViewMode}>Cancel</Button>
         </div>
       )
@@ -78,17 +86,23 @@ class Entry extends Component {
   renderViewMode() {
     return {
       content: <EntryView entry={this.props.entry} />,
-      footer: <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>Edit</Button>
+      footer: (
+        <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
+          Edit
+        </Button>
+      )
     };
   }
 
   renderIdleMode() {
     return {
-      content: <EmptyView
-        caption="Select or Create an Entry"
-        className={styles.emptyView}
-        imageSrc={bench}
-        />,
+      content: (
+        <EmptyView
+          caption="Select or Create an Entry"
+          className={styles.emptyView}
+          imageSrc={bench}
+        />
+      ),
       footer: null
     };
   }
@@ -112,7 +126,12 @@ class Entry extends Component {
     const { content, footer } = fn.call(this);
 
     return (
-      <Column light footer={footer} className={styles.column} contentClassName={styles.content}>
+      <Column
+        light
+        footer={footer}
+        className={styles.column}
+        contentClassName={styles.content}
+      >
         {content}
       </Column>
     );

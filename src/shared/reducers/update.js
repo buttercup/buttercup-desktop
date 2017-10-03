@@ -1,7 +1,4 @@
-import {
-  UPDATE_AVAILABLE,
-  UPDATE_INSTALL,
-} from '../actions/types';
+import { UPDATE_AVAILABLE, UPDATE_INSTALL } from '../actions/types';
 
 const initialState = {
   available: false,

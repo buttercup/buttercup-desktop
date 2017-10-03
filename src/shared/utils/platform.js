@@ -4,7 +4,14 @@ export function isOSX() {
 
 // Temporary fix for High Sierra. See #339
 export function isHighSierra() {
-  return process.platform === 'darwin' && Number(require('os').release().split('.')[0]) >= 17;
+  return (
+    process.platform === 'darwin' &&
+    Number(
+      require('os')
+        .release()
+        .split('.')[0]
+    ) >= 17
+  );
 }
 
 export function isWindows() {
