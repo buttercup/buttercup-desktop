@@ -187,7 +187,7 @@ export function setupMenu(store) {
               label: 'Condenced Sidebar',
               type: 'checkbox',
               checked: condenced,
-              accelerator: 'CmdOrCtrl+B',
+              accelerator: 'CmdOrCtrl+Shift+B',
               click: () => {
                 condenced = !condenced;
                 store.dispatch(setSetting('condencedSidebar', condenced));
