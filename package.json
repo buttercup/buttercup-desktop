@@ -6,7 +6,7 @@
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
-    "format": "prettier \"{src,config,test}/**/*.js\"",
+    "format": "prettier --write \"{src,config,test}/**/*.js\"",
     "test": "ava && npm run lint",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
@@ -148,6 +148,7 @@
     "electron-unhandled": "^0.2.0",
     "electron-updater": "^2.3.0",
     "eslint": "^3.19.0",
+    "eslint-config-prettier": "^2.6.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-config-standard-react": "^4.3.0",
     "eslint-import-resolver-webpack": "^0.8.1",
