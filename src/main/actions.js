@@ -59,17 +59,15 @@ export function setupActions(store) {
   });
 
   ipc.on('track', (e, payload) => {
-    piwik.track({
-      url: 'buttercup://desktop/beta',
-      action_name: 'Launch',
-      ua: payload,
-      cvar: JSON.stringify({
-        '1': ['version', app.getVersion()],
-        '2': [
-          'production',
-          process.env.NODE_ENV === 'development' ? 'No' : 'Yes'
-        ]
-      })
-    });
+    if (process.env.NODE_ENV !== 'development') {
+      piwik.track({
+        url: 'buttercup://desktop/beta',
+        action_name: 'Launch',
+        ua: payload,
+        cvar: JSON.stringify({
+          '1': ['version', app.getVersion()]
+        })
+      });
+    }
   });
 }
