@@ -196,7 +196,7 @@ export function setupMenu(store) {
                 store.dispatch(setSetting('condencedSidebar', condenced));
               }
             },
-            ...(isOSX()
+            ...(!isOSX()
               ? [
                   {
                     label: 'Auto-hide Menubar',
