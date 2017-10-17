@@ -1,7 +1,7 @@
 import { app, ipcMain as ipc } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
-import { throttle } from 'lodash';
+import debounce from 'lodash/debounce';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
@@ -23,7 +23,7 @@ const windowManager = getWindowManager();
 
 let appIsReady = false;
 let initialFile = null;
-let isSaving = false;
+let isSavingWorkspace = false;
 
 // Crash reporter for alpha and beta releases
 // After we come out of beta, we should be rolling our own
@@ -101,8 +101,10 @@ app.on('ready', async () => {
 
   // Persist Store to Disk
   store.subscribe(
-    throttle(() => {
-      storage.set('state', store.getState());
+    debounce(async () => {
+      log.info('Start Saving state');
+      await storage.set('state', store.getState());
+      log.info('Finish Saving state');
     }, 100)
   );
 
@@ -142,21 +144,21 @@ app.on('activate', () => {
 // Prevent quitting if a file is being saved
 // to prevent data loss
 ipc.on('workspace-save-started', () => {
-  isSaving = true;
+  isSavingWorkspace = true;
 });
 
 ipc.on('workspace-save-finished', () => {
-  isSaving = false;
+  isSavingWorkspace = false;
 });
 
 app.on('before-quit', e => {
   const mainWindow = getMainWindow();
   mainWindow.webContents.send('will-quit');
 
-  if (isSaving === true) {
+  if (isSavingWorkspace === true) {
     e.preventDefault();
     ipc.once('workspace-save-finished', () => {
-      isSaving = false;
+      isSavingWorkspace = false;
       app.quit();
     });
   }
