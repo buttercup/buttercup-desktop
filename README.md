@@ -8,8 +8,8 @@
 
 > Cross-platform, free and open-source password manager based on NodeJS.
 
-[![Backers on Open Collective](https://opencollective.com/buttercup-desktop/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup-desktop/sponsors/badge.svg)](#sponsors) [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
- [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup/buttercup)
+[![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
+ [![Github All Releases](https://img.shields.io/github/downloads/buttercup-pw/buttercup/total.svg)](https://github.com/buttercup-pw/buttercup/releases) [![Backers on Open Collective](https://opencollective.com/buttercup-desktop/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup-desktop/sponsors/badge.svg)](#sponsors) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Gitter](https://img.shields.io/gitter/room/buttercup-cpre/buttercup.svg)](https://gitter.im/buttercup/buttercup)
 
 ![image](https://user-images.githubusercontent.com/768052/29536730-9db58428-86c7-11e7-9bef-418a8cd14830.png)
 
@@ -105,18 +105,18 @@ $ npm run package:linux
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
 <a href="graphs/contributors"><img src="https://opencollective.com/buttercup-desktop/contributors.svg?width=890" /></a>
 
+We'd also like to thank:
+
  * Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
  * Arash Asghari (Brand & Identity) ([@_arashasghari](https://twitter.com/_arashasghari))
 
 > We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
-
 
 ### Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/buttercup-desktop#backer)]
 
 <a href="https://opencollective.com/buttercup-desktop#backers" target="_blank"><img src="https://opencollective.com/buttercup-desktop/backers.svg?width=890"></a>
-
 
 ### Sponsors
 
@@ -132,8 +132,6 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/buttercup-desktop/sponsor/7/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/buttercup-desktop/sponsor/8/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/buttercup-desktop/sponsor/9/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/9/avatar.svg"></a>
-
-
 
 ## License
 
