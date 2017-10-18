@@ -25,7 +25,8 @@
     "package:mac": "build --mac",
     "package:win": "build --win --x64",
     "package": "build --mac --linux --win --x64 -p always",
-    "package:current": "build"
+    "package:current": "build",
+    "postinstall": "opencollective postinstall"
   },
   "lint-staged": {
     "{src,config,test}/**/*.js": [
@@ -106,7 +107,9 @@
     "url": "https://github.com/buttercup/buttercup-desktop/issues"
   },
   "homepage": "https://buttercup.pw",
-  "dependencies": {},
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
   "devDependencies": {
     "@buttercup/ui": "^0.6.1",
     "@types/node": "^6.0.45",
@@ -231,5 +234,10 @@
     "webpack": "2.2.0",
     "webpack-dev-server": "2.2.0",
     "webpack-merge": "^2.6.0"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/buttercup-desktop",
+    "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }
