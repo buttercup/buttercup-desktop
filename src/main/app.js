@@ -153,6 +153,9 @@ ipc.on('workspace-save-finished', () => {
 
 app.on('before-quit', e => {
   const mainWindow = getMainWindow();
+  if (mainWindow === null) {
+    return;
+  }
   mainWindow.webContents.send('will-quit');
 
   if (isSavingWorkspace === true) {
