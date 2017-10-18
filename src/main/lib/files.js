@@ -88,14 +88,14 @@ export function loadFile(filePath, win, isNew = false) {
   }
 
   // If we have found a window at this point
-  if (win !== null) {
+  if (win) {
     win.webContents.send('load-archive', payload);
     return;
   }
 
   // Otherwise create a new window
-  windowManager.buildWindowOfType('main', win =>
-    win.webContents.send('load-archive', payload)
+  windowManager.buildWindowOfType('main', newWindow =>
+    newWindow.webContents.send('load-archive', payload)
   );
 }
 
