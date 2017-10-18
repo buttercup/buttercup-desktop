@@ -86,9 +86,17 @@ export function loadFile(filePath, win, isNew = false) {
   if (!win) {
     win = getMainWindow();
   }
+
+  // If we have found a window at this point
   if (win) {
     win.webContents.send('load-archive', payload);
+    return;
   }
+
+  // Otherwise create a new window
+  windowManager.buildWindowOfType('main', newWindow =>
+    newWindow.webContents.send('load-archive', payload)
+  );
 }
 
 /**
