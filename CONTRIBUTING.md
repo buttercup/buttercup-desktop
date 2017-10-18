@@ -39,7 +39,7 @@ Every chunk of code that may be hard to understand has some comments above it. I
 
 ## Financial contributions
 
-We also welcome financial contributions in full transparency on our [open collective](https://opencollective.com/buttercup-desktop).
+We also welcome financial contributions in full transparency on our [open collective](https://opencollective.com/buttercup).
 Anyone can file an expense. If the expense makes sense for the development of the community, it will be "merged" in the ledger of our open collective by the core contributors and the person who filed the expense will be reimbursed.
 
 
@@ -49,27 +49,27 @@ Anyone can file an expense. If the expense makes sense for the development of th
 ### Contributors
 
 Thank you to all the people who have already contributed to buttercup-desktop!
-<a href="graphs/contributors"><img src="https://opencollective.com/buttercup-desktop/contributors.svg?width=890" /></a>
+<a href="graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
 
 
 ### Backers
 
-Thank you to all our backers! [[Become a backer](https://opencollective.com/buttercup-desktop#backer)]
+Thank you to all our backers! [[Become a backer](https://opencollective.com/buttercup#backer)]
 
-<a href="https://opencollective.com/buttercup-desktop#backers" target="_blank"><img src="https://opencollective.com/buttercup-desktop/backers.svg?width=890"></a>
+<a href="https://opencollective.com/buttercup#backers" target="_blank"><img src="https://opencollective.com/buttercup/backers.svg?width=890"></a>
 
 
 ### Sponsors
 
-Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/buttercup-desktop#sponsor))
+Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/buttercup#sponsor))
 
-<a href="https://opencollective.com/buttercup-desktop/sponsor/0/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/1/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/2/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/3/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/4/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/5/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/6/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/7/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/8/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/buttercup-desktop/sponsor/9/website" target="_blank"><img src="https://opencollective.com/buttercup-desktop/sponsor/9/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/0/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/1/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/2/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/3/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/4/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/5/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/6/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/7/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/8/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/9/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/9/avatar.svg"></a>
