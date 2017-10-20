@@ -22,6 +22,5 @@ export function installUpdates() {
 }
 
 export function checkForUpdates() {
-  log.info('Checking for Updates...');
   autoUpdater.checkForUpdates();
 }
