@@ -1,5 +1,5 @@
 import { app, shell, Menu } from 'electron';
-import { isOSX } from '../shared/utils/platform';
+import { isOSX, isWindows } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
   getAllArchives,
@@ -9,6 +9,7 @@ import { setSetting } from '../shared/actions/settings';
 import { ImportTypeInfo } from '../shared/buttercup/types';
 import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
+import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
 import pkg from '../../package.json';
 
@@ -142,14 +143,21 @@ if (isOSX()) {
   );
 }
 
+// Check for Updates...
+defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
+  label: 'Check for Updates...',
+  click: () => {
+    checkForUpdates();
+  }
+});
+
 export function setupMenu(store) {
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
-  let condenced = Boolean(getSetting(state, 'condencedSidebar'));
-  let menubarVisible = getSetting(state, 'menubarVisible');
 
   // Default should be safe (always on) in case it isn't set.
+  let menubarVisible = getSetting(state, 'menubarVisible');
   menubarVisible = typeof menubarVisible === 'boolean' ? menubarVisible : true;
 
   const template = defaultTemplate.map((item, i) => {
@@ -189,24 +197,22 @@ export function setupMenu(store) {
             {
               label: 'Condensed Sidebar',
               type: 'checkbox',
-              checked: condenced,
+              checked: getSetting(state, 'condencedSidebar'),
               accelerator: 'CmdOrCtrl+Shift+B',
-              click: () => {
-                condenced = !condenced;
-                store.dispatch(setSetting('condencedSidebar', condenced));
+              click: item => {
+                store.dispatch(setSetting('condencedSidebar', item.checked));
               }
             },
-            ...(!isOSX()
+            ...(isWindows()
               ? [
                   {
                     label: 'Auto-hide Menubar',
                     type: 'checkbox',
                     checked: !menubarVisible,
-                    click: () => {
-                      menubarVisible = !menubarVisible;
-                      getMainWindow().setMenuBarVisibility(menubarVisible);
+                    click: item => {
+                      getMainWindow().setMenuBarVisibility(!item.checked);
                       store.dispatch(
-                        setSetting('menubarVisible', menubarVisible)
+                        setSetting('menubarVisible', !item.checked)
                       );
                     }
                   }

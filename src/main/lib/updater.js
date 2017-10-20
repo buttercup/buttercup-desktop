@@ -1,5 +1,6 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import ms from 'ms';
 
 // Set logger
 autoUpdater.logger = log;
@@ -12,9 +13,15 @@ export function startAutoUpdate(cb) {
   autoUpdater.on('update-downloaded', ({ version, releaseNotes }) =>
     cb(releaseNotes, version)
   );
-  autoUpdater.checkForUpdates();
+  checkForUpdates();
+  setInterval(checkForUpdates, ms('15m'));
 }
 
 export function installUpdates() {
   autoUpdater.quitAndInstall();
+}
+
+export function checkForUpdates() {
+  log.info('Checking for Updates...');
+  autoUpdater.checkForUpdates();
 }
