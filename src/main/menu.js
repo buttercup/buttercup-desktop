@@ -157,8 +157,9 @@ export function setupMenu(store) {
   const currentArchiveId = getCurrentArchiveId(state);
 
   // Default should be safe (always on) in case it isn't set.
-  let menubarVisible = getSetting(state, 'menubarVisible');
-  menubarVisible = typeof menubarVisible === 'boolean' ? menubarVisible : true;
+  const menubarVisibleSetting = getSetting(state, 'menubarVisible');
+  const menubarVisible =
+    typeof menubarVisibleSetting === 'boolean' ? menubarVisibleSetting : true;
 
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
