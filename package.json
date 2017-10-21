@@ -111,6 +111,7 @@
     "opencollective": "^1.0.3"
   },
   "devDependencies": {
+    "@buttercup/channel-queue": "^0.2.1",
     "@buttercup/ui": "^0.6.1",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",

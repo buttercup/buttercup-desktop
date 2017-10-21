@@ -1,14 +1,14 @@
 import { app, ipcMain as ipc } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
-import debounce from 'lodash/debounce';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { loadFile } from './lib/files';
-import { getMainWindow } from './utils/window';
+import { getQueue } from './lib/queue';
 import { isWindows } from '../shared/utils/platform';
+import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 
@@ -23,7 +23,6 @@ const windowManager = getWindowManager();
 
 let appIsReady = false;
 let initialFile = null;
-let isSavingWorkspace = false;
 
 // Crash reporter for alpha and beta releases
 // After we come out of beta, we should be rolling our own
@@ -100,13 +99,15 @@ app.on('ready', async () => {
   const store = configureStore(state, 'main');
 
   // Persist Store to Disk
-  store.subscribe(
-    debounce(async () => {
-      log.info('Start Saving state');
-      await storage.set('state', store.getState());
-      log.info('Finish Saving state');
-    }, 100)
-  );
+  store.subscribe(() => {
+    getQueue()
+      .channel('saves')
+      .enqueue(
+        () => storage.set('state', store.getState()).then(() => sleep(500)),
+        undefined,
+        'store'
+      );
+  });
 
   // Setup Windows & IPC Actions
   setupWindows(store);
@@ -151,18 +152,14 @@ ipc.on('workspace-save-finished', () => {
   isSavingWorkspace = false;
 });
 
-app.on('before-quit', e => {
-  const mainWindow = getMainWindow();
-  if (mainWindow === null) {
-    return;
-  }
-  mainWindow.webContents.send('will-quit');
+app.once('before-quit', e => {
+  const channel = getQueue().channel('saves');
 
-  if (isSavingWorkspace === true) {
+  if (!channel.isEmpty) {
+    log.info('Operation queue is not empty, waiting before quitting.');
     e.preventDefault();
-    ipc.once('workspace-save-finished', () => {
-      isSavingWorkspace = false;
-      app.quit();
-    });
+    channel.once('stopped', () => app.quit());
+  } else {
+    app.quit();
   }
 });
