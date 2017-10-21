@@ -40,8 +40,8 @@ export default class SavingModal extends Component {
   }
 
   componentWillUnmount() {
-    ipc.removeAllListeners('saving-started');
-    ipc.removeAllListeners('saving-completed');
+    ipc.removeAllListeners('save-started');
+    ipc.removeAllListeners('save-completed');
   }
 
   render() {
