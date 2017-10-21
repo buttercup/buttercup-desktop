@@ -142,16 +142,6 @@ app.on('activate', () => {
   }
 });
 
-// Prevent quitting if a file is being saved
-// to prevent data loss
-ipc.on('workspace-save-started', () => {
-  isSavingWorkspace = true;
-});
-
-ipc.on('workspace-save-finished', () => {
-  isSavingWorkspace = false;
-});
-
 app.once('before-quit', e => {
   const channel = getQueue().channel('saves');
 

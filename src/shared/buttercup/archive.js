@@ -1,6 +1,7 @@
 import path from 'path';
 import { ArchiveManager, createCredentials } from 'buttercup-web';
 import ElectronStorageInterface from './storage';
+import { enqueue } from '../../renderer/system/queue';
 import './ipc-datasource';
 
 let __sharedManager = null;
@@ -65,16 +66,15 @@ export function saveWorkspace(archiveId) {
   const sourceIndex = manager.indexOfSource(archiveId);
   const { workspace } = manager.sources[sourceIndex];
 
-  manager.emit('savingStarted');
-
-  return workspace
-    .localDiffersFromRemote()
-    .then(
-      differs =>
-        differs ? workspace.mergeSaveablesFromRemote().then(() => true) : false
-    )
-    .then(shouldSave => (shouldSave ? workspace.save() : null))
-    .then(() => {
-      manager.emit('savingFinished');
-    });
+  enqueue('saves', () => {
+    return workspace
+      .localDiffersFromRemote()
+      .then(
+        differs =>
+          differs
+            ? workspace.mergeSaveablesFromRemote().then(() => true)
+            : false
+      )
+      .then(shouldSave => (shouldSave ? workspace.save() : null));
+  });
 }
