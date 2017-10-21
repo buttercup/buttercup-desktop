@@ -1,10 +1,11 @@
-import { app, ipcMain as ipc } from 'electron';
+import { app } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
+import { sendEventToMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
 import { isWindows } from '../shared/utils/platform';
@@ -103,7 +104,7 @@ app.on('ready', async () => {
     getQueue()
       .channel('saves')
       .enqueue(
-        () => storage.set('state', store.getState()).then(() => sleep(500)),
+        () => storage.set('state', store.getState()).then(() => sleep(100)),
         undefined,
         'store'
       );
@@ -148,7 +149,11 @@ app.once('before-quit', e => {
   if (!channel.isEmpty) {
     log.info('Operation queue is not empty, waiting before quitting.');
     e.preventDefault();
-    channel.once('stopped', () => app.quit());
+    sendEventToMainWindow('save-started');
+    channel.once('stopped', () => {
+      sendEventToMainWindow('save-completed');
+      app.quit();
+    });
   } else {
     app.quit();
   }
