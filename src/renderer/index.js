@@ -21,7 +21,7 @@ const unhandled = require('electron-unhandled');
 unhandled();
 
 // Alter some Buttercup internals
-// Buttercup.Web.HashingTools.patchCorePBKDF();
+Buttercup.Web.HashingTools.patchCorePBKDF();
 Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
 
 // Create store
