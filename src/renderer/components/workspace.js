@@ -20,9 +20,7 @@ const Workspace = ({
   installUpdate,
   setColumnSize,
   columnSizes,
-  condencedSidebar,
-  savingArchive,
-  isExiting
+  condencedSidebar
 }) => {
   return (
     <Flex flexAuto>
