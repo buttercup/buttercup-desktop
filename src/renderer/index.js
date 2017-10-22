@@ -1,4 +1,4 @@
-import Buttercup from 'buttercup-web';
+import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
@@ -21,7 +21,7 @@ const unhandled = require('electron-unhandled');
 unhandled();
 
 // Alter some Buttercup internals
-Buttercup.Web.HashingTools.patchCorePBKDF();
+// Buttercup.Web.HashingTools.patchCorePBKDF();
 Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
 
 // Create store

@@ -1,5 +1,8 @@
 import path from 'path';
-import { ArchiveManager, createCredentials } from 'buttercup-web';
+import {
+  ArchiveManager,
+  createCredentials
+} from 'buttercup/dist/buttercup-web.min';
 import ElectronStorageInterface from './storage';
 import './ipc-datasource';
 

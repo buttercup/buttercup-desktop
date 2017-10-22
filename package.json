@@ -1,5 +1,5 @@
 {
-  "name": "buttercup",
+  "name": "buttercup-desktop",
   "productName": "Buttercup",
   "version": "0.21.4",
   "description": "Free and Open Source password vault",
@@ -136,8 +136,8 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",
     "babili-webpack-plugin": "^0.1.1",
+    "buttercup": "~1.0.0-rc2",
     "buttercup-importer": "~0.9.2",
-    "buttercup-web": "~0.39.0",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",
     "cross-env": "^1.0.8",
@@ -237,7 +237,7 @@
   },
   "collective": {
     "type": "opencollective",
-    "url": "https://opencollective.com/buttercup-desktop",
+    "url": "https://opencollective.com/buttercup",
     "logo": "https://opencollective.com/opencollective/logo.txt"
   }
 }

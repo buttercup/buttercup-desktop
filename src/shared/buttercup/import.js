@@ -1,4 +1,4 @@
-import { Archive } from 'buttercup-web';
+import { Archive } from 'buttercup/dist/buttercup-web.min';
 import { showPasswordDialog } from '../../renderer/system/dialog';
 import { getArchive, saveWorkspace } from './archive';
 import { ImportTypeInfo } from './types';

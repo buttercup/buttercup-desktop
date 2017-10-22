@@ -1,4 +1,4 @@
-import Buttercup from 'buttercup-web';
+import Buttercup from 'buttercup/dist/buttercup-web.min';
 import Store from 'electron-store';
 
 const { StorageInterface } = Buttercup.storage;
