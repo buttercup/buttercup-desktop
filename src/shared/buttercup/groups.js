@@ -1,4 +1,4 @@
-import { Group } from 'buttercup-web';
+import { Group } from 'buttercup/dist/buttercup-web.min';
 import { getArchive, saveWorkspace } from './archive';
 import { normalize, denormalize, schema } from 'normalizr';
 

@@ -1,5 +1,8 @@
 import fs from 'fs';
-import { TextDatasource, DatasourceAdapter } from 'buttercup-web';
+import {
+  TextDatasource,
+  DatasourceAdapter
+} from 'buttercup/dist/buttercup-web.min';
 
 const registerDatasource = DatasourceAdapter.registerDatasource;
 

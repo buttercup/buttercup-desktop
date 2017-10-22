@@ -1,4 +1,4 @@
-import Buttercup from 'buttercup-web';
+import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
@@ -34,7 +34,6 @@ setupShortcuts(store);
 store.dispatch(setCurrentArchive(null));
 
 ipc.send('init');
-ipc.send('track', navigator.userAgent);
 
 ipc.on('load-archive', (e, payload) => {
   store.dispatch(addArchiveFromSource(payload));
