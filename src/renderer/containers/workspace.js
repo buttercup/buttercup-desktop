@@ -5,7 +5,6 @@ import { setColumnSize } from '../../shared/actions/settings';
 import {
   getCurrentArchive,
   getSetting,
-  getUIState,
   getArchivesCount
 } from '../../shared/selectors';
 
@@ -15,9 +14,7 @@ export default connect(
     condencedSidebar: getSetting(state, 'condencedSidebar'),
     currentArchive: getCurrentArchive(state),
     archivesCount: getArchivesCount(state),
-    update: state.update,
-    savingArchive: getUIState(state, 'savingArchive'),
-    isExiting: getUIState(state, 'isExiting')
+    update: state.update
   }),
   {
     setColumnSize,
