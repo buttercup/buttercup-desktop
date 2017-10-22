@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "0.21.4",
+  "version": "0.22.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "package:linux": "build --linux --x64",
     "package:mac": "build --mac",
     "package:win": "build --win --x64",
-    "package": "build --mac --linux --win --x64 -p always",
+    "package": "build --mac --linux --win --x64 --ia32 -p always",
     "package:current": "build",
     "postinstall": "opencollective postinstall"
   },
