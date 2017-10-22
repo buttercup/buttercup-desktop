@@ -17,3 +17,10 @@ export function getMainWindow(
   }
   return null;
 }
+
+export function sendEventToMainWindow(...args) {
+  const mainWindow = getMainWindow();
+  if (mainWindow !== null) {
+    mainWindow.webContents.send(...args);
+  }
+}

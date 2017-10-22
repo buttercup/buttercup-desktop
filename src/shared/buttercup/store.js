@@ -6,7 +6,6 @@ import {
   lockArchiveInStore,
   unlockArchiveInStore
 } from '../actions/archives.js';
-import { setSavingArchive } from '../actions/ui-state';
 
 export function linkArchiveManagerToStore(store) {
   const archiveManager = getSharedArchiveManager();
@@ -34,16 +33,6 @@ export function linkArchiveManagerToStore(store) {
   ) {
     store.dispatch(removeArchiveFromStore(sourceInfo.id));
     ipc.send('archive-list-updated');
-  });
-
-  archiveManager.on('savingStarted', () => {
-    ipc.send('workspace-save-started');
-    store.dispatch(setSavingArchive(true));
-  });
-
-  archiveManager.on('savingFinished', () => {
-    ipc.send('workspace-save-finished');
-    store.dispatch(setSavingArchive(false));
   });
 
   // rehydrate
