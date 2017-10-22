@@ -197,7 +197,6 @@
     "node-sass": "^4.5.3",
     "normalizr": "^3.2.3",
     "pify": "^2.3.0",
-    "piwik-tracker": "^1.1.2",
     "prettier": "1.7.4",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
