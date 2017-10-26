@@ -157,9 +157,11 @@ export function setupMenu(store) {
   const currentArchiveId = getCurrentArchiveId(state);
 
   // Default should be safe (always on) in case it isn't set.
-  const menubarVisibleSetting = getSetting(state, 'menubarVisible');
-  const menubarVisible =
-    typeof menubarVisibleSetting === 'boolean' ? menubarVisibleSetting : true;
+  const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
+  const menubarAutoHide =
+    typeof menubarAutoHideSetting === 'boolean'
+      ? menubarAutoHideSetting
+      : false;
 
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
@@ -207,14 +209,13 @@ export function setupMenu(store) {
             ...(isWindows()
               ? [
                   {
-                    label: 'Hide/Show Menubar',
+                    label: 'Auto Hide Menubar',
                     type: 'checkbox',
-                    checked: !menubarVisible,
-                    accelerator: 'CmdOrCtrl+Shift+H',
+                    checked: menubarAutoHide,
                     click: item => {
-                      getMainWindow().setMenuBarVisibility(!item.checked);
+                      getMainWindow().setAutoHideMenuBar(item.checked);
                       store.dispatch(
-                        setSetting('menubarVisible', !item.checked)
+                        setSetting('menubarAutoHide', item.checked)
                       );
                     }
                   }

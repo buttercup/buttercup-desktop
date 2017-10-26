@@ -28,9 +28,9 @@ export function setupWindows(store) {
     });
 
     // Set initial menu bar visibility
-    const menubarVisible = getSetting(store.getState(), 'menubarVisible');
-    win.setMenuBarVisibility(
-      typeof menubarVisible === 'boolean' ? menubarVisible : true
+    const menubarAutoHide = getSetting(store.getState(), 'menubarAutoHide');
+    win.setAutoHideMenuBar(
+      typeof menubarAutoHide === 'boolean' ? menubarAutoHide : false
     );
 
     win.loadURL(getPathToFile('views/index.html'));
