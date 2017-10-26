@@ -207,9 +207,10 @@ export function setupMenu(store) {
             ...(isWindows()
               ? [
                   {
-                    label: 'Auto-hide Menubar',
+                    label: 'Hide/Show Menubar',
                     type: 'checkbox',
                     checked: !menubarVisible,
+                    accelerator: 'CmdOrCtrl+Shift+H',
                     click: item => {
                       getMainWindow().setMenuBarVisibility(!item.checked);
                       store.dispatch(
