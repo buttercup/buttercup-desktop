@@ -60,9 +60,7 @@ export const WelcomeScreen = () => (
     <Figure>
       <img src={logo} />
       <Title>Welcome to Buttercup.</Title>
-      <Caption>
-        You haven't added have any archives yet. Why not add one?
-      </Caption>
+      <Caption>You haven't added any archives yet. Why not add one?</Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
