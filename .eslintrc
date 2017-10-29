@@ -1,14 +1,15 @@
 {
   "parser": "babel-eslint",
-  "plugins": [
-    "jsx-control-statements"
-  ],
+  "plugins": ["jsx-control-statements"],
   "extends": [
     "standard",
     "standard-react",
     "plugin:jsx-control-statements/recommended",
     "prettier"
   ],
+  "ecmaFeatures": {
+    "jsx": true
+  },
   "env": {
     "node": true,
     "browser": true,
@@ -18,6 +19,7 @@
     "semi": ["error", "always"],
     "space-before-function-paren": ["error", "never"],
     "jsx-quotes": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "jsx-control-statements/jsx-use-if-tag": 0
   }
 }
