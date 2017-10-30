@@ -11,6 +11,8 @@ const Input = styled.input`
   color: #222;
 `;
 
+const DEFAULT_TITLE = 'Untitled';
+
 export default class LabelEditor extends Component {
   static propTypes = {
     node: PropTypes.object,
@@ -19,14 +21,14 @@ export default class LabelEditor extends Component {
   };
 
   state = {
-    title: 'Untitle'
+    title: DEFAULT_TITLE
   };
 
-  _handleChange(e) {
+  handleChange(e) {
     this.setState({ title: e.target.value.trim() });
   }
 
-  _handleBlur() {
+  handleBlur() {
     const { title } = this.state;
     if (title) {
       this.props.onSave(title);
@@ -35,7 +37,7 @@ export default class LabelEditor extends Component {
     }
   }
 
-  _handleKeyUp(e) {
+  handleKeyUp(e) {
     const { title } = this.state;
     if (e.keyCode === 13 && title) {
       this.props.onSave(title);
@@ -49,7 +51,7 @@ export default class LabelEditor extends Component {
 
     this.setState(
       {
-        title: isNew ? 'Untitled' : title
+        title: isNew ? DEFAULT_TITLE : title
       },
       () => {
         if (this._input) {
@@ -64,9 +66,9 @@ export default class LabelEditor extends Component {
     return (
       <Input
         value={this.state.title}
-        onChange={e => this._handleChange(e)}
-        onKeyUp={e => this._handleKeyUp(e)}
-        onBlur={e => this._handleBlur(e)}
+        onChange={e => this.handleChange(e)}
+        onKeyUp={e => this.handleKeyUp(e)}
+        onBlur={e => this.handleBlur(e)}
         innerRef={c => {
           this._input = c;
         }}
