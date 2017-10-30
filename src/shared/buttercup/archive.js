@@ -43,10 +43,16 @@ export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
     .unlock(archiveId, masterPassword)
     .then(() => archiveId)
     .catch(err => {
-      if (err.message && err.message.includes('ENOENT')) {
-        throw new Error('Archive source was not found.');
+      const { message } = err;
+      if (message) {
+        if (message.includes('ENOENT')) {
+          throw new Error('Archive source was not found.');
+        } else if (message.includes('Authentication')) {
+          throw new Error('Authentication failed.');
+        }
+        throw new Error(message);
       }
-      throw err;
+      throw message;
     });
 }
 
