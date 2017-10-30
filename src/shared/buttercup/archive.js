@@ -52,7 +52,7 @@ export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
         }
         throw new Error(message);
       }
-      throw message;
+      throw err;
     });
 }
 
