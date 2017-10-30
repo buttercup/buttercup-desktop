@@ -37,7 +37,6 @@ export const loadArchive = payload => (dispatch, getState) => {
   }
   dispatch(setCurrentArchive(payload));
   dispatch(reloadGroups());
-  ipc.send('archive-list-updated');
 };
 
 export const removeArchive = payload => () => {
