@@ -1,4 +1,3 @@
-import { ipcRenderer as ipc } from 'electron';
 import { getSharedArchiveManager } from './archive';
 import {
   addArchiveToStore,
@@ -12,14 +11,12 @@ export function linkArchiveManagerToStore(store) {
 
   archiveManager.on('sourceAdded', function __handleNewSource(sourceInfo) {
     store.dispatch(addArchiveToStore(sourceInfo));
-    ipc.send('archive-list-updated');
   });
 
   archiveManager.on('sourceRehydrated', function __handleRehydratedSource(
     sourceInfo
   ) {
     store.dispatch(lockArchiveInStore(sourceInfo.id));
-    ipc.send('archive-list-updated');
   });
 
   archiveManager.on('sourceUnlocked', function __handleUnlockedSource(
@@ -32,7 +29,6 @@ export function linkArchiveManagerToStore(store) {
     sourceInfo
   ) {
     store.dispatch(removeArchiveFromStore(sourceInfo.id));
-    ipc.send('archive-list-updated');
   });
 
   // rehydrate

@@ -39,9 +39,7 @@ const defaultTemplate = [
       {
         type: 'separator'
       },
-      // @TODO: Gray out this option dynamically
-      // when target is not available
-      {},
+      {}, // Import menu will be injected here
       {
         type: 'separator'
       },
@@ -234,7 +232,10 @@ export function setupMenu(store) {
             ...archives.map((archive, index) => ({
               label: archive.name,
               accelerator: `CmdOrCtrl+${index + 1}`,
-              type: 'checkbox',
+              // set type to checkbox because if none of the archives are
+              // selected and the type is radio, then always the first item
+              // will show as active which is unwanted.
+              type: currentArchiveId ? 'radio' : 'checkbox',
               click: () => {
                 const win = getMainWindow();
                 if (win) {

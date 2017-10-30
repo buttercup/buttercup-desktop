@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce';
 import { ipcMain as ipc, BrowserWindow } from 'electron';
 import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
@@ -10,6 +11,9 @@ const windowManager = getWindowManager();
 export function setupActions(store) {
   // Clear update notice
   store.dispatch(updateInstalled());
+
+  // Update the menu
+  store.subscribe(debounce(() => setupMenu(store), 500));
 
   if (process.env.NODE_ENV !== 'development') {
     startAutoUpdate((releaseNotes, releaseName) => {
@@ -38,10 +42,6 @@ export function setupActions(store) {
 
   ipc.on('new-file-dialog', () => {
     newFile();
-  });
-
-  ipc.on('archive-list-updated', (e, payload) => {
-    setupMenu(store);
   });
 
   ipc.on('show-import-dialog', (e, payload) => {
