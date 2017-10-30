@@ -19,20 +19,25 @@ export default class LabelEditor extends Component {
   };
 
   state = {
-    title: 'Untitled'
+    title: 'Untitle'
   };
 
-  handleBlur() {
-    this.props.onDismiss();
+  _handleChange(e) {
+    this.setState({ title: e.target.value.trim() });
   }
 
-  handleChange(e) {
-    this.setState({ title: e.target.value });
+  _handleBlur() {
+    const { title } = this.state;
+    if (title) {
+      this.props.onSave(title);
+    } else {
+      this.props.onDismiss();
+    }
   }
 
-  handleKeyUp(e) {
-    const title = this.state.title.trim();
-    if (e.keyCode === 13 && title !== '') {
+  _handleKeyUp(e) {
+    const { title } = this.state;
+    if (e.keyCode === 13 && title) {
       this.props.onSave(title);
     } else if (e.keyCode === 27) {
       this.props.onDismiss();
@@ -59,9 +64,9 @@ export default class LabelEditor extends Component {
     return (
       <Input
         value={this.state.title}
-        onChange={e => this.handleChange(e)}
-        onKeyUp={e => this.handleKeyUp(e)}
-        onBlur={e => this.handleBlur(e)}
+        onChange={e => this._handleChange(e)}
+        onKeyUp={e => this._handleKeyUp(e)}
+        onBlur={e => this._handleBlur(e)}
         innerRef={c => {
           this._input = c;
         }}
