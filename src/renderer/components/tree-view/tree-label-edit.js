@@ -11,6 +11,8 @@ const Input = styled.input`
   color: #222;
 `;
 
+const DEFAULT_TITLE = 'Untitled';
+
 export default class LabelEditor extends Component {
   static propTypes = {
     node: PropTypes.object,
@@ -19,20 +21,25 @@ export default class LabelEditor extends Component {
   };
 
   state = {
-    title: 'Untitled'
+    title: DEFAULT_TITLE
   };
 
-  handleBlur() {
-    this.props.onDismiss();
+  handleChange(e) {
+    this.setState({ title: e.target.value.trim() });
   }
 
-  handleChange(e) {
-    this.setState({ title: e.target.value });
+  handleBlur() {
+    const { title } = this.state;
+    if (title) {
+      this.props.onSave(title);
+    } else {
+      this.props.onDismiss();
+    }
   }
 
   handleKeyUp(e) {
-    const title = this.state.title.trim();
-    if (e.keyCode === 13 && title !== '') {
+    const { title } = this.state;
+    if (e.keyCode === 13 && title) {
       this.props.onSave(title);
     } else if (e.keyCode === 27) {
       this.props.onDismiss();
@@ -44,7 +51,7 @@ export default class LabelEditor extends Component {
 
     this.setState(
       {
-        title: isNew ? 'Untitled' : title
+        title: isNew ? DEFAULT_TITLE : title
       },
       () => {
         if (this._input) {
