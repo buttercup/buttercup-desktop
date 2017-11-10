@@ -157,7 +157,7 @@
     "electron-rpc": "^2.0.1",
     "electron-store": "^1.2.0",
     "electron-unhandled": "^0.2.0",
-    "electron-updater": "^2.3.0",
+    "electron-updater": "^2.16.1",
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-config-standard": "^10.2.1",
