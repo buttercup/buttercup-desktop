@@ -22,8 +22,10 @@ export function installUpdates() {
 }
 
 export function checkForUpdates() {
-  autoUpdater.checkForUpdates().catch(err => {
+  try {
+    autoUpdater.checkForUpdates();
+  } catch (err) {
     // NOOP
-    log.error(err);
-  });
+    log.error('Check for Update Error', err);
+  }
 }
