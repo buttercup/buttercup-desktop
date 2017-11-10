@@ -23,9 +23,13 @@ class WindowManager {
    * @returns {BrowserWindow}
    */
   buildWindowOfType(type, fn = null, options = {}) {
-    const window = this._buildProcedures[type](fn, options);
-    this.register(type, window);
-    return window;
+    const procedure = this._buildProcedures[type];
+    if (typeof procedure !== 'function') {
+      return;
+    }
+    const win = procedure(fn, options);
+    this.register(type, win);
+    return win;
   }
 
   /**
