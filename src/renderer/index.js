@@ -1,11 +1,6 @@
 import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
-import {
-  IntlProvider,
-  usersLocale,
-  translationsForUsersLocale,
-  setupI18n
-} from '../shared/i18n';
+import i18n, { IntlProvider } from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -33,9 +28,9 @@ Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
 // Create store
 const store = configureStore({}, 'renderer');
 
+i18n.setup(store);
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
-setupI18n(store);
 
 // Reset current archive
 store.dispatch(setCurrentArchive(null));
@@ -74,7 +69,7 @@ ipc.on('locale-changed', (e, payload) => {
 });
 
 render(
-  <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+  <IntlProvider locale={i18n.getLocale()} messages={i18n.getTranslations()}>
     <AppContainer>
       <Root store={store} />
     </AppContainer>
@@ -87,7 +82,7 @@ if (module.hot) {
     const NewRoot = require('./containers/root').default;
 
     render(
-      <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+      <IntlProvider locale={i18n.getLocale()} messages={i18n.getTranslations()}>
         <AppContainer>
           <NewRoot store={store} />
         </AppContainer>

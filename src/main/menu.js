@@ -11,148 +11,148 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
-import { formatMessage, i18nConfig } from '../shared/i18n';
+import i18n from '../shared/i18n';
 import pkg from '../../package.json';
 
-const defaultTemplate = [
-  {
-    label: isOSX() ? 'Archive' : 'File',
-    submenu: [
-      {
-        label: formatMessage({
-          id: 'components.file-manager.index.new_archive'
-        }),
-        accelerator: 'CmdOrCtrl+N',
-        click: (item, focusedWindow) => newFile(focusedWindow)
-      },
-      {
-        label: 'Open Archive',
-        accelerator: 'CmdOrCtrl+O',
-        click: (item, focusedWindow) => openFile(focusedWindow)
-      },
-      {
-        label: 'Connect Cloud Sources',
-        accelerator: 'CmdOrCtrl+Shift+C',
-        click: (item, focusedWindow) => {
-          getWindowManager().buildWindowOfType('file-manager', null, {
-            parent: getMainWindow(focusedWindow)
-          });
+export function setupMenu(store) {
+  const defaultTemplate = [
+    {
+      label: isOSX() ? 'Archive' : 'File',
+      submenu: [
+        {
+          label: i18n.formatMessage({
+            id: 'components.file-manager.index.new_archive'
+          }),
+          accelerator: 'CmdOrCtrl+N',
+          click: (item, focusedWindow) => newFile(focusedWindow)
+        },
+        {
+          label: 'Open Archive',
+          accelerator: 'CmdOrCtrl+O',
+          click: (item, focusedWindow) => openFile(focusedWindow)
+        },
+        {
+          label: 'Connect Cloud Sources',
+          accelerator: 'CmdOrCtrl+Shift+C',
+          click: (item, focusedWindow) => {
+            getWindowManager().buildWindowOfType('file-manager', null, {
+              parent: getMainWindow(focusedWindow)
+            });
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {}, // Import menu will be injected here
+        {
+          type: 'separator'
+        },
+        {
+          role: 'close'
         }
-      },
-      {
-        type: 'separator'
-      },
-      {}, // Import menu will be injected here
-      {
-        type: 'separator'
-      },
-      {
-        role: 'close'
-      }
-    ]
-  },
-  {
-    label: 'Edit',
-    submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
-      { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
-      { role: 'pasteandmatchstyle' },
-      { role: 'delete' },
-      { role: 'selectall' }
-    ]
-  },
-  {
-    label: 'View',
-    submenu: [
-      { type: 'separator' },
-      { role: 'reload' },
-      { role: 'forcereload' },
-      { role: 'toggledevtools' },
-      { type: 'separator' },
-      { role: 'togglefullscreen' }
-    ]
-  },
-  {
-    label: 'Window',
-    role: 'window',
-    submenu: [{ role: 'minimize' }, { role: 'close' }]
-  },
-  {
-    label: 'Help',
-    role: 'help',
-    submenu: [
-      {
-        label: 'Visit Our Website',
-        click: () => {
-          shell.openExternal('https://buttercup.pw');
+      ]
+    },
+    {
+      label: 'Edit',
+      submenu: [
+        { role: 'undo' },
+        { role: 'redo' },
+        { type: 'separator' },
+        { role: 'cut' },
+        { role: 'copy' },
+        { role: 'paste' },
+        { role: 'pasteandmatchstyle' },
+        { role: 'delete' },
+        { role: 'selectall' }
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        { type: 'separator' },
+        { role: 'reload' },
+        { role: 'forcereload' },
+        { role: 'toggledevtools' },
+        { type: 'separator' },
+        { role: 'togglefullscreen' }
+      ]
+    },
+    {
+      label: 'Window',
+      role: 'window',
+      submenu: [{ role: 'minimize' }, { role: 'close' }]
+    },
+    {
+      label: 'Help',
+      role: 'help',
+      submenu: [
+        {
+          label: 'Visit Our Website',
+          click: () => {
+            shell.openExternal('https://buttercup.pw');
+          }
+        },
+        {
+          label: 'Privacy Policy',
+          click: () => {
+            shell.openExternal('https://buttercup.pw/privacy');
+          }
+        },
+        {
+          label: `View Changelog For v${pkg.version}`,
+          click: () => {
+            shell.openExternal(
+              `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
+            );
+          }
         }
-      },
-      {
-        label: 'Privacy Policy',
-        click: () => {
-          shell.openExternal('https://buttercup.pw/privacy');
-        }
-      },
-      {
-        label: `View Changelog For v${pkg.version}`,
-        click: () => {
-          shell.openExternal(
-            `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
-          );
-        }
-      }
-    ]
-  }
-];
+      ]
+    }
+  ];
 
-if (isOSX()) {
-  defaultTemplate.unshift({
-    label: app.getName(),
-    submenu: [
-      { role: 'about' },
+  if (isOSX()) {
+    defaultTemplate.unshift({
+      label: app.getName(),
+      submenu: [
+        { role: 'about' },
+        { type: 'separator' },
+        { role: 'services', submenu: [] },
+        { type: 'separator' },
+        { role: 'hide' },
+        { role: 'hideothers' },
+        { role: 'unhide' },
+        { type: 'separator' },
+        { role: 'quit' }
+      ]
+    });
+
+    // Edit
+    defaultTemplate[2].submenu.push(
       { type: 'separator' },
-      { role: 'services', submenu: [] },
+      {
+        label: 'Speech',
+        submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
+      }
+    );
+
+    // Window
+    defaultTemplate[4].submenu.push(
+      { role: 'close' },
+      { role: 'minimize' },
+      { role: 'zoom' },
       { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideothers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
+      { role: 'front' }
+    );
+  }
+
+  // Check for Updates...
+  defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
+    label: 'Check for Updates...',
+    click: () => {
+      checkForUpdates();
+    }
   });
 
-  // Edit
-  defaultTemplate[2].submenu.push(
-    { type: 'separator' },
-    {
-      label: 'Speech',
-      submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
-    }
-  );
-
-  // Window
-  defaultTemplate[4].submenu.push(
-    { role: 'close' },
-    { role: 'minimize' },
-    { role: 'zoom' },
-    { type: 'separator' },
-    { role: 'front' }
-  );
-}
-
-// Check for Updates...
-defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
-  label: 'Check for Updates...',
-  click: () => {
-    checkForUpdates();
-  }
-});
-
-export function setupMenu(store) {
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
@@ -169,7 +169,7 @@ export function setupMenu(store) {
 
   // make sure that a language is set
   if (!currentLocale) {
-    store.dispatch(setSetting('locale', i18nConfig.standardLanguage));
+    store.dispatch(setSetting('locale', i18n.getConfig('standardLanguage')));
   }
 
   const template = defaultTemplate.map((item, i) => {
@@ -216,22 +216,25 @@ export function setupMenu(store) {
               }
             },
             { type: 'separator' },
+            // Language menu point
             {
-              label: formatMessage({
+              label: i18n.formatMessage({
                 id: 'main.menu.language'
               }),
-              submenu: i18nConfig.availableLanguages.map(lang => ({
+              submenu: i18n.getConfig('availableLanguages').map(lang => ({
                 label: lang.name,
                 checked: currentLocale === lang.code,
                 type: 'checkbox',
                 click: () => {
-                  store.dispatch(setSetting('locale', lang.code));
-                  const win = getMainWindow();
-                  if (win) {
-                    win.webContents.send(
-                      'locale-changed',
-                      formatMessage({ id: 'main.menu.restart_program' })
-                    );
+                  if (currentLocale !== lang.code) {
+                    store.dispatch(setSetting('locale', lang.code));
+                    const win = getMainWindow();
+                    if (win) {
+                      win.webContents.send(
+                        'locale-changed',
+                        i18n.formatMessage({ id: 'main.menu.restart_program' })
+                      );
+                    }
                   }
                 }
               }))
