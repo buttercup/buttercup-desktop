@@ -1,6 +1,11 @@
 import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
-import { IntlProvider, usersLocale, translationsForUsersLocale } from '../i18n';
+import {
+  IntlProvider,
+  usersLocale,
+  translationsForUsersLocale,
+  setupI18n
+} from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -30,6 +35,7 @@ const store = configureStore({}, 'renderer');
 
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
+setupI18n(store);
 
 // Reset current archive
 store.dispatch(setCurrentArchive(null));
@@ -60,6 +66,11 @@ ipc.on('import-history-prompt', (e, payload) => {
 
 ipc.on('will-quit', () => {
   store.dispatch(setUIState('isExiting', true));
+});
+
+// show message, when locale changed
+ipc.on('locale-changed', (e, payload) => {
+  alert(payload);
 });
 
 render(

@@ -2,6 +2,7 @@ import path from 'path';
 import { remote } from 'electron';
 import capitalize from 'lodash/capitalize';
 import { copyToClipboard, openUrl } from './utils';
+import { formatMessage } from '../../shared/i18n';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -122,7 +123,7 @@ export function createCopyMenu(entry, currentEntry) {
 
   const menu = [
     {
-      label: 'Copy To Clipboard',
+      label: formatMessage({ id: 'system.menu.copy_to_clipboard' }),
       submenu: [
         ...props,
         { type: 'separator' },

@@ -11,7 +11,7 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
-import { formatMessage } from '../i18n';
+import { formatMessage, i18nConfig } from '../shared/i18n';
 import pkg from '../../package.json';
 
 const defaultTemplate = [
@@ -164,6 +164,14 @@ export function setupMenu(store) {
       ? menubarAutoHideSetting
       : false;
 
+  // language support
+  const currentLocale = getSetting(state, 'locale');
+
+  // make sure that a language is set
+  if (!currentLocale) {
+    store.dispatch(setSetting('locale', i18nConfig.standardLanguage));
+  }
+
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
     const index = isOSX() ? i : i + 1;
@@ -206,6 +214,27 @@ export function setupMenu(store) {
               click: item => {
                 store.dispatch(setSetting('condencedSidebar', item.checked));
               }
+            },
+            { type: 'separator' },
+            {
+              label: formatMessage({
+                id: 'main.menu.language'
+              }),
+              submenu: i18nConfig.availableLanguages.map(lang => ({
+                label: lang.name,
+                checked: currentLocale === lang.code,
+                type: 'checkbox',
+                click: () => {
+                  store.dispatch(setSetting('locale', lang.code));
+                  const win = getMainWindow();
+                  if (win) {
+                    win.webContents.send(
+                      'locale-changed',
+                      formatMessage({ id: 'main.menu.restart_program' })
+                    );
+                  }
+                }
+              }))
             },
             ...(isWindows()
               ? [

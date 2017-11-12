@@ -14,5 +14,8 @@
   "system.dialog.title": "Contraseña maestra",
   "system.dialog.confirm": "Confirmar",
   "system.dialog.nevermind": "No importa",
-  "system.dialog.password": "Contraseña"
+  "system.dialog.password": "Contraseña",
+  "main.menu.language": "Idioma",
+  "main.menu.restart_program": "Comience Buttercup para aplicar todos los cambios.",
+  "system.menu.copy_to_clipboard": "Copiar al portapapeles"
 }

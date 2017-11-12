@@ -1,5 +1,5 @@
 import { remote } from 'electron';
-import { formatMessage } from '../../i18n';
+import { formatMessage } from '../../shared/i18n';
 import { default as swal } from 'sweetalert2';
 import '../styles/lib/sweetalert.global';
 import styles from '../styles/sweetalert';

@@ -14,5 +14,8 @@
   "system.dialog.title": "Master Password",
   "system.dialog.confirm": "Confirm",
   "system.dialog.nevermind": "Nevermind",
-  "system.dialog.password": "Password"
+  "system.dialog.password": "Password",
+  "main.menu.language": "Language",
+  "main.menu.restart_program": "Please restart buttercup to apply all changes.",
+  "system.menu.copy_to_clipboard": "Copy To Clipboard"
 }
