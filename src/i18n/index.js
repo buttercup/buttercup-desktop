@@ -1,12 +1,12 @@
 import { IntlProvider, addLocaleData } from 'react-intl';
 import electron from 'electron';
 
-const app = electron.app ? electron.app : electron.remote.app;
-
 // languages
 import en from 'react-intl/locale-data/en';
 import de from 'react-intl/locale-data/de';
 import es from 'react-intl/locale-data/es';
+
+const app = electron.app ? electron.app : electron.remote.app;
 
 addLocaleData([...en, ...es, ...de]);
 
