@@ -1,4 +1,4 @@
-const { join, resolve } = require('path');
+const { join } = require('path');
 
 module.exports = {
   module: {
