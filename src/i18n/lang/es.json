@@ -1,0 +1,18 @@
+{
+  "components.empty-view.welcome_back_title": "Bienvenido de nuevo a Buttercup.",
+  "components.empty-view.unlock_archive": "Desbloquee un archivo para comenzar ({os}).",
+  "components.empty-view.welcome_title": "Bienvenido a Buttercup.",
+  "components.empty-view.welcome_caption": "Aún no ha agregado ningún archivo. ¿Por qué no agregar uno?",
+  "components.add-archive-button.open_archive_file": "Abrir archivo de archivo",
+  "components.add-archive-button.new_archive_file": "Nuevo archivo archivado",
+  "components.add-archive-button.connect_cloud_sources": "Connect Cloud Sources",
+  "components.add-archive-button.add_archive": "Agregar archivo",
+  "components.file-manager.index.cancel": "Cancelar",
+  "components.file-manager.index.go_back": "Volver atrás",
+  "components.file-manager.index.new_archive": "Nuevo archivo",
+  "components.file-manager.index.open_in_buttercup": "Abrir en Buttercup",
+  "system.dialog.title": "Contraseña maestra",
+  "system.dialog.confirm": "Confirmar",
+  "system.dialog.nevermind": "No importa",
+  "system.dialog.password": "Contraseña"
+}

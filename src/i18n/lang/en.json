@@ -1,0 +1,18 @@
+{
+  "components.empty-view.welcome_back_title": "Welcome back to Buttercup.",
+  "components.empty-view.unlock_archive": "Unlock an archive to begin ({os}).",
+  "components.empty-view.welcome_title": "Welcome to Buttercup.",
+  "components.empty-view.welcome_caption": "You haven't added any archives yet. Why not add one?",
+  "components.add-archive-button.open_archive_file": "Open Archive File",
+  "components.add-archive-button.new_archive_file": "New Archive File",
+  "components.add-archive-button.connect_cloud_sources": "Connect Cloud Sources",
+  "components.add-archive-button.add_archive": "Add Archive",
+  "components.file-manager.index.cancel": "Cancel",
+  "components.file-manager.index.go_back": "Go Back",
+  "components.file-manager.index.new_archive": "New Archive",
+  "components.file-manager.index.open_in_buttercup": "Open in Buttercup",
+  "system.dialog.title": "Master Password",
+  "system.dialog.confirm": "Confirm",
+  "system.dialog.nevermind": "Nevermind",
+  "system.dialog.password": "Password"
+}

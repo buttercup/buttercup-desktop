@@ -1,5 +1,6 @@
 import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
+import { IntlProvider, usersLocale, translationsForUsersLocale } from '../i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -62,9 +63,11 @@ ipc.on('will-quit', () => {
 });
 
 render(
-  <AppContainer>
-    <Root store={store} />
-  </AppContainer>,
+  <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+    <AppContainer>
+      <Root store={store} />
+    </AppContainer>
+  </IntlProvider>,
   document.getElementById('root')
 );
 
@@ -73,9 +76,11 @@ if (module.hot) {
     const NewRoot = require('./containers/root').default;
 
     render(
-      <AppContainer>
-        <NewRoot store={store} />
-      </AppContainer>,
+      <IntlProvider locale={usersLocale} messages={translationsForUsersLocale}>
+        <AppContainer>
+          <NewRoot store={store} />
+        </AppContainer>
+      </IntlProvider>,
       document.getElementById('root')
     );
   });

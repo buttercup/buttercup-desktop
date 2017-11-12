@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import { FormattedMessage } from 'react-intl';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -47,9 +48,16 @@ export const NoArchiveSelected = () => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>Welcome back to Buttercup.</Title>
+      <Title>
+        <FormattedMessage id="components.empty-view.welcome_back_title" />
+      </Title>
       <Caption>
-        Unlock an archive to begin ({isOSX() ? '⌘' : 'Ctrl'}+1).
+        <FormattedMessage
+          id="components.empty-view.unlock_archive"
+          values={{
+            os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
+          }}
+        />
       </Caption>
     </Figure>
   </ColoredFlex>
@@ -59,8 +67,12 @@ export const WelcomeScreen = () => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>Welcome to Buttercup.</Title>
-      <Caption>You haven't added any archives yet. Why not add one?</Caption>
+      <Title>
+        <FormattedMessage id="components.empty-view.welcome_title" />
+      </Title>
+      <Caption>
+        <FormattedMessage id="components.empty-view.welcome_caption" />
+      </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>

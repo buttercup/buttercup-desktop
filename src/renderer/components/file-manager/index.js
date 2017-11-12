@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
@@ -104,9 +105,13 @@ export default class FileManager extends Component {
           <Footer>
             <Flex align="center" width="50%">
               <ButtonRow>
-                <Button onClick={this.handleClose}>Cancel</Button>
+                <Button onClick={this.handleClose}>
+                  <FormattedMessage id="components.file-manager.index.cancel" />
+                </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
-                  <Button>Go Back</Button>
+                  <Button>
+                    <FormattedMessage id="components.file-manager.index.go_back" />
+                  </Button>
                 </NavLink>
               </ButtonRow>
             </Flex>
@@ -116,14 +121,14 @@ export default class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  New Archive
+                  <FormattedMessage id="components.file-manager.index.new_archive" />
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  Open in Buttercup
+                  <FormattedMessage id="components.file-manager.index.open_in_buttercup" />
                 </Button>
               </ButtonRow>
             </Flex>
