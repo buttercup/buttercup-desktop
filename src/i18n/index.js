@@ -1,4 +1,7 @@
 import { IntlProvider, addLocaleData } from 'react-intl';
+import electron from 'electron';
+
+const app = electron.app ? electron.app : electron.remote.app;
 
 // languages
 import en from 'react-intl/locale-data/en';
@@ -8,7 +11,7 @@ import es from 'react-intl/locale-data/es';
 addLocaleData([...en, ...es, ...de]);
 
 // load language messages
-const usersLocale = navigator.language.split('-')[0] || navigator.language;
+const usersLocale = app.getLocale().split('-')[0] || app.getLocale();
 
 // load language object
 const translationsForUsersLocale =

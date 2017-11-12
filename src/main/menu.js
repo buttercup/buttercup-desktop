@@ -11,6 +11,7 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
+import { formatMessage } from '../i18n';
 import pkg from '../../package.json';
 
 const defaultTemplate = [
@@ -18,7 +19,9 @@ const defaultTemplate = [
     label: isOSX() ? 'Archive' : 'File',
     submenu: [
       {
-        label: 'New Archive',
+        label: formatMessage({
+          id: 'components.file-manager.index.new_archive'
+        }),
         accelerator: 'CmdOrCtrl+N',
         click: (item, focusedWindow) => newFile(focusedWindow)
       },
