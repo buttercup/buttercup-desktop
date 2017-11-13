@@ -16,6 +16,6 @@
   "system.dialog.nevermind": "Abbrechen",
   "system.dialog.password": "Passwort",
   "main.menu.language": "Sprache",
-  "main.menu.restart_program": "Bitte starte Buttercup um alle Änderungen zu übernehmen.",
+  "main.menu.restart_program": "Bitte starte Buttercup neu um alle Änderungen zu übernehmen.",
   "system.menu.copy_to_clipboard": "In die Zwischenablage kopieren"
 }

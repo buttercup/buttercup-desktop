@@ -4,73 +4,83 @@ import { getSetting } from '../selectors';
 // export wrapper for file-manager.js and index.js
 export { IntlProvider };
 
+const config = {
+  standardLanguage: 'en',
+  availableLanguages: [
+    {
+      name: 'English',
+      code: 'en'
+    },
+    {
+      name: 'Deutsch',
+      code: 'de'
+    },
+    {
+      name: 'Español',
+      code: 'es'
+    }
+  ]
+};
+
+// add available language rules from react-intl
+addLocaleData(
+  config.availableLanguages.map(lang =>
+    require(`react-intl/locale-data/${lang.code}`)
+  )
+);
+
+// add all locale files to an array for electron
+const getAllTranslationsAsObject = () => {
+  const translations = [];
+
+  config.availableLanguages.forEach(lang => {
+    translations[lang.code] = require(`../../../locales/${lang.code}`);
+  });
+
+  return translations;
+};
+
 /**
- * i18n class
+ * i18n object
  */
-class i18n {
-  constructor() {
-    this.config = {
-      standardLanguage: 'en',
-      languagePath: '../../../locales/',
-      availableLanguages: [
-        {
-          name: 'English',
-          code: 'en'
-        },
-        {
-          name: 'Deutsch',
-          code: 'de'
-        },
-        {
-          name: 'Español',
-          code: 'es'
-        }
-      ]
-    };
-
-    // add available language rules from react-intl
-    addLocaleData(
-      this.config.availableLanguages.map(lang =>
-        require(`react-intl/locale-data/${lang.code}`)
-      )
-    );
-
-    this.locale = '';
-    this.translations = {};
-  }
+const i18n = () => ({
+  allTranslations: getAllTranslationsAsObject(),
+  locale: '',
+  translations: {},
   /**
-   * Setup language
-   * @param {*} store
-   */
+     * Setup language
+     * @param {*} store
+     */
   setup(store) {
-    this.locale = getSetting(store.getState(), 'locale');
-    this.translations = require('../../../locales/' + this.locale);
-  }
+    this.locale =
+      getSetting(store.getState(), 'locale') || config.standardLanguage;
+    this.translations = this.allTranslations[this.locale];
+  },
   /**
-   * Used for non react files
-   * @param {*} object
-   */
+     * Used for non react files
+     * @param {*} object
+     */
   formatMessage({ id }) {
     return this.translations[id] || id;
-  }
+  },
   /**
-   * Return full config or config by key
-   */
+     * Return full config or config by key
+     */
   getConfig(key) {
-    return this.config[key] || this.config;
-  }
+    return config[key] || config;
+  },
   /**
-   * Get current locale
-   */
+     * Get current locale
+     */
   getLocale() {
     return this.locale;
-  }
+  },
   /**
-   * Get all translations of current locale
-   */
+     * Get all translations of current locale
+     */
   getTranslations() {
     return this.translations;
   }
-}
+});
 
-export default new i18n();
+export default i18n();

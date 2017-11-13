@@ -229,6 +229,7 @@
     "styled-components": "^1.4.4",
     "styled-flexbox": "^0.2.0",
     "sweetalert2": "^6.11.5",
+    "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.5.9",
     "uuid": "^2.0.3",
     "webdav-fs": "^1.6.0",
