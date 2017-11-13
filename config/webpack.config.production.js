@@ -37,7 +37,7 @@ module.exports = merge(baseConfig, {
               loader: 'css-loader',
               options: {
                 modules: true,
-                importLoaders: 1,
+                importLoaders: true,
                 localIdentName: '[name]__[local]___[hash:base64:5]'
               }
             },
@@ -109,7 +109,7 @@ module.exports = merge(baseConfig, {
     //   sourceMap: false
     // }),
     new ExtractTextPlugin({
-      filename: '[name].css',
+      filename: '[name].[contenthash].css',
       allChunks: true
     })
   ],
