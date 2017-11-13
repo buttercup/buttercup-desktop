@@ -24,7 +24,17 @@ module.exports = merge(baseConfig, {
         test: /\.global\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader', 'sass-loader']
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                minimize: true
+              }
+            },
+            {
+              loader: 'sass-loader'
+            }
+          ]
         })
       },
 
@@ -38,7 +48,8 @@ module.exports = merge(baseConfig, {
               options: {
                 modules: true,
                 importLoaders: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]'
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+                minimize: true
               }
             },
             {
@@ -109,7 +120,7 @@ module.exports = merge(baseConfig, {
     //   sourceMap: false
     // }),
     new ExtractTextPlugin({
-      filename: '[name].[contenthash].css',
+      filename: '[name].css',
       allChunks: true
     })
   ],

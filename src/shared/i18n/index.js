@@ -44,24 +44,42 @@ const getAllTranslationsAsObject = () => {
  * i18n object
  */
 const i18n = () => ({
+  provider: null,
   allTranslations: getAllTranslationsAsObject(),
   locale: '',
   translations: {},
   /**
-     * Setup language
-     * @param {*} store
-     */
-  setup(store) {
+   * Setup language
+   * @param {object} store
+   * @param {string} scope
+   */
+  setup(store, scope) {
     this.locale =
       getSetting(store.getState(), 'locale') || config.standardLanguage;
     this.translations = this.allTranslations[this.locale];
+
+    if (scope === 'main') {
+      this.provider = new IntlProvider(
+        { locale: this.locale, messages: this.translations },
+        {}
+      );
+    }
   },
   /**
      * Used for non react files
      * @param {*} object
      */
-  formatMessage({ id }) {
-    return this.translations[id] || id;
+  formatMessage({ id, defaultMessage, description }) {
+    let translation = '';
+    // provider is set
+    if (this.provider) {
+      const { intl } = this.provider.getChildContext();
+      translation = intl.formatMessage({ id, defaultMessage, description });
+    } else {
+      translation = this.translations[id] || id;
+    }
+
+    return translation;
   },
   /**
      * Return full config or config by key

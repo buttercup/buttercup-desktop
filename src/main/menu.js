@@ -224,17 +224,16 @@ export function setupMenu(store) {
               submenu: i18n.getConfig('availableLanguages').map(lang => ({
                 label: lang.name,
                 checked: currentLocale === lang.code,
+                enabled: currentLocale !== lang.code,
                 type: 'checkbox',
                 click: () => {
-                  if (currentLocale !== lang.code) {
-                    store.dispatch(setSetting('locale', lang.code));
-                    const win = getMainWindow();
-                    if (win) {
-                      win.webContents.send(
-                        'locale-changed',
-                        i18n.formatMessage({ id: 'main.menu.restart_program' })
-                      );
-                    }
+                  store.dispatch(setSetting('locale', lang.code));
+                  const win = getMainWindow();
+                  if (win) {
+                    win.webContents.send(
+                      'locale-changed',
+                      i18n.formatMessage({ id: 'main.menu.restart_program' })
+                    );
                   }
                 }
               }))

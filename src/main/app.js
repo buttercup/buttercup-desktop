@@ -112,7 +112,7 @@ app.on('ready', async () => {
   });
 
   // Setup Windows & IPC Actions
-  i18n.setup(store);
+  i18n.setup(store, 'main');
   setupWindows(store);
   setupActions(store);
   setupMenu(store);
