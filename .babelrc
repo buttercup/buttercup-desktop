@@ -18,7 +18,7 @@
     "transform-strict-mode",
     "transform-class-properties",
     "jsx-control-statements",
-   ["webpack-alias", { "config": "${PWD}/config/webpack.config.base.js" } ]
+   ["webpack-alias", { "config": "./config/webpack.config.base.js" } ]
   ],
   "env": {
   	"production": {
