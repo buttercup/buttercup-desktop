@@ -21,7 +21,7 @@ export function setupMenu(store) {
       submenu: [
         {
           label: i18n.formatMessage({
-            id: 'components.file-manager.index.new_archive'
+            id: 'new-archive'
           }),
           accelerator: 'CmdOrCtrl+N',
           click: (item, focusedWindow) => newFile(focusedWindow)
@@ -219,7 +219,7 @@ export function setupMenu(store) {
             // Language menu point
             {
               label: i18n.formatMessage({
-                id: 'main.menu.language'
+                id: 'language'
               }),
               submenu: i18n.getConfig('availableLanguages').map(lang => ({
                 label: lang.name,
@@ -230,10 +230,9 @@ export function setupMenu(store) {
                   store.dispatch(setSetting('locale', lang.code));
                   const win = getMainWindow();
                   if (win) {
-                    win.webContents.send(
-                      'locale-changed',
-                      i18n.formatMessage({ id: 'main.menu.restart_program' })
-                    );
+                    setupMenu(store);
+                    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+                    win.webContents.send('locale-change');
                   }
                 }
               }))

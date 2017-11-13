@@ -63,31 +63,33 @@ ipc.on('will-quit', () => {
   store.dispatch(setUIState('isExiting', true));
 });
 
+const renderApp = (RootContainer, { locale, translations }) =>
+  render(
+    <IntlProvider key={locale} locale={locale} messages={translations}>
+      <AppContainer>
+        <RootContainer store={store} />
+      </AppContainer>
+    </IntlProvider>,
+    document.getElementById('root')
+  );
+
 // show message, when locale changed
-ipc.on('locale-changed', (e, payload) => {
-  alert(payload);
+ipc.on('locale-change', () => {
+  // refresh main menu
+  ipc.send('locale-change');
+
+  i18n.setup(store);
+
+  console.log();
+  renderApp(Root, i18n);
 });
 
-render(
-  <IntlProvider locale={i18n.getLocale()} messages={i18n.getTranslations()}>
-    <AppContainer>
-      <Root store={store} />
-    </AppContainer>
-  </IntlProvider>,
-  document.getElementById('root')
-);
+renderApp(Root, i18n);
 
 if (module.hot) {
   module.hot.accept('./containers/root', () => {
     const NewRoot = require('./containers/root').default;
 
-    render(
-      <IntlProvider locale={i18n.getLocale()} messages={i18n.getTranslations()}>
-        <AppContainer>
-          <NewRoot store={store} />
-        </AppContainer>
-      </IntlProvider>,
-      document.getElementById('root')
-    );
+    renderApp(NewRoot, i18n);
   });
 }

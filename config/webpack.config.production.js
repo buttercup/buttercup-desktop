@@ -2,7 +2,6 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const MinifyPlugin = require('babel-minify-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 
@@ -92,33 +91,6 @@ module.exports = merge(baseConfig, {
         }
       }
     }),
-    // new MinifyPlugin({
-    //   booleans:	false,
-    //   builtIns:	false,
-    //   consecutiveAdds: false,
-    //   deadcode: false,
-    //   evaluate: false,
-    //   flipComparisons: false,
-    //   guards: false,
-    //   infinity: false,
-    //   mangle: false,
-    //   memberExpressions: false,
-    //   mergeVars: false,
-    //   numericLiterals: false,
-    //   propertyLiterals: false,
-    //   regexpConstructors: false,
-    //   removeUndefined: false,
-    //   replace: false,
-    //   simplify: false,
-    //   simplifyComparisons: false,
-    //   typeConstructors: false,
-    //   undefinedToVoid: false,
-    //   removeConsole:false,
-    //   removeDebugger:false
-    // }, {
-    //   test: /\.js$/,
-    //   sourceMap: false
-    // }),
     new ExtractTextPlugin({
       filename: '[name].css',
       allChunks: true

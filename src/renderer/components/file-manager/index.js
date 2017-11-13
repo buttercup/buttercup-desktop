@@ -106,11 +106,11 @@ export default class FileManager extends Component {
             <Flex align="center" width="50%">
               <ButtonRow>
                 <Button onClick={this.handleClose}>
-                  <FormattedMessage id="components.file-manager.index.cancel" />
+                  <FormattedMessage id="cancel" />
                 </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
                   <Button>
-                    <FormattedMessage id="components.file-manager.index.go_back" />
+                    <FormattedMessage id="go-back" />
                   </Button>
                 </NavLink>
               </ButtonRow>
@@ -121,14 +121,14 @@ export default class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  <FormattedMessage id="components.file-manager.index.new_archive" />
+                  <FormattedMessage id="new-archive" />
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  <FormattedMessage id="components.file-manager.index.open_in_buttercup" />
+                  <FormattedMessage id="open-in-buttercup" />
                 </Button>
               </ButtonRow>
             </Flex>

@@ -1,23 +1,29 @@
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { getSetting } from '../selectors';
 
-// export wrapper for file-manager.js and index.js
-export { IntlProvider };
+// add all locales
+import de from 'locales/de';
+import en from 'locales/en';
+import es from 'locales/es';
 
+// configuration
 const config = {
   standardLanguage: 'en',
   availableLanguages: [
     {
       name: 'English',
-      code: 'en'
+      code: 'en',
+      messages: en
     },
     {
       name: 'Deutsch',
-      code: 'de'
+      code: 'de',
+      messages: de
     },
     {
       name: 'Español',
-      code: 'es'
+      code: 'es',
+      messages: es
     }
   ]
 };
@@ -29,23 +35,16 @@ addLocaleData(
   )
 );
 
-// add all locale files to an array for electron
-const getAllTranslationsAsObject = () => {
-  const translations = [];
-
-  config.availableLanguages.forEach(lang => {
-    translations[lang.code] = require(`../../../locales/${lang.code}`);
-  });
-
-  return translations;
-};
+// get translation messages by language code
+const getTranslationsByLangCode = langCode =>
+  config.availableLanguages.filter(lang => lang.code === langCode).pop()
+    .messages;
 
 /**
  * i18n object
  */
 const i18n = () => ({
   provider: null,
-  allTranslations: getAllTranslationsAsObject(),
   locale: '',
   translations: {},
   /**
@@ -56,7 +55,7 @@ const i18n = () => ({
   setup(store, scope) {
     this.locale =
       getSetting(store.getState(), 'locale') || config.standardLanguage;
-    this.translations = this.allTranslations[this.locale];
+    this.translations = getTranslationsByLangCode(this.locale);
 
     if (scope === 'main') {
       this.provider = new IntlProvider(
@@ -86,19 +85,10 @@ const i18n = () => ({
      */
   getConfig(key) {
     return config[key] || config;
-  },
-  /**
-     * Get current locale
-     */
-  getLocale() {
-    return this.locale;
-  },
-  /**
-     * Get all translations of current locale
-     */
-  getTranslations() {
-    return this.translations;
   }
 });
+
+// export wrapper for file-manager.js and index.js
+export { IntlProvider };
 
 export default i18n();

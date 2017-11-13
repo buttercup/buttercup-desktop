@@ -30,16 +30,16 @@ export function showPasswordDialog(preConfirm, options = {}) {
     preConfirm = defaultFunc;
   }
   return swal({
-    title: i18n.formatMessage({ id: 'system.dialog.title' }),
+    title: i18n.formatMessage({ id: 'master-password' }),
     input: 'password',
     showCancelButton: true,
     animation: false,
     customClass: styles.alert,
     confirmButtonClass: styles.confirm,
-    confirmButtonText: i18n.formatMessage({ id: 'system.dialog.confirm' }),
+    confirmButtonText: i18n.formatMessage({ id: 'confirm' }),
     cancelButtonClass: styles.cancel,
-    cancelButtonText: i18n.formatMessage({ id: 'system.dialog.nevermind' }),
-    inputPlaceholder: i18n.formatMessage({ id: 'system.dialog.password' }),
+    cancelButtonText: i18n.formatMessage({ id: 'nevermind' }),
+    inputPlaceholder: i18n.formatMessage({ id: 'password' }),
     inputClass: styles.input,
     buttonsStyling: false,
     ...options,

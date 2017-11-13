@@ -28,7 +28,10 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss'],
+    alias: {
+      locales: join(__dirname, '../locales')
+    }
   },
   plugins: [],
   externals: ['buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']
