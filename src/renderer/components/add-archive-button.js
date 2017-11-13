@@ -42,7 +42,7 @@ const AddArchiveButton = ({
     {...props}
   >
     {condenced
-      ? ''
+      ? ' '
       : intl.formatMessage({ id: 'components.add-archive-button.add_archive' })}
   </Button>
 );
