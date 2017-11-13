@@ -235,7 +235,8 @@
     "webdav-fs": "^1.6.0",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
-    "webpack-merge": "^2.6.0"
+    "webpack-merge": "^2.6.0",
+    "webdriverio": "4.8.0"
   },
   "collective": {
     "type": "opencollective",
