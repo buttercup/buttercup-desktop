@@ -5,7 +5,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
         include: [
           join(__dirname, '../src'),
           join(__dirname, '../node_modules/buttercup-generator')
@@ -13,12 +13,12 @@ module.exports = {
       },
       {
         test: /\.(svg|png|ttf|woff|woff2)$/,
-        loader: 'file-loader',
+        use: 'file-loader',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
