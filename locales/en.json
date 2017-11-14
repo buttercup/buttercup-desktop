@@ -65,6 +65,7 @@
   "change-color":"Change Color",
   "import":"Import",
   "import-from-type":"From {name} archive (.{extension})",
+  "import-to-type":"To {name}",
   "archive-remove-with-name":"Remove {name}",
   "dropbox-connection-failed-info":"Connection to Dropbox server failed. Please try again later",
   "connect-to-dropbox":"Connect to Dropbox",
@@ -78,5 +79,7 @@
   "date":"Date",
   "open-url-in-browser": "Open URL in Browser",
   "new-field": "New Field",
-  "label": "Label"
+  "label": "Label",
+  "archive": "Archive",
+  "file": "File"
 }

@@ -17,7 +17,15 @@ import pkg from '../../package.json';
 export function setupMenu(store) {
   const defaultTemplate = [
     {
-      label: isOSX() ? 'Archive' : 'File',
+      label: isOSX()
+        ? i18n.formatMessage({
+            id: 'archive',
+            defaultMessage: 'Archive'
+          })
+        : i18n.formatMessage({
+            id: 'file',
+            defaultMessage: 'File'
+          }),
       submenu: [
         {
           label: i18n.formatMessage({
@@ -218,13 +226,30 @@ export function setupMenu(store) {
           submenu: item.submenu.map((sub, i) => {
             if (i === 4) {
               return {
-                label: 'Import',
+                label: i18n.formatMessage({
+                  id: 'import',
+                  defaultMessage: 'Import'
+                }),
                 submenu: Object.entries(
                   ImportTypeInfo
                 ).map(([typeKey, type]) => ({
-                  label: `From ${type.name} archive (.${type.extension})`,
+                  label: i18n.formatMessage({
+                    id: 'import-from-type',
+                    defaultMessage: 'From {name} archive (.{.extension})',
+                    values: {
+                      name: type.name,
+                      extension: type.extension
+                    }
+                  }),
                   submenu: archives.map(archive => ({
-                    label: `To ${archive.name}`,
+                    label: i18n.formatMessage({
+                      id: 'import-to-type',
+                      defaultMessage: 'Zu {name}',
+                      values: {
+                        name: archive.name,
+                        extension: type.extension
+                      }
+                    }),
                     enabled: archive.status === 'unlocked',
                     click: (item, focusedWindow) =>
                       openFileForImporting(focusedWindow, typeKey, archive.id)

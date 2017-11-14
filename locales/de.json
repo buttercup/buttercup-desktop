@@ -63,8 +63,9 @@
   "unlock":"Entsperren",
   "open":"Öffnen",
   "change-color":"Farbe wechseln",
-  "import":"Impportieren",
+  "import":"Importieren",
   "import-from-type":"Von {name} Archiv (.{extension})",
+  "import-to-type":"Zu {name}",
   "archive-remove-with-name":"Entferne {name}",
   "dropbox-connection-failed-info":"Die Verbindung zum Dropbox-Server ist fehlgeschlagen. Bitte versuche es später noch einmal.",
   "connect-to-dropbox":"Mit Dropbox verbinden",
@@ -78,5 +79,7 @@
   "date":"Datum",
   "open-url-in-browser": "URL im Browser öffnen",
   "new-field": "Neues Feld",
-  "label": "Bezeichnung"
+  "label": "Bezeichnung",
+  "archive": "Archiv",
+  "file": "Datei"
 }
