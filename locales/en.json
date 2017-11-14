@@ -76,5 +76,6 @@
   "name":"Name",
   "size":"Size",
   "date":"Date",
-  "open-url-in-browser": "Open URL in Browser"
+  "open-url-in-browser": "Open URL in Browser",
+  "new-field": "New Field"
 }

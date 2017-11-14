@@ -4,6 +4,7 @@ import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import i18n from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
@@ -27,7 +28,10 @@ const renderMeta = (
             name={`${member}.value`}
             type="text"
             component={Input}
-            placeholder="New Field"
+            placeholder={i18n.formatMessage({
+              id: 'new-field',
+              defaultMessage: 'New Field'
+            })}
           />
           <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
         </div>
