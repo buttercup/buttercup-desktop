@@ -64,7 +64,7 @@ class Webdav extends Component {
     }
 
     let { endpoint, username, password } = this.state;
-    const { brand } = this.props;
+    const { brand, intl } = this.props;
 
     if (!endpoint || !username || !password) {
       return;
