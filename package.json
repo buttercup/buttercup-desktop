@@ -224,7 +224,7 @@
     "reselect": "^2.5.4",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
-    "spectron": "^3.7.2",
+    "spectron": "3.6.4",
     "style-loader": "^0.13.1",
     "styled-components": "^1.4.4",
     "styled-flexbox": "^0.2.0",
@@ -233,7 +233,6 @@
     "url-loader": "^0.5.9",
     "uuid": "^2.0.3",
     "webdav-fs": "^1.6.0",
-    "webdriverio": "4.8.0",
     "webpack": "3.8.1",
     "webpack-dev-server": "2.9.4",
     "webpack-merge": "^2.6.0"
