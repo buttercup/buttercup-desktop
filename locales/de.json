@@ -77,5 +77,6 @@
   "size":"Größe",
   "date":"Datum",
   "open-url-in-browser": "URL im Browser öffnen",
-  "new-field": "Neues Feld"
+  "new-field": "Neues Feld",
+  "label": "Bezeichnung"
 }

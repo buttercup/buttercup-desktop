@@ -4,13 +4,12 @@ import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
-import i18n from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
 
 const renderMeta = (
-  { fields, meta: { touched, error } } // eslint-disable-line react/prop-types
+  { fields, intl, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
   <div>
     <div className={styles.metaWrapper}>
@@ -21,14 +20,17 @@ const renderMeta = (
               name={`${member}.key`}
               type="text"
               component="input"
-              placeholder="Label"
+              placeholder={intl.formatMessage({
+                id: 'label',
+                defaultMessage: 'Label'
+              })}
             />
           </div>
           <Field
             name={`${member}.value`}
             type="text"
             component={Input}
-            placeholder={i18n.formatMessage({
+            placeholder={intl.formatMessage({
               id: 'new-field',
               defaultMessage: 'New Field'
             })}
@@ -110,7 +112,7 @@ class EntryForm extends Component {
             defaultMessage="Custom Fields"
           />:
         </h6>
-        <FieldArray name="meta" component={renderMeta} />
+        <FieldArray name="meta" component={renderMeta} intl={intl} />
       </form>
     );
   }
