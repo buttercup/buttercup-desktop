@@ -141,7 +141,7 @@
     "buttercup-importer": "~0.9.2",
     "classnames": "^2.2.5",
     "concurrently": "^2.1.0",
-    "cross-env": "^1.0.8",
+    "cross-env": "^5.1.1",
     "css-loader": "^0.25.0",
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
