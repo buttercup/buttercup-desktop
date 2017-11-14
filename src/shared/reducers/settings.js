@@ -32,7 +32,7 @@ const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
   condencedSidebar: true,
   menubarAutoHide: false,
-  locale: i18n.getConfig('standardLanguage')
+  locale: i18n.getConfig('defaultLanguage')
 };
 
 export function settings(state = DEFAULT_SETTINGS, action) {

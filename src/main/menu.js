@@ -203,7 +203,7 @@ export function setupMenu(store) {
 
   // make sure that a language is set
   if (!currentLocale) {
-    store.dispatch(setSetting('locale', i18n.getConfig('standardLanguage')));
+    store.dispatch(setSetting('locale', i18n.getConfig('defaultLanguage')));
   }
 
   const template = defaultTemplate.map((item, i) => {

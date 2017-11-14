@@ -37,8 +37,7 @@ addLocaleData(
 
 // get translation messages by language code
 const getTranslationsByLangCode = langCode =>
-  config.availableLanguages.filter(lang => lang.code === langCode).pop()
-    .messages;
+  config.availableLanguages.find(lang => lang.code === langCode).messages;
 
 /**
  * i18n object
@@ -58,7 +57,6 @@ const i18n = () => ({
     this.translations = getTranslationsByLangCode(this.locale);
 
     if (scope === 'main') {
-      console.log('init provider');
       this.provider = new IntlProvider(
         { locale: this.locale, messages: this.translations },
         {}
@@ -66,9 +64,9 @@ const i18n = () => ({
     }
   },
   /**
-     * Used for non react files
-     * @param {*} object
-     */
+   * Used for non react files
+   * @param {*} object
+   */
   formatMessage({ id, defaultMessage, description, values }) {
     let translation = '';
     // provider is set
@@ -86,10 +84,13 @@ const i18n = () => ({
     return translation;
   },
   /**
-     * Return full config or config by key
-     */
+   * Return config
+   */
   getConfig(key) {
-    return config[key] || config;
+    if (!(key in config)) {
+      throw new Error('i18n config not found.');
+    }
+    return config[key];
   }
 });
 
