@@ -21,18 +21,25 @@ export function setupMenu(store) {
       submenu: [
         {
           label: i18n.formatMessage({
-            id: 'new-archive'
+            id: 'new-archive',
+            defaultMessage: 'New Archive'
           }),
           accelerator: 'CmdOrCtrl+N',
           click: (item, focusedWindow) => newFile(focusedWindow)
         },
         {
-          label: 'Open Archive',
+          label: i18n.formatMessage({
+            id: 'open-archive',
+            defaultMessage: 'Open Archive'
+          }),
           accelerator: 'CmdOrCtrl+O',
           click: (item, focusedWindow) => openFile(focusedWindow)
         },
         {
-          label: 'Connect Cloud Sources',
+          label: i18n.formatMessage({
+            id: 'connect-cloud-sources',
+            defaultMessage: 'Connect Cloud Sources'
+          }),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: (item, focusedWindow) => {
             getWindowManager().buildWindowOfType('file-manager', null, {
@@ -53,7 +60,10 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: 'Edit',
+      label: i18n.formatMessage({
+        id: 'edit',
+        defaultMessage: 'Edit'
+      }),
       submenu: [
         { role: 'undo' },
         { role: 'redo' },
@@ -67,7 +77,10 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: 'View',
+      label: i18n.formatMessage({
+        id: 'view',
+        defaultMessage: 'View'
+      }),
       submenu: [
         { type: 'separator' },
         { role: 'reload' },
@@ -78,28 +91,46 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: 'Window',
+      label: i18n.formatMessage({
+        id: 'window',
+        defaultMessage: 'Window'
+      }),
       role: 'window',
       submenu: [{ role: 'minimize' }, { role: 'close' }]
     },
     {
-      label: 'Help',
+      label: i18n.formatMessage({
+        id: 'help',
+        defaultMessage: 'Help'
+      }),
       role: 'help',
       submenu: [
         {
-          label: 'Visit Our Website',
+          label: i18n.formatMessage({
+            id: 'visit-our-website',
+            defaultMessage: 'Visit Our Website'
+          }),
           click: () => {
             shell.openExternal('https://buttercup.pw');
           }
         },
         {
-          label: 'Privacy Policy',
+          label: i18n.formatMessage({
+            id: 'privacy-policy',
+            defaultMessage: 'Privacy Policy'
+          }),
           click: () => {
             shell.openExternal('https://buttercup.pw/privacy');
           }
         },
         {
-          label: `View Changelog For v${pkg.version}`,
+          label: i18n.formatMessage({
+            id: 'view-changelog-for-v',
+            defaultMessage: 'View Changelog For v{version}',
+            values: {
+              version: pkg.version
+            }
+          }),
           click: () => {
             shell.openExternal(
               `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
@@ -130,7 +161,10 @@ export function setupMenu(store) {
     defaultTemplate[2].submenu.push(
       { type: 'separator' },
       {
-        label: 'Speech',
+        label: i18n.formatMessage({
+          id: 'speech',
+          defaultMessage: 'Speech'
+        }),
         submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
       }
     );
@@ -207,7 +241,10 @@ export function setupMenu(store) {
           ...item,
           submenu: [
             {
-              label: 'Condensed Sidebar',
+              label: i18n.formatMessage({
+                id: 'condensed-sidebar',
+                defaultMessage: 'Condensed Sidebar'
+              }),
               type: 'checkbox',
               checked: getSetting(state, 'condencedSidebar'),
               accelerator: 'CmdOrCtrl+Shift+B',
@@ -219,7 +256,8 @@ export function setupMenu(store) {
             // Language menu point
             {
               label: i18n.formatMessage({
-                id: 'language'
+                id: 'language',
+                defaultMessage: 'Language'
               }),
               submenu: i18n.getConfig('availableLanguages').map(lang => ({
                 label: lang.name,
@@ -240,7 +278,10 @@ export function setupMenu(store) {
             ...(isWindows()
               ? [
                   {
-                    label: 'Auto Hide Menubar',
+                    label: i18n.formatMessage({
+                      id: 'auto-hide-menubar',
+                      defaultMessage: 'Auto Hide Menubar'
+                    }),
                     type: 'checkbox',
                     checked: menubarAutoHide,
                     click: item => {

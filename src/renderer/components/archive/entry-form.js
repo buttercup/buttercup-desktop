@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
@@ -40,7 +41,7 @@ const renderMeta = (
       }}
       icon={<PlusIcon />}
     >
-      Add New Field
+      <FormattedMessage id="add-new-field" defaultMessage="Add New Field" />
     </Button>
     {touched && error && <span>{error}</span>}
   </div>
@@ -48,43 +49,63 @@ const renderMeta = (
 
 class EntryForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, intl } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">
-            Title
+            <FormattedMessage id="title" defaultMessage="Title" />
           </label>
           <Field
             name="properties.title"
             component={Input}
             type="text"
-            placeholder="Untitled"
+            placeholder={intl.formatMessage({
+              id: 'untitled',
+              defaultMessage: 'Untitled'
+            })}
           />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.username">
-            Username
+            <FormattedMessage id="username" defaultMessage="Username" />
           </label>
           <Field
             name="properties.username"
             component={Input}
             type="text"
-            placeholder="@username..."
+            placeholder={
+              '@' +
+              intl.formatMessage({
+                id: 'username',
+                defaultMessage: 'Username'
+              }) +
+              '...'
+            }
           />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.password">
-            Password
+            <FormattedMessage id="password" defaultMessage="Password" />
           </label>
           <Field
             name="properties.password"
             component={Input}
             type="password"
-            placeholder="Secure password..."
+            placeholder={
+              intl.formatMessage({
+                id: 'secure-password',
+                defaultMessage: 'Secure password'
+              }) + '...'
+            }
           />
         </div>
-        <h6 className={styles.heading}>Custom Fields:</h6>
+        <h6 className={styles.heading}>
+          <FormattedMessage
+            id="custom-fields"
+            defaultMessage="Custom Fields"
+          />:
+        </h6>
         <FieldArray name="meta" component={renderMeta} />
       </form>
     );
@@ -92,7 +113,8 @@ class EntryForm extends Component {
 }
 
 EntryForm.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default EntryForm;
+export default injectIntl(EntryForm);

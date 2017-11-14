@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
+import { FormattedHTMLMessage } from 'react-intl';
 import spinner from '../styles/img/spinner.svg';
 
 const SavingDialog = styled(Flex)`
@@ -53,7 +54,10 @@ export default class SavingModal extends Component {
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
           <p>
-            Your archive is being saved.<br />Exiting automatically...
+            <FormattedHTMLMessage
+              id="archive-saved-loading-info"
+              defaultMessage="Your archive is being saved.<br>Exiting automatically"
+            />...
           </p>
         </SavingDialogText>
       </SavingDialog>

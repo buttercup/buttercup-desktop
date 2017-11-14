@@ -123,7 +123,10 @@ export function createCopyMenu(entry, currentEntry) {
 
   const menu = [
     {
-      label: i18n.formatMessage({ id: 'system.menu.copy_to_clipboard' }),
+      label: i18n.formatMessage({
+        id: 'copy-to-clipboard',
+        defaultMessage: 'Copy To Clipboard'
+      }),
       submenu: [
         ...props,
         { type: 'separator' },
@@ -137,7 +140,10 @@ export function createCopyMenu(entry, currentEntry) {
 
   if (url) {
     menu.push({
-      label: 'Open URL in Browser',
+      label: i18n.formatMessage({
+        id: 'open-url-in-browser',
+        defaultMessage: 'Open URL in Browser'
+      }),
       click: () => openUrl(url.value)
     });
   }

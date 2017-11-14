@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
+import { injectIntl, intlShape } from 'react-intl';
 
 const UpdateNotice = ({
   available,
   version,
   installing,
   onClick,
-  className
+  className,
+  intl
 }) => {
   if (!available) {
     return null;
@@ -15,8 +17,20 @@ const UpdateNotice = ({
   return (
     <div className={className} onClick={onClick}>
       {installing
-        ? 'Installing...'
-        : `Buttercup ${version} is available. Click here to install now.`}
+        ? intl.formatMessage({
+            id: 'installing',
+            defaultMessage: 'Installing'
+          }) + '...'
+        : intl.formatMessage(
+            {
+              id: 'update-available-message',
+              defaultMessage:
+                'Buttercup {version} is available. Click here to install now.'
+            },
+            {
+              version
+            }
+          )}
     </div>
   );
 };
@@ -26,10 +40,11 @@ UpdateNotice.propTypes = {
   installing: PropTypes.bool,
   version: PropTypes.string,
   className: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default styled(UpdateNotice)`
+export default styled(injectIntl(UpdateNotice))`
   position: fixed;
   right: 1rem;
   bottom: 1rem;

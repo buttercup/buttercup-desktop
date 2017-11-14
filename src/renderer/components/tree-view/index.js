@@ -6,6 +6,7 @@ import Tree, { TreeNode } from 'rc-tree';
 import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import {
   showContextMenu,
   createMenuFromGroups,
@@ -24,11 +25,14 @@ const Column = styled(BaseColumn)`
 
 class TreeView extends Component {
   handleColumnRightClick() {
-    const { sortMode, onSortModeChange } = this.props;
+    const { sortMode, onSortModeChange, intl } = this.props;
 
     showContextMenu([
       {
-        label: 'New Group',
+        label: intl.formatMessage({
+          id: 'new-group',
+          defaultMessage: 'New Group'
+        }),
         click: () => this.handleAddClick()
       },
       { type: 'separator' },
@@ -36,12 +40,18 @@ class TreeView extends Component {
         [
           {
             mode: 'title-asc',
-            label: 'Title: Ascending',
+            label: intl.formatMessage({
+              id: 'title-asc',
+              defaultMessage: 'Title: Ascending'
+            }),
             icon: 'sort-alpha-asc'
           },
           {
             mode: 'title-desc',
-            label: 'Title: Descending',
+            label: intl.formatMessage({
+              id: 'title-desc',
+              defaultMessage: 'Title: Descending'
+            }),
             icon: 'sort-alpha-desc'
           }
         ],
@@ -53,6 +63,7 @@ class TreeView extends Component {
 
   handleRightClick = (node, groups, e) => {
     const { id: groupId, isTrash } = node;
+    const { intl } = this.props;
 
     // Prevent righ click from propagation to parent
     e.stopPropagation();
@@ -60,27 +71,42 @@ class TreeView extends Component {
     if (isTrash) {
       showContextMenu([
         {
-          label: 'Empty Trash',
+          label: intl.formatMessage({
+            id: 'empty-trash',
+            defaultMessage: 'Empty Trash'
+          }),
           click: () => this.props.onEmptyTrash()
         }
       ]);
     } else {
       showContextMenu([
         {
-          label: 'Add Group',
+          label: intl.formatMessage({
+            id: 'add-group',
+            defaultMessage: 'Add Group'
+          }),
           click: () => this.handleAddClick(null, groupId)
         },
         {
-          label: 'Rename',
+          label: intl.formatMessage({
+            id: 'rename',
+            defaultMessage: 'Rename'
+          }),
           click: () => this.props.onRenameClick(groupId)
         },
         { type: 'separator' },
         {
-          label: 'Move to Root',
+          label: intl.formatMessage({
+            id: 'move-to-root',
+            defaultMessage: 'Move to Root'
+          }),
           click: () => this.props.onMoveGroup(groupId, null)
         },
         {
-          label: 'Move to Group',
+          label: intl.formatMessage({
+            id: 'move-to-group',
+            defaultMessage: 'Move to Group'
+          }),
           submenu: createMenuFromGroups(
             groups,
             groupId,
@@ -92,7 +118,10 @@ class TreeView extends Component {
         },
         { type: 'separator' },
         {
-          label: 'Delete',
+          label: intl.formatMessage({
+            id: 'delete',
+            defaultMessage: 'Delete'
+          }),
           click: () => this.handleRemoveClick(null, groupId)
         }
       ]);
@@ -172,7 +201,7 @@ class TreeView extends Component {
       <Column
         footer={
           <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
-            New Group
+            <FormattedMessage id="new-group" defaultMessage="New Group" />
           </Button>
         }
         onContextMenu={() => this.handleColumnRightClick()}
@@ -208,7 +237,8 @@ TreeView.propTypes = {
   onEmptyTrash: PropTypes.func,
   onMoveGroup: PropTypes.func,
   onSortModeChange: PropTypes.func,
-  onExpand: PropTypes.func
+  onExpand: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default TreeView;
+export default injectIntl(TreeView);

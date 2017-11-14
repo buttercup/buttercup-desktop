@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { Button } from '@buttercup/ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
@@ -39,9 +40,11 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              Save
+              <FormattedMessage id="save" defaultMessage="Save" />
             </Button>{' '}
-            <Button onClick={this.props.handleViewMode}>Cancel</Button>
+            <Button onClick={this.props.handleViewMode}>
+              <FormattedMessage id="cancel" defaultMessage="Cancel" />
+            </Button>
           </div>
           <div>
             <Button
@@ -49,7 +52,7 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              Delete
+              <FormattedMessage id="delete" defaultMessage="Delete" />
             </Button>
           </div>
         </div>
@@ -75,9 +78,11 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            Save
+            <FormattedMessage id="save" defaultMessage="Save" />
           </Button>{' '}
-          <Button onClick={this.props.handleViewMode}>Cancel</Button>
+          <Button onClick={this.props.handleViewMode}>
+            <FormattedMessage id="cancel" defaultMessage="Cancel" />
+          </Button>
         </div>
       )
     };
@@ -88,17 +93,22 @@ class Entry extends Component {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          Edit
+          <FormattedMessage id="edit" defaultMessage="Edit" />
         </Button>
       )
     };
   }
 
   renderIdleMode() {
+    const { intl } = this.props;
+
     return {
       content: (
         <EmptyView
-          caption="Select or Create an Entry"
+          caption={intl.formatMessage({
+            id: 'select-or-create-an-entry',
+            defaultMessage: 'Select or Create an Entry'
+          })}
           className={styles.emptyView}
           imageSrc={bench}
         />
@@ -147,7 +157,8 @@ Entry.propTypes = {
   onDelete: PropTypes.func,
   handleEditMode: PropTypes.func,
   handleViewMode: PropTypes.func,
-  initializeForm: PropTypes.func
+  initializeForm: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default Entry;
+export default injectIntl(Entry);

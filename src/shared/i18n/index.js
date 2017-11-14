@@ -8,7 +8,7 @@ import es from 'locales/es';
 
 // configuration
 const config = {
-  standardLanguage: 'en',
+  defaultLanguage: 'en',
   availableLanguages: [
     {
       name: 'English',
@@ -54,10 +54,11 @@ const i18n = () => ({
    */
   setup(store, scope) {
     this.locale =
-      getSetting(store.getState(), 'locale') || config.standardLanguage;
+      getSetting(store.getState(), 'locale') || config.defaultLanguage;
     this.translations = getTranslationsByLangCode(this.locale);
 
     if (scope === 'main') {
+      console.log('init provider');
       this.provider = new IntlProvider(
         { locale: this.locale, messages: this.translations },
         {}
@@ -68,14 +69,18 @@ const i18n = () => ({
      * Used for non react files
      * @param {*} object
      */
-  formatMessage({ id, defaultMessage, description }) {
+  formatMessage({ id, defaultMessage, description, values }) {
     let translation = '';
     // provider is set
     if (this.provider) {
       const { intl } = this.provider.getChildContext();
-      translation = intl.formatMessage({ id, defaultMessage, description });
+      translation = intl.formatMessage(
+        { id, defaultMessage, description },
+        values
+      );
     } else {
-      translation = this.translations[id] || id;
+      // fallback
+      translation = getTranslationsByLangCode(config.defaultLanguage)[id] || id;
     }
 
     return translation;

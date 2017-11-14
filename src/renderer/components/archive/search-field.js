@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { injectIntl, intlShape } from 'react-intl';
 import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 
@@ -19,7 +20,7 @@ class SearchField extends Component {
   }
 
   render() {
-    const { filter, onChange } = this.props;
+    const { filter, onChange, intl } = this.props;
     return (
       <div className={styles.wrapper}>
         <input
@@ -28,7 +29,12 @@ class SearchField extends Component {
           onChange={e => onChange(e.target.value)}
           onKeyUp={e => this.handleKeyUp(e)}
           className={styles.field}
-          placeholder="Search..."
+          placeholder={
+            intl.formatMessage({
+              id: 'search',
+              defaultMessage: 'Search'
+            }) + '...'
+          }
           ref={input => {
             this.textInput = input;
           }}
@@ -49,7 +55,8 @@ class SearchField extends Component {
 
 SearchField.propTypes = {
   onChange: PropTypes.func,
-  filter: PropTypes.string
+  filter: PropTypes.string,
+  intl: intlShape.isRequired
 };
 
-export default SearchField;
+export default injectIntl(SearchField);

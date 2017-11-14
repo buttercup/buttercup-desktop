@@ -6,6 +6,7 @@ import CopyIcon from 'react-icons/lib/go/clippy';
 import EyeIcon from 'react-icons/lib/fa/eye';
 import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
 import { Button, ButtonRow, ColoredDigits } from '@buttercup/ui';
+import { injectIntl, intlShape } from 'react-intl';
 import { showContextMenu } from '../../system/menu';
 import { copyToClipboard } from '../../system/utils';
 
@@ -60,17 +61,23 @@ class Copyable extends Component {
   }
 
   showContextMenu() {
-    const { type } = this.props;
+    const { type, intl } = this.props;
     const items = [
       {
-        label: 'Copy to Clipboard',
+        label: intl.formatMessage({
+          id: 'copy-to-clipboard',
+          defaultMessage: 'Copy to Clipboard'
+        }),
         click: () => this.handleCopy()
       }
     ];
 
     if ((type || '').toLowerCase() === 'password') {
       items.push({
-        label: 'Reveal Password',
+        label: intl.formatMessage({
+          id: 'reveal-password',
+          defaultMessage: 'Reveal Password'
+        }),
         type: 'checkbox',
         checked: !this.state.concealed,
         click: () => this.handleReveal()
@@ -99,7 +106,7 @@ class Copyable extends Component {
   }
 
   render() {
-    const { children, type } = this.props;
+    const { children, type, intl } = this.props;
     if (!children) {
       return null;
     }
@@ -113,13 +120,26 @@ class Copyable extends Component {
           {(type || '').toLowerCase() === 'password' && (
             <Button
               icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
-              title={this.state.concealed ? 'Reveal' : 'Hide'}
+              title={
+                this.state.concealed
+                  ? intl.formatMessage({
+                      id: 'reveal',
+                      defaultMessage: 'Reveal'
+                    })
+                  : intl.formatMessage({
+                      id: 'hide',
+                      defaultMessage: 'Hide'
+                    })
+              }
               onClick={() => this.handleReveal()}
             />
           )}
           <Button
             icon={<CopyIcon />}
-            title="Copy"
+            title={intl.formatMessage({
+              id: 'copy',
+              defaultMessage: 'Copy'
+            })}
             onClick={() => this.handleCopy()}
           />
         </HiddenButtonRow>
@@ -130,7 +150,8 @@ class Copyable extends Component {
 
 Copyable.propTypes = {
   children: PropTypes.node,
-  type: PropTypes.string
+  type: PropTypes.string,
+  intl: intlShape.isRequired
 };
 
-export default Copyable;
+export default injectIntl(Copyable);

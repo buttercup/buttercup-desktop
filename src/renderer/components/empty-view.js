@@ -49,11 +49,15 @@ export const NoArchiveSelected = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <FormattedMessage id="welcome-back-title" />
+        <FormattedMessage
+          id="welcome-back-title"
+          defaultMessage="Welcome back to Buttercup."
+        />
       </Title>
       <Caption>
         <FormattedMessage
           id="unlock-archive"
+          defaultMessage="Unlock an archive to begin ({os})."
           values={{
             os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
           }}
@@ -68,10 +72,16 @@ export const WelcomeScreen = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <FormattedMessage id="welcome-title" />
+        <FormattedMessage
+          id="welcome-title"
+          defaultMessage="Welcome to Buttercup."
+        />
       </Title>
       <Caption>
-        <FormattedMessage id="welcome-caption" />
+        <FormattedMessage
+          id="welcome-caption"
+          defaultMessage="You haven't added any archives yet. Why not add one?"
+        />
       </Caption>
     </Figure>
     <AddArchiveButton />

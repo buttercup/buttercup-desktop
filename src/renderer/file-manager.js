@@ -11,7 +11,7 @@ const store = configureStore({}, 'renderer');
 i18n.setup(store);
 
 render(
-  <IntlProvider locale={i18n.getLocale()} messages={i18n.getTranslations()}>
+  <IntlProvider locale={i18n.locale} messages={i18n.translations}>
     <FileManager />
   </IntlProvider>,
   document.getElementById('root')

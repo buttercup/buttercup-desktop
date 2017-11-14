@@ -18,21 +18,24 @@ const AddArchiveButton = ({
       showContextMenu([
         {
           label: intl.formatMessage({
-            id: 'open-archive-file'
+            id: 'open-archive-file',
+            defaultMessage: 'Open Archive File'
           }),
           accelerator: 'CmdOrCtrl+O',
           click: onOpenClick
         },
         {
           label: intl.formatMessage({
-            id: 'new-archive-file'
+            id: 'new-archive-file',
+            defaultMessage: 'New Archive File'
           }),
           accelerator: 'CmdOrCtrl+N',
           click: onNewClick
         },
         {
           label: intl.formatMessage({
-            id: 'connect-cloud-sources'
+            id: 'connect-cloud-sources',
+            defaultMessage: 'Connect Cloud Sources'
           }),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: onCloudClick
@@ -41,7 +44,12 @@ const AddArchiveButton = ({
     icon={<ArchiveIcon />}
     {...props}
   >
-    {condenced ? ' ' : intl.formatMessage({ id: 'add-archive' })}
+    {condenced
+      ? ' '
+      : intl.formatMessage({
+          id: 'add-archive',
+          defaultMessage: 'Add Archive'
+        })}
   </Button>
 );
 

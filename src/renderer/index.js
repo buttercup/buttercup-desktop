@@ -80,7 +80,6 @@ ipc.on('locale-change', () => {
 
   i18n.setup(store);
 
-  console.log();
   renderApp(Root, i18n);
 });
 
