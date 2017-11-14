@@ -51,7 +51,7 @@ export function setupActions(store) {
   });
 
   ipc.on('locale-change', () => {
-    i18n.setup(store, 'main');
+    i18n.setup(store);
     store.subscribe(debounce(() => setupMenu(store), 500));
   });
 }

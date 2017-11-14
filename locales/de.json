@@ -26,7 +26,7 @@
   "privacy-policy":"Datenschutzrichtlinie",
   "view-changelog-for-v":"Changelog für v{version} aufrufen",
   "speech":"Sprachhilfe",
-  "condensed-sidebar":"Kleine Sidebar",
+  "condensed-sidebar":"Verkleinerte Seitenleiste",
   "auto-hide-menubar":"Menüleiste automatisch ausblenden",
   "new-group":"Neue Gruppe",
   "title-asc":"Titel: Aufsteigend",
@@ -37,6 +37,7 @@
   "rename":"Umbenennen",
   "move-to-root":"Ins Hauptverzeichnis verschieben",
   "move-to-group":"In Gruppe verschieben",
+  "move-to-group-custom": "Nach {title} verschieben",
   "move-to-trash":"In den Papierkorb verschieben",
   "delete":"Löschen",
   "delete-permanently":"Permanent löschen",
@@ -81,5 +82,14 @@
   "new-field": "Neues Feld",
   "label": "Bezeichnung",
   "archive": "Archiv",
-  "file": "Datei"
+  "file": "Datei",
+  "archive-not-found-error": "Archiv wurde nicht gefunden",
+  "authentication-failed-error": "Authentifizierung fehlgeschlagen.",
+  "unknown-error": "Ein unbekannter Fehler ist aufgetreten",
+  "passwords-font-match-error": "Die Passwörter stimmen nicht überein.",
+  "confirm-password": "Passwort bestätigen",
+  "group-not-found-error": "Gruppe wurde nicht gefunden.",
+  "sort-definition-not-found-error": "Sortieroption nicht gefunden",
+  "insufficient-data-provided-error": "Nicht genügend Daten zum Sortieren",
+  "check-for-update-error": "Fehler beim Überprüfen von Updates"
 }

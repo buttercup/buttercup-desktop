@@ -37,6 +37,7 @@
   "rename":"Rename",
   "move-to-root":"Move to Root",
   "move-to-group":"Move to Group",
+  "move-to-group-custom": "Move to {title}",
   "move-to-trash":"Move to Trash",
   "delete":"Delete",
   "delete-permanently":"Delete Permanently",
@@ -81,5 +82,14 @@
   "new-field": "New Field",
   "label": "Label",
   "archive": "Archive",
-  "file": "File"
+  "file": "File",
+  "archive-not-found-error": "Archive source was not found.",
+  "authentication-failed-error": "Authentication failed.",
+  "unknown-error": "An unknown error has occurred",
+  "passwords-font-match-error": "Your passwords don't match.",
+  "confirm-password": "Confirm Password",
+  "group-not-found-error": "Group has not been found.",
+  "sort-definition-not-found-error": "Sort definition not found",
+  "insufficient-data-provided-error": "Insufficient data provided for sorting",
+  "check-for-update-error": "Check for Update Error"
 }

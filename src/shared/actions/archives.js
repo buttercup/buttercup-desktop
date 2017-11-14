@@ -21,6 +21,7 @@ import {
   removeArchiveFromArchiveManager,
   unlockArchiveInArchiveManager
 } from '../buttercup/archive';
+import i18n from '../i18n';
 
 // Store Actions
 export const addArchiveToStore = createAction(ARCHIVES_ADD);
@@ -68,7 +69,10 @@ export const addArchive = payload => async (dispatch, getState) => {
   const dispatchLoad = archiveId => dispatch(loadArchive(archiveId));
   const addToArchive = password =>
     addArchiveToArchiveManager(payload, password).catch(err => {
-      const unknownMessage = 'An unknown error has occurred';
+      const unknownMessage = i18n.formatMessage({
+        id: 'unknown-error',
+        defaultMessage: 'An unknown error has occurred'
+      });
       return Promise.reject(
         isError(err) ? err.message || unknownMessage : unknownMessage
       );
@@ -88,12 +92,22 @@ export const addArchive = payload => async (dispatch, getState) => {
       showPasswordDialog(
         password => {
           if (firstPassword !== password) {
-            return Promise.reject(new Error("Your passwords don't match."));
+            return Promise.reject(
+              new Error(
+                i18n.formatMessage({
+                  id: 'passwords-font-match-error',
+                  defaultMessage: "Your passwords don't match."
+                })
+              )
+            );
           }
           return addToArchive(password);
         },
         {
-          title: 'Confirm Password'
+          title: i18n.formatMessage({
+            id: 'confirm-password',
+            defaultMessage: 'Confirm Password'
+          })
         }
       )
     )

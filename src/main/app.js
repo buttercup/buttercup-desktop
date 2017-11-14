@@ -98,7 +98,7 @@ app.on('ready', async () => {
   } catch (err) {
     log.error('Unable to read state json file', err);
   }
-  const store = configureStore(state, 'main');
+  const store = configureStore(state);
 
   // Persist Store to Disk
   store.subscribe(() => {
@@ -112,7 +112,7 @@ app.on('ready', async () => {
   });
 
   // Setup Windows & IPC Actions
-  i18n.setup(store, 'main');
+  i18n.setup(store);
   setupWindows(store);
   setupActions(store);
   setupMenu(store);

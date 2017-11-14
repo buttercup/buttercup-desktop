@@ -55,7 +55,13 @@ export function createMenuFromGroups(
                   [
                     {
                       ...group,
-                      title: `Move to ${group.title}`,
+                      title: i18n.formatMessage({
+                        id: 'move-to-group-custom',
+                        defaultMessage: 'Move to {title}',
+                        values: {
+                          title: group.title
+                        }
+                      }),
                       groups: []
                     },
                     {
@@ -74,7 +80,12 @@ export function createMenuFromGroups(
 
 export function createSortMenu(sortDefinition = [], currentMode, onChange) {
   if (sortDefinition.length === 0) {
-    throw new Error('Sort definition not found');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'sort-definition-not-found-error',
+        defaultMessage: 'Sort definition not found'
+      })
+    );
   }
 
   if (!Array.isArray(sortDefinition[0])) {
@@ -102,12 +113,18 @@ export function createCopyMenu(entry, currentEntry) {
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [
     {
-      label: 'Username',
+      label: i18n.formatMessage({
+        id: 'username',
+        defaultMessage: 'Username'
+      }),
       accelerator: showKeys ? 'CmdOrCtrl+B' : null,
       click: () => copyToClipboard(entry.properties.username)
     },
     {
-      label: 'Password',
+      label: i18n.formatMessage({
+        id: 'password',
+        defaultMessage: 'Password'
+      }),
       accelerator: showKeys ? 'CmdOrCtrl+C' : null,
       click: () => copyToClipboard(entry.properties.password)
     }

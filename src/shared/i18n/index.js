@@ -42,26 +42,23 @@ const getTranslationsByLangCode = langCode =>
 /**
  * i18n object
  */
-const i18n = () => ({
+const i18n = {
   provider: null,
   locale: '',
   translations: {},
   /**
    * Setup language
    * @param {object} store
-   * @param {string} scope
    */
-  setup(store, scope) {
+  setup(store) {
     this.locale =
       getSetting(store.getState(), 'locale') || config.defaultLanguage;
     this.translations = getTranslationsByLangCode(this.locale);
 
-    if (scope === 'main') {
-      this.provider = new IntlProvider(
-        { locale: this.locale, messages: this.translations },
-        {}
-      );
-    }
+    this.provider = new IntlProvider(
+      { locale: this.locale, messages: this.translations },
+      {}
+    );
   },
   /**
    * Used for non react files
@@ -78,7 +75,7 @@ const i18n = () => ({
       );
     } else {
       // fallback
-      translation = getTranslationsByLangCode(config.defaultLanguage)[id] || id;
+      translation = getTranslationsByLangCode(this.locale)[id] || id;
     }
 
     return translation;
@@ -92,9 +89,9 @@ const i18n = () => ({
     }
     return config[key];
   }
-});
+};
 
 // export wrapper for file-manager.js and index.js
 export { IntlProvider };
 
-export default i18n();
+export default i18n;

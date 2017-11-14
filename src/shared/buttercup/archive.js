@@ -6,6 +6,7 @@ import {
 import ElectronStorageInterface from './storage';
 import { enqueue } from '../../renderer/system/queue';
 import './ipc-datasource';
+import i18n from '../i18n';
 
 let __sharedManager = null;
 
@@ -46,9 +47,19 @@ export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
       const { message } = err;
       if (message) {
         if (message.includes('ENOENT')) {
-          throw new Error('Archive source was not found.');
+          throw new Error(
+            i18n.formatMessage({
+              id: 'archive-not-found-error',
+              defaultMessage: 'Archive source was not found.'
+            })
+          );
         } else if (message.includes('Authentication')) {
-          throw new Error('Authentication failed.');
+          throw new Error(
+            i18n.formatMessage({
+              id: 'authentication-failed-error',
+              defaultMessage: 'Authentication failed.'
+            })
+          );
         }
         throw new Error(message);
       }
