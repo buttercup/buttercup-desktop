@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import {
   formRow,
   metaWrapper,
@@ -11,17 +12,21 @@ import bubbleImage from '../../styles/img/info-bubble.svg';
 import EmptyView from '../empty-view';
 import Copyable from './copyable';
 
-const EntryView = ({ entry }) => (
+const EntryView = ({ entry, intl }) => (
   <div>
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className={labelWrapper}>{key}</div>
+        <div className={labelWrapper}>
+          <FormattedMessage id={key} defaultMessage={key} />
+        </div>
         <div className={inputWrapper}>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </div>
       </div>
     ))}
-    <h6 className={heading}>Custom Fields:</h6>
+    <h6 className={heading}>
+      <FormattedMessage id="custom-fields" defaultMessage="Custom Fields" />:
+    </h6>
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>
         {entry.meta.map(meta => (
@@ -35,7 +40,10 @@ const EntryView = ({ entry }) => (
       </div>
     ) : (
       <EmptyView
-        caption="No custom fields yet. Why not add one?"
+        caption={intl.formatMessage({
+          id: 'no-custom-fields-info-text',
+          defaultMessage: 'No custom fields yet. Why not add one?'
+        })}
         imageSrc={bubbleImage}
       />
     )}
@@ -43,7 +51,8 @@ const EntryView = ({ entry }) => (
 );
 
 EntryView.propTypes = {
-  entry: PropTypes.object
+  entry: PropTypes.object,
+  intl: intlShape.isRequired
 };
 
-export default EntryView;
+export default injectIntl(EntryView);

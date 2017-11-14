@@ -2,6 +2,7 @@ import path from 'path';
 import { remote } from 'electron';
 import capitalize from 'lodash/capitalize';
 import { copyToClipboard, openUrl } from './utils';
+import i18n from '../../shared/i18n';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -54,7 +55,13 @@ export function createMenuFromGroups(
                   [
                     {
                       ...group,
-                      title: `Move to ${group.title}`,
+                      title: i18n.formatMessage({
+                        id: 'move-to-group-custom',
+                        defaultMessage: 'Move to {title}',
+                        values: {
+                          title: group.title
+                        }
+                      }),
                       groups: []
                     },
                     {
@@ -73,7 +80,12 @@ export function createMenuFromGroups(
 
 export function createSortMenu(sortDefinition = [], currentMode, onChange) {
   if (sortDefinition.length === 0) {
-    throw new Error('Sort definition not found');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'sort-definition-not-found-error',
+        defaultMessage: 'Sort definition not found'
+      })
+    );
   }
 
   if (!Array.isArray(sortDefinition[0])) {
@@ -101,12 +113,18 @@ export function createCopyMenu(entry, currentEntry) {
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [
     {
-      label: 'Username',
+      label: i18n.formatMessage({
+        id: 'username',
+        defaultMessage: 'Username'
+      }),
       accelerator: showKeys ? 'CmdOrCtrl+B' : null,
       click: () => copyToClipboard(entry.properties.username)
     },
     {
-      label: 'Password',
+      label: i18n.formatMessage({
+        id: 'password',
+        defaultMessage: 'Password'
+      }),
       accelerator: showKeys ? 'CmdOrCtrl+C' : null,
       click: () => copyToClipboard(entry.properties.password)
     }
@@ -122,7 +140,10 @@ export function createCopyMenu(entry, currentEntry) {
 
   const menu = [
     {
-      label: 'Copy To Clipboard',
+      label: i18n.formatMessage({
+        id: 'copy-to-clipboard',
+        defaultMessage: 'Copy To Clipboard'
+      }),
       submenu: [
         ...props,
         { type: 'separator' },
@@ -136,7 +157,10 @@ export function createCopyMenu(entry, currentEntry) {
 
   if (url) {
     menu.push({
-      label: 'Open URL in Browser',
+      label: i18n.formatMessage({
+        id: 'open-url-in-browser',
+        defaultMessage: 'Open URL in Browser'
+      }),
       click: () => openUrl(url.value)
     });
   }

@@ -19,6 +19,7 @@ cache:
 
 install:
   - ps: Install-Product node $env:nodejs_version
+  - npm cache verify
   - npm install
   - npm run build
 

@@ -3,6 +3,7 @@ import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
+import i18n from '../shared/i18n';
 import { setupMenu } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { sendEventToMainWindow } from './utils/window';
@@ -97,7 +98,7 @@ app.on('ready', async () => {
   } catch (err) {
     log.error('Unable to read state json file', err);
   }
-  const store = configureStore(state, 'main');
+  const store = configureStore(state);
 
   // Persist Store to Disk
   store.subscribe(() => {
@@ -111,6 +112,7 @@ app.on('ready', async () => {
   });
 
   // Setup Windows & IPC Actions
+  i18n.setup(store);
   setupWindows(store);
   setupActions(store);
   setupMenu(store);

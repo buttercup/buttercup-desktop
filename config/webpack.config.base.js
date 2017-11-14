@@ -5,7 +5,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        use: 'babel-loader',
         include: [
           join(__dirname, '../src'),
           join(__dirname, '../node_modules/buttercup-generator')
@@ -13,12 +13,12 @@ module.exports = {
       },
       {
         test: /\.(svg|png|ttf|woff|woff2)$/,
-        loader: 'file-loader',
+        use: 'file-loader',
         exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -28,7 +28,10 @@ module.exports = {
     libraryTarget: 'commonjs2'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.scss'],
+    alias: {
+      locales: join(__dirname, '../locales')
+    }
   },
   plugins: [],
   externals: ['buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']

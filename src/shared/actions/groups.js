@@ -3,6 +3,7 @@ import uuid from 'uuid';
 import { showConfirmDialog } from '../../renderer/system/dialog';
 import * as groupTools from '../buttercup/groups';
 import { loadEntries } from './entries';
+import i18n from '../i18n';
 import { addExpandedKeys } from './ui';
 import {
   getCurrentArchiveId,
@@ -148,10 +149,16 @@ export const emptyTrash = () => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(state);
   const trashIds = getTrashChildrenIds(state);
 
-  showConfirmDialog('Are you sure you want to empty Trash?', resp => {
-    if (resp === 0) {
-      trashIds.forEach(id => dispatch(dismissGroup(id)));
-      groupTools.emptyTrash(archiveId);
+  showConfirmDialog(
+    i18n.formatMessage({
+      id: 'empty-trash-question',
+      defaultMessage: 'Are you sure you want to empty Trash?'
+    }),
+    resp => {
+      if (resp === 0) {
+        trashIds.forEach(id => dispatch(dismissGroup(id)));
+        groupTools.emptyTrash(archiveId);
+      }
     }
-  });
+  );
 };

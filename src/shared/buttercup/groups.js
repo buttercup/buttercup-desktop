@@ -1,6 +1,7 @@
 import { Group } from 'buttercup/dist/buttercup-web.min';
 import { getArchive, saveWorkspace } from './archive';
 import { normalize, denormalize, schema } from 'normalizr';
+import i18n from '../i18n';
 
 const group = new schema.Entity('groups');
 const groups = new schema.Array(group);
@@ -47,7 +48,12 @@ export function createGroup(archiveId, parentId, groupName) {
   const group = parentId ? arch.findGroupByID(parentId) : arch;
 
   if (!group) {
-    throw new Error('Group has not been found.');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'group-not-found-error',
+        defaultMessage: 'Group has not been found.'
+      })
+    );
   }
 
   const newGroup = group.createGroup(groupName);
@@ -64,7 +70,12 @@ export function deleteGroup(archiveId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error('Group has not been found.');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'group-not-found-error',
+        defaultMessage: 'Group has not been found.'
+      })
+    );
   }
 
   group.delete();
@@ -76,7 +87,12 @@ export function saveGroup(archiveId, groupId, title) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error('Group has not been found.');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'group-not-found-error',
+        defaultMessage: 'Group has not been found.'
+      })
+    );
   }
 
   group.setTitle(title);
@@ -91,7 +107,12 @@ export function moveGroup(archiveId, groupId, parentId) {
   const parent = parentId ? arch.findGroupByID(parentId) : arch;
 
   if (!group || !parent) {
-    throw new Error('Group has not been found.');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'group-not-found-error',
+        defaultMessage: 'Group has not been found.'
+      })
+    );
   }
 
   group.moveToGroup(parent);

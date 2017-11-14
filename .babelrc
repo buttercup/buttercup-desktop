@@ -17,7 +17,8 @@
     "transform-object-rest-spread",
     "transform-strict-mode",
     "transform-class-properties",
-    "jsx-control-statements"
+    "jsx-control-statements",
+   ["webpack-alias", { "config": "./config/webpack.config.base.js" } ]
   ],
   "env": {
   	"production": {

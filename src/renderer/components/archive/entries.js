@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { isOSX } from '../../../shared/utils/platform';
 import {
   showContextMenu,
@@ -44,19 +45,31 @@ class Entries extends Component {
       currentGroup,
       currentEntry,
       onEntryMove,
-      onDelete
+      onDelete,
+      intl
     } = this.props;
     showContextMenu([
       ...createCopyMenu(entry, currentEntry),
       { type: 'separator' },
       {
-        label: 'Move to Group',
+        label: intl.formatMessage({
+          id: 'move-to-group',
+          defaultMessage: 'Move to Group'
+        }),
         submenu: createMenuFromGroups(groups, currentGroup, groupId => {
           onEntryMove(entry.id, groupId);
         })
       },
       {
-        label: entry.isInTrash ? 'Delete Permanently' : 'Move to Trash',
+        label: entry.isInTrash
+          ? intl.formatMessage({
+              id: 'delete-permanently',
+              defaultMessage: 'Delete Permanently'
+            })
+          : intl.formatMessage({
+              id: 'move-to-trash',
+              defaultMessage: 'Move to Trash'
+            }),
         click() {
           onDelete(entry.id);
         }
@@ -74,7 +87,7 @@ class Entries extends Component {
         dark
         icon={<PlusIcon />}
       >
-        Add Entry
+        <FormattedMessage id="add-entry" defaultMessage="Add Entry" />
       </Button>
     );
     const filterNode = (
@@ -109,7 +122,8 @@ Entries.propTypes = {
   onSortModeChange: PropTypes.func,
   onEntryMove: PropTypes.func,
   onDelete: PropTypes.func,
-  handleAddEntry: PropTypes.func
+  handleAddEntry: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default Entries;
+export default injectIntl(Entries);

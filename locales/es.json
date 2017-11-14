@@ -1,0 +1,20 @@
+{
+  "welcome-back-title": "Bienvenido de nuevo a Buttercup.",
+  "unlock-archive": "Desbloquee un archivo para comenzar ({os}).",
+  "welcome-title": "Bienvenido a Buttercup.",
+  "welcome-caption":"Aún no ha agregado ningún archivo. ¿Por qué no agregar uno?",
+  "open-archive-file": "Abrir archivo de archivo",
+  "new-archive-file": "Nuevo archivo archivado",
+  "connect-cloud-sources": "Connect Cloud Sources",
+  "add-archive": "Agregar archivo",
+  "cancel": "Cancelar",
+  "go-back": "Volver atrás",
+  "new-archive": "Nuevo archivo",
+  "open-in-buttercup": "Abrir en Buttercup",
+  "master_password": "Contraseña maestra",
+  "confirm": "Confirmar",
+  "nevermind": "No importa",
+  "password": "Contraseña",
+  "language": "Idioma",
+  "copy-to-clipboard": "Copiar al portapapeles"
+}

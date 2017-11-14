@@ -5,6 +5,7 @@ import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
+import i18n from '../shared/i18n';
 
 const windowManager = getWindowManager();
 
@@ -47,5 +48,10 @@ export function setupActions(store) {
   ipc.on('show-import-dialog', (e, payload) => {
     const { type, archiveId } = payload;
     openFileForImporting(undefined, type, archiveId);
+  });
+
+  ipc.on('locale-change', () => {
+    i18n.setup(store);
+    store.subscribe(debounce(() => setupMenu(store), 500));
   });
 }

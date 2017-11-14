@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 import { Button } from '@buttercup/ui';
 import ArchiveIcon from 'react-icons/lib/md/add';
 import { showContextMenu } from '../system/menu';
@@ -9,23 +10,33 @@ const AddArchiveButton = ({
   onNewClick,
   onOpenClick,
   onCloudClick,
+  intl,
   ...props
 }) => (
   <Button
     onClick={() =>
       showContextMenu([
         {
-          label: 'Open Archive File',
+          label: intl.formatMessage({
+            id: 'open-archive-file',
+            defaultMessage: 'Open Archive File'
+          }),
           accelerator: 'CmdOrCtrl+O',
           click: onOpenClick
         },
         {
-          label: 'New Archive File',
+          label: intl.formatMessage({
+            id: 'new-archive-file',
+            defaultMessage: 'New Archive File'
+          }),
           accelerator: 'CmdOrCtrl+N',
           click: onNewClick
         },
         {
-          label: 'Connect Cloud Sources',
+          label: intl.formatMessage({
+            id: 'connect-cloud-sources',
+            defaultMessage: 'Connect Cloud Sources'
+          }),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: onCloudClick
         }
@@ -33,7 +44,12 @@ const AddArchiveButton = ({
     icon={<ArchiveIcon />}
     {...props}
   >
-    {condenced ? ' ' : 'Add Archive'}
+    {condenced
+      ? ' '
+      : intl.formatMessage({
+          id: 'add-archive',
+          defaultMessage: 'Add Archive'
+        })}
   </Button>
 );
 
@@ -41,7 +57,8 @@ AddArchiveButton.propTypes = {
   condenced: PropTypes.bool,
   onOpenClick: PropTypes.func,
   onNewClick: PropTypes.func,
-  onCloudClick: PropTypes.func
+  onCloudClick: PropTypes.func,
+  intl: intlShape.isRequired
 };
 
-export default AddArchiveButton;
+export default injectIntl(AddArchiveButton);

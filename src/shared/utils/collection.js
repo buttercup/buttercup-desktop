@@ -1,5 +1,6 @@
 import { sortBy, at } from 'lodash';
 import Fuse from 'fuse.js';
+import i18n from '../i18n';
 
 export function filterByText(list, filterText) {
   if (filterText === '' || !filterText) {
@@ -27,7 +28,12 @@ export function sortByLastAccessed(list) {
 
 export function sortDeepByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
-    throw new Error('Insufficient data provided for sorting');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'insufficient-data-provided-error',
+        defaultMessage: 'Insufficient data provided for sorting'
+      })
+    );
   }
   return sortByKey(list, sortKey).map(item => {
     return {

@@ -1,5 +1,6 @@
 import Buttercup from 'buttercup/dist/buttercup-web.min';
 import React from 'react';
+import i18n, { IntlProvider } from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -27,6 +28,7 @@ Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
 // Create store
 const store = configureStore({}, 'renderer');
 
+i18n.setup(store);
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
@@ -61,22 +63,32 @@ ipc.on('will-quit', () => {
   store.dispatch(setUIState('isExiting', true));
 });
 
-render(
-  <AppContainer>
-    <Root store={store} />
-  </AppContainer>,
-  document.getElementById('root')
-);
+const renderApp = (RootContainer, { locale, translations }) =>
+  render(
+    <IntlProvider key={locale} locale={locale} messages={translations}>
+      <AppContainer>
+        <RootContainer store={store} />
+      </AppContainer>
+    </IntlProvider>,
+    document.getElementById('root')
+  );
+
+// show message, when locale changed
+ipc.on('locale-change', () => {
+  // refresh main menu
+  ipc.send('locale-change');
+
+  i18n.setup(store);
+
+  renderApp(Root, i18n);
+});
+
+renderApp(Root, i18n);
 
 if (module.hot) {
   module.hot.accept('./containers/root', () => {
     const NewRoot = require('./containers/root').default;
 
-    render(
-      <AppContainer>
-        <NewRoot store={store} />
-      </AppContainer>,
-      document.getElementById('root')
-    );
+    renderApp(NewRoot, i18n);
   });
 }

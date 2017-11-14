@@ -1,6 +1,7 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import ms from 'ms';
+import i18n from '../../shared/i18n';
 
 // Set logger
 autoUpdater.logger = log;
@@ -26,6 +27,12 @@ export function checkForUpdates() {
     autoUpdater.checkForUpdates();
   } catch (err) {
     // NOOP
-    log.error('Check for Update Error', err);
+    log.error(
+      i18n.formatMessage({
+        id: 'check-for-update-error',
+        defaultMessage: 'Check for Update Error'
+      }),
+      err
+    );
   }
 }
