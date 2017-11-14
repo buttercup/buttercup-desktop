@@ -1,7 +1,7 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import ms from 'ms';
-import i18n from '../i18n';
+import i18n from '../../shared/i18n';
 
 // Set logger
 autoUpdater.logger = log;
