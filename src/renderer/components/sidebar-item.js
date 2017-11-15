@@ -129,10 +129,7 @@ class SidebarItem extends Component {
                 id: 'lock',
                 defaultMessage: 'Lock'
               }),
-              click: (...args) => {
-                console.log(args);
-                this.props.onLockArchive();
-              }
+              click: this.props.onLockArchive
             }
           ]
         : []),
