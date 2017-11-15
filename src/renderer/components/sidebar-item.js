@@ -122,6 +122,17 @@ class SidebarItem extends Component {
         accelerator: `CmdOrCtrl+${this.props.index + 1}`,
         click: this.props.onClick
       },
+      ...(status === 'unlocked'
+        ? [
+            {
+              label: intl.formatMessage({
+                id: 'lock',
+                defaultMessage: 'Lock'
+              }),
+              click: this.props.onLockArchive
+            }
+          ]
+        : []),
       {
         label: intl.formatMessage({
           id: 'change-color',
@@ -253,14 +264,15 @@ class SidebarItem extends Component {
 }
 
 SidebarItem.propTypes = {
-  archive: PropTypes.object,
-  active: PropTypes.bool,
-  condenced: PropTypes.bool,
-  index: PropTypes.number,
-  onClick: PropTypes.func,
-  onRemoveClick: PropTypes.func,
-  onArchiveUpdate: PropTypes.func,
-  showImportDialog: PropTypes.func,
+  archive: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired,
+  condenced: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onLockArchive: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+  onArchiveUpdate: PropTypes.func.isRequired,
+  showImportDialog: PropTypes.func.isRequired,
   intl: intlShape.isRequired
 };
 
