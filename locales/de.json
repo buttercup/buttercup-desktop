@@ -101,5 +101,7 @@
   "load-a-buttercup-archive": "Lade ein Buttercup Archiv",
   "create-a-new-buttercup-archive": "Erstelle ein neues Buttercup Archiv",
   "invalid-import-type-requested-error": "Ungültiger Importtyp angefordert",
-  "open-file-for-importing-error": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist."
+  "open-file-for-importing-error": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
+  "yes": "Ja",
+  "no": "Nein"
 }
