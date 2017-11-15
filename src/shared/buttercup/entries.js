@@ -24,6 +24,11 @@ export function loadEntries(archiveId, groupId) {
 }
 
 export function updateEntry(archiveId, entryObj) {
+  // filter empty meta objects
+  entryObj.meta = entryObj.meta.filter(
+    value => Object.keys(value).length !== 0
+  );
+
   const arch = getArchive(archiveId);
   const entry = arch.getEntryByID(entryObj.id);
 
@@ -72,6 +77,11 @@ export function updateEntry(archiveId, entryObj) {
 }
 
 export function createEntry(archiveId, groupId, newValues) {
+  // filter empty meta objects
+  newValues.meta = newValues.meta.filter(
+    value => Object.keys(value).length !== 0
+  );
+
   const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
