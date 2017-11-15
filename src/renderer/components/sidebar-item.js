@@ -122,6 +122,17 @@ class SidebarItem extends Component {
         accelerator: `CmdOrCtrl+${this.props.index + 1}`,
         click: this.props.onClick
       },
+      ...(status === 'unlocked'
+        ? [
+            {
+              label: intl.formatMessage({
+                id: 'lock',
+                defaultMessage: 'Lock'
+              }),
+              click: this.props.onLockArchive
+            }
+          ]
+        : []),
       {
         label: intl.formatMessage({
           id: 'change-color',
@@ -258,6 +269,7 @@ SidebarItem.propTypes = {
   condenced: PropTypes.bool,
   index: PropTypes.number,
   onClick: PropTypes.func,
+  onLockArchive: PropTypes.func,
   onRemoveClick: PropTypes.func,
   onArchiveUpdate: PropTypes.func,
   showImportDialog: PropTypes.func,

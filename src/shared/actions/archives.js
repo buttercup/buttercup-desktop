@@ -18,6 +18,7 @@ import {
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
   addArchiveToArchiveManager,
+  lockArchiveInArchiveManager,
   removeArchiveFromArchiveManager,
   unlockArchiveInArchiveManager
 } from '../buttercup/archive';
@@ -42,6 +43,12 @@ export const loadArchive = payload => (dispatch, getState) => {
 
 export const removeArchive = payload => () => {
   return removeArchiveFromArchiveManager(payload);
+};
+
+export const lockArchive = payload => dispatch => {
+  return lockArchiveInArchiveManager(payload)
+    .then(archiveId => dispatch(lockArchiveInStore(archiveId)))
+    .catch(() => {});
 };
 
 export const unlockArchive = payload => dispatch => {
