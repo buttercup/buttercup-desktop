@@ -129,7 +129,10 @@ class SidebarItem extends Component {
                 id: 'lock',
                 defaultMessage: 'Lock'
               }),
-              click: this.props.onLockArchive
+              click: (...args) => {
+                console.log(args);
+                this.props.onLockArchive();
+              }
             }
           ]
         : []),
@@ -264,15 +267,15 @@ class SidebarItem extends Component {
 }
 
 SidebarItem.propTypes = {
-  archive: PropTypes.object,
-  active: PropTypes.bool,
-  condenced: PropTypes.bool,
-  index: PropTypes.number,
-  onClick: PropTypes.func,
-  onLockArchive: PropTypes.func,
-  onRemoveClick: PropTypes.func,
-  onArchiveUpdate: PropTypes.func,
-  showImportDialog: PropTypes.func,
+  archive: PropTypes.object.isRequired,
+  active: PropTypes.bool.isRequired,
+  condenced: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onLockArchive: PropTypes.func.isRequired,
+  onRemoveClick: PropTypes.func.isRequired,
+  onArchiveUpdate: PropTypes.func.isRequired,
+  showImportDialog: PropTypes.func.isRequired,
   intl: intlShape.isRequired
 };
 
