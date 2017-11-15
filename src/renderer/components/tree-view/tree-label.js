@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -25,7 +25,7 @@ class TreeLabel extends Component {
   };
 
   render() {
-    const { node, onRightClick, intl } = this.props;
+    const { node, onRightClick } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -44,10 +44,7 @@ class TreeLabel extends Component {
       <Node onContextMenu={onRightClick}>
         {title.trim() || (
           <i>
-            {intl.formatMessage({
-              id: 'untitled',
-              defaultMessage: 'Untitled'
-            })}
+            <FormattedMessage id="untitled" defaultMessage="Untitled" />
           </i>
         )}
       </Node>
@@ -60,8 +57,7 @@ TreeLabel.propTypes = {
   onDismissClick: PropTypes.func,
   onSaveClick: PropTypes.func,
   onCreateNew: PropTypes.func,
-  onRightClick: PropTypes.func,
-  intl: intlShape.isRequired
+  onRightClick: PropTypes.func
 };
 
 export default injectIntl(TreeLabel);

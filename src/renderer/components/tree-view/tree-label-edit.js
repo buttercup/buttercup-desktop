@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import styled from 'styled-components';
 
 const Input = styled.input`
@@ -11,18 +12,17 @@ const Input = styled.input`
   color: #222;
 `;
 
-const DEFAULT_TITLE = 'Untitled';
+class LabelEditor extends Component {
+  constructor(props) {
+    super(props);
 
-export default class LabelEditor extends Component {
-  static propTypes = {
-    node: PropTypes.object,
-    onDismiss: PropTypes.func,
-    onSave: PropTypes.func
-  };
-
-  state = {
-    title: DEFAULT_TITLE
-  };
+    this.state = {
+      title: this.props.intl.formatMessage({
+        id: 'untitled',
+        defaultMessage: 'Untitled'
+      })
+    };
+  }
 
   handleChange(e) {
     this.setState({ title: e.target.value.trim() });
@@ -47,11 +47,17 @@ export default class LabelEditor extends Component {
   }
 
   componentDidMount() {
-    const { isNew, title } = this.props.node;
+    const { node, intl } = this.props;
+    const { isNew, title } = node;
 
     this.setState(
       {
-        title: isNew ? DEFAULT_TITLE : title
+        title: isNew
+          ? intl.formatMessage({
+              id: 'untitled',
+              defaultMessage: 'Untitled'
+            })
+          : title
       },
       () => {
         if (this._input) {
@@ -76,3 +82,12 @@ export default class LabelEditor extends Component {
     );
   }
 }
+
+LabelEditor.propTypes = {
+  node: PropTypes.object,
+  onDismiss: PropTypes.func,
+  onSave: PropTypes.func,
+  intl: intlShape.isRequired
+};
+
+export default injectIntl(LabelEditor);
