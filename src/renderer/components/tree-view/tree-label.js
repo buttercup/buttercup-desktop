@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -60,4 +60,4 @@ TreeLabel.propTypes = {
   onRightClick: PropTypes.func
 };
 
-export default injectIntl(TreeLabel);
+export default TreeLabel;
