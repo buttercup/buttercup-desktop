@@ -62,6 +62,7 @@
   "update-available-message":"Buttercup {version} ist verfügbar. Klicke hier zum Installieren.",
   "archive-saved-loading-info":"Dein Archiv wird gespeichert.<br>Schließt automatisch",
   "unlock":"Entsperren",
+  "lock": "Sperren",
   "open":"Öffnen",
   "change-color":"Farbe wechseln",
   "import":"Importieren",
@@ -95,5 +96,10 @@
   "are-you-sure-question": "Bist du dir sicher?",
   "entry-inputs-empty-info": "Bitte gib mindestens einen Titel an.",
   "entry-title-empty-info": "Bitte gib einen Titel ein.",
-  "entry-not-found-error": "Der Eintrag wurde nicht gefunden"
+  "entry-not-found-error": "Der Eintrag wurde nicht gefunden",
+  "buttercup-archives": "Buttercup Archive",
+  "load-a-buttercup-archive": "Lade ein Buttercup Archiv",
+  "create-a-new-buttercup-archive": "Erstelle ein neues Buttercup Archiv",
+  "invalid-import-type-requested-error": "Ungültiger Importtyp angefordert",
+  "open-file-for-importing-error": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist."
 }

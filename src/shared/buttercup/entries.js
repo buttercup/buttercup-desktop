@@ -13,6 +13,10 @@ function entryToObj(entry) {
   };
 }
 
+/**
+ * Filter empty values
+ * @param {ButtercupEntry} entry
+ */
 export function filterEmptyEntryValues(entry) {
   if (entry.meta) {
     entry.meta = entry.meta.filter(value => Object.keys(value).length !== 0);
@@ -21,6 +25,10 @@ export function filterEmptyEntryValues(entry) {
   return entry;
 }
 
+/**
+ * Validate buttercup entry values
+ * @param {ButtercupEntry} entry
+ */
 export function validateEntry(entry) {
   const errorMessages = [];
   // filter empty values
@@ -120,7 +128,8 @@ export function updateEntry(archiveId, entryObj) {
 
         // Save workspace
         saveWorkspace(archiveId);
-        resolve(entry);
+
+        resolve(entryToObj(entry));
       })
       .catch(err => reject(err));
   });

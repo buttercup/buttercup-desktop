@@ -62,6 +62,7 @@
   "update-available-message":"Buttercup {version} is available. Click here to install now.",
   "archive-saved-loading-info":"Your archive is being saved.<br>Exiting automatically",
   "unlock":"Unlock",
+  "lock":"Lock",
   "open":"Open",
   "change-color":"Change Color",
   "import":"Import",
@@ -95,5 +96,10 @@
   "are-you-sure-question": "Are you sure?",
   "entry-inputs-empty-info": "Please enter at least a title.",
   "entry-title-empty-info": "Please enter a title.",
-  "entry-not-found-error": "Entry has not been found"
+  "entry-not-found-error": "Entry has not been found",
+  "buttercup-archives": "Buttercup Archives",
+  "load-a-buttercup-archive": "Load a Buttercup Archive",
+  "create-a-new-buttercup-archive": "Create a New Buttercup Archive",
+  "invalid-import-type-requested-error": "Invalid import type requested",
+  "open-file-for-importing-error": "Import function should not be running without the main window running."
 }
