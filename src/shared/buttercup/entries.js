@@ -1,5 +1,4 @@
 import { saveWorkspace, getArchive } from './archive';
-import { promisify } from 'util';
 import i18n from '../i18n';
 
 function entryToObj(entry) {
