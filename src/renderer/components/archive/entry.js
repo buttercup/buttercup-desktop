@@ -16,10 +16,6 @@ class Entry extends Component {
     const { mode, entry, initializeForm } = this.props;
     if (nextProps.mode !== mode) {
       if (nextProps.mode === 'edit' && entry) {
-        // filter empty meta objects
-        entry.meta = entry.meta.filter(
-          value => Object.keys(value).length !== 0
-        );
         initializeForm(entry);
       }
     }

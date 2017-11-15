@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { initialize, isDirty } from 'redux-form';
 import Entry from '../../components/archive/entry';
 import { getCurrentEntry } from '../../../shared/selectors';
+import { filterEmptyEntryValues } from '../../../shared/buttercup/entries.js';
 import {
   updateEntry,
   newEntry,
@@ -21,6 +22,7 @@ export default connect(
     onDelete: deleteEntry,
     handleEditMode: changeMode('edit'),
     handleViewMode: changeMode('view'),
-    initializeForm: entry => initialize('editForm', entry)
+    initializeForm: entry =>
+      initialize('editForm', filterEmptyEntryValues(entry))
   }
 )(Entry, 'Entry');

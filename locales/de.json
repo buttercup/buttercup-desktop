@@ -2,7 +2,7 @@
   "unlock-archive": "Entsperre ein Archiv um zu starten ({os}).",
   "welcome-back-title": "Willkommen zurück bei Buttercup.",
   "welcome-title": "Willkommen bei Buttercup.",
-  "welcome-caption": "Du hast noch keine Archive hinzugefügt. Möchtest das jetzt tun?",
+  "welcome-caption": "Du hast noch keine Archiv hinzugefügt. Möchtest das jetzt tun?",
   "open-archive-file": "Archiv öffnen",
   "new-archive-file": "Archiv erstellen",
   "connect-cloud-sources": "Clouds verbinden",
@@ -91,5 +91,9 @@
   "group-not-found-error": "Gruppe wurde nicht gefunden.",
   "sort-definition-not-found-error": "Sortieroption nicht gefunden",
   "insufficient-data-provided-error": "Nicht genügend Daten zum Sortieren",
-  "check-for-update-error": "Fehler beim Überprüfen von Updates"
+  "check-for-update-error": "Fehler beim Überprüfen von Updates",
+  "are-you-sure-question": "Bist du dir sicher?",
+  "entry-inputs-empty-info": "Bitte gib mindestens einen Titel an.",
+  "entry-title-empty-info": "Bitte gib einen Titel ein.",
+  "entry-not-found-error": "Der Eintrag wurde nicht gefunden"
 }

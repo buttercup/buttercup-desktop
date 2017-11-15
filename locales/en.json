@@ -91,5 +91,9 @@
   "group-not-found-error": "Group has not been found.",
   "sort-definition-not-found-error": "Sort definition not found",
   "insufficient-data-provided-error": "Insufficient data provided for sorting",
-  "check-for-update-error": "Check for Update Error"
+  "check-for-update-error": "Check for Update Error",
+  "are-you-sure-question": "Are you sure?",
+  "entry-inputs-empty-info": "Please enter at least a title.",
+  "entry-title-empty-info": "Please enter a title.",
+  "entry-not-found-error": "Entry has not been found"
 }

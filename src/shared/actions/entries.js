@@ -1,7 +1,8 @@
 import { createAction } from 'redux-actions';
 import * as entryTools from '../buttercup/entries';
-import { showConfirmDialog } from '../../renderer/system/dialog';
+import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
+import i18n from '../i18n';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -30,12 +31,20 @@ export const loadEntries = (archiveId, groupId) => ({
 
 export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  dispatch({
-    type: ENTRIES_UPDATE,
-    payload: newValues
-  });
-  entryTools.updateEntry(archiveId, newValues);
-  dispatch(changeMode('view')());
+
+  entryTools
+    .updateEntry(archiveId, newValues)
+    .then(() => {
+      dispatch({
+        type: ENTRIES_UPDATE,
+        payload: newValues
+      });
+
+      dispatch(changeMode('view')());
+    })
+    .catch(err => {
+      showDialog(err);
+    });
 };
 
 export const newEntry = newValues => (dispatch, getState) => {
@@ -57,7 +66,7 @@ export const newEntry = newValues => (dispatch, getState) => {
       dispatch(selectEntry(entryObj.id));
     })
     .catch(err => {
-      console.error(err);
+      showDialog(err);
     });
 };
 
@@ -75,13 +84,19 @@ export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
 
 export const deleteEntry = entryId => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  showConfirmDialog('Are you sure?', resp => {
-    if (resp === 0) {
-      dispatch({
-        type: ENTRIES_DELETE,
-        payload: entryId
-      });
-      entryTools.deleteEntry(archiveId, entryId);
+  showConfirmDialog(
+    i18n.formatMessage({
+      id: 'are-you-sure-question',
+      defaultMessage: 'Are you sure?'
+    }),
+    resp => {
+      if (resp === 0) {
+        dispatch({
+          type: ENTRIES_DELETE,
+          payload: entryId
+        });
+        entryTools.deleteEntry(archiveId, entryId);
+      }
     }
-  });
+  );
 };
