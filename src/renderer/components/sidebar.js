@@ -30,13 +30,14 @@ const ArchiveList = styled.ul`
 
 class RecentFiles extends Component {
   static propTypes = {
-    condenced: PropTypes.bool,
-    archives: PropTypes.array,
+    condenced: PropTypes.bool.isRequired,
+    archives: PropTypes.array.isRequired,
     currentArchiveId: PropTypes.string,
-    onRemoveClick: PropTypes.func,
-    onArchiveUpdate: PropTypes.func,
-    onClick: PropTypes.func,
-    showImportDialog: PropTypes.func
+    onRemoveClick: PropTypes.func.isRequired,
+    onArchiveUpdate: PropTypes.func.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onLockArchive: PropTypes.func.isRequired,
+    showImportDialog: PropTypes.func.isRequired
   };
 
   renderEmptyState() {
@@ -62,6 +63,7 @@ class RecentFiles extends Component {
               key={archive.id}
               index={i}
               condenced={condenced}
+              onLockArchive={() => this.props.onLockArchive(archive.id)}
               onArchiveUpdate={this.props.onArchiveUpdate}
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}

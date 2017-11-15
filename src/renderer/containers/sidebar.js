@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import {
   removeArchive,
   loadOrUnlockArchive,
+  lockArchive,
   updateArchive,
   showImportDialog
 } from '../../shared/actions/archives';
@@ -21,6 +22,7 @@ export default connect(
   {
     onRemoveClick: removeArchive,
     onClick: loadOrUnlockArchive,
+    onLockArchive: lockArchive,
     onOpenClick: openArchive,
     onNewClick: newArchive,
     onArchiveUpdate: updateArchive,

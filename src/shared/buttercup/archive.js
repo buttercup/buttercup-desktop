@@ -33,6 +33,20 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
   );
 }
 
+export function lockArchiveInArchiveManager(archiveId) {
+  const manager = getSharedArchiveManager();
+  return manager
+    .lock(archiveId)
+    .then(() => archiveId)
+    .catch(err => {
+      const { message } = err;
+      if (message) {
+        throw new Error(message);
+      }
+      throw err;
+    });
+}
+
 export function removeArchiveFromArchiveManager(archiveId) {
   const manager = getSharedArchiveManager();
   return manager.remove(archiveId);

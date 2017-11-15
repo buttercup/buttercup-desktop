@@ -13,10 +13,10 @@
 
 ![image](https://user-images.githubusercontent.com/768052/29536730-9db58428-86c7-11e7-9bef-418a8cd14830.png)
 
-## Under Development
+## Beta software
 
 Buttercup is currently under heavy development, and updates will be pushed here very frequently.
-The application is currently in alpha, and should be considered unstable.
+The application is currently in beta, but should be considered stable for general use.
 
 Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
 
@@ -47,6 +47,14 @@ Archives store groups and entries in a simple hierarchy. Both groups and entries
 Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
 
 You can import from other password managers (such as 1Password and KeePass) by opening your archive and choosing Import from the menu.
+
+## Internationalization
+
+Buttercup for Desktop supports the following languages:
+
+ * **English** (Default)
+ * Spanish
+ * German
 
 ## Development
 
