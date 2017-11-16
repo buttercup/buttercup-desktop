@@ -4,11 +4,14 @@ import { ArchiveTypes } from '../src/shared/buttercup/types';
 import { loadFile } from '../src/main/lib/files';
 import { Application } from 'spectron';
 
+// method to wait n ms
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
+// global vars
 let app;
 let buttons;
 let inputs;
+
 test.before(async t => {
   app = new Application({
     path: require('electron'),
@@ -42,6 +45,7 @@ test(async t => {
   t.true(height > 0);
 });
 
+// input test
 test('test input focus', async t => {
   // create temp archive
   await app.webContents.send('load-archive', payload);
@@ -73,7 +77,6 @@ test('test input focus', async t => {
   const titleInput = await app.client.getValue(
     'input[name="properties.title"]'
   );
-  console.log('inputs', titleInput);
 
   // test title
   t.true(titleInput === 'title');
