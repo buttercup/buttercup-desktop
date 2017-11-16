@@ -55,6 +55,7 @@ Buttercup for Desktop supports the following languages:
  * **English** (Default)
  * Spanish
  * German
+ * French
 
 ## Development
 

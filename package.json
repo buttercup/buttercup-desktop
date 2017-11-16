@@ -6,7 +6,7 @@
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
-    "format": "prettier --write \"{src,config,test}/**/*.js\"",
+    "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
     "test": "ava && npm run lint",
     "lint": "eslint ./src ./config",
@@ -29,7 +29,7 @@
     "postinstall": "opencollective postinstall"
   },
   "lint-staged": {
-    "{src,config,test}/**/*.js": [
+    "{src,config,test,locales}/**/*.{js,json}": [
       "prettier --write",
       "git add"
     ]
@@ -147,8 +147,8 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "^1.7.8",
-    "electron-builder": "^19.31.1",
+    "electron": "^1.7.9",
+    "electron-builder": "^19.45.5",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-installer-dmg": "^0.1.2",
