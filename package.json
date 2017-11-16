@@ -6,7 +6,7 @@
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
-    "format": "prettier --write \"{src,config,test}/**/*.js\"",
+    "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
     "test": "ava && npm run lint",
     "lint": "eslint ./src ./config",
@@ -29,7 +29,7 @@
     "postinstall": "opencollective postinstall"
   },
   "lint-staged": {
-    "{src,config,test}/**/*.js": [
+    "{src,config,test,locales}/**/*.{js,json}": [
       "prettier --write",
       "git add"
     ]
