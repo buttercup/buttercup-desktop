@@ -5,6 +5,12 @@ import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 
 class SearchField extends Component {
+  static propTypes = {
+    onChange: PropTypes.func,
+    filter: PropTypes.string,
+    intl: intlShape.isRequired
+  };
+
   handleClearClick() {
     if (this.textInput) {
       this.textInput.value = '';
@@ -52,11 +58,5 @@ class SearchField extends Component {
     );
   }
 }
-
-SearchField.propTypes = {
-  onChange: PropTypes.func,
-  filter: PropTypes.string,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(SearchField);

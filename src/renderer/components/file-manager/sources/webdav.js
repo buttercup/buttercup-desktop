@@ -26,6 +26,13 @@ const Form = styled.form`
 `;
 
 class Webdav extends Component {
+  static propTypes = {
+    onSelect: PropTypes.func,
+    toggleCreateButton: PropTypes.func,
+    brand: PropTypes.string,
+    intl: intlShape.isRequired
+  };
+
   state = {
     endpoint: '',
     username: '',
@@ -182,12 +189,5 @@ class Webdav extends Component {
     );
   }
 }
-
-Webdav.propTypes = {
-  onSelect: PropTypes.func,
-  toggleCreateButton: PropTypes.func,
-  brand: PropTypes.string,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(Webdav);

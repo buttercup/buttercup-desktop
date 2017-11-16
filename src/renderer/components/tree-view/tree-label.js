@@ -11,6 +11,14 @@ const Node = styled.div`
 `;
 
 class TreeLabel extends Component {
+  static propTypes = {
+    node: PropTypes.object.isRequired,
+    onDismissClick: PropTypes.func,
+    onSaveClick: PropTypes.func,
+    onCreateNew: PropTypes.func,
+    onRightClick: PropTypes.func
+  };
+
   handleSave = title => {
     const { isNew, parentId, id } = this.props.node;
     if (isNew) {
@@ -51,13 +59,5 @@ class TreeLabel extends Component {
     );
   }
 }
-
-TreeLabel.propTypes = {
-  node: PropTypes.object,
-  onDismissClick: PropTypes.func,
-  onSaveClick: PropTypes.func,
-  onCreateNew: PropTypes.func,
-  onRightClick: PropTypes.func
-};
 
 export default TreeLabel;

@@ -54,6 +54,11 @@ const renderMeta = (
 );
 
 class EntryForm extends Component {
+  static propTypes = {
+    handleSubmit: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   render() {
     const { handleSubmit, intl } = this.props;
     return (
@@ -117,10 +122,5 @@ class EntryForm extends Component {
     );
   }
 }
-
-EntryForm.propTypes = {
-  handleSubmit: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(EntryForm);

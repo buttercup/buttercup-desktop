@@ -26,6 +26,12 @@ const Wrapper = styled(Center)`
 `;
 
 class Dropbox extends Component {
+  static propTypes = {
+    onSelect: PropTypes.func,
+    toggleCreateButton: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   state = {
     established: false,
     token: null
@@ -114,11 +120,5 @@ class Dropbox extends Component {
     );
   }
 }
-
-Dropbox.propTypes = {
-  onSelect: PropTypes.func,
-  toggleCreateButton: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(Dropbox);

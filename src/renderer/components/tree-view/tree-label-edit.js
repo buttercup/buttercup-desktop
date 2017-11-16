@@ -13,6 +13,13 @@ const Input = styled.input`
 `;
 
 class LabelEditor extends Component {
+  static propTypes = {
+    node: PropTypes.object.isRequired,
+    onDismiss: PropTypes.func,
+    onSave: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -82,12 +89,5 @@ class LabelEditor extends Component {
     );
   }
 }
-
-LabelEditor.propTypes = {
-  node: PropTypes.object,
-  onDismiss: PropTypes.func,
-  onSave: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(LabelEditor);

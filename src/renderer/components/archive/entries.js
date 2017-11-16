@@ -31,6 +31,22 @@ const SearchWrapper = styled.div`
 `;
 
 class Entries extends Component {
+  static propTypes = {
+    filter: PropTypes.string,
+    sortMode: PropTypes.string,
+    entries: PropTypes.array,
+    groups: PropTypes.array,
+    currentEntry: PropTypes.object,
+    currentGroup: PropTypes.object,
+    onSelectEntry: PropTypes.func,
+    onFilterChange: PropTypes.func,
+    onSortModeChange: PropTypes.func,
+    onEntryMove: PropTypes.func,
+    onDelete: PropTypes.func,
+    handleAddEntry: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   handleFilterChange = value => {
     this.props.onFilterChange(value);
   };
@@ -109,21 +125,5 @@ class Entries extends Component {
     );
   }
 }
-
-Entries.propTypes = {
-  filter: PropTypes.string,
-  sortMode: PropTypes.string,
-  entries: PropTypes.array,
-  groups: PropTypes.array,
-  currentEntry: PropTypes.object,
-  currentGroup: PropTypes.object,
-  onSelectEntry: PropTypes.func,
-  onFilterChange: PropTypes.func,
-  onSortModeChange: PropTypes.func,
-  onEntryMove: PropTypes.func,
-  onDelete: PropTypes.func,
-  handleAddEntry: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(Entries);
