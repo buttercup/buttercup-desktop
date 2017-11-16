@@ -59,10 +59,8 @@
   "reveal": "Reveal",
   "reveal-password": "Reveal Password",
   "installing": "Installing",
-  "update-available-message":
-    "Buttercup {version} is available. Click here to install now.",
-  "archive-saved-loading-info":
-    "Your archive is being saved.<br>Exiting automatically",
+  "update-available-message": "Buttercup {version} is available. Click here to install now.",
+  "archive-saved-loading-info": "Your archive is being saved.<br>Exiting automatically",
   "unlock": "Unlock",
   "open": "Open",
   "change-color": "Change Color",
@@ -70,17 +68,13 @@
   "import-from-type": "From {name} archive (.{extension})",
   "import-to-type": "To {name}",
   "archive-remove-with-name": "Remove {name}",
-  "dropbox-connection-failed-info":
-    "Connection to Dropbox server failed. Please try again later",
+  "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
   "connect-to-dropbox": "Connect to Dropbox",
   "authenticate-with-dropbox": "Authenticate with Dropbox",
-  "dropbox-description-text":
-    "Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
-  "webdav-connection-failed-info":
-    "Connection to {endpoint} failed. Please check your credentials and try again.",
+  "dropbox-description-text": "Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
+  "webdav-connection-failed-info": "Connection to {endpoint} failed. Please check your credentials and try again.",
   "connect-to-wedav": "Connect to {title} Server",
-  "webdav-description-text":
-    "Enter your {title} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.",
+  "webdav-description-text": "Enter your {title} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.",
   "name": "Name",
   "size": "Size",
   "date": "Date",

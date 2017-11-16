@@ -2,8 +2,7 @@
   "unlock-archive": "Entsperre ein Archiv um zu starten ({os}).",
   "welcome-back-title": "Willkommen zurück bei Buttercup.",
   "welcome-title": "Willkommen bei Buttercup.",
-  "welcome-caption":
-    "Du hast noch keine Archive hinzugefügt. Möchtest das jetzt tun?",
+  "welcome-caption": "Du hast noch keine Archive hinzugefügt. Möchtest das jetzt tun?",
   "open-archive-file": "Archiv öffnen",
   "new-archive-file": "Archiv erstellen",
   "connect-cloud-sources": "Clouds verbinden",
@@ -48,8 +47,7 @@
   "save": "Speichern",
   "empty-trash": "Papierkorb leeren",
   "empty-trash-question": "Willst du den Papierkorb wirklich leeren?",
-  "no-custom-fields-info-text":
-    "Noch keine benutzerdefinierten Felder hinzugefügt. Warum fügst du nicht ein paar hinzu?",
+  "no-custom-fields-info-text": "Noch keine benutzerdefinierten Felder hinzugefügt. Warum fügst du nicht ein paar hinzu?",
   "custom-fields": "Benutzerdefinierten Felder",
   "title": "Titel",
   "username": "Benutzername",
@@ -61,10 +59,8 @@
   "reveal": "Aufdecken",
   "reveal-password": "Passwort anzeigen",
   "installing": "Installiere",
-  "update-available-message":
-    "Buttercup {version} ist verfügbar. Klicke hier zum Installieren.",
-  "archive-saved-loading-info":
-    "Dein Archiv wird gespeichert.<br>Schließt automatisch",
+  "update-available-message": "Buttercup {version} ist verfügbar. Klicke hier zum Installieren.",
+  "archive-saved-loading-info": "Dein Archiv wird gespeichert.<br>Schließt automatisch",
   "unlock": "Entsperren",
   "open": "Öffnen",
   "change-color": "Farbe wechseln",
@@ -72,17 +68,13 @@
   "import-from-type": "Von {name} Archiv (.{extension})",
   "import-to-type": "Zu {name}",
   "archive-remove-with-name": "Entferne {name}",
-  "dropbox-connection-failed-info":
-    "Die Verbindung zum Dropbox-Server ist fehlgeschlagen. Bitte versuche es später noch einmal.",
+  "dropbox-connection-failed-info": "Die Verbindung zum Dropbox-Server ist fehlgeschlagen. Bitte versuche es später noch einmal.",
   "connect-to-dropbox": "Mit Dropbox verbinden",
   "authenticate-with-dropbox": "Authentifizieren mit Dropbox",
-  "dropbox-description-text":
-    "Verbinde Buttercup mit deinem Dropbox-Konto, um deine Archive zu lesen und zu speichern.<br /> Wir speichern keine deiner Dropbox-Daten.",
-  "webdav-connection-failed-info":
-    "Die Verbindung zu {endpoint} ist fehlgeschlagen. Bitte überprüfe deine Anmeldeinformationen und versuche es erneut.",
+  "dropbox-description-text": "Verbinde Buttercup mit deinem Dropbox-Konto, um deine Archive zu lesen und zu speichern.<br /> Wir speichern keine deiner Dropbox-Daten.",
+  "webdav-connection-failed-info": "Die Verbindung zu {endpoint} ist fehlgeschlagen. Bitte überprüfe deine Anmeldeinformationen und versuche es erneut.",
   "connect-to-wedav": "Verbindung zu {title} Server herstellen",
-  "webdav-description-text":
-    "Gib Benutzername, Passwort und deine {title} Server-Adresse an, um eine Verbindung herzustellen und ein Buttercup-Archiv auszuwählen. Wir <strong>speichern</strong> die Anmeldeinformationen und verschlüsseln sie.",
+  "webdav-description-text": "Gib Benutzername, Passwort und deine {title} Server-Adresse an, um eine Verbindung herzustellen und ein Buttercup-Archiv auszuwählen. Wir <strong>speichern</strong> die Anmeldeinformationen und verschlüsseln sie.",
   "name": "Name",
   "size": "Größe",
   "date": "Datum",
