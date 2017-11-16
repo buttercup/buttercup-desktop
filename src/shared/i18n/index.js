@@ -6,6 +6,7 @@ import de from 'locales/de';
 import en from 'locales/en';
 import es from 'locales/es';
 import fr from 'locales/fr';
+import ru from 'locales/ru';
 
 // configuration
 const config = {
@@ -30,6 +31,11 @@ const config = {
       name: 'Français',
       code: 'fr',
       messages: fr
+    }
+    {
+      name: 'Русский',
+      code: 'ru',
+      messages: ru
     }
   ]
 };
