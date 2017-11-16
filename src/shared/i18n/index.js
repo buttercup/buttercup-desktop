@@ -31,7 +31,7 @@ const config = {
       name: 'Français',
       code: 'fr',
       messages: fr
-    }
+    },
     {
       name: 'Русский',
       code: 'ru',
