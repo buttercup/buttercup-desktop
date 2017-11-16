@@ -5,6 +5,7 @@ import { getSetting } from '../selectors';
 import de from 'locales/de';
 import en from 'locales/en';
 import es from 'locales/es';
+import fr from 'locales/fr';
 
 // configuration
 const config = {
@@ -24,6 +25,11 @@ const config = {
       name: 'Español',
       code: 'es',
       messages: es
+    },
+    {
+      name: 'Français',
+      code: 'fr',
+      messages: fr
     }
   ]
 };
