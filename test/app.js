@@ -1,7 +1,6 @@
 import path from 'path';
 import test from 'ava';
 import { ArchiveTypes } from '../src/shared/buttercup/types';
-import { loadFile } from '../src/main/lib/files';
 import { Application } from 'spectron';
 
 // method to wait n ms
