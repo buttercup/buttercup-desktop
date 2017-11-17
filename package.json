@@ -127,7 +127,6 @@
   },
   "homepage": "https://buttercup.pw",
   "dependencies": {
-    "assert": "^1.4.1",
     "opencollective": "^1.0.3"
   },
   "devDependencies": {
