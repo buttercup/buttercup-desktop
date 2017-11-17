@@ -2,6 +2,7 @@ import path from 'path';
 import { dialog, ipcMain as ipc } from 'electron';
 import { ArchiveTypes, ImportTypeInfo } from '../../shared/buttercup/types';
 import { isWindows } from '../../shared/utils/platform';
+import i18n from '../../shared/i18n';
 import { getWindowManager } from './window-manager';
 import { importArchive } from './buttercup';
 import { getMainWindow } from '../utils/window';
@@ -10,7 +11,10 @@ const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [
     {
-      name: 'Buttercup Archives',
+      name: i18n.formatMessage({
+        id: 'buttercup-archives',
+        defaultMessage: 'Buttercup Archives'
+      }),
       extensions: ['bcup']
     }
   ]
@@ -36,7 +40,10 @@ function showOpenDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: 'Load a Buttercup Archive'
+      title: i18n.formatMessage({
+        id: 'load-a-buttercup-archive',
+        defaultMessage: 'Load a Buttercup Archive'
+      })
     },
     filename => {
       if (filename && filename.length > 0) {
@@ -58,7 +65,10 @@ function showSaveDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: 'Create a New Buttercup Archive'
+      title: i18n.formatMessage({
+        id: 'create-a-new-buttercup-archive',
+        defaultMessage: 'Create a New Buttercup Archive'
+      })
     },
     filename => {
       if (typeof filename === 'string' && filename.length > 0) {
@@ -140,7 +150,12 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
   const typeInfo = ImportTypeInfo[type];
 
   if (!typeInfo) {
-    throw new Error('Invalid import type requested');
+    throw new Error(
+      i18n.formatMessage({
+        id: 'invalid-import-type-requested-error',
+        defaultMessage: 'Invalid import type requested'
+      })
+    );
   }
 
   const handleError = err => {
@@ -198,7 +213,11 @@ export function openFileForImporting(focusedWindow, type, archiveId) {
 
   if (!focusedWindow) {
     throw new Error(
-      'Import function should not be running without the main window running.'
+      i18n.formatMessage({
+        id: 'open-file-for-importing-error',
+        defaultMessage:
+          'Import function should not be running without the main window running.'
+      })
     );
   }
 

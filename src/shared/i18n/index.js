@@ -56,7 +56,7 @@ const getTranslationsByLangCode = langCode =>
  */
 const i18n = {
   provider: null,
-  locale: '',
+  locale: config.defaultLanguage,
   translations: {},
   /**
    * Setup language

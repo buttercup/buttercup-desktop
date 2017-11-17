@@ -30,12 +30,14 @@ const EntryView = ({ entry, intl }) => (
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>
         {entry.meta.map(meta => (
-          <div className={formRow} key={meta.key}>
-            <div className={labelWrapper}>{meta.key}</div>
-            <div className={inputWrapper}>
-              <Copyable>{meta.value}</Copyable>
+          <If condition={Object.keys(meta).length > 0}>
+            <div className={formRow} key={meta.key}>
+              <div className={labelWrapper}>{meta.key}</div>
+              <div className={inputWrapper}>
+                <Copyable>{meta.value}</Copyable>
+              </div>
             </div>
-          </div>
+          </If>
         ))}
       </div>
     ) : (

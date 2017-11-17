@@ -24,6 +24,25 @@ const Column = styled(BaseColumn)`
 `;
 
 class TreeView extends Component {
+  static propTypes = {
+    expandedKeys: PropTypes.array,
+    selectedKeys: PropTypes.array,
+    groups: PropTypes.array,
+    sortMode: PropTypes.string,
+    onRemoveClick: PropTypes.func,
+    onSaveClick: PropTypes.func,
+    onCreateNew: PropTypes.func,
+    onDismissClick: PropTypes.func,
+    onAddClick: PropTypes.func,
+    onRenameClick: PropTypes.func,
+    onGroupSelect: PropTypes.func,
+    onEmptyTrash: PropTypes.func,
+    onMoveGroup: PropTypes.func,
+    onSortModeChange: PropTypes.func,
+    onExpand: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   handleColumnRightClick() {
     const { sortMode, onSortModeChange, intl } = this.props;
 
@@ -221,24 +240,5 @@ class TreeView extends Component {
     );
   }
 }
-
-TreeView.propTypes = {
-  expandedKeys: PropTypes.array,
-  selectedKeys: PropTypes.array,
-  groups: PropTypes.array,
-  sortMode: PropTypes.string,
-  onRemoveClick: PropTypes.func,
-  onSaveClick: PropTypes.func,
-  onCreateNew: PropTypes.func,
-  onDismissClick: PropTypes.func,
-  onAddClick: PropTypes.func,
-  onRenameClick: PropTypes.func,
-  onGroupSelect: PropTypes.func,
-  onEmptyTrash: PropTypes.func,
-  onMoveGroup: PropTypes.func,
-  onSortModeChange: PropTypes.func,
-  onExpand: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(TreeView);

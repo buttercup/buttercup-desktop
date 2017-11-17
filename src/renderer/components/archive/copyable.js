@@ -47,6 +47,12 @@ const Content = styled.div`
 `;
 
 class Copyable extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    type: PropTypes.string,
+    intl: intlShape.isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -147,11 +153,5 @@ class Copyable extends Component {
     );
   }
 }
-
-Copyable.propTypes = {
-  children: PropTypes.node,
-  type: PropTypes.string,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(Copyable);

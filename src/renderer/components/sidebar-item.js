@@ -99,6 +99,19 @@ const PickerWrapper = styled.div`
 `;
 
 class SidebarItem extends Component {
+  static propTypes = {
+    archive: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
+    condenced: PropTypes.bool.isRequired,
+    index: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
+    onLockArchive: PropTypes.func.isRequired,
+    onRemoveClick: PropTypes.func.isRequired,
+    onArchiveUpdate: PropTypes.func.isRequired,
+    showImportDialog: PropTypes.func.isRequired,
+    intl: intlShape.isRequired
+  };
+
   state = {
     isPickerOpen: false,
     top: 0,
@@ -262,18 +275,5 @@ class SidebarItem extends Component {
     );
   }
 }
-
-SidebarItem.propTypes = {
-  archive: PropTypes.object.isRequired,
-  active: PropTypes.bool.isRequired,
-  condenced: PropTypes.bool.isRequired,
-  index: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired,
-  onLockArchive: PropTypes.func.isRequired,
-  onRemoveClick: PropTypes.func.isRequired,
-  onArchiveUpdate: PropTypes.func.isRequired,
-  showImportDialog: PropTypes.func.isRequired,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(SidebarItem);

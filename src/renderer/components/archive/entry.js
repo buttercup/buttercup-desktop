@@ -12,6 +12,19 @@ import bench from '../../styles/img/bench.svg';
 import EntryView from './entry-view';
 
 class Entry extends Component {
+  static propTypes = {
+    dirty: PropTypes.bool,
+    mode: PropTypes.string,
+    entry: PropTypes.object,
+    onEditEntry: PropTypes.func,
+    onNewEntry: PropTypes.func,
+    onDelete: PropTypes.func,
+    handleEditMode: PropTypes.func,
+    handleViewMode: PropTypes.func,
+    initializeForm: PropTypes.func,
+    intl: intlShape.isRequired
+  };
+
   componentWillReceiveProps(nextProps) {
     const { mode, entry, initializeForm } = this.props;
     if (nextProps.mode !== mode) {
@@ -147,18 +160,5 @@ class Entry extends Component {
     );
   }
 }
-
-Entry.propTypes = {
-  dirty: PropTypes.bool,
-  mode: PropTypes.string,
-  entry: PropTypes.object,
-  onEditEntry: PropTypes.func,
-  onNewEntry: PropTypes.func,
-  onDelete: PropTypes.func,
-  handleEditMode: PropTypes.func,
-  handleViewMode: PropTypes.func,
-  initializeForm: PropTypes.func,
-  intl: intlShape.isRequired
-};
 
 export default injectIntl(Entry);

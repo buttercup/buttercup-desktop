@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -11,6 +11,14 @@ const Node = styled.div`
 `;
 
 class TreeLabel extends Component {
+  static propTypes = {
+    node: PropTypes.object.isRequired,
+    onDismissClick: PropTypes.func,
+    onSaveClick: PropTypes.func,
+    onCreateNew: PropTypes.func,
+    onRightClick: PropTypes.func
+  };
+
   handleSave = title => {
     const { isNew, parentId, id } = this.props.node;
     if (isNew) {
@@ -25,7 +33,7 @@ class TreeLabel extends Component {
   };
 
   render() {
-    const { node, onRightClick, intl } = this.props;
+    const { node, onRightClick } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -44,10 +52,7 @@ class TreeLabel extends Component {
       <Node onContextMenu={onRightClick}>
         {title.trim() || (
           <i>
-            {intl.formatMessage({
-              id: 'untitled',
-              defaultMessage: 'Untitled'
-            })}
+            <FormattedMessage id="untitled" defaultMessage="Untitled" />
           </i>
         )}
       </Node>
@@ -55,13 +60,4 @@ class TreeLabel extends Component {
   }
 }
 
-TreeLabel.propTypes = {
-  node: PropTypes.object,
-  onDismissClick: PropTypes.func,
-  onSaveClick: PropTypes.func,
-  onCreateNew: PropTypes.func,
-  onRightClick: PropTypes.func,
-  intl: intlShape.isRequired
-};
-
-export default injectIntl(TreeLabel);
+export default TreeLabel;
