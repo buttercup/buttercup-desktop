@@ -1,14 +1,14 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "0.23.0",
+  "version": "0.24.1",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
     "clean": "rimraf ./app/node_modules",
     "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
-    "test": "ava && npm run lint",
+    "test": "cross-env NODE_ENV=test ava && npm run lint",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
@@ -91,6 +91,25 @@
     "manager",
     "credentials"
   ],
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ],
+    "source": [
+      "src/**/*.{js,jsx}"
+    ],
+    "modules": false,
+    "concurrency": 5,
+    "failFast": true,
+    "powerAssert": true,
+    "require": [
+      "babel-register"
+    ],
+    "babel": {
+      "babelrc": true,
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
+  },
   "author": "Buttercup <info@buttercup.pw>",
   "contributors": [
     {

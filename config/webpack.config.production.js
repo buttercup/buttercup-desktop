@@ -80,7 +80,7 @@ module.exports = merge(baseConfig, {
           dead_code: true,
           conditionals: true,
           booleans: true,
-          unused: true,
+          unused: false,
           if_return: true,
           join_vars: true,
           drop_console: true
