@@ -48,7 +48,7 @@
   "empty-trash": "Papierkorb leeren",
   "empty-trash-question": "Willst du den Papierkorb wirklich leeren?",
   "no-custom-fields-info-text": "Noch keine benutzerdefinierten Felder hinzugefügt. Warum fügst du nicht ein paar hinzu?",
-  "custom-fields": "Benutzerdefinierten Felder",
+  "custom-fields": "Benutzerdefinierte Felder",
   "title": "Titel",
   "username": "Benutzername",
   "secure-password": "Sicheres Passwort",
@@ -103,5 +103,6 @@
   "invalid-import-type-requested-error": "Ungültiger Importtyp angefordert",
   "open-file-for-importing-error": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
   "yes": "Ja",
-  "no": "Nein"
+  "no": "Nein",
+  "custom-fields-title-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben."
 }

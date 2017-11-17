@@ -103,5 +103,6 @@
   "invalid-import-type-requested-error": "Invalid import type requested",
   "open-file-for-importing-error": "Import function should not be running without the main window running.",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields."
 }

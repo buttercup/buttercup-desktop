@@ -19,7 +19,9 @@ function entryToObj(entry) {
  */
 export function filterEmptyEntryValues(entry) {
   if (entry.meta) {
-    entry.meta = entry.meta.filter(value => Object.keys(value).length !== 0);
+    entry.meta = entry.meta.filter(
+      metaEntry => Object.keys(metaEntry).length !== 0 && metaEntry.key
+    );
   }
 
   return entry;
@@ -32,7 +34,6 @@ export function filterEmptyEntryValues(entry) {
 export function validateEntry(entry) {
   const errorMessages = [];
   // filter empty values
-  entry = filterEmptyEntryValues(entry);
 
   if (!entry.properties) {
     errorMessages.push(
@@ -50,10 +51,23 @@ export function validateEntry(entry) {
         })
       );
     }
+
+    if (
+      entry.meta.filter(metaEntry => !metaEntry.key && metaEntry.value).length >
+      0
+    ) {
+      errorMessages.push(
+        i18n.formatMessage({
+          id: 'custom-fields-label-empty-info',
+          defaultMessage:
+            "You've forgotten to set a title for one or more custom fields."
+        })
+      );
+    }
   }
 
   return errorMessages.length === 0
-    ? Promise.resolve(entry)
+    ? Promise.resolve(filterEmptyEntryValues(entry))
     : Promise.reject(errorMessages.join('\n'));
 }
 
