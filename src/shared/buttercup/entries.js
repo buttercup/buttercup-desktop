@@ -53,8 +53,8 @@ export function validateEntry(entry) {
     }
 
     if (
-      entry.meta.filter(metaEntry => !metaEntry.key && metaEntry.value).length >
-      0
+      (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
+        .length > 0
     ) {
       errorMessages.push(
         i18n.formatMessage({

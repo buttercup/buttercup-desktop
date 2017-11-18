@@ -24,6 +24,9 @@ export function showConfirmDialog(message, fn) {
 }
 
 export function showDialog(message, type = 'error') {
+  if (message instanceof Error) {
+    message = message.message;
+  }
   dialog.showMessageBox(currentWindow, {
     type,
     message
