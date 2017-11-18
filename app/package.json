@@ -1,6 +1,6 @@
 {
   "name": "buttercup-desktop",
-  "version": "0.24.2",
+  "version": "0.24.3",
   "productName": "Buttercup",
   "main": "./dist/app.js",
   "description": "Free and Open Source password vault",
