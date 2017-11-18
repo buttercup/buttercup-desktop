@@ -76,7 +76,6 @@ export const removeGroup = groupId => (dispatch, getState) => {
   }
 };
 
-// @todo: fix expanded keys
 export const addGroup = parentId => dispatch => {
   dispatch(addExpandedKeys(parentId));
   dispatch(addTemporaryGroup(parentId));
