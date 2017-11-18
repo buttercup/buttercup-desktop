@@ -20,7 +20,7 @@ cache:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm cache verify
-  - appveyor-retry npm install
+  - appveyor-retry npm install --force
   - npm run build
 
 test_script:
