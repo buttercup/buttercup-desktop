@@ -101,27 +101,12 @@ class TreeView extends Component {
       const nonRootContextMenu =
         depth > 0
           ? [
-              { type: 'separator' },
               {
                 label: intl.formatMessage({
                   id: 'move-to-root',
                   defaultMessage: 'Move to Root'
                 }),
                 click: () => this.props.onMoveGroup(groupId, null)
-              },
-              {
-                label: intl.formatMessage({
-                  id: 'move-to-group',
-                  defaultMessage: 'Move to Group'
-                }),
-                submenu: createMenuFromGroups(
-                  groups,
-                  groupId,
-                  selectedGroupId => {
-                    this.props.onMoveGroup(groupId, selectedGroupId);
-                  },
-                  false
-                )
               }
             ]
           : [];
@@ -134,7 +119,22 @@ class TreeView extends Component {
           }),
           click: () => this.handleAddClick(null, groupId)
         },
+        { type: 'separator' },
         ...nonRootContextMenu,
+        {
+          label: intl.formatMessage({
+            id: 'move-to-group',
+            defaultMessage: 'Move to Group'
+          }),
+          submenu: createMenuFromGroups(
+            groups,
+            groupId,
+            selectedGroupId => {
+              this.props.onMoveGroup(groupId, selectedGroupId);
+            },
+            false
+          )
+        },
         {
           label: intl.formatMessage({
             id: 'rename',
