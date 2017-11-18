@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -107,7 +107,9 @@
     ],
     "babel": {
       "babelrc": true,
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
     }
   },
   "author": "Buttercup <info@buttercup.pw>",
