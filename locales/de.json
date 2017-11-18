@@ -104,5 +104,5 @@
   "open-file-for-importing-error": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
   "yes": "Ja",
   "no": "Nein",
-  "custom-fields-title-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben."
+  "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben."
 }

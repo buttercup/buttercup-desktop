@@ -95,6 +95,22 @@ export const getGroups = createSelector(
   (groups, sortMode) => {
     const trashGroups = groups.filter(g => g.isTrash);
     const rest = groups.filter(g => !g.isTrash);
-    return [...sortDeepByKey(rest, sortMode, 'groups'), ...trashGroups];
+
+    // set depth key in group object
+    const setGroupDepth = (restGroups, depth = 0) =>
+      Array.isArray(restGroups) && restGroups.length > 0
+        ? restGroups.map(group => {
+            return {
+              depth,
+              ...group,
+              groups: setGroupDepth(group.groups, depth + 1)
+            };
+          })
+        : [];
+
+    return [
+      ...sortDeepByKey(setGroupDepth(rest), sortMode, 'groups'),
+      ...trashGroups
+    ];
   }
 );

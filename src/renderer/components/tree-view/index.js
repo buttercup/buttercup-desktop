@@ -81,7 +81,7 @@ class TreeView extends Component {
   }
 
   handleRightClick = (node, groups, e) => {
-    const { id: groupId, isTrash } = node;
+    const { id: groupId, isTrash, depth } = node;
     const { intl } = this.props;
 
     // Prevent righ click from propagation to parent
@@ -98,6 +98,35 @@ class TreeView extends Component {
         }
       ]);
     } else {
+      const nonRootContextMenu =
+        depth > 0
+          ? [
+              {
+                label: intl.formatMessage({
+                  id: 'move-to-root',
+                  defaultMessage: 'Move to Root'
+                }),
+                click: () => this.props.onMoveGroup(groupId, null)
+              }
+            ]
+          : [];
+
+      const availableGroups = createMenuFromGroups(
+        groups,
+        groupId,
+        selectedGroupId => {
+          this.props.onMoveGroup(groupId, selectedGroupId);
+        },
+        false
+      );
+
+      const groupsMenu =
+        availableGroups.items.length > 0
+          ? {
+              submenu: availableGroups
+            }
+          : {};
+
       showContextMenu([
         {
           label: intl.formatMessage({
@@ -106,34 +135,22 @@ class TreeView extends Component {
           }),
           click: () => this.handleAddClick(null, groupId)
         },
+        { type: 'separator' },
+        ...nonRootContextMenu,
+        {
+          label: intl.formatMessage({
+            id: 'move-to-group',
+            defaultMessage: 'Move to Group'
+          }),
+          enabled: availableGroups.items,
+          ...groupsMenu
+        },
         {
           label: intl.formatMessage({
             id: 'rename',
             defaultMessage: 'Rename'
           }),
           click: () => this.props.onRenameClick(groupId)
-        },
-        { type: 'separator' },
-        {
-          label: intl.formatMessage({
-            id: 'move-to-root',
-            defaultMessage: 'Move to Root'
-          }),
-          click: () => this.props.onMoveGroup(groupId, null)
-        },
-        {
-          label: intl.formatMessage({
-            id: 'move-to-group',
-            defaultMessage: 'Move to Group'
-          }),
-          submenu: createMenuFromGroups(
-            groups,
-            groupId,
-            selectedGroupId => {
-              this.props.onMoveGroup(groupId, selectedGroupId);
-            },
-            false
-          )
         },
         { type: 'separator' },
         {
