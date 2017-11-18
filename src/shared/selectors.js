@@ -97,17 +97,19 @@ export const getGroups = createSelector(
     const rest = groups.filter(g => !g.isTrash);
 
     // set depth key in group object
-    const setGroupDepth = (restGroups = rest, depth = 0) =>
-      restGroups.map(group => {
-        return {
-          depth,
-          ...group,
-          groups: setGroupDepth(group.groups, depth + 1)
-        };
-      });
+    const setGroupDepth = (restGroups, depth = 0) =>
+      Array.isArray(restGroups) && restGroups.length > 0
+        ? restGroups.map(group => {
+            return {
+              depth,
+              ...group,
+              groups: setGroupDepth(group.groups, depth + 1)
+            };
+          })
+        : [];
 
     return [
-      ...sortDeepByKey(setGroupDepth(), sortMode, 'groups'),
+      ...sortDeepByKey(setGroupDepth(rest), sortMode, 'groups'),
       ...trashGroups
     ];
   }

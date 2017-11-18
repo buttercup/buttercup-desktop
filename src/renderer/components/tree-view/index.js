@@ -111,6 +111,22 @@ class TreeView extends Component {
             ]
           : [];
 
+      const availableGroups = createMenuFromGroups(
+        groups,
+        groupId,
+        selectedGroupId => {
+          this.props.onMoveGroup(groupId, selectedGroupId);
+        },
+        false
+      );
+
+      const groupsMenu =
+        availableGroups.items.length > 0
+          ? {
+              submenu: availableGroups
+            }
+          : {};
+
       showContextMenu([
         {
           label: intl.formatMessage({
@@ -126,14 +142,8 @@ class TreeView extends Component {
             id: 'move-to-group',
             defaultMessage: 'Move to Group'
           }),
-          submenu: createMenuFromGroups(
-            groups,
-            groupId,
-            selectedGroupId => {
-              this.props.onMoveGroup(groupId, selectedGroupId);
-            },
-            false
-          )
+          enabled: availableGroups.items,
+          ...groupsMenu
         },
         {
           label: intl.formatMessage({
