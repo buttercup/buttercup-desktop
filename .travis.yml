@@ -1,23 +1,19 @@
-#os:
-#  - osx
-
-language: node_js
-
-node_js:
-  - 8
-
-env:
-  - CXX=g++-4.8
-
-script: ./script/travis.sh
-
-branches:
-  only:
-  - master
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+matrix:
+  include:
+    - language: node_js
+      sudo: required
+      node_js: 8
+      env: 
+        - NAME="Node 8"
+      install:
+        - sudo apt-get install build-essential g++ make -y
+        - npm cache verify
+        - npm install
+      before_script:
+        - export DISPLAY=:99.0
+        - sh -e /etc/init.d/xvfb start
+        - sleep 3 # give xvfb some time to start
+      script:
+        - npm --versions
+        - npm run build
+        - npm test
