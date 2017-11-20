@@ -93,17 +93,38 @@ export const setupMenu = store => {
       label: i18n.t('view'),
       submenu: [
         { type: 'separator' },
-        { role: 'reload' },
-        { role: 'forcereload' },
-        { role: 'toggledevtools' },
+        {
+          role: 'reload',
+          label: i18n.t('reload')
+        },
+        {
+          role: 'forcereload',
+          label: i18n.t('forcereload')
+        },
+        {
+          role: 'toggledevtools',
+          label: i18n.t('toggledevtools')
+        },
         { type: 'separator' },
-        { role: 'togglefullscreen' }
+        {
+          role: 'togglefullscreen',
+          label: i18n.t('togglefullscreen')
+        }
       ]
     },
     {
       label: i18n.t('window'),
       role: 'window',
-      submenu: [{ role: 'minimize' }, { role: 'close' }]
+      submenu: [
+        {
+          role: 'minimize',
+          label: i18n.t('minimize')
+        },
+        {
+          role: 'close',
+          label: i18n.t('close')
+        }
+      ]
     },
     {
       label: i18n.t('help'),
@@ -139,15 +160,15 @@ export const setupMenu = store => {
     defaultTemplate.unshift({
       label: app.getName(),
       submenu: [
-        { role: 'about' },
+        { role: 'about', label: i18n.t('about') },
         { type: 'separator' },
-        { role: 'services', submenu: [] },
+        { role: 'services', submenu: [], label: i18n.t('services') },
         { type: 'separator' },
-        { role: 'hide' },
-        { role: 'hideothers' },
-        { role: 'unhide' },
+        { role: 'hide', label: i18n.t('hide') },
+        { role: 'hideothers', label: i18n.t('hideothers') },
+        { role: 'unhide', label: i18n.t('unhide') },
         { type: 'separator' },
-        { role: 'quit' }
+        { role: 'quit', label: i18n.t('quit') }
       ]
     });
 
@@ -156,15 +177,26 @@ export const setupMenu = store => {
       { type: 'separator' },
       {
         label: i18n.t('speech'),
-        submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
+        submenu: [
+          { role: 'startspeaking', label: i18n.t('startspeaking') },
+          { role: 'stopspeaking', label: i18n.t('stopspeaking') }
+        ]
       }
     );
 
     // Window
     defaultTemplate[4].submenu.push(
-      { role: 'zoom' },
-      { type: 'separator' },
-      { role: 'front' }
+      {
+        role: 'zoom',
+        label: i18n.t('zoom')
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'front',
+        label: i18n.t('front')
+      }
     );
   }
 
