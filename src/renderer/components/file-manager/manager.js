@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
-import { FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
@@ -22,6 +22,7 @@ class Manager extends Component {
     containerHeight: PropTypes.number,
     onSelectFile: PropTypes.func,
     toggleCreateButton: PropTypes.func,
+    t: PropTypes.func,
     fs: PropTypes.object
   };
 
@@ -147,7 +148,7 @@ class Manager extends Component {
   }
 
   render() {
-    const { containerWidth, containerHeight } = this.props;
+    const { containerWidth, containerHeight, t } = this.props;
     const { contents, selectedIndex } = this.state;
     const scrollIndex = contents.findIndex(item => item.editing);
 
@@ -174,11 +175,7 @@ class Manager extends Component {
         />
         <Column
           columnKey="name"
-          header={
-            <Cell>
-              <FormattedMessage id="name" defaultMessage="Name" />
-            </Cell>
-          }
+          header={<Cell>{t('name')}</Cell>}
           cell={
             <TextCell
               data={contents}
@@ -193,22 +190,14 @@ class Manager extends Component {
         />
         <Column
           columnKey="size"
-          header={
-            <Cell>
-              <FormattedMessage id="size" defaultMessage="Size" />
-            </Cell>
-          }
+          header={<Cell>{t('size')}</Cell>}
           cell={<SizeCell data={contents} />}
           width={100}
           fixed
         />
         <Column
           columnKey="mtime"
-          header={
-            <Cell>
-              <FormattedMessage id="date" defaultMessage="Date" />
-            </Cell>
-          }
+          header={<Cell>{t('date')}</Cell>}
           cell={<DateCell data={contents} />}
           width={100}
           fixed
@@ -218,6 +207,8 @@ class Manager extends Component {
   }
 }
 
-export default dimensions({
-  elementResize: true
-})(Manager);
+export default translate()(
+  dimensions({
+    elementResize: true
+  })(Manager)
+);

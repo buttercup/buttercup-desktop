@@ -4,12 +4,7 @@ import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Center } from '@buttercup/ui';
-import {
-  injectIntl,
-  intlShape,
-  FormattedHTMLMessage,
-  FormattedMessage
-} from 'react-intl';
+import { translate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
@@ -29,7 +24,7 @@ class Dropbox extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
     toggleCreateButton: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   state = {
@@ -51,7 +46,7 @@ class Dropbox extends Component {
   };
 
   handleAuthClick = () => {
-    const { intl } = this.props;
+    const { t } = this.props;
     authenticateDropbox()
       .then(token => {
         this.fs = getFsInstance('dropbox', { token });
@@ -62,13 +57,7 @@ class Dropbox extends Component {
       })
       .catch(err => {
         console.error(err);
-        showDialog(
-          intl.formatMessage({
-            id: 'dropbox-connection-failed-info',
-            defaultMessage:
-              'Connection to Dropbox server failed. Please try again later'
-          })
-        );
+        showDialog(t('dropbox-connection-failed-info'));
       });
   };
 
@@ -77,6 +66,8 @@ class Dropbox extends Component {
   }
 
   render() {
+    const { t } = this.props;
+
     if (this.state.established) {
       return (
         <Flex flexAuto>
@@ -92,27 +83,20 @@ class Dropbox extends Component {
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
-          <h2>
-            <FormattedMessage
-              id="connect-to-dropbox"
-              defaultMessage="Connect to Dropbox"
-            />
-          </h2>
+          <h2>{t('connect-to-dropbox')}</h2>
           <DropboxButton
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
           >
-            <FormattedMessage
-              id="authenticate-with-dropbox"
-              defaultMessage="Authenticate with Dropbox"
-            />
+            {t('authenticate-with-dropbox')}
           </DropboxButton>
           <SmallType border>
             <InfoIcon />{' '}
-            <FormattedHTMLMessage
-              id="dropbox-description-text"
-              defaultMessage="Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password."
+            <span
+              dangerouslySetInnerHTML={{
+                __html: t('dropbox-description-text')
+              }}
             />
           </SmallType>
         </Wrapper>
@@ -121,4 +105,4 @@ class Dropbox extends Component {
   }
 }
 
-export default injectIntl(Dropbox);
+export default translate()(Dropbox);

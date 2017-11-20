@@ -27,12 +27,6 @@ export function checkForUpdates() {
     autoUpdater.checkForUpdates();
   } catch (err) {
     // NOOP
-    log.error(
-      i18n.formatMessage({
-        id: 'check-for-update-error',
-        defaultMessage: 'Check for Update Error'
-      }),
-      err
-    );
+    log.error(i18n.t('check-for-update-error'), err);
   }
 }

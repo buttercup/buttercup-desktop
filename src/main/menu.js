@@ -11,43 +11,26 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
-import i18n from '../shared/i18n';
+import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 
-export function setupMenu(store) {
+export const setupMenu = store => {
   const defaultTemplate = [
     {
-      label: isOSX()
-        ? i18n.formatMessage({
-            id: 'archive',
-            defaultMessage: 'Archive'
-          })
-        : i18n.formatMessage({
-            id: 'file',
-            defaultMessage: 'File'
-          }),
+      label: isOSX() ? i18n.t('archive') : i18n.t('file'),
       submenu: [
         {
-          label: i18n.formatMessage({
-            id: 'new-archive',
-            defaultMessage: 'New Archive'
-          }),
+          label: i18n.t('new-archive'),
           accelerator: 'CmdOrCtrl+N',
           click: (item, focusedWindow) => newFile(focusedWindow)
         },
         {
-          label: i18n.formatMessage({
-            id: 'open-archive',
-            defaultMessage: 'Open Archive'
-          }),
+          label: i18n.t('open-archive'),
           accelerator: 'CmdOrCtrl+O',
           click: (item, focusedWindow) => openFile(focusedWindow)
         },
         {
-          label: i18n.formatMessage({
-            id: 'connect-cloud-sources',
-            defaultMessage: 'Connect Cloud Sources'
-          }),
+          label: i18n.t('connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: (item, focusedWindow) => {
             getWindowManager().buildWindowOfType('file-manager', null, {
@@ -68,10 +51,7 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: i18n.formatMessage({
-        id: 'edit',
-        defaultMessage: 'Edit'
-      }),
+      label: i18n.t('edit'),
       submenu: [
         { role: 'undo' },
         { role: 'redo' },
@@ -85,10 +65,7 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: i18n.formatMessage({
-        id: 'view',
-        defaultMessage: 'View'
-      }),
+      label: i18n.t('view'),
       submenu: [
         { type: 'separator' },
         { role: 'reload' },
@@ -99,45 +76,29 @@ export function setupMenu(store) {
       ]
     },
     {
-      label: i18n.formatMessage({
-        id: 'window',
-        defaultMessage: 'Window'
-      }),
+      label: i18n.t('window'),
       role: 'window',
       submenu: [{ role: 'minimize' }, { role: 'close' }]
     },
     {
-      label: i18n.formatMessage({
-        id: 'help',
-        defaultMessage: 'Help'
-      }),
+      label: i18n.t('help'),
       role: 'help',
       submenu: [
         {
-          label: i18n.formatMessage({
-            id: 'visit-our-website',
-            defaultMessage: 'Visit Our Website'
-          }),
+          label: i18n.t('visit-our-website'),
           click: () => {
             shell.openExternal('https://buttercup.pw');
           }
         },
         {
-          label: i18n.formatMessage({
-            id: 'privacy-policy',
-            defaultMessage: 'Privacy Policy'
-          }),
+          label: i18n.t('privacy-policy'),
           click: () => {
             shell.openExternal('https://buttercup.pw/privacy');
           }
         },
         {
-          label: i18n.formatMessage({
-            id: 'view-changelog-for-v',
-            defaultMessage: 'View Changelog For v{version}',
-            values: {
-              version: pkg.version
-            }
+          label: i18n.t('view-changelog-for-v', {
+            version: pkg.version
           }),
           click: () => {
             shell.openExternal(
@@ -169,10 +130,7 @@ export function setupMenu(store) {
     defaultTemplate[2].submenu.push(
       { type: 'separator' },
       {
-        label: i18n.formatMessage({
-          id: 'speech',
-          defaultMessage: 'Speech'
-        }),
+        label: i18n.t('speech'),
         submenu: [{ role: 'startspeaking' }, { role: 'stopspeaking' }]
       }
     );
@@ -189,7 +147,7 @@ export function setupMenu(store) {
 
   // Check for Updates...
   defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
-    label: 'Check for Updates...',
+    label: i18n.t('check-for-updates'),
     click: () => {
       checkForUpdates();
     }
@@ -206,14 +164,6 @@ export function setupMenu(store) {
       ? menubarAutoHideSetting
       : false;
 
-  // language support
-  const currentLocale = getSetting(state, 'locale');
-
-  // make sure that a language is set
-  if (!currentLocale) {
-    store.dispatch(setSetting('locale', i18n.getConfig('defaultLanguage')));
-  }
-
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
     const index = isOSX() ? i : i + 1;
@@ -226,29 +176,18 @@ export function setupMenu(store) {
           submenu: item.submenu.map((sub, i) => {
             if (i === 4) {
               return {
-                label: i18n.formatMessage({
-                  id: 'import',
-                  defaultMessage: 'Import'
-                }),
+                label: i18n.t('import'),
                 submenu: Object.entries(
                   ImportTypeInfo
                 ).map(([typeKey, type]) => ({
-                  label: i18n.formatMessage({
-                    id: 'import-from-type',
-                    defaultMessage: 'From {name} archive (.{.extension})',
-                    values: {
-                      name: type.name,
-                      extension: type.extension
-                    }
+                  label: i18n.t('import-from-type', {
+                    name: type.name,
+                    extension: type.extension
                   }),
                   submenu: archives.map(archive => ({
-                    label: i18n.formatMessage({
-                      id: 'import-to-type',
-                      defaultMessage: 'Zu {name}',
-                      values: {
-                        name: archive.name,
-                        extension: type.extension
-                      }
+                    label: i18n.t('import-to-type', {
+                      name: archive.name,
+                      extension: type.extension
                     }),
                     enabled: archive.status === 'unlocked',
                     click: (item, focusedWindow) =>
@@ -266,10 +205,7 @@ export function setupMenu(store) {
           ...item,
           submenu: [
             {
-              label: i18n.formatMessage({
-                id: 'condensed-sidebar',
-                defaultMessage: 'Condensed Sidebar'
-              }),
+              label: i18n.t('condensed-sidebar'),
               type: 'checkbox',
               checked: getSetting(state, 'condencedSidebar'),
               accelerator: 'CmdOrCtrl+Shift+B',
@@ -280,22 +216,20 @@ export function setupMenu(store) {
             { type: 'separator' },
             // Language menu point
             {
-              label: i18n.formatMessage({
-                id: 'language',
-                defaultMessage: 'Language'
-              }),
-              submenu: i18n.getConfig('availableLanguages').map(lang => ({
-                label: lang.name,
-                checked: currentLocale === lang.code,
-                enabled: currentLocale !== lang.code,
+              label: i18n.t('language'),
+              submenu: Object.keys(languages).map(key => ({
+                label: languages[key].name,
+                checked: getSetting(state, 'locale') === key,
+                enabled: getSetting(state, 'locale') !== key,
                 type: 'checkbox',
                 click: () => {
-                  store.dispatch(setSetting('locale', lang.code));
+                  store.dispatch(setSetting('locale', key));
+                  i18n.changeLanguage(key);
                   const win = getMainWindow();
                   if (win) {
                     setupMenu(store);
                     Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-                    win.webContents.send('locale-change');
+                    win.webContents.send('change-locale-main', key);
                   }
                 }
               }))
@@ -303,10 +237,7 @@ export function setupMenu(store) {
             ...(isWindows()
               ? [
                   {
-                    label: i18n.formatMessage({
-                      id: 'auto-hide-menubar',
-                      defaultMessage: 'Auto Hide Menubar'
-                    }),
+                    label: i18n.t('auto-hide-menubar'),
                     type: 'checkbox',
                     checked: menubarAutoHide,
                     click: item => {
@@ -351,4 +282,4 @@ export function setupMenu(store) {
   });
 
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-}
+};

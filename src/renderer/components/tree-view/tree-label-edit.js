@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { injectIntl, intlShape } from 'react-intl';
+import { translate } from 'react-i18next';
 import styled from 'styled-components';
 
 const Input = styled.input`
@@ -17,17 +17,14 @@ class LabelEditor extends Component {
     node: PropTypes.object.isRequired,
     onDismiss: PropTypes.func,
     onSave: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      title: this.props.intl.formatMessage({
-        id: 'untitled',
-        defaultMessage: 'Untitled'
-      })
+      title: t('untitled')
     };
   }
 
@@ -54,17 +51,12 @@ class LabelEditor extends Component {
   }
 
   componentDidMount() {
-    const { node, intl } = this.props;
+    const { node, t } = this.props;
     const { isNew, title } = node;
 
     this.setState(
       {
-        title: isNew
-          ? intl.formatMessage({
-              id: 'untitled',
-              defaultMessage: 'Untitled'
-            })
-          : title
+        title: isNew ? t('untitled') : title
       },
       () => {
         if (this._input) {
@@ -90,4 +82,4 @@ class LabelEditor extends Component {
   }
 }
 
-export default injectIntl(LabelEditor);
+export default translate()(LabelEditor);

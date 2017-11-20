@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import { isOSX } from '../../../shared/utils/platform';
 import {
   showContextMenu,
@@ -44,7 +44,7 @@ class Entries extends Component {
     onEntryMove: PropTypes.func,
     onDelete: PropTypes.func,
     handleAddEntry: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   handleFilterChange = value => {
@@ -62,30 +62,19 @@ class Entries extends Component {
       currentEntry,
       onEntryMove,
       onDelete,
-      intl
+      t
     } = this.props;
     showContextMenu([
       ...createCopyMenu(entry, currentEntry),
       { type: 'separator' },
       {
-        label: intl.formatMessage({
-          id: 'move-to-group',
-          defaultMessage: 'Move to Group'
-        }),
+        label: t('move-to-group'),
         submenu: createMenuFromGroups(groups, currentGroup, groupId => {
           onEntryMove(entry.id, groupId);
         })
       },
       {
-        label: entry.isInTrash
-          ? intl.formatMessage({
-              id: 'delete-permanently',
-              defaultMessage: 'Delete Permanently'
-            })
-          : intl.formatMessage({
-              id: 'move-to-trash',
-              defaultMessage: 'Move to Trash'
-            }),
+        label: entry.isInTrash ? t('delete-permanently') : t('move-to-trash'),
         click() {
           onDelete(entry.id);
         }
@@ -94,7 +83,7 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
+    const { currentGroup, handleAddEntry, sortMode, filter, t } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
@@ -103,7 +92,7 @@ class Entries extends Component {
         dark
         icon={<PlusIcon />}
       >
-        <FormattedMessage id="add-entry" defaultMessage="Add Entry" />
+        {t('add-entry')}
       </Button>
     );
     const filterNode = (
@@ -126,4 +115,4 @@ class Entries extends Component {
   }
 }
 
-export default injectIntl(Entries);
+export default translate()(Entries);

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { injectIntl, intlShape } from 'react-intl';
+import { translate } from 'react-i18next';
 
 const UpdateNotice = ({
   available,
@@ -9,7 +9,7 @@ const UpdateNotice = ({
   installing,
   onClick,
   className,
-  intl
+  t
 }) => {
   if (!available) {
     return null;
@@ -17,20 +17,10 @@ const UpdateNotice = ({
   return (
     <div className={className} onClick={onClick}>
       {installing
-        ? intl.formatMessage({
-            id: 'installing',
-            defaultMessage: 'Installing'
-          }) + '...'
-        : intl.formatMessage(
-            {
-              id: 'update-available-message',
-              defaultMessage:
-                'Buttercup {version} is available. Click here to install now.'
-            },
-            {
-              version
-            }
-          )}
+        ? t('installing') + '...'
+        : t('update-available-message', {
+            version
+          })}
     </div>
   );
 };
@@ -41,10 +31,10 @@ UpdateNotice.propTypes = {
   version: PropTypes.string,
   className: PropTypes.string,
   onClick: PropTypes.func,
-  intl: intlShape.isRequired
+  t: PropTypes.func
 };
 
-export default styled(injectIntl(UpdateNotice))`
+export default styled(translate()(UpdateNotice))`
   position: fixed;
   right: 1rem;
   bottom: 1rem;

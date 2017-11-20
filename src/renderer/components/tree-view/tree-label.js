@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -16,10 +16,12 @@ class TreeLabel extends Component {
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
-    onRightClick: PropTypes.func
+    onRightClick: PropTypes.func,
+    t: PropTypes.func
   };
 
   handleSave = title => {
+    const { t } = this.props;
     const { isNew, parentId, id } = this.props.node;
     if (isNew) {
       this.props.onCreateNew(parentId, id, title);
@@ -50,14 +52,10 @@ class TreeLabel extends Component {
 
     return (
       <Node onContextMenu={onRightClick}>
-        {title.trim() || (
-          <i>
-            <FormattedMessage id="untitled" defaultMessage="Untitled" />
-          </i>
-        )}
+        {title.trim() || <i>{t('untitled')}</i>}
       </Node>
     );
   }
 }
 
-export default TreeLabel;
+export default translate()(TreeLabel);

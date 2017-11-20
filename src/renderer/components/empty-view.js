@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -44,46 +44,37 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
-export const NoArchiveSelected = () => (
+const NoArchiveSelectedView = ({ t }) => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>
-        <FormattedMessage
-          id="welcome-back-title"
-          defaultMessage="Welcome back to Buttercup."
-        />
-      </Title>
+      <Title>{t('welcome-back-title')}</Title>
       <Caption>
-        <FormattedMessage
-          id="unlock-archive"
-          defaultMessage="Unlock an archive to begin ({os})."
-          values={{
-            os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
-          }}
-        />
+        {t('unlock-archive', { os: `${isOSX() ? '⌘' : 'Ctrl'}+1` })}
       </Caption>
     </Figure>
   </ColoredFlex>
 );
 
-export const WelcomeScreen = () => (
+NoArchiveSelectedView.propTypes = {
+  t: PropTypes.func
+};
+
+export const NoArchiveSelected = translate()(NoArchiveSelectedView);
+
+const WelcomeScreenView = ({ t }) => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>
-        <FormattedMessage
-          id="welcome-title"
-          defaultMessage="Welcome to Buttercup."
-        />
-      </Title>
-      <Caption>
-        <FormattedMessage
-          id="welcome-caption"
-          defaultMessage="You haven't added any archives yet. Why not add one?"
-        />
-      </Caption>
+      <Title>{t('welcome-title')}</Title>
+      <Caption>{t('welcome-caption')}</Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
 );
+
+WelcomeScreenView.propTypes = {
+  t: PropTypes.func
+};
+
+export const WelcomeScreen = translate()(WelcomeScreenView);

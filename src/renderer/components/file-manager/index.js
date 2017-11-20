@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
@@ -44,7 +44,7 @@ PathRenderer.propTypes = {
   pathName: PropTypes.string
 };
 
-export default class FileManager extends Component {
+class FileManager extends Component {
   state = {
     selectedConfig: null,
     creatable: false
@@ -93,6 +93,7 @@ export default class FileManager extends Component {
   };
 
   render() {
+    const { t } = this.props;
     return (
       <Router>
         <Wrapper flexAuto flexColumn>
@@ -105,13 +106,9 @@ export default class FileManager extends Component {
           <Footer>
             <Flex align="center" width="50%">
               <ButtonRow>
-                <Button onClick={this.handleClose}>
-                  <FormattedMessage id="cancel" />
-                </Button>
+                <Button onClick={this.handleClose}>{t('cancel')}</Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
-                  <Button>
-                    <FormattedMessage id="go-back" />
-                  </Button>
+                  <Button>{t('go-back')}</Button>
                 </NavLink>
               </ButtonRow>
             </Flex>
@@ -121,14 +118,14 @@ export default class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  <FormattedMessage id="new-archive" />
+                  {t('new-archive')}
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  <FormattedMessage id="open-in-buttercup" />
+                  {t('open-in-buttercup')}
                 </Button>
               </ButtonRow>
             </Flex>
@@ -138,3 +135,5 @@ export default class FileManager extends Component {
     );
   }
 }
+
+export default translate()(FileManager);

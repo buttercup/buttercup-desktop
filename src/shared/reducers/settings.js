@@ -1,5 +1,4 @@
 import uiReducer from './ui';
-import i18n from '../i18n';
 import {
   ARCHIVES_REMOVE,
   COLUMN_SIZE_SET,
@@ -32,7 +31,7 @@ const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
   condencedSidebar: true,
   menubarAutoHide: false,
-  locale: i18n.getConfig('defaultLanguage')
+  locale: ''
 };
 
 export function settings(state = DEFAULT_SETTINGS, action) {

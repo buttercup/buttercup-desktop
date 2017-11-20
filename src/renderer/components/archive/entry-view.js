@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import {
   formRow,
   metaWrapper,
@@ -12,21 +12,17 @@ import bubbleImage from '../../styles/img/info-bubble.svg';
 import EmptyView from '../empty-view';
 import Copyable from './copyable';
 
-const EntryView = ({ entry, intl }) => (
+const EntryView = ({ entry, t }) => (
   <div>
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className={labelWrapper}>
-          <FormattedMessage id={key} defaultMessage={key} />
-        </div>
+        <div className={labelWrapper}>{t(key)}</div>
         <div className={inputWrapper}>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </div>
       </div>
     ))}
-    <h6 className={heading}>
-      <FormattedMessage id="custom-fields" defaultMessage="Custom Fields" />:
-    </h6>
+    <h6 className={heading}>{t('custom-fields')}:</h6>
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>
         {entry.meta.map(meta => (
@@ -42,10 +38,7 @@ const EntryView = ({ entry, intl }) => (
       </div>
     ) : (
       <EmptyView
-        caption={intl.formatMessage({
-          id: 'no-custom-fields-info-text',
-          defaultMessage: 'No custom fields yet. Why not add one?'
-        })}
+        caption={t('no-custom-fields-info-text')}
         imageSrc={bubbleImage}
       />
     )}
@@ -54,7 +47,7 @@ const EntryView = ({ entry, intl }) => (
 
 EntryView.propTypes = {
   entry: PropTypes.object,
-  intl: intlShape.isRequired
+  t: PropTypes.func
 };
 
-export default injectIntl(EntryView);
+export default translate()(EntryView);
