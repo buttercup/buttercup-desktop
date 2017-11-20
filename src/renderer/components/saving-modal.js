@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
@@ -27,6 +28,10 @@ const SavingDialogText = styled.div`
 `;
 
 class SavingModal extends Component {
+  static propTypes = {
+    t: PropTypes.func
+  };
+
   state = {
     isSaving: false
   };

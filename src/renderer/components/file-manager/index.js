@@ -45,6 +45,10 @@ PathRenderer.propTypes = {
 };
 
 class FileManager extends Component {
+  static propTypes = {
+    t: PropTypes.func
+  };
+
   state = {
     selectedConfig: null,
     creatable: false

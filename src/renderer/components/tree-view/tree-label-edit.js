@@ -24,7 +24,7 @@ class LabelEditor extends Component {
     super(props);
 
     this.state = {
-      title: t('untitled')
+      title: this.props.t('untitled')
     };
   }
 

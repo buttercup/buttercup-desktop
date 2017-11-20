@@ -21,7 +21,6 @@ class TreeLabel extends Component {
   };
 
   handleSave = title => {
-    const { t } = this.props;
     const { isNew, parentId, id } = this.props.node;
     if (isNew) {
       this.props.onCreateNew(parentId, id, title);
@@ -35,7 +34,7 @@ class TreeLabel extends Component {
   };
 
   render() {
-    const { node, onRightClick } = this.props;
+    const { node, onRightClick, t } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
