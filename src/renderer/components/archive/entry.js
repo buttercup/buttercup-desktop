@@ -54,7 +54,7 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              {t('sav')}
+              {t('save')}
             </Button>{' '}
             <Button onClick={this.props.handleViewMode}>{t('cancel')}</Button>
           </div>

@@ -46,22 +46,47 @@ export const setupMenu = store => {
           type: 'separator'
         },
         {
-          role: 'close'
+          role: 'close',
+          label: i18n.t('close')
         }
       ]
     },
     {
       label: i18n.t('edit'),
       submenu: [
-        { role: 'undo' },
-        { role: 'redo' },
+        {
+          role: 'undo',
+          label: i18n.t('undo')
+        },
+        {
+          role: 'redo',
+          label: i18n.t('redo')
+        },
         { type: 'separator' },
-        { role: 'cut' },
-        { role: 'copy' },
-        { role: 'paste' },
-        { role: 'pasteandmatchstyle' },
-        { role: 'delete' },
-        { role: 'selectall' }
+        {
+          role: 'cut',
+          label: i18n.t('cut')
+        },
+        {
+          role: 'copy',
+          label: i18n.t('copy')
+        },
+        {
+          role: 'paste',
+          label: i18n.t('paste')
+        },
+        {
+          role: 'pasteandmatchstyle',
+          label: i18n.t('pasteandmatchstyle')
+        },
+        {
+          role: 'delete',
+          label: i18n.t('delete')
+        },
+        {
+          role: 'selectall',
+          label: i18n.t('selectall')
+        }
       ]
     },
     {
@@ -137,8 +162,6 @@ export const setupMenu = store => {
 
     // Window
     defaultTemplate[4].submenu.push(
-      { role: 'close' },
-      { role: 'minimize' },
       { role: 'zoom' },
       { type: 'separator' },
       { role: 'front' }
