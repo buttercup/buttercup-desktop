@@ -2,11 +2,12 @@ import { IntlProvider, addLocaleData } from 'react-intl';
 import { getSetting } from '../selectors';
 
 // add all locales
-import de from 'locales/de';
-import en from 'locales/en';
-import es from 'locales/es';
-import fr from 'locales/fr';
-import ru from 'locales/ru';
+import german from 'locales/de';
+import english from 'locales/en';
+import spanish from 'locales/es';
+import french from 'locales/fr';
+import russian from 'locales/ru';
+import italian from 'locales/it';
 
 // configuration
 const config = {
@@ -15,27 +16,32 @@ const config = {
     {
       name: 'English',
       code: 'en',
-      messages: en
+      messages: english
     },
     {
       name: 'Deutsch',
       code: 'de',
-      messages: de
+      messages: german
     },
     {
       name: 'Español',
       code: 'es',
-      messages: es
+      messages: spanish
     },
     {
       name: 'Français',
       code: 'fr',
-      messages: fr
+      messages: french
     },
     {
       name: 'Русский',
       code: 'ru',
-      messages: ru
+      messages: russian
+    },
+    {
+      name: 'Italiano',
+      code: 'it',
+      messages: italian
     }
   ]
 };
