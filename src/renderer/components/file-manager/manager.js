@@ -22,7 +22,6 @@ class Manager extends Component {
     containerHeight: PropTypes.number,
     onSelectFile: PropTypes.func,
     toggleCreateButton: PropTypes.func,
-    t: PropTypes.func,
     fs: PropTypes.object
   };
 
@@ -148,7 +147,7 @@ class Manager extends Component {
   }
 
   render() {
-    const { containerWidth, containerHeight, t } = this.props;
+    const { containerWidth, containerHeight } = this.props;
     const { contents, selectedIndex } = this.state;
     const scrollIndex = contents.findIndex(item => item.editing);
 

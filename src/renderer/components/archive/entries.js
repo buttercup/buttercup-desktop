@@ -83,7 +83,7 @@ class Entries extends Component {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, sortMode, filter, t } = this.props;
+    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}

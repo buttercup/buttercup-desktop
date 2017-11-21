@@ -3,7 +3,7 @@
   "singleQuote": true,
   "overrides": [
     {
-      "files": "locales/*.json",
+      "files": "locales/**/*.json",
       "options": {
         "printWidth": 10000
       }

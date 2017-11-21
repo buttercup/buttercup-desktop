@@ -35,7 +35,6 @@ class Entry extends Component {
   }
 
   renderEditMode() {
-    const { t } = this.props;
     let ref;
     return {
       content: (
@@ -81,7 +80,6 @@ class Entry extends Component {
   }
 
   renderNewMode() {
-    const { t } = this.props;
     let ref;
     return {
       content: (
@@ -115,8 +113,6 @@ class Entry extends Component {
   }
 
   renderViewMode() {
-    const { t } = this.props;
-
     return {
       content: <EntryView entry={this.props.entry} />,
       footer: (

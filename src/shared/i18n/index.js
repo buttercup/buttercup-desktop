@@ -3,23 +3,23 @@ import i18n from 'i18next';
 export const languages = {
   en: {
     name: 'English',
-    common: require('locales/en.json')
+    common: require('locales/en/translation.json')
   },
   de: {
     name: 'Deutsch',
-    common: require('locales/de.json')
+    common: require('locales/de/translation.json')
   },
   es: {
     name: 'Español',
-    common: require('locales/es.json')
+    common: require('locales/es/translation.json')
   },
   fr: {
     name: 'Français',
-    common: require('locales/fr.json')
+    common: require('locales/fr/translation.json')
   },
   ru: {
     name: 'Русский',
-    common: require('locales/ru.json')
+    common: require('locales/ru/translation.json')
   }
 };
 
@@ -38,8 +38,8 @@ i18n.init({
   },
   ns: ['common'],
   defaultNS: 'common',
-  keySeparator: '>',
-  nsSeparator: '|',
+  keySeparator: '.',
+  nsSeparator: ':',
   debug: false
 });
 

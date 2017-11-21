@@ -169,7 +169,7 @@ class TreeView extends Component {
   };
 
   render() {
-    const { groups, t } = this.props;
+    const { groups } = this.props;
 
     const loop = children => {
       if (!children) {

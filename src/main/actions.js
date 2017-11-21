@@ -59,8 +59,8 @@ export function setupActions(store) {
       locale = app.getLocale().split('-')[0] || 'en';
 
       // check if its available
-      if (Object.keys(languages).indexOf(locale) >= 0) {
-        locale = 'de';
+      if (!(locale in languages)) {
+        locale = 'en';
       }
       if (win) {
         win.webContents.send('change-initial-locale', locale);

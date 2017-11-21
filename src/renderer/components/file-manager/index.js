@@ -97,7 +97,6 @@ class FileManager extends Component {
   };
 
   render() {
-    const { t } = this.props;
     return (
       <Router>
         <Wrapper flexAuto flexColumn>
