@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { translate } from 'react-i18next';
+import { translate, Trans, Interpolate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -48,9 +48,18 @@ const NoArchiveSelectedView = ({ t }) => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>{t('welcome-back-title')}</Title>
+      <Title>
+        <Trans i18nKey="welcome-back-title" parent="span">
+          Welcome back to Buttercup.
+        </Trans>
+      </Title>
       <Caption>
-        {t('unlock-archive', { os: `${isOSX() ? '⌘' : 'Ctrl'}+1` })}
+        <Interpolate
+          i18nKey="unlock-archive"
+          os={`${isOSX() ? '⌘' : 'Ctrl'}+1`}
+        >
+          Unlock an archive to begin ({`${isOSX() ? '⌘' : 'Ctrl'}+1`}).
+        </Interpolate>
       </Caption>
     </Figure>
   </ColoredFlex>
@@ -66,8 +75,16 @@ const WelcomeScreenView = ({ t }) => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
-      <Title>{t('welcome-title')}</Title>
-      <Caption>{t('welcome-caption')}</Caption>
+      <Title>
+        <Trans i18nKey="welcome-title" parent="span">
+          Welcome to Buttercup.
+        </Trans>
+      </Title>
+      <Caption>
+        <Trans i18nKey="welcome-caption" parent="span">
+          You haven't added any archives yet. Why not add one?
+        </Trans>
+      </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Center } from '@buttercup/ui';
-import { translate } from 'react-i18next';
+import { translate, Trans, Interpolate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
@@ -66,8 +66,6 @@ class Dropbox extends Component {
   }
 
   render() {
-    const { t } = this.props;
-
     if (this.state.established) {
       return (
         <Flex flexAuto>
@@ -83,21 +81,29 @@ class Dropbox extends Component {
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
-          <h2>{t('connect-to-dropbox')}</h2>
+          <h2>
+            <Trans i18nKey="connect-to-dropbox" parent="span">
+              Connect to Dropbox
+            </Trans>
+          </h2>
           <DropboxButton
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
           >
-            {t('authenticate-with-dropbox')}
+            <Trans i18nKey="authenticate-with-dropbox" parent="span">
+              Authenticate with Dropbox
+            </Trans>
           </DropboxButton>
           <SmallType border>
             <InfoIcon />{' '}
-            <span
-              dangerouslySetInnerHTML={{
-                __html: t('dropbox-description-text')
-              }}
-            />
+            <Interpolate
+              useDangerouslySetInnerHTML
+              i18nKey="dropbox-description-text"
+            >
+              Connect Buttercup to your Dropbox account to read and save your
+              archives.<br />We won't save your Dropbox username or password.
+            </Interpolate>
           </SmallType>
         </Wrapper>
       </Flex>

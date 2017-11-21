@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { translate } from 'react-i18next';
+import { translate, Interpolate } from 'react-i18next';
 import spinner from '../styles/img/spinner.svg';
 
 const SavingDialog = styled(Flex)`
@@ -28,10 +27,6 @@ const SavingDialogText = styled.div`
 `;
 
 class SavingModal extends Component {
-  static propTypes = {
-    t: PropTypes.func
-  };
-
   state = {
     isSaving: false
   };
@@ -51,7 +46,6 @@ class SavingModal extends Component {
   }
 
   render() {
-    const { t } = this.props;
     if (this.state.isSaving === false) {
       return null;
     }
@@ -59,7 +53,13 @@ class SavingModal extends Component {
       <SavingDialog align="center" justify="center">
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
-          <p>{t('archive-saved-loading-info')}</p>
+          <Interpolate
+            useDangerouslySetInnerHTML
+            i18nKey="archive-saved-loading-info"
+            parent="p"
+          >
+            Your archive is being saved.<br />Exiting automatically
+          </Interpolate>
         </SavingDialogText>
       </SavingDialog>
     );

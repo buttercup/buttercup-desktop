@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
@@ -41,7 +41,9 @@ const renderMeta = (
       }}
       icon={<PlusIcon />}
     >
-      {t('add-new-field')}
+      <Trans i18nKey="add-new-field" parent="span">
+        Add New Field
+      </Trans>
     </Button>
     {touched && error && <span>{error}</span>}
   </div>
@@ -59,7 +61,9 @@ class EntryForm extends Component {
       <form onSubmit={handleSubmit}>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">
-            {t('title')}
+            <Trans i18nKey="title" parent="span">
+              Title
+            </Trans>
           </label>
           <Field
             name="properties.title"
@@ -70,7 +74,9 @@ class EntryForm extends Component {
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.username">
-            {t('username')}
+            <Trans i18nKey="username" parent="span">
+              Username
+            </Trans>
           </label>
           <Field
             name="properties.username"
@@ -81,7 +87,9 @@ class EntryForm extends Component {
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.password">
-            {t('password')}
+            <Trans i18nKey="password" parent="span">
+              Password
+            </Trans>
           </label>
           <Field
             name="properties.password"
@@ -90,7 +98,12 @@ class EntryForm extends Component {
             placeholder={t('secure-password') + '...'}
           />
         </div>
-        <h6 className={styles.heading}>{t('custom-fields')}:</h6>
+        <h6 className={styles.heading}>
+          {' '}
+          <Trans i18nKey="custom-fields" parent="span">
+            Custom Fields
+          </Trans>:
+        </h6>
         <FieldArray name="meta" component={renderMeta} t={t} />
       </form>
     );

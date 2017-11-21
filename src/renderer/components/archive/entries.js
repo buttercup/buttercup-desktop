@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import { isOSX } from '../../../shared/utils/platform';
 import {
   showContextMenu,
@@ -92,7 +92,9 @@ class Entries extends Component {
         dark
         icon={<PlusIcon />}
       >
-        {t('add-entry')}
+        <Trans i18nKey="add-entry" parent="span">
+          Add Entry
+        </Trans>
       </Button>
     );
     const filterNode = (

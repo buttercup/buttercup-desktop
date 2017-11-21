@@ -5,7 +5,7 @@ import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
-import { translate } from 'react-i18next';
+import { translate, Trans, Interpolate } from 'react-i18next';
 import { brands } from '../../../../shared/buttercup/brands';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
@@ -123,7 +123,11 @@ class Webdav extends Component {
 
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
-        <h2>{t('connect-to-wedav', { title })}</h2>
+        <h2>
+          <Interpolate i18nKey="connect-to-wedav" title={title}>
+            Connect to {{ title }} Server
+          </Interpolate>
+        </h2>
         <Form onSubmit={this.handleConnect}>
           <Input
             bordered
@@ -150,10 +154,21 @@ class Webdav extends Component {
             value={this.state.password}
           />
           <Button type="submit" onClick={this.handleConnect} full primary>
-            {t('connect')}
+            <Trans i18nKey="connect" parent="span">
+              Connect
+            </Trans>
           </Button>
           <SmallType border center>
-            <InfoIcon /> {t('webdav-description-text', { title })}
+            <InfoIcon />{' '}
+            <Interpolate
+              useDangerouslySetInnerHTML
+              i18nKey="webdav-description-text"
+              title={title}
+            >
+              Enter your {{ title }} Endpoint Address, Username and Password to
+              connect and choose a Buttercup Archive. We{' '}
+              <strong>will save</strong> your credentials and encrypt it.
+            </Interpolate>
           </SmallType>
         </Form>
       </Flex>

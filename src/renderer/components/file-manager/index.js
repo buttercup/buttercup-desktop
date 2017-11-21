@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
@@ -110,9 +110,17 @@ class FileManager extends Component {
           <Footer>
             <Flex align="center" width="50%">
               <ButtonRow>
-                <Button onClick={this.handleClose}>{t('cancel')}</Button>
+                <Button onClick={this.handleClose}>
+                  <Trans i18nKey="cancel" parent="span">
+                    Cancel
+                  </Trans>
+                </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
-                  <Button>{t('go-back')}</Button>
+                  <Button>
+                    <Trans i18nKey="go-back" parent="span">
+                      Go Back
+                    </Trans>
+                  </Button>
                 </NavLink>
               </ButtonRow>
             </Flex>
@@ -122,14 +130,18 @@ class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  {t('new-archive')}
+                  <Trans i18nKey="new-archive" parent="span">
+                    New Archive
+                  </Trans>
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  {t('open-in-buttercup')}
+                  <Trans i18nKey="open-in-buttercup" parent="span">
+                    Open in Buttercup
+                  </Trans>
                 </Button>
               </ButtonRow>
             </Flex>

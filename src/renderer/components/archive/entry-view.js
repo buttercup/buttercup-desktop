@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import {
   formRow,
   metaWrapper,
@@ -22,7 +22,11 @@ const EntryView = ({ entry, t }) => (
         </div>
       </div>
     ))}
-    <h6 className={heading}>{t('custom-fields')}:</h6>
+    <h6 className={heading}>
+      <Trans i18nKey="custom-fields" parent="span">
+        Custom Fields
+      </Trans>:
+    </h6>
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>
         {entry.meta.map(meta => (

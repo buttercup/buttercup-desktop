@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import { translate } from 'react-i18next';
+import { translate, Trans } from 'react-i18next';
 import { Button } from '@buttercup/ui';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
@@ -54,9 +54,15 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              {t('save')}
+              <Trans i18nKey="save" parent="span">
+                Save
+              </Trans>
             </Button>{' '}
-            <Button onClick={this.props.handleViewMode}>{t('cancel')}</Button>
+            <Button onClick={this.props.handleViewMode}>
+              <Trans i18nKey="cancel" parent="span">
+                Cancel
+              </Trans>
+            </Button>
           </div>
           <div>
             <Button
@@ -64,7 +70,9 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              {t('delete')}
+              <Trans i18nKey="delete" parent="span">
+                Delete
+              </Trans>
             </Button>
           </div>
         </div>
@@ -91,9 +99,16 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            {t('save')}
+            <Trans i18nKey="save" parent="span">
+              Save
+            </Trans>
           </Button>{' '}
-          <Button onClick={this.props.handleViewMode}>{t('cancel')}</Button>
+          <Button onClick={this.props.handleViewMode}>
+            {' '}
+            <Trans i18nKey="cancel" parent="span">
+              Cancel
+            </Trans>
+          </Button>
         </div>
       )
     };
@@ -106,7 +121,9 @@ class Entry extends Component {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          {t('edit')}
+          <Trans i18nKey="edit" parent="span">
+            Edit
+          </Trans>
         </Button>
       )
     };
