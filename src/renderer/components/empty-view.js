@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { translate, Trans, Interpolate } from 'react-i18next';
+import { Translate } from '../../shared/i18n';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -44,54 +44,46 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
-const NoArchiveSelectedView = ({ t }) => (
+export const NoArchiveSelected = () => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Trans i18nKey="welcome-back-title" parent="span">
-          Welcome back to Buttercup.
-        </Trans>
+        <Translate
+          i18nKey="welcome-back-title"
+          defaultText="Welcome back to Buttercup."
+        />
       </Title>
       <Caption>
-        <Interpolate
+        <Translate
           i18nKey="unlock-archive"
-          os={`${isOSX() ? '⌘' : 'Ctrl'}+1`}
-        >
-          Unlock an archive to begin ({`${isOSX() ? '⌘' : 'Ctrl'}+1`}).
-        </Interpolate>
+          values={{
+            os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
+          }}
+          defaultText="Unlock an archive ewrwerewrw ewr to begin {{os}}."
+        />
       </Caption>
     </Figure>
   </ColoredFlex>
 );
 
-NoArchiveSelectedView.propTypes = {
-  t: PropTypes.func
-};
-
-export const NoArchiveSelected = translate()(NoArchiveSelectedView);
-
-const WelcomeScreenView = ({ t }) => (
+export const WelcomeScreen = () => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Trans i18nKey="welcome-title" parent="span">
-          Welcome to Buttercup.
-        </Trans>
+        <Translate
+          i18nKey="welcome-title"
+          defaultText="Welcome to Buttercup."
+        />
       </Title>
       <Caption>
-        <Trans i18nKey="welcome-caption" parent="span">
-          You haven't added any archives yet. Why not add one?
-        </Trans>
+        <Translate
+          i18nKey="welcome-caption"
+          defaultText="You haven't added any archives yet. Why not add one?"
+        />
       </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
 );
-
-WelcomeScreenView.propTypes = {
-  t: PropTypes.func
-};
-
-export const WelcomeScreen = translate()(WelcomeScreenView);

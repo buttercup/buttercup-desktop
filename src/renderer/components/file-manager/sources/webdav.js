@@ -6,6 +6,7 @@ import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { translate, Trans, Interpolate } from 'react-i18next';
+import { Translate } from '../../../../shared/i18n';
 import { brands } from '../../../../shared/buttercup/brands';
 import { getFsInstance } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
@@ -124,9 +125,13 @@ class Webdav extends Component {
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
         <h2>
-          <Interpolate i18nKey="connect-to-wedav" title={title}>
-            Connect to {{ title }} Server
-          </Interpolate>
+          <Translate
+            i18nKey="connect-to-wedav"
+            values={{
+              title
+            }}
+            defaultText="Connect to {{ title }} Server"
+          />
         </h2>
         <Form onSubmit={this.handleConnect}>
           <Input
@@ -154,21 +159,15 @@ class Webdav extends Component {
             value={this.state.password}
           />
           <Button type="submit" onClick={this.handleConnect} full primary>
-            <Trans i18nKey="connect" parent="span">
-              Connect
-            </Trans>
+            <Translate i18nKey="connect" defaultText="Connect" />
           </Button>
           <SmallType border center>
             <InfoIcon />{' '}
-            <Interpolate
-              useDangerouslySetInnerHTML
+            <Translate
+              html
               i18nKey="webdav-description-text"
-              title={title}
-            >
-              Enter your {{ title }} Endpoint Address, Username and Password to
-              connect and choose a Buttercup Archive. We{' '}
-              <strong>will save</strong> your credentials and encrypt it.
-            </Interpolate>
+              defaultText="Enter your {{ title }} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it."
+            />
           </SmallType>
         </Form>
       </Flex>

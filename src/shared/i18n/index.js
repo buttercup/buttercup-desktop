@@ -1,31 +1,32 @@
 import i18n from 'i18next';
+import Translate from './translate';
 
 export const languages = {
   en: {
     name: 'English',
-    common: require('locales/en/translation.json')
+    translation: require('locales/en/translation.json')
   },
   de: {
     name: 'Deutsch',
-    common: require('locales/de/translation.json')
+    translation: require('locales/de/translation.json')
   },
   es: {
     name: 'Español',
-    common: require('locales/es/translation.json')
+    translation: require('locales/es/translation.json')
   },
   fr: {
     name: 'Français',
-    common: require('locales/fr/translation.json')
+    translation: require('locales/fr/translation.json')
   },
   ru: {
     name: 'Русский',
-    common: require('locales/ru/translation.json')
+    translation: require('locales/ru/translation.json')
   }
 };
 
 const resources = Object.keys(languages).reduce((accumulator, key) => {
   accumulator[key] = {
-    common: languages[key].common
+    translation: languages[key].translation
   };
   return accumulator;
 }, {});
@@ -34,13 +35,17 @@ i18n.init({
   fallbackLng: 'en',
   resources,
   react: {
-    wait: true
+    wait: false
   },
-  ns: ['common'],
-  defaultNS: 'common',
-  keySeparator: '.',
+  ns: ['translation'],
+  defaultNS: 'translation',
   nsSeparator: ':',
+  keySeparator: '.',
+  pluralSeparator: '_',
+  contextSeparator: '-',
   debug: false
 });
+
+export { Translate };
 
 export default i18n;
