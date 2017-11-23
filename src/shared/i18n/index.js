@@ -8,6 +8,7 @@ import spanish from 'locales/es';
 import french from 'locales/fr';
 import russian from 'locales/ru';
 import italian from 'locales/it';
+import farsi from 'locales/fa';
 
 // configuration
 const config = {
@@ -42,6 +43,11 @@ const config = {
       name: 'Italiano',
       code: 'it',
       messages: italian
+    },
+    {
+      name: 'Persian (فارسی)',
+      code: 'fa',
+      messages: farsi
     }
   ]
 };
