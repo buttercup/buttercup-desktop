@@ -76,7 +76,7 @@ export function createMenuFromGroups(
 
 export function createSortMenu(sortDefinition = [], currentMode, onChange) {
   if (sortDefinition.length === 0) {
-    throw new Error(i18n.t('sort-definition-not-found-error'));
+    throw new Error(i18n.t('error.sort-definition-not-found'));
   }
 
   if (!Array.isArray(sortDefinition[0])) {

@@ -141,7 +141,7 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
   const typeInfo = ImportTypeInfo[type];
 
   if (!typeInfo) {
-    throw new Error(i18n.t('invalid-import-type-requested-error'));
+    throw new Error(i18n.t('error.invalid-import-type-requested'));
   }
 
   const handleError = err => {
@@ -198,7 +198,7 @@ export function openFileForImporting(focusedWindow, type, archiveId) {
   focusedWindow = getMainWindow(focusedWindow);
 
   if (!focusedWindow) {
-    throw new Error(i18n.t('open-file-for-importing-error'));
+    throw new Error(i18n.t('error.open-file-for-importing'));
   }
 
   showImportDialog(focusedWindow, type, archiveId);

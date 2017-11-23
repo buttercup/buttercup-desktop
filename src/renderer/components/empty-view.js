@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Translate } from '../../shared/i18n';
+import { Trans, translate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -44,15 +45,12 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
-export const NoArchiveSelected = () => (
+const NoArchiveSelectedView = () => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Translate
-          i18nKey="welcome-back-title"
-          defaultText="Welcome back to Buttercup."
-        />
+        <Trans i18nKey="welcome-back-title">Welcome back to Buttercup.</Trans>
       </Title>
       <Caption>
         <Translate
@@ -60,30 +58,31 @@ export const NoArchiveSelected = () => (
           values={{
             os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
           }}
-          defaultText="Unlock an archive ewrwerewrw ewr to begin {{os}}."
-        />
+        >
+          Unlock an archive to begin. (%(os))
+        </Translate>
       </Caption>
     </Figure>
   </ColoredFlex>
 );
 
-export const WelcomeScreen = () => (
+export const NoArchiveSelected = translate()(NoArchiveSelectedView);
+
+export const WelcomeScreeView = () => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Translate
-          i18nKey="welcome-title"
-          defaultText="Welcome to Buttercup."
-        />
+        <Translate i18nKey="welcome-title">Welcome to Buttercup.</Translate>
       </Title>
       <Caption>
-        <Translate
-          i18nKey="welcome-caption"
-          defaultText="You haven't added any archives yet. Why not add one?"
-        />
+        <Trans i18nKey="welcome-caption">
+          You haven't added any archives yet. Why not add one?
+        </Trans>
       </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
 );
+
+export const WelcomeScreen = translate()(WelcomeScreeView);

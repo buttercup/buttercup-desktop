@@ -130,8 +130,9 @@ class Webdav extends Component {
             values={{
               title
             }}
-            defaultText="Connect to {{ title }} Server"
-          />
+          >
+            Connect to %(title) Server
+          </Translate>
         </h2>
         <Form onSubmit={this.handleConnect}>
           <Input
@@ -159,15 +160,15 @@ class Webdav extends Component {
             value={this.state.password}
           />
           <Button type="submit" onClick={this.handleConnect} full primary>
-            <Translate i18nKey="connect" defaultText="Connect" />
+            <Translate i18nKey="connect" text="Connect" />
           </Button>
           <SmallType border center>
             <InfoIcon />{' '}
-            <Translate
-              html
-              i18nKey="webdav-description-text"
-              defaultText="Enter your {{ title }} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it."
-            />
+            <Translate html i18nKey="webdav-description-text">
+              Enter your %(title) Endpoint Address, Username and Password to
+              connect and choose a Buttercup Archive. We{' '}
+              <strong>will save</strong> your credentials and encrypt it.
+            </Translate>
           </SmallType>
         </Form>
       </Flex>

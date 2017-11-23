@@ -3,12 +3,17 @@ const chalk = require('chalk');
 const path = require('path');
 
 // fallback language
-const content = JSON.parse(
-  fs.readFileSync(
-    path.resolve(__dirname, '../locales/en/translation.json'),
-    'utf8'
-  )
-);
+let content = {};
+try {
+  content = JSON.parse(
+    fs.readFileSync(
+      path.resolve(__dirname, '../locales/en/base.json'),
+      'utf8'
+    ) || {}
+  );
+} catch (err) {
+  console.log('default langauge not found');
+}
 
 module.exports = {
   options: {
@@ -16,24 +21,20 @@ module.exports = {
     func: {
       list: ['i18next.t', 'i18n.t']
     },
-    lngs: ['en', 'de', 'fr', 'ru', 'es'],
-    ns: ['translation', 'error'],
-    defaultNs: 'translation',
+    lngs: ['en', 'de', 'fr', 'ru', 'es', 'it', 'fa'],
+    ns: ['base'],
+    defaultNs: 'base',
     defaultValue(lng, ns, key) {
       return content[key] || key;
     },
     resource: {
-      loadPath: 'locales/{{lng}}/{{ns}}.json',
+      loadPath: 'locales/en/{{ns}}.json',
       savePath: 'locales/{{lng}}/{{ns}}.json'
     },
     nsSeparator: ':',
     keySeparator: '.',
     pluralSeparator: '_',
-    contextSeparator: '-',
-    interpolation: {
-      prefix: '{{',
-      suffix: '}}'
-    }
+    contextSeparator: '-'
   },
   transform: function customTransform(file, enc, done) {
     'use strict';

@@ -4,29 +4,29 @@ import Translate from './translate';
 export const languages = {
   en: {
     name: 'English',
-    translation: require('locales/en/translation.json')
+    base: require('locales/en/base.json')
   },
   de: {
     name: 'Deutsch',
-    translation: require('locales/de/translation.json')
+    base: require('locales/de/base.json')
   },
   es: {
     name: 'Español',
-    translation: require('locales/es/translation.json')
+    base: require('locales/es/base.json')
   },
   fr: {
     name: 'Français',
-    translation: require('locales/fr/translation.json')
+    base: require('locales/fr/base.json')
   },
   ru: {
     name: 'Русский',
-    translation: require('locales/ru/translation.json')
+    base: require('locales/ru/base.json')
   }
 };
 
 const resources = Object.keys(languages).reduce((accumulator, key) => {
   accumulator[key] = {
-    translation: languages[key].translation
+    base: languages[key].base
   };
   return accumulator;
 }, {});
@@ -37,12 +37,16 @@ i18n.init({
   react: {
     wait: false
   },
-  ns: ['translation'],
-  defaultNS: 'translation',
+  ns: ['base'],
+  defaultNS: 'base',
   nsSeparator: ':',
   keySeparator: '.',
   pluralSeparator: '_',
   contextSeparator: '-',
+  interpolation: {
+    prefix: '%(',
+    suffix: ')'
+  },
   debug: false
 });
 

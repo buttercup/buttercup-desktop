@@ -61,9 +61,9 @@ export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
       const { message } = err;
       if (message) {
         if (message.includes('ENOENT')) {
-          throw new Error(i18n.t('archive-not-found-error'));
+          throw new Error(i18n.t('error.archive-not-found'));
         } else if (message.includes('Authentication')) {
-          throw new Error(i18n.t('authentication-failed-error'));
+          throw new Error(i18n.t('error.authentication-failed'));
         }
         throw new Error(message);
       }

@@ -27,6 +27,6 @@ export function checkForUpdates() {
     autoUpdater.checkForUpdates();
   } catch (err) {
     // NOOP
-    log.error(i18n.t('check-for-update-error'), err);
+    log.error(i18n.t('error.check-for-update'), err);
   }
 }

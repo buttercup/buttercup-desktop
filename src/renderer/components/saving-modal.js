@@ -54,11 +54,9 @@ class SavingModal extends Component {
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
           <br />
-          <Translate
-            html
-            i18nKey="archive-saved-loading-info"
-            defaultText="Your archive is being saved.<br />Exiting automatically"
-          />
+          <Translate html i18nKey="archive-saved-loading-info">
+            Your archive is being saved.<br />Exiting automatically
+          </Translate>
         </SavingDialogText>
       </SavingDialog>
     );

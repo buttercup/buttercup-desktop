@@ -83,31 +83,26 @@ class Dropbox extends Component {
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
           <h2>
-            <Translate
-              i18nKey="connect-to-dropbox"
-              defaultText="Connect to Dropbox"
-            />
+            <Translate i18nKey="connect-to-dropbox">
+              Connect to Dropbox
+            </Translate>
           </h2>
           <DropboxButton
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
           >
-            <Translate
-              i18nKey="authenticate-with-dropbox"
-              defaultText="Authenticate with Dropbox"
-            />
+            <Translate i18nKey="authenticate-with-dropbox">
+              Authenticate with Dropbox
+            </Translate>
           </DropboxButton>
           <SmallType border>
             <InfoIcon />{' '}
-            <Translate
-              html
-              i18nKey="dropbox-description-text"
-              defaultText={`
-                Connect Buttercup to your Dropbox account to read and save your archives.
-                <br />We won't save your Dropbox username or password.
-              `}
-            />
+            <Translate html i18nKey="dropbox-description-text">
+              Connect Buttercup to your Dropbox account to read and save your
+              archives.
+              <br />We won't save your Dropbox username or password.
+            </Translate>
           </SmallType>
         </Wrapper>
       </Flex>

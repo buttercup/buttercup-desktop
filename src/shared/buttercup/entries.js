@@ -60,7 +60,7 @@ export function loadEntries(archiveId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(i18n.t('group-not-found-error'));
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   return group.getEntries().map(entry => entryToObj(entry));
@@ -71,7 +71,7 @@ export function updateEntry(archiveId, entryObj) {
   const entry = arch.getEntryByID(entryObj.id);
 
   if (!entry) {
-    throw new Error(i18n.t('entry-not-found-error'));
+    throw new Error(i18n.t('error.entry-not-found'));
   }
 
   return new Promise((resolve, reject) => {
@@ -128,7 +128,7 @@ export function createEntry(archiveId, groupId, newValues) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(i18n.t('group-not-found-error'));
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   return new Promise((resolve, reject) => {
@@ -160,7 +160,7 @@ export function deleteEntry(archiveId, entryId) {
   const entry = arch.getEntryByID(entryId);
 
   if (!entry) {
-    throw new Error(i18n.t('entry-not-found-error'));
+    throw new Error(i18n.t('error.entry-not-found'));
   }
 
   entry.delete();
@@ -173,7 +173,7 @@ export function moveEntry(archiveId, entryId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!entry || !group) {
-    throw new Error(i18n.t('entry-not-found-error'));
+    throw new Error(i18n.t('error.entry-not-found'));
   }
 
   entry.moveToGroup(group);
