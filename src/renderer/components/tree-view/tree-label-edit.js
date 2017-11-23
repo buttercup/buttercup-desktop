@@ -32,7 +32,7 @@ class LabelEditor extends Component {
   }
 
   handleChange(e) {
-    this.setState({ title: e.target.value.trim() });
+    this.setState({ title: e.target.value });
   }
 
   handleBlur() {
