@@ -46,7 +46,6 @@ class LabelEditor extends Component {
 
   handleKeyUp(e) {
     const { title } = this.state;
-    console.log(e.keyCode);
     if (e.keyCode === 13 && title) {
       this.props.onSave(title);
     } else if (e.keyCode === 27) {
