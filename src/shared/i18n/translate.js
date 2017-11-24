@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
-import i18n from './index';
 
 const Translate = props => {
   // init props
@@ -19,18 +18,21 @@ const Translate = props => {
 
   // search translation and pass values
   const translatedText = t(i18nKey, values);
-  let foundComponents = false;
-  const concatedChildren = [];
 
   // replace all found words
   const interpolation = (str, values) => {
-    const replaceStr = s => s.replace(/%\((.+?)\)/g, (a, b) => values[b] || a);
+    const replaceStr = (s, isChildProp) =>
+      s.replace(
+        isChildProp ? /%\((.+?)\)/g : /\{\{(.+?)\}\}/g,
+        (a, b) => values[b] || a
+      );
 
     if (typeof str === 'object') {
+      const concatedChildren = [];
       if (Array.isArray(str)) {
         str.forEach(child => {
           if (typeof child === 'string') {
-            concatedChildren.push(replaceStr(child));
+            concatedChildren.push(replaceStr(child, true));
           } else {
             concatedChildren.push(interpolation(child, values));
           }
@@ -54,10 +56,8 @@ const Translate = props => {
     }
   };
 
-  console.log(concatedChildren);
-
   // return html or plain text
-  return foundComponents ? (
+  return html ? (
     <Parent dangerouslySetInnerHTML={{ __html: getContent() }} />
   ) : (
     <Parent>{getContent()}</Parent>
@@ -70,7 +70,12 @@ Translate.propTypes = {
   text: PropTypes.string,
   values: PropTypes.object,
   html: PropTypes.bool,
-  t: PropTypes.func
+  t: PropTypes.func,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.array
+  ])
 };
 
 export default translate()(Translate);

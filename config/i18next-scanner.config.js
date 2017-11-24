@@ -28,7 +28,7 @@ module.exports = {
       return content[key] || key;
     },
     resource: {
-      loadPath: 'locales/en/{{ns}}.json',
+      loadPath: 'locales/{{lng}}/{{ns}}.json',
       savePath: 'locales/{{lng}}/{{ns}}.json'
     },
     nsSeparator: ':',

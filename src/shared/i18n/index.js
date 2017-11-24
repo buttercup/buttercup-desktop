@@ -21,6 +21,14 @@ export const languages = {
   ru: {
     name: 'Русский',
     base: require('locales/ru/base.json')
+  },
+  it: {
+    name: 'Italiano',
+    base: require('locales/it/base.json')
+  },
+  fa: {
+    name: 'Persian (فارسی)',
+    base: require('locales/fa/base.json')
   }
 };
 
@@ -43,10 +51,6 @@ i18n.init({
   keySeparator: '.',
   pluralSeparator: '_',
   contextSeparator: '-',
-  interpolation: {
-    prefix: '%(',
-    suffix: ')'
-  },
   debug: false
 });
 

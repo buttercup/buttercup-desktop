@@ -1,5 +1,5 @@
 {
-  "unlock-archive": "Entsperre ein Archiv um zu starten (%(os)).",
+  "unlock-archive": "Entsperre ein Archiv um zu starten ({{os}}).",
   "welcome-back-title": "Willkommen zurück bei Buttercup.",
   "welcome-title": "Willkommen bei Buttercup.",
   "welcome-caption": "Du hast noch keine Archiv hinzugefügt. Möchtest das jetzt tun?",

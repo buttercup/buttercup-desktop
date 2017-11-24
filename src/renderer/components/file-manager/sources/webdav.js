@@ -5,7 +5,7 @@ import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
-import { translate, Trans, Interpolate } from 'react-i18next';
+import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { brands } from '../../../../shared/buttercup/brands';
 import { getFsInstance } from '../../../system/auth';
