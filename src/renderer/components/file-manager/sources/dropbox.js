@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Center } from '@buttercup/ui';
+import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
@@ -23,7 +24,8 @@ const Wrapper = styled(Center)`
 class Dropbox extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
-    toggleCreateButton: PropTypes.func
+    toggleCreateButton: PropTypes.func,
+    t: PropTypes.func
   };
 
   state = {
@@ -45,6 +47,7 @@ class Dropbox extends Component {
   };
 
   handleAuthClick = () => {
+    const { t } = this.props;
     authenticateDropbox()
       .then(token => {
         this.fs = getFsInstance('dropbox', { token });
@@ -98,4 +101,4 @@ class Dropbox extends Component {
   }
 }
 
-export default Dropbox;
+export default translate()(Dropbox);

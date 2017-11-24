@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
