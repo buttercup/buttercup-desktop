@@ -49,29 +49,35 @@ test('test input focus', async t => {
   // create temp archive
   await app.webContents.send('load-archive', payload);
 
+  // wait for popup
   await sleep(2000);
+
   await app.client.setValue('input[type="password"]', '1');
   await app.client.keys('Enter');
 
-  await sleep(500);
+  // wait for field change
+  await sleep(1000);
 
   await app.client.setValue('input[type="password"]', '1');
   await app.client.keys('Enter');
 
-  await sleep(2000);
+  // wait for login
+  await sleep(3500);
 
   // click add entry
   buttons = await app.client.elements('button');
   await app.client.elementIdClick(buttons.value[3].ELEMENT);
 
+  // wait for entry form
   await sleep(2000);
 
-  // entry is open
+  // entry form is open
   buttons = await app.client.elements('button');
   inputs = await app.client.elements('input');
   await app.client.elementIdClick(buttons.value[4].ELEMENT);
 
-  await sleep(500);
+  // save
+  await sleep(1500);
 
   // set title
   await app.client.setValue('input[name="properties.title"]', 'title');
