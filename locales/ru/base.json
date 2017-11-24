@@ -128,5 +128,6 @@
     "check-for-update": "Ошибка при проверке наличия обновлений",
     "invalid-import-type-requested": "Invalid import type requested",
     "open-file-for-importing": "Import function should not be running without the main window running."
-  }
+  },
+  "lock": "Lock"
 }

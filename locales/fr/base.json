@@ -128,5 +128,6 @@
     "invalid-import-type-requested": "Invalid import type requested",
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found"
-  }
+  },
+  "lock": "Lock"
 }

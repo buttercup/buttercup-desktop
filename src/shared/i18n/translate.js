@@ -14,8 +14,6 @@ const Translate = props => {
     values = {}
   } = props;
 
-  console.log(props);
-
   // search translation and pass values
   const translatedText = t(i18nKey, values);
 
@@ -52,7 +50,7 @@ const Translate = props => {
         ? interpolation(text || children, values)
         : translatedText;
     } else {
-      return i18nKey;
+      return translatedText;
     }
   };
 

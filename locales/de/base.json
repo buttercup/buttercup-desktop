@@ -116,7 +116,7 @@
   "stopspeaking": "Aufhören zu Reden",
   "startspeaking": "Reden starten",
   "close": "Schließen",
-  "connect": "Connect",
+  "connect": "Verbinden",
   "error": {
     "archive-not-found": "Archiv wurde nicht gefunden",
     "authentication-failed": "Authentifizierung fehlgeschlagen.",

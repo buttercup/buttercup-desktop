@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
-import { translate, Trans } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
@@ -177,9 +177,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Trans i18nKey="name" parent="span">
-                Name
-              </Trans>
+              <Translate i18nKey="name" parent="span" />
             </Cell>
           }
           cell={
@@ -199,9 +197,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Trans i18nKey="size" parent="span">
-                Size
-              </Trans>
+              <Translate i18nKey="size" parent="span" />
             </Cell>
           }
           cell={<SizeCell data={contents} />}
@@ -213,9 +209,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Trans i18nKey="date" parent="span">
-                Date
-              </Trans>
+              <Translate i18nKey="date" parent="span" />
             </Cell>
           }
           cell={<DateCell data={contents} />}
@@ -227,8 +221,6 @@ class Manager extends Component {
   }
 }
 
-export default translate()(
-  dimensions({
-    elementResize: true
-  })(Manager)
-);
+export default dimensions({
+  elementResize: true
+})(Manager);

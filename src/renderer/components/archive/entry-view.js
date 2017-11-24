@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 import {
   formRow,
   metaWrapper,
@@ -9,6 +9,7 @@ import {
 } from '../../styles/entry-form';
 import { wrapper as inputWrapper } from '../../styles/entry-input';
 import bubbleImage from '../../styles/img/info-bubble.svg';
+import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
 import Copyable from './copyable';
 
@@ -23,9 +24,7 @@ const EntryView = ({ entry, t }) => (
       </div>
     ))}
     <h6 className={heading}>
-      <Trans i18nKey="custom-fields" parent="span">
-        Custom Fields
-      </Trans>:
+      <Translate i18nKey="custom-fields" parent="span" />:
     </h6>
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>

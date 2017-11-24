@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { translate, Trans } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -53,9 +53,7 @@ class TreeLabel extends Component {
         {title.trim() || (
           <i>
             {' '}
-            <Trans i18nKey="untitled" parent="span">
-              Untitled
-            </Trans>
+            <Translate i18nKey="untitled" parent="span" />
           </i>
         )}
       </Node>
@@ -63,4 +61,4 @@ class TreeLabel extends Component {
   }
 }
 
-export default translate()(TreeLabel);
+export default TreeLabel;

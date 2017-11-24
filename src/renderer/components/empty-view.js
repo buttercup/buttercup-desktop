@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import { Translate } from '../../shared/i18n';
-import { Trans, translate } from 'react-i18next';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -45,12 +44,12 @@ const Title = styled.h3`
   margin-bottom: var(--spacing-half);
 `;
 
-const NoArchiveSelectedView = () => (
+export const NoArchiveSelected = () => (
   <ColoredFlex align="center" justify="center" flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Trans i18nKey="welcome-back-title">Welcome back to Buttercup.</Trans>
+        <Translate i18nKey="welcome-back-title" />
       </Title>
       <Caption>
         <Translate
@@ -58,31 +57,23 @@ const NoArchiveSelectedView = () => (
           values={{
             os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
           }}
-        >
-          Unlock an archive to begin. (%(os))
-        </Translate>
+        />
       </Caption>
     </Figure>
   </ColoredFlex>
 );
 
-export const NoArchiveSelected = translate()(NoArchiveSelectedView);
-
-export const WelcomeScreeView = () => (
+export const WelcomeScreen = () => (
   <ColoredFlex align="center" justify="center" flexColumn flexAuto>
     <Figure>
       <img src={logo} />
       <Title>
-        <Translate i18nKey="welcome-title">Welcome to Buttercup.</Translate>
+        <Translate i18nKey="welcome-title" />
       </Title>
       <Caption>
-        <Trans i18nKey="welcome-caption">
-          You haven't added any archives yet. Why not add one?
-        </Trans>
+        <Translate i18nKey="welcome-caption" />
       </Caption>
     </Figure>
     <AddArchiveButton />
   </ColoredFlex>
 );
-
-export const WelcomeScreen = translate()(WelcomeScreeView);

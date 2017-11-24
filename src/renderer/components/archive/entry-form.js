@@ -4,6 +4,7 @@ import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate, Trans } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
@@ -41,9 +42,7 @@ const renderMeta = (
       }}
       icon={<PlusIcon />}
     >
-      <Trans i18nKey="add-new-field" parent="span">
-        Add New Field
-      </Trans>
+      <Translate i18nKey="add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
   </div>
@@ -61,9 +60,7 @@ class EntryForm extends Component {
       <form onSubmit={handleSubmit}>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">
-            <Trans i18nKey="title" parent="span">
-              Title
-            </Trans>
+            <Translate i18nKey="title" parent="span" />
           </label>
           <Field
             name="properties.title"
@@ -74,9 +71,7 @@ class EntryForm extends Component {
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.username">
-            <Trans i18nKey="username" parent="span">
-              Username
-            </Trans>
+            <Translate i18nKey="username" parent="span" />
           </label>
           <Field
             name="properties.username"
@@ -87,9 +82,7 @@ class EntryForm extends Component {
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.password">
-            <Trans i18nKey="password" parent="span">
-              Password
-            </Trans>
+            <Translate i18nKey="password" parent="span" />
           </label>
           <Field
             name="properties.password"
@@ -100,9 +93,7 @@ class EntryForm extends Component {
         </div>
         <h6 className={styles.heading}>
           {' '}
-          <Trans i18nKey="custom-fields" parent="span">
-            Custom Fields
-          </Trans>:
+          <Translate i18nKey="custom-fields" parent="span" />:
         </h6>
         <FieldArray name="meta" component={renderMeta} t={t} />
       </form>

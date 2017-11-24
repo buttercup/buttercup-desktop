@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import { translate, Trans } from 'react-i18next';
+import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
+import { Translate } from '../../../shared/i18n';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
@@ -53,14 +54,10 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              <Trans i18nKey="save" parent="span">
-                Save
-              </Trans>
+              <Translate i18nKey="save" parent="span" />
             </Button>{' '}
             <Button onClick={this.props.handleViewMode}>
-              <Trans i18nKey="cancel" parent="span">
-                Cancel
-              </Trans>
+              <Translate i18nKey="cancel" parent="span" />
             </Button>
           </div>
           <div>
@@ -69,9 +66,7 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              <Trans i18nKey="delete" parent="span">
-                Delete
-              </Trans>
+              <Translate i18nKey="delete" parent="span" />
             </Button>
           </div>
         </div>
@@ -97,15 +92,11 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            <Trans i18nKey="save" parent="span">
-              Save
-            </Trans>
+            <Translate i18nKey="save" parent="span" />
           </Button>{' '}
           <Button onClick={this.props.handleViewMode}>
             {' '}
-            <Trans i18nKey="cancel" parent="span">
-              Cancel
-            </Trans>
+            <Translate i18nKey="cancel" parent="span" />
           </Button>
         </div>
       )
@@ -117,9 +108,7 @@ class Entry extends Component {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          <Trans i18nKey="edit" parent="span">
-            Edit
-          </Trans>
+          <Translate i18nKey="edit" parent="span" />
         </Button>
       )
     };

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import DropboxIcon from 'react-icons/lib/fa/dropbox';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Center } from '@buttercup/ui';
-import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
 import { authenticateDropbox, getFsInstance } from '../../../system/auth';
@@ -24,8 +23,7 @@ const Wrapper = styled(Center)`
 class Dropbox extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
-    toggleCreateButton: PropTypes.func,
-    t: PropTypes.func
+    toggleCreateButton: PropTypes.func
   };
 
   state = {
@@ -47,7 +45,6 @@ class Dropbox extends Component {
   };
 
   handleAuthClick = () => {
-    const { t } = this.props;
     authenticateDropbox()
       .then(token => {
         this.fs = getFsInstance('dropbox', { token });
@@ -83,26 +80,17 @@ class Dropbox extends Component {
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
           <h2>
-            <Translate i18nKey="connect-to-dropbox">
-              Connect to Dropbox
-            </Translate>
+            <Translate i18nKey="connect-to-dropbox" />
           </h2>
           <DropboxButton
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
           >
-            <Translate i18nKey="authenticate-with-dropbox">
-              Authenticate with Dropbox
-            </Translate>
+            <Translate i18nKey="authenticate-with-dropbox" />
           </DropboxButton>
           <SmallType border>
-            <InfoIcon />{' '}
-            <Translate html i18nKey="dropbox-description-text">
-              Connect Buttercup to your Dropbox account to read and save your
-              archives.
-              <br />We won't save your Dropbox username or password.
-            </Translate>
+            <InfoIcon /> <Translate html i18nKey="dropbox-description-text" />
           </SmallType>
         </Wrapper>
       </Flex>
@@ -110,4 +98,4 @@ class Dropbox extends Component {
   }
 }
 
-export default translate()(Dropbox);
+export default Dropbox;

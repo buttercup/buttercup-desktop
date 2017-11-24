@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { translate, Trans } from 'react-i18next';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { brands } from '../../../shared/buttercup/brands';
+import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import {
   emitActionToParentAndClose,
@@ -45,10 +45,6 @@ PathRenderer.propTypes = {
 };
 
 class FileManager extends Component {
-  static propTypes = {
-    t: PropTypes.func
-  };
-
   state = {
     selectedConfig: null,
     creatable: false
@@ -110,15 +106,11 @@ class FileManager extends Component {
             <Flex align="center" width="50%">
               <ButtonRow>
                 <Button onClick={this.handleClose}>
-                  <Trans i18nKey="cancel" parent="span">
-                    Cancel
-                  </Trans>
+                  <Translate i18nKey="cancel" parent="span" />
                 </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
                   <Button>
-                    <Trans i18nKey="go-back" parent="span">
-                      Go Back
-                    </Trans>
+                    <Translate i18nKey="go-back" parent="span" />
                   </Button>
                 </NavLink>
               </ButtonRow>
@@ -129,18 +121,14 @@ class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  <Trans i18nKey="new-archive" parent="span">
-                    New Archive
-                  </Trans>
+                  <Translate i18nKey="new-archive" parent="span" />
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  <Trans i18nKey="open-in-buttercup" parent="span">
-                    Open in Buttercup
-                  </Trans>
+                  <Translate i18nKey="open-in-buttercup" parent="span" />
                 </Button>
               </ButtonRow>
             </Flex>
@@ -151,4 +139,4 @@ class FileManager extends Component {
   }
 }
 
-export default translate()(FileManager);
+export default FileManager;
