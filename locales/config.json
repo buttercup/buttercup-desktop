@@ -1,0 +1,27 @@
+{
+  "types": ["base"],
+  "fallbackLng": "en",
+  "languages": {
+    "en": {
+      "name": "English"
+    },
+    "de": {
+      "name": "Deutsch"
+    },
+    "es": {
+      "name": "Español"
+    },
+    "fr": {
+      "name": "Français"
+    },
+    "ru": {
+      "name": "Русский"
+    },
+    "it": {
+      "name": "Italiano"
+    },
+    "fa": {
+      "name": "Persian (فارسی)"
+    }
+  }
+}

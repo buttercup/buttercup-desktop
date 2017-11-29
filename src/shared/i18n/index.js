@@ -1,46 +1,34 @@
 import i18n from 'i18next';
+import localesConfig from '../../../locales/config';
 import Translate from './translate';
 
-export const languages = {
-  en: {
-    name: 'English',
-    base: require('locales/en/base.json')
-  },
-  de: {
-    name: 'Deutsch',
-    base: require('locales/de/base.json')
-  },
-  es: {
-    name: 'Español',
-    base: require('locales/es/base.json')
-  },
-  fr: {
-    name: 'Français',
-    base: require('locales/fr/base.json')
-  },
-  ru: {
-    name: 'Русский',
-    base: require('locales/ru/base.json')
-  },
-  it: {
-    name: 'Italiano',
-    base: require('locales/it/base.json')
-  },
-  fa: {
-    name: 'Persian (فارسی)',
-    base: require('locales/fa/base.json')
-  }
-};
+// get all configurated languages
+const languages = {};
+Object.keys(localesConfig.languages).forEach((key, lang) => {
+  languages[key] = {};
+  languages[key].name = localesConfig.languages[key].name;
+
+  localesConfig.types.forEach(type => {
+    languages[key][type] = require('../../../locales/' +
+      key +
+      '/' +
+      type +
+      '.json');
+  });
+});
 
 const resources = Object.keys(languages).reduce((accumulator, key) => {
-  accumulator[key] = {
-    base: languages[key].base
-  };
+  accumulator[key] = {};
+
+  localesConfig.types.forEach(type => {
+    accumulator[key][type] = languages[key][type];
+  });
+
   return accumulator;
 }, {});
 
 i18n.init({
-  fallbackLng: 'en',
+  fallbackLng: localesConfig.fallbackLng,
   resources,
   react: {
     wait: false
@@ -51,9 +39,12 @@ i18n.init({
   keySeparator: '.',
   pluralSeparator: '_',
   contextSeparator: '-',
-  debug: false
+  debug: false,
+  saveMissingTo: 'all',
+  saveMissing: true,
+  returnEmptyString: false
 });
 
-export { Translate };
+export { Translate, languages };
 
 export default i18n;

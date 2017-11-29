@@ -7,6 +7,7 @@ import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
 import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
+import localesConfig from '../../locales/config';
 
 const windowManager = getWindowManager();
 
@@ -56,11 +57,11 @@ export function setupActions(store) {
     if (!locale) {
       const win = getMainWindow();
       // set system lang
-      locale = app.getLocale().split('-')[0] || 'en';
+      locale = app.getLocale().split('-')[0] || localesConfig.fallbackLng;
 
       // check if its available
       if (!(locale in languages)) {
-        locale = 'en';
+        locale = localesConfig.fallbackLng;
       }
       if (win) {
         win.webContents.send('change-initial-locale', locale);
