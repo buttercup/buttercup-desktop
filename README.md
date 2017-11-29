@@ -133,7 +133,7 @@ We'd also like to thank:
 
  * Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
  * Arash Asghari (Brand & Identity) ([@_arashasghari](https://twitter.com/_arashasghari))
- * [Sebastian Stapelfeldt](https://dribbble.com/carlhauser) (Brand, Graphics)
+ * Sebastian Stapelfeldt (Brand, Graphics) ([@carlhauser](https://dribbble.com/carlhauser))
 
 > We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
 
