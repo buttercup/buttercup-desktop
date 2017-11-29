@@ -1,11 +1,13 @@
 import debounce from 'lodash/debounce';
-import { ipcMain as ipc, BrowserWindow } from 'electron';
+import { ipcMain as ipc, BrowserWindow, app } from 'electron';
 import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
 import { startAutoUpdate, installUpdates } from './lib/updater';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
-import i18n from '../shared/i18n';
+import { getMainWindow } from './utils/window';
+import i18n, { languages } from '../shared/i18n';
+import localesConfig from '../../locales/config';
 
 const windowManager = getWindowManager();
 
@@ -50,8 +52,23 @@ export function setupActions(store) {
     openFileForImporting(undefined, type, archiveId);
   });
 
-  ipc.on('locale-change', () => {
-    i18n.setup(store);
+  ipc.on('change-locale-main', (e, lang) => {
+    let locale = lang;
+    if (!locale) {
+      const win = getMainWindow();
+      // set system lang
+      locale = app.getLocale().split('-')[0] || localesConfig.fallbackLng;
+
+      // check if its available
+      if (!(locale in languages)) {
+        locale = localesConfig.fallbackLng;
+      }
+      if (win) {
+        win.webContents.send('change-initial-locale', locale);
+      }
+    }
+
+    i18n.changeLanguage(locale);
     store.subscribe(debounce(() => setupMenu(store), 500));
   });
 }

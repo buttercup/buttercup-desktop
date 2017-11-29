@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { brands } from '../../../shared/buttercup/brands';
+import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import {
   emitActionToParentAndClose,
@@ -44,7 +44,7 @@ PathRenderer.propTypes = {
   pathName: PropTypes.string
 };
 
-export default class FileManager extends Component {
+class FileManager extends Component {
   state = {
     selectedConfig: null,
     creatable: false
@@ -106,11 +106,11 @@ export default class FileManager extends Component {
             <Flex align="center" width="50%">
               <ButtonRow>
                 <Button onClick={this.handleClose}>
-                  <FormattedMessage id="cancel" />
+                  <Translate i18nKey="cancel" parent="span" />
                 </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
                   <Button>
-                    <FormattedMessage id="go-back" />
+                    <Translate i18nKey="go-back" parent="span" />
                   </Button>
                 </NavLink>
               </ButtonRow>
@@ -121,14 +121,14 @@ export default class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  <FormattedMessage id="new-archive" />
+                  <Translate i18nKey="new-archive" parent="span" />
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  <FormattedMessage id="open-in-buttercup" />
+                  <Translate i18nKey="open-in-buttercup" parent="span" />
                 </Button>
               </ButtonRow>
             </Flex>
@@ -138,3 +138,5 @@ export default class FileManager extends Component {
     );
   }
 }
+
+export default FileManager;

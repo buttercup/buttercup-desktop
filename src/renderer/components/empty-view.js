@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { Translate } from '../../shared/i18n';
 import { Flex } from 'styled-flexbox';
 import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
@@ -49,15 +49,11 @@ export const NoArchiveSelected = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <FormattedMessage
-          id="welcome-back-title"
-          defaultMessage="Welcome back to Buttercup."
-        />
+        <Translate i18nKey="welcome-back-title" />
       </Title>
       <Caption>
-        <FormattedMessage
-          id="unlock-archive"
-          defaultMessage="Unlock an archive to begin ({os})."
+        <Translate
+          i18nKey="unlock-archive"
           values={{
             os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
           }}
@@ -72,16 +68,10 @@ export const WelcomeScreen = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <FormattedMessage
-          id="welcome-title"
-          defaultMessage="Welcome to Buttercup."
-        />
+        <Translate i18nKey="welcome-title" />
       </Title>
       <Caption>
-        <FormattedMessage
-          id="welcome-caption"
-          defaultMessage="You haven't added any archives yet. Why not add one?"
-        />
+        <Translate i18nKey="welcome-caption" />
       </Caption>
     </Figure>
     <AddArchiveButton />

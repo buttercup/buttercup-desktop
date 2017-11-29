@@ -11,10 +11,7 @@ const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [
     {
-      name: i18n.formatMessage({
-        id: 'buttercup-archives',
-        defaultMessage: 'Buttercup Archives'
-      }),
+      name: i18n.t('buttercup-archives'),
       extensions: ['bcup']
     }
   ]
@@ -40,10 +37,7 @@ function showOpenDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: i18n.formatMessage({
-        id: 'load-a-buttercup-archive',
-        defaultMessage: 'Load a Buttercup Archive'
-      })
+      title: i18n.t('load-a-buttercup-archive')
     },
     filename => {
       if (filename && filename.length > 0) {
@@ -65,10 +59,7 @@ function showSaveDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: i18n.formatMessage({
-        id: 'create-a-new-buttercup-archive',
-        defaultMessage: 'Create a New Buttercup Archive'
-      })
+      title: i18n.t('create-a-new-buttercup-archive')
     },
     filename => {
       if (typeof filename === 'string' && filename.length > 0) {
@@ -150,12 +141,7 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
   const typeInfo = ImportTypeInfo[type];
 
   if (!typeInfo) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'invalid-import-type-requested-error',
-        defaultMessage: 'Invalid import type requested'
-      })
-    );
+    throw new Error(i18n.t('error.invalid-import-type-requested'));
   }
 
   const handleError = err => {
@@ -212,13 +198,7 @@ export function openFileForImporting(focusedWindow, type, archiveId) {
   focusedWindow = getMainWindow(focusedWindow);
 
   if (!focusedWindow) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'open-file-for-importing-error',
-        defaultMessage:
-          'Import function should not be running without the main window running.'
-      })
-    );
+    throw new Error(i18n.t('error.open-file-for-importing'));
   }
 
   showImportDialog(focusedWindow, type, archiveId);

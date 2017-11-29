@@ -6,7 +6,8 @@ import Tree, { TreeNode } from 'rc-tree';
 import styled from 'styled-components';
 import PlusIcon from 'react-icons/lib/md/add';
 import { Button } from '@buttercup/ui';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import {
   showContextMenu,
   createMenuFromGroups,
@@ -40,18 +41,15 @@ class TreeView extends Component {
     onMoveGroup: PropTypes.func,
     onSortModeChange: PropTypes.func,
     onExpand: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   handleColumnRightClick() {
-    const { sortMode, onSortModeChange, intl } = this.props;
+    const { sortMode, onSortModeChange, t } = this.props;
 
     showContextMenu([
       {
-        label: intl.formatMessage({
-          id: 'new-group',
-          defaultMessage: 'New Group'
-        }),
+        label: t('new-group'),
         click: () => this.handleAddClick()
       },
       { type: 'separator' },
@@ -59,18 +57,12 @@ class TreeView extends Component {
         [
           {
             mode: 'title-asc',
-            label: intl.formatMessage({
-              id: 'title-asc',
-              defaultMessage: 'Title: Ascending'
-            }),
+            label: t('title-asc'),
             icon: 'sort-alpha-asc'
           },
           {
             mode: 'title-desc',
-            label: intl.formatMessage({
-              id: 'title-desc',
-              defaultMessage: 'Title: Descending'
-            }),
+            label: t('title-desc'),
             icon: 'sort-alpha-desc'
           }
         ],
@@ -82,7 +74,7 @@ class TreeView extends Component {
 
   handleRightClick = (node, groups, e) => {
     const { id: groupId, isTrash, depth } = node;
-    const { intl } = this.props;
+    const { t } = this.props;
 
     // Prevent righ click from propagation to parent
     e.stopPropagation();
@@ -90,10 +82,7 @@ class TreeView extends Component {
     if (isTrash) {
       showContextMenu([
         {
-          label: intl.formatMessage({
-            id: 'empty-trash',
-            defaultMessage: 'Empty Trash'
-          }),
+          label: t('empty-trash'),
           click: () => this.props.onEmptyTrash()
         }
       ]);
@@ -102,10 +91,7 @@ class TreeView extends Component {
         depth > 0
           ? [
               {
-                label: intl.formatMessage({
-                  id: 'move-to-root',
-                  defaultMessage: 'Move to Root'
-                }),
+                label: t('move-to-root'),
                 click: () => this.props.onMoveGroup(groupId, null)
               }
             ]
@@ -129,35 +115,23 @@ class TreeView extends Component {
 
       showContextMenu([
         {
-          label: intl.formatMessage({
-            id: 'add-group',
-            defaultMessage: 'Add Group'
-          }),
+          label: t('add-group'),
           click: () => this.handleAddClick(null, groupId)
         },
         { type: 'separator' },
         ...nonRootContextMenu,
         {
-          label: intl.formatMessage({
-            id: 'move-to-group',
-            defaultMessage: 'Move to Group'
-          }),
+          label: t('move-to-group'),
           enabled: availableGroups.items,
           ...groupsMenu
         },
         {
-          label: intl.formatMessage({
-            id: 'rename',
-            defaultMessage: 'Rename'
-          }),
+          label: t('rename'),
           click: () => this.props.onRenameClick(groupId)
         },
         { type: 'separator' },
         {
-          label: intl.formatMessage({
-            id: 'delete',
-            defaultMessage: 'Delete'
-          }),
+          label: t('delete'),
           click: () => this.handleRemoveClick(null, groupId)
         }
       ]);
@@ -237,7 +211,7 @@ class TreeView extends Component {
       <Column
         footer={
           <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
-            <FormattedMessage id="new-group" defaultMessage="New Group" />
+            <Translate i18nKey="new-group" parent="span" />
           </Button>
         }
         onContextMenu={() => this.handleColumnRightClick()}
@@ -259,4 +233,4 @@ class TreeView extends Component {
   }
 }
 
-export default injectIntl(TreeView);
+export default translate()(TreeView);

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
+import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -52,7 +52,8 @@ class TreeLabel extends Component {
       <Node onContextMenu={onRightClick}>
         {title.trim() || (
           <i>
-            <FormattedMessage id="untitled" defaultMessage="Untitled" />
+            {' '}
+            <Translate i18nKey="untitled" parent="span" />
           </i>
         )}
       </Node>

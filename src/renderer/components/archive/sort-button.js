@@ -2,29 +2,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import SortIcon from 'react-icons/lib/md/sort';
 import { Button } from '@buttercup/ui';
-import { injectIntl, intlShape } from 'react-intl';
+import { translate } from 'react-i18next';
 import { showContextMenu, createSortMenu } from '../../system/menu';
 
-function showMenu(mode, onChange, intl) {
+function showMenu(mode, onChange, t) {
   showContextMenu(
     createSortMenu(
       [
         [
           {
             mode: 'properties.title-asc',
-            label: intl.formatMessage({
-              id: 'title-asc',
-              defaultMessage: 'Title: Ascending'
-            }),
+            label: t('title-asc'),
             icon: 'sort-alpha-asc',
             enabled: true
           },
           {
             mode: 'properties.title-desc',
-            label: intl.formatMessage({
-              id: 'title-desc',
-              defaultMessage: 'Title: Descending'
-            }),
+            label: t('title-desc'),
             icon: 'sort-alpha-desc',
             enabled: true
           }
@@ -32,19 +26,13 @@ function showMenu(mode, onChange, intl) {
         [
           {
             mode: 'time-asc',
-            label: intl.formatMessage({
-              id: 'time-asc',
-              defaultMessage: 'Time: Ascending'
-            }),
+            label: t('time-asc'),
             icon: 'sort-time-asc',
             enabled: false
           },
           {
             mode: 'time-desc',
-            label: intl.formatMessage({
-              id: 'time-desc',
-              defaultMessage: 'Time: Descending'
-            }),
+            label: t('time-desc'),
             icon: 'sort-time-desc',
             enabled: false
           }
@@ -56,10 +44,10 @@ function showMenu(mode, onChange, intl) {
   );
 }
 
-const SortButton = ({ mode, onChange, intl }) => (
+const SortButton = ({ mode, onChange, t }) => (
   <Button
     transparent
-    onClick={() => showMenu(mode, onChange, intl)}
+    onClick={() => showMenu(mode, onChange, t)}
     icon={<SortIcon />}
   />
 );
@@ -67,7 +55,7 @@ const SortButton = ({ mode, onChange, intl }) => (
 SortButton.propTypes = {
   mode: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  intl: intlShape.isRequired
+  t: PropTypes.func
 };
 
-export default injectIntl(SortButton);
+export default translate()(SortButton);

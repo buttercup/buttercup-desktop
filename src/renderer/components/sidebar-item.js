@@ -6,7 +6,7 @@ import LockOpen from 'react-icons/lib/md/lock-open';
 import LockClosed from 'react-icons/lib/md/lock-outline';
 import { GithubPicker } from 'react-color';
 import Portal from 'react-portal';
-import { injectIntl, intlShape } from 'react-intl';
+import { translate } from 'react-i18next';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
@@ -109,7 +109,7 @@ class SidebarItem extends Component {
     onRemoveClick: PropTypes.func.isRequired,
     onArchiveUpdate: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   state = {
@@ -119,59 +119,36 @@ class SidebarItem extends Component {
   };
 
   handleContextMenu = () => {
-    const { intl, archive } = this.props;
+    const { t, archive } = this.props;
     const { status, name, id } = archive;
     showContextMenu([
       {
-        label: `${status === 'locked'
-          ? intl.formatMessage({
-              id: 'unlock',
-              defaultMessage: 'Unlock'
-            })
-          : intl.formatMessage({
-              id: 'open',
-              defaultMessage: 'Open'
-            })} ${name}`,
+        label: `${status === 'locked' ? t('unlock') : t('open')} ${name}`,
         accelerator: `CmdOrCtrl+${this.props.index + 1}`,
         click: this.props.onClick
       },
       ...(status === 'unlocked'
         ? [
             {
-              label: intl.formatMessage({
-                id: 'lock',
-                defaultMessage: 'Lock'
-              }),
+              label: t('lock'),
               click: this.props.onLockArchive
             }
           ]
         : []),
       {
-        label: intl.formatMessage({
-          id: 'change-color',
-          defaultMessage: 'Change Color'
-        }),
+        label: t('change-color'),
         click: this.showColorPopup
       },
       {
         type: 'separator'
       },
       {
-        label: intl.formatMessage({
-          id: 'import',
-          defaultMessage: 'Import'
-        }),
+        label: t('import'),
         submenu: Object.entries(ImportTypeInfo).map(([type, typeInfo]) => ({
-          label: intl.formatMessage(
-            {
-              id: 'import-from-type',
-              defaultMessage: 'From {name} archive (.{extension})'
-            },
-            {
-              name: typeInfo.name,
-              extension: typeInfo.extension
-            }
-          ),
+          label: t('import-from-type', {
+            name: typeInfo.name,
+            extension: typeInfo.extension
+          }),
           enabled: status === 'unlocked',
           click: () =>
             this.props.showImportDialog({
@@ -184,15 +161,9 @@ class SidebarItem extends Component {
         type: 'separator'
       },
       {
-        label: intl.formatMessage(
-          {
-            id: 'archive-remove-with-name',
-            defaultMessage: 'Remove {name}'
-          },
-          {
-            name
-          }
-        ),
+        label: t('archive-remove-with-name', {
+          name
+        }),
         click: this.props.onRemoveClick
       }
     ]);
@@ -276,4 +247,4 @@ class SidebarItem extends Component {
   }
 }
 
-export default injectIntl(SidebarItem);
+export default translate()(SidebarItem);

@@ -48,12 +48,7 @@ export function createGroup(archiveId, parentId, groupName) {
   const group = parentId ? arch.findGroupByID(parentId) : arch;
 
   if (!group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found.'
-      })
-    );
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   const newGroup = group.createGroup(groupName);
@@ -70,12 +65,7 @@ export function deleteGroup(archiveId, groupId) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found.'
-      })
-    );
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   group.delete();
@@ -87,12 +77,7 @@ export function saveGroup(archiveId, groupId, title) {
   const group = arch.findGroupByID(groupId);
 
   if (!group) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found.'
-      })
-    );
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   group.setTitle(title);
@@ -107,12 +92,7 @@ export function moveGroup(archiveId, groupId, parentId) {
   const parent = parentId ? arch.findGroupByID(parentId) : arch;
 
   if (!group || !parent) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'group-not-found-error',
-        defaultMessage: 'Group has not been found.'
-      })
-    );
+    throw new Error(i18n.t('error.group-not-found'));
   }
 
   group.moveToGroup(parent);

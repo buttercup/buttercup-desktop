@@ -28,12 +28,7 @@ export function sortByLastAccessed(list) {
 
 export function sortDeepByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'insufficient-data-provided-error',
-        defaultMessage: 'Insufficient data provided for sorting'
-      })
-    );
+    throw new Error(i18n.t('error.insufficient-data-provided'));
   }
   return sortByKey(list, sortKey).map(item => {
     return {

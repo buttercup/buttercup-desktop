@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
-import { FormattedMessage } from 'react-intl';
+import { Translate } from '../../../shared/i18n';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
@@ -176,7 +176,8 @@ class Manager extends Component {
           columnKey="name"
           header={
             <Cell>
-              <FormattedMessage id="name" defaultMessage="Name" />
+              {' '}
+              <Translate i18nKey="name" parent="span" />
             </Cell>
           }
           cell={
@@ -195,7 +196,8 @@ class Manager extends Component {
           columnKey="size"
           header={
             <Cell>
-              <FormattedMessage id="size" defaultMessage="Size" />
+              {' '}
+              <Translate i18nKey="size" parent="span" />
             </Cell>
           }
           cell={<SizeCell data={contents} />}
@@ -206,7 +208,8 @@ class Manager extends Component {
           columnKey="mtime"
           header={
             <Cell>
-              <FormattedMessage id="date" defaultMessage="Date" />
+              {' '}
+              <Translate i18nKey="date" parent="span" />
             </Cell>
           }
           cell={<DateCell data={contents} />}

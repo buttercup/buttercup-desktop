@@ -55,12 +55,8 @@ export function createMenuFromGroups(
                   [
                     {
                       ...group,
-                      title: i18n.formatMessage({
-                        id: 'move-to-group-custom',
-                        defaultMessage: 'Move to {title}',
-                        values: {
-                          title: group.title
-                        }
+                      title: i18n.t('move-to-group-custom', {
+                        title: group.title
                       }),
                       groups: []
                     },
@@ -80,12 +76,7 @@ export function createMenuFromGroups(
 
 export function createSortMenu(sortDefinition = [], currentMode, onChange) {
   if (sortDefinition.length === 0) {
-    throw new Error(
-      i18n.formatMessage({
-        id: 'sort-definition-not-found-error',
-        defaultMessage: 'Sort definition not found'
-      })
-    );
+    throw new Error(i18n.t('error.sort-definition-not-found'));
   }
 
   if (!Array.isArray(sortDefinition[0])) {
@@ -113,18 +104,12 @@ export function createCopyMenu(entry, currentEntry) {
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [
     {
-      label: i18n.formatMessage({
-        id: 'username',
-        defaultMessage: 'Username'
-      }),
+      label: i18n.t('username'),
       accelerator: showKeys ? 'CmdOrCtrl+B' : null,
       click: () => copyToClipboard(entry.properties.username)
     },
     {
-      label: i18n.formatMessage({
-        id: 'password',
-        defaultMessage: 'Password'
-      }),
+      label: i18n.t('password'),
       accelerator: showKeys ? 'CmdOrCtrl+C' : null,
       click: () => copyToClipboard(entry.properties.password)
     }
@@ -140,10 +125,7 @@ export function createCopyMenu(entry, currentEntry) {
 
   const menu = [
     {
-      label: i18n.formatMessage({
-        id: 'copy-to-clipboard',
-        defaultMessage: 'Copy To Clipboard'
-      }),
+      label: i18n.t('copy-to-clipboard'),
       submenu: [
         ...props,
         { type: 'separator' },
@@ -157,10 +139,7 @@ export function createCopyMenu(entry, currentEntry) {
 
   if (url) {
     menu.push({
-      label: i18n.formatMessage({
-        id: 'open-url-in-browser',
-        defaultMessage: 'Open URL in Browser'
-      }),
+      label: i18n.t('open-url-in-browser'),
       click: () => openUrl(url.value)
     });
   }

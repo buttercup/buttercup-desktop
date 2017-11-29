@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
+import { Translate } from '../../../shared/i18n';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
@@ -22,7 +23,7 @@ class Entry extends Component {
     handleEditMode: PropTypes.func,
     handleViewMode: PropTypes.func,
     initializeForm: PropTypes.func,
-    intl: intlShape.isRequired
+    t: PropTypes.func
   };
 
   componentWillReceiveProps(nextProps) {
@@ -53,10 +54,10 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              <FormattedMessage id="save" defaultMessage="Save" />
+              <Translate i18nKey="save" parent="span" />
             </Button>{' '}
             <Button onClick={this.props.handleViewMode}>
-              <FormattedMessage id="cancel" defaultMessage="Cancel" />
+              <Translate i18nKey="cancel" parent="span" />
             </Button>
           </div>
           <div>
@@ -65,7 +66,7 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              <FormattedMessage id="delete" defaultMessage="Delete" />
+              <Translate i18nKey="delete" parent="span" />
             </Button>
           </div>
         </div>
@@ -91,10 +92,11 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            <FormattedMessage id="save" defaultMessage="Save" />
+            <Translate i18nKey="save" parent="span" />
           </Button>{' '}
           <Button onClick={this.props.handleViewMode}>
-            <FormattedMessage id="cancel" defaultMessage="Cancel" />
+            {' '}
+            <Translate i18nKey="cancel" parent="span" />
           </Button>
         </div>
       )
@@ -106,22 +108,19 @@ class Entry extends Component {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          <FormattedMessage id="edit" defaultMessage="Edit" />
+          <Translate i18nKey="edit" parent="span" />
         </Button>
       )
     };
   }
 
   renderIdleMode() {
-    const { intl } = this.props;
+    const { t } = this.props;
 
     return {
       content: (
         <EmptyView
-          caption={intl.formatMessage({
-            id: 'select-or-create-an-entry',
-            defaultMessage: 'Select or Create an Entry'
-          })}
+          caption={t('select-or-create-an-entry')}
           className={styles.emptyView}
           imageSrc={bench}
         />
@@ -161,4 +160,4 @@ class Entry extends Component {
   }
 }
 
-export default injectIntl(Entry);
+export default translate()(Entry);

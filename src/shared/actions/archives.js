@@ -77,10 +77,7 @@ export const addArchive = payload => async (dispatch, getState) => {
   const dispatchLoad = archiveId => dispatch(loadArchive(archiveId));
   const addToArchive = password =>
     addArchiveToArchiveManager(payload, password).catch(err => {
-      const unknownMessage = i18n.formatMessage({
-        id: 'unknown-error',
-        defaultMessage: 'An unknown error has occurred'
-      });
+      const unknownMessage = i18n.t('error.unknown');
       return Promise.reject(
         isError(err) ? err.message || unknownMessage : unknownMessage
       );
@@ -101,21 +98,13 @@ export const addArchive = payload => async (dispatch, getState) => {
         password => {
           if (firstPassword !== password) {
             return Promise.reject(
-              new Error(
-                i18n.formatMessage({
-                  id: 'passwords-font-match-error',
-                  defaultMessage: "Your passwords don't match."
-                })
-              )
+              new Error(i18n.t('error.passwords-font-match'))
             );
           }
           return addToArchive(password);
         },
         {
-          title: i18n.formatMessage({
-            id: 'confirm-password',
-            defaultMessage: 'Confirm Password'
-          })
+          title: i18n.t('confirm-password')
         }
       )
     )

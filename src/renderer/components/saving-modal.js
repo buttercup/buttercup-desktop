@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { FormattedHTMLMessage } from 'react-intl';
+import { Translate } from '../../shared/i18n';
 import spinner from '../styles/img/spinner.svg';
 
 const SavingDialog = styled(Flex)`
@@ -26,7 +26,7 @@ const SavingDialogText = styled.div`
   }
 `;
 
-export default class SavingModal extends Component {
+class SavingModal extends Component {
   state = {
     isSaving: false
   };
@@ -53,14 +53,11 @@ export default class SavingModal extends Component {
       <SavingDialog align="center" justify="center">
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
-          <p>
-            <FormattedHTMLMessage
-              id="archive-saved-loading-info"
-              defaultMessage="Your archive is being saved.<br>Exiting automatically"
-            />...
-          </p>
+          <br />
+          <Translate html i18nKey="archive-saved-loading-info" />
         </SavingDialogText>
       </SavingDialog>
     );
   }
 }
+export default SavingModal;

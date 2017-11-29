@@ -8,16 +8,7 @@ const { dialog } = remote;
 const currentWindow = remote.getCurrentWindow();
 
 export function showConfirmDialog(message, fn) {
-  const buttons = [
-    i18n.formatMessage({
-      id: 'yes',
-      defaultMessage: 'Yes'
-    }),
-    i18n.formatMessage({
-      id: 'no',
-      defaultMessage: 'No'
-    })
-  ];
+  const buttons = [i18n.t('yes'), i18n.t('no')];
   dialog.showMessageBox(currentWindow, { message, buttons }, resp => {
     fn(resp);
   });
@@ -42,28 +33,16 @@ export function showPasswordDialog(preConfirm, options = {}) {
     preConfirm = defaultFunc;
   }
   return swal({
-    title: i18n.formatMessage({
-      id: 'master-password',
-      defaultMessage: 'Master Password'
-    }),
+    title: i18n.t('master-password'),
     input: 'password',
     showCancelButton: true,
     animation: false,
     customClass: styles.alert,
     confirmButtonClass: styles.confirm,
-    confirmButtonText: i18n.formatMessage({
-      id: 'confirm',
-      defaultMessage: 'Confirm'
-    }),
+    confirmButtonText: i18n.t('confirm'),
     cancelButtonClass: styles.cancel,
-    cancelButtonText: i18n.formatMessage({
-      id: 'nevermind',
-      defaultMessage: 'Nevermind'
-    }),
-    inputPlaceholder: i18n.formatMessage({
-      id: 'password',
-      defaultMessage: 'Password'
-    }),
+    cancelButtonText: i18n.t('nevermind'),
+    inputPlaceholder: i18n.t('password'),
     inputClass: styles.input,
     buttonsStyling: false,
     ...options,

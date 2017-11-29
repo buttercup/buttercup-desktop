@@ -84,19 +84,13 @@ export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
 
 export const deleteEntry = entryId => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  showConfirmDialog(
-    i18n.formatMessage({
-      id: 'are-you-sure-question',
-      defaultMessage: 'Are you sure?'
-    }),
-    resp => {
-      if (resp === 0) {
-        dispatch({
-          type: ENTRIES_DELETE,
-          payload: entryId
-        });
-        entryTools.deleteEntry(archiveId, entryId);
-      }
+  showConfirmDialog(i18n.t('are-you-sure-question'), resp => {
+    if (resp === 0) {
+      dispatch({
+        type: ENTRIES_DELETE,
+        payload: entryId
+      });
+      entryTools.deleteEntry(archiveId, entryId);
     }
-  );
+  });
 };
