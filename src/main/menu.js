@@ -14,7 +14,7 @@ import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 
-const label = (key, options) => i18n.t('menu.window.' + key, options);
+const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 export const setupMenu = store => {
   const defaultTemplate = [

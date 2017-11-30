@@ -1,67 +1,65 @@
 {
-  "menu": {
-    "window": {
-      "app": {
-        "about": "About",
-        "check-for-updates": "Check for Updates...",
-        "services": "Services",
-        "hide": "Hide",
-        "hideothers": "Hide others",
-        "unhide": "Unhide",
-        "quit": "Quit"
+  "app-menu": {
+    "app": {
+      "about": "About",
+      "check-for-updates": "Check for Updates...",
+      "services": "Services",
+      "hide": "Hide",
+      "hideothers": "Hide others",
+      "unhide": "Unhide",
+      "quit": "Quit"
+    },
+    "archive": {
+      "archive": "Archive",
+      "file": "File",
+      "new": "New Archive",
+      "open": "Open Archive",
+      "connect-cloud-sources": "Connect Cloud Sources",
+      "import": {
+        "import": "Import",
+        "import-from-type": "From {{name}} archive (.{{extension}})",
+        "import-to-type": "To {{name}}"
       },
-      "archive": {
-        "archive": "Archive",
-        "file": "File",
-        "new": "New Archive",
-        "open": "Open Archive",
-        "connect-cloud-sources": "Connect Cloud Sources",
-        "import": {
-          "import": "Import",
-          "import-from-type": "From {{name}} archive (.{{extension}})",
-          "import-to-type": "To {{name}}"
-        },
-        "close": "Close"
-      },
-      "edit": {
-        "edit": "Edit",
-        "undo": "Undo",
-        "redo": "Redo",
-        "cut": "Cut",
-        "copy": "Copy",
-        "paste": "Paste",
-        "pasteandmatchstyle": "Paste and match style",
-        "delete": "Delete",
-        "selectall": "Select all",
-        "speech": {
-          "speech": "Speech",
-          "startspeaking": "Start speaking",
-          "stopspeaking": "Stop speaking"
-        }
-      },
-      "view": {
-        "view": "View",
-        "condensed-sidebar": "Condensed Sidebar",
-        "language": "Language",
-        "reload": "Reload",
-        "forcereload": "Force reload",
-        "toggledevtools": "Toggle dev tools",
-        "auto-hide-menubar": "Auto Hide Menubar"
-      },
-      "window": {
-        "window": "Window",
-        "minimize": "Minimize",
-        "close": "Close",
-        "zoom": "Zoom",
-        "front": "Bring all to front"
-      },
-      "help": {
-        "help": "Help",
-        "search": "Search",
-        "visit-our-website": "Visit Our Website",
-        "privacy-policy": "Privacy Policy",
-        "view-changelog-for-v": "View Changelog For v{{version}}"
+      "close": "Close"
+    },
+    "edit": {
+      "edit": "Edit",
+      "undo": "Undo",
+      "redo": "Redo",
+      "cut": "Cut",
+      "copy": "Copy",
+      "paste": "Paste",
+      "pasteandmatchstyle": "Paste and match style",
+      "delete": "Delete",
+      "selectall": "Select all",
+      "speech": {
+        "speech": "Speech",
+        "startspeaking": "Start speaking",
+        "stopspeaking": "Stop speaking"
       }
+    },
+    "view": {
+      "view": "View",
+      "condensed-sidebar": "Condensed Sidebar",
+      "language": "Language",
+      "reload": "Reload",
+      "forcereload": "Force reload",
+      "toggledevtools": "Toggle dev tools",
+      "auto-hide-menubar": "Auto Hide Menubar"
+    },
+    "window": {
+      "window": "Window",
+      "minimize": "Minimize",
+      "close": "Close",
+      "zoom": "Zoom",
+      "front": "Bring all to front"
+    },
+    "help": {
+      "help": "Help",
+      "search": "Search",
+      "visit-our-website": "Visit Our Website",
+      "privacy-policy": "Privacy Policy",
+      "view-changelog-for-v": "View Changelog For v{{version}}"
     }
   },
   "welcome-back-title": "Welcome back to Buttercup.",
