@@ -14,23 +14,25 @@ import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 
+const label = (key, options) => i18n.t('menu.window.' + key, options);
+
 export const setupMenu = store => {
   const defaultTemplate = [
     {
-      label: isOSX() ? i18n.t('archive') : i18n.t('file'),
+      label: isOSX() ? label('archive.archive') : label('archive.file'),
       submenu: [
         {
-          label: i18n.t('new-archive'),
+          label: label('archive.new'),
           accelerator: 'CmdOrCtrl+N',
           click: (item, focusedWindow) => newFile(focusedWindow)
         },
         {
-          label: i18n.t('open-archive'),
+          label: label('archive.open'),
           accelerator: 'CmdOrCtrl+O',
           click: (item, focusedWindow) => openFile(focusedWindow)
         },
         {
-          label: i18n.t('connect-cloud-sources'),
+          label: label('archive.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: (item, focusedWindow) => {
             getWindowManager().buildWindowOfType('file-manager', null, {
@@ -47,103 +49,103 @@ export const setupMenu = store => {
         },
         {
           role: 'close',
-          label: i18n.t('close')
+          label: label('archive.close')
         }
       ]
     },
     {
-      label: i18n.t('edit'),
+      label: label('edit.edit'),
       submenu: [
         {
           role: 'undo',
-          label: i18n.t('undo')
+          label: label('edit.undo')
         },
         {
           role: 'redo',
-          label: i18n.t('redo')
+          label: label('edit.redo')
         },
         { type: 'separator' },
         {
           role: 'cut',
-          label: i18n.t('cut')
+          label: label('edit.cut')
         },
         {
           role: 'copy',
-          label: i18n.t('copy')
+          label: label('edit.copy')
         },
         {
           role: 'paste',
-          label: i18n.t('paste')
+          label: label('edit.paste')
         },
         {
           role: 'pasteandmatchstyle',
-          label: i18n.t('pasteandmatchstyle')
+          label: label('edit.pasteandmatchstyle')
         },
         {
           role: 'delete',
-          label: i18n.t('delete')
+          label: label('edit.delete')
         },
         {
           role: 'selectall',
-          label: i18n.t('selectall')
+          label: label('edit.selectall')
         }
       ]
     },
     {
-      label: i18n.t('view'),
+      label: label('view.view'),
       submenu: [
         { type: 'separator' },
         {
           role: 'reload',
-          label: i18n.t('reload')
+          label: label('view.reload')
         },
         {
           role: 'forcereload',
-          label: i18n.t('forcereload')
+          label: label('view.forcereload')
         },
         {
           role: 'toggledevtools',
-          label: i18n.t('toggledevtools')
+          label: label('view.toggledevtools')
         },
         { type: 'separator' },
         {
           role: 'togglefullscreen',
-          label: i18n.t('togglefullscreen')
+          label: label('view.togglefullscreen')
         }
       ]
     },
     {
-      label: i18n.t('window'),
+      label: label('window.window'),
       role: 'window',
       submenu: [
         {
           role: 'minimize',
-          label: i18n.t('minimize')
+          label: label('window.minimize')
         },
         {
           role: 'close',
-          label: i18n.t('close')
+          label: label('window.close')
         }
       ]
     },
     {
-      label: i18n.t('help'),
+      label: label('help.help'),
       role: 'help',
       submenu: [
         {
-          label: i18n.t('visit-our-website'),
+          label: label('help.visit-our-website'),
           click: () => {
             shell.openExternal('https://buttercup.pw');
           }
         },
         {
-          label: i18n.t('privacy-policy'),
+          label: label('help.privacy-policy'),
           click: () => {
             shell.openExternal('https://buttercup.pw/privacy');
           }
         },
         {
-          label: i18n.t('view-changelog-for-v', {
+          label: label('help.view-changelog-for-v', {
             version: pkg.version
           }),
           click: () => {
@@ -160,15 +162,15 @@ export const setupMenu = store => {
     defaultTemplate.unshift({
       label: app.getName(),
       submenu: [
-        { role: 'about', label: i18n.t('about') },
+        { role: 'about', label: label('app.about') },
         { type: 'separator' },
-        { role: 'services', submenu: [], label: i18n.t('services') },
+        { role: 'services', submenu: [], label: label('app.services') },
         { type: 'separator' },
-        { role: 'hide', label: i18n.t('hide') },
-        { role: 'hideothers', label: i18n.t('hideothers') },
-        { role: 'unhide', label: i18n.t('unhide') },
+        { role: 'hide', label: label('app.hide') },
+        { role: 'hideothers', label: label('app.hideothers') },
+        { role: 'unhide', label: label('app.unhide') },
         { type: 'separator' },
-        { role: 'quit', label: i18n.t('quit') }
+        { role: 'quit', label: label('app.quit') }
       ]
     });
 
@@ -176,10 +178,10 @@ export const setupMenu = store => {
     defaultTemplate[2].submenu.push(
       { type: 'separator' },
       {
-        label: i18n.t('speech'),
+        label: label('edit.speech.speech'),
         submenu: [
-          { role: 'startspeaking', label: i18n.t('startspeaking') },
-          { role: 'stopspeaking', label: i18n.t('stopspeaking') }
+          { role: 'startspeaking', label: label('edit.speech.startspeaking') },
+          { role: 'stopspeaking', label: label('edit.speech.stopspeaking') }
         ]
       }
     );
@@ -188,21 +190,21 @@ export const setupMenu = store => {
     defaultTemplate[4].submenu.push(
       {
         role: 'zoom',
-        label: i18n.t('zoom')
+        label: label('window.zoom')
       },
       {
         type: 'separator'
       },
       {
         role: 'front',
-        label: i18n.t('front')
+        label: label('window.front')
       }
     );
   }
 
   // Check for Updates...
   defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
-    label: i18n.t('check-for-updates'),
+    label: label('app.check-for-updates'),
     click: () => {
       checkForUpdates();
     }
@@ -231,16 +233,16 @@ export const setupMenu = store => {
           submenu: item.submenu.map((sub, i) => {
             if (i === 4) {
               return {
-                label: i18n.t('import'),
+                label: label('archive.import.import'),
                 submenu: Object.entries(
                   ImportTypeInfo
                 ).map(([typeKey, type]) => ({
-                  label: i18n.t('import-from-type', {
+                  label: label('archive.import.import-from-type', {
                     name: type.name,
                     extension: type.extension
                   }),
                   submenu: archives.map(archive => ({
-                    label: i18n.t('import-to-type', {
+                    label: label('archive.import.import-to-type', {
                       name: archive.name,
                       extension: type.extension
                     }),
@@ -260,7 +262,7 @@ export const setupMenu = store => {
           ...item,
           submenu: [
             {
-              label: i18n.t('condensed-sidebar'),
+              label: label('view.condensed-sidebar'),
               type: 'checkbox',
               checked: getSetting(state, 'condencedSidebar'),
               accelerator: 'CmdOrCtrl+Shift+B',
@@ -271,7 +273,7 @@ export const setupMenu = store => {
             { type: 'separator' },
             // Language menu point
             {
-              label: i18n.t('language'),
+              label: label('view.language'),
               submenu: Object.keys(languages).map(key => ({
                 label: languages[key].name,
                 checked: getSetting(state, 'locale') === key,
@@ -292,7 +294,7 @@ export const setupMenu = store => {
             ...(isWindows()
               ? [
                   {
-                    label: i18n.t('auto-hide-menubar'),
+                    label: label('view.auto-hide-menubar'),
                     type: 'checkbox',
                     checked: menubarAutoHide,
                     click: item => {

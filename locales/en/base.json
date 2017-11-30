@@ -1,33 +1,87 @@
 {
+  "menu": {
+    "window": {
+      "app": {
+        "about": "About",
+        "check-for-updates": "Check for Updates...",
+        "services": "Services",
+        "hide": "Hide",
+        "hideothers": "Hide others",
+        "unhide": "Unhide",
+        "quit": "Quit"
+      },
+      "archive": {
+        "archive": "Archive",
+        "file": "File",
+        "new": "New Archive",
+        "open": "Open Archive",
+        "connect-cloud-sources": "Connect Cloud Sources",
+        "import": {
+          "import": "Import",
+          "import-from-type": "From {{name}} archive (.{{extension}})",
+          "import-to-type": "To {{name}}"
+        },
+        "close": "Close"
+      },
+      "edit": {
+        "edit": "Edit",
+        "undo": "Undo",
+        "redo": "Redo",
+        "cut": "Cut",
+        "copy": "Copy",
+        "paste": "Paste",
+        "pasteandmatchstyle": "Paste and match style",
+        "delete": "Delete",
+        "selectall": "Select all",
+        "speech": {
+          "speech": "Speech",
+          "startspeaking": "Start speaking",
+          "stopspeaking": "Stop speaking"
+        }
+      },
+      "view": {
+        "view": "View",
+        "condensed-sidebar": "Condensed Sidebar",
+        "language": "Language",
+        "reload": "Reload",
+        "forcereload": "Force reload",
+        "toggledevtools": "Toggle dev tools",
+        "auto-hide-menubar": "Auto Hide Menubar"
+      },
+      "window": {
+        "window": "Window",
+        "minimize": "Minimize",
+        "close": "Close",
+        "zoom": "Zoom",
+        "front": "Bring all to front"
+      },
+      "help": {
+        "help": "Help",
+        "search": "Search",
+        "visit-our-website": "Visit Our Website",
+        "privacy-policy": "Privacy Policy",
+        "view-changelog-for-v": "View Changelog For v{{version}}"
+      }
+    }
+  },
   "welcome-back-title": "Welcome back to Buttercup.",
   "unlock-archive": "Unlock an archive to begin ({{os}}).",
   "welcome-title": "Welcome to Buttercup.",
   "welcome-caption": "You haven't added any archives yet. Why not add one?",
   "open-archive-file": "Open Archive File",
   "new-archive-file": "New Archive File",
-  "connect-cloud-sources": "Connect Cloud Sources",
+
   "add-archive": "Add Archive",
   "cancel": "Cancel",
   "go-back": "Go Back",
-  "new-archive": "New Archive",
-  "open-archive": "Open Archive",
+
   "open-in-buttercup": "Open in Buttercup",
   "master-password": "Master Password",
   "confirm": "Confirm",
   "nevermind": "Nevermind",
   "password": "Password",
-  "language": "Language",
   "copy-to-clipboard": "Copy To Clipboard",
-  "edit": "Edit",
-  "view": "View",
-  "window": "Window",
-  "help": "Help",
-  "visit-our-website": "Visit Our Website",
-  "privacy-policy": "Privacy Policy",
-  "view-changelog-for-v": "View Changelog For v{{version}}",
-  "speech": "Speech",
-  "condensed-sidebar": "Condensed Sidebar",
-  "auto-hide-menubar": "Auto Hide Menubar",
+
   "new-group": "New Group",
   "title-asc": "Title: Ascending",
   "title-desc": "Title: Descending",
@@ -67,7 +121,6 @@
   "change-color": "Change Color",
   "import": "Import",
   "import-from-type": "From {{name}} archive (.{{extension}})",
-  "import-to-type": "To {{name}}",
   "archive-remove-with-name": "Remove {{name}}",
   "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
   "connect-to-dropbox": "Connect to Dropbox",
@@ -82,8 +135,7 @@
   "open-url-in-browser": "Open URL in Browser",
   "new-field": "New Field",
   "label": "Label",
-  "archive": "Archive",
-  "file": "File",
+
   "confirm-password": "Confirm Password",
   "are-you-sure-question": "Are you sure?",
   "entry-inputs-empty-info": "Please enter at least a title.",
@@ -94,28 +146,9 @@
   "yes": "Yes",
   "no": "No",
   "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-  "check-for-updates": "Check for Updates...",
-  "undo": "Undo",
-  "redo": "Redo",
-  "cut": "Cut",
-  "paste": "Paste",
-  "pasteandmatchstyle": "Paste and match style",
-  "selectall": "Select all",
-  "reload": "Reload",
-  "forcereload": "Force reload",
-  "toggledevtools": "Toggle dev tools",
+
   "togglefullscreen": "Toggle full screen",
-  "minimize": "Minimize",
-  "about": "About",
-  "services": "Services",
-  "hideothers": "Hide others",
-  "unhide": "Unhide",
-  "quit": "Quit",
-  "zoom": "Zoom",
-  "front": "Bring all to front",
-  "stopspeaking": "Stop speaking",
-  "startspeaking": "Start speaking",
-  "close": "Close",
+
   "connect": "Connect",
   "error": {
     "archive-not-found": "Archive source was not found.",
