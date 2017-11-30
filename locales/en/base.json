@@ -70,18 +70,15 @@
   "welcome-caption": "You haven't added any archives yet. Why not add one?",
   "open-archive-file": "Open Archive File",
   "new-archive-file": "New Archive File",
-
   "add-archive": "Add Archive",
   "cancel": "Cancel",
   "go-back": "Go Back",
-
   "open-in-buttercup": "Open in Buttercup",
   "master-password": "Master Password",
   "confirm": "Confirm",
   "nevermind": "Nevermind",
   "password": "Password",
   "copy-to-clipboard": "Copy To Clipboard",
-
   "new-group": "New Group",
   "title-asc": "Title: Ascending",
   "title-desc": "Title: Descending",
@@ -135,7 +132,6 @@
   "open-url-in-browser": "Open URL in Browser",
   "new-field": "New Field",
   "label": "Label",
-
   "confirm-password": "Confirm Password",
   "are-you-sure-question": "Are you sure?",
   "entry-inputs-empty-info": "Please enter at least a title.",
@@ -146,9 +142,7 @@
   "yes": "Yes",
   "no": "No",
   "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-
   "togglefullscreen": "Toggle full screen",
-
   "connect": "Connect",
   "error": {
     "archive-not-found": "Archive source was not found.",
