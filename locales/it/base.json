@@ -1,4 +1,66 @@
 {
+  "app-menu": {
+    "app": {
+      "about": "About",
+      "check-for-updates": "Check for Updates...",
+      "services": "Services",
+      "hide": "Nascondi",
+      "hideothers": "Hide others",
+      "unhide": "Unhide",
+      "quit": "Quit"
+    },
+    "archive": {
+      "archive": "Archivio",
+      "file": "File",
+      "new": "Nuovo Archivio",
+      "open": "Apri Archivio",
+      "connect-cloud-sources": "Connetti al Cloud",
+      "import": {
+        "import": "Importa",
+        "import-from-type": "Dall'archivio {{name}} (.{{extension}})",
+        "import-to-type": "In {{name}}"
+      },
+      "close": "Close"
+    },
+    "edit": {
+      "edit": "Modifica",
+      "undo": "Undo",
+      "redo": "Redo",
+      "cut": "Cut",
+      "copy": "Copia",
+      "paste": "Paste",
+      "pasteandmatchstyle": "Paste and match style",
+      "delete": "Cancella",
+      "selectall": "Select all",
+      "speech": {
+        "speech": "Voce",
+        "startspeaking": "Start speaking",
+        "stopspeaking": "Stop speaking"
+      }
+    },
+    "view": {
+      "view": "Schermata",
+      "condensed-sidebar": "Sidebar Ridotta",
+      "language": "Lingua",
+      "reload": "Reload",
+      "forcereload": "Force reload",
+      "toggledevtools": "Toggle dev tools",
+      "auto-hide-menubar": "Auto Nascondi Menubar"
+    },
+    "window": {
+      "window": "Finestra",
+      "minimize": "Minimize",
+      "close": "Close",
+      "zoom": "Zoom",
+      "front": "Bring all to front"
+    },
+    "help": {
+      "help": "Aiuto",
+      "visit-our-website": "Visita il nostro Sito",
+      "privacy-policy": "Privacy Policy",
+      "view-changelog-for-v": "Guarda il Changelog per v{{version}}"
+    }
+  },
   "welcome-back-title": "Bentornato in Buttercup.",
   "unlock-archive": "Sblocca un archivio per iniziare ({{os}}).",
   "welcome-title": "Bevenuto in Buttercup.",
@@ -9,25 +71,13 @@
   "add-archive": "Aggiungi Archivio",
   "cancel": "Cancella",
   "go-back": "Torna Indietro",
-  "new-archive": "Nuovo Archivio",
-  "open-archive": "Apri Archivio",
   "open-in-buttercup": "Apri in Buttercup",
   "master-password": "Master Password",
   "confirm": "Conferma",
   "nevermind": "Non Ricordare",
   "password": "Password",
-  "language": "Lingua",
   "copy-to-clipboard": "Copia negli Appunti",
   "edit": "Modifica",
-  "view": "Schermata",
-  "window": "Finestra",
-  "help": "Aiuto",
-  "visit-our-website": "Visita il nostro Sito",
-  "privacy-policy": "Privacy Policy",
-  "view-changelog-for-v": "Guarda il Changelog per v{{version}}",
-  "speech": "Voce",
-  "condensed-sidebar": "Sidebar Ridotta",
-  "auto-hide-menubar": "Auto Nascondi Menubar",
   "new-group": "Nuovo Gruppo",
   "title-asc": "Titolo: Ascendente",
   "title-desc": "Titolo: Discendente",
@@ -67,7 +117,6 @@
   "change-color": "Cambia Colore",
   "import": "Importa",
   "import-from-type": "Dall'archivio {{name}} (.{{extension}})",
-  "import-to-type": "In {{name}}",
   "archive-remove-with-name": "Cancella {{name}}",
   "dropbox-connection-failed-info": "Connessione a Dropbox fallita. Riprova più tardi",
   "connect-to-dropbox": "Connetti a Dropbox",
@@ -82,8 +131,6 @@
   "open-url-in-browser": "Apri l'URL nel Browser",
   "new-field": "Nuovo Campo",
   "label": "Etichetta",
-  "archive": "Archivio",
-  "file": "File",
   "confirm-password": "Conferma Password",
   "are-you-sure-question": "Sei sicuro?",
   "entry-inputs-empty-info": "Per favore inserisci almeno un titolo.",
@@ -94,6 +141,8 @@
   "yes": "Si",
   "no": "No",
   "custom-fields-label-empty-info": "Non sono state definite le etichette per uno o più campi personalizzati.",
+  "togglefullscreen": "Toggle full screen",
+  "connect": "Connect",
   "error": {
     "archive-not-found": "La sorgente dell' Archivio non è stata trovata.",
     "authentication-failed": "Autenticazione fallita.",
