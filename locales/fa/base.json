@@ -1,4 +1,66 @@
 {
+  "app-menu": {
+    "app": {
+      "about": "About",
+      "check-for-updates": "Check for Updates...",
+      "services": "Services",
+      "hide": "مخفی",
+      "hideothers": "Hide others",
+      "unhide": "Unhide",
+      "quit": "Quit"
+    },
+    "archive": {
+      "archive": "آرشیو",
+      "file": "پروند",
+      "new": "ساخت آرشیو",
+      "open": "باز کردن آرشیو",
+      "connect-cloud-sources": "اتصال به منابع ابری",
+      "import": {
+        "import": "درون ریزی",
+        "import-from-type": "از آرشیو {{name}} (.{{extension}})",
+        "import-to-type": "به {{name}}"
+      },
+      "close": "Close"
+    },
+    "edit": {
+      "edit": "ویرایش",
+      "undo": "Undo",
+      "redo": "Redo",
+      "cut": "Cut",
+      "copy": "کپی",
+      "paste": "Paste",
+      "pasteandmatchstyle": "Paste and match style",
+      "delete": "حذف",
+      "selectall": "Select all",
+      "speech": {
+        "speech": "گفتار",
+        "startspeaking": "Start speaking",
+        "stopspeaking": "Stop speaking"
+      }
+    },
+    "view": {
+      "view": "مشاهده",
+      "condensed-sidebar": "منوی کنار عریض",
+      "language": "زبان",
+      "reload": "Reload",
+      "forcereload": "Force reload",
+      "toggledevtools": "Toggle dev tools",
+      "auto-hide-menubar": "مخفی کردن خودکار منو"
+    },
+    "window": {
+      "window": "پنجره",
+      "minimize": "Minimize",
+      "close": "Close",
+      "zoom": "Zoom",
+      "front": "Bring all to front"
+    },
+    "help": {
+      "help": "راهنمایی",
+      "visit-our-website": "مشاهده سایت ما",
+      "privacy-policy": "حریم شخصی",
+      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+    }
+  },
   "welcome-back-title": "به باترکاپ خوش آمدید.",
   "unlock-archive": "برای شروع یک آرشیو را رمزگشایی کنید. ({{os}}).",
   "welcome-title": "به باترکاپ خوش آمدید.",
@@ -9,25 +71,13 @@
   "add-archive": "افزودن یک آرشیو",
   "cancel": "لغو",
   "go-back": "برگرد عقب",
-  "new-archive": "ساخت آرشیو",
-  "open-archive": "باز کردن آرشیو",
   "open-in-buttercup": "باز کردن در باترکاپ",
   "master-password": "رمز عبور اصلی",
   "confirm": "تایید",
   "nevermind": "بی‌خیال",
   "password": "رمز عبور",
-  "language": "زبان",
   "copy-to-clipboard": "کپی در کلیپ‌بورد",
   "edit": "ویرایش",
-  "view": "مشاهده",
-  "window": "پنجره",
-  "help": "راهنمایی",
-  "visit-our-website": "مشاهده سایت ما",
-  "privacy-policy": "حریم شخصی",
-  "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}",
-  "speech": "گفتار",
-  "condensed-sidebar": "منوی کنار عریض",
-  "auto-hide-menubar": "مخفی کردن خودکار منو",
   "new-group": "گروه جدید",
   "title-asc": "عنوان: صعودی",
   "title-desc": "عنوان: نزولی",
@@ -42,7 +92,7 @@
   "delete": "حذف",
   "delete-permanently": "حذف برای همیشه",
   "add-entry": "افزودن سند",
-  "search": "جستجو",
+  "search": "Search",
   "select-or-create-an-entry": "انتخاب یا ساخت سند",
   "save": "ذخیره",
   "empty-trash": "خالی کردن سطل زباله",
@@ -67,7 +117,6 @@
   "change-color": "تغییر رمز عبور",
   "import": "درون ریزی",
   "import-from-type": "از آرشیو {{name}} (.{{extension}})",
-  "import-to-type": "به {{name}}",
   "archive-remove-with-name": "حذف {{name}}",
   "dropbox-connection-failed-info": "خطایی در اتصال به دراپ‌باکس رخ داد. لطفا بعدا دوباره امتحان کنید.",
   "connect-to-dropbox": "اتصال به دراپ‌باکس",
@@ -82,8 +131,6 @@
   "open-url-in-browser": "باز کردن لینک در مرورگر",
   "new-field": "فیلد جدید",
   "label": "عنوان",
-  "archive": "آرشیو",
-  "file": "پروند",
   "confirm-password": "تایید رمز عبور",
   "are-you-sure-question": "برای این کار اطمینان دارید؟",
   "entry-inputs-empty-info": "لطفا حداقل یک عنوان وارد کنید.",
@@ -94,6 +141,8 @@
   "yes": "بله",
   "no": "خیر",
   "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
+  "togglefullscreen": "Toggle full screen",
+  "connect": "Connect",
   "error": {
     "archive-not-found": "آرشیو پیدا نشد.",
     "authentication-failed": "در تایید اعتبار خطایی رخ داد.",

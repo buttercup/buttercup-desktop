@@ -56,7 +56,6 @@
     },
     "help": {
       "help": "Ayuda",
-      "search": "Buscar",
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
       "view-changelog-for-v": "Ver cambios en v{{version}}"
@@ -78,6 +77,7 @@
   "nevermind": "No importa",
   "password": "Contraseña",
   "copy-to-clipboard": "Copiar al portapapeles",
+  "edit": "Editar",
   "new-group": "Nuevo grupo",
   "title-asc": "Título: Ascendente",
   "title-desc": "Título: Descendente",
@@ -109,7 +109,7 @@
   "reveal": "Mostrar",
   "reveal-password": "Mostrar contraseña",
   "installing": "Instalando",
-  "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalarla ahora.",
+  "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora.",
   "archive-saved-loading-info": "Tu archivo se está guardando. <br>Saliendo automáticamente.",
   "unlock": "Desbloquear",
   "lock": "Bloquear",

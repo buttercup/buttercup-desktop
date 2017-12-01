@@ -56,7 +56,6 @@
     },
     "help": {
       "help": "Hilfe",
-      "search": "Suche",
       "visit-our-website": "Besuche unsere Website",
       "privacy-policy": "Datenschutzrichtlinie",
       "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
@@ -78,6 +77,7 @@
   "nevermind": "Abbrechen",
   "password": "Passwort",
   "copy-to-clipboard": "In die Zwischenablage kopieren",
+  "edit": "Bearbeiten",
   "new-group": "Neue Gruppe",
   "title-asc": "Titel: Aufsteigend",
   "title-desc": "Titel: Absteigend",
