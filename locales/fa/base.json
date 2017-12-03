@@ -1,13 +1,7 @@
 {
   "app-menu": {
     "app": {
-      "about": "About",
-      "check-for-updates": "Check for Updates...",
-      "services": "Services",
-      "hide": "مخفی",
-      "hideothers": "Hide others",
-      "unhide": "Unhide",
-      "quit": "Quit"
+      "hide": "مخفی"
     },
     "archive": {
       "archive": "آرشیو",
@@ -19,40 +13,24 @@
         "import": "درون ریزی",
         "import-from-type": "از آرشیو {{name}} (.{{extension}})",
         "import-to-type": "به {{name}}"
-      },
-      "close": "Close"
+      }
     },
     "edit": {
       "edit": "ویرایش",
-      "undo": "Undo",
-      "redo": "Redo",
-      "cut": "Cut",
       "copy": "کپی",
-      "paste": "Paste",
-      "pasteandmatchstyle": "Paste and match style",
       "delete": "حذف",
-      "selectall": "Select all",
       "speech": {
-        "speech": "گفتار",
-        "startspeaking": "Start speaking",
-        "stopspeaking": "Stop speaking"
+        "speech": "گفتار"
       }
     },
     "view": {
       "view": "مشاهده",
       "condensed-sidebar": "منوی کنار عریض",
       "language": "زبان",
-      "reload": "Reload",
-      "forcereload": "Force reload",
-      "toggledevtools": "Toggle dev tools",
       "auto-hide-menubar": "مخفی کردن خودکار منو"
     },
     "window": {
-      "window": "پنجره",
-      "minimize": "Minimize",
-      "close": "Close",
-      "zoom": "Zoom",
-      "front": "Bring all to front"
+      "window": "پنجره"
     },
     "help": {
       "help": "راهنمایی",
@@ -141,8 +119,6 @@
   "yes": "بله",
   "no": "خیر",
   "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
-  "togglefullscreen": "Toggle full screen",
-  "connect": "Connect",
   "error": {
     "archive-not-found": "آرشیو پیدا نشد.",
     "authentication-failed": "در تایید اعتبار خطایی رخ داد.",

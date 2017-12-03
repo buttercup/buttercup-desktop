@@ -1,13 +1,7 @@
 {
   "app-menu": {
     "app": {
-      "about": "About",
-      "check-for-updates": "Check for Updates...",
-      "services": "Services",
-      "hide": "Скрыть",
-      "hideothers": "Hide others",
-      "unhide": "Unhide",
-      "quit": "Quit"
+      "hide": "Скрыть"
     },
     "archive": {
       "archive": "Архив",
@@ -19,40 +13,24 @@
         "import": "Импортировать",
         "import-from-type": "Из {{name}} архива (.{{extension}})",
         "import-to-type": "В {{name}}"
-      },
-      "close": "Close"
+      }
     },
     "edit": {
       "edit": "Редактировать",
-      "undo": "Undo",
-      "redo": "Redo",
-      "cut": "Cut",
       "copy": "Копировать",
-      "paste": "Paste",
-      "pasteandmatchstyle": "Paste and match style",
       "delete": "Удалить",
-      "selectall": "Select all",
       "speech": {
-        "speech": "Произнести",
-        "startspeaking": "Start speaking",
-        "stopspeaking": "Stop speaking"
+        "speech": "Произнести"
       }
     },
     "view": {
       "view": "Просмотреть",
       "condensed-sidebar": "Компактная боковая панель",
       "language": "Язык",
-      "reload": "Reload",
-      "forcereload": "Force reload",
-      "toggledevtools": "Toggle dev tools",
       "auto-hide-menubar": "Автоматически скрывать панель меню"
     },
     "window": {
-      "window": "Окно",
-      "minimize": "Minimize",
-      "close": "Close",
-      "zoom": "Zoom",
-      "front": "Bring all to front"
+      "window": "Окно"
     },
     "help": {
       "help": "Помощь",
@@ -112,7 +90,6 @@
   "update-available-message": "Доступен Buttercup версии {{version}}. Нажмите здесь, чтобы установить сейчас.",
   "archive-saved-loading-info": "Ваш архив сохраняется.<br>Программа завершится автоматически.",
   "unlock": "Разблокировать",
-  "lock": "Lock",
   "open": "Открыть",
   "change-color": "Изменить цвет",
   "import": "Импортировать",
@@ -132,17 +109,6 @@
   "new-field": "Новое поле",
   "label": "Ярлык",
   "confirm-password": "Подтвердить пароль",
-  "are-you-sure-question": "Are you sure?",
-  "entry-inputs-empty-info": "Please enter at least a title.",
-  "entry-title-empty-info": "Please enter a title.",
-  "buttercup-archives": "Buttercup Archives",
-  "load-a-buttercup-archive": "Load a Buttercup Archive",
-  "create-a-new-buttercup-archive": "Create a New Buttercup Archive",
-  "yes": "Yes",
-  "no": "No",
-  "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-  "togglefullscreen": "Toggle full screen",
-  "connect": "Connect",
   "error": {
     "archive-not-found": "Хранилище архива не найдено.",
     "authentication-failed": "Авторизация не удалась.",
@@ -151,9 +117,6 @@
     "group-not-found": "Группа не найдена.",
     "sort-definition-not-found": "Определение для сортировки не найдено",
     "insufficient-data-provided": "Недостаточно данных для сортировки",
-    "check-for-update": "Ошибка при проверке наличия обновлений",
-    "invalid-import-type-requested": "Invalid import type requested",
-    "open-file-for-importing": "Import function should not be running without the main window running.",
-    "entry-not-found": "Entry has not been found"
+    "check-for-update": "Ошибка при проверке наличия обновлений"
   }
 }

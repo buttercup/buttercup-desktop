@@ -1,13 +1,7 @@
 {
   "app-menu": {
     "app": {
-      "about": "About",
-      "check-for-updates": "Check for Updates...",
-      "services": "Services",
-      "hide": "Cacher",
-      "hideothers": "Hide others",
-      "unhide": "Unhide",
-      "quit": "Quit"
+      "hide": "Cacher"
     },
     "archive": {
       "archive": "Archive",
@@ -19,8 +13,7 @@
         "import": "Importer",
         "import-from-type": "Depuis l’archive {{name}} (.{{extension}})",
         "import-to-type": "Vers {{name}}"
-      },
-      "close": "Close"
+      }
     },
     "edit": {
       "edit": "Éditer",
@@ -29,30 +22,19 @@
       "cut": "Cut",
       "copy": "Copier",
       "paste": "Paste",
-      "pasteandmatchstyle": "Paste and match style",
       "delete": "Supprimer",
-      "selectall": "Select all",
       "speech": {
-        "speech": "Aide vocale",
-        "startspeaking": "Start speaking",
-        "stopspeaking": "Stop speaking"
+        "speech": "Aide vocale"
       }
     },
     "view": {
       "view": "Visualiser",
       "condensed-sidebar": "Replier la colonne latérale",
       "language": "Langue",
-      "reload": "Reload",
-      "forcereload": "Force reload",
-      "toggledevtools": "Toggle dev tools",
       "auto-hide-menubar": "Cacher automatiquement la barre de menu"
     },
     "window": {
-      "window": "Fenêtre",
-      "minimize": "Minimize",
-      "close": "Close",
-      "zoom": "Zoom",
-      "front": "Bring all to front"
+      "window": "Fenêtre"
     },
     "help": {
       "help": "Aide",
@@ -105,7 +87,7 @@
   "untitled": "Sans titre",
   "add-new-field": "Ajouter un nouveau champ",
   "copy": "Copier",
-  "hide": "Hide",
+  "hide": "Cacher",
   "reveal": "Afficher",
   "reveal-password": "Afficher le mot de passe",
   "installing": "En cours d’installation",
@@ -132,17 +114,6 @@
   "new-field": "Nouveau champ",
   "label": "Label",
   "confirm-password": "Confirmation du mot de passe",
-  "are-you-sure-question": "Are you sure?",
-  "entry-inputs-empty-info": "Please enter at least a title.",
-  "entry-title-empty-info": "Please enter a title.",
-  "buttercup-archives": "Buttercup Archives",
-  "load-a-buttercup-archive": "Load a Buttercup Archive",
-  "create-a-new-buttercup-archive": "Create a New Buttercup Archive",
-  "yes": "Yes",
-  "no": "No",
-  "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-  "togglefullscreen": "Toggle full screen",
-  "connect": "Connect",
   "error": {
     "archive-not-found": "La source de l’archive est introuvable.",
     "authentication-failed": "Échec d’authentification.",

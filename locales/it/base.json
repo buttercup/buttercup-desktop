@@ -1,13 +1,7 @@
 {
   "app-menu": {
     "app": {
-      "about": "About",
-      "check-for-updates": "Check for Updates...",
-      "services": "Services",
-      "hide": "Nascondi",
-      "hideothers": "Hide others",
-      "unhide": "Unhide",
-      "quit": "Quit"
+      "hide": "Nascondi"
     },
     "archive": {
       "archive": "Archivio",
@@ -19,40 +13,24 @@
         "import": "Importa",
         "import-from-type": "Dall'archivio {{name}} (.{{extension}})",
         "import-to-type": "In {{name}}"
-      },
-      "close": "Close"
+      }
     },
     "edit": {
       "edit": "Modifica",
-      "undo": "Undo",
-      "redo": "Redo",
-      "cut": "Cut",
       "copy": "Copia",
-      "paste": "Paste",
-      "pasteandmatchstyle": "Paste and match style",
       "delete": "Cancella",
-      "selectall": "Select all",
       "speech": {
-        "speech": "Voce",
-        "startspeaking": "Start speaking",
-        "stopspeaking": "Stop speaking"
+        "speech": "Voce"
       }
     },
     "view": {
       "view": "Schermata",
       "condensed-sidebar": "Sidebar Ridotta",
       "language": "Lingua",
-      "reload": "Reload",
-      "forcereload": "Force reload",
-      "toggledevtools": "Toggle dev tools",
       "auto-hide-menubar": "Auto Nascondi Menubar"
     },
     "window": {
-      "window": "Finestra",
-      "minimize": "Minimize",
-      "close": "Close",
-      "zoom": "Zoom",
-      "front": "Bring all to front"
+      "window": "Finestra"
     },
     "help": {
       "help": "Aiuto",
@@ -141,8 +119,6 @@
   "yes": "Si",
   "no": "No",
   "custom-fields-label-empty-info": "Non sono state definite le etichette per uno o più campi personalizzati.",
-  "togglefullscreen": "Toggle full screen",
-  "connect": "Connect",
   "error": {
     "archive-not-found": "La sorgente dell' Archivio non è stata trovata.",
     "authentication-failed": "Autenticazione fallita.",
