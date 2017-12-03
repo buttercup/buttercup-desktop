@@ -36,28 +36,29 @@ We've written tests and you can run them to assure the stability of the code, ju
 
 Every chunk of code that may be hard to understand has some comments above it. If you write some new code or change some part of the existing code in a way that it would not be functional without changing it's usages, it needs to be documented.
 
+### Internationlization / Translations
+
+Translations are very valuable as they make Buttercup accessible to large amounts of people with every submission. They are a little trickier to merge, however, due to the fact that we most likely do not speak the language you're submitting and will need to have it verified by a 3rd party before publishing it.
+
+When submitting a translation: Translate all items from the [English base file](https://github.com/buttercup/buttercup-desktop/blob/master/locales/en/base.json). Do not add English items to any other locale - if something can not yet be translated, omit it from the locale file completely.
 
 ## Financial contributions
 
 We also welcome financial contributions in full transparency on our [open collective](https://opencollective.com/buttercup).
 Anyone can file an expense. If the expense makes sense for the development of the community, it will be "merged" in the ledger of our open collective by the core contributors and the person who filed the expense will be reimbursed.
 
-
 ## Credits
-
 
 ### Contributors
 
 Thank you to all the people who have already contributed to buttercup-desktop!
 <a href="graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
 
-
 ### Backers
 
 Thank you to all our backers! [[Become a backer](https://opencollective.com/buttercup#backer)]
 
 <a href="https://opencollective.com/buttercup#backers" target="_blank"><img src="https://opencollective.com/buttercup/backers.svg?width=890"></a>
-
 
 ### Sponsors
 
