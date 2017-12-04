@@ -11,7 +11,7 @@ const windowManager = getWindowManager();
 const dialogOptions = {
   filters: [
     {
-      name: i18n.t('buttercup-archives'),
+      name: i18n.t('archive-dialog.buttercup-archives'),
       extensions: ['bcup']
     }
   ]
@@ -37,7 +37,7 @@ function showOpenDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: i18n.t('load-a-buttercup-archive')
+      title: i18n.t('archive-dialog.load-a-buttercup-archive')
     },
     filename => {
       if (filename && filename.length > 0) {
@@ -59,7 +59,7 @@ function showSaveDialog(focusedWindow) {
     focusedWindow,
     {
       ...dialogOptions,
-      title: i18n.t('create-a-new-buttercup-archive')
+      title: i18n.t('archive-dialog.create-a-new-buttercup-archive')
     },
     filename => {
       if (typeof filename === 'string' && filename.length > 0) {

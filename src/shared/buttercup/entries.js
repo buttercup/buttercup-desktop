@@ -36,17 +36,17 @@ export function validateEntry(entry) {
   // filter empty values
 
   if (!entry.properties) {
-    errorMessages.push(i18n.t('entry-inputs-empty-info'));
+    errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
   } else {
     if (!entry.properties.title) {
-      errorMessages.push(i18n.t('entry-title-empty-info'));
+      errorMessages.push(i18n.t('entry.entry-title-empty-info'));
     }
 
     if (
       (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
         .length > 0
     ) {
-      errorMessages.push(i18n.t('custom-fields-label-empty-info'));
+      errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
     }
   }
 

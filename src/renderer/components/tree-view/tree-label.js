@@ -53,7 +53,7 @@ class TreeLabel extends Component {
         {title.trim() || (
           <i>
             {' '}
-            <Translate i18nKey="untitled" parent="span" />
+            <Translate i18nKey="group.untitled" parent="span" />
           </i>
         )}
       </Node>

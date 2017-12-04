@@ -21,14 +21,14 @@ const renderMeta = (
               name={`${member}.key`}
               type="text"
               component="input"
-              placeholder={t('label')}
+              placeholder={t('entry.label')}
             />
           </div>
           <Field
             name={`${member}.value`}
             type="text"
             component={Input}
-            placeholder={t('new-field')}
+            placeholder={t('entry.new-field')}
           />
           <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
         </div>
@@ -42,7 +42,7 @@ const renderMeta = (
       }}
       icon={<PlusIcon />}
     >
-      <Translate i18nKey="add-new-field" parent="span" />
+      <Translate i18nKey="entry.add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
   </div>
@@ -60,40 +60,40 @@ class EntryForm extends Component {
       <form onSubmit={handleSubmit}>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">
-            <Translate i18nKey="title" parent="span" />
+            <Translate i18nKey="entry.title" parent="span" />
           </label>
           <Field
             name="properties.title"
             component={Input}
             type="text"
-            placeholder={t('untitled')}
+            placeholder={t('entry.untitled')}
           />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.username">
-            <Translate i18nKey="username" parent="span" />
+            <Translate i18nKey="entry.username" parent="span" />
           </label>
           <Field
             name="properties.username"
             component={Input}
             type="text"
-            placeholder={'@' + t('username') + '...'}
+            placeholder={'@' + t('entry.username') + '...'}
           />
         </div>
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.password">
-            <Translate i18nKey="password" parent="span" />
+            <Translate i18nKey="entry.password" parent="span" />
           </label>
           <Field
             name="properties.password"
             component={Input}
             type="password"
-            placeholder={t('secure-password') + '...'}
+            placeholder={t('entry.secure-password') + '...'}
           />
         </div>
         <h6 className={styles.heading}>
           {' '}
-          <Translate i18nKey="custom-fields" parent="span" />:
+          <Translate i18nKey="entry.custom-fields" parent="span" />:
         </h6>
         <FieldArray name="meta" component={renderMeta} t={t} />
       </form>

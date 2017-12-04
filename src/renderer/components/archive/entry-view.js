@@ -24,7 +24,7 @@ const EntryView = ({ entry, t }) => (
       </div>
     ))}
     <h6 className={heading}>
-      <Translate i18nKey="custom-fields" parent="span" />:
+      <Translate i18nKey="entry.custom-fields" parent="span" />:
     </h6>
     {entry.meta.length > 0 ? (
       <div className={metaWrapper}>
@@ -41,7 +41,7 @@ const EntryView = ({ entry, t }) => (
       </div>
     ) : (
       <EmptyView
-        caption={t('no-custom-fields-info-text')}
+        caption={t('entry.no-custom-fields-info-text')}
         imageSrc={bubbleImage}
       />
     )}

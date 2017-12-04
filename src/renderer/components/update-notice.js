@@ -17,8 +17,8 @@ const UpdateNotice = ({
   return (
     <div className={className} onClick={onClick}>
       {installing
-        ? t('installing') + '...'
-        : t('update-available-message', {
+        ? t('update.installing') + '...'
+        : t('update.update-available-message', {
             version
           })}
     </div>

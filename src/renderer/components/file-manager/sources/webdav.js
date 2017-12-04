@@ -95,7 +95,7 @@ class Webdav extends Component {
       .catch(err => {
         console.error(err);
         showDialog(
-          t('webdav-connection-failed-info', {
+          t('error.webdav-connection-failed-info', {
             endpoint
           })
         );
@@ -126,7 +126,7 @@ class Webdav extends Component {
       <Flex align="center" justify="center" flexColumn flexAuto>
         <h2>
           <Translate
-            i18nKey="connect-to-wedav"
+            i18nKey="cloud-source.connect-to-wedav"
             values={{
               title
             }}
@@ -145,7 +145,7 @@ class Webdav extends Component {
             bordered
             type="text"
             name="username"
-            placeholder={`${title} ${t('username')}...`}
+            placeholder={`${title} ${t('cloud-source.username')}...`}
             onChange={this.handleInputChange}
             value={this.state.username}
           />
@@ -153,15 +153,16 @@ class Webdav extends Component {
             bordered
             type="password"
             name="password"
-            placeholder={`${title} ${t('password')}...`}
+            placeholder={`${title} ${t('cloud-source.password')}...`}
             onChange={this.handleInputChange}
             value={this.state.password}
           />
           <Button type="submit" onClick={this.handleConnect} full primary>
-            <Translate i18nKey="connect" />
+            <Translate i18nKey="cloud-source.connect" />
           </Button>
           <SmallType border center>
-            <InfoIcon /> <Translate html i18nKey="webdav-description-text" />
+            <InfoIcon />{' '}
+            <Translate html i18nKey="cloud-source.webdav-description-text" />
           </SmallType>
         </Form>
       </Flex>

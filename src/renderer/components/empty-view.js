@@ -49,11 +49,11 @@ export const NoArchiveSelected = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <Translate i18nKey="welcome-back-title" />
+        <Translate i18nKey="intro.welcome-back-title" />
       </Title>
       <Caption>
         <Translate
-          i18nKey="unlock-archive"
+          i18nKey="intro.unlock-archive"
           values={{
             os: `${isOSX() ? '⌘' : 'Ctrl'}+1`
           }}
@@ -68,10 +68,10 @@ export const WelcomeScreen = () => (
     <Figure>
       <img src={logo} />
       <Title>
-        <Translate i18nKey="welcome-title" />
+        <Translate i18nKey="intro.welcome-title" />
       </Title>
       <Caption>
-        <Translate i18nKey="welcome-caption" />
+        <Translate i18nKey="intro.welcome-caption" />
       </Caption>
     </Figure>
     <AddArchiveButton />

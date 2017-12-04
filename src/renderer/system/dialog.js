@@ -8,7 +8,7 @@ const { dialog } = remote;
 const currentWindow = remote.getCurrentWindow();
 
 export function showConfirmDialog(message, fn) {
-  const buttons = [i18n.t('yes'), i18n.t('no')];
+  const buttons = [i18n.t('confirm-dialog.yes'), i18n.t('confirm-dialog.no')];
   dialog.showMessageBox(currentWindow, { message, buttons }, resp => {
     fn(resp);
   });
@@ -33,16 +33,16 @@ export function showPasswordDialog(preConfirm, options = {}) {
     preConfirm = defaultFunc;
   }
   return swal({
-    title: i18n.t('master-password'),
+    title: i18n.t('password-dialog.master-password'),
     input: 'password',
     showCancelButton: true,
     animation: false,
     customClass: styles.alert,
     confirmButtonClass: styles.confirm,
-    confirmButtonText: i18n.t('confirm'),
+    confirmButtonText: i18n.t('password-dialog.confirm'),
     cancelButtonClass: styles.cancel,
-    cancelButtonText: i18n.t('nevermind'),
-    inputPlaceholder: i18n.t('password'),
+    cancelButtonText: i18n.t('password-dialog.nevermind'),
+    inputPlaceholder: i18n.t('password-dialog.password'),
     inputClass: styles.input,
     buttonsStyling: false,
     ...options,

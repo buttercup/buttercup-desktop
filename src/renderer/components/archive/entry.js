@@ -54,10 +54,10 @@ class Entry extends Component {
               disabled={!this.props.dirty}
               primary
             >
-              <Translate i18nKey="save" parent="span" />
+              <Translate i18nKey="entry.save" parent="span" />
             </Button>{' '}
             <Button onClick={this.props.handleViewMode}>
-              <Translate i18nKey="cancel" parent="span" />
+              <Translate i18nKey="entry.cancel" parent="span" />
             </Button>
           </div>
           <div>
@@ -66,7 +66,7 @@ class Entry extends Component {
               icon={<TrashIcon />}
               danger
             >
-              <Translate i18nKey="delete" parent="span" />
+              <Translate i18nKey="entry.delete" parent="span" />
             </Button>
           </div>
         </div>
@@ -92,11 +92,11 @@ class Entry extends Component {
             disabled={!this.props.dirty}
             primary
           >
-            <Translate i18nKey="save" parent="span" />
+            <Translate i18nKey="entry.save" parent="span" />
           </Button>{' '}
           <Button onClick={this.props.handleViewMode}>
             {' '}
-            <Translate i18nKey="cancel" parent="span" />
+            <Translate i18nKey="entry.cancel" parent="span" />
           </Button>
         </div>
       )
@@ -108,7 +108,7 @@ class Entry extends Component {
       content: <EntryView entry={this.props.entry} />,
       footer: (
         <Button onClick={this.props.handleEditMode} icon={<EditIcon />}>
-          <Translate i18nKey="edit" parent="span" />
+          <Translate i18nKey="entry.edit" parent="span" />
         </Button>
       )
     };
@@ -120,7 +120,7 @@ class Entry extends Component {
     return {
       content: (
         <EmptyView
-          caption={t('select-or-create-an-entry')}
+          caption={t('entry.select-or-create-an-entry')}
           className={styles.emptyView}
           imageSrc={bench}
         />

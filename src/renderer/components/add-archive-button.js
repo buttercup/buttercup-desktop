@@ -17,17 +17,17 @@ const AddArchiveButton = ({
     onClick={() =>
       showContextMenu([
         {
-          label: t('open-archive-file'),
+          label: t('intro-menu.open-archive-file'),
           accelerator: 'CmdOrCtrl+O',
           click: onOpenClick
         },
         {
-          label: t('new-archive-file'),
+          label: t('intro-menu.new-archive-file'),
           accelerator: 'CmdOrCtrl+N',
           click: onNewClick
         },
         {
-          label: t('connect-cloud-sources'),
+          label: t('intro-menu.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: onCloudClick
         }
@@ -35,7 +35,7 @@ const AddArchiveButton = ({
     icon={<ArchiveIcon />}
     {...props}
   >
-    {condenced ? ' ' : t('add-archive')}
+    {condenced ? ' ' : t('archive.add-archive')}
   </Button>
 );
 

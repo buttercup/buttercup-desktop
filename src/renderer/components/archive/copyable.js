@@ -70,14 +70,14 @@ class Copyable extends Component {
     const { type, t } = this.props;
     const items = [
       {
-        label: t('copy-to-clipboard'),
+        label: t('copyable-menu.copy-to-clipboard'),
         click: () => this.handleCopy()
       }
     ];
 
     if ((type || '').toLowerCase() === 'password') {
       items.push({
-        label: t('reveal-password'),
+        label: t('copyable-menu.reveal-password'),
         type: 'checkbox',
         checked: !this.state.concealed,
         click: () => this.handleReveal()
@@ -120,13 +120,15 @@ class Copyable extends Component {
           {(type || '').toLowerCase() === 'password' && (
             <Button
               icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
-              title={this.state.concealed ? t('reveal') : t('hide')}
+              title={
+                this.state.concealed ? t('copyable.reveal') : t('copyable.hide')
+              }
               onClick={() => this.handleReveal()}
             />
           )}
           <Button
             icon={<CopyIcon />}
-            title={t('copy')}
+            title={t('copyable.copy')}
             onClick={() => this.handleCopy()}
           />
         </HiddenButtonRow>

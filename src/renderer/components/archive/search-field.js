@@ -35,7 +35,7 @@ class SearchField extends Component {
           onChange={e => onChange(e.target.value)}
           onKeyUp={e => this.handleKeyUp(e)}
           className={styles.field}
-          placeholder={t('search') + '...'}
+          placeholder={t('search.search') + '...'}
           ref={input => {
             this.textInput = input;
           }}
