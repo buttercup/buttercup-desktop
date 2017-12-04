@@ -82,9 +82,9 @@
   },
   "cloud-source": {
     "cancel": "Cancel",
+    "go-back": "Go Back",
     "new-archive": "New Archive",
     "open-in-buttercup": "Open in Buttercup",
-    "go-back": "Go Back",
     "connect-to-dropbox": "Connect to Dropbox",
     "authenticate-with-dropbox": "Authenticate with Dropbox",
     "dropbox-description-text": "Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
@@ -110,29 +110,38 @@
     "add-new-field": "Add New Field",
     "label": "Label",
     "new-field": "New Field",
-    "hide": "Hide",
-    "reveal": "Reveal",
-    "reveal-password": "Reveal Password",
     "edit": "Edit",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "copy": "Copy",
-    "search": "Search",
-    "title-asc": "Title: Ascending",
-    "title-desc": "Title: Descending",
-    "time-asc": "Time: Ascending",
-    "time-desc": "Time: Descending",
     "entry-inputs-empty-info": "Please enter at least a title.",
     "entry-title-empty-info": "Please enter a title.",
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?"
   },
+  "copyable": {
+    "hide": "Hide",
+    "reveal": "Reveal",
+    "copy": "Copy"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Copy To Clipboard",
+    "reveal-password": "Reveal Password"
+  },
+  "search": {
+    "search": "Search"
+  },
+  "sort": {
+    "title-asc": "Title: Ascending",
+    "title-desc": "Title: Descending",
+    "time-asc": "Time: Ascending",
+    "time-desc": "Time: Descending"
+  },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
-    "open-url-in-browser": "Open URL in Browser",
     "username": "Username",
     "password": "Password",
+    "open-url-in-browser": "Open URL in Browser",
     "move-to-group": "Move to Group",
     "move-to-trash": "Move to Trash",
     "delete-permanently": "Delete Permanently"
@@ -184,7 +193,7 @@
     "archive-not-found": "Archive source was not found.",
     "authentication-failed": "Authentication failed.",
     "unknown": "An unknown error has occurred",
-    "passwords-font-match": "Your passwords don't match.",
+    "passwords-dont-match": "Your passwords don't match.",
     "group-not-found": "Group has not been found.",
     "sort-definition-not-found": "Sort definition not found",
     "insufficient-data-provided": "Insufficient data provided for sorting",
