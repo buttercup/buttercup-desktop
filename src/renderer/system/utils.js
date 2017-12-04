@@ -12,6 +12,9 @@ export function readClipboard() {
 }
 
 export function openUrl(url) {
+  if (!/^http(s)?:\/\//i.test(url)) {
+    url = `https://${url}`;
+  }
   shell.openExternal(url);
 }
 
