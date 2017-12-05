@@ -162,7 +162,11 @@ class Webdav extends Component {
           </Button>
           <SmallType border center>
             <InfoIcon />{' '}
-            <Translate html i18nKey="cloud-source.webdav-description-text" />
+            <Translate
+              html
+              i18nKey="cloud-source.webdav-description-text"
+              values={{ title }}
+            />
           </SmallType>
         </Form>
       </Flex>
