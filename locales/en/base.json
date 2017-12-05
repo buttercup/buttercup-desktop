@@ -1,22 +1,4 @@
 {
-  "archive": {
-    "add-archive": "Add Archive",
-    "archive-saved-loading-info": "Your archive is being saved.<br>Exiting automatically"
-  },
-  "archive-dialog": {
-    "buttercup-archives": "Buttercup Archives",
-    "load-a-buttercup-archive": "Load a Buttercup Archive",
-    "create-a-new-buttercup-archive": "Create a New Buttercup Archive"
-  },
-  "archive-menu": {
-    "unlock": "Unlock",
-    "change-color": "Change Color",
-    "import": "Import",
-    "import-from-type": "From {{name}} archive (.{{extension}})",
-    "archive-remove-with-name": "Remove {{name}}",
-    "open": "Open",
-    "lock": "Lock"
-  },
   "app-menu": {
     "app": {
       "about": "About",
@@ -80,6 +62,24 @@
       "view-changelog-for-v": "View Changelog For v{{version}}"
     }
   },
+  "archive": {
+    "add-archive": "Add Archive",
+    "archive-saved-loading-info": "Your archive is being saved.<br>Exiting automatically"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup Archives",
+    "load-a-buttercup-archive": "Load a Buttercup Archive",
+    "create-a-new-buttercup-archive": "Create a New Buttercup Archive"
+  },
+  "archive-menu": {
+    "unlock": "Unlock",
+    "change-color": "Change Color",
+    "import": "Import",
+    "import-from-type": "From {{name}} archive (.{{extension}})",
+    "archive-remove-with-name": "Remove {{name}}",
+    "open": "Open",
+    "lock": "Lock"
+  },
   "cloud-source": {
     "cancel": "Cancel",
     "go-back": "Go Back",
@@ -96,6 +96,19 @@
     "name": "Name",
     "size": "Size",
     "date": "Date"
+  },
+  "confirm-dialog": {
+    "yes": "Yes",
+    "no": "No"
+  },
+  "copyable": {
+    "hide": "Hide",
+    "reveal": "Reveal",
+    "copy": "Copy"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Copy To Clipboard",
+    "reveal-password": "Reveal Password"
   },
   "entry": {
     "add-entry": "Add Entry",
@@ -119,24 +132,6 @@
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?"
   },
-  "copyable": {
-    "hide": "Hide",
-    "reveal": "Reveal",
-    "copy": "Copy"
-  },
-  "copyable-menu": {
-    "copy-to-clipboard": "Copy To Clipboard",
-    "reveal-password": "Reveal Password"
-  },
-  "search": {
-    "search": "Search"
-  },
-  "sort": {
-    "title-asc": "Title: Ascending",
-    "title-desc": "Title: Descending",
-    "time-asc": "Time: Ascending",
-    "time-desc": "Time: Descending"
-  },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
     "username": "Username",
@@ -145,6 +140,21 @@
     "move-to-group": "Move to Group",
     "move-to-trash": "Move to Trash",
     "delete-permanently": "Delete Permanently"
+  },
+  "error": {
+    "archive-not-found": "Archive source was not found.",
+    "authentication-failed": "Authentication failed.",
+    "unknown": "An unknown error has occurred",
+    "passwords-dont-match": "Your passwords don't match.",
+    "group-not-found": "Group has not been found.",
+    "sort-definition-not-found": "Sort definition not found",
+    "insufficient-data-provided": "Insufficient data provided for sorting",
+    "check-for-update": "Check for Update Error",
+    "invalid-import-type-requested": "Invalid import type requested",
+    "open-file-for-importing": "Import function should not be running without the main window running.",
+    "entry-not-found": "Entry has not been found",
+    "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
+    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
   },
   "group": {
     "new-group": "New Group",
@@ -174,10 +184,6 @@
     "new-archive-file": "New Archive File",
     "connect-cloud-sources": "Connect Cloud Sources"
   },
-  "confirm-dialog": {
-    "yes": "Yes",
-    "no": "No"
-  },
   "password-dialog": {
     "master-password": "Master Password",
     "password": "Password",
@@ -185,23 +191,17 @@
     "confirm": "Confirm",
     "nevermind": "Nevermind"
   },
+  "search": {
+    "search": "Search"
+  },
+  "sort": {
+    "title-asc": "Title: Ascending",
+    "title-desc": "Title: Descending",
+    "time-asc": "Time: Ascending",
+    "time-desc": "Time: Descending"
+  },
   "update": {
     "installing": "Installing",
     "update-available-message": "Buttercup {{version}} is available. Click here to install now."
-  },
-  "error": {
-    "archive-not-found": "Archive source was not found.",
-    "authentication-failed": "Authentication failed.",
-    "unknown": "An unknown error has occurred",
-    "passwords-dont-match": "Your passwords don't match.",
-    "group-not-found": "Group has not been found.",
-    "sort-definition-not-found": "Sort definition not found",
-    "insufficient-data-provided": "Insufficient data provided for sorting",
-    "check-for-update": "Check for Update Error",
-    "invalid-import-type-requested": "Invalid import type requested",
-    "open-file-for-importing": "Import function should not be running without the main window running.",
-    "entry-not-found": "Entry has not been found",
-    "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
-    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
   }
 }
