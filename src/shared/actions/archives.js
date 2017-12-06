@@ -98,13 +98,13 @@ export const addArchive = payload => async (dispatch, getState) => {
         password => {
           if (firstPassword !== password) {
             return Promise.reject(
-              new Error(i18n.t('error.passwords-font-match'))
+              new Error(i18n.t('error.passwords-dont-match'))
             );
           }
           return addToArchive(password);
         },
         {
-          title: i18n.t('confirm-password')
+          title: i18n.t('password-dialog.confirm-password')
         }
       )
     )

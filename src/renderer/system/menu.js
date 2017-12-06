@@ -104,12 +104,12 @@ export function createCopyMenu(entry, currentEntry) {
   const meta = entry.meta.filter(meta => meta !== url);
   const props = [
     {
-      label: i18n.t('username'),
+      label: i18n.t('entry-menu.username'),
       accelerator: showKeys ? 'CmdOrCtrl+B' : null,
       click: () => copyToClipboard(entry.properties.username)
     },
     {
-      label: i18n.t('password'),
+      label: i18n.t('entry-menu.password'),
       accelerator: showKeys ? 'CmdOrCtrl+C' : null,
       click: () => copyToClipboard(entry.properties.password)
     }
@@ -125,7 +125,7 @@ export function createCopyMenu(entry, currentEntry) {
 
   const menu = [
     {
-      label: i18n.t('copy-to-clipboard'),
+      label: i18n.t('entry-menu.copy-to-clipboard'),
       submenu: [
         ...props,
         { type: 'separator' },
@@ -139,7 +139,7 @@ export function createCopyMenu(entry, currentEntry) {
 
   if (url) {
     menu.push({
-      label: i18n.t('open-url-in-browser'),
+      label: i18n.t('entry-menu.open-url-in-browser'),
       click: () => openUrl(url.value)
     });
   }

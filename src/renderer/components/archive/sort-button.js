@@ -12,13 +12,13 @@ function showMenu(mode, onChange, t) {
         [
           {
             mode: 'properties.title-asc',
-            label: t('title-asc'),
+            label: t('sort.title-asc'),
             icon: 'sort-alpha-asc',
             enabled: true
           },
           {
             mode: 'properties.title-desc',
-            label: t('title-desc'),
+            label: t('sort.title-desc'),
             icon: 'sort-alpha-desc',
             enabled: true
           }
@@ -26,13 +26,13 @@ function showMenu(mode, onChange, t) {
         [
           {
             mode: 'time-asc',
-            label: t('time-asc'),
+            label: t('sort.time-asc'),
             icon: 'sort-time-asc',
             enabled: false
           },
           {
             mode: 'time-desc',
-            label: t('time-desc'),
+            label: t('sort.time-desc'),
             icon: 'sort-time-desc',
             enabled: false
           }

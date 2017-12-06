@@ -54,7 +54,7 @@ class SavingModal extends Component {
         <SavingDialogText>
           <img width="64" src={spinner} alt="Loading" />
           <br />
-          <Translate html i18nKey="archive-saved-loading-info" />
+          <Translate html i18nKey="archive.archive-saved-loading-info" />
         </SavingDialogText>
       </SavingDialog>
     );

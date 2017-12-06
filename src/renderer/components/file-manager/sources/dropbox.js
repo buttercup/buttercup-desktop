@@ -58,7 +58,7 @@ class Dropbox extends Component {
       })
       .catch(err => {
         console.error(err);
-        showDialog(t('dropbox-connection-failed-info'));
+        showDialog(t('error.dropbox-connection-failed-info'));
       });
   };
 
@@ -83,17 +83,18 @@ class Dropbox extends Component {
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
           <h2>
-            <Translate i18nKey="connect-to-dropbox" />
+            <Translate i18nKey="cloud-source.connect-to-dropbox" />
           </h2>
           <DropboxButton
             large
             onClick={this.handleAuthClick}
             icon={<DropboxIcon />}
           >
-            <Translate i18nKey="authenticate-with-dropbox" />
+            <Translate i18nKey="cloud-source.authenticate-with-dropbox" />
           </DropboxButton>
           <SmallType border>
-            <InfoIcon /> <Translate html i18nKey="dropbox-description-text" />
+            <InfoIcon />{' '}
+            <Translate html i18nKey="cloud-source.dropbox-description-text" />
           </SmallType>
         </Wrapper>
       </Flex>

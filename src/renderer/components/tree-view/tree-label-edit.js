@@ -24,7 +24,7 @@ class LabelEditor extends Component {
     super(props);
 
     this.state = {
-      title: this.props.t('untitled')
+      title: this.props.t('group.untitled')
     };
   }
 
@@ -56,7 +56,7 @@ class LabelEditor extends Component {
 
     this.setState(
       {
-        title: isNew ? t('untitled') : title
+        title: isNew ? t('group.untitled') : title
       },
       () => {
         if (this._input) {

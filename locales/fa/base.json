@@ -1,110 +1,180 @@
 {
-  "welcome-back-title": "به باترکاپ خوش آمدید.",
-  "unlock-archive": "برای شروع یک آرشیو را رمزگشایی کنید. ({{os}}).",
-  "welcome-title": "به باترکاپ خوش آمدید.",
-  "welcome-caption": "شما هنوز هیچ آرشیوی نساخته‌اید. یک آرشیو جدید باز کنیم؟",
-  "open-archive-file": "باز کردن پرونده آرشیو",
-  "new-archive-file": "ساخت یک پرونده آرشیو",
-  "connect-cloud-sources": "اتصال به منابع ابری",
-  "add-archive": "افزودن یک آرشیو",
-  "cancel": "لغو",
-  "go-back": "برگرد عقب",
-  "new-archive": "ساخت آرشیو",
-  "open-archive": "باز کردن آرشیو",
-  "open-in-buttercup": "باز کردن در باترکاپ",
-  "master-password": "رمز عبور اصلی",
-  "confirm": "تایید",
-  "nevermind": "بی‌خیال",
-  "password": "رمز عبور",
-  "language": "زبان",
-  "copy-to-clipboard": "کپی در کلیپ‌بورد",
-  "edit": "ویرایش",
-  "view": "مشاهده",
-  "window": "پنجره",
-  "help": "راهنمایی",
-  "visit-our-website": "مشاهده سایت ما",
-  "privacy-policy": "حریم شخصی",
-  "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}",
-  "speech": "گفتار",
-  "condensed-sidebar": "منوی کنار عریض",
-  "auto-hide-menubar": "مخفی کردن خودکار منو",
-  "new-group": "گروه جدید",
-  "title-asc": "عنوان: صعودی",
-  "title-desc": "عنوان: نزولی",
-  "time-asc": "زمان: صعودی",
-  "time-desc": "زمان: نزولی",
-  "add-group": "افزودن گروه",
-  "rename": "تغییر نام",
-  "move-to-root": "انتقال به ریشه",
-  "move-to-group": "انتقال به گروه",
-  "move-to-group-custom": "انتقال به گروه {{title}}",
-  "move-to-trash": "انتقال به سطل زباله",
-  "delete": "حذف",
-  "delete-permanently": "حذف برای همیشه",
-  "add-entry": "افزودن سند",
-  "search": "جستجو",
-  "select-or-create-an-entry": "انتخاب یا ساخت سند",
-  "save": "ذخیره",
-  "empty-trash": "خالی کردن سطل زباله",
-  "empty-trash-question": "از خالی کردن سطل زباله اطمینان دارید؟",
-  "no-custom-fields-info-text": "هیچ فیلد شخصی نیست. چرا یکی اضافه نمی‌کنی؟",
-  "custom-fields": "فیلدهای شخصی",
-  "title": "عنوان",
-  "username": "نام کاربری",
-  "secure-password": "رمز عبور امن",
-  "untitled": "بدون عنوان",
-  "add-new-field": "افزودن فیلد جدید",
-  "copy": "کپی",
-  "hide": "مخفی",
-  "reveal": "نمایش دادن",
-  "reveal-password": "نمایش رمزعبور",
-  "installing": "در حال نصب",
-  "update-available-message": "باترکاپ {{version}} آماده است. برای نصب اینجا کلیک کنید.",
-  "archive-saved-loading-info": "آرشیو شما ذخیره شد.<br>در حال خروج خودکار",
-  "unlock": "رمزگشایی",
-  "lock": "قفل کردن",
-  "open": "باز کردن",
-  "change-color": "تغییر رمز عبور",
-  "import": "درون ریزی",
-  "import-from-type": "از آرشیو {{name}} (.{{extension}})",
-  "import-to-type": "به {{name}}",
-  "archive-remove-with-name": "حذف {{name}}",
-  "dropbox-connection-failed-info": "خطایی در اتصال به دراپ‌باکس رخ داد. لطفا بعدا دوباره امتحان کنید.",
-  "connect-to-dropbox": "اتصال به دراپ‌باکس",
-  "authenticate-with-dropbox": "اعتبار سنجی در دراپ‌باکس",
-  "dropbox-description-text": "باترکاپ را به حساب دراپ باکس خود متصل کنید. <br />البته که نیازی به رمز عبور شما نیست.",
-  "webdav-connection-failed-info": "در اتصال به {{endpoint}} خطایی رخ داد. لطفا اطلاعات ورود خود را بررسی کنید.",
-  "connect-to-wedav": "اتصال به سرور {{title}}",
-  "webdav-description-text": "مشخصات ورود به {{title}} را وارد کنید. ابتدا شناسه‌کاربری و رمز عبور را وارد کنید، سپس پرونده را انتخاب کنید. ما اطلاعات ورود شما را رمز نگاری و <strong>ذخیره خواهیم کرد</strong>",
-  "name": "نام",
-  "size": "حجم",
-  "date": "تاریخ",
-  "open-url-in-browser": "باز کردن لینک در مرورگر",
-  "new-field": "فیلد جدید",
-  "label": "عنوان",
-  "archive": "آرشیو",
-  "file": "پروند",
-  "confirm-password": "تایید رمز عبور",
-  "are-you-sure-question": "برای این کار اطمینان دارید؟",
-  "entry-inputs-empty-info": "لطفا حداقل یک عنوان وارد کنید.",
-  "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
-  "buttercup-archives": "آرشیوهای باترکاپ",
-  "load-a-buttercup-archive": "خواندن از یک آرشیو",
-  "create-a-new-buttercup-archive": "ساخت یک آرشیو جدید",
-  "yes": "بله",
-  "no": "خیر",
-  "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
+  "app-menu": {
+    "app": {
+      "hide": "مخفی"
+    },
+    "archive": {
+      "archive": "آرشیو",
+      "file": "پروند",
+      "new": "ساخت آرشیو",
+      "open": "باز کردن آرشیو",
+      "connect-cloud-sources": "اتصال به منابع ابری",
+      "import": {
+        "import": "درون ریزی",
+        "import-from-type": "از آرشیو {{name}} (.{{extension}})",
+        "import-to-type": "به {{name}}"
+      }
+    },
+    "edit": {
+      "edit": "ویرایش",
+      "copy": "کپی",
+      "delete": "حذف",
+      "speech": {
+        "speech": "گفتار"
+      }
+    },
+    "view": {
+      "view": "مشاهده",
+      "condensed-sidebar": "منوی کنار عریض",
+      "language": "زبان",
+      "auto-hide-menubar": "مخفی کردن خودکار منو"
+    },
+    "window": {
+      "window": "پنجره"
+    },
+    "help": {
+      "help": "راهنمایی",
+      "visit-our-website": "مشاهده سایت ما",
+      "privacy-policy": "حریم شخصی",
+      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+    }
+  },
+  "archive": {
+    "add-archive": "افزودن یک آرشیو",
+    "archive-saved-loading-info": "آرشیو شما ذخیره شد.<br>در حال خروج خودکار"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "آرشیوهای باترکاپ",
+    "load-a-buttercup-archive": "خواندن از یک آرشیو",
+    "create-a-new-buttercup-archive": "ساخت یک آرشیو جدید"
+  },
+  "archive-menu": {
+    "unlock": "رمزگشایی",
+    "change-color": "تغییر رمز عبور",
+    "import": "درون ریزی",
+    "import-from-type": "از آرشیو {{name}} (.{{extension}})",
+    "archive-remove-with-name": "حذف {{name}}",
+    "open": "باز کردن",
+    "lock": "قفل کردن"
+  },
+  "cloud-source": {
+    "cancel": "لغو",
+    "go-back": "برگرد عقب",
+    "open-in-buttercup": "باز کردن در باترکاپ",
+    "connect-to-dropbox": "اتصال به دراپ‌باکس",
+    "authenticate-with-dropbox": "اعتبار سنجی در دراپ‌باکس",
+    "dropbox-description-text": "باترکاپ را به حساب دراپ باکس خود متصل کنید. <br />البته که نیازی به رمز عبور شما نیست.",
+    "connect-to-wedav": "اتصال به سرور {{title}}",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "webdav-description-text": "مشخصات ورود به {{title}} را وارد کنید. ابتدا شناسه‌کاربری و رمز عبور را وارد کنید، سپس پرونده را انتخاب کنید. ما اطلاعات ورود شما را رمز نگاری و <strong>ذخیره خواهیم کرد</strong>",
+    "name": "نام",
+    "size": "حجم",
+    "date": "تاریخ"
+  },
+  "confirm-dialog": {
+    "yes": "بله",
+    "no": "خیر"
+  },
+  "copyable": {
+    "hide": "مخفی",
+    "reveal": "نمایش دادن",
+    "copy": "کپی"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "کپی در کلیپ‌بورد",
+    "reveal-password": "نمایش رمزعبور"
+  },
+  "entry": {
+    "add-entry": "افزودن سند",
+    "select-or-create-an-entry": "انتخاب یا ساخت سند",
+    "title": "عنوان",
+    "untitled": "بدون عنوان",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "secure-password": "رمز عبور امن",
+    "custom-fields": "فیلدهای شخصی",
+    "no-custom-fields-info-text": "هیچ فیلد شخصی نیست. چرا یکی اضافه نمی‌کنی؟",
+    "add-new-field": "افزودن فیلد جدید",
+    "label": "عنوان",
+    "new-field": "فیلد جدید",
+    "edit": "ویرایش",
+    "save": "ذخیره",
+    "cancel": "لغو",
+    "delete": "حذف",
+    "entry-inputs-empty-info": "لطفا حداقل یک عنوان وارد کنید.",
+    "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
+    "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
+    "are-you-sure-question": "برای این کار اطمینان دارید؟"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "کپی در کلیپ‌بورد",
+    "username": "نام کاربری",
+    "password": "رمز عبور",
+    "open-url-in-browser": "باز کردن لینک در مرورگر",
+    "move-to-group": "انتقال به گروه",
+    "move-to-trash": "انتقال به سطل زباله",
+    "delete-permanently": "حذف برای همیشه"
+  },
   "error": {
     "archive-not-found": "آرشیو پیدا نشد.",
     "authentication-failed": "در تایید اعتبار خطایی رخ داد.",
     "unknown": "یک خطای ناشناخته رخ داد.",
-    "passwords-font-match": "رمز عبور شما صحیح نیست.",
+    "passwords-dont-match": "رمز عبور شما صحیح نیست.",
     "group-not-found": "گروهی پیدا نشد",
     "sort-definition-not-found": "حالتی برای مرتب‌سازی تعریف نشده.",
     "insufficient-data-provided": "اطلاعات کافی برای مرتب‌سازی در دست نیست.",
     "check-for-update": "خطا در بروزرسانی",
-    "entry-not-found": "سند پیدا نشد.",
     "invalid-import-type-requested": "درخواست درون‌ریزی پرونده نامرتبط",
-    "open-file-for-importing": "برای عملیات درون‌ریزی نیاز است که پنجره اصلی باترکاپ باز باشد."
+    "open-file-for-importing": "برای عملیات درون‌ریزی نیاز است که پنجره اصلی باترکاپ باز باشد.",
+    "entry-not-found": "سند پیدا نشد."
+  },
+  "group": {
+    "new-group": "گروه جدید",
+    "untitled": "بدون عنوان"
+  },
+  "group-menu": {
+    "new-group": "گروه جدید",
+    "add-group": "افزودن گروه",
+    "move-to-root": "انتقال به ریشه",
+    "move-to-group": "انتقال به گروه",
+    "rename": "تغییر نام",
+    "delete": "حذف",
+    "move-to-group-custom": "انتقال به گروه {{title}}",
+    "empty-trash": "خالی کردن سطل زباله",
+    "empty-trash-question": "از خالی کردن سطل زباله اطمینان دارید؟",
+    "title-asc": "عنوان: صعودی",
+    "title-desc": "عنوان: نزولی"
+  },
+  "intro": {
+    "welcome-title": "به باترکاپ خوش آمدید.",
+    "welcome-back-title": "به باترکاپ خوش آمدید.",
+    "welcome-caption": "شما هنوز هیچ آرشیوی نساخته‌اید. یک آرشیو جدید باز کنیم؟",
+    "unlock-archive": "برای شروع یک آرشیو را رمزگشایی کنید. ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "باز کردن پرونده آرشیو",
+    "new-archive-file": "ساخت یک پرونده آرشیو",
+    "connect-cloud-sources": "اتصال به منابع ابری"
+  },
+  "password-dialog": {
+    "master-password": "رمز عبور اصلی",
+    "password": "رمز عبور",
+    "confirm-password": "تایید رمز عبور",
+    "confirm": "تایید",
+    "nevermind": "بی‌خیال"
+  },
+  "search": {
+    "search": "Search"
+  },
+  "sort": {
+    "title-asc": "عنوان: صعودی",
+    "title-desc": "عنوان: نزولی",
+    "time-asc": "زمان: صعودی",
+    "time-desc": "زمان: نزولی"
+  },
+  "update": {
+    "installing": "در حال نصب",
+    "update-available-message": "باترکاپ {{version}} آماده است. برای نصب اینجا کلیک کنید."
   }
 }

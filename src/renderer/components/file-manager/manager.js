@@ -177,7 +177,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Translate i18nKey="name" parent="span" />
+              <Translate i18nKey="cloud-source.name" parent="span" />
             </Cell>
           }
           cell={
@@ -197,7 +197,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Translate i18nKey="size" parent="span" />
+              <Translate i18nKey="cloud-source.size" parent="span" />
             </Cell>
           }
           cell={<SizeCell data={contents} />}
@@ -209,7 +209,7 @@ class Manager extends Component {
           header={
             <Cell>
               {' '}
-              <Translate i18nKey="date" parent="span" />
+              <Translate i18nKey="cloud-source.date" parent="span" />
             </Cell>
           }
           cell={<DateCell data={contents} />}

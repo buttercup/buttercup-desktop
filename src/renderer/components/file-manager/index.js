@@ -106,11 +106,11 @@ class FileManager extends Component {
             <Flex align="center" width="50%">
               <ButtonRow>
                 <Button onClick={this.handleClose}>
-                  <Translate i18nKey="cancel" parent="span" />
+                  <Translate i18nKey="cloud-source.cancel" parent="span" />
                 </Button>
                 <NavLink exact to="/" activeStyle={{ display: 'none' }}>
                   <Button>
-                    <Translate i18nKey="go-back" parent="span" />
+                    <Translate i18nKey="cloud-source.go-back" parent="span" />
                   </Button>
                 </NavLink>
               </ButtonRow>
@@ -121,14 +121,17 @@ class FileManager extends Component {
                   disabled={!this.state.creatable}
                   onClick={this.handleCreateClick}
                 >
-                  <Translate i18nKey="new-archive" parent="span" />
+                  <Translate i18nKey="cloud-source.new-archive" parent="span" />
                 </Button>
                 <Button
                   primary
                   disabled={this.state.selectedConfig === null}
                   onClick={this.handleOpenClick}
                 >
-                  <Translate i18nKey="open-in-buttercup" parent="span" />
+                  <Translate
+                    i18nKey="cloud-source.open-in-buttercup"
+                    parent="span"
+                  />
                 </Button>
               </ButtonRow>
             </Flex>

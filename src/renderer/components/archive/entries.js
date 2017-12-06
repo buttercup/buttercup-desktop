@@ -69,13 +69,15 @@ class Entries extends Component {
       ...createCopyMenu(entry, currentEntry),
       { type: 'separator' },
       {
-        label: t('move-to-group'),
+        label: t('entry-menu.move-to-group'),
         submenu: createMenuFromGroups(groups, currentGroup, groupId => {
           onEntryMove(entry.id, groupId);
         })
       },
       {
-        label: entry.isInTrash ? t('delete-permanently') : t('move-to-trash'),
+        label: entry.isInTrash
+          ? t('entry-menu.delete-permanently')
+          : t('entry-menu.move-to-trash'),
         click() {
           onDelete(entry.id);
         }
@@ -93,7 +95,7 @@ class Entries extends Component {
         dark
         icon={<PlusIcon />}
       >
-        <Translate i18nKey="add-entry" parent="span" />
+        <Translate i18nKey="entry.add-entry" parent="span" />
       </Button>
     );
     const filterNode = (

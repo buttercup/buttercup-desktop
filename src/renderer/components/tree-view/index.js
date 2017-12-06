@@ -49,7 +49,7 @@ class TreeView extends Component {
 
     showContextMenu([
       {
-        label: t('new-group'),
+        label: t('group-menu.new-group'),
         click: () => this.handleAddClick()
       },
       { type: 'separator' },
@@ -57,12 +57,12 @@ class TreeView extends Component {
         [
           {
             mode: 'title-asc',
-            label: t('title-asc'),
+            label: t('group-menu.title-asc'),
             icon: 'sort-alpha-asc'
           },
           {
             mode: 'title-desc',
-            label: t('title-desc'),
+            label: t('group-menu.title-desc'),
             icon: 'sort-alpha-desc'
           }
         ],
@@ -82,7 +82,7 @@ class TreeView extends Component {
     if (isTrash) {
       showContextMenu([
         {
-          label: t('empty-trash'),
+          label: t('group-menu.empty-trash'),
           click: () => this.props.onEmptyTrash()
         }
       ]);
@@ -91,7 +91,7 @@ class TreeView extends Component {
         depth > 0
           ? [
               {
-                label: t('move-to-root'),
+                label: t('group-menu.move-to-root'),
                 click: () => this.props.onMoveGroup(groupId, null)
               }
             ]
@@ -115,23 +115,23 @@ class TreeView extends Component {
 
       showContextMenu([
         {
-          label: t('add-group'),
+          label: t('group-menu.add-group'),
           click: () => this.handleAddClick(null, groupId)
         },
         { type: 'separator' },
         ...nonRootContextMenu,
         {
-          label: t('move-to-group'),
+          label: t('group-menu.move-to-group'),
           enabled: availableGroups.items,
           ...groupsMenu
         },
         {
-          label: t('rename'),
+          label: t('group-menu.rename'),
           click: () => this.props.onRenameClick(groupId)
         },
         { type: 'separator' },
         {
-          label: t('delete'),
+          label: t('group-menu.delete'),
           click: () => this.handleRemoveClick(null, groupId)
         }
       ]);
@@ -211,7 +211,7 @@ class TreeView extends Component {
       <Column
         footer={
           <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
-            <Translate i18nKey="new-group" parent="span" />
+            <Translate i18nKey="group.new-group" parent="span" />
           </Button>
         }
         onContextMenu={() => this.handleColumnRightClick()}

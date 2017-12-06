@@ -121,31 +121,35 @@ class SidebarItem extends Component {
   handleContextMenu = () => {
     const { t, archive } = this.props;
     const { status, name, id } = archive;
+    const label = (key, options) => t(`archive-menu.${key}`, options);
+
     showContextMenu([
       {
-        label: `${status === 'locked' ? t('unlock') : t('open')} ${name}`,
+        label: `${status === 'locked'
+          ? label('unlock')
+          : label('open')} ${name}`,
         accelerator: `CmdOrCtrl+${this.props.index + 1}`,
         click: this.props.onClick
       },
       ...(status === 'unlocked'
         ? [
             {
-              label: t('lock'),
+              label: label('lock'),
               click: this.props.onLockArchive
             }
           ]
         : []),
       {
-        label: t('change-color'),
+        label: label('change-color'),
         click: this.showColorPopup
       },
       {
         type: 'separator'
       },
       {
-        label: t('import'),
+        label: label('import'),
         submenu: Object.entries(ImportTypeInfo).map(([type, typeInfo]) => ({
-          label: t('import-from-type', {
+          label: label('import-from-type', {
             name: typeInfo.name,
             extension: typeInfo.extension
           }),
@@ -161,7 +165,7 @@ class SidebarItem extends Component {
         type: 'separator'
       },
       {
-        label: t('archive-remove-with-name', {
+        label: label('archive-remove-with-name', {
           name
         }),
         click: this.props.onRemoveClick
