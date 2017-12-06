@@ -1,7 +1,13 @@
 {
   "app-menu": {
     "app": {
-      "hide": "مخفی"
+      "hide": "مخفی",
+      "about": "درباره",
+      "services": "سرویس‌ها",
+      "hideothers": "مخفی کردن بقیه برنامه‌ها",
+      "unhide": "نشان دادن",
+      "quit": "بستن برنامه",
+      "check-for-updates": "دریافت نسخه جدید..."
     },
     "archive": {
       "archive": "آرشیو",
@@ -13,24 +19,41 @@
         "import": "درون ریزی",
         "import-from-type": "از آرشیو {{name}} (.{{extension}})",
         "import-to-type": "به {{name}}"
-      }
+      },
+      "close": "بستن"
     },
     "edit": {
       "edit": "ویرایش",
       "copy": "کپی",
       "delete": "حذف",
       "speech": {
-        "speech": "گفتار"
-      }
+        "speech": "گفتار",
+        "startspeaking": "شروع گفتار",
+        "stopspeaking": "پایان گفتار"
+      },
+      "undo": "لغو عمل",
+      "redo": "انجام دوباره عمل",
+      "cut": "بریدن",
+      "paste": "چسباندن",
+      "pasteandmatchstyle": "چسباندن با استایل یکسان",
+      "selectall": "انتخاب همه"
     },
     "view": {
       "view": "مشاهده",
       "condensed-sidebar": "منوی کنار عریض",
       "language": "زبان",
-      "auto-hide-menubar": "مخفی کردن خودکار منو"
+      "auto-hide-menubar": "مخفی کردن خودکار منو",
+      "reload": "بازنشانی",
+      "forcereload": "بازنشانی به زور",
+      "toggledevtools": "نمایش ابزارهای توسعه‌دهندگان",
+      "togglefullscreen": "تمام صفحه"
     },
     "window": {
-      "window": "پنجره"
+      "window": "پنجره",
+      "minimize": "کوچک کردن",
+      "close": "بستن",
+      "zoom": "بزرگ‌نمایی",
+      "front": "جلو"
     },
     "help": {
       "help": "راهنمایی",
@@ -70,7 +93,9 @@
     "webdav-description-text": "مشخصات ورود به {{title}} را وارد کنید. ابتدا شناسه‌کاربری و رمز عبور را وارد کنید، سپس پرونده را انتخاب کنید. ما اطلاعات ورود شما را رمز نگاری و <strong>ذخیره خواهیم کرد</strong>",
     "name": "نام",
     "size": "حجم",
-    "date": "تاریخ"
+    "date": "تاریخ",
+    "new-archive": "پرونده جدید",
+    "connect": "اتصال"
   },
   "confirm-dialog": {
     "yes": "بله",
@@ -127,7 +152,9 @@
     "check-for-update": "خطا در بروزرسانی",
     "invalid-import-type-requested": "درخواست درون‌ریزی پرونده نامرتبط",
     "open-file-for-importing": "برای عملیات درون‌ریزی نیاز است که پنجره اصلی باترکاپ باز باشد.",
-    "entry-not-found": "سند پیدا نشد."
+    "entry-not-found": "سند پیدا نشد.",
+    "dropbox-connection-failed-info": "اتصال به دراپ‌باکس با خطا مواجه شد. لطفا دوباره سعی کنید.",
+    "webdav-connection-failed-info": "اتصال به WebDAV با خطا مواجه شد. لطفا دوباره سعی کنید."
   },
   "group": {
     "new-group": "گروه جدید",
