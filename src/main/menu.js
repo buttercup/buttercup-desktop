@@ -1,5 +1,5 @@
 import { app, shell, Menu } from 'electron';
-import { isOSX, isWindows } from '../shared/utils/platform';
+import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
   getAllArchives,
