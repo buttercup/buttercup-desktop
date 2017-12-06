@@ -291,7 +291,7 @@ export const setupMenu = store => {
                 }
               }))
             },
-            ...(isWindows()
+            ...(!isOSX()
               ? [
                   {
                     label: label('view.auto-hide-menubar'),
