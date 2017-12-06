@@ -55,7 +55,7 @@ export function createMenuFromGroups(
                   [
                     {
                       ...group,
-                      title: i18n.t('move-to-group-custom', {
+                      title: i18n.t('group-menu.move-to-group-custom', {
                         title: group.title
                       }),
                       groups: []
