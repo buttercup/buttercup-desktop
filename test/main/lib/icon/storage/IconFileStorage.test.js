@@ -36,12 +36,14 @@ test('get icon keys', async t => {
 
 test('store, retrieve and delete icon', async t => {
   const dir = await createTmpDir();
-  const storage = new IconFileStorage(dir);
+  const storagePath = path.join(dir, 'icons');
+  const storage = new IconFileStorage(storagePath);
 
   const buffer = await fs.readFile(path.join(__dirname, 'buttercup.ico'));
   const data = await storage.encodeIconForStorage(buffer);
 
-  const key = 'foo';
+  // Should sanitize key name (any chars causing an invalid path)
+  const key = 'http://buttercup.pw';
   await storage.storeIcon(key, data);
   const retrieved = await storage.retrieveIcon(key);
 
@@ -49,8 +51,29 @@ test('store, retrieve and delete icon', async t => {
 
   await storage.deleteIcon(key);
 
-  const files = await fs.readdir(dir);
+  const files = await fs.readdir(storagePath);
   t.deepEqual(files, []);
+});
+
+test('creates dir if does not exist', async t => {
+  const dir = await createTmpDir();
+  const storagePath = path.join(dir, 'foo', 'bar');
+  const storage = new IconFileStorage(storagePath);
+
+  const keys = await storage.getIconKeys();
+  t.deepEqual(keys, []);
+
+  // We check that the dir exists and it's writable
+  const filePath = path.join(storagePath, 'baz');
+  await fs.writeFile(filePath, 'I am file content');
+
+  // Delete the dir
+  await fs.unlink(filePath);
+  await fs.rmdir(storagePath);
+
+  // Should create it automatically again (and be writable)
+  await storage.getIconKeys();
+  await fs.writeFile(path.join(storagePath, 'baz'), 'I am file content');
 });
 
 const createTmpDir = async () => tmp.dir({ unsafeCleanup: true });
