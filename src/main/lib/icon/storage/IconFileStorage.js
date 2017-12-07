@@ -1,14 +1,38 @@
 import fsLib from 'fs';
+import mkdirpLib from 'mkdirp';
 import pify from 'pify';
 import path from 'path';
+import sanitize from 'sanitize-filename';
 import { StorageInterface } from '@buttercup/iconographer';
 
 const fs = pify(fsLib);
+const mkdirp = pify(mkdirpLib);
 
 export default class IconFileStorage extends StorageInterface {
   constructor(path) {
     super();
     this.path = path;
+  }
+
+  async _getPath() {
+    await this._createDirIfNotExists(this.path);
+    return this.path;
+  }
+
+  async _createDirIfNotExists(path) {
+    let stats;
+    try {
+      stats = await fs.stats(path);
+    } catch (err) {}
+
+    if (!stats || !stats.isDirectory()) {
+      await mkdirp(path);
+    }
+  }
+
+  async _buildKeyPath(iconKey) {
+    const basePath = await this._getPath();
+    return path.join(basePath, sanitize(iconKey)) + '.ico';
   }
 
   /**
@@ -25,8 +49,9 @@ export default class IconFileStorage extends StorageInterface {
      * @param {String} iconKey The icon key
      * @returns {Promise} A promise that resolves once deletion has completed
      */
-  deleteIcon(iconKey) {
-    fs.unlink(this._buildPath(iconKey));
+  async deleteIcon(iconKey) {
+    const path = await this._buildKeyPath(iconKey);
+    return fs.unlink(path);
   }
 
   /**
@@ -43,8 +68,9 @@ export default class IconFileStorage extends StorageInterface {
      * Fetch all icon keys
      * @returns {Promise.<Array.<String>>} A promise that resolves with an array of icon keys
      */
-  getIconKeys() {
-    return fs.readdir(this.path);
+  async getIconKeys() {
+    const path = await this._getPath();
+    return fs.readdir(path);
   }
 
   /**
@@ -52,8 +78,9 @@ export default class IconFileStorage extends StorageInterface {
      * @param {String} iconKey The icon key
      * @returns {Promise.<*>} A promise that resolves with raw icon data
      */
-  retrieveIcon(iconKey) {
-    return fs.readFile(this._buildPath(iconKey));
+  async retrieveIcon(iconKey) {
+    const path = await this._buildKeyPath(iconKey);
+    return fs.readFile(path);
   }
 
   /**
@@ -62,11 +89,8 @@ export default class IconFileStorage extends StorageInterface {
      * @param {*} iconData The encoded icon data
      * @returns {Promise} A promise that resolves once storage has been completed
      */
-  storeIcon(iconKey, iconData) {
-    return fs.writeFile(this._buildPath(iconKey), iconData);
-  }
-
-  _buildPath(iconKey) {
-    return path.join(this.path, iconKey);
+  async storeIcon(iconKey, iconData) {
+    const path = await this._buildKeyPath(iconKey);
+    return fs.writeFile(path, iconData);
   }
 }
