@@ -1,0 +1,17 @@
+@import './variables';
+
+.entryIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid white;
+  background-size: 85%;   
+  background-repeat: no-repeat;
+  background-position: center;
+
+  &.big {
+    width: 50px;
+    height: 50px;
+  }
+}

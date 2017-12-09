@@ -24,30 +24,48 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => ({
-  type: ENTRIES_LOADED,
-  payload: entryTools.loadEntries(archiveId, groupId)
-});
-
-export const updateEntry = newValues => (dispatch, getState) => {
-  const archiveId = getCurrentArchiveId(getState());
-
-  entryTools
-    .updateEntry(archiveId, newValues)
-    .then(() => {
-      dispatch({
-        type: ENTRIES_UPDATE,
-        payload: newValues
-      });
-
-      dispatch(changeMode('view')());
-    })
-    .catch(err => {
-      showDialog(err);
+export const loadEntries = (archiveId, groupId) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const entries = await entryTools.loadEntries(archiveId, groupId);
+    dispatch({
+      type: ENTRIES_LOADED,
+      payload: entries
     });
+  } catch (err) {
+    showDialog(err);
+  }
 };
 
-export const newEntry = newValues => (dispatch, getState) => {
+export const updateEntry = newValues => async (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+
+  try {
+    // First create the new entry with the data
+    await entryTools.updateEntry(archiveId, newValues);
+    dispatch({
+      type: ENTRIES_UPDATE,
+      payload: newValues
+    });
+    dispatch(changeMode('view')());
+
+    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
+    const entryObjWithIcon = await entryTools.updateEntryIcon(
+      archiveId,
+      newValues.id
+    );
+    dispatch({
+      type: ENTRIES_UPDATE,
+      payload: entryObjWithIcon
+    });
+  } catch (err) {
+    showDialog(err);
+  }
+};
+
+export const newEntry = newValues => async (dispatch, getState) => {
   const state = getState();
   const currentGroupId = getCurrentGroupId(state);
   const archiveId = getCurrentArchiveId(state);
@@ -56,18 +74,31 @@ export const newEntry = newValues => (dispatch, getState) => {
     return null;
   }
 
-  entryTools
-    .createEntry(archiveId, currentGroupId, newValues)
-    .then(entryObj => {
-      dispatch({
-        type: ENTRIES_CREATE,
-        payload: entryObj
-      });
-      dispatch(selectEntry(entryObj.id));
-    })
-    .catch(err => {
-      showDialog(err);
+  try {
+    // First update the entry data
+    const entryObj = entryTools.createEntry(
+      archiveId,
+      currentGroupId,
+      newValues
+    );
+    dispatch({
+      type: ENTRIES_CREATE,
+      payload: entryObj
     });
+    dispatch(selectEntry(entryObj.id));
+
+    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
+    const entryObjWithIcon = await entryTools.updateEntryIcon(
+      archiveId,
+      entryObj.id
+    );
+    dispatch({
+      type: ENTRIES_UPDATE,
+      payload: entryObjWithIcon
+    });
+  } catch (err) {
+    showDialog(err);
+  }
 };
 
 export const moveEntry = (entryId, groupId) => (dispatch, getState) => {

@@ -20,6 +20,7 @@ export default class IconFileStorage extends StorageInterface {
   }
 
   async _createDirIfNotExists(path) {
+    // TODO Refactor this to retry on error
     let stats;
     try {
       stats = await fs.stats(path);

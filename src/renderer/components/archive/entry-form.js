@@ -8,6 +8,7 @@ import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
+import EntryIcon from './entry-icon';
 
 const renderMeta = (
   { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
@@ -51,13 +52,15 @@ const renderMeta = (
 class EntryForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func,
+    icon: PropTypes.string,
     t: PropTypes.func
   };
 
   render() {
-    const { handleSubmit, t } = this.props;
+    const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
+        <EntryIcon icon={icon} big />
         <div className={styles.formRow}>
           <label className={styles.labelWrapper} htmlFor="properties.title">
             <Translate i18nKey="entry.title" parent="span" />
