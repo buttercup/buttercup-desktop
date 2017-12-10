@@ -34,7 +34,7 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise} A promise that resolves once deletion has completed
      */
   async deleteIcon(iconKey) {
-    fs.unlink(this._buildKeyPath(iconKey));
+    return fs.unlink(this._buildKeyPath(iconKey));
   }
 
   /**
@@ -62,8 +62,14 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise.<*>} A promise that resolves with raw icon data
      */
   async retrieveIcon(iconKey) {
-    // TODO Handle errors?
-    return fs.readFile(this._buildKeyPath(iconKey));
+    try {
+      return await fs.readFile(this._buildKeyPath(iconKey));
+    } catch (err) {
+      if (isNotFoundError(err)) {
+        return null;
+      }
+      throw err;
+    }
   }
 
   /**
@@ -85,7 +91,7 @@ export default class IconFileStorage extends StorageInterface {
     try {
       return await func();
     } catch (err) {
-      if (err.code === 'ENOENT') {
+      if (isNotFoundError(err)) {
         await mkdirp(this.path);
         return func();
       }
@@ -93,3 +99,5 @@ export default class IconFileStorage extends StorageInterface {
     }
   }
 }
+
+const isNotFoundError = err => err.code === 'ENOENT';

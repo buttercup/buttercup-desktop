@@ -34,6 +34,14 @@ test('get icon keys', async t => {
   t.deepEqual(keys, ['bar', 'baz', 'foo.bar']);
 });
 
+test('get icon keys, empty results', async t => {
+  const dir = await createTmpDir();
+  const storage = new IconFileStorage(dir);
+
+  const keys = await storage.getIconKeys();
+  t.deepEqual(keys, []);
+});
+
 test('store, retrieve and delete icon', async t => {
   const dir = await createTmpDir();
   const storagePath = path.join(dir, 'icons');
@@ -53,6 +61,46 @@ test('store, retrieve and delete icon', async t => {
 
   const files = await fs.readdir(storagePath);
   t.deepEqual(files, []);
+});
+
+test('retrieve icon, dir does not exist', async t => {
+  const dir = await createTmpDir();
+  const storage = new IconFileStorage(path.join(dir, 'foo'));
+
+  const icon = await storage.retrieveIcon('bar');
+  t.is(icon, null);
+});
+
+test('retrieve icon, file does not exist', async t => {
+  const dir = await createTmpDir();
+  const storage = new IconFileStorage(dir);
+
+  const icon = await storage.retrieveIcon('bar');
+  t.is(icon, null);
+});
+
+test('delete icon, dir does not exist', async t => {
+  const dir = await createTmpDir();
+  const storage = new IconFileStorage(path.join(dir, 'foo'));
+
+  try {
+    await storage.deleteIcon('bar');
+    t.fail('Should throw Error');
+  } catch (err) {
+    t.is(err.code, 'ENOENT');
+  }
+});
+
+test('delete icon, file does not exist', async t => {
+  const dir = await createTmpDir();
+  const storage = new IconFileStorage(dir);
+
+  try {
+    await storage.deleteIcon('bar');
+    t.fail('Should throw Error');
+  } catch (err) {
+    t.is(err.code, 'ENOENT');
+  }
 });
 
 test('creates dir if does not exist', async t => {
