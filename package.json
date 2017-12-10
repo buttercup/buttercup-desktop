@@ -5,11 +5,12 @@
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
-    "ava": "cross-env NODE_ENV=test ava",
     "clean": "rimraf ./app/node_modules",
     "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
-    "test": "npm run ava && npm run lint",
+    "test": "npm run test:unit && npm run test:gui && npm run lint",
+    "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
+    "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
@@ -129,7 +130,7 @@
   },
   "devDependencies": {
     "@buttercup/channel-queue": "~0.2.1",
-    "@buttercup/iconographer": "git://github.com/hugo-cardenas/iconographer.git#improvements",
+    "@buttercup/iconographer": "git://github.com/hugo-cardenas/iconographer.git#fc099568b7b5432d9a336f8c774e057fdce66d11",
     "@buttercup/ui": "^0.6.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",

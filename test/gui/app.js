@@ -1,6 +1,6 @@
 import path from 'path';
 import test from 'ava';
-import { ArchiveTypes } from '../src/shared/buttercup/types';
+import { ArchiveTypes } from '../../src/shared/buttercup/types';
 import { Application } from 'spectron';
 
 // method to wait n ms
@@ -14,7 +14,7 @@ let inputs;
 test.before(async t => {
   app = new Application({
     path: require('electron'),
-    args: [path.join(__dirname, '../app')]
+    args: [path.join(__dirname, '../../app')]
   });
 
   await app.start();

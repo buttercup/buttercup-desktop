@@ -3,7 +3,7 @@ import path from 'path';
 import pify from 'pify';
 import fsLib from 'fs';
 import tmpLib from 'tmp';
-import IconFileStorage from '../../../../../src/main/lib/icon/storage/IconFileStorage';
+import IconFileStorage from '../../../../../../src/main/lib/icon/storage/IconFileStorage';
 
 const fs = pify(fsLib);
 const tmp = pify(tmpLib);
