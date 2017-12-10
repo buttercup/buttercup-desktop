@@ -14,26 +14,9 @@ export default class IconFileStorage extends StorageInterface {
     this.path = path;
   }
 
-  async _getPath() {
-    await this._createDirIfNotExists(this.path);
-    return this.path;
-  }
-
-  async _createDirIfNotExists(path) {
-    // TODO Refactor this to retry on error
-    let stats;
-    try {
-      stats = await fs.stats(path);
-    } catch (err) {}
-
-    if (!stats || !stats.isDirectory()) {
-      await mkdirp(path);
-    }
-  }
-
-  async _buildKeyPath(iconKey) {
-    const basePath = await this._getPath();
-    return path.join(basePath, sanitize(iconKey)) + '.ico';
+  _buildKeyPath(iconKey) {
+    // TODO No extension?
+    return path.join(this.path, sanitize(iconKey)) + '.ico';
   }
 
   /**
@@ -51,8 +34,7 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise} A promise that resolves once deletion has completed
      */
   async deleteIcon(iconKey) {
-    const path = await this._buildKeyPath(iconKey);
-    return fs.unlink(path);
+    fs.unlink(this._buildKeyPath(iconKey));
   }
 
   /**
@@ -70,8 +52,8 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise.<Array.<String>>} A promise that resolves with an array of icon keys
      */
   async getIconKeys() {
-    const path = await this._getPath();
-    return fs.readdir(path);
+    const path = this.path;
+    return this._retryWithDirCreation(() => fs.readdir(path));
   }
 
   /**
@@ -80,8 +62,8 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise.<*>} A promise that resolves with raw icon data
      */
   async retrieveIcon(iconKey) {
-    const path = await this._buildKeyPath(iconKey);
-    return fs.readFile(path);
+    // TODO Handle errors?
+    return fs.readFile(this._buildKeyPath(iconKey));
   }
 
   /**
@@ -91,7 +73,23 @@ export default class IconFileStorage extends StorageInterface {
      * @returns {Promise} A promise that resolves once storage has been completed
      */
   async storeIcon(iconKey, iconData) {
-    const path = await this._buildKeyPath(iconKey);
-    return fs.writeFile(path, iconData);
+    const path = this._buildKeyPath(iconKey);
+    return this._retryWithDirCreation(() => fs.writeFile(path, iconData));
+  }
+
+  /**
+   * Wrap a function in a retry, creating the storage dir before retrying
+   * @param {Function} func 
+   */
+  async _retryWithDirCreation(func) {
+    try {
+      return await func();
+    } catch (err) {
+      if (err.code === 'ENOENT') {
+        await mkdirp(this.path);
+        return func();
+      }
+      throw err;
+    }
   }
 }
