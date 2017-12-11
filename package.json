@@ -130,7 +130,7 @@
   },
   "devDependencies": {
     "@buttercup/channel-queue": "~0.2.1",
-    "@buttercup/iconographer": "git://github.com/hugo-cardenas/iconographer.git#fc099568b7b5432d9a336f8c774e057fdce66d11",
+    "@buttercup/iconographer": "^0.2.0",
     "@buttercup/ui": "^0.6.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -168,8 +168,8 @@
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
     "electron": "^1.7.9",
-    "electron-context-menu": "^0.9.1",
     "electron-builder": "^19.45.5",
+    "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-installer-dmg": "^0.1.2",
