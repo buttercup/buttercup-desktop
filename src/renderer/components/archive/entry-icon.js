@@ -1,16 +1,20 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import styles from '../../styles/entry-icon';
-import defaultIcon from '../../styles/img/lock-black.svg';
+import styled from 'styled-components';
+import defaultIcon from '../../styles/img/ic-lock-48px.svg';
 
-const EntryIcon = props => {
-  const style = {
-    backgroundImage: `url(${props.icon ? props.icon : defaultIcon})`
-  };
-  const className = [styles.entryIcon, props.big ? styles.big : ''].join(' ');
-
-  return <div className={className} style={style} />;
-};
+const EntryIcon = styled.div`
+  height: ${props => (props.big ? '50px' : '30px')}
+  width: ${props => (props.big ? '50px' : '30px')}
+  
+  border-radius: 50%;
+  background-color: white;
+  border: 3px solid white;
+  
+  background-image: ${props => `url(${props.icon ? props.icon : defaultIcon})`}
+  background-size: 85%;   
+  background-repeat: no-repeat;
+  background-position: center;
+`;
 
 EntryIcon.propTypes = {
   big: PropTypes.bool,

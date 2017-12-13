@@ -15,8 +15,8 @@ export default class IconFileStorage extends StorageInterface {
   }
 
   _buildKeyPath(iconKey) {
-    // TODO No extension?
-    return path.join(this.path, sanitize(iconKey)) + '.icon.dat';
+    const fileName = sanitize(iconKey, { replacement: '_' }) + '.icon.dat';
+    return path.join(this.path, fileName);
   }
 
   /**
