@@ -40,8 +40,6 @@ i18n.init({
   pluralSeparator: '_',
   contextSeparator: '-',
   debug: false,
-  saveMissingTo: 'all',
-  saveMissing: true,
   returnEmptyString: false
 });
 
