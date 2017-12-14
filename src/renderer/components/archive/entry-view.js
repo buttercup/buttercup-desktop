@@ -19,7 +19,7 @@ const EntryView = ({ entry, t }) => (
     <EntryIcon icon={entry.icon} big />
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className={labelWrapper}>{t(key)}</div>
+        <div className={labelWrapper}>{t(`entry.${key}`)}</div>
         <div className={inputWrapper}>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </div>
