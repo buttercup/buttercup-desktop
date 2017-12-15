@@ -1,5 +1,6 @@
 import { saveWorkspace, getArchive } from './archive';
 import i18n from '../i18n';
+import log from 'electron-log';
 import iconographer from '../../main/lib/icon/iconographer';
 
 function entryToObj(entry) {
@@ -68,16 +69,18 @@ export async function loadEntries(archiveId, groupId) {
 
   const entries = group.getEntries();
 
-  const entryObjects = entries.map(entry => entryToObj(entry));
-
-  for (let i = 0; i < entries.length; i++) {
-    const icon = await getIconForEntry(entries[i]);
-    if (icon) {
-      entryObjects[i].icon = icon;
-    }
-  }
-
-  return entryObjects;
+  return Promise.all(
+    entries.map(async (entry, i) => {
+      const entryObject = entryToObj(entry);
+      // Here we get only the available icons in disk.
+      // Downloading missing icons is a lot slower, we do it later, after loading the entries.
+      const icon = await getIcon(entry);
+      if (icon) {
+        entryObject.icon = icon;
+      }
+      return entryObject;
+    })
+  );
 }
 
 export async function updateEntry(archiveId, entryObj) {
@@ -141,7 +144,7 @@ export async function updateEntryIcon(archiveId, entryId) {
   }
 
   const entryObj = entryToObj(entry);
-  const icon = await fetchIcon(entry);
+  const icon = await getOrDownloadIcon(entry);
   if (icon) {
     entryObj.icon = icon;
   }
@@ -149,32 +152,37 @@ export async function updateEntryIcon(archiveId, entryId) {
   return entryObj;
 }
 
-async function fetchIcon(entry) {
+async function getOrDownloadIcon(entry) {
   // We move on whether this succeeds or not
   // TODO Should maybe log it somewhere (but not alert the user - not an error)
-  let icon = await getIconForEntry(entry);
+  let icon = await getIcon(entry);
   if (!icon) {
-    await processIconForEntry(entry);
-    icon = await getIconForEntry(entry);
+    await processIcon(entry);
+    icon = await getIcon(entry);
   }
   return icon;
 }
 
-async function processIconForEntry(entry) {
-  // TODO Decide better differentiate between errors? (Icon missing vs iconographer failed)
+async function processIcon(entry) {
   try {
     await iconographer.processIconForEntry(entry);
-  } catch (err) {}
+  } catch (err) {
+    // ENOTFOUND or ECONNREFUSED means the URL is just invalid, not an error
+    if (!['ENOTFOUND', 'ECONNREFUSED'].includes(err.code)) {
+      log.error('Unable to process icon for entry', err);
+    }
+  }
 }
 
-async function getIconForEntry(entry) {
-  // TODO Decide better differentiate between errors? (Icon missing vs iconographer failed)
+async function getIcon(entry) {
   try {
-    const buf = await iconographer.getIconForEntry(entry);
-    if (buf) {
-      return `data:image/png;base64,${buf.toString('base64')}`;
+    const buffer = await iconographer.getIconForEntry(entry);
+    if (buffer) {
+      return `data:image/png;base64,${buffer.toString('base64')}`;
     }
-  } catch (err) {}
+  } catch (err) {
+    log.error('Unable to get icon for entry', err);
+  }
 
   return null;
 }

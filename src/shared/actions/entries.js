@@ -29,11 +29,16 @@ export const loadEntries = (archiveId, groupId) => async (
   getState
 ) => {
   try {
+    // First load all the entries fetching their icons only from disk
     const entries = await entryTools.loadEntries(archiveId, groupId);
     dispatch({
       type: ENTRIES_LOADED,
       payload: entries
     });
+
+    // Then download all the missing icons and update the entries
+    const entriesWithoutIcon = entries.filter(entry => !entry.icon);
+    await fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon, dispatch);
   } catch (err) {
     showDialog(err);
   }
@@ -52,14 +57,7 @@ export const updateEntry = newValues => async (dispatch, getState) => {
     dispatch(changeMode('view')());
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    const entryObjWithIcon = await entryTools.updateEntryIcon(
-      archiveId,
-      newValues.id
-    );
-    dispatch({
-      type: ENTRIES_UPDATE,
-      payload: entryObjWithIcon
-    });
+    await fetchEntryIconsAndUpdate(archiveId, [newValues], dispatch);
   } catch (err) {
     showDialog(err);
   }
@@ -88,14 +86,7 @@ export const newEntry = newValues => async (dispatch, getState) => {
     dispatch(selectEntry(entryObj.id));
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    const entryObjWithIcon = await entryTools.updateEntryIcon(
-      archiveId,
-      entryObj.id
-    );
-    dispatch({
-      type: ENTRIES_UPDATE,
-      payload: entryObjWithIcon
-    });
+    await fetchEntryIconsAndUpdate(archiveId, [entryObj], dispatch);
   } catch (err) {
     showDialog(err);
   }
@@ -124,4 +115,19 @@ export const deleteEntry = entryId => (dispatch, getState) => {
       entryTools.deleteEntry(archiveId, entryId);
     }
   });
+};
+
+const fetchEntryIconsAndUpdate = async (archiveId, entries, dispatch) => {
+  return Promise.all(
+    entries.map(async entry => {
+      const entryObjWithIcon = await entryTools.updateEntryIcon(
+        archiveId,
+        entry.id
+      );
+      dispatch({
+        type: ENTRIES_UPDATE,
+        payload: entryObjWithIcon
+      });
+    })
+  );
 };
