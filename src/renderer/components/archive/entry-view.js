@@ -7,20 +7,20 @@ import {
   heading,
   labelWrapper
 } from '../../styles/entry-form';
-import { wrapper as inputWrapper } from '../../styles/entry-input';
 import bubbleImage from '../../styles/img/info-bubble.svg';
 import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
 import Copyable from './copyable';
+import { Wrapper } from './entry-input';
 
 const EntryView = ({ entry, t }) => (
   <div>
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
         <div className={labelWrapper}>{t(key)}</div>
-        <div className={inputWrapper}>
+        <Wrapper>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
-        </div>
+        </Wrapper>
       </div>
     ))}
     <h6 className={heading}>
@@ -32,9 +32,9 @@ const EntryView = ({ entry, t }) => (
           <If condition={Object.keys(meta).length > 0}>
             <div className={formRow} key={meta.key}>
               <div className={labelWrapper}>{meta.key}</div>
-              <div className={inputWrapper}>
+              <Wrapper>
                 <Copyable>{meta.value}</Copyable>
-              </div>
+              </Wrapper>
             </div>
           </If>
         ))}
