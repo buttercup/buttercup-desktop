@@ -241,15 +241,29 @@ export const setupMenu = store => {
                     name: type.name,
                     extension: type.extension
                   }),
-                  submenu: archives.map(archive => ({
-                    label: label('archive.import.import-to-type', {
-                      name: archive.name,
-                      extension: type.extension
-                    }),
-                    enabled: archive.status === 'unlocked',
-                    click: (item, focusedWindow) =>
-                      openFileForImporting(focusedWindow, typeKey, archive.id)
-                  }))
+                  submenu:
+                    archives.length > 0
+                      ? archives.map(archive => ({
+                          label: label('archive.import.import-to-type', {
+                            name: archive.name,
+                            extension: type.extension
+                          }),
+                          enabled: archive.status === 'unlocked',
+                          click: (item, focusedWindow) =>
+                            openFileForImporting(
+                              focusedWindow,
+                              typeKey,
+                              archive.id
+                            )
+                        }))
+                      : [
+                          {
+                            label: label(
+                              'archive.import.no-available-archives'
+                            ),
+                            enabled: false
+                          }
+                        ]
                 }))
               };
             }
