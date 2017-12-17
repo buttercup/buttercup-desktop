@@ -14,7 +14,9 @@ let inputs;
 test.before(async t => {
   app = new Application({
     path: require('electron'),
-    args: [path.join(__dirname, '../app')]
+    args: [path.join(__dirname, '../app')],
+    host: 'localhost',
+    port: 4444
   });
 
   await app.start();
