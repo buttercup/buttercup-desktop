@@ -251,7 +251,7 @@
     "sass-loader": "^6.0.6",
     "spectron": "^3.7.2",
     "style-loader": "^0.13.1",
-    "styled-components": "^1.4.4",
+    "styled-components": "^2.3.0",
     "styled-flexbox": "^0.2.0",
     "sweetalert2": "^6.6.0",
     "uglifyjs-webpack-plugin": "^1.0.1",
