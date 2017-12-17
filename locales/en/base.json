@@ -18,7 +18,8 @@
       "import": {
         "import": "Import",
         "import-from-type": "From {{name}} archive (.{{extension}})",
-        "import-to-type": "To {{name}}"
+        "import-to-type": "To {{name}}",
+        "no-available-archives": "No available archives to import to."
       },
       "close": "Close"
     },
