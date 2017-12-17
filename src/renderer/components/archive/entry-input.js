@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import cx from 'classnames';
 import styled from 'styled-components';
 import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
-import styles from '../../styles/entry-input';
 
 export const Wrapper = styled.div`
   flex: 1;
@@ -17,6 +15,24 @@ const PasswordInput = styled(BaseInput)`
   padding-right: 2.2rem;
   font-size: 14px;
   font-family: Anonymous;
+`;
+
+const GeneratorToggle = styled.div`
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 2px;
+  background-color: ${props => (props.active ? 'var(--gray)' : 'transparent')};
+
+  svg {
+    display: block;
+  }
+
+  &:hover {
+    background-color: var(--gray-light);
+  }
 `;
 
 export default class Input extends Component {
@@ -62,14 +78,9 @@ export default class Input extends Component {
               isOpen={this.state.isGeneratorOpen}
               preferPlace="below"
             >
-              <div
-                className={cx(
-                  styles.generator,
-                  this.state.isGeneratorOpen && styles.generatorActive
-                )}
-              >
+              <GeneratorToggle active={this.state.isGeneratorOpen}>
                 <MagicIcon onClick={() => this.handleGeneratorToggle()} />
-              </div>
+              </GeneratorToggle>
             </Generator>
             <Meter input={input.value} />
           </When>
