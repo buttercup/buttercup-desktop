@@ -205,6 +205,7 @@
     "husky": "^0.14.3",
     "i18next": "^10.0.7",
     "i18next-scanner": "^2.1.2",
+    "image-type": "^3.0.0",
     "is-error": "^2.2.1",
     "jsdom": "^9.8.3",
     "json-loader": "^0.5.4",

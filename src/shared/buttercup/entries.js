@@ -1,7 +1,8 @@
 import { saveWorkspace, getArchive } from './archive';
-import i18n from '../i18n';
 import log from 'electron-log';
+import i18n from '../i18n';
 import iconographer from '../../main/lib/icon/iconographer';
+import { iconToDataURI } from '../utils/encoding';
 
 function entryToObj(entry) {
   const obj = entry.toObject();
@@ -178,13 +179,7 @@ async function getIcon(entry) {
   try {
     const buffer = await iconographer.getIconForEntry(entry);
     if (buffer) {
-      const reader = new window.FileReader();
-      reader.readAsDataURL(buffer);
-      return new Promise(resolve => {
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-      });
+      return iconToDataURI(buffer);
     }
   } catch (err) {
     log.error('Unable to get icon for entry', err);
