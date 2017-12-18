@@ -178,7 +178,13 @@ async function getIcon(entry) {
   try {
     const buffer = await iconographer.getIconForEntry(entry);
     if (buffer) {
-      return `data:image/png;base64,${buffer.toString('base64')}`;
+      const reader = new window.FileReader();
+      reader.readAsDataURL(buffer);
+      return new Promise(resolve => {
+        reader.onloadend = () => {
+          resolve(reader.result);
+        };
+      });
     }
   } catch (err) {
     log.error('Unable to get icon for entry', err);
