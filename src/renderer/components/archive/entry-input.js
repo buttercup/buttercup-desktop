@@ -1,34 +1,46 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import cx from 'classnames';
-import { Generator, Meter } from '@buttercup/ui';
+import styled from 'styled-components';
+import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
-import styles from '../../styles/entry-input';
 
-const BareInput = ({ input, name, placeholder, type }) => {
-  const isPassword = type === 'password';
-  return (
-    <input
-      {...input}
-      id={name}
-      type="text"
-      placeholder={placeholder}
-      className={cx(styles.input, isPassword ? styles.password : null)}
-    />
-  );
-};
+export const Wrapper = styled.div`
+  flex: 1;
+  min-height: $form-input-height;
+  margin-right: $spacing-half;
+  position: relative;
+`;
 
-BareInput.propTypes = {
-  placeholder: PropTypes.string,
-  name: PropTypes.string,
-  input: PropTypes.object,
-  type: PropTypes.string
-};
+const PasswordInput = styled(BaseInput)`
+  padding-right: 2.2rem;
+  font-size: 14px;
+  font-family: Anonymous;
+`;
+
+const GeneratorToggle = styled.div`
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 2px;
+  background-color: ${props => (props.active ? 'var(--gray)' : 'transparent')};
+
+  svg {
+    display: block;
+  }
+
+  &:hover {
+    background-color: var(--gray-light);
+  }
+`;
 
 export default class Input extends Component {
   static propTypes = {
     type: PropTypes.string,
-    input: PropTypes.object
+    placeholder: PropTypes.string,
+    input: PropTypes.object,
+    meta: PropTypes.object
   };
 
   state = {
@@ -48,28 +60,40 @@ export default class Input extends Component {
   }
 
   render() {
-    const { type, input } = this.props;
+    const { type, input, placeholder, meta } = this.props;
     return (
-      <div className={styles.wrapper}>
-        <BareInput {...this.props} />
-        {type === 'password' && (
-          <Generator
-            onGenerate={pwd => this.receivePassword(pwd)}
-            isOpen={this.state.isGeneratorOpen}
-            preferPlace="below"
-          >
-            <div
-              className={cx(
-                styles.generator,
-                this.state.isGeneratorOpen && styles.generatorActive
-              )}
+      <Wrapper>
+        <Choose>
+          <When condition={type === 'password'}>
+            <PasswordInput
+              {...input}
+              id={name}
+              type={
+                meta.active || this.state.isGeneratorOpen ? 'text' : 'password'
+              }
+              placeholder={placeholder}
+            />
+            <Generator
+              onGenerate={pwd => this.receivePassword(pwd)}
+              isOpen={this.state.isGeneratorOpen}
+              preferPlace="below"
             >
-              <MagicIcon onClick={() => this.handleGeneratorToggle()} />
-            </div>
-          </Generator>
-        )}
-        {type === 'password' && <Meter input={input.value} />}
-      </div>
+              <GeneratorToggle active={this.state.isGeneratorOpen}>
+                <MagicIcon onClick={() => this.handleGeneratorToggle()} />
+              </GeneratorToggle>
+            </Generator>
+            <Meter input={input.value} />
+          </When>
+          <Otherwise>
+            <BaseInput
+              {...input}
+              id={name}
+              type="text"
+              placeholder={placeholder}
+            />
+          </Otherwise>
+        </Choose>
+      </Wrapper>
     );
   }
 }

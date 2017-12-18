@@ -18,7 +18,8 @@
       "import": {
         "import": "درون ریزی",
         "import-from-type": "از آرشیو {{name}} (.{{extension}})",
-        "import-to-type": "به {{name}}"
+        "import-to-type": "به {{name}}",
+        "no-available-archives": "هیچ آرشیوی برای درون‌ریزی وجود ندارد."
       },
       "close": "بستن"
     },

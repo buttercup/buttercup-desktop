@@ -22,7 +22,9 @@ test.before(async t => {
 });
 
 test.after(async t => {
-  await app.stop();
+  if (app && app.isRunning()) {
+    await app.stop();
+  }
 });
 
 const payload = {
@@ -31,7 +33,7 @@ const payload = {
   isNew: true
 };
 
-test(async t => {
+test('check if window is loaded and visible', async t => {
   const win = app.browserWindow;
   t.is(await app.client.getWindowCount(), 1);
   t.false(await win.isMinimized());
@@ -56,13 +58,13 @@ test('test input focus', async t => {
   await app.client.keys('Enter');
 
   // wait for field change
-  await sleep(1000);
+  await sleep(2000);
 
   await app.client.setValue('input[type="password"]', '1');
   await app.client.keys('Enter');
 
   // wait for login
-  await sleep(3500);
+  await sleep(5000);
 
   // click add entry
   buttons = await app.client.elements('button');
