@@ -178,7 +178,7 @@ async function getIcon(entry) {
   try {
     const iconContents = await iconographer.getIconForEntry(entry);
     if (iconContents) {
-      return iconContents;
+      return iconContents.toString();
     }
   } catch (err) {
     log.error('Unable to get icon for entry', err);

@@ -18,7 +18,7 @@ const EntryIcon = styled.div`
 
 EntryIcon.propTypes = {
   big: PropTypes.bool,
-  icon: PropTypes.object
+  icon: PropTypes.string
 };
 
 export default EntryIcon;
