@@ -7,6 +7,7 @@ import { StorageInterface } from '@buttercup/iconographer';
 
 const fs = pify(fsLib);
 const mkdirp = pify(mkdirpLib);
+const isNotFoundError = err => err.code === 'ENOENT';
 
 export default class IconFileStorage extends StorageInterface {
   constructor(path) {
@@ -19,13 +20,14 @@ export default class IconFileStorage extends StorageInterface {
     return path.join(this.path, fileName);
   }
 
-  /**
-     * Decode icon data that was pulled from storage
-     * @param {*} data The encoded data as it was stored
-     * @returns {Promise.<Buffer>} A promise that resolves with a buffer
-     */
-  decodeIconFromStorage(data) {
-    return Promise.resolve(data);
+  async encodeIconForStorage(iconData) {
+    const reader = new window.FileReader();
+    reader.readAsDataURL(iconData);
+    return new Promise(resolve => {
+      reader.onloadend = () => {
+        resolve(reader.result);
+      };
+    });
   }
 
   /**
@@ -35,25 +37,6 @@ export default class IconFileStorage extends StorageInterface {
      */
   async deleteIcon(iconKey) {
     return fs.unlink(this._buildKeyPath(iconKey));
-  }
-
-  /**
-     * Encode icon data for storage
-     * @param {Buffer} data The data buffer for encoding
-     * @returns {Promise.<*>} A promise that resolves with the encoded data ready
-     *  for storage
-     */
-  encodeIconForStorage(data) {
-    return Promise.resolve(data);
-  }
-
-  /**
-     * Fetch all icon keys
-     * @returns {Promise.<Array.<String>>} A promise that resolves with an array of icon keys
-     */
-  async getIconKeys() {
-    const path = this.path;
-    return this._retryWithDirCreation(() => fs.readdir(path));
   }
 
   /**
@@ -99,5 +82,3 @@ export default class IconFileStorage extends StorageInterface {
     }
   }
 }
-
-const isNotFoundError = err => err.code === 'ENOENT';
