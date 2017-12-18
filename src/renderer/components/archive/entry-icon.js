@@ -6,12 +6,12 @@ const EntryIcon = styled.div`
   height: ${props => (props.big ? '50px' : '30px')}
   width: ${props => (props.big ? '50px' : '30px')}
   
-  border-radius: 50%;
+  border-radius: 5%;
   background-color: white;
   border: 3px solid white;
   
   background-image: ${props => `url(${props.icon ? props.icon : defaultIcon})`}
-  background-size: 85%;   
+  background-size: 99%;   
   background-repeat: no-repeat;
   background-position: center;
 `;
