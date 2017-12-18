@@ -1,7 +1,13 @@
 {
   "app-menu": {
     "app": {
-      "hide": "Cacher"
+      "about": "A propos",
+      "check-for-updates": "Vérifier les mises à jour...",
+      "services": "Services",
+      "hide": "Cacher",
+      "hideothers": "Cacher les autres",
+      "unhide": "Révéler",
+      "quit": "Quitter"
     },
     "archive": {
       "archive": "Archive",
@@ -13,16 +19,19 @@
         "import": "Importer",
         "import-from-type": "Depuis l’archive {{name}} (.{{extension}})",
         "import-to-type": "Vers {{name}}"
-      }
+      },
+      "close": "Fermer"
     },
     "edit": {
       "edit": "Éditer",
       "undo": "Undo",
       "redo": "Redo",
-      "cut": "Cut",
+      "cut": "Couper",
       "copy": "Copier",
-      "paste": "Paste",
+      "paste": "Coller",
+      "pasteandmatchstyle": "Coller et assortir le style",
       "delete": "Supprimer",
+      "selectall": "Sélectionner tout",
       "speech": {
         "speech": "Aide vocale"
       }
@@ -31,10 +40,18 @@
       "view": "Visualiser",
       "condensed-sidebar": "Replier la colonne latérale",
       "language": "Langue",
+      "reload": "Recharger",
+      "forcereload": "Forcer rechargement",
+      "toggledevtools": "Activer/Désactiver les outils développeurs",
+      "togglefullscreen": "Activer/Désactiver le plein écran",
       "auto-hide-menubar": "Cacher automatiquement la barre de menu"
     },
     "window": {
-      "window": "Fenêtre"
+      "window": "Fenêtre",
+      "minimize": "Minimiser",
+      "close": "Fermer",
+      "zoom": "Zoom",
+      "front": "Mettre en avant"
     },
     "help": {
       "help": "Aide",
@@ -54,10 +71,10 @@
     "import-from-type": "Depuis l’archive {{name}} (.{{extension}})",
     "archive-remove-with-name": "Retirer {{name}}",
     "open": "Ouvrir",
-    "lock": "Lock"
+    "lock": "Verrouiller"
   },
   "cloud-source": {
-    "cancel": "Annule",
+    "cancel": "Annuler",
     "go-back": "Retour en arrière",
     "open-in-buttercup": "Ouvrir dans Buttercup",
     "connect-to-dropbox": "Connexion à Dropbox",
@@ -95,7 +112,7 @@
     "new-field": "Nouveau champ",
     "edit": "Éditer",
     "save": "Enregistrer",
-    "cancel": "Annule",
+    "cancel": "Annuler",
     "delete": "Supprimer"
   },
   "entry-menu": {
@@ -116,9 +133,9 @@
     "sort-definition-not-found": "Le critère de tri n'existe pas",
     "insufficient-data-provided": "Pas assez d’informations pour lancer le tri",
     "check-for-update": "Vérification de la mise à jour",
-    "invalid-import-type-requested": "Invalid import type requested",
-    "open-file-for-importing": "Import function should not be running without the main window running.",
-    "entry-not-found": "Entry has not been found",
+    "invalid-import-type-requested": "Le type d'importation est invalide",
+    "open-file-for-importing": "Le fenêtre principale doit être ouverte pour pouvoir importer.",
+    "entry-not-found": "L'entrée n'a pas été trouvé",
     "dropbox-connection-failed-info": "Échec de la connexion au serveur Dropbox. Veuillez réessayer ultérieurement",
     "webdav-connection-failed-info": "La connexion à {{endpoint}} a échoué. Veuillez vérifier vos identifiants et essayer à nouveau."
   },
