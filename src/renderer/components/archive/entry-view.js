@@ -11,13 +11,15 @@ import bubbleImage from '../../styles/img/info-bubble.svg';
 import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
 import Copyable from './copyable';
+import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
 
 const EntryView = ({ entry, t }) => (
   <div>
+    <EntryIcon icon={entry.icon} big />
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className={labelWrapper}>{t(key)}</div>
+        <div className={labelWrapper}>{t(`entry.${key}`)}</div>
         <Wrapper>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </Wrapper>
