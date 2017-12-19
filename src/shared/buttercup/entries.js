@@ -1,6 +1,6 @@
 import { saveWorkspace, getArchive } from './archive';
-import i18n from '../i18n';
 import log from 'electron-log';
+import i18n from '../i18n';
 import iconographer from '../../main/lib/icon/iconographer';
 
 function entryToObj(entry) {
@@ -176,9 +176,9 @@ async function processIcon(entry) {
 
 async function getIcon(entry) {
   try {
-    const buffer = await iconographer.getIconForEntry(entry);
-    if (buffer) {
-      return `data:image/png;base64,${buffer.toString('base64')}`;
+    const iconContents = await iconographer.getIconForEntry(entry);
+    if (iconContents) {
+      return iconContents.toString();
     }
   } catch (err) {
     log.error('Unable to get icon for entry', err);

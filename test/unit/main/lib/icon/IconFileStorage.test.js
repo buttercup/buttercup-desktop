@@ -20,28 +20,6 @@ test('encode and decode icon', async t => {
   t.is(decoded, buffer);
 });
 
-test('get icon keys', async t => {
-  const dir = await createTmpDir();
-  const storage = new IconFileStorage(dir);
-
-  // There shouldn't be any extension so the name is taken as the whole key
-  await fs.writeFile(path.join(dir, 'foo.bar'), 'irrelevant');
-  await fs.writeFile(path.join(dir, 'bar'), 'irrelevant');
-  await fs.writeFile(path.join(dir, 'baz'), 'irrelevant');
-
-  const keys = await storage.getIconKeys();
-  keys.sort();
-  t.deepEqual(keys, ['bar', 'baz', 'foo.bar']);
-});
-
-test('get icon keys, empty results', async t => {
-  const dir = await createTmpDir();
-  const storage = new IconFileStorage(dir);
-
-  const keys = await storage.getIconKeys();
-  t.deepEqual(keys, []);
-});
-
 test('store, retrieve and delete icon', async t => {
   const dir = await createTmpDir();
   const storagePath = path.join(dir, 'icons');
@@ -108,9 +86,6 @@ test('creates dir if does not exist', async t => {
   const storagePath = path.join(dir, 'foo', 'bar');
   const storage = new IconFileStorage(storagePath);
 
-  const keys = await storage.getIconKeys();
-  t.deepEqual(keys, []);
-
   // We check that the dir exists and it's writable
   const filePath = path.join(storagePath, 'baz');
   await fs.writeFile(filePath, 'I am file content');
@@ -120,7 +95,7 @@ test('creates dir if does not exist', async t => {
   await fs.rmdir(storagePath);
 
   // Should create it automatically again (and be writable)
-  await storage.getIconKeys();
+  await storage.storeIcon('https://google.com', '(fake)');
   await fs.writeFile(path.join(storagePath, 'baz'), 'I am file content');
 });
 
