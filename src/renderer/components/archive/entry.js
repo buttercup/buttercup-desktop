@@ -40,6 +40,7 @@ class Entry extends Component {
     return {
       content: (
         <EntryForm
+          icon={this.props.entry.icon}
           ref={form => {
             ref = form;
           }}

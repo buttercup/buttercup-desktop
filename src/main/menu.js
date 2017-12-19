@@ -13,6 +13,9 @@ import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
+import electronContextMenu from 'electron-context-menu';
+
+electronContextMenu();
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
