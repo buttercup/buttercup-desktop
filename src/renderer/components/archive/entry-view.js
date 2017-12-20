@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { translate } from 'react-i18next';
+import styled from 'styled-components';
 import {
   formRow,
   metaWrapper,
@@ -14,13 +15,41 @@ import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
 
+export const LabelWrapper = styled.label`
+  flex: 0 0 130px;
+  min-height: var(--form-input-height);
+  border-right: 1px solid var(--black-10);
+  margin-right: var(--spacing-half);
+  padding-right: var(--spacing-one);
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  input {
+    width: 100%;
+    border: none;
+    text-align: right;
+  }
+`;
+
 const EntryView = ({ entry, t }) => (
   <div>
-    <EntryIcon icon={entry.icon} big />
     {['title', 'username', 'password'].map(key => (
       <div className={formRow} key={key}>
-        <div className={labelWrapper}>{t(`entry.${key}`)}</div>
-        <Wrapper>
+        <LabelWrapper>
+          <Choose>
+            <When condition={key === 'title'}>
+              <EntryIcon icon={entry.icon} big />
+            </When>
+            <Otherwise>{t(`entry.${key}`)}</Otherwise>
+          </Choose>
+        </LabelWrapper>
+        <Wrapper isTitle={key === 'title'}>
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </Wrapper>
       </div>

@@ -43,7 +43,7 @@ const Content = styled.div`
   flex: 1;
   word-break: break-all;
   padding: 8px 0 6px;
-  font-size: 0.95rem;
+  /*font-size: 0.95rem;*/
 `;
 
 class Copyable extends Component {

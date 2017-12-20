@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
   min-height: $form-input-height;
   margin-right: $spacing-half;
   position: relative;
+
+  font-size: ${props => (props.isTitle ? '1.8rem' : '14px')};
+  font-weight: ${props => (props.isTitle ? 300 : 400)};
 `;
 
 const PasswordInput = styled(BaseInput)`

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import defaultIcon from '../../styles/img/ic-lock-48px.svg';
 
 const EntryIcon = styled.div`
-  height: ${props => (props.big ? '50px' : '30px')};
-  width: ${props => (props.big ? '50px' : '30px')};
+  height: ${props => (props.big ? '45px' : '30px')};
+  width: ${props => (props.big ? '45px' : '30px')};
 
   border-radius: 5%;
   background-color: white;

@@ -9,6 +9,7 @@ import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
+import { LabelWrapper } from './entry-view';
 
 const renderMeta = (
   { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
@@ -60,11 +61,10 @@ class EntryForm extends Component {
     const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <EntryIcon icon={icon} big />
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.title">
-            <Translate i18nKey="entry.title" parent="span" />
-          </label>
+          <LabelWrapper htmlFor="properties.title">
+            <EntryIcon icon={icon} big />
+          </LabelWrapper>
           <Field
             name="properties.title"
             component={Input}
