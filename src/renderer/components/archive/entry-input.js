@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Flex).attrs({
+  align: 'center'
+})`
   flex: 1;
-  min-height: $form-input-height;
-  margin-right: $spacing-half;
+  min-height: var(--form-input-height);
+  margin-right: var(--spacing-half);
   position: relative;
 
   font-size: ${props => (props.isTitle ? '1.8rem' : '14px')};
@@ -18,6 +21,12 @@ const PasswordInput = styled(BaseInput)`
   padding-right: 2.2rem;
   font-size: 14px;
   font-family: Anonymous;
+`;
+
+const TitleInput = styled(BaseInput)`
+  font-weight: 300;
+  font-size: 1.8rem;
+  height: auto;
 `;
 
 const GeneratorToggle = styled.div`
@@ -63,18 +72,24 @@ export default class Input extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { type, input, placeholder, meta } = this.props;
+    const { name, value } = input;
+    const commonProps = {
+      ...input,
+      id: name,
+      type: 'text',
+      placeholder
+    };
     return (
       <Wrapper>
         <Choose>
           <When condition={type === 'password'}>
             <PasswordInput
-              {...input}
-              id={name}
+              {...commonProps}
               type={
                 meta.active || this.state.isGeneratorOpen ? 'text' : 'password'
               }
-              placeholder={placeholder}
             />
             <Generator
               onGenerate={pwd => this.receivePassword(pwd)}
@@ -85,15 +100,13 @@ export default class Input extends Component {
                 <MagicIcon onClick={() => this.handleGeneratorToggle()} />
               </GeneratorToggle>
             </Generator>
-            <Meter input={input.value} />
+            <Meter input={value} />
+          </When>
+          <When condition={name === 'properties.title'}>
+            <TitleInput {...commonProps} />
           </When>
           <Otherwise>
-            <BaseInput
-              {...input}
-              id={name}
-              type="text"
-              placeholder={placeholder}
-            />
+            <BaseInput {...commonProps} />
           </Otherwise>
         </Choose>
       </Wrapper>
