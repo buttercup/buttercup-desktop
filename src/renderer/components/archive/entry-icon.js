@@ -1,20 +1,29 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import defaultIcon from '../../styles/img/ic-lock-48px.svg';
+import defaultIcon from '../../styles/img/no-icon.svg';
 
-const EntryIcon = styled.div`
-  height: ${props => (props.big ? '45px' : '30px')};
-  width: ${props => (props.big ? '45px' : '30px')};
+const IconWrapper = styled.div`
+  height: ${props => (props.big ? '45px' : '32px')};
+  width: ${props => (props.big ? '45px' : '32px')};
 
-  border-radius: 5%;
-  background-color: white;
-  border: 3px solid white;
+  border-radius: 3px;
+  background-color: #fff;
+  padding: 2px;
 
-  background-image: ${props => `url(${props.icon ? props.icon : defaultIcon})`};
-  background-size: 99%;
-  background-repeat: no-repeat;
-  background-position: center;
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 2px;
+  }
 `;
+
+const EntryIcon = ({ icon, big }) => (
+  <IconWrapper big={big}>
+    <img src={icon || defaultIcon} />
+  </IconWrapper>
+);
 
 EntryIcon.propTypes = {
   big: PropTypes.bool,
