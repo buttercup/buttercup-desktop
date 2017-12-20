@@ -77,7 +77,6 @@ export default class Input extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { type, input, placeholder, meta } = this.props;
     const { name, value } = input;
     const commonProps = {

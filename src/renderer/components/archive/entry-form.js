@@ -6,10 +6,10 @@ import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
-import styles from '../../styles/entry-form';
+import { heading } from '../../styles/_common';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
-import { LabelWrapper, MetaWrapper } from './entry-view';
+import { LabelWrapper, MetaWrapper, Row } from './entry-view';
 
 const renderMeta = (
   { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
@@ -17,7 +17,7 @@ const renderMeta = (
   <div>
     <MetaWrapper>
       {fields.map((member, index) => (
-        <div className={styles.formRow} key={index}>
+        <Row key={index}>
           <LabelWrapper>
             <Field
               name={`${member}.key`}
@@ -33,7 +33,7 @@ const renderMeta = (
             placeholder={t('entry.new-field')}
           />
           <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
-        </div>
+        </Row>
       ))}
     </MetaWrapper>
     <Button
@@ -61,7 +61,7 @@ class EntryForm extends Component {
     const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <div className={styles.formRow}>
+        <Row>
           <LabelWrapper htmlFor="properties.title">
             <EntryIcon icon={icon} big />
           </LabelWrapper>
@@ -71,8 +71,8 @@ class EntryForm extends Component {
             type="text"
             placeholder={t('entry.untitled')}
           />
-        </div>
-        <div className={styles.formRow}>
+        </Row>
+        <Row>
           <LabelWrapper htmlFor="properties.username">
             <Translate i18nKey="entry.username" parent="span" />
           </LabelWrapper>
@@ -82,8 +82,8 @@ class EntryForm extends Component {
             type="text"
             placeholder={'@' + t('entry.username') + '...'}
           />
-        </div>
-        <div className={styles.formRow}>
+        </Row>
+        <Row>
           <LabelWrapper htmlFor="properties.password">
             <Translate i18nKey="entry.password" parent="span" />
           </LabelWrapper>
@@ -93,8 +93,8 @@ class EntryForm extends Component {
             type="password"
             placeholder={t('entry.secure-password') + '...'}
           />
-        </div>
-        <h6 className={styles.heading}>
+        </Row>
+        <h6 className={heading}>
           {' '}
           <Translate i18nKey="entry.custom-fields" parent="span" />:
         </h6>
