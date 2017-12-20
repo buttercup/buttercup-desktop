@@ -2,12 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
-import {
-  formRow,
-  metaWrapper,
-  heading,
-  labelWrapper
-} from '../../styles/entry-form';
+import { formRow, heading } from '../../styles/entry-form';
 import bubbleImage from '../../styles/img/info-bubble.svg';
 import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
@@ -37,6 +32,10 @@ export const LabelWrapper = styled.label`
   }
 `;
 
+export const MetaWrapper = styled.div`
+  margin-bottom: var(--spacing-one);
+`;
+
 const EntryView = ({ entry, t }) => (
   <div>
     {['title', 'username', 'password'].map(key => (
@@ -58,18 +57,18 @@ const EntryView = ({ entry, t }) => (
       <Translate i18nKey="entry.custom-fields" parent="span" />:
     </h6>
     {entry.meta.length > 0 ? (
-      <div className={metaWrapper}>
+      <MetaWrapper>
         {entry.meta.map(meta => (
           <If condition={Object.keys(meta).length > 0}>
             <div className={formRow} key={meta.key}>
-              <div className={labelWrapper}>{meta.key}</div>
+              <LabelWrapper>{meta.key}</LabelWrapper>
               <Wrapper>
                 <Copyable>{meta.value}</Copyable>
               </Wrapper>
             </div>
           </If>
         ))}
-      </div>
+      </MetaWrapper>
     ) : (
       <EmptyView
         caption={t('entry.no-custom-fields-info-text')}

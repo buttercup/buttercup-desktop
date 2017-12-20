@@ -9,23 +9,23 @@ import { Button } from '@buttercup/ui';
 import styles from '../../styles/entry-form';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
-import { LabelWrapper } from './entry-view';
+import { LabelWrapper, MetaWrapper } from './entry-view';
 
 const renderMeta = (
   { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
   <div>
-    <div className={styles.metaWrapper}>
+    <MetaWrapper>
       {fields.map((member, index) => (
         <div className={styles.formRow} key={index}>
-          <div className={styles.labelWrapper}>
+          <LabelWrapper>
             <Field
               name={`${member}.key`}
               type="text"
               component="input"
               placeholder={t('entry.label')}
             />
-          </div>
+          </LabelWrapper>
           <Field
             name={`${member}.value`}
             type="text"
@@ -35,7 +35,7 @@ const renderMeta = (
           <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
         </div>
       ))}
-    </div>
+    </MetaWrapper>
     <Button
       onClick={e => {
         fields.push({});
@@ -73,9 +73,9 @@ class EntryForm extends Component {
           />
         </div>
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.username">
+          <LabelWrapper htmlFor="properties.username">
             <Translate i18nKey="entry.username" parent="span" />
-          </label>
+          </LabelWrapper>
           <Field
             name="properties.username"
             component={Input}
@@ -84,9 +84,9 @@ class EntryForm extends Component {
           />
         </div>
         <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.password">
+          <LabelWrapper htmlFor="properties.password">
             <Translate i18nKey="entry.password" parent="span" />
-          </label>
+          </LabelWrapper>
           <Field
             name="properties.password"
             component={Input}

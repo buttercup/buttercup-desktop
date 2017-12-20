@@ -17,6 +17,11 @@ export const Wrapper = styled(Flex).attrs({
   font-weight: ${props => (props.isTitle ? 300 : 400)};
 `;
 
+const PasswordWrapper = styled.div`
+  flex: 1;
+  position: relative;
+`;
+
 const PasswordInput = styled(BaseInput)`
   padding-right: 2.2rem;
   font-size: 14px;
@@ -85,22 +90,26 @@ export default class Input extends Component {
       <Wrapper>
         <Choose>
           <When condition={type === 'password'}>
-            <PasswordInput
-              {...commonProps}
-              type={
-                meta.active || this.state.isGeneratorOpen ? 'text' : 'password'
-              }
-            />
-            <Generator
-              onGenerate={pwd => this.receivePassword(pwd)}
-              isOpen={this.state.isGeneratorOpen}
-              preferPlace="below"
-            >
-              <GeneratorToggle active={this.state.isGeneratorOpen}>
-                <MagicIcon onClick={() => this.handleGeneratorToggle()} />
-              </GeneratorToggle>
-            </Generator>
-            <Meter input={value} />
+            <PasswordWrapper>
+              <PasswordInput
+                {...commonProps}
+                type={
+                  meta.active || this.state.isGeneratorOpen
+                    ? 'text'
+                    : 'password'
+                }
+              />
+              <Generator
+                onGenerate={pwd => this.receivePassword(pwd)}
+                isOpen={this.state.isGeneratorOpen}
+                preferPlace="below"
+              >
+                <GeneratorToggle active={this.state.isGeneratorOpen}>
+                  <MagicIcon onClick={() => this.handleGeneratorToggle()} />
+                </GeneratorToggle>
+              </Generator>
+              <Meter input={value} />
+            </PasswordWrapper>
           </When>
           <When condition={name === 'properties.title'}>
             <TitleInput {...commonProps} />
