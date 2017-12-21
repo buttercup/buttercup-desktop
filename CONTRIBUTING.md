@@ -36,7 +36,7 @@ We've written tests and you can run them to assure the stability of the code, ju
 
 Every chunk of code that may be hard to understand has some comments above it. If you write some new code or change some part of the existing code in a way that it would not be functional without changing it's usages, it needs to be documented.
 
-### Internationlization / Translations
+### Internationalization / Translations
 
 Translations are very valuable as they make Buttercup accessible to large amounts of people with every submission. They are a little trickier to merge, however, due to the fact that we most likely do not speak the language you're submitting and will need to have it verified by a 3rd party before publishing it.
 
