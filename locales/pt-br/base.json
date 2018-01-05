@@ -1,0 +1,208 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Sobre",
+      "check-for-updates": "Verificar novas Atualizações",
+      "services": "Serviços",
+      "hide": "Esconder",
+      "hideothers": "Esconder outros",
+      "unhide": "Mostrar",
+      "quit": "Sair"
+    },
+    "archive": {
+      "archive": "Arquivos",
+      "file": "Arquivo",
+      "new": "Novo Arquivo",
+      "open": "Abrir Arquivo",
+      "connect-cloud-sources": "Conectar a Serviços de Nuvem",
+      "import": {
+        "import": "Importar",
+        "import-from-type": "De {{name}} arquivo (.{{extension}})",
+        "import-to-type": "Para {{name}}",
+        "no-available-archives": "Não existem arquivos disponíveis para importar"
+      },
+      "close": "Fechar"
+    },
+    "edit": {
+      "edit": "Editar",
+      "undo": "Desfazer",
+      "redo": "Refazer",
+      "cut": "Cortar",
+      "copy": "Copiar",
+      "paste": "Colar",
+      "pasteandmatchstyle": "Colar e manter estilo",
+      "delete": "Deletar",
+      "selectall": "Selecionar todos",
+      "speech": {
+        "speech": "Falar",
+        "startspeaking": "Começar a fala",
+        "stopspeaking": "Parar a fala"
+      }
+    },
+    "view": {
+      "view": "Visualização",
+      "condensed-sidebar": "Barra Lateral Condensada",
+      "language": "Idioma",
+      "reload": "Recarregar",
+      "forcereload": "Recarregamento Forçado",
+      "toggledevtools": "Abrir dev-tools",
+      "togglefullscreen": "Tela cheia",
+      "auto-hide-menubar": "Esconder Automaticamnete a barra de menu"
+    },
+    "window": {
+      "window": "Janela",
+      "minimize": "Minimizar",
+      "close": "Fechar",
+      "zoom": "Zoom",
+      "front": "Trazer tudo à frente"
+    },
+    "help": {
+      "help": "Ajuda",
+      "visit-our-website": "Visite nosso Site",
+      "privacy-policy": "Políticas de Privacidade",
+      "view-changelog-for-v": "Ver o Changelog da v{{version}}"
+    }
+  },
+  "archive": {
+    "add-archive": "Adicionar Arquivo",
+    "archive-saved-loading-info": "Seu arquivo está sendo salvo.<br>Saindo automáticamente"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Arquivos do Buttercup",
+    "load-a-buttercup-archive": "Carregar um Arquivo Buttercup",
+    "create-a-new-buttercup-archive": "Criar um novo Arquivo Buttercup"
+  },
+  "archive-menu": {
+    "unlock": "Desbloquear",
+    "change-color": "Alterar a Cor",
+    "import": "Importar",
+    "import-from-type": "De {{name}} arquivo (.{{extension}})",
+    "archive-remove-with-name": "Remover {{name}}",
+    "open": "Abrir",
+    "lock": "Bloquear"
+  },
+  "cloud-source": {
+    "cancel": "Cancelar",
+    "go-back": "Voltar",
+    "new-archive": "Novo Arquivo",
+    "open-in-buttercup": "Abrir no Buttercup",
+    "connect-to-dropbox": "Conectar ao Dropbox",
+    "authenticate-with-dropbox": "Autenticado com Dropbox",
+    "dropbox-description-text": "Conecte o Buttercup a sua conta Dropbox para ler e salvar seus arquivos.<br />Nós não salvamos seu nome de usuário nem senha do Dropbox.",
+    "connect-to-wedav": "Conectar ao {{title}} Server",
+    "username": "Nome de Usuário",
+    "password": "Senha",
+    "connect": "Conectar",
+    "webdav-description-text": "Entre com seu {{title}} endereço Endpoint, Nome de Usuário e Senha para conectar e escolher um arquivo Buttercup. Nós <strong>vamos salvar</strong> suas credenciais e codificá-las.",
+    "name": "Nome",
+    "size": "Tamanho",
+    "date": "Data"
+  },
+  "confirm-dialog": {
+    "yes": "Sim",
+    "no": "Não"
+  },
+  "copyable": {
+    "hide": "Esconder",
+    "reveal": "Revelar",
+    "copy": "Copiar"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Copiar para Área de Transferência",
+    "reveal-password": "Revelar Senha"
+  },
+  "entry": {
+    "add-entry": "Adicionar Entrada",
+    "select-or-create-an-entry": "Selecionar ou Criar uma Entrada",
+    "title": "Título",
+    "untitled": "Sem Título",
+    "username": "Nome de Usuário",
+    "password": "Senha",
+    "secure-password": "Senha Segura",
+    "custom-fields": "Campos Customizado",
+    "no-custom-fields-info-text": "Nenhum campo customizado ainda. Por quê adicionar um?",
+    "add-new-field": "Adicionar novo Campo",
+    "label": "Etiqueta",
+    "new-field": "Novo Campo",
+    "edit": "Editar",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "delete": "Deletar",
+    "entry-inputs-empty-info": "Por favor, adicione ao menos um título.",
+    "entry-title-empty-info": "Entre com o título, por favor.",
+    "custom-fields-label-empty-info": "Você se esqueceu de adicionar uma etiqueta a um campo customizado",
+    "are-you-sure-question": "Você tem certeza?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Copiado para a Área de Transferência",
+    "username": "Nome de Usuário",
+    "password": "Senha",
+    "open-url-in-browser": "Abrir a URL no Navegador",
+    "move-to-group": "Mover para o Grupo",
+    "move-to-trash": "Mover para a Lixeira",
+    "delete-permanently": "Deletar Permanentemente"
+  },
+  "error": {
+    "archive-not-found": "O arquivo de origem não foi encontrado",
+    "authentication-failed": "Falha na Autenticação",
+    "unknown": "Um erro desconhecido aconteceu.",
+    "passwords-dont-match": "Suas senhas não são idênticas.",
+    "group-not-found": "Grupo não encontrado.",
+    "sort-definition-not-found": "Definição de Classificação não encontrada",
+    "insufficient-data-provided": "Dados insuficientes para a classificação",
+    "check-for-update": "Erro na Verificação de Atualização",
+    "invalid-import-type-requested": "Requisição de um tipo invalido para importar",
+    "open-file-for-importing": "A função de importação não deve ser executada sem a janela principal em execução.",
+    "entry-not-found": "Entrada não encontrada",
+    "dropbox-connection-failed-info": "Conexão com o server do Dropbox falhou. Por favor, tente novamente mais tarde",
+    "webdav-connection-failed-info": "Conexão com {{endpoint}} falhou. Por favor, verifique as credenciais e tente novamente."
+  },
+  "group": {
+    "new-group": "Novo Grupo",
+    "untitled": "Sem Título"
+  },
+  "group-menu": {
+    "new-group": "Novo Grupo",
+    "add-group": "Adicionar Grupo",
+    "move-to-root": "Mover para a raiz",
+    "move-to-group": "Mover para o grupo",
+    "rename": "Renomear",
+    "delete": "Deletar",
+    "move-to-group-custom": "Mover para {{title}}",
+    "empty-trash": "Esvaziar a Lixeira",
+    "empty-trash-question": "Você tem certeza em esvaziar a lixeira?",
+    "title-asc": "Título: Ascendente",
+    "title-desc": "Título: Descendente"
+  },
+  "intro": {
+    "welcome-title": "Bem-vindo ao Buttercup",
+    "welcome-back-title": "Bem-vindo de volta ao Buttercup.",
+    "welcome-caption": "Você não adicionou muitos arquivos ainda. Que tal adicionar algum?",
+    "unlock-archive": "Desbloqueie um arquivo para começar ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Abrir um arquivo",
+    "new-archive-file": "Novo arquivo",
+    "connect-cloud-sources": "Conectar a Serviços de Nuvem"
+  },
+  "password-dialog": {
+    "master-password": "Senha Mestra",
+    "password": "Senha",
+    "confirm-password": "Confirmar a Senha",
+    "confirm": "Confirmar",
+    "nevermind": "Esquecer"
+  },
+  "search": {
+    "search": "Buscar"
+  },
+  "sort": {
+    "title-asc": "Título: Ascendente",
+    "title-desc": "Título: Descendente",
+    "time-asc": "Tempo: Ascendente",
+    "time-desc": "Tempo: Descendente"
+  },
+  "update": {
+    "installing": "Instalando",
+    "update-available-message": "Buttercup {{version}} está disponível. Clique aqui para instalar agora."
+  }
+}
