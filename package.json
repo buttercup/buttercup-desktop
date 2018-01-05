@@ -66,6 +66,7 @@
     },
     "linux": {
       "target": [
+        "snap",
         "rpm",
         "AppImage",
         "deb"
@@ -171,7 +172,7 @@
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
     "electron": "^1.7.9",
-    "electron-builder": "^19.45.5",
+    "electron-builder": "^19.53.0",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.0",
     "electron-installer-dmg": "^0.1.2",
