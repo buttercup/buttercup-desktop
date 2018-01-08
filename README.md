@@ -18,7 +18,7 @@ Buttercup is a **password manager** - an assistant for helping you store all of 
 
 This is the Desktop application in the Buttercup suite, and there's also a [mobile app](https://github.com/buttercup/buttercup-mobile) and [browser extension](https://github.com/buttercup/buttercup-browser-extension) so that you can access your credentials anywhere. You store your credentials (login information) in a secure archive, which can then be stored on your own computer or any of our supported **cloud services** (like Dropbox, for example).
 
-Archives are encrypted using the AES specification, and can not be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
+Archives are encrypted using the AES specification, and cannot be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
 
 ### Why you need software like Buttercup
 Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these with 1 or 2 passwords. Why? If an attacker gains access to one of the systems you have an account with, your password there may be easily stolen - if an attacker gets this it's highly likely they will try to log in to other accounts you have with the same password. If you're using the same password on more than one site, you risk having several accounts stolen if any one of them is breached.
@@ -42,7 +42,7 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
 
 ## Encryption & Format
 
