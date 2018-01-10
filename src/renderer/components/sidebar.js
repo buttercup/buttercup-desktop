@@ -37,6 +37,7 @@ class RecentFiles extends Component {
     onArchiveUpdate: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
+    onChangePassword: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
   };
 
@@ -64,6 +65,7 @@ class RecentFiles extends Component {
               index={i}
               condenced={condenced}
               onLockArchive={() => this.props.onLockArchive(archive.id)}
+              onChangePassword={() => this.props.onChangePassword(archive.id)}
               onArchiveUpdate={this.props.onArchiveUpdate}
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
