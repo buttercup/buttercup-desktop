@@ -41,7 +41,7 @@ i18n.init({
   contextSeparator: '-',
   debug: false,
   saveMissingTo: 'all',
-  saveMissing: true,
+  saveMissing: false,
   returnEmptyString: false
 });
 
