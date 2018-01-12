@@ -1,5 +1,5 @@
 import test from 'ava';
-import { sortByKey } from '../collection';
+import { sortByKey } from '../../src/shared/utils/collection';
 
 test('sortByKey should do nothing when sortKey is invalid', t => {
   const unsortedInput = [{ name: 'Yellow' }, { name: 'Blue' }, { name: 'Red' }];

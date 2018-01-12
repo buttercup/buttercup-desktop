@@ -8,7 +8,9 @@
     "clean": "rimraf ./app/node_modules",
     "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
-    "test": "cross-env NODE_ENV=test ava && npm run lint",
+    "test": "npm run test:unit && npm run test:gui && npm run lint",
+    "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
+    "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
@@ -95,8 +97,7 @@
   ],
   "ava": {
     "files": [
-      "test/**/*.js",
-      "**/test/**/*.js"
+      "test/**/*.js"
     ],
     "source": [
       "src/**/*.{js,jsx}"
