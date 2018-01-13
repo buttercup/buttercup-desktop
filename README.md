@@ -127,7 +127,7 @@ $ npm run package:linux
 ### Contributions
 
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
-<a href="graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
+<a href="https://github.com/buttercup/buttercup-desktop/graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
 
 We'd also like to thank:
 
