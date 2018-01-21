@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { isString } from 'lodash';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -24,7 +24,7 @@ const Column = styled(BaseColumn)`
   padding-top: var(--spacing-one);
 `;
 
-class TreeView extends Component {
+class TreeView extends PureComponent {
   static propTypes = {
     expandedKeys: PropTypes.array,
     selectedKeys: PropTypes.array,

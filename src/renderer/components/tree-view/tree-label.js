@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
@@ -10,7 +10,7 @@ const Node = styled.div`
   overflow: hidden;
 `;
 
-class TreeLabel extends Component {
+class TreeLabel extends PureComponent {
   static propTypes = {
     node: PropTypes.object.isRequired,
     onDismissClick: PropTypes.func,
