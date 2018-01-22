@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
@@ -35,7 +35,7 @@ const GeneratorToggle = styled.div`
   }
 `;
 
-export default class Input extends Component {
+export default class Input extends PureComponent {
   static propTypes = {
     type: PropTypes.string,
     placeholder: PropTypes.string,

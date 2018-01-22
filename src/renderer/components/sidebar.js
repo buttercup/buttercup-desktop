@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { isOSX, isHighSierra } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
@@ -28,7 +28,7 @@ const ArchiveList = styled.ul`
   padding: 0;
 `;
 
-class RecentFiles extends Component {
+class RecentFiles extends PureComponent {
   static propTypes = {
     condenced: PropTypes.bool.isRequired,
     archives: PropTypes.array.isRequired,

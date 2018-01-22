@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
@@ -98,7 +98,7 @@ const PickerWrapper = styled.div`
   left: ${props => props.left + 5}px;
 `;
 
-class SidebarItem extends Component {
+class SidebarItem extends PureComponent {
   static propTypes = {
     archive: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,

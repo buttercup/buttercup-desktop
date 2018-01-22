@@ -1,6 +1,6 @@
 import path from 'path';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Input } from '@buttercup/ui';
 import { Cell } from 'fixed-data-table-2';
 import humanize from 'humanize';
@@ -16,7 +16,7 @@ const propTypes = {
   className: PropTypes.any
 };
 
-class NewFileInput extends Component {
+class NewFileInput extends PureComponent {
   state = {
     name: ''
   };

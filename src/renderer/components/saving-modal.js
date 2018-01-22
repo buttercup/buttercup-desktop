@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
@@ -26,7 +26,7 @@ const SavingDialogText = styled.div`
   }
 `;
 
-class SavingModal extends Component {
+class SavingModal extends PureComponent {
   state = {
     isSaving: false
   };
