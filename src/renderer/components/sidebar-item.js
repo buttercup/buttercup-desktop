@@ -139,7 +139,7 @@ class SidebarItem extends Component {
               click: this.props.onLockArchive
             },
             {
-              label: 'Change Password',
+              label: label('change-password'),
               click: this.props.onChangePassword
             }
           ]

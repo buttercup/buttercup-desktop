@@ -75,6 +75,7 @@
   "archive-menu": {
     "unlock": "Unlock",
     "change-color": "Change Color",
+    "change-password": "Change Password",
     "import": "Import",
     "import-from-type": "From {{name}} archive (.{{extension}})",
     "archive-remove-with-name": "Remove {{name}}",
