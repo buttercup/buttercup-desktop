@@ -53,7 +53,7 @@ export const changeArchivePassword = payload => () => {
   showConfirmedPasswordDialog(
     undefined,
     {
-      title: 'New Password'
+      title: i18n.t('password-dialog.new-password')
     },
     {
       title: i18n.t('password-dialog.confirm-password')

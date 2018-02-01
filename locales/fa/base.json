@@ -188,6 +188,7 @@
   },
   "password-dialog": {
     "master-password": "رمز عبور اصلی",
+    "new-password": "رمز عبور جدید",
     "password": "رمز عبور",
     "confirm-password": "تایید رمز عبور",
     "confirm": "تایید",
