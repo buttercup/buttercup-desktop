@@ -4,10 +4,12 @@ import { ipcRenderer as ipc } from 'electron';
 export function enqueue(channelName, fn, stack) {
   const id = uuid.v4();
 
-  ipc.once(`channel:execute:${id}`, () => {
+  ipc.once(`channel:execute:${id}`, async () => {
     const output = fn();
-    const result = output instanceof Promise ? output : Promise.resolve(output);
-    result.then(() => ipc.send(`channel:resolve:${id}`));
+    if (output instanceof Promise) {
+      await output;
+    }
+    ipc.send(`channel:resolve:${id}`);
   });
 
   ipc.send('channel:enqueue', {

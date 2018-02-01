@@ -105,12 +105,9 @@ export function saveWorkspace(archiveId) {
 
 export function updateArchivePassword(archiveId, newPassword) {
   const manager = getSharedArchiveManager();
-  const sourceIndex = manager.indexOfSource(archiveId);
-  const { workspace } = manager.sources[sourceIndex];
   const passwordCredentials = createCredentials.fromPassword(newPassword);
 
   enqueue('saves', () => {
-    workspace.updatePrimaryCredentials(passwordCredentials);
-    return workspace.save();
+    return manager.updateArchiveCredentials(archiveId, passwordCredentials);
   });
 }
