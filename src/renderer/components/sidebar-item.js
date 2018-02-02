@@ -106,6 +106,7 @@ class SidebarItem extends PureComponent {
     index: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
+    onChangePassword: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
     onArchiveUpdate: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
@@ -136,6 +137,10 @@ class SidebarItem extends PureComponent {
             {
               label: label('lock'),
               click: this.props.onLockArchive
+            },
+            {
+              label: label('change-password'),
+              click: this.props.onChangePassword
             }
           ]
         : []),

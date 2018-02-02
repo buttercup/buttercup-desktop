@@ -5,7 +5,10 @@ import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
 import { importHistory } from '../buttercup/import';
-import { showPasswordDialog } from '../../renderer/system/dialog';
+import {
+  showPasswordDialog,
+  showConfirmedPasswordDialog
+} from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_ADD,
@@ -20,7 +23,8 @@ import {
   addArchiveToArchiveManager,
   lockArchiveInArchiveManager,
   removeArchiveFromArchiveManager,
-  unlockArchiveInArchiveManager
+  unlockArchiveInArchiveManager,
+  updateArchivePassword
 } from '../buttercup/archive';
 import i18n from '../i18n';
 
@@ -43,6 +47,22 @@ export const loadArchive = payload => (dispatch, getState) => {
 
 export const removeArchive = payload => () => {
   return removeArchiveFromArchiveManager(payload);
+};
+
+export const changeArchivePassword = payload => () => {
+  showConfirmedPasswordDialog(
+    undefined,
+    {
+      title: i18n.t('password-dialog.new-password')
+    },
+    {
+      title: i18n.t('password-dialog.confirm-password')
+    }
+  )
+    .then(password => {
+      updateArchivePassword(payload, password);
+    })
+    .catch(() => {});
 };
 
 export const lockArchive = payload => dispatch => {
@@ -92,22 +112,13 @@ export const addArchive = payload => async (dispatch, getState) => {
   }
 
   // Otherwise show a confirmation too.
-  return showPasswordDialog()
-    .then(firstPassword =>
-      showPasswordDialog(
-        password => {
-          if (firstPassword !== password) {
-            return Promise.reject(
-              new Error(i18n.t('error.passwords-dont-match'))
-            );
-          }
-          return addToArchive(password);
-        },
-        {
-          title: i18n.t('password-dialog.confirm-password')
-        }
-      )
-    )
+  return showConfirmedPasswordDialog(
+    addToArchive,
+    {},
+    {
+      title: i18n.t('password-dialog.confirm-password')
+    }
+  )
     .then(dispatchLoad)
     .catch(() => {});
 };
