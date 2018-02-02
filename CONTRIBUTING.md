@@ -52,7 +52,7 @@ Anyone can file an expense. If the expense makes sense for the development of th
 ### Contributors
 
 Thank you to all the people who have already contributed to buttercup-desktop!
-<a href="graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
+<a href="https://github.com/buttercup/buttercup-desktop/graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
 
 ### Backers
 
