@@ -1,8 +1,8 @@
 import Mousetrap from 'mousetrap';
 import ms from 'ms';
+import { lockArchive } from '../../shared/actions/archives';
 import { getCurrentArchiveId, getCurrentEntry } from '../../shared/selectors';
 import { copyToClipboard, readClipboard } from './utils';
-import { lockArchive } from './../../shared/actions/archives';
 const __cache = {
   timer: null
 };
