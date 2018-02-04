@@ -136,7 +136,7 @@ class SidebarItem extends PureComponent {
         ? [
             {
               label: label('lock'),
-              accelerator: `CmdOrCtrl+l`,
+              accelerator: this.props.active ? 'CmdOrCtrl+l' : null,
               click: this.props.onLockArchive
             },
             {
