@@ -1,8 +1,8 @@
 import Mousetrap from 'mousetrap';
 import ms from 'ms';
-import { getCurrentEntry } from '../../shared/selectors';
+import { lockArchive } from '../../shared/actions/archives';
+import { getCurrentArchiveId, getCurrentEntry } from '../../shared/selectors';
 import { copyToClipboard, readClipboard } from './utils';
-
 const __cache = {
   timer: null
 };
@@ -40,6 +40,16 @@ export const setupShortcuts = store => {
     const currentEntry = getCurrentEntry(store.getState());
     if (currentEntry) {
       copyToClipboard(currentEntry.properties.username);
+    }
+  });
+
+  /**
+   * Lock Current Archive 
+   */
+  Mousetrap.bind('mod+l', () => {
+    const currentArchiveId = getCurrentArchiveId(store.getState());
+    if (currentArchiveId) {
+      store.dispatch(lockArchive(currentArchiveId));
     }
   });
 };
