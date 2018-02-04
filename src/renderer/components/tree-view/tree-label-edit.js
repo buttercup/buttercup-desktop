@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const Input = styled.input`
   color: #222;
 `;
 
-class LabelEditor extends Component {
+class LabelEditor extends PureComponent {
   static propTypes = {
     node: PropTypes.object.isRequired,
     onDismiss: PropTypes.func,

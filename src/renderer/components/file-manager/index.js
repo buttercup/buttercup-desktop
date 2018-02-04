@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Button, ButtonRow } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
@@ -44,7 +44,7 @@ PathRenderer.propTypes = {
   pathName: PropTypes.string
 };
 
-class FileManager extends Component {
+class FileManager extends PureComponent {
   state = {
     selectedConfig: null,
     creatable: false

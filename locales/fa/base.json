@@ -74,7 +74,8 @@
   },
   "archive-menu": {
     "unlock": "رمزگشایی",
-    "change-color": "تغییر رمز عبور",
+    "change-color": "تغییر رنگ",
+    "change-password": "تغییر رمز عبور",
     "import": "درون ریزی",
     "import-from-type": "از آرشیو {{name}} (.{{extension}})",
     "archive-remove-with-name": "حذف {{name}}",
@@ -187,6 +188,7 @@
   },
   "password-dialog": {
     "master-password": "رمز عبور اصلی",
+    "new-password": "رمز عبور جدید",
     "password": "رمز عبور",
     "confirm-password": "تایید رمز عبور",
     "confirm": "تایید",

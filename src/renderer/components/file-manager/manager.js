@@ -1,6 +1,6 @@
 import path from 'path';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import dimensions from 'react-dimensions';
 import { Table, Column, Cell } from 'fixed-data-table-2';
 import { Translate } from '../../../shared/i18n';
@@ -16,7 +16,7 @@ function sortContent(list) {
   return [...folders, ...newFile, ...files];
 }
 
-class Manager extends Component {
+class Manager extends PureComponent {
   static propTypes = {
     containerWidth: PropTypes.number,
     containerHeight: PropTypes.number,

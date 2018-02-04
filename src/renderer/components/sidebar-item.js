@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
@@ -98,7 +98,7 @@ const PickerWrapper = styled.div`
   left: ${props => props.left + 5}px;
 `;
 
-class SidebarItem extends Component {
+class SidebarItem extends PureComponent {
   static propTypes = {
     archive: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
@@ -106,6 +106,7 @@ class SidebarItem extends Component {
     index: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
+    onChangePassword: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
     onArchiveUpdate: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
@@ -135,7 +136,12 @@ class SidebarItem extends Component {
         ? [
             {
               label: label('lock'),
+              accelerator: this.props.active ? 'CmdOrCtrl+l' : null,
               click: this.props.onLockArchive
+            },
+            {
+              label: label('change-password'),
+              click: this.props.onChangePassword
             }
           ]
         : []),

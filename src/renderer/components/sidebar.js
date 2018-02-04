@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { isOSX, isHighSierra } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
@@ -28,7 +28,7 @@ const ArchiveList = styled.ul`
   padding: 0;
 `;
 
-class RecentFiles extends Component {
+class RecentFiles extends PureComponent {
   static propTypes = {
     condenced: PropTypes.bool.isRequired,
     archives: PropTypes.array.isRequired,
@@ -37,6 +37,7 @@ class RecentFiles extends Component {
     onArchiveUpdate: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
+    onChangePassword: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
   };
 
@@ -64,6 +65,7 @@ class RecentFiles extends Component {
               index={i}
               condenced={condenced}
               onLockArchive={() => this.props.onLockArchive(archive.id)}
+              onChangePassword={() => this.props.onChangePassword(archive.id)}
               onArchiveUpdate={this.props.onArchiveUpdate}
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}

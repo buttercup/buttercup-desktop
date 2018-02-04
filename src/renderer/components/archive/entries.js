@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PlusIcon from 'react-icons/lib/md/add';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
@@ -31,7 +31,7 @@ const SearchWrapper = styled.div`
   }
 `;
 
-class Entries extends Component {
+class Entries extends PureComponent {
   static propTypes = {
     filter: PropTypes.string,
     sortMode: PropTypes.string,

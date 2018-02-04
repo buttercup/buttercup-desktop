@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import { translate } from 'react-i18next';
@@ -12,7 +12,7 @@ import EmptyView from '../empty-view';
 import bench from '../../styles/img/bench.svg';
 import EntryView from './entry-view';
 
-class Entry extends Component {
+class Entry extends PureComponent {
   static propTypes = {
     dirty: PropTypes.bool,
     mode: PropTypes.string,

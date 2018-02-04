@@ -9,7 +9,7 @@
 > Cross-platform, free and open-source password manager based on NodeJS.
 
 [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
- [![Github All Releases](https://buttercup-download-count.now.sh/)](https://github.com/buttercup/buttercup-desktop/releases) [![Backers on Open Collective](https://opencollective.com/buttercup/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup/sponsors/badge.svg)](#sponsors) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/buttercup)
+ [![Github All Releases](https://buttercup-download-count.now.sh/?)](https://github.com/buttercup/buttercup-desktop/releases) [![Backers on Open Collective](https://opencollective.com/buttercup/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup/sponsors/badge.svg)](#sponsors) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/buttercup)
 
 ![image](https://user-images.githubusercontent.com/768052/29536730-9db58428-86c7-11e7-9bef-418a8cd14830.png)
 
@@ -18,7 +18,7 @@ Buttercup is a **password manager** - an assistant for helping you store all of 
 
 This is the Desktop application in the Buttercup suite, and there's also a [mobile app](https://github.com/buttercup/buttercup-mobile) and [browser extension](https://github.com/buttercup/buttercup-browser-extension) so that you can access your credentials anywhere. You store your credentials (login information) in a secure archive, which can then be stored on your own computer or any of our supported **cloud services** (like Dropbox, for example).
 
-Archives are encrypted using the AES specification, and can not be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
+Archives are encrypted using the AES specification, and cannot be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
 
 ### Why you need software like Buttercup
 Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these with 1 or 2 passwords. Why? If an attacker gains access to one of the systems you have an account with, your password there may be easily stolen - if an attacker gets this it's highly likely they will try to log in to other accounts you have with the same password. If you're using the same password on more than one site, you risk having several accounts stolen if any one of them is breached.
@@ -42,7 +42,7 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
 
 ## Encryption & Format
 
@@ -127,7 +127,7 @@ $ npm run package:linux
 ### Contributions
 
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
-<a href="graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
+<a href="https://github.com/buttercup/buttercup-desktop/graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
 
 We'd also like to thank:
 

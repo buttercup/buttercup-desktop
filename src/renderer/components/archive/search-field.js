@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { translate } from 'react-i18next';
 import SearchIcon from 'react-icons/lib/md/search';
 import styles from '../../styles/search-field';
 
-class SearchField extends Component {
+class SearchField extends PureComponent {
   static propTypes = {
     onChange: PropTypes.func,
     filter: PropTypes.string,

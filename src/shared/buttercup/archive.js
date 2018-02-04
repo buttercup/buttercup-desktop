@@ -102,3 +102,12 @@ export function saveWorkspace(archiveId) {
       .then(shouldSave => (shouldSave ? workspace.save() : null));
   });
 }
+
+export function updateArchivePassword(archiveId, newPassword) {
+  const manager = getSharedArchiveManager();
+  const passwordCredentials = createCredentials.fromPassword(newPassword);
+
+  enqueue('saves', () => {
+    return manager.updateArchiveCredentials(archiveId, passwordCredentials);
+  });
+}

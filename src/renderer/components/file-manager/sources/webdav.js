@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import url from 'url';
 import InfoIcon from 'react-icons/lib/md/info-outline';
 import { Button, SmallType, Input } from '@buttercup/ui';
@@ -21,7 +21,7 @@ const Form = styled.form`
   }
 `;
 
-class Webdav extends Component {
+class Webdav extends PureComponent {
   static propTypes = {
     onSelect: PropTypes.func,
     toggleCreateButton: PropTypes.func,

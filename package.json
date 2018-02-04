@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "0.25.1",
+  "version": "0.26.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -12,34 +12,37 @@
     "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
     "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
-    "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
-    "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
+    "build:main":
+      "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
+    "build:renderer":
+      "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
     "build": "npm run build:main && npm run build:renderer",
     "prestart": "npm run clean",
-    "start": "concurrently --kill-others \"npm run start:renderer\" \"npm run start:main\"",
+    "start":
+      "concurrently --kill-others \"npm run start:renderer\" \"npm run start:main\"",
     "prestart:renderer": "npm run clean",
-    "start:renderer": "webpack-dev-server --config ./config/webpack.config.development --progress",
+    "start:renderer":
+      "webpack-dev-server --config ./config/webpack.config.development --progress",
     "prestart:main": "npm run clean",
-    "start:main": "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
+    "start:main":
+      "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
     "prerelease": "npm run clean",
-    "release": "npm run build && npm run package",
+    "release": "npm run build && npm run package && npm run package:win",
     "package:linux": "build --linux --x64",
     "package:mac": "build --mac",
-    "package:win": "build --win --x64",
-    "package": "build --mac --linux --win --x64 --ia32 -p always",
+    "package:win": "build --win --x64 --ia32 -p always",
+    "package": "build --mac --linux --x64 -p always",
     "package:current": "build",
     "postinstall": "opencollective postinstall",
-    "i18next-parse-lang": "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
+    "i18next-parse-lang":
+      "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
   },
   "lint-staged": {
-    "{src,config,test,locales}/**/*.{js,json}": [
-      "prettier --write",
-      "git add"
-    ]
+    "{src,config,test,locales}/**/*.{js,json}": ["prettier --write", "git add"]
   },
   "build": {
     "appId": "pw.buttercup.desktop",
-    "copyright": "Copyright © 2015-2017 Buttercup and Contributors",
+    "copyright": "Copyright © 2015-2018 Buttercup and Contributors",
     "mac": {
       "category": "public.app-category.productivity"
     },
@@ -67,11 +70,7 @@
       "perMachine": true
     },
     "linux": {
-      "target": [
-        "rpm",
-        "AppImage",
-        "deb"
-      ],
+      "target": ["snap", "rpm", "AppImage", "deb"],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault"
     },
@@ -88,26 +87,19 @@
     "type": "git",
     "url": "git+https://github.com/buttercup/buttercup-desktop.git"
   },
-  "keywords": [
-    "password",
-    "vault",
-    "manager",
-    "credentials"
-  ],
+  "keywords": ["password", "vault", "manager", "credentials"],
   "ava": {
-    "files": [
-      "test/**/*.js"
-    ],
-    "source": [
-      "src/**/*.{js,jsx}"
-    ],
+    "files": ["test/**/*.js"],
+    "source": ["src/**/*.{js,jsx}"],
     "modules": false,
     "concurrency": 5,
     "failFast": true,
     "powerAssert": true,
-    "require": [
-      "babel-register"
-    ]
+    "require": ["babel-register"],
+    "babel": {
+      "babelrc": true,
+      "plugins": ["transform-es2015-modules-commonjs"]
+    }
   },
   "author": "Buttercup <info@buttercup.pw>",
   "contributors": [
@@ -157,7 +149,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",
-    "buttercup": "~1.1.1",
+    "buttercup": "~1.4.0",
     "buttercup-importer": "~0.9.2",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
@@ -168,7 +160,7 @@
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
     "electron": "^1.7.9",
-    "electron-builder": "^19.45.5",
+    "electron-builder": "^19.56.2",
     "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.0",

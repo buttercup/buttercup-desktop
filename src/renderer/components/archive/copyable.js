@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import CopyIcon from 'react-icons/lib/go/clippy';
@@ -47,7 +47,7 @@ const Content = styled.div`
   /*font-size: 0.95rem;*/
 `;
 
-class Copyable extends Component {
+class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     type: PropTypes.string,

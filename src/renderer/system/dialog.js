@@ -49,3 +49,21 @@ export function showPasswordDialog(preConfirm, options = {}) {
     preConfirm
   });
 }
+
+export function showConfirmedPasswordDialog(
+  preConfirm,
+  firstDialogOptions = {},
+  secondDialogOptions = {}
+) {
+  return showPasswordDialog(undefined, firstDialogOptions).then(firstPassword =>
+    showPasswordDialog(password => {
+      if (firstPassword !== password) {
+        return Promise.reject(new Error(i18n.t('error.passwords-dont-match')));
+      }
+      if (typeof preConfirm === 'function') {
+        return preConfirm(password);
+      }
+      return Promise.resolve();
+    }, secondDialogOptions)
+  );
+}

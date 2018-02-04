@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
@@ -50,7 +50,7 @@ const renderMeta = (
   </div>
 );
 
-class EntryForm extends Component {
+class EntryForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func,
     icon: PropTypes.string,

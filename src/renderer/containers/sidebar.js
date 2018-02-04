@@ -3,6 +3,7 @@ import {
   removeArchive,
   loadOrUnlockArchive,
   lockArchive,
+  changeArchivePassword,
   updateArchive,
   showImportDialog
 } from '../../shared/actions/archives';
@@ -23,6 +24,7 @@ export default connect(
     onRemoveClick: removeArchive,
     onClick: loadOrUnlockArchive,
     onLockArchive: lockArchive,
+    onChangePassword: changeArchivePassword,
     onOpenClick: openArchive,
     onNewClick: newArchive,
     onArchiveUpdate: updateArchive,
