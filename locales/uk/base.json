@@ -1,0 +1,210 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Про Buttercup",
+      "check-for-updates": "Перевірити оновлення...",
+      "services": "Сервіси",
+      "hide": "Сховати",
+      "hideothers": "Сховати інші",
+      "unhide": "Показати",
+      "quit": "Вихід"
+    },
+    "archive": {
+      "archive": "Архів",
+      "file": "Файл",
+      "new": "Новий архів",
+      "open": "Відкрити архів",
+      "connect-cloud-sources": "Підключити хмарний сервіс",
+      "import": {
+        "import": "Імпортувати",
+        "import-from-type": "З {{name}} архіву (.{{extension}})",
+        "import-to-type": "В {{name}}",
+        "no-available-archives": "Доступні архіви для імпорту відсутні."
+      },
+      "close": "Закрити"
+    },
+    "edit": {
+      "edit": "Редагувати",
+      "undo": "Відмінити",
+      "redo": "Повторити",
+      "cut": "Вирізати",
+      "copy": "Копіювати",
+      "paste": "Вставити",
+      "pasteandmatchstyle": "Вставити відповідно до стилю",
+      "delete": "Видалити",
+      "selectall": "Виділити все",
+      "speech": {
+        "speech": "Промовити",
+        "startspeaking": "Почати мовлення",
+        "stopspeaking": "Зупинити мовлення"
+      }
+    },
+    "view": {
+      "view": "Подивитися",
+      "condensed-sidebar": "Компактна бокова панель",
+      "language": "Мова",
+      "reload": "Перезавантаження",
+      "forcereload": "Примусове перезавантаження",
+      "toggledevtools": "Засоби розробника",
+      "togglefullscreen": "Повний екран",
+      "auto-hide-menubar": "Автоматично ховати панель меню"
+    },
+    "window": {
+      "window": "Вікно",
+      "minimize": "Мінімізувати",
+      "close": "Закрити",
+      "zoom": "Збільшити",
+      "front": "Перенести все наперед"
+    },
+    "help": {
+      "help": "Допомога",
+      "visit-our-website": "Відвідайте наш сайт",
+      "privacy-policy": "Політика конфіденційності",
+      "view-changelog-for-v": "Подивитися зміни у версії v{{version}}"
+    }
+  },
+  "archive": {
+    "add-archive": "Додати архів",
+    "archive-saved-loading-info": "Ваш архів зберігається.<br>Програма завершиться автоматично."
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Архіви Buttercup",
+    "load-a-buttercup-archive": "Завантажити архів Buttercup",
+    "create-a-new-buttercup-archive": "Створити новий архів Buttercup"
+  },
+  "archive-menu": {
+    "unlock": "Разблокувати",
+    "change-color": "Змінити колір",
+    "change-password": "Змінити пароль",
+    "import": "Імпортувати",
+    "import-from-type": "З {{name}} архіву (.{{extension}})",
+    "archive-remove-with-name": "Вилучити {{name}}",
+    "open": "Відкрити",
+    "lock": "Заблокувати"
+  },
+  "cloud-source": {
+    "cancel": "Відмінити",
+    "go-back": "Назад",
+    "new-archive": "Новий архів",
+    "open-in-buttercup": "Відкрити в Buttercup",
+    "connect-to-dropbox": "Подключитися к Dropbox",
+    "authenticate-with-dropbox": "Авторизуватися в Dropbox",
+    "dropbox-description-text": "Підключіть Buttercup до вашого аккаунту Dropbox, щоб мати можливість відкривати і зберігати ваші архіви.<br/>Ми не зберігаємо Ваші ім'я користувача та пароль від Dropbox.",
+    "connect-to-wedav": "Підключитися до серверу {{title}}",
+    "username": "Им'я користувача",
+    "password": "Пароль",
+    "connect": "З'єднати",
+    "webdav-description-text": "Введіть Ваші адреса кінцевої точки, ім'я користувача і пароль від {{title}}для підключення і виберіть архів Buttercup. Ми <strong> збережемо </ strong> Ваші реєстраційні дані і зашіфруем їх.",
+    "name": "Ім'я",
+    "size": "Розмір",
+    "date": "Дата"
+  },
+  "confirm-dialog": {
+    "yes": "Так",
+    "no": "Ні"
+  },
+  "copyable": {
+    "hide": "Сховати",
+    "reveal": "Показати",
+    "copy": "Копіювати"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Скопіювати до буферу обміну",
+    "reveal-password": "Показати пароль"
+  },
+  "entry": {
+    "add-entry": "Додати елемент",
+    "select-or-create-an-entry": "Вибрати або створити елемент",
+    "title": "Заголовок",
+    "untitled": "Без назви",
+    "username": "Ім'я користувача",
+    "password": "Пароль",
+    "secure-password": "Безопасний пароль",
+    "custom-fields": "Довільні поля",
+    "no-custom-fields-info-text": "Поки немає довільних полів. Чому б не додати одне прямо зараз?",
+    "add-new-field": "Додати нове поле",
+    "label": "Ярлик",
+    "new-field": "Нове поле",
+    "edit": "Редагувати",
+    "save": "Зберегті",
+    "cancel": "Відмінити",
+    "delete": "Видалити",
+    "entry-inputs-empty-info": "Введіть хоча б назву, будь ласка.",
+    "entry-title-empty-info": "Введіть назву, будь ласка.",
+    "custom-fields-label-empty-info": "Ви забули задати назву для одного чи більше довільних полів",
+    "are-you-sure-question": "Ви впевнені?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Скопіювати до буферу обміну",
+    "username": "Ім'я користувача",
+    "password": "Пароль",
+    "open-url-in-browser": "Відкрити посилання в браузері",
+    "move-to-group": "Перемістити в групу",
+    "move-to-trash": "Перемістити в корзину",
+    "delete-permanently": "Видалити назавжди"
+  },
+  "error": {
+    "archive-not-found": "Сховище архіву не знайдено.",
+    "authentication-failed": "Авторизація не вдалася.",
+    "unknown": "Виникла невідома помилка",
+    "passwords-dont-match": "Ваш пароль не підходить.",
+    "group-not-found": "Групи не знайдено.",
+    "sort-definition-not-found": "Визначення для сортування не знайдено",
+    "insufficient-data-provided": "Недостатньо даних для сортування",
+    "check-for-update": "Помилка при перевірці наявності оновлень",
+    "invalid-import-type-requested": "Неправильний тип імпорту",
+    "open-file-for-importing": "Імпорт не може бути запущеним без відкритого головного вікна",
+    "entry-not-found": "Не знайдено",
+    "dropbox-connection-failed-info": "Підключення до сервера Dropbox не вдалося. Спробуйте пізніше ще раз.",
+    "webdav-connection-failed-info": "Підключення до {{endpoint}} не вдалося. Будь ласка, перевірте Ваші реєстраційні дані і спробуйте ще раз."
+  },
+  "group": {
+    "new-group": "Нова група",
+    "untitled": "Без назви"
+  },
+  "group-menu": {
+    "new-group": "Нова група",
+    "add-group": "Додати групу",
+    "move-to-root": "Перемістити в корінь",
+    "move-to-group": "Перемістити в групу",
+    "rename": "Перейменувати",
+    "delete": "Видалити",
+    "move-to-group-custom": "Перемістити в {{title}}",
+    "empty-trash": "Очистити корзину",
+    "empty-trash-question": "Ви впевнені, що хочете очистити кошик?",
+    "title-asc": "Заголовок: за зростанням",
+    "title-desc": "Заголовок: за спаданням"
+  },
+  "intro": {
+    "welcome-title": "Ласкаво просимо в Buttercup.",
+    "welcome-back-title": "З поверненням в Buttercup.",
+    "welcome-caption": "Ви поки не додали жодного архіву. Чому б не додати один прямо зараз?",
+    "unlock-archive": "Розблокуйте архів, щоб почати ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Відкрити файл архіву",
+    "new-archive-file": "Новий файл архіву",
+    "connect-cloud-sources": "Підключити хмарне сховище"
+  },
+  "password-dialog": {
+    "master-password": "Майстер-пароль",
+    "new-password": "Новий пароль",
+    "password": "Пароль",
+    "confirm-password": "Підтвердитиь пароль",
+    "confirm": "Підтвердити",
+    "nevermind": "Втім, не треба"
+  },
+  "search": {
+    "search": "Пошук"
+  },
+  "sort": {
+    "title-asc": "Заголовок: за зростанням",
+    "title-desc": "Заголовок: за спаданням",
+    "time-asc": "Время: за зростанням",
+    "time-desc": "Время: за спаданням"
+  },
+  "update": {
+    "installing": "Встановлення",
+    "update-available-message": "Доступний Buttercup версії {{version}}. Натисніть тут, щоб встановити зараз."
+  }
+}
