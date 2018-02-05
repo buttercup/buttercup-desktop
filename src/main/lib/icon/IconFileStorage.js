@@ -9,6 +9,16 @@ const fs = pify(fsLib);
 const mkdirp = pify(mkdirpLib);
 const isNotFoundError = err => err.code === 'ENOENT';
 
+function retryWithDirCreation(dirPath, func) {
+  return func().catch(async err => {
+    if (isNotFoundError(err)) {
+      await mkdirp(dirPath);
+      return func();
+    }
+    throw err;
+  });
+}
+
 export default class IconFileStorage extends StorageInterface {
   constructor(path) {
     super();
@@ -20,7 +30,7 @@ export default class IconFileStorage extends StorageInterface {
     return path.join(this.path, fileName);
   }
 
-  async encodeIconForStorage(iconData) {
+  encodeIconForStorage(iconData) {
     const reader = new window.FileReader();
     reader.readAsDataURL(iconData);
     return new Promise(resolve => {
@@ -31,19 +41,19 @@ export default class IconFileStorage extends StorageInterface {
   }
 
   /**
-     * Delete an icon in storage
-     * @param {String} iconKey The icon key
-     * @returns {Promise} A promise that resolves once deletion has completed
-     */
-  async deleteIcon(iconKey) {
+   * Delete an icon in storage
+   * @param {String} iconKey The icon key
+   * @returns {Promise} A promise that resolves once deletion has completed
+   */
+  deleteIcon(iconKey) {
     return fs.unlink(this._buildKeyPath(iconKey));
   }
 
   /**
-     * Retrieve the raw data for an icon
-     * @param {String} iconKey The icon key
-     * @returns {Promise.<*>} A promise that resolves with raw icon data
-     */
+   * Retrieve the raw data for an icon
+   * @param {String} iconKey The icon key
+   * @returns {Promise.<*>} A promise that resolves with raw icon data
+  */
   async retrieveIcon(iconKey) {
     try {
       return await fs.readFile(this._buildKeyPath(iconKey));
@@ -56,29 +66,13 @@ export default class IconFileStorage extends StorageInterface {
   }
 
   /**
-     * Store encoded icon data
-     * @param {String} iconKey The icon key
-     * @param {*} iconData The encoded icon data
-     * @returns {Promise} A promise that resolves once storage has been completed
-     */
-  async storeIcon(iconKey, iconData) {
-    const path = this._buildKeyPath(iconKey);
-    return this._retryWithDirCreation(() => fs.writeFile(path, iconData));
-  }
-
-  /**
-   * Wrap a function in a retry, creating the storage dir before retrying
-   * @param {Function} func 
+   * Store encoded icon data
+   * @param {String} iconKey The icon key
+   * @param {*} iconData The encoded icon data
+   * @returns {Promise} A promise that resolves once storage has been completed
    */
-  async _retryWithDirCreation(func) {
-    try {
-      return await func();
-    } catch (err) {
-      if (isNotFoundError(err)) {
-        await mkdirp(this.path);
-        return func();
-      }
-      throw err;
-    }
+  storeIcon(iconKey, iconData) {
+    const path = this._buildKeyPath(iconKey);
+    return retryWithDirCreation(this.path, () => fs.writeFile(path, iconData));
   }
 }

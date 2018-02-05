@@ -2,17 +2,22 @@ import test from 'ava';
 import path from 'path';
 import pify from 'pify';
 import fsLib from 'fs';
+import rimrafCb from 'rimraf';
 import tmpLib from 'tmp';
 import IconFileStorage from '../../../../../src/main/lib/icon/IconFileStorage';
 
 const fs = pify(fsLib);
 const tmp = pify(tmpLib);
+const rimraf = pify(rimrafCb);
+
+const createTmpDir = async () => tmp.dir({ unsafeCleanup: true });
 
 test('encode and decode icon', async t => {
   // Get the inital binary buffer from a real icon
   const buffer = await fs.readFile(path.join(__dirname, 'buttercup.ico'));
   const dir = await createTmpDir();
   const storage = new IconFileStorage(dir);
+  storage.encodeIconForStorage = data => data;
 
   const encoded = await storage.encodeIconForStorage(buffer);
   const decoded = await storage.decodeIconFromStorage(encoded);
@@ -24,6 +29,7 @@ test('store, retrieve and delete icon', async t => {
   const dir = await createTmpDir();
   const storagePath = path.join(dir, 'icons');
   const storage = new IconFileStorage(storagePath);
+  storage.encodeIconForStorage = data => data;
 
   const buffer = await fs.readFile(path.join(__dirname, 'buttercup.ico'));
   const data = await storage.encodeIconForStorage(buffer);
@@ -86,17 +92,19 @@ test('creates dir if does not exist', async t => {
   const storagePath = path.join(dir, 'foo', 'bar');
   const storage = new IconFileStorage(storagePath);
 
+  // Delete the dir
+  await rimraf(storagePath);
+
+  // Should create it automatically (and be writable)
+  await storage.storeIcon('https://google.com', '(fake)');
+
   // We check that the dir exists and it's writable
   const filePath = path.join(storagePath, 'baz');
   await fs.writeFile(filePath, 'I am file content');
 
-  // Delete the dir
-  await fs.unlink(filePath);
-  await fs.rmdir(storagePath);
+  // Read the file, ensure it's written
+  t.is(await fs.readFile(filePath, 'utf8'), 'I am file content');
 
-  // Should create it automatically again (and be writable)
-  await storage.storeIcon('https://google.com', '(fake)');
-  await fs.writeFile(path.join(storagePath, 'baz'), 'I am file content');
+  // Delete the dir again
+  await rimraf(storagePath);
 });
-
-const createTmpDir = async () => tmp.dir({ unsafeCleanup: true });
