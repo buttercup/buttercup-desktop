@@ -44,7 +44,6 @@ const Content = styled.div`
   flex: 1;
   word-break: break-all;
   padding: 7px 0 6px;
-  /*font-size: 0.95rem;*/
 `;
 
 class Copyable extends PureComponent {
