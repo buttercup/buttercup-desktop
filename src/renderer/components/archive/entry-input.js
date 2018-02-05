@@ -1,13 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { Flex } from 'styled-flexbox';
 import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(Flex).attrs({
+  align: 'center'
+})`
   flex: 1;
-  min-height: $form-input-height;
-  margin-right: $spacing-half;
+  min-height: var(--form-input-height);
+  margin-right: var(--spacing-half);
+  position: relative;
+
+  font-size: ${props => (props.isTitle ? '1.8rem' : '14px')};
+  font-weight: ${props => (props.isTitle ? 300 : 400)};
+`;
+
+const PasswordWrapper = styled.div`
+  flex: 1;
   position: relative;
 `;
 
@@ -15,6 +26,12 @@ const PasswordInput = styled(BaseInput)`
   padding-right: 2.2rem;
   font-size: 14px;
   font-family: Anonymous;
+`;
+
+const TitleInput = styled(BaseInput)`
+  font-weight: 300;
+  font-size: 1.8rem;
+  height: auto;
 `;
 
 const GeneratorToggle = styled.div`
@@ -61,36 +78,43 @@ export default class Input extends PureComponent {
 
   render() {
     const { type, input, placeholder, meta } = this.props;
+    const { name, value } = input;
+    const commonProps = {
+      ...input,
+      id: name,
+      type: 'text',
+      placeholder
+    };
     return (
       <Wrapper>
         <Choose>
           <When condition={type === 'password'}>
-            <PasswordInput
-              {...input}
-              id={name}
-              type={
-                meta.active || this.state.isGeneratorOpen ? 'text' : 'password'
-              }
-              placeholder={placeholder}
-            />
-            <Generator
-              onGenerate={pwd => this.receivePassword(pwd)}
-              isOpen={this.state.isGeneratorOpen}
-              preferPlace="below"
-            >
-              <GeneratorToggle active={this.state.isGeneratorOpen}>
-                <MagicIcon onClick={() => this.handleGeneratorToggle()} />
-              </GeneratorToggle>
-            </Generator>
-            <Meter input={input.value} />
+            <PasswordWrapper>
+              <PasswordInput
+                {...commonProps}
+                type={
+                  meta.active || this.state.isGeneratorOpen
+                    ? 'text'
+                    : 'password'
+                }
+              />
+              <Generator
+                onGenerate={pwd => this.receivePassword(pwd)}
+                isOpen={this.state.isGeneratorOpen}
+                preferPlace="below"
+              >
+                <GeneratorToggle active={this.state.isGeneratorOpen}>
+                  <MagicIcon onClick={() => this.handleGeneratorToggle()} />
+                </GeneratorToggle>
+              </Generator>
+              <Meter input={value} />
+            </PasswordWrapper>
+          </When>
+          <When condition={name === 'properties.title'}>
+            <TitleInput {...commonProps} />
           </When>
           <Otherwise>
-            <BaseInput
-              {...input}
-              id={name}
-              type="text"
-              placeholder={placeholder}
-            />
+            <BaseInput {...commonProps} />
           </Otherwise>
         </Choose>
       </Wrapper>

@@ -9,6 +9,8 @@
     padding: $spacing-half $spacing-one;
     cursor: pointer !important;
     transition: background-color ease .2s;
+    display: flex;
+    align-items: center;
 
     &.active {
       background-color: $brand-primary !important;
@@ -16,6 +18,15 @@
 
     &:hover {
       background-color: $black-20;
+    }
+
+    > div {
+      &.icon {
+        margin-right: 15px;
+      }
+      &.text {
+        padding-bottom: 2px;
+      }
     }
 
     strong, small {

@@ -1,4 +1,5 @@
 const { join } = require('path');
+const { NormalModuleReplacementPlugin } = require('webpack');
 
 module.exports = {
   module: {
@@ -33,6 +34,6 @@ module.exports = {
       locales: join(__dirname, '../locales')
     }
   },
-  plugins: [],
+  plugins: [new NormalModuleReplacementPlugin(/\/iconv-loader/, 'node-noop')],
   externals: ['buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']
 };

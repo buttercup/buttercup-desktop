@@ -24,30 +24,46 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => ({
-  type: ENTRIES_LOADED,
-  payload: entryTools.loadEntries(archiveId, groupId)
-});
-
-export const updateEntry = newValues => (dispatch, getState) => {
-  const archiveId = getCurrentArchiveId(getState());
-
-  entryTools
-    .updateEntry(archiveId, newValues)
-    .then(() => {
-      dispatch({
-        type: ENTRIES_UPDATE,
-        payload: newValues
-      });
-
-      dispatch(changeMode('view')());
-    })
-    .catch(err => {
-      showDialog(err);
+export const loadEntries = (archiveId, groupId) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    // First load all the entries fetching their icons only from disk
+    const entries = await entryTools.loadEntries(archiveId, groupId);
+    dispatch({
+      type: ENTRIES_LOADED,
+      payload: entries
     });
+
+    // Then download all the missing icons and update the entries
+    const entriesWithoutIcon = entries.filter(entry => !entry.icon);
+    await fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon, dispatch);
+  } catch (err) {
+    showDialog(err);
+  }
 };
 
-export const newEntry = newValues => (dispatch, getState) => {
+export const updateEntry = newValues => async (dispatch, getState) => {
+  const archiveId = getCurrentArchiveId(getState());
+
+  try {
+    // First create the new entry with the data
+    await entryTools.updateEntry(archiveId, newValues);
+    dispatch({
+      type: ENTRIES_UPDATE,
+      payload: newValues
+    });
+    dispatch(changeMode('view')());
+
+    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
+    await fetchEntryIconsAndUpdate(archiveId, [newValues], dispatch);
+  } catch (err) {
+    showDialog(err);
+  }
+};
+
+export const newEntry = newValues => async (dispatch, getState) => {
   const state = getState();
   const currentGroupId = getCurrentGroupId(state);
   const archiveId = getCurrentArchiveId(state);
@@ -56,18 +72,24 @@ export const newEntry = newValues => (dispatch, getState) => {
     return null;
   }
 
-  entryTools
-    .createEntry(archiveId, currentGroupId, newValues)
-    .then(entryObj => {
-      dispatch({
-        type: ENTRIES_CREATE,
-        payload: entryObj
-      });
-      dispatch(selectEntry(entryObj.id));
-    })
-    .catch(err => {
-      showDialog(err);
+  try {
+    // First update the entry data
+    const entryObj = entryTools.createEntry(
+      archiveId,
+      currentGroupId,
+      newValues
+    );
+    dispatch({
+      type: ENTRIES_CREATE,
+      payload: entryObj
     });
+    dispatch(selectEntry(entryObj.id));
+
+    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
+    await fetchEntryIconsAndUpdate(archiveId, [entryObj], dispatch);
+  } catch (err) {
+    showDialog(err);
+  }
 };
 
 export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
@@ -93,4 +115,19 @@ export const deleteEntry = entryId => (dispatch, getState) => {
       entryTools.deleteEntry(archiveId, entryId);
     }
   });
+};
+
+const fetchEntryIconsAndUpdate = async (archiveId, entries, dispatch) => {
+  return Promise.all(
+    entries.map(async entry => {
+      const entryObjWithIcon = await entryTools.updateEntryIcon(
+        archiveId,
+        entry.id
+      );
+      dispatch({
+        type: ENTRIES_UPDATE,
+        payload: entryObjWithIcon
+      });
+    })
+  );
 };

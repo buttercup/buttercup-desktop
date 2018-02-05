@@ -6,24 +6,26 @@ import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
-import styles from '../../styles/entry-form';
+import { heading } from '../../styles/_common';
 import Input from './entry-input';
+import EntryIcon from './entry-icon';
+import { LabelWrapper, MetaWrapper, Row } from './entry-view';
 
 const renderMeta = (
   { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
   <div>
-    <div className={styles.metaWrapper}>
+    <MetaWrapper>
       {fields.map((member, index) => (
-        <div className={styles.formRow} key={index}>
-          <div className={styles.labelWrapper}>
+        <Row key={index}>
+          <LabelWrapper>
             <Field
               name={`${member}.key`}
               type="text"
               component="input"
               placeholder={t('entry.label')}
             />
-          </div>
+          </LabelWrapper>
           <Field
             name={`${member}.value`}
             type="text"
@@ -31,9 +33,9 @@ const renderMeta = (
             placeholder={t('entry.new-field')}
           />
           <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
-        </div>
+        </Row>
       ))}
-    </div>
+    </MetaWrapper>
     <Button
       onClick={e => {
         fields.push({});
@@ -51,47 +53,48 @@ const renderMeta = (
 class EntryForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func,
+    icon: PropTypes.string,
     t: PropTypes.func
   };
 
   render() {
-    const { handleSubmit, t } = this.props;
+    const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.title">
-            <Translate i18nKey="entry.title" parent="span" />
-          </label>
+        <Row>
+          <LabelWrapper htmlFor="properties.title">
+            <EntryIcon icon={icon} big />
+          </LabelWrapper>
           <Field
             name="properties.title"
             component={Input}
             type="text"
             placeholder={t('entry.untitled')}
           />
-        </div>
-        <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.username">
+        </Row>
+        <Row>
+          <LabelWrapper htmlFor="properties.username">
             <Translate i18nKey="entry.username" parent="span" />
-          </label>
+          </LabelWrapper>
           <Field
             name="properties.username"
             component={Input}
             type="text"
             placeholder={'@' + t('entry.username') + '...'}
           />
-        </div>
-        <div className={styles.formRow}>
-          <label className={styles.labelWrapper} htmlFor="properties.password">
+        </Row>
+        <Row>
+          <LabelWrapper htmlFor="properties.password">
             <Translate i18nKey="entry.password" parent="span" />
-          </label>
+          </LabelWrapper>
           <Field
             name="properties.password"
             component={Input}
             type="password"
             placeholder={t('entry.secure-password') + '...'}
           />
-        </div>
-        <h6 className={styles.heading}>
+        </Row>
+        <h6 className={heading}>
           {' '}
           <Translate i18nKey="entry.custom-fields" parent="span" />:
         </h6>

@@ -31,6 +31,7 @@ const Wrapper = styled(Flex)`
   padding-left: var(--spacing-half);
   margin-left: 2px;
   line-height: 1.2;
+  flex: 1;
 
   &:hover {
     button {
@@ -42,8 +43,7 @@ const Wrapper = styled(Flex)`
 const Content = styled.div`
   flex: 1;
   word-break: break-all;
-  padding: 8px 0 6px;
-  font-size: 0.95rem;
+  padding: 7px 0 6px;
 `;
 
 class Copyable extends PureComponent {
