@@ -32,7 +32,7 @@ export default class IconFileStorage extends StorageInterface {
 
   encodeIconForStorage(iconData) {
     const reader = new window.FileReader();
-    reader.readAsDataURL(iconData);
+    reader.readAsDataURL(new Blob([iconData]));
     return new Promise(resolve => {
       reader.onloadend = () => {
         resolve(reader.result);
