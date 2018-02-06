@@ -25,12 +25,11 @@ Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these
 
 Buttercup helps you by remembering all of your passwords, and because you no longer have to remember them yourself, you can use **different passwords for every single site**.
 
-## Beta software
+## Protecting your details
 
-Buttercup is currently under heavy development, and updates will be pushed here very frequently.
-The application is currently in beta, but should be considered stable for general use.
+Buttercup provides a secure way of storing your details, but it is only as secure as how you treat your master password and archive files.
 
-Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
+Ensure that you never share your master password or use it anywhere other than with your archive. Never share or store your archive in a non-private environment. Always remember to make **regular** backups of your archive.
 
 ## Download & Install
 
@@ -71,6 +70,8 @@ Buttercup for Desktop supports the following languages:
  * Russian
  * Farsi
  * Italian
+ * Brazilian Portuguese
+ * Ukrainian
 
 ## Development
 
