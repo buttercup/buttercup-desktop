@@ -25,6 +25,12 @@ Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these
 
 Buttercup helps you by remembering all of your passwords, and because you no longer have to remember them yourself, you can use **different passwords for every single site**.
 
+## Protecting your details
+
+Buttercup provides a secure way of storing your details, but it is only as secure as how you treat your master password and archive files.
+
+Ensure that you never share your master password or use it anywhere other than with your archive. Never share or store your archive in a non-private environment. Always remember to make **regular** backups of your archive.
+
 ## Download & Install
 
 [Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup-desktop/releases) to download different builds and versions.
