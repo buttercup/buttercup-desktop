@@ -25,13 +25,6 @@ Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these
 
 Buttercup helps you by remembering all of your passwords, and because you no longer have to remember them yourself, you can use **different passwords for every single site**.
 
-## Beta software
-
-Buttercup is currently under heavy development, and updates will be pushed here very frequently.
-The application is currently in beta, but should be considered stable for general use.
-
-Please check [buttercup-core](https://github.com/perry-mitchell/buttercup-core) for more information on Buttercup’s core module.
-
 ## Download & Install
 
 [Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup-desktop/releases) to download different builds and versions.
@@ -71,6 +64,8 @@ Buttercup for Desktop supports the following languages:
  * Russian
  * Farsi
  * Italian
+ * Brazilian Portuguese
+ * Ukrainian
 
 ## Development
 
