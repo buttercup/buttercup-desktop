@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "0.26.0",
+  "version": "1.0.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -12,20 +12,15 @@
     "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
     "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
-    "build:main":
-      "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
-    "build:renderer":
-      "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
+    "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.production --progress --colors",
     "build": "npm run build:main && npm run build:renderer",
     "prestart": "npm run clean",
-    "start":
-      "concurrently --kill-others \"npm run start:renderer\" \"npm run start:main\"",
+    "start": "concurrently --kill-others \"npm run start:renderer\" \"npm run start:main\"",
     "prestart:renderer": "npm run clean",
-    "start:renderer":
-      "webpack-dev-server --config ./config/webpack.config.development --progress",
+    "start:renderer": "webpack-dev-server --config ./config/webpack.config.development --progress",
     "prestart:main": "npm run clean",
-    "start:main":
-      "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
+    "start:main": "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
     "prerelease": "npm run clean",
     "release": "npm run build && npm run package && npm run package:win",
     "package:linux": "build --linux --x64",
@@ -34,11 +29,13 @@
     "package": "build --mac --linux --x64 -p always",
     "package:current": "build",
     "postinstall": "opencollective postinstall",
-    "i18next-parse-lang":
-      "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
+    "i18next-parse-lang": "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
   },
   "lint-staged": {
-    "{src,config,test,locales}/**/*.{js,json}": ["prettier --write", "git add"]
+    "{src,config,test,locales}/**/*.{js,json}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "build": {
     "appId": "pw.buttercup.desktop",
@@ -70,7 +67,12 @@
       "perMachine": true
     },
     "linux": {
-      "target": ["snap", "rpm", "AppImage", "deb"],
+      "target": [
+        "snap",
+        "rpm",
+        "AppImage",
+        "deb"
+      ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault"
     },
@@ -87,18 +89,31 @@
     "type": "git",
     "url": "git+https://github.com/buttercup/buttercup-desktop.git"
   },
-  "keywords": ["password", "vault", "manager", "credentials"],
+  "keywords": [
+    "password",
+    "vault",
+    "manager",
+    "credentials"
+  ],
   "ava": {
-    "files": ["test/**/*.js"],
-    "source": ["src/**/*.{js,jsx}"],
+    "files": [
+      "test/**/*.js"
+    ],
+    "source": [
+      "src/**/*.{js,jsx}"
+    ],
     "modules": false,
     "concurrency": 5,
     "failFast": true,
     "powerAssert": true,
-    "require": ["babel-register"],
+    "require": [
+      "babel-register"
+    ],
     "babel": {
       "babelrc": true,
-      "plugins": ["transform-es2015-modules-commonjs"]
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
     }
   },
   "author": "Buttercup <info@buttercup.pw>",
