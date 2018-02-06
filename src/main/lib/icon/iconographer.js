@@ -14,7 +14,7 @@ setTextFetcher(url => {
   return window.fetch(url).then(res => res.text());
 });
 setDataFetcher(url => {
-  return window.fetch(url).then(res => res.blob());
+  return window.fetch(url).then(res => res.arrayBuffer());
 });
 
 const storage = new IconFileStorage(iconPath);
