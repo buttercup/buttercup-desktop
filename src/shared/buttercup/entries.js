@@ -75,10 +75,10 @@ export async function loadEntries(archiveId, groupId) {
       // Here we get only the available icons in disk.
       // Downloading missing icons is a lot slower, we do it later, after loading the entries.
       const icon = await getIcon(entry);
-      if (icon) {
-        entryObject.icon = icon;
-      }
-      return entryObject;
+      return {
+        ...entryObject,
+        icon: icon || null
+      };
     })
   );
 }

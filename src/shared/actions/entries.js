@@ -1,6 +1,7 @@
 import { createAction } from 'redux-actions';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
+import { getQueue } from '../../renderer/system/queue';
 import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
 import i18n from '../i18n';
 import {
@@ -24,21 +25,13 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => async (
-  dispatch,
-  getState
-) => {
+export const loadEntries = (archiveId, groupId) => async dispatch => {
   try {
-    // First load all the entries fetching their icons only from disk
     const entries = await entryTools.loadEntries(archiveId, groupId);
-    dispatch({
-      type: ENTRIES_LOADED,
-      payload: entries
-    });
+    dispatch({ type: ENTRIES_LOADED, payload: entries });
 
-    // Then download all the missing icons and update the entries
     const entriesWithoutIcon = entries.filter(entry => !entry.icon);
-    await fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon, dispatch);
+    dispatch(fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon));
   } catch (err) {
     showDialog(err);
   }
@@ -57,7 +50,7 @@ export const updateEntry = newValues => async (dispatch, getState) => {
     dispatch(changeMode('view')());
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    await fetchEntryIconsAndUpdate(archiveId, [newValues], dispatch);
+    dispatch(fetchEntryIconsAndUpdate(archiveId, [newValues]));
   } catch (err) {
     showDialog(err);
   }
@@ -86,7 +79,7 @@ export const newEntry = newValues => async (dispatch, getState) => {
     dispatch(selectEntry(entryObj.id));
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    await fetchEntryIconsAndUpdate(archiveId, [entryObj], dispatch);
+    dispatch(fetchEntryIconsAndUpdate(archiveId, [entryObj]));
   } catch (err) {
     showDialog(err);
   }
@@ -117,17 +110,16 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-const fetchEntryIconsAndUpdate = async (archiveId, entries, dispatch) => {
-  return Promise.all(
-    entries.map(async entry => {
-      const entryObjWithIcon = await entryTools.updateEntryIcon(
-        archiveId,
-        entry.id
-      );
-      dispatch({
-        type: ENTRIES_UPDATE,
-        payload: entryObjWithIcon
+const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
+  entries.forEach(entry => {
+    getQueue()
+      .channel('icons')
+      .enqueue(() => {
+        return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
+          if (entry.icon) {
+            return dispatch({ type: ENTRIES_UPDATE, payload: entry });
+          }
+        });
       });
-    })
-  );
+  });
 };
