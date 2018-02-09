@@ -13,7 +13,6 @@ const requireTest = require.context(
   true,
   /\/\d+\.svg$/
 );
-console.log(requireTest.keys());
 const illustrations = requireTest.keys().map(requireTest);
 
 const Caption = styled.figcaption`
