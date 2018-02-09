@@ -8,8 +8,7 @@ import { Translate } from '../../../shared/i18n';
 import EntryForm from '../../containers/archive/entry-form';
 import styles from '../../styles/entry';
 import Column from '../column';
-import EmptyView from '../empty-view';
-import bench from '../../styles/img/bench.svg';
+import EmptyView, { getRandomIllustration } from '../empty-view';
 import EntryView from './entry-view';
 
 class Entry extends PureComponent {
@@ -123,7 +122,7 @@ class Entry extends PureComponent {
         <EmptyView
           caption={t('entry.select-or-create-an-entry')}
           className={styles.emptyView}
-          imageSrc={bench}
+          imageSrc={getRandomIllustration()}
         />
       ),
       footer: null
