@@ -3,8 +3,7 @@
     "react",
     ["env", {
       "targets": {
-        "node": "7.4",
-        "chrome": 56
+        "electron": "1.7"
       },
       "useBuiltIns": true,
       "modules": false,

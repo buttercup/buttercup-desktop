@@ -136,8 +136,8 @@
     "opencollective": "^1.0.3"
   },
   "devDependencies": {
-    "@buttercup/channel-queue": "~0.2.1",
-    "@buttercup/iconographer": "^0.6.0",
+    "@buttercup/channel-queue": "^0.3.0",
+    "@buttercup/iconographer": "^0.7.0",
     "@buttercup/ui": "^0.6.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
@@ -160,7 +160,7 @@
     "babel-plugin-transform-strict-mode": "^6.22.0",
     "babel-plugin-webpack-alias": "^2.1.2",
     "babel-plugin-webpack-loaders": "^0.8.0",
-    "babel-preset-env": "^1.5.2",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",

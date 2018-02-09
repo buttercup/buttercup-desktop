@@ -4,7 +4,7 @@ import {
   createCredentials
 } from 'buttercup/dist/buttercup-web.min';
 import ElectronStorageInterface from './storage';
-import { enqueue } from '../../renderer/system/queue';
+import { enqueueInMain as enqueue } from '../../renderer/system/queue';
 import './ipc-datasource';
 import i18n from '../i18n';
 
