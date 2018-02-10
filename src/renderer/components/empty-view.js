@@ -7,6 +7,14 @@ import { isOSX } from '../../shared/utils/platform';
 import logo from '../styles/img/solo-logo.svg';
 import AddArchiveButton from '../containers/add-archive-button';
 
+// Load illustrations
+const requireTest = require.context(
+  '../styles/img/illustrations',
+  true,
+  /\/\d+\.svg$/
+);
+const illustrations = requireTest.keys().map(requireTest);
+
 const Caption = styled.figcaption`
   color: var(--gray-dark);
   font-weight: 300;
@@ -77,3 +85,7 @@ export const WelcomeScreen = () => (
     <AddArchiveButton />
   </ColoredFlex>
 );
+
+export function getRandomIllustration() {
+  return illustrations[Math.floor(Math.random() * illustrations.length)];
+}
