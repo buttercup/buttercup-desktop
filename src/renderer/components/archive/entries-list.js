@@ -9,7 +9,7 @@ const List = ({ entries, currentEntry, onSelectEntry, onRightClick }) => (
       <li
         key={entry.id}
         className={
-          currentEntry && entry.id === currentEntry.id && styles.active
+          currentEntry && entry.id === currentEntry.id ? styles.active : null
         }
         onClick={() => onSelectEntry(entry.id)}
         onContextMenu={() => onRightClick(entry)}

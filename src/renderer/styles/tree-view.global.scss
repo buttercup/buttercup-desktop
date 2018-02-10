@@ -94,13 +94,13 @@ $treePrefixCls: 'rc-tree';
         &.#{$treePrefixCls}-switcher-noop {
           cursor: auto;
         }
-        &.#{$treePrefixCls}-noline_open {
+        &.#{$treePrefixCls}-switcher_open {
           &:before {
             transform: rotate(45deg);
             transform-origin: 0;
           }
         }
-        &.#{$treePrefixCls}-noline_close { }
+        &.#{$treePrefixCls}-switcher_close { }
       }
     }
 
