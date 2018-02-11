@@ -4,12 +4,33 @@ import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
 import LockOpen from 'react-icons/lib/md/lock-open';
 import LockClosed from 'react-icons/lib/md/lock-outline';
-import { GithubPicker } from 'react-color';
+import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
+import tinycolor from 'tinycolor2';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
+
+const COLORS = [
+  '#B80000',
+  '#DB3E00',
+  '#EB144C',
+  '#FF6900',
+  '#FCB900',
+  '#DCE775',
+  '#808900',
+  '#00D084',
+  '#006B76',
+  '#ABB8C3',
+  '#0693E3',
+  '#1273DE',
+  '#004DCF',
+  '#5300EB',
+  '#3F51B5',
+  '#7B64FF',
+  '#9900EF'
+];
 
 const Wrapper = styled.li`
   display: flex;
@@ -57,6 +78,7 @@ const Avatar = styled.div`
   border-radius: 50px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: ${props => props.color};
+  color: ${props => (tinycolor(props.color).isLight() ? '#222' : '#fff')};
   font-weight: 400;
   font-size: 1rem;
   display: flex;
@@ -64,10 +86,17 @@ const Avatar = styled.div`
   justify-content: center;
   position: relative;
 
-  &:hover {
-    .cog {
-      display: block;
-    }
+  &:after {
+    content: '';
+    display: ${props => (props.locked ? 'none' : 'block')};
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    margin-top: -2px;
   }
 `;
 
@@ -194,7 +223,8 @@ class SidebarItem extends PureComponent {
     this.setState({ isPickerOpen: false });
   };
 
-  handleColorChange = color => {
+  handleColorChange = (color, e) => {
+    e.stopPropagation();
     this.props.onArchiveUpdate({
       ...this.props.archive,
       color: color.hex
@@ -218,17 +248,17 @@ class SidebarItem extends PureComponent {
       >
         <Avatar
           color={color || '#000000'}
+          locked={locked}
           innerRef={ref => {
             this.avatarRef = ref;
           }}
         >
           <span>{briefName}</span>
-          {condenced &&
-            brands[type].remote && (
-              <Icon>
-                <img src={brands[type].icon} alt={brands[type].name} />
-              </Icon>
-            )}
+          <If condition={condenced && brands[type].remote}>
+            <Icon>
+              <img src={brands[type].icon} alt={brands[type].name} />
+            </Icon>
+          </If>
           <If condition={this.state.isPickerOpen}>
             <PortalWithState
               closeOnEsc
@@ -239,8 +269,8 @@ class SidebarItem extends PureComponent {
               {({ portal }) => [
                 portal(
                   <PickerWrapper left={this.state.left} top={this.state.top}>
-                    <GithubPicker
-                      width={212}
+                    <TwitterPicker
+                      colors={COLORS}
                       triangle="top-left"
                       onChange={this.handleColorChange}
                     />
@@ -250,7 +280,7 @@ class SidebarItem extends PureComponent {
             </PortalWithState>
           </If>
         </Avatar>
-        {!condenced && (
+        <If condition={!condenced}>
           <section>
             <div>{formattedName}</div>
             <span className="status">
@@ -258,7 +288,7 @@ class SidebarItem extends PureComponent {
               {brands[type].name}
             </span>
           </section>
-        )}
+        </If>
       </Wrapper>
     );
   }
