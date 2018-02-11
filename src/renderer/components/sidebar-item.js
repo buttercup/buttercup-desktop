@@ -7,6 +7,7 @@ import LockClosed from 'react-icons/lib/md/lock-outline';
 import { GithubPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
+import tinycolor from 'tinycolor2';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
@@ -57,6 +58,7 @@ const Avatar = styled.div`
   border-radius: 50px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: ${props => props.color};
+  color: ${props => (tinycolor(props.color).isLight() ? '#222' : '#fff')};
   font-weight: 400;
   font-size: 1rem;
   display: flex;
