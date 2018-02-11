@@ -8,6 +8,7 @@ import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
 import tinycolor from 'tinycolor2';
+import { SortableElement } from 'react-sortable-hoc';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
@@ -132,7 +133,7 @@ class SidebarItem extends PureComponent {
     archive: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
     condenced: PropTypes.bool.isRequired,
-    index: PropTypes.number.isRequired,
+    order: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
@@ -158,7 +159,7 @@ class SidebarItem extends PureComponent {
         label: `${status === 'locked'
           ? label('unlock')
           : label('open')} ${name}`,
-        accelerator: `CmdOrCtrl+${this.props.index + 1}`,
+        accelerator: `CmdOrCtrl+${this.props.order + 1}`,
         click: this.props.onClick
       },
       ...(status === 'unlocked'
@@ -294,4 +295,4 @@ class SidebarItem extends PureComponent {
   }
 }
 
-export default translate()(SidebarItem);
+export default translate()(SortableElement(SidebarItem));
