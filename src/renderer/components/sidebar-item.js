@@ -4,13 +4,33 @@ import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
 import LockOpen from 'react-icons/lib/md/lock-open';
 import LockClosed from 'react-icons/lib/md/lock-outline';
-import { GithubPicker } from 'react-color';
+import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
 import tinycolor from 'tinycolor2';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { showContextMenu } from '../system/menu';
+
+const COLORS = [
+  '#B80000',
+  '#DB3E00',
+  '#EB144C',
+  '#FF6900',
+  '#FCB900',
+  '#DCE775',
+  '#808900',
+  '#00D084',
+  '#006B76',
+  '#ABB8C3',
+  '#0693E3',
+  '#1273DE',
+  '#004DCF',
+  '#5300EB',
+  '#3F51B5',
+  '#7B64FF',
+  '#9900EF'
+];
 
 const Wrapper = styled.li`
   display: flex;
@@ -249,8 +269,8 @@ class SidebarItem extends PureComponent {
               {({ portal }) => [
                 portal(
                   <PickerWrapper left={this.state.left} top={this.state.top}>
-                    <GithubPicker
-                      width={212}
+                    <TwitterPicker
+                      colors={COLORS}
                       triangle="top-left"
                       onChange={this.handleColorChange}
                     />
