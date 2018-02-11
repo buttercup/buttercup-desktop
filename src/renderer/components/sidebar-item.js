@@ -194,7 +194,8 @@ class SidebarItem extends PureComponent {
     this.setState({ isPickerOpen: false });
   };
 
-  handleColorChange = color => {
+  handleColorChange = (color, e) => {
+    e.stopPropagation();
     this.props.onArchiveUpdate({
       ...this.props.archive,
       color: color.hex
