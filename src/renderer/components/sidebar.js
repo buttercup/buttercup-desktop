@@ -56,7 +56,11 @@ class RecentFiles extends PureComponent {
 
     return (
       <Column footer={footer} condenced={condenced}>
-        <ArchiveList onSortEnd={this.onSortEnd}>
+        <ArchiveList
+          onSortEnd={this.onSortEnd}
+          lockAxis="y"
+          lockToContainerEdges
+        >
           {archives.map((archive, i) => (
             <SidebarItem
               active={archive.id === currentArchiveId}
