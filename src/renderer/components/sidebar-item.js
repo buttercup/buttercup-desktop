@@ -66,10 +66,17 @@ const Avatar = styled.div`
   justify-content: center;
   position: relative;
 
-  &:hover {
-    .cog {
-      display: block;
-    }
+  &:after {
+    content: '';
+    display: ${props => (props.locked ? 'none' : 'block')};
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    margin-top: -2px;
   }
 `;
 
@@ -221,11 +228,12 @@ class SidebarItem extends PureComponent {
       >
         <Avatar
           color={color || '#000000'}
+          locked={locked}
           innerRef={ref => {
             this.avatarRef = ref;
           }}
         >
-          {condenced && locked ? <LockClosed /> : <span>{briefName}</span>}
+          <span>{briefName}</span>
           <If condition={condenced && brands[type].remote}>
             <Icon>
               <img src={brands[type].icon} alt={brands[type].name} />
