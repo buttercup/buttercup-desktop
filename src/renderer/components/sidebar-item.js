@@ -5,7 +5,7 @@ import capitalize from 'lodash/capitalize';
 import LockOpen from 'react-icons/lib/md/lock-open';
 import LockClosed from 'react-icons/lib/md/lock-outline';
 import { GithubPicker } from 'react-color';
-import Portal from 'react-portal';
+import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
@@ -229,19 +229,26 @@ class SidebarItem extends PureComponent {
                 <img src={brands[type].icon} alt={brands[type].name} />
               </Icon>
             )}
-          <Portal
-            closeOnOutsideClick
-            isOpened={this.state.isPickerOpen}
-            onClose={this.handlePickerClose}
-          >
-            <PickerWrapper left={this.state.left} top={this.state.top}>
-              <GithubPicker
-                width={212}
-                triangle="top-left"
-                onChange={this.handleColorChange}
-              />
-            </PickerWrapper>
-          </Portal>
+          <If condition={this.state.isPickerOpen}>
+            <PortalWithState
+              closeOnEsc
+              closeOnOutsideClick
+              defaultOpen
+              onClose={this.handlePickerClose}
+            >
+              {({ portal }) => [
+                portal(
+                  <PickerWrapper left={this.state.left} top={this.state.top}>
+                    <GithubPicker
+                      width={212}
+                      triangle="top-left"
+                      onChange={this.handleColorChange}
+                    />
+                  </PickerWrapper>
+                )
+              ]}
+            </PortalWithState>
+          </If>
         </Avatar>
         {!condenced && (
           <section>
