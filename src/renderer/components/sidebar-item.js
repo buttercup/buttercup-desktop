@@ -225,13 +225,12 @@ class SidebarItem extends PureComponent {
             this.avatarRef = ref;
           }}
         >
-          <span>{briefName}</span>
-          {condenced &&
-            brands[type].remote && (
-              <Icon>
-                <img src={brands[type].icon} alt={brands[type].name} />
-              </Icon>
-            )}
+          {condenced && locked ? <LockClosed /> : <span>{briefName}</span>}
+          <If condition={condenced && brands[type].remote}>
+            <Icon>
+              <img src={brands[type].icon} alt={brands[type].name} />
+            </Icon>
+          </If>
           <If condition={this.state.isPickerOpen}>
             <PortalWithState
               closeOnEsc
@@ -253,7 +252,7 @@ class SidebarItem extends PureComponent {
             </PortalWithState>
           </If>
         </Avatar>
-        {!condenced && (
+        <If condition={!condenced}>
           <section>
             <div>{formattedName}</div>
             <span className="status">
@@ -261,7 +260,7 @@ class SidebarItem extends PureComponent {
               {brands[type].name}
             </span>
           </section>
-        )}
+        </If>
       </Wrapper>
     );
   }
