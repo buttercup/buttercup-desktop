@@ -7,30 +7,10 @@ import LockClosed from 'react-icons/lib/md/lock-outline';
 import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
-import tinycolor from 'tinycolor2';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
+import { getTextColor, COLORS } from '../../shared/utils/colors';
 import { showContextMenu } from '../system/menu';
-
-const COLORS = [
-  '#B80000',
-  '#DB3E00',
-  '#EB144C',
-  '#FF6900',
-  '#FCB900',
-  '#DCE775',
-  '#808900',
-  '#00D084',
-  '#006B76',
-  '#ABB8C3',
-  '#0693E3',
-  '#1273DE',
-  '#004DCF',
-  '#5300EB',
-  '#3F51B5',
-  '#7B64FF',
-  '#9900EF'
-];
 
 const Wrapper = styled.li`
   display: flex;
@@ -78,7 +58,7 @@ const Avatar = styled.div`
   border-radius: 50px;
   border: 2px solid rgba(255, 255, 255, 0.2);
   background-color: ${props => props.color};
-  color: ${props => (tinycolor(props.color).isLight() ? '#222' : '#fff')};
+  color: ${props => getTextColor(props.color)};
   font-weight: 400;
   font-size: 1rem;
   display: flex;
