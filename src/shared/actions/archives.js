@@ -10,31 +10,21 @@ import {
   showConfirmedPasswordDialog
 } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
-import {
-  ARCHIVES_ADD,
-  ARCHIVES_REMOVE,
-  ARCHIVES_LOCK,
-  ARCHIVES_UNLOCK,
-  ARCHIVES_SET_CURRENT,
-  ARCHIVES_UPDATE
-} from './types';
+import { ARCHIVES_SET, ARCHIVES_SET_CURRENT } from './types';
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
   addArchiveToArchiveManager,
   lockArchiveInArchiveManager,
   removeArchiveFromArchiveManager,
   unlockArchiveInArchiveManager,
-  updateArchivePassword
+  updateArchivePassword,
+  updateArchiveColour
 } from '../buttercup/archive';
 import i18n from '../i18n';
 
 // Store Actions
-export const addArchiveToStore = createAction(ARCHIVES_ADD);
-export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
-export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
-export const lockArchiveInStore = createAction(ARCHIVES_LOCK);
+export const resetArchivesInStore = createAction(ARCHIVES_SET);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
-export const updateArchive = createAction(ARCHIVES_UPDATE);
 
 // Impure Buttercup actions
 export const loadArchive = payload => (dispatch, getState) => {
@@ -46,7 +36,7 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => () => {
-  return removeArchiveFromArchiveManager(payload);
+  removeArchiveFromArchiveManager(payload);
 };
 
 export const changeArchivePassword = payload => () => {
@@ -65,9 +55,12 @@ export const changeArchivePassword = payload => () => {
     .catch(() => {});
 };
 
+export const changeArchiveColour = ({ archiveId, colour }) => () => {
+  updateArchiveColour(archiveId, colour);
+};
+
 export const lockArchive = payload => dispatch => {
   return lockArchiveInArchiveManager(payload).then(archiveId => {
-    dispatch(lockArchiveInStore(archiveId));
     dispatch(setCurrentArchive(null));
   });
 };
