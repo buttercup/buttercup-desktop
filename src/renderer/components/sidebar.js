@@ -30,10 +30,10 @@ class RecentFiles extends PureComponent {
     archives: PropTypes.array.isRequired,
     currentArchiveId: PropTypes.string,
     onRemoveClick: PropTypes.func.isRequired,
-    onArchiveUpdate: PropTypes.func.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
+    onChangeColour: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
   };
 
@@ -71,7 +71,7 @@ class RecentFiles extends PureComponent {
               condenced={condenced}
               onLockArchive={() => this.props.onLockArchive(archive.id)}
               onChangePassword={() => this.props.onChangePassword(archive.id)}
-              onArchiveUpdate={this.props.onArchiveUpdate}
+              onChangeColour={this.props.onChangeColour}
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
               showImportDialog={this.props.showImportDialog}

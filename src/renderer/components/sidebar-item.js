@@ -137,8 +137,8 @@ class SidebarItem extends PureComponent {
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
+    onChangeColour: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
-    onArchiveUpdate: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
     t: PropTypes.func
   };
@@ -226,15 +226,15 @@ class SidebarItem extends PureComponent {
 
   handleColorChange = (color, e) => {
     e.stopPropagation();
-    this.props.onArchiveUpdate({
-      ...this.props.archive,
-      color: color.hex
+    this.props.onChangeColour({
+      archiveId: this.props.archive.id,
+      colour: color.hex
     });
   };
 
   render() {
     const { archive, onClick, active, condenced } = this.props;
-    const { name, color, status, type } = archive;
+    const { name, colour, status, type } = archive;
     const locked = status === 'locked';
 
     const formattedName = capitalize(name.replace('.bcup', ''));
@@ -248,7 +248,7 @@ class SidebarItem extends PureComponent {
         onClick={onClick}
       >
         <Avatar
-          color={color || '#000000'}
+          color={colour}
           locked={locked}
           innerRef={ref => {
             this.avatarRef = ref;
