@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { SortableContainer } from 'react-sortable-hoc';
 import { isOSX } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
 import EmptyView from './empty-view';
@@ -17,10 +18,11 @@ const Column = styled(BaseColumn)`
   display: flex;
 `;
 
-const ArchiveList = styled.ul`
+const ArchiveList = SortableContainer(styled.ul`
+  -webkit-app-region: no-drag;
   margin: calc(var(--spacing-one) * ${isOSX() ? 3 : 1}) 0 0 0;
   padding: 0;
-`;
+`);
 
 class RecentFiles extends PureComponent {
   static propTypes = {
@@ -33,6 +35,10 @@ class RecentFiles extends PureComponent {
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
+  };
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    console.log(oldIndex, newIndex);
   };
 
   renderEmptyState() {
@@ -50,13 +56,18 @@ class RecentFiles extends PureComponent {
 
     return (
       <Column footer={footer} condenced={condenced}>
-        <ArchiveList>
+        <ArchiveList
+          onSortEnd={this.onSortEnd}
+          lockAxis="y"
+          lockToContainerEdges
+        >
           {archives.map((archive, i) => (
             <SidebarItem
               active={archive.id === currentArchiveId}
               archive={archive}
               key={archive.id}
               index={i}
+              order={i}
               condenced={condenced}
               onLockArchive={() => this.props.onLockArchive(archive.id)}
               onChangePassword={() => this.props.onChangePassword(archive.id)}
