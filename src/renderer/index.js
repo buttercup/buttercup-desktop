@@ -11,7 +11,8 @@ import {
   addArchiveFromSource,
   loadOrUnlockArchive,
   setCurrentArchive,
-  importHistoryIntoArchive
+  importHistoryIntoArchive,
+  resetArchivesInStore
 } from '../shared/actions/archives';
 import { setUIState } from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
@@ -37,6 +38,7 @@ setupShortcuts(store);
 
 // Reset current archive
 store.dispatch(setCurrentArchive(null));
+store.dispatch(resetArchivesInStore([]));
 
 ipc.send('init');
 
