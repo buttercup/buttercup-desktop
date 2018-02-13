@@ -58,6 +58,7 @@ class RecentFiles extends PureComponent {
       <Column footer={footer} condenced={condenced}>
         <ArchiveList
           onSortEnd={this.onSortEnd}
+          distance={5}
           lockAxis="y"
           lockToContainerEdges
         >

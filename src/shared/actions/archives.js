@@ -36,7 +36,7 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => () => {
-  removeArchiveFromArchiveManager(payload);
+  return removeArchiveFromArchiveManager(payload);
 };
 
 export const changeArchivePassword = payload => () => {

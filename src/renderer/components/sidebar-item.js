@@ -255,7 +255,7 @@ class SidebarItem extends PureComponent {
           }}
         >
           <span>{briefName}</span>
-          <If condition={condenced && brands[type].remote}>
+          <If condition={condenced && brands[type] && brands[type].remote}>
             <Icon>
               <img src={brands[type].icon} alt={brands[type].name} />
             </Icon>
@@ -286,7 +286,7 @@ class SidebarItem extends PureComponent {
             <div>{formattedName}</div>
             <span className="status">
               {locked ? <LockClosed /> : <LockOpen />}
-              {brands[type].name}
+              {brands[type] && brands[type].name}
             </span>
           </section>
         </If>

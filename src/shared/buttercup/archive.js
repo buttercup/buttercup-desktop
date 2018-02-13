@@ -11,7 +11,7 @@ import i18n from '../i18n';
 const { ArchiveManager, ArchiveSource } = OldArchiveManager.v2;
 let __sharedManager = null;
 
-export function addArchiveToArchiveManager(masterConfig, masterPassword) {
+export async function addArchiveToArchiveManager(masterConfig, masterPassword) {
   const { credentials, datasource, type, path: filePath, isNew } = masterConfig;
 
   const passwordCredentials = createCredentials.fromPassword(masterPassword);
@@ -26,20 +26,23 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
 
   const manager = getSharedArchiveManager();
 
-  // return manager.addSource(
-  //   path.basename(filePath),
-  //   sourceCredentials,
-  //   passwordCredentials,
-  //   isNew
-  // );
-  return manager.addSource(
-    new ArchiveSource(
-      path.basename(filePath),
-      sourceCredentials,
-      passwordCredentials
-      // isNew
-    )
-  );
+  return Promise.all([
+    sourceCredentials.toSecureString(masterPassword),
+    passwordCredentials.toSecureString(masterPassword)
+  ])
+    .then(([sourceCredentialsStr, passwordCredentialsStr]) => {
+      const source = new ArchiveSource(
+        path.basename(filePath),
+        sourceCredentialsStr,
+        passwordCredentialsStr
+      );
+      manager.addSource(source);
+      return unlockArchiveInArchiveManager(source.id, masterPassword, isNew);
+    })
+    .then(archiveId => {
+      saveArchiveManager();
+      return archiveId;
+    });
 }
 
 export function lockArchiveInArchiveManager(archiveId) {
@@ -58,15 +61,18 @@ export function lockArchiveInArchiveManager(archiveId) {
 
 export function removeArchiveFromArchiveManager(archiveId) {
   const manager = getSharedArchiveManager();
-  manager.removeSource(archiveId);
-  saveArchiveManager();
+  return manager.removeSource(archiveId);
 }
 
-export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
+export function unlockArchiveInArchiveManager(
+  archiveId,
+  masterPassword,
+  isNew = false
+) {
   const manager = getSharedArchiveManager();
   return manager
     .getSourceForID(archiveId)
-    .unlock(masterPassword)
+    .unlock(masterPassword, isNew)
     .then(() => archiveId)
     .catch(err => {
       const { message } = err;
@@ -98,14 +104,9 @@ export function getArchive(archiveId) {
 export function updateArchivePassword(archiveId, newPassword) {
   const manager = getSharedArchiveManager();
   const source = manager.getSourceForID(archiveId);
-  console.log(source);
 
   enqueue('saves', () => {
-    console.log('hello');
-    return source.updateArchiveCredentials(newPassword).then(args => {
-      console.log('done');
-      console.log(args);
-    });
+    return source.updateArchiveCredentials(newPassword);
   });
 }
 
