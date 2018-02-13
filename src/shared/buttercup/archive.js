@@ -117,6 +117,13 @@ export function updateArchiveColour(archiveId, newColor) {
   saveArchiveManager();
 }
 
+export function updateArchiveOrder(archiveId, newOrder) {
+  const manager = getSharedArchiveManager();
+  console.log(archiveId, newOrder);
+  manager.reorderSource(archiveId, newOrder);
+  saveArchiveManager();
+}
+
 export function saveWorkspace(archiveId) {
   const manager = getSharedArchiveManager();
   const { workspace } = manager.getSourceForID(archiveId);

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { SortableContainer } from 'react-sortable-hoc';
 import { isOSX } from '../../shared/utils/platform';
 import AddArchiveButton from '../containers/add-archive-button';
-import EmptyView from './empty-view';
 import BaseColumn from './column';
 import SidebarItem from './sidebar-item';
 
@@ -34,20 +33,18 @@ class RecentFiles extends PureComponent {
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
     onChangeColour: PropTypes.func.isRequired,
+    onChangeOrder: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     console.log(oldIndex, newIndex);
+    const archive = this.props.archives[oldIndex];
+    this.props.onChangeOrder({
+      archiveId: archive.id,
+      order: newIndex
+    });
   };
-
-  renderEmptyState() {
-    return (
-      <div>
-        <EmptyView caption="No archives yet." />
-      </div>
-    );
-  }
 
   render() {
     const { archives, currentArchiveId, condenced } = this.props;

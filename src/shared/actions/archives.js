@@ -10,7 +10,12 @@ import {
   showConfirmedPasswordDialog
 } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
-import { ARCHIVES_SET, ARCHIVES_SET_CURRENT } from './types';
+import {
+  ARCHIVES_SET,
+  ARCHIVES_SET_CURRENT,
+  ARCHIVES_REMOVE,
+  ARCHIVES_SET_ORDER
+} from './types';
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
   addArchiveToArchiveManager,
@@ -18,13 +23,16 @@ import {
   removeArchiveFromArchiveManager,
   unlockArchiveInArchiveManager,
   updateArchivePassword,
-  updateArchiveColour
+  updateArchiveColour,
+  updateArchiveOrder
 } from '../buttercup/archive';
 import i18n from '../i18n';
 
 // Store Actions
+export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
 export const resetArchivesInStore = createAction(ARCHIVES_SET);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
+export const reorderArchiveInStore = createAction(ARCHIVES_SET_ORDER);
 
 // Impure Buttercup actions
 export const loadArchive = payload => (dispatch, getState) => {
@@ -35,8 +43,10 @@ export const loadArchive = payload => (dispatch, getState) => {
   dispatch(reloadGroups());
 };
 
-export const removeArchive = payload => () => {
-  return removeArchiveFromArchiveManager(payload);
+export const removeArchive = payload => dispatch => {
+  return removeArchiveFromArchiveManager(payload).then(() => {
+    dispatch(removeArchiveFromStore(payload));
+  });
 };
 
 export const changeArchivePassword = payload => () => {
@@ -57,6 +67,18 @@ export const changeArchivePassword = payload => () => {
 
 export const changeArchiveColour = ({ archiveId, colour }) => () => {
   updateArchiveColour(archiveId, colour);
+};
+
+export const changeArchiveOrder = ({ archiveId, order }) => dispatch => {
+  // Reorder locally first, since the manager event might come in a few
+  // milliseconds late, we don't want any flashes of content.
+  dispatch(
+    reorderArchiveInStore({
+      archiveId,
+      order
+    })
+  );
+  updateArchiveOrder(archiveId, order);
 };
 
 export const lockArchive = payload => dispatch => {

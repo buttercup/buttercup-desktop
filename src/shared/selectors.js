@@ -5,8 +5,7 @@ import { denormalizeGroups } from './buttercup/groups';
 // Archive ->
 
 export const getArchivesCount = state => state.archives.length;
-export const getAllArchives = state =>
-  sortByKey(Object.values(state.archives), 'name-asc');
+export const getAllArchives = state => state.archives;
 export const getArchive = (state, archiveId) =>
   state.archives.find(archive => archive.id === archiveId);
 export const getCurrentArchiveId = state => state.currentArchive;
