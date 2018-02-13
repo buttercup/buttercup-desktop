@@ -38,7 +38,6 @@ class RecentFiles extends PureComponent {
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
-    console.log(oldIndex, newIndex);
     const archive = this.props.archives[oldIndex];
     this.props.onChangeOrder({
       archiveId: archive.id,

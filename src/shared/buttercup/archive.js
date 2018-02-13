@@ -119,7 +119,6 @@ export function updateArchiveColour(archiveId, newColor) {
 
 export function updateArchiveOrder(archiveId, newOrder) {
   const manager = getSharedArchiveManager();
-  console.log(archiveId, newOrder);
   manager.reorderSource(archiveId, newOrder);
   saveArchiveManager();
 }
@@ -143,7 +142,5 @@ export function saveWorkspace(archiveId) {
 
 export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
-  manager.dehydrate().then(res => {
-    console.log('saved', res);
-  });
+  manager.dehydrate();
 }
