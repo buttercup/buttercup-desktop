@@ -11,7 +11,7 @@ import i18n from '../i18n';
 const { ArchiveManager, ArchiveSource } = OldArchiveManager.v2;
 let __sharedManager = null;
 
-export async function addArchiveToArchiveManager(masterConfig, masterPassword) {
+export function addArchiveToArchiveManager(masterConfig, masterPassword) {
   const { credentials, datasource, type, path: filePath, isNew } = masterConfig;
 
   const passwordCredentials = createCredentials.fromPassword(masterPassword);
