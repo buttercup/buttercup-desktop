@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from '../../styles/entries-list';
+import cx from 'classnames';
 import EntryIcon from './entry-icon';
 
 const List = ({ entries, currentEntry, onSelectEntry, onRightClick }) => (
@@ -8,9 +9,9 @@ const List = ({ entries, currentEntry, onSelectEntry, onRightClick }) => (
     {entries.map(entry => (
       <li
         key={entry.id}
-        className={
-          currentEntry && entry.id === currentEntry.id ? styles.active : null
-        }
+        className={cx({
+          [styles.active]: currentEntry && entry.id === currentEntry.id
+        })}
         onClick={() => onSelectEntry(entry.id)}
         onContextMenu={() => onRightClick(entry)}
       >
