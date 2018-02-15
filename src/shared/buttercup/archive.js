@@ -36,8 +36,11 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
         sourceCredentialsStr,
         passwordCredentialsStr
       );
-      manager.addSource(source);
-      return unlockArchiveInArchiveManager(source.id, masterPassword, isNew);
+      return manager
+        .addSource(source)
+        .then(() =>
+          unlockArchiveInArchiveManager(source.id, masterPassword, isNew)
+        );
     })
     .then(archiveId => {
       saveArchiveManager();
