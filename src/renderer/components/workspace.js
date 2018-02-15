@@ -14,8 +14,6 @@ const Primary = styled(Flex)`
   position: relative;
 `;
 
-const LoadingWrapper = styled(Flex)``;
-
 const Workspace = ({
   currentArchive,
   archivesCount,
@@ -34,9 +32,9 @@ const Workspace = ({
       <Primary flexAuto>
         <Choose>
           <When condition={archivesLoading}>
-            <LoadingWrapper align="center" justify="center" flexColumn flexAuto>
+            <Flex align="center" justify="center" flexColumn flexAuto>
               <img width="64" src={spinner} alt="Loading" />
-            </LoadingWrapper>
+            </Flex>
           </When>
           <Otherwise>
             <Choose>
