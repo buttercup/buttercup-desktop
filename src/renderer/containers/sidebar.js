@@ -4,8 +4,9 @@ import {
   loadOrUnlockArchive,
   lockArchive,
   changeArchivePassword,
-  updateArchive,
-  showImportDialog
+  changeArchiveColour,
+  showImportDialog,
+  changeArchiveOrder
 } from '../../shared/actions/archives';
 import {
   openArchive,
@@ -25,9 +26,10 @@ export default connect(
     onClick: loadOrUnlockArchive,
     onLockArchive: lockArchive,
     onChangePassword: changeArchivePassword,
+    onChangeColour: changeArchiveColour,
+    onChangeOrder: changeArchiveOrder,
     onOpenClick: openArchive,
     onNewClick: newArchive,
-    onArchiveUpdate: updateArchive,
     onCloudClick: openFileManager,
     showImportDialog
   }

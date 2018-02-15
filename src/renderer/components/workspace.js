@@ -8,6 +8,7 @@ import '../styles/workspace.global.scss';
 import UpdateNotice from './update-notice';
 import SavingModal from './saving-modal';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
+import spinner from '../styles/img/spinner.svg';
 
 const Primary = styled(Flex)`
   position: relative;
@@ -20,24 +21,36 @@ const Workspace = ({
   installUpdate,
   setColumnSize,
   columnSizes,
-  condencedSidebar
+  condencedSidebar,
+  archivesLoading
 }) => {
   return (
     <Flex flexAuto>
-      {archivesCount > 0 && <Sidebar condenced={condencedSidebar} />}
+      <If condition={archivesCount > 0}>
+        <Sidebar condenced={condencedSidebar} />
+      </If>
       <Primary flexAuto>
         <Choose>
-          <When condition={archivesCount === 0}>
-            <WelcomeScreen />
-          </When>
-          <When condition={archivesCount > 0 && currentArchive === null}>
-            <NoArchiveSelected />
+          <When condition={archivesLoading}>
+            <Flex align="center" justify="center" flexColumn flexAuto>
+              <img width="64" src={spinner} alt="Loading" />
+            </Flex>
           </When>
           <Otherwise>
-            <Archive
-              columnSizes={columnSizes}
-              onColumnSizeChange={setColumnSize}
-            />
+            <Choose>
+              <When condition={archivesCount === 0}>
+                <WelcomeScreen />
+              </When>
+              <When condition={archivesCount > 0 && currentArchive === null}>
+                <NoArchiveSelected />
+              </When>
+              <Otherwise>
+                <Archive
+                  columnSizes={columnSizes}
+                  onColumnSizeChange={setColumnSize}
+                />
+              </Otherwise>
+            </Choose>
           </Otherwise>
         </Choose>
       </Primary>
@@ -53,6 +66,7 @@ Workspace.propTypes = {
   update: PropTypes.object,
   columnSizes: PropTypes.object,
   condencedSidebar: PropTypes.bool,
+  archivesLoading: PropTypes.bool,
   installUpdate: PropTypes.func,
   setColumnSize: PropTypes.func
 };

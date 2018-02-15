@@ -11,12 +11,10 @@ import {
 } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
-  ARCHIVES_ADD,
-  ARCHIVES_REMOVE,
-  ARCHIVES_LOCK,
-  ARCHIVES_UNLOCK,
+  ARCHIVES_SET,
   ARCHIVES_SET_CURRENT,
-  ARCHIVES_UPDATE
+  ARCHIVES_REMOVE,
+  ARCHIVES_SET_ORDER
 } from './types';
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
@@ -24,17 +22,17 @@ import {
   lockArchiveInArchiveManager,
   removeArchiveFromArchiveManager,
   unlockArchiveInArchiveManager,
-  updateArchivePassword
+  updateArchivePassword,
+  updateArchiveColour,
+  updateArchiveOrder
 } from '../buttercup/archive';
 import i18n from '../i18n';
 
 // Store Actions
-export const addArchiveToStore = createAction(ARCHIVES_ADD);
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
-export const unlockArchiveInStore = createAction(ARCHIVES_UNLOCK);
-export const lockArchiveInStore = createAction(ARCHIVES_LOCK);
+export const resetArchivesInStore = createAction(ARCHIVES_SET);
 export const setCurrentArchive = createAction(ARCHIVES_SET_CURRENT);
-export const updateArchive = createAction(ARCHIVES_UPDATE);
+export const reorderArchiveInStore = createAction(ARCHIVES_SET_ORDER);
 
 // Impure Buttercup actions
 export const loadArchive = payload => (dispatch, getState) => {
@@ -45,8 +43,10 @@ export const loadArchive = payload => (dispatch, getState) => {
   dispatch(reloadGroups());
 };
 
-export const removeArchive = payload => () => {
-  return removeArchiveFromArchiveManager(payload);
+export const removeArchive = payload => dispatch => {
+  return removeArchiveFromArchiveManager(payload).then(() => {
+    dispatch(removeArchiveFromStore(payload));
+  });
 };
 
 export const changeArchivePassword = payload => () => {
@@ -65,9 +65,24 @@ export const changeArchivePassword = payload => () => {
     .catch(() => {});
 };
 
+export const changeArchiveColour = ({ archiveId, colour }) => () => {
+  updateArchiveColour(archiveId, colour);
+};
+
+export const changeArchiveOrder = ({ archiveId, order }) => dispatch => {
+  // Reorder locally first, since the manager event might come in a few
+  // milliseconds late, we don't want any flashes of content.
+  dispatch(
+    reorderArchiveInStore({
+      archiveId,
+      order
+    })
+  );
+  updateArchiveOrder(archiveId, order);
+};
+
 export const lockArchive = payload => dispatch => {
   return lockArchiveInArchiveManager(payload).then(archiveId => {
-    dispatch(lockArchiveInStore(archiveId));
     dispatch(setCurrentArchive(null));
   });
 };

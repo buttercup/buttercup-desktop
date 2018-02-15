@@ -31,6 +31,7 @@ const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
   condencedSidebar: true,
   menubarAutoHide: false,
+  archivesLoading: false,
   locale: ''
 };
 

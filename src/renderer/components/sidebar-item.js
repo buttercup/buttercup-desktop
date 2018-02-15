@@ -7,6 +7,7 @@ import LockClosed from 'react-icons/lib/md/lock-outline';
 import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
+import { SortableElement } from 'react-sortable-hoc';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
 import { getTextColor, COLORS } from '../../shared/utils/colors';
@@ -112,12 +113,12 @@ class SidebarItem extends PureComponent {
     archive: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
     condenced: PropTypes.bool.isRequired,
-    index: PropTypes.number.isRequired,
+    order: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     onLockArchive: PropTypes.func.isRequired,
     onChangePassword: PropTypes.func.isRequired,
+    onChangeColour: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
-    onArchiveUpdate: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
     t: PropTypes.func
   };
@@ -138,7 +139,7 @@ class SidebarItem extends PureComponent {
         label: `${status === 'locked'
           ? label('unlock')
           : label('open')} ${name}`,
-        accelerator: `CmdOrCtrl+${this.props.index + 1}`,
+        accelerator: `CmdOrCtrl+${this.props.order + 1}`,
         click: this.props.onClick
       },
       ...(status === 'unlocked'
@@ -205,15 +206,15 @@ class SidebarItem extends PureComponent {
 
   handleColorChange = (color, e) => {
     e.stopPropagation();
-    this.props.onArchiveUpdate({
-      ...this.props.archive,
-      color: color.hex
+    this.props.onChangeColour({
+      archiveId: this.props.archive.id,
+      colour: color.hex
     });
   };
 
   render() {
     const { archive, onClick, active, condenced } = this.props;
-    const { name, color, status, type } = archive;
+    const { name, colour, status, type } = archive;
     const locked = status === 'locked';
 
     const formattedName = capitalize(name.replace('.bcup', ''));
@@ -227,14 +228,14 @@ class SidebarItem extends PureComponent {
         onClick={onClick}
       >
         <Avatar
-          color={color || '#000000'}
+          color={colour}
           locked={locked}
           innerRef={ref => {
             this.avatarRef = ref;
           }}
         >
           <span>{briefName}</span>
-          <If condition={condenced && brands[type].remote}>
+          <If condition={condenced && brands[type] && brands[type].remote}>
             <Icon>
               <img src={brands[type].icon} alt={brands[type].name} />
             </Icon>
@@ -265,7 +266,7 @@ class SidebarItem extends PureComponent {
             <div>{formattedName}</div>
             <span className="status">
               {locked ? <LockClosed /> : <LockOpen />}
-              {brands[type].name}
+              {brands[type] && brands[type].name}
             </span>
           </section>
         </If>
@@ -274,4 +275,4 @@ class SidebarItem extends PureComponent {
   }
 }
 
-export default translate()(SidebarItem);
+export default translate()(SortableElement(SidebarItem));

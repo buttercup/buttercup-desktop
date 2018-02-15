@@ -1,6 +1,6 @@
 import path from 'path';
 import {
-  ArchiveManager,
+  ArchiveManager as OldArchiveManager,
   createCredentials
 } from 'buttercup/dist/buttercup-web.min';
 import ElectronStorageInterface from './storage';
@@ -8,6 +8,7 @@ import { enqueueInMain as enqueue } from '../../renderer/system/queue';
 import './ipc-datasource';
 import i18n from '../i18n';
 
+const { ArchiveManager, ArchiveSource } = OldArchiveManager.v2;
 let __sharedManager = null;
 
 export function addArchiveToArchiveManager(masterConfig, masterPassword) {
@@ -25,12 +26,26 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
 
   const manager = getSharedArchiveManager();
 
-  return manager.addSource(
-    path.basename(filePath),
-    sourceCredentials,
-    passwordCredentials,
-    isNew
-  );
+  return Promise.all([
+    sourceCredentials.toSecureString(masterPassword),
+    passwordCredentials.toSecureString(masterPassword)
+  ])
+    .then(([sourceCredentialsStr, passwordCredentialsStr]) => {
+      const source = new ArchiveSource(
+        path.basename(filePath),
+        sourceCredentialsStr,
+        passwordCredentialsStr
+      );
+      return manager
+        .addSource(source)
+        .then(() =>
+          unlockArchiveInArchiveManager(source.id, masterPassword, isNew)
+        );
+    })
+    .then(archiveId => {
+      saveArchiveManager();
+      return archiveId;
+    });
 }
 
 export function lockArchiveInArchiveManager(archiveId) {
@@ -49,13 +64,18 @@ export function lockArchiveInArchiveManager(archiveId) {
 
 export function removeArchiveFromArchiveManager(archiveId) {
   const manager = getSharedArchiveManager();
-  return manager.remove(archiveId);
+  return manager.removeSource(archiveId);
 }
 
-export function unlockArchiveInArchiveManager(archiveId, masterPassword) {
+export function unlockArchiveInArchiveManager(
+  archiveId,
+  masterPassword,
+  isNew = false
+) {
   const manager = getSharedArchiveManager();
   return manager
-    .unlock(archiveId, masterPassword)
+    .getSourceForID(archiveId)
+    .unlock(masterPassword, isNew)
     .then(() => archiveId)
     .catch(err => {
       const { message } = err;
@@ -80,15 +100,35 @@ export function getSharedArchiveManager() {
 
 export function getArchive(archiveId) {
   const manager = getSharedArchiveManager();
-  const sourceIndex = manager.indexOfSource(archiveId);
-  const source = manager.sources[sourceIndex];
+  const source = manager.getSourceForID(archiveId);
   return source.workspace.primary.archive;
+}
+
+export function updateArchivePassword(archiveId, newPassword) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(archiveId);
+
+  enqueue('saves', () => {
+    return source.updateArchiveCredentials(newPassword);
+  });
+}
+
+export function updateArchiveColour(archiveId, newColor) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(archiveId);
+  source.colour = newColor;
+  saveArchiveManager();
+}
+
+export function updateArchiveOrder(archiveId, newOrder) {
+  const manager = getSharedArchiveManager();
+  manager.reorderSource(archiveId, newOrder);
+  saveArchiveManager();
 }
 
 export function saveWorkspace(archiveId) {
   const manager = getSharedArchiveManager();
-  const sourceIndex = manager.indexOfSource(archiveId);
-  const { workspace } = manager.sources[sourceIndex];
+  const { workspace } = manager.getSourceForID(archiveId);
 
   enqueue('saves', () => {
     return workspace
@@ -103,11 +143,7 @@ export function saveWorkspace(archiveId) {
   });
 }
 
-export function updateArchivePassword(archiveId, newPassword) {
+export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
-  const passwordCredentials = createCredentials.fromPassword(newPassword);
-
-  enqueue('saves', () => {
-    return manager.updateArchiveCredentials(archiveId, passwordCredentials);
-  });
+  manager.dehydrate();
 }
