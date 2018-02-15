@@ -260,7 +260,7 @@
     "spectron": "^3.7.2",
     "style-loader": "^0.13.1",
     "styled-components": "^3.1.6",
-    "styled-flexbox": "^0.3.0",
+    "styled-flexbox": "^0.3.1",
     "sweetalert2": "^6.6.0",
     "tinycolor2": "^1.4.1",
     "tmp": "0.0.33",
