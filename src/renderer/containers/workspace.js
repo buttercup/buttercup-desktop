@@ -12,6 +12,7 @@ export default connect(
   state => ({
     columnSizes: getSetting(state, 'columnSizes'),
     condencedSidebar: getSetting(state, 'condencedSidebar'),
+    archivesLoading: getSetting(state, 'archivesLoading'),
     currentArchive: getCurrentArchive(state),
     archivesCount: getArchivesCount(state),
     update: state.update

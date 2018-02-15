@@ -37,6 +37,7 @@ linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
 // Reset current archive
+store.dispatch(setSetting('archivesLoading', true));
 store.dispatch(setCurrentArchive(null));
 store.dispatch(resetArchivesInStore([]));
 
