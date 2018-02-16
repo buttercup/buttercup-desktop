@@ -51,7 +51,8 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
 export function lockArchiveInArchiveManager(archiveId) {
   const manager = getSharedArchiveManager();
   return manager
-    .lock(archiveId)
+    .getSourceForID(archiveId)
+    .lock()
     .then(() => archiveId)
     .catch(err => {
       const { message } = err;
