@@ -85,4 +85,22 @@ export function setupWindows(store) {
 
     return win;
   });
+
+  windowManager.setBuildProcedure('update', (callback, options) => {
+    const win = new BrowserWindow({
+      width: 650,
+      height: 450,
+      show: false,
+      resizable: false,
+      ...options
+    });
+
+    win.loadURL(getPathToFile('views/update.html'));
+
+    win.once('ready-to-show', () => {
+      win.show();
+    });
+
+    return win;
+  });
 }

@@ -33,6 +33,10 @@ export function setupActions(store) {
     });
   }
 
+  ipc.on('show-update', () => {
+    windowManager.buildWindowOfType('update');
+  });
+
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {
       parent: BrowserWindow.getFocusedWindow()
