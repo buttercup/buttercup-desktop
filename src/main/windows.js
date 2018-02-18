@@ -88,8 +88,8 @@ export function setupWindows(store) {
 
   windowManager.setBuildProcedure('update', (callback, options) => {
     const win = new BrowserWindow({
-      width: 650,
-      height: 450,
+      width: 700,
+      height: 470,
       show: false,
       resizable: false,
       ...options
