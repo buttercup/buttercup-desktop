@@ -118,6 +118,14 @@ $ npm run package:win
 $ npm run package:linux
 ```
 
+## Debugging
+
+In case you need to access Buttercup logs, they are located in:
+
+* **On Linux:** `~/.config/Buttercup/log.log`
+* **On macOS:** `~/Library/Logs/Buttercup/log.log`
+* **On Windows:** `%USERPROFILE%\AppData\Roaming\Buttercup\log.log`
+
 ## Contributors
 
 ### Creation
