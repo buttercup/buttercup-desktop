@@ -60,18 +60,27 @@ export default class Update extends PureComponent {
   state = {
     version: null,
     currentVersion: null,
-    releaseNotes: null
+    releaseNotes: null,
+    percent: 0
   };
 
   componentDidMount() {
     ipcRenderer.on('update-available', (event, updateInfo) => {
       this.setState(updateInfo);
     });
+    ipcRenderer.on('download-progress', (event, { percent }) => {
+      this.setState({ percent });
+    });
+    ipcRenderer.on('update-error', () => {
+      this.setState({ percent: 0 });
+    });
     ipcRenderer.send('init');
   }
 
   componentWillUnmount() {
     ipcRenderer.removeListener('update-avialable');
+    ipcRenderer.removeListener('update-error');
+    ipcRenderer.removeListener('download-progress');
   }
 
   handleLinkClick(e, href) {
@@ -117,7 +126,11 @@ export default class Update extends PureComponent {
           </ReleaseNotes>
           <Flex justify="space-between">
             <Button onClick={this.handleSkip}>Remind me Later</Button>
-            <Button primary onClick={this.handleDownload}>
+            <Button
+              primary
+              onClick={this.handleDownload}
+              disabled={this.state.percent > 0}
+            >
               Download and Install
             </Button>
           </Flex>

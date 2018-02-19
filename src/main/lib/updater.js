@@ -3,7 +3,7 @@ import log from 'electron-log';
 import ms from 'ms';
 import { getWindowManager } from './window-manager';
 import i18n from '../../shared/i18n';
-import { app, ipcMain } from 'electron';
+import { app, ipcMain, dialog } from 'electron';
 
 const windowManager = getWindowManager();
 let __updateWin;
@@ -30,9 +30,19 @@ autoUpdater.on('update-downloaded', () => {
   autoUpdater.quitAndInstall();
 });
 
-autoUpdater.on('download-progress', ({ progress }) => {
+autoUpdater.on('download-progress', progress => {
   if (__updateWin) {
     __updateWin.webContents.send('download-progress', progress);
+  }
+});
+
+autoUpdater.on('error', error => {
+  dialog.showErrorBox(
+    'Error: ',
+    error == null ? 'Unknown error occured' : (error.stack || error).toString()
+  );
+  if (__updateWin) {
+    __updateWin.webContents.send('update-error', error);
   }
 });
 
