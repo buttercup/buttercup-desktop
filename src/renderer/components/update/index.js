@@ -3,7 +3,6 @@ import { shell, ipcRenderer } from 'electron';
 import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
-import ReactMarkdown from 'react-markdown';
 import '../../styles/workspace.global.scss';
 import icon from '../../styles/img/icons/256x256.png';
 
@@ -112,19 +111,9 @@ export default class Update extends PureComponent {
             </p>
             <h5>Release Notes:</h5>
           </Header>
-          <ReleaseNotes>
-            <ReactMarkdown
-              escapeHtml={false}
-              source={this.state.releaseNotes}
-              renderers={{
-                link: ({ href, children }) => (
-                  <a href="#" onClick={e => this.handleLinkClick(e, href)}>
-                    {children}
-                  </a>
-                )
-              }}
-            />
-          </ReleaseNotes>
+          <ReleaseNotes
+            dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
+          />
           <Flex justify="space-between">
             <Button onClick={this.handleSkip}>Remind me Later</Button>
             <Button

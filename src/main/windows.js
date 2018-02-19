@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain as ipc } from 'electron';
+import { app, BrowserWindow, ipcMain as ipc, shell } from 'electron';
 import debounce from 'lodash/debounce';
 import { isHighSierra, isOSX } from '../shared/utils/platform';
 import { getWindowManager } from './lib/window-manager';
@@ -98,7 +98,13 @@ export function setupWindows(store) {
     win.loadURL(getPathToFile('views/update.html'));
 
     ipc.once('init', () => {
+      win.webContents.on('will-navigate', (e, url) => {
+        e.preventDefault();
+        shell.openExternal(url);
+      });
+
       win.show();
+
       if (callback) {
         callback(win);
       }
