@@ -37,10 +37,7 @@ autoUpdater.on('download-progress', progress => {
 });
 
 autoUpdater.on('error', error => {
-  dialog.showErrorBox(
-    'Error: ',
-    error == null ? 'Unknown error occured' : (error.stack || error).toString()
-  );
+  dialog.showErrorBox('Error', i18n.t('error.check-for-update'));
   if (__updateWin) {
     __updateWin.webContents.send('update-error', error);
   }
@@ -56,10 +53,5 @@ export function startAutoUpdate(cb) {
 }
 
 export function checkForUpdates() {
-  try {
-    autoUpdater.checkForUpdates();
-  } catch (err) {
-    // NOOP
-    log.error(i18n.t('error.check-for-update'), err);
-  }
+  autoUpdater.checkForUpdates();
 }

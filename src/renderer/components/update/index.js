@@ -114,6 +114,7 @@ export default class Update extends PureComponent {
           </Header>
           <ReleaseNotes>
             <ReactMarkdown
+              escapeHtml={false}
               source={this.state.releaseNotes}
               renderers={{
                 link: ({ href, children }) => (
