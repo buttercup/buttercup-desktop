@@ -78,6 +78,13 @@ export default class Update extends PureComponent {
     e.preventDefault();
     shell.openExternal(href);
   }
+
+  handleDownload = () => {
+    ipcRenderer.send('download-update');
+  };
+
+  handleSkip = () => {};
+
   render() {
     if (!this.state.version) {
       return null;
@@ -109,8 +116,10 @@ export default class Update extends PureComponent {
             />
           </ReleaseNotes>
           <Flex justify="space-between">
-            <Button>Remind me Later</Button>
-            <Button primary>Download and Install</Button>
+            <Button onClick={this.handleSkip}>Remind me Later</Button>
+            <Button primary onClick={this.handleDownload}>
+              Download and Install
+            </Button>
           </Flex>
         </Flex>
       </Wrapper>
