@@ -34,7 +34,13 @@ export function setupActions(store) {
   }
 
   ipc.on('show-update', () => {
-    windowManager.buildWindowOfType('update');
+    windowManager.buildWindowOfType('update', win => {
+      win.webContents.send('update-available', {
+        version: '1.1.1',
+        currentVersion: '0.2.2',
+        releaseNotes: 'Blah'
+      });
+    });
   });
 
   ipc.on('show-file-manager', () => {

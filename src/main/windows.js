@@ -97,8 +97,11 @@ export function setupWindows(store) {
 
     win.loadURL(getPathToFile('views/update.html'));
 
-    win.once('ready-to-show', () => {
+    ipc.once('init', () => {
       win.show();
+      if (callback) {
+        callback(win);
+      }
     });
 
     return win;
