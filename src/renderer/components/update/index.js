@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
 import sanitizeHtml from 'sanitize-html';
+import { translate } from 'react-i18next';
+import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import icon from '../../styles/img/icons/256x256.png';
 
@@ -60,7 +62,7 @@ const ReleaseNotes = styled.div`
   }
 `;
 
-export default class Update extends PureComponent {
+class Update extends PureComponent {
   state = {
     version: null,
     currentVersion: null,
@@ -118,19 +120,23 @@ export default class Update extends PureComponent {
         </Icon>
         <Flex flexColumn flexAuto>
           <Header>
-            <h4>A new version of Buttercup is available!</h4>
-            <p>
-              Buttercup {this.state.version} is now available. You have{' '}
-              {this.state.currentVersion}. Would you like to download it now?
-            </p>
-            <h5>Release Notes:</h5>
+            <Translate i18nKey="update.new-version-available" parent="h4" />
+            <Translate
+              i18nKey="update.update-available-message"
+              parent="p"
+              values={{
+                version: this.state.version,
+                currentVersion: this.state.currentVersion
+              }}
+            />
+            <Translate i18nKey="update.release-notes" parent="h5" />
           </Header>
           <ReleaseNotes
             dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
           />
           <Flex justify="space-between">
             <Button onClick={this.handleSkip} dark>
-              Not Now
+              <Translate i18nKey="update.not-now" />
             </Button>
             <Button
               primary
@@ -138,7 +144,7 @@ export default class Update extends PureComponent {
               loading={this.state.percent > 0}
               disabled={this.state.percent > 0}
             >
-              Download and Install
+              <Translate i18nKey="update.download" />
             </Button>
           </Flex>
         </Flex>
@@ -146,3 +152,5 @@ export default class Update extends PureComponent {
     );
   }
 }
+
+export default translate()(Update);

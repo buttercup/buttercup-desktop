@@ -205,6 +205,10 @@
   },
   "update": {
     "installing": "Installing",
-    "update-available-message": "Buttercup {{version}} is available. Click here to install now."
+    "update-available-message": "Buttercup {{version}} is now available. You have {{currentVersion}}. Would you like to download it now?",
+    "new-version-available": "A new version of Buttercup is available!",
+    "not-now": "Not Now",
+    "download": "Download and Install",
+    "release-notes": "Release Notes:"
   }
 }
