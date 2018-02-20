@@ -13,16 +13,6 @@ export function setupActions(store) {
   // Update the menu
   store.subscribe(debounce(() => setupMenu(store), 500));
 
-  ipc.on('show-update', () => {
-    windowManager.buildWindowOfType('update', win => {
-      win.webContents.send('update-available', {
-        version: '1.1.1',
-        currentVersion: '0.2.2',
-        releaseNotes: '<a href="https://google.com">Blah</a><br/>Blah'
-      });
-    });
-  });
-
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {
       parent: BrowserWindow.getFocusedWindow()
