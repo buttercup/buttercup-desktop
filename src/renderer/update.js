@@ -1,6 +1,7 @@
 import React from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import { I18nextProvider } from 'react-i18next';
+import Mousetrap from 'mousetrap';
 import i18n from '../shared/i18n';
 import { render } from 'react-dom';
 import Updater from './components/update';
@@ -10,6 +11,11 @@ import { getSetting } from '../shared/selectors';
 
 // Create store
 const store = configureStore({}, 'renderer');
+
+// Setup shortcuts
+Mousetrap.bind('esc', () => {
+  window.close();
+});
 
 // setup i18n
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));

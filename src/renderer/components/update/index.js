@@ -54,6 +54,10 @@ const ReleaseNotes = styled.div`
   img {
     width: 100%;
   }
+
+  p {
+    margin: 0 0 1rem;
+  }
 `;
 
 export default class Update extends PureComponent {
@@ -112,7 +116,7 @@ export default class Update extends PureComponent {
         <Icon>
           <img src={icon} />
         </Icon>
-        <Flex flexColumn>
+        <Flex flexColumn flexAuto>
           <Header>
             <h4>A new version of Buttercup is available!</h4>
             <p>
@@ -125,10 +129,13 @@ export default class Update extends PureComponent {
             dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
           />
           <Flex justify="space-between">
-            <Button onClick={this.handleSkip}>Not Now</Button>
+            <Button onClick={this.handleSkip} dark>
+              Not Now
+            </Button>
             <Button
               primary
               onClick={this.handleDownload}
+              loading={this.state.percent > 0}
               disabled={this.state.percent > 0}
             >
               Download and Install
