@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
-import { installUpdate } from '../../shared/actions/update';
 import { setColumnSize } from '../../shared/actions/settings';
 import {
   getCurrentArchive,
@@ -14,11 +13,9 @@ export default connect(
     condencedSidebar: getSetting(state, 'condencedSidebar'),
     archivesLoading: getSetting(state, 'archivesLoading'),
     currentArchive: getCurrentArchive(state),
-    archivesCount: getArchivesCount(state),
-    update: state.update
+    archivesCount: getArchivesCount(state)
   }),
   {
-    setColumnSize,
-    installUpdate
+    setColumnSize
   }
 )(Workspace, 'Workspace');

@@ -5,7 +5,6 @@ import { Flex } from 'styled-flexbox';
 import Archive from '../components/archive';
 import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
-import UpdateNotice from './update-notice';
 import SavingModal from './saving-modal';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 import spinner from '../styles/img/spinner.svg';
@@ -17,8 +16,6 @@ const Primary = styled(Flex)`
 const Workspace = ({
   currentArchive,
   archivesCount,
-  update,
-  installUpdate,
   setColumnSize,
   columnSizes,
   condencedSidebar,
@@ -54,7 +51,6 @@ const Workspace = ({
           </Otherwise>
         </Choose>
       </Primary>
-      <UpdateNotice {...update} onClick={() => installUpdate()} />
       <SavingModal />
     </Flex>
   );
@@ -63,11 +59,9 @@ const Workspace = ({
 Workspace.propTypes = {
   currentArchive: PropTypes.object,
   archivesCount: PropTypes.number,
-  update: PropTypes.object,
   columnSizes: PropTypes.object,
   condencedSidebar: PropTypes.bool,
   archivesLoading: PropTypes.bool,
-  installUpdate: PropTypes.func,
   setColumnSize: PropTypes.func
 };
 

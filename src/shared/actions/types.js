@@ -32,9 +32,6 @@ export const UI_STATE_SET = 'buttercup/settings/UI_STATE_SET';
 
 export const SET_WORKSPACE = 'buttercup/workspace/SET';
 
-export const UPDATE_AVAILABLE = 'buttercup/ui/UPDATE_AVAILABLE';
-export const UPDATE_INSTALL = 'buttercup/ui/UPDATE_INSTALL';
-
 export const ARCHIVES_REMOVE = 'buttercup/archives/REMOVE';
 export const ARCHIVES_SET = 'buttercup/archives/SET';
 export const ARCHIVES_SET_CURRENT = 'buttercup/archives/SET_CURRENT';
