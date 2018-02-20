@@ -1,7 +1,6 @@
 import debounce from 'lodash/debounce';
 import { ipcMain as ipc, BrowserWindow, app } from 'electron';
 import { getWindowManager } from './lib/window-manager';
-import { startAutoUpdate } from './lib/updater';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
 import { getMainWindow } from './utils/window';
@@ -14,16 +13,12 @@ export function setupActions(store) {
   // Update the menu
   store.subscribe(debounce(() => setupMenu(store), 500));
 
-  if (process.env.NODE_ENV !== 'development') {
-    startAutoUpdate();
-  }
-
   ipc.on('show-update', () => {
     windowManager.buildWindowOfType('update', win => {
       win.webContents.send('update-available', {
         version: '1.1.1',
         currentVersion: '0.2.2',
-        releaseNotes: 'Blah'
+        releaseNotes: '<a href="https://google.com">Blah</a><br/>Blah'
       });
     });
   });

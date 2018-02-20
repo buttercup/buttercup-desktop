@@ -1,6 +1,5 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import ms from 'ms';
 import { getWindowManager } from './window-manager';
 import i18n from '../../shared/i18n';
 import { app, ipcMain, dialog } from 'electron';
@@ -46,11 +45,6 @@ autoUpdater.on('error', error => {
 ipcMain.on('download-update', () => {
   autoUpdater.downloadUpdate();
 });
-
-export function startAutoUpdate(cb) {
-  checkForUpdates();
-  setInterval(checkForUpdates, ms('15m'));
-}
 
 export function checkForUpdates() {
   autoUpdater.checkForUpdates();
