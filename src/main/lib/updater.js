@@ -1,8 +1,7 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { getWindowManager } from './window-manager';
-import i18n from '../../shared/i18n';
-import { app, ipcMain, dialog } from 'electron';
+import { app, ipcMain } from 'electron';
 
 const windowManager = getWindowManager();
 let __updateWin;
@@ -42,7 +41,6 @@ autoUpdater.on('download-progress', progress => {
 });
 
 autoUpdater.on('error', error => {
-  dialog.showErrorBox('Error', i18n.t('error.check-for-update'));
   if (__updateWin) {
     __updateWin.webContents.send('update-error', error);
   }
@@ -53,5 +51,7 @@ ipcMain.on('download-update', () => {
 });
 
 export function checkForUpdates() {
-  autoUpdater.checkForUpdates();
+  if (process.env.NODE_ENV === 'production') {
+    autoUpdater.checkForUpdates();
+  }
 }

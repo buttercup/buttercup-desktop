@@ -54,9 +54,7 @@ export function setupWindows(store) {
         callback(win);
       }
 
-      if (process.env.NODE_ENV !== 'development') {
-        setTimeout(() => checkForUpdates(), ms('5s'));
-      }
+      setTimeout(() => checkForUpdates(), ms('5s'));
     });
 
     win.on(
