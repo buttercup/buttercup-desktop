@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { shell, ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
@@ -67,7 +67,8 @@ class Update extends PureComponent {
     version: null,
     currentVersion: null,
     releaseNotes: null,
-    percent: 0
+    percent: 0,
+    installing: false
   };
 
   componentDidMount() {
@@ -96,12 +97,8 @@ class Update extends PureComponent {
     ipcRenderer.removeListener('download-progress');
   }
 
-  handleLinkClick(e, href) {
-    e.preventDefault();
-    shell.openExternal(href);
-  }
-
   handleDownload = () => {
+    this.setState({ installing: true });
     ipcRenderer.send('download-update');
   };
 
@@ -141,8 +138,8 @@ class Update extends PureComponent {
             <Button
               primary
               onClick={this.handleDownload}
-              loading={this.state.percent > 0}
-              disabled={this.state.percent > 0}
+              loading={this.state.installing}
+              disabled={this.state.installing}
             >
               <Translate i18nKey="update.download" />
             </Button>
