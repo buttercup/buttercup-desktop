@@ -3,6 +3,7 @@ import { shell, ipcRenderer } from 'electron';
 import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
+import sanitizeHtml from 'sanitize-html';
 import '../../styles/workspace.global.scss';
 import icon from '../../styles/img/icons/256x256.png';
 
@@ -64,9 +65,16 @@ export default class Update extends PureComponent {
   };
 
   componentDidMount() {
-    ipcRenderer.on('update-available', (event, updateInfo) => {
-      this.setState(updateInfo);
-    });
+    ipcRenderer.on(
+      'update-available',
+      (event, { version, currentVersion, releaseNotes }) => {
+        this.setState({
+          version,
+          currentVersion,
+          releaseNotes: sanitizeHtml(releaseNotes)
+        });
+      }
+    );
     ipcRenderer.on('download-progress', (event, { percent }) => {
       this.setState({ percent });
     });
@@ -91,7 +99,9 @@ export default class Update extends PureComponent {
     ipcRenderer.send('download-update');
   };
 
-  handleSkip = () => {};
+  handleSkip = () => {
+    window.close();
+  };
 
   render() {
     if (!this.state.version) {
