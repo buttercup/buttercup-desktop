@@ -99,6 +99,7 @@ export function setupWindows(store) {
       ...options
     });
 
+    win.setMenuBarVisibility(false);
     win.loadURL(getPathToFile('views/update.html'));
 
     ipc.once('init', () => {

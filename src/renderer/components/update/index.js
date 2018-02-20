@@ -132,7 +132,11 @@ class Update extends PureComponent {
             dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
           />
           <Flex justify="space-between">
-            <Button onClick={this.handleSkip} dark>
+            <Button
+              onClick={this.handleSkip}
+              dark
+              disabled={this.state.installing}
+            >
               <Translate i18nKey="update.not-now" />
             </Button>
             <Button
