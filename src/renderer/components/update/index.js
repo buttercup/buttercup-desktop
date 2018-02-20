@@ -125,7 +125,7 @@ export default class Update extends PureComponent {
             dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
           />
           <Flex justify="space-between">
-            <Button onClick={this.handleSkip}>Remind me Later</Button>
+            <Button onClick={this.handleSkip}>Not Now</Button>
             <Button
               primary
               onClick={this.handleDownload}

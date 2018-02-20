@@ -16,12 +16,18 @@ autoUpdater.allowPrerelease = false;
 autoUpdater.autoDownload = false;
 
 autoUpdater.on('update-available', ({ version, releaseNotes }) => {
+  if (__updateWin) {
+    return;
+  }
   __updateWin = windowManager.buildWindowOfType('update', win => {
     win.webContents.send('update-available', {
       version,
       releaseNotes,
       currentVersion: app.getVersion()
     });
+  });
+  __updateWin.on('close', () => {
+    __updateWin = null;
   });
 });
 
