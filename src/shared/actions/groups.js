@@ -147,11 +147,15 @@ export const emptyTrash = () => (dispatch, getState) => {
   const state = getState();
   const archiveId = getCurrentArchiveId(state);
   const trashIds = getTrashChildrenIds(state);
+  const trashGroupId = getTrashGroupId(state);
 
   showConfirmDialog(i18n.t('group-menu.empty-trash-question'), resp => {
     if (resp === 0) {
       trashIds.forEach(id => dispatch(dismissGroup(id)));
       groupTools.emptyTrash(archiveId);
     }
+
+    dispatch(updateGroup(trashGroupId));
+    dispatch(loadEntries(archiveId, trashGroupId));
   });
 };
