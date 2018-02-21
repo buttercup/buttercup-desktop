@@ -11,7 +11,8 @@ module.exports = merge(baseConfig, {
       'react-hot-loader/patch',
       resolve(__dirname, '../src/renderer/index')
     ],
-    fileManager: resolve(__dirname, '../src/renderer/file-manager')
+    fileManager: resolve(__dirname, '../src/renderer/file-manager'),
+    update: resolve(__dirname, '../src/renderer/update')
   },
 
   devServer: {

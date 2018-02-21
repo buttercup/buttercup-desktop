@@ -205,6 +205,10 @@
   },
   "update": {
     "installing": "در حال نصب",
-    "update-available-message": "باترکاپ {{version}} آماده است. برای نصب اینجا کلیک کنید."
+    "update-available-message": "باترکاپ {{version}} آماده است. شما نسخه {{currentVersion}} را نصب کرده‌اید. آیا مایلید نسخه جدید بارگزاری و نصب شود؟",
+    "new-version-available": "یک نسخه جدید باترکاپ آماده بارگزاری است!",
+    "not-now": "الان نه",
+    "download": "دریافت و نصب",
+    "release-notes": "مشخصات این نسخه:"
   }
 }

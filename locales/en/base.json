@@ -151,7 +151,7 @@
     "group-not-found": "Group has not been found.",
     "sort-definition-not-found": "Sort definition not found",
     "insufficient-data-provided": "Insufficient data provided for sorting",
-    "check-for-update": "Check for Update Error",
+    "check-for-update": "An error occured during the update. Please try again later.",
     "invalid-import-type-requested": "Invalid import type requested",
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
@@ -205,6 +205,10 @@
   },
   "update": {
     "installing": "Installing",
-    "update-available-message": "Buttercup {{version}} is available. Click here to install now."
+    "update-available-message": "Buttercup {{version}} is now available. You have {{currentVersion}}. Would you like to download it now?",
+    "new-version-available": "A new version of Buttercup is available!",
+    "not-now": "Not Now",
+    "download": "Download and Install",
+    "release-notes": "Release Notes:"
   }
 }

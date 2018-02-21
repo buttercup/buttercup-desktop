@@ -4,7 +4,6 @@ import groups from './groups';
 import entries from './entries';
 import { settings, settingsByArchiveId } from './settings';
 import archives, { currentArchive } from './archives';
-import update from './update';
 import uiState from './ui-state';
 
 export default function getRootReducer(scope = 'main') {
@@ -12,7 +11,6 @@ export default function getRootReducer(scope = 'main') {
     settingsByArchiveId,
     currentArchive,
     archives,
-    update,
     settings
   };
 

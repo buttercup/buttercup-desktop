@@ -1,4 +1,5 @@
-import { app, BrowserWindow, ipcMain as ipc } from 'electron';
+import { app, BrowserWindow, ipcMain as ipc, shell } from 'electron';
+import ms from 'ms';
 import debounce from 'lodash/debounce';
 import { isHighSierra, isOSX } from '../shared/utils/platform';
 import { getWindowManager } from './lib/window-manager';
@@ -6,6 +7,7 @@ import { getSetting } from '../shared/selectors';
 import { getPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
 import { config } from '../shared/config';
+import { checkForUpdates } from './lib/updater';
 
 const windowManager = getWindowManager();
 
@@ -51,6 +53,8 @@ export function setupWindows(store) {
       if (callback) {
         callback(win);
       }
+
+      setTimeout(() => checkForUpdates(), ms('5s'));
     });
 
     win.on(
@@ -81,6 +85,34 @@ export function setupWindows(store) {
 
     win.once('ready-to-show', () => {
       win.show();
+    });
+
+    return win;
+  });
+
+  windowManager.setBuildProcedure('update', (callback, options) => {
+    const win = new BrowserWindow({
+      width: 700,
+      height: 470,
+      show: false,
+      resizable: false,
+      ...options
+    });
+
+    win.setMenuBarVisibility(false);
+    win.loadURL(getPathToFile('views/update.html'));
+
+    ipc.once('init', () => {
+      win.webContents.on('will-navigate', (e, url) => {
+        e.preventDefault();
+        shell.openExternal(url);
+      });
+
+      win.show();
+
+      if (callback) {
+        callback(win);
+      }
     });
 
     return win;

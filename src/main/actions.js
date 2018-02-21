@@ -1,8 +1,6 @@
 import debounce from 'lodash/debounce';
 import { ipcMain as ipc, BrowserWindow, app } from 'electron';
-import { pushUpdate, updateInstalled } from '../shared/actions/update';
 import { getWindowManager } from './lib/window-manager';
-import { startAutoUpdate, installUpdates } from './lib/updater';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
 import { getMainWindow } from './utils/window';
@@ -12,26 +10,8 @@ import localesConfig from '../../locales/config';
 const windowManager = getWindowManager();
 
 export function setupActions(store) {
-  // Clear update notice
-  store.dispatch(updateInstalled());
-
   // Update the menu
   store.subscribe(debounce(() => setupMenu(store), 500));
-
-  if (process.env.NODE_ENV !== 'development') {
-    startAutoUpdate((releaseNotes, releaseName) => {
-      store.dispatch(
-        pushUpdate({
-          releaseNotes,
-          releaseName
-        })
-      );
-    });
-
-    ipc.on('quit-and-install', () => {
-      installUpdates();
-    });
-  }
 
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {

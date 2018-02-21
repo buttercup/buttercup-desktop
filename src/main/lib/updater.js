@@ -1,32 +1,57 @@
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import ms from 'ms';
-import i18n from '../../shared/i18n';
+import { getWindowManager } from './window-manager';
+import { app, ipcMain } from 'electron';
+
+const windowManager = getWindowManager();
+let __updateWin;
 
 // Set logger
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 
-// Enable pre-releases
-autoUpdater.allowPrerelease = true;
+// Configure updater
+autoUpdater.allowPrerelease = false;
+autoUpdater.autoDownload = false;
 
-export function startAutoUpdate(cb) {
-  autoUpdater.on('update-downloaded', ({ version, releaseNotes }) =>
-    cb(releaseNotes, version)
-  );
-  checkForUpdates();
-  setInterval(checkForUpdates, ms('15m'));
-}
+autoUpdater.on('update-available', ({ version, releaseNotes }) => {
+  if (__updateWin) {
+    return;
+  }
+  __updateWin = windowManager.buildWindowOfType('update', win => {
+    win.webContents.send('update-available', {
+      version,
+      releaseNotes,
+      currentVersion: app.getVersion()
+    });
+  });
+  __updateWin.on('close', () => {
+    __updateWin = null;
+  });
+});
 
-export function installUpdates() {
+autoUpdater.on('update-downloaded', () => {
   autoUpdater.quitAndInstall();
-}
+});
+
+autoUpdater.on('download-progress', progress => {
+  if (__updateWin) {
+    __updateWin.webContents.send('download-progress', progress);
+  }
+});
+
+autoUpdater.on('error', error => {
+  if (__updateWin) {
+    __updateWin.webContents.send('update-error', error);
+  }
+});
+
+ipcMain.on('download-update', () => {
+  autoUpdater.downloadUpdate();
+});
 
 export function checkForUpdates() {
-  try {
+  if (process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
-  } catch (err) {
-    // NOOP
-    log.error(i18n.t('error.check-for-update'), err);
   }
 }
