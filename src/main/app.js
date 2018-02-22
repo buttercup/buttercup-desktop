@@ -12,6 +12,7 @@ import { isWindows } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
+import { getFilePathFromArgv } from './utils/argv';
 
 log.info('Buttercup starting up...');
 
@@ -71,8 +72,8 @@ app.on('open-file', (e, filePath) => {
 });
 
 // Open file using Buttercup (on Windows)
-if (isWindows() && typeof process.argv[1] === 'string') {
-  initialFile = process.argv[1];
+if (isWindows()) {
+  initialFile = getFilePathFromArgv(process.argv);
 }
 
 const isSecondInstance = app.makeSingleInstance(argv => {
@@ -83,16 +84,12 @@ const isSecondInstance = app.makeSingleInstance(argv => {
       mainWindow.restore();
     }
     mainWindow.focus();
-  }
 
-  // Handle the argv of second instance for windows
-  if (
-    isWindows() &&
-    Array.isArray(argv) &&
-    argv.length > 1 &&
-    typeof argv[1] === 'string'
-  ) {
-    initialFile = argv[1];
+    // Handle the argv of second instance for windows
+    const filePath = getFilePathFromArgv(argv);
+    if (isWindows() && filePath) {
+      loadFile(filePath, mainWindow);
+    }
   }
 });
 
