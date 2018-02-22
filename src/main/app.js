@@ -75,6 +75,31 @@ if (isWindows() && typeof process.argv[1] === 'string') {
   initialFile = process.argv[1];
 }
 
+const isSecondInstance = app.makeSingleInstance(argv => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (windowManager.getCountOfType('main') > 0) {
+    const [mainWindow] = windowManager.getWindowsOfType('main');
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+  }
+
+  // Handle the argv of second instance for windows
+  if (
+    isWindows() &&
+    Array.isArray(argv) &&
+    argv.length > 1 &&
+    typeof argv[1] === 'string'
+  ) {
+    initialFile = argv[1];
+  }
+});
+
+if (isSecondInstance) {
+  app.quit();
+}
+
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development') {
     // Install Dev Extensions
