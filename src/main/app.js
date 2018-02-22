@@ -23,6 +23,7 @@ const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 
 let appIsReady = false;
+let appTriedToQuit = false;
 let initialFile = null;
 
 // Crash reporter for alpha and beta releases
@@ -131,7 +132,7 @@ app.on('ready', async () => {
 // When user closes all windows
 // On Windows, the command practice is to quit the app.
 app.on('window-all-closed', () => {
-  if (isWindows()) {
+  if (isWindows() || appTriedToQuit) {
     app.quit();
   }
 });
@@ -145,6 +146,7 @@ app.on('activate', () => {
 
 app.once('before-quit', e => {
   const channel = getQueue().channel('saves');
+  appTriedToQuit = true;
 
   if (!channel.isEmpty) {
     log.info('Operation queue is not empty, waiting before quitting.');

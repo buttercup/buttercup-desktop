@@ -19,7 +19,8 @@ const Workspace = ({
   setColumnSize,
   columnSizes,
   condencedSidebar,
-  archivesLoading
+  archivesLoading,
+  savingArchive
 }) => {
   return (
     <Flex flexAuto>
@@ -51,7 +52,9 @@ const Workspace = ({
           </Otherwise>
         </Choose>
       </Primary>
-      <SavingModal />
+      <If condition={savingArchive}>
+        <SavingModal />
+      </If>
     </Flex>
   );
 };
@@ -62,6 +65,7 @@ Workspace.propTypes = {
   columnSizes: PropTypes.object,
   condencedSidebar: PropTypes.bool,
   archivesLoading: PropTypes.bool,
+  savingArchive: PropTypes.bool,
   setColumnSize: PropTypes.func
 };
 

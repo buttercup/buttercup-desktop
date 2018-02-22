@@ -47,6 +47,13 @@ export function setupWindows(store) {
       }, 500)
     );
 
+    win.on(
+      'resize',
+      debounce(() => {
+        config.set('window.size', win.getSize());
+      }, 500)
+    );
+
     // Set initial menu bar visibility
     const menubarAutoHide = getSetting(store.getState(), 'menubarAutoHide');
     win.setAutoHideMenuBar(
@@ -72,13 +79,6 @@ export function setupWindows(store) {
 
       setTimeout(() => checkForUpdates(), ms('5s'));
     });
-
-    win.on(
-      'resize',
-      debounce(() => {
-        config.set('window.size', win.getSize());
-      }, 2000)
-    );
 
     win.once('closed', () => {
       windowManager.deregister(win);
