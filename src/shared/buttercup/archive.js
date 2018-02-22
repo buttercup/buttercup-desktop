@@ -4,7 +4,7 @@ import {
   createCredentials
 } from 'buttercup/dist/buttercup-web.min';
 import ElectronStorageInterface from './storage';
-import { enqueueInMain as enqueue } from '../../renderer/system/queue';
+import { getQueue } from '../../renderer/system/queue';
 import './ipc-datasource';
 import i18n from '../i18n';
 
@@ -109,9 +109,9 @@ export function updateArchivePassword(archiveId, newPassword) {
   const manager = getSharedArchiveManager();
   const source = manager.getSourceForID(archiveId);
 
-  enqueue('saves', () => {
-    return source.updateArchiveCredentials(newPassword);
-  });
+  getQueue()
+    .channel('saves')
+    .enqueue(() => source.updateArchiveCredentials(newPassword));
 }
 
 export function updateArchiveColour(archiveId, newColor) {
@@ -131,17 +131,23 @@ export function saveWorkspace(archiveId) {
   const manager = getSharedArchiveManager();
   const { workspace } = manager.getSourceForID(archiveId);
 
-  enqueue('saves', () => {
-    return workspace
-      .localDiffersFromRemote()
-      .then(
-        differs =>
-          differs
-            ? workspace.mergeSaveablesFromRemote().then(() => true)
-            : false
-      )
-      .then(shouldSave => (shouldSave ? workspace.save() : null));
-  });
+  getQueue()
+    .channel('saves')
+    .enqueue(
+      () => {
+        return workspace
+          .localDiffersFromRemote()
+          .then(
+            differs =>
+              differs
+                ? workspace.mergeSaveablesFromRemote().then(() => true)
+                : false
+          )
+          .then(shouldSave => (shouldSave ? workspace.save() : null));
+      },
+      undefined,
+      archiveId
+    );
 }
 
 export function saveArchiveManager() {

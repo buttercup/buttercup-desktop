@@ -20,6 +20,7 @@ import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
 import { getSetting } from '../shared/selectors';
 import Root from './containers/root';
+import { getQueue } from './system/queue';
 
 // Unhandled rejections
 const unhandled = require('electron-unhandled');
@@ -65,8 +66,22 @@ ipc.on('import-history-prompt', (e, payload) => {
     });
 });
 
-ipc.on('will-quit', () => {
-  store.dispatch(setUIState('isExiting', true));
+ipc.on('save-started', () => {
+  store.dispatch(setUIState('savingArchive', true));
+});
+
+ipc.on('will-close', () => {
+  const channel = getQueue().channel('saves');
+
+  if (!channel.isEmpty) {
+    store.dispatch(setUIState('savingArchive', true));
+
+    channel.once('stopped', () => {
+      ipc.send('can-close');
+    });
+  } else {
+    ipc.send('can-close');
+  }
 });
 
 const currentLocale = getSetting(store.getState(), 'locale');
