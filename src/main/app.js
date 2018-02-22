@@ -76,20 +76,24 @@ if (isWindows()) {
   initialFile = getFilePathFromArgv(process.argv);
 }
 
+// Someone tried to run a second instance, we should focus our window.
 const isSecondInstance = app.makeSingleInstance(argv => {
-  // Someone tried to run a second instance, we should focus our window.
+  const handleArgvForWindow = win => {
+    // Handle the argv of second instance for windows
+    const filePath = getFilePathFromArgv(argv);
+    if (isWindows() && filePath) {
+      loadFile(filePath, win);
+    }
+  };
   if (windowManager.getCountOfType('main') > 0) {
     const [mainWindow] = windowManager.getWindowsOfType('main');
     if (mainWindow.isMinimized()) {
       mainWindow.restore();
     }
     mainWindow.focus();
-
-    // Handle the argv of second instance for windows
-    const filePath = getFilePathFromArgv(argv);
-    if (isWindows() && filePath) {
-      loadFile(filePath, mainWindow);
-    }
+    handleArgvForWindow(mainWindow);
+  } else {
+    windowManager.buildWindowOfType('main', win => handleArgvForWindow(win));
   }
 });
 
@@ -140,7 +144,7 @@ app.on('ready', async () => {
 
   appIsReady = true;
 
-  // Show intro
+  // Show main window
   windowManager.buildWindowOfType('main', win => {
     // If the app has been started in order to open a file
     // launch that file after the main window has been created.
