@@ -39,7 +39,7 @@
   },
   "build": {
     "appId": "pw.buttercup.desktop",
-    "copyright": "Copyright © 2015-2018 Buttercup and Contributors",
+    "copyright": "Copyright © 2015-2018 MadDev Oy",
     "mac": {
       "category": "public.app-category.productivity"
     },
