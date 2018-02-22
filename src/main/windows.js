@@ -80,14 +80,6 @@ export function setupWindows(store) {
       setTimeout(() => checkForUpdates(), ms('5s'));
     });
 
-    win.on('close', event => {
-      event.preventDefault();
-      ipc.once('can-close', () => {
-        win.destroy();
-      });
-      win.webContents.send('will-close');
-    });
-
     win.once('closed', () => {
       windowManager.deregister(win);
     });

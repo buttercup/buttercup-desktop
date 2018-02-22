@@ -70,19 +70,20 @@ ipc.on('save-started', () => {
   store.dispatch(setUIState('savingArchive', true));
 });
 
-ipc.on('will-close', () => {
+window.onbeforeunload = event => {
   const channel = getQueue().channel('saves');
 
   if (!channel.isEmpty) {
-    store.dispatch(setUIState('savingArchive', true));
+    event.returnValue = false;
+
+    // setImmediate is needed to escape the process block
+    setImmediate(() => store.dispatch(setUIState('savingArchive', true)));
 
     channel.once('stopped', () => {
-      ipc.send('can-close');
+      window.close();
     });
-  } else {
-    ipc.send('can-close');
   }
-});
+};
 
 const currentLocale = getSetting(store.getState(), 'locale');
 const renderApp = (RootContainer, i18n) =>
