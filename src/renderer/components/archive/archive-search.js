@@ -226,9 +226,11 @@ class ArchiveSearch extends PureComponent {
                     <EntryData>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: this.highlightSearchResult(
-                            entry.getProperty('title')
-                          )
+                          __html: entry.getProperty('title')
+                            ? this.highlightSearchResult(
+                                entry.getProperty('title')
+                              )
+                            : '-'
                         }}
                       />
                       <EntryFolder>{getNameForSource(sourceID)}</EntryFolder>
