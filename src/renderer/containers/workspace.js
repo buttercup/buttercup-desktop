@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 import Workspace from '../components/workspace';
 import { setColumnSize } from '../../shared/actions/settings';
-import * as entries from '../../shared/actions/entries';
-import * as groups from '../../shared/actions/groups';
 import {
   getCurrentArchive,
   getSetting,
@@ -20,8 +18,6 @@ export default connect(
     savingArchive: getUIState(state, 'savingArchive')
   }),
   {
-    onSelectEntry: entries.selectEntry,
-    onGroupSelect: groups.loadGroup,
     setColumnSize
   }
 )(Workspace, 'Workspace');

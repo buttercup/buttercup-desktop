@@ -62,6 +62,9 @@
       "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
     }
   },
+  "archive-search": {
+    "searchterm": "Suchbegriff"
+  },
   "archive": {
     "add-archive": "Archiv hinzufügen",
     "archive-saved-loading-info": "Dein Archiv wird gespeichert.<br>Schließt automatisch"
