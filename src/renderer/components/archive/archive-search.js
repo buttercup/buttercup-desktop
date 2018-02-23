@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
@@ -7,9 +7,11 @@ import { getArchiveToSearch } from '../../../shared/buttercup/entries.js';
 import { Translate } from '../../../shared/i18n';
 
 const SearchWrapper = styled('div')`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
+  z-index: 3;
+  left: 0;
 `;
 
 const SearchOverlay = styled('div')`
@@ -66,10 +68,11 @@ const ListItem = styled('li')`
   }
 `;
 
-class ArchiveSearch extends Component {
+class ArchiveSearch extends PureComponent {
   static propTypes = {
     onSelectEntry: PropTypes.func,
-    onGroupSelect: PropTypes.func
+    onGroupSelect: PropTypes.func,
+    currentArchive: PropTypes.obj
   };
 
   constructor(props) {
@@ -83,23 +86,26 @@ class ArchiveSearch extends Component {
     };
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
+    this.searchListener = this.searchListener.bind(this);
   }
 
   componentDidMount() {
-    ipcRenderer.on('open-archive-search', () => {
-      const { currentArchive } = this.props;
+    ipcRenderer.on('open-archive-search', this.searchListener);
+  }
 
-      if (currentArchive) {
-        const archive = getArchiveToSearch(currentArchive.id);
+  searchListener() {
+    const { currentArchive } = this.props;
 
-        this.setState(state => ({
-          visible: !state.visible,
-          archive
-        }));
+    if (currentArchive) {
+      const archive = getArchiveToSearch(currentArchive.id);
 
-        this.searchInputRef.focus();
-      }
-    });
+      this.setState(state => ({
+        visible: !state.visible,
+        archive
+      }));
+
+      this.searchInputRef.focus();
+    }
   }
 
   changeInput(e) {
@@ -115,7 +121,7 @@ class ArchiveSearch extends Component {
   }
 
   componentWillUnmount() {
-    ipcRenderer.removeListener('open-archive-search');
+    ipcRenderer.removeListener('open-archive-search', this.searchListener);
   }
 
   closeSearch() {

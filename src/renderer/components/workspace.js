@@ -28,11 +28,6 @@ const Workspace = ({
 }) => {
   return (
     <Flex flexAuto>
-      <ArchiveSearch
-        currentArchive={currentArchive}
-        onSelectEntry={onSelectEntry}
-        onGroupSelect={onGroupSelect}
-      />
       <If condition={archivesCount > 0}>
         <Sidebar condenced={condencedSidebar} />
       </If>
@@ -52,6 +47,11 @@ const Workspace = ({
                 <NoArchiveSelected />
               </When>
               <Otherwise>
+                <ArchiveSearch
+                  currentArchive={currentArchive}
+                  onSelectEntry={onSelectEntry}
+                  onGroupSelect={onGroupSelect}
+                />
                 <Archive
                   columnSizes={columnSizes}
                   onColumnSizeChange={setColumnSize}
