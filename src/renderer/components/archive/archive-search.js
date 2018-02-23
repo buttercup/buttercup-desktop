@@ -89,10 +89,6 @@ class ArchiveSearch extends PureComponent {
     this.searchListener = this.searchListener.bind(this);
   }
 
-  componentDidMount() {
-    ipcRenderer.on('open-archive-search', this.searchListener);
-  }
-
   searchListener() {
     const { currentArchive } = this.props;
 
@@ -108,6 +104,12 @@ class ArchiveSearch extends PureComponent {
     }
   }
 
+  closeSearch() {
+    this.setState({
+      visible: false
+    });
+  }
+
   changeInput(e) {
     const value = e.target.value;
     const entries = value
@@ -120,14 +122,12 @@ class ArchiveSearch extends PureComponent {
     });
   }
 
-  componentWillUnmount() {
-    ipcRenderer.removeListener('open-archive-search', this.searchListener);
+  componentDidMount() {
+    ipcRenderer.on('open-archive-search', this.searchListener);
   }
 
-  closeSearch() {
-    this.setState({
-      visible: false
-    });
+  componentWillUnmount() {
+    ipcRenderer.removeListener('open-archive-search', this.searchListener);
   }
 
   render() {
