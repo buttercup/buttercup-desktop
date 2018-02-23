@@ -4,6 +4,9 @@ import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getQueue } from '../../renderer/system/queue';
 import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
 import i18n from '../i18n';
+import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
+import { getSharedArchiveManager } from '../buttercup/archive';
+import iconographer from '../../main/lib/icon/iconographer';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -123,3 +126,45 @@ const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
       });
   });
 };
+
+export async function getMatchingEntriesForSearchTerm(term) {
+  const manager = getSharedArchiveManager();
+
+  const unlockedSources = manager.unlockedSources;
+  const lookup = unlockedSources.reduce(
+    (current, next) => ({
+      ...current,
+      [next.workspace.primary.archive.getID()]: next.id
+    }),
+    {}
+  );
+  const archives = unlockedSources.map(
+    source => source.workspace.primary.archive
+  );
+  const finder = new EntryFinder(archives);
+
+  return Promise.all(
+    finder.search(term).map(async result => {
+      const archiveId = lookup[result.archive.getID()];
+
+      return {
+        sourceID: archiveId,
+        groupID: result.entry.getGroup().getID(),
+        icon: await iconographer.getIconForEntry(result.entry),
+        entry: result.entry
+      };
+    })
+  );
+}
+
+export function getNameForSource(sourceID) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(sourceID);
+
+  if (!source) {
+    throw new Error(
+      `Unable to fetch source information: No source found for ID: ${sourceID}`
+    );
+  }
+  return source.name;
+}

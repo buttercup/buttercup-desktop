@@ -1,6 +1,5 @@
 import path from 'path';
 import {
-  EntryFinder,
   ArchiveManager as OldArchiveManager,
   createCredentials
 } from 'buttercup/dist/buttercup-web.min';
@@ -154,40 +153,4 @@ export function saveWorkspace(archiveId) {
 export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
   manager.dehydrate();
-}
-
-export function getMatchingEntriesForSearchTerm(term) {
-  const manager = getSharedArchiveManager();
-
-  const unlockedSources = manager.unlockedSources;
-  const lookup = unlockedSources.reduce(
-    (current, next) => ({
-      ...current,
-      [next.workspace.primary.archive.getID()]: next.id
-    }),
-    {}
-  );
-  const archives = unlockedSources.map(
-    source => source.workspace.primary.archive
-  );
-  const finder = new EntryFinder(archives);
-
-  const results = finder.search(term).map(result => ({
-    entry: result.entry,
-    sourceID: lookup[result.archive.getID()]
-  }));
-
-  return results;
-}
-
-export function getNameForSource(sourceID) {
-  const manager = getSharedArchiveManager();
-  const source = manager.getSourceForID(sourceID);
-
-  if (!source) {
-    throw new Error(
-      `Unable to fetch source information: No source found for ID: ${sourceID}`
-    );
-  }
-  return source.name;
 }

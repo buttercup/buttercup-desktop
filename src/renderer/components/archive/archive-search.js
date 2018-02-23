@@ -10,7 +10,7 @@ import EntryIcon from './entry-icon';
 import {
   getMatchingEntriesForSearchTerm,
   getNameForSource
-} from '../../../shared/buttercup/archive';
+} from '../../../shared/actions/entries';
 
 const SearchWrapper = styled.div`
   position: fixed;
@@ -128,6 +128,7 @@ class ArchiveSearch extends PureComponent {
     this.closeSearch = this.closeSearch.bind(this);
     this.searchListener = this.searchListener.bind(this);
     this.highlightSearchResult = this.highlightSearchResult.bind(this);
+    this.getAllMatchingEntries = this.getAllMatchingEntries.bind(this);
   }
 
   searchListener() {
@@ -154,11 +155,20 @@ class ArchiveSearch extends PureComponent {
 
   changeInput(e) {
     const value = e.target.value;
-    const entries = value ? getMatchingEntriesForSearchTerm(value) : [];
 
     this.setState({
-      searchTerm: e.target.value,
-      entries
+      searchTerm: value
+    });
+
+    this.getAllMatchingEntries();
+  }
+
+  getAllMatchingEntries() {
+    getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
+      console.log(entries);
+      this.setState({
+        entries
+      });
     });
   }
 
@@ -199,7 +209,7 @@ class ArchiveSearch extends PureComponent {
           {entries.length > 0 ? (
             <EntryList flexAuto>
               <Scrollbars autoHeight autoHeightMax={300}>
-                {entries.map(({ entry, sourceID }, index) => (
+                {entries.map(({ entry, sourceID, groupID, icon }, index) => (
                   <ListItem
                     key={index}
                     onClick={() => {
@@ -211,7 +221,7 @@ class ArchiveSearch extends PureComponent {
                     }}
                   >
                     <Icon>
-                      <EntryIcon icon={entry.icon} />
+                      <EntryIcon icon={icon} />
                     </Icon>
                     <EntryData>
                       <span
