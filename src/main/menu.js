@@ -48,6 +48,7 @@ export const setupMenu = store => {
           type: 'separator'
         },
         {}, // Import menu will be injected here
+        {}, // Import search menu seperator
         {}, // Import search menu
         {
           type: 'separator'
@@ -282,9 +283,6 @@ export const setupMenu = store => {
                 accelerator: 'CmdOrCtrl+F',
                 click: (item, focusedWindow) => openSearch(focusedWindow)
               };
-            }
-            if (i === 7) {
-              return { type: 'separator' };
             }
             return sub;
           })
