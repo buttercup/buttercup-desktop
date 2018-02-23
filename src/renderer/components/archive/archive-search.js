@@ -124,6 +124,7 @@ class ArchiveSearch extends PureComponent {
       entries: [],
       searchTerm: ''
     };
+
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
     this.searchListener = this.searchListener.bind(this);
@@ -154,10 +155,8 @@ class ArchiveSearch extends PureComponent {
   }
 
   changeInput(e) {
-    const value = e.target.value;
-
     this.setState({
-      searchTerm: value
+      searchTerm: e.target.value
     });
 
     this.getAllMatchingEntries();
