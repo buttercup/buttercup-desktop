@@ -8,6 +8,10 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import { Flex, Box } from 'styled-flexbox';
 import EntryIcon from './entry-icon';
 import folderIcon from '../../styles/img/folder-open.svg';
+import {
+  getMatchingEntriesForSearchTerm,
+  getNameForSource
+} from '../../../shared/buttercup/archive';
 
 const SearchWrapper = styled.div`
   position: fixed;
@@ -29,14 +33,17 @@ const SearchOverlay = styled.div`
 `;
 
 const Search = styled(Flex)`
+  background-color: #fff;
+  padding: var(--spacing-two);
   position: absolute;
+  border-radius: 5px;
   z-index: 4;
-  top: 50%;
+  top: 10%;
   left: 50%;
   width: 50vw;
   max-width: 400px;
   transition: transform 0.3s;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   width: 100%;
 `;
 
@@ -50,25 +57,11 @@ const Input = styled(BaseInput)`
 	* Entry-List
 	*/
 const EntryList = styled(Box)`
-  background-color: #fff;
-  padding: var(--spacing-two);
   border: 0;
   margin: 0;
   width: 100%;
   border-radius: 6px;
   position: relative;
-  &:after {
-    bottom: 100%;
-    left: 30px;
-    border: solid transparent;
-    content: ' ';
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(136, 183, 213, 0);
-    border-bottom-color: #fff;
-    border-width: 10px;
-    margin-left: -10px;
-  }
 `;
 
 const NothingFound = styled(EntryList)`
@@ -123,6 +116,7 @@ class ArchiveSearch extends PureComponent {
     getArchive: PropTypes.func,
     currentArchive: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     onGroupSelect: PropTypes.func,
+    switchArchive: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -133,7 +127,6 @@ class ArchiveSearch extends PureComponent {
       visible: false,
       archive: null,
       entries: [],
-      groups: [],
       searchTerm: ''
     };
     this.changeInput = this.changeInput.bind(this);
@@ -166,15 +159,11 @@ class ArchiveSearch extends PureComponent {
 
   changeInput(e) {
     const value = e.target.value;
-    const entries = value
-      ? this.state.archive.findEntriesByProperty('title', value)
-      : [];
-    const groups = value ? this.state.archive.findGroupsByTitle(value) : [];
+    const entries = value ? getMatchingEntriesForSearchTerm(value) : [];
 
     this.setState({
       searchTerm: e.target.value,
-      entries,
-      groups
+      entries
     });
   }
 
@@ -192,8 +181,8 @@ class ArchiveSearch extends PureComponent {
   }
 
   render() {
-    const { entries, groups, searchTerm } = this.state;
-    const { onSelectEntry, onGroupSelect, t } = this.props;
+    const { entries, searchTerm } = this.state;
+    const { switchArchive, onSelectEntry, onGroupSelect, t } = this.props;
 
     return (
       <SearchWrapper visible={this.state.visible}>
@@ -215,10 +204,11 @@ class ArchiveSearch extends PureComponent {
           {entries.length > 0 ? (
             <EntryList flexAuto>
               <Scrollbars autoHeight autoHeightMax={300}>
-                {entries.map((entry, index) => (
+                {entries.map(({ entry, sourceID }, index) => (
                   <ListItem
                     key={index}
                     onClick={() => {
+                      switchArchive(sourceID);
                       onGroupSelect(entry.getGroup().getID());
                       onSelectEntry(entry.getID());
 
@@ -236,30 +226,7 @@ class ArchiveSearch extends PureComponent {
                           )
                         }}
                       />
-                      <EntryFolder>{entry.getGroup().getTitle()}</EntryFolder>
-                    </EntryData>
-                  </ListItem>
-                ))}
-
-                {groups.map((group, index) => (
-                  <ListItem
-                    key={index}
-                    onClick={() => {
-                      onGroupSelect(group.getID());
-
-                      this.closeSearch();
-                    }}
-                  >
-                    <Icon>
-                      <FolderIcon src={folderIcon} />
-                    </Icon>
-
-                    <EntryData>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: this.highlightSearchResult(group.getTitle())
-                        }}
-                      />
+                      <EntryFolder>{getNameForSource(sourceID)}</EntryFolder>
                     </EntryData>
                   </ListItem>
                 ))}
