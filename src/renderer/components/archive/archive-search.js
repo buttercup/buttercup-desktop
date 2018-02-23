@@ -105,10 +105,6 @@ const Icon = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const FolderIcon = styled('img')`
-  width: 22px;
-`;
-
 class ArchiveSearch extends PureComponent {
   static propTypes = {
     onSelectEntry: PropTypes.func,
