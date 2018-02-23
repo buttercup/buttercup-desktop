@@ -26,7 +26,6 @@ const Workspace = ({
   setCurrentGroup,
   onGroupSelect
 }) => {
-  console.log(onSelectEntry);
   return (
     <Flex flexAuto>
       <ArchiveSearch
