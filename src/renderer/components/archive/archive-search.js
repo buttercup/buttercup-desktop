@@ -165,9 +165,8 @@ class ArchiveSearch extends PureComponent {
 
   getAllMatchingEntries() {
     getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
-      console.log(entries);
       this.setState({
-        entries
+        entries: this.state.searchTerm ? entries : []
       });
     });
   }
