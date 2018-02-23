@@ -63,7 +63,8 @@
     }
   },
   "archive-search": {
-    "searchterm": "Suchbegriff"
+    "searchterm": "Suchbegriff...",
+    "nothing-found": "Leider nichts gefunden"
   },
   "archive": {
     "add-archive": "Archiv hinzufügen",

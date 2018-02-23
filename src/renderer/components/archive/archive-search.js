@@ -9,7 +9,7 @@ import { Flex, Box } from 'styled-flexbox';
 import EntryIcon from './entry-icon';
 import folderIcon from '../../styles/img/folder-open.svg';
 
-const SearchWrapper = styled('div')`
+const SearchWrapper = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
@@ -18,7 +18,7 @@ const SearchWrapper = styled('div')`
   display: ${props => (props.visible ? 'block' : 'none')};
 `;
 
-const SearchOverlay = styled('div')`
+const SearchOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   left: 0;
@@ -26,7 +26,6 @@ const SearchOverlay = styled('div')`
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: ${props => (props.visible ? 'block' : 'none')};
 `;
 
 const Search = styled(Flex)`
@@ -35,7 +34,7 @@ const Search = styled(Flex)`
   top: 50%;
   left: 50%;
   width: 50vw;
-  max-width: 500px;
+  max-width: 400px;
   transition: transform 0.3s;
   transform: translate(-50%, -50%);
   width: 100%;
@@ -43,7 +42,8 @@ const Search = styled(Flex)`
 
 const Input = styled(BaseInput)`
   padding: 20px 10px;
-  margin: ${props => (props.entries.length > 0 ? '0 0 20px 0' : 0)};
+  margin: ${props =>
+    props.entries.length > 0 || props.searchTerm !== '' ? '0 0 20px 0' : 0};
 `;
 
 /**
@@ -70,7 +70,14 @@ const EntryList = styled(Box)`
     margin-left: -10px;
   }
 `;
-const ListItem = styled('div')`
+
+const NothingFound = styled(EntryList)`
+  color: #999;
+  text-align: center;
+  font-size: 14px;
+`;
+
+const ListItem = styled.div`
   margin: 0;
   font-size: 14px;
   padding: 15px;
@@ -90,7 +97,7 @@ const ListItem = styled('div')`
   }
 `;
 
-const EntryData = styled('div')`
+const EntryData = styled.div`
   display: inline-block;
   margin: -5px 0 0 0;
 `;
@@ -101,7 +108,7 @@ const EntryFolder = styled('p')`
   margin: 0;
 `;
 
-const Icon = styled('div')`
+const Icon = styled.div`
   float: left;
   margin: 0 10px 0 0;
 `;
@@ -132,7 +139,7 @@ class ArchiveSearch extends PureComponent {
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
     this.searchListener = this.searchListener.bind(this);
-    this.markFoundWordParts = this.markFoundWordParts.bind(this);
+    this.highlightSearchResult = this.highlightSearchResult.bind(this);
   }
 
   searchListener() {
@@ -171,7 +178,7 @@ class ArchiveSearch extends PureComponent {
     });
   }
 
-  markFoundWordParts(word) {
+  highlightSearchResult(word) {
     const regex = new RegExp('(' + this.state.searchTerm + ')', 'g');
     return word.replace(regex, '<mark>$1</mark>');
   }
@@ -185,16 +192,13 @@ class ArchiveSearch extends PureComponent {
   }
 
   render() {
-    const { entries, groups } = this.state;
+    const { entries, groups, searchTerm } = this.state;
     const { onSelectEntry, onGroupSelect, t } = this.props;
 
     return (
       <SearchWrapper visible={this.state.visible}>
-        <SearchOverlay
-          visible={this.state.visible}
-          onClick={this.closeSearch}
-        />
-        <Search flexColumn visible={this.state.visible}>
+        <SearchOverlay onClick={this.closeSearch} />
+        <Search flexColumn>
           <Input
             bordered
             innerRef={input => {
@@ -205,6 +209,7 @@ class ArchiveSearch extends PureComponent {
             placeholder={t('archive-search.searchterm')}
             type="text"
             entries={this.state.entries}
+            searchTerm={this.state.searchTerm}
           />
 
           {entries.length > 0 ? (
@@ -226,7 +231,7 @@ class ArchiveSearch extends PureComponent {
                     <EntryData>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: this.markFoundWordParts(
+                          __html: this.highlightSearchResult(
                             entry.getProperty('title')
                           )
                         }}
@@ -252,7 +257,7 @@ class ArchiveSearch extends PureComponent {
                     <EntryData>
                       <span
                         dangerouslySetInnerHTML={{
-                          __html: this.markFoundWordParts(group.getTitle())
+                          __html: this.highlightSearchResult(group.getTitle())
                         }}
                       />
                     </EntryData>
@@ -260,6 +265,8 @@ class ArchiveSearch extends PureComponent {
                 ))}
               </Scrollbars>
             </EntryList>
+          ) : searchTerm !== '' ? (
+            <NothingFound>{t('archive-search.nothing-found')}</NothingFound>
           ) : (
             ''
           )}

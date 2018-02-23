@@ -48,14 +48,7 @@ export const setupMenu = store => {
           type: 'separator'
         },
         {}, // Import menu will be injected here
-        {
-          type: 'separator'
-        },
-        {
-          label: label('archive.search'),
-          accelerator: 'CmdOrCtrl+F',
-          click: (item, focusedWindow) => openSearch(focusedWindow)
-        },
+        {}, // Import search menu
         {
           type: 'separator'
         },
@@ -278,6 +271,20 @@ export const setupMenu = store => {
                         ]
                 }))
               };
+            }
+            // Archive Search
+            if (i === 5) {
+              return { type: 'separator' };
+            }
+            if (i === 6) {
+              return {
+                label: label('archive.search'),
+                accelerator: 'CmdOrCtrl+F',
+                click: (item, focusedWindow) => openSearch(focusedWindow)
+              };
+            }
+            if (i === 7) {
+              return { type: 'separator' };
             }
             return sub;
           })
