@@ -7,6 +7,7 @@ import { Input as BaseInput } from '@buttercup/ui';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Flex, Box } from 'styled-flexbox';
 import EntryIcon from './entry-icon';
+import folderIcon from '../../styles/img/folder-open.svg';
 
 const SearchWrapper = styled('div')`
   position: fixed;
@@ -18,7 +19,7 @@ const SearchWrapper = styled('div')`
 `;
 
 const SearchOverlay = styled('div')`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   position: absolute;
   left: 0;
   top: 0;
@@ -29,24 +30,19 @@ const SearchOverlay = styled('div')`
 `;
 
 const Search = styled(Flex)`
-  background-color: #ececec;
-  padding: var(--spacing-two);
   position: absolute;
   z-index: 4;
   top: 50%;
   left: 50%;
   width: 50vw;
   max-width: 500px;
-  border-radius: 3px;
   transition: transform 0.3s;
-  background-color: #fff;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   width: 100%;
 `;
 
 const Input = styled(BaseInput)`
-  padding: 20px;
+  padding: 20px 10px;
   margin: ${props => (props.entries.length > 0 ? '0 0 20px 0' : 0)};
 `;
 
@@ -54,10 +50,25 @@ const Input = styled(BaseInput)`
 	* Entry-List
 	*/
 const EntryList = styled(Box)`
+  background-color: #fff;
+  padding: var(--spacing-two);
   border: 0;
   margin: 0;
-  overflow: hidden;
   width: 100%;
+  border-radius: 6px;
+  position: relative;
+  &:after {
+    bottom: 100%;
+    left: 30px;
+    border: solid transparent;
+    content: ' ';
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-bottom-color: #fff;
+    border-width: 10px;
+    margin-left: -10px;
+  }
 `;
 const ListItem = styled('div')`
   margin: 0;
@@ -81,6 +92,7 @@ const ListItem = styled('div')`
 
 const EntryData = styled('div')`
   display: inline-block;
+  margin: -5px 0 0 0;
 `;
 
 const EntryFolder = styled('p')`
@@ -90,8 +102,12 @@ const EntryFolder = styled('p')`
 `;
 
 const Icon = styled('div')`
-  display: inline-block;
+  float: left;
   margin: 0 10px 0 0;
+`;
+
+const FolderIcon = styled('img')`
+  width: 22px;
 `;
 
 class ArchiveSearch extends PureComponent {
@@ -110,6 +126,7 @@ class ArchiveSearch extends PureComponent {
       visible: false,
       archive: null,
       entries: [],
+      groups: [],
       searchTerm: ''
     };
     this.changeInput = this.changeInput.bind(this);
@@ -130,6 +147,7 @@ class ArchiveSearch extends PureComponent {
       }));
 
       this._input.focus();
+      this._input.select();
     }
   }
 
@@ -144,10 +162,12 @@ class ArchiveSearch extends PureComponent {
     const entries = value
       ? this.state.archive.findEntriesByProperty('title', value)
       : [];
+    const groups = value ? this.state.archive.findGroupsByTitle(value) : [];
 
     this.setState({
       searchTerm: e.target.value,
-      entries
+      entries,
+      groups
     });
   }
 
@@ -165,7 +185,7 @@ class ArchiveSearch extends PureComponent {
   }
 
   render() {
-    const { entries } = this.state;
+    const { entries, groups } = this.state;
     const { onSelectEntry, onGroupSelect, t } = this.props;
 
     return (
@@ -188,8 +208,8 @@ class ArchiveSearch extends PureComponent {
           />
 
           {entries.length > 0 ? (
-            <Scrollbars autoHeight autoHeightMax={300}>
-              <EntryList flexAuto>
+            <EntryList flexAuto>
+              <Scrollbars autoHeight autoHeightMax={300}>
                 {entries.map((entry, index) => (
                   <ListItem
                     key={index}
@@ -215,8 +235,31 @@ class ArchiveSearch extends PureComponent {
                     </EntryData>
                   </ListItem>
                 ))}
-              </EntryList>
-            </Scrollbars>
+
+                {groups.map((group, index) => (
+                  <ListItem
+                    key={index}
+                    onClick={() => {
+                      onGroupSelect(group.getID());
+
+                      this.closeSearch();
+                    }}
+                  >
+                    <Icon>
+                      <FolderIcon src={folderIcon} />
+                    </Icon>
+
+                    <EntryData>
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: this.markFoundWordParts(group.getTitle())
+                        }}
+                      />
+                    </EntryData>
+                  </ListItem>
+                ))}
+              </Scrollbars>
+            </EntryList>
           ) : (
             ''
           )}
