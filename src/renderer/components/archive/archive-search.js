@@ -7,7 +7,6 @@ import { Input as BaseInput } from '@buttercup/ui';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Flex, Box } from 'styled-flexbox';
 import EntryIcon from './entry-icon';
-import folderIcon from '../../styles/img/folder-open.svg';
 import {
   getMatchingEntriesForSearchTerm,
   getNameForSource
