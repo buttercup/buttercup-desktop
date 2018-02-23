@@ -8,6 +8,7 @@ import {
 import { setSetting } from '../shared/actions/settings';
 import { ImportTypeInfo } from '../shared/buttercup/types';
 import { openFile, openFileForImporting, newFile } from './lib/files';
+import { openSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
@@ -47,6 +48,14 @@ export const setupMenu = store => {
           type: 'separator'
         },
         {}, // Import menu will be injected here
+        {
+          type: 'separator'
+        },
+        {
+          label: label('archive.search'),
+          accelerator: 'CmdOrCtrl+F',
+          click: (item, focusedWindow) => openSearch(focusedWindow)
+        },
         {
           type: 'separator'
         },

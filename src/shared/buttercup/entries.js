@@ -237,3 +237,7 @@ export function moveEntry(archiveId, entryId, groupId) {
   entry.moveToGroup(group);
   saveWorkspace(archiveId);
 }
+
+export function getArchiveToSearch(archiveId) {
+  return getArchive(archiveId);
+}

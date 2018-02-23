@@ -6,6 +6,7 @@ import Archive from '../components/archive';
 import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
 import SavingModal from './saving-modal';
+import ArchiveSearch from './archive/archive-search';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 import spinner from '../styles/img/spinner.svg';
 
@@ -20,10 +21,19 @@ const Workspace = ({
   columnSizes,
   condencedSidebar,
   archivesLoading,
-  savingArchive
+  savingArchive,
+  onSelectEntry,
+  setCurrentGroup,
+  onGroupSelect
 }) => {
+  console.log(onSelectEntry);
   return (
     <Flex flexAuto>
+      <ArchiveSearch
+        currentArchive={currentArchive}
+        onSelectEntry={onSelectEntry}
+        onGroupSelect={onGroupSelect}
+      />
       <If condition={archivesCount > 0}>
         <Sidebar condenced={condencedSidebar} />
       </If>
@@ -66,7 +76,10 @@ Workspace.propTypes = {
   condencedSidebar: PropTypes.bool,
   archivesLoading: PropTypes.bool,
   savingArchive: PropTypes.bool,
-  setColumnSize: PropTypes.func
+  setColumnSize: PropTypes.func,
+  onSelectEntry: PropTypes.func,
+  setCurrentGroup: PropTypes.func,
+  onGroupSelect: PropTypes.func
 };
 
 export default Workspace;
