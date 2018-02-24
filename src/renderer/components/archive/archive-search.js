@@ -232,40 +232,41 @@ class ArchiveSearch extends PureComponent {
             entries={this.state.entries}
             searchTerm={this.state.searchTerm}
           />
+          <Choose>
+            <When condition={entries.length > 0}>
+              <EntryList flexAuto>
+                <Scrollbars autoHeight autoHeightMax={300}>
+                  {entries.map(({ entry, sourceID, groupID, icon }, index) => (
+                    <ListItem
+                      selected={selectedItem === index}
+                      key={index}
+                      onClick={() => this.openEntry(sourceID, entry)}
+                    >
+                      <Icon>
+                        <EntryIcon icon={icon} />
+                      </Icon>
+                      <EntryData>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: entry.getProperty('title')
+                              ? this.highlightSearchResult(
+                                  entry.getProperty('title')
+                                )
+                              : '-'
+                          }}
+                        />
+                        <EntryFolder>{getNameForSource(sourceID)}</EntryFolder>
+                      </EntryData>
+                    </ListItem>
+                  ))}
+                </Scrollbars>
+              </EntryList>
+            </When>
 
-          {entries.length > 0 ? (
-            <EntryList flexAuto>
-              <Scrollbars autoHeight autoHeightMax={300}>
-                {entries.map(({ entry, sourceID, groupID, icon }, index) => (
-                  <ListItem
-                    selected={selectedItem === index}
-                    key={index}
-                    onClick={() => this.openEntry(sourceID, entry)}
-                  >
-                    <Icon>
-                      <EntryIcon icon={icon} />
-                    </Icon>
-                    <EntryData>
-                      <span
-                        dangerouslySetInnerHTML={{
-                          __html: entry.getProperty('title')
-                            ? this.highlightSearchResult(
-                                entry.getProperty('title')
-                              )
-                            : '-'
-                        }}
-                      />
-                      <EntryFolder>{getNameForSource(sourceID)}</EntryFolder>
-                    </EntryData>
-                  </ListItem>
-                ))}
-              </Scrollbars>
-            </EntryList>
-          ) : searchTerm !== '' ? (
-            <NothingFound>{t('archive-search.nothing-found')}</NothingFound>
-          ) : (
-            ''
-          )}
+            <When condition={entries.length === 0 && searchTerm !== ''}>
+              <NothingFound>{t('archive-search.nothing-found')}</NothingFound>
+            </When>
+          </Choose>
         </Search>
       </SearchWrapper>
     );
