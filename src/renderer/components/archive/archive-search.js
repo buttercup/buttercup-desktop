@@ -135,7 +135,6 @@ class ArchiveSearch extends PureComponent {
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
     this.highlightSearchResult = this.highlightSearchResult.bind(this);
-    this.getAllMatchingEntries = this.getAllMatchingEntries.bind(this);
     this.onInputKeyDownOrDown = this.onInputKeyDownOrDown.bind(this);
     this.openEntry = this.openEntry.bind(this);
   }
@@ -145,20 +144,18 @@ class ArchiveSearch extends PureComponent {
   }
 
   changeInput(e) {
-    this.setState({
-      searchTerm: e.target.value,
-      selectedItem: -1
-    });
-
-    this.getAllMatchingEntries();
-  }
-
-  getAllMatchingEntries() {
-    getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
-      this.setState({
-        entries: this.state.searchTerm ? entries : []
-      });
-    });
+    this.setState(
+      {
+        searchTerm: e.target.value,
+        selectedItem: -1
+      },
+      () =>
+        getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
+          this.setState({
+            entries: this.state.searchTerm ? entries : []
+          });
+        })
+    );
   }
 
   highlightSearchResult(word) {
