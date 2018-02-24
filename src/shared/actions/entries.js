@@ -6,7 +6,6 @@ import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
 import i18n from '../i18n';
 import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import { getSharedArchiveManager } from '../buttercup/archive';
-import iconographer from '../../main/lib/icon/iconographer';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -153,7 +152,7 @@ export async function getMatchingEntriesForSearchTerm(term) {
       return {
         sourceID: archiveId,
         groupID: result.entry.getGroup().getID(),
-        icon: await iconographer.getIconForEntry(result.entry),
+        icon: await entryTools.getIcon(result.entry),
         entry: result.entry
       };
     })
