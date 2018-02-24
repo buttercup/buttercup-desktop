@@ -14,12 +14,14 @@ import {
   importHistoryIntoArchive,
   resetArchivesInStore
 } from '../shared/actions/archives';
-import { setUIState } from '../shared/actions/ui-state';
+import {
+  setUIState,
+  setIsArchiveSearchVisible
+} from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
 import { getSetting, getUIState } from '../shared/selectors';
-import { setIsArchiveSearchVisible } from '../shared/actions/ui-state';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
 
