@@ -159,7 +159,7 @@ class ArchiveSearch extends PureComponent {
   }
 
   highlightSearchResult(word) {
-    const regex = new RegExp('(' + this.state.searchTerm + ')', 'g');
+    const regex = new RegExp('(' + this.state.searchTerm + ')', 'ig');
     return word.replace(regex, '<mark>$1</mark>');
   }
 
