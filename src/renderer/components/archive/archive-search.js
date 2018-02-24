@@ -125,7 +125,6 @@ class ArchiveSearch extends PureComponent {
     super(props);
 
     this.state = {
-      visible: false,
       archive: null,
       entries: [],
       searchTerm: '',
@@ -203,13 +202,11 @@ class ArchiveSearch extends PureComponent {
       const archive = getArchive(currentArchive.id);
 
       this.setState(state => ({
-        visible: !state.visible,
         archive
       }));
-
-      this._input.focus();
-      this._input.select();
     }
+    this._input.focus();
+    this._input.select();
   }
 
   render() {
