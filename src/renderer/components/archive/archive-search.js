@@ -184,6 +184,10 @@ class ArchiveSearch extends PureComponent {
         this.openEntry(result.sourceID, result.entry);
       }
     }
+
+    if (e.keyCode === 27) {
+      this.closeSearch();
+    }
   }
 
   openEntry(sourceID, entry) {
