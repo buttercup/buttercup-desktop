@@ -21,7 +21,8 @@ const Workspace = ({
   columnSizes,
   condencedSidebar,
   archivesLoading,
-  savingArchive
+  savingArchive,
+  isArchiveSearchVisible
 }) => {
   return (
     <Flex flexAuto>
@@ -44,7 +45,9 @@ const Workspace = ({
                 <NoArchiveSelected />
               </When>
               <Otherwise>
-                <ArchiveSearch />
+                <If condition={isArchiveSearchVisible}>
+                  <ArchiveSearch />
+                </If>
                 <Archive
                   columnSizes={columnSizes}
                   onColumnSizeChange={setColumnSize}
@@ -68,6 +71,7 @@ Workspace.propTypes = {
   condencedSidebar: PropTypes.bool,
   archivesLoading: PropTypes.bool,
   savingArchive: PropTypes.bool,
+  isArchiveSearchVisible: PropTypes.bool,
   setColumnSize: PropTypes.func
 };
 

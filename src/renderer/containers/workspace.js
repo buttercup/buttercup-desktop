@@ -15,7 +15,8 @@ export default connect(
     archivesLoading: getSetting(state, 'archivesLoading'),
     currentArchive: getCurrentArchive(state),
     archivesCount: getArchivesCount(state),
-    savingArchive: getUIState(state, 'savingArchive')
+    savingArchive: getUIState(state, 'savingArchive'),
+    isArchiveSearchVisible: getUIState(state, 'isArchiveSearchVisible')
   }),
   {
     setColumnSize

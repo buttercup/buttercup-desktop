@@ -19,6 +19,9 @@ import {
   ENTRIES_SET_SORT
 } from './types';
 
+import { loadOrUnlockArchive } from '../../shared/actions/archives';
+import { loadGroup } from '../../shared/actions/groups';
+
 export const selectEntry = createAction(ENTRIES_SELECTED);
 export const setFilter = createAction(ENTRIES_SET_FILTER);
 export const setSortMode = createAction(ENTRIES_SET_SORT);
@@ -168,3 +171,12 @@ export function getNameForSource(sourceID) {
   }
   return source.name;
 }
+
+export const selectArchiveGroupAndEntry = (archiveId, entry) => (
+  dispatch,
+  getState
+) => {
+  dispatch(loadOrUnlockArchive(archiveId));
+  dispatch(loadGroup(entry.getGroup().getID()));
+  dispatch(selectEntry(entry.getID()));
+};

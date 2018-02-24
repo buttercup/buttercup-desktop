@@ -1,10 +1,9 @@
 /**
- * Present an open dialog box
- * and return the filename if selected
+ * Toggle archive search
  *
  * @param {BrowserWindow} focusedWindow
  * @returns {void}
  */
-export function openSearch(focusedWindow) {
-  focusedWindow.webContents.send('open-archive-search');
+export function toggleArchiveSearch(focusedWindow) {
+  focusedWindow.webContents.send('toggle-archive-search');
 }

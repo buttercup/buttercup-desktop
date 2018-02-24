@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
 import { translate } from 'react-i18next';
 import { Input as BaseInput } from '@buttercup/ui';
@@ -18,7 +17,6 @@ const SearchWrapper = styled.div`
   height: 100%;
   z-index: 3;
   left: 0;
-  display: ${props => (props.visible ? 'block' : 'none')};
 `;
 
 const SearchOverlay = styled.div`
@@ -80,6 +78,15 @@ const ListItem = styled.div`
     border: 0;
   }
 
+  ${props =>
+    props.selected
+      ? `    background-color: #00b7ac;
+    color: #fff;
+    p {
+      color: #fff;
+    }`
+      : ''};
+
   &:hover {
     background-color: #00b7ac;
     color: #fff;
@@ -94,7 +101,7 @@ const EntryData = styled.div`
   margin: -5px 0 0 0;
 `;
 
-const EntryFolder = styled('p')`
+const EntryFolder = styled.p`
   font-size: 12px;
   color: #999;
   margin: 0;
@@ -107,11 +114,10 @@ const Icon = styled.div`
 
 class ArchiveSearch extends PureComponent {
   static propTypes = {
-    onSelectEntry: PropTypes.func,
     getArchive: PropTypes.func,
     currentArchive: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    onGroupSelect: PropTypes.func,
-    switchArchive: PropTypes.func,
+    selectArchiveGroupAndEntry: PropTypes.func,
+    setIsArchiveSearchVisible: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -122,41 +128,26 @@ class ArchiveSearch extends PureComponent {
       visible: false,
       archive: null,
       entries: [],
-      searchTerm: ''
+      searchTerm: '',
+      selectedItem: -1
     };
 
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
-    this.searchListener = this.searchListener.bind(this);
     this.highlightSearchResult = this.highlightSearchResult.bind(this);
     this.getAllMatchingEntries = this.getAllMatchingEntries.bind(this);
-  }
-
-  searchListener() {
-    const { getArchive, currentArchive } = this.props;
-
-    if (currentArchive) {
-      const archive = getArchive(currentArchive.id);
-
-      this.setState(state => ({
-        visible: !state.visible,
-        archive
-      }));
-
-      this._input.focus();
-      this._input.select();
-    }
+    this.onInputKeyDownOrDown = this.onInputKeyDownOrDown.bind(this);
+    this.openEntry = this.openEntry.bind(this);
   }
 
   closeSearch() {
-    this.setState({
-      visible: false
-    });
+    this.props.setIsArchiveSearchVisible(false);
   }
 
   changeInput(e) {
     this.setState({
-      searchTerm: e.target.value
+      searchTerm: e.target.value,
+      selectedItem: -1
     });
 
     this.getAllMatchingEntries();
@@ -175,24 +166,62 @@ class ArchiveSearch extends PureComponent {
     return word.replace(regex, '<mark>$1</mark>');
   }
 
-  componentDidMount() {
-    ipcRenderer.on('open-archive-search', this.searchListener);
+  onInputKeyDownOrDown(e) {
+    const { entries, selectedItem } = this.state;
+
+    if (e.keyCode === 38 && selectedItem !== -1) {
+      this.setState(state => ({
+        selectedItem: state.selectedItem - 1
+      }));
+    }
+
+    if (e.keyCode === 40 && selectedItem < entries.length - 1) {
+      this.setState(state => ({
+        selectedItem: state.selectedItem + 1
+      }));
+    }
+
+    if (e.keyCode === 13) {
+      if (entries.length > 0 && entries[selectedItem]) {
+        const result = entries[selectedItem];
+        this.openEntry(result.sourceID, result.entry);
+      }
+    }
   }
 
-  componentWillUnmount() {
-    ipcRenderer.removeListener('open-archive-search', this.searchListener);
+  openEntry(sourceID, entry) {
+    this.props.selectArchiveGroupAndEntry(sourceID, entry);
+
+    this.closeSearch();
+  }
+
+  componentDidMount() {
+    const { getArchive, currentArchive } = this.props;
+
+    if (currentArchive) {
+      const archive = getArchive(currentArchive.id);
+
+      this.setState(state => ({
+        visible: !state.visible,
+        archive
+      }));
+
+      this._input.focus();
+      this._input.select();
+    }
   }
 
   render() {
-    const { entries, searchTerm } = this.state;
-    const { switchArchive, onSelectEntry, onGroupSelect, t } = this.props;
+    const { entries, searchTerm, selectedItem } = this.state;
+    const { t } = this.props;
 
     return (
-      <SearchWrapper visible={this.state.visible}>
+      <SearchWrapper>
         <SearchOverlay onClick={this.closeSearch} />
         <Search flexColumn>
           <Input
             bordered
+            onKeyDown={this.onInputKeyDownOrDown}
             innerRef={input => {
               this._input = input;
             }}
@@ -209,14 +238,9 @@ class ArchiveSearch extends PureComponent {
               <Scrollbars autoHeight autoHeightMax={300}>
                 {entries.map(({ entry, sourceID, groupID, icon }, index) => (
                   <ListItem
+                    selected={selectedItem === index}
                     key={index}
-                    onClick={() => {
-                      switchArchive(sourceID);
-                      onGroupSelect(entry.getGroup().getID());
-                      onSelectEntry(entry.getID());
-
-                      this.closeSearch();
-                    }}
+                    onClick={() => this.openEntry(sourceID, entry)}
                   >
                     <Icon>
                       <EntryIcon icon={icon} />

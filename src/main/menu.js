@@ -8,7 +8,7 @@ import {
 import { setSetting } from '../shared/actions/settings';
 import { ImportTypeInfo } from '../shared/buttercup/types';
 import { openFile, openFileForImporting, newFile } from './lib/files';
-import { openSearch } from './lib/archive-search';
+import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow } from './utils/window';
@@ -48,8 +48,14 @@ export const setupMenu = store => {
           type: 'separator'
         },
         {}, // Import menu will be injected here
-        {}, // Import search menu seperator
-        {}, // Import search menu
+        {
+          type: 'separator'
+        },
+        {
+          label: label('archive.search'),
+          accelerator: 'CmdOrCtrl+F',
+          click: (item, focusedWindow) => toggleArchiveSearch(focusedWindow)
+        },
         {
           type: 'separator'
         },
@@ -271,17 +277,6 @@ export const setupMenu = store => {
                           }
                         ]
                 }))
-              };
-            }
-            // Archive Search
-            if (i === 5) {
-              return { type: 'separator' };
-            }
-            if (i === 6) {
-              return {
-                label: label('archive.search'),
-                accelerator: 'CmdOrCtrl+F',
-                click: (item, focusedWindow) => openSearch(focusedWindow)
               };
             }
             return sub;
