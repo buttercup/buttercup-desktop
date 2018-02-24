@@ -65,7 +65,7 @@
     }
   },
   "archive-search": {
-    "searchterm": "Searchterm...",
+    "searchterm": "Search for...",
     "nothing-found": "Nothing found"
   },
   "archive": {
