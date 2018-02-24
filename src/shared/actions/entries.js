@@ -4,6 +4,9 @@ import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getQueue } from '../../renderer/system/queue';
 import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
 import i18n from '../i18n';
+import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
+import { getSharedArchiveManager } from '../buttercup/archive';
+import iconographer from '../../main/lib/icon/iconographer';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -15,6 +18,9 @@ import {
   ENTRIES_SET_FILTER,
   ENTRIES_SET_SORT
 } from './types';
+
+import { loadOrUnlockArchive } from '../../shared/actions/archives';
+import { loadGroup } from '../../shared/actions/groups';
 
 export const selectEntry = createAction(ENTRIES_SELECTED);
 export const setFilter = createAction(ENTRIES_SET_FILTER);
@@ -122,4 +128,55 @@ const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
         });
       });
   });
+};
+
+export async function getMatchingEntriesForSearchTerm(term) {
+  const manager = getSharedArchiveManager();
+
+  const unlockedSources = manager.unlockedSources;
+  const lookup = unlockedSources.reduce(
+    (current, next) => ({
+      ...current,
+      [next.workspace.primary.archive.getID()]: next.id
+    }),
+    {}
+  );
+  const archives = unlockedSources.map(
+    source => source.workspace.primary.archive
+  );
+  const finder = new EntryFinder(archives);
+
+  return Promise.all(
+    finder.search(term).map(async result => {
+      const archiveId = lookup[result.archive.getID()];
+
+      return {
+        sourceID: archiveId,
+        groupID: result.entry.getGroup().getID(),
+        icon: await iconographer.getIconForEntry(result.entry),
+        entry: result.entry
+      };
+    })
+  );
+}
+
+export function getNameForSource(sourceID) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(sourceID);
+
+  if (!source) {
+    throw new Error(
+      `Unable to fetch source information: No source found for ID: ${sourceID}`
+    );
+  }
+  return source.name;
+}
+
+export const selectArchiveGroupAndEntry = (archiveId, entry) => (
+  dispatch,
+  getState
+) => {
+  dispatch(loadOrUnlockArchive(archiveId));
+  dispatch(loadGroup(entry.getGroup().getID()));
+  dispatch(selectEntry(entry.getID()));
 };

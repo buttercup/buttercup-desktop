@@ -14,6 +14,7 @@
       "file": "File",
       "new": "New Archive",
       "open": "Open Archive",
+      "search": "Search in Archive",
       "connect-cloud-sources": "Connect Cloud Sources",
       "import": {
         "import": "Import",
@@ -62,6 +63,10 @@
       "privacy-policy": "Privacy Policy",
       "view-changelog-for-v": "View Changelog For v{{version}}"
     }
+  },
+  "archive-search": {
+    "searchterm": "Searchterm...",
+    "nothing-found": "Nothing found"
   },
   "archive": {
     "add-archive": "Add Archive",

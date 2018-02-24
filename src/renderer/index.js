@@ -14,11 +14,14 @@ import {
   importHistoryIntoArchive,
   resetArchivesInStore
 } from '../shared/actions/archives';
-import { setUIState } from '../shared/actions/ui-state';
+import {
+  setUIState,
+  setIsArchiveSearchVisible
+} from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
-import { getSetting } from '../shared/selectors';
+import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
 
@@ -68,6 +71,14 @@ ipc.on('import-history-prompt', (e, payload) => {
 
 ipc.on('save-started', () => {
   store.dispatch(setUIState('savingArchive', true));
+});
+
+ipc.on('toggle-archive-search', () => {
+  store.dispatch(
+    setIsArchiveSearchVisible(
+      !getUIState(store.getState(), 'isArchiveSearchVisible')
+    )
+  );
 });
 
 window.onbeforeunload = event => {

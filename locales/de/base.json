@@ -14,6 +14,7 @@
       "file": "Datei",
       "new": "Neues Archiv",
       "open": "Archiv öffnen",
+      "search": "Archiv durchsuchen",
       "connect-cloud-sources": "Clouds verbinden",
       "import": {
         "import": "Importieren",
@@ -60,6 +61,10 @@
       "privacy-policy": "Datenschutzrichtlinie",
       "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
     }
+  },
+  "archive-search": {
+    "searchterm": "Suchbegriff...",
+    "nothing-found": "Leider nichts gefunden"
   },
   "archive": {
     "add-archive": "Archiv hinzufügen",
