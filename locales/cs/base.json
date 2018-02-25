@@ -205,7 +205,7 @@
   },
   "update": {
     "installing": "Instaluji",
-    "update-available-message": "Je dostupná {{version}} Buttercupu. Klikněte pro spuštění instalace."
+    "update-available-message": "Je dostupná {{version}} Buttercupu. Klikněte pro spuštění instalace.",
     "new-version-available": "Nová verze Buttercupu je k dispozici!",
     "not-now": "Teď ne",
     "download": "Stáhnout a nainstalovat",
