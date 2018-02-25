@@ -45,9 +45,6 @@ const Workspace = ({
                 <NoArchiveSelected />
               </When>
               <Otherwise>
-                <If condition={isArchiveSearchVisible}>
-                  <ArchiveSearch />
-                </If>
                 <Archive
                   columnSizes={columnSizes}
                   onColumnSizeChange={setColumnSize}
@@ -57,6 +54,9 @@ const Workspace = ({
           </Otherwise>
         </Choose>
       </Primary>
+      <If condition={isArchiveSearchVisible}>
+        <ArchiveSearch />
+      </If>
       <If condition={savingArchive}>
         <SavingModal />
       </If>
