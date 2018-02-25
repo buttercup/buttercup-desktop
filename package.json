@@ -38,7 +38,7 @@
     ]
   },
   "build": {
-    "asar": false,
+    "asar": true,
     "appId": "pw.buttercup.desktop",
     "copyright": "Copyright © 2015-2018 MadDev Oy",
     "mac": {
