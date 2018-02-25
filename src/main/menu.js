@@ -382,26 +382,25 @@ export const setupMenu = store => {
 
   if (getSetting(state, 'isTrayModeEnabled')) {
     if (!tray) {
-      console.log('TRAYICON', trayIcon);
       tray = new Tray(trayIcon);
     }
 
     setTimeout(() => {
       app.dock.hide();
-    }, 200);
+    }, 300);
 
     tray.setContextMenu(buildTemplate);
   } else {
     app.dock.show();
 
-    if (app.dock.isVisible()) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (app.dock.isVisible()) {
         if (tray) {
           tray.destroy();
         }
         tray = null;
-      }, 200);
-    }
+      }
+    }, 300);
   }
   Menu.setApplicationMenu(buildTemplate);
 };
