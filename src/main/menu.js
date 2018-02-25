@@ -1,4 +1,4 @@
-import { app, shell, Menu, Tray } from 'electron';
+import { app, shell, Menu, Tray, BrowserWindow } from 'electron';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
@@ -377,6 +377,7 @@ export const setupMenu = store => {
     return item;
   });
 
+  const mainWindow = getWindowManager().getWindowsOfType('main');
   const buildTemplate = Menu.buildFromTemplate(template);
 
   if (getSetting(state, 'isTrayModeEnabled')) {
@@ -386,6 +387,10 @@ export const setupMenu = store => {
 
     if (isOSX()) {
       app.dock.hide();
+    } else {
+      if (mainWindow.length > 0) {
+        mainWindow[0].setMenu(null);
+      }
     }
 
     tray.setContextMenu(buildTemplate);
@@ -400,6 +405,6 @@ export const setupMenu = store => {
       }
       tray = null;
     }, 0);
+    Menu.setApplicationMenu(buildTemplate);
   }
-  Menu.setApplicationMenu(buildTemplate);
 };
