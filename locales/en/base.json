@@ -44,6 +44,7 @@
       "view": "View",
       "condensed-sidebar": "Condensed Sidebar",
       "language": "Language",
+      "enable-tray-mode": "Display as icon",
       "reload": "Reload",
       "forcereload": "Force reload",
       "toggledevtools": "Toggle dev tools",

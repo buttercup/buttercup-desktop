@@ -1,4 +1,5 @@
-import { app, shell, Menu } from 'electron';
+import { app, shell, Menu, Tray } from 'electron';
+import path from 'path';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
@@ -15,10 +16,14 @@ import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
+import { getPathToFile } from './lib/utils';
 
 electronContextMenu();
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
+
+let tray = null;
+const trayIcon = getPathToFile('resources/icons/trayTemplate.png', true);
 
 export const setupMenu = store => {
   const defaultTemplate = [
@@ -296,6 +301,15 @@ export const setupMenu = store => {
                 store.dispatch(setSetting('condencedSidebar', item.checked));
               }
             },
+            {
+              label: label('view.enable-tray-mode'),
+              type: 'checkbox',
+              checked: getSetting(state, 'isTrayModeEnabled'),
+              click: item => {
+                store.dispatch(setSetting('isTrayModeEnabled', item.checked));
+                setupMenu(store);
+              }
+            },
             { type: 'separator' },
             // Language menu point
             {
@@ -364,5 +378,30 @@ export const setupMenu = store => {
     return item;
   });
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  const buildTemplate = Menu.buildFromTemplate(template);
+
+  if (getSetting(state, 'isTrayModeEnabled')) {
+    if (!tray) {
+      console.log('TRAYICON', trayIcon);
+      tray = new Tray(trayIcon);
+    }
+
+    setTimeout(() => {
+      app.dock.hide();
+    }, 200);
+
+    tray.setContextMenu(buildTemplate);
+  } else {
+    app.dock.show();
+
+    if (app.dock.isVisible()) {
+      setTimeout(() => {
+        if (tray) {
+          tray.destroy();
+        }
+        tray = null;
+      }, 200);
+    }
+  }
+  Menu.setApplicationMenu(buildTemplate);
 };
