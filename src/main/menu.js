@@ -15,14 +15,14 @@ import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
-import { getPathToFile } from './lib/utils';
+import { getURIPathToFile } from './lib/utils';
 
 electronContextMenu();
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
-const trayIcon = getPathToFile('resources/icons/trayTemplate.png', true);
+const trayIcon = getURIPathToFile('resources/icons/trayTemplate.png', true);
 
 export const setupMenu = store => {
   const defaultTemplate = [
@@ -384,20 +384,22 @@ export const setupMenu = store => {
       tray = new Tray(trayIcon);
     }
 
-    app.dock.hide();
+    if (isOSX()) {
+      app.dock.hide();
+    }
 
     tray.setContextMenu(buildTemplate);
   } else {
-    app.dock.show();
+    if (isOSX()) {
+      app.dock.show();
+    }
 
     setTimeout(() => {
-      if (app.dock.isVisible()) {
-        if (tray) {
-          tray.destroy();
-        }
-        tray = null;
+      if (tray) {
+        tray.destroy();
       }
-    }, 300);
+      tray = null;
+    }, 0);
   }
   Menu.setApplicationMenu(buildTemplate);
 };
