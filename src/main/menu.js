@@ -1,4 +1,4 @@
-import { app, shell, Menu, Tray, BrowserWindow } from 'electron';
+import { app, shell, Menu, Tray } from 'electron';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
