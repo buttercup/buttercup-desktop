@@ -384,9 +384,7 @@ export const setupMenu = store => {
       tray = new Tray(trayIcon);
     }
 
-    setTimeout(() => {
-      app.dock.hide();
-    }, 300);
+    app.dock.hide();
 
     tray.setContextMenu(buildTemplate);
   } else {
