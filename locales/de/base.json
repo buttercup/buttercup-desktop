@@ -43,7 +43,7 @@
       "view": "Darstellung",
       "condensed-sidebar": "Verkleinerte Seitenleiste",
       "language": "Sprache",
-      "enable-tray-mode": "Als Icon anzeigen",
+      "enable-tray-icon": "In Statusleiste anzeigen",
       "reload": "Neuladen",
       "forcereload": "Neuladen erzwingen",
       "toggledevtools": "Entwicklerwerkzeug ein- und ausblenden",

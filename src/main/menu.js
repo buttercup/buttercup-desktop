@@ -22,11 +22,50 @@ electronContextMenu();
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
-const trayIcon = getURIPathToFile('resources/icons/trayTemplate.png', true);
 
 const reopenMainWindow = () => {
   if (getWindowManager().getCountOfType('main') === 0) {
     getWindowManager().buildWindowOfType('main');
+  }
+};
+
+export const setupTrayIcon = store => {
+  const state = store.getState();
+  const isTrayIconEnabled = getSetting(state, 'isTrayIconEnabled');
+  const mainWindow = getWindowManager().getWindowsOfType('main');
+  const mainWindowsExists = mainWindow.length > 0;
+
+  if (isTrayIconEnabled) {
+    if (!tray) {
+      tray = new Tray(
+        getURIPathToFile('resources/icons/trayTemplate.png', true)
+      );
+    }
+
+    tray.setContextMenu(
+      Menu.buildFromTemplate([
+        {
+          label: label('tray.open-buttercup'),
+          click: () => {
+            reopenMainWindow();
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: label('tray.quit'),
+          click: () => {
+            app.quit();
+          }
+        }
+      ])
+    );
+  } else {
+    if (tray) {
+      tray.destroy();
+    }
+    tray = null;
   }
 };
 
@@ -244,26 +283,6 @@ export const setupMenu = store => {
       ? menubarAutoHideSetting
       : false;
 
-  const isTrayModeEnabled = getSetting(state, 'isTrayModeEnabled');
-
-  if (isTrayModeEnabled) {
-    defaultTemplate.push({
-      type: 'separator'
-    });
-    defaultTemplate.push({
-      label: label('tray.open-buttercup'),
-      click: () => {
-        reopenMainWindow();
-      }
-    });
-    defaultTemplate.push({
-      label: label('tray.quit'),
-      click: () => {
-        app.quit();
-      }
-    });
-  }
-
   const template = defaultTemplate.map((item, i) => {
     // OSX has one more menu item
     const index = isOSX() ? i : i + 1;
@@ -329,12 +348,12 @@ export const setupMenu = store => {
               }
             },
             {
-              label: label('view.enable-tray-mode'),
+              label: label('view.enable-tray-icon'),
               type: 'checkbox',
-              checked: getSetting(state, 'isTrayModeEnabled'),
+              checked: getSetting(state, 'isTrayIconEnabled'),
               click: item => {
-                store.dispatch(setSetting('isTrayModeEnabled', item.checked));
-                setupMenu(store);
+                store.dispatch(setSetting('isTrayIconEnabled', item.checked));
+                setupTrayIcon(store);
               }
             },
             { type: 'separator' },
@@ -406,40 +425,7 @@ export const setupMenu = store => {
     return item;
   });
 
-  const mainWindow = getWindowManager().getWindowsOfType('main');
   const buildTemplate = Menu.buildFromTemplate(template);
 
-  const mainWindowsExists = mainWindow.length > 0;
-
-  if (getSetting(state, 'isTrayModeEnabled')) {
-    if (!tray) {
-      tray = new Tray(trayIcon);
-    }
-
-    if (isOSX()) {
-      app.dock.hide();
-    } else {
-      if (mainWindowsExists) {
-        mainWindow[0].setMenuBarVisibility(false);
-      }
-    }
-
-    tray.setContextMenu(buildTemplate);
-  } else {
-    if (isOSX()) {
-      app.dock.show();
-    } else {
-      if (mainWindowsExists) {
-        mainWindow[0].setMenuBarVisibility(true);
-      }
-    }
-
-    setTimeout(() => {
-      if (tray) {
-        tray.destroy();
-      }
-      tray = null;
-    }, 0);
-    Menu.setApplicationMenu(buildTemplate);
-  }
+  Menu.setApplicationMenu(buildTemplate);
 };
