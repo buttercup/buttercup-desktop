@@ -6,6 +6,7 @@ import Archive from '../components/archive';
 import Sidebar from '../containers/sidebar';
 import '../styles/workspace.global.scss';
 import SavingModal from './saving-modal';
+import ArchiveSearch from '../containers/archive/archive-search';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 import spinner from '../styles/img/spinner.svg';
 
@@ -19,7 +20,9 @@ const Workspace = ({
   setColumnSize,
   columnSizes,
   condencedSidebar,
-  archivesLoading
+  archivesLoading,
+  savingArchive,
+  isArchiveSearchVisible
 }) => {
   return (
     <Flex flexAuto>
@@ -51,7 +54,12 @@ const Workspace = ({
           </Otherwise>
         </Choose>
       </Primary>
-      <SavingModal />
+      <If condition={isArchiveSearchVisible}>
+        <ArchiveSearch />
+      </If>
+      <If condition={savingArchive}>
+        <SavingModal />
+      </If>
     </Flex>
   );
 };
@@ -62,6 +70,8 @@ Workspace.propTypes = {
   columnSizes: PropTypes.object,
   condencedSidebar: PropTypes.bool,
   archivesLoading: PropTypes.bool,
+  savingArchive: PropTypes.bool,
+  isArchiveSearchVisible: PropTypes.bool,
   setColumnSize: PropTypes.func
 };
 

@@ -15,6 +15,8 @@ export function setupWindows(store) {
   // Intro Screen
   windowManager.setBuildProcedure('main', callback => {
     const [width, height] = config.get('window.size', [950, 700]);
+    const windowPosition = config.get('window.position');
+
     // Create the browser window.
     const win = new BrowserWindow({
       width,
@@ -30,6 +32,27 @@ export function setupWindows(store) {
       darkTheme: true,
       vibrancy: 'ultra-dark'
     });
+
+    // set window position only if config exists
+    if (windowPosition) {
+      const [x, y] = windowPosition;
+      win.setPosition(x, y);
+    }
+
+    // set current window position
+    win.on(
+      'move',
+      debounce(() => {
+        config.set('window.position', win.getPosition());
+      }, 500)
+    );
+
+    win.on(
+      'resize',
+      debounce(() => {
+        config.set('window.size', win.getSize());
+      }, 500)
+    );
 
     // Set initial menu bar visibility
     const menubarAutoHide = getSetting(store.getState(), 'menubarAutoHide');
@@ -56,13 +79,6 @@ export function setupWindows(store) {
 
       setTimeout(() => checkForUpdates(), ms('5s'));
     });
-
-    win.on(
-      'resize',
-      debounce(() => {
-        config.set('window.size', win.getSize());
-      }, 2000)
-    );
 
     win.once('closed', () => {
       windowManager.deregister(win);

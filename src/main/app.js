@@ -12,6 +12,7 @@ import { isWindows } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
+import { getFilePathFromArgv } from './utils/argv';
 
 log.info('Buttercup starting up...');
 
@@ -23,6 +24,7 @@ const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 
 let appIsReady = false;
+let appTriedToQuit = false;
 let initialFile = null;
 
 // Crash reporter for alpha and beta releases
@@ -70,8 +72,33 @@ app.on('open-file', (e, filePath) => {
 });
 
 // Open file using Buttercup (on Windows)
-if (isWindows() && typeof process.argv[1] === 'string') {
-  initialFile = process.argv[1];
+if (isWindows()) {
+  initialFile = getFilePathFromArgv(process.argv);
+}
+
+// Someone tried to run a second instance, we should focus our window.
+const isSecondInstance = app.makeSingleInstance(argv => {
+  const handleArgvForWindow = win => {
+    // Handle the argv of second instance for windows
+    const filePath = getFilePathFromArgv(argv);
+    if (isWindows() && filePath) {
+      loadFile(filePath, win);
+    }
+  };
+  if (windowManager.getCountOfType('main') > 0) {
+    const [mainWindow] = windowManager.getWindowsOfType('main');
+    if (mainWindow.isMinimized()) {
+      mainWindow.restore();
+    }
+    mainWindow.focus();
+    handleArgvForWindow(mainWindow);
+  } else {
+    windowManager.buildWindowOfType('main', win => handleArgvForWindow(win));
+  }
+});
+
+if (isSecondInstance) {
+  app.quit();
 }
 
 app.on('ready', async () => {
@@ -117,7 +144,7 @@ app.on('ready', async () => {
 
   appIsReady = true;
 
-  // Show intro
+  // Show main window
   windowManager.buildWindowOfType('main', win => {
     // If the app has been started in order to open a file
     // launch that file after the main window has been created.
@@ -131,7 +158,7 @@ app.on('ready', async () => {
 // When user closes all windows
 // On Windows, the command practice is to quit the app.
 app.on('window-all-closed', () => {
-  if (isWindows()) {
+  if (isWindows() || appTriedToQuit) {
     app.quit();
   }
 });
@@ -145,6 +172,7 @@ app.on('activate', () => {
 
 app.once('before-quit', e => {
   const channel = getQueue().channel('saves');
+  appTriedToQuit = true;
 
   if (!channel.isEmpty) {
     log.info('Operation queue is not empty, waiting before quitting.');

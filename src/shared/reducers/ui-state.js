@@ -1,8 +1,8 @@
 import { UI_STATE_SET } from '../actions/types';
 
 const initialState = {
-  savingArchive: true,
-  isExiting: false
+  savingArchive: false,
+  isArchiveSearchVisible: false
 };
 
 export default function uiState(state = initialState, action) {

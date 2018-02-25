@@ -14,12 +14,16 @@ import {
   importHistoryIntoArchive,
   resetArchivesInStore
 } from '../shared/actions/archives';
-import { setUIState } from '../shared/actions/ui-state';
+import {
+  setUIState,
+  setIsArchiveSearchVisible
+} from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
-import { getSetting } from '../shared/selectors';
+import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
+import { getQueue } from './system/queue';
 
 // Unhandled rejections
 const unhandled = require('electron-unhandled');
@@ -65,9 +69,32 @@ ipc.on('import-history-prompt', (e, payload) => {
     });
 });
 
-ipc.on('will-quit', () => {
-  store.dispatch(setUIState('isExiting', true));
+ipc.on('save-started', () => {
+  store.dispatch(setUIState('savingArchive', true));
 });
+
+ipc.on('toggle-archive-search', () => {
+  store.dispatch(
+    setIsArchiveSearchVisible(
+      !getUIState(store.getState(), 'isArchiveSearchVisible')
+    )
+  );
+});
+
+window.onbeforeunload = event => {
+  const channel = getQueue().channel('saves');
+
+  if (!channel.isEmpty) {
+    event.returnValue = false;
+
+    // setImmediate is needed to escape the process block
+    setImmediate(() => store.dispatch(setUIState('savingArchive', true)));
+
+    channel.once('stopped', () => {
+      window.close();
+    });
+  }
+};
 
 const currentLocale = getSetting(store.getState(), 'locale');
 const renderApp = (RootContainer, i18n) =>

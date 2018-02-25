@@ -14,6 +14,7 @@
       "file": "Datei",
       "new": "Neues Archiv",
       "open": "Archiv öffnen",
+      "search": "Archiv durchsuchen",
       "connect-cloud-sources": "Clouds verbinden",
       "import": {
         "import": "Importieren",
@@ -29,13 +30,13 @@
       "cut": "Ausschneiden",
       "copy": "Kopieren",
       "paste": "Einfügen",
-      "pasteandmatchstyle": "Einstzen und Stil anpassen",
+      "pasteandmatchstyle": "Einfügen und Formatvorlage anpassen",
       "delete": "Löschen",
       "selectall": "Alles auswählen",
       "speech": {
-        "speech": "Sprachhilfe",
-        "startspeaking": "Reden starten",
-        "stopspeaking": "Aufhören zu Reden"
+        "speech": "Sprachausgabe",
+        "startspeaking": "Sprachausgabe starten",
+        "stopspeaking": "Sprachausgabe stoppen"
       }
     },
     "view": {
@@ -43,8 +44,8 @@
       "condensed-sidebar": "Verkleinerte Seitenleiste",
       "language": "Sprache",
       "reload": "Neuladen",
-      "forcereload": "Force neuladen",
-      "toggledevtools": "Toggle dev tools",
+      "forcereload": "Neuladen erzwingen",
+      "toggledevtools": "Entwicklerwerkzeug ein- und ausblenden",
       "auto-hide-menubar": "Menüleiste automatisch ausblenden"
     },
     "window": {
@@ -52,7 +53,7 @@
       "minimize": "Minimieren",
       "close": "Schließen",
       "zoom": "Zoomen",
-      "front": "Alles nach vorne holen"
+      "front": "Alle nach vorn bringen"
     },
     "help": {
       "help": "Hilfe",
@@ -60,6 +61,10 @@
       "privacy-policy": "Datenschutzrichtlinie",
       "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
     }
+  },
+  "archive-search": {
+    "searchterm": "Suchbegriff...",
+    "nothing-found": "Leider nichts gefunden"
   },
   "archive": {
     "add-archive": "Archiv hinzufügen",
@@ -93,16 +98,17 @@
     "webdav-description-text": "Gib Benutzername, Passwort und deine {{title}} Server-Adresse an, um eine Verbindung herzustellen und ein Buttercup-Archiv auszuwählen. Wir <strong>speichern</strong> die Anmeldeinformationen und verschlüsseln sie.",
     "name": "Name",
     "size": "Größe",
-    "date": "Datum"
+    "date": "Datum",
+    "new-archive": "Neues Archiv"
   },
   "confirm-dialog": {
     "yes": "Ja",
     "no": "Nein"
   },
   "copyable": {
-    "hide": "Hide",
-    "reveal": "Reveal",
-    "copy": "Copy"
+    "hide": "Verstecken",
+    "reveal": "Aufdecken",
+    "copy": "Kopieren"
   },
   "copyable-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
@@ -150,7 +156,9 @@
     "check-for-update": "Fehler beim Überprüfen von Updates",
     "invalid-import-type-requested": "Ungültiger Importtyp angefordert",
     "open-file-for-importing": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
-    "entry-not-found": "Der Eintrag wurde nicht gefunden"
+    "entry-not-found": "Der Eintrag wurde nicht gefunden",
+    "dropbox-connection-failed-info": "Die Verbindung zu Dropbox ist fehlgeschlagen. Bitte versuche es später erneut.",
+    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut."
   },
   "group": {
     "new-group": "Neue Gruppe",
@@ -185,7 +193,8 @@
     "password": "Passwort",
     "confirm-password": "Passwort bestätigen",
     "confirm": "Bestätigen",
-    "nevermind": "Abbrechen"
+    "nevermind": "Abbrechen",
+    "new-password": "Neues Passwort"
   },
   "search": {
     "search": "Suche"
@@ -198,6 +207,10 @@
   },
   "update": {
     "installing": "Installiere",
-    "update-available-message": "Buttercup {{version}} ist verfügbar. Klicke hier zum Installieren."
+    "update-available-message": "Buttercup {{version}} ist verfügbar. Klicke hier zum Installieren.",
+    "new-version-available": "Eine neue Version von Buttercup ist verfügbar!",
+    "not-now": "Nicht jetzt",
+    "download": "Herunterladen und installieren",
+    "release-notes": "Versionshinweise:"
   }
 }

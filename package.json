@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.2.2",
+  "version": "1.4.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -39,7 +39,7 @@
   },
   "build": {
     "appId": "pw.buttercup.desktop",
-    "copyright": "Copyright © 2015-2018 Buttercup and Contributors",
+    "copyright": "Copyright © 2015-2018 MadDev Oy",
     "mac": {
       "category": "public.app-category.productivity"
     },
@@ -175,7 +175,7 @@
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
     "electron": "^1.7.9",
-    "electron-builder": "^20.0.5",
+    "electron-builder": "^20.0.8",
     "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.3",

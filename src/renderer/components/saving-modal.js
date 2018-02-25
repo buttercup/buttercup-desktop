@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react';
-import { ipcRenderer as ipc } from 'electron';
+import React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import { Translate } from '../../shared/i18n';
@@ -26,38 +25,12 @@ const SavingDialogText = styled.div`
   }
 `;
 
-class SavingModal extends PureComponent {
-  state = {
-    isSaving: false
-  };
-
-  componentDidMount() {
-    ipc.on('save-started', () => {
-      this.setState({ isSaving: true });
-    });
-    ipc.on('save-completed', () => {
-      this.setState({ isSaving: false });
-    });
-  }
-
-  componentWillUnmount() {
-    ipc.removeAllListeners('save-started');
-    ipc.removeAllListeners('save-completed');
-  }
-
-  render() {
-    if (this.state.isSaving === false) {
-      return null;
-    }
-    return (
-      <SavingDialog align="center" justify="center">
-        <SavingDialogText>
-          <img width="64" src={spinner} alt="Loading" />
-          <br />
-          <Translate html i18nKey="archive.archive-saved-loading-info" />
-        </SavingDialogText>
-      </SavingDialog>
-    );
-  }
-}
-export default SavingModal;
+export default () => (
+  <SavingDialog align="center" justify="center">
+    <SavingDialogText>
+      <img width="64" src={spinner} alt="Loading" />
+      <br />
+      <Translate html i18nKey="archive.archive-saved-loading-info" />
+    </SavingDialogText>
+  </SavingDialog>
+);
