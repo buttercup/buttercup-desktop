@@ -63,6 +63,10 @@
       "visit-our-website": "Visit Our Website",
       "privacy-policy": "Privacy Policy",
       "view-changelog-for-v": "View Changelog For v{{version}}"
+    },
+    "tray": {
+      "quit": "Quit",
+      "open-buttercup": "Open buttercup"
     }
   },
   "archive-search": {

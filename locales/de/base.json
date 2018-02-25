@@ -61,6 +61,10 @@
       "visit-our-website": "Besuche unsere Website",
       "privacy-policy": "Datenschutzrichtlinie",
       "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
+    },
+    "tray": {
+      "quit": "Beenden",
+      "open-buttercup": "Buttercup öffnen"
     }
   },
   "archive-search": {
