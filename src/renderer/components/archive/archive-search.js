@@ -125,7 +125,6 @@ class ArchiveSearch extends PureComponent {
     super(props);
 
     this.state = {
-      visible: false,
       archive: null,
       entries: [],
       searchTerm: '',
@@ -159,7 +158,7 @@ class ArchiveSearch extends PureComponent {
   }
 
   highlightSearchResult(word) {
-    const regex = new RegExp('(' + this.state.searchTerm + ')', 'g');
+    const regex = new RegExp('(' + this.state.searchTerm + ')', 'ig');
     return word.replace(regex, '<mark>$1</mark>');
   }
 
@@ -184,6 +183,10 @@ class ArchiveSearch extends PureComponent {
         this.openEntry(result.sourceID, result.entry);
       }
     }
+
+    if (e.keyCode === 27) {
+      this.closeSearch();
+    }
   }
 
   openEntry(sourceID, entry) {
@@ -199,13 +202,11 @@ class ArchiveSearch extends PureComponent {
       const archive = getArchive(currentArchive.id);
 
       this.setState(state => ({
-        visible: !state.visible,
         archive
       }));
-
-      this._input.focus();
-      this._input.select();
     }
+    this._input.focus();
+    this._input.select();
   }
 
   render() {

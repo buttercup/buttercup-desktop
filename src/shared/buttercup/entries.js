@@ -174,7 +174,7 @@ async function processIcon(entry) {
   }
 }
 
-async function getIcon(entry) {
+export async function getIcon(entry) {
   try {
     const iconContents = await iconographer.getIconForEntry(entry);
     if (iconContents) {

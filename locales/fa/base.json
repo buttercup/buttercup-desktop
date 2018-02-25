@@ -14,6 +14,7 @@
       "file": "پروند",
       "new": "ساخت آرشیو",
       "open": "باز کردن آرشیو",
+      "search": "جستجو در آرشیوها",
       "connect-cloud-sources": "اتصال به منابع ابری",
       "import": {
         "import": "درون ریزی",
@@ -62,6 +63,10 @@
       "privacy-policy": "حریم شخصی",
       "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
     }
+  },
+  "archive-search": {
+    "searchterm": "جستجو برای...",
+    "nothing-found": "هیچی پیدا نشد"
   },
   "archive": {
     "add-archive": "افزودن یک آرشیو",
