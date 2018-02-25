@@ -14,6 +14,7 @@
       "file": "Soubor",
       "new": "Nový archiv",
       "open": "Otevřít archiv",
+      "search": "Vyhledat v archivu",
       "connect-cloud-sources": "Připojit ke cloud službám",
       "import": {
         "import": "Import",
@@ -62,6 +63,10 @@
       "privacy-policy": "Politika soukromí ",
       "view-changelog-for-v": "Zobrazit změny v{{version}}"
     }
+  },
+  "archive-search": {
+    "searchterm": "Hledat...",
+    "nothing-found": "Nic nenalezeno"
   },
   "archive": {
     "add-archive": "Přidat archiv",
