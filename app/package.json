@@ -9,7 +9,7 @@
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
     "conf": "~1.0.0",
-    "buttercup-importer": "~0.9.2",
+    "buttercup-importer": "~0.10.0",
     "dropbox": "^2.3.0",
     "webdav": "~0.10.0",
     "zxcvbn": "^4.4.2"
