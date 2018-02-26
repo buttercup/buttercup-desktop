@@ -14,6 +14,7 @@
       "file": "Fájl",
       "new": "Új archívum",
       "open": "Archívum megnyitása",
+      "search": "Keresés",
       "connect-cloud-sources": "Csatlakozás a felhő forrásokhoz",
       "import": {
         "import": "Importálás",
@@ -62,6 +63,10 @@
       "privacy-policy": "Adatvédelmi irányelvek",
       "view-changelog-for-v": "Changelog megtekintése v{{version}}"
     }
+  },
+  "archive-search": {
+    "searchterm": "Keresés...",
+    "nothing-found": "Nincs találat"
   },
   "archive": {
     "add-archive": "Új archívum",
