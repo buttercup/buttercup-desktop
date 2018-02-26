@@ -23,13 +23,19 @@ const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
 
-const reopenMainWindow = () => {
+const reopenMainWindow = store => {
   if (getWindowManager().getCountOfType('main') === 0) {
     getWindowManager().buildWindowOfType('main');
   } else {
     const mainWindow = getWindowManager().getWindowsOfType('main')[0];
     mainWindow.show();
     mainWindow.focus();
+  }
+};
+
+const checkDockVisibility = () => {
+  if (isOSX() && !app.dock.isVisible()) {
+    app.dock.show();
   }
 };
 
@@ -61,7 +67,7 @@ export const setupTrayIcon = store => {
           {
             label: label('archive.connect-cloud-sources'),
             click: (item, focusedWindow) => {
-              reopenMainWindow();
+              reopenMainWindow(store);
               getWindowManager().buildWindowOfType('file-manager', null, {
                 parent: getMainWindow(focusedWindow)
               });
@@ -81,10 +87,11 @@ export const setupTrayIcon = store => {
     };
 
     tray.on('click', () => {
-      reopenMainWindow();
-      if (!isOSX() && !isWindows()) {
-        showTrayMenu();
-      }
+      checkDockVisibility();
+
+      setTimeout(() => {
+        reopenMainWindow(store);
+      }, 0);
     });
 
     tray.on('right-click', () => {
@@ -95,6 +102,8 @@ export const setupTrayIcon = store => {
       tray.destroy();
     }
     tray = null;
+
+    checkDockVisibility();
   }
 };
 
@@ -117,7 +126,7 @@ export const setupMenu = store => {
           label: label('archive.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
           click: (item, focusedWindow) => {
-            reopenMainWindow();
+            reopenMainWindow(store);
             getWindowManager().buildWindowOfType('file-manager', null, {
               parent: getMainWindow(focusedWindow)
             });

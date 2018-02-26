@@ -82,6 +82,9 @@ export function setupWindows(store) {
 
     win.once('closed', () => {
       windowManager.deregister(win);
+      if (isOSX() && getSetting(store.getState(), 'isTrayIconEnabled')) {
+        app.dock.hide();
+      }
     });
 
     return win;
