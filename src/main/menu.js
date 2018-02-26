@@ -1,5 +1,5 @@
 import { app, shell, Menu, Tray } from 'electron';
-import { isOSX } from '../shared/utils/platform';
+import { isOSX, isWindows } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
   getAllArchives,
@@ -26,14 +26,16 @@ let tray = null;
 const reopenMainWindow = () => {
   if (getWindowManager().getCountOfType('main') === 0) {
     getWindowManager().buildWindowOfType('main');
+  } else {
+    const mainWindow = getWindowManager().getWindowsOfType('main')[0];
+    mainWindow.show();
+    mainWindow.focus();
   }
 };
 
 export const setupTrayIcon = store => {
   const state = store.getState();
   const isTrayIconEnabled = getSetting(state, 'isTrayIconEnabled');
-  const mainWindow = getWindowManager().getWindowsOfType('main');
-  const mainWindowsExists = mainWindow.length > 0;
 
   if (isTrayIconEnabled) {
     if (!tray) {
@@ -42,25 +44,49 @@ export const setupTrayIcon = store => {
       );
     }
 
-    tray.setContextMenu(
-      Menu.buildFromTemplate([
-        {
-          label: label('tray.open-buttercup'),
-          click: () => {
-            reopenMainWindow();
+    const showTrayMenu = () => {
+      tray.popUpContextMenu(
+        Menu.buildFromTemplate([
+          {
+            label: label('archive.new'),
+            click: (item, focusedWindow) => newFile(focusedWindow)
+          },
+          {
+            label: label('archive.open'),
+            click: (item, focusedWindow) => openFile(focusedWindow)
+          },
+          {
+            label: label('archive.connect-cloud-sources'),
+            click: (item, focusedWindow) => {
+              reopenMainWindow();
+              getWindowManager().buildWindowOfType('file-manager', null, {
+                parent: getMainWindow(focusedWindow)
+              });
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: label('tray.quit'),
+            click: () => {
+              app.quit();
+            }
           }
-        },
-        {
-          type: 'separator'
-        },
-        {
-          label: label('tray.quit'),
-          click: () => {
-            app.quit();
-          }
-        }
-      ])
-    );
+        ])
+      );
+    };
+
+    tray.on('click', () => {
+      reopenMainWindow();
+      if (!isOSX() && !isWindows()) {
+        showTrayMenu();
+      }
+    });
+
+    tray.on('right-click', () => {
+      showTrayMenu();
+    });
   } else {
     if (tray) {
       tray.destroy();
