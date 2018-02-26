@@ -15,7 +15,7 @@ import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
-import { getURIPathToFile } from './lib/utils';
+import { getPathToFile } from './lib/utils';
 
 electronContextMenu();
 
@@ -39,9 +39,12 @@ export const setupTrayIcon = store => {
 
   if (isTrayIconEnabled) {
     if (!tray) {
-      tray = new Tray(
-        getURIPathToFile('resources/icons/trayTemplate.png', true)
-      );
+      let trayPath = 'resources/icons/trayTemplate.png';
+      if (isWindows()) {
+        trayPath = 'resources/icons/tray.ico';
+      }
+
+      tray = new Tray(getPathToFile(trayPath));
     }
 
     const showTrayMenu = () => {
