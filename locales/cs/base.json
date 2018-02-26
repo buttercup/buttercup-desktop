@@ -1,0 +1,219 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "O Buttercupu",
+      "check-for-updates": "Zkontrolovat aktualizace...",
+      "services": "Služby",
+      "hide": "Skrýt",
+      "hideothers": "Skrýt ostatní",
+      "unhide": "Zobrazit",
+      "quit": "Ukončit"
+    },
+    "archive": {
+      "archive": "Archiv",
+      "file": "Soubor",
+      "new": "Nový archiv",
+      "open": "Otevřít archiv",
+      "search": "Vyhledat v archivu",
+      "connect-cloud-sources": "Připojit ke cloud službám",
+      "import": {
+        "import": "Import",
+        "import-from-type": "Z {{name}} archivu (.{{extension}})",
+        "import-to-type": "Do {{name}}",
+        "no-available-archives": "Žádné archivy pro import."
+      },
+      "close": "Zavřít"
+    },
+    "edit": {
+      "edit": "Upravit",
+      "undo": "Zpět",
+      "redo": "Vpřed",
+      "cut": "Vyjmout",
+      "copy": "Kopírovat",
+      "paste": "Vložit",
+      "pasteandmatchstyle": "Vložit a přizpůsobit styl",
+      "delete": "Smazat",
+      "selectall": "Vybrat vše",
+      "speech": {
+        "speech": "Mluvený projev",
+        "startspeaking": "Začít mluvit",
+        "stopspeaking": "Ukončit mluvení"
+      }
+    },
+    "view": {
+      "view": "Zobrazit",
+      "condensed-sidebar": "Zkrátit boční panel",
+      "language": "Jazyk",
+      "reload": "Obnovit",
+      "forcereload": "Vynutit obnovení ",
+      "toggledevtools": "Vývojařské nástroje",
+      "togglefullscreen": "Celá obrazovka",
+      "auto-hide-menubar": "Automaticky schovávat menu"
+    },
+    "window": {
+      "window": "Okno",
+      "minimize": "Minimalizovat",
+      "close": "Zavřít",
+      "zoom": "Zoom",
+      "front": "Přenést do popředí"
+    },
+    "help": {
+      "help": "Nápověda",
+      "visit-our-website": "Navštivte naše stránky",
+      "privacy-policy": "Politika soukromí ",
+      "view-changelog-for-v": "Zobrazit změny v{{version}}"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Hledat...",
+    "nothing-found": "Nic nenalezeno"
+  },
+  "archive": {
+    "add-archive": "Přidat archiv",
+    "archive-saved-loading-info": "Váš archiv se ukládá.<br>Automatické ukončení"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup archivy",
+    "load-a-buttercup-archive": "Načíst Buttercup archiv",
+    "create-a-new-buttercup-archive": "Vytvořit nový Buttercup archiv"
+  },
+  "archive-menu": {
+    "unlock": "Odemknout",
+    "change-color": "Změnit barvu",
+    "change-password": "Změnit heslo",
+    "import": "Import",
+    "import-from-type": "Z {{name}} archiv (.{{extension}})",
+    "archive-remove-with-name": "Odebrat {{name}}",
+    "open": "Otevřít",
+    "lock": "Zamknout"
+  },
+  "cloud-source": {
+    "cancel": "Zrušit",
+    "go-back": "Zpět",
+    "new-archive": "Nový archiv",
+    "open-in-buttercup": "Otevřít v Buttercup",
+    "connect-to-dropbox": "Připojit k Dropboxu",
+    "authenticate-with-dropbox": "Přihlásit k Dropboxu",
+    "dropbox-description-text": "Připojit Buttercup k Vašemu Dropbox účtu pro čtení a uložení Vašeho archivu.<br />Nebudeme ukládat Vaše přihlašovací údaje k Dropboxu.",
+    "connect-to-wedav": "Připojit k {{title}} serveru",
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "connect": "Připojit",
+    "webdav-description-text": "Vložte Vaši {{title}} cílovou adresu, uživatelské jméno a heslo pro připojení a vyberte Buttercup archiv. Vaše přihlašovací údaje <strong>ukládáme</strong> a šifrujeme.",
+    "name": "Jméno",
+    "size": "Velikost",
+    "date": "Datum"
+  },
+  "confirm-dialog": {
+    "yes": "Ano",
+    "no": "Ne"
+  },
+  "copyable": {
+    "hide": "Skrýt",
+    "reveal": "Odhalit",
+    "copy": "Kopírovat"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Zkopírovat do schránky",
+    "reveal-password": "Odhalit heslo"
+  },
+  "entry": {
+    "add-entry": "Přidat záznam",
+    "select-or-create-an-entry": "Vybrat nebo vytvořit záznam",
+    "title": "Název",
+    "untitled": "Nepojmenováno",
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "secure-password": "Bezppečné heslo",
+    "custom-fields": "Volitelná pole",
+    "no-custom-fields-info-text": "Nemáte žádné volitelné pole. Nechcete si jedno přidat?",
+    "add-new-field": "Přidat nové pole",
+    "label": "Označení",
+    "new-field": "Nové pole",
+    "edit": "Upravit",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "delete": "Smazat",
+    "entry-inputs-empty-info": "Vložte prosím alespoň název.",
+    "entry-title-empty-info": "Prosím vložte název.",
+    "custom-fields-label-empty-info": "Zapomněli jste nastavit označení jednoho nebo více polí.",
+    "are-you-sure-question": "Jste si jistí?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Zkopírovat do schránky",
+    "username": "Uživatelské jméno",
+    "password": "Heslo",
+    "open-url-in-browser": "Otevřít URL v prohlížeči",
+    "move-to-group": "Přesunout do skupiny",
+    "move-to-trash": "Přeusnout do koše",
+    "delete-permanently": "Permanentně vymazat"
+  },
+  "error": {
+    "archive-not-found": "Zdroj archivu nenalezen.",
+    "authentication-failed": "Oveření hesla selhalo.",
+    "unknown": "Vyskytla se neznáma chyba",
+    "passwords-dont-match": "Vaše hesla se neshodují.",
+    "group-not-found": "Skupina nenalezena.",
+    "sort-definition-not-found": "Definice řazení nebyla nalezena",
+    "insufficient-data-provided": "Nedostatečná data pro třídění.",
+    "check-for-update": "Chyba při kontrole aktualizací",
+    "invalid-import-type-requested": "Požadován neplatný druh importu",
+    "open-file-for-importing": "Import nemůže bežet bez spustěného hlavního okna.",
+    "entry-not-found": "Záznam nenalezen",
+    "dropbox-connection-failed-info": "Připojení k serveru Dropbox selhalo. Zkuste to prosím znovu.",
+    "webdav-connection-failed-info": "Připojení k {{endpoint}} selhalo. Prosím zkontrolujte své přihlašovací údaje a zkuste to znovu."
+  },
+  "group": {
+    "new-group": "Nová skupina",
+    "untitled": "Nepojmenováno"
+  },
+  "group-menu": {
+    "new-group": "Nová skupina",
+    "add-group": "Přidat skupinu",
+    "move-to-root": "Přesunout do kořene",
+    "move-to-group": "Přesunout do skupiny",
+    "rename": "Přejmenovat",
+    "delete": "Smazat",
+    "move-to-group-custom": "Přesunout do {{title}}",
+    "empty-trash": "Vysypat koš",
+    "empty-trash-question": "Opravdu chcete vysypat koš?",
+    "title-asc": "Název: Vzestupně",
+    "title-desc": "Název: Sestupně"
+  },
+  "intro": {
+    "welcome-title": "Vítejte v Buttercupu.",
+    "welcome-back-title": "Vítejte zpět v Buttercupu.",
+    "welcome-caption": "Zatím nemáte žádný archivt. Nechcete si jeden přidat?",
+    "unlock-archive": "Pro začátek odemkněte archiv ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Otevřít soubor archivu",
+    "new-archive-file": "Nový soubor archivu",
+    "connect-cloud-sources": "Připojit ke cloud službám"
+  },
+  "password-dialog": {
+    "master-password": "Hlavní heslo",
+    "new-password": "Nové heslo",
+    "password": "Heslo",
+    "confirm-password": "Potvrdit heslo",
+    "confirm": "Potvrdit",
+    "nevermind": "Opustit"
+  },
+  "search": {
+    "search": "Hledat"
+  },
+  "sort": {
+    "title-asc": "Název: Vzestupně",
+    "title-desc": "Název: Sestupně",
+    "time-asc": "Čas: Vzestupně",
+    "time-desc": "Čas: Sestupně"
+  },
+  "update": {
+    "installing": "Instaluji",
+    "update-available-message": "Je dostupná {{version}} Buttercupu. Klikněte pro spuštění instalace.",
+    "new-version-available": "Nová verze Buttercupu je k dispozici!",
+    "not-now": "Teď ne",
+    "download": "Stáhnout a nainstalovat",
+    "release-notes": "Popis změn:"
+  }
+}
