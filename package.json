@@ -255,7 +255,6 @@
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
     "rimraf": "^2.5.3",
-    "sanitize-filename": "^1.6.1",
     "sanitize-html": "^1.18.2",
     "sass-loader": "^6.0.6",
     "spectron": "^3.7.2",
