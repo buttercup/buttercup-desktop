@@ -159,7 +159,6 @@ app.on('ready', async () => {
   // When user closes all windows
   // On Windows, the command practice is to quit the app.
   app.on('window-all-closed', () => {
-    console.log('window-all-closed');
     if (
       (isWindows() || appTriedToQuit) &&
       !getSetting(store.getState(), 'isTrayIconEnabled')
