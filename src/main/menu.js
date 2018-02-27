@@ -11,7 +11,11 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
-import { getMainWindow } from './utils/window';
+import {
+  getMainWindow,
+  reopenMainWindow,
+  checkDockVisibility
+} from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
@@ -23,24 +27,6 @@ const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
 let isTrayIconInitialized = false;
-
-const checkDockVisibility = () => {
-  if (isOSX() && !app.dock.isVisible()) {
-    app.dock.show();
-  }
-};
-
-const reopenMainWindow = () => {
-  if (getWindowManager().getCountOfType('main') === 0) {
-    getWindowManager().buildWindowOfType('main');
-  } else {
-    const mainWindow = getWindowManager().getWindowsOfType('main')[0];
-    mainWindow.show();
-    mainWindow.focus();
-  }
-
-  checkDockVisibility();
-};
 
 export const setupTrayIcon = store => {
   const state = store.getState();
@@ -61,24 +47,23 @@ export const setupTrayIcon = store => {
         Menu.buildFromTemplate([
           {
             label: label('archive.new'),
-            click: (item, focusedWindow) => {
-              reopenMainWindow();
-              newFile(focusedWindow);
+            click: () => {
+              reopenMainWindow(win => newFile(win));
             }
           },
           {
             label: label('archive.open'),
-            click: (item, focusedWindow) => {
-              reopenMainWindow();
-              openFile(focusedWindow);
+            click: () => {
+              reopenMainWindow(win => openFile(win));
             }
           },
           {
             label: label('archive.connect-cloud-sources'),
-            click: (item, focusedWindow) => {
-              reopenMainWindow(store);
-              getWindowManager().buildWindowOfType('file-manager', null, {
-                parent: getMainWindow(focusedWindow)
+            click: () => {
+              reopenMainWindow(win => {
+                getWindowManager().buildWindowOfType('file-manager', null, {
+                  parent: win
+                });
               });
             }
           },
@@ -97,7 +82,7 @@ export const setupTrayIcon = store => {
 
     if (!isTrayIconInitialized) {
       tray.on('click', () => {
-        reopenMainWindow(store);
+        reopenMainWindow();
       });
 
       tray.on('right-click', () => {
@@ -125,20 +110,25 @@ export const setupMenu = store => {
         {
           label: label('archive.new'),
           accelerator: 'CmdOrCtrl+N',
-          click: (item, focusedWindow) => newFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => newFile(win));
+          }
         },
         {
           label: label('archive.open'),
           accelerator: 'CmdOrCtrl+O',
-          click: (item, focusedWindow) => openFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => openFile(win));
+          }
         },
         {
           label: label('archive.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
-          click: (item, focusedWindow) => {
-            reopenMainWindow(store);
-            getWindowManager().buildWindowOfType('file-manager', null, {
-              parent: getMainWindow(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => {
+              getWindowManager().buildWindowOfType('file-manager', null, {
+                parent: win
+              });
             });
           }
         },
@@ -458,11 +448,9 @@ export const setupMenu = store => {
               // will show as active which is unwanted.
               type: currentArchiveId ? 'radio' : 'checkbox',
               click: () => {
-                reopenMainWindow();
-                const win = getMainWindow();
-                if (win) {
+                reopenMainWindow(win => {
                   win.webContents.send('set-current-archive', archive.id);
-                }
+                });
               },
               checked: archive.id === currentArchiveId
             }))
