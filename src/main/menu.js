@@ -22,6 +22,13 @@ electronContextMenu();
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
+let isTrayIconInitialized = false;
+
+const checkDockVisibility = () => {
+  if (isOSX() && !app.dock.isVisible()) {
+    app.dock.show();
+  }
+};
 
 const reopenMainWindow = () => {
   if (getWindowManager().getCountOfType('main') === 0) {
@@ -31,12 +38,8 @@ const reopenMainWindow = () => {
     mainWindow.show();
     mainWindow.focus();
   }
-};
 
-const checkDockVisibility = () => {
-  if (isOSX() && !app.dock.isVisible()) {
-    app.dock.show();
-  }
+  checkDockVisibility();
 };
 
 export const setupTrayIcon = store => {
@@ -58,11 +61,17 @@ export const setupTrayIcon = store => {
         Menu.buildFromTemplate([
           {
             label: label('archive.new'),
-            click: (item, focusedWindow) => newFile(focusedWindow)
+            click: (item, focusedWindow) => {
+              reopenMainWindow();
+              newFile(focusedWindow);
+            }
           },
           {
             label: label('archive.open'),
-            click: (item, focusedWindow) => openFile(focusedWindow)
+            click: (item, focusedWindow) => {
+              reopenMainWindow();
+              openFile(focusedWindow);
+            }
           },
           {
             label: label('archive.connect-cloud-sources'),
@@ -86,22 +95,23 @@ export const setupTrayIcon = store => {
       );
     };
 
-    tray.on('click', () => {
-      checkDockVisibility();
-
-      setTimeout(() => {
+    if (!isTrayIconInitialized) {
+      tray.on('click', () => {
         reopenMainWindow(store);
-      }, 0);
-    });
+      });
 
-    tray.on('right-click', () => {
-      showTrayMenu();
-    });
+      tray.on('right-click', () => {
+        showTrayMenu();
+      });
+    }
+
+    isTrayIconInitialized = true;
   } else {
     if (tray) {
       tray.destroy();
     }
     tray = null;
+    isTrayIconInitialized = false;
 
     checkDockVisibility();
   }
