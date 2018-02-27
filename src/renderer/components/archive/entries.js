@@ -108,7 +108,11 @@ class Entries extends PureComponent {
     const filterNode = (
       <SearchWrapper>
         <EntriesCount>
-          Displaying {this.props.entries.length} entries
+          <Translate
+            i18nKey="entry.displaying-entries"
+            parent="span"
+            values={{ count: this.props.entries.length }}
+          />
         </EntriesCount>
         <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
       </SearchWrapper>
