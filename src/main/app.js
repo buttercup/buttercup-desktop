@@ -8,7 +8,7 @@ import { getWindowManager } from './lib/window-manager';
 import { sendEventToMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
-import { isWindows } from '../shared/utils/platform';
+import { isWindows, isOSX } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
@@ -167,6 +167,9 @@ app.on('window-all-closed', () => {
 // Create a new window if all windows are closed.
 app.on('activate', () => {
   if (windowManager.getCountOfType('main') === 0) {
+    if (isOSX()) {
+      app.dock.show();
+    }
     windowManager.buildWindowOfType('main');
   }
 });
