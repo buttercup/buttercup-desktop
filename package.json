@@ -201,7 +201,6 @@
     "file-loader": "^0.10.1",
     "fixed-data-table-2": "^0.7.12",
     "fs-extra": "^0.30.0",
-    "fuse.js": "^2.5.0",
     "grunt": "^0.4.5",
     "grunt-bump": "^0.7.0",
     "grunt-contrib-clean": "^0.6.0",

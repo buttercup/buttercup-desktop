@@ -137,7 +137,8 @@
     "entry-inputs-empty-info": "لطفا حداقل یک عنوان وارد کنید.",
     "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
-    "are-you-sure-question": "برای این کار اطمینان دارید؟"
+    "are-you-sure-question": "برای این کار اطمینان دارید؟",
+    "displaying-entries": "در حال نمایش {{count}} سند"
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",

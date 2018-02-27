@@ -14,7 +14,6 @@ import {
   ENTRIES_DELETE,
   ENTRIES_MOVE,
   ENTRIES_CHANGE_MODE,
-  ENTRIES_SET_FILTER,
   ENTRIES_SET_SORT
 } from './types';
 
@@ -22,7 +21,6 @@ import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
 export const selectEntry = createAction(ENTRIES_SELECTED);
-export const setFilter = createAction(ENTRIES_SET_FILTER);
 export const setSortMode = createAction(ENTRIES_SET_SORT);
 
 export const changeMode = mode => () => ({

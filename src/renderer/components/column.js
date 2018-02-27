@@ -13,7 +13,7 @@ const Content = styled(Box)``;
 const Bar = styled.section`
   border: 0 solid rgba(255, 255, 255, 0.05);
   flex: 0;
-  padding: var(--spacing-one);
+  padding: var(--spacing-half) var(--spacing-one);
 
   &.light {
     border-color: var(--black-5);
