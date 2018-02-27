@@ -1,7 +1,7 @@
 import path from 'path';
 
 export function getURIPathToFile(fileName) {
-  return `file://${getURIPathToFile(fileName)}`;
+  return `file://${getPathToFile(fileName)}`;
 }
 
 export function getPathToFile(fileName) {
