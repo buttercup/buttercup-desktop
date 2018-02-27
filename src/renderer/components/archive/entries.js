@@ -13,7 +13,6 @@ import {
 } from '../../system/menu';
 import BaseColumn from '../column';
 import List from './entries-list';
-import SearchField from './search-field';
 import SortButton from './sort-button';
 
 const Column = styled(BaseColumn)`
@@ -21,7 +20,7 @@ const Column = styled(BaseColumn)`
   color: #fff;
 `;
 
-const SearchWrapper = styled.div`
+const HeaderWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -40,23 +39,17 @@ const EntriesCount = styled.div`
 
 class Entries extends PureComponent {
   static propTypes = {
-    filter: PropTypes.string,
     sortMode: PropTypes.string,
     entries: PropTypes.array,
     groups: PropTypes.array,
     currentEntry: PropTypes.object,
     currentGroup: PropTypes.object,
     onSelectEntry: PropTypes.func,
-    onFilterChange: PropTypes.func,
     onSortModeChange: PropTypes.func,
     onEntryMove: PropTypes.func,
     onDelete: PropTypes.func,
     handleAddEntry: PropTypes.func,
     t: PropTypes.func
-  };
-
-  handleFilterChange = value => {
-    this.props.onFilterChange(value);
   };
 
   handleSortModeChange = newMode => {
@@ -93,7 +86,7 @@ class Entries extends PureComponent {
   }
 
   render() {
-    const { currentGroup, handleAddEntry, sortMode, filter } = this.props;
+    const { currentGroup, handleAddEntry, sortMode } = this.props;
     const addButton = (
       <Button
         onClick={handleAddEntry}
@@ -106,7 +99,7 @@ class Entries extends PureComponent {
       </Button>
     );
     const filterNode = (
-      <SearchWrapper>
+      <HeaderWrapper>
         <EntriesCount>
           <Translate
             i18nKey="entry.displaying-entries"
@@ -115,7 +108,7 @@ class Entries extends PureComponent {
           />
         </EntriesCount>
         <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
-      </SearchWrapper>
+      </HeaderWrapper>
     );
 
     return (

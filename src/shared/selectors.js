@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { filterByText, sortByKey, sortDeepByKey } from './utils/collection';
+import { sortByKey, sortDeepByKey } from './utils/collection';
 import { denormalizeGroups } from './buttercup/groups';
 
 // Archive ->
@@ -52,15 +52,8 @@ export const getVisibleEntries = createSelector(
 
 export const getEntries = createSelector(
   getVisibleEntries,
-  state => state.entries.filter,
   state => state.entries.sortMode,
-  (entries, filter, sortMode) => {
-    if (filter && filter.length > 0) {
-      return filterByText(entries, filter);
-    }
-
-    return sortByKey(entries, sortMode);
-  }
+  (entries, sortMode) => sortByKey(entries, sortMode)
 );
 
 // Groups ->

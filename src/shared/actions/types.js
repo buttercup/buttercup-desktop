@@ -6,7 +6,6 @@ export const ENTRIES_CREATE = 'buttercup/entries/CREATE';
 export const ENTRIES_DELETE = 'buttercup/entries/DELETE';
 export const ENTRIES_MOVE = 'buttercup/entries/MOVE';
 export const ENTRIES_CHANGE_MODE = 'buttercup/entries/CHANGE_MODE';
-export const ENTRIES_SET_FILTER = 'buttercup/entries/SET_FILTER';
 export const ENTRIES_SET_SORT = 'buttercup/entries/SET_SORT';
 
 export const FILES_OPEN = 'buttercup/files/OPEN';
