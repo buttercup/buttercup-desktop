@@ -23,7 +23,7 @@ const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 let tray = null;
 
-const reopenMainWindow = store => {
+const reopenMainWindow = () => {
   if (getWindowManager().getCountOfType('main') === 0) {
     getWindowManager().buildWindowOfType('main');
   } else {
