@@ -122,7 +122,7 @@ class TreeView extends PureComponent {
         ...nonRootContextMenu,
         {
           label: t('group-menu.move-to-group'),
-          enabled: availableGroups.items,
+          enabled: availableGroups.items.length > 0,
           ...groupsMenu
         },
         {
