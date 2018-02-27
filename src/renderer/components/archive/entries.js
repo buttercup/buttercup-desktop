@@ -24,11 +24,18 @@ const Column = styled(BaseColumn)`
 const SearchWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   margin-right: calc(-1 * var(--spacing-half));
 
   button {
     color: #fff;
   }
+`;
+
+const EntriesCount = styled.div`
+  flex: 1;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.5);
 `;
 
 class Entries extends PureComponent {
@@ -100,7 +107,9 @@ class Entries extends PureComponent {
     );
     const filterNode = (
       <SearchWrapper>
-        <SearchField onChange={this.handleFilterChange} filter={filter} />
+        <EntriesCount>
+          Displaying {this.props.entries.length} entries
+        </EntriesCount>
         <SortButton mode={sortMode} onChange={this.handleSortModeChange} />
       </SearchWrapper>
     );
