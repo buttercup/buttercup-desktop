@@ -13,6 +13,7 @@ import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
+import { getSetting } from '../shared/selectors';
 
 log.info('Buttercup starting up...');
 
@@ -154,14 +155,18 @@ app.on('ready', async () => {
       initialFile = null;
     }
   });
-});
 
-// When user closes all windows
-// On Windows, the command practice is to quit the app.
-app.on('window-all-closed', () => {
-  if (isWindows() || appTriedToQuit) {
-    app.quit();
-  }
+  // When user closes all windows
+  // On Windows, the command practice is to quit the app.
+  app.on('window-all-closed', () => {
+    console.log('window-all-closed');
+    if (
+      (isWindows() || appTriedToQuit) &&
+      !getSetting(store.getState(), 'isTrayIconEnabled')
+    ) {
+      app.quit();
+    }
+  });
 });
 
 // Create a new window if all windows are closed.
