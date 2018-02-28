@@ -160,8 +160,8 @@ app.on('ready', async () => {
   // On Windows, the command practice is to quit the app.
   app.on('window-all-closed', () => {
     if (
-      (isWindows() || appTriedToQuit) &&
-      !getSetting(store.getState(), 'isTrayIconEnabled')
+      appTriedToQuit ||
+      (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
     ) {
       app.quit();
     }
