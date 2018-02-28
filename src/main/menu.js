@@ -91,7 +91,11 @@ export const setupTrayIcon = store => {
 
     if (!isTrayIconInitialized) {
       tray.on('click', () => {
-        showTrayMenu();
+        if (isWindows()) {
+          reopenMainWindow();
+        } else {
+          showTrayMenu();
+        }
       });
 
       tray.on('right-click', () => {
