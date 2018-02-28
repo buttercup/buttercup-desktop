@@ -1,5 +1,5 @@
-import { app, shell, Menu } from 'electron';
-import { isOSX } from '../shared/utils/platform';
+import { app, shell, Menu, Tray } from 'electron';
+import { isOSX, isWindows } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
   getAllArchives,
@@ -11,14 +11,105 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
-import { getMainWindow } from './utils/window';
+import {
+  getMainWindow,
+  reopenMainWindow,
+  checkDockVisibility
+} from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
+import { getPathToFile } from './lib/utils';
 
 electronContextMenu();
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
+
+let tray = null;
+let isTrayIconInitialized = false;
+
+export const setupTrayIcon = store => {
+  const state = store.getState();
+  const isTrayIconEnabled = getSetting(state, 'isTrayIconEnabled');
+
+  if (isTrayIconEnabled) {
+    if (!tray) {
+      let trayPath = 'resources/icons/trayTemplate.png';
+      if (isWindows()) {
+        trayPath = 'resources/icons/tray.ico';
+      }
+
+      tray = new Tray(getPathToFile(trayPath));
+    }
+
+    const showTrayMenu = () => {
+      tray.popUpContextMenu(
+        Menu.buildFromTemplate([
+          {
+            label: label('tray.open'),
+            click: () => {
+              reopenMainWindow();
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: label('archive.new'),
+            click: () => {
+              reopenMainWindow(win => newFile(win));
+            }
+          },
+          {
+            label: label('archive.open'),
+            click: () => {
+              reopenMainWindow(win => openFile(win));
+            }
+          },
+          {
+            label: label('archive.connect-cloud-sources'),
+            click: () => {
+              reopenMainWindow(win => {
+                getWindowManager().buildWindowOfType('file-manager', null, {
+                  parent: win
+                });
+              });
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
+            label: label('tray.quit'),
+            click: () => {
+              app.quit();
+            }
+          }
+        ])
+      );
+    };
+
+    if (!isTrayIconInitialized) {
+      tray.on('click', () => {
+        showTrayMenu();
+      });
+
+      tray.on('right-click', () => {
+        showTrayMenu();
+      });
+    }
+
+    isTrayIconInitialized = true;
+  } else {
+    if (tray) {
+      tray.destroy();
+    }
+    tray = null;
+    isTrayIconInitialized = false;
+
+    checkDockVisibility();
+  }
+};
 
 export const setupMenu = store => {
   const defaultTemplate = [
@@ -28,19 +119,25 @@ export const setupMenu = store => {
         {
           label: label('archive.new'),
           accelerator: 'CmdOrCtrl+N',
-          click: (item, focusedWindow) => newFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => newFile(win));
+          }
         },
         {
           label: label('archive.open'),
           accelerator: 'CmdOrCtrl+O',
-          click: (item, focusedWindow) => openFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => openFile(win));
+          }
         },
         {
           label: label('archive.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
-          click: (item, focusedWindow) => {
-            getWindowManager().buildWindowOfType('file-manager', null, {
-              parent: getMainWindow(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => {
+              getWindowManager().buildWindowOfType('file-manager', null, {
+                parent: win
+              });
             });
           }
         },
@@ -261,12 +358,13 @@ export const setupMenu = store => {
                             extension: type.extension
                           }),
                           enabled: archive.status === 'unlocked',
-                          click: (item, focusedWindow) =>
+                          click: (item, focusedWindow) => {
                             openFileForImporting(
                               focusedWindow,
                               typeKey,
                               archive.id
-                            )
+                            );
+                          }
                         }))
                       : [
                           {
@@ -294,6 +392,15 @@ export const setupMenu = store => {
               accelerator: 'CmdOrCtrl+Shift+B',
               click: item => {
                 store.dispatch(setSetting('condencedSidebar', item.checked));
+              }
+            },
+            {
+              label: label('view.enable-tray-icon'),
+              type: 'checkbox',
+              checked: getSetting(state, 'isTrayIconEnabled'),
+              click: item => {
+                store.dispatch(setSetting('isTrayIconEnabled', item.checked));
+                setupTrayIcon(store);
               }
             },
             { type: 'separator' },
@@ -350,10 +457,9 @@ export const setupMenu = store => {
               // will show as active which is unwanted.
               type: currentArchiveId ? 'radio' : 'checkbox',
               click: () => {
-                const win = getMainWindow();
-                if (win) {
+                reopenMainWindow(win => {
                   win.webContents.send('set-current-archive', archive.id);
-                }
+                });
               },
               checked: archive.id === currentArchiveId
             }))
@@ -364,5 +470,7 @@ export const setupMenu = store => {
     return item;
   });
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  const buildTemplate = Menu.buildFromTemplate(template);
+
+  Menu.setApplicationMenu(buildTemplate);
 };

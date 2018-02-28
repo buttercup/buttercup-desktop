@@ -44,6 +44,7 @@
       "view": "View",
       "condensed-sidebar": "Condensed Sidebar",
       "language": "Language",
+      "enable-tray-icon": "Display in Menubar",
       "reload": "Reload",
       "forcereload": "Force reload",
       "toggledevtools": "Toggle dev tools",
@@ -62,6 +63,10 @@
       "visit-our-website": "Visit Our Website",
       "privacy-policy": "Privacy Policy",
       "view-changelog-for-v": "View Changelog For v{{version}}"
+    },
+    "tray": {
+      "quit": "Quit",
+      "open": "Open Buttercup"
     }
   },
   "archive-search": {

@@ -3,16 +3,17 @@ import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
-import { setupMenu } from './menu';
+import { setupMenu, setupTrayIcon } from './menu';
 import { getWindowManager } from './lib/window-manager';
 import { sendEventToMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
-import { isWindows } from '../shared/utils/platform';
+import { isWindows, isOSX } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
+import { getSetting } from '../shared/selectors';
 
 log.info('Buttercup starting up...');
 
@@ -141,6 +142,7 @@ app.on('ready', async () => {
   setupWindows(store);
   setupActions(store);
   setupMenu(store);
+  setupTrayIcon(store);
 
   appIsReady = true;
 
@@ -153,19 +155,25 @@ app.on('ready', async () => {
       initialFile = null;
     }
   });
-});
 
-// When user closes all windows
-// On Windows, the command practice is to quit the app.
-app.on('window-all-closed', () => {
-  if (isWindows() || appTriedToQuit) {
-    app.quit();
-  }
+  // When user closes all windows
+  // On Windows, the command practice is to quit the app.
+  app.on('window-all-closed', () => {
+    if (
+      appTriedToQuit ||
+      (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
+    ) {
+      app.quit();
+    }
+  });
 });
 
 // Create a new window if all windows are closed.
 app.on('activate', () => {
   if (windowManager.getCountOfType('main') === 0) {
+    if (isOSX()) {
+      app.dock.show();
+    }
     windowManager.buildWindowOfType('main');
   }
 });

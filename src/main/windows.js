@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce';
 import { isHighSierra, isOSX } from '../shared/utils/platform';
 import { getWindowManager } from './lib/window-manager';
 import { getSetting } from '../shared/selectors';
-import { getPathToFile } from './lib/utils';
+import { getURIPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
 import { config } from '../shared/config';
 import { checkForUpdates } from './lib/updater';
@@ -60,7 +60,7 @@ export function setupWindows(store) {
       typeof menubarAutoHide === 'boolean' ? menubarAutoHide : false
     );
 
-    win.loadURL(getPathToFile('views/index.html'));
+    win.loadURL(getURIPathToFile('views/index.html'));
 
     // When user drops a file on the window
     win.webContents.on('will-navigate', (e, url) => {
@@ -82,6 +82,9 @@ export function setupWindows(store) {
 
     win.once('closed', () => {
       windowManager.deregister(win);
+      if (isOSX() && getSetting(store.getState(), 'isTrayIconEnabled')) {
+        app.dock.hide();
+      }
     });
 
     return win;
@@ -97,7 +100,7 @@ export function setupWindows(store) {
       ...options
     });
 
-    win.loadURL(getPathToFile('views/file-manager.html'));
+    win.loadURL(getURIPathToFile('views/file-manager.html'));
 
     win.once('ready-to-show', () => {
       win.show();
@@ -116,7 +119,7 @@ export function setupWindows(store) {
     });
 
     win.setMenuBarVisibility(false);
-    win.loadURL(getPathToFile('views/update.html'));
+    win.loadURL(getURIPathToFile('views/update.html'));
 
     ipc.once('init', () => {
       win.webContents.on('will-navigate', (e, url) => {
