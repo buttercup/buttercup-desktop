@@ -90,13 +90,15 @@ export const setupTrayIcon = store => {
     };
 
     if (!isTrayIconInitialized) {
-      tray.on('click', () => {
-        if (isWindows()) {
-          reopenMainWindow();
-        } else {
+      if (!isWindows()) {
+        tray.on('click', () => {
           showTrayMenu();
-        }
-      });
+        });
+      } else {
+        tray.on('double-click', () => {
+          reopenMainWindow();
+        });
+      }
 
       tray.on('right-click', () => {
         showTrayMenu();
