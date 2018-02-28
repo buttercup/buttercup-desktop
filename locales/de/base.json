@@ -64,7 +64,7 @@
     },
     "tray": {
       "quit": "Beenden",
-      "open-buttercup": "Buttercup öffnen"
+      "open": "Buttercup öffnen"
     }
   },
   "archive-search": {

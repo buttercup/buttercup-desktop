@@ -46,6 +46,15 @@ export const setupTrayIcon = store => {
       tray.popUpContextMenu(
         Menu.buildFromTemplate([
           {
+            label: label('tray.open'),
+            click: () => {
+              reopenMainWindow();
+            }
+          },
+          {
+            type: 'separator'
+          },
+          {
             label: label('archive.new'),
             click: () => {
               reopenMainWindow(win => newFile(win));
@@ -82,7 +91,7 @@ export const setupTrayIcon = store => {
 
     if (!isTrayIconInitialized) {
       tray.on('click', () => {
-        reopenMainWindow();
+        showTrayMenu();
       });
 
       tray.on('right-click', () => {
