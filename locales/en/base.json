@@ -44,7 +44,7 @@
       "view": "View",
       "condensed-sidebar": "Condensed Sidebar",
       "language": "Language",
-      "enable-tray-icon": "Display in menubar",
+      "enable-tray-icon": "Display in Menubar",
       "reload": "Reload",
       "forcereload": "Force reload",
       "toggledevtools": "Toggle dev tools",
@@ -66,7 +66,7 @@
     },
     "tray": {
       "quit": "Quit",
-      "open": "Open buttercup"
+      "open": "Open Buttercup"
     }
   },
   "archive-search": {

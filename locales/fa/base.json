@@ -44,6 +44,7 @@
       "view": "مشاهده",
       "condensed-sidebar": "منوی کنار عریض",
       "language": "زبان",
+      "enable-tray-icon": "نمایش در منوبار",
       "auto-hide-menubar": "مخفی کردن خودکار منو",
       "reload": "بازنشانی",
       "forcereload": "بازنشانی به زور",
@@ -62,6 +63,10 @@
       "visit-our-website": "مشاهده سایت ما",
       "privacy-policy": "حریم شخصی",
       "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+    },
+    "tray": {
+      "quit": "بستن",
+      "open": "نمایش باترکاپ"
     }
   },
   "archive-search": {
