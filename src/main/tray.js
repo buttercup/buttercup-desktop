@@ -29,10 +29,9 @@ export const setupTrayIcon = async store => {
   }
 
   if (!tray) {
-    let trayPath = 'resources/icons/trayTemplate.png';
-    if (isWindows()) {
-      trayPath = 'resources/icons/tray.ico';
-    }
+    const trayPath = isWindows()
+      ? 'resources/icons/tray.ico'
+      : 'resources/icons/tray.png';
 
     tray = new Tray(getPathToFile(trayPath));
   }
