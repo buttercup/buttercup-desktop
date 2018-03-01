@@ -14,7 +14,7 @@ const isTraySupported = checkTraySupport();
 let tray = null;
 let isTrayIconInitialized = false;
 
-export const setupTrayIcon = async store => {
+export const setupTrayIcon = store => {
   const state = store.getState();
   const isTrayIconEnabled = getSetting(state, 'isTrayIconEnabled');
 
