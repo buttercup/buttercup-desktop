@@ -9,6 +9,7 @@ import i18n from '../shared/i18n';
 import { getPathToFile } from './lib/utils';
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
+const isTraySupported = checkTraySupport();
 
 let tray = null;
 let isTrayIconInitialized = false;
@@ -17,7 +18,7 @@ export const setupTrayIcon = async store => {
   const state = store.getState();
   const isTrayIconEnabled = getSetting(state, 'isTrayIconEnabled');
 
-  if (!await checkTraySupport() || !isTrayIconEnabled) {
+  if (!isTraySupported || !isTrayIconEnabled) {
     if (tray) {
       tray.destroy();
     }
