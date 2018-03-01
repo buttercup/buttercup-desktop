@@ -31,7 +31,9 @@ export const setupTrayIcon = async store => {
   if (!tray) {
     const trayPath = isWindows()
       ? 'resources/icons/tray.ico'
-      : 'resources/icons/tray.png';
+      : isLinux()
+        ? 'resources/icons/tray-linux.png'
+        : 'resources/icons/tray.png';
 
     tray = new Tray(getPathToFile(trayPath));
   }
