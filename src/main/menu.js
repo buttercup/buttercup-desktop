@@ -221,9 +221,7 @@ export const setupMenu = store => {
 
   // About and Check for Updates...
   // App menu on macOS and Help menu on others
-  defaultTemplate[isOSX() ? 0 : 4].submenu.splice(
-    0,
-    0,
+  defaultTemplate[isOSX() ? 0 : 4].submenu.unshift(
     { role: 'about', label: label('app.about') },
     {
       label: label('app.check-for-updates'),
