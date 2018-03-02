@@ -181,8 +181,6 @@ export const setupMenu = store => {
     defaultTemplate.unshift({
       label: app.getName(),
       submenu: [
-        { role: 'about', label: label('app.about') },
-        { type: 'separator' },
         { role: 'services', submenu: [], label: label('app.services') },
         { type: 'separator' },
         { role: 'hide', label: label('app.hide') },
@@ -221,13 +219,20 @@ export const setupMenu = store => {
     );
   }
 
-  // Check for Updates...
-  defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
-    label: label('app.check-for-updates'),
-    click: () => {
-      checkForUpdates();
-    }
-  });
+  // About and Check for Updates...
+  // App menu on macOS and Help menu on others
+  defaultTemplate[isOSX() ? 0 : 4].submenu.splice(
+    0,
+    0,
+    { role: 'about', label: label('app.about') },
+    {
+      label: label('app.check-for-updates'),
+      click: () => {
+        checkForUpdates();
+      }
+    },
+    { type: 'separator' }
+  );
 
   const state = store.getState();
   const archives = getAllArchives(state);
