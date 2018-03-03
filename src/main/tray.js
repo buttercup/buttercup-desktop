@@ -1,4 +1,4 @@
-import { app, Menu, Tray } from 'electron';
+import { Menu, Tray } from 'electron';
 import checkTraySupport from 'check-os-tray-support';
 import { isWindows, isLinux } from '../shared/utils/platform';
 import { reopenMainWindow, checkDockVisibility } from './utils/window';
@@ -7,6 +7,7 @@ import { openFile, newFile } from './lib/files';
 import { getSetting } from '../shared/selectors';
 import i18n from '../shared/i18n';
 import { getPathToFile } from './lib/utils';
+import { checkForUpdates } from './lib/updater';
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 const isTraySupported = checkTraySupport();
@@ -49,6 +50,16 @@ export const setupTrayIcon = store => {
     {
       type: 'separator'
     },
+    { role: 'about', label: label('app.about') },
+    {
+      label: label('app.check-for-updates'),
+      click: () => {
+        checkForUpdates();
+      }
+    },
+    {
+      type: 'separator'
+    },
     {
       label: label('archive.new'),
       click: () => {
@@ -74,12 +85,7 @@ export const setupTrayIcon = store => {
     {
       type: 'separator'
     },
-    {
-      label: label('app.quit'),
-      click: () => {
-        app.quit();
-      }
-    }
+    { role: 'quit', label: label('app.quit'), accelerator: 'CmdOrCtrl+Q' }
   ]);
 
   const showTrayMenu = () => {
