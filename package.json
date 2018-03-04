@@ -166,7 +166,7 @@
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",
     "buttercup": "~1.5.1",
-    "buttercup-importer": "^0.11.0",
+    "buttercup-importer": "^0.12.0",
     "check-os-tray-support": "^1.1.0",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
