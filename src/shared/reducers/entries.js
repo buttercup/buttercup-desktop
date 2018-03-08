@@ -9,7 +9,6 @@ import {
   ENTRIES_DELETE,
   ENTRIES_MOVE,
   ENTRIES_CHANGE_MODE,
-  ENTRIES_SET_FILTER,
   ENTRIES_SET_SORT
 } from '../actions/types';
 
@@ -90,17 +89,6 @@ function mode(state = 'view', action) {
   }
 }
 
-function filter(state = '', action) {
-  switch (action.type) {
-    case ENTRIES_SET_FILTER:
-      return action.payload;
-    case GROUPS_SELECTED:
-      return state;
-    default:
-      return state;
-  }
-}
-
 function sortMode(state = 'properties.title-asc', action) {
   switch (action.type) {
     case ENTRIES_SET_SORT:
@@ -115,6 +103,5 @@ export default combineReducers({
   shownIds,
   currentEntry,
   mode,
-  filter,
   sortMode
 });

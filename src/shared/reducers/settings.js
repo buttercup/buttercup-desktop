@@ -32,6 +32,7 @@ const DEFAULT_SETTINGS = {
   condencedSidebar: true,
   menubarAutoHide: false,
   archivesLoading: false,
+  isTrayIconEnabled: true,
   locale: ''
 };
 

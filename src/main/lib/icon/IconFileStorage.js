@@ -2,8 +2,8 @@ import fsLib from 'fs';
 import mkdirpLib from 'mkdirp';
 import pify from 'pify';
 import path from 'path';
-import sanitize from 'sanitize-filename';
 import { StorageInterface } from '@buttercup/iconographer';
+import { md5 } from '../../utils/hash';
 
 const fs = pify(fsLib);
 const mkdirp = pify(mkdirpLib);
@@ -26,7 +26,7 @@ export default class IconFileStorage extends StorageInterface {
   }
 
   _buildKeyPath(iconKey) {
-    const fileName = sanitize(iconKey, { replacement: '_' }) + '.icon.dat';
+    const fileName = `${md5(iconKey)}.dat`;
     return path.join(this.path, fileName);
   }
 

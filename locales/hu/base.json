@@ -1,0 +1,219 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Kapcsolat",
+      "check-for-updates": "Frissítések ellenőrzése...",
+      "services": "Szolgáltatások",
+      "hide": "Elrejt",
+      "hideothers": "Minden más elrejtése",
+      "unhide": "Mutat",
+      "quit": "Kilépés"
+    },
+    "archive": {
+      "archive": "Archívum",
+      "file": "Fájl",
+      "new": "Új archívum",
+      "open": "Archívum megnyitása",
+      "search": "Keresés",
+      "connect-cloud-sources": "Csatlakozás a felhő forrásokhoz",
+      "import": {
+        "import": "Importálás",
+        "import-from-type": "{{name}} archívumból (.{{extension}})",
+        "import-to-type": "Ide {{name}}",
+        "no-available-archives": "Nincs elérhető archívum az importáláshoz."
+      },
+      "close": "Bezár"
+    },
+    "edit": {
+      "edit": "Szerkesztés",
+      "undo": "Vissza",
+      "redo": "Újra",
+      "cut": "Kivágás",
+      "copy": "Másolás",
+      "paste": "Beillesztés",
+      "pasteandmatchstyle": "Beillesztés stílussal",
+      "delete": "Törlés",
+      "selectall": "Összes kijelölése",
+      "speech": {
+        "speech": "Beszéd",
+        "startspeaking": "Beszéd inditása",
+        "stopspeaking": "Beszéd befejezése"
+      }
+    },
+    "view": {
+      "view": "Nézet",
+      "condensed-sidebar": "Tömörített oldalság",
+      "language": "Nyelv",
+      "reload": "Újratöltés",
+      "forcereload": "Kényszerített újratöltés",
+      "toggledevtools": "Fejlesztői eszköz váltás",
+      "togglefullscreen": "Teljes képernyőre váltás",
+      "auto-hide-menubar": "Automatikus menü elrejtése"
+    },
+    "window": {
+      "window": "Ablak",
+      "minimize": "Kis méret",
+      "close": "Bezár",
+      "zoom": "Nagyítás",
+      "front": "Minden előtérbe helyezés"
+    },
+    "help": {
+      "help": "Segítség",
+      "visit-our-website": "Látogasd meg weboldalunkat",
+      "privacy-policy": "Adatvédelmi irányelvek",
+      "view-changelog-for-v": "Changelog megtekintése v{{version}}"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Keresés...",
+    "nothing-found": "Nincs találat"
+  },
+  "archive": {
+    "add-archive": "Új archívum",
+    "archive-saved-loading-info": "Az archívum mentésre került.<br>Automatikus kilépés."
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup archívumok",
+    "load-a-buttercup-archive": "Buttercup archívum betöltése",
+    "create-a-new-buttercup-archive": "Új Buttercup archívum létrehozása"
+  },
+  "archive-menu": {
+    "unlock": "Feloldás",
+    "change-color": "Szín változtatás",
+    "change-password": "Jelszó módosítás",
+    "import": "Importálás",
+    "import-from-type": "{{name}} archívumból (.{{extension}})",
+    "archive-remove-with-name": "{{name}} törlése",
+    "open": "Megnyitás",
+    "lock": "Zárolás"
+  },
+  "cloud-source": {
+    "cancel": "Mégse",
+    "go-back": "Vissza",
+    "new-archive": "Új archívum",
+    "open-in-buttercup": "Megnyitás Buttercupban",
+    "connect-to-dropbox": "Dropbox csatlakoztatása",
+    "authenticate-with-dropbox": "Hitelesítés Dropbox-szal",
+    "dropbox-description-text": "Csatlakoztassa a Buttercupot a Dropbox fiókjába az archívumok elolvasásához és mentéséhez.<br />Nem kerül mentésre a Dropbox felhasználónév vagy jelszó.",
+    "connect-to-wedav": "Csatlakozás a {{title}} szerverhez",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "connect": "Csatlakozás",
+    "webdav-description-text": "Adja meg a {{title}} végpont címét, felhasználónevét és jelszavát a Buttercup archívum kiválasztásához. A hitelesítő adatok titkosítva kerülnek <strong>mentésre</ strong>.",
+    "name": "Név",
+    "size": "Méret",
+    "date": "Dátum"
+  },
+  "confirm-dialog": {
+    "yes": "Igen",
+    "no": "Nem"
+  },
+  "copyable": {
+    "hide": "Elrejtés",
+    "reveal": "Megjelenítés",
+    "copy": "Másolás"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Vágólapra másolás",
+    "reveal-password": "Jelszó megjelenítése"
+  },
+  "entry": {
+    "add-entry": "Új fiók",
+    "select-or-create-an-entry": "Fiók kijelöltése vagy létrehozása",
+    "title": "Cím",
+    "untitled": "Névtelen",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "secure-password": "Biztonságos jelszó",
+    "custom-fields": "Egyedi mezők",
+    "no-custom-fields-info-text": "Még nincsenek egyedi mezők. Miért nem adhat hozzá egyet?",
+    "add-new-field": "Új mező hozzáadása",
+    "label": "Címke",
+    "new-field": "Új mező",
+    "edit": "Szerkesztés",
+    "save": "Mentés",
+    "cancel": "Mégse",
+    "delete": "Törlés",
+    "entry-inputs-empty-info": "Kérjük, írjon be legalább egy címet.",
+    "entry-title-empty-info": "Adjon meg egy címet.",
+    "custom-fields-label-empty-info": "Elfelejtette beállítani a címkét egy vagy több egyedi mezőre.",
+    "are-you-sure-question": "Biztos?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Vágólapra másolás",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "open-url-in-browser": "URL megnyitása böngészőben",
+    "move-to-group": "Áthelyezés csoportba",
+    "move-to-trash": "Áthelyezés lomtárba",
+    "delete-permanently": "Végleges törlés"
+  },
+  "error": {
+    "archive-not-found": "Az archívum forrás nem található.",
+    "authentication-failed": "Hitelesítés sikertelen.",
+    "unknown": "Ismeretlen hiba lépett fel",
+    "passwords-dont-match": "A jelszavaid nem egyeznek.",
+    "group-not-found": "Csoport nem található.",
+    "sort-definition-not-found": "A rendezés nem található",
+    "insufficient-data-provided": "Nincs elegendő adat a válogatáshoz",
+    "check-for-update": "Hiba történt a frissítés során. Kérlek, próbáld újra később.",
+    "invalid-import-type-requested": "Érvénytelen importálási típus",
+    "open-file-for-importing": "Az importfunkció nem futtatható a főablak futása nélkül.",
+    "entry-not-found": "A fiók nem található",
+    "dropbox-connection-failed-info": "A Dropbox szerverhez való csatlakozás nem sikerült. Kérlek, próbáld újra később.",
+    "webdav-connection-failed-info": "A(z) {{endpoint}} kapcsolódás sikertelen. Kérjük, ellenőrizze a hitelesítő adatait, és próbálja újra."
+  },
+  "group": {
+    "new-group": "Új csoport",
+    "untitled": "Névtelen"
+  },
+  "group-menu": {
+    "new-group": "Új csoport",
+    "add-group": "Csoport hozzáadása",
+    "move-to-root": "Áthelyezés a győkérbe",
+    "move-to-group": "Áthelyezés a csoportba",
+    "rename": "Átnevezése",
+    "delete": "Törlés",
+    "move-to-group-custom": "Áthelyezés a {{title}}",
+    "empty-trash": "Szemét ürítés",
+    "empty-trash-question": "Biztosan ki akarja üríteni a szemetet?",
+    "title-asc": "Cím: nővekvő",
+    "title-desc": "Cím: csökkenő"
+  },
+  "intro": {
+    "welcome-title": "Üdvözöljük a Buttercupban.",
+    "welcome-back-title": "Üdvözöljük újra a Buttercupban.",
+    "welcome-caption": "Még nem hozta létre az archívumokat. Miért nem ad hozzá egyet?",
+    "unlock-archive": "Archívum feloldása ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Archívum fájl megnyitása",
+    "new-archive-file": "Új archívum fáj",
+    "connect-cloud-sources": "Csatlakozás a felhő forrásokhoz"
+  },
+  "password-dialog": {
+    "master-password": "Mester jelszó",
+    "new-password": "Új jelszó",
+    "password": "Jelszó",
+    "confirm-password": "Megerősítő jelszó",
+    "confirm": "Megerősítve",
+    "nevermind": "Nem egyezik"
+  },
+  "search": {
+    "search": "Keresés"
+  },
+  "sort": {
+    "title-asc": "Cím: nővekvő",
+    "title-desc": "Cím: csökkenő",
+    "time-asc": "Idő: nővekvő",
+    "time-desc": "Idő: csökkenő"
+  },
+  "update": {
+    "installing": "Telepítés",
+    "update-available-message": "Buttercup {{version}} elérhető. Jelenlegi verió {{currentVersion}}. Szeretne letölteni most?",
+    "new-version-available": "Buttercup új változata érhető el!",
+    "not-now": "Most nem",
+    "download": "Letöltés és telepítés",
+    "release-notes": "Kiadási megjegyzések:"
+  }
+}

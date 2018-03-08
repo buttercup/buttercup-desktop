@@ -11,10 +11,11 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
-import { getMainWindow } from './utils/window';
+import { getMainWindow, reopenMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
+import { setupTrayIcon } from './tray';
 
 electronContextMenu();
 
@@ -28,19 +29,25 @@ export const setupMenu = store => {
         {
           label: label('archive.new'),
           accelerator: 'CmdOrCtrl+N',
-          click: (item, focusedWindow) => newFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => newFile(win));
+          }
         },
         {
           label: label('archive.open'),
           accelerator: 'CmdOrCtrl+O',
-          click: (item, focusedWindow) => openFile(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => openFile(win));
+          }
         },
         {
           label: label('archive.connect-cloud-sources'),
           accelerator: 'CmdOrCtrl+Shift+C',
-          click: (item, focusedWindow) => {
-            getWindowManager().buildWindowOfType('file-manager', null, {
-              parent: getMainWindow(focusedWindow)
+          click: () => {
+            reopenMainWindow(win => {
+              getWindowManager().buildWindowOfType('file-manager', null, {
+                parent: win
+              });
             });
           }
         },
@@ -174,8 +181,6 @@ export const setupMenu = store => {
     defaultTemplate.unshift({
       label: app.getName(),
       submenu: [
-        { role: 'about', label: label('app.about') },
-        { type: 'separator' },
         { role: 'services', submenu: [], label: label('app.services') },
         { type: 'separator' },
         { role: 'hide', label: label('app.hide') },
@@ -214,13 +219,18 @@ export const setupMenu = store => {
     );
   }
 
-  // Check for Updates...
-  defaultTemplate[isOSX() ? 0 : 4].submenu.splice(isOSX() ? 1 : 0, 0, {
-    label: label('app.check-for-updates'),
-    click: () => {
-      checkForUpdates();
-    }
-  });
+  // About and Check for Updates...
+  // App menu on macOS and Help menu on others
+  defaultTemplate[isOSX() ? 0 : 4].submenu.unshift(
+    { role: 'about', label: label('app.about') },
+    {
+      label: label('app.check-for-updates'),
+      click: () => {
+        checkForUpdates();
+      }
+    },
+    { type: 'separator' }
+  );
 
   const state = store.getState();
   const archives = getAllArchives(state);
@@ -261,12 +271,13 @@ export const setupMenu = store => {
                             extension: type.extension
                           }),
                           enabled: archive.status === 'unlocked',
-                          click: (item, focusedWindow) =>
+                          click: (item, focusedWindow) => {
                             openFileForImporting(
                               focusedWindow,
                               typeKey,
                               archive.id
-                            )
+                            );
+                          }
                         }))
                       : [
                           {
@@ -294,6 +305,15 @@ export const setupMenu = store => {
               accelerator: 'CmdOrCtrl+Shift+B',
               click: item => {
                 store.dispatch(setSetting('condencedSidebar', item.checked));
+              }
+            },
+            {
+              label: label('view.enable-tray-icon'),
+              type: 'checkbox',
+              checked: getSetting(state, 'isTrayIconEnabled'),
+              click: item => {
+                store.dispatch(setSetting('isTrayIconEnabled', item.checked));
+                setupTrayIcon(store);
               }
             },
             { type: 'separator' },
@@ -350,10 +370,9 @@ export const setupMenu = store => {
               // will show as active which is unwanted.
               type: currentArchiveId ? 'radio' : 'checkbox',
               click: () => {
-                const win = getMainWindow();
-                if (win) {
+                reopenMainWindow(win => {
                   win.webContents.send('set-current-archive', archive.id);
-                }
+                });
               },
               checked: archive.id === currentArchiveId
             }))
@@ -364,5 +383,7 @@ export const setupMenu = store => {
     return item;
   });
 
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  const buildTemplate = Menu.buildFromTemplate(template);
+
+  Menu.setApplicationMenu(buildTemplate);
 };

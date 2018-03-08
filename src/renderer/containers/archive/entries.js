@@ -11,7 +11,6 @@ import * as entries from '../../../shared/actions/entries';
 export default connect(
   state => ({
     groups: getGroups(state),
-    filter: state.entries.filter,
     sortMode: state.entries.sortMode,
     entries: getEntries(state),
     currentEntry: getCurrentEntry(state),
@@ -20,7 +19,6 @@ export default connect(
   {
     onSelectEntry: entries.selectEntry,
     onEntryMove: entries.moveEntry,
-    onFilterChange: entries.setFilter,
     onSortModeChange: entries.setSortMode,
     onDelete: entries.deleteEntry,
     handleAddEntry: entries.changeMode('new')

@@ -44,6 +44,7 @@
       "view": "مشاهده",
       "condensed-sidebar": "منوی کنار عریض",
       "language": "زبان",
+      "enable-tray-icon": "نمایش در منوبار",
       "auto-hide-menubar": "مخفی کردن خودکار منو",
       "reload": "بازنشانی",
       "forcereload": "بازنشانی به زور",
@@ -62,6 +63,10 @@
       "visit-our-website": "مشاهده سایت ما",
       "privacy-policy": "حریم شخصی",
       "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+    },
+    "tray": {
+      "quit": "بستن",
+      "open": "نمایش باترکاپ"
     }
   },
   "archive-search": {
@@ -137,7 +142,8 @@
     "entry-inputs-empty-info": "لطفا حداقل یک عنوان وارد کنید.",
     "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
-    "are-you-sure-question": "برای این کار اطمینان دارید؟"
+    "are-you-sure-question": "برای این کار اطمینان دارید؟",
+    "displaying-entries": "در حال نمایش {{count}} سند"
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
