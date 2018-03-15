@@ -11,7 +11,7 @@
     "buttercup-importer": "~0.12.0",
     "conf": "~1.0.0",
     "dropbox": "^2.3.0",
-    "webdav": "~0.10.0",
+    "webdav": "~1.4.0",
     "zxcvbn": "^4.4.2"
   }
 }
