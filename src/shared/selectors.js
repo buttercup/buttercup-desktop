@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { sortByKey, sortDeepByKey } from './utils/collection';
-import { denormalizeGroups } from './buttercup/groups';
+import { denormalizeGroups } from './utils/normalize';
 
 // Archive ->
 

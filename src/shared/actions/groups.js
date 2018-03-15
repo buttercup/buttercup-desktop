@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 import uuid from 'uuid';
 import { showConfirmDialog } from '../../renderer/system/dialog';
 import * as groupTools from '../buttercup/groups';
+import { normalizeGroups } from '../utils/normalize';
 import { loadEntries } from './entries';
 import i18n from '../i18n';
 import { addExpandedKeys } from './ui';
@@ -24,7 +25,7 @@ import {
 } from './types';
 
 export const resetGroups = createAction(GROUPS_RESET, payload =>
-  groupTools.normalizeGroups(payload)
+  normalizeGroups(payload)
 );
 export const renameGroup = createAction(GROUPS_RENAME);
 export const setSortMode = createAction(GROUPS_SET_SORT);
