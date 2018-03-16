@@ -42,7 +42,7 @@
     },
     "view": {
       "view": "Zobrazit",
-      "condensed-sidebar": "Zkrátit boční panel",
+      "condensed-sidebar": "Zmenšit boční panel",
       "language": "Jazyk",
       "reload": "Obnovit",
       "forcereload": "Vynutit obnovení ",
@@ -119,12 +119,12 @@
   },
   "entry": {
     "add-entry": "Přidat záznam",
-    "select-or-create-an-entry": "Vybrat nebo vytvořit záznam",
+    "select-or-create-an-entry": "Vyberte nebo vytvořte záznam",
     "title": "Název",
     "untitled": "Nepojmenováno",
     "username": "Uživatelské jméno",
     "password": "Heslo",
-    "secure-password": "Bezppečné heslo",
+    "secure-password": "Bezpečné heslo",
     "custom-fields": "Volitelná pole",
     "no-custom-fields-info-text": "Nemáte žádné volitelné pole. Nechcete si jedno přidat?",
     "add-new-field": "Přidat nové pole",
@@ -210,8 +210,8 @@
   },
   "update": {
     "installing": "Instaluji",
-    "update-available-message": "Je dostupná {{version}} Buttercupu. Klikněte pro spuštění instalace.",
-    "new-version-available": "Nová verze Buttercupu je k dispozici!",
+    "update-available-message": "Je dostupná verze {{version}} Buttercup. Spuštění instalace potvrďte kliknutím.",
+    "new-version-available": "Nová verze Buttercup je k dispozici!",
     "not-now": "Teď ne",
     "download": "Stáhnout a nainstalovat",
     "release-notes": "Popis změn:"
