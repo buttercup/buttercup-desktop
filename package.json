@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -139,7 +139,7 @@
   "devDependencies": {
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/iconographer": "^0.7.1",
-    "@buttercup/ui": "^1.1.0",
+    "@buttercup/ui": "^1.2.0",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
@@ -165,9 +165,9 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-react-optimize": "^1.0.1",
     "babel-register": "^6.18.0",
-    "buttercup": "~1.5.1",
-    "buttercup-importer": "^0.12.0",
-    "check-os-tray-support": "^1.1.0",
+    "buttercup": "~1.6.2",
+    "buttercup-importer": "^0.13.0",
+    "check-os-tray-support": "^2.0.0",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.1",
@@ -268,7 +268,7 @@
     "uglifyjs-webpack-plugin": "^1.0.1",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.3",
-    "webdav-fs": "^1.3.0",
+    "webdav-fs": "^1.8.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4",
     "webpack-merge": "^4.1.1"

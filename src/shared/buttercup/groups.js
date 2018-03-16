@@ -1,19 +1,6 @@
 import { Group } from 'buttercup/dist/buttercup-web.min';
 import { getArchive, saveWorkspace } from './archive';
-import { normalize, denormalize, schema } from 'normalizr';
 import i18n from '../i18n';
-
-const group = new schema.Entity('groups');
-const groups = new schema.Array(group);
-group.define({ groups });
-
-export function normalizeGroups(payload) {
-  return normalize(payload, groups);
-}
-
-export function denormalizeGroups(shownIds, allIds) {
-  return denormalize(shownIds, groups, { groups: allIds });
-}
 
 export function groupToObject(group) {
   const obj = group.toObject();

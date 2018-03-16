@@ -108,29 +108,31 @@ export function getArchive(archiveId) {
 export function updateArchivePassword(archiveId, newPassword) {
   const manager = getSharedArchiveManager();
   const source = manager.getSourceForID(archiveId);
-
-  getQueue()
+  return getQueue()
     .channel('saves')
-    .enqueue(() => source.updateArchiveCredentials(newPassword));
+    .enqueue(() =>
+      source
+        .updateArchiveCredentials(newPassword)
+        .then(() => manager.dehydrateSource(source))
+    );
 }
 
 export function updateArchiveColour(archiveId, newColor) {
   const manager = getSharedArchiveManager();
   const source = manager.getSourceForID(archiveId);
   source.colour = newColor;
-  saveArchiveManager();
+  return saveArchiveManager();
 }
 
 export function updateArchiveOrder(archiveId, newOrder) {
   const manager = getSharedArchiveManager();
   manager.reorderSource(archiveId, newOrder);
-  saveArchiveManager();
+  return saveArchiveManager();
 }
 
 export function saveWorkspace(archiveId) {
   const manager = getSharedArchiveManager();
   const { workspace } = manager.getSourceForID(archiveId);
-
   getQueue()
     .channel('saves')
     .enqueue(
@@ -152,5 +154,5 @@ export function saveWorkspace(archiveId) {
 
 export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
-  manager.dehydrate();
+  return manager.dehydrate();
 }
