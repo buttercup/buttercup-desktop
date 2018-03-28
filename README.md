@@ -37,13 +37,13 @@ Ensure that you never share your master password or use it anywhere other than w
 
 If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
 
-``` bash
+```shell
 $ brew cask install buttercup
 ```
 
 If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install Buttercup:
 
-```
+```shell
 choco install buttercup
 ```
 
