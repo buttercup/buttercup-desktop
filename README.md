@@ -41,6 +41,12 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
+If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install Buttercup:
+
+```
+choco install buttercup
+```
+
 Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
 
 ## Encryption & Format
