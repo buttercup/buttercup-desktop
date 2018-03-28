@@ -37,8 +37,14 @@ Ensure that you never share your master password or use it anywhere other than w
 
 If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
 
-``` bash
+```shell
 $ brew cask install buttercup
+```
+
+If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install [Buttercup](https://chocolatey.org/packages/buttercup):
+
+```shell
+choco install buttercup
 ```
 
 Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
