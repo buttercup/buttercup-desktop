@@ -41,7 +41,7 @@ If you're using macOS, you can also use **Homebrew Cask** to download and instal
 $ brew cask install buttercup
 ```
 
-If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install Buttercup:
+If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install [Buttercup](https://chocolatey.org/packages/buttercup):
 
 ```shell
 choco install buttercup
