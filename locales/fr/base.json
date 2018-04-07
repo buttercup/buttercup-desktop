@@ -199,6 +199,7 @@
   },
   "password-dialog": {
     "master-password": "Mot de passe principal",
+    "new-password": "Nouveau mot de passe",
     "password": "Mot de passe",
     "confirm-password": "Confirmation du mot de passe",
     "confirm": "Confirmer",
@@ -216,6 +217,7 @@
   "update": {
     "installing": "En cours d’installation",
     "update-available-message": "Buttercup {{version}} est disponible. Cliquez pour l’installer maintenant.",
+    "new-version-available": "Une nouvelle version de Buttercup est disponible !",
     "not-now": "Pas maintenant",
     "download": "Télécharger et Installer",
     "release-notes": "Notes de version :"
