@@ -139,7 +139,7 @@
   "devDependencies": {
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/iconographer": "^0.7.1",
-    "@buttercup/ui": "^1.2.0",
+    "@buttercup/ui": "^1.4.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
