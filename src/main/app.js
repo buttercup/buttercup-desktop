@@ -100,7 +100,7 @@ const isSecondInstance = app.makeSingleInstance(argv => {
 });
 
 if (isSecondInstance) {
-  app.quit();
+  app.exit();
 }
 
 app.on('ready', async () => {
