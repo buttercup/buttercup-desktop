@@ -100,6 +100,7 @@ const isSecondInstance = app.makeSingleInstance(argv => {
 });
 
 if (isSecondInstance) {
+  log.info('Second instance opened, attempting to exit now.');
   app.exit();
 }
 
@@ -180,6 +181,7 @@ app.on('activate', () => {
 });
 
 app.once('before-quit', e => {
+  log.info('Running before-quit operatios.');
   const channel = getQueue().channel('saves');
   appTriedToQuit = true;
 
