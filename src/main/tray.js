@@ -35,7 +35,7 @@ export const setupTrayIcon = store => {
       ? 'resources/icons/tray.ico'
       : isLinux()
         ? 'resources/icons/tray-linux.png'
-        : 'resources/icons/tray.png';
+        : 'resources/icons/trayTemplate.png';
 
     tray = new Tray(getPathToFile(trayPath));
   }
