@@ -79,29 +79,16 @@ if (isWindows()) {
 }
 
 // Someone tried to run a second instance, we should focus our window.
-const isSecondInstance = app.makeSingleInstance(argv => {
-  const handleArgvForWindow = win => {
-    // Handle the argv of second instance for windows
-    const filePath = getFilePathFromArgv(argv);
-    if (isWindows() && filePath) {
-      loadFile(filePath, win);
-    }
-  };
-  if (windowManager.getCountOfType('main') > 0) {
-    const [mainWindow] = windowManager.getWindowsOfType('main');
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    mainWindow.focus();
-    handleArgvForWindow(mainWindow);
-  } else {
-    windowManager.buildWindowOfType('main', win => handleArgvForWindow(win));
-  }
+const isSecondInstance = app.makeSingleInstance(() => {
+  log.info(
+    'Detected a newer instance. Closing the this instance.',
+    app.getVersion()
+  );
+  app.quit();
 });
 
 if (isSecondInstance) {
-  log.info('Second instance opened, attempting to exit now.');
-  app.exit();
+  log.info('This is the newer version running.', app.getVersion());
 }
 
 app.on('ready', async () => {
