@@ -81,7 +81,7 @@ if (isWindows()) {
 // Someone tried to run a second instance, we should focus our window.
 const isSecondInstance = app.makeSingleInstance(() => {
   log.info(
-    'Detected a newer instance. Closing the this instance.',
+    'Detected a newer instance. Closing this instance.',
     app.getVersion()
   );
   app.quit();
