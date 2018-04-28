@@ -89,6 +89,12 @@ Buttercup for Desktop supports the following languages:
  * Hungarian
  * Czech
 
+### Submitting internationalization configurations
+
+We welcome the addition of new languages to the Buttercup platform. Please follow the style of the current translations.
+
+If adding languages that are more specific than usual (eg. "pt_br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `_` and not a dash.
+
 ## Development
 
 If you're interested in developing Buttercup:
