@@ -49,6 +49,14 @@ choco install buttercup
 
 Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
 
+### Portability
+
+Buttercup supports portable builds on the following platforms:
+
+ * Linux: [AppImage](https://github.com/buttercup/buttercup-desktop/releases/latest)
+
+_Portable versions for Windows and Mac will arrive in the not-so-distant future._
+
 ## Encryption & Format
 
 Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at between 200-250k iterations.
