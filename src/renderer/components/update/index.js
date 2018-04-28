@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
@@ -68,17 +68,22 @@ class Update extends PureComponent {
     currentVersion: null,
     releaseNotes: null,
     percent: 0,
-    installing: false
+    installing: false,
+    canUpdateAutomatically: true
   };
 
   componentDidMount() {
     ipcRenderer.on(
       'update-available',
-      (event, { version, currentVersion, releaseNotes }) => {
+      (
+        event,
+        { version, currentVersion, releaseNotes, canUpdateAutomatically }
+      ) => {
         this.setState({
           version,
           currentVersion,
-          releaseNotes: sanitizeHtml(releaseNotes)
+          releaseNotes: sanitizeHtml(releaseNotes),
+          canUpdateAutomatically
         });
       }
     );
@@ -98,6 +103,13 @@ class Update extends PureComponent {
   }
 
   handleDownload = () => {
+    if (this.state.canUpdateAutomatically === false) {
+      shell.openExternal(
+        'https://github.com/buttercup/buttercup-desktop/releases/latest'
+      );
+      this.handleSkip();
+      return;
+    }
     this.setState({ installing: true });
     ipcRenderer.send('download-update');
   };
@@ -145,7 +157,13 @@ class Update extends PureComponent {
               loading={this.state.installing}
               disabled={this.state.installing}
             >
-              <Translate i18nKey="update.download" />
+              <Translate
+                i18nKey={
+                  this.state.canUpdateAutomatically
+                    ? 'update.download'
+                    : 'update.download-manual'
+                }
+              />
             </Button>
           </Flex>
         </Flex>
