@@ -177,7 +177,7 @@
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
     "electron": "^1.8.4",
-    "electron-builder": "^20.14.5",
+    "electron-builder": "^20.13.4",
     "electron-context-menu": "^0.9.1",
     "electron-debug": "^1.1.0",
     "electron-devtools-installer": "^2.2.3",
