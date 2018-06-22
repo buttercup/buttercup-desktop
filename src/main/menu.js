@@ -68,12 +68,22 @@ export const setupMenu = store => {
         {
           label: i18n.t('entry.add-entry'),
           accelerator: 'CmdOrCtrl+N',
-          enabled: currentArchiveId !== null
+          enabled: currentArchiveId !== null,
+          click: () => {
+            reopenMainWindow(win => {
+              win.webContents.send('trigger-add-entry');
+            });
+          }
         },
         {
           label: i18n.t('group.new-group'),
           accelerator: 'CmdOrCtrl+G',
-          enabled: currentArchiveId !== null
+          enabled: currentArchiveId !== null,
+          click: () => {
+            reopenMainWindow(win => {
+              win.webContents.send('trigger-new-group');
+            });
+          }
         },
         {
           type: 'separator'

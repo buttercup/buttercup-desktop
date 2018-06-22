@@ -21,6 +21,8 @@ import {
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
+import { changeMode } from '../shared/actions/entries';
+import { addGroup } from '../shared/actions/groups';
 import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
@@ -79,6 +81,14 @@ ipc.on('toggle-archive-search', () => {
       !getUIState(store.getState(), 'isArchiveSearchVisible')
     )
   );
+});
+
+ipc.on('trigger-add-entry', () => {
+  store.dispatch(changeMode('new')());
+});
+
+ipc.on('trigger-new-group', () => {
+  store.dispatch(addGroup(null));
 });
 
 window.onbeforeunload = event => {
