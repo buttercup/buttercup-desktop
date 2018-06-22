@@ -22,13 +22,24 @@ electronContextMenu();
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 export const setupMenu = store => {
+  const state = store.getState();
+  const archives = getAllArchives(state);
+  const currentArchiveId = getCurrentArchiveId(state);
+
+  // Default should be safe (always on) in case it isn't set.
+  const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
+  const menubarAutoHide =
+    typeof menubarAutoHideSetting === 'boolean'
+      ? menubarAutoHideSetting
+      : false;
+
   const defaultTemplate = [
     {
       label: isOSX() ? label('archive.archive') : label('archive.file'),
       submenu: [
         {
           label: label('archive.new'),
-          accelerator: 'CmdOrCtrl+N',
+          accelerator: 'CmdOrCtrl+Shift+N',
           click: () => {
             reopenMainWindow(win => newFile(win));
           }
@@ -54,7 +65,46 @@ export const setupMenu = store => {
         {
           type: 'separator'
         },
-        {}, // Import menu will be injected here
+        {
+          label: i18n.t('entry.add-entry'),
+          accelerator: 'CmdOrCtrl+N',
+          enabled: currentArchiveId !== null
+        },
+        {
+          label: i18n.t('group.new-group'),
+          accelerator: 'CmdOrCtrl+G',
+          enabled: currentArchiveId !== null
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: label('archive.import.import'),
+          submenu: Object.entries(ImportTypeInfo).map(([typeKey, type]) => ({
+            label: label('archive.import.import-from-type', {
+              name: type.name,
+              extension: type.extension
+            }),
+            submenu:
+              archives.length > 0
+                ? archives.map(archive => ({
+                    label: label('archive.import.import-to-type', {
+                      name: archive.name,
+                      extension: type.extension
+                    }),
+                    enabled: archive.status === 'unlocked',
+                    click: (item, focusedWindow) => {
+                      openFileForImporting(focusedWindow, typeKey, archive.id);
+                    }
+                  }))
+                : [
+                    {
+                      label: label('archive.import.no-available-archives'),
+                      enabled: false
+                    }
+                  ]
+          }))
+        },
         {
           type: 'separator'
         },
@@ -113,6 +163,58 @@ export const setupMenu = store => {
     {
       label: label('view.view'),
       submenu: [
+        {
+          label: label('view.condensed-sidebar'),
+          type: 'checkbox',
+          checked: getSetting(state, 'condencedSidebar'),
+          accelerator: 'CmdOrCtrl+Shift+B',
+          click: item => {
+            store.dispatch(setSetting('condencedSidebar', item.checked));
+          }
+        },
+        {
+          label: label('view.enable-tray-icon'),
+          type: 'checkbox',
+          checked: getSetting(state, 'isTrayIconEnabled'),
+          click: item => {
+            store.dispatch(setSetting('isTrayIconEnabled', item.checked));
+            setupTrayIcon(store);
+          }
+        },
+        { type: 'separator' },
+        // Language menu point
+        {
+          label: label('view.language'),
+          submenu: Object.keys(languages).map(key => ({
+            label: languages[key].name,
+            checked: getSetting(state, 'locale') === key,
+            enabled: getSetting(state, 'locale') !== key,
+            type: 'checkbox',
+            click: () => {
+              store.dispatch(setSetting('locale', key));
+              i18n.changeLanguage(key);
+              const win = getMainWindow();
+              if (win) {
+                setupMenu(store);
+                Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+                win.webContents.send('change-locale-main', key);
+              }
+            }
+          }))
+        },
+        ...(!isOSX()
+          ? [
+              {
+                label: label('view.auto-hide-menubar'),
+                type: 'checkbox',
+                checked: menubarAutoHide,
+                click: item => {
+                  getMainWindow().setAutoHideMenuBar(item.checked);
+                  store.dispatch(setSetting('menubarAutoHide', item.checked));
+                }
+              }
+            ]
+          : []),
         { type: 'separator' },
         {
           role: 'reload',
@@ -144,7 +246,22 @@ export const setupMenu = store => {
         {
           role: 'close',
           label: label('window.close')
-        }
+        },
+        { type: 'separator' },
+        ...archives.map((archive, index) => ({
+          label: archive.name,
+          accelerator: `CmdOrCtrl+${index + 1}`,
+          // set type to checkbox because if none of the archives are
+          // selected and the type is radio, then always the first item
+          // will show as active which is unwanted.
+          type: currentArchiveId ? 'radio' : 'checkbox',
+          click: () => {
+            reopenMainWindow(win => {
+              win.webContents.send('set-current-archive', archive.id);
+            });
+          },
+          checked: archive.id === currentArchiveId
+        }))
       ]
     },
     {
@@ -204,7 +321,9 @@ export const setupMenu = store => {
     );
 
     // Window
-    defaultTemplate[4].submenu.push(
+    defaultTemplate[4].submenu.splice(
+      2,
+      0,
       {
         role: 'zoom',
         label: label('window.zoom')
@@ -232,158 +351,6 @@ export const setupMenu = store => {
     { type: 'separator' }
   );
 
-  const state = store.getState();
-  const archives = getAllArchives(state);
-  const currentArchiveId = getCurrentArchiveId(state);
-
-  // Default should be safe (always on) in case it isn't set.
-  const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
-  const menubarAutoHide =
-    typeof menubarAutoHideSetting === 'boolean'
-      ? menubarAutoHideSetting
-      : false;
-
-  const template = defaultTemplate.map((item, i) => {
-    // OSX has one more menu item
-    const index = isOSX() ? i : i + 1;
-
-    switch (index) {
-      // Archive / File Menu:
-      case 1:
-        return {
-          ...item,
-          submenu: item.submenu.map((sub, i) => {
-            if (i === 4) {
-              return {
-                label: label('archive.import.import'),
-                submenu: Object.entries(
-                  ImportTypeInfo
-                ).map(([typeKey, type]) => ({
-                  label: label('archive.import.import-from-type', {
-                    name: type.name,
-                    extension: type.extension
-                  }),
-                  submenu:
-                    archives.length > 0
-                      ? archives.map(archive => ({
-                          label: label('archive.import.import-to-type', {
-                            name: archive.name,
-                            extension: type.extension
-                          }),
-                          enabled: archive.status === 'unlocked',
-                          click: (item, focusedWindow) => {
-                            openFileForImporting(
-                              focusedWindow,
-                              typeKey,
-                              archive.id
-                            );
-                          }
-                        }))
-                      : [
-                          {
-                            label: label(
-                              'archive.import.no-available-archives'
-                            ),
-                            enabled: false
-                          }
-                        ]
-                }))
-              };
-            }
-            return sub;
-          })
-        };
-      // View Menu:
-      case 3:
-        return {
-          ...item,
-          submenu: [
-            {
-              label: label('view.condensed-sidebar'),
-              type: 'checkbox',
-              checked: getSetting(state, 'condencedSidebar'),
-              accelerator: 'CmdOrCtrl+Shift+B',
-              click: item => {
-                store.dispatch(setSetting('condencedSidebar', item.checked));
-              }
-            },
-            {
-              label: label('view.enable-tray-icon'),
-              type: 'checkbox',
-              checked: getSetting(state, 'isTrayIconEnabled'),
-              click: item => {
-                store.dispatch(setSetting('isTrayIconEnabled', item.checked));
-                setupTrayIcon(store);
-              }
-            },
-            { type: 'separator' },
-            // Language menu point
-            {
-              label: label('view.language'),
-              submenu: Object.keys(languages).map(key => ({
-                label: languages[key].name,
-                checked: getSetting(state, 'locale') === key,
-                enabled: getSetting(state, 'locale') !== key,
-                type: 'checkbox',
-                click: () => {
-                  store.dispatch(setSetting('locale', key));
-                  i18n.changeLanguage(key);
-                  const win = getMainWindow();
-                  if (win) {
-                    setupMenu(store);
-                    Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-                    win.webContents.send('change-locale-main', key);
-                  }
-                }
-              }))
-            },
-            ...(!isOSX()
-              ? [
-                  {
-                    label: label('view.auto-hide-menubar'),
-                    type: 'checkbox',
-                    checked: menubarAutoHide,
-                    click: item => {
-                      getMainWindow().setAutoHideMenuBar(item.checked);
-                      store.dispatch(
-                        setSetting('menubarAutoHide', item.checked)
-                      );
-                    }
-                  }
-                ]
-              : []),
-            ...item.submenu
-          ]
-        };
-      // Window Menu:
-      case 4:
-        return {
-          ...item,
-          submenu: [
-            ...item.submenu,
-            { type: 'separator' },
-            ...archives.map((archive, index) => ({
-              label: archive.name,
-              accelerator: `CmdOrCtrl+${index + 1}`,
-              // set type to checkbox because if none of the archives are
-              // selected and the type is radio, then always the first item
-              // will show as active which is unwanted.
-              type: currentArchiveId ? 'radio' : 'checkbox',
-              click: () => {
-                reopenMainWindow(win => {
-                  win.webContents.send('set-current-archive', archive.id);
-                });
-              },
-              checked: archive.id === currentArchiveId
-            }))
-          ]
-        };
-    }
-
-    return item;
-  });
-
-  const buildTemplate = Menu.buildFromTemplate(template);
-
+  const buildTemplate = Menu.buildFromTemplate(defaultTemplate);
   Menu.setApplicationMenu(buildTemplate);
 };
