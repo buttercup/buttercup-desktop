@@ -206,7 +206,9 @@ export const setupMenu = store => {
               const win = getMainWindow();
               if (win) {
                 setupMenu(store);
-                Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+                Menu.setApplicationMenu(
+                  Menu.buildFromTemplate(defaultTemplate)
+                );
                 win.webContents.send('change-locale-main', key);
               }
             }
