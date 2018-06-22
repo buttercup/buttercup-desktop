@@ -39,7 +39,13 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
       return manager
         .addSource(source)
         .then(() =>
-          unlockArchiveInArchiveManager(source.id, masterPassword, isNew)
+          unlockArchiveInArchiveManager(
+            source.id,
+            masterPassword,
+            isNew
+          ).catch(err =>
+            manager.removeSource(source.id).then(() => Promise.reject(err))
+          )
         );
     })
     .then(archiveId => {
