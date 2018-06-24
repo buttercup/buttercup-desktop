@@ -36,6 +36,7 @@ export const loadEntries = (archiveId, groupId) => async dispatch => {
     const entriesWithoutIcon = entries.filter(entry => !entry.icon);
     dispatch(fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon));
   } catch (err) {
+    console.error(err);
     showDialog(err);
   }
 };

@@ -7,11 +7,11 @@ function entryToObj(entry) {
   const obj = entry.toObject();
   return {
     ...obj,
-    isInTrash: entry.isInTrash(),
+    isInTrash: entry.isInTrash() /* ,
     meta: Object.keys(obj.meta).map(metaKey => ({
       key: metaKey,
       value: obj.meta[metaKey]
-    }))
+    })) */
   };
 }
 
