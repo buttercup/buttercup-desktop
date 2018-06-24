@@ -1,4 +1,4 @@
-import { Group } from 'buttercup/dist/buttercup-web.min';
+import { Group } from './buttercup';
 import { getArchive, saveWorkspace } from './archive';
 import i18n from '../i18n';
 

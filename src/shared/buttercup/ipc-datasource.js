@@ -1,10 +1,7 @@
 import fs from 'fs';
-import {
-  TextDatasource,
-  DatasourceAdapter
-} from 'buttercup/dist/buttercup-web.min';
+import { Datasources } from './buttercup';
 
-const registerDatasource = DatasourceAdapter.registerDatasource;
+const { TextDatasource, registerDatasource } = Datasources;
 
 /**
  * Datasource for Ipc archives
@@ -24,7 +21,7 @@ export class IpcDatasource extends TextDatasource {
   }
 
   save(archive, password) {
-    return super.save(archive, password).then(encryptedContent => {
+    return super.save(archive.getHistory(), password).then(encryptedContent => {
       return fs.writeFileSync(this.path, encryptedContent, 'utf8');
     });
   }
