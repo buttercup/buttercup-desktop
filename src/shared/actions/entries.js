@@ -135,22 +135,20 @@ export async function getMatchingEntriesForSearchTerm(term) {
   const lookup = unlockedSources.reduce(
     (current, next) => ({
       ...current,
-      [next.workspace.primary.archive.getID()]: next.id
+      [next.workspace.archive.id]: next.id
     }),
     {}
   );
-  const archives = unlockedSources.map(
-    source => source.workspace.primary.archive
-  );
+  const archives = unlockedSources.map(source => source.workspace.archive);
   const finder = new EntryFinder(archives);
 
   return Promise.all(
     finder.search(term).map(async result => {
-      const archiveId = lookup[result.archive.getID()];
+      const archiveId = lookup[result.archive.id];
 
       return {
         sourceID: archiveId,
-        groupID: result.entry.getGroup().getID(),
+        groupID: result.entry.getGroup().id,
         icon: await entryTools.getIcon(result.entry),
         entry: result.entry
       };
@@ -175,6 +173,6 @@ export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   getState
 ) => {
   dispatch(loadOrUnlockArchive(archiveId));
-  dispatch(loadGroup(entry.getGroup().getID()));
-  dispatch(selectEntry(entry.getID()));
+  dispatch(loadGroup(entry.getGroup().id));
+  dispatch(selectEntry(entry.id));
 };

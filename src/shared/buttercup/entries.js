@@ -1,18 +1,23 @@
 import { saveWorkspace, getArchive } from './archive';
+import { entryFacade } from './buttercup';
 import log from 'electron-log';
 import i18n from '../i18n';
 import iconographer from '../../main/lib/icon/iconographer';
 
+const { consumeEntryFacade, createEntryFacade } = entryFacade;
+
 function entryToObj(entry) {
-  const obj = entry.toObject();
+  const facade = createEntryFacade(entry);
   return {
-    ...obj,
-    isInTrash: entry.isInTrash() /* ,
-    meta: Object.keys(obj.meta).map(metaKey => ({
-      key: metaKey,
-      value: obj.meta[metaKey]
-    })) */
+    id: entry.id,
+    facade,
+    isInTrash: entry.isInTrash()
   };
+  // const obj = entry.toObject();
+  // return {
+  //   ...obj,
+  //   isInTrash: entry.isInTrash()
+  // };
 }
 
 /**
@@ -20,11 +25,11 @@ function entryToObj(entry) {
  * @param {ButtercupEntry} entry
  */
 export function filterEmptyEntryValues(entry) {
-  if (entry.meta) {
-    entry.meta = entry.meta.filter(
-      metaEntry => Object.keys(metaEntry).length !== 0 && metaEntry.key
-    );
-  }
+  // if (entry.meta) {
+  //   entry.meta = entry.meta.filter(
+  //     metaEntry => Object.keys(metaEntry).length !== 0 && metaEntry.key
+  //   );
+  // }
 
   return entry;
 }
@@ -37,24 +42,24 @@ export function validateEntry(entry) {
   const errorMessages = [];
   // Filter empty values
 
-  if (!entry.properties) {
-    errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
-  } else {
-    if (!entry.properties.title) {
-      errorMessages.push(i18n.t('entry.entry-title-empty-info'));
-    }
+  // if (!entry.properties) {
+  //   errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
+  // } else {
+  //   if (!entry.properties.title) {
+  //     errorMessages.push(i18n.t('entry.entry-title-empty-info'));
+  //   }
 
-    if (
-      (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
-        .length > 0
-    ) {
-      errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
-    }
-  }
+  //   if (
+  //     (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
+  //       .length > 0
+  //   ) {
+  //     errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
+  //   }
+  // }
 
-  if (errorMessages.length > 0) {
-    throw new Error(errorMessages.join('\n'));
-  }
+  // if (errorMessages.length > 0) {
+  //   throw new Error(errorMessages.join('\n'));
+  // }
 
   return filterEmptyEntryValues(entry);
 }
@@ -91,43 +96,45 @@ export async function updateEntry(archiveId, entryObj) {
     throw new Error(i18n.t('error.entry-not-found'));
   }
 
-  const entryData = validateEntry(entryObj);
+  consumeEntryFacade(entry, entryObj.facade);
 
-  const properties = entryData.properties || {};
-  const meta = entryData.meta || [];
-  const sourceMeta = entry.toObject().meta || {};
+  // const entryData = validateEntry(entryObj);
 
-  // Update properties
-  for (const propertyKey in properties) {
-    if (
-      properties.hasOwnProperty(propertyKey) && // eslint-disable-line no-prototype-builtins
-      entry.getProperty(propertyKey) !== properties[propertyKey]
-    ) {
-      entry.setProperty(propertyKey, properties[propertyKey]);
-    }
-  }
+  // const properties = entryData.properties || {};
+  // const meta = entryData.meta || [];
+  // const sourceMeta = entry.toObject().meta || {};
 
-  // Remove Meta
-  for (const metaKey in sourceMeta) {
-    if (sourceMeta.hasOwnProperty(metaKey)) {
-      // eslint-disable-line no-prototype-builtins
-      const keys = meta.map(metaObj => metaObj.key);
-      if (keys.indexOf(metaKey) === -1) {
-        entry.deleteMeta(metaKey);
-      }
-    }
-  }
+  // // Update properties
+  // for (const propertyKey in properties) {
+  //   if (
+  //     properties.hasOwnProperty(propertyKey) && // eslint-disable-line no-prototype-builtins
+  //     entry.getProperty(propertyKey) !== properties[propertyKey]
+  //   ) {
+  //     entry.setProperty(propertyKey, properties[propertyKey]);
+  //   }
+  // }
 
-  // Update/Add meta
-  meta.forEach(metaObj => {
-    const source = entry.getMeta(metaObj.key);
-    if (
-      source === undefined ||
-      (source !== undefined && source !== metaObj.value)
-    ) {
-      entry.setMeta(metaObj.key, metaObj.value);
-    }
-  });
+  // // Remove Meta
+  // for (const metaKey in sourceMeta) {
+  //   if (sourceMeta.hasOwnProperty(metaKey)) {
+  //     // eslint-disable-line no-prototype-builtins
+  //     const keys = meta.map(metaObj => metaObj.key);
+  //     if (keys.indexOf(metaKey) === -1) {
+  //       entry.deleteMeta(metaKey);
+  //     }
+  //   }
+  // }
+
+  // // Update/Add meta
+  // meta.forEach(metaObj => {
+  //   const source = entry.getMeta(metaObj.key);
+  //   if (
+  //     source === undefined ||
+  //     (source !== undefined && source !== metaObj.value)
+  //   ) {
+  //     entry.setMeta(metaObj.key, metaObj.value);
+  //   }
+  // });
 
   // Save workspace
   saveWorkspace(archiveId);

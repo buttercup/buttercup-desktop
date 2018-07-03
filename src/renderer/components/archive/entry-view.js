@@ -11,6 +11,20 @@ import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
 
+function filteredFields(fieldsArr) {
+  return fieldsArr.filter(f => f.field === 'property');
+}
+
+function sortedFields(fieldsArr) {
+  fieldsArr.sort((a, b) => {
+    if (a.field === 'property' && a.property === 'title') {
+      return -1;
+    }
+    return 0;
+  });
+  return fieldsArr;
+}
+
 export const LabelWrapper = styled.label`
   flex: 0 0 130px;
   min-height: var(--form-input-height);
@@ -44,7 +58,24 @@ export const Row = styled(Flex)`
 
 const EntryView = ({ entry, t }) => (
   <div>
-    {['title', 'username', 'password'].map(key => (
+    <With fields={sortedFields(filteredFields(entry.facade.fields))}>
+      <For each="field" of={fields}>
+        <Row key={field.property}>
+          <LabelWrapper>
+            <Choose>
+              <When condition={field.property === 'title'}>
+                <EntryIcon icon={entry.icon} big />
+              </When>
+              <Otherwise>{t(`entry.${field.property}`)}</Otherwise>
+            </Choose>
+          </LabelWrapper>
+          <Wrapper isTitle={field.property === 'title'}>
+            <Copyable type={field.property}>{field.value}</Copyable>
+          </Wrapper>
+        </Row>
+      </For>
+    </With>
+    {/*{['title', 'username', 'password'].map(key => (
       <Row key={key}>
         <LabelWrapper>
           <Choose>
@@ -58,8 +89,8 @@ const EntryView = ({ entry, t }) => (
           <Copyable type={key}>{entry.properties[key]}</Copyable>
         </Wrapper>
       </Row>
-    ))}
-    <h6 className={heading}>
+    ))}*/}
+    {/*<h6 className={heading}>
       <Translate i18nKey="entry.custom-fields" parent="span" />:
     </h6>
     {entry.meta.length > 0 ? (
@@ -80,7 +111,7 @@ const EntryView = ({ entry, t }) => (
         caption={t('entry.no-custom-fields-info-text')}
         imageSrc={bubbleImage}
       />
-    )}
+    )}*/}
   </div>
 );
 

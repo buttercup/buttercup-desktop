@@ -6,6 +6,8 @@ export function sortByKey(list, sortKey) {
   if (!key || !order) {
     return list;
   }
+  console.log('SORTING', list);
+  console.trace('HERE');
   const sorted = sortBy(list, o => at(o, key).map(item => item.toLowerCase()));
   return order === 'asc' ? sorted : sorted.reverse();
 }
