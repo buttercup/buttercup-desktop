@@ -13,11 +13,13 @@ function entryToObj(entry) {
     facade,
     isInTrash: entry.isInTrash()
   };
-  // const obj = entry.toObject();
-  // return {
-  //   ...obj,
-  //   isInTrash: entry.isInTrash()
-  // };
+}
+
+export function getFacadeFieldValue(entry, fieldName) {
+  const field = entry.facade.fields.find(field => field.property === fieldName);
+  if (field) {
+    return field.value;
+  }
 }
 
 /**
@@ -90,7 +92,7 @@ export async function loadEntries(archiveId, groupId) {
 
 export async function updateEntry(archiveId, entryObj) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryObj.id);
+  const entry = arch.findEntryByID(entryObj.id);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
@@ -144,7 +146,7 @@ export async function updateEntry(archiveId, entryObj) {
 
 export async function updateEntryIcon(archiveId, entryId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
@@ -222,7 +224,7 @@ export function createEntry(archiveId, groupId, newValues) {
 
 export function deleteEntry(archiveId, entryId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
@@ -234,7 +236,7 @@ export function deleteEntry(archiveId, entryId) {
 
 export function moveEntry(archiveId, entryId, groupId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
   const group = arch.findGroupByID(groupId);
 
   if (!entry || !group) {
