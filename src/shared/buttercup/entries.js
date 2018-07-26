@@ -43,27 +43,26 @@ export function getPresentableFacadeFields(fieldsArr) {
  * @param {ButtercupEntry} entry
  */
 export function validateEntry(entry) {
-  // const errorMessages = [];
-  // Filter empty values
+  const errorMessages = [];
+  const fields = entry.facade.fields;
 
-  // if (!entry.properties) {
-  //   errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
-  // } else {
-  //   if (!entry.properties.title) {
-  //     errorMessages.push(i18n.t('entry.entry-title-empty-info'));
-  //   }
+  if (!Array.isArray(fields) || fields.length === 0) {
+    errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
+  } else {
+    const title = getFacadeFieldValue(entry, 'title');
 
-  //   if (
-  //     (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
-  //       .length > 0
-  //   ) {
-  //     errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
-  //   }
-  // }
+    if (!title) {
+      errorMessages.push(i18n.t('entry.entry-title-empty-info'));
+    }
 
-  // if (errorMessages.length > 0) {
-  //   throw new Error(errorMessages.join('\n'));
-  // }
+    if (fields.filter(field => !field.property).length > 0) {
+      errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
+    }
+  }
+
+  if (errorMessages.length > 0) {
+    throw new Error(errorMessages.join('\n'));
+  }
 
   return entry;
 }
@@ -118,7 +117,9 @@ export function updateEntry(archiveId, entryObj) {
     throw new Error(i18n.t('error.entry-not-found'));
   }
 
-  consumeEntryFacade(entry, entryObj.facade);
+  const { facade } = validateEntry(entryObj);
+
+  consumeEntryFacade(entry, facade);
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
