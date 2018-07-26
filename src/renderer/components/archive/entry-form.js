@@ -123,10 +123,6 @@ class EntryForm extends PureComponent {
     const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        {/* <h6 className={heading}>
-          {' '}
-          <Translate i18nKey="entry.custom-fields" parent="span" />:
-        </h6> */}
         <FieldArray
           name="facade.fields"
           component={renderMeta}
