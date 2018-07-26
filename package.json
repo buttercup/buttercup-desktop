@@ -252,7 +252,7 @@
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-electron-store": "^0.4.1",
-    "redux-form": "^6.4.3",
+    "redux-form": "^7.4.2",
     "redux-logger": "^3.0.0",
     "redux-persist": "^3.1.1",
     "redux-thunk": "^2.1.0",
