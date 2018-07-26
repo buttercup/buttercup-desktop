@@ -3,10 +3,10 @@ import React from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { heading } from '../../styles/_common';
-import bubbleImage from '../../styles/img/info-bubble.svg';
-import { Translate } from '../../../shared/i18n';
-import EmptyView from '../empty-view';
+// import { heading } from '../../styles/_common';
+// import bubbleImage from '../../styles/img/info-bubble.svg';
+// import { Translate } from '../../../shared/i18n';
+// import EmptyView from '../empty-view';
 import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
@@ -78,7 +78,7 @@ const EntryView = ({ entry, t }) => (
         </Row>
       </For>
     </With>
-    {/*<h6 className={heading}>
+    {/* <h6 className={heading}>
       <Translate i18nKey="entry.custom-fields" parent="span" />:
     </h6>
     {entry.meta.length > 0 ? (
@@ -99,7 +99,7 @@ const EntryView = ({ entry, t }) => (
         caption={t('entry.no-custom-fields-info-text')}
         imageSrc={bubbleImage}
       />
-    )}*/}
+    )} */}
   </div>
 );
 

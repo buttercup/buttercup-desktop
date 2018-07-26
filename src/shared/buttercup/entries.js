@@ -3,7 +3,7 @@ import omit from 'lodash/omit';
 import iconographer from '../../main/lib/icon/iconographer';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import { Archive, Entry as ButtercupEntry, entryFacade } from './buttercup';
+import { Archive, entryFacade } from './buttercup';
 
 const { consumeEntryFacade, createEntryFacade } = entryFacade;
 
@@ -28,7 +28,7 @@ export function getFacadeFieldValue(entry, fieldName) {
  * @param {ButtercupEntry} entry
  */
 export function validateEntry(entry) {
-  const errorMessages = [];
+  // const errorMessages = [];
   // Filter empty values
 
   // if (!entry.properties) {

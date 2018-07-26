@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sortByKey, sortDeepByKey, sortEntriesByKey } from './utils/collection';
+import { sortDeepByKey, sortEntriesByKey } from './utils/collection';
 import { denormalizeGroups } from './utils/normalize';
 
 // Archive ->

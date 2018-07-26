@@ -82,11 +82,11 @@ test('test input focus', async t => {
   await sleep(1500);
 
   // set title
-  await app.client.setValue('input[name="properties.title"]', 'title');
+  await app.client.setValue('input[name="facade.fields[0].value"]', 'title');
 
   // get title
   const titleInput = await app.client.getValue(
-    'input[name="properties.title"]'
+    'input[name="facade.fields[0].value"]'
   );
 
   // test title

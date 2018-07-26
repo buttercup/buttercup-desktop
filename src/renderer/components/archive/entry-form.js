@@ -6,7 +6,7 @@ import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
-import { heading } from '../../styles/_common';
+// import { heading } from '../../styles/_common';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';

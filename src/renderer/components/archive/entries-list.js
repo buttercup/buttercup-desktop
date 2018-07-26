@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import cx from 'classnames';
 import EntryIcon from './entry-icon';
 import { getFacadeFieldValue } from '../../../shared/buttercup/entries';
 
@@ -49,6 +48,10 @@ const ListItemContent = ({ entry }) => (
     <small>{getFacadeFieldValue(entry, 'username')}</small>
   </ListItemContentWrapper>
 );
+
+ListItemContent.propTypes = {
+  entry: PropTypes.object
+};
 
 const List = ({ entries, currentEntry, onSelectEntry, onRightClick }) => (
   <ListWrapper>
