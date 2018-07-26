@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
@@ -11,10 +11,23 @@ import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
 
+function getPlaceholder(propertyName) {
+  switch (propertyName) {
+    case 'title':
+      return 'entry.untitled';
+    case 'username':
+      return 'entry.username';
+    case 'password':
+      return 'entry.secure-password';
+    default:
+      return 'entry.new-field';
+  }
+}
+
 const renderMeta = (
   { fields, t, icon, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
-  <div>
+  <Fragment>
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
@@ -49,7 +62,7 @@ const renderMeta = (
               name={`${member}.value`}
               type={field.secret ? 'password' : 'text'}
               component={ValueInput}
-              placeholder={t('entry.new-field')}
+              placeholder={t(getPlaceholder(field.property))}
             />
             <If condition={field.removeable}>
               <Button
@@ -79,7 +92,7 @@ const renderMeta = (
       <Translate i18nKey="entry.add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
-  </div>
+  </Fragment>
 );
 
 class EntryForm extends PureComponent {
@@ -93,43 +106,10 @@ class EntryForm extends PureComponent {
     const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Row>
-          <LabelWrapper htmlFor="properties.title">
-            <EntryIcon icon={icon} big />
-          </LabelWrapper>
-          <Field
-            name="properties.title"
-            component={Input}
-            type="text"
-            placeholder={t('entry.untitled')}
-          />
-        </Row>
-        <Row>
-          <LabelWrapper htmlFor="properties.username">
-            <Translate i18nKey="entry.username" parent="span" />
-          </LabelWrapper>
-          <Field
-            name="properties.username"
-            component={Input}
-            type="text"
-            placeholder={'@' + t('entry.username') + '...'}
-          />
-        </Row>
-        <Row>
-          <LabelWrapper htmlFor="properties.password">
-            <Translate i18nKey="entry.password" parent="span" />
-          </LabelWrapper>
-          <Field
-            name="properties.password"
-            component={Input}
-            type="password"
-            placeholder={t('entry.secure-password') + '...'}
-          />
-        </Row>
-        <h6 className={heading}>
+        {/* <h6 className={heading}>
           {' '}
           <Translate i18nKey="entry.custom-fields" parent="span" />:
-        </h6>
+        </h6> */}
         <FieldArray
           name="facade.fields"
           component={renderMeta}

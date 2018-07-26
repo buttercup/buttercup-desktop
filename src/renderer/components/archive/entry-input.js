@@ -86,7 +86,6 @@ export default class Input extends PureComponent {
       type: 'text',
       placeholder
     };
-    console.log(name, value);
     return (
       <Wrapper>
         <Choose>
