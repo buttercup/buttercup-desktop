@@ -46,16 +46,17 @@ export const updateEntry = newValues => async (dispatch, getState) => {
 
   try {
     // First create the new entry with the data
-    await entryTools.updateEntry(archiveId, newValues);
+    const entryObj = entryTools.updateEntry(archiveId, newValues);
     dispatch({
       type: ENTRIES_UPDATE,
-      payload: newValues
+      payload: entryObj
     });
     dispatch(changeMode('view')());
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
     dispatch(fetchEntryIconsAndUpdate(archiveId, [newValues]));
   } catch (err) {
+    console.error(err);
     showDialog(err);
   }
 };

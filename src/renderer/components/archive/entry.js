@@ -27,10 +27,8 @@ class Entry extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     const { mode, entry, initializeForm } = this.props;
-    if (nextProps.mode !== mode) {
-      if (nextProps.mode === 'edit' && entry) {
-        initializeForm(entry);
-      }
+    if (nextProps.mode !== mode && nextProps.mode !== 'view') {
+      initializeForm(entry, nextProps.mode);
     }
   }
 

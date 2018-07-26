@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { initialize, isDirty } from 'redux-form';
-import Entry from '../../components/archive/entry';
-import { getCurrentEntry } from '../../../shared/selectors';
-import { filterEmptyEntryValues } from '../../../shared/buttercup/entries.js';
 import {
-  updateEntry,
-  newEntry,
+  changeMode,
   deleteEntry,
-  changeMode
+  newEntry,
+  updateEntry
 } from '../../../shared/actions/entries';
+import { createNewEntryStructure } from '../../../shared/buttercup/entries.js';
+import { getCurrentEntry } from '../../../shared/selectors';
+import Entry from '../../components/archive/entry';
 
 export default connect(
   state => ({
@@ -22,7 +22,7 @@ export default connect(
     onDelete: deleteEntry,
     handleEditMode: changeMode('edit'),
     handleViewMode: changeMode('view'),
-    initializeForm: entry =>
-      initialize('editForm', filterEmptyEntryValues(entry))
+    initializeForm: (entry, mode) =>
+      initialize('editForm', mode === 'new' ? createNewEntryStructure() : entry)
   }
 )(Entry, 'Entry');

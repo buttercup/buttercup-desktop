@@ -1,8 +1,9 @@
-import { saveWorkspace, getArchive } from './archive';
-import { entryFacade } from './buttercup';
 import log from 'electron-log';
-import i18n from '../i18n';
+import omit from 'lodash/omit';
 import iconographer from '../../main/lib/icon/iconographer';
+import i18n from '../i18n';
+import { getArchive, saveWorkspace } from './archive';
+import { Archive, Entry as ButtercupEntry, entryFacade } from './buttercup';
 
 const { consumeEntryFacade, createEntryFacade } = entryFacade;
 
@@ -20,20 +21,6 @@ export function getFacadeFieldValue(entry, fieldName) {
   if (field) {
     return field.value;
   }
-}
-
-/**
- * Filter empty values
- * @param {ButtercupEntry} entry
- */
-export function filterEmptyEntryValues(entry) {
-  // if (entry.meta) {
-  //   entry.meta = entry.meta.filter(
-  //     metaEntry => Object.keys(metaEntry).length !== 0 && metaEntry.key
-  //   );
-  // }
-
-  return entry;
 }
 
 /**
@@ -66,6 +53,14 @@ export function validateEntry(entry) {
   return filterEmptyEntryValues(entry);
 }
 
+// @TODO: Add entry type when we take facades into use
+export function createNewEntryStructure() {
+  const archive = new Archive();
+  const group = archive.createGroup('temp');
+  const entry = entryToObj(group.createEntry());
+  return omit(entry, 'id');
+}
+
 export async function loadEntries(archiveId, groupId) {
   const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
@@ -90,7 +85,7 @@ export async function loadEntries(archiveId, groupId) {
   );
 }
 
-export async function updateEntry(archiveId, entryObj) {
+export function updateEntry(archiveId, entryObj) {
   const arch = getArchive(archiveId);
   const entry = arch.findEntryByID(entryObj.id);
 
@@ -99,46 +94,6 @@ export async function updateEntry(archiveId, entryObj) {
   }
 
   consumeEntryFacade(entry, entryObj.facade);
-
-  // const entryData = validateEntry(entryObj);
-
-  // const properties = entryData.properties || {};
-  // const meta = entryData.meta || [];
-  // const sourceMeta = entry.toObject().meta || {};
-
-  // // Update properties
-  // for (const propertyKey in properties) {
-  //   if (
-  //     properties.hasOwnProperty(propertyKey) && // eslint-disable-line no-prototype-builtins
-  //     entry.getProperty(propertyKey) !== properties[propertyKey]
-  //   ) {
-  //     entry.setProperty(propertyKey, properties[propertyKey]);
-  //   }
-  // }
-
-  // // Remove Meta
-  // for (const metaKey in sourceMeta) {
-  //   if (sourceMeta.hasOwnProperty(metaKey)) {
-  //     // eslint-disable-line no-prototype-builtins
-  //     const keys = meta.map(metaObj => metaObj.key);
-  //     if (keys.indexOf(metaKey) === -1) {
-  //       entry.deleteMeta(metaKey);
-  //     }
-  //   }
-  // }
-
-  // // Update/Add meta
-  // meta.forEach(metaObj => {
-  //   const source = entry.getMeta(metaObj.key);
-  //   if (
-  //     source === undefined ||
-  //     (source !== undefined && source !== metaObj.value)
-  //   ) {
-  //     entry.setMeta(metaObj.key, metaObj.value);
-  //   }
-  // });
-
-  // Save workspace
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
@@ -204,19 +159,10 @@ export function createEntry(archiveId, groupId, newValues) {
     throw new Error(i18n.t('error.group-not-found'));
   }
 
-  const entryData = validateEntry(newValues);
-  const entry = group.createEntry(entryData.properties.title);
+  const { facade } = validateEntry(newValues);
+  const entry = group.createEntry();
 
-  ['username', 'password'].forEach(key => {
-    if (typeof entryData.properties[key] !== 'undefined') {
-      entry.setProperty(key, entryData.properties[key]);
-    }
-  });
-
-  (entryData.meta || []).forEach(meta => {
-    entry.setMeta(meta.key, meta.value);
-  });
-
+  consumeEntryFacade(entry, facade);
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
