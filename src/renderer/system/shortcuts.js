@@ -3,6 +3,7 @@ import ms from 'ms';
 import { lockArchive } from '../../shared/actions/archives';
 import { getCurrentArchiveId, getCurrentEntry } from '../../shared/selectors';
 import { copyToClipboard, readClipboard } from './utils';
+import { getFacadeFieldValue } from '../../shared/buttercup/entries';
 const __cache = {
   timer: null
 };
@@ -20,7 +21,12 @@ export const setupShortcuts = store => {
     const currentEntry = getCurrentEntry(store.getState());
 
     if (!selection && currentEntry) {
-      const { password } = currentEntry.properties;
+      const password = getFacadeFieldValue(currentEntry, 'password');
+
+      if (!password) {
+        return;
+      }
+
       copyToClipboard(password);
 
       // Clean the clipboard after 15s
@@ -38,8 +44,10 @@ export const setupShortcuts = store => {
    */
   Mousetrap.bind('mod+b', () => {
     const currentEntry = getCurrentEntry(store.getState());
-    if (currentEntry) {
-      copyToClipboard(currentEntry.properties.username);
+    const username = getFacadeFieldValue(currentEntry, 'username');
+
+    if (username) {
+      copyToClipboard(username);
     }
   });
 

@@ -17,10 +17,25 @@ function entryToObj(entry) {
 }
 
 export function getFacadeFieldValue(entry, fieldName) {
-  const field = entry.facade.fields.find(field => field.property === fieldName);
+  const field = entry.facade.fields.find(
+    field => field.property === fieldName && field.field === 'property'
+  );
   if (field) {
     return field.value;
   }
+}
+
+export function getPresentableFacadeFields(fieldsArr) {
+  return fieldsArr.filter(f => f.field === 'property').sort((a, b) => {
+    if (
+      a.field === 'property' &&
+      a.property === 'title' &&
+      a.removeable === false
+    ) {
+      return -1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -59,6 +74,16 @@ export function createNewEntryStructure() {
   const group = archive.createGroup('temp');
   const entry = entryToObj(group.createEntry());
   return omit(entry, 'id');
+}
+
+export function prepareEntryForEditing(entry) {
+  return {
+    ...entry,
+    facade: {
+      ...entry.facade,
+      fields: getPresentableFacadeFields(entry.facade.fields)
+    }
+  };
 }
 
 export async function loadEntries(archiveId, groupId) {

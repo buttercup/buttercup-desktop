@@ -10,20 +10,7 @@ import { Flex } from 'styled-flexbox';
 import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
-
-function filteredFields(fieldsArr) {
-  return fieldsArr.filter(f => f.field === 'property');
-}
-
-function sortedFields(fieldsArr) {
-  fieldsArr.sort((a, b) => {
-    if (a.field === 'property' && a.property === 'title') {
-      return -1;
-    }
-    return 0;
-  });
-  return fieldsArr;
-}
+import { getPresentableFacadeFields } from '../../../shared/buttercup/entries';
 
 export const LabelWrapper = styled.label`
   flex: 0 0 130px;
@@ -58,7 +45,7 @@ export const Row = styled(Flex)`
 
 const EntryView = ({ entry, t }) => (
   <div>
-    <With fields={sortedFields(filteredFields(entry.facade.fields))}>
+    <With fields={getPresentableFacadeFields(entry.facade.fields)}>
       <For each="field" of={fields}>
         <Row key={field.property}>
           <LabelWrapper>
@@ -72,7 +59,9 @@ const EntryView = ({ entry, t }) => (
               <Otherwise>{field.property}</Otherwise>
             </Choose>
           </LabelWrapper>
-          <Wrapper isTitle={field.property === 'title'}>
+          <Wrapper
+            isTitle={field.property === 'title' && field.removeable === false}
+          >
             <Copyable type={field.property}>{field.value}</Copyable>
           </Wrapper>
         </Row>

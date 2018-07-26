@@ -82,7 +82,7 @@ export function moveGroup(archiveId, groupId, parentId) {
     throw new Error(i18n.t('error.group-not-found'));
   }
 
-  group.moveToGroup(parent);
+  group.moveTo(parent);
   saveWorkspace(archiveId);
 }
 

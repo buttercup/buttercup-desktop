@@ -31,11 +31,13 @@ const renderMeta = (
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
+        const isTitle =
+          field.property === 'title' && field.removeable === false;
         return (
           <Row key={index}>
             <LabelWrapper>
               <Choose>
-                <When condition={field.property === 'title'}>
+                <When condition={isTitle}>
                   <EntryIcon icon={icon} big />
                 </When>
                 <When condition={field.removeable}>
@@ -59,7 +61,7 @@ const renderMeta = (
               type={field.secret ? 'password' : 'text'}
               component={Input}
               placeholder={t(getPlaceholder(field.property))}
-              isBig={field.property === 'title'}
+              isBig={isTitle}
             />
             <If condition={field.removeable}>
               <Button
