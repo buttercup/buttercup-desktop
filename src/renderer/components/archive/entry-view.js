@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Fragment } from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
@@ -10,6 +10,12 @@ import EmptyView from '../empty-view';
 import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
+import { getPresentableFacadeFields } from '../../../shared/buttercup/entries';
+
+const getNonRemoveableFields = fieldsArr =>
+  fieldsArr.filter(field => !field.removeable);
+const getRemoveableFields = fieldsArr =>
+  fieldsArr.filter(field => field.removeable);
 
 export const LabelWrapper = styled.label`
   flex: 0 0 130px;
@@ -42,47 +48,68 @@ export const Row = styled(Flex)`
   border-bottom: 1px solid var(--black-10);
 `;
 
-const EntryView = ({ entry, t }) => (
-  <div>
-    {['title', 'username', 'password'].map(key => (
-      <Row key={key}>
-        <LabelWrapper>
-          <Choose>
-            <When condition={key === 'title'}>
-              <EntryIcon icon={entry.icon} big />
-            </When>
-            <Otherwise>{t(`entry.${key}`)}</Otherwise>
-          </Choose>
-        </LabelWrapper>
-        <Wrapper isTitle={key === 'title'}>
-          <Copyable type={key}>{entry.properties[key]}</Copyable>
-        </Wrapper>
-      </Row>
-    ))}
-    <h6 className={heading}>
-      <Translate i18nKey="entry.custom-fields" parent="span" />:
-    </h6>
-    {entry.meta.length > 0 ? (
-      <MetaWrapper>
-        {entry.meta.map(meta => (
-          <If condition={Object.keys(meta).length > 0}>
-            <Row key={meta.key}>
-              <LabelWrapper>{meta.key}</LabelWrapper>
-              <Wrapper>
-                <Copyable>{meta.value}</Copyable>
-              </Wrapper>
-            </Row>
-          </If>
-        ))}
-      </MetaWrapper>
-    ) : (
-      <EmptyView
-        caption={t('entry.no-custom-fields-info-text')}
-        imageSrc={bubbleImage}
-      />
-    )}
-  </div>
+const FieldsView = ({ fields, entry, t }) => (
+  <For each="field" of={fields}>
+    <Row key={field.property}>
+      <LabelWrapper>
+        <Choose>
+          <When condition={field.property === 'title'}>
+            <EntryIcon icon={entry.icon} big />
+          </When>
+          <When condition={field.removeable === false}>
+            {t(`entry.${field.property}`)}
+          </When>
+          <Otherwise>{field.property}</Otherwise>
+        </Choose>
+      </LabelWrapper>
+      <Wrapper
+        isTitle={field.property === 'title' && field.removeable === false}
+      >
+        <Copyable type={field.property}>{field.value}</Copyable>
+      </Wrapper>
+    </Row>
+  </For>
 );
+
+FieldsView.propTypes = {
+  entry: PropTypes.object,
+  fields: PropTypes.array,
+  t: PropTypes.func
+};
+
+const EntryView = props => {
+  const { entry, t } = props;
+  return (
+    <Fragment>
+      <FieldsView
+        {...props}
+        fields={getNonRemoveableFields(
+          getPresentableFacadeFields(entry.facade.fields)
+        )}
+      />
+      <h6 className={heading}>
+        <Translate i18nKey="entry.custom-fields" parent="span" />:
+      </h6>
+      <With
+        fields={getRemoveableFields(
+          getPresentableFacadeFields(entry.facade.fields)
+        )}
+      >
+        <Choose>
+          <When condition={fields.length > 0}>
+            <FieldsView {...props} fields={fields} />
+          </When>
+          <Otherwise>
+            <EmptyView
+              caption={t('entry.no-custom-fields-info-text')}
+              imageSrc={bubbleImage}
+            />
+          </Otherwise>
+        </Choose>
+      </With>
+    </Fragment>
+  );
+};
 
 EntryView.propTypes = {
   entry: PropTypes.object,

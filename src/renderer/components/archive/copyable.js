@@ -75,7 +75,7 @@ class Copyable extends PureComponent {
       }
     ];
 
-    if ((type || '').toLowerCase() === 'password') {
+    if (/^password$/i.test(type)) {
       items.push({
         label: t('copyable-menu.reveal-password'),
         type: 'checkbox',
@@ -117,7 +117,7 @@ class Copyable extends PureComponent {
           {type === 'password' ? this.renderPassword(children) : children}
         </Content>
         <HiddenButtonRow>
-          {(type || '').toLowerCase() === 'password' && (
+          {/^password$/i.test(type) && (
             <Button
               icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
               title={

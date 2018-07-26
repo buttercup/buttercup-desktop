@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import PlusIcon from 'react-icons/lib/md/add';
 import RemoveIcon from 'react-icons/lib/fa/trash-o';
@@ -11,34 +11,96 @@ import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
 
+function getPlaceholder(propertyName) {
+  switch (propertyName) {
+    case 'title':
+      return 'entry.untitled';
+    case 'username':
+      return 'entry.username';
+    case 'password':
+      return 'entry.secure-password';
+    default:
+      return 'entry.new-field';
+  }
+}
+
+function shouldShowSeparator(index, field, fields) {
+  if (
+    (field.removeable === false && index === fields.length - 1) ||
+    (field.removeable === false && fields.get(index + 1).removeable === true)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 const renderMeta = (
-  { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
+  { fields, t, icon, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
-  <div>
+  <Fragment>
     <MetaWrapper>
-      {fields.map((member, index) => (
-        <Row key={index}>
-          <LabelWrapper>
-            <Field
-              name={`${member}.key`}
-              type="text"
-              component="input"
-              placeholder={t('entry.label')}
-            />
-          </LabelWrapper>
-          <Field
-            name={`${member}.value`}
-            type="text"
-            component={Input}
-            placeholder={t('entry.new-field')}
-          />
-          <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
-        </Row>
-      ))}
+      {fields.map((member, index) => {
+        const field = fields.get(index);
+        const isTitle =
+          field.property === 'title' && field.removeable === false;
+        return (
+          <Fragment key={index}>
+            <Row>
+              <LabelWrapper>
+                <Choose>
+                  <When condition={isTitle}>
+                    <EntryIcon icon={icon} big />
+                  </When>
+                  <When condition={field.removeable}>
+                    <Field
+                      name={`${member}.property`}
+                      type="text"
+                      component="input"
+                      placeholder={t('entry.label')}
+                    />
+                  </When>
+                  <Otherwise>
+                    <Translate
+                      i18nKey={`entry.${field.property}`}
+                      parent="span"
+                    />
+                  </Otherwise>
+                </Choose>
+              </LabelWrapper>
+              <Field
+                name={`${member}.value`}
+                type={field.secret ? 'password' : 'text'}
+                component={Input}
+                placeholder={t(getPlaceholder(field.property))}
+                isBig={isTitle}
+              />
+              <If condition={field.removeable}>
+                <Button
+                  onClick={() => fields.remove(index)}
+                  icon={<RemoveIcon />}
+                />
+              </If>
+            </Row>
+            <If condition={shouldShowSeparator(index, field, fields)}>
+              <h6 className={heading}>
+                {' '}
+                <Translate i18nKey="entry.custom-fields" parent="span" />:
+              </h6>
+            </If>
+          </Fragment>
+        );
+      })}
     </MetaWrapper>
     <Button
       onClick={e => {
-        fields.push({});
+        fields.push({
+          title: '',
+          removeable: true,
+          field: 'property',
+          secret: false,
+          multiline: false,
+          formatting: false
+        });
         e.stopPropagation();
         e.preventDefault();
       }}
@@ -47,7 +109,7 @@ const renderMeta = (
       <Translate i18nKey="entry.add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
-  </div>
+  </Fragment>
 );
 
 class EntryForm extends PureComponent {
@@ -61,44 +123,12 @@ class EntryForm extends PureComponent {
     const { icon, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
-        <Row>
-          <LabelWrapper htmlFor="properties.title">
-            <EntryIcon icon={icon} big />
-          </LabelWrapper>
-          <Field
-            name="properties.title"
-            component={Input}
-            type="text"
-            placeholder={t('entry.untitled')}
-          />
-        </Row>
-        <Row>
-          <LabelWrapper htmlFor="properties.username">
-            <Translate i18nKey="entry.username" parent="span" />
-          </LabelWrapper>
-          <Field
-            name="properties.username"
-            component={Input}
-            type="text"
-            placeholder={'@' + t('entry.username') + '...'}
-          />
-        </Row>
-        <Row>
-          <LabelWrapper htmlFor="properties.password">
-            <Translate i18nKey="entry.password" parent="span" />
-          </LabelWrapper>
-          <Field
-            name="properties.password"
-            component={Input}
-            type="password"
-            placeholder={t('entry.secure-password') + '...'}
-          />
-        </Row>
-        <h6 className={heading}>
-          {' '}
-          <Translate i18nKey="entry.custom-fields" parent="span" />:
-        </h6>
-        <FieldArray name="meta" component={renderMeta} t={t} />
+        <FieldArray
+          name="facade.fields"
+          component={renderMeta}
+          t={t}
+          icon={icon}
+        />
       </form>
     );
   }

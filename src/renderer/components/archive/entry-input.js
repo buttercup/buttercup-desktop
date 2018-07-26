@@ -57,7 +57,8 @@ export default class Input extends PureComponent {
     type: PropTypes.string,
     placeholder: PropTypes.string,
     input: PropTypes.object,
-    meta: PropTypes.object
+    meta: PropTypes.object,
+    isBig: PropTypes.bool
   };
 
   state = {
@@ -77,7 +78,7 @@ export default class Input extends PureComponent {
   }
 
   render() {
-    const { type, input, placeholder, meta } = this.props;
+    const { type, input, placeholder, meta, isBig } = this.props;
     const { name, value } = input;
     const commonProps = {
       ...input,
@@ -110,7 +111,7 @@ export default class Input extends PureComponent {
               <Meter input={value} />
             </PasswordWrapper>
           </When>
-          <When condition={name === 'properties.title'}>
+          <When condition={isBig}>
             <TitleInput {...commonProps} />
           </When>
           <Otherwise>

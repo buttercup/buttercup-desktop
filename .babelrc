@@ -1,6 +1,7 @@
 {
   "presets": [
     "react",
+    "flow",
     ["env", {
       "targets": {
         "electron": "1.7"

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sortByKey, sortDeepByKey } from './utils/collection';
+import { sortDeepByKey, sortEntriesByKey } from './utils/collection';
 import { denormalizeGroups } from './utils/normalize';
 
 // Archive ->
@@ -53,7 +53,7 @@ export const getVisibleEntries = createSelector(
 export const getEntries = createSelector(
   getVisibleEntries,
   state => state.entries.sortMode,
-  (entries, sortMode) => sortByKey(entries, sortMode)
+  (entries, sortMode) => sortEntriesByKey(entries, sortMode)
 );
 
 // Groups ->

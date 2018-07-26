@@ -1,32 +1,41 @@
-import { saveWorkspace, getArchive } from './archive';
 import log from 'electron-log';
-import i18n from '../i18n';
+import omit from 'lodash/omit';
 import iconographer from '../../main/lib/icon/iconographer';
+import i18n from '../i18n';
+import { getArchive, saveWorkspace } from './archive';
+import { Archive, entryFacade } from './buttercup';
+
+const { consumeEntryFacade, createEntryFacade } = entryFacade;
 
 function entryToObj(entry) {
-  const obj = entry.toObject();
+  const facade = createEntryFacade(entry);
   return {
-    ...obj,
-    isInTrash: entry.isInTrash(),
-    meta: Object.keys(obj.meta).map(metaKey => ({
-      key: metaKey,
-      value: obj.meta[metaKey]
-    }))
+    id: entry.id,
+    facade,
+    isInTrash: entry.isInTrash()
   };
 }
 
-/**
- * Filter empty values
- * @param {ButtercupEntry} entry
- */
-export function filterEmptyEntryValues(entry) {
-  if (entry.meta) {
-    entry.meta = entry.meta.filter(
-      metaEntry => Object.keys(metaEntry).length !== 0 && metaEntry.key
-    );
+export function getFacadeFieldValue(entry, fieldName) {
+  const field = entry.facade.fields.find(
+    field => field.property === fieldName && field.field === 'property'
+  );
+  if (field) {
+    return field.value;
   }
+}
 
-  return entry;
+export function getPresentableFacadeFields(fieldsArr) {
+  return fieldsArr.filter(f => f.field === 'property').sort((a, b) => {
+    if (
+      a.field === 'property' &&
+      a.property === 'title' &&
+      a.removeable === false
+    ) {
+      return -1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -35,19 +44,18 @@ export function filterEmptyEntryValues(entry) {
  */
 export function validateEntry(entry) {
   const errorMessages = [];
-  // Filter empty values
+  const fields = entry.facade.fields;
 
-  if (!entry.properties) {
+  if (!Array.isArray(fields) || fields.length === 0) {
     errorMessages.push(i18n.t('entry.entry-inputs-empty-info'));
   } else {
-    if (!entry.properties.title) {
+    const title = getFacadeFieldValue(entry, 'title');
+
+    if (!title) {
       errorMessages.push(i18n.t('entry.entry-title-empty-info'));
     }
 
-    if (
-      (entry.meta || []).filter(metaEntry => !metaEntry.key && metaEntry.value)
-        .length > 0
-    ) {
+    if (fields.filter(field => !field.property).length > 0) {
       errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
     }
   }
@@ -56,7 +64,25 @@ export function validateEntry(entry) {
     throw new Error(errorMessages.join('\n'));
   }
 
-  return filterEmptyEntryValues(entry);
+  return entry;
+}
+
+// @TODO: Add entry type when we take facades into use
+export function createNewEntryStructure() {
+  const archive = new Archive();
+  const group = archive.createGroup('temp');
+  const entry = entryToObj(group.createEntry());
+  return omit(entry, 'id');
+}
+
+export function prepareEntryForEditing(entry) {
+  return {
+    ...entry,
+    facade: {
+      ...entry.facade,
+      fields: getPresentableFacadeFields(entry.facade.fields)
+    }
+  };
 }
 
 export async function loadEntries(archiveId, groupId) {
@@ -83,53 +109,17 @@ export async function loadEntries(archiveId, groupId) {
   );
 }
 
-export async function updateEntry(archiveId, entryObj) {
+export function updateEntry(archiveId, entryObj) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryObj.id);
+  const entry = arch.findEntryByID(entryObj.id);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
   }
 
-  const entryData = validateEntry(entryObj);
+  const { facade } = validateEntry(entryObj);
 
-  const properties = entryData.properties || {};
-  const meta = entryData.meta || [];
-  const sourceMeta = entry.toObject().meta || {};
-
-  // Update properties
-  for (const propertyKey in properties) {
-    if (
-      properties.hasOwnProperty(propertyKey) && // eslint-disable-line no-prototype-builtins
-      entry.getProperty(propertyKey) !== properties[propertyKey]
-    ) {
-      entry.setProperty(propertyKey, properties[propertyKey]);
-    }
-  }
-
-  // Remove Meta
-  for (const metaKey in sourceMeta) {
-    if (sourceMeta.hasOwnProperty(metaKey)) {
-      // eslint-disable-line no-prototype-builtins
-      const keys = meta.map(metaObj => metaObj.key);
-      if (keys.indexOf(metaKey) === -1) {
-        entry.deleteMeta(metaKey);
-      }
-    }
-  }
-
-  // Update/Add meta
-  meta.forEach(metaObj => {
-    const source = entry.getMeta(metaObj.key);
-    if (
-      source === undefined ||
-      (source !== undefined && source !== metaObj.value)
-    ) {
-      entry.setMeta(metaObj.key, metaObj.value);
-    }
-  });
-
-  // Save workspace
+  consumeEntryFacade(entry, facade);
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
@@ -137,7 +127,7 @@ export async function updateEntry(archiveId, entryObj) {
 
 export async function updateEntryIcon(archiveId, entryId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
@@ -195,19 +185,10 @@ export function createEntry(archiveId, groupId, newValues) {
     throw new Error(i18n.t('error.group-not-found'));
   }
 
-  const entryData = validateEntry(newValues);
-  const entry = group.createEntry(entryData.properties.title);
+  const { facade } = validateEntry(newValues);
+  const entry = group.createEntry();
 
-  ['username', 'password'].forEach(key => {
-    if (typeof entryData.properties[key] !== 'undefined') {
-      entry.setProperty(key, entryData.properties[key]);
-    }
-  });
-
-  (entryData.meta || []).forEach(meta => {
-    entry.setMeta(meta.key, meta.value);
-  });
-
+  consumeEntryFacade(entry, facade);
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
@@ -215,7 +196,7 @@ export function createEntry(archiveId, groupId, newValues) {
 
 export function deleteEntry(archiveId, entryId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
 
   if (!entry) {
     throw new Error(i18n.t('error.entry-not-found'));
@@ -227,7 +208,7 @@ export function deleteEntry(archiveId, entryId) {
 
 export function moveEntry(archiveId, entryId, groupId) {
   const arch = getArchive(archiveId);
-  const entry = arch.getEntryByID(entryId);
+  const entry = arch.findEntryByID(entryId);
   const group = arch.findGroupByID(groupId);
 
   if (!entry || !group) {
