@@ -12,33 +12,65 @@ import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
 
 const renderMeta = (
-  { fields, t, meta: { touched, error } } // eslint-disable-line react/prop-types
+  { fields, t, icon, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
   <div>
     <MetaWrapper>
-      {fields.map((member, index) => (
-        <Row key={index}>
-          <LabelWrapper>
+      {fields.map((member, index) => {
+        const field = fields.get(index);
+        const ValueInput =
+          field.property === 'title'
+            ? props => <Input isBig={true} {...props} />
+            : Input;
+        return (
+          <Row key={index}>
+            <LabelWrapper>
+              <Choose>
+                <When condition={field.property === 'title'}>
+                  <EntryIcon icon={icon} big />
+                </When>
+                <When condition={field.removeable}>
+                  <Field
+                    name={`${member}.property`}
+                    type="text"
+                    component="input"
+                    placeholder={t('entry.label')}
+                  />
+                </When>
+                <Otherwise>
+                  <Translate
+                    i18nKey={`entry.${field.property}`}
+                    parent="span"
+                  />
+                </Otherwise>
+              </Choose>
+            </LabelWrapper>
             <Field
-              name={`${member}.key`}
-              type="text"
-              component="input"
-              placeholder={t('entry.label')}
+              name={`${member}.value`}
+              type={field.secret ? 'password' : 'text'}
+              component={ValueInput}
+              placeholder={t('entry.new-field')}
             />
-          </LabelWrapper>
-          <Field
-            name={`${member}.value`}
-            type="text"
-            component={Input}
-            placeholder={t('entry.new-field')}
-          />
-          <Button onClick={() => fields.remove(index)} icon={<RemoveIcon />} />
-        </Row>
-      ))}
+            <If condition={field.removeable}>
+              <Button
+                onClick={() => fields.remove(index)}
+                icon={<RemoveIcon />}
+              />
+            </If>
+          </Row>
+        );
+      })}
     </MetaWrapper>
     <Button
       onClick={e => {
-        fields.push({});
+        fields.push({
+          title: '',
+          removeable: true,
+          field: 'property',
+          secret: false,
+          multiline: false,
+          formatting: false
+        });
         e.stopPropagation();
         e.preventDefault();
       }}
@@ -98,7 +130,12 @@ class EntryForm extends PureComponent {
           {' '}
           <Translate i18nKey="entry.custom-fields" parent="span" />:
         </h6>
-        <FieldArray name="meta" component={renderMeta} t={t} />
+        <FieldArray
+          name="facade.fields"
+          component={renderMeta}
+          t={t}
+          icon={icon}
+        />
       </form>
     );
   }
