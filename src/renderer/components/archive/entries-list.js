@@ -7,6 +7,7 @@ import { getFacadeFieldValue } from '../../../shared/buttercup/entries';
 const ListItemContentWrapper = styled.div`
   padding-bottom: 2px;
   margin-left: 15px;
+  flex: 1;
 
   strong,
   small {

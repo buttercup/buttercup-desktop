@@ -6,7 +6,7 @@ import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
-// import { heading } from '../../styles/_common';
+import { heading } from '../../styles/_common';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
@@ -24,6 +24,16 @@ function getPlaceholder(propertyName) {
   }
 }
 
+function shouldShowSeparator(index, field, fields) {
+  if (
+    (field.removeable === false && index === fields.length - 1) ||
+    (field.removeable === false && fields.get(index + 1).removeable === true)
+  ) {
+    return true;
+  }
+  return false;
+}
+
 const renderMeta = (
   { fields, t, icon, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
@@ -34,42 +44,50 @@ const renderMeta = (
         const isTitle =
           field.property === 'title' && field.removeable === false;
         return (
-          <Row key={index}>
-            <LabelWrapper>
-              <Choose>
-                <When condition={isTitle}>
-                  <EntryIcon icon={icon} big />
-                </When>
-                <When condition={field.removeable}>
-                  <Field
-                    name={`${member}.property`}
-                    type="text"
-                    component="input"
-                    placeholder={t('entry.label')}
-                  />
-                </When>
-                <Otherwise>
-                  <Translate
-                    i18nKey={`entry.${field.property}`}
-                    parent="span"
-                  />
-                </Otherwise>
-              </Choose>
-            </LabelWrapper>
-            <Field
-              name={`${member}.value`}
-              type={field.secret ? 'password' : 'text'}
-              component={Input}
-              placeholder={t(getPlaceholder(field.property))}
-              isBig={isTitle}
-            />
-            <If condition={field.removeable}>
-              <Button
-                onClick={() => fields.remove(index)}
-                icon={<RemoveIcon />}
+          <Fragment key={index}>
+            <Row>
+              <LabelWrapper>
+                <Choose>
+                  <When condition={isTitle}>
+                    <EntryIcon icon={icon} big />
+                  </When>
+                  <When condition={field.removeable}>
+                    <Field
+                      name={`${member}.property`}
+                      type="text"
+                      component="input"
+                      placeholder={t('entry.label')}
+                    />
+                  </When>
+                  <Otherwise>
+                    <Translate
+                      i18nKey={`entry.${field.property}`}
+                      parent="span"
+                    />
+                  </Otherwise>
+                </Choose>
+              </LabelWrapper>
+              <Field
+                name={`${member}.value`}
+                type={field.secret ? 'password' : 'text'}
+                component={Input}
+                placeholder={t(getPlaceholder(field.property))}
+                isBig={isTitle}
               />
+              <If condition={field.removeable}>
+                <Button
+                  onClick={() => fields.remove(index)}
+                  icon={<RemoveIcon />}
+                />
+              </If>
+            </Row>
+            <If condition={shouldShowSeparator(index, field, fields)}>
+              <h6 className={heading}>
+                {' '}
+                <Translate i18nKey="entry.custom-fields" parent="span" />:
+              </h6>
             </If>
-          </Row>
+          </Fragment>
         );
       })}
     </MetaWrapper>
