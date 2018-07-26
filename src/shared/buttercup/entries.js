@@ -50,7 +50,7 @@ export function validateEntry(entry) {
   //   throw new Error(errorMessages.join('\n'));
   // }
 
-  return filterEmptyEntryValues(entry);
+  return entry;
 }
 
 // @TODO: Add entry type when we take facades into use

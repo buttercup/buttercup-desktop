@@ -66,7 +66,10 @@ const EntryView = ({ entry, t }) => (
               <When condition={field.property === 'title'}>
                 <EntryIcon icon={entry.icon} big />
               </When>
-              <Otherwise>{t(`entry.${field.property}`)}</Otherwise>
+              <When condition={field.removeable === false}>
+                {t(`entry.${field.property}`)}
+              </When>
+              <Otherwise>{field.property}</Otherwise>
             </Choose>
           </LabelWrapper>
           <Wrapper isTitle={field.property === 'title'}>
@@ -75,21 +78,6 @@ const EntryView = ({ entry, t }) => (
         </Row>
       </For>
     </With>
-    {/*{['title', 'username', 'password'].map(key => (
-      <Row key={key}>
-        <LabelWrapper>
-          <Choose>
-            <When condition={key === 'title'}>
-              <EntryIcon icon={entry.icon} big />
-            </When>
-            <Otherwise>{t(`entry.${key}`)}</Otherwise>
-          </Choose>
-        </LabelWrapper>
-        <Wrapper isTitle={key === 'title'}>
-          <Copyable type={key}>{entry.properties[key]}</Copyable>
-        </Wrapper>
-      </Row>
-    ))}*/}
     {/*<h6 className={heading}>
       <Translate i18nKey="entry.custom-fields" parent="span" />:
     </h6>

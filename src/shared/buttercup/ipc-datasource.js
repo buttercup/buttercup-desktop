@@ -20,8 +20,8 @@ export class IpcDatasource extends TextDatasource {
     });
   }
 
-  save(archive, password) {
-    return super.save(archive.getHistory(), password).then(encryptedContent => {
+  save(history, password) {
+    return super.save(history, password).then(encryptedContent => {
       return fs.writeFileSync(this.path, encryptedContent, 'utf8');
     });
   }
