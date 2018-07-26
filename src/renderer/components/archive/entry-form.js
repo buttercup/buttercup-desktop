@@ -31,10 +31,6 @@ const renderMeta = (
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
-        const ValueInput =
-          field.property === 'title'
-            ? props => <Input isBig={true} {...props} />
-            : Input;
         return (
           <Row key={index}>
             <LabelWrapper>
@@ -61,8 +57,9 @@ const renderMeta = (
             <Field
               name={`${member}.value`}
               type={field.secret ? 'password' : 'text'}
-              component={ValueInput}
+              component={Input}
               placeholder={t(getPlaceholder(field.property))}
+              isBig={field.property === 'title'}
             />
             <If condition={field.removeable}>
               <Button
