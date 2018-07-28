@@ -140,7 +140,7 @@
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/exporter": "^0.1.0",
     "@buttercup/iconographer": "^0.7.1",
-    "@buttercup/importer": "^0.14.0",
+    "@buttercup/importer": "^0.14.1",
     "@buttercup/ui": "^1.4.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",
