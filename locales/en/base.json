@@ -22,6 +22,11 @@
         "import-to-type": "To {{name}}",
         "no-available-archives": "No available archives to import to."
       },
+      "export": {
+        "export": "Export",
+        "export-archive": "Export {{name}} to CSV",
+        "no-available-archives": "No available archives to export."
+      },
       "close": "Close"
     },
     "edit": {
@@ -88,6 +93,7 @@
     "change-password": "Change Password",
     "import": "Import",
     "import-from-type": "From {{name}} archive (.{{extension}})",
+    "export": "Export",
     "archive-remove-with-name": "Remove {{name}}",
     "open": "Open",
     "lock": "Lock"

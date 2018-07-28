@@ -178,6 +178,12 @@ class SidebarItem extends PureComponent {
         }))
       },
       {
+        label: label('export'),
+        click() {
+          // @TODO: EXPORT
+        }
+      },
+      {
         type: 'separator'
       },
       {
