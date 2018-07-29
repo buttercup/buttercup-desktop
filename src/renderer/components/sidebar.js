@@ -34,7 +34,8 @@ class RecentFiles extends PureComponent {
     onChangePassword: PropTypes.func.isRequired,
     onChangeColour: PropTypes.func.isRequired,
     onChangeOrder: PropTypes.func.isRequired,
-    showImportDialog: PropTypes.func.isRequired
+    showImportDialog: PropTypes.func.isRequired,
+    onExportArchive: PropTypes.func.isRequired
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -72,6 +73,7 @@ class RecentFiles extends PureComponent {
               onClick={() => this.props.onClick(archive.id)}
               onRemoveClick={() => this.props.onRemoveClick(archive.id)}
               showImportDialog={this.props.showImportDialog}
+              onExportArchive={() => this.props.onExportArchive(archive.id)}
             />
           ))}
         </ArchiveList>

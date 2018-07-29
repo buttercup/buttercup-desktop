@@ -6,7 +6,8 @@ import {
   changeArchivePassword,
   changeArchiveColour,
   showImportDialog,
-  changeArchiveOrder
+  changeArchiveOrder,
+  exportArchive
 } from '../../shared/actions/archives';
 import {
   openArchive,
@@ -31,6 +32,7 @@ export default connect(
     onOpenClick: openArchive,
     onNewClick: newArchive,
     onCloudClick: openFileManager,
-    showImportDialog
+    showImportDialog,
+    onExportArchive: exportArchive
   }
 )(ArchiveList);
