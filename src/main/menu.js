@@ -125,7 +125,9 @@ export const setupMenu = store => {
                   }),
                   enabled: archive.status === 'unlocked',
                   click: (item, focusedWindow) => {
-                    // @TODO: EXPORT
+                    reopenMainWindow(win => {
+                      win.webContents.send('export-archive', archive.id);
+                    });
                   }
                 }))
               : [

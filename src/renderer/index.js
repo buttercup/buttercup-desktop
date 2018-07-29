@@ -12,7 +12,8 @@ import {
   loadOrUnlockArchive,
   setCurrentArchive,
   importHistoryIntoArchive,
-  resetArchivesInStore
+  resetArchivesInStore,
+  exportArchive
 } from '../shared/actions/archives';
 import {
   setUIState,
@@ -69,6 +70,10 @@ ipc.on('import-history-prompt', (e, payload) => {
     .catch(() => {
       ipc.send('import-history-prompt-resp', null);
     });
+});
+
+ipc.on('export-archive', (e, payload) => {
+  store.dispatch(exportArchive(payload));
 });
 
 ipc.on('save-started', () => {
