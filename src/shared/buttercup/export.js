@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { remote } from 'electron';
-import { Archive } from './buttercup';
 import { exportArchiveToCSV } from '@buttercup/exporter';
 import { getArchive } from './archive';
 
