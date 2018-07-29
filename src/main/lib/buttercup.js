@@ -1,8 +1,9 @@
 import {
   importFromKDBX,
   importFrom1PIF,
-  importFromLastPass
-} from 'buttercup-importer';
+  importFromLastPass,
+  importFromButtercup
+} from '@buttercup/importer';
 import { ImportTypes } from '../../shared/buttercup/types';
 
 /**
@@ -23,6 +24,10 @@ export function importArchive(type, filename, password) {
       return importFrom1PIF(filename).then(archive => archive.getHistory());
     case ImportTypes.LASTPASS:
       return importFromLastPass(filename).then(archive => archive.getHistory());
+    case ImportTypes.BUTTERCUP:
+      return importFromButtercup(filename).then(archive =>
+        archive.getHistory()
+      );
     default:
       throw new Error('Wrong import type provided');
   }

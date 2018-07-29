@@ -116,6 +116,28 @@ export const setupMenu = store => {
           }))
         },
         {
+          label: label('archive.export.export'),
+          submenu:
+            archives.length > 0
+              ? archives.map(archive => ({
+                  label: label('archive.export.export-archive', {
+                    name: archive.name
+                  }),
+                  enabled: archive.status === 'unlocked',
+                  click: (item, focusedWindow) => {
+                    reopenMainWindow(win => {
+                      win.webContents.send('export-archive', archive.id);
+                    });
+                  }
+                }))
+              : [
+                  {
+                    label: label('archive.export.no-available-archives'),
+                    enabled: false
+                  }
+                ]
+        },
+        {
           type: 'separator'
         },
         {

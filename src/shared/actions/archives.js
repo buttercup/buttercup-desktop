@@ -27,6 +27,7 @@ import {
   updateArchiveOrder
 } from '../buttercup/archive';
 import i18n from '../i18n';
+import { exportArchiveToCSVAndSave } from '../buttercup/export';
 
 // Store Actions
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
@@ -214,4 +215,8 @@ export const importHistoryIntoArchive = payload => (dispatch, getState) => {
 
 export const showImportDialog = payload => () => {
   ipc.send('show-import-dialog', payload);
+};
+
+export const exportArchive = archiveId => dispatch => {
+  exportArchiveToCSVAndSave(archiveId);
 };
