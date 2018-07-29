@@ -17,10 +17,15 @@
       "search": "جستجو در آرشیوها",
       "connect-cloud-sources": "اتصال به منابع ابری",
       "import": {
-        "import": "درون ریزی",
+        "import": "درون‌ریزی",
         "import-from-type": "از آرشیو {{name}} (.{{extension}})",
         "import-to-type": "به {{name}}",
         "no-available-archives": "هیچ آرشیوی برای درون‌ریزی وجود ندارد."
+      },
+      "export": {
+        "export": "برون‌ریزی",
+        "export-archive": "برون‌ریزی آرشیو {{name}} به CSV",
+        "no-available-archives": "هیچ آرشیوی برای برون‌ریزی وجود ندارد."
       },
       "close": "بستن"
     },
@@ -86,8 +91,9 @@
     "unlock": "رمزگشایی",
     "change-color": "تغییر رنگ",
     "change-password": "تغییر رمز عبور",
-    "import": "درون ریزی",
+    "import": "درون‌ریزی",
     "import-from-type": "از آرشیو {{name}} (.{{extension}})",
+    "export": "برون‌ریزی",
     "archive-remove-with-name": "حذف {{name}}",
     "open": "باز کردن",
     "lock": "قفل کردن"
