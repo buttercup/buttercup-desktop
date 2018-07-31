@@ -49,7 +49,7 @@ const Content = styled.div`
 class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    type: PropTypes.string,
+    isSecret: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -67,7 +67,7 @@ class Copyable extends PureComponent {
   }
 
   showContextMenu() {
-    const { type, t } = this.props;
+    const { isSecret, t } = this.props;
     const items = [
       {
         label: t('copyable-menu.copy-to-clipboard'),
@@ -75,7 +75,7 @@ class Copyable extends PureComponent {
       }
     ];
 
-    if (/^password$/i.test(type)) {
+    if (isSecret) {
       items.push({
         label: t('copyable-menu.reveal-password'),
         type: 'checkbox',
@@ -106,7 +106,7 @@ class Copyable extends PureComponent {
   }
 
   render() {
-    const { children, type, t } = this.props;
+    const { children, isSecret, t } = this.props;
     if (!children) {
       return null;
     }
@@ -114,10 +114,10 @@ class Copyable extends PureComponent {
     return (
       <Wrapper onContextMenu={() => this.showContextMenu()}>
         <Content role="content">
-          {type === 'password' ? this.renderPassword(children) : children}
+          {isSecret ? this.renderPassword(children) : children}
         </Content>
         <HiddenButtonRow>
-          {/^password$/i.test(type) && (
+          <If condition={isSecret}>
             <Button
               icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
               title={
@@ -125,7 +125,7 @@ class Copyable extends PureComponent {
               }
               onClick={() => this.handleReveal()}
             />
-          )}
+          </If>
           <Button
             icon={<CopyIcon />}
             title={t('copyable.copy')}
