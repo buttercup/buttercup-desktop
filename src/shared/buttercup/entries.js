@@ -26,16 +26,7 @@ export function getFacadeFieldValue(entry, fieldName) {
 }
 
 export function getPresentableFacadeFields(fieldsArr) {
-  return fieldsArr.filter(f => f.field === 'property').sort((a, b) => {
-    if (
-      a.field === 'property' &&
-      a.property === 'title' &&
-      a.removeable === false
-    ) {
-      return -1;
-    }
-    return 0;
-  });
+  return fieldsArr.filter(f => f.field === 'property');
 }
 
 /**
