@@ -46,10 +46,15 @@ const Content = styled.div`
   padding: 7px 0 6px;
 `;
 
+const EmptyField = styled.span`
+  color: var(--black-20);
+  cursor: default;
+`;
+
 class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
-    type: PropTypes.string,
+    isSecret: PropTypes.bool,
     t: PropTypes.func
   };
 
@@ -67,7 +72,7 @@ class Copyable extends PureComponent {
   }
 
   showContextMenu() {
-    const { type, t } = this.props;
+    const { isSecret, t } = this.props;
     const items = [
       {
         label: t('copyable-menu.copy-to-clipboard'),
@@ -75,7 +80,7 @@ class Copyable extends PureComponent {
       }
     ];
 
-    if (/^password$/i.test(type)) {
+    if (isSecret) {
       items.push({
         label: t('copyable-menu.reveal-password'),
         type: 'checkbox',
@@ -106,32 +111,40 @@ class Copyable extends PureComponent {
   }
 
   render() {
-    const { children, type, t } = this.props;
-    if (!children) {
-      return null;
-    }
+    const { children, isSecret, t } = this.props;
 
     return (
       <Wrapper onContextMenu={() => this.showContextMenu()}>
         <Content role="content">
-          {type === 'password' ? this.renderPassword(children) : children}
+          <Choose>
+            <When condition={children}>
+              {isSecret ? this.renderPassword(children) : children}
+            </When>
+            <Otherwise>
+              <EmptyField>{t('entry.no-value')}</EmptyField>
+            </Otherwise>
+          </Choose>
         </Content>
-        <HiddenButtonRow>
-          {/^password$/i.test(type) && (
+        <If condition={children}>
+          <HiddenButtonRow>
+            <If condition={isSecret}>
+              <Button
+                icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
+                title={
+                  this.state.concealed
+                    ? t('copyable.reveal')
+                    : t('copyable.hide')
+                }
+                onClick={() => this.handleReveal()}
+              />
+            </If>
             <Button
-              icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
-              title={
-                this.state.concealed ? t('copyable.reveal') : t('copyable.hide')
-              }
-              onClick={() => this.handleReveal()}
+              icon={<CopyIcon />}
+              title={t('copyable.copy')}
+              onClick={() => this.handleCopy()}
             />
-          )}
-          <Button
-            icon={<CopyIcon />}
-            title={t('copyable.copy')}
-            onClick={() => this.handleCopy()}
-          />
-        </HiddenButtonRow>
+          </HiddenButtonRow>
+        </If>
       </Wrapper>
     );
   }

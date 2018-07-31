@@ -25,19 +25,6 @@ export function getFacadeFieldValue(entry, fieldName) {
   }
 }
 
-export function getPresentableFacadeFields(fieldsArr) {
-  return fieldsArr.filter(f => f.field === 'property').sort((a, b) => {
-    if (
-      a.field === 'property' &&
-      a.property === 'title' &&
-      a.removeable === false
-    ) {
-      return -1;
-    }
-    return 0;
-  });
-}
-
 /**
  * Validate buttercup entry values
  * @param {ButtercupEntry} entry
@@ -73,16 +60,6 @@ export function createNewEntryStructure() {
   const group = archive.createGroup('temp');
   const entry = entryToObj(group.createEntry());
   return omit(entry, 'id');
-}
-
-export function prepareEntryForEditing(entry) {
-  return {
-    ...entry,
-    facade: {
-      ...entry.facade,
-      fields: getPresentableFacadeFields(entry.facade.fields)
-    }
-  };
 }
 
 export async function loadEntries(archiveId, groupId) {
