@@ -6,10 +6,7 @@ import {
   newEntry,
   updateEntry
 } from '../../../shared/actions/entries';
-import {
-  createNewEntryStructure,
-  prepareEntryForEditing
-} from '../../../shared/buttercup/entries.js';
+import { createNewEntryStructure } from '../../../shared/buttercup/entries.js';
 import { getCurrentEntry } from '../../../shared/selectors';
 import Entry from '../../components/archive/entry';
 
@@ -26,11 +23,6 @@ export default connect(
     handleEditMode: changeMode('edit'),
     handleViewMode: changeMode('view'),
     initializeForm: (entry, mode) =>
-      initialize(
-        'editForm',
-        mode === 'new'
-          ? prepareEntryForEditing(createNewEntryStructure())
-          : prepareEntryForEditing(entry)
-      )
+      initialize('editForm', mode === 'new' ? createNewEntryStructure() : entry)
   }
 )(Entry, 'Entry');

@@ -41,7 +41,19 @@ export const getCurrentEntryId = state => state.entries.currentEntry;
 export const getCurrentEntry = createSelector(
   getAllEntries,
   getCurrentEntryId,
-  (entries, entryId) => entries[entryId]
+  (entries, entryId) => {
+    const entry = entries[entryId];
+    if (!entry) {
+      return;
+    }
+    return {
+      ...entry,
+      facade: {
+        ...entry.facade,
+        fields: entry.facade.fields.filter(f => f.field === 'property')
+      }
+    };
+  }
 );
 
 export const getVisibleEntries = createSelector(

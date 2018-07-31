@@ -10,7 +10,6 @@ import EmptyView from '../empty-view';
 import Copyable from './copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
-import { getPresentableFacadeFields } from '../../../shared/buttercup/entries';
 
 const getNonRemoveableFields = fieldsArr =>
   fieldsArr.filter(field => !field.removeable);
@@ -83,18 +82,12 @@ const EntryView = props => {
     <Fragment>
       <FieldsView
         {...props}
-        fields={getNonRemoveableFields(
-          getPresentableFacadeFields(entry.facade.fields)
-        )}
+        fields={getNonRemoveableFields(entry.facade.fields)}
       />
       <h6 className={heading}>
         <Translate i18nKey="entry.custom-fields" parent="span" />:
       </h6>
-      <With
-        fields={getRemoveableFields(
-          getPresentableFacadeFields(entry.facade.fields)
-        )}
-      >
+      <With fields={getRemoveableFields(entry.facade.fields)}>
         <Choose>
           <When condition={fields.length > 0}>
             <FieldsView {...props} fields={fields} />
