@@ -46,6 +46,11 @@ const Content = styled.div`
   padding: 7px 0 6px;
 `;
 
+const EmptyField = styled.span`
+  color: var(--black-20);
+  cursor: default;
+`;
+
 class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
@@ -107,31 +112,39 @@ class Copyable extends PureComponent {
 
   render() {
     const { children, isSecret, t } = this.props;
-    if (!children) {
-      return null;
-    }
 
     return (
       <Wrapper onContextMenu={() => this.showContextMenu()}>
         <Content role="content">
-          {isSecret ? this.renderPassword(children) : children}
+          <Choose>
+            <When condition={children}>
+              {isSecret ? this.renderPassword(children) : children}
+            </When>
+            <Otherwise>
+              <EmptyField>{t('entry.no-value')}</EmptyField>
+            </Otherwise>
+          </Choose>
         </Content>
-        <HiddenButtonRow>
-          <If condition={isSecret}>
+        <If condition={children}>
+          <HiddenButtonRow>
+            <If condition={isSecret}>
+              <Button
+                icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
+                title={
+                  this.state.concealed
+                    ? t('copyable.reveal')
+                    : t('copyable.hide')
+                }
+                onClick={() => this.handleReveal()}
+              />
+            </If>
             <Button
-              icon={this.state.concealed ? <EyeIcon /> : <EyeSlashIcon />}
-              title={
-                this.state.concealed ? t('copyable.reveal') : t('copyable.hide')
-              }
-              onClick={() => this.handleReveal()}
+              icon={<CopyIcon />}
+              title={t('copyable.copy')}
+              onClick={() => this.handleCopy()}
             />
-          </If>
-          <Button
-            icon={<CopyIcon />}
-            title={t('copyable.copy')}
-            onClick={() => this.handleCopy()}
-          />
-        </HiddenButtonRow>
+          </HiddenButtonRow>
+        </If>
       </Wrapper>
     );
   }

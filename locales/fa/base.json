@@ -149,7 +149,8 @@
     "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
     "are-you-sure-question": "برای این کار اطمینان دارید؟",
-    "displaying-entries": "در حال نمایش {{count}} سند"
+    "displaying-entries": "در حال نمایش {{count}} سند",
+    "no-value": "بدون محتوی"
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
