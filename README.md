@@ -91,6 +91,7 @@ Buttercup for Desktop supports the following languages:
  * Ukrainian
  * Hungarian
  * Czech
+ * Dutch
 
 ### Submitting internationalization configurations
 
