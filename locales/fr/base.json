@@ -22,6 +22,11 @@
         "import-to-type": "Vers {{name}}",
         "no-available-archives": "Pas d’archive disponible pour y importer des données."
       },
+      "export": {
+        "export": "Exporter",
+        "export-archive": "Exporter {{name}} en CSV",
+        "no-available-archives": "Aucune archive à exporter."
+      },
       "close": "Fermer"
     },
     "edit": {
@@ -88,6 +93,7 @@
     "change-password": "Changer le mot de passe",
     "import": "Importer",
     "import-from-type": "Depuis l’archive {{name}} (.{{extension}})",
+    "export": "Exporter",
     "archive-remove-with-name": "Retirer {{name}}",
     "open": "Ouvrir",
     "lock": "Verrouiller"
@@ -143,7 +149,8 @@
     "entry-title-empty-info": "Veuillez saisir un titre.",
     "custom-fields-label-empty-info": "Vous avez oublié de définir un label pour un ou plusieurs champs personnalisés.",
     "are-you-sure-question": "Confirmez-vous ?",
-    "displaying-entries": "{{count}} entrées affichées"
+    "displaying-entries": "{{count}} entrées affichées",
+    "no-value": "Vide"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copier dans le presse-papier",
