@@ -105,12 +105,12 @@
     "open-in-buttercup": "Open in Buttercup",
     "connect-to-dropbox": "Verbind met Dropbox",
     "authenticate-with-dropbox": "Meld aan met Dropbox",
-    "dropbox-description-text": "Verbind Buttercup met Dropbox om je archieven te lezen en op te slaan.<br />We zullen je Dropbox gebruikersnaam en wachtwoord niet opslaan.",
+    "dropbox-description-text": "Verbind Buttercup met Dropbox om jouw archieven te lezen en op te slaan.<br />Dropbox gebruikersnaam en wachtwoord worden niet opgeslagen.",
     "connect-to-wedav": "Verbind met {{title}} server",
     "username": "gebruikersnaam",
     "password": "wachtwoord",
     "connect": "Verbind",
-    "webdav-description-text": "Voer je {{title}} Endpoint adres, gebruikersnaam en wachtwoord in om te verbinden en kies een Buttercup archief. <strong>We slaan je inloggegevens op</strong> en versleutelen ze.",
+    "webdav-description-text": "Voer je {{title}} Endpoint adres, gebruikersnaam en wachtwoord in om te verbinden en kies een Buttercup archief. <strong>Inloggegevens worden versleuteld opgeslagen</strong>",
     "name": "Naam",
     "size": "Grootte",
     "date": "Datum"
@@ -170,7 +170,7 @@
     "insufficient-data-provided": "Onvoldoende data gegeven om te sorteren.",
     "check-for-update": "Er heeft een error plaatsgevonden tijdens de update. Probeer het later nog eens.",
     "invalid-import-type-requested": "Ongeldig import type gevraagd.",
-    "open-file-for-importing": "Importeer functies mogen niet draaien zonder dat het hoofdscherm draait.",
+    "open-file-for-importing": "Importeer functies mogen niet draaien zonder dat het hoofdscherm openstaat.",
     "entry-not-found": "Item niet gevonden",
     "dropbox-connection-failed-info": "Verbinding met Dropbox-server mislukt. Probeer het later nog eens.",
     "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals."
@@ -188,14 +188,14 @@
     "delete": "Naam wijzigen",
     "move-to-group-custom": "Verplaats naar {{title}}",
     "empty-trash": "Leeg prullenbak",
-    "empty-trash-question": "Weet je zeker dat je de prullenbak wil leegmaken?",
+    "empty-trash-question": "Weet je zeker dat je de prullenbak wilt leegmaken?",
     "title-asc": "Titel: oplopend",
     "title-desc": "Titel: aflopend"
   },
   "intro": {
     "welcome-title": "Welkom bij Buttercup.",
     "welcome-back-title": "Welkom terug bij Buttercup.",
-    "welcome-caption": "Je hebt nog een archieven toegevoegd. Waarom voeg je er geen toe?",
+    "welcome-caption": "Je hebt nog geen archieven toegevoegd. Waarom voeg je er geen toe?",
     "unlock-archive": "Ontgrendel archief om te beginnen ({{os}})."
   },
   "intro-menu": {
