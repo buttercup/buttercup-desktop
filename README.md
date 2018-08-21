@@ -47,7 +47,21 @@ If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) t
 choco install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+### Platforms and Operating Systems
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only).
+
+We actively support Buttercup on the following platforms:
+
+ * MacOS (latest)
+ * Windows 10
+ * Ubuntu 18.04
+
+Operating systems outside of these are not directly supported by staff - Issues will be followed on GitHub, however, and assistance provided where possible.
+
+#### Arch Linux
+Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+
+Some users have reported segmentation faults on Arch - if you notice a similiar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
 
 ### Portability
 
