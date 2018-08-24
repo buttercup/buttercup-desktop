@@ -6,6 +6,7 @@ import defaultIcon from '../../styles/img/no-icon.svg';
 const IconWrapper = styled.div`
   height: ${props => (props.big ? '45px' : '32px')};
   width: ${props => (props.big ? '45px' : '32px')};
+  flex: 0 0 ${props => (props.big ? '45px' : '32px')};
 
   border-radius: 3px;
   background-color: #fff;
