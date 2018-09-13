@@ -167,7 +167,7 @@ app.on('activate', () => {
 });
 
 app.once('before-quit', e => {
-  log.info('Running before-quit operatios.');
+  log.info('Running before-quit operation.');
   const channel = getQueue().channel('saves');
   appTriedToQuit = true;
 
