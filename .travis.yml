@@ -8,8 +8,7 @@ matrix:
       install:
         #- sudo apt-get install build-essential g++ make -y
         - npm cache verify
-        - npx npm-force-resolutions
-        - npm install
+        - yarn
       before_script:
         - export DISPLAY=:99.0
         - sh -e /etc/init.d/xvfb start

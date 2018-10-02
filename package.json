@@ -9,7 +9,7 @@
     "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
     "test": "npm run test:unit && npm run test:gui && npm run lint",
-    "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
+    "test:gui": "cross-env NODE_ENV=test ava test/gui/**",
     "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
@@ -133,7 +133,7 @@
   },
   "homepage": "https://buttercup.pw",
   "resolutions": {
-    "electron-chromedriver": "^3.0.0-beta.1"
+    "spectron/**/electron-chromedriver": "^3.0.0-beta.1"
   },
   "dependencies": {
     "opencollective": "^1.0.3"
