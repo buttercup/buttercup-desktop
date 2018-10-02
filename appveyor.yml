@@ -21,7 +21,8 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - npm cache verify
   # This is the danger zone (it fails often):
-  - appveyor-retry npm install --force
+  # - appveyor-retry npm install --force
+  - yarn
   - npm run build
 
 test_script:

@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.10.1",
+  "version": "1.10.2",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "format": "prettier --write '{src,config,test,locales}/**/*.{js,json}'",
     "precommit": "lint-staged",
     "test": "npm run test:unit && npm run test:gui && npm run lint",
-    "test:gui": "npm run build && cross-env NODE_ENV=test ava test/gui/**",
+    "test:gui": "cross-env NODE_ENV=test ava test/gui/**",
     "test:unit": "cross-env NODE_ENV=test ava test/unit/**",
     "lint": "eslint ./src ./config",
     "build:main": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.electron --progress --colors",
@@ -22,11 +22,11 @@
     "prestart:main": "npm run clean",
     "start:main": "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r babel-register ./src/main/app",
     "prerelease": "npm run clean",
-    "release": "npm run build && npm run package && npm run package:win",
-    "package:linux": "build --linux --x64",
+    "release": "npm run build && npm run package",
+    "package:linux": "build --linux --ia32 --x64",
     "package:mac": "build --mac",
     "package:win": "build --win --x64 --ia32 -p always",
-    "package": "build --mac --linux --x64 -p always",
+    "package": "build --mac --win --linux --x64 --ia32 -p always",
     "package:current": "build",
     "postinstall": "opencollective postinstall",
     "i18next-parse-lang": "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
@@ -69,7 +69,6 @@
     },
     "linux": {
       "target": [
-        "snap",
         "rpm",
         "AppImage",
         "deb"
@@ -133,6 +132,9 @@
     "url": "https://github.com/buttercup/buttercup-desktop/issues"
   },
   "homepage": "https://buttercup.pw",
+  "resolutions": {
+    "spectron/**/electron-chromedriver": "^3.0.0-beta.1"
+  },
   "dependencies": {
     "opencollective": "^1.0.3"
   },
@@ -178,8 +180,8 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "^1.8.8",
-    "electron-builder": "^20.26.0",
+    "electron": "^3.0.2",
+    "electron-builder": "^20.28.4",
     "electron-context-menu": "^0.10.0",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
@@ -261,7 +263,7 @@
     "rimraf": "^2.5.3",
     "sanitize-html": "^1.18.2",
     "sass-loader": "^6.0.6",
-    "spectron": "^3.8.0",
+    "spectron": "^4.0.0",
     "style-loader": "^0.13.1",
     "styled-components": "^3.1.6",
     "styled-flexbox": "^0.3.1",
