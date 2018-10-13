@@ -43,7 +43,7 @@ export function authenticateDropbox() {
       }
     };
 
-    authWin.webContents.on('will-navigate', (e, url) => navigateCb(url));
+    authWin.webContents.on('did-start-navigation', (e, url) => navigateCb(url));
     authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) =>
       navigateCb(newUrl)
     );
