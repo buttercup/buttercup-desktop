@@ -210,7 +210,8 @@
     "password": "Password",
     "confirm-password": "Confirm Password",
     "confirm": "Confirm",
-    "nevermind": "Nevermind"
+    "nevermind": "Nevermind",
+    "not-strong-enought": "Your password must contain at least: 1 uppercase letter, 1 number, 1 special character and contain 10 characters."
   },
   "search": {
     "search": "Search"
