@@ -2,12 +2,12 @@
   "app-menu": {
     "app": {
       "about": "Hakkımızda",
-      "check-for-updates": "Check for Updates...",
+      "check-for-updates": "Güncellemeleri denetle",
       "services": "Hizmetler",
       "hide": "gizlemek",
-      "hideothers": "Hide others",
-      "unhide": "Unhide",
-      "quit": "Çıkış"
+      "hideothers": "diğerlerini gizle",
+      "unhide": "gösterme",
+      "quit": "çıkış"
     },
     "archive": {
       "archive": "Arşiv",
@@ -15,42 +15,42 @@
       "new": "Yeni Arşiv",
       "open": "Arşiv Aç",
       "search": "Arşivde Ara",
-      "connect-cloud-sources": "Connect Cloud Sources",
+      "connect-cloud-sources": "bulut hesabına bağla",
       "import": {
         "import": "Veri Al",
         "import-from-type": "From {{name}} archive (.{{extension}})",
         "import-to-type": "To {{name}}",
-        "no-available-archives": "No available archives to import to."
+        "no-available-archives": "Kullanılabilir arşiv bulunamadı."
       },
       "export": {
-        "export": "Ver",
+        "export": "Dışarı aktar",
         "export-archive": "Export {{name}} to CSV",
-        "no-available-archives": "No available archives to export."
+        "no-available-archives": "Kullanılabilir arşiv bulunamadı."
       },
-      "close": "Close"
+      "close": "Kapat"
     },
     "edit": {
       "edit": "Düzenle",
-      "undo": "Undo",
-      "redo": "Redo",
-      "cut": "Cut",
+      "undo": "Geri al",
+      "redo": "İleri al",
+      "cut": "Kes",
       "copy": "Kopyala",
       "paste": "Yapıştır",
       "pasteandmatchstyle": "Paste and match style",
-      "delete": "Delete",
-      "selectall": "Select all",
+      "delete": "Sil",
+      "selectall": "Hepsini seç",
       "speech": {
-        "speech": "Speech",
-        "startspeaking": "Start speaking",
-        "stopspeaking": "Stop speaking"
+        "speech": "Konuş",
+        "startspeaking": "Konuşmaya başla",
+        "stopspeaking": "Konuşmayı durdur"
       }
     },
     "view": {
       "view": "View",
       "condensed-sidebar": "Condensed Sidebar",
-      "language": "Language",
+      "language": "Dil",
       "enable-tray-icon": "Display in Menubar",
-      "reload": "Reload",
+      "reload": "Yeniden yükle",
       "forcereload": "Force reload",
       "toggledevtools": "Toggle dev tools",
       "togglefullscreen": "Toggle full screen",
