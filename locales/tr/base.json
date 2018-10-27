@@ -46,109 +46,109 @@
       }
     },
     "view": {
-      "view": "View",
+      "view": "Görünüm",
       "condensed-sidebar": "Condensed Sidebar",
       "language": "Dil",
-      "enable-tray-icon": "Display in Menubar",
+      "enable-tray-icon": "Menubar'da görüntüle",
       "reload": "Yeniden yükle",
-      "forcereload": "Force reload",
+      "forcereload": "Zorla yeniden yükle",
       "toggledevtools": "Toggle dev tools",
       "togglefullscreen": "Toggle full screen",
-      "auto-hide-menubar": "Auto Hide Menubar"
+      "auto-hide-menubar": "Menubar'ı Otomatik Gizle"
     },
     "window": {
-      "window": "Window",
-      "minimize": "Minimize",
-      "close": "Close",
-      "zoom": "Zoom",
-      "front": "Bring all to front"
+      "window": "pencere",
+      "minimize": "küçültmek",
+      "close": "Kapak",
+      "zoom": "zoom yapmak",
+      "front": "Ön tarafa getir"
     },
     "help": {
-      "help": "Help",
-      "visit-our-website": "Visit Our Website",
-      "privacy-policy": "Privacy Policy",
-      "view-changelog-for-v": "View Changelog For v{{version}}"
+      "help": "Yardim",
+      "visit-our-website": "Web sitemizi ziyaret ediniz",
+      "privacy-policy": "Gizlilik Politikası",
+      "view-changelog-for-v": "////View Changelog For v{{version}}"
     },
     "tray": {
-      "quit": "Quit",
-      "open": "Open Buttercup"
+      "quit": "çıkmak",
+      "open": "Buttercup'ı aç"
     }
   },
   "archive-search": {
-    "searchterm": "Search for...",
-    "nothing-found": "Nothing found"
+    "searchterm": "Ara ... ",
+    "nothing-found": "Hiçbirşey Bulunamadı"
   },
   "archive": {
-    "add-archive": "Add Archive",
-    "archive-saved-loading-info": "Your archive is being saved.<br>Exiting automatically"
+    "add-archive": "Arşivi ekle",
+    "archive-saved-loading-info": "////Your archive is being saved.<br>Exiting automatically"
   },
   "archive-dialog": {
-    "buttercup-archives": "Buttercup Archives",
-    "load-a-buttercup-archive": "Load a Buttercup Archive",
-    "create-a-new-buttercup-archive": "Create a New Buttercup Archive"
+    "buttercup-archives": "Buttercup Arşivleri",
+    "load-a-buttercup-archive": "Bir Buttercup Arşivi yükle",
+    "create-a-new-buttercup-archive": "Yeni Bir Buttercup Arşivi Oluşturun"
   },
   "archive-menu": {
-    "unlock": "Unlock",
-    "change-color": "Change Color",
-    "change-password": "Change Password",
-    "import": "Import",
+    "unlock": "Kilidini aç",
+    "change-color": "Rengi değiştir",
+    "change-password": "Şifre değiştir",
+    "import": "ithal etmek",
     "import-from-type": "From {{name}} archive (.{{extension}})",
-    "export": "Export",
-    "archive-remove-with-name": "Remove {{name}}",
-    "open": "Open",
-    "lock": "Lock"
+    "export": "ihraç etmek",
+    "archive-remove-with-name": "{{Name}} öğesini kaldır",
+    "open": "Açmak",
+    "lock": "Kilitle"
   },
   "cloud-source": {
-    "cancel": "Cancel",
-    "go-back": "Go Back",
-    "new-archive": "New Archive",
-    "open-in-buttercup": "Open in Buttercup",
-    "connect-to-dropbox": "Connect to Dropbox",
-    "authenticate-with-dropbox": "Authenticate with Dropbox",
+    "cancel": "İptal etmek",
+    "go-back": "Geri dön",
+    "new-archive": "Yeni Arşiv",
+    "open-in-buttercup": "Buttercup'ta aç",
+    "connect-to-dropbox": "Dropbox'a Bağlan",
+    "authenticate-with-dropbox": "////Dropbox ile Kimlik Doğrulama",
     "dropbox-description-text": "Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
     "connect-to-wedav": "Connect to {{title}} Server",
-    "username": "Username",
-    "password": "Password",
-    "connect": "Connect",
-    "webdav-description-text": "Enter your {{title}} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.",
-    "name": "Name",
-    "size": "Size",
-    "date": "Date"
+    "username": "Kullanıcı adı",
+    "password": "şifre",
+    "connect": "bağlamak",
+    "webdav-description-text": "////Enter your {{title}} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.",
+    "name": "isim",
+    "size": "////Size",
+    "date": "Bilgi"
   },
   "confirm-dialog": {
-    "yes": "Yes",
-    "no": "No"
+    "yes": "Evet",
+    "no": "Hayır"
   },
   "copyable": {
-    "hide": "Hide",
-    "reveal": "Reveal",
-    "copy": "Copy"
+    "hide": "Gizlemek",
+    "reveal": "ifşa etmek",
+    "copy": "kopya etmek"
   },
   "copyable-menu": {
-    "copy-to-clipboard": "Copy To Clipboard",
-    "reveal-password": "Reveal Password"
+    "copy-to-clipboard": "Panoya kopyala",
+    "reveal-password": "Şifreyi Göster"
   },
   "entry": {
-    "add-entry": "Add Entry",
-    "select-or-create-an-entry": "Select or Create an Entry",
-    "title": "Title",
-    "untitled": "Untitled",
-    "username": "Username",
-    "password": "Password",
-    "secure-password": "Secure password",
-    "custom-fields": "Custom Fields",
-    "no-custom-fields-info-text": "No custom fields yet. Why not add one?",
-    "add-new-field": "Add New Field",
-    "label": "Label",
-    "new-field": "New Field",
-    "edit": "Edit",
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "entry-inputs-empty-info": "Please enter at least a title.",
-    "entry-title-empty-info": "Please enter a title.",
-    "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
-    "are-you-sure-question": "Are you sure?",
+    "add-entry": "Giriş ekle",
+    "select-or-create-an-entry": "Giriş seç veya Giriş Yap",
+    "title": "Başlık",
+    "untitled": "Başlıksız",
+    "username": "Kullanıcı adı",
+    "password": "şifre",
+    "secure-password": "Güvenli şifre",
+    "custom-fields": "Özel Alanlar",
+    "no-custom-fields-info-text": "Henüz özel alan yok. Neden bir tane eklemiyorsun?",
+    "add-new-field": "Yeni Alan Ekle",
+    "label": "Etiket",
+    "new-field": "Yeni alan",
+    "edit": "Düzenle",
+    "save": "Kayıt etmek",
+    "cancel": "İptal etmek",
+    "delete": "silmek",
+    "entry-inputs-empty-info": "Lütfen en az bir başlık girin.",
+    "entry-title-empty-info": "Lütfen bir başlık girin.",
+    "custom-fields-label-empty-info": "////You've forgotten to set a label for one or more custom fields.",
+    "are-you-sure-question": "Emin misiniz?",
     "displaying-entries": "Displaying {{count}} entries",
     "no-value": "No Value"
   },
