@@ -153,81 +153,81 @@
     "no-value": "No Value"
   },
   "entry-menu": {
-    "copy-to-clipboard": "Copy To Clipboard",
-    "username": "Username",
-    "password": "Password",
-    "open-url-in-browser": "Open URL in Browser",
-    "move-to-group": "Move to Group",
-    "move-to-trash": "Move to Trash",
-    "delete-permanently": "Delete Permanently"
+    "copy-to-clipboard": "Panoya kopyala",
+    "username": "Kullanıcı adı",
+    "password": "şifre",
+    "open-url-in-browser": "Tarayıcıda URL'yi aç",
+    "move-to-group": "Gruba Taşı",
+    "move-to-trash": "Çöp kutusuna taşıyın",
+    "delete-permanently": "kalıcı olarak sil"
   },
   "error": {
-    "archive-not-found": "Archive source was not found.",
-    "authentication-failed": "Authentication failed.",
-    "unknown": "An unknown error has occurred",
-    "passwords-dont-match": "Your passwords don't match.",
-    "group-not-found": "Group has not been found.",
-    "sort-definition-not-found": "Sort definition not found",
-    "insufficient-data-provided": "Insufficient data provided for sorting",
-    "check-for-update": "An error occured during the update. Please try again later.",
-    "invalid-import-type-requested": "Invalid import type requested",
-    "open-file-for-importing": "Import function should not be running without the main window running.",
-    "entry-not-found": "Entry has not been found",
-    "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
-    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
+    "archive-not-found": "Arşiv kaynağı bulunamadı.",
+    "authentication-failed": "Kimlik doğrulama başarısız oldu.",
+    "unknown": "Bilinmeyen bir hata oluştu",
+    "passwords-dont-match": "Şifreleriniz eşleşmiyor.",
+    "group-not-found": "Grup bulunamadı.",
+    "sort-definition-not-found": "Sıralama tanımı bulunamadı",
+    "insufficient-data-provided": "Sıralama için yetersiz veri sağlandı",
+    "check-for-update": "Güncelleme sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.",
+    "invalid-import-type-requested": "Geçersiz içe aktarma türü istendi",
+    "open-file-for-importing": "////Import function should not be running without the main window running.",
+    "entry-not-found": "Kayıt bulunamadı",
+    "dropbox-connection-failed-info": "Dropbox sunucusuna bağlantı başarısız oldu. Lütfen daha sonra tekrar deneyiniz",
+    "webdav-connection-failed-info": "{{Endpoint}} ile bağlantı başarısız oldu. Lütfen güven belgenizi kontrol edip tekrar deneyin."
   },
   "group": {
-    "new-group": "New Group",
-    "untitled": "Untitled"
+    "new-group": "Yeni grup",
+    "untitled": "Başlıksız"
   },
   "group-menu": {
-    "new-group": "New Group",
-    "add-group": "Add Group",
-    "move-to-root": "Move to Root",
-    "move-to-group": "Move to Group",
-    "rename": "Rename",
-    "delete": "Delete",
-    "move-to-group-custom": "Move to {{title}}",
-    "empty-trash": "Empty Trash",
-    "empty-trash-question": "Are you sure you want to empty Trash?",
-    "title-asc": "Title: Ascending",
-    "title-desc": "Title: Descending"
+    "new-group": "Yeni grup",
+    "add-group": "Grup ekle",
+    "move-to-root": "Köküne Taşı",
+    "move-to-group": "Gruba Taşı",
+    "rename": "Adını değiştirmek",
+    "delete": "silmek",
+    "move-to-group-custom": "{{title}} hareket et",
+    "empty-trash": "Boş Çöp Kutusu",
+    "empty-trash-question": "Çöp kutusunu boşaltmak istediğinden emin misin?",
+    "title-asc": "Başlık: Artan",
+    "title-desc": "Başlık: Azalan"
   },
   "intro": {
-    "welcome-title": "Welcome to Buttercup.",
-    "welcome-back-title": "Welcome back to Buttercup.",
-    "welcome-caption": "You haven't added any archives yet. Why not add one?",
-    "unlock-archive": "Unlock an archive to begin ({{os}})."
+    "welcome-title": "Buttercup'a hoşgeldiniz.",
+    "welcome-back-title": "Buttercup'a tekrar hoşgeldiniz.",
+    "welcome-caption": "Henüz hiç arşiv eklemediniz. Neden bir tane eklemiyorsun?",
+    "unlock-archive": "Başlamak için bir arşivin kilidini açın ({{os}})."
   },
   "intro-menu": {
-    "open-archive-file": "Open Archive File",
-    "new-archive-file": "New Archive File",
-    "connect-cloud-sources": "Connect Cloud Sources"
+    "open-archive-file": "Arşiv Dosyasını Aç",
+    "new-archive-file": "Yeni Arşiv Dosyası",
+    "connect-cloud-sources": "Bulut Kaynaklarını Bağlayın"
   },
   "password-dialog": {
-    "master-password": "Master Password",
-    "new-password": "New Password",
-    "password": "Password",
-    "confirm-password": "Confirm Password",
-    "confirm": "Confirm",
-    "nevermind": "Nevermind"
+    "master-password": "Ana şifre",
+    "new-password": "Yeni Şifre",
+    "password": "Şifre",
+    "confirm-password": "Şifreyi Onayla",
+    "confirm": "Onaylamak",
+    "nevermind": "Boşver"
   },
   "search": {
-    "search": "Search"
+    "search": "Arama"
   },
   "sort": {
-    "title-asc": "Title: Ascending",
-    "title-desc": "Title: Descending",
-    "time-asc": "Time: Ascending",
-    "time-desc": "Time: Descending"
+    "title-asc": "Başlık: Artan",
+    "title-desc": "Başlık: Azalan",
+    "time-asc": "Zaman: Artan",
+    "time-desc": "Zaman: Azalan"
   },
   "update": {
-    "installing": "Installing",
-    "update-available-message": "Buttercup {{version}} is now available. You have {{currentVersion}}. Would you like to download it now?",
-    "new-version-available": "A new version of Buttercup is available!",
-    "not-now": "Not Now",
-    "download": "Download and Install",
-    "download-manual": "Open Releases Page",
-    "release-notes": "Release Notes:"
+    "installing": "yükleme",
+    "update-available-message": "Buttercup {{version}} şu anda hazır. Sizde {{CurrentVersion}} var. Şimdi indirmek ister misiniz?",
+    "new-version-available": "Buttercup'ın yeni bir sürümü mevcut!",
+    "not-now": "Şimdi değil",
+    "download": "İndir ve Yükle",
+    "download-manual": "Açık Bültenler Sayfası",
+    "release-notes": "Sürüm notları:"
   }
 }
