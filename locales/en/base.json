@@ -169,7 +169,7 @@
     "group-not-found": "Group has not been found.",
     "sort-definition-not-found": "Sort definition not found",
     "insufficient-data-provided": "Insufficient data provided for sorting",
-    "check-for-update": "An error occured during the update. Please try again later.",
+    "check-for-update": "An error occurred during the update. Please try again later.",
     "invalid-import-type-requested": "Invalid import type requested",
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
