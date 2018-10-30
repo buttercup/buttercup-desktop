@@ -1,13 +1,13 @@
 {
   "app-menu": {
     "app": {
-      "about": "Hakkımızda",
+      "about": "Hakkında",
       "check-for-updates": "Güncellemeleri denetle",
       "services": "Hizmetler",
-      "hide": "gizlemek",
-      "hideothers": "diğerlerini gizle",
-      "unhide": "gösterme",
-      "quit": "çıkış"
+      "hide": "Gizlemek",
+      "hideothers": "Diğerlerini gizle",
+      "unhide": "Göster",
+      "quit": "Çıkış"
     },
     "archive": {
       "archive": "Arşiv",
@@ -15,16 +15,16 @@
       "new": "Yeni Arşiv",
       "open": "Arşiv Aç",
       "search": "Arşivde Ara",
-      "connect-cloud-sources": "bulut hesabına bağla",
+      "connect-cloud-sources": "Bulut hesabına bağla",
       "import": {
-        "import": "Veri Al",
+        "import": "İçe aktar",
         "import-from-type": "From {{name}} archive (.{{extension}})",
-        "import-to-type": "To {{name}}",
+        "import-to-type": "Için {{name}}",
         "no-available-archives": "Kullanılabilir arşiv bulunamadı."
       },
       "export": {
-        "export": "Dışarı aktar",
-        "export-archive": "Export {{name}} to CSV",
+        "export": "Dışa aktar",
+        "export-archive": "CSV olarak {{name}} dışa aktar",
         "no-available-archives": "Kullanılabilir arşiv bulunamadı."
       },
       "close": "Kapat"
@@ -57,10 +57,10 @@
       "auto-hide-menubar": "Menubar'ı Otomatik Gizle"
     },
     "window": {
-      "window": "pencere",
-      "minimize": "küçültmek",
+      "window": "Pencere",
+      "minimize": "Küçültmek",
       "close": "Kapak",
-      "zoom": "zoom yapmak",
+      "zoom": "Zoom yapmak",
       "front": "Ön tarafa getir"
     },
     "help": {
@@ -70,7 +70,7 @@
       "view-changelog-for-v": "////View Changelog For v{{version}}"
     },
     "tray": {
-      "quit": "çıkmak",
+      "quit": "Çıkmak",
       "open": "Buttercup'ı aç"
     }
   },
@@ -91,38 +91,38 @@
     "unlock": "Kilidini aç",
     "change-color": "Rengi değiştir",
     "change-password": "Şifre değiştir",
-    "import": "ithal etmek",
-    "import-from-type": "From {{name}} archive (.{{extension}})",
-    "export": "ihraç etmek",
+    "import": "Ithalat",
+    "import-from-type": "////From {{name}} archive (.{{extension}})",
+    "export": "Ihraç",
     "archive-remove-with-name": "{{Name}} öğesini kaldır",
     "open": "Açmak",
     "lock": "Kilitle"
   },
   "cloud-source": {
-    "cancel": "İptal etmek",
+    "cancel": "Vazgeç",
     "go-back": "Geri dön",
     "new-archive": "Yeni Arşiv",
     "open-in-buttercup": "Buttercup'ta aç",
     "connect-to-dropbox": "Dropbox'a Bağlan",
     "authenticate-with-dropbox": "////Dropbox ile Kimlik Doğrulama",
-    "dropbox-description-text": "Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
-    "connect-to-wedav": "Connect to {{title}} Server",
+    "dropbox-description-text": "////Connect Buttercup to your Dropbox account to read and save your archives.<br />We won't save your Dropbox username or password.",
+    "connect-to-wedav": "////Connect to {{title}} Server",
     "username": "Kullanıcı adı",
-    "password": "şifre",
-    "connect": "bağlamak",
+    "password": "Şifre",
+    "connect": "Bağlamak",
     "webdav-description-text": "////Enter your {{title}} Endpoint Address, Username and Password to connect and choose a Buttercup Archive. We <strong>will save</strong> your credentials and encrypt it.",
     "name": "isim",
-    "size": "////Size",
-    "date": "Bilgi"
+    "size": "Boy",
+    "date": "Tarih"
   },
   "confirm-dialog": {
     "yes": "Evet",
     "no": "Hayır"
   },
   "copyable": {
-    "hide": "Gizlemek",
-    "reveal": "ifşa etmek",
-    "copy": "kopya etmek"
+    "hide": "Gizle",
+    "reveal": "Ifşa etmek",
+    "copy": "Kopyala"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Panoya kopyala",
@@ -134,7 +134,7 @@
     "title": "Başlık",
     "untitled": "Başlıksız",
     "username": "Kullanıcı adı",
-    "password": "şifre",
+    "password": "Şifre",
     "secure-password": "Güvenli şifre",
     "custom-fields": "Özel Alanlar",
     "no-custom-fields-info-text": "Henüz özel alan yok. Neden bir tane eklemiyorsun?",
@@ -142,15 +142,15 @@
     "label": "Etiket",
     "new-field": "Yeni alan",
     "edit": "Düzenle",
-    "save": "Kayıt etmek",
-    "cancel": "İptal etmek",
-    "delete": "silmek",
+    "save": "Kaydet",
+    "cancel": "Vazgeç",
+    "delete": "Sil",
     "entry-inputs-empty-info": "Lütfen en az bir başlık girin.",
     "entry-title-empty-info": "Lütfen bir başlık girin.",
     "custom-fields-label-empty-info": "////You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Emin misiniz?",
-    "displaying-entries": "Displaying {{count}} entries",
-    "no-value": "No Value"
+    "displaying-entries": "////Displaying {{count}} entries",
+    "no-value": "Değersiz"
   },
   "entry-menu": {
     "copy-to-clipboard": "Panoya kopyala",
@@ -159,7 +159,7 @@
     "open-url-in-browser": "Tarayıcıda URL'yi aç",
     "move-to-group": "Gruba Taşı",
     "move-to-trash": "Çöp kutusuna taşıyın",
-    "delete-permanently": "kalıcı olarak sil"
+    "delete-permanently": "Kalıcı olarak sil"
   },
   "error": {
     "archive-not-found": "Arşiv kaynağı bulunamadı.",
@@ -186,7 +186,7 @@
     "move-to-root": "Köküne Taşı",
     "move-to-group": "Gruba Taşı",
     "rename": "Adını değiştirmek",
-    "delete": "silmek",
+    "delete": "Sil",
     "move-to-group-custom": "{{title}} hareket et",
     "empty-trash": "Boş Çöp Kutusu",
     "empty-trash-question": "Çöp kutusunu boşaltmak istediğinden emin misin?",
@@ -222,7 +222,7 @@
     "time-desc": "Zaman: Azalan"
   },
   "update": {
-    "installing": "yükleme",
+    "installing": "Yükleme",
     "update-available-message": "Buttercup {{version}} şu anda hazır. Sizde {{CurrentVersion}} var. Şimdi indirmek ister misiniz?",
     "new-version-available": "Buttercup'ın yeni bir sürümü mevcut!",
     "not-now": "Şimdi değil",
