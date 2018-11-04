@@ -85,6 +85,12 @@ Archives store groups and entries in a simple hierarchy. Both groups and entries
 
 Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
 
+### WebDAV
+
+Buttercup can connect to WebDAV-based services for the purpose of remotely-accessing vault files. Most WebDAV services and services supporting WebDAV are compatible.
+
+Please note that Buttercup **does not support self-signed certificates**.
+
 ### Importing and Exporting
 You can import from other password managers (such as 1Password, Lastpass and KeePass) by opening your archive and choosing Import from the menu.
 
