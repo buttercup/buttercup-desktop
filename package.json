@@ -69,6 +69,7 @@
     },
     "linux": {
       "target": [
+        "snap",
         "rpm",
         "AppImage",
         "deb"
