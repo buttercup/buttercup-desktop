@@ -99,7 +99,7 @@
     "files": [
       "test/**/*.js"
     ],
-    "source": [
+    "sources": [
       "src/**/*.{js,jsx}"
     ],
     "modules": false,
@@ -107,14 +107,8 @@
     "failFast": true,
     "powerAssert": true,
     "require": [
-      "babel-register"
-    ],
-    "babel": {
-      "babelrc": true,
-      "plugins": [
-        "transform-es2015-modules-commonjs"
-      ]
-    }
+      "@babel/register"
+    ]
   },
   "author": "Buttercup <info@buttercup.pw>",
   "contributors": [
@@ -140,11 +134,13 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/plugin-transform-strict-mode": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-flow": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/exporter": "^0.1.0",
     "@buttercup/iconographer": "^0.7.1",
@@ -154,21 +150,19 @@
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
     "any-fs": "^0.4.0",
-    "ava": "^0.25.0",
+    "ava": "1.0.0-rc.1",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.4",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-jsx-control-statements": "^4.0.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-polished": "^1.1.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-plugin-transform-remove-debugger": "^6.9.4",
-    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-plugin-transform-strict-mode": "^6.22.0",
     "babel-plugin-webpack-alias": "^2.1.2",
     "babel-plugin-webpack-loaders": "^0.9.0",
-    "buttercup": "^2.3.0",
+    "buttercup": "^2.7.0",
     "check-os-tray-support": "^2.0.0",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
