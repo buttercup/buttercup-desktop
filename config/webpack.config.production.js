@@ -20,12 +20,35 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.scss$/,
+        test: /\.global\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader
           },
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
+        test: /^((?!\.global).)*\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]',
+              minimize: true
+            }
+          },
           'sass-loader'
         ]
       }
