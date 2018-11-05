@@ -35,5 +35,5 @@ module.exports = {
     }
   },
   plugins: [new NormalModuleReplacementPlugin(/\/iconv-loader/, 'node-noop')],
-  externals: ['buttercup-importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']
+  externals: ['@buttercup/importer', 'zxcvbn', 'dropbox', 'webdav', 'conf']
 };

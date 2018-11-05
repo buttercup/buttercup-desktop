@@ -132,9 +132,6 @@
     "url": "https://github.com/buttercup/buttercup-desktop/issues"
   },
   "homepage": "https://buttercup.pw",
-  "resolutions": {
-    "spectron/**/electron-chromedriver": "^3.0.0-beta.1"
-  },
   "dependencies": {
     "opencollective": "^1.0.3"
   },
@@ -263,7 +260,7 @@
     "rimraf": "^2.5.3",
     "sanitize-html": "^1.18.2",
     "sass-loader": "^6.0.6",
-    "spectron": "^4.0.0",
+    "spectron": "^5.0.0",
     "style-loader": "^0.13.1",
     "styled-components": "^3.1.6",
     "styled-flexbox": "^0.3.1",

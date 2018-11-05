@@ -12,7 +12,7 @@ branches:
 skip_tags: true
 
 environment:
-  nodejs_version: "8"
+  nodejs_version: "10"
 
 #cache:
 #  - node_modules -> package.json
