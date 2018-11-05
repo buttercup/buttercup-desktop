@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = merge(baseConfig, {
@@ -57,6 +58,14 @@ module.exports = merge(baseConfig, {
 
   node: {
     __dirname: false
+  },
+
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        exclude: /\/node_modules/
+      })
+    ]
   },
 
   plugins: [

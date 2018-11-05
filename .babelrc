@@ -2,15 +2,18 @@
   "presets": [
     "@babel/preset-react",
     "@babel/preset-flow",
-    ["@babel/preset-env", {
-      "targets": {
-        "chrome": "66",
-        "node": "10"
-      },
-      "useBuiltIns": "usage",
-      "modules": false,
-      "loose": true
-    }]
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "chrome": "66",
+          "node": "10"
+        },
+        "useBuiltIns": "usage",
+        "modules": false,
+        "loose": true
+      }
+    ]
   ],
   "plugins": [
     "lodash",
@@ -19,26 +22,25 @@
     "@babel/plugin-transform-strict-mode",
     "@babel/plugin-proposal-class-properties",
     "jsx-control-statements",
-   ["webpack-alias", { "config": "./config/webpack.config.base.js" } ]
+    ["webpack-alias", { "config": "./config/webpack.config.base.js" }]
   ],
   "env": {
-  	"production": {
-  		"plugins": [
-  			"transform-remove-console",
-  			"transform-remove-debugger",
+    "production": {
+      "plugins": [
+        "transform-remove-console",
+        "transform-remove-debugger",
         "dev-expression",
         "jsx-control-statements"
-  		]
-  	},
-    "node": {
-      "plugins": [
-        "@babel/plugin-transform-modules-commonjs"
       ]
     },
+    "node": {
+      "plugins": ["@babel/plugin-transform-modules-commonjs"]
+    },
     "test": {
-      "presets": ["es2015", "stage-2"],
-      "plugins": ["transform-runtime"],
-      "comments": false
+      "plugins": [
+        "@babel/plugin-transform-runtime",
+        "@babel/plugin-transform-modules-commonjs"
+      ]
     }
   }
 }
