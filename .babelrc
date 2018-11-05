@@ -1,12 +1,13 @@
 {
   "presets": [
-    "react",
-    "flow",
-    ["env", {
+    "@babel/preset-react",
+    "@babel/preset-flow",
+    ["@babel/preset-env", {
       "targets": {
-        "electron": "1.7"
+        "chrome": "66",
+        "node": "10"
       },
-      "useBuiltIns": true,
+      "useBuiltIns": "usage",
       "modules": false,
       "loose": true
     }]
@@ -14,15 +15,14 @@
   "plugins": [
     "lodash",
     "polished",
-    "transform-object-rest-spread",
-    "transform-strict-mode",
-    "transform-class-properties",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-strict-mode",
+    "@babel/plugin-proposal-class-properties",
     "jsx-control-statements",
    ["webpack-alias", { "config": "./config/webpack.config.base.js" } ]
   ],
   "env": {
   	"production": {
-  		"presets": ["react-optimize"],
   		"plugins": [
   			"transform-remove-console",
   			"transform-remove-debugger",
@@ -32,13 +32,7 @@
   	},
     "node": {
       "plugins": [
-        "transform-es2015-modules-commonjs",
-        "add-module-exports"
-      ]
-    },
-    "development": {
-      "plugins": [
-        // "react-hot-loader/babel"
+        "@babel/plugin-transform-modules-commonjs"
       ]
     },
     "test": {

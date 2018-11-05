@@ -1,8 +1,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseConfig = require('./webpack.config.base');
 
 module.exports = merge(baseConfig, {
@@ -21,42 +20,14 @@ module.exports = merge(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.global\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
-        })
-      },
-
-      {
-        test: /^((?!\.global).)*\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: true,
-                localIdentName: '[name]__[local]___[hash:base64:5]',
-                minimize: true
-              }
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
-        })
+        test: /\.scss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -67,36 +38,11 @@ module.exports = merge(baseConfig, {
 
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new UglifyJSPlugin({
-      parallel: true,
-      exclude: /\/node_modules/,
-      uglifyOptions: {
-        ecma: 8,
-        mangle: true,
-        compress: {
-          sequences: true,
-          dead_code: true,
-          conditionals: true,
-          booleans: true,
-          unused: false,
-          if_return: true,
-          join_vars: true,
-          drop_console: true
-        },
-        output: {
-          comments: false,
-          beautify: false
-        }
-      }
-    }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: '[name].css',
-      allChunks: true
+      chunkFilename: '[id].css'
     })
   ],
-
+  mode: 'production',
   target: 'electron-renderer'
 });
