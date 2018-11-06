@@ -47,7 +47,6 @@ module.exports = merge(baseConfig, {
 
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
@@ -61,6 +60,6 @@ module.exports = merge(baseConfig, {
   node: {
     __dirname: false
   },
-
+  mode: 'development',
   target: 'electron-renderer'
 });

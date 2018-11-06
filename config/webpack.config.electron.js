@@ -1,5 +1,4 @@
 const { resolve } = require('path');
-const webpack = require('webpack');
 const merge = require('webpack-merge');
 const baseConfig = require('./webpack.config.base');
 
@@ -13,18 +12,12 @@ module.exports = merge(baseConfig, {
     filename: 'app.js'
   },
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    })
-  ],
-
+  mode: 'production',
   target: 'electron-main',
 
   node: {
     __dirname: false,
     __filename: false
   },
-
   externals: ['electron-devtools-installer', 'source-map-support']
 });

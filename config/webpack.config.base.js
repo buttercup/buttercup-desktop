@@ -14,7 +14,12 @@ module.exports = {
       },
       {
         test: /\.(svg|png|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        use: {
+          loader: 'file-loader',
+          options: {
+            outputPath: 'assets/'
+          }
+        },
         exclude: /node_modules/
       },
       {
