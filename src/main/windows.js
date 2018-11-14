@@ -136,4 +136,34 @@ export function setupWindows(store) {
 
     return win;
   });
+
+  windowManager.setBuildProcedure(
+    'file-host-connection',
+    (callback, options) => {
+      const win = new BrowserWindow({
+        width: 400,
+        height: 200,
+        modal: true,
+        show: false,
+        resizable: false,
+        darkTheme: true,
+        transparent: true,
+        vibrancy: 'ultra-dark',
+        ...options
+      });
+
+      win.setMenuBarVisibility(false);
+      win.loadURL(getURIPathToFile('views/file-host-connection.html'));
+
+      ipc.once('file-host-connection-init', () => {
+        win.show();
+
+        if (callback) {
+          callback(win);
+        }
+      });
+
+      return win;
+    }
+  );
 }
