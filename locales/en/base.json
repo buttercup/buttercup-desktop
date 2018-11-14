@@ -63,6 +63,10 @@
       "zoom": "Zoom",
       "front": "Bring all to front"
     },
+    "system": {
+      "system": "System",
+      "enable-browser-access": "Enable Browser Access"
+    },
     "help": {
       "help": "Help",
       "visit-our-website": "Visit Our Website",

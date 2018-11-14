@@ -299,6 +299,15 @@ export const setupMenu = store => {
       ]
     },
     {
+      label: label('system.system'),
+      submenu: [
+        {
+          label: label('system.enable-browser-access'),
+          type: 'checkbox'
+        }
+      ]
+    },
+    {
       label: label('help.help'),
       role: 'help',
       submenu: [

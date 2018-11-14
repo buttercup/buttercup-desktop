@@ -44,3 +44,7 @@ export function startHost() {
   // Save key back to config
   config.set(CONFIG_KEY, __host.key);
 }
+
+export function getHost() {
+  return __host;
+}
