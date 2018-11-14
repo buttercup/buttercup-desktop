@@ -145,7 +145,7 @@
     "@buttercup/exporter": "^0.1.0",
     "@buttercup/iconographer": "^0.7.1",
     "@buttercup/importer": "^0.14.1",
-    "@buttercup/secure-file-host": "^0.1.2",
+    "@buttercup/secure-file-host": "^0.1.3",
     "@buttercup/ui": "^1.4.2",
     "@types/node": "^6.0.45",
     "@types/react": "^0.14.41",

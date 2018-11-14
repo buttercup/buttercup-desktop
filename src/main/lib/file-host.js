@@ -1,9 +1,12 @@
 import { startFileHost } from '@buttercup/secure-file-host';
 import { getWindowManager } from './window-manager';
 import { reopenMainWindow } from '../utils/window';
+import { config } from '../../shared/config';
 
 let __host;
+const CONFIG_KEY = 'fileHost.encryptionKey';
 const windowManager = getWindowManager();
+const encryptionKey = config.get(CONFIG_KEY);
 
 const showConnectionWindow = async code => {
   const parent = await reopenMainWindow();
@@ -27,11 +30,9 @@ export function startHost() {
   if (__host) {
     return;
   }
-  __host = startFileHost(12821);
-  __host.emitter.on('codeReady', ({ code }) => {
-    showConnectionWindow(code);
-  });
-  __host.emitter.on('connected', (...args) => {
+  __host = startFileHost(12821, encryptionKey);
+  __host.emitter.on('codeReady', ({ code }) => showConnectionWindow(code));
+  __host.emitter.on('connected', () => {
     const [connectionWindow] = windowManager.getWindowsOfType(
       'file-host-connection'
     );
@@ -39,4 +40,7 @@ export function startHost() {
       connectionWindow.close();
     }
   });
+
+  // Save key back to config
+  config.set(CONFIG_KEY, __host.key);
 }
