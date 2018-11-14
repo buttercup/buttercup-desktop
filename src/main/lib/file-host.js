@@ -32,6 +32,11 @@ export function startHost() {
     showConnectionWindow(code);
   });
   __host.emitter.on('connected', (...args) => {
-    console.log('connected', args);
+    const [connectionWindow] = windowManager.getWindowsOfType(
+      'file-host-connection'
+    );
+    if (connectionWindow) {
+      connectionWindow.close();
+    }
   });
 }
