@@ -1,5 +1,5 @@
 import React from 'react';
-import { ipcRenderer as ipc } from 'electron';
+import { ipcRenderer as ipc, remote } from 'electron';
 import { I18nextProvider } from 'react-i18next';
 import { render } from 'react-dom';
 import styled from 'styled-components';
@@ -47,7 +47,12 @@ const renderWindow = connectionCode =>
         <Code>
           <span>{connectionCode}</span>
         </Code>
-        <Button dark onClick={() => window.close()}>
+        <Button
+          dark
+          onClick={() => {
+            remote.getCurrentWindow().close();
+          }}
+        >
           Cancel
         </Button>
       </Wrapper>
