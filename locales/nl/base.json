@@ -149,7 +149,8 @@
     "entry-title-empty-info": "Voer een titel in.",
     "custom-fields-label-empty-info": "Je bent vergeten om een label in te stellen voor een of meer speciale velden.",
     "are-you-sure-question": "Weet je het zeker?",
-    "displaying-entries": "{{count}} items weergegeven"
+    "displaying-entries": "{{count}} items weergegeven",
+    "no-value": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Kopieer naar klembord",
@@ -228,5 +229,9 @@
     "download": "Download en installeer",
     "download-manual": "Open versieoverzicht",
     "release-notes": "Opmerkingen bij versie:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

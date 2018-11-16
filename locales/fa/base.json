@@ -229,5 +229,9 @@
     "download": "دریافت و نصب",
     "download-manual": "باز کردن صفحه دریافت",
     "release-notes": "مشخصات این نسخه:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

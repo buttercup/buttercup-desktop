@@ -143,7 +143,8 @@
     "entry-title-empty-info": "Per favore inserisci un titolo.",
     "custom-fields-label-empty-info": "Hai dimenticato di impostare un'etichetta per uno o più campi personalizzati.",
     "are-you-sure-question": "Sei sicuro?",
-    "displaying-entries": "Hai {{count}} elementi"
+    "displaying-entries": "Hai {{count}} elementi",
+    "no-value": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copia negli Appunti",
@@ -222,5 +223,9 @@
     "download": "Scarica e Installa",
     "download-manual": "Apri Pagina delle Release",
     "release-notes": "Note di Rilascio:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

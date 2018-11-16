@@ -132,7 +132,9 @@
     "entry-inputs-empty-info": "Введіть хоча б назву, будь ласка.",
     "entry-title-empty-info": "Введіть назву, будь ласка.",
     "custom-fields-label-empty-info": "Ви забули задати назву для одного чи більше довільних полів",
-    "are-you-sure-question": "Ви впевнені?"
+    "are-you-sure-question": "Ви впевнені?",
+    "no-value": "",
+    "displaying-entries": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Скопіювати до буферу обміну",
@@ -205,6 +207,17 @@
   },
   "update": {
     "installing": "Встановлення",
-    "update-available-message": "Доступний Buttercup версії {{version}}. Натисніть тут, щоб встановити зараз."
+    "update-available-message": "Доступний Buttercup версії {{version}}. Натисніть тут, щоб встановити зараз.",
+    "new-version-available": "",
+    "release-notes": "",
+    "not-now": ""
+  },
+  "archive-search": {
+    "searchterm": "",
+    "nothing-found": ""
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

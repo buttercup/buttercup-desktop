@@ -129,7 +129,9 @@
     "entry-inputs-empty-info": "Por favor, introduce al menos un título.",
     "entry-title-empty-info": "Por favor, introduce un título.",
     "custom-fields-label-empty-info": "Has olvidado añadir una etiqueta a uno o a varios campos personalizados.",
-    "are-you-sure-question": "¿Estás seguro?"
+    "are-you-sure-question": "¿Estás seguro?",
+    "no-value": "",
+    "displaying-entries": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiar al portapapeles",
@@ -153,7 +155,8 @@
     "open-file-for-importing": "La función de importación no se debería ejecutar sin la ventana principal en ejecución.",
     "entry-not-found": "Entrada no encontrada.",
     "dropbox-connection-failed-info": "La conexión al servidor de Dropbox ha fallado. Por favor, inténtalo de nuevo más tarde.",
-    "webdav-connection-failed-info": "La conexión a {{endpoint}} ha fallado. Por favor, comprueba tus credenciales e inténtalo de nuevo."
+    "webdav-connection-failed-info": "La conexión a {{endpoint}} ha fallado. Por favor, comprueba tus credenciales e inténtalo de nuevo.",
+    "passwords-dont-match": ""
   },
   "group": {
     "new-group": "Nuevo grupo",
@@ -188,7 +191,8 @@
     "password": "Contraseña",
     "confirm-password": "Confirma la contraseña",
     "confirm": "Confirmar",
-    "nevermind": "No importa"
+    "nevermind": "No importa",
+    "new-password": ""
   },
   "search": {
     "search": "Buscar"
@@ -201,6 +205,17 @@
   },
   "update": {
     "installing": "Instalando",
-    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora."
+    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora.",
+    "new-version-available": "",
+    "release-notes": "",
+    "not-now": ""
+  },
+  "archive-search": {
+    "searchterm": "",
+    "nothing-found": ""
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

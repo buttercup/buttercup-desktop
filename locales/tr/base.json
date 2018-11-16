@@ -229,5 +229,9 @@
     "download": "İndir ve Yükle",
     "download-manual": "Sürümler sayfasını aç",
     "release-notes": "Sürüm Notları:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

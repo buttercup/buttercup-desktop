@@ -7,7 +7,8 @@
       "hide": "Hide",
       "hideothers": "Hide others",
       "unhide": "Unhide",
-      "quit": "Quit"
+      "quit": "Quit",
+      "preferences": "Preferences..."
     },
     "archive": {
       "archive": "Archive",
@@ -229,5 +230,9 @@
     "download": "Download and Install",
     "download-manual": "Open Releases Page",
     "release-notes": "Release Notes:"
+  },
+  "preferences": {
+    "general": "General",
+    "appereance": "Appereance"
   }
 }

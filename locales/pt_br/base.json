@@ -131,7 +131,9 @@
     "entry-inputs-empty-info": "Por favor, adicione ao menos um título.",
     "entry-title-empty-info": "Entre com o título, por favor.",
     "custom-fields-label-empty-info": "Você se esqueceu de adicionar uma etiqueta a um campo customizado",
-    "are-you-sure-question": "Você tem certeza?"
+    "are-you-sure-question": "Você tem certeza?",
+    "no-value": "",
+    "displaying-entries": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiado para a Área de Transferência",
@@ -190,7 +192,8 @@
     "password": "Senha",
     "confirm-password": "Confirmar a Senha",
     "confirm": "Confirmar",
-    "nevermind": "Esquecer"
+    "nevermind": "Esquecer",
+    "new-password": ""
   },
   "search": {
     "search": "Buscar"
@@ -203,6 +206,17 @@
   },
   "update": {
     "installing": "Instalando",
-    "update-available-message": "Buttercup {{version}} está disponível. Clique aqui para instalar agora."
+    "update-available-message": "Buttercup {{version}} está disponível. Clique aqui para instalar agora.",
+    "new-version-available": "",
+    "release-notes": "",
+    "not-now": ""
+  },
+  "archive-search": {
+    "searchterm": "",
+    "nothing-found": ""
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

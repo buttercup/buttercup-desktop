@@ -137,7 +137,9 @@
     "entry-inputs-empty-info": "Kérjük, írjon be legalább egy címet.",
     "entry-title-empty-info": "Adjon meg egy címet.",
     "custom-fields-label-empty-info": "Elfelejtette beállítani a címkét egy vagy több egyedi mezőre.",
-    "are-you-sure-question": "Biztos?"
+    "are-you-sure-question": "Biztos?",
+    "no-value": "",
+    "displaying-entries": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Vágólapra másolás",
@@ -215,5 +217,9 @@
     "not-now": "Most nem",
     "download": "Letöltés és telepítés",
     "release-notes": "Kiadási megjegyzések:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }

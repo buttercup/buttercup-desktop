@@ -7,7 +7,8 @@
       "hide": "Verbergen",
       "hideothers": "Alles andere ausblenden",
       "unhide": "Einblenden",
-      "quit": "Verlassen"
+      "quit": "Verlassen",
+      "preferences": "Einstellungen..."
     },
     "archive": {
       "archive": "Archiv",
@@ -139,7 +140,9 @@
     "entry-inputs-empty-info": "Bitte gib mindestens einen Titel an.",
     "entry-title-empty-info": "Bitte gib einen Titel ein.",
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
-    "are-you-sure-question": "Bist du dir sicher?"
+    "are-you-sure-question": "Bist du dir sicher?",
+    "no-value": "Kein Wert hinterlegt",
+    "displaying-entries": "Angezeigte Einträge"
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
@@ -217,5 +220,9 @@
     "not-now": "Nicht jetzt",
     "download": "Herunterladen und installieren",
     "release-notes": "Versionshinweise:"
+  },
+  "preferences": {
+    "general": "Allgemein",
+    "appereance": "Erscheinungsbild"
   }
 }

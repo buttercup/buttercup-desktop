@@ -229,5 +229,9 @@
     "download": "Pobierz i zainstaluj",
     "download-manual": "Otwórz stronę wydania",
     "release-notes": "Nota wydania:"
+  },
+  "preferences": {
+    "general": "",
+    "appereance": ""
   }
 }
