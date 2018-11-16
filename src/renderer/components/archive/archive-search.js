@@ -188,24 +188,23 @@ class ArchiveSearch extends PureComponent {
         selectedItemIndex
       },
       () => {
-        const selectedItem = this.searchEntryList.view.childNodes[
-          selectedItemIndex
-        ];
-        let searchListScrollTop = this.searchEntryList.view.scrollTop;
+        const { view, scrollTop } = this.searchEntryList;
+        const selectedItem = view.childNodes[selectedItemIndex];
+        let searchListScrollTop = view.scrollTop;
 
         if (selectedItem) {
           if (
             selectedItem.offsetTop +
               selectedItem.offsetHeight * 2 -
-              this.searchEntryList.view.scrollTop >
-            this.searchEntryList.view.clientHeight
+              view.scrollTop >
+            view.clientHeight
           ) {
             searchListScrollTop += selectedItem.offsetHeight;
           } else {
             searchListScrollTop -= selectedItem.offsetHeight;
           }
 
-          this.searchEntryList.scrollTop(searchListScrollTop);
+          scrollTop(searchListScrollTop);
         }
       }
     );
