@@ -37,8 +37,8 @@ const Search = styled(Flex)`
   z-index: 4;
   top: 10%;
   left: 50%;
-  width: 50vw;
-  max-width: 400px;
+  max-width: 50vw;
+  min-width: 400px;
   transition: transform 0.3s;
   transform: translate(-50%, 0);
   width: 100%;
@@ -136,6 +136,7 @@ class ArchiveSearch extends PureComponent {
     this.highlightSearchResult = this.highlightSearchResult.bind(this);
     this.onInputKeyDownOrDown = this.onInputKeyDownOrDown.bind(this);
     this.openEntry = this.openEntry.bind(this);
+    this.selectListItem = this.selectListItem.bind(this);
   }
 
   closeSearch() {
@@ -162,21 +163,49 @@ class ArchiveSearch extends PureComponent {
     return word.replace(regex, '<mark>$1</mark>');
   }
 
+  selectListItem(selectedItem) {
+    const { searchEntryList } = this.refs;
+
+    this.setState(
+      {
+        selectedItem
+      },
+      () => {
+        const selectedElement = searchEntryList.view.childNodes[selectedItem];
+        let searchListScrollTop = searchEntryList.view.scrollTop;
+
+        if (selectedElement) {
+          if (
+            selectedElement.offsetTop +
+              selectedElement.offsetHeight * 2 -
+              searchEntryList.view.scrollTop >
+            searchEntryList.view.clientHeight
+          ) {
+            searchListScrollTop += selectedElement.offsetHeight;
+          } else {
+            searchListScrollTop -= selectedElement.offsetHeight;
+          }
+
+          searchEntryList.scrollTop(searchListScrollTop);
+        }
+      }
+    );
+  }
+
   onInputKeyDownOrDown(e) {
     const { entries, selectedItem } = this.state;
 
+    // up
     if (e.keyCode === 38 && selectedItem !== -1) {
-      this.setState(state => ({
-        selectedItem: state.selectedItem - 1
-      }));
+      this.selectListItem(selectedItem - 1);
     }
 
+    // down
     if (e.keyCode === 40 && selectedItem < entries.length - 1) {
-      this.setState(state => ({
-        selectedItem: state.selectedItem + 1
-      }));
+      this.selectListItem(selectedItem + 1);
     }
 
+    // enter
     if (e.keyCode === 13) {
       if (entries.length > 0 && entries[selectedItem]) {
         const result = entries[selectedItem];
@@ -233,7 +262,11 @@ class ArchiveSearch extends PureComponent {
           <Choose>
             <When condition={entries.length > 0}>
               <EntryList flexAuto>
-                <Scrollbars autoHeight autoHeightMax={300}>
+                <Scrollbars
+                  ref="searchEntryList"
+                  autoHeight
+                  autoHeightMax={300}
+                >
                   {entries.map(({ entry, sourceID, groupID, icon }, index) => (
                     <ListItem
                       selected={selectedItem === index}
