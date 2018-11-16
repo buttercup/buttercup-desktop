@@ -2,6 +2,7 @@ import { startFileHost } from '@buttercup/secure-file-host';
 import { getWindowManager } from './window-manager';
 import { reopenMainWindow } from '../utils/window';
 import { config } from '../../shared/config';
+import { getSetting } from '../../shared/selectors';
 
 let __host;
 const CONFIG_KEY = 'fileHost.encryptionKey';
@@ -45,6 +46,17 @@ export function startHost() {
   config.set(CONFIG_KEY, __host.key);
 }
 
-export function getHost() {
-  return __host;
+export function stopHost() {
+  if (__host) {
+    __host.stop();
+    __host = undefined;
+  }
+}
+
+export function setupHost(store) {
+  const state = store.getState();
+  const isHostEnabled = getSetting(state, 'isBrowserAccessEnabled');
+  if (isHostEnabled) {
+    startHost();
+  }
 }

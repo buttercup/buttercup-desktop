@@ -7,7 +7,7 @@ import { setupTrayIcon } from './tray';
 import { getMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import localesConfig from '../../locales/config';
-import { startHost } from './lib/file-host';
+import { setupHost } from './lib/file-host';
 
 const windowManager = getWindowManager();
 
@@ -20,8 +20,8 @@ export function setupActions(store) {
     }, 500)
   );
 
-  // Start File Host
-  startHost();
+  // Start File Host if Enabled
+  setupHost(store);
 
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {
