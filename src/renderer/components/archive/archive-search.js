@@ -128,13 +128,13 @@ class ArchiveSearch extends PureComponent {
       archive: null,
       entries: [],
       searchTerm: '',
-      selectedItem: -1
+      selectedItemIndex: -1
     };
 
     this.changeInput = this.changeInput.bind(this);
     this.closeSearch = this.closeSearch.bind(this);
     this.highlightSearchResult = this.highlightSearchResult.bind(this);
-    this.onInputKeyDownOrDown = this.onInputKeyDownOrDown.bind(this);
+    this.onInputKeyUpOrDown = this.onInputKeyUpOrDown.bind(this);
     this.openEntry = this.openEntry.bind(this);
     this.selectListItem = this.selectListItem.bind(this);
   }
@@ -147,7 +147,7 @@ class ArchiveSearch extends PureComponent {
     this.setState(
       {
         searchTerm: e.target.value,
-        selectedItem: -1
+        selectedItemIndex: -1
       },
       () =>
         getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
@@ -163,27 +163,27 @@ class ArchiveSearch extends PureComponent {
     return word.replace(regex, '<mark>$1</mark>');
   }
 
-  selectListItem(selectedItem) {
+  selectListItem(selectedItemIndex) {
     const { searchEntryList } = this.refs;
 
     this.setState(
       {
-        selectedItem
+        selectedItemIndex
       },
       () => {
-        const selectedElement = searchEntryList.view.childNodes[selectedItem];
+        const selectedItem = searchEntryList.view.childNodes[selectedItemIndex];
         let searchListScrollTop = searchEntryList.view.scrollTop;
 
-        if (selectedElement) {
+        if (selectedItem) {
           if (
-            selectedElement.offsetTop +
-              selectedElement.offsetHeight * 2 -
+            selectedItem.offsetTop +
+              selectedItem.offsetHeight * 2 -
               searchEntryList.view.scrollTop >
             searchEntryList.view.clientHeight
           ) {
-            searchListScrollTop += selectedElement.offsetHeight;
+            searchListScrollTop += selectedItem.offsetHeight;
           } else {
-            searchListScrollTop -= selectedElement.offsetHeight;
+            searchListScrollTop -= selectedItem.offsetHeight;
           }
 
           searchEntryList.scrollTop(searchListScrollTop);
@@ -192,23 +192,23 @@ class ArchiveSearch extends PureComponent {
     );
   }
 
-  onInputKeyDownOrDown(e) {
-    const { entries, selectedItem } = this.state;
+  onInputKeyUpOrDown(e) {
+    const { entries, selectedItemIndex } = this.state;
 
     // up
-    if (e.keyCode === 38 && selectedItem !== -1) {
-      this.selectListItem(selectedItem - 1);
+    if (e.keyCode === 38 && selectedItemIndex !== -1) {
+      this.selectListItem(selectedItemIndex - 1);
     }
 
     // down
-    if (e.keyCode === 40 && selectedItem < entries.length - 1) {
-      this.selectListItem(selectedItem + 1);
+    if (e.keyCode === 40 && selectedItemIndex < entries.length - 1) {
+      this.selectListItem(selectedItemIndex + 1);
     }
 
     // enter
     if (e.keyCode === 13) {
-      if (entries.length > 0 && entries[selectedItem]) {
-        const result = entries[selectedItem];
+      if (entries.length > 0 && entries[selectedItemIndex]) {
+        const result = entries[selectedItemIndex];
         this.openEntry(result.sourceID, result.entry);
       }
     }
@@ -239,7 +239,7 @@ class ArchiveSearch extends PureComponent {
   }
 
   render() {
-    const { entries, searchTerm, selectedItem } = this.state;
+    const { entries, searchTerm, selectedItemIndex } = this.state;
     const { t } = this.props;
 
     return (
@@ -248,7 +248,7 @@ class ArchiveSearch extends PureComponent {
         <Search flexColumn>
           <Input
             bordered
-            onKeyDown={this.onInputKeyDownOrDown}
+            onKeyDown={this.onInputKeyUpOrDown}
             innerRef={input => {
               this._input = input;
             }}
@@ -269,7 +269,7 @@ class ArchiveSearch extends PureComponent {
                 >
                   {entries.map(({ entry, sourceID, groupID, icon }, index) => (
                     <ListItem
-                      selected={selectedItem === index}
+                      selected={selectedItemIndex === index}
                       key={index}
                       onClick={() => this.openEntry(sourceID, entry)}
                     >
