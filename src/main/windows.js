@@ -109,6 +109,25 @@ export function setupWindows(store) {
     return win;
   });
 
+  windowManager.setBuildProcedure('app-preferences', (callback, options) => {
+    const win = new BrowserWindow({
+      width: 650,
+      height: 450,
+      modal: true,
+      show: false,
+      resizable: false,
+      ...options
+    });
+
+    win.loadURL(getURIPathToFile('views/app-preferences.html'));
+
+    win.once('ready-to-show', () => {
+      win.show();
+    });
+
+    return win;
+  });
+
   windowManager.setBuildProcedure('update', (callback, options) => {
     const win = new BrowserWindow({
       width: 700,

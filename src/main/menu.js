@@ -382,6 +382,18 @@ export const setupMenu = store => {
         checkForUpdates();
       }
     },
+    { type: 'separator' },
+    {
+      label: label('app.preferences'),
+      accelerator: `CmdOrCtrl+,`,
+      click: () => {
+        reopenMainWindow(win => {
+          getWindowManager().buildWindowOfType('app-preferences', null, {
+            parent: win
+          });
+        });
+      }
+    },
     { type: 'separator' }
   );
 

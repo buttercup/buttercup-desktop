@@ -10,6 +10,7 @@ module.exports = merge(baseConfig, {
 
   entry: {
     main: resolve(__dirname, '../src/renderer/index'),
+    appPreferences: resolve(__dirname, '../src/renderer/preferences'),
     fileManager: resolve(__dirname, '../src/renderer/file-manager'),
     update: resolve(__dirname, '../src/renderer/update')
   },

@@ -25,6 +25,12 @@ export function setupActions(store) {
     });
   });
 
+  ipc.on('show-app-preferences', () => {
+    windowManager.buildWindowOfType('app-preferences', null, {
+      parent: BrowserWindow.getFocusedWindow()
+    });
+  });
+
   ipc.on('open-file-dialog', () => {
     openFile();
   });
