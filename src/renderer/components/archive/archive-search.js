@@ -113,6 +113,8 @@ const Icon = styled.div`
 `;
 
 class ArchiveSearch extends PureComponent {
+  searchEntryList = null; // search entry list reference
+
   static propTypes = {
     getArchive: PropTypes.func,
     currentArchive: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
@@ -121,6 +123,11 @@ class ArchiveSearch extends PureComponent {
     t: PropTypes.func
   };
 
+  /**
+   * Creates an instance of ArchiveSearch
+   * @param {*} props
+   * @memberof ArchiveSearch
+   */
   constructor(props) {
     super(props);
 
@@ -130,20 +137,22 @@ class ArchiveSearch extends PureComponent {
       searchTerm: '',
       selectedItemIndex: -1
     };
-
-    this.changeInput = this.changeInput.bind(this);
-    this.closeSearch = this.closeSearch.bind(this);
-    this.highlightSearchResult = this.highlightSearchResult.bind(this);
-    this.onInputKeyUpOrDown = this.onInputKeyUpOrDown.bind(this);
-    this.openEntry = this.openEntry.bind(this);
-    this.selectListItem = this.selectListItem.bind(this);
   }
 
-  closeSearch() {
+  /**
+   * Close search popup
+   * @memberof ArchiveSearch
+   */
+  closeSearch = () => {
     this.props.setIsArchiveSearchVisible(false);
-  }
+  };
 
-  changeInput(e) {
+  /**
+   * Update search entry on input
+   * @param {object} e
+   * @memberof ArchiveSearch
+   */
+  changeInput = e => {
     this.setState(
       {
         searchTerm: e.target.value,
@@ -156,43 +165,58 @@ class ArchiveSearch extends PureComponent {
           });
         })
     );
-  }
+  };
 
-  highlightSearchResult(word) {
+  /**
+   * Wrap word with mark tag
+   * @param {string} word text to wrap
+   * @memberof ArchiveSearch
+   */
+  highlightSearchResult = word => {
     const regex = new RegExp('(' + this.state.searchTerm + ')', 'ig');
     return word.replace(regex, '<mark>$1</mark>');
-  }
+  };
 
-  selectListItem(selectedItemIndex) {
-    const { searchEntryList } = this.refs;
-
+  /**
+   * Select list item by index
+   * @param {number} selectedItemIndex
+   * @memberof ArchiveSearch
+   */
+  selectListItem = selectedItemIndex => {
     this.setState(
       {
         selectedItemIndex
       },
       () => {
-        const selectedItem = searchEntryList.view.childNodes[selectedItemIndex];
-        let searchListScrollTop = searchEntryList.view.scrollTop;
+        const selectedItem = this.searchEntryList.view.childNodes[
+          selectedItemIndex
+        ];
+        let searchListScrollTop = this.searchEntryList.view.scrollTop;
 
         if (selectedItem) {
           if (
             selectedItem.offsetTop +
               selectedItem.offsetHeight * 2 -
-              searchEntryList.view.scrollTop >
-            searchEntryList.view.clientHeight
+              this.searchEntryList.view.scrollTop >
+            this.searchEntryList.view.clientHeight
           ) {
             searchListScrollTop += selectedItem.offsetHeight;
           } else {
             searchListScrollTop -= selectedItem.offsetHeight;
           }
 
-          searchEntryList.scrollTop(searchListScrollTop);
+          this.searchEntryList.scrollTop(searchListScrollTop);
         }
       }
     );
-  }
+  };
 
-  onInputKeyUpOrDown(e) {
+  /**
+   * Handle up/down/esc and enter keys
+   * @param {object} e
+   * @memberof ArchiveSearch
+   */
+  onInputKeyUpOrDown = e => {
     const { entries, selectedItemIndex } = this.state;
 
     // up
@@ -216,13 +240,19 @@ class ArchiveSearch extends PureComponent {
     if (e.keyCode === 27) {
       this.closeSearch();
     }
-  }
+  };
 
-  openEntry(sourceID, entry) {
+  /**
+   * Open archive entry
+   * @param {number} sourceID
+   * @param {object} entry
+   * @memberof ArchiveSearch
+   */
+  openEntry = (sourceID, entry) => {
     this.props.selectArchiveGroupAndEntry(sourceID, entry);
 
     this.closeSearch();
-  }
+  };
 
   componentDidMount() {
     const { getArchive, currentArchive } = this.props;
@@ -263,7 +293,7 @@ class ArchiveSearch extends PureComponent {
             <When condition={entries.length > 0}>
               <EntryList flexAuto>
                 <Scrollbars
-                  ref="searchEntryList"
+                  ref={el => (this.searchEntryList = el)}
                   autoHeight
                   autoHeightMax={300}
                 >
