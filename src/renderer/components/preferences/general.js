@@ -88,7 +88,6 @@ class General extends PureComponent {
                 {languages[key].name}
               </option>
             ))}
-            <option>english</option>
           </Select>
         </LabelWrapper>
       </Content>

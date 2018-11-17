@@ -129,7 +129,7 @@ class Preferences extends PureComponent {
 
   render() {
     const { t } = this.props;
-    console.log(this.props);
+
     return (
       <Router>
         <Wrapper>
@@ -156,7 +156,7 @@ class Preferences extends PureComponent {
                 key={key}
                 exact
                 path={path}
-                render={props => <Component {...props} />}
+                render={props => <Component {...this.props} {...props} />}
               />
             ))}
           </Content>
