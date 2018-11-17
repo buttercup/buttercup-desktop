@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
@@ -8,8 +9,30 @@ import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import { closeCurrentWindow } from '../../system/utils';
 
+import { getSetting } from '../../../shared/selectors';
+
 // router views
-import General from './general';
+const preferencesFiles = require.context('./', true, /^\.\/.*\.js$/);
+const defaultView = 'general';
+const views = preferencesFiles
+  .keys()
+  .filter(
+    fileName =>
+      !fileName.includes('index') && preferencesFiles(fileName).default
+  )
+  .map(fileName => {
+    const component = preferencesFiles(fileName).default;
+    const key = fileName.substr(0, fileName.lastIndexOf('.')).replace('./', '');
+
+    if (component) {
+      return {
+        key,
+        path: key === defaultView ? '/' : `/${key}`,
+        component
+      };
+    }
+  })
+  .reverse();
 
 const Wrapper = styled.div`
   display: grid;
@@ -106,21 +129,36 @@ class Preferences extends PureComponent {
 
   render() {
     const { t } = this.props;
+    console.log(this.props);
     return (
       <Router>
         <Wrapper>
           <Menu>
             <MenuInner>
-              <NavLink exact to="/" activeclass="active">
-                <Translate i18nKey="preferences.general" parent="span" />
-              </NavLink>
-              <NavLink exact to="/appereance" activeclass="active">
-                <Translate i18nKey="preferences.appereance" parent="span" />
-              </NavLink>
+              {views.map(view => (
+                <NavLink
+                  key={view.path}
+                  exact
+                  to={view.path}
+                  activeclass="active"
+                >
+                  <Translate
+                    i18nKey={`preferences.${view.key}`}
+                    parent="span"
+                  />
+                </NavLink>
+              ))}
             </MenuInner>
           </Menu>
           <Content>
-            <Route exact path="/" component={General} />
+            {views.map(({ key, path, component: Component }) => (
+              <Route
+                key={key}
+                exact
+                path={path}
+                render={props => <Component {...props} />}
+              />
+            ))}
           </Content>
           <Footer>
             <Button onClick={this.handleClose}>
@@ -134,4 +172,8 @@ class Preferences extends PureComponent {
   }
 }
 
-export default translate()(Preferences);
+export default translate()(
+  connect(state => ({
+    locale: getSetting(state, 'locale')
+  }))(Preferences, 'Preferences')
+);

@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import { translate } from 'react-i18next';
 import { Input as BaseInput } from '@buttercup/ui';
 import { languages } from '../../../shared/i18n';
-import { ipcRenderer as ipc } from 'electron';
 
 const Input = styled(BaseInput)`
   font-weight: 300;
@@ -45,6 +44,7 @@ class General extends PureComponent {
   static propTypes = {
     t: PropTypes.func
   };
+
   state = {
     fontSize: 13,
     language: 'en'
@@ -62,35 +62,7 @@ class General extends PureComponent {
 
     return (
       <Content>
-        <h3>{t('preferences.general')}</h3>
-
-        <LabelWrapper>
-          font size
-          <Input
-            bordered
-            onChange={e => this.changeInput(e, 'fontSize')}
-            value={fontSize}
-            placeholder={t('archive-search.searchterm')}
-            type="number"
-            searchTerm={fontSize}
-          />
-        </LabelWrapper>
-
-        <LabelWrapper>
-          language
-          <Select
-            onChange={e => {
-              ipc.send('change-locale-main', e.target.value);
-            }}
-          >
-            {Object.keys(languages).map(key => (
-              <option key={key} value={key}>
-                {languages[key].name}
-              </option>
-            ))}
-            <option>english</option>
-          </Select>
-        </LabelWrapper>
+        <h3>{t('preferences.appereance')}</h3>
       </Content>
     );
   }

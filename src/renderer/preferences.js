@@ -1,8 +1,9 @@
 import React from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import { I18nextProvider } from 'react-i18next';
-import i18n from '../shared/i18n';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import i18n from '../shared/i18n';
 import Preferences from './components/preferences';
 import configureStore from '../shared/store/configure-store';
 import { setSetting } from '../shared/actions/settings';
@@ -17,7 +18,9 @@ i18n.changeLanguage(getSetting(store.getState(), 'locale'));
 const renderPreferences = i18n =>
   render(
     <I18nextProvider i18n={i18n}>
-      <Preferences />
+      <Provider store={store}>
+        <Preferences />
+      </Provider>
     </I18nextProvider>,
     document.getElementById('root')
   );
@@ -37,4 +40,6 @@ ipc.on('change-locale-main', (e, lang) => {
   renderPreferences(i18n);
 });
 
-renderPreferences(i18n);
+setTimeout(() => {
+  renderPreferences(i18n);
+}, 0);
