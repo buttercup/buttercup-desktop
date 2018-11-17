@@ -2,7 +2,11 @@ import { createAction } from 'redux-actions';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getQueue } from '../../renderer/system/queue';
-import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
+import {
+  getCurrentGroupId,
+  getCurrentArchiveId,
+  getExpandedKeys
+} from '../selectors';
 import i18n from '../i18n';
 import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import { getSharedArchiveManager } from '../buttercup/archive';
@@ -16,7 +20,7 @@ import {
   ENTRIES_CHANGE_MODE,
   ENTRIES_SET_SORT
 } from './types';
-
+import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
@@ -173,7 +177,22 @@ export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   dispatch,
   getState
 ) => {
+  // get all parent groups
+  const getParentGroup = currentGroup =>
+    currentGroup
+      ? [...getParentGroup(currentGroup.getGroup()), currentGroup]
+      : [];
+
   dispatch(loadOrUnlockArchive(archiveId));
   dispatch(loadGroup(entry.getGroup().id));
+  // set expanded keys and remove duplicate entries
+  dispatch(
+    setExpandedKeys([
+      ...new Set([
+        ...getExpandedKeys(getState()),
+        ...getParentGroup(entry.getGroup()).map(g => g.id)
+      ])
+    ])
+  );
   dispatch(selectEntry(entry.id));
 };
