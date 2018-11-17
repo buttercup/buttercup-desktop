@@ -8,16 +8,17 @@ import { ipcRenderer as ipc } from 'electron';
 
 const Input = styled(BaseInput)`
   font-weight: 300;
-  height: auto;
   display: inline-block;
+  padding: 0 12px;
 `;
 
 const Select = styled.select`
   font-weight: 300;
   height: auto;
+  height: 43px;
   background-color: #fff;
   border: 2px solid #e4e9f2;
-  padding: 0 6px;
+  padding: 0 12px;
   border-radius: 4px;
   display: inline-block;
   width: 100%;
@@ -35,6 +36,10 @@ const LabelWrapper = styled.label`
   font-weight: bold;
   font-size: 0.75em;
   margin: 0 0 20px;
+  input,
+  select {
+    margin-top: 4px;
+  }
 `;
 
 const Content = styled.div`
