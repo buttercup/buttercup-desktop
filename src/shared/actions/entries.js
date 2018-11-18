@@ -178,21 +178,27 @@ export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   getState
 ) => {
   // get all parent groups
-  const getParentGroup = currentGroup =>
+  const getParentGroups = currentGroup =>
     currentGroup
-      ? [...getParentGroup(currentGroup.getGroup()), currentGroup]
+      ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
       : [];
 
+  // load archive
   dispatch(loadOrUnlockArchive(archiveId));
-  dispatch(loadGroup(entry.getGroup().id));
-  // set expanded keys and remove duplicate entries
+
+  // set expanded keys and remove duplicate keys
   dispatch(
     setExpandedKeys([
       ...new Set([
         ...getExpandedKeys(getState()),
-        ...getParentGroup(entry.getGroup()).map(g => g.id)
+        ...getParentGroups(entry.getGroup()).map(g => g.id)
       ])
     ])
   );
+
+  // load group with entry
+  dispatch(loadGroup(entry.getGroup().id));
+
+  // select entry by id
   dispatch(selectEntry(entry.id));
 };
