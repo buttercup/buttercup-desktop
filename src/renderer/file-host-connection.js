@@ -5,7 +5,7 @@ import { render } from 'react-dom';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
-import i18n from '../shared/i18n';
+import i18n, { Translate } from '../shared/i18n';
 import { isOSX } from '../shared/utils/platform';
 import configureStore from '../shared/store/configure-store';
 import { getSetting } from '../shared/selectors';
@@ -18,6 +18,13 @@ const Wrapper = styled(Flex)`
   height: 100vh;
   width: 100vw;
   padding: var(--spacing-one);
+  color: #fff;
+
+  p {
+    margin: 0 0 var(--spacing-half);
+    text-align: center;
+    font-size: 0.8rem;
+  }
 `;
 
 const Code = styled.pre`
@@ -27,7 +34,6 @@ const Code = styled.pre`
   border: 1px solid var(--white-5);
   border-radius: 1rem;
   margin: 0 0 var(--spacing-one);
-  color: #fff;
   text-align: center;
   letter-spacing: 2rem;
   font-size: 2rem;
@@ -44,8 +50,9 @@ const renderWindow = connectionCode =>
   render(
     <I18nextProvider i18n={i18n}>
       <Wrapper flexColumn>
+        <Translate i18nKey="app-menu.system.enable-browser-access" parent="p" />
         <Code>
-          <span>{connectionCode}</span>
+          <span role="content">{connectionCode || 'ABC123'}</span>
         </Code>
         <Button
           dark
@@ -53,7 +60,7 @@ const renderWindow = connectionCode =>
             remote.getCurrentWindow().close();
           }}
         >
-          Cancel
+          <Translate i18nKey="entry.cancel" parent="span" />
         </Button>
       </Wrapper>
     </I18nextProvider>,
