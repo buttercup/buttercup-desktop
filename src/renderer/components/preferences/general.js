@@ -110,6 +110,7 @@ class General extends PureComponent {
         <LabelWrapper>
           {t('app-menu.view.language')}
           <Select
+            value={locale}
             onChange={e => {
               ipc.send('change-locale-main', e.target.value);
               // quick fix to update tray icon translation
@@ -120,7 +121,7 @@ class General extends PureComponent {
             }}
           >
             {Object.keys(languages).map(key => (
-              <option key={key} value={key} selected={locale === key}>
+              <option key={key} value={key}>
                 {languages[key].name}
               </option>
             ))}
