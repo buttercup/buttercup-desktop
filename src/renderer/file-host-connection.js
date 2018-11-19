@@ -52,7 +52,7 @@ const renderWindow = connectionCode =>
       <Wrapper flexColumn>
         <Translate i18nKey="app-menu.system.enable-browser-access" parent="p" />
         <Code>
-          <span role="content">{connectionCode || 'ABC123'}</span>
+          <span role="content">{connectionCode}</span>
         </Code>
         <Button
           dark
