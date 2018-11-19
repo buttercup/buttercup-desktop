@@ -13,7 +13,8 @@
         "import": "Импортировать",
         "import-from-type": "Из {{name}} архива (.{{extension}})",
         "import-to-type": "В {{name}}"
-      }
+      },
+      "close": ""
     },
     "edit": {
       "edit": "Редактировать",
@@ -192,6 +193,7 @@
   },
   "preferences": {
     "general": "",
-    "appereance": ""
+    "appereance": "",
+    "preferences": ""
   }
 }

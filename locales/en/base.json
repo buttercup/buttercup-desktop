@@ -233,6 +233,7 @@
   },
   "preferences": {
     "general": "General",
-    "appereance": "Appereance"
+    "appereance": "Appereance",
+    "preferences": ""
   }
 }
