@@ -3,7 +3,6 @@ import { ipcMain as ipc, BrowserWindow, app } from 'electron';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
-import { setupTrayIcon } from './tray';
 import i18n, { languages } from '../shared/i18n';
 import localesConfig from '../../locales/config';
 
@@ -11,10 +10,7 @@ const windowManager = getWindowManager();
 
 export function setupActions(store) {
   // Update the menu
-  store.subscribe(() => {
-    setupMenu(store);
-    setupTrayIcon(store);
-  });
+  store.subscribe(debounce(() => setupMenu(store), 200));
 
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {
@@ -63,9 +59,6 @@ export function setupActions(store) {
     }
 
     i18n.changeLanguage(locale);
-    store.subscribe(() => {
-      setupMenu(store);
-      setupTrayIcon(store);
-    });
+    store.subscribe(debounce(() => setupMenu(store), 200));
   });
 }

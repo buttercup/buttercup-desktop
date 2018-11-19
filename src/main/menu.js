@@ -12,6 +12,7 @@ import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow, reopenMainWindow } from './utils/window';
+import { setupTrayIcon } from './tray';
 import i18n from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
@@ -21,6 +22,8 @@ electronContextMenu();
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 export const setupMenu = store => {
+  setupTrayIcon(store);
+
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
@@ -358,7 +361,9 @@ export const setupMenu = store => {
             });
           });
         } else {
-          // getWindowManager().getWindowsOfType('app-preferences').focus();
+          getWindowManager()
+            .getWindowsOfType('app-preferences')
+            .show();
         }
       }
     },

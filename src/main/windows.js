@@ -29,7 +29,7 @@ export function setupWindows(store) {
       frame: !isOSX(),
       transparent: isOSX() && isHighSierra(),
       show: process.env.NODE_ENV === 'development',
-      darkTheme: true,
+      darkTheme: false,
       vibrancy: 'ultra-dark'
     });
 
