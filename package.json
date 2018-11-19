@@ -173,7 +173,7 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "dropbox-fs": "^0.0.5",
-    "electron": "^3.0.2",
+    "electron": "^3.0.9",
     "electron-builder": "^20.28.4",
     "electron-context-menu": "^0.10.0",
     "electron-debug": "^2.0.0",

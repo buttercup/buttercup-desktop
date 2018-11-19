@@ -155,6 +155,10 @@ export function setupWindows(store) {
       win.setMenuBarVisibility(false);
       win.loadURL(getURIPathToFile('views/file-host-connection.html'));
 
+      win.once('closed', () => {
+        windowManager.deregister(win);
+      });
+
       ipc.once('file-host-connection-init', () => {
         win.show();
 
