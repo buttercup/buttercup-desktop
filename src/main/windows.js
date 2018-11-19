@@ -113,17 +113,16 @@ export function setupWindows(store) {
     const win = new BrowserWindow({
       width: 650,
       height: 450,
-      modal: true,
-      show: false,
-      resizable: false,
+      minWidth: 650,
+      minHeight: 450,
+      resizable: true,
       ...options
     });
 
     win.loadURL(getURIPathToFile('views/app-preferences.html'));
 
-    win.once('ready-to-show', () => {
-      win.show();
-    });
+    win.once('ready-to-show', () => win.show());
+    win.on('close', () => windowManager.deregister(win));
 
     return win;
   });

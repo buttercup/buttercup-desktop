@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
@@ -48,7 +47,7 @@ const Menu = styled.div`
 `;
 
 const MenuInner = styled.div`
-  padding: 0 20px;
+  padding: 20px 20px 0;
   a {
     list-style: none;
     color: #999;
@@ -160,20 +159,10 @@ class Preferences extends PureComponent {
               />
             ))}
           </Content>
-          <Footer>
-            <Button onClick={this.handleClose}>
-              {t('app-menu.archive.close')}
-            </Button>
-            <Button primary>{t('entry.save')}</Button>
-          </Footer>
         </Wrapper>
       </Router>
     );
   }
 }
 
-export default translate()(
-  connect(state => ({
-    locale: getSetting(state, 'locale')
-  }))(Preferences, 'Preferences')
-);
+export default translate()(Preferences);

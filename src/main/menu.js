@@ -12,10 +12,9 @@ import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { getMainWindow, reopenMainWindow } from './utils/window';
-import i18n, { languages } from '../shared/i18n';
+import i18n from '../shared/i18n';
 import pkg from '../../package.json';
 import electronContextMenu from 'electron-context-menu';
-import { setupTrayIcon } from './tray';
 
 electronContextMenu();
 
@@ -195,47 +194,7 @@ export const setupMenu = store => {
     {
       label: label('view.view'),
       submenu: [
-        {
-          label: label('view.condensed-sidebar'),
-          type: 'checkbox',
-          checked: getSetting(state, 'condencedSidebar'),
-          accelerator: 'CmdOrCtrl+Shift+B',
-          click: item => {
-            store.dispatch(setSetting('condencedSidebar', item.checked));
-          }
-        },
-        {
-          label: label('view.enable-tray-icon'),
-          type: 'checkbox',
-          checked: getSetting(state, 'isTrayIconEnabled'),
-          click: item => {
-            store.dispatch(setSetting('isTrayIconEnabled', item.checked));
-            setupTrayIcon(store);
-          }
-        },
-        { type: 'separator' },
         // Language menu point
-        {
-          label: label('view.language'),
-          submenu: Object.keys(languages).map(key => ({
-            label: languages[key].name,
-            checked: getSetting(state, 'locale') === key,
-            enabled: getSetting(state, 'locale') !== key,
-            type: 'checkbox',
-            click: () => {
-              store.dispatch(setSetting('locale', key));
-              i18n.changeLanguage(key);
-              const win = getMainWindow();
-              if (win) {
-                setupMenu(store);
-                Menu.setApplicationMenu(
-                  Menu.buildFromTemplate(defaultTemplate)
-                );
-                win.webContents.send('change-locale-main', key);
-              }
-            }
-          }))
-        },
         ...(!isOSX()
           ? [
               {
@@ -387,11 +346,20 @@ export const setupMenu = store => {
       label: label('app.preferences'),
       accelerator: `CmdOrCtrl+,`,
       click: () => {
-        reopenMainWindow(win => {
-          getWindowManager().buildWindowOfType('app-preferences', null, {
-            parent: win
+        if (getWindowManager().getCountOfType('app-preferences') === 0) {
+          if (isOSX()) {
+            app.dock.show();
+          }
+
+          reopenMainWindow(win => {
+            getWindowManager().buildWindowOfType('app-preferences', null, {
+              title: i18n.t('preferences.preferences'),
+              titleBarStyle: 'hiddenInset'
+            });
           });
-        });
+        } else {
+          // getWindowManager().getWindowsOfType('app-preferences').focus();
+        }
       }
     },
     { type: 'separator' }

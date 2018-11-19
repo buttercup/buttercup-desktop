@@ -1,6 +1,6 @@
 import { Menu, Tray } from 'electron';
 import checkTraySupport from 'check-os-tray-support';
-import { isWindows, isLinux } from '../shared/utils/platform';
+import { isWindows, isLinux, isOSX } from '../shared/utils/platform';
 import { reopenMainWindow, checkDockVisibility } from './utils/window';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile } from './lib/files';
@@ -45,6 +45,21 @@ export const setupTrayIcon = store => {
       label: label('tray.open'),
       click: () => {
         reopenMainWindow();
+      }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: label('app.preferences'),
+      accelerator: `CmdOrCtrl+,`,
+      click: () => {
+        if (getWindowManager().getCountOfType('app-preferences') === 0) {
+          getWindowManager().buildWindowOfType('app-preferences', null, {
+            title: i18n.t('preferences.preferences'),
+            titleBarStyle: 'hiddenInset'
+          });
+        }
       }
     },
     {
