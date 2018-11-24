@@ -111,7 +111,8 @@ window.onbeforeunload = event => {
   }
 };
 
-const unsubscribe = store.subscribe(() => {
+// listen for store changes
+store.subscribe(() => {
   const state = store.getState();
   if (state.settings && state.settings.referenceFontSize) {
     document.documentElement.style.setProperty(
