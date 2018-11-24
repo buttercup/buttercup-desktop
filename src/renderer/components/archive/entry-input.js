@@ -13,7 +13,7 @@ export const Wrapper = styled(Flex).attrs({
   margin-right: var(--spacing-half);
   position: relative;
 
-  font-size: ${props => (props.isTitle ? '1.8rem' : '14px')};
+  font-size: ${props => (props.isTitle ? '1.8rem' : '1em')};
   font-weight: ${props => (props.isTitle ? 300 : 400)};
 `;
 
@@ -24,7 +24,7 @@ const PasswordWrapper = styled.div`
 
 const PasswordInput = styled(BaseInput)`
   padding-right: 2.2rem;
-  font-size: 14px;
+  font-size: 1em;
   font-family: Anonymous;
 `;
 

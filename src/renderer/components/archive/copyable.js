@@ -12,7 +12,7 @@ import { copyToClipboard } from '../../system/utils';
 
 const Password = styled(ColoredDigits)`
   font-family: Anonymous;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: bold;
 
   .num {

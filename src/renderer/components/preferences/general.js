@@ -61,13 +61,10 @@ class General extends PureComponent {
     isTrayIconEnabled: PropTypes.boolean,
     setIsTrayIconEnabled: PropTypes.func,
     condencedSidebar: PropTypes.boolean,
-    setCondencedSidebar: PropTypes.func,
-    referenceFontSize: PropTypes.number,
-    setReferenceFontSize: PropTypes.func
+    setCondencedSidebar: PropTypes.func
   };
 
   state = {
-    fontSize: 13,
     language: 'en'
   };
 
@@ -84,12 +81,8 @@ class General extends PureComponent {
       isTrayIconEnabled,
       setIsTrayIconEnabled,
       condencedSidebar,
-      setCondencedSidebar,
-      referenceFontSize,
-      setReferenceFontSize
+      setCondencedSidebar
     } = this.props;
-
-    const { fontSize } = this.state;
 
     return (
       <Content>
@@ -109,19 +102,6 @@ class General extends PureComponent {
             type="checkbox"
             onChange={e => setCondencedSidebar(e.target.checked)}
             checked={condencedSidebar}
-          />
-        </LabelWrapper>
-        <LabelWrapper>
-          font size
-          <Range
-            bordered
-            min="0.5"
-            step="0.1"
-            max="2"
-            onChange={e => setReferenceFontSize(e.target.value)}
-            value={referenceFontSize}
-            placeholder={t('archive-search.searchterm')}
-            type="range"
           />
         </LabelWrapper>
 
@@ -152,15 +132,10 @@ class General extends PureComponent {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setIsTrayIconEnabled: payload => {
-      dispatch(setSetting('isTrayIconEnabled', payload));
-    },
-    setCondencedSidebar: payload => {
-      dispatch(setSetting('condencedSidebar', payload));
-    },
-    setReferenceFontSize: payload => {
-      dispatch(setSetting('referenceFontSize', payload));
-    }
+    setIsTrayIconEnabled: payload =>
+      dispatch(setSetting('isTrayIconEnabled', payload)),
+    setCondencedSidebar: payload =>
+      dispatch(setSetting('condencedSidebar', payload))
   };
 };
 
@@ -168,8 +143,7 @@ export default connect(
   state => ({
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
-    condencedSidebar: getSetting(state, 'condencedSidebar'),
-    referenceFontSize: getSetting(state, 'referenceFontSize')
+    condencedSidebar: getSetting(state, 'condencedSidebar')
   }),
   mapDispatchToProps
 )(General, 'General');

@@ -3,7 +3,7 @@
 .button {
   display: inline-block;
   border-radius: 20px;
-  font-size: .75em;
+  font-size: .75em !important;
   font-weight: 400;
   text-transform: uppercase;
   padding: $spacing-half $spacing-one;
@@ -18,7 +18,7 @@
   }
 
   svg {
-    font-size: 14px;
+    font-size: 1em;
     vertical-align: -3px !important;
     margin-right: 2px;
     cursor: pointer !important;
