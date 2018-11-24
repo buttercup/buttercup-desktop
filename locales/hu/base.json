@@ -48,7 +48,8 @@
       "forcereload": "Kényszerített újratöltés",
       "toggledevtools": "Fejlesztői eszköz váltás",
       "togglefullscreen": "Teljes képernyőre váltás",
-      "auto-hide-menubar": "Automatikus menü elrejtése"
+      "auto-hide-menubar": "Automatikus menü elrejtése",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Ablak",
@@ -221,6 +222,8 @@
   "preferences": {
     "general": "",
     "appereance": "",
-    "preferences": ""
+    "preferences": "",
+    "font-size": "",
+    "reset": ""
   }
 }

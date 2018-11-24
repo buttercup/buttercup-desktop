@@ -234,6 +234,8 @@
   "preferences": {
     "general": "General",
     "appereance": "Appereance",
-    "preferences": ""
+    "preferences": "Preferences",
+    "font-size": "Font size",
+    "reset": "Reset"
   }
 }

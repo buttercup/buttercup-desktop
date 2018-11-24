@@ -48,7 +48,8 @@
       "forcereload": "Vynutit obnovení ",
       "toggledevtools": "Vývojařské nástroje",
       "togglefullscreen": "Celá obrazovka",
-      "auto-hide-menubar": "Automaticky schovávat menu"
+      "auto-hide-menubar": "Automaticky schovávat menu",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Okno",
@@ -221,6 +222,8 @@
   "preferences": {
     "general": "",
     "appereance": "",
-    "preferences": ""
+    "preferences": "",
+    "font-size": "",
+    "reset": ""
   }
 }

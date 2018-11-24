@@ -47,7 +47,8 @@
       "forcereload": "Recarregamento Forçado",
       "toggledevtools": "Abrir dev-tools",
       "togglefullscreen": "Tela cheia",
-      "auto-hide-menubar": "Esconder Automaticamnete a barra de menu"
+      "auto-hide-menubar": "Esconder Automaticamnete a barra de menu",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Janela",
@@ -218,6 +219,8 @@
   "preferences": {
     "general": "",
     "appereance": "",
-    "preferences": ""
+    "preferences": "",
+    "font-size": "",
+    "reset": ""
   }
 }

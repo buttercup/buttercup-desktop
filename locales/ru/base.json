@@ -28,7 +28,8 @@
       "view": "Просмотреть",
       "condensed-sidebar": "Компактная боковая панель",
       "language": "Язык",
-      "auto-hide-menubar": "Автоматически скрывать панель меню"
+      "auto-hide-menubar": "Автоматически скрывать панель меню",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Окно"
@@ -194,6 +195,8 @@
   "preferences": {
     "general": "",
     "appereance": "",
-    "preferences": ""
+    "preferences": "",
+    "font-size": "",
+    "reset": ""
   }
 }

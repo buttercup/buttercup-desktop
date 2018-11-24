@@ -224,6 +224,8 @@
   "preferences": {
     "preferences": "Einstellungen",
     "general": "Allgemein",
-    "appereance": "Erscheinungsbild"
+    "appereance": "Erscheinungsbild",
+    "font-size": "Schriftgröße",
+    "reset": "Zurücksetzen"
   }
 }

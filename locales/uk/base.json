@@ -47,7 +47,8 @@
       "forcereload": "Примусове перезавантаження",
       "toggledevtools": "Засоби розробника",
       "togglefullscreen": "Повний екран",
-      "auto-hide-menubar": "Автоматично ховати панель меню"
+      "auto-hide-menubar": "Автоматично ховати панель меню",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Вікно",
@@ -219,6 +220,8 @@
   "preferences": {
     "general": "",
     "appereance": "",
-    "preferences": ""
+    "preferences": "",
+    "font-size": "",
+    "reset": ""
   }
 }
