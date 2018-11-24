@@ -44,15 +44,17 @@ export const setupShortcuts = store => {
    */
   Mousetrap.bind('mod+b', () => {
     const currentEntry = getCurrentEntry(store.getState());
-    const username = getFacadeFieldValue(currentEntry, 'username');
+    if (currentEntry) {
+      const username = getFacadeFieldValue(currentEntry, 'username');
 
-    if (username) {
-      copyToClipboard(username);
+      if (username) {
+        copyToClipboard(username);
+      }
     }
   });
 
   /**
-   * Lock Current Archive 
+   * Lock Current Archive
    */
   Mousetrap.bind('mod+l', () => {
     const currentArchiveId = getCurrentArchiveId(store.getState());
