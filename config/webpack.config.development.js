@@ -12,7 +12,11 @@ module.exports = merge(baseConfig, {
       resolve(__dirname, '../src/renderer/index')
     ],
     fileManager: resolve(__dirname, '../src/renderer/file-manager'),
-    update: resolve(__dirname, '../src/renderer/update')
+    update: resolve(__dirname, '../src/renderer/update'),
+    fileHostConnection: resolve(
+      __dirname,
+      '../src/renderer/file-host-connection'
+    )
   },
 
   devServer: {
@@ -20,7 +24,7 @@ module.exports = merge(baseConfig, {
     contentBase: baseConfig.output.path,
     publicPath: '/app',
     port: 3000,
-    stats: 'minimal'
+    stats: 'normal'
   },
 
   output: {
