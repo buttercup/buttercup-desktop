@@ -42,7 +42,7 @@ body {
 }
 
 body, button, input, select, textarea {
-  font: 1em/1.5 'Open Sans';
+  font: var(--font-size)/1.5 'Open Sans';
 }
 
 *, *:before, *:after {
@@ -73,6 +73,7 @@ input, button, textarea, :focus {
 }
 
 :root {
+  --font-size: 1em;
   --spacing-half: 6px;
   --spacing-one: 12px;
   --spacing-two: 20px;

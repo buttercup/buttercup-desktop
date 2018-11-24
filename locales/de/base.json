@@ -142,7 +142,7 @@
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
     "are-you-sure-question": "Bist du dir sicher?",
     "no-value": "Kein Wert hinterlegt",
-    "displaying-entries": "Angezeigte Einträge"
+    "displaying-entries": "{{count}} Angezeigte Einträge"
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",

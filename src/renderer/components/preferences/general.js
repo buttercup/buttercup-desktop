@@ -15,6 +15,11 @@ const Input = styled(BaseInput)`
   padding: 0 12px;
 `;
 
+const Range = styled(BaseInput)`
+  display: inline-block;
+  padding: 0;
+`;
+
 const Select = styled.select`
   font-weight: 300;
   height: auto;
@@ -51,8 +56,16 @@ const Content = styled.div`
 
 class General extends PureComponent {
   static propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
+    locale: PropTypes.string,
+    isTrayIconEnabled: PropTypes.boolean,
+    setIsTrayIconEnabled: PropTypes.func,
+    condencedSidebar: PropTypes.boolean,
+    setCondencedSidebar: PropTypes.func,
+    referenceFontSize: PropTypes.number,
+    setReferenceFontSize: PropTypes.func
   };
+
   state = {
     fontSize: 13,
     language: 'en'
@@ -71,8 +84,11 @@ class General extends PureComponent {
       isTrayIconEnabled,
       setIsTrayIconEnabled,
       condencedSidebar,
-      setCondencedSidebar
+      setCondencedSidebar,
+      referenceFontSize,
+      setReferenceFontSize
     } = this.props;
+
     const { fontSize } = this.state;
 
     return (
@@ -97,13 +113,15 @@ class General extends PureComponent {
         </LabelWrapper>
         <LabelWrapper>
           font size
-          <Input
+          <Range
             bordered
-            onChange={e => this.changeInput(e, 'fontSize')}
-            value={fontSize}
+            min="0.5"
+            step="0.1"
+            max="2"
+            onChange={e => setReferenceFontSize(e.target.value)}
+            value={referenceFontSize}
             placeholder={t('archive-search.searchterm')}
-            type="number"
-            searchTerm={fontSize}
+            type="range"
           />
         </LabelWrapper>
 
@@ -139,6 +157,9 @@ const mapDispatchToProps = dispatch => {
     },
     setCondencedSidebar: payload => {
       dispatch(setSetting('condencedSidebar', payload));
+    },
+    setReferenceFontSize: payload => {
+      dispatch(setSetting('referenceFontSize', payload));
     }
   };
 };
@@ -147,7 +168,8 @@ export default connect(
   state => ({
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
-    condencedSidebar: getSetting(state, 'condencedSidebar')
+    condencedSidebar: getSetting(state, 'condencedSidebar'),
+    referenceFontSize: getSetting(state, 'referenceFontSize')
   }),
   mapDispatchToProps
 )(General, 'General');

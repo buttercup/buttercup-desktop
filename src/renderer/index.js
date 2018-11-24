@@ -111,6 +111,17 @@ window.onbeforeunload = event => {
   }
 };
 
+const unsubscribe = store.subscribe(() => {
+  const state = store.getState();
+  if (state.settings && state.settings.referenceFontSize) {
+    document.documentElement.style.setProperty(
+      '--font-size',
+      state.settings.referenceFontSize + 'em'
+    );
+  }
+});
+// unsubscribe();
+
 const currentLocale = getSetting(store.getState(), 'locale');
 const renderApp = (RootContainer, i18n) =>
   render(
