@@ -401,10 +401,6 @@ export const setupMenu = store => {
               titleBarStyle: 'hiddenInset'
             });
           });
-        } else {
-          getWindowManager()
-            .getWindowsOfType('app-preferences')
-            .show();
         }
       }
     },
