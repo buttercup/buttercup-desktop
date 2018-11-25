@@ -226,6 +226,7 @@
     "general": "Allgemein",
     "appereance": "Erscheinungsbild",
     "font-size": "Schriftgröße",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "seconds-until-clear-clipboard": ""
   }
 }

@@ -221,6 +221,7 @@
     "appereance": "",
     "preferences": "",
     "font-size": "",
-    "reset": ""
+    "reset": "",
+    "seconds-until-clear-clipboard": ""
   }
 }

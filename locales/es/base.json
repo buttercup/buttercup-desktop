@@ -220,6 +220,7 @@
     "appereance": "",
     "preferences": "",
     "font-size": "",
-    "reset": ""
+    "reset": "",
+    "seconds-until-clear-clipboard": "Seconds until clear clipboard"
   }
 }

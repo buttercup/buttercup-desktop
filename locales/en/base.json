@@ -236,6 +236,7 @@
     "appereance": "Appereance",
     "preferences": "Preferences",
     "font-size": "Font size",
-    "reset": "Reset"
+    "reset": "Reset",
+    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden)"
   }
 }
