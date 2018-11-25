@@ -9,11 +9,40 @@ import { languages } from '../../../shared/i18n';
 import { getSetting } from '../../../shared/selectors';
 import { setSetting } from '../../../shared/actions/settings';
 
+const Grid = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
 const Input = styled(BaseInput)`
   font-weight: 300;
   display: inline-block;
   padding: 0 12px;
   border: 2px solid #e4e9f2;
+`;
+const Checkbox = styled(Input)`
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  width: 20px;
+  height: 20px;
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  margin: 0 8px -5px 0;
+  position: relative;
+
+  &:checked {
+    border: 1px solid #00b7ac;
+    background-color: #00b7ac;
+    &:after {
+      content: '\\2714';
+      font-size: 14px;
+      position: absolute;
+      top: -2px;
+      left: 3px;
+      color: #fff;
+    }
+  }
 `;
 
 const Select = styled.select`
@@ -103,24 +132,32 @@ class General extends PureComponent {
     return (
       <Content>
         <h3>{t('preferences.general')}</h3>
-        <LabelWrapper>
-          {t('app-menu.view.enable-tray-icon')}
-          <input
-            type="checkbox"
-            onChange={e => setIsTrayIconEnabled(e.target.checked)}
-            checked={isTrayIconEnabled}
-          />
-        </LabelWrapper>
-
-        <LabelWrapper>
-          {t('app-menu.view.condensed-sidebar')}
-          <input
-            type="checkbox"
-            onChange={e => setCondencedSidebar(e.target.checked)}
-            checked={condencedSidebar}
-          />
-        </LabelWrapper>
-
+        <Grid>
+          <div>
+            <LabelWrapper>
+              <label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={e => setIsTrayIconEnabled(e.target.checked)}
+                  checked={isTrayIconEnabled}
+                />
+                {t('app-menu.view.enable-tray-icon')}
+              </label>
+            </LabelWrapper>
+          </div>
+          <div>
+            <LabelWrapper>
+              <label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={e => setCondencedSidebar(e.target.checked)}
+                  checked={condencedSidebar}
+                />
+                {t('app-menu.view.condensed-sidebar')}
+              </label>
+            </LabelWrapper>
+          </div>
+        </Grid>
         <LabelWrapper>
           {t('preferences.seconds-until-clear-clipboard')}{' '}
           {secondsUntilClearClipboard !== DEFAULT_CLEAR_SECONDS ? (
