@@ -18,6 +18,7 @@ const LabelWrapper = styled.label`
   display: block;
   text-transform: uppercase;
   font-weight: bold;
+  padding: 0;
   font-size: 0.75em;
   margin: 0 0 20px;
   input,

@@ -66,6 +66,7 @@ const LabelWrapper = styled.label`
   margin-right: var(--spacing-half);
   padding-right: var(--spacing-one);
   display: block;
+  padding: 0;
   text-transform: ${props => (props.checkbox ? 'none' : 'uppercase')};
   font-weight: ${props => (props.checkbox ? 'normal' : 'bold')};
   font-size: 0.75em;
