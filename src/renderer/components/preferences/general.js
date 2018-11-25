@@ -13,11 +13,7 @@ const Input = styled(BaseInput)`
   font-weight: 300;
   display: inline-block;
   padding: 0 12px;
-`;
-
-const Range = styled(BaseInput)`
-  display: inline-block;
-  padding: 0;
+  border: 2px solid #e4e9f2;
 `;
 
 const Select = styled.select`
@@ -47,6 +43,20 @@ const LabelWrapper = styled.label`
   input,
   select {
     margin-top: 4px;
+    &[type='text'],
+    &[type='number'] {
+      display: block;
+    }
+  }
+  span {
+    cursor: pointer;
+    text-transform: none;
+    font-weight: normal;
+    margin-left: 10px;
+    color: #999;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -54,14 +64,18 @@ const Content = styled.div`
   height: 100%;
 `;
 
+const DEFAULT_CLEAR_SECONDS = '15';
+
 class General extends PureComponent {
   static propTypes = {
     t: PropTypes.func,
     locale: PropTypes.string,
-    isTrayIconEnabled: PropTypes.boolean,
+    isTrayIconEnabled: PropTypes.any,
     setIsTrayIconEnabled: PropTypes.func,
-    condencedSidebar: PropTypes.boolean,
-    setCondencedSidebar: PropTypes.func
+    condencedSidebar: PropTypes.any,
+    setCondencedSidebar: PropTypes.func,
+    secondsUntilClearClipboard: PropTypes.any,
+    setSecondsUntilClearClipboard: PropTypes.func
   };
 
   state = {
@@ -81,7 +95,9 @@ class General extends PureComponent {
       isTrayIconEnabled,
       setIsTrayIconEnabled,
       condencedSidebar,
-      setCondencedSidebar
+      setCondencedSidebar,
+      secondsUntilClearClipboard,
+      setSecondsUntilClearClipboard
     } = this.props;
 
     return (
@@ -102,6 +118,25 @@ class General extends PureComponent {
             type="checkbox"
             onChange={e => setCondencedSidebar(e.target.checked)}
             checked={condencedSidebar}
+          />
+        </LabelWrapper>
+
+        <LabelWrapper>
+          {t('preferences.seconds-until-clear-clipboard')}{' '}
+          {secondsUntilClearClipboard !== DEFAULT_CLEAR_SECONDS ? (
+            <span
+              onClick={e =>
+                setSecondsUntilClearClipboard(DEFAULT_CLEAR_SECONDS)}
+            >
+              {t('preferences.reset')}
+            </span>
+          ) : (
+            ''
+          )}
+          <Input
+            type="number"
+            onChange={e => setSecondsUntilClearClipboard(e.target.value)}
+            value={secondsUntilClearClipboard}
           />
         </LabelWrapper>
 
@@ -130,20 +165,21 @@ class General extends PureComponent {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setIsTrayIconEnabled: payload =>
-      dispatch(setSetting('isTrayIconEnabled', payload)),
-    setCondencedSidebar: payload =>
-      dispatch(setSetting('condencedSidebar', payload))
-  };
-};
-
 export default connect(
   state => ({
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
-    condencedSidebar: getSetting(state, 'condencedSidebar')
+    condencedSidebar: getSetting(state, 'condencedSidebar'),
+    secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard')
   }),
-  mapDispatchToProps
+  dispatch => {
+    return {
+      setIsTrayIconEnabled: payload =>
+        dispatch(setSetting('isTrayIconEnabled', payload)),
+      setCondencedSidebar: payload =>
+        dispatch(setSetting('condencedSidebar', payload)),
+      setSecondsUntilClearClipboard: payload =>
+        dispatch(setSetting('secondsUntilClearClipboard', payload))
+    };
+  }
 )(General, 'General');

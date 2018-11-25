@@ -33,6 +33,8 @@ const DEFAULT_SETTINGS = {
   menubarAutoHide: false,
   archivesLoading: false,
   isTrayIconEnabled: true,
+  secondsUntilClearClipboard: '15',
+  referenceFontSize: '1',
   locale: ''
 };
 

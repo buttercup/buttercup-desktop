@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
-import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import { closeCurrentWindow } from '../../system/utils';
-
-import { getSetting } from '../../../shared/selectors';
 
 // router views
 const preferencesFiles = require.context('./', true, /^\.\/.*\.js$/);
@@ -68,15 +65,15 @@ const Content = styled.div`
     margin: 0 0 15px;
   }
 `;
-const Footer = styled.div`
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  h3 {
-    margin: 0 0 15px;
-  }
-`;
+// const Footer = styled.div`
+//   padding: 20px;
+//   display: grid;
+//   grid-template-columns: 1fr 1fr;
+//   grid-gap: 20px;
+//   h3 {
+//     margin: 0 0 15px;
+//   }
+// `;
 
 const Seperator = styled.div`
   display: block;
@@ -127,8 +124,6 @@ class Preferences extends PureComponent {
   }
 
   render() {
-    const { t } = this.props;
-
     return (
       <Router>
         <Wrapper>

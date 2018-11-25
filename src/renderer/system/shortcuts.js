@@ -17,8 +17,9 @@ export const setupShortcuts = store => {
       clearTimeout(__cache.timer);
     }
 
+    const state = store.getState();
     const selection = window.getSelection().toString();
-    const currentEntry = getCurrentEntry(store.getState());
+    const currentEntry = getCurrentEntry(state);
 
     if (!selection && currentEntry) {
       const password = getFacadeFieldValue(currentEntry, 'password');
@@ -29,13 +30,12 @@ export const setupShortcuts = store => {
 
       copyToClipboard(password);
 
-      // Clean the clipboard after 15s
-      // @TODO: Make a UI for this.
+      // Clean the clipboard after n seconds
       __cache.timer = setTimeout(function clipboardPurgerClosure() {
         if (readClipboard() === password) {
           copyToClipboard('');
         }
-      }, ms('15s'));
+      }, ms((state.settings.secondsUntilClearClipboard || '15') + 's'));
     }
   });
 

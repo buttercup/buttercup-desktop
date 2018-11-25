@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import React, { PureComponent } from 'react';
 import { Input as BaseInput } from '@buttercup/ui';
-import { ipcRenderer as ipc } from 'electron';
-
 import { getSetting } from '../../../shared/selectors';
 import { setSetting } from '../../../shared/actions/settings';
 
@@ -67,6 +65,7 @@ class Appereance extends PureComponent {
             ''
           )}
           <Range
+            className="range-slider"
             bordered
             min="0.5"
             step="0.1"
