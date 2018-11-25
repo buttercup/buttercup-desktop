@@ -30,12 +30,14 @@ export const setupShortcuts = store => {
 
       copyToClipboard(password);
 
-      // Clean the clipboard after n seconds
-      __cache.timer = setTimeout(function clipboardPurgerClosure() {
-        if (readClipboard() === password) {
-          copyToClipboard('');
-        }
-      }, ms((state.settings.secondsUntilClearClipboard || '15') + 's'));
+      if (state.settings.secondsUntilClearClipboard !== '0') {
+        // Clean the clipboard after n seconds
+        __cache.timer = setTimeout(function clipboardPurgerClosure() {
+          if (readClipboard() === password) {
+            copyToClipboard('');
+          }
+        }, ms((state.settings.secondsUntilClearClipboard || '15') + 's'));
+      }
     }
   });
 

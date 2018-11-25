@@ -227,6 +227,6 @@
     "appereance": "Erscheinungsbild",
     "font-size": "Schriftgröße",
     "reset": "Zurücksetzen",
-    "seconds-until-clear-clipboard": ""
+    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)"
   }
 }

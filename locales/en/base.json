@@ -241,6 +241,6 @@
     "preferences": "Preferences",
     "font-size": "Font size",
     "reset": "Reset",
-    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden)"
+    "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)"
   }
 }
