@@ -119,11 +119,17 @@ window.onbeforeunload = event => {
 // listen for store changes
 store.subscribe(() => {
   const state = store.getState();
-  if (state.settings && state.settings.referenceFontSize) {
-    document.documentElement.style.setProperty(
-      '--font-size',
-      state.settings.referenceFontSize + 'em'
-    );
+  if (state.settings) {
+    if (state.settings.referenceFontSize) {
+      document.documentElement.style.setProperty(
+        '--font-size',
+        state.settings.referenceFontSize + 'em'
+      );
+    }
+    if (state.settings.secondsUntilArchiveShouldClose) {
+      archiveActions.lockArchiveTimer();
+      console.log(archiveActions);
+    }
   }
 });
 // unsubscribe();

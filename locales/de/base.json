@@ -231,7 +231,7 @@
     "font-size": "Schriftgröße",
     "reset": "Zurücksetzen",
     "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)",
-    "seconds-until-archive-should-close": "Zeit bis ein Archiv automatisch gesperrt wird (Sekunden, 0 = aus)",
+    "seconds-until-archive-should-close": "Archiv automatisch sperren, wenn Fenster nicht fokussiert ist (in Sekunden, 0 = aus)",
     "lock-archive-on-minimize": "Archive sperren beim Minimieren"
   }
 }

@@ -242,7 +242,7 @@
     "font-size": "Font size",
     "reset": "Reset",
     "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)",
-    "seconds-until-archive-should-close": "Time until an archive should be closed (Seconds, 0 = off)",
+    "seconds-until-archive-should-close": "Lock archive automatically, when window is not focused (in seconds, 0 = off)",
     "lock-archive-on-minimize": "Lock archives on minimize"
   }
 }
