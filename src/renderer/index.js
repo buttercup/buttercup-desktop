@@ -21,6 +21,7 @@ import {
 } from '../shared/actions/ui-state';
 import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
+import { setupArchiveActions } from './system/archives';
 import { setSetting } from '../shared/actions/settings';
 import { changeMode } from '../shared/actions/entries';
 import { addGroup } from '../shared/actions/groups';
@@ -43,6 +44,8 @@ i18n.changeLanguage(getSetting(store.getState(), 'locale'));
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
+const archiveActions = setupArchiveActions(store);
+
 // Reset current archive
 store.dispatch(setSetting('archivesLoading', true));
 store.dispatch(setCurrentArchive(null));
@@ -53,6 +56,8 @@ ipc.send('init');
 ipc.on('load-archive', (e, payload) => {
   store.dispatch(addArchiveFromSource(payload));
 });
+
+ipc.on('lock-all-archives', () => archiveActions.lockAllArchives());
 
 ipc.on('set-current-archive', (e, payload) => {
   store.dispatch(loadOrUnlockArchive(payload));

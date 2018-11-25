@@ -29,11 +29,14 @@ export function settingsByArchiveId(state = {}, action) {
 
 const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
+  windowIsFocused: true,
   condencedSidebar: true,
   menubarAutoHide: false,
   archivesLoading: false,
   isTrayIconEnabled: true,
   secondsUntilClearClipboard: '15',
+  secondsUntilArchiveShouldClose: '0',
+  lockArchiveOnMinimize: false,
   referenceFontSize: '1',
   isBrowserAccessEnabled: false,
   locale: ''

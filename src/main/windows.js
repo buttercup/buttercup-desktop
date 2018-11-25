@@ -8,6 +8,7 @@ import { getURIPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
 import { config } from '../shared/config';
 import { checkForUpdates } from './lib/updater';
+import { setSetting } from '../shared/actions/settings';
 
 const windowManager = getWindowManager();
 
@@ -68,6 +69,14 @@ export function setupWindows(store) {
       loadFile(url, win);
     });
 
+    win.on('focus', () => {
+      store.dispatch(setSetting('windowIsFocused', true));
+    });
+
+    win.on('blur', () => {
+      store.dispatch(setSetting('windowIsFocused', false));
+    });
+
     win.once('ready-to-show', () => {
       win.show();
     });
@@ -78,6 +87,12 @@ export function setupWindows(store) {
       }
 
       setTimeout(() => checkForUpdates(), ms('5s'));
+    });
+
+    win.on('hide', () => {
+      if (getSetting(store.getState(), 'lockArchiveOnMinimize')) {
+        win.webContents.send('lock-all-archives');
+      }
     });
 
     win.once('closed', () => {
@@ -115,7 +130,7 @@ export function setupWindows(store) {
 
     const win = new BrowserWindow({
       width: 650,
-      height: 450,
+      height: 480,
       minWidth: 650,
       minHeight: 450,
       fullscreenable: false,

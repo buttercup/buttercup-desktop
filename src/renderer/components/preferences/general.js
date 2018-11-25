@@ -12,6 +12,7 @@ import { setSetting } from '../../../shared/actions/settings';
 const Grid = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
 `;
 const Input = styled(BaseInput)`
   font-weight: 300;
@@ -68,7 +69,7 @@ const LabelWrapper = styled.label`
   text-transform: ${props => (props.checkbox ? 'none' : 'uppercase')};
   font-weight: ${props => (props.checkbox ? 'normal' : 'bold')};
   font-size: 0.75em;
-  margin: 0 0 20px;
+  margin: 0 0 ${props => (props.checkbox ? '0' : '20px')};
   input,
   select {
     margin-top: 4px;
@@ -93,7 +94,8 @@ const Content = styled.div`
   height: 100%;
 `;
 
-const DEFAULT_CLEAR_SECONDS = '15';
+const DEFAULT_CLIPBOARD_CLEAR_SECONDS = '15';
+const DEFAULT_ARCHIVE_CLOSE_SECONDS = '0';
 
 class General extends PureComponent {
   static propTypes = {
@@ -104,7 +106,11 @@ class General extends PureComponent {
     condencedSidebar: PropTypes.any,
     setCondencedSidebar: PropTypes.func,
     secondsUntilClearClipboard: PropTypes.any,
-    setSecondsUntilClearClipboard: PropTypes.func
+    setSecondsUntilClearClipboard: PropTypes.func,
+    secondsUntilArchiveShouldClose: PropTypes.any,
+    setSecondsUntilArchiveShouldClose: PropTypes.func,
+    lockArchiveOnMinimize: PropTypes.any,
+    setLockArchiveOnMinimize: PropTypes.func
   };
 
   state = {
@@ -126,7 +132,11 @@ class General extends PureComponent {
       condencedSidebar,
       setCondencedSidebar,
       secondsUntilClearClipboard,
-      setSecondsUntilClearClipboard
+      setSecondsUntilClearClipboard,
+      secondsUntilArchiveShouldClose,
+      setSecondsUntilArchiveShouldClose,
+      lockArchiveOnMinimize,
+      setLockArchiveOnMinimize
     } = this.props;
 
     return (
@@ -157,13 +167,25 @@ class General extends PureComponent {
               </label>
             </LabelWrapper>
           </div>
+          <div>
+            <LabelWrapper checkbox>
+              <label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={e => setLockArchiveOnMinimize(e.target.checked)}
+                  checked={lockArchiveOnMinimize}
+                />
+                {t('preferences.lock-archive-on-minimize')}
+              </label>
+            </LabelWrapper>
+          </div>
         </Grid>
         <LabelWrapper>
           {t('preferences.seconds-until-clear-clipboard')}{' '}
-          {secondsUntilClearClipboard !== DEFAULT_CLEAR_SECONDS ? (
+          {secondsUntilClearClipboard !== DEFAULT_CLIPBOARD_CLEAR_SECONDS ? (
             <span
               onClick={e =>
-                setSecondsUntilClearClipboard(DEFAULT_CLEAR_SECONDS)}
+                setSecondsUntilClearClipboard(DEFAULT_CLIPBOARD_CLEAR_SECONDS)}
             >
               {t('preferences.reset')}
             </span>
@@ -174,6 +196,27 @@ class General extends PureComponent {
             type="number"
             onChange={e => setSecondsUntilClearClipboard(e.target.value)}
             value={secondsUntilClearClipboard}
+          />
+        </LabelWrapper>
+
+        <LabelWrapper>
+          {t('preferences.seconds-until-archive-should-close')}{' '}
+          {secondsUntilArchiveShouldClose !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
+            <span
+              onClick={e =>
+                setSecondsUntilArchiveShouldClose(
+                  DEFAULT_ARCHIVE_CLOSE_SECONDS
+                )}
+            >
+              {t('preferences.reset')}
+            </span>
+          ) : (
+            ''
+          )}
+          <Input
+            type="number"
+            onChange={e => setSecondsUntilArchiveShouldClose(e.target.value)}
+            value={secondsUntilArchiveShouldClose}
           />
         </LabelWrapper>
 
@@ -207,7 +250,12 @@ export default connect(
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
     condencedSidebar: getSetting(state, 'condencedSidebar'),
-    secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard')
+    secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
+    secondsUntilArchiveShouldClose: getSetting(
+      state,
+      'secondsUntilArchiveShouldClose'
+    ),
+    lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize')
   }),
   dispatch => {
     return {
@@ -216,7 +264,11 @@ export default connect(
       setCondencedSidebar: payload =>
         dispatch(setSetting('condencedSidebar', payload)),
       setSecondsUntilClearClipboard: payload =>
-        dispatch(setSetting('secondsUntilClearClipboard', payload))
+        dispatch(setSetting('secondsUntilClearClipboard', payload)),
+      setSecondsUntilArchiveShouldClose: payload =>
+        dispatch(setSetting('secondsUntilArchiveShouldClose', payload)),
+      setLockArchiveOnMinimize: payload =>
+        dispatch(setSetting('lockArchiveOnMinimize', payload))
     };
   }
 )(General, 'General');
