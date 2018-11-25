@@ -63,6 +63,10 @@
       "zoom": "بزرگ‌نمایی",
       "front": "جلو"
     },
+    "system": {
+      "system": "سیستم",
+      "enable-browser-access": "فعال کردن دسترسی از مرورگرها"
+    },
     "help": {
       "help": "راهنمایی",
       "visit-our-website": "مشاهده سایت ما",

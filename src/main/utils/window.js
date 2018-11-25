@@ -32,17 +32,23 @@ export function checkDockVisibility() {
   }
 }
 
-export function reopenMainWindow(fn = () => { }) {
-  const windowManager = getWindowManager();
+export function reopenMainWindow(fn = () => {}) {
+  return new Promise(resolve => {
+    const windowManager = getWindowManager();
 
-  if (windowManager.getCountOfType('main') > 0) {
-    const [mainWindow] = windowManager.getWindowsOfType('main');
-    mainWindow.focus();
-    mainWindow.show();
-    fn(mainWindow);
-  } else {
-    windowManager.buildWindowOfType('main', fn);
-  }
+    if (windowManager.getCountOfType('main') > 0) {
+      const [mainWindow] = windowManager.getWindowsOfType('main');
+      mainWindow.focus();
+      mainWindow.show();
+      resolve(mainWindow);
+      fn(mainWindow);
+    } else {
+      windowManager.buildWindowOfType('main', win => {
+        resolve(win);
+        fn(win);
+      });
+    }
 
-  checkDockVisibility();
+    checkDockVisibility();
+  });
 }

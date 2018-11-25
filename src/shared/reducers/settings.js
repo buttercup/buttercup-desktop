@@ -35,6 +35,7 @@ const DEFAULT_SETTINGS = {
   isTrayIconEnabled: true,
   secondsUntilClearClipboard: '15',
   referenceFontSize: '1',
+  isBrowserAccessEnabled: false,
   locale: ''
 };
 

@@ -1,4 +1,6 @@
+import electronContextMenu from 'electron-context-menu';
 import { app, shell, Menu } from 'electron';
+import electronContextMenu from 'electron-context-menu';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
@@ -11,11 +13,11 @@ import { openFile, openFileForImporting, newFile } from './lib/files';
 import { toggleArchiveSearch } from './lib/archive-search';
 import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
+import { startHost, stopHost } from './lib/file-host';
 import { getMainWindow, reopenMainWindow } from './utils/window';
 import { setupTrayIcon } from './tray';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
-import electronContextMenu from 'electron-context-menu';
 
 electronContextMenu();
 
@@ -298,6 +300,24 @@ export const setupMenu = store => {
           },
           checked: archive.id === currentArchiveId
         }))
+      ]
+    },
+    {
+      label: label('system.system'),
+      submenu: [
+        {
+          label: label('system.enable-browser-access'),
+          type: 'checkbox',
+          checked: getSetting(state, 'isBrowserAccessEnabled'),
+          click: item => {
+            store.dispatch(setSetting('isBrowserAccessEnabled', item.checked));
+            if (item.checked) {
+              startHost();
+            } else {
+              stopHost();
+            }
+          }
+        }
       ]
     },
     {

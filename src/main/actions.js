@@ -5,12 +5,16 @@ import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
 import i18n, { languages } from '../shared/i18n';
 import localesConfig from '../../locales/config';
+import { setupHost } from './lib/file-host';
 
 const windowManager = getWindowManager();
 
 export function setupActions(store) {
   // Update the menu
   store.subscribe(debounce(() => setupMenu(store), 200));
+
+  // Start File Host if Enabled
+  setupHost(store);
 
   ipc.on('show-file-manager', () => {
     windowManager.buildWindowOfType('file-manager', null, {
