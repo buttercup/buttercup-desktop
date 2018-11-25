@@ -63,6 +63,9 @@
       "visit-our-website": "Navštivte naše stránky",
       "privacy-policy": "Politika soukromí ",
       "view-changelog-for-v": "Zobrazit změny v{{version}}"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -225,6 +228,8 @@
     "preferences": "",
     "font-size": "",
     "reset": "",
-    "seconds-until-clear-clipboard": ""
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": ""
   }
 }

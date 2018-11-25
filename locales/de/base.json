@@ -66,6 +66,9 @@
     "tray": {
       "quit": "Beenden",
       "open": "Buttercup öffnen"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -227,6 +230,8 @@
     "appereance": "Erscheinungsbild",
     "font-size": "Schriftgröße",
     "reset": "Zurücksetzen",
-    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)"
+    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)",
+    "seconds-until-archive-should-close": "Zeit bis ein Archiv automatisch gesperrt wird (Sekunden, 0 = aus)",
+    "lock-archive-on-minimize": "Archive sperren beim Minimieren"
   }
 }

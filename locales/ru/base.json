@@ -39,6 +39,9 @@
       "visit-our-website": "Посетите наш сайт",
       "privacy-policy": "Политика конфиденциальности",
       "view-changelog-for-v": "Посмотреть изменения в версии v{{version}}"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive": {
@@ -198,6 +201,8 @@
     "preferences": "",
     "font-size": "",
     "reset": "",
-    "seconds-until-clear-clipboard": ""
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": ""
   }
 }

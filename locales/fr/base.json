@@ -72,6 +72,9 @@
     "tray": {
       "quit": "Quitter",
       "open": "Ouvrir Buttercup"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -236,6 +239,8 @@
     "preferences": "",
     "font-size": "",
     "reset": "",
-    "seconds-until-clear-clipboard": ""
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": ""
   }
 }

@@ -63,6 +63,9 @@
       "visit-our-website": "Látogasd meg weboldalunkat",
       "privacy-policy": "Adatvédelmi irányelvek",
       "view-changelog-for-v": "Changelog megtekintése v{{version}}"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -225,6 +228,8 @@
     "preferences": "",
     "font-size": "",
     "reset": "",
-    "seconds-until-clear-clipboard": ""
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": ""
   }
 }

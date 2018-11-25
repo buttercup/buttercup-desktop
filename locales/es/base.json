@@ -60,6 +60,9 @@
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
       "view-changelog-for-v": "Ver cambios en v{{version}}"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive": {
@@ -221,6 +224,8 @@
     "preferences": "",
     "font-size": "",
     "reset": "",
-    "seconds-until-clear-clipboard": "Seconds until clear clipboard"
+    "seconds-until-clear-clipboard": "Seconds until clear clipboard",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": ""
   }
 }
