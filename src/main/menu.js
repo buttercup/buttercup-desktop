@@ -1,6 +1,5 @@
 import electronContextMenu from 'electron-context-menu';
 import { app, shell, Menu } from 'electron';
-import electronContextMenu from 'electron-context-menu';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
