@@ -110,12 +110,17 @@ export function setupWindows(store) {
   });
 
   windowManager.setBuildProcedure('app-preferences', (callback, options) => {
+    const [x, y] = options.parent.getPosition();
+    const [width, height] = options.parent.getSize();
+
     const win = new BrowserWindow({
       width: 650,
       height: 450,
       minWidth: 650,
       minHeight: 450,
-      resizable: true,
+      fullscreenable: false,
+      x: Math.ceil(x + (width - 650) / 2),
+      y: Math.ceil(y + (height - 450) / 2),
       ...options
     });
 
