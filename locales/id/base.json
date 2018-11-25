@@ -63,6 +63,10 @@
       "zoom": "Zoom",
       "front": "Tampilkan semua Window ke atas"
     },
+    "system": {
+       "system": "Sistem",
+       "enable-browser-access": "Aktifkan Akses Peramban/Browser"
+     },
     "help": {
       "help": "Bantuan",
       "visit-our-website": "Kunjungi Situs Kami",
