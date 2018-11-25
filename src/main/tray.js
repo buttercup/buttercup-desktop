@@ -58,7 +58,8 @@ export const setupTrayIcon = store => {
           if (getWindowManager().getCountOfType('app-preferences') === 0) {
             getWindowManager().buildWindowOfType('app-preferences', null, {
               title: i18n.t('preferences.preferences'),
-              titleBarStyle: 'hiddenInset'
+              titleBarStyle: 'hiddenInset',
+              parent: win
             });
           }
         }
