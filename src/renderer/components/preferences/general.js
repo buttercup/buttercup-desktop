@@ -65,8 +65,8 @@ const LabelWrapper = styled.label`
   margin-right: var(--spacing-half);
   padding-right: var(--spacing-one);
   display: block;
-  text-transform: uppercase;
-  font-weight: bold;
+  text-transform: ${props => (props.checkbox ? 'none' : 'uppercase')};
+  font-weight: ${props => (props.checkbox ? 'normal' : 'bold')};
   font-size: 0.75em;
   margin: 0 0 20px;
   input,
@@ -134,7 +134,7 @@ class General extends PureComponent {
         <h3>{t('preferences.general')}</h3>
         <Grid>
           <div>
-            <LabelWrapper>
+            <LabelWrapper checkbox>
               <label>
                 <Checkbox
                   type="checkbox"
@@ -146,7 +146,7 @@ class General extends PureComponent {
             </LabelWrapper>
           </div>
           <div>
-            <LabelWrapper>
+            <LabelWrapper checkbox>
               <label>
                 <Checkbox
                   type="checkbox"
