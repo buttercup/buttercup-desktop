@@ -230,6 +230,7 @@
     "reset": "",
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": ""
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": ""
   }
 }

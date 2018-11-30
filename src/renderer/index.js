@@ -127,8 +127,8 @@ store.subscribe(() => {
       );
     }
     if (state.settings.secondsUntilArchiveShouldClose) {
+      console.log(state.settings.secondsUntilArchiveShouldClose);
       archiveActions.lockArchiveTimer();
-      console.log(archiveActions);
     }
   }
 });

@@ -70,11 +70,11 @@ export function setupWindows(store) {
     });
 
     win.on('focus', () => {
-      store.dispatch(setSetting('windowIsFocused', true));
+      store.dispatch(setSetting('buttercupIsFocused', true));
     });
 
     win.on('blur', () => {
-      store.dispatch(setSetting('windowIsFocused', false));
+      store.dispatch(setSetting('buttercupIsFocused', false));
     });
 
     win.once('ready-to-show', () => {
@@ -133,6 +133,8 @@ export function setupWindows(store) {
       height: 480,
       minWidth: 650,
       minHeight: 450,
+      minimizable: false,
+      maximizable: false,
       fullscreenable: false,
       x: Math.ceil(x + (width - 650) / 2),
       y: Math.ceil(y + (height - 450) / 2),

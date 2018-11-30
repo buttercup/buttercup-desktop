@@ -242,7 +242,8 @@
     "font-size": "Font size",
     "reset": "Reset",
     "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)",
-    "seconds-until-archive-should-close": "Lock archive automatically, when window is not focused (in seconds, 0 = off)",
-    "lock-archive-on-minimize": "Lock archives on minimize"
+    "seconds-until-archive-should-close": "Lock archive automatically after x seconds (0 = off)",
+    "lock-archive-on-minimize": "Lock archives on minimize",
+    "lock-archive-onfocusout": "When buttercup is not focused"
   }
 }

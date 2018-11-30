@@ -111,7 +111,9 @@ class General extends PureComponent {
     secondsUntilArchiveShouldClose: PropTypes.any,
     setSecondsUntilArchiveShouldClose: PropTypes.func,
     lockArchiveOnMinimize: PropTypes.any,
-    setLockArchiveOnMinimize: PropTypes.func
+    setLockArchiveOnMinimize: PropTypes.func,
+    lockArchiveOnFocusout: PropTypes.any,
+    setLockArchiveOnFocusout: PropTypes.func
   };
 
   state = {
@@ -137,7 +139,9 @@ class General extends PureComponent {
       secondsUntilArchiveShouldClose,
       setSecondsUntilArchiveShouldClose,
       lockArchiveOnMinimize,
-      setLockArchiveOnMinimize
+      setLockArchiveOnMinimize,
+      lockArchiveOnFocusout,
+      setLockArchiveOnFocusout
     } = this.props;
 
     return (
@@ -195,6 +199,7 @@ class General extends PureComponent {
           )}
           <Input
             type="number"
+            min="0"
             onChange={e => setSecondsUntilClearClipboard(e.target.value)}
             value={secondsUntilClearClipboard}
           />
@@ -216,10 +221,23 @@ class General extends PureComponent {
           )}
           <Input
             type="number"
+            min="0"
             onChange={e => setSecondsUntilArchiveShouldClose(e.target.value)}
             value={secondsUntilArchiveShouldClose}
           />
         </LabelWrapper>
+        <Grid>
+          <LabelWrapper checkbox>
+            <label>
+              <Checkbox
+                type="checkbox"
+                onChange={e => setLockArchiveOnFocusout(e.target.checked)}
+                checked={lockArchiveOnFocusout}
+              />
+              {t('preferences.lock-archive-onfocusout')}
+            </label>
+          </LabelWrapper>
+        </Grid>
 
         <LabelWrapper>
           {t('app-menu.view.language')}
@@ -269,7 +287,9 @@ export default connect(
       setSecondsUntilArchiveShouldClose: payload =>
         dispatch(setSetting('secondsUntilArchiveShouldClose', payload)),
       setLockArchiveOnMinimize: payload =>
-        dispatch(setSetting('lockArchiveOnMinimize', payload))
+        dispatch(setSetting('lockArchiveOnMinimize', payload)),
+      setLockArchiveOnFocusout: payload =>
+        dispatch(setSetting('lockArchiveOnFocusout', payload))
     };
   }
 )(General, 'General');
