@@ -7,4 +7,4 @@ Icon=buttercup
 Terminal=false
 Type=Application
 Categories=Utility;
-StartupWMClass=Buttercup;
+StartupWMClass=Buttercup
