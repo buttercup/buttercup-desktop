@@ -30,10 +30,12 @@ export const setupArchiveActions = store => ({
       this.lockAllArchives();
     } else {
       if (
-        state.settings.secondsUntilArchiveShouldClose !== '0'
-        // ((state.settings.lockArchiveOnFocusout &&
-        //   !state.settings.isButtercupFocused) ||
-        //   !state.settings.lockArchiveOnFocusout)
+        state.settings.secondsUntilArchiveShouldClose !==
+        '0'(
+          (state.settings.lockArchiveOnFocusout &&
+            !state.settings.isButtercupFocused) ||
+            !state.settings.lockArchiveOnFocusout
+        )
       ) {
         __cache.timer = setTimeout(() => {
           this.lockAllArchives();
