@@ -121,7 +121,6 @@ window.onbeforeunload = event => {
 const subscribe = initSubscriber(store);
 
 subscribe('settings', state => {
-  console.log(state.settings.archivesLoading);
   archiveActions.lockArchiveTimer();
 });
 
