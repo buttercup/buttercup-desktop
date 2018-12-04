@@ -155,7 +155,7 @@
     "are-you-sure-question": "Are you sure?",
     "displaying-entries": "Displaying {{count}} entries",
     "no-value": "No Value",
-    "quit-unsave-entry": "You will lost your entry, are you sure ?"
+    "quit-unsave-entry": "You will lose your changes, are you sure?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
