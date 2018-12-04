@@ -154,7 +154,8 @@
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?",
     "displaying-entries": "Displaying {{count}} entries",
-    "no-value": "No Value"
+    "no-value": "No Value",
+    "quit-unsave-entry": "You will lost your entry, are you sure ?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",

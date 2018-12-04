@@ -37,6 +37,7 @@ export const getExpandedKeys = createSelector(
 
 export const getAllEntries = state => state.entries.byId;
 export const getCurrentEntryId = state => state.entries.currentEntry;
+export const getCurrentEntryMode = state => state.entries.mode;
 
 export const getCurrentEntry = createSelector(
   getAllEntries,
