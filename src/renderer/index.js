@@ -28,6 +28,7 @@ import { addGroup } from '../shared/actions/groups';
 import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
+import initSubscriber from 'redux-subscriber';
 
 // Unhandled rejections
 const unhandled = require('electron-unhandled');
@@ -117,21 +118,20 @@ window.onbeforeunload = event => {
 };
 
 // listen for store changes
-store.subscribe(() => {
-  const state = store.getState();
-  if (state.settings) {
-    if (state.settings.referenceFontSize) {
-      document.documentElement.style.setProperty(
-        '--font-size',
-        state.settings.referenceFontSize + 'em'
-      );
-    }
-    if (state.settings.secondsUntilArchiveShouldClose) {
-      console.log(state.settings.secondsUntilArchiveShouldClose);
-      archiveActions.lockArchiveTimer();
-    }
-  }
+const subscribe = initSubscriber(store);
+
+subscribe('settings', state => {
+  console.log(state.settings.archivesLoading);
+  archiveActions.lockArchiveTimer();
 });
+
+subscribe('settings.referenceFontSize', state => {
+  document.documentElement.style.setProperty(
+    '--font-size',
+    state.settings.referenceFontSize + 'em'
+  );
+});
+
 // unsubscribe();
 
 const currentLocale = getSetting(store.getState(), 'locale');

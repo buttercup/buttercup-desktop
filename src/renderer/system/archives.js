@@ -3,52 +3,41 @@ import { lockArchive } from '../../shared/actions/archives';
 import { getAllArchives } from '../../shared/selectors';
 
 const __cache = {
-  timer: null,
-  locking: false
+  timer: null
 };
 
 export const setupArchiveActions = store => ({
   lockAllArchives() {
-    if (!__cache.locking) {
-      const archives = getAllArchives(store.getState());
-      if (archives) {
-        console.log(archives);
-        archives.forEach(
-          ({ id, status }) =>
-            status === 'unlocked' ? store.dispatch(lockArchive(id)) : ''
-        );
-      }
+    const archives = getAllArchives(store.getState());
+    if (archives) {
+      archives.forEach(
+        ({ id, status }) =>
+          status === 'unlocked' ? store.dispatch(lockArchive(id)) : ''
+      );
     }
-
-    __cache.locking = true;
-    setTimeout(() => (__cache.locking = false), 300);
   },
   lockArchiveTimer() {
-    if (!__cache.locking) {
-      if (__cache.timer) {
-        clearTimeout(__cache.timer);
-      }
-      const state = store.getState();
+    if (__cache.timer) {
+      clearTimeout(__cache.timer);
+    }
+    const state = store.getState();
 
+    if (
+      state.settings.secondsUntilArchiveShouldClose === '0' &&
+      (state.settings.lockArchiveOnFocusout &&
+        !state.settings.isButtercupFocused)
+    ) {
+      this.lockAllArchives();
+    } else {
       if (
-        state.settings &&
-        state.settings.secondsUntilArchiveShouldClose === '0' &&
-        (state.settings.lockArchiveOnFocusout &&
-          !state.settings.buttercupIsFocused)
+        state.settings.secondsUntilArchiveShouldClose !== '0'
+        // ((state.settings.lockArchiveOnFocusout &&
+        //   !state.settings.isButtercupFocused) ||
+        //   !state.settings.lockArchiveOnFocusout)
       ) {
-        this.lockAllArchives();
-      } else {
-        if (
-          state.settings &&
-          state.settings.secondsUntilArchiveShouldClose !== '0' &&
-          ((state.settings.lockArchiveOnFocusout &&
-            !state.settings.buttercupIsFocused) ||
-            !state.settings.lockArchiveOnFocusout)
-        ) {
-          __cache.timer = setTimeout(() => {
-            this.lockAllArchives();
-          }, ms(state.settings.secondsUntilArchiveShouldClose + 's'));
-        }
+        __cache.timer = setTimeout(() => {
+          this.lockAllArchives();
+        }, ms(state.settings.secondsUntilArchiveShouldClose + 's'));
       }
     }
   }

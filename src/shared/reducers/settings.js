@@ -29,7 +29,7 @@ export function settingsByArchiveId(state = {}, action) {
 
 const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
-  buttercupIsFocused: true,
+  isButtercupFocused: true,
   condencedSidebar: true,
   menubarAutoHide: false,
   archivesLoading: false,
@@ -40,6 +40,7 @@ const DEFAULT_SETTINGS = {
   lockArchiveOnMinimize: false,
   referenceFontSize: '1',
   isBrowserAccessEnabled: false,
+  isAutoloadingIconsDisabled: false,
   locale: ''
 };
 

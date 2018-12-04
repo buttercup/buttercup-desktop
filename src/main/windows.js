@@ -70,11 +70,11 @@ export function setupWindows(store) {
     });
 
     win.on('focus', () => {
-      store.dispatch(setSetting('buttercupIsFocused', true));
+      store.dispatch(setSetting('isButtercupFocused', true));
     });
 
     win.on('blur', () => {
-      store.dispatch(setSetting('buttercupIsFocused', false));
+      store.dispatch(setSetting('isButtercupFocused', false));
     });
 
     win.once('ready-to-show', () => {

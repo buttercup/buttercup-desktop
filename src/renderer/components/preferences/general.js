@@ -11,7 +11,7 @@ import { setSetting } from '../../../shared/actions/settings';
 
 const Grid = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: ${props => (props.single ? '1fr' : '1fr 1fr')};
   margin-bottom: 20px;
 `;
 const Input = styled(BaseInput)`
@@ -113,7 +113,9 @@ class General extends PureComponent {
     lockArchiveOnMinimize: PropTypes.any,
     setLockArchiveOnMinimize: PropTypes.func,
     lockArchiveOnFocusout: PropTypes.any,
-    setLockArchiveOnFocusout: PropTypes.func
+    setLockArchiveOnFocusout: PropTypes.func,
+    isAutoloadingIconsDisabled: PropTypes.any,
+    setIsAutoloadingIconsDisabled: PropTypes.func
   };
 
   state = {
@@ -141,7 +143,9 @@ class General extends PureComponent {
       lockArchiveOnMinimize,
       setLockArchiveOnMinimize,
       lockArchiveOnFocusout,
-      setLockArchiveOnFocusout
+      setLockArchiveOnFocusout,
+      isAutoloadingIconsDisabled,
+      setIsAutoloadingIconsDisabled
     } = this.props;
 
     return (
@@ -181,6 +185,19 @@ class General extends PureComponent {
                   checked={lockArchiveOnMinimize}
                 />
                 {t('preferences.lock-archive-on-minimize')}
+              </label>
+            </LabelWrapper>
+          </div>
+          <div>
+            <LabelWrapper checkbox>
+              <label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={e =>
+                    setIsAutoloadingIconsDisabled(e.target.checked)}
+                  checked={isAutoloadingIconsDisabled}
+                />
+                {t('preferences.disable-autloading-icons')}
               </label>
             </LabelWrapper>
           </div>
@@ -226,7 +243,7 @@ class General extends PureComponent {
             value={secondsUntilArchiveShouldClose}
           />
         </LabelWrapper>
-        <Grid>
+        <Grid single>
           <LabelWrapper checkbox>
             <label>
               <Checkbox
@@ -269,7 +286,9 @@ export default connect(
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
     condencedSidebar: getSetting(state, 'condencedSidebar'),
+    lockArchiveOnFocusout: getSetting(state, 'lockArchiveOnFocusout'),
     secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
+    isAutoloadingIconsDisabled: getSetting(state, 'isAutoloadingIconsDisabled'),
     secondsUntilArchiveShouldClose: getSetting(
       state,
       'secondsUntilArchiveShouldClose'
@@ -289,7 +308,9 @@ export default connect(
       setLockArchiveOnMinimize: payload =>
         dispatch(setSetting('lockArchiveOnMinimize', payload)),
       setLockArchiveOnFocusout: payload =>
-        dispatch(setSetting('lockArchiveOnFocusout', payload))
+        dispatch(setSetting('lockArchiveOnFocusout', payload)),
+      setIsAutoloadingIconsDisabled: payload =>
+        dispatch(setSetting('isAutoloadingIconsDisabled', payload))
     };
   }
 )(General, 'General');
