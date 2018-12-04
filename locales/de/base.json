@@ -233,6 +233,7 @@
     "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)",
     "seconds-until-archive-should-close": "Archiv automatisch sperren nach x Sekunden (0 = aus)",
     "lock-archive-on-minimize": "Archiv sperren beim Minimieren",
-    "lock-archive-onfocusout": "Wenn aus dem Fenster geklickt wurde"
+    "lock-archive-onfocusout": "Nur sperren, wenn das Fenster nicht mehr im Fokus ist",
+    "disable-autloading-icons": "Icons nicht automatisch laden"
   }
 }

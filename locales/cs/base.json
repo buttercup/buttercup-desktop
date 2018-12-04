@@ -231,6 +231,7 @@
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": ""
+    "lock-archive-onfocusout": "",
+    "disable-autloading-icons": ""
   }
 }

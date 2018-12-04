@@ -244,6 +244,7 @@
     "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)",
     "seconds-until-archive-should-close": "Lock archive automatically after x seconds (0 = off)",
     "lock-archive-on-minimize": "Lock archives on minimize",
-    "lock-archive-onfocusout": "When buttercup is not focused"
+    "lock-archive-onfocusout": "Only lock archives, when buttercup is not focused",
+    "disable-autloading-icons": "Disable icon autoloading"
   }
 }
