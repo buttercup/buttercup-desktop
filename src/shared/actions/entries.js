@@ -5,6 +5,8 @@ import { getQueue } from '../../renderer/system/queue';
 import {
   getCurrentGroupId,
   getCurrentArchiveId,
+  getCurrentEntry,
+  getCurrentEntryMode,
   getExpandedKeys,
   getSetting
 } from '../selectors';
@@ -25,7 +27,28 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = createAction(ENTRIES_SELECTED);
+export const selectEntry = (entryId, isSavingNewEntry = false) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const currentEntry = getCurrentEntry(getState());
+    const currentEntryMode = getCurrentEntryMode(getState());
+    !currentEntry && currentEntryMode === 'new' && !isSavingNewEntry
+      ? showConfirmDialog(
+          i18n.t('entry.quit-unsave-entry'),
+          choice =>
+            choice === 0
+              ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
+              : null
+        )
+      : dispatch({ type: ENTRIES_SELECTED, payload: entryId });
+  } catch (err) {
+    console.error(err);
+    showDialog(err);
+  }
+};
+
 export const setSortMode = createAction(ENTRIES_SET_SORT);
 
 export const changeMode = mode => () => ({
@@ -86,7 +109,7 @@ export const newEntry = newValues => async (dispatch, getState) => {
       type: ENTRIES_CREATE,
       payload: entryObj
     });
-    dispatch(selectEntry(entryObj.id));
+    dispatch(selectEntry(entryObj.id, true));
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
     dispatch(fetchEntryIconsAndUpdate(archiveId, [entryObj]));
