@@ -35,7 +35,7 @@ const DEFAULT_SETTINGS = {
   archivesLoading: false,
   isTrayIconEnabled: true,
   secondsUntilClearClipboard: '15',
-  secondsUntilArchiveShouldClose: '0',
+  autolockSeconds: '0',
   lockArchiveOnFocusout: false,
   lockArchiveOnMinimize: false,
   referenceFontSize: '1',

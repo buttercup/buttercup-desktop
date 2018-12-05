@@ -108,8 +108,8 @@ class General extends PureComponent {
     setCondencedSidebar: PropTypes.func,
     secondsUntilClearClipboard: PropTypes.any,
     setSecondsUntilClearClipboard: PropTypes.func,
-    secondsUntilArchiveShouldClose: PropTypes.any,
-    setSecondsUntilArchiveShouldClose: PropTypes.func,
+    autolockSeconds: PropTypes.any,
+    setAutolockSeconds: PropTypes.func,
     lockArchiveOnMinimize: PropTypes.any,
     setLockArchiveOnMinimize: PropTypes.func,
     lockArchiveOnFocusout: PropTypes.any,
@@ -138,8 +138,8 @@ class General extends PureComponent {
       setCondencedSidebar,
       secondsUntilClearClipboard,
       setSecondsUntilClearClipboard,
-      secondsUntilArchiveShouldClose,
-      setSecondsUntilArchiveShouldClose,
+      autolockSeconds,
+      setAutolockSeconds,
       lockArchiveOnMinimize,
       setLockArchiveOnMinimize,
       lockArchiveOnFocusout,
@@ -224,12 +224,9 @@ class General extends PureComponent {
 
         <LabelWrapper>
           {t('preferences.seconds-until-archive-should-close')}{' '}
-          {secondsUntilArchiveShouldClose !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
+          {autolockSeconds !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
             <span
-              onClick={e =>
-                setSecondsUntilArchiveShouldClose(
-                  DEFAULT_ARCHIVE_CLOSE_SECONDS
-                )}
+              onClick={e => setAutolockSeconds(DEFAULT_ARCHIVE_CLOSE_SECONDS)}
             >
               {t('preferences.reset')}
             </span>
@@ -239,8 +236,8 @@ class General extends PureComponent {
           <Input
             type="number"
             min="0"
-            onChange={e => setSecondsUntilArchiveShouldClose(e.target.value)}
-            value={secondsUntilArchiveShouldClose}
+            onChange={e => setAutolockSeconds(e.target.value)}
+            value={autolockSeconds}
           />
         </LabelWrapper>
         <Grid single>
@@ -289,10 +286,7 @@ export default connect(
     lockArchiveOnFocusout: getSetting(state, 'lockArchiveOnFocusout'),
     secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
     isAutoloadingIconsDisabled: getSetting(state, 'isAutoloadingIconsDisabled'),
-    secondsUntilArchiveShouldClose: getSetting(
-      state,
-      'secondsUntilArchiveShouldClose'
-    ),
+    autolockSeconds: getSetting(state, 'autolockSeconds'),
     lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize')
   }),
   dispatch => {
@@ -303,8 +297,8 @@ export default connect(
         dispatch(setSetting('condencedSidebar', payload)),
       setSecondsUntilClearClipboard: payload =>
         dispatch(setSetting('secondsUntilClearClipboard', payload)),
-      setSecondsUntilArchiveShouldClose: payload =>
-        dispatch(setSetting('secondsUntilArchiveShouldClose', payload)),
+      setAutolockSeconds: payload =>
+        dispatch(setSetting('autolockSeconds', payload)),
       setLockArchiveOnMinimize: payload =>
         dispatch(setSetting('lockArchiveOnMinimize', payload)),
       setLockArchiveOnFocusout: payload =>

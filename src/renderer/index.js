@@ -134,7 +134,14 @@ subscribe('settings.referenceFontSize', state => {
 // unsubscribe();
 
 const currentLocale = getSetting(store.getState(), 'locale');
-const renderApp = (RootContainer, i18n) =>
+const referenceFontSize = getSetting(store.getState(), 'referenceFontSize');
+const renderApp = (RootContainer, i18n) => {
+  // set font-size
+  document.documentElement.style.setProperty(
+    '--font-size',
+    referenceFontSize + 'em'
+  );
+
   render(
     <I18nextProvider i18n={i18n}>
       <AppContainer>
@@ -143,6 +150,7 @@ const renderApp = (RootContainer, i18n) =>
     </I18nextProvider>,
     document.getElementById('root')
   );
+};
 
 // set lang on load
 ipc.send('change-locale-main', currentLocale);

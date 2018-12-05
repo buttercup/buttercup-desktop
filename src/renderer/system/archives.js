@@ -23,23 +23,21 @@ export const setupArchiveActions = store => ({
     const state = store.getState();
 
     if (
-      state.settings.secondsUntilArchiveShouldClose === '0' &&
+      state.settings.autolockSeconds === '0' &&
       (state.settings.lockArchiveOnFocusout &&
         !state.settings.isButtercupFocused)
     ) {
       this.lockAllArchives();
     } else {
       if (
-        state.settings.secondsUntilArchiveShouldClose !==
-        '0'(
-          (state.settings.lockArchiveOnFocusout &&
-            !state.settings.isButtercupFocused) ||
-            !state.settings.lockArchiveOnFocusout
-        )
+        state.settings.autolockSeconds !== '0' &&
+        ((state.settings.lockArchiveOnFocusout &&
+          !state.settings.isButtercupFocused) ||
+          !state.settings.lockArchiveOnFocusout)
       ) {
         __cache.timer = setTimeout(() => {
           this.lockAllArchives();
-        }, ms(state.settings.secondsUntilArchiveShouldClose + 's'));
+        }, ms(state.settings.autolockSeconds + 's'));
       }
     }
   }
