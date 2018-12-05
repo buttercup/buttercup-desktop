@@ -143,7 +143,8 @@
     "custom-fields-label-empty-info": "Zapomněli jste nastavit označení jednoho nebo více polí.",
     "are-you-sure-question": "Jste si jistí?",
     "no-value": "",
-    "displaying-entries": ""
+    "displaying-entries": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Zkopírovat do schránky",
@@ -232,6 +233,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

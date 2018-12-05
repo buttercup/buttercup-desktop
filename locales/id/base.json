@@ -154,7 +154,8 @@
     "custom-fields-label-empty-info": "Anda lupa untuk mengisi label untuk satu atau lebih dari kolom khusus.",
     "are-you-sure-question": "Anda yakin?",
     "displaying-entries": "Menampilkan {{count}} entri",
-    "no-value": "Tidak ada nilai"
+    "no-value": "Tidak ada nilai",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Salin ke Clipboard",
@@ -233,5 +234,17 @@
     "download": "Unduh dan instal",
     "download-manual": "Buka Halaman Rilis",
     "release-notes": "Catatan Rilis:"
+  },
+  "preferences": {
+    "preferences": "",
+    "appereance": "",
+    "font-size": "",
+    "reset": "",
+    "general": "",
+    "lock-archive-on-minimize": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-onfocusout": "",
+    "disable-autoloading-icons": ""
   }
 }

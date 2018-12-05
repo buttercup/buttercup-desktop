@@ -147,7 +147,8 @@
     "custom-fields-label-empty-info": "Hai dimenticato di impostare un'etichetta per uno o più campi personalizzati.",
     "are-you-sure-question": "Sei sicuro?",
     "displaying-entries": "Hai {{count}} elementi",
-    "no-value": ""
+    "no-value": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copia negli Appunti",
@@ -237,6 +238,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

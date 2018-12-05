@@ -145,7 +145,8 @@
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
     "are-you-sure-question": "Bist du dir sicher?",
     "no-value": "Kein Wert hinterlegt",
-    "displaying-entries": "{{count}} Angezeigte Einträge"
+    "displaying-entries": "{{count}} Angezeigte Einträge",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
@@ -234,6 +235,6 @@
     "seconds-until-archive-should-close": "Archiv automatisch sperren nach x Sekunden (0 = aus)",
     "lock-archive-on-minimize": "Archiv sperren beim Minimieren",
     "lock-archive-onfocusout": "Nur sperren, wenn das Fenster nicht mehr im Fokus ist",
-    "disable-autloading-icons": "Icons nicht automatisch laden"
+    "disable-autoloading-icons": "Icons nicht automatisch laden"
   }
 }

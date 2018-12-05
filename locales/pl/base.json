@@ -153,7 +153,8 @@
     "custom-fields-label-empty-info": "Zapomniałeś o uzupełnieniu etykiety dla przynajmniej jednego dodatkowego pola.",
     "are-you-sure-question": "Jesteś pewny?",
     "displaying-entries": "Liczba wpisów: {{count}}",
-    "no-value": "Brak wartości"
+    "no-value": "Brak wartości",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Kopiuj do schowka",
@@ -243,6 +244,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

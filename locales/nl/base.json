@@ -153,7 +153,8 @@
     "custom-fields-label-empty-info": "Je bent vergeten om een label in te stellen voor een of meer speciale velden.",
     "are-you-sure-question": "Weet je het zeker?",
     "displaying-entries": "{{count}} items weergegeven",
-    "no-value": ""
+    "no-value": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Kopieer naar klembord",
@@ -243,6 +244,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

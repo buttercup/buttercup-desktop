@@ -153,7 +153,8 @@
     "custom-fields-label-empty-info": "Özel alanlarınızın biri veya daha fazlasına etiket yazmayı unutmuşsun.",
     "are-you-sure-question": "Emin misiniz?",
     "displaying-entries": "{{count}} kayıt görüntüleniyor",
-    "no-value": "İçeriksiz"
+    "no-value": "İçeriksiz",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Panoya kopyala",
@@ -243,6 +244,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

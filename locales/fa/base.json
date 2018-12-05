@@ -154,7 +154,8 @@
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
     "are-you-sure-question": "برای این کار اطمینان دارید؟",
     "displaying-entries": "در حال نمایش {{count}} سند",
-    "no-value": "بدون محتوی"
+    "no-value": "بدون محتوی",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
@@ -244,6 +245,6 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
-    "disable-autloading-icons": ""
+    "disable-autoloading-icons": ""
   }
 }

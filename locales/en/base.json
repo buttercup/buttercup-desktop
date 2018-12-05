@@ -246,6 +246,6 @@
     "seconds-until-archive-should-close": "Lock archive automatically after x seconds (0 = off)",
     "lock-archive-on-minimize": "Lock archives on minimize",
     "lock-archive-onfocusout": "Only lock archives, when buttercup is not focused",
-    "disable-autloading-icons": "Disable icon autoloading"
+    "disable-autoloading-icons": "Disable icon autoloading"
   }
 }
