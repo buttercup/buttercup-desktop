@@ -197,7 +197,7 @@ class General extends PureComponent {
                     setIsAutoloadingIconsDisabled(e.target.checked)}
                   checked={isAutoloadingIconsDisabled}
                 />
-                {t('preferences.disable-autloading-icons')}
+                {t('preferences.disable-autoloading-icons')}
               </label>
             </LabelWrapper>
           </div>

@@ -45,8 +45,6 @@ i18n.changeLanguage(getSetting(store.getState(), 'locale'));
 linkArchiveManagerToStore(store);
 setupShortcuts(store);
 
-const archiveActions = setupArchiveActions(store);
-
 // Reset current archive
 store.dispatch(setSetting('archivesLoading', true));
 store.dispatch(setCurrentArchive(null));
@@ -118,10 +116,17 @@ window.onbeforeunload = event => {
 };
 
 // listen for store changes
+const archiveActions = setupArchiveActions(store);
 const subscribe = initSubscriber(store);
 
-subscribe('settings', state => {
+subscribe('settings.isButtercupFocused', state => {
   archiveActions.lockArchiveTimer();
+});
+
+subscribe('archives', state => {
+  if (state.archives.some(archive => archive.status === 'unlocked')) {
+    archiveActions.lockArchiveTimer();
+  }
 });
 
 subscribe('settings.referenceFontSize', state => {
