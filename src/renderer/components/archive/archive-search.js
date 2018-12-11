@@ -164,12 +164,8 @@ class ArchiveSearch extends PureComponent {
             {
               entries: this.state.searchTerm ? entries : []
             },
-            () => {
-              // check entries and select first one
-              if (this.state.entries.length) {
-                this.selectListItem(0);
-              }
-            }
+            // check entries and select first one
+            () => this.state.entries.length && this.selectListItem()
           );
         })
     );
@@ -190,7 +186,7 @@ class ArchiveSearch extends PureComponent {
    * @param {number} selectedItemIndex
    * @memberof ArchiveSearch
    */
-  selectListItem = selectedItemIndex => {
+  selectListItem = (selectedItemIndex = 0) => {
     this.setState(
       {
         selectedItemIndex
