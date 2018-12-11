@@ -152,7 +152,7 @@ class ArchiveSearch extends PureComponent {
    * @param {object} e
    * @memberof ArchiveSearch
    */
-  changeInput = e => {
+  changeSearchtermInput = e => {
     this.setState(
       {
         searchTerm: e.target.value,
@@ -160,9 +160,17 @@ class ArchiveSearch extends PureComponent {
       },
       () =>
         getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
-          this.setState({
-            entries: this.state.searchTerm ? entries : []
-          });
+          this.setState(
+            {
+              entries: this.state.searchTerm ? entries : []
+            },
+            () => {
+              // check entries and select first one
+              if (this.state.entries.length) {
+                this.selectListItem(0);
+              }
+            }
+          );
         })
     );
   };
@@ -281,7 +289,7 @@ class ArchiveSearch extends PureComponent {
             innerRef={input => {
               this._input = input;
             }}
-            onChange={this.changeInput}
+            onChange={this.changeSearchtermInput}
             value={this.state.searchTerm}
             placeholder={t('archive-search.searchterm')}
             type="text"
