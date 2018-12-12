@@ -172,13 +172,19 @@ class ArchiveSearch extends PureComponent {
   };
 
   /**
-   * Wrap word with mark tag
-   * @param {string} word text to wrap
+   * Wrap text with <mark> tag
+   * @param {string} text
    * @memberof ArchiveSearch
    */
-  highlightSearchResult = word => {
-    const regex = new RegExp('(' + this.state.searchTerm + ')', 'ig');
-    return word.replace(regex, '<mark>$1</mark>');
+  highlightSearchResult = text => {
+    const startIndex = text.toLowerCase().indexOf(this.state.searchTerm.toLowerCase());
+    if (startIndex >= 0) {
+      const endIndex = startIndex + this.state.searchTerm.length;
+      return text.substring(0, startIndex) +
+        '<mark>' + text.substring(startIndex, endIndex) + '</mark>' +
+        text.substring(endIndex);
+    }
+    return text;
   };
 
   /**
