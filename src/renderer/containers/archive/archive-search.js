@@ -4,7 +4,10 @@ import { getArchive } from '../../../shared/buttercup/archive';
 import { getCurrentArchive } from '../../../shared/selectors';
 import { setIsArchiveSearchVisible } from '../../../shared/actions/ui-state';
 
-import { selectArchiveGroupAndEntry } from '../../../shared/actions/entries';
+import {
+  selectArchiveGroupAndEntry,
+  getMatchingEntriesForSearchTerm
+} from '../../../shared/actions/entries';
 
 export default connect(
   state => ({
@@ -13,6 +16,7 @@ export default connect(
   }),
   {
     selectArchiveGroupAndEntry,
-    setIsArchiveSearchVisible
+    setIsArchiveSearchVisible,
+    findEntryByTerm: getMatchingEntriesForSearchTerm
   }
 )(ArchiveSearch, 'ArchiveSearch');

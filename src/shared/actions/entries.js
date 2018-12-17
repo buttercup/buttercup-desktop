@@ -26,6 +26,24 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
+// get all parent groups
+const getParentGroups = currentGroup =>
+  currentGroup
+    ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
+    : [];
+
+export const getSourceName = sourceID => {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(sourceID);
+
+  if (!source) {
+    throw new Error(
+      `Unable to fetch source information: No source found for ID: ${sourceID}`
+    );
+  }
+  return source.name;
+};
+
 export const selectEntry = (entryId, isSavingNewEntry = false) => async (
   dispatch,
   getState
@@ -156,7 +174,7 @@ const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
   });
 };
 
-export async function getMatchingEntriesForSearchTerm(term) {
+export const getMatchingEntriesForSearchTerm = term => async dispatch => {
   const manager = getSharedArchiveManager();
 
   const unlockedSources = manager.unlockedSources;
@@ -172,40 +190,27 @@ export async function getMatchingEntriesForSearchTerm(term) {
 
   return Promise.all(
     finder.search(term).map(async result => {
+      const { entry } = result;
       const archiveId = lookup[result.archive.id];
 
       return {
         sourceID: archiveId,
-        groupID: result.entry.getGroup().id,
-        icon: await entryTools.getIcon(result.entry),
-        entry: result.entry
+        groupID: entry.getGroup().id,
+        icon: await entryTools.getIcon(entry),
+        entry: entry,
+        path: [
+          getSourceName(archiveId),
+          ...getParentGroups(entry.getGroup()).map(group => group.getTitle())
+        ]
       };
     })
   );
-}
-
-export function getNameForSource(sourceID) {
-  const manager = getSharedArchiveManager();
-  const source = manager.getSourceForID(sourceID);
-
-  if (!source) {
-    throw new Error(
-      `Unable to fetch source information: No source found for ID: ${sourceID}`
-    );
-  }
-  return source.name;
-}
+};
 
 export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   dispatch,
   getState
 ) => {
-  // get all parent groups
-  const getParentGroups = currentGroup =>
-    currentGroup
-      ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
-      : [];
-
   // load archive
   dispatch(loadOrUnlockArchive(archiveId));
 
