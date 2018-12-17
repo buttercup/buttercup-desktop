@@ -1,0 +1,238 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Tietoa",
+      "check-for-updates": "Tarkista onko päivityksiä...",
+      "services": "Palvelut",
+      "hide": "Piilota",
+      "hideothers": "Piilota muut",
+      "unhide": "Näytä",
+      "quit": "Lopeta"
+    },
+    "archive": {
+      "archive": "Arkisto",
+      "file": "Tietosto",
+      "new": "Uusi Arkisto",
+      "open": "Avaa Arkisto",
+      "search": "Etsi Arkistosta",
+      "connect-cloud-sources": "Yhdistä pilvipalveluun",
+      "import": {
+        "import": "Tuo",
+        "import-from-type": "Tuo arkisto {{name}} (.{{extension}})",
+        "import-to-type": "Kohteeseen {{name}}",
+        "no-available-archives": "Arkistoja, johon voi tuoda ei ole saatavilla."
+      },
+      "export": {
+        "export": "Vie",
+        "export-archive": "View {{name}} CSV-tiedostoon",
+        "no-available-archives": "Arkistoja, johon voi viedä ei ole saatavilla."
+      },
+      "close": "Sulje"
+    },
+    "edit": {
+      "edit": "Muokkaa",
+      "undo": "Kumoa",
+      "redo": "Tee uudelleen",
+      "cut": "Leikkaa",
+      "copy": "Kopioi",
+      "paste": "Liitä",
+      "pasteandmatchstyle": "Liitä ilman tyylejä",
+      "delete": "Poista",
+      "selectall": "Valitse kaikki",
+      "speech": {
+        "speech": "Puhe",
+        "startspeaking": "Aloita puhuminen",
+        "stopspeaking": "Lopeta puhuminen"
+      }
+    },
+    "view": {
+      "view": "Näytä",
+      "condensed-sidebar": "Tiiviimpi Sivupalkki",
+      "language": "Kieli",
+      "enable-tray-icon": "Näytä Tehtäväpalkissa",
+      "reload": "Lataa uudelleen",
+      "forcereload": "Pakota uudelleenkäynnistys",
+      "toggledevtools": "Näytä/Piilota kehittäjätyökalut",
+      "togglefullscreen": "Aseta/Poista koko näytön tila",
+      "auto-hide-menubar": "Piilota valikko automaattisesti"
+    },
+    "window": {
+      "window": "Ikkuna",
+      "minimize": "Pienennä",
+      "close": "Sulje",
+      "zoom": "Zoomaus",
+      "front": "Tuo kaikki eteen"
+    },
+    "system": {
+      "system": "Järjestelmä",
+      "enable-browser-access": "Ota käyttöön Selain Pääsy"
+    },
+    "help": {
+      "help": "Ohje",
+      "visit-our-website": "Vieraile verkkosivullamme",
+      "privacy-policy": "Yksityisyyskäytännöt",
+      "view-changelog-for-v": "Katso version {{version}} muutoshistoria"
+    },
+    "tray": {
+      "quit": "Lopeta",
+      "open": "Avaa Buttercup"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Hakutermi...",
+    "nothing-found": "Mitään ei löytynyt"
+  },
+  "archive": {
+    "add-archive": "Lisää Arkisto",
+    "archive-saved-loading-info": "Arkistoasi tallennetaan.<br>Poistutaan automaattisesti"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup Arkistot",
+    "load-a-buttercup-archive": "Lataa Buttercup Arkisto",
+    "create-a-new-buttercup-archive": "Luo Uusi Buttercup Arkisto"
+  },
+  "archive-menu": {
+    "unlock": "Poista lukitus",
+    "change-color": "Vaihda Väriä",
+    "change-password": "Vaihda Salasanaa",
+    "import": "Tuo",
+    "import-from-type": "Tuo arkisto {{name}} (.{{extension}})",
+    "export": "Vie",
+    "archive-remove-with-name": "Poista {{name}}",
+    "open": "Avaa",
+    "lock": "Lukitse"
+  },
+  "cloud-source": {
+    "cancel": "Peruuta",
+    "go-back": "Mene Takaisin",
+    "new-archive": "Uusi Arkisto",
+    "open-in-buttercup": "Avaa Buttercupissa",
+    "connect-to-dropbox": "Yhdistä Dropboxiin",
+    "authenticate-with-dropbox": "Tunnistaudu Dropboxiin",
+    "dropbox-description-text": "Yhdistä Buttercup Dropbox tiliisi arkistojen lukua ja kirjoitusta varten.<br />Me emme tallenna Dropbox käyttäjätunnusta tai salasanaasi.",
+    "connect-to-wedav": "Yhdistä {{title}} Palvelimeen",
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "connect": "Yhdistä",
+    "webdav-description-text": "Syötä {{title}} päätepisteosoite, Käyttäjätunnus ja Salasana yhdistääkseksi ja valitaksesi Buttercup Arkiston. Me <strong>tallenname</strong> sinun tunnistautumistiedot ja salaamme ne.",
+    "name": "Nimi",
+    "size": "Koko",
+    "date": "Päivämäärä"
+  },
+  "confirm-dialog": {
+    "yes": "Kyllä",
+    "no": "Ei"
+  },
+  "copyable": {
+    "hide": "Piilota",
+    "reveal": "Näytä",
+    "copy": "Kopioi"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Kopioi Leikepöydälle",
+    "reveal-password": "Näytä Salasana"
+  },
+  "entry": {
+    "add-entry": "Lisää Merkintä",
+    "select-or-create-an-entry": "Valitse tai Luo Merkintä",
+    "title": "Otsikko",
+    "untitled": "Nimeämätön",
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "secure-password": "Turvallinen salasana",
+    "custom-fields": "Lisäkentät",
+    "no-custom-fields-info-text": "Lisäkenttiä ei ole lisätty. Mitä jos lisäisit yhden?",
+    "add-new-field": "Lisää Uusi Kenttä",
+    "label": "Nimi",
+    "new-field": "Uusi Kenttä",
+    "edit": "Muokkaa",
+    "save": "Tallenna",
+    "cancel": "Peruuta",
+    "delete": "Poista",
+    "entry-inputs-empty-info": "Täytä vähintään otsikko.",
+    "entry-title-empty-info": "Täytä otsikko.",
+    "custom-fields-label-empty-info": "Olet unohtanut lisätä nimen yhdelle tai useammalle kentälle.",
+    "are-you-sure-question": "Oletko aivan varma?",
+    "displaying-entries": "Näytetään {{count}} merkintää",
+    "no-value": "Ei valintaa",
+    "quit-unsave-entry": "Menetät tallentamattomat muutokset. Haluatko varmasti jatkaa?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Kopioi Leikepöydälle",
+    "username": "Käyttäjänimi",
+    "password": "Salasana",
+    "open-url-in-browser": "Avaa osoite selaimessa",
+    "move-to-group": "Lisää Ryhmään",
+    "move-to-trash": "Siirrä Roskiin",
+    "delete-permanently": "Poista Lopullisesti"
+  },
+  "error": {
+    "archive-not-found": "Arkiston lähde ei löytynyt.",
+    "authentication-failed": "Tunnistautuminen epäonnistui.",
+    "unknown": "Tapahtui tuntematon virhe.",
+    "passwords-dont-match": "Salasanasi eivät täsmää.",
+    "group-not-found": "Ryhmää ei löytynyt.",
+    "sort-definition-not-found": "Järjestysmääritystä ei löytynyt",
+    "insufficient-data-provided": "Liian vähän tietoa annettu järjestämiseksi",
+    "check-for-update": "Ohjelmaa päivittäessä tapahtui virhe. Yritä myöhemmin uudelleen.",
+    "invalid-import-type-requested": "Pyydettiin tuomaan epäkelpoa tuontityyppiä",
+    "open-file-for-importing": "Tuo toiminto ei pitäisi olla ajossa ilman, että ohjelman pääikkuna on ajossa.",
+    "entry-not-found": "Merkintää ei löydetty",
+    "dropbox-connection-failed-info": "Yhteys Dropbox palvelimeen epäonnistui. Yritä myöhemmin uudestaan.",
+    "webdav-connection-failed-info": "Yhteys {{endpoint}} epäonnistui. Tarkista kirjautumistietosi ja kokeile uudestaan."
+  },
+  "group": {
+    "new-group": "Uusi Ryhmä",
+    "untitled": "Nimeämätön"
+  },
+  "group-menu": {
+    "new-group": "Uusi Ryhmä",
+    "add-group": "Lisää Ryhmä",
+    "move-to-root": "Siirrä Ylätasolle",
+    "move-to-group": "Siirrä Ryhmään",
+    "rename": "Uudelleennimeä",
+    "delete": "Poista",
+    "move-to-group-custom": "Siirrä kohteeseen {{title}}",
+    "empty-trash": "Tyhjennä Roskakori",
+    "empty-trash-question": "Oletko aivan varma että haluat tyhjentää Roskakorin?",
+    "title-asc": "Otsikko: Nouseva",
+    "title-desc": "Otsikko: Laskeva"
+  },
+  "intro": {
+    "welcome-title": "Tervetuloa Buttercupiin.",
+    "welcome-back-title": "Tervetuloa takaisin Buttercupiin.",
+    "welcome-caption": "Et ole vielä lisännyt yhtään arkistoa. Mitä jos lisäisit yhden?",
+    "unlock-archive": "Avaa arkisto aloittaaksesi ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Avaa Arkisto Tiedosto",
+    "new-archive-file": "Uusi Arkisto Tiedosto",
+    "connect-cloud-sources": "Yhdistä Pilvipalveluun"
+  },
+  "password-dialog": {
+    "master-password": "Pääsalasana",
+    "new-password": "Uusi Salasana",
+    "password": "Salasana",
+    "confirm-password": "Vahvista Salasana",
+    "confirm": "Vahvista",
+    "nevermind": "Peruuta"
+  },
+  "search": {
+    "search": "Etsi"
+  },
+  "sort": {
+    "title-asc": "Otsikko: Nouseva",
+    "title-desc": "Otsikko: Laskeva",
+    "time-asc": "Aika: Nouseva",
+    "time-desc": "Aika: Laskeva"
+  },
+  "update": {
+    "installing": "Asennetaan",
+    "update-available-message": "Buttercup {{version}} on nyt saatavilla. Sinulla on versio {{currentVersion}}. Haluatko ladata päivityksen?",
+    "new-version-available": "Uusi versio Buttercupista on saatavilla!",
+    "not-now": "Ei nyt",
+    "download": "Lataa ja Asenna",
+    "download-manual": "Avaa Julkaisut Näkymä",
+    "release-notes": "Julkaisumuistio:"
+  }
+}
