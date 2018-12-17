@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getQueue } from '../../renderer/system/queue';
@@ -10,8 +11,7 @@ import {
   getExpandedKeys
 } from '../selectors';
 import i18n from '../i18n';
-import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
-import { getSharedArchiveManager } from '../buttercup/archive';
+import { getSharedArchiveManager, getSourceName } from '../buttercup/archive';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -25,24 +25,6 @@ import {
 import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
-
-// get all parent groups
-const getParentGroups = currentGroup =>
-  currentGroup
-    ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
-    : [];
-
-export const getSourceName = sourceID => {
-  const manager = getSharedArchiveManager();
-  const source = manager.getSourceForID(sourceID);
-
-  if (!source) {
-    throw new Error(
-      `Unable to fetch source information: No source found for ID: ${sourceID}`
-    );
-  }
-  return source.name;
-};
 
 export const selectEntry = (entryId, isSavingNewEntry = false) => async (
   dispatch,
@@ -200,7 +182,9 @@ export const getMatchingEntriesForSearchTerm = term => async dispatch => {
         entry: entry,
         path: [
           getSourceName(archiveId),
-          ...getParentGroups(entry.getGroup()).map(group => group.getTitle())
+          ...entryTools
+            .getParentGroups(entry.getGroup())
+            .map(group => group.getTitle())
         ]
       };
     })
@@ -219,7 +203,7 @@ export const selectArchiveGroupAndEntry = (archiveId, entry) => (
     setExpandedKeys([
       ...new Set([
         ...getExpandedKeys(getState()),
-        ...getParentGroups(entry.getGroup()).map(g => g.id)
+        ...entryTools.getParentGroups(entry.getGroup()).map(g => g.id)
       ])
     ])
   );
