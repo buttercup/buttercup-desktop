@@ -326,7 +326,12 @@ class ArchiveSearch extends PureComponent {
                                 : '-'
                             }}
                           />
-                          <EntryFolder>{path.join(' → ')}</EntryFolder>
+                          <EntryFolder>
+                            <For each="group" index="index" of={path}>
+                              <If condition={index > 0}> › </If>
+                              {group}
+                            </For>
+                          </EntryFolder>
                         </EntryData>
                       </ListItem>
                     )
