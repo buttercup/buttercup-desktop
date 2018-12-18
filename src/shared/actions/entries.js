@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions';
+import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import { getQueue } from '../../renderer/system/queue';
@@ -10,8 +11,7 @@ import {
   getExpandedKeys
 } from '../selectors';
 import i18n from '../i18n';
-import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
-import { getSharedArchiveManager } from '../buttercup/archive';
+import { getSharedArchiveManager, getSourceName } from '../buttercup/archive';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -156,7 +156,7 @@ const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
   });
 };
 
-export async function getMatchingEntriesForSearchTerm(term) {
+export const getMatchingEntriesForSearchTerm = term => async dispatch => {
   const manager = getSharedArchiveManager();
 
   const unlockedSources = manager.unlockedSources;
@@ -172,40 +172,29 @@ export async function getMatchingEntriesForSearchTerm(term) {
 
   return Promise.all(
     finder.search(term).map(async result => {
+      const { entry } = result;
       const archiveId = lookup[result.archive.id];
 
       return {
         sourceID: archiveId,
-        groupID: result.entry.getGroup().id,
-        icon: await entryTools.getIcon(result.entry),
-        entry: result.entry
+        groupID: entry.getGroup().id,
+        icon: await entryTools.getIcon(entry),
+        entry: entry,
+        path: [
+          getSourceName(archiveId),
+          ...entryTools
+            .getParentGroups(entry.getGroup())
+            .map(group => group.getTitle())
+        ]
       };
     })
   );
-}
-
-export function getNameForSource(sourceID) {
-  const manager = getSharedArchiveManager();
-  const source = manager.getSourceForID(sourceID);
-
-  if (!source) {
-    throw new Error(
-      `Unable to fetch source information: No source found for ID: ${sourceID}`
-    );
-  }
-  return source.name;
-}
+};
 
 export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   dispatch,
   getState
 ) => {
-  // get all parent groups
-  const getParentGroups = currentGroup =>
-    currentGroup
-      ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
-      : [];
-
   // load archive
   dispatch(loadOrUnlockArchive(archiveId));
 
@@ -214,7 +203,7 @@ export const selectArchiveGroupAndEntry = (archiveId, entry) => (
     setExpandedKeys([
       ...new Set([
         ...getExpandedKeys(getState()),
-        ...getParentGroups(entry.getGroup()).map(g => g.id)
+        ...entryTools.getParentGroups(entry.getGroup()).map(g => g.id)
       ])
     ])
   );

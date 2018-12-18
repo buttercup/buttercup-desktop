@@ -25,6 +25,12 @@ export function getFacadeFieldValue(entry, fieldName) {
   }
 }
 
+export function getParentGroups(currentGroup) {
+  return currentGroup
+    ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
+    : [];
+}
+
 /**
  * Validate buttercup entry values
  * @param {ButtercupEntry} entry
