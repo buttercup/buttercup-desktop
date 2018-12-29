@@ -96,7 +96,8 @@ class Webdav extends PureComponent {
         console.error(err);
         showDialog(
           t('error.webdav-connection-failed-info', {
-            endpoint
+            endpoint,
+            interpolation: { escapeValue: false }
           })
         );
       });
