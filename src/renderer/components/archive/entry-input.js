@@ -41,7 +41,7 @@ const GeneratorToggle = styled.div`
   top: 0px;
   cursor: pointer;
   padding: 5px;
-  background-color: ${props => (props.active ? 'var(--gray)' : 'transparent')};
+  background-color: 'transparent';
 
   button {
     bottom: 2px;
