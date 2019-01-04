@@ -212,6 +212,9 @@
     "confirm": "Onayla",
     "nevermind": "Boşver"
   },
+  "password-generator": {
+    "password-generator": "Şifre oluştur"
+  },
   "search": {
     "search": "Ara"
   },

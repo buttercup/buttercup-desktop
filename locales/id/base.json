@@ -64,9 +64,9 @@
       "front": "Tampilkan semua Window ke atas"
     },
     "system": {
-       "system": "Sistem",
-       "enable-browser-access": "Aktifkan Akses Peramban/Browser"
-     },
+      "system": "Sistem",
+      "enable-browser-access": "Aktifkan Akses Peramban/Browser"
+    },
     "help": {
       "help": "Bantuan",
       "visit-our-website": "Kunjungi Situs Kami",
@@ -215,6 +215,9 @@
     "confirm-password": "Konfirmasi Kata Sandu",
     "confirm": "Konfirmasi",
     "nevermind": "Sudahlah"
+  },
+  "password-generator": {
+    "password-generator": "Buat Kata Sandi"
   },
   "search": {
     "search": "Cari"

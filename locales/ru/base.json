@@ -149,6 +149,9 @@
     "confirm": "Подтвердить",
     "nevermind": "Впрочем, не надо"
   },
+  "password-generator": {
+    "password-generator": "Создать пароль"
+  },
   "search": {
     "search": "Поиск"
   },

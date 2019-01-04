@@ -199,6 +199,9 @@
     "confirm": "Megerősítve",
     "nevermind": "Nem egyezik"
   },
+  "password-generator": {
+    "password-generator": "Jelszó létrehozása"
+  },
   "search": {
     "search": "Keresés"
   },

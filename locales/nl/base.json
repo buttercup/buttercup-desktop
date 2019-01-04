@@ -211,6 +211,9 @@
     "confirm": "Bevestig",
     "nevermind": "Maakt niet uit"
   },
+  "password-generator": {
+    "password-generator": "Genereer wachtwoord"
+  },
   "search": {
     "search": "Zoeken"
   },
