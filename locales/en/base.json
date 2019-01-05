@@ -155,7 +155,8 @@
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?",
     "displaying-entries": "Displaying {{count}} entries",
-    "no-value": "No Value"
+    "no-value": "No Value",
+    "quit-unsave-entry": "You will lose your changes, are you sure?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
@@ -242,7 +243,9 @@
     "font-size": "Font size",
     "reset": "Reset",
     "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)",
-    "seconds-until-archive-should-close": "Lock archive automatically, when window is not focused (in seconds, 0 = off)",
-    "lock-archive-on-minimize": "Lock archives on minimize"
+    "seconds-until-archive-should-close": "Lock archive automatically after x seconds (0 = off)",
+    "lock-archive-on-minimize": "Lock archives on minimize",
+    "lock-archive-onfocusout": "Only lock archives, when buttercup is not focused",
+    "disable-autoloading-icons": "Disable icon autoloading"
   }
 }

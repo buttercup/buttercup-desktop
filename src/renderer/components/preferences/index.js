@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
+import { Scrollbars } from 'react-custom-scrollbars';
+
 import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
 import { closeCurrentWindow } from '../../system/utils';
@@ -60,20 +62,12 @@ const MenuInner = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 20px;
+  margin: 20px 20px 0 20px;
+  overflow: auto;
   h3 {
     margin: 0 0 15px;
   }
 `;
-// const Footer = styled.div`
-//   padding: 20px;
-//   display: grid;
-//   grid-template-columns: 1fr 1fr;
-//   grid-gap: 20px;
-//   h3 {
-//     margin: 0 0 15px;
-//   }
-// `;
 
 const Seperator = styled.div`
   display: block;
@@ -144,16 +138,19 @@ class Preferences extends PureComponent {
               ))}
             </MenuInner>
           </Menu>
-          <Content>
-            {views.map(({ key, path, component: Component }) => (
-              <Route
-                key={key}
-                exact
-                path={path}
-                render={props => <Component {...this.props} {...props} />}
-              />
-            ))}
-          </Content>
+
+          <Scrollbars style={{ display: 'flex' }}>
+            <Content>
+              {views.map(({ key, path, component: Component }) => (
+                <Route
+                  key={key}
+                  exact
+                  path={path}
+                  render={props => <Component {...this.props} {...props} />}
+                />
+              ))}
+            </Content>
+          </Scrollbars>
         </Wrapper>
       </Router>
     );

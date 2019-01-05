@@ -106,6 +106,7 @@ Buttercup for Desktop supports the following languages:
  * French
  * Russian
  * Farsi
+ * Bahasa Indonesia
  * Italian
  * Brazilian Portuguese
  * Ukrainian

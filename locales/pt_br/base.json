@@ -137,7 +137,8 @@
     "custom-fields-label-empty-info": "Você se esqueceu de adicionar uma etiqueta a um campo customizado",
     "are-you-sure-question": "Você tem certeza?",
     "no-value": "",
-    "displaying-entries": ""
+    "displaying-entries": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiado para a Área de Transferência",
@@ -227,6 +228,8 @@
     "reset": "",
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": ""
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "disable-autoloading-icons": ""
   }
 }

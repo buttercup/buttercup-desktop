@@ -11,7 +11,7 @@ import { setSetting } from '../../../shared/actions/settings';
 
 const Grid = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: ${props => (props.single ? '1fr' : '1fr 1fr')};
   margin-bottom: 20px;
 `;
 const Input = styled(BaseInput)`
@@ -108,10 +108,14 @@ class General extends PureComponent {
     setCondencedSidebar: PropTypes.func,
     secondsUntilClearClipboard: PropTypes.any,
     setSecondsUntilClearClipboard: PropTypes.func,
-    secondsUntilArchiveShouldClose: PropTypes.any,
-    setSecondsUntilArchiveShouldClose: PropTypes.func,
+    autolockSeconds: PropTypes.any,
+    setAutolockSeconds: PropTypes.func,
     lockArchiveOnMinimize: PropTypes.any,
-    setLockArchiveOnMinimize: PropTypes.func
+    setLockArchiveOnMinimize: PropTypes.func,
+    lockArchiveOnFocusout: PropTypes.any,
+    setLockArchiveOnFocusout: PropTypes.func,
+    isAutoloadingIconsDisabled: PropTypes.any,
+    setIsAutoloadingIconsDisabled: PropTypes.func
   };
 
   state = {
@@ -134,10 +138,14 @@ class General extends PureComponent {
       setCondencedSidebar,
       secondsUntilClearClipboard,
       setSecondsUntilClearClipboard,
-      secondsUntilArchiveShouldClose,
-      setSecondsUntilArchiveShouldClose,
+      autolockSeconds,
+      setAutolockSeconds,
       lockArchiveOnMinimize,
-      setLockArchiveOnMinimize
+      setLockArchiveOnMinimize,
+      lockArchiveOnFocusout,
+      setLockArchiveOnFocusout,
+      isAutoloadingIconsDisabled,
+      setIsAutoloadingIconsDisabled
     } = this.props;
 
     return (
@@ -180,6 +188,19 @@ class General extends PureComponent {
               </label>
             </LabelWrapper>
           </div>
+          <div>
+            <LabelWrapper checkbox>
+              <label>
+                <Checkbox
+                  type="checkbox"
+                  onChange={e =>
+                    setIsAutoloadingIconsDisabled(e.target.checked)}
+                  checked={isAutoloadingIconsDisabled}
+                />
+                {t('preferences.disable-autoloading-icons')}
+              </label>
+            </LabelWrapper>
+          </div>
         </Grid>
         <LabelWrapper>
           {t('preferences.seconds-until-clear-clipboard')}{' '}
@@ -195,6 +216,7 @@ class General extends PureComponent {
           )}
           <Input
             type="number"
+            min="0"
             onChange={e => setSecondsUntilClearClipboard(e.target.value)}
             value={secondsUntilClearClipboard}
           />
@@ -202,12 +224,9 @@ class General extends PureComponent {
 
         <LabelWrapper>
           {t('preferences.seconds-until-archive-should-close')}{' '}
-          {secondsUntilArchiveShouldClose !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
+          {autolockSeconds !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
             <span
-              onClick={e =>
-                setSecondsUntilArchiveShouldClose(
-                  DEFAULT_ARCHIVE_CLOSE_SECONDS
-                )}
+              onClick={e => setAutolockSeconds(DEFAULT_ARCHIVE_CLOSE_SECONDS)}
             >
               {t('preferences.reset')}
             </span>
@@ -216,10 +235,23 @@ class General extends PureComponent {
           )}
           <Input
             type="number"
-            onChange={e => setSecondsUntilArchiveShouldClose(e.target.value)}
-            value={secondsUntilArchiveShouldClose}
+            min="0"
+            onChange={e => setAutolockSeconds(e.target.value)}
+            value={autolockSeconds}
           />
         </LabelWrapper>
+        <Grid single>
+          <LabelWrapper checkbox>
+            <label>
+              <Checkbox
+                type="checkbox"
+                onChange={e => setLockArchiveOnFocusout(e.target.checked)}
+                checked={lockArchiveOnFocusout}
+              />
+              {t('preferences.lock-archive-onfocusout')}
+            </label>
+          </LabelWrapper>
+        </Grid>
 
         <LabelWrapper>
           {t('app-menu.view.language')}
@@ -251,11 +283,10 @@ export default connect(
     locale: getSetting(state, 'locale'),
     isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
     condencedSidebar: getSetting(state, 'condencedSidebar'),
+    lockArchiveOnFocusout: getSetting(state, 'lockArchiveOnFocusout'),
     secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
-    secondsUntilArchiveShouldClose: getSetting(
-      state,
-      'secondsUntilArchiveShouldClose'
-    ),
+    isAutoloadingIconsDisabled: getSetting(state, 'isAutoloadingIconsDisabled'),
+    autolockSeconds: getSetting(state, 'autolockSeconds'),
     lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize')
   }),
   dispatch => {
@@ -266,10 +297,14 @@ export default connect(
         dispatch(setSetting('condencedSidebar', payload)),
       setSecondsUntilClearClipboard: payload =>
         dispatch(setSetting('secondsUntilClearClipboard', payload)),
-      setSecondsUntilArchiveShouldClose: payload =>
-        dispatch(setSetting('secondsUntilArchiveShouldClose', payload)),
+      setAutolockSeconds: payload =>
+        dispatch(setSetting('autolockSeconds', payload)),
       setLockArchiveOnMinimize: payload =>
-        dispatch(setSetting('lockArchiveOnMinimize', payload))
+        dispatch(setSetting('lockArchiveOnMinimize', payload)),
+      setLockArchiveOnFocusout: payload =>
+        dispatch(setSetting('lockArchiveOnFocusout', payload)),
+      setIsAutoloadingIconsDisabled: payload =>
+        dispatch(setSetting('isAutoloadingIconsDisabled', payload))
     };
   }
 )(General, 'General');

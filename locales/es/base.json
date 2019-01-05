@@ -135,7 +135,8 @@
     "custom-fields-label-empty-info": "Has olvidado añadir una etiqueta a uno o a varios campos personalizados.",
     "are-you-sure-question": "¿Estás seguro?",
     "no-value": "",
-    "displaying-entries": ""
+    "displaying-entries": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiar al portapapeles",
@@ -226,6 +227,8 @@
     "reset": "",
     "seconds-until-clear-clipboard": "Seconds until clear clipboard",
     "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": ""
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "disable-autoloading-icons": ""
   }
 }

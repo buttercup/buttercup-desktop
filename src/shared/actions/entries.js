@@ -5,7 +5,10 @@ import { getQueue } from '../../renderer/system/queue';
 import {
   getCurrentGroupId,
   getCurrentArchiveId,
-  getExpandedKeys
+  getCurrentEntry,
+  getCurrentEntryMode,
+  getExpandedKeys,
+  getSetting
 } from '../selectors';
 import i18n from '../i18n';
 import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
@@ -24,7 +27,28 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = createAction(ENTRIES_SELECTED);
+export const selectEntry = (entryId, isSavingNewEntry = false) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const currentEntry = getCurrentEntry(getState());
+    const currentEntryMode = getCurrentEntryMode(getState());
+    !currentEntry && currentEntryMode === 'new' && !isSavingNewEntry
+      ? showConfirmDialog(
+          i18n.t('entry.quit-unsave-entry'),
+          choice =>
+            choice === 0
+              ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
+              : null
+        )
+      : dispatch({ type: ENTRIES_SELECTED, payload: entryId });
+  } catch (err) {
+    console.error(err);
+    showDialog(err);
+  }
+};
+
 export const setSortMode = createAction(ENTRIES_SET_SORT);
 
 export const changeMode = mode => () => ({
@@ -85,7 +109,7 @@ export const newEntry = newValues => async (dispatch, getState) => {
       type: ENTRIES_CREATE,
       payload: entryObj
     });
-    dispatch(selectEntry(entryObj.id));
+    dispatch(selectEntry(entryObj.id, true));
 
     // Then update the entry icon - might be slower, so we don't want the UI to wait for this
     dispatch(fetchEntryIconsAndUpdate(archiveId, [entryObj]));
@@ -119,18 +143,25 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
-  entries.forEach(entry => {
-    getQueue()
-      .channel('icons')
-      .enqueue(() => {
-        return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
-          if (entry.icon) {
-            return dispatch({ type: ENTRIES_UPDATE, payload: entry });
-          }
+const fetchEntryIconsAndUpdate = (archiveId, entries) => (
+  dispatch,
+  getState
+) => {
+  const state = getState();
+
+  if (!getSetting(state, 'isAutoloadingIconsDisabled')) {
+    entries.forEach(entry => {
+      getQueue()
+        .channel('icons')
+        .enqueue(() => {
+          return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
+            if (entry.icon) {
+              return dispatch({ type: ENTRIES_UPDATE, payload: entry });
+            }
+          });
         });
-      });
-  });
+    });
+  }
 };
 
 export async function getMatchingEntriesForSearchTerm(term) {

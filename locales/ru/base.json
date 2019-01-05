@@ -104,7 +104,8 @@
     "are-you-sure-question": "",
     "entry-inputs-empty-info": "",
     "entry-title-empty-info": "",
-    "custom-fields-label-empty-info": ""
+    "custom-fields-label-empty-info": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Скопировать в буфер обмена",
@@ -203,6 +204,8 @@
     "reset": "",
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": ""
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "disable-autoloading-icons": ""
   }
 }

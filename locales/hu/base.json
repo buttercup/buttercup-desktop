@@ -143,7 +143,8 @@
     "custom-fields-label-empty-info": "Elfelejtette beállítani a címkét egy vagy több egyedi mezőre.",
     "are-you-sure-question": "Biztos?",
     "no-value": "",
-    "displaying-entries": ""
+    "displaying-entries": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Vágólapra másolás",
@@ -230,6 +231,8 @@
     "reset": "",
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": ""
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "disable-autoloading-icons": ""
   }
 }

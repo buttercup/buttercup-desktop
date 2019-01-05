@@ -69,13 +69,12 @@ export function setupWindows(store) {
       loadFile(url, win);
     });
 
-    win.on('focus', () => {
-      store.dispatch(setSetting('windowIsFocused', true));
-    });
-
-    win.on('blur', () => {
-      store.dispatch(setSetting('windowIsFocused', false));
-    });
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
 
     win.once('ready-to-show', () => {
       win.show();
@@ -86,7 +85,9 @@ export function setupWindows(store) {
         callback(win);
       }
 
-      setTimeout(() => checkForUpdates(), ms('5s'));
+      setTimeout(() => {
+        checkForUpdates();
+      }, ms('5s'));
     });
 
     win.on('hide', () => {
@@ -121,6 +122,13 @@ export function setupWindows(store) {
       win.show();
     });
 
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
+
     return win;
   });
 
@@ -133,6 +141,8 @@ export function setupWindows(store) {
       height: 480,
       minWidth: 650,
       minHeight: 450,
+      minimizable: false,
+      maximizable: false,
       fullscreenable: false,
       x: Math.ceil(x + (width - 650) / 2),
       y: Math.ceil(y + (height - 450) / 2),
@@ -143,6 +153,13 @@ export function setupWindows(store) {
 
     win.once('ready-to-show', () => win.show());
     win.on('close', () => windowManager.deregister(win));
+
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
 
     return win;
   });

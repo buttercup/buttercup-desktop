@@ -12,7 +12,7 @@ export const setupArchiveActions = store => ({
     if (archives) {
       archives.forEach(
         ({ id, status }) =>
-          status !== 'locked' ? store.dispatch(lockArchive(id)) : ''
+          status === 'unlocked' ? store.dispatch(lockArchive(id)) : ''
       );
     }
   },
@@ -22,14 +22,22 @@ export const setupArchiveActions = store => ({
     }
     const state = store.getState();
 
+    const {
+      autolockSeconds,
+      lockArchiveOnFocusout,
+      isButtercupFocused
+    } = state.settings;
+
     if (
-      state.settings &&
-      !state.settings.windowIsFocused &&
-      state.settings.secondsUntilArchiveShouldClose !== '0'
+      (autolockSeconds === '0' &&
+        (lockArchiveOnFocusout && !isButtercupFocused)) ||
+      (autolockSeconds !== '0' &&
+        ((lockArchiveOnFocusout && !isButtercupFocused) ||
+          !lockArchiveOnFocusout))
     ) {
       __cache.timer = setTimeout(() => {
         this.lockAllArchives();
-      }, ms(state.settings.secondsUntilArchiveShouldClose + 's'));
+      }, ms(autolockSeconds + 's'));
     }
   }
 });
