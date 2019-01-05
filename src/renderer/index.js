@@ -128,7 +128,6 @@ store.subscribe(() => {
     }
     if (state.settings.secondsUntilArchiveShouldClose) {
       archiveActions.lockArchiveTimer();
-      console.log(archiveActions);
     }
   }
 });
