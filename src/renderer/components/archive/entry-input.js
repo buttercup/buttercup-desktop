@@ -104,8 +104,11 @@ export default class Input extends PureComponent {
                 isOpen={this.state.isGeneratorOpen}
                 preferPlace="below"
               >
-                <GeneratorToggle active={this.state.isGeneratorOpen}>
-                  <MagicIcon onClick={() => this.handleGeneratorToggle()} />
+                <GeneratorToggle
+                  active={this.state.isGeneratorOpen}
+                  onClick={() => this.handleGeneratorToggle()}
+                >
+                  <MagicIcon />
                 </GeneratorToggle>
               </Generator>
               <Meter input={value} />

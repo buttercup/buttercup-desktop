@@ -159,3 +159,15 @@ export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
   return manager.dehydrate();
 }
+
+export function getSourceName(sourceID) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(sourceID);
+
+  if (!source) {
+    throw new Error(
+      `Unable to fetch source information: No source found for ID: ${sourceID}`
+    );
+  }
+  return source.name;
+}
