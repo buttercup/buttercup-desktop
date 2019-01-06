@@ -122,12 +122,6 @@ class General extends PureComponent {
     language: 'en'
   };
 
-  changeInput = (e, name) => {
-    this.setState({
-      [name]: e.target.value
-    });
-  };
-
   render() {
     const {
       t,
@@ -218,6 +212,7 @@ class General extends PureComponent {
             type="number"
             min="0"
             onChange={e => setSecondsUntilClearClipboard(e.target.value)}
+            onBlur={e => setSecondsUntilClearClipboard(e.target.value || '0')}
             value={secondsUntilClearClipboard}
           />
         </LabelWrapper>
@@ -237,6 +232,7 @@ class General extends PureComponent {
             type="number"
             min="0"
             onChange={e => setAutolockSeconds(e.target.value)}
+            onBlur={e => setAutolockSeconds(e.target.value || '0')}
             value={autolockSeconds}
           />
         </LabelWrapper>
