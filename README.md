@@ -168,6 +168,16 @@ $ npm run package:win
 $ npm run package:linux
 ```
 
+**NB**:
+
+The above is a naive release process, without signing. To sign and release, as is the standard approach, run the following:
+
+```shell
+GH_TOKEN=github_token WIN_CSC_LINK=file:///some/directory/buttercup_codesign.p12 WIN_CSC_KEY_PASSWORD="codesign_password" npm run release
+```
+
+_Where `GH_TOKEN` is your GitHub token, `WIN_CSC_LINK` is the location of the p12 code signing certificate and `WIN_CSC_KEY_PASSWORD` is the certificate password._
+
 ## Debugging
 
 In case you need to access Buttercup logs, they are located in:
