@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
-import { translate } from 'react-i18next';
-import styled from 'styled-components';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 import { Translate } from '../../../shared/i18n';
