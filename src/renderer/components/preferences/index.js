@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { translate } from 'react-i18next';
 
 import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';

@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, globalShortcut } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
@@ -132,6 +132,31 @@ app.on('ready', async () => {
 
   appIsReady = true;
 
+  // global shortcut to max- and minimize the main window
+  const ret = globalShortcut.register('CommandOrControl+Shift+B', () => {
+    const windows = windowManager._windows;
+
+    // send update to all open windows
+    if (windows) {
+      windows.forEach(({ window, type }) => {
+        if (type === 'main') {
+          if (!window.isVisible()) {
+            window.focus();
+            window.show();
+          } else {
+            window.minimize();
+          }
+        } else {
+          window.close();
+        }
+      });
+    }
+  });
+
+  if (!ret) {
+    console.log('registration failed');
+  }
+
   // Show main window
   windowManager.buildWindowOfType('main', win => {
     // If the app has been started in order to open a file
@@ -149,6 +174,8 @@ app.on('ready', async () => {
       appTriedToQuit ||
       (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
     ) {
+      globalShortcut.unregisterAll();
+
       app.quit();
     }
   });
