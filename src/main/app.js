@@ -1,4 +1,4 @@
-import { app, globalShortcut } from 'electron';
+import { app } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
@@ -14,6 +14,10 @@ import { setupActions } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
 import { getSetting } from '../shared/selectors';
+import {
+  setupGlobalShortcuts,
+  unregisterGlobalShortcuts
+} from './globalShortcuts';
 
 log.info('Buttercup starting up...');
 
@@ -129,33 +133,9 @@ app.on('ready', async () => {
   setupWindows(store);
   setupActions(store);
   setupMenu(store);
+  setupGlobalShortcuts();
 
   appIsReady = true;
-
-  // global shortcut to max- and minimize the main window
-  const ret = globalShortcut.register('CommandOrControl+Shift+B', () => {
-    const windows = windowManager._windows;
-
-    // send update to all open windows
-    if (windows) {
-      windows.forEach(({ window, type }) => {
-        if (type === 'main') {
-          if (!window.isVisible()) {
-            window.focus();
-            window.show();
-          } else {
-            window.minimize();
-          }
-        } else {
-          window.close();
-        }
-      });
-    }
-  });
-
-  if (!ret) {
-    console.log('registration failed');
-  }
 
   // Show main window
   windowManager.buildWindowOfType('main', win => {
@@ -174,7 +154,7 @@ app.on('ready', async () => {
       appTriedToQuit ||
       (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
     ) {
-      globalShortcut.unregisterAll();
+      unregisterGlobalShortcuts();
 
       app.quit();
     }
