@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React, { PureComponent } from 'react';
 import { ipcRenderer as ipc } from 'electron';
 import { setGlobalShortcut } from '../../../shared/actions/settings';
-import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/globalShortcuts';
+import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/global-shortcuts';
 import { getSetting } from '../../../shared/selectors';
 import { Grid, LabelWrapper, Input } from './ui-elements';
 

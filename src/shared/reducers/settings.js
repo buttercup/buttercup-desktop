@@ -5,7 +5,7 @@ import {
   GLOBAL_SHORTCUT_SET,
   SETTING_SET
 } from '../actions/types';
-import { DEFAULT_GLOBAL_SHORTCUTS } from '../utils/globalShortcuts';
+import { DEFAULT_GLOBAL_SHORTCUTS } from '../utils/global-shortcuts';
 
 function itemReducer(state = {}, action) {
   return {

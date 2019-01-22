@@ -17,7 +17,7 @@ import { getSetting } from '../shared/selectors';
 import {
   setupGlobalShortcuts,
   unregisterGlobalShortcuts
-} from './globalShortcuts';
+} from './global-shortcuts';
 
 log.info('Buttercup starting up...');
 
