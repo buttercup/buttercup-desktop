@@ -246,6 +246,7 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-onfocusout": "",
     "disable-autoloading-icons": "",
-    "shortcuts": ""
+    "shortcuts": "",
+    "minimize-and-maximize": ""
   }
 }

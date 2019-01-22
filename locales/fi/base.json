@@ -246,6 +246,7 @@
     "seconds-until-clear-clipboard": "",
     "seconds-until-archive-should-close": "",
     "lock-archive-onfocusout": "",
-    "shortcuts": ""
+    "shortcuts": "",
+    "minimize-and-maximize": ""
   }
 }

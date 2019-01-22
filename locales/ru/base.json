@@ -207,6 +207,7 @@
     "lock-archive-on-minimize": "",
     "lock-archive-onfocusout": "",
     "disable-autoloading-icons": "",
-    "shortcuts": ""
+    "shortcuts": "",
+    "minimize-and-maximize": ""
   }
 }
