@@ -28,6 +28,9 @@ export const setupMenu = store => {
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
+  const globalShortcuts = getSetting(state, 'globalShortcuts');
+
+  const shortcutByLabel = key => globalShortcuts[`app-menu.${key}`];
 
   // Default should be safe (always on) in case it isn't set.
   const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
@@ -42,21 +45,23 @@ export const setupMenu = store => {
       submenu: [
         {
           label: label('archive.new'),
-          accelerator: 'CmdOrCtrl+Shift+N',
+          accelerator: shortcutByLabel('archive.new') || 'CmdOrCtrl+Shift+N',
           click: () => {
             reopenMainWindow(win => newFile(win));
           }
         },
         {
           label: label('archive.open'),
-          accelerator: 'CmdOrCtrl+O',
+          accelerator: shortcutByLabel('archive.open') || 'CmdOrCtrl+O',
           click: () => {
             reopenMainWindow(win => openFile(win));
           }
         },
         {
           label: label('archive.connect-cloud-sources'),
-          accelerator: 'CmdOrCtrl+Shift+C',
+          accelerator:
+            shortcutByLabel('archive.connect-cloud-sources') ||
+            'CmdOrCtrl+Shift+C',
           click: () => {
             reopenMainWindow(win => {
               getWindowManager().buildWindowOfType('file-manager', null, {
@@ -70,7 +75,7 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('entry.add-entry'),
-          accelerator: 'CmdOrCtrl+N',
+          accelerator: shortcutByLabel('entry.add-entry') || 'CmdOrCtrl+N',
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -80,7 +85,7 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('group.new-group'),
-          accelerator: 'CmdOrCtrl+G',
+          accelerator: shortcutByLabel('group.new-group') || 'CmdOrCtrl+G',
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -145,7 +150,7 @@ export const setupMenu = store => {
         },
         {
           label: label('archive.search'),
-          accelerator: 'CmdOrCtrl+F',
+          accelerator: shortcutByLabel('archive.search') || 'CmdOrCtrl+F',
           click: (item, focusedWindow) => toggleArchiveSearch(focusedWindow)
         },
         {
@@ -202,7 +207,8 @@ export const setupMenu = store => {
           label: label('view.condensed-sidebar'),
           type: 'checkbox',
           checked: getSetting(state, 'condencedSidebar'),
-          accelerator: 'CmdOrCtrl+Shift+B',
+          accelerator:
+            shortcutByLabel('view.condensed-sidebar') || 'CmdOrCtrl+Shift+B',
           click: item => {
             store.dispatch(setSetting('condencedSidebar', item.checked));
           }
@@ -406,7 +412,7 @@ export const setupMenu = store => {
     { type: 'separator' },
     {
       label: label('app.preferences'),
-      accelerator: `CmdOrCtrl+,`,
+      accelerator: shortcutByLabel('app.preferences') || `CmdOrCtrl+,`,
       click: () => {
         if (getWindowManager().getCountOfType('app-preferences') === 0) {
           if (isOSX()) {

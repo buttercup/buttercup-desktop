@@ -33,6 +33,7 @@ export const getSetting = (state, key) => {
   if (!setting) {
     setting = DEFAULT_SETTINGS[key];
   }
+
   return setting;
 };
 export const getUIState = (state, key) => state.uiState[key];

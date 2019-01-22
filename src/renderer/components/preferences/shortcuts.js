@@ -15,6 +15,7 @@ class Shortcuts extends PureComponent {
   };
 
   state = {
+    ...DEFAULT_GLOBAL_SHORTCUTS,
     ...this.props.globalShortcuts
   };
 
@@ -74,6 +75,7 @@ class Shortcuts extends PureComponent {
                 >
                   {t('preferences.reset')}
                 </span>
+
                 <Input
                   type="text"
                   name={shortcutName}
