@@ -7,16 +7,67 @@ import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/global-shortcuts
 import { getSetting } from '../../../shared/selectors';
 import { Grid, LabelWrapper, Input } from './ui-elements';
 
-class Shortcuts extends PureComponent {
+class Items extends PureComponent {
   static propTypes = {
     t: PropTypes.func,
     globalShortcuts: PropTypes.object,
-    setGlobalShortcut: PropTypes.func
+    list: PropTypes.array
   };
 
   state = {
     ...DEFAULT_GLOBAL_SHORTCUTS,
     ...this.props.globalShortcuts
+  };
+
+  changeInput = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value
+    });
+  };
+
+  render() {
+    const { list, t } = this.props;
+    return list.map(shortcutName => (
+      <LabelWrapper key={shortcutName}>
+        {t(shortcutName)}
+        <span
+          onClick={e =>
+            this.setState(
+              {
+                [shortcutName]: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+              },
+              () => {
+                setGlobalShortcut({
+                  name: shortcutName,
+                  accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+                });
+              }
+            )}
+        >
+          {t('preferences.reset')}
+        </span>
+
+        <Input
+          type="text"
+          name={shortcutName}
+          onChange={e => this.changeInput(e)}
+          onBlur={e =>
+            ipc.send('register-global-shortcut', {
+              name: shortcutName,
+              accelerator: e.target.value
+            })}
+          value={this.state[shortcutName]}
+        />
+      </LabelWrapper>
+    ));
+  }
+}
+
+class Shortcuts extends PureComponent {
+  static propTypes = {
+    t: PropTypes.func,
+    globalShortcuts: PropTypes.object,
+    setGlobalShortcut: PropTypes.func
   };
 
   componentDidMount() {
@@ -42,53 +93,42 @@ class Shortcuts extends PureComponent {
     ipc.removeAllListeners('register-global-shortcut');
   }
 
-  changeInput = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value
-    });
-  };
-
   render() {
     const { t } = this.props;
+    const { preferences, menu, others } = Object.keys(
+      DEFAULT_GLOBAL_SHORTCUTS
+    ).reduce(
+      (pre, current) => {
+        if (current.startsWith('app-menu.')) {
+          pre.menu = pre.menu.concat(current);
+        } else if (current.startsWith('preferences.')) {
+          pre.preferences = pre.preferences.concat(current);
+        } else {
+          pre.others = pre.others.concat(current);
+        }
+        return pre;
+      },
+      {
+        preferences: [],
+        menu: [],
+        others: []
+      }
+    );
 
     return (
       <div>
-        <h3>{t('preferences.shortcuts')}</h3>
         <Grid>
           <div>
-            {Object.keys(DEFAULT_GLOBAL_SHORTCUTS).map(shortcutName => (
-              <LabelWrapper key={shortcutName}>
-                {t(shortcutName)}
-                <span
-                  onClick={e =>
-                    this.setState(
-                      {
-                        [shortcutName]: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-                      },
-                      () => {
-                        setGlobalShortcut({
-                          name: shortcutName,
-                          accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-                        });
-                      }
-                    )}
-                >
-                  {t('preferences.reset')}
-                </span>
+            <h3>{t('preferences.shortcuts-global')}</h3>
+            <Items list={preferences} {...this.props} />
 
-                <Input
-                  type="text"
-                  name={shortcutName}
-                  onChange={e => this.changeInput(e)}
-                  onBlur={e =>
-                    ipc.send('register-global-shortcut', {
-                      name: shortcutName,
-                      accelerator: e.target.value
-                    })}
-                  value={this.state[shortcutName]}
-                />
-              </LabelWrapper>
-            ))}
+            <h3>{t('preferences.shortcuts-others')}</h3>
+            <Items list={others} {...this.props} />
+          </div>
+
+          <div>
+            <h3>{t('preferences.shortcuts-menu')}</h3>
+            <Items list={menu} {...this.props} />
           </div>
         </Grid>
       </div>

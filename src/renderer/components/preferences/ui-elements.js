@@ -76,6 +76,7 @@ export const Grid = styled.section`
   display: grid;
   grid-template-columns: ${props => (props.single ? '1fr' : '1fr 1fr')};
   margin-bottom: 20px;
+  grid-gap: 20px;
 `;
 export const Input = styled(BaseInput)`
   font-weight: 300;

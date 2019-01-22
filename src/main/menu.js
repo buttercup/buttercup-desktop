@@ -30,7 +30,8 @@ export const setupMenu = store => {
   const currentArchiveId = getCurrentArchiveId(state);
   const globalShortcuts = getSetting(state, 'globalShortcuts');
 
-  const shortcutByLabel = key => globalShortcuts[`app-menu.${key}`];
+  const shortcutByLabel = (key, isAppMenu = true) =>
+    globalShortcuts[isAppMenu ? `app-menu.${key}` : key];
 
   // Default should be safe (always on) in case it isn't set.
   const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
@@ -75,7 +76,8 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('entry.add-entry'),
-          accelerator: shortcutByLabel('entry.add-entry') || 'CmdOrCtrl+N',
+          accelerator:
+            shortcutByLabel('entry.add-entry', false) || 'CmdOrCtrl+N',
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -85,7 +87,8 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('group.new-group'),
-          accelerator: shortcutByLabel('group.new-group') || 'CmdOrCtrl+G',
+          accelerator:
+            shortcutByLabel('group.new-group', false) || 'CmdOrCtrl+G',
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
