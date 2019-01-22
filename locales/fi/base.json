@@ -248,6 +248,9 @@
     "lock-archive-onfocusout": "",
     "shortcuts": "",
     "minimize-and-maximize": "",
-    "shortcut-already-taken": ""
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": ""
   }
 }

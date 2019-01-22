@@ -238,6 +238,9 @@
     "disable-autoloading-icons": "Icons nicht automatisch laden",
     "shortcuts": "Kurzbefehle",
     "minimize-and-maximize": "Mini- und maximieren von Buttercup",
-    "shortcut-already-taken": "Diese Tastenkombination ist leider schon belegt"
+    "shortcut-already-taken": "Diese Tastenkombination ist leider schon belegt",
+    "shortcuts-others": "Andere Kurzbefehle",
+    "shortcuts-menu": "Menü Kurzbefehle",
+    "shortcuts-global": "Globale Kurzbefehle"
   }
 }
