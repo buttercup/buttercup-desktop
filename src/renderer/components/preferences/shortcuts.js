@@ -14,10 +14,6 @@ class Shortcuts extends PureComponent {
     setGlobalShortcut: PropTypes.func
   };
 
-  resetState = {
-    ...this.props.globalShortcuts
-  };
-
   state = {
     ...this.props.globalShortcuts
   };
@@ -35,7 +31,7 @@ class Shortcuts extends PureComponent {
         alert('already taken');
 
         this.setState({
-          [name]: this.resetState[name]
+          [name]: this.props.globalShortcuts[name]
         });
       }
     });
@@ -61,7 +57,7 @@ class Shortcuts extends PureComponent {
           <div>
             {Object.keys(DEFAULT_GLOBAL_SHORTCUTS).map(shortcutName => (
               <LabelWrapper key={shortcutName}>
-                {t(`preferences.${shortcutName}`)}
+                {t(shortcutName)}
                 <span
                   onClick={e =>
                     this.setState(

@@ -7,7 +7,7 @@ const windowManager = getWindowManager();
 export const unregisterGlobalShortcuts = () => globalShortcut.unregisterAll();
 
 const initGlobalShortcuts = {
-  'minimize-and-maximize': shortcut =>
+  'preferences.minimize-and-maximize': shortcut =>
     globalShortcut.register(shortcut, () => {
       const windows = windowManager._windows;
 
@@ -41,14 +41,28 @@ const acceleratorIsValid = (store, accelerator) => {
 
 export const setupGlobalShortcuts = store => {
   const windows = windowManager._windows;
+  let state = store.getState();
+  let globalShortcuts = getSetting(state, 'globalShortcuts');
+
+  // init shortcuts
+  Object.keys(globalShortcuts).forEach(
+    shortcutName =>
+      initGlobalShortcuts[shortcutName] &&
+      initGlobalShortcuts[shortcutName](globalShortcuts[shortcutName])
+  );
 
   ipc.on('register-global-shortcut', (e, { name, accelerator }) => {
+    state = store.getState();
+    globalShortcuts = getSetting(state, 'globalShortcuts');
+
     if (name && accelerator) {
       const valid = acceleratorIsValid(store, accelerator);
 
       if (valid) {
-        globalShortcut.unregister(accelerator);
-        initGlobalShortcuts[name](accelerator);
+        globalShortcut.unregister(globalShortcuts[name]);
+        if (initGlobalShortcuts[name]) {
+          initGlobalShortcuts[name](accelerator);
+        }
       }
 
       if (windows) {
@@ -62,15 +76,4 @@ export const setupGlobalShortcuts = store => {
       }
     }
   });
-
-  const state = store.getState();
-  const allGlobalShortcuts = getSetting(state, 'globalShortcuts');
-
-  console.log(allGlobalShortcuts);
-  // init shortcuts
-  Object.keys(allGlobalShortcuts).forEach(
-    shortcutName =>
-      initGlobalShortcuts[shortcutName] &&
-      initGlobalShortcuts[shortcutName](allGlobalShortcuts[shortcutName])
-  );
 };
