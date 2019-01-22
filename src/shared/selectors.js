@@ -30,7 +30,7 @@ export const getSetting = (state, key) => {
   let setting = state.settings[key];
 
   // fallback, if setting not found use default
-  if (!setting) {
+  if (typeof setting === 'undefined') {
     setting = DEFAULT_SETTINGS[key];
   }
 
