@@ -238,6 +238,7 @@
   },
   "preferences": {
     "general": "General",
+    "shortcuts": "Shortcuts",
     "appearance": "Appearance",
     "preferences": "Preferences",
     "font-size": "Font size",

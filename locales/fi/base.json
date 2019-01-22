@@ -234,5 +234,18 @@
     "download": "Lataa ja Asenna",
     "download-manual": "Avaa Julkaisut Näkymä",
     "release-notes": "Julkaisumuistio:"
+  },
+  "preferences": {
+    "preferences": "",
+    "appearance": "",
+    "font-size": "",
+    "reset": "",
+    "general": "",
+    "lock-archive-on-minimize": "",
+    "disable-autoloading-icons": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": ""
   }
 }

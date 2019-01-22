@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { translate } from 'react-i18next';
+import orderBy from 'lodash/orderBy';
 
 import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
@@ -13,25 +14,30 @@ import { Wrapper, Menu, MenuInner, Content } from './ui-elements';
 // router views
 const preferencesFiles = require.context('./', true, /^\.\/(?!_).*\.js$/);
 const defaultView = 'general';
-const views = preferencesFiles
-  .keys()
-  .filter(
-    fileName =>
-      !fileName.includes('index') && preferencesFiles(fileName).default
-  )
-  .map(fileName => {
-    const component = preferencesFiles(fileName).default;
-    const key = fileName.substr(0, fileName.lastIndexOf('.')).replace('./', '');
+const views = orderBy(
+  preferencesFiles
+    .keys()
+    .filter(
+      fileName =>
+        !fileName.includes('index') && preferencesFiles(fileName).default
+    )
+    .map(fileName => {
+      const component = preferencesFiles(fileName).default;
+      const key = fileName
+        .substr(0, fileName.lastIndexOf('.'))
+        .replace('./', '');
 
-    if (component) {
-      return {
-        key,
-        path: key === defaultView ? '/' : `/${key}`,
-        component
-      };
-    }
-  })
-  .reverse();
+      if (component) {
+        return {
+          key,
+          path: key === defaultView ? '/' : `/${key}`,
+          component
+        };
+      }
+    }),
+  [{ key: defaultView }],
+  ['desc']
+);
 
 class Preferences extends PureComponent {
   static propTypes = {
