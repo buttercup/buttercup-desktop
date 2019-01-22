@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 import { sortDeepByKey, sortEntriesByKey } from './utils/collection';
 import { denormalizeGroups } from './utils/normalize';
+import { DEFAULT_SETTINGS } from './reducers/settings';
 
 // Archive ->
 
@@ -25,7 +26,15 @@ export const getCurrentArchiveSettings = createSelector(
   (settings, archiveId) => settings[archiveId]
 );
 
-export const getSetting = (state, key) => state.settings[key];
+export const getSetting = (state, key) => {
+  let setting = state.settings[key];
+
+  // fallback, if setting not found use default
+  if (!setting) {
+    setting = DEFAULT_SETTINGS[key];
+  }
+  return setting;
+};
 export const getUIState = (state, key) => state.uiState[key];
 
 export const getExpandedKeys = createSelector(

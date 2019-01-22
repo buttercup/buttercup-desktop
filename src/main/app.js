@@ -133,7 +133,7 @@ app.on('ready', async () => {
   setupWindows(store);
   setupActions(store);
   setupMenu(store);
-  setupGlobalShortcuts();
+  setupGlobalShortcuts(store);
 
   appIsReady = true;
 
