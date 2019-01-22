@@ -67,9 +67,12 @@ export const setupGlobalShortcuts = store => {
       const valid = acceleratorIsValid(store, accelerator, name);
 
       if (valid) {
-        if (globalShortcuts[name]) {
+        try {
           globalShortcut.unregister(globalShortcuts[name]);
+        } catch (e) {
+          // invalid shortcut
         }
+
         if (initGlobalShortcuts[name]) {
           initGlobalShortcuts[name](accelerator);
         }

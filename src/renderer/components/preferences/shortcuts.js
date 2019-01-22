@@ -20,7 +20,7 @@ class Shortcuts extends PureComponent {
   };
 
   componentDidMount() {
-    const { setGlobalShortcut } = this.props;
+    const { t, setGlobalShortcut } = this.props;
 
     ipc.on('register-global-shortcut', (e, { valid, name, accelerator }) => {
       if (valid) {
@@ -29,11 +29,11 @@ class Shortcuts extends PureComponent {
           accelerator
         });
       } else {
-        alert('already taken');
-
         this.setState({
           [name]: this.props.globalShortcuts[name]
         });
+
+        alert(t('preferences.shortcut-already-taken'));
       }
     });
   }
