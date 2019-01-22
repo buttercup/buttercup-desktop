@@ -248,6 +248,7 @@
     "lock-archive-on-minimize": "Lock archives on minimize",
     "lock-archive-onfocusout": "Only lock archives, when buttercup is not focused",
     "disable-autoloading-icons": "Disable icon autoloading",
-    "minimize-and-maximize": "Mini- and maximizing Buttercup"
+    "minimize-and-maximize": "Mini- and maximizing Buttercup",
+    "shortcut-already-taken": "Unfortunately, this key combination is already assigned"
   }
 }

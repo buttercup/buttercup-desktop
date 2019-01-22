@@ -247,6 +247,7 @@
     "seconds-until-archive-should-close": "",
     "lock-archive-onfocusout": "",
     "shortcuts": "",
-    "minimize-and-maximize": ""
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": ""
   }
 }
