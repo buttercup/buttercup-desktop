@@ -40,6 +40,4 @@ ipc.on('change-locale-main', (e, lang) => {
   renderPreferences(i18n);
 });
 
-setTimeout(() => {
-  renderPreferences(i18n);
-}, 0);
+renderPreferences(i18n);
