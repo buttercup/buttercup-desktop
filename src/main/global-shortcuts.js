@@ -1,18 +1,20 @@
 import { globalShortcut, ipcMain as ipc } from 'electron';
 import { getWindowManager } from './lib/window-manager';
+import { sendEventToMainWindow } from './utils/window';
 import { setupMenu } from './menu';
 import { getSetting } from '../shared/selectors';
 import { DEFAULT_GLOBAL_SHORTCUTS } from '../shared/utils/global-shortcuts';
 
 const windowManager = getWindowManager();
+const windows = windowManager._windows;
 
+// unregister all global shortcuts
 export const unregisterGlobalShortcuts = () => globalShortcut.unregisterAll();
 
+// defined global shortcut methods
 const initGlobalShortcuts = {
   'preferences.minimize-and-maximize': shortcut =>
     globalShortcut.register(shortcut, () => {
-      const windows = windowManager._windows;
-
       // send update to all open windows
       if (windows) {
         windows.forEach(({ window, type }) => {
@@ -31,6 +33,12 @@ const initGlobalShortcuts = {
     })
 };
 
+/**
+ * Check if accelerator is already in use
+ * @param {object} store
+ * @param {string} accelerator
+ * @param {string} name
+ */
 const acceleratorIsValid = (store, accelerator, name) => {
   const state = store.getState();
   const globalShortcuts = {
@@ -46,6 +54,10 @@ const acceleratorIsValid = (store, accelerator, name) => {
   return !findAccelerator;
 };
 
+/**
+ * Setup all shortcuts
+ * @param {object} store
+ */
 export const setupGlobalShortcuts = store => {
   let state = store.getState();
   let globalShortcuts = getSetting(state, 'globalShortcuts');
@@ -58,8 +70,6 @@ export const setupGlobalShortcuts = store => {
   );
 
   ipc.on('register-global-shortcut', (e, { name, accelerator }) => {
-    const windows = windowManager._windows;
-
     state = store.getState();
     globalShortcuts = getSetting(state, 'globalShortcuts');
 
@@ -73,22 +83,21 @@ export const setupGlobalShortcuts = store => {
           // invalid shortcut
         }
 
+        // register new defined shortcut
         if (initGlobalShortcuts[name]) {
           initGlobalShortcuts[name](accelerator);
         }
 
+        // refresh menu
         setupMenu(store);
       }
 
-      if (windows) {
-        windows.forEach(({ window }) => {
-          window.webContents.send('register-global-shortcut', {
-            valid,
-            name,
-            accelerator
-          });
-        });
-      }
+      // send upfate if accelerator is valid
+      sendEventToMainWindow('register-global-shortcut', {
+        valid,
+        name,
+        accelerator
+      });
     }
   });
 };

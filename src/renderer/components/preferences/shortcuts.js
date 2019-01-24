@@ -10,53 +10,32 @@ import { Grid, LabelWrapper, Input } from './ui-elements';
 class Items extends PureComponent {
   static propTypes = {
     t: PropTypes.func,
+    list: PropTypes.array,
     globalShortcuts: PropTypes.object,
-    list: PropTypes.array
-  };
-
-  state = {
-    ...DEFAULT_GLOBAL_SHORTCUTS,
-    ...this.props.globalShortcuts
-  };
-
-  changeInput = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value
-    });
+    resetShortcut: PropTypes.func,
+    changeInput: PropTypes.func
   };
 
   render() {
-    const { list, t } = this.props;
+    const { list, t, resetShortcut, changeInput, globalShortcuts } = this.props;
+
     return list.map(shortcutName => (
       <LabelWrapper key={shortcutName}>
         {t(shortcutName)}
-        <span
-          onClick={e =>
-            this.setState(
-              {
-                [shortcutName]: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-              },
-              () => {
-                setGlobalShortcut({
-                  name: shortcutName,
-                  accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-                });
-              }
-            )}
-        >
+        <span onClick={e => resetShortcut(shortcutName)}>
           {t('preferences.reset')}
         </span>
 
         <Input
           type="text"
           name={shortcutName}
-          onChange={e => this.changeInput(e)}
+          onChange={e => changeInput(e)}
           onBlur={e =>
             ipc.send('register-global-shortcut', {
               name: shortcutName,
               accelerator: e.target.value
             })}
-          value={this.state[shortcutName]}
+          value={globalShortcuts[shortcutName]}
         />
       </LabelWrapper>
     ));
@@ -70,6 +49,31 @@ class Shortcuts extends PureComponent {
     setGlobalShortcut: PropTypes.func
   };
 
+  state = {
+    ...DEFAULT_GLOBAL_SHORTCUTS,
+    ...this.props.globalShortcuts
+  };
+
+  changeInput = ({ target: { name, value } }) => {
+    this.setState({
+      [name]: value
+    });
+  };
+
+  resetShortcut = () => {
+    this.setState(
+      {
+        [shortcutName]: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+      },
+      () => {
+        setGlobalShortcut({
+          name: shortcutName,
+          accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+        });
+      }
+    );
+  };
+
   componentDidMount() {
     const { t, setGlobalShortcut } = this.props;
 
@@ -80,6 +84,7 @@ class Shortcuts extends PureComponent {
           accelerator
         });
       } else {
+        console.log(this.state);
         this.setState({
           [name]: this.props.globalShortcuts[name]
         });
@@ -120,15 +125,33 @@ class Shortcuts extends PureComponent {
         <Grid>
           <div>
             <h3>{t('preferences.shortcuts-global')}</h3>
-            <Items list={preferences} {...this.props} />
+            <Items
+              list={preferences}
+              t={t}
+              globalShortcuts={this.state}
+              changeInput={this.changeInput}
+              resetShortcut={this.resetShortcut}
+            />
 
             <h3>{t('preferences.shortcuts-others')}</h3>
-            <Items list={others} {...this.props} />
+            <Items
+              list={others}
+              t={t}
+              globalShortcuts={this.state}
+              changeInput={this.changeInput}
+              resetShortcut={this.resetShortcut}
+            />
           </div>
 
           <div>
             <h3>{t('preferences.shortcuts-menu')}</h3>
-            <Items list={menu} {...this.props} />
+            <Items
+              list={menu}
+              t={t}
+              globalShortcuts={this.state}
+              changeInput={this.changeInput}
+              resetShortcut={this.resetShortcut}
+            />
           </div>
         </Grid>
       </div>
