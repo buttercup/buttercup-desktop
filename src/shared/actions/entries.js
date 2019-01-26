@@ -25,10 +25,14 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = entryId => async (dispatch, getState) => {
+export const selectEntry = (entryId, isSavingNewEntry = false) => async (
+  dispatch,
+  getState
+) => {
   try {
     const currentEntryMode = getCurrentEntryMode(getState());
-    currentEntryMode === 'new' || currentEntryMode === 'edit'
+    (currentEntryMode === 'new' && !isSavingNewEntry) ||
+    (currentEntryMode === 'edit' && !isSavingNewEntry)
       ? showConfirmDialog(
           i18n.t('entry.quit-unsave-entry'),
           choice =>
