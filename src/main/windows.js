@@ -148,10 +148,13 @@ export function setupWindows(store) {
       y: Math.ceil(y + (height - 450) / 2),
       ...options
     });
+    win.setMenu(null);
+    win.setAutoHideMenuBar(true);
 
     win.loadURL(getURIPathToFile('views/app-preferences.html'));
 
     win.once('ready-to-show', () => win.show());
+
     win.on('close', () => windowManager.deregister(win));
 
     win.on('focus', () =>

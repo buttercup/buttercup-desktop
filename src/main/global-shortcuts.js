@@ -15,20 +15,15 @@ export const unregisterGlobalShortcuts = () => globalShortcut.unregisterAll();
 const initGlobalShortcuts = {
   'preferences.minimize-and-maximize': shortcut =>
     globalShortcut.register(shortcut, () => {
-      // send update to all open windows
       if (windows) {
-        windows.forEach(({ window, type }) => {
-          if (type === 'main') {
-            if (!window.isVisible()) {
-              window.focus();
-              window.show();
-            } else {
-              window.minimize();
-            }
-          } else {
-            window.close();
-          }
-        });
+        const [window] = windowManager.getWindowsOfType('main');
+
+        if (window.isMinimized()) {
+          window.focus();
+          window.restore();
+        } else {
+          window.minimize();
+        }
       }
     })
 };

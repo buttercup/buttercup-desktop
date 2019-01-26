@@ -40,6 +40,29 @@ export const setupMenu = store => {
       ? menubarAutoHideSetting
       : false;
 
+  const preferencesSection = [
+    { type: 'separator' },
+    {
+      label: label('app.preferences'),
+      accelerator: shortcutByLabel('app.preferences') || `CmdOrCtrl+,`,
+      click: () => {
+        if (getWindowManager().getCountOfType('app-preferences') === 0) {
+          if (isOSX()) {
+            app.dock.show();
+          }
+
+          reopenMainWindow(win => {
+            getWindowManager().buildWindowOfType('app-preferences', null, {
+              parent: win,
+              title: i18n.t('preferences.preferences'),
+              titleBarStyle: 'hiddenInset'
+            });
+          });
+        }
+      }
+    }
+  ];
+
   const defaultTemplate = [
     {
       label: isOSX() ? label('archive.archive') : label('archive.file'),
@@ -71,6 +94,7 @@ export const setupMenu = store => {
             });
           }
         },
+        ...(!isOSX() ? preferencesSection : []),
         {
           type: 'separator'
         },
@@ -412,26 +436,7 @@ export const setupMenu = store => {
         checkForUpdates();
       }
     },
-    { type: 'separator' },
-    {
-      label: label('app.preferences'),
-      accelerator: shortcutByLabel('app.preferences') || `CmdOrCtrl+,`,
-      click: () => {
-        if (getWindowManager().getCountOfType('app-preferences') === 0) {
-          if (isOSX()) {
-            app.dock.show();
-          }
-
-          reopenMainWindow(win => {
-            getWindowManager().buildWindowOfType('app-preferences', null, {
-              parent: win,
-              title: i18n.t('preferences.preferences'),
-              titleBarStyle: 'hiddenInset'
-            });
-          });
-        }
-      }
-    },
+    ...preferencesSection,
     { type: 'separator' }
   );
 
