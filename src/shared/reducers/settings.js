@@ -43,6 +43,7 @@ export const DEFAULT_SETTINGS = {
   referenceFontSize: '1',
   isBrowserAccessEnabled: false,
   isAutoloadingIconsDisabled: false,
+  updateOnStartDisabled: false,
   locale: '',
   globalShortcuts: {
     ...DEFAULT_GLOBAL_SHORTCUTS

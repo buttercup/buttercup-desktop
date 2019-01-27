@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import React, { PureComponent } from 'react';
 import { ipcRenderer as ipc } from 'electron';
+import { isOSX } from '../../../shared/utils/platform';
 
 import { languages } from '../../../shared/i18n';
 import { getSetting } from '../../../shared/selectors';
@@ -29,7 +30,11 @@ class General extends PureComponent {
     lockArchiveOnFocusout: PropTypes.any,
     setLockArchiveOnFocusout: PropTypes.func,
     isAutoloadingIconsDisabled: PropTypes.any,
-    setIsAutoloadingIconsDisabled: PropTypes.func
+    setIsAutoloadingIconsDisabled: PropTypes.func,
+    menubarAutoHide: PropTypes.any,
+    setMenubarAutoHide: PropTypes.func,
+    updateOnStartDisabled: PropTypes.any,
+    setUpdateOnStartDisabled: PropTypes.func
   };
 
   state = {
@@ -53,63 +58,59 @@ class General extends PureComponent {
       lockArchiveOnFocusout,
       setLockArchiveOnFocusout,
       isAutoloadingIconsDisabled,
-      setIsAutoloadingIconsDisabled
+      setIsAutoloadingIconsDisabled,
+      menubarAutoHide,
+      setMenubarAutoHide,
+      updateOnStartDisabled,
+      setUpdateOnStartDisabled
     } = this.props;
 
     return (
       <div>
         <h3>{t('preferences.general')}</h3>
-        <Grid>
+
+        {!isOSX() ? (
           <div>
-            <LabelWrapper checkbox>
-              <label>
-                <Checkbox
-                  type="checkbox"
-                  onChange={e => setIsTrayIconEnabled(e.target.checked)}
-                  checked={isTrayIconEnabled}
-                />
-                {t('app-menu.view.enable-tray-icon')}
-              </label>
-            </LabelWrapper>
+            <Checkbox
+              type="checkbox"
+              onChange={setMenubarAutoHide}
+              checked={menubarAutoHide}
+              title={t('app-menu.view.auto-hide-menubar')}
+            />
           </div>
-          <div>
-            <LabelWrapper checkbox>
-              <label>
-                <Checkbox
-                  type="checkbox"
-                  onChange={e => setCondencedSidebar(e.target.checked)}
-                  checked={condencedSidebar}
-                />
-                {t('app-menu.view.condensed-sidebar')}
-              </label>
-            </LabelWrapper>
-          </div>
-          <div>
-            <LabelWrapper checkbox>
-              <label>
-                <Checkbox
-                  type="checkbox"
-                  onChange={e => setLockArchiveOnMinimize(e.target.checked)}
-                  checked={lockArchiveOnMinimize}
-                />
-                {t('preferences.lock-archive-on-minimize')}
-              </label>
-            </LabelWrapper>
-          </div>
-          <div>
-            <LabelWrapper checkbox>
-              <label>
-                <Checkbox
-                  type="checkbox"
-                  onChange={e =>
-                    setIsAutoloadingIconsDisabled(e.target.checked)}
-                  checked={isAutoloadingIconsDisabled}
-                />
-                {t('preferences.disable-autoloading-icons')}
-              </label>
-            </LabelWrapper>
-          </div>
-        </Grid>
+        ) : (
+          ''
+        )}
+        <div>
+          <Checkbox
+            onChange={setUpdateOnStartDisabled}
+            checked={updateOnStartDisabled}
+            title={t('preferences.disable-update-on-start')}
+          />
+          <Checkbox
+            onChange={setIsTrayIconEnabled}
+            checked={isTrayIconEnabled}
+            title={t('app-menu.view.enable-tray-icon')}
+          />
+          <Checkbox
+            type="checkbox"
+            onChange={setCondencedSidebar}
+            checked={condencedSidebar}
+            title={t('app-menu.view.condensed-sidebar')}
+          />
+          <Checkbox
+            type="checkbox"
+            onChange={setLockArchiveOnMinimize}
+            checked={lockArchiveOnMinimize}
+            title={t('preferences.lock-archive-on-minimize')}
+          />
+          <Checkbox
+            type="checkbox"
+            onChange={setIsAutoloadingIconsDisabled}
+            checked={isAutoloadingIconsDisabled}
+            title={t('preferences.disable-autoloading-icons')}
+          />
+        </div>
         <LabelWrapper>
           {t('preferences.seconds-until-clear-clipboard')}{' '}
           {secondsUntilClearClipboard !== DEFAULT_CLIPBOARD_CLEAR_SECONDS ? (
@@ -151,16 +152,12 @@ class General extends PureComponent {
           />
         </LabelWrapper>
         <Grid single>
-          <LabelWrapper checkbox>
-            <label>
-              <Checkbox
-                type="checkbox"
-                onChange={e => setLockArchiveOnFocusout(e.target.checked)}
-                checked={lockArchiveOnFocusout}
-              />
-              {t('preferences.lock-archive-onfocusout')}
-            </label>
-          </LabelWrapper>
+          <Checkbox
+            type="checkbox"
+            onChange={setLockArchiveOnFocusout}
+            checked={lockArchiveOnFocusout}
+            title={t('preferences.lock-archive-onfocusout')}
+          />
         </Grid>
 
         <LabelWrapper>
@@ -197,7 +194,9 @@ export default connect(
     secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
     isAutoloadingIconsDisabled: getSetting(state, 'isAutoloadingIconsDisabled'),
     autolockSeconds: getSetting(state, 'autolockSeconds'),
-    lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize')
+    lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize'),
+    menubarAutoHide: getSetting(state, 'menubarAutoHide'),
+    updateOnStartDisabled: getSetting(state, 'updateOnStartDisabled')
   }),
   dispatch => {
     return {
@@ -214,7 +213,11 @@ export default connect(
       setLockArchiveOnFocusout: payload =>
         dispatch(setSetting('lockArchiveOnFocusout', payload)),
       setIsAutoloadingIconsDisabled: payload =>
-        dispatch(setSetting('isAutoloadingIconsDisabled', payload))
+        dispatch(setSetting('isAutoloadingIconsDisabled', payload)),
+      setMenubarAutoHide: payload =>
+        dispatch(setSetting('menubarAutoHide', payload)),
+      setUpdateOnStartDisabled: payload =>
+        dispatch(setSetting('updateOnStartDisabled', payload))
     };
   }
 )(General, 'General');

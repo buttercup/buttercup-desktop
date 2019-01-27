@@ -85,9 +85,11 @@ export function setupWindows(store) {
         callback(win);
       }
 
-      setTimeout(() => {
-        checkForUpdates();
-      }, ms('5s'));
+      if (!getSetting(store.getState(), 'updateOnStartDisabled')) {
+        setTimeout(() => {
+          checkForUpdates(true);
+        }, ms('5s'));
+      }
     });
 
     win.on('hide', () => {

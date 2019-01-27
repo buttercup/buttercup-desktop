@@ -122,7 +122,7 @@ class Shortcuts extends PureComponent {
 
     return (
       <div>
-        <Grid>
+        <Grid gap={20}>
           <div>
             <h3>{t('preferences.shortcuts-global')}</h3>
             <Items

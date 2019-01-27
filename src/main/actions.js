@@ -58,7 +58,9 @@ export function setupActions(store) {
     // send update to all open windows
     if (windows) {
       windows.forEach(({ window }) => {
-        window.webContents.send('change-initial-locale', locale);
+        if (window) {
+          window.webContents.send('change-initial-locale', locale);
+        }
       });
     }
 

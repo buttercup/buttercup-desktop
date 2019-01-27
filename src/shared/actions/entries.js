@@ -44,7 +44,6 @@ export const selectEntry = (entryId, isSavingNewEntry = false) => async (
         )
       : dispatch({ type: ENTRIES_SELECTED, payload: entryId });
   } catch (err) {
-    console.error(err);
     showDialog(err);
   }
 };

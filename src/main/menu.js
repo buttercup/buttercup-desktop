@@ -46,18 +46,25 @@ export const setupMenu = store => {
       label: label('app.preferences'),
       accelerator: shortcutByLabel('app.preferences') || `CmdOrCtrl+,`,
       click: () => {
-        if (getWindowManager().getCountOfType('app-preferences') === 0) {
+        const windowManager = getWindowManager();
+        const [preferencesWindow] = windowManager.getWindowsOfType(
+          'app-preferences'
+        );
+
+        if (!preferencesWindow) {
           if (isOSX()) {
             app.dock.show();
           }
 
           reopenMainWindow(win => {
-            getWindowManager().buildWindowOfType('app-preferences', null, {
+            windowManager.buildWindowOfType('app-preferences', null, {
               parent: win,
               title: i18n.t('preferences.preferences'),
               titleBarStyle: 'hiddenInset'
             });
           });
+        } else {
+          preferencesWindow.close();
         }
       }
     }
