@@ -237,6 +237,10 @@
     "shortcut-already-taken": "",
     "shortcuts-others": "",
     "shortcuts-menu": "",
-    "shortcuts-global": ""
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
   }
 }

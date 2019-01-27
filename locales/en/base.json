@@ -252,6 +252,10 @@
     "shortcut-already-taken": "Unfortunately, this key combination is already assigned",
     "shortcuts-others": "Other Shortcuts",
     "shortcuts-menu": "Menu Shortcuts",
-    "shortcuts-global": "Global Shortcuts"
+    "shortcuts-global": "Global Shortcuts",
+    "disable-update-on-start": "Disable update on start"
+  },
+  "info": {
+    "update-not-available": "There are currently no updates available"
   }
 }

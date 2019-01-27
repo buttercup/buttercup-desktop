@@ -241,6 +241,10 @@
     "shortcut-already-taken": "Diese Tastenkombination ist leider schon belegt",
     "shortcuts-others": "Andere Kurzbefehle",
     "shortcuts-menu": "Menü Kurzbefehle",
-    "shortcuts-global": "Globale Kurzbefehle"
+    "shortcuts-global": "Globale Kurzbefehle",
+    "disable-update-on-start": "Updateanfrage beim Starten deaktivieren"
+  },
+  "info": {
+    "update-not-available": "Es sind momentan keine weiteren Updates verfügbar"
   }
 }

@@ -64,9 +64,8 @@
       "front": "Mettre en avant"
     },
     "system": {
-      "system": "Système",
-      "enable-browser-access": "Activer l'accès par navigateur"
-}	,
+      "enable-browser-access": ""
+    },
     "help": {
       "help": "Aide",
       "visit-our-website": "Visitez notre site web",
@@ -76,9 +75,6 @@
     "tray": {
       "quit": "Quitter",
       "open": "Ouvrir Buttercup"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -254,6 +250,10 @@
     "shortcut-already-taken": "",
     "shortcuts-others": "",
     "shortcuts-menu": "",
-    "shortcuts-global": ""
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
   }
 }
