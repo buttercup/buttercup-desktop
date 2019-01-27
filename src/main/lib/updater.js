@@ -14,7 +14,7 @@ let __updateWin;
 if (process.env.NODE_ENV !== 'production') {
   autoUpdater.updateConfigPath = path.join(
     __dirname,
-    '../../../app/dev-app-update.yml'
+    '../../../dev-app-update.yml'
   );
 }
 
