@@ -5,7 +5,7 @@ $treePrefixCls: 'rc-tree';
   margin: 0;
   padding: 0;
   -webkit-app-region: no-drag;
-  
+
   li {
     padding: 0;
     margin: 0;
@@ -150,6 +150,9 @@ $treePrefixCls: 'rc-tree';
     background-image: url(./img/folder-open.svg) !important;
   }
   &-icon__close {
+    background-image: url(./img/folder.svg) !important;
+  }
+  &-icon__docu {
     background-image: url(./img/folder.svg) !important;
   }
 }
