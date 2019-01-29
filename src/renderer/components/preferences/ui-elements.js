@@ -3,49 +3,68 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Input as BaseInput } from '@buttercup/ui';
 import { isOSX } from '../../../shared/utils/platform';
+import { Translate } from '../../../shared/i18n';
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 150px 1fr;
+  grid-template-rows: 108px 1fr;
+  grid-template-columns: 1fr;
   width: 100%;
   background-color: #fff;
   overflow: hidden;
 `;
 
 export const Menu = styled.div`
-  background-color: var(--entries-bg);
-  display: grid;
-  grid-template-rows: 1fr auto;
+  background-color: var(--brand-primary);
+  border-radius: 10px;
+  margin: ${!isOSX() ? 18 : 38}px 25px 0;
+  box-sizing: border-box;
+  align-self: center;
 `;
 
 export const MenuInner = styled.div`
   padding: 0;
-  margin-top: ${!isOSX() ? 0 : 40}px;
+  align-self: center;
   a {
     list-style: none;
     color: #fff;
     text-decoration: none;
     padding: 12px 20px;
-    font-size: 13px;
-    display: block;
+    font-size: 12px;
+    display: inline-block;
     position: relative;
     border: 0;
     transition: all 0.2s;
-    &:hover {
-      background-color: #383d46;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+    text-align: center;
+    svg {
+      transition: all 0.2s;
+      opacity: 0.5;
     }
-    &.active {
-      background-color: var(--brand-primary);
+    &.active,
+    &:hover {
       color: #fff;
+      svg {
+        opacity: 1;
+      }
     }
   }
 `;
 
 export const Content = styled.div`
-  margin: 20px;
+  margin: 40px;
   h3 {
+    font-size: 0.9em;
     margin: 0 0 15px;
+    position: relative;
+    line-height: 0.9em;
+    svg {
+      top: 6px;
+      margin: 0 7px 0 0;
+      position: relative;
+      display: inline-block;
+    }
   }
 `;
 
@@ -90,12 +109,6 @@ export const Grid = styled.section`
   margin-bottom: 20px;
   grid-gap: ${props => (props.gap ? props.gap : 0)}px;
 `;
-export const Input = styled(BaseInput)`
-  font-weight: 300;
-  display: inline-block;
-  padding: 0 12px;
-  border: 2px solid #e4e9f2;
-`;
 
 const CheckboxStyle = styled.input`
   -webkit-appearance: none;
@@ -116,9 +129,34 @@ const CheckboxStyle = styled.input`
     background-color: #eee;
     transition: all 0.3s;
   }
-  &:checked {
+  &:before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    z-index: 4;
+    top: 6px;
+    left: 6px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  &:hover {
+    border-color: #cecece;
+    &:before {
+      content: '';
+    }
     &:after {
-      content: '\\2714';
+      content: '';
+      padding: 0 0 0 5px;
+      background-color: #cecece;
+      color: #fff;
+    }
+  }
+  &:checked {
+    &:before {
+      content: '';
+    }
+    &:after {
+      content: '';
       padding: 0 0 0 5px;
       color: #fff;
       background-color: var(--brand-primary-darker);
@@ -128,11 +166,14 @@ const CheckboxStyle = styled.input`
       border: 1px solid var(--brand-primary);
       color: #fff;
     }
+    &:hover {
+      background-color: var(--brand-primary);
+    }
   }
   & + label {
     cursor: pointer;
     transition: all 0.3s;
-    padding: 4px 12px 5px 30px;
+    padding: 7px 12px 7px 30px;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 14px;
@@ -165,7 +206,7 @@ export const LabelWrapper = styled.div`
   font-weight: ${props => (props.checkbox ? 'normal' : 'bold')};
   font-size: 0.75em;
   margin: 0 ${props => (props.checkbox ? 5 : 0)}px
-    ${props => (props.checkbox ? '0' : '20px')};
+    ${props => (props.checkbox ? '0' : '20px')} 0;
   input,
   select {
     margin-top: 4px;
@@ -177,15 +218,10 @@ export const LabelWrapper = styled.div`
       display: block;
     }
   }
-  span {
-    cursor: pointer;
-    text-transform: none;
-    font-weight: normal;
-    margin-left: 10px;
+  label {
+    font-size: 0.9em;
     color: #999;
-    &:hover {
-      text-decoration: underline;
-    }
+    font-weight: ${props => (props.checkbox ? 600 : 100)};
   }
 `;
 
@@ -193,6 +229,99 @@ export const Range = styled(BaseInput)`
   display: inline-block;
   padding: 0;
 `;
+
+const InputStyle = styled.input`
+  font-weight: 300;
+  display: inline-block;
+  padding: 7px 0;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #e4e9f2;
+  width: 100%;
+  &:focus {
+    border-color: var(--brand-primary);
+  }
+`;
+
+const ResetButton = styled.span`
+  position: absolute;
+  right: 0;
+  font-size: 0.9em;
+  bottom: 9px;
+  cursor: pointer;
+  text-transform: none;
+  font-weight: normal;
+  margin-left: 10px;
+  color: #999;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const Input = ({
+  min,
+  max,
+  title,
+  name,
+  onChange,
+  onBlur,
+  onReset,
+  value,
+  defaultValue,
+  type = 'text'
+}) => {
+  const computedName =
+    name || (title && title.toLowerCase().replace(/\s/g, ''));
+  return (
+    <LabelWrapper>
+      <label htmlFor={computedName}>{title}</label>
+
+      {value !== defaultValue ? (
+        <ResetButton
+          onClick={
+            onReset ||
+            (e =>
+              onChange({
+                ...e,
+                target: {
+                  ...e.target,
+                  name,
+                  value: defaultValue
+                }
+              }))
+          }
+        >
+          <Translate i18nKey="preferences.reset" />
+        </ResetButton>
+      ) : (
+        ''
+      )}
+      <InputStyle
+        type={type}
+        name={name}
+        min={min}
+        max={max}
+        id={computedName}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur || (e => onChange(e))}
+      />
+    </LabelWrapper>
+  );
+};
+
+Input.propTypes = {
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onReset: PropTypes.func,
+  title: PropTypes.string,
+  type: PropTypes.string,
+  min: PropTypes.string,
+  max: PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string,
+  defaultValue: PropTypes.any
+};
 
 export const Checkbox = ({ title, onChange, checked }) => {
   const name = title && title.toLowerCase().replace(/\s/g, '');

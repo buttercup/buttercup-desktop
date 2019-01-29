@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { translate } from 'react-i18next';
 import orderBy from 'lodash/orderBy';
+import * as eva from 'eva-icons';
 
 import { Translate } from '../../../shared/i18n';
 import '../../styles/workspace.global.scss';
@@ -44,8 +45,17 @@ class Preferences extends PureComponent {
     t: PropTypes.func
   };
 
+  icons = {
+    general: 'options-outline',
+    shortcuts: 'book-open-outline'
+  };
+
   handleClose() {
     closeCurrentWindow();
+  }
+
+  componentDidMount() {
+    eva.replace();
   }
 
   render() {
@@ -61,10 +71,8 @@ class Preferences extends PureComponent {
                   to={view.path}
                   activeclass="active"
                 >
-                  <Translate
-                    i18nKey={`preferences.${view.key}`}
-                    parent="span"
-                  />
+                  <i data-eva={this.icons[view.key]} data-eva-fill="white" />
+                  <Translate i18nKey={`preferences.${view.key}`} parent="div" />
                 </NavLink>
               ))}
             </MenuInner>

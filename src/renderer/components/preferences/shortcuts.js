@@ -5,39 +5,40 @@ import { ipcRenderer as ipc } from 'electron';
 import { setGlobalShortcut } from '../../../shared/actions/settings';
 import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/global-shortcuts';
 import { getSetting } from '../../../shared/selectors';
-import { Grid, LabelWrapper, Input } from './ui-elements';
+import { Grid, Input } from './ui-elements';
+import * as eva from 'eva-icons';
 
 class Items extends PureComponent {
   static propTypes = {
     t: PropTypes.func,
     list: PropTypes.array,
     globalShortcuts: PropTypes.object,
-    resetShortcut: PropTypes.func,
     changeInput: PropTypes.func
   };
 
   render() {
-    const { list, t, resetShortcut, changeInput, globalShortcuts } = this.props;
+    const { list, t, changeInput, globalShortcuts } = this.props;
 
     return list.map(shortcutName => (
-      <LabelWrapper key={shortcutName}>
-        {t(shortcutName)}
-        <span onClick={e => resetShortcut(shortcutName)}>
-          {t('preferences.reset')}
-        </span>
-
-        <Input
-          type="text"
-          name={shortcutName}
-          onChange={e => changeInput(e)}
-          onBlur={e =>
-            ipc.send('register-global-shortcut', {
-              name: shortcutName,
-              accelerator: e.target.value
-            })}
-          value={globalShortcuts[shortcutName]}
-        />
-      </LabelWrapper>
+      <Input
+        key={shortcutName}
+        type="text"
+        name={shortcutName}
+        defaultValue={DEFAULT_GLOBAL_SHORTCUTS[shortcutName]}
+        title={t(shortcutName)}
+        onReset={e =>
+          ipc.send('register-global-shortcut', {
+            name: shortcutName,
+            accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+          })}
+        onChange={e => changeInput(e)}
+        onBlur={e =>
+          ipc.send('register-global-shortcut', {
+            name: shortcutName,
+            accelerator: e.target.value
+          })}
+        value={globalShortcuts[shortcutName]}
+      />
     ));
   }
 }
@@ -60,38 +61,31 @@ class Shortcuts extends PureComponent {
     });
   };
 
-  resetShortcut = () => {
-    this.setState(
-      {
-        [shortcutName]: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-      },
-      () => {
-        setGlobalShortcut({
-          name: shortcutName,
-          accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-        });
-      }
-    );
-  };
-
   componentDidMount() {
     const { t, setGlobalShortcut } = this.props;
 
-    ipc.on('register-global-shortcut', (e, { valid, name, accelerator }) => {
-      if (valid) {
-        setGlobalShortcut({
-          name,
-          accelerator
-        });
-      } else {
-        console.log(this.state);
-        this.setState({
-          [name]: this.props.globalShortcuts[name]
-        });
+    ipc.on(
+      'register-global-shortcut',
+      (e, { valid, name, accelerator: acc }) => {
+        let accelerator = acc;
+        if (valid) {
+          setGlobalShortcut({
+            name,
+            accelerator
+          });
+        } else {
+          accelerator = this.props.globalShortcuts[name];
 
-        alert(t('preferences.shortcut-already-taken'));
+          alert(t('preferences.shortcut-already-taken'));
+        }
+
+        this.setState({
+          [name]: accelerator
+        });
       }
-    });
+    );
+
+    eva.replace();
   }
 
   componentWillUnmount() {
@@ -124,33 +118,39 @@ class Shortcuts extends PureComponent {
       <div>
         <Grid gap={20}>
           <div>
-            <h3>{t('preferences.shortcuts-global')}</h3>
+            <h3>
+              <i data-eva="globe-2-outline" width="24" />
+              {t('preferences.shortcuts-global')}
+            </h3>
             <Items
               list={preferences}
               t={t}
               globalShortcuts={this.state}
               changeInput={this.changeInput}
-              resetShortcut={this.resetShortcut}
             />
 
-            <h3>{t('preferences.shortcuts-others')}</h3>
+            <h3>
+              <i data-eva="compass-outline" width="24" />
+              {t('preferences.shortcuts-others')}
+            </h3>
             <Items
               list={others}
               t={t}
               globalShortcuts={this.state}
               changeInput={this.changeInput}
-              resetShortcut={this.resetShortcut}
             />
           </div>
 
           <div>
-            <h3>{t('preferences.shortcuts-menu')}</h3>
+            <h3>
+              <i data-eva="menu-arrow-outline" width="24" />
+              {t('preferences.shortcuts-menu')}
+            </h3>
             <Items
               list={menu}
               t={t}
               globalShortcuts={this.state}
               changeInput={this.changeInput}
-              resetShortcut={this.resetShortcut}
             />
           </div>
         </Grid>

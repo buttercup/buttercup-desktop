@@ -67,8 +67,6 @@ class General extends PureComponent {
 
     return (
       <div>
-        <h3>{t('preferences.general')}</h3>
-
         {!isOSX() ? (
           <div>
             <Checkbox
@@ -81,7 +79,7 @@ class General extends PureComponent {
         ) : (
           ''
         )}
-        <div>
+        <div style={{ marginBottom: 20 }}>
           <Checkbox
             onChange={setUpdateOnStartDisabled}
             checked={updateOnStartDisabled}
@@ -111,46 +109,25 @@ class General extends PureComponent {
             title={t('preferences.disable-autoloading-icons')}
           />
         </div>
-        <LabelWrapper>
-          {t('preferences.seconds-until-clear-clipboard')}{' '}
-          {secondsUntilClearClipboard !== DEFAULT_CLIPBOARD_CLEAR_SECONDS ? (
-            <span
-              onClick={e =>
-                setSecondsUntilClearClipboard(DEFAULT_CLIPBOARD_CLEAR_SECONDS)}
-            >
-              {t('preferences.reset')}
-            </span>
-          ) : (
-            ''
-          )}
-          <Input
-            type="number"
-            min="0"
-            onChange={e => setSecondsUntilClearClipboard(e.target.value)}
-            onBlur={e => setSecondsUntilClearClipboard(e.target.value || '0')}
-            value={secondsUntilClearClipboard}
-          />
-        </LabelWrapper>
 
-        <LabelWrapper>
-          {t('preferences.seconds-until-archive-should-close')}{' '}
-          {autolockSeconds !== DEFAULT_ARCHIVE_CLOSE_SECONDS ? (
-            <span
-              onClick={e => setAutolockSeconds(DEFAULT_ARCHIVE_CLOSE_SECONDS)}
-            >
-              {t('preferences.reset')}
-            </span>
-          ) : (
-            ''
-          )}
-          <Input
-            type="number"
-            min="0"
-            onChange={e => setAutolockSeconds(e.target.value)}
-            onBlur={e => setAutolockSeconds(e.target.value || '0')}
-            value={autolockSeconds}
-          />
-        </LabelWrapper>
+        <Input
+          type="number"
+          min="0"
+          defaultValue={DEFAULT_CLIPBOARD_CLEAR_SECONDS}
+          onChange={e => setSecondsUntilClearClipboard(e.target.value)}
+          value={secondsUntilClearClipboard}
+          title={t('preferences.seconds-until-clear-clipboard')}
+        />
+
+        <Input
+          type="number"
+          min="0"
+          defaultValue={DEFAULT_ARCHIVE_CLOSE_SECONDS}
+          onChange={e => setAutolockSeconds(e.target.value)}
+          value={autolockSeconds}
+          title={t('preferences.seconds-until-archive-should-close')}
+        />
+
         <Grid single>
           <Checkbox
             type="checkbox"

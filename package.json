@@ -196,6 +196,7 @@
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
+    "eva-icons": "^1.1.1",
     "file-loader": "^2.0.0",
     "fixed-data-table-2": "^0.7.12",
     "flow-bin": "^0.77.0",

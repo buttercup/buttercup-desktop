@@ -48,7 +48,6 @@ class TreeLabel extends PureComponent {
       );
     }
 
-    console.log(node);
     return (
       <Node onContextMenu={onRightClick}>
         {node.isTrash ? (
