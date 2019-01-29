@@ -1,6 +1,8 @@
 import test from 'ava';
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
 import { settings } from '../../../../src/shared/reducers/settings';
-
+import { getSetting } from '../../../../src/shared/selectors';
 import {
   COLUMN_SIZE_SET,
   SETTING_SET
@@ -10,7 +12,8 @@ import {
   setColumnSize
 } from '../../../../src/shared/actions/settings';
 
-test.afterEach(t => {});
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 const initialState = {
   columnSizes: {
@@ -43,6 +46,22 @@ const initialState = {
     'app-menu.view.condensed-sidebar': 'CmdOrCtrl+Shift+B'
   }
 };
+
+test('getSetting() should return true by getting isTrayIconEnabled', async t => {
+  const store = mockStore({
+    settings: initialState
+  });
+
+  t.is(getSetting(store.getState(), 'isTrayIconEnabled'), true);
+});
+
+test('getSetting() should handle missing keys', async t => {
+  const store = mockStore({
+    settings: initialState
+  });
+
+  t.is(getSetting(store.getState(), 'doesNotExist'), undefined);
+});
 
 test('should return initial settings', t => {
   t.deepEqual(settings(undefined, {}), {
