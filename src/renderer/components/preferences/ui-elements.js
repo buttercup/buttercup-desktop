@@ -181,15 +181,17 @@ const CheckboxStyle = styled.input`
 `;
 
 export const Select = styled.select`
+  -webkit-appearance: none;
   font-weight: 300;
-  height: auto;
-  height: 43px;
-  background-color: #fff;
-  border: 2px solid #e4e9f2;
-  padding: 0 12px;
-  border-radius: 4px;
   display: inline-block;
+  padding: 7px 0;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #e4e9f2;
+  height: 33px;
   width: 100%;
+  background-color: transparent;
+  border-radius: 0;
   &:focus {
     border-color: var(--brand-primary);
   }

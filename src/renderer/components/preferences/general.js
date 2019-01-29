@@ -138,8 +138,9 @@ class General extends PureComponent {
         </Grid>
 
         <LabelWrapper>
-          {t('app-menu.view.language')}
+          <label htmlFor="language">{t('app-menu.view.language')}</label>
           <Select
+            id="language"
             value={locale}
             onChange={e => {
               ipc.send('change-locale-main', e.target.value);

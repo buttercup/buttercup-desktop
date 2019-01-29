@@ -145,9 +145,9 @@ export function setupWindows(store) {
 
     const win = new BrowserWindow({
       width: 650,
-      height: 558,
+      height: 548,
       minWidth: 650,
-      minHeight: 558,
+      minHeight: 548,
       minimizable: false,
       maximizable: false,
       fullscreenable: false,
