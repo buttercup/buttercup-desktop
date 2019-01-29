@@ -127,9 +127,14 @@ export function setupWindows(store) {
     win.on('focus', () =>
       store.dispatch(setSetting('isButtercupFocused', true))
     );
+
     win.on('blur', () =>
       store.dispatch(setSetting('isButtercupFocused', false))
     );
+
+    win.once('closed', () => {
+      windowManager.deregister(win);
+    });
 
     return win;
   });
@@ -157,14 +162,17 @@ export function setupWindows(store) {
 
     win.once('ready-to-show', () => win.show());
 
-    win.on('close', () => windowManager.deregister(win));
-
     win.on('focus', () =>
       store.dispatch(setSetting('isButtercupFocused', true))
     );
+
     win.on('blur', () =>
       store.dispatch(setSetting('isButtercupFocused', false))
     );
+
+    win.once('closed', () => {
+      windowManager.deregister(win);
+    });
 
     return win;
   });

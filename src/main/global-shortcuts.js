@@ -10,26 +10,44 @@ const windowManager = getWindowManager();
 // unregister all global shortcuts
 export const unregisterGlobalShortcuts = () => globalShortcut.unregisterAll();
 
+// sleep n ms
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 // defined global shortcut methods
 const initGlobalShortcuts = {
   'preferences.minimize-and-maximize': (shortcut, store) =>
-    globalShortcut.register(shortcut, () => {
+    globalShortcut.register(shortcut, async () => {
       const state = store.getState();
-      const [window] = windowManager.getWindowsOfType('main');
+      const [mainWindow] = windowManager.getWindowsOfType('main');
+      const windows = windowManager._windows;
 
       if (getSetting(state, 'isTrayIconEnabled')) {
-        if (!window) {
+        if (!mainWindow) {
           reopenMainWindow();
         } else {
-          window.close();
+          try {
+            if (windows) {
+              await Promise.all(
+                windows.map(async ({ type, window }) => {
+                  if (type === 'file-manager') {
+                    window.close();
+                    await sleep(100);
+                    mainWindow.close();
+                  } else {
+                    window.close();
+                  }
+                })
+              );
+            }
+          } catch (e) {}
         }
       } else {
-        if (window) {
-          if (window.isMinimized()) {
-            window.focus();
-            window.restore();
+        if (mainWindow) {
+          if (mainWindow.isMinimized()) {
+            mainWindow.focus();
+            mainWindow.restore();
           } else {
-            window.minimize();
+            mainWindow.minimize();
           }
         }
       }
