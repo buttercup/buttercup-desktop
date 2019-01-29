@@ -257,5 +257,8 @@
   },
   "info": {
     "update-not-available": "There are currently no updates available"
+  },
+  "common": {
+    "trash": "Trash"
   }
 }

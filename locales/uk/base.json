@@ -242,5 +242,8 @@
   },
   "info": {
     "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

@@ -246,5 +246,8 @@
   },
   "info": {
     "update-not-available": "Es sind momentan keine weiteren Updates verfügbar"
+  },
+  "common": {
+    "trash": "Papierkorb"
   }
 }
