@@ -236,7 +236,7 @@ class SidebarItem extends PureComponent {
         <Avatar
           color={colour}
           locked={locked}
-          innerRef={ref => {
+          ref={ref => {
             this.avatarRef = ref;
           }}
         >

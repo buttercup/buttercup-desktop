@@ -79,7 +79,7 @@ class NewFileInput extends PureComponent {
         onKeyUp={this.handleKeyup}
         onBlur={this.handleBlur}
         value={this.state.name}
-        innerRef={ref => {
+        ref={ref => {
           this.ref = ref;
         }}
       />

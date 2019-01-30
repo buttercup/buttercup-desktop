@@ -74,7 +74,7 @@ class LabelEditor extends PureComponent {
         onChange={e => this.handleChange(e)}
         onKeyUp={e => this.handleKeyUp(e)}
         onBlur={e => this.handleBlur(e)}
-        innerRef={c => {
+        ref={c => {
           this._input = c;
         }}
       />

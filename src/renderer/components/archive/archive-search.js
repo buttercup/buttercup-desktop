@@ -288,7 +288,7 @@ class ArchiveSearch extends PureComponent {
           <Input
             bordered
             onKeyDown={this.onInputKeyUpOrDown}
-            innerRef={input => {
+            ref={input => {
               this._input = input;
             }}
             onChange={this.changeSearchtermInput}
