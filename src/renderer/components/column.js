@@ -33,14 +33,13 @@ const Column = ({
   footer = null,
   header = null,
   className = null,
-  contentClassName = null,
   light = false,
   ...rest
 }) => (
   <Wrapper flexColumn className={className} {...rest}>
     {header && <Header>{header}</Header>}
     <Scrollbars style={{ display: 'flex' }}>
-      <Content flexAuto className={contentClassName}>
+      <Content flexAuto className="content">
         {children}
       </Content>
     </Scrollbars>
@@ -53,7 +52,6 @@ Column.propTypes = {
   header: PropTypes.node,
   footer: PropTypes.node,
   className: PropTypes.string,
-  contentClassName: PropTypes.string,
   light: PropTypes.bool
 };
 

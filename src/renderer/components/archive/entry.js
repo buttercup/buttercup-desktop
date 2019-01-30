@@ -1,15 +1,53 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import TrashIcon from 'react-icons/lib/fa/trash-o';
 import EditIcon from 'react-icons/lib/fa/edit';
 import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
 import { Translate } from '../../../shared/i18n';
 import EntryForm from '../../containers/archive/entry-form';
-import styles from '../../styles/entry';
-import Column from '../column';
+import BaseColumn from '../column';
 import EmptyView, { getRandomIllustration } from '../empty-view';
 import EntryView from './entry-view';
+
+const Splitter = styled.div`
+  flex: 1;
+  display: flex;
+
+  > div {
+    flex: 0 0 50%;
+    &:last-child {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+`;
+
+const Column = styled(BaseColumn)`
+  background-color: #fff;
+
+  .content {
+    padding: 1em;
+  }
+`;
+
+const CenteredEmptyView = styled(EmptyView)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  img {
+    width: 250px;
+    height: 250px;
+  }
+
+  figcaption {
+    margin-top: -2rem;
+  }
+`;
 
 class Entry extends PureComponent {
   static propTypes = {
@@ -45,7 +83,7 @@ class Entry extends PureComponent {
         />
       ),
       footer: (
-        <div className={styles.splitter}>
+        <Splitter>
           <div>
             <Button
               onClick={() => ref.submit()}
@@ -67,7 +105,7 @@ class Entry extends PureComponent {
               <Translate i18nKey="entry.delete" parent="span" />
             </Button>
           </div>
-        </div>
+        </Splitter>
       )
     };
   }
@@ -117,9 +155,8 @@ class Entry extends PureComponent {
 
     return {
       content: (
-        <EmptyView
+        <CenteredEmptyView
           caption={t('entry.select-or-create-an-entry')}
-          className={styles.emptyView}
           imageSrc={getRandomIllustration()}
         />
       ),
@@ -146,12 +183,7 @@ class Entry extends PureComponent {
     const { content, footer } = fn.call(this);
 
     return (
-      <Column
-        light
-        footer={footer}
-        className={styles.column}
-        contentClassName={styles.content}
-      >
+      <Column light footer={footer}>
         {content}
       </Column>
     );
