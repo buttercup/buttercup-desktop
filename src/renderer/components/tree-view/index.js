@@ -14,9 +14,9 @@ import {
   createSortMenu
 } from '../../system/menu';
 import { isOSX } from '../../../shared/utils/platform';
-import '../../styles/tree-view.global';
 import BaseColumn from '../column';
 import TreeLabel from './tree-label';
+import Styles from './styles';
 
 const Column = styled(BaseColumn)`
   background-color: ${isOSX() ? 'var(--groups-bg-mac)' : 'var(--groups-bg)'};
@@ -208,27 +208,30 @@ class TreeView extends PureComponent {
     };
 
     return (
-      <Column
-        footer={
-          <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
-            <Translate i18nKey="group.new-group" parent="span" />
-          </Button>
-        }
-        onContextMenu={() => this.handleColumnRightClick()}
-      >
-        <Tree
-          draggable
-          showLine={false}
-          expandedKeys={this.props.expandedKeys}
-          selectedKeys={this.props.selectedKeys}
-          autoExpandParent={false}
-          onSelect={this.handleSelect}
-          onExpand={this.handleExpand}
-          onDrop={this.handleDrop}
+      <React.Fragment>
+        <Column
+          footer={
+            <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
+              <Translate i18nKey="group.new-group" parent="span" />
+            </Button>
+          }
+          onContextMenu={() => this.handleColumnRightClick()}
         >
-          {loop(groups)}
-        </Tree>
-      </Column>
+          <Tree
+            draggable
+            showLine={false}
+            expandedKeys={this.props.expandedKeys}
+            selectedKeys={this.props.selectedKeys}
+            autoExpandParent={false}
+            onSelect={this.handleSelect}
+            onExpand={this.handleExpand}
+            onDrop={this.handleDrop}
+          >
+            {loop(groups)}
+          </Tree>
+        </Column>
+        <Styles />
+      </React.Fragment>
     );
   }
 }

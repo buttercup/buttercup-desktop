@@ -6,7 +6,7 @@ import { Button } from '@buttercup/ui';
 import sanitizeHtml from 'sanitize-html';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
-import '../../styles/workspace.global.scss';
+import GlobalStyles from '../global-styles';
 import icon from '../../styles/img/icons/256x256.png';
 
 const Wrapper = styled(Flex)`
@@ -123,51 +123,54 @@ class Update extends PureComponent {
       return null;
     }
     return (
-      <Wrapper flexAuto>
-        <Icon>
-          <img src={icon} />
-        </Icon>
-        <Flex flexColumn flexAuto>
-          <Header>
-            <Translate i18nKey="update.new-version-available" parent="h4" />
-            <Translate
-              i18nKey="update.update-available-message"
-              parent="p"
-              values={{
-                version: this.state.version,
-                currentVersion: this.state.currentVersion
-              }}
-            />
-            <Translate i18nKey="update.release-notes" parent="h5" />
-          </Header>
-          <ReleaseNotes
-            dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
-          />
-          <Flex justify="space-between">
-            <Button
-              onClick={this.handleSkip}
-              dark
-              disabled={this.state.installing}
-            >
-              <Translate i18nKey="update.not-now" />
-            </Button>
-            <Button
-              primary
-              onClick={this.handleDownload}
-              loading={this.state.installing}
-              disabled={this.state.installing}
-            >
+      <React.Fragment>
+        <Wrapper flexAuto>
+          <Icon>
+            <img src={icon} />
+          </Icon>
+          <Flex flexColumn flexAuto>
+            <Header>
+              <Translate i18nKey="update.new-version-available" parent="h4" />
               <Translate
-                i18nKey={
-                  this.state.canUpdateAutomatically
-                    ? 'update.download'
-                    : 'update.download-manual'
-                }
+                i18nKey="update.update-available-message"
+                parent="p"
+                values={{
+                  version: this.state.version,
+                  currentVersion: this.state.currentVersion
+                }}
               />
-            </Button>
+              <Translate i18nKey="update.release-notes" parent="h5" />
+            </Header>
+            <ReleaseNotes
+              dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
+            />
+            <Flex justify="space-between">
+              <Button
+                onClick={this.handleSkip}
+                dark
+                disabled={this.state.installing}
+              >
+                <Translate i18nKey="update.not-now" />
+              </Button>
+              <Button
+                primary
+                onClick={this.handleDownload}
+                loading={this.state.installing}
+                disabled={this.state.installing}
+              >
+                <Translate
+                  i18nKey={
+                    this.state.canUpdateAutomatically
+                      ? 'update.download'
+                      : 'update.download-manual'
+                  }
+                />
+              </Button>
+            </Flex>
           </Flex>
-        </Flex>
-      </Wrapper>
+        </Wrapper>
+        <GlobalStyles />
+      </React.Fragment>
     );
   }
 }

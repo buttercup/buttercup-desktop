@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import Archive from '../components/archive';
 import Sidebar from '../containers/sidebar';
-import '../styles/workspace.global.scss';
+import GlobalStyles from './global-styles';
 import SavingModal from './saving-modal';
 import ArchiveSearch from '../containers/archive/archive-search';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
@@ -25,42 +25,45 @@ const Workspace = ({
   isArchiveSearchVisible
 }) => {
   return (
-    <Flex flexAuto>
-      <If condition={archivesCount > 0}>
-        <Sidebar condenced={condencedSidebar} />
-      </If>
-      <Primary flexAuto>
-        <Choose>
-          <When condition={archivesLoading}>
-            <Flex align="center" justify="center" flexColumn flexAuto>
-              <img width="64" src={spinner} alt="Loading" />
-            </Flex>
-          </When>
-          <Otherwise>
-            <Choose>
-              <When condition={archivesCount === 0}>
-                <WelcomeScreen />
-              </When>
-              <When condition={archivesCount > 0 && currentArchive === null}>
-                <NoArchiveSelected />
-              </When>
-              <Otherwise>
-                <Archive
-                  columnSizes={columnSizes}
-                  onColumnSizeChange={setColumnSize}
-                />
-              </Otherwise>
-            </Choose>
-          </Otherwise>
-        </Choose>
-      </Primary>
-      <If condition={isArchiveSearchVisible}>
-        <ArchiveSearch />
-      </If>
-      <If condition={savingArchive}>
-        <SavingModal />
-      </If>
-    </Flex>
+    <React.Fragment>
+      <Flex flexAuto>
+        <If condition={archivesCount > 0}>
+          <Sidebar condenced={condencedSidebar} />
+        </If>
+        <Primary flexAuto>
+          <Choose>
+            <When condition={archivesLoading}>
+              <Flex align="center" justify="center" flexColumn flexAuto>
+                <img width="64" src={spinner} alt="Loading" />
+              </Flex>
+            </When>
+            <Otherwise>
+              <Choose>
+                <When condition={archivesCount === 0}>
+                  <WelcomeScreen />
+                </When>
+                <When condition={archivesCount > 0 && currentArchive === null}>
+                  <NoArchiveSelected />
+                </When>
+                <Otherwise>
+                  <Archive
+                    columnSizes={columnSizes}
+                    onColumnSizeChange={setColumnSize}
+                  />
+                </Otherwise>
+              </Choose>
+            </Otherwise>
+          </Choose>
+        </Primary>
+        <If condition={isArchiveSearchVisible}>
+          <ArchiveSearch />
+        </If>
+        <If condition={savingArchive}>
+          <SavingModal />
+        </If>
+      </Flex>
+      <GlobalStyles />
+    </React.Fragment>
   );
 };
 

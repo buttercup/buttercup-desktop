@@ -9,7 +9,7 @@ import i18n, { Translate } from '../shared/i18n';
 import { isOSX } from '../shared/utils/platform';
 import configureStore from '../shared/store/configure-store';
 import { getSetting } from '../shared/selectors';
-import './styles/workspace.global.scss';
+import GlobalStyles from './components/global-styles';
 
 const store = configureStore({}, 'renderer');
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));
@@ -48,22 +48,28 @@ const Code = styled.pre`
 
 const renderWindow = connectionCode =>
   render(
-    <I18nextProvider i18n={i18n}>
-      <Wrapper flexColumn>
-        <Translate i18nKey="app-menu.system.enable-browser-access" parent="p" />
-        <Code>
-          <span role="content">{connectionCode}</span>
-        </Code>
-        <Button
-          dark
-          onClick={() => {
-            remote.getCurrentWindow().close();
-          }}
-        >
-          <Translate i18nKey="entry.cancel" parent="span" />
-        </Button>
-      </Wrapper>
-    </I18nextProvider>,
+    <React.Fragment>
+      <I18nextProvider i18n={i18n}>
+        <Wrapper flexColumn>
+          <Translate
+            i18nKey="app-menu.system.enable-browser-access"
+            parent="p"
+          />
+          <Code>
+            <span role="content">{connectionCode}</span>
+          </Code>
+          <Button
+            dark
+            onClick={() => {
+              remote.getCurrentWindow().close();
+            }}
+          >
+            <Translate i18nKey="entry.cancel" parent="span" />
+          </Button>
+        </Wrapper>
+      </I18nextProvider>
+      <GlobalStyles />
+    </React.Fragment>,
     document.getElementById('root')
   );
 
