@@ -1,11 +1,16 @@
 import path from 'path';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import { Input } from '@buttercup/ui';
-import { Cell } from 'fixed-data-table-2';
+import { Cell as BaseCell } from 'fixed-data-table-2';
 import humanize from 'humanize';
 import Icon from '../icon';
-import styles from '../../styles/file-manager';
+
+const Cell = styled(BaseCell)`
+  font-size: 0.8rem;
+  cursor: pointer;
+`;
 
 const propTypes = {
   rowIndex: PropTypes.number,
@@ -101,11 +106,7 @@ export const TextCell = ({
       <NewFileInput onSaveFile={onSaveFile} onDismissFile={onDismissFile} />
     );
   }
-  return (
-    <Cell className={styles.cell} {...props}>
-      {item[col]}
-    </Cell>
-  );
+  return <Cell {...props}>{item[col]}</Cell>;
 };
 
 TextCell.propTypes = {
@@ -115,16 +116,14 @@ TextCell.propTypes = {
 };
 
 export const DateCell = ({ rowIndex, data, ...props }) => (
-  <Cell className={styles.cell} {...props}>
+  <Cell {...props}>
     {data[rowIndex].mtime ? humanize.date('d M', data[rowIndex].mtime) : ''}
   </Cell>
 );
 DateCell.propTypes = propTypes;
 
 export const SizeCell = ({ rowIndex, data, ...props }) => (
-  <Cell className={styles.cell} {...props}>
-    {humanize.filesize(data[rowIndex].size)}
-  </Cell>
+  <Cell {...props}>{humanize.filesize(data[rowIndex].size)}</Cell>
 );
 SizeCell.propTypes = propTypes;
 
@@ -132,7 +131,7 @@ export const IconCell = ({ rowIndex, data, ...props }) => {
   let ext = path.extname(data[rowIndex].name);
   ext = ext ? ext.toLowerCase().replace('.', '') : null;
   return (
-    <Cell className={styles.cell} {...props}>
+    <Cell {...props}>
       <Icon
         name={
           data[rowIndex].type === 'directory'
