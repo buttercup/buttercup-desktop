@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { brands } from '../../../shared/buttercup/brands';
 import { Translate } from '../../../shared/i18n';
 import GlobalStyles from '../global-styles';
+import { IconStyles } from '../icon';
 import {
   emitActionToParentAndClose,
   closeCurrentWindow
@@ -147,6 +148,7 @@ class FileManager extends PureComponent {
           </Wrapper>
         </Router>
         <GlobalStyles />
+        <IconStyles />
       </React.Fragment>
     );
   }
