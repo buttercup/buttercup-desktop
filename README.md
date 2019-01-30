@@ -116,6 +116,7 @@ Buttercup for Desktop supports the following languages:
  * Turkish
  * Polish
  * Finnish
+ * Catalan
 
 ### Submitting internationalization configurations
 
