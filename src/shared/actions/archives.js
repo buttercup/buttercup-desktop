@@ -88,23 +88,29 @@ export const lockArchive = payload => dispatch => {
   });
 };
 
-export const unlockArchive = payload => dispatch => {
-  return showPasswordDialog(password =>
-    unlockArchiveInArchiveManager(payload, password)
-  )
-    .then(archiveId => dispatch(loadArchive(archiveId)))
-    .catch(() => {});
+export const unlockArchive = (archiveId, masterPassword) => dispatch => {
+  return unlockArchiveInArchiveManager(archiveId, masterPassword).then(
+    archiveId => dispatch(loadArchive(archiveId))
+  );
+  // return showPasswordDialog(password =>
+  //   unlockArchiveInArchiveManager(payload, password)
+  // )
+  //   .then(archiveId => dispatch(loadArchive(archiveId)))
+  //   .catch(() => {});
 };
 
-export const loadOrUnlockArchive = payload => (dispatch, getState) => {
-  const archive = getArchive(getState(), payload);
+export const loadOrUnlockArchive = (archiveId, masterPassword) => (
+  dispatch,
+  getState
+) => {
+  const archive = getArchive(getState(), archiveId);
   if (!archive) {
     return;
   }
   if (archive.status === 'locked') {
-    dispatch(unlockArchive(payload));
+    return dispatch(unlockArchive(archiveId, masterPassword));
   } else {
-    dispatch(loadArchive(payload));
+    return dispatch(loadArchive(payload));
   }
 };
 

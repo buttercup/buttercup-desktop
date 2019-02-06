@@ -7,6 +7,7 @@ import {
   getArchivesCount,
   getUIState
 } from '../../shared/selectors';
+import { loadOrUnlockArchive } from '../../shared/actions/archives';
 
 export default connect(
   state => ({
@@ -19,6 +20,7 @@ export default connect(
     isArchiveSearchVisible: getUIState(state, 'isArchiveSearchVisible')
   }),
   {
-    setColumnSize
+    setColumnSize,
+    onUnlockArchive: loadOrUnlockArchive
   }
 )(Workspace, 'Workspace');
