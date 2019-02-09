@@ -1,14 +1,11 @@
 // @ts-check
 
-import isError from 'is-error';
+// import isError from 'is-error';
 import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
 import { importHistory } from '../buttercup/import';
-import {
-  showPasswordDialog,
-  showConfirmedPasswordDialog
-} from '../../renderer/system/dialog';
+import { showConfirmedPasswordDialog } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_SET,
@@ -92,11 +89,6 @@ export const unlockArchive = (archiveId, masterPassword) => dispatch => {
   return unlockArchiveInArchiveManager(archiveId, masterPassword).then(
     archiveId => dispatch(loadArchive(archiveId))
   );
-  // return showPasswordDialog(password =>
-  //   unlockArchiveInArchiveManager(payload, password)
-  // )
-  //   .then(archiveId => dispatch(loadArchive(archiveId)))
-  //   .catch(() => {});
 };
 
 export const loadOrUnlockArchive = (archiveId, masterPassword) => (
@@ -109,105 +101,66 @@ export const loadOrUnlockArchive = (archiveId, masterPassword) => (
   }
   if (archive.status === 'locked') {
     return dispatch(unlockArchive(archiveId, masterPassword));
-  } else {
-    return dispatch(loadArchive(payload));
   }
+  return dispatch(loadArchive(archiveId));
 };
 
-export const addArchive = payload => async (dispatch, getState) => {
-  const { isNew } = payload;
-  const dispatchLoad = archiveId => dispatch(loadArchive(archiveId));
-  const addToArchive = password =>
-    addArchiveToArchiveManager(payload, password).catch(err => {
-      const unknownMessage = i18n.t('error.unknown');
-      return Promise.reject(
-        isError(err) ? err.message || unknownMessage : unknownMessage
-      );
-    });
-
-  // If it's not a new archive,
-  // show the password dialog only once.
-  if (isNew === false) {
-    return showPasswordDialog(addToArchive)
-      .then(dispatchLoad)
-      .catch(() => {});
-  }
-
-  // Otherwise show a confirmation too.
-  return showConfirmedPasswordDialog(
-    addToArchive,
-    {},
-    {
-      title: i18n.t('password-dialog.confirm-password')
-    }
-  )
-    .then(dispatchLoad)
-    .catch(() => {});
-};
-
-export const addArchiveFromFile = ({ path, isNew = false }) => dispatch => {
-  dispatch(
-    addArchive({
-      type: ArchiveTypes.FILE,
-      isNew,
-      path,
-      datasource: {
-        path
-      }
-    })
+export const addArchive = (payload, masterPassword) => async dispatch => {
+  return addArchiveToArchiveManager(payload, masterPassword).then(archiveId =>
+    dispatch(loadArchive(archiveId))
   );
 };
 
-export const addArchiveFromWebdav = (
-  { path, endpoint, credentials, isNew = false },
-  type
-) => dispatch => {
-  dispatch(
-    addArchive({
-      type,
-      isNew,
-      path,
-      credentials,
-      datasource: {
-        endpoint,
-        path
-      }
-    })
-  );
-};
-
-export const addArchiveFromDropbox = ({
-  path,
-  token,
-  isNew = false
-}) => dispatch => {
-  dispatch(
-    addArchive({
-      type: ArchiveTypes.DROPBOX,
-      isNew,
-      path,
-      datasource: {
-        token,
-        path
-      }
-    })
-  );
-};
-
-export const addArchiveFromSource = payload => dispatch => {
-  const { type, ...config } = payload;
+export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
+  const { type, path, isNew, ...config } = payload;
   switch (type) {
     case ArchiveTypes.DROPBOX:
-      dispatch(addArchiveFromDropbox(config));
-      break;
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            datasource: {
+              token: config.token,
+              path
+            }
+          },
+          masterPassword
+        )
+      );
     case ArchiveTypes.OWNCLOUD:
     case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
-      dispatch(addArchiveFromWebdav(config, type));
-      break;
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            credentials: config.credentials,
+            datasource: {
+              endpoint: config.endpoint,
+              path
+            }
+          },
+          masterPassword
+        )
+      );
     case ArchiveTypes.FILE:
-      dispatch(addArchiveFromFile(config));
-      break;
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            datasource: {
+              path
+            }
+          },
+          masterPassword
+        )
+      );
     default:
       break;
   }

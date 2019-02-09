@@ -45,6 +45,10 @@ class PasswordModal extends PureComponent {
         this.props.onSuccess();
       })
       .catch(err => {
+        //     const unknownMessage = i18n.t('error.unknown');
+        //     return Promise.reject(
+        //       isError(err) ? err.message || unknownMessage : unknownMessage
+        //     );
         this.setState({
           errorMessage: err.message
         });

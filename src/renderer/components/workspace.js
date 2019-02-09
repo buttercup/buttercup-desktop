@@ -12,6 +12,12 @@ import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 import spinner from '../styles/img/spinner.svg';
 import PasswordModal from './password-modal';
 
+const RequestTypes = {
+  UNLOCK: 'unlock',
+  PASSWORD_CHANGE: 'change',
+  NEW_VAULT: 'new'
+};
+
 const Primary = styled(Flex)`
   position: relative;
 `;
@@ -26,36 +32,47 @@ class Workspace extends PureComponent {
     savingArchive: PropTypes.bool,
     isArchiveSearchVisible: PropTypes.bool,
     setColumnSize: PropTypes.func,
-    onUnlockArchive: PropTypes.func
+    onUnlockArchive: PropTypes.func,
+    onAddNewVault: PropTypes.func
   };
 
   state = {
+    modalRequest: null,
     unlockRequest: null,
     passwordChangeRequest: null
   };
 
   componentDidMount() {
     ipc.on('load-archive', (e, payload) => {
-      console.log(payload);
+      this.setState({
+        modalRequest: {
+          type: RequestTypes.NEW_VAULT,
+          confirm: payload.isNew,
+          payload
+        }
+      });
     });
 
     ipc.on('set-current-archive', (e, payload) => {
       this.setState({
-        unlockRequest: payload
+        modalRequest: {
+          type: RequestTypes.UNLOCK,
+          confirm: false,
+          payload
+        }
       });
     });
   }
 
   handleUnlockSuccess = () => {
     this.setState({
-      unlockRequest: null
+      modalRequest: null
     });
   };
 
   handlePasswordModalCancel = () => {
     this.setState({
-      unlockRequest: null,
-      passwordChangeRequest: null
+      modalRequest: null
     });
   };
 
@@ -69,8 +86,21 @@ class Workspace extends PureComponent {
       archivesLoading,
       savingArchive,
       isArchiveSearchVisible,
-      onUnlockArchive
+      onUnlockArchive,
+      onAddNewVault
     } = this.props;
+
+    const onValidate = modalRequest => {
+      const { payload, type } = modalRequest;
+      return password => {
+        switch (type) {
+          case RequestTypes.UNLOCK:
+            return onUnlockArchive(payload, password);
+          case RequestTypes.NEW_VAULT:
+            return onAddNewVault(payload, password);
+        }
+      };
+    };
 
     return (
       <React.Fragment>
@@ -113,11 +143,9 @@ class Workspace extends PureComponent {
             <SavingModal />
           </If>
         </Flex>
-        <If condition={this.state.unlockRequest}>
+        <If condition={this.state.modalRequest !== null}>
           <PasswordModal
-            onValidate={password =>
-              onUnlockArchive(this.state.unlockRequest, password)
-            }
+            onValidate={onValidate(this.state.modalRequest)}
             onCancel={this.handlePasswordModalCancel}
             onSuccess={this.handleUnlockSuccess}
           />

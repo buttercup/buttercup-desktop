@@ -7,7 +7,10 @@ import {
   getArchivesCount,
   getUIState
 } from '../../shared/selectors';
-import { loadOrUnlockArchive } from '../../shared/actions/archives';
+import {
+  loadOrUnlockArchive,
+  addArchiveFromSource
+} from '../../shared/actions/archives';
 
 export default connect(
   state => ({
@@ -21,6 +24,7 @@ export default connect(
   }),
   {
     setColumnSize,
-    onUnlockArchive: loadOrUnlockArchive
+    onUnlockArchive: loadOrUnlockArchive,
+    onAddNewVault: addArchiveFromSource
   }
 )(Workspace, 'Workspace');
