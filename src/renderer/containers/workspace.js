@@ -5,7 +5,8 @@ import {
   getCurrentArchive,
   getSetting,
   getArchivesCount,
-  getUIState
+  getUIState,
+  getArchive
 } from '../../shared/selectors';
 import {
   loadOrUnlockArchive,
@@ -25,6 +26,8 @@ export default connect(
   {
     setColumnSize,
     onUnlockArchive: loadOrUnlockArchive,
-    onAddNewVault: addArchiveFromSource
+    onAddNewVault: addArchiveFromSource,
+    isVaultUnlocked: vaultId => (_, getState) =>
+      getArchive(getState(), vaultId).status === 'unlocked'
   }
 )(Workspace, 'Workspace');

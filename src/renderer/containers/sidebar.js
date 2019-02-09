@@ -1,7 +1,7 @@
+import { remote } from 'electron';
 import { connect } from 'react-redux';
 import {
   removeArchive,
-  loadOrUnlockArchive,
   lockArchive,
   changeArchivePassword,
   changeArchiveColour,
@@ -24,7 +24,12 @@ export default connect(
   }),
   {
     onRemoveClick: removeArchive,
-    onClick: loadOrUnlockArchive,
+    onClick: vaultId => () => {
+      remote.BrowserWindow.getFocusedWindow().webContents.send(
+        'set-current-archive',
+        vaultId
+      );
+    },
     onLockArchive: lockArchive,
     onChangePassword: changeArchivePassword,
     onChangeColour: changeArchiveColour,

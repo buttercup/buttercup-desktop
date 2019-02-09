@@ -33,7 +33,8 @@ class Workspace extends PureComponent {
     isArchiveSearchVisible: PropTypes.bool,
     setColumnSize: PropTypes.func,
     onUnlockArchive: PropTypes.func,
-    onAddNewVault: PropTypes.func
+    onAddNewVault: PropTypes.func,
+    isVaultUnlocked: PropTypes.func
   };
 
   state = {
@@ -54,6 +55,9 @@ class Workspace extends PureComponent {
     });
 
     ipc.on('set-current-archive', (e, payload) => {
+      if (this.props.isVaultUnlocked(payload)) {
+        return this.props.onUnlockArchive(payload);
+      }
       this.setState({
         modalRequest: {
           type: RequestTypes.UNLOCK,
