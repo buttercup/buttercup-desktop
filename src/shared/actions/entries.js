@@ -2,7 +2,6 @@ import { createAction } from 'redux-actions';
 import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
-import { getQueue } from '../../renderer/system/queue';
 import {
   getCurrentGroupId,
   getCurrentArchiveId,
@@ -25,7 +24,7 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = (entryId, isSavingNewEntry = false) => async (
+export const selectEntry = (entryId, isSavingNewEntry = false) => (
   dispatch,
   getState
 ) => {
@@ -33,12 +32,10 @@ export const selectEntry = (entryId, isSavingNewEntry = false) => async (
     const currentEntryMode = getCurrentEntryMode(getState());
     (currentEntryMode === 'new' && !isSavingNewEntry) ||
     (currentEntryMode === 'edit' && !isSavingNewEntry)
-      ? showConfirmDialog(
-          i18n.t('entry.quit-unsave-entry'),
-          choice =>
-            choice === 0
-              ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
-              : null
+      ? showConfirmDialog(i18n.t('entry.quit-unsave-entry'), choice =>
+          choice === 0
+            ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
+            : null
         )
       : dispatch({
           type: ENTRIES_SELECTED,
@@ -57,20 +54,17 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => async dispatch => {
+export const loadEntries = (archiveId, groupId) => dispatch => {
   try {
-    const entries = await entryTools.loadEntries(archiveId, groupId);
+    const entries = entryTools.loadEntries(archiveId, groupId);
     dispatch({ type: ENTRIES_LOADED, payload: entries });
-
-    const entriesWithoutIcon = entries.filter(entry => !entry.icon);
-    dispatch(fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon));
   } catch (err) {
     console.error(err);
     showDialog(err);
   }
 };
 
-export const updateEntry = newValues => async (dispatch, getState) => {
+export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
 
   try {
@@ -81,16 +75,13 @@ export const updateEntry = newValues => async (dispatch, getState) => {
       payload: entryObj
     });
     dispatch(changeMode('view')());
-
-    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    dispatch(fetchEntryIconsAndUpdate(archiveId, [newValues]));
   } catch (err) {
     console.error(err);
     showDialog(err);
   }
 };
 
-export const newEntry = newValues => async (dispatch, getState) => {
+export const newEntry = newValues => (dispatch, getState) => {
   const state = getState();
   const currentGroupId = getCurrentGroupId(state);
   const archiveId = getCurrentArchiveId(state);
@@ -111,9 +102,6 @@ export const newEntry = newValues => async (dispatch, getState) => {
       payload: entryObj
     });
     dispatch(selectEntry(entryObj.id, true));
-
-    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    dispatch(fetchEntryIconsAndUpdate(archiveId, [entryObj]));
   } catch (err) {
     showDialog(err);
   }
@@ -144,21 +132,7 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
-  entries.forEach(entry => {
-    getQueue()
-      .channel('icons')
-      .enqueue(() => {
-        return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
-          if (entry.icon) {
-            return dispatch({ type: ENTRIES_UPDATE, payload: entry });
-          }
-        });
-      });
-  });
-};
-
-export const getMatchingEntriesForSearchTerm = term => async dispatch => {
+export const getMatchingEntriesForSearchTerm = term => dispatch => {
   const manager = getSharedArchiveManager();
 
   const unlockedSources = manager.unlockedSources;
@@ -173,14 +147,13 @@ export const getMatchingEntriesForSearchTerm = term => async dispatch => {
   const finder = new EntryFinder(archives);
 
   return Promise.all(
-    finder.search(term).map(async result => {
+    finder.search(term).map(result => {
       const { entry } = result;
       const archiveId = lookup[result.archive.id];
 
       return {
         sourceID: archiveId,
         groupID: entry.getGroup().id,
-        icon: await entryTools.getIcon(entry),
         entry: entry,
         path: [
           getSourceName(archiveId),

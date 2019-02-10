@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { heading } from '../../styles/_common';
+import Heading from './heading';
 import bubbleImage from '../../styles/img/info-bubble.svg';
 import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
@@ -53,7 +53,7 @@ const FieldsView = ({ fields, entry, t }) => (
       <LabelWrapper>
         <Choose>
           <When condition={field.property === 'title'}>
-            <EntryIcon icon={entry.icon} big />
+            <EntryIcon entry={entry} big />
           </When>
           <When condition={field.removeable === false}>
             {t(`entry.${field.property}`)}
@@ -79,14 +79,12 @@ FieldsView.propTypes = {
 const EntryView = props => {
   const { entry, t } = props;
   return (
-    <Fragment>
+    <>
       <FieldsView
         {...props}
         fields={getNonRemoveableFields(entry.facade.fields)}
       />
-      <h6 className={heading}>
-        <Translate i18nKey="entry.custom-fields" parent="span" />:
-      </h6>
+      <Translate i18nKey="entry.custom-fields" parent={Heading} />
       <With fields={getRemoveableFields(entry.facade.fields)}>
         <Choose>
           <When condition={fields.length > 0}>
@@ -100,7 +98,7 @@ const EntryView = props => {
           </Otherwise>
         </Choose>
       </With>
-    </Fragment>
+    </>
   );
 };
 

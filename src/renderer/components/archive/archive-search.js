@@ -48,8 +48,8 @@ const Input = styled(BaseInput)`
 `;
 
 /**
-	* Entry-List
-	*/
+ * Entry-List
+ */
 const EntryList = styled(Box)`
   border: 0;
   margin: 0;
@@ -288,7 +288,7 @@ class ArchiveSearch extends PureComponent {
           <Input
             bordered
             onKeyDown={this.onInputKeyUpOrDown}
-            innerRef={input => {
+            ref={input => {
               this._input = input;
             }}
             onChange={this.changeSearchtermInput}
@@ -307,14 +307,14 @@ class ArchiveSearch extends PureComponent {
                   autoHeightMax={300}
                 >
                   {entries.map(
-                    ({ entry, sourceID, groupID, icon, path }, index) => (
+                    ({ entry, sourceID, groupID, path }, entryIndex) => (
                       <ListItem
-                        selected={selectedItemIndex === index}
-                        key={index}
+                        selected={selectedItemIndex === entryIndex}
+                        key={entryIndex}
                         onClick={() => this.openEntry(sourceID, entry)}
                       >
                         <Icon>
-                          <EntryIcon icon={icon} />
+                          <EntryIcon entry={entry} />
                         </Icon>
                         <EntryData>
                           <span
@@ -327,8 +327,8 @@ class ArchiveSearch extends PureComponent {
                             }}
                           />
                           <EntryFolder>
-                            <For each="group" index="index" of={path}>
-                              <If condition={index > 0}> › </If>
+                            <For each="group" index="groupIndex" of={path}>
+                              <If condition={groupIndex > 0}> › </If>
                               {group}
                             </For>
                           </EntryFolder>

@@ -2,11 +2,22 @@ import path from 'path';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import dimensions from 'react-dimensions';
-import { Table, Column, Cell } from 'fixed-data-table-2';
+import styled from 'styled-components';
+import { Table as BaseTable, Column, Cell } from 'fixed-data-table-2';
 import { Translate } from '../../../shared/i18n';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
-import styles from '../../styles/file-manager';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
+
+const Table = styled(BaseTable)`
+  .public_fixedDataTable_main {
+    border-width: 0;
+  }
+  .selected,
+  .selected .public_fixedDataTableCell_main {
+    background: var(--brand-primary) !important;
+    color: #fff;
+  }
+`;
 
 function sortContent(list) {
   const folders = list.filter(item => item.type === 'directory');
@@ -157,7 +168,7 @@ class Manager extends PureComponent {
         headerHeight={40}
         rowsCount={contents.length}
         rowClassNameGetter={index => {
-          return selectedIndex === index ? styles.selected : null;
+          return selectedIndex === index ? 'selected' : null;
         }}
         scrollToRow={scrollIndex}
         width={containerWidth}

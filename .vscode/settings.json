@@ -1,5 +1,3 @@
 {
-  "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
-  "flow.useLSP": true,
   "eslint.enable": true
 }

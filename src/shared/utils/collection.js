@@ -1,9 +1,7 @@
-// @flow
 import { sortBy, at } from 'lodash';
 import i18n from '../i18n';
-import type { Entry } from '../../types/buttercup';
 
-export function sortEntriesByKey(list: Entry[], sortKey: string): Entry[] {
+export function sortEntriesByKey(list, sortKey) {
   // BRIDGE: Honor old formatting keys:
   sortKey = sortKey.replace('properties.', '');
   const [key, order] = sortKey.split('-');
@@ -12,7 +10,7 @@ export function sortEntriesByKey(list: Entry[], sortKey: string): Entry[] {
     return list;
   }
 
-  const sorted: Entry[] = sortBy(list, (item: Entry) => {
+  const sorted = sortBy(list, item => {
     const field = item.facade.fields.find(field => field.property === key);
     if (field) {
       return field.value.toLowerCase();
@@ -22,7 +20,7 @@ export function sortEntriesByKey(list: Entry[], sortKey: string): Entry[] {
   return order === 'asc' ? sorted : sorted.reverse();
 }
 
-export function sortByKey(list: any[], sortKey: string): any[] {
+export function sortByKey(list, sortKey) {
   const [key, order] = sortKey.split('-');
   if (!key || !order) {
     return list;
@@ -31,11 +29,7 @@ export function sortByKey(list: any[], sortKey: string): any[] {
   return order === 'asc' ? sorted : sorted.reverse();
 }
 
-export function sortDeepByKey(
-  list: any[],
-  sortKey: string,
-  childrenKey: string
-): any[] {
+export function sortDeepByKey(list, sortKey, childrenKey) {
   if (!sortKey || !childrenKey) {
     throw new Error(i18n.t('error.insufficient-data-provided'));
   }

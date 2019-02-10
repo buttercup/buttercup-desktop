@@ -30,7 +30,10 @@ export function setupWindows(store) {
       transparent: isOSX() && isHighSierra(),
       show: process.env.NODE_ENV === 'development',
       darkTheme: true,
-      vibrancy: 'ultra-dark'
+      vibrancy: 'ultra-dark',
+      webPreferences: {
+        navigateOnDragDrop: true
+      }
     });
 
     // set window position only if config exists

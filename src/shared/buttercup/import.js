@@ -1,7 +1,5 @@
 import { Archive } from './buttercup';
-import { showPasswordDialog } from '../../renderer/system/dialog';
 import { getArchive, saveWorkspace } from './archive';
-import { ImportTypeInfo } from './types';
 
 export function importHistory(archiveId, history) {
   const tempArchive = Archive.createFromHistory(history);
@@ -12,13 +10,4 @@ export function importHistory(archiveId, history) {
   });
 
   saveWorkspace(archiveId);
-}
-
-export function showHistoryPasswordPrompt(type) {
-  const typeInfo = ImportTypeInfo[type];
-  return showPasswordDialog(null, {
-    title: `${typeInfo.name} Archive Password`,
-    confirmButtonText: `Import ${typeInfo.name} Archive`,
-    cancelButtonText: 'Cancel Import'
-  });
 }

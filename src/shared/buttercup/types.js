@@ -35,3 +35,10 @@ export const ImportTypeInfo = {
     extension: 'csv'
   }
 };
+
+export const PasswordDialogRequestTypes = {
+  UNLOCK: 'unlock',
+  PASSWORD_CHANGE: 'change',
+  NEW_VAULT: 'new',
+  IMPORT: 'import'
+};

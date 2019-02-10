@@ -1,11 +1,10 @@
-import log from 'electron-log';
 import omit from 'lodash/omit';
-import iconographer from '../../main/lib/icon/iconographer';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import { Archive, entryFacade } from './buttercup';
+import { Archive, entryFacade, tools as buttercupTools } from './buttercup';
 
 const { consumeEntryFacade, createEntryFacade } = entryFacade;
+const { getEntryFacadeURLs, ENTRY_URL_TYPE_ANY } = buttercupTools.entry;
 
 function entryToObj(entry) {
   const facade = createEntryFacade(entry);
@@ -23,6 +22,13 @@ export function getFacadeFieldValue(entry, fieldName) {
   if (field) {
     return field.value;
   }
+}
+
+export function getEntryURL(entry) {
+  const [url] = entry.facade
+    ? getEntryFacadeURLs(entry.facade, ENTRY_URL_TYPE_ANY)
+    : entry.getURLs([ENTRY_URL_TYPE_ANY]);
+  return url;
 }
 
 export function getParentGroups(currentGroup) {
@@ -68,7 +74,7 @@ export function createNewEntryStructure() {
   return omit(entry, 'id');
 }
 
-export async function loadEntries(archiveId, groupId) {
+export function loadEntries(archiveId, groupId) {
   const arch = getArchive(archiveId);
   const group = arch.findGroupByID(groupId);
 
@@ -77,19 +83,7 @@ export async function loadEntries(archiveId, groupId) {
   }
 
   const entries = group.getEntries();
-
-  return Promise.all(
-    entries.map(async (entry, i) => {
-      const entryObject = entryToObj(entry);
-      // Here we get only the available icons in disk.
-      // Downloading missing icons is a lot slower, we do it later, after loading the entries.
-      const icon = await getIcon(entry);
-      return {
-        ...entryObject,
-        icon: icon || null
-      };
-    })
-  );
+  return entries.map(entry => entryToObj(entry));
 }
 
 export function updateEntry(archiveId, entryObj) {
@@ -106,58 +100,6 @@ export function updateEntry(archiveId, entryObj) {
   saveWorkspace(archiveId);
 
   return entryToObj(entry);
-}
-
-export async function updateEntryIcon(archiveId, entryId) {
-  const arch = getArchive(archiveId);
-  const entry = arch.findEntryByID(entryId);
-
-  if (!entry) {
-    throw new Error(i18n.t('error.entry-not-found'));
-  }
-
-  const entryObj = entryToObj(entry);
-  const icon = await getOrDownloadIcon(entry);
-  if (icon) {
-    entryObj.icon = icon;
-  }
-
-  return entryObj;
-}
-
-async function getOrDownloadIcon(entry) {
-  // We move on whether this succeeds or not
-  // TODO Should maybe log it somewhere (but not alert the user - not an error)
-  let icon = await getIcon(entry);
-  if (!icon) {
-    await processIcon(entry);
-    icon = await getIcon(entry);
-  }
-  return icon;
-}
-
-async function processIcon(entry) {
-  try {
-    await iconographer.processIconForEntry(entry);
-  } catch (err) {
-    // ENOTFOUND or ECONNREFUSED means the URL is just invalid, not an error
-    if (!['ENOTFOUND', 'ECONNREFUSED'].includes(err.code)) {
-      log.error('Unable to process icon for entry', err);
-    }
-  }
-}
-
-export async function getIcon(entry) {
-  try {
-    const iconContents = await iconographer.getIconForEntry(entry);
-    if (iconContents) {
-      return iconContents.toString();
-    }
-  } catch (err) {
-    log.error('Unable to get icon for entry', err);
-  }
-
-  return null;
 }
 
 export function createEntry(archiveId, groupId, newValues) {
