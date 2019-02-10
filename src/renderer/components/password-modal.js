@@ -29,17 +29,21 @@ Modal.setAppElement('#root');
 
 const initialState = {
   password: '',
+  passwordConfirmation: '',
+  passwordSubmitted: false,
   errorMessage: null,
   loading: false
 };
 
 class PasswordModal extends PureComponent {
+  _currentInputRef = null;
+
   static propTypes = {
     onValidate: PropTypes.func,
     onSuccess: PropTypes.func,
     onCancel: PropTypes.func,
-    t: PropTypes.func
-    // confirmPassword: PropTypes.bool
+    t: PropTypes.func,
+    confirmPassword: PropTypes.bool
   };
 
   state = {
@@ -50,8 +54,38 @@ class PasswordModal extends PureComponent {
     this.setState({ ...initialState });
   }
 
-  handleSubmit = e => {
+  handleFormSubmit = e => {
     e.preventDefault();
+    const { confirmPassword, t } = this.props;
+    const { password, passwordConfirmation, passwordSubmitted } = this.state;
+
+    // No confirmation needed, validate the form
+    if (!confirmPassword) {
+      return this.handleSubmit();
+    }
+
+    // Render password confirmation
+    if (!passwordSubmitted) {
+      return this.setState({
+        passwordSubmitted: true
+      });
+    }
+
+    // Check if passwords are the same
+    if (password === passwordConfirmation) {
+      return this.handleSubmit();
+    }
+
+    // If not, show an error
+    this.setState({
+      errorMessage: t('error.passwords-dont-match'),
+      password: '',
+      passwordConfirmation: '',
+      passwordSubmitted: false
+    });
+  };
+
+  handleSubmit = () => {
     const { onValidate, onSuccess, t } = this.props;
     this.setState(
       {
@@ -70,6 +104,9 @@ class PasswordModal extends PureComponent {
                 : unknownMessage,
               loading: false
             });
+            if (this._currentInputRef) {
+              this._currentInputRef.focus();
+            }
           });
       }
     );
@@ -82,8 +119,21 @@ class PasswordModal extends PureComponent {
     });
   };
 
+  handlePasswordConfirmationChange = e => {
+    this.setState({
+      passwordConfirmation: e.target.value,
+      errorMessage: null
+    });
+  };
+
   render() {
-    const { errorMessage, loading, password } = this.state;
+    const {
+      errorMessage,
+      loading,
+      password,
+      passwordConfirmation,
+      passwordSubmitted
+    } = this.state;
     const { t } = this.props;
     return (
       <Modal
@@ -108,17 +158,39 @@ class PasswordModal extends PureComponent {
         onRequestClose={this.props.onCancel}
       >
         <Translate i18nKey="password-dialog.master-password" parent={Title} />
-        <form onSubmit={this.handleSubmit}>
-          <Input
-            bordered
-            className={errorMessage !== null ? 'has-error' : null}
-            type="password"
-            placeholder={`${t('password-dialog.password')}...`}
-            autoFocus
-            value={password}
-            onChange={this.handlePasswordChange}
-            disabled={loading}
-          />
+        <form onSubmit={this.handleFormSubmit}>
+          <Choose>
+            <When condition={!passwordSubmitted}>
+              <Input
+                bordered
+                className={errorMessage !== null ? 'has-error' : null}
+                type="password"
+                placeholder={`${t('password-dialog.password')}...`}
+                autoFocus
+                value={password}
+                onChange={this.handlePasswordChange}
+                disabled={loading}
+                ref={input => {
+                  this._currentInputRef = input;
+                }}
+              />
+            </When>
+            <Otherwise>
+              <Input
+                bordered
+                className={errorMessage !== null ? 'has-error' : null}
+                type="password"
+                placeholder={`${t('password-dialog.confirm-password')}...`}
+                autoFocus
+                value={passwordConfirmation}
+                onChange={this.handlePasswordConfirmationChange}
+                disabled={loading}
+                ref={input => {
+                  this._currentInputRef = input;
+                }}
+              />
+            </Otherwise>
+          </Choose>
           <If condition={errorMessage}>
             <p>{errorMessage}</p>
           </If>
