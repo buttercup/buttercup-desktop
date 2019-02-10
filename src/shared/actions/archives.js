@@ -45,20 +45,8 @@ export const removeArchive = payload => dispatch => {
   });
 };
 
-export const changeArchivePassword = payload => () => {
-  showConfirmedPasswordDialog(
-    undefined,
-    {
-      title: i18n.t('password-dialog.new-password')
-    },
-    {
-      title: i18n.t('password-dialog.confirm-password')
-    }
-  )
-    .then(password => {
-      updateArchivePassword(payload, password);
-    })
-    .catch(() => {});
+export const changeArchivePassword = (payload, masterPassword) => () => {
+  return updateArchivePassword(payload, masterPassword);
 };
 
 export const changeArchiveColour = ({ archiveId, colour }) => () => {

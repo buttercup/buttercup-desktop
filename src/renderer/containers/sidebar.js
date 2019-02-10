@@ -26,12 +26,17 @@ export default connect(
     onRemoveClick: removeArchive,
     onClick: vaultId => () => {
       remote.BrowserWindow.getFocusedWindow().webContents.send(
-        'set-current-archive',
+        'vault-set-current',
         vaultId
       );
     },
     onLockArchive: lockArchive,
-    onChangePassword: changeArchivePassword,
+    onChangePassword: vaultId => () => {
+      remote.BrowserWindow.getFocusedWindow().webContents.send(
+        'vault-password-change',
+        vaultId
+      );
+    },
     onChangeColour: changeArchiveColour,
     onChangeOrder: changeArchiveOrder,
     onOpenClick: openArchive,

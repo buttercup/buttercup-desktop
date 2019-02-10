@@ -292,7 +292,7 @@ export const setupMenu = store => {
           type: currentArchiveId ? 'radio' : 'checkbox',
           click: () => {
             reopenMainWindow(win => {
-              win.webContents.send('set-current-archive', archive.id);
+              win.webContents.send('vault-set-current', archive.id);
             });
           },
           checked: archive.id === currentArchiveId
@@ -339,7 +339,9 @@ export const setupMenu = store => {
           }),
           click: () => {
             shell.openExternal(
-              `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
+              `https://github.com/buttercup/buttercup/releases/tag/v${
+                pkg.version
+              }`
             );
           }
         }

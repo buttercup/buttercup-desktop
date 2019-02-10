@@ -10,8 +10,10 @@ import {
 } from '../../shared/selectors';
 import {
   loadOrUnlockArchive,
-  addArchiveFromSource
+  addArchiveFromSource,
+  changeArchivePassword
 } from '../../shared/actions/archives';
+import { PasswordDialogRequestTypes } from '../../shared/buttercup/types';
 
 export default connect(
   state => ({
@@ -25,8 +27,17 @@ export default connect(
   }),
   {
     setColumnSize,
-    onUnlockArchive: loadOrUnlockArchive,
-    onAddNewVault: addArchiveFromSource,
+    onValidate: (modalRequest, password) => dispatch => {
+      const { type, payload } = modalRequest;
+      switch (type) {
+        case PasswordDialogRequestTypes.UNLOCK:
+          return dispatch(loadOrUnlockArchive(payload, password));
+        case PasswordDialogRequestTypes.NEW_VAULT:
+          return dispatch(addArchiveFromSource(payload, password));
+        case PasswordDialogRequestTypes.PASSWORD_CHANGE:
+          return dispatch(changeArchivePassword(payload, password));
+      }
+    },
     isVaultUnlocked: vaultId => (_, getState) =>
       getArchive(getState(), vaultId).status === 'unlocked'
   }

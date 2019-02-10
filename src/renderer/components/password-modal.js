@@ -157,7 +157,14 @@ class PasswordModal extends PureComponent {
         isOpen
         onRequestClose={this.props.onCancel}
       >
-        <Translate i18nKey="password-dialog.master-password" parent={Title} />
+        <Translate
+          i18nKey={
+            !passwordSubmitted
+              ? 'password-dialog.master-password'
+              : 'password-dialog.confirm-password'
+          }
+          parent={Title}
+        />
         <form onSubmit={this.handleFormSubmit}>
           <Choose>
             <When condition={!passwordSubmitted}>

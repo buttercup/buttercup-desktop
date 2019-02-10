@@ -11,12 +11,7 @@ import ArchiveSearch from '../containers/archive/archive-search';
 import { NoArchiveSelected, WelcomeScreen } from './empty-view';
 import spinner from '../styles/img/spinner.svg';
 import PasswordModal from './password-modal';
-
-const RequestTypes = {
-  UNLOCK: 'unlock',
-  PASSWORD_CHANGE: 'change',
-  NEW_VAULT: 'new'
-};
+import { PasswordDialogRequestTypes } from '../../shared/buttercup/types';
 
 const Primary = styled(Flex)`
   position: relative;
@@ -32,9 +27,8 @@ class Workspace extends PureComponent {
     savingArchive: PropTypes.bool,
     isArchiveSearchVisible: PropTypes.bool,
     setColumnSize: PropTypes.func,
-    onUnlockArchive: PropTypes.func,
-    onAddNewVault: PropTypes.func,
-    isVaultUnlocked: PropTypes.func
+    isVaultUnlocked: PropTypes.func,
+    onValidate: PropTypes.func
   };
 
   state = {
@@ -45,21 +39,32 @@ class Workspace extends PureComponent {
     ipc.on('load-archive', (e, payload) => {
       this.setState({
         modalRequest: {
-          type: RequestTypes.NEW_VAULT,
+          type: PasswordDialogRequestTypes.NEW_VAULT,
           confirm: payload.isNew,
           payload
         }
       });
     });
 
-    ipc.on('set-current-archive', (e, payload) => {
+    ipc.on('vault-set-current', (e, payload) => {
+      const modalRequest = {
+        type: PasswordDialogRequestTypes.UNLOCK,
+        confirm: false,
+        payload
+      };
       if (this.props.isVaultUnlocked(payload)) {
-        return this.props.onUnlockArchive(payload);
+        return this.props.onValidate(modalRequest);
       }
       this.setState({
+        modalRequest
+      });
+    });
+
+    ipc.on('vault-password-change', (e, payload) => {
+      this.setState({
         modalRequest: {
-          type: RequestTypes.UNLOCK,
-          confirm: false,
+          type: PasswordDialogRequestTypes.PASSWORD_CHANGE,
+          confirm: true,
           payload
         }
       });
@@ -82,21 +87,9 @@ class Workspace extends PureComponent {
       archivesLoading,
       savingArchive,
       isArchiveSearchVisible,
-      onUnlockArchive,
-      onAddNewVault
+      onValidate
     } = this.props;
-
-    const onValidate = modalRequest => {
-      const { payload, type } = modalRequest;
-      return password => {
-        switch (type) {
-          case RequestTypes.UNLOCK:
-            return onUnlockArchive(payload, password);
-          case RequestTypes.NEW_VAULT:
-            return onAddNewVault(payload, password);
-        }
-      };
-    };
+    const { modalRequest } = this.state;
 
     return (
       <React.Fragment>
@@ -141,7 +134,7 @@ class Workspace extends PureComponent {
         </Flex>
         <If condition={this.state.modalRequest !== null}>
           <PasswordModal
-            onValidate={onValidate(this.state.modalRequest)}
+            onValidate={password => onValidate(modalRequest, password)}
             onCancel={this.handlePasswordModalClose}
             onSuccess={this.handlePasswordModalClose}
             confirmPassword={this.state.modalRequest.confirm}
