@@ -216,6 +216,9 @@
     "confirm": "Konfirmasi",
     "nevermind": "Sudahlah"
   },
+  "password-generator": {
+    "password-generator": "Buat Kata Sandi"
+  },
   "search": {
     "search": "Cari"
   },

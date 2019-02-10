@@ -217,6 +217,9 @@
     "confirm": "Confirmer",
     "nevermind": "Pas grave…"
   },
+  "password-generator": {
+    "password-generator": "Créer un mot de passe"
+  },
   "search": {
     "search": "Chercher"
   },

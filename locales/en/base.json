@@ -217,6 +217,9 @@
     "confirm": "Confirm",
     "nevermind": "Nevermind"
   },
+  "password-generator": {
+    "password-generator": "Generate Password"
+  },
   "search": {
     "search": "Search"
   },
