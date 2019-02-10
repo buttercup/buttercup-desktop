@@ -167,6 +167,9 @@ class PasswordModal extends PureComponent {
       passwordSubmitted
     } = this.state;
     const { t } = this.props;
+    const mainTitleKey = passwordConfirmation
+      ? 'password-dialog.new-password'
+      : 'password-dialog.master-password';
     return (
       <Modal
         style={{
@@ -192,7 +195,7 @@ class PasswordModal extends PureComponent {
         <Translate
           i18nKey={
             !passwordSubmitted
-              ? 'password-dialog.master-password'
+              ? mainTitleKey
               : 'password-dialog.confirm-password'
           }
           parent={Title}

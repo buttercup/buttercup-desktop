@@ -132,12 +132,12 @@ class Workspace extends PureComponent {
             <SavingModal />
           </If>
         </Flex>
-        <If condition={this.state.modalRequest !== null}>
+        <If condition={modalRequest !== null}>
           <PasswordModal
             onValidate={password => onValidate(modalRequest, password)}
             onCancel={this.handlePasswordModalClose}
             onSuccess={this.handlePasswordModalClose}
-            confirmPassword={this.state.modalRequest.confirm}
+            confirmPassword={modalRequest.confirm}
           />
         </If>
       </React.Fragment>
