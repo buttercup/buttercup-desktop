@@ -1,6 +1,4 @@
 // @ts-check
-
-// import isError from 'is-error';
 import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';

@@ -108,6 +108,7 @@ export default createGlobalStyle`
     --entries-bg: #31353D;
     /*--entries-bg-mac: rgba(49, 53, 61, 0.4);*/
     --entries-bg-mac: rgba(0, 0, 0, .35);
+    --modal-overlay: rgba(0,0,0,.40);
     --red: #EB5767;
     --gray-light: #F5F7FA;
     --gray: #E4E9F2;

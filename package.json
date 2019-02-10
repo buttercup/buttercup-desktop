@@ -224,7 +224,7 @@
     "normalizr": "^3.2.3",
     "pify": "^2.3.0",
     "prettier": "^1.16.4",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15.6.2",
     "raw-loader": "^0.5.1",
     "rc-tree": "^1.7.10",
     "react": "^16.7.0",

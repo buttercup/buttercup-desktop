@@ -38,9 +38,7 @@ class Workspace extends PureComponent {
   };
 
   state = {
-    modalRequest: null,
-    unlockRequest: null,
-    passwordChangeRequest: null
+    modalRequest: null
   };
 
   componentDidMount() {
@@ -68,13 +66,7 @@ class Workspace extends PureComponent {
     });
   }
 
-  handleUnlockSuccess = () => {
-    this.setState({
-      modalRequest: null
-    });
-  };
-
-  handlePasswordModalCancel = () => {
+  handlePasswordModalClose = () => {
     this.setState({
       modalRequest: null
     });
@@ -150,8 +142,9 @@ class Workspace extends PureComponent {
         <If condition={this.state.modalRequest !== null}>
           <PasswordModal
             onValidate={onValidate(this.state.modalRequest)}
-            onCancel={this.handlePasswordModalCancel}
-            onSuccess={this.handleUnlockSuccess}
+            onCancel={this.handlePasswordModalClose}
+            onSuccess={this.handlePasswordModalClose}
+            confirmPassword={this.state.modalRequest.confirm}
           />
         </If>
       </React.Fragment>
