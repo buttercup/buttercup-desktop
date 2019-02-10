@@ -48,7 +48,7 @@ const Code = styled.pre`
 
 const renderWindow = connectionCode =>
   render(
-    <React.Fragment>
+    <>
       <I18nextProvider i18n={i18n}>
         <Wrapper flexColumn>
           <Translate
@@ -69,7 +69,7 @@ const renderWindow = connectionCode =>
         </Wrapper>
       </I18nextProvider>
       <GlobalStyles />
-    </React.Fragment>,
+    </>,
     document.getElementById('root')
   );
 

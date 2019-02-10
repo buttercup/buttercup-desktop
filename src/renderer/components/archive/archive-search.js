@@ -306,34 +306,36 @@ class ArchiveSearch extends PureComponent {
                   autoHeight
                   autoHeightMax={300}
                 >
-                  {entries.map(({ entry, sourceID, groupID, path }, index) => (
-                    <ListItem
-                      selected={selectedItemIndex === index}
-                      key={index}
-                      onClick={() => this.openEntry(sourceID, entry)}
-                    >
-                      <Icon>
-                        <EntryIcon entry={entry} />
-                      </Icon>
-                      <EntryData>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: entry.getProperty('title')
-                              ? this.highlightSearchResult(
-                                  entry.getProperty('title')
-                                )
-                              : '-'
-                          }}
-                        />
-                        <EntryFolder>
-                          <For each="group" index="index" of={path}>
-                            <If condition={index > 0}> › </If>
-                            {group}
-                          </For>
-                        </EntryFolder>
-                      </EntryData>
-                    </ListItem>
-                  ))}
+                  {entries.map(
+                    ({ entry, sourceID, groupID, path }, entryIndex) => (
+                      <ListItem
+                        selected={selectedItemIndex === entryIndex}
+                        key={entryIndex}
+                        onClick={() => this.openEntry(sourceID, entry)}
+                      >
+                        <Icon>
+                          <EntryIcon entry={entry} />
+                        </Icon>
+                        <EntryData>
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: entry.getProperty('title')
+                                ? this.highlightSearchResult(
+                                    entry.getProperty('title')
+                                  )
+                                : '-'
+                            }}
+                          />
+                          <EntryFolder>
+                            <For each="group" index="groupIndex" of={path}>
+                              <If condition={groupIndex > 0}> › </If>
+                              {group}
+                            </For>
+                          </EntryFolder>
+                        </EntryData>
+                      </ListItem>
+                    )
+                  )}
                 </Scrollbars>
               </EntryList>
             </When>

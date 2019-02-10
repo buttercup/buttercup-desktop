@@ -104,7 +104,7 @@ class Workspace extends PureComponent {
     const { modalRequest } = this.state;
 
     return (
-      <React.Fragment>
+      <>
         <GlobalStyles />
         <Flex flexAuto>
           <If condition={archivesCount > 0}>
@@ -152,7 +152,7 @@ class Workspace extends PureComponent {
             confirmPassword={modalRequest.confirm}
           />
         </If>
-      </React.Fragment>
+      </>
     );
   }
 }

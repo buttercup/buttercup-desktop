@@ -37,7 +37,7 @@ function shouldShowSeparator(index, field, fields) {
 const renderMeta = (
   { fields, t, entry, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
-  <Fragment>
+  <>
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
@@ -106,7 +106,7 @@ const renderMeta = (
       <Translate i18nKey="entry.add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
-  </Fragment>
+  </>
 );
 
 class EntryForm extends PureComponent {

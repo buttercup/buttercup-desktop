@@ -123,7 +123,7 @@ class Update extends PureComponent {
       return null;
     }
     return (
-      <React.Fragment>
+      <>
         <Wrapper flexAuto>
           <Icon>
             <img src={icon} />
@@ -170,7 +170,7 @@ class Update extends PureComponent {
           </Flex>
         </Wrapper>
         <GlobalStyles />
-      </React.Fragment>
+      </>
     );
   }
 }

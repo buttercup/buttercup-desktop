@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { translate } from 'react-i18next';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
@@ -79,7 +79,7 @@ FieldsView.propTypes = {
 const EntryView = props => {
   const { entry, t } = props;
   return (
-    <Fragment>
+    <>
       <FieldsView
         {...props}
         fields={getNonRemoveableFields(entry.facade.fields)}
@@ -98,7 +98,7 @@ const EntryView = props => {
           </Otherwise>
         </Choose>
       </With>
-    </Fragment>
+    </>
   );
 };
 

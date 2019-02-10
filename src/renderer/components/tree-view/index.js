@@ -208,7 +208,7 @@ class TreeView extends PureComponent {
     };
 
     return (
-      <React.Fragment>
+      <>
         <Column
           footer={
             <Button onClick={this.handleAddClick} dark full icon={<PlusIcon />}>
@@ -231,7 +231,7 @@ class TreeView extends PureComponent {
           </Tree>
         </Column>
         <Styles />
-      </React.Fragment>
+      </>
     );
   }
 }

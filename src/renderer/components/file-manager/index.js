@@ -95,7 +95,7 @@ class FileManager extends PureComponent {
 
   render() {
     return (
-      <React.Fragment>
+      <>
         <Router>
           <Wrapper flexAuto flexColumn>
             <Flex flexAuto>
@@ -149,7 +149,7 @@ class FileManager extends PureComponent {
         </Router>
         <GlobalStyles />
         <IconStyles />
-      </React.Fragment>
+      </>
     );
   }
 }
