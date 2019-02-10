@@ -69,6 +69,18 @@ class Workspace extends PureComponent {
         }
       });
     });
+
+    ipc.on('import-history-prompt', (e, payload) => {
+      this.setState({
+        modalRequest: {
+          type: PasswordDialogRequestTypes.IMPORT,
+          confirm: false,
+          payload
+        }
+      });
+    });
+
+    ipc.send('init');
   }
 
   handlePasswordModalClose = () => {

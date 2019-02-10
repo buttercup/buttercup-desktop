@@ -17,7 +17,6 @@ import {
   setUIState,
   setIsArchiveSearchVisible
 } from '../shared/actions/ui-state';
-import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
 import { changeMode } from '../shared/actions/entries';
@@ -46,20 +45,8 @@ store.dispatch(setSetting('archivesLoading', true));
 store.dispatch(setCurrentArchive(null));
 store.dispatch(resetArchivesInStore([]));
 
-ipc.send('init');
-
 ipc.on('import-history', (e, payload) => {
   store.dispatch(importHistoryIntoArchive(payload));
-});
-
-ipc.on('import-history-prompt', (e, payload) => {
-  showHistoryPasswordPrompt(payload)
-    .then(result => {
-      ipc.send('import-history-prompt-resp', result);
-    })
-    .catch(() => {
-      ipc.send('import-history-prompt-resp', null);
-    });
 });
 
 ipc.on('export-archive', (e, payload) => {

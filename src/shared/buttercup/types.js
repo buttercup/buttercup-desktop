@@ -39,5 +39,6 @@ export const ImportTypeInfo = {
 export const PasswordDialogRequestTypes = {
   UNLOCK: 'unlock',
   PASSWORD_CHANGE: 'change',
-  NEW_VAULT: 'new'
+  NEW_VAULT: 'new',
+  IMPORT: 'import'
 };
