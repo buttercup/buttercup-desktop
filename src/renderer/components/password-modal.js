@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import styled from 'styled-components';
-import { Input as BaseInput, Button } from '@buttercup/ui';
+import { Input as BaseInput, Button, Meter } from '@buttercup/ui';
 import ErrorIcon from 'react-icons/lib/md/warning';
 import { Translate } from '../../shared/i18n';
 
@@ -34,7 +34,6 @@ const ErrorContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--spacing-one);
 
   p {
     margin: 0 0 0 var(--spacing-half);
@@ -43,6 +42,10 @@ const ErrorContainer = styled.div`
   svg {
     color: var(--red);
   }
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: var(--spacing-one);
 `;
 
 Modal.setAppElement('#root');
@@ -166,8 +169,8 @@ class PasswordModal extends PureComponent {
       passwordConfirmation,
       passwordSubmitted
     } = this.state;
-    const { t } = this.props;
-    const mainTitleKey = passwordConfirmation
+    const { t, confirmPassword } = this.props;
+    const mainTitleKey = confirmPassword
       ? 'password-dialog.new-password'
       : 'password-dialog.master-password';
     return (
@@ -216,6 +219,9 @@ class PasswordModal extends PureComponent {
                   this._currentInputRef = input;
                 }}
               />
+              <If condition={confirmPassword}>
+                <Meter input={password} />
+              </If>
             </When>
             <Otherwise>
               <Input
@@ -239,9 +245,11 @@ class PasswordModal extends PureComponent {
               <p>{errorMessage}</p>
             </ErrorContainer>
           </If>
-          <Button type="submit" full primary large disabled={loading}>
-            <Translate i18nKey="password-dialog.confirm" parent="span" />
-          </Button>
+          <ButtonWrapper>
+            <Button type="submit" full primary large disabled={loading}>
+              <Translate i18nKey="password-dialog.confirm" parent="span" />
+            </Button>
+          </ButtonWrapper>
         </form>
       </Modal>
     );
