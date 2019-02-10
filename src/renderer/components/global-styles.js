@@ -1,34 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import OpenSansRegular from '../styles/font/OpenSans-Regular.woff2';
-import OpenSansLight from '../styles/font/OpenSans-Light.woff2';
-import OpenSansBold from '../styles/font/OpenSans-Bold.woff2';
-import AnonymousBold from '../styles/font/Anonymous-Bold.woff2';
+import '../styles/font/fonts.css';
 
 export default createGlobalStyle`
-  @font-face {
-    font-family: 'Open Sans';
-    font-weight: normal;
-    src: url(${OpenSansRegular}) format('woff2');
-  }
-
-  @font-face {
-    font-family: 'Open Sans';
-    font-weight: 300;
-    src: url(${OpenSansLight}) format('woff2');
-  }
-
-  @font-face {
-    font-family: 'Open Sans';
-    font-weight: bold;
-    src: url(${OpenSansBold}) format('woff2');
-  }
-
-  @font-face {
-    font-family: 'Anonymous';
-    font-weight: bold;
-    src: url(${AnonymousBold}) format('woff2');
-  }
-
   html {
     height: 100%;
     -moz-osx-font-smoothing: grayscale;

@@ -24,7 +24,7 @@ import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = (entryId, isSavingNewEntry = false) => async (
+export const selectEntry = (entryId, isSavingNewEntry = false) => (
   dispatch,
   getState
 ) => {
@@ -54,7 +54,7 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => async dispatch => {
+export const loadEntries = (archiveId, groupId) => dispatch => {
   try {
     const entries = entryTools.loadEntries(archiveId, groupId);
     dispatch({ type: ENTRIES_LOADED, payload: entries });
@@ -64,7 +64,7 @@ export const loadEntries = (archiveId, groupId) => async dispatch => {
   }
 };
 
-export const updateEntry = newValues => async (dispatch, getState) => {
+export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
 
   try {
@@ -81,7 +81,7 @@ export const updateEntry = newValues => async (dispatch, getState) => {
   }
 };
 
-export const newEntry = newValues => async (dispatch, getState) => {
+export const newEntry = newValues => (dispatch, getState) => {
   const state = getState();
   const currentGroupId = getCurrentGroupId(state);
   const archiveId = getCurrentArchiveId(state);
@@ -132,7 +132,7 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-export const getMatchingEntriesForSearchTerm = term => async dispatch => {
+export const getMatchingEntriesForSearchTerm = term => dispatch => {
   const manager = getSharedArchiveManager();
 
   const unlockedSources = manager.unlockedSources;
@@ -147,7 +147,7 @@ export const getMatchingEntriesForSearchTerm = term => async dispatch => {
   const finder = new EntryFinder(archives);
 
   return Promise.all(
-    finder.search(term).map(async result => {
+    finder.search(term).map(result => {
       const { entry } = result;
       const archiveId = lookup[result.archive.id];
 
