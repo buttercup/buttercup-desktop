@@ -31,24 +31,6 @@ module.exports = merge(baseConfig, {
     publicPath: 'http://localhost:3000/app/'
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.global\.scss$/,
-        use: ['style-loader', 'css-loader?sourceMap', 'sass-loader']
-      },
-
-      {
-        test: /^((?!\.global).)*\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'sass-loader'
-        ]
-      }
-    ]
-  },
-
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({

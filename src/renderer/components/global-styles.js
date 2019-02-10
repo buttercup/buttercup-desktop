@@ -117,6 +117,7 @@ export default createGlobalStyle`
     --black-5: rgba(0,0,0,.05);
     --black-10: rgba(0,0,0,.10);
     --black-20: rgba(0,0,0,.20);
+    --black-35: rgba(0,0,0,.35);
     --white-5: rgba(255, 255, 255, 0.05);
     --brand-primary: #00B7AC;
     --brand-primary-darker: #179E94;
