@@ -142,25 +142,18 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-const fetchEntryIconsAndUpdate = (archiveId, entries) => (
-  dispatch,
-  getState
-) => {
-  const state = getState();
-
-  if (!getSetting(state, 'isAutoloadingIconsDisabled')) {
-    entries.forEach(entry => {
-      getQueue()
-        .channel('icons')
-        .enqueue(() => {
-          return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
-            if (entry.icon) {
-              return dispatch({ type: ENTRIES_UPDATE, payload: entry });
-            }
-          });
+const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
+  entries.forEach(entry => {
+    getQueue()
+      .channel('icons')
+      .enqueue(() => {
+        return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
+          if (entry.icon) {
+            return dispatch({ type: ENTRIES_UPDATE, payload: entry });
+          }
         });
-    });
-  }
+      });
+  });
 };
 
 export const getMatchingEntriesForSearchTerm = term => async dispatch => {

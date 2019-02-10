@@ -235,7 +235,6 @@
     "seconds-until-archive-should-close": "Archiv automatisch sperren nach x Sekunden (0 = aus)",
     "lock-archive-on-minimize": "Archiv sperren beim Minimieren",
     "lock-archive-onfocusout": "Nur sperren, wenn das Fenster nicht mehr im Fokus ist",
-    "disable-autoloading-icons": "Icons nicht automatisch laden",
     "shortcuts": "Kurzbefehle",
     "minimize-and-maximize": "Mini- und maximieren von Buttercup",
     "shortcut-already-taken": "Diese Tastenkombination ist leider schon belegt",

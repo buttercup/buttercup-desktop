@@ -42,7 +42,6 @@ export const DEFAULT_SETTINGS = {
   lockArchiveOnMinimize: false,
   referenceFontSize: '1',
   isBrowserAccessEnabled: false,
-  isAutoloadingIconsDisabled: false,
   updateOnStartDisabled: false,
   locale: '',
   globalShortcuts: {

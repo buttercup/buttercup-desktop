@@ -29,8 +29,6 @@ class General extends PureComponent {
     setLockArchiveOnMinimize: PropTypes.func,
     lockArchiveOnFocusout: PropTypes.any,
     setLockArchiveOnFocusout: PropTypes.func,
-    isAutoloadingIconsDisabled: PropTypes.any,
-    setIsAutoloadingIconsDisabled: PropTypes.func,
     menubarAutoHide: PropTypes.any,
     setMenubarAutoHide: PropTypes.func,
     updateOnStartDisabled: PropTypes.any,
@@ -57,8 +55,6 @@ class General extends PureComponent {
       setLockArchiveOnMinimize,
       lockArchiveOnFocusout,
       setLockArchiveOnFocusout,
-      isAutoloadingIconsDisabled,
-      setIsAutoloadingIconsDisabled,
       menubarAutoHide,
       setMenubarAutoHide,
       updateOnStartDisabled,
@@ -101,12 +97,6 @@ class General extends PureComponent {
             onChange={setLockArchiveOnMinimize}
             checked={lockArchiveOnMinimize}
             title={t('preferences.lock-archive-on-minimize')}
-          />
-          <Checkbox
-            type="checkbox"
-            onChange={setIsAutoloadingIconsDisabled}
-            checked={isAutoloadingIconsDisabled}
-            title={t('preferences.disable-autoloading-icons')}
           />
         </div>
 
@@ -170,7 +160,6 @@ export default connect(
     condencedSidebar: getSetting(state, 'condencedSidebar'),
     lockArchiveOnFocusout: getSetting(state, 'lockArchiveOnFocusout'),
     secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
-    isAutoloadingIconsDisabled: getSetting(state, 'isAutoloadingIconsDisabled'),
     autolockSeconds: getSetting(state, 'autolockSeconds'),
     lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize'),
     menubarAutoHide: getSetting(state, 'menubarAutoHide'),
@@ -190,8 +179,6 @@ export default connect(
         dispatch(setSetting('lockArchiveOnMinimize', payload)),
       setLockArchiveOnFocusout: payload =>
         dispatch(setSetting('lockArchiveOnFocusout', payload)),
-      setIsAutoloadingIconsDisabled: payload =>
-        dispatch(setSetting('isAutoloadingIconsDisabled', payload)),
       setMenubarAutoHide: payload =>
         dispatch(setSetting('menubarAutoHide', payload)),
       setUpdateOnStartDisabled: payload =>
