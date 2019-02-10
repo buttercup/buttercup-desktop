@@ -1,0 +1,238 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Quant a",
+      "check-for-updates": "Comprova si hi ha actualitzacions...",
+      "services": "Serveis",
+      "hide": "Amaga",
+      "hideothers": "Amaga els altres",
+      "unhide": "Mostra",
+      "quit": "Surt"
+    },
+    "archive": {
+      "archive": "Arxiu",
+      "file": "Fitxer",
+      "new": "Fitxer nou",
+      "open": "Obre un fitxer",
+      "search": "Cerca en el fitxer",
+      "connect-cloud-sources": "Connecta amb serveis del núvol",
+      "import": {
+        "import": "Importa",
+        "import-from-type": "Des d'un fitxer {{name}} (.{{extension}})",
+        "import-to-type": "A {{name}}",
+        "no-available-archives": "No hi ha cap arxiu disponible per importar."
+      },
+      "export": {
+        "export": "Exporta",
+        "export-archive": "Exporta {{name}} a CSV",
+        "no-available-archives": "No hi ha cap arxiu disponible per exportar."
+      },
+      "close": "Tanca"
+    },
+    "edit": {
+      "edit": "Edita",
+      "undo": "Desfés",
+      "redo": "Refés",
+      "cut": "Retalla",
+      "copy": "Copia",
+      "paste": "Enganxa",
+      "pasteandmatchstyle": "Enganxa amb el mateix estil",
+      "delete": "Suprimeix",
+      "selectall": "Selecciona-ho tot",
+      "speech": {
+        "speech": "Parla",
+        "startspeaking": "Inicia la locució",
+        "stopspeaking": "Atura la locució"
+      }
+    },
+    "view": {
+      "view": "Visualització",
+      "condensed-sidebar": "Barra lateral condensada",
+      "language": "Idioma",
+      "enable-tray-icon": "Mostra en la barra de menús",
+      "reload": "Recarrega",
+      "forcereload": "Força la recarrega",
+      "toggledevtools": "Eines per a desenvolupadors",
+      "togglefullscreen": "Commuta la pantalla completa",
+      "auto-hide-menubar": "Oculta automàticament la barra de menús"
+    },
+    "window": {
+      "window": "Finestra",
+      "minimize": "Minimitza",
+      "close": "Tanca",
+      "zoom": "Amplia",
+      "front": "Porta tot al davant"
+    },
+    "system": {
+      "system": "Sistema",
+      "enable-browser-access": "Habilita l'accés del navegador"
+    },
+    "help": {
+      "help": "Ajuda",
+      "visit-our-website": "Visita el nostre lloc web",
+      "privacy-policy": "Política de privadesa",
+      "view-changelog-for-v": "Mostra el registre de canvis de la v{{version}}"
+    },
+    "tray": {
+      "quit": "Surt",
+      "open": "Obre Buttercup"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Cerca...",
+    "nothing-found": "No s'ha trobat res"
+  },
+  "archive": {
+    "add-archive": "Afegeix un arxiu",
+    "archive-saved-loading-info": "El teu arxiu s'està desant. <br>Sortint automàticament."
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Arxius de Buttercup",
+    "load-a-buttercup-archive": "carrega un arxiu de Buttercup",
+    "create-a-new-buttercup-archive": "Crea un nou arxiu de Buttercup"
+  },
+  "archive-menu": {
+    "unlock": "Desbloqueja",
+    "change-color": "Canvia el color",
+    "change-password": "Canvia la contrasenya",
+    "import": "Importa",
+    "import-from-type": "Des d'un arxiu {{name}} (.{{extension}})",
+    "export": "Exporta",
+    "archive-remove-with-name": "Elimina {{name}}",
+    "open": "Obre",
+    "lock": "Bloqueja"
+  },
+  "cloud-source": {
+    "cancel": "Cancel·la",
+    "go-back": "Enrere",
+    "new-archive": "Nou arxiu",
+    "open-in-buttercup": "Obre al Buttercup",
+    "connect-to-dropbox": "Connecta al Dropbox",
+    "authenticate-with-dropbox": "Autentica amb Dropbox",
+    "dropbox-description-text": "Connecta Buttercup al teu compte de Dropbox per llegir i desar els teus arxius. <br />No guardarem el vostre nom d'usuari ni la contrasenya de Dropbox.",
+    "connect-to-wedav": "Connecta a un servidor {{title}}",
+    "username": "Usuari",
+    "password": "Contrasenya",
+    "connect": "Connecta",
+    "webdav-description-text": "Escriu la teva adreça de {{title}}, usuari i contrasenya per connectar i tria un arxiu de Buttercup. <strong>Guardarem<strong> les teves credencials i les xifrarem.",
+    "name": "Nom",
+    "size": "Mida",
+    "date": "Data"
+  },
+  "confirm-dialog": {
+    "yes": "Si",
+    "no": "No"
+  },
+  "copyable": {
+    "hide": "Amaga",
+    "reveal": "Mostra",
+    "copy": "Copia"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Copia al porta-retalls",
+    "reveal-password": "Mostra contrasenya"
+  },
+  "entry": {
+    "add-entry": "Afegeix una entrada",
+    "select-or-create-an-entry": "Selecciona o crea una entrada",
+    "title": "Títol",
+    "untitled": "Sense títol",
+    "username": "Usuari",
+    "password": "Contrasenya",
+    "secure-password": "Contrasenya segura",
+    "custom-fields": "Camps personalitzats",
+    "no-custom-fields-info-text": "Sense camps personalitzats. Per què no afegir-ne un?",
+    "add-new-field": "Afegeix un nou camp",
+    "label": "Etiqueta",
+    "new-field": "Nou cam`",
+    "edit": "Edita",
+    "save": "Desa",
+    "cancel": "Cancel·la",
+    "delete": "Suprimeix",
+    "entry-inputs-empty-info": "Si us plau, introdueix com a mínim un títol.",
+    "entry-title-empty-info": "Si us plau, introdueix un títol.",
+    "custom-fields-label-empty-info": "Has oblidat afegir una etiqueta a un o diversos camps personalitzats.",
+    "are-you-sure-question": "N'estàs segur?",
+    "displaying-entries": "Mostrant {{count}} entrades",
+    "no-value": "Sense valor",
+    "quit-unsave-entry": "Perdràs els teus canvis, n'estàs segur?"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "copia al porta-retalls",
+    "username": "Usuari",
+    "password": "Contrasenya",
+    "open-url-in-browser": "Obre URL al navegador",
+    "move-to-group": "Mou al grup",
+    "move-to-trash": "Mou a la paperera",
+    "delete-permanently": "Suprimeix definitivament"
+  },
+  "error": {
+    "archive-not-found": "No s'ha trobat el l'arxiu d'origen",
+    "authentication-failed": "L'autenticació ha fallat.",
+    "unknown": "S'ha produït un error desconegut",
+    "passwords-font-match": "Les contrasenyes no coincideixen.",
+    "group-not-found": "No s'ha pogut trobar el grup.",
+    "sort-definition-not-found": "No s'ha trobat la definició de classificació",
+    "insufficient-data-provided": "No hi ha prou informació per fer la classificació",
+    "check-for-update": "S'ha produït un error durant l'actualització. Si us plau, intenta-ho més tard.",
+    "invalid-import-type-requested": "El tipus d'importació sol·licitat no és vàlid.",
+    "open-file-for-importing": "La funció d'importació no s'hauria d'executar sense la finestra principal en execució.",
+    "entry-not-found": "No s'ha trobat l'entrada",
+    "dropbox-connection-failed-info": "La connexió al servidor de Dropbox ha fallat. Si us plau, torna-ho a intentar més tard.",
+    "webdav-connection-failed-info": "La connexió al {{endpoint}} ha fallat. Si us plau, comprova els teus credencials i torna-ho a intentar."
+  },
+  "group": {
+    "new-group": "Nou grup",
+    "untitled": "Sense títol"
+  },
+  "group-menu": {
+    "new-group": "Nou grup",
+    "add-group": "Afegeix al grup",
+    "move-to-root": "Mou a l'arrel",
+    "move-to-group": "Mou al grup",
+    "rename": "Canvia el nom",
+    "delete": "Suprimeix",
+    "move-to-group-custom": "Mou a {{title}}",
+    "empty-trash": "Buida la paperera",
+    "empty-trash-question": "¿Segur que vols buidar la paperera?",
+    "title-asc": "Títol: Ascendent",
+    "title-desc": "Títol: Descendent"
+  },
+  "intro": {
+    "welcome-title": "Benvingut a Buttercup.",
+    "welcome-back-title": "Benvingut de nou a Buttercup.",
+    "welcome-caption": "Encara no has afegit cap arxiu. Per què no afegir-ne un?",
+    "unlock-archive": "Desbloqueja un arxiu per començar ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Obre un arxiu",
+    "new-archive-file": "Nou arxiu",
+    "connect-cloud-sources": "Connecta serveis del núvol"
+  },
+  "password-dialog": {
+    "master-password": "Contrasenya mestra",
+    "new-password": "Nova contrasenya",
+    "password": "Contrasenya",
+    "confirm-password": "Confirma la contrasenya",
+    "confirm": "Confirma",
+    "nevermind": "No importa"
+  },
+  "search": {
+    "search": "Busca"
+  },
+  "sort": {
+    "title-asc": "Títol: Ascendent",
+    "title-desc": "Títol: Descendent",
+    "time-asc": "Temps: Ascendent",
+    "time-desc": "Temps: Descendent"
+  },
+  "update": {
+    "installing": "Instal·lant",
+    "update-available-message": "Buttercup {{version}} està disponible. Fes clic aquí per instal·lar-la ara.",
+    "new-version-available": "Hi ha disponible una nova versió de Buttercup!",
+    "not-now": "Ara No",
+    "download": "Descarrega i instal·la",
+    "download-manual": "Obre les Notes de la Versió",
+    "release-notes": "Notes de la Versió"
+  }
+}

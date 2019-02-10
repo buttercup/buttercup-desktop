@@ -200,6 +200,9 @@
     "nevermind": "Esquecer",
     "new-password": ""
   },
+  "password-generator": {
+    "password-generator": "Gerar senha"
+  },
   "search": {
     "search": "Buscar"
   },

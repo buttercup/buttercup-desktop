@@ -217,6 +217,9 @@
     "confirm": "Vahvista",
     "nevermind": "Peruuta"
   },
+  "password-generator": {
+    "password-generator": "Luo salasana"
+  },
   "search": {
     "search": "Etsi"
   },

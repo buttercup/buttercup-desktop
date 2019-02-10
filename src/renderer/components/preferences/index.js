@@ -4,10 +4,11 @@ import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { translate } from 'react-i18next';
 import orderBy from 'lodash/orderBy';
+import GlobalStyles from '../../components/global-styles';
+import { IconStyles } from '../icon';
 import * as eva from 'eva-icons';
 
 import { Translate } from '../../../shared/i18n';
-import '../../styles/workspace.global.scss';
 import { closeCurrentWindow } from '../../system/utils';
 
 import { Wrapper, Menu, MenuInner, Content } from './ui-elements';
@@ -90,6 +91,8 @@ class Preferences extends PureComponent {
               ))}
             </Content>
           </Scrollbars>
+          <GlobalStyles />
+          <IconStyles />
         </Wrapper>
       </Router>
     );

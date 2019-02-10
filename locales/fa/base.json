@@ -217,6 +217,9 @@
     "confirm": "تایید",
     "nevermind": "بی‌خیال"
   },
+  "password-generator": {
+    "password-generator": "ایجاد گذرواژه"
+  },
   "search": {
     "search": "Search"
   },

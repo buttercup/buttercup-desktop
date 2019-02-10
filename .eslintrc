@@ -1,8 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "jsx-control-statements",
-    "flowtype"
+    "jsx-control-statements"
   ],
   "extends": [
     "standard",
@@ -38,10 +37,5 @@
     "comma-dangle": "off",
     "jsx-control-statements/jsx-use-if-tag": 0,
     "jsx-control-statements/jsx-jcs-no-undef": "off"
-  },
-  "settings": {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
-    }
   }
 }

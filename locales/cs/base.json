@@ -206,6 +206,9 @@
     "confirm": "Potvrdit",
     "nevermind": "Opustit"
   },
+  "password-generator": {
+    "password-generator": "Generovat heslo"
+  },
   "search": {
     "search": "Hledat"
   },

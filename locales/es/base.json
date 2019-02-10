@@ -199,6 +199,9 @@
     "nevermind": "No importa",
     "new-password": ""
   },
+  "password-generator": {
+    "password-generator": "Generar contraseña"
+  },
   "search": {
     "search": "Buscar"
   },

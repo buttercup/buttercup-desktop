@@ -167,6 +167,9 @@
     "nevermind": "Впрочем, не надо",
     "new-password": ""
   },
+  "password-generator": {
+    "password-generator": "Создать пароль"
+  },
   "search": {
     "search": "Поиск"
   },

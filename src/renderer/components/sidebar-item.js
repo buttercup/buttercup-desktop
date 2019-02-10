@@ -137,9 +137,9 @@ class SidebarItem extends PureComponent {
 
     showContextMenu([
       {
-        label: `${status === 'locked'
-          ? label('unlock')
-          : label('open')} ${name}`,
+        label: `${
+          status === 'locked' ? label('unlock') : label('open')
+        } ${name}`,
         accelerator: `CmdOrCtrl+${this.props.order + 1}`,
         click: this.props.onClick
       },
@@ -236,7 +236,7 @@ class SidebarItem extends PureComponent {
         <Avatar
           color={colour}
           locked={locked}
-          innerRef={ref => {
+          ref={ref => {
             this.avatarRef = ref;
           }}
         >

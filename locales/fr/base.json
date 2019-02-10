@@ -64,7 +64,8 @@
       "front": "Mettre en avant"
     },
     "system": {
-      "enable-browser-access": ""
+      "system": "Système",
+      "enable-browser-access": "Activer l'accès par navigateur"
     },
     "help": {
       "help": "Aide",
@@ -215,6 +216,9 @@
     "confirm-password": "Confirmation du mot de passe",
     "confirm": "Confirmer",
     "nevermind": "Pas grave…"
+  },
+  "password-generator": {
+    "password-generator": "Créer un mot de passe"
   },
   "search": {
     "search": "Chercher"

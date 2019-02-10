@@ -208,6 +208,9 @@
     "nevermind": "Abbrechen",
     "new-password": "Neues Passwort"
   },
+  "password-generator": {
+    "password-generator": "Generiere Passwort"
+  },
   "search": {
     "search": "Suche"
   },

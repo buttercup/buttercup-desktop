@@ -6,7 +6,7 @@ import RemoveIcon from 'react-icons/lib/fa/trash-o';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';
-import { heading } from '../../styles/_common';
+import Heading from './heading';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
@@ -35,9 +35,9 @@ function shouldShowSeparator(index, field, fields) {
 }
 
 const renderMeta = (
-  { fields, t, icon, meta: { touched, error } } // eslint-disable-line react/prop-types
+  { fields, t, entry, meta: { touched, error } } // eslint-disable-line react/prop-types
 ) => (
-  <Fragment>
+  <>
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
@@ -49,7 +49,7 @@ const renderMeta = (
               <LabelWrapper>
                 <Choose>
                   <When condition={isTitle}>
-                    <EntryIcon icon={icon} big />
+                    <EntryIcon entry={entry} big />
                   </When>
                   <When condition={field.removeable}>
                     <Field
@@ -82,10 +82,7 @@ const renderMeta = (
               </If>
             </Row>
             <If condition={shouldShowSeparator(index, field, fields)}>
-              <h6 className={heading}>
-                {' '}
-                <Translate i18nKey="entry.custom-fields" parent="span" />:
-              </h6>
+              <Translate i18nKey="entry.custom-fields" parent={Heading} />
             </If>
           </Fragment>
         );
@@ -109,25 +106,25 @@ const renderMeta = (
       <Translate i18nKey="entry.add-new-field" parent="span" />
     </Button>
     {touched && error && <span>{error}</span>}
-  </Fragment>
+  </>
 );
 
 class EntryForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func,
-    icon: PropTypes.string,
+    entry: PropTypes.object,
     t: PropTypes.func
   };
 
   render() {
-    const { icon, handleSubmit, t } = this.props;
+    const { entry, handleSubmit, t } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <FieldArray
           name="facade.fields"
           component={renderMeta}
           t={t}
-          icon={icon}
+          entry={entry}
         />
       </form>
     );

@@ -210,6 +210,9 @@
     "confirm": "Conferma",
     "nevermind": "Annulla"
   },
+  "password-generator": {
+    "password-generator": "Genera password"
+  },
   "search": {
     "search": "Cerca"
   },

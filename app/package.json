@@ -9,6 +9,7 @@
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
     "@buttercup/exporter": "~0.1.0",
+    "@buttercup/iconographer": "~1.1.1",
     "@buttercup/importer": "~0.14.1",
     "buttercup": "~2.7.0",
     "conf": "~1.0.0",

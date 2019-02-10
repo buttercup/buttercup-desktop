@@ -216,6 +216,9 @@
     "confirm": "Potwierdź",
     "nevermind": "Nie ważne"
   },
+  "password-generator": {
+    "password-generator": "Wygeneruj hasło"
+  },
   "search": {
     "search": "Szukaj"
   },
