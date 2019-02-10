@@ -53,7 +53,7 @@ const FieldsView = ({ fields, entry, t }) => (
       <LabelWrapper>
         <Choose>
           <When condition={field.property === 'title'}>
-            <EntryIcon icon={entry.icon} big />
+            <EntryIcon entry={entry} big />
           </When>
           <When condition={field.removeable === false}>
             {t(`entry.${field.property}`)}

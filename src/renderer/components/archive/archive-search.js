@@ -48,8 +48,8 @@ const Input = styled(BaseInput)`
 `;
 
 /**
-	* Entry-List
-	*/
+ * Entry-List
+ */
 const EntryList = styled(Box)`
   border: 0;
   margin: 0;
@@ -306,36 +306,34 @@ class ArchiveSearch extends PureComponent {
                   autoHeight
                   autoHeightMax={300}
                 >
-                  {entries.map(
-                    ({ entry, sourceID, groupID, icon, path }, index) => (
-                      <ListItem
-                        selected={selectedItemIndex === index}
-                        key={index}
-                        onClick={() => this.openEntry(sourceID, entry)}
-                      >
-                        <Icon>
-                          <EntryIcon icon={icon} />
-                        </Icon>
-                        <EntryData>
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: entry.getProperty('title')
-                                ? this.highlightSearchResult(
-                                    entry.getProperty('title')
-                                  )
-                                : '-'
-                            }}
-                          />
-                          <EntryFolder>
-                            <For each="group" index="index" of={path}>
-                              <If condition={index > 0}> › </If>
-                              {group}
-                            </For>
-                          </EntryFolder>
-                        </EntryData>
-                      </ListItem>
-                    )
-                  )}
+                  {entries.map(({ entry, sourceID, groupID, path }, index) => (
+                    <ListItem
+                      selected={selectedItemIndex === index}
+                      key={index}
+                      onClick={() => this.openEntry(sourceID, entry)}
+                    >
+                      <Icon>
+                        <EntryIcon entry={entry} />
+                      </Icon>
+                      <EntryData>
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: entry.getProperty('title')
+                              ? this.highlightSearchResult(
+                                  entry.getProperty('title')
+                                )
+                              : '-'
+                          }}
+                        />
+                        <EntryFolder>
+                          <For each="group" index="index" of={path}>
+                            <If condition={index > 0}> › </If>
+                            {group}
+                          </For>
+                        </EntryFolder>
+                      </EntryData>
+                    </ListItem>
+                  ))}
                 </Scrollbars>
               </EntryList>
             </When>

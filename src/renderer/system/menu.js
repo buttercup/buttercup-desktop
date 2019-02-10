@@ -3,7 +3,10 @@ import { remote } from 'electron';
 import capitalize from 'lodash/capitalize';
 import { copyToClipboard, openUrl } from './utils';
 import i18n from '../../shared/i18n';
-import { getFacadeFieldValue } from '../../shared/buttercup/entries';
+import {
+  getFacadeFieldValue,
+  getEntryURL
+} from '../../shared/buttercup/entries';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -101,7 +104,7 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
 
 export function createCopyMenu(entry, currentEntry) {
   const showKeys = currentEntry && currentEntry.id === entry.id;
-  const url = entry.facade.fields.find(field => /^url$/i.test(field.property));
+  const url = getEntryURL(entry);
   const removeableFields = entry.facade.fields.filter(
     field => field.removeable && field !== url
   );
@@ -122,7 +125,7 @@ export function createCopyMenu(entry, currentEntry) {
   if (url) {
     props.push({
       label: 'URL',
-      click: () => copyToClipboard(url.value)
+      click: () => copyToClipboard(url)
     });
   }
 
@@ -143,7 +146,7 @@ export function createCopyMenu(entry, currentEntry) {
   if (url) {
     menu.push({
       label: i18n.t('entry-menu.open-url-in-browser'),
-      click: () => openUrl(url.value)
+      click: () => openUrl(url)
     });
   }
 
