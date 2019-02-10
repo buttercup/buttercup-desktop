@@ -3,7 +3,6 @@ import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
 import { importHistory } from '../buttercup/import';
-import { showConfirmedPasswordDialog } from '../../renderer/system/dialog';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_SET,
