@@ -5,6 +5,7 @@ import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Input as BaseInput, Button } from '@buttercup/ui';
+import ErrorIcon from 'react-icons/lib/md/warning';
 import { Translate } from '../../shared/i18n';
 
 const Input = styled(BaseInput)`
@@ -25,6 +26,25 @@ const Title = styled.h2`
   color: var(--gray-darker);
 `;
 
+const ErrorContainer = styled.div`
+  background-color: var(--gray-light);
+  border-radius: 3px;
+  padding: var(--spacing-one);
+  color: var(--gray-darker);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-one);
+
+  p {
+    margin: 0 0 0 var(--spacing-half);
+  }
+
+  svg {
+    color: var(--red);
+  }
+`;
+
 Modal.setAppElement('#root');
 
 const initialState = {
@@ -37,6 +57,7 @@ const initialState = {
 
 class PasswordModal extends PureComponent {
   _currentInputRef = null;
+  _mounted = false;
 
   static propTypes = {
     onValidate: PropTypes.func,
@@ -50,8 +71,19 @@ class PasswordModal extends PureComponent {
     ...initialState
   };
 
+  setState(...props) {
+    if (this._mounted) {
+      return super.setState(...props);
+    }
+  }
+
   componentDidMount() {
+    this._mounted = true;
     this.setState({ ...initialState });
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
   }
 
   handleFormSubmit = e => {
@@ -155,7 +187,7 @@ class PasswordModal extends PureComponent {
           }
         }}
         isOpen
-        onRequestClose={this.props.onCancel}
+        onRequestClose={loading ? () => {} : this.props.onCancel}
       >
         <Translate
           i18nKey={
@@ -199,7 +231,10 @@ class PasswordModal extends PureComponent {
             </Otherwise>
           </Choose>
           <If condition={errorMessage}>
-            <p>{errorMessage}</p>
+            <ErrorContainer>
+              <ErrorIcon />
+              <p>{errorMessage}</p>
+            </ErrorContainer>
           </If>
           <Button type="submit" full primary large disabled={loading}>
             <Translate i18nKey="password-dialog.confirm" parent="span" />

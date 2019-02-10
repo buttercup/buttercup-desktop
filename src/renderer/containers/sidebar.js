@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   removeArchive,
   lockArchive,
-  changeArchivePassword,
   changeArchiveColour,
   showImportDialog,
   changeArchiveOrder,

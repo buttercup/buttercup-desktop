@@ -21,7 +21,6 @@ import {
   updateArchiveColour,
   updateArchiveOrder
 } from '../buttercup/archive';
-import i18n from '../i18n';
 import { exportArchiveToCSVAndSave } from '../buttercup/export';
 
 // Store Actions
