@@ -152,7 +152,7 @@
     "entry-inputs-empty-info": "Vložte prosím alespoň název.",
     "entry-title-empty-info": "Prosím vložte název.",
     "custom-fields-label-empty-info": "Zapomněli jste nastavit označení jednoho nebo více polí.",
-    "are-you-sure-question": "Jste si jistí?"
+    "are-you-sure-question": "Jste si jistí?",
     "displaying-entries": "Zobrazeno {{count}} záznamů",
     "no-value": "Žádná hodnota",
     "quit-unsave-entry": "Všechny změny budou zahozeny. Jste si jistí?"
