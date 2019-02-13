@@ -47,11 +47,11 @@
     },
     "view": {
       "view": "Zobrazit",
-      "condensed-sidebar": "Zkrátit boční panel",
+      "condensed-sidebar": "Zmenšit boční panel",
       "language": "Jazyk",
       "enable-tray-icon": "Zobrazit stavovou ikonu",
       "reload": "Obnovit",
-      "forcereload": "Vynutit obnovení ",
+      "forcereload": "Vynutit obnovení",
       "toggledevtools": "Vývojařské nástroje",
       "togglefullscreen": "Celá obrazovka",
       "auto-hide-menubar": "Automaticky schovávat stavovou ikonu"
@@ -134,12 +134,12 @@
   },
   "entry": {
     "add-entry": "Přidat záznam",
-    "select-or-create-an-entry": "Vybrat nebo vytvořit záznam",
+    "select-or-create-an-entry": "Vyberte nebo vytvořte záznam",
     "title": "Název",
     "untitled": "Nepojmenováno",
     "username": "Uživatelské jméno",
     "password": "Heslo",
-    "secure-password": "Bezppečné heslo",
+    "secure-password": "Bezpečné heslo",
     "custom-fields": "Volitelná pole",
     "no-custom-fields-info-text": "Nemáte žádné volitelné pole. Nechcete si jedno přidat?",
     "add-new-field": "Přidat nové pole",
