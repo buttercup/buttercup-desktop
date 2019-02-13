@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { sortByKey, sortDeepByKey } from './utils/collection';
+import { sortDeepByKey, sortEntriesByKey } from './utils/collection';
 import { denormalizeGroups } from './utils/normalize';
 
 // Archive ->
@@ -37,11 +37,24 @@ export const getExpandedKeys = createSelector(
 
 export const getAllEntries = state => state.entries.byId;
 export const getCurrentEntryId = state => state.entries.currentEntry;
+export const getCurrentEntryMode = state => state.entries.mode;
 
 export const getCurrentEntry = createSelector(
   getAllEntries,
   getCurrentEntryId,
-  (entries, entryId) => entries[entryId]
+  (entries, entryId) => {
+    const entry = entries[entryId];
+    if (!entry) {
+      return;
+    }
+    return {
+      ...entry,
+      facade: {
+        ...entry.facade,
+        fields: entry.facade.fields.filter(f => f.field === 'property')
+      }
+    };
+  }
 );
 
 export const getVisibleEntries = createSelector(
@@ -53,7 +66,7 @@ export const getVisibleEntries = createSelector(
 export const getEntries = createSelector(
   getVisibleEntries,
   state => state.entries.sortMode,
-  (entries, sortMode) => sortByKey(entries, sortMode)
+  (entries, sortMode) => sortEntriesByKey(entries, sortMode)
 );
 
 // Groups ->

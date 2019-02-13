@@ -194,6 +194,9 @@
     "confirm": "Підтвердити",
     "nevermind": "Втім, не треба"
   },
+  "password-generator": {
+    "password-generator": "Створити пароль"
+  },
   "search": {
     "search": "Пошук"
   },

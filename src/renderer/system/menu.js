@@ -3,6 +3,10 @@ import { remote } from 'electron';
 import capitalize from 'lodash/capitalize';
 import { copyToClipboard, openUrl } from './utils';
 import i18n from '../../shared/i18n';
+import {
+  getFacadeFieldValue,
+  getEntryURL
+} from '../../shared/buttercup/entries';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -100,18 +104,20 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
 
 export function createCopyMenu(entry, currentEntry) {
   const showKeys = currentEntry && currentEntry.id === entry.id;
-  const url = entry.meta.find(meta => /^url$/i.test(meta.key));
-  const meta = entry.meta.filter(meta => meta !== url);
+  const url = getEntryURL(entry);
+  const removeableFields = entry.facade.fields.filter(
+    field => field.removeable && field !== url
+  );
   const props = [
     {
       label: i18n.t('entry-menu.username'),
       accelerator: showKeys ? 'CmdOrCtrl+B' : null,
-      click: () => copyToClipboard(entry.properties.username)
+      click: () => copyToClipboard(getFacadeFieldValue(entry, 'username'))
     },
     {
       label: i18n.t('entry-menu.password'),
       accelerator: showKeys ? 'CmdOrCtrl+C' : null,
-      click: () => copyToClipboard(entry.properties.password)
+      click: () => copyToClipboard(getFacadeFieldValue(entry, 'password'))
     }
   ];
 
@@ -119,7 +125,7 @@ export function createCopyMenu(entry, currentEntry) {
   if (url) {
     props.push({
       label: 'URL',
-      click: () => copyToClipboard(url.value)
+      click: () => copyToClipboard(url)
     });
   }
 
@@ -129,9 +135,9 @@ export function createCopyMenu(entry, currentEntry) {
       submenu: [
         ...props,
         { type: 'separator' },
-        ...meta.map(meta => ({
-          label: capitalize(meta.key),
-          click: () => copyToClipboard(meta.value)
+        ...removeableFields.map(field => ({
+          label: capitalize(field.property),
+          click: () => copyToClipboard(field.value)
         }))
       ]
     }
@@ -140,7 +146,7 @@ export function createCopyMenu(entry, currentEntry) {
   if (url) {
     menu.push({
       label: i18n.t('entry-menu.open-url-in-browser'),
-      click: () => openUrl(url.value)
+      click: () => openUrl(url)
     });
   }
 

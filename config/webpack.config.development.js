@@ -12,7 +12,11 @@ module.exports = merge(baseConfig, {
       resolve(__dirname, '../src/renderer/index')
     ],
     fileManager: resolve(__dirname, '../src/renderer/file-manager'),
-    update: resolve(__dirname, '../src/renderer/update')
+    update: resolve(__dirname, '../src/renderer/update'),
+    fileHostConnection: resolve(
+      __dirname,
+      '../src/renderer/file-host-connection'
+    )
   },
 
   devServer: {
@@ -20,34 +24,15 @@ module.exports = merge(baseConfig, {
     contentBase: baseConfig.output.path,
     publicPath: '/app',
     port: 3000,
-    stats: 'minimal'
+    stats: 'normal'
   },
 
   output: {
     publicPath: 'http://localhost:3000/app/'
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.global\.scss$/,
-        use: ['style-loader', 'css-loader?sourceMap', 'sass-loader']
-      },
-
-      {
-        test: /^((?!\.global).)*\.scss$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-          'sass-loader'
-        ]
-      }
-    ]
-  },
-
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     }),
@@ -61,6 +46,6 @@ module.exports = merge(baseConfig, {
   node: {
     __dirname: false
   },
-
+  mode: 'development',
   target: 'electron-renderer'
 });

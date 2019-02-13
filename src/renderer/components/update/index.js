@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import styled from 'styled-components';
 import { Flex, Box } from 'styled-flexbox';
 import { Button } from '@buttercup/ui';
 import sanitizeHtml from 'sanitize-html';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
-import '../../styles/workspace.global.scss';
+import GlobalStyles from '../global-styles';
 import icon from '../../styles/img/icons/256x256.png';
 
 const Wrapper = styled(Flex)`
@@ -68,17 +68,22 @@ class Update extends PureComponent {
     currentVersion: null,
     releaseNotes: null,
     percent: 0,
-    installing: false
+    installing: false,
+    canUpdateAutomatically: true
   };
 
   componentDidMount() {
     ipcRenderer.on(
       'update-available',
-      (event, { version, currentVersion, releaseNotes }) => {
+      (
+        event,
+        { version, currentVersion, releaseNotes, canUpdateAutomatically }
+      ) => {
         this.setState({
           version,
           currentVersion,
-          releaseNotes: sanitizeHtml(releaseNotes)
+          releaseNotes: sanitizeHtml(releaseNotes),
+          canUpdateAutomatically
         });
       }
     );
@@ -98,6 +103,13 @@ class Update extends PureComponent {
   }
 
   handleDownload = () => {
+    if (this.state.canUpdateAutomatically === false) {
+      shell.openExternal(
+        'https://github.com/buttercup/buttercup-desktop/releases/latest'
+      );
+      this.handleSkip();
+      return;
+    }
     this.setState({ installing: true });
     ipcRenderer.send('download-update');
   };
@@ -111,45 +123,54 @@ class Update extends PureComponent {
       return null;
     }
     return (
-      <Wrapper flexAuto>
-        <Icon>
-          <img src={icon} />
-        </Icon>
-        <Flex flexColumn flexAuto>
-          <Header>
-            <Translate i18nKey="update.new-version-available" parent="h4" />
-            <Translate
-              i18nKey="update.update-available-message"
-              parent="p"
-              values={{
-                version: this.state.version,
-                currentVersion: this.state.currentVersion
-              }}
+      <>
+        <Wrapper flexAuto>
+          <Icon>
+            <img src={icon} />
+          </Icon>
+          <Flex flexColumn flexAuto>
+            <Header>
+              <Translate i18nKey="update.new-version-available" parent="h4" />
+              <Translate
+                i18nKey="update.update-available-message"
+                parent="p"
+                values={{
+                  version: this.state.version,
+                  currentVersion: this.state.currentVersion
+                }}
+              />
+              <Translate i18nKey="update.release-notes" parent="h5" />
+            </Header>
+            <ReleaseNotes
+              dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
             />
-            <Translate i18nKey="update.release-notes" parent="h5" />
-          </Header>
-          <ReleaseNotes
-            dangerouslySetInnerHTML={{ __html: this.state.releaseNotes }}
-          />
-          <Flex justify="space-between">
-            <Button
-              onClick={this.handleSkip}
-              dark
-              disabled={this.state.installing}
-            >
-              <Translate i18nKey="update.not-now" />
-            </Button>
-            <Button
-              primary
-              onClick={this.handleDownload}
-              loading={this.state.installing}
-              disabled={this.state.installing}
-            >
-              <Translate i18nKey="update.download" />
-            </Button>
+            <Flex justify="space-between">
+              <Button
+                onClick={this.handleSkip}
+                dark
+                disabled={this.state.installing}
+              >
+                <Translate i18nKey="update.not-now" />
+              </Button>
+              <Button
+                primary
+                onClick={this.handleDownload}
+                loading={this.state.installing}
+                disabled={this.state.installing}
+              >
+                <Translate
+                  i18nKey={
+                    this.state.canUpdateAutomatically
+                      ? 'update.download'
+                      : 'update.download-manual'
+                  }
+                />
+              </Button>
+            </Flex>
           </Flex>
-        </Flex>
-      </Wrapper>
+        </Wrapper>
+        <GlobalStyles />
+      </>
     );
   }
 }

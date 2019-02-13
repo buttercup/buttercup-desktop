@@ -1,43 +1,77 @@
 {
   "app-menu": {
     "app": {
-      "hide": "Nascondi"
+      "about": "A proposito",
+      "check-for-updates": "Controlla Aggiornamenti...",
+      "services": "Servizi",
+      "hide": "Nascondi",
+      "hideothers": "Nascondi altri",
+      "unhide": "Annulla nascondi",
+      "quit": "Esci"
     },
     "archive": {
       "archive": "Archivio",
       "file": "File",
       "new": "Nuovo Archivio",
       "open": "Apri Archivio",
+      "search": "Cerca in Archivio",
       "connect-cloud-sources": "Connetti al Cloud",
       "import": {
         "import": "Importa",
-        "import-from-type": "Dall'archivio {{name}} (.{{extension}})",
-        "import-to-type": "In {{name}}"
-      }
+        "import-from-type": "Da un archivio {{name}} (.{{extension}})",
+        "import-to-type": "In {{name}}",
+        "no-available-archives": "Nessun archivio disponibile per l'importazione."
+      },
+      "close": "Chiudi"
     },
     "edit": {
       "edit": "Modifica",
+      "undo": "Annulla",
+      "redo": "Ripristina",
+      "cut": "Taglia",
       "copy": "Copia",
-      "delete": "Cancella",
+      "paste": "Incolla",
+      "pasteandmatchstyle": "Incolla con formattazione",
+      "delete": "Elimina",
+      "selectall": "Seleziona tutto",
       "speech": {
-        "speech": "Voce"
+        "speech": "Voce",
+        "startspeaking": "Inizia a parlare",
+        "stopspeaking": "Smetti di parlare"
       }
     },
     "view": {
       "view": "Schermata",
       "condensed-sidebar": "Sidebar Ridotta",
       "language": "Lingua",
-      "auto-hide-menubar": "Auto Nascondi Menubar"
+      "enable-tray-icon": "Mostra in menubar",
+      "reload": "Ricarica",
+      "forcereload": "Forza ricarica",
+      "toggledevtools": "Attiva strumenti sviluppatore",
+      "togglefullscreen": "Attiva schermo intero",
+      "auto-hide-menubar": "Nascondi in menubar"
     },
     "window": {
-      "window": "Finestra"
+      "window": "Finestra",
+      "minimize": "Minimizza",
+      "close": "Chiudi",
+      "zoom": "Zoom",
+      "front": "Porta in primo piano"
     },
     "help": {
       "help": "Aiuto",
-      "visit-our-website": "Visita il nostro Sito",
+      "visit-our-website": "Visita il nostro sito",
       "privacy-policy": "Privacy Policy",
       "view-changelog-for-v": "Guarda il Changelog per v{{version}}"
+    },
+    "tray": {
+      "quit": "Esci",
+      "open": "Apri Buttercup"
     }
+  },
+  "archive-search": {
+    "searchterm": "Cerca...",
+    "nothing-found": "Nessun risultato"
   },
   "archive": {
     "add-archive": "Aggiungi Archivio",
@@ -51,29 +85,32 @@
   "archive-menu": {
     "unlock": "Sblocca",
     "change-color": "Cambia Colore",
+    "change-password": "Cambia Password",
     "import": "Importa",
     "import-from-type": "Dall'archivio {{name}} (.{{extension}})",
-    "archive-remove-with-name": "Cancella {{name}}",
+    "archive-remove-with-name": "Elimina {{name}}",
     "open": "Apri",
     "lock": "Blocca"
   },
   "cloud-source": {
-    "cancel": "Cancella",
+    "cancel": "Annulla",
     "go-back": "Torna Indietro",
+    "new-archive": "Nuovo Archivio",
     "open-in-buttercup": "Apri in Buttercup",
     "connect-to-dropbox": "Connetti a Dropbox",
     "authenticate-with-dropbox": "Autenticati con Dropbox",
     "dropbox-description-text": "Connetti Buttercup al tuo account Dropbox per leggere e salvare i tuoi archivi.<br />Non salveremo la tua username e password di Dropbox.",
     "connect-to-wedav": "Connetti al Server {{title}}",
-    "username": "Nome Utente",
+    "username": "Username",
     "password": "Password",
-    "webdav-description-text": "Inserire l'indirizzo di Endpoint per {{title}}, la Username e la Password per connettersi e scegliere un Archivio di Buttercup. <strong>Salveremo</strong> le tue credenziali criptandole.",
+    "connect": "Connetti",
+    "webdav-description-text": "Inserisci il tuo Indirizzo di Endpoint per {{title}}, l'Username e la Password per connetterti, e scegli un Archivio Buttercup. <strong>Salveremo</strong> le tue credenziali e le cripteremo.",
     "name": "Nome",
     "size": "Dimensione",
     "date": "Data"
   },
   "confirm-dialog": {
-    "yes": "Si",
+    "yes": "Sì",
     "no": "No"
   },
   "copyable": {
@@ -90,7 +127,7 @@
     "select-or-create-an-entry": "Seleziona o Crea un Elemento",
     "title": "Titolo",
     "untitled": "Senza Titolo",
-    "username": "Nome Utente",
+    "username": "Username",
     "password": "Password",
     "secure-password": "Password Sicura",
     "custom-fields": "Campi Personalizzati",
@@ -100,36 +137,37 @@
     "new-field": "Nuovo Campo",
     "edit": "Modifica",
     "save": "Salva",
-    "cancel": "Cancella",
-    "delete": "Cancella",
+    "cancel": "Annulla",
+    "delete": "Elimina",
     "entry-inputs-empty-info": "Per favore inserisci almeno un titolo.",
     "entry-title-empty-info": "Per favore inserisci un titolo.",
-    "custom-fields-label-empty-info": "Non sono state definite le etichette per uno o più campi personalizzati.",
-    "are-you-sure-question": "Sei sicuro?"
+    "custom-fields-label-empty-info": "Hai dimenticato di impostare un'etichetta per uno o più campi personalizzati.",
+    "are-you-sure-question": "Sei sicuro?",
+    "displaying-entries": "Hai {{count}} elementi"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copia negli Appunti",
-    "username": "Nome Utente",
+    "username": "Username",
     "password": "Password",
     "open-url-in-browser": "Apri l'URL nel Browser",
-    "move-to-group": "Muovi nel Gruppo",
-    "move-to-trash": "Muovi nel Cestino",
-    "delete-permanently": "Rimuovi Permanentemente"
+    "move-to-group": "Sposta nel Gruppo",
+    "move-to-trash": "Sposta nel Cestino",
+    "delete-permanently": "Elimina Permanentemente"
   },
   "error": {
-    "archive-not-found": "La sorgente dell' Archivio non è stata trovata.",
+    "archive-not-found": "Archivio non trovato.",
     "authentication-failed": "Autenticazione fallita.",
-    "unknown": "Errore non Identificato",
+    "unknown": "Errore sconosciuto",
     "passwords-dont-match": "Le password non coincidono.",
-    "group-not-found": "Il Gruppo non è stato trovato.",
-    "sort-definition-not-found": "Ordinamento non trovato",
-    "insufficient-data-provided": "Informazioni insufficienti per l'ordinamento",
-    "check-for-update": "Verifica gli Errori di Aggiornamento",
-    "entry-not-found": "Nessun Elemento è stato trovato",
-    "invalid-import-type-requested": "Richiesta di import non valida",
-    "open-file-for-importing": "La funzione di importazione non dovrebbe essere eseguita senza l'esecuzione della finestra principale",
+    "group-not-found": "Gruppo non trovato.",
+    "sort-definition-not-found": "Ordinamento non trovato.",
+    "insufficient-data-provided": "Dati insufficienti per ordinare",
+    "check-for-update": "Errore durante l'aggiornamento. Riprova più tardi.",
+    "invalid-import-type-requested": "Richiesta di importazione non valida",
+    "open-file-for-importing": "La funzione di importazione non dovrebbe essere eseguita senza l'esecuzione della finestra principale.",
+    "entry-not-found": "Nessun elemento trovato",
     "dropbox-connection-failed-info": "Connessione a Dropbox fallita. Riprova più tardi",
-    "webdav-connection-failed-info": "Connessione a {{endpoint}} fallita. Per favore verifica le tue credenziali e prova di nuovo."
+    "webdav-connection-failed-info": "Connessione a {{endpoint}} fallita. Per favore verifica le tue credenziali e riprova."
   },
   "group": {
     "new-group": "Nuovo Gruppo",
@@ -138,33 +176,37 @@
   "group-menu": {
     "new-group": "Nuovo Gruppo",
     "add-group": "Aggiungi Gruppo",
-    "move-to-root": "Muovi nella Root",
-    "move-to-group": "Muovi nel Gruppo",
+    "move-to-root": "Sposta nella Radice",
+    "move-to-group": "Sposta nel Gruppo",
     "rename": "Rinomina",
-    "delete": "Cancella",
-    "move-to-group-custom": "Muovi in {{title}}",
+    "delete": "Elimina",
+    "move-to-group-custom": "Sposta in {{title}}",
     "empty-trash": "Svuota Cestino",
     "empty-trash-question": "Sei sicuro di voler svuotare il Cestino?",
     "title-asc": "Titolo: Ascendente",
     "title-desc": "Titolo: Discendente"
   },
   "intro": {
-    "welcome-title": "Bevenuto in Buttercup.",
+    "welcome-title": "Benvenuto in Buttercup.",
     "welcome-back-title": "Bentornato in Buttercup.",
-    "welcome-caption": "Non è stato aggiungo ancora alcun archivio. Perché non aggiungerne uno?",
+    "welcome-caption": "Non hai ancora nessun archivio. Perché non aggiungerne uno?",
     "unlock-archive": "Sblocca un archivio per iniziare ({{os}})."
   },
   "intro-menu": {
-    "open-archive-file": "Apri Archivio File",
-    "new-archive-file": "Nuovo Archivio File",
+    "open-archive-file": "Apri File di Archivio",
+    "new-archive-file": "Nuovo File di Archivio",
     "connect-cloud-sources": "Connetti al Cloud"
   },
   "password-dialog": {
     "master-password": "Master Password",
+    "new-password": "Nuova Password",
     "password": "Password",
     "confirm-password": "Conferma Password",
     "confirm": "Conferma",
-    "nevermind": "Non Ricordare"
+    "nevermind": "Annulla"
+  },
+  "password-generator": {
+    "password-generator": "Genera password"
   },
   "search": {
     "search": "Cerca"
@@ -176,7 +218,12 @@
     "time-desc": "Ora: Discendente"
   },
   "update": {
-    "installing": "Installa",
-    "update-available-message": "Buttercup {{version}} è disponibile. Clicca qui per installarlo ora."
+    "installing": "Installando",
+    "update-available-message": "Buttercup {{version}} è disponibile. Ora hai la versione {{currentVersion}}. Vuoi scaricarlo adesso?",
+    "new-version-available": "Una nuova versione di Buttercup è disponibile!",
+    "not-now": "Non Ora",
+    "download": "Scarica e Installa",
+    "download-manual": "Apri Pagina delle Release",
+    "release-notes": "Note di Rilascio:"
   }
 }

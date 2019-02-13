@@ -1,0 +1,236 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "O Buttercup",
+      "check-for-updates": "Sprawdź aktualizacje...",
+      "services": "Usługi",
+      "hide": "Ukryj",
+      "hideothers": "Ukryj pozostałe",
+      "unhide": "Pokaż",
+      "quit": "Wyjście"
+    },
+    "archive": {
+      "archive": "Archiwum",
+      "file": "Plik",
+      "new": "Nowe archiwum",
+      "open": "Otwórz archiwum",
+      "search": "Szukaj w Archiwum",
+      "connect-cloud-sources": "Połącz z usługą w chmurze",
+      "import": {
+        "import": "Importuj",
+        "import-from-type": "Z {{name}} archiwum (.{{extension}})",
+        "import-to-type": "Do {{name}}",
+        "no-available-archives": "Nieznaleziono archiwum do importu."
+      },
+      "export": {
+        "export": "Eksportuj",
+        "export-archive": "Eksportuj {{name}} do CSV",
+        "no-available-archives": "Nieznaleziono archiwum do eksportu."
+      },
+      "close": "Zamknij"
+    },
+    "edit": {
+      "edit": "Edytuj",
+      "undo": "Cofnij",
+      "redo": "Powtórz",
+      "cut": "Wytnij",
+      "copy": "Kopiuj",
+      "paste": "Wklej",
+      "pasteandmatchstyle": "Wklej i dostosuj",
+      "delete": "Usuń",
+      "selectall": "Zaznacz wszystkie",
+      "speech": {
+        "speech": "Mowa",
+        "startspeaking": "Rozpocznij",
+        "stopspeaking": "Zakończ"
+      }
+    },
+    "view": {
+      "view": "Widok",
+      "condensed-sidebar": "Skrócony pasek boczny",
+      "language": "Język",
+      "enable-tray-icon": "Wyświetl w menu",
+      "reload": "Przeładuj",
+      "forcereload": "Wymuś przeładowanie",
+      "toggledevtools": "Przełącz narzędzia developerskie",
+      "togglefullscreen": "Przełącz pełny ekran",
+      "auto-hide-menubar": "Automatycznie ukrywaj menu"
+    },
+    "window": {
+      "window": "Okno",
+      "minimize": "Minimalizuj",
+      "close": "Zamknij",
+      "zoom": "Zoom",
+      "front": "Przenieś wszystko na wierzch"
+    },
+    "help": {
+      "help": "Pomoc",
+      "visit-our-website": "Odwiedź naszą stronę",
+      "privacy-policy": "Polityka Prywatności",
+      "view-changelog-for-v": "Pokaż dziennik zmian dla v{{version}}"
+    },
+    "tray": {
+      "quit": "Zamknij",
+      "open": "Otwórz Buttercup"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Wyszukaj...",
+    "nothing-found": "Nic nie znaleziono"
+  },
+  "archive": {
+    "add-archive": "Dodaj archiwum",
+    "archive-saved-loading-info": "Twoje archiwum zostało zapisane.<br>Wyjście nastąpi automatycznie"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Archiwa Buttercup",
+    "load-a-buttercup-archive": "Wczytaj archiwum Buttercup",
+    "create-a-new-buttercup-archive": "Stwórz nowe archiwum Buttercup"
+  },
+  "archive-menu": {
+    "unlock": "Odblokuj",
+    "change-color": "Zmień kolor",
+    "change-password": "Zmień hasło",
+    "import": "Importuj",
+    "import-from-type": "Z {{name}} archiwum (.{{extension}})",
+    "export": "Eksport",
+    "archive-remove-with-name": "Usuń {{name}}",
+    "open": "Otwórz",
+    "lock": "Zablokuj"
+  },
+  "cloud-source": {
+    "cancel": "Anuluj",
+    "go-back": "Powrót",
+    "new-archive": "Nowe archiwum",
+    "open-in-buttercup": "Otwórz w Buttercup",
+    "connect-to-dropbox": "Połącz z Dropbox",
+    "authenticate-with-dropbox": "Autentykuj kontem Dropbox",
+    "dropbox-description-text": "Połacz Buttercup z Twoim kontem Dropbox żeby czytać i zapisywać Twoje archiwa.<br />Nie zapisujemy nazwy twojego konta ani hasła Dropbox.",
+    "connect-to-wedav": "Połącz z serwerem {{title}}",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "connect": "Połącz",
+    "webdav-description-text": "Podaj {{title}} adres, nazwę użytkownika oraz hasło aby uzyskać połączenie oraz wybierz archiwum Buttercup. Twoje dane <strong>zostaną zapisane</strong> i zaszyfrowane.",
+    "name": "Nazwa",
+    "size": "Rozmiar",
+    "date": "Data"
+  },
+  "confirm-dialog": {
+    "yes": "Tak",
+    "no": "Nie"
+  },
+  "copyable": {
+    "hide": "Ukryj",
+    "reveal": "Odsłoń",
+    "copy": "Kopiuj"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Kopiuj do schowka",
+    "reveal-password": "Pokaż hasło"
+  },
+  "entry": {
+    "add-entry": "Dodaj wpis",
+    "select-or-create-an-entry": "Wybierz lub utwórz wpis",
+    "title": "Tytuł",
+    "untitled": "Bez tytułu",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "secure-password": "Bezpieczne hasło",
+    "custom-fields": "Dodatkowe pola",
+    "no-custom-fields-info-text": "Nie ma jeszcze żadnych dodatkowych pól. Czy chcesz utworzyć nowe?",
+    "add-new-field": "Dodaj nowe pole",
+    "label": "Etykieta",
+    "new-field": "Nowe pole",
+    "edit": "Edytuj",
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "entry-inputs-empty-info": "Podaj przynajmniej tytuł.",
+    "entry-title-empty-info": "Wpisz tytuł.",
+    "custom-fields-label-empty-info": "Zapomniałeś o uzupełnieniu etykiety dla przynajmniej jednego dodatkowego pola.",
+    "are-you-sure-question": "Jesteś pewny?",
+    "displaying-entries": "Liczba wpisów: {{count}}",
+    "no-value": "Brak wartości"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Kopiuj do schowka",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "open-url-in-browser": "Otwórz URL w przeglądarce",
+    "move-to-group": "Przenieś do grupy",
+    "move-to-trash": "Przenieś do śmietnika",
+    "delete-permanently": "Usuń na stałe"
+  },
+  "error": {
+    "archive-not-found": "Nie znaleziono źródła dla archiwum.",
+    "authentication-failed": "Błąd autentykacji.",
+    "unknown": "Wystąpił nieznany błąd",
+    "passwords-dont-match": "Hasła nie zgadzają się.",
+    "group-not-found": "Nie znaleziono grupy.",
+    "sort-definition-not-found": "Nie znaleziono sposobu sortowania",
+    "insufficient-data-provided": "Niewystarczające dane do sortowania",
+    "check-for-update": "Podczas aktualizacji wystąpił błąd. Spróbuj jeszcze raz później.",
+    "invalid-import-type-requested": "Nieprawidłowy typ importu",
+    "open-file-for-importing": "Import nie powinien być uruchomiony bez głównego okna",
+    "entry-not-found": "Nie znaleziono wpisu",
+    "dropbox-connection-failed-info": "Połączenie z serwerem Dropbox nie powiodło się. Spróbuj jeszcze raz później",
+    "webdav-connection-failed-info": "Połączenie z {{endpoint}} nie powiodło się. Sprawdź swoje dane i spróbuj jeszcze raz."
+  },
+  "group": {
+    "new-group": "Nowa grupa",
+    "untitled": "Bez tytułu"
+  },
+  "group-menu": {
+    "new-group": "Nowa grupa",
+    "add-group": "Dodaj grupę",
+    "move-to-root": "Przenieś do głównego poziomu",
+    "move-to-group": "Przenieś do grupy",
+    "rename": "Zmień nazwę",
+    "delete": "Usuń",
+    "move-to-group-custom": "Przenieś do {{title}}",
+    "empty-trash": "Opróżnij śmietnik",
+    "empty-trash-question": "Czy na pewno chcesz opróżnić śmietnik?",
+    "title-asc": "Tytuł: Rosnąco",
+    "title-desc": "Tytuł: Malejąco"
+  },
+  "intro": {
+    "welcome-title": "Witaj w Buttercup.",
+    "welcome-back-title": "Witaj ponownie w Buttercup.",
+    "welcome-caption": "Nie dodałeś jeszcze żandego archiwum. Czy chcesz dodać je teraz?",
+    "unlock-archive": "Odblokuj archiwum żeby rozpocząć ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Otwórz plik archiwum",
+    "new-archive-file": "Nowy plik archiwum",
+    "connect-cloud-sources": "Podłącz źródło w chmurze"
+  },
+  "password-dialog": {
+    "master-password": "Hasło główne",
+    "new-password": "Nowe hasło",
+    "password": "Hasło",
+    "confirm-password": "Potwierdź hasło",
+    "confirm": "Potwierdź",
+    "nevermind": "Nie ważne"
+  },
+  "password-generator": {
+    "password-generator": "Wygeneruj hasło"
+  },
+  "search": {
+    "search": "Szukaj"
+  },
+  "sort": {
+    "title-asc": "Tytuł: Rosnąco",
+    "title-desc": "Tytuł: Malejąco",
+    "time-asc": "Czas: Rosnąco",
+    "time-desc": "Czas: Malejąco"
+  },
+  "update": {
+    "installing": "Trwa instalacja",
+    "update-available-message": "Buttercup {{version}} jest już dostępny. Twoja aktualna wersja to {{currentVersion}}. Czy chciałbyś ją pobrać teraz?",
+    "new-version-available": "Nowa wersja Buttercup jest już dostępna!",
+    "not-now": "Nie teraz",
+    "download": "Pobierz i zainstaluj",
+    "download-manual": "Otwórz stronę wydania",
+    "release-notes": "Nota wydania:"
+  }
+}

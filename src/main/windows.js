@@ -30,7 +30,10 @@ export function setupWindows(store) {
       transparent: isOSX() && isHighSierra(),
       show: process.env.NODE_ENV === 'development',
       darkTheme: true,
-      vibrancy: 'ultra-dark'
+      vibrancy: 'ultra-dark',
+      webPreferences: {
+        navigateOnDragDrop: true
+      }
     });
 
     // set window position only if config exists
@@ -136,4 +139,38 @@ export function setupWindows(store) {
 
     return win;
   });
+
+  windowManager.setBuildProcedure(
+    'file-host-connection',
+    (callback, options) => {
+      const win = new BrowserWindow({
+        width: 400,
+        height: 200,
+        modal: true,
+        show: false,
+        resizable: false,
+        darkTheme: true,
+        transparent: true,
+        vibrancy: 'ultra-dark',
+        ...options
+      });
+
+      win.setMenuBarVisibility(false);
+      win.loadURL(getURIPathToFile('views/file-host-connection.html'));
+
+      win.once('closed', () => {
+        windowManager.deregister(win);
+      });
+
+      ipc.once('file-host-connection-init', () => {
+        win.show();
+
+        if (callback) {
+          callback(win);
+        }
+      });
+
+      return win;
+    }
+  );
 }

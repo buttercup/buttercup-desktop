@@ -7,9 +7,10 @@ export const ArchiveTypes = {
 };
 
 export const ImportTypes = {
-  ONE_PASSWORD: '1password',
+  BUTTERCUP: 'buttercup-csv',
   KEEPASS: 'keepass',
-  LASTPASS: 'lastpass'
+  LASTPASS: 'lastpass',
+  ONE_PASSWORD: '1password'
 };
 
 export const ImportTypeInfo = {
@@ -27,5 +28,17 @@ export const ImportTypeInfo = {
     password: false,
     name: 'LastPass',
     extension: 'csv'
+  },
+  [ImportTypes.BUTTERCUP]: {
+    password: false,
+    name: 'Buttercup (CSV)',
+    extension: 'csv'
   }
+};
+
+export const PasswordDialogRequestTypes = {
+  UNLOCK: 'unlock',
+  PASSWORD_CHANGE: 'change',
+  NEW_VAULT: 'new',
+  IMPORT: 'import'
 };

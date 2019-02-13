@@ -190,6 +190,9 @@
     "confirm": "Confirmar",
     "nevermind": "No importa"
   },
+  "password-generator": {
+    "password-generator": "Generar contraseña"
+  },
   "search": {
     "search": "Buscar"
   },

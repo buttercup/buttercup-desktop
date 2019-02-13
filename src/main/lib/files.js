@@ -148,7 +148,9 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
     setTimeout(() => {
       dialog.showMessageBox(focusedWindow, {
         title: 'Import Failed',
-        message: `Importing from ${typeInfo.name} archive failed: ${err.message}`
+        message: `Importing from ${typeInfo.name} archive failed: ${
+          err.message
+        }`
       });
     }, 10);
   };

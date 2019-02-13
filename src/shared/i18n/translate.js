@@ -64,7 +64,11 @@ const Translate = props => {
 
 Translate.propTypes = {
   i18nKey: PropTypes.string,
-  parent: PropTypes.string,
+  parent: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.string,
+    PropTypes.shape({ render: PropTypes.func.isRequired })
+  ]),
   text: PropTypes.string,
   values: PropTypes.object,
   html: PropTypes.bool,

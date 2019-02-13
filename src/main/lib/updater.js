@@ -2,6 +2,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import { getWindowManager } from './window-manager';
 import { app, ipcMain } from 'electron';
+import { isLinux } from '../../shared/utils/platform';
 
 const windowManager = getWindowManager();
 let __updateWin;
@@ -22,7 +23,8 @@ autoUpdater.on('update-available', ({ version, releaseNotes }) => {
     win.webContents.send('update-available', {
       version,
       releaseNotes,
-      currentVersion: app.getVersion()
+      currentVersion: app.getVersion(),
+      canUpdateAutomatically: !isLinux()
     });
   });
   __updateWin.on('close', () => {

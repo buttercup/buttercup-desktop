@@ -52,7 +52,6 @@ const installExtensions = async () => {
   });
 
   const installer = require('electron-devtools-installer');
-
   const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS);
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
 
@@ -79,28 +78,16 @@ if (isWindows()) {
 }
 
 // Someone tried to run a second instance, we should focus our window.
-const isSecondInstance = app.makeSingleInstance(argv => {
-  const handleArgvForWindow = win => {
-    // Handle the argv of second instance for windows
-    const filePath = getFilePathFromArgv(argv);
-    if (isWindows() && filePath) {
-      loadFile(filePath, win);
-    }
-  };
-  if (windowManager.getCountOfType('main') > 0) {
-    const [mainWindow] = windowManager.getWindowsOfType('main');
-    if (mainWindow.isMinimized()) {
-      mainWindow.restore();
-    }
-    mainWindow.focus();
-    handleArgvForWindow(mainWindow);
-  } else {
-    windowManager.buildWindowOfType('main', win => handleArgvForWindow(win));
-  }
+const isSecondInstance = app.makeSingleInstance(() => {
+  log.info(
+    'Detected a newer instance. Closing this instance.',
+    app.getVersion()
+  );
+  app.quit();
 });
 
 if (isSecondInstance) {
-  app.quit();
+  log.info('This is the newer version running.', app.getVersion());
 }
 
 app.on('ready', async () => {
@@ -180,6 +167,7 @@ app.on('activate', () => {
 });
 
 app.once('before-quit', e => {
+  log.info('Running before-quit operation.');
   const channel = getQueue().channel('saves');
   appTriedToQuit = true;
 

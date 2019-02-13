@@ -192,6 +192,9 @@
     "confirm": "Confirmar",
     "nevermind": "Esquecer"
   },
+  "password-generator": {
+    "password-generator": "Gerar senha"
+  },
   "search": {
     "search": "Buscar"
   },

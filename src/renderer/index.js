@@ -8,19 +8,19 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
 import { linkArchiveManagerToStore } from '../shared/buttercup/store';
 import {
-  addArchiveFromSource,
-  loadOrUnlockArchive,
   setCurrentArchive,
   importHistoryIntoArchive,
-  resetArchivesInStore
+  resetArchivesInStore,
+  exportArchive
 } from '../shared/actions/archives';
 import {
   setUIState,
   setIsArchiveSearchVisible
 } from '../shared/actions/ui-state';
-import { showHistoryPasswordPrompt } from '../shared/buttercup/import';
 import { setupShortcuts } from './system/shortcuts';
 import { setSetting } from '../shared/actions/settings';
+import { changeMode } from '../shared/actions/entries';
+import { addGroup } from '../shared/actions/groups';
 import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
@@ -31,7 +31,7 @@ unhandled();
 
 // Alter some Buttercup internals
 Buttercup.Web.HashingTools.patchCorePBKDF();
-Buttercup.vendor.webdavFS.setFetchMethod(window.fetch);
+Buttercup.vendor.webdav.setFetchMethod(window.fetch);
 
 // Create store
 const store = configureStore({}, 'renderer');
@@ -45,28 +45,12 @@ store.dispatch(setSetting('archivesLoading', true));
 store.dispatch(setCurrentArchive(null));
 store.dispatch(resetArchivesInStore([]));
 
-ipc.send('init');
-
-ipc.on('load-archive', (e, payload) => {
-  store.dispatch(addArchiveFromSource(payload));
-});
-
-ipc.on('set-current-archive', (e, payload) => {
-  store.dispatch(loadOrUnlockArchive(payload));
-});
-
 ipc.on('import-history', (e, payload) => {
   store.dispatch(importHistoryIntoArchive(payload));
 });
 
-ipc.on('import-history-prompt', (e, payload) => {
-  showHistoryPasswordPrompt(payload)
-    .then(result => {
-      ipc.send('import-history-prompt-resp', result);
-    })
-    .catch(() => {
-      ipc.send('import-history-prompt-resp', null);
-    });
+ipc.on('export-archive', (e, payload) => {
+  store.dispatch(exportArchive(payload));
 });
 
 ipc.on('save-started', () => {
@@ -79,6 +63,14 @@ ipc.on('toggle-archive-search', () => {
       !getUIState(store.getState(), 'isArchiveSearchVisible')
     )
   );
+});
+
+ipc.on('trigger-add-entry', () => {
+  store.dispatch(changeMode('new')());
+});
+
+ipc.on('trigger-new-group', () => {
+  store.dispatch(addGroup(null));
 });
 
 window.onbeforeunload = event => {

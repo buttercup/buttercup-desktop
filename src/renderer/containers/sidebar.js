@@ -1,12 +1,12 @@
+import { remote } from 'electron';
 import { connect } from 'react-redux';
 import {
   removeArchive,
-  loadOrUnlockArchive,
   lockArchive,
-  changeArchivePassword,
   changeArchiveColour,
   showImportDialog,
-  changeArchiveOrder
+  changeArchiveOrder,
+  exportArchive
 } from '../../shared/actions/archives';
 import {
   openArchive,
@@ -23,14 +23,25 @@ export default connect(
   }),
   {
     onRemoveClick: removeArchive,
-    onClick: loadOrUnlockArchive,
+    onClick: vaultId => () => {
+      remote.BrowserWindow.getFocusedWindow().webContents.send(
+        'vault-set-current',
+        vaultId
+      );
+    },
     onLockArchive: lockArchive,
-    onChangePassword: changeArchivePassword,
+    onChangePassword: vaultId => () => {
+      remote.BrowserWindow.getFocusedWindow().webContents.send(
+        'vault-password-change',
+        vaultId
+      );
+    },
     onChangeColour: changeArchiveColour,
     onChangeOrder: changeArchiveOrder,
     onOpenClick: openArchive,
     onNewClick: newArchive,
     onCloudClick: openFileManager,
-    showImportDialog
+    showImportDialog,
+    onExportArchive: exportArchive
   }
 )(ArchiveList);

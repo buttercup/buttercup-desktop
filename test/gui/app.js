@@ -8,8 +8,6 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // global vars
 let app;
-let buttons;
-let inputs;
 
 test.before(async t => {
   app = new Application({
@@ -33,7 +31,7 @@ const payload = {
   isNew: true
 };
 
-test('check if window is loaded and visible', async t => {
+test.serial('check if window is loaded and visible', async t => {
   const win = app.browserWindow;
   t.is(await app.client.getWindowCount(), 1);
   t.false(await win.isMinimized());
@@ -47,7 +45,7 @@ test('check if window is loaded and visible', async t => {
 });
 
 // input test
-test('test input focus', async t => {
+test.serial('test if vaults can be added', async t => {
   // create temp archive
   await app.webContents.send('load-archive', payload);
 
@@ -64,31 +62,37 @@ test('test input focus', async t => {
   await app.client.keys('Enter');
 
   // wait for login
-  await sleep(5000);
+  await sleep(3000);
+  t.is((await app.client.elements('.rc-tree li')).value.length, 2);
+});
 
+test.serial('test if entries can be added', async t => {
   // click add entry
-  buttons = await app.client.elements('button');
+  let buttons = await app.client.elements('button');
   await app.client.elementIdClick(buttons.value[3].ELEMENT);
 
   // wait for entry form
-  await sleep(2000);
+  await sleep(1000);
 
   // entry form is open
+  // and click on add custom field
   buttons = await app.client.elements('button');
-  inputs = await app.client.elements('input');
-  await app.client.elementIdClick(buttons.value[4].ELEMENT);
-
-  // save
-  await sleep(1500);
 
   // set title
-  await app.client.setValue('input[name="properties.title"]', 'title');
+  await app.client.setValue('input[name="facade.fields[0].value"]', 'title');
 
   // get title
   const titleInput = await app.client.getValue(
-    'input[name="properties.title"]'
+    'input[name="facade.fields[0].value"]'
   );
 
   // test title
   t.true(titleInput === 'title');
+
+  // Click save
+  await app.client.elementIdClick(buttons.value[6].ELEMENT);
+  await sleep(1000);
+
+  const entries = await app.client.elements('.Pane2 .Pane1 li');
+  t.is(entries.value.length, 1);
 });

@@ -120,6 +120,7 @@ class SidebarItem extends PureComponent {
     onChangeColour: PropTypes.func.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
+    onExportArchive: PropTypes.func.isRequired,
     t: PropTypes.func
   };
 
@@ -178,6 +179,11 @@ class SidebarItem extends PureComponent {
         }))
       },
       {
+        label: label('export'),
+        enabled: status === 'unlocked',
+        click: this.props.onExportArchive
+      },
+      {
         type: 'separator'
       },
       {
@@ -230,7 +236,7 @@ class SidebarItem extends PureComponent {
         <Avatar
           color={colour}
           locked={locked}
-          innerRef={ref => {
+          ref={ref => {
             this.avatarRef = ref;
           }}
         >

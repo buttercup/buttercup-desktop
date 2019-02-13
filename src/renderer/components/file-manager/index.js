@@ -6,7 +6,8 @@ import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
 import { brands } from '../../../shared/buttercup/brands';
 import { Translate } from '../../../shared/i18n';
-import '../../styles/workspace.global.scss';
+import GlobalStyles from '../global-styles';
+import { IconStyles } from '../icon';
 import {
   emitActionToParentAndClose,
   closeCurrentWindow
@@ -94,50 +95,61 @@ class FileManager extends PureComponent {
 
   render() {
     return (
-      <Router>
-        <Wrapper flexAuto flexColumn>
-          <Flex flexAuto>
-            <Route exact path="/" component={TypeSelector} />
-            {Object.keys(brands).map(brand => (
-              <Route key={brand} path={`/${brand}`} render={this.renderPath} />
-            ))}
-          </Flex>
-          <Footer>
-            <Flex align="center" width="50%">
-              <ButtonRow>
-                <Button onClick={this.handleClose}>
-                  <Translate i18nKey="cloud-source.cancel" parent="span" />
-                </Button>
-                <NavLink exact to="/" activeStyle={{ display: 'none' }}>
-                  <Button>
-                    <Translate i18nKey="cloud-source.go-back" parent="span" />
+      <>
+        <Router>
+          <Wrapper flexAuto flexColumn>
+            <Flex flexAuto>
+              <Route exact path="/" component={TypeSelector} />
+              {Object.keys(brands).map(brand => (
+                <Route
+                  key={brand}
+                  path={`/${brand}`}
+                  render={this.renderPath}
+                />
+              ))}
+            </Flex>
+            <Footer>
+              <Flex align="center" width="50%">
+                <ButtonRow>
+                  <Button onClick={this.handleClose}>
+                    <Translate i18nKey="cloud-source.cancel" parent="span" />
                   </Button>
-                </NavLink>
-              </ButtonRow>
-            </Flex>
-            <Flex justify="flex-end" align="center" width="50%">
-              <ButtonRow>
-                <Button
-                  disabled={!this.state.creatable}
-                  onClick={this.handleCreateClick}
-                >
-                  <Translate i18nKey="cloud-source.new-archive" parent="span" />
-                </Button>
-                <Button
-                  primary
-                  disabled={this.state.selectedConfig === null}
-                  onClick={this.handleOpenClick}
-                >
-                  <Translate
-                    i18nKey="cloud-source.open-in-buttercup"
-                    parent="span"
-                  />
-                </Button>
-              </ButtonRow>
-            </Flex>
-          </Footer>
-        </Wrapper>
-      </Router>
+                  <NavLink exact to="/" activeStyle={{ display: 'none' }}>
+                    <Button>
+                      <Translate i18nKey="cloud-source.go-back" parent="span" />
+                    </Button>
+                  </NavLink>
+                </ButtonRow>
+              </Flex>
+              <Flex justify="flex-end" align="center" width="50%">
+                <ButtonRow>
+                  <Button
+                    disabled={!this.state.creatable}
+                    onClick={this.handleCreateClick}
+                  >
+                    <Translate
+                      i18nKey="cloud-source.new-archive"
+                      parent="span"
+                    />
+                  </Button>
+                  <Button
+                    primary
+                    disabled={this.state.selectedConfig === null}
+                    onClick={this.handleOpenClick}
+                  >
+                    <Translate
+                      i18nKey="cloud-source.open-in-buttercup"
+                      parent="span"
+                    />
+                  </Button>
+                </ButtonRow>
+              </Flex>
+            </Footer>
+          </Wrapper>
+        </Router>
+        <GlobalStyles />
+        <IconStyles />
+      </>
     );
   }
 }

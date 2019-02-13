@@ -14,11 +14,20 @@
     "es": {
       "name": "Español"
     },
+    "ca_es": {
+      "name": "Català"
+    },
+    "fi": {
+      "name": "Suomi"
+    },
     "fr": {
       "name": "Français"
     },
     "hu": {
       "name": "Magyar"
+    },
+    "id": {
+      "name": "Bahasa Indonesia"
     },
     "ru": {
       "name": "Русский"
@@ -26,7 +35,10 @@
     "it": {
       "name": "Italiano"
     },
-    "pt-br": {
+    "pl": {
+      "name": "Polish"
+    },
+    "pt_br": {
       "name": "Português Brasileiro"
     },
     "fa": {
@@ -34,6 +46,12 @@
     },
     "uk": {
       "name": "Українська"
+    },
+    "nl": {
+      "name": "Nederlands"
+    },
+    "tr": {
+      "name": "Turkish"
     }
   }
 }

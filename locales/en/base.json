@@ -22,6 +22,11 @@
         "import-to-type": "To {{name}}",
         "no-available-archives": "No available archives to import to."
       },
+      "export": {
+        "export": "Export",
+        "export-archive": "Export {{name}} to CSV",
+        "no-available-archives": "No available archives to export."
+      },
       "close": "Close"
     },
     "edit": {
@@ -58,6 +63,10 @@
       "zoom": "Zoom",
       "front": "Bring all to front"
     },
+    "system": {
+      "system": "System",
+      "enable-browser-access": "Enable Browser Access"
+    },
     "help": {
       "help": "Help",
       "visit-our-website": "Visit Our Website",
@@ -88,6 +97,7 @@
     "change-password": "Change Password",
     "import": "Import",
     "import-from-type": "From {{name}} archive (.{{extension}})",
+    "export": "Export",
     "archive-remove-with-name": "Remove {{name}}",
     "open": "Open",
     "lock": "Lock"
@@ -143,7 +153,9 @@
     "entry-title-empty-info": "Please enter a title.",
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?",
-    "displaying-entries": "Displaying {{count}} entries"
+    "displaying-entries": "Displaying {{count}} entries",
+    "no-value": "No Value",
+    "quit-unsave-entry": "You will lose your changes, are you sure?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
@@ -162,7 +174,7 @@
     "group-not-found": "Group has not been found.",
     "sort-definition-not-found": "Sort definition not found",
     "insufficient-data-provided": "Insufficient data provided for sorting",
-    "check-for-update": "An error occured during the update. Please try again later.",
+    "check-for-update": "An error occurred during the update. Please try again later.",
     "invalid-import-type-requested": "Invalid import type requested",
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
@@ -205,6 +217,9 @@
     "confirm": "Confirm",
     "nevermind": "Nevermind"
   },
+  "password-generator": {
+    "password-generator": "Generate Password"
+  },
   "search": {
     "search": "Search"
   },
@@ -220,6 +235,7 @@
     "new-version-available": "A new version of Buttercup is available!",
     "not-now": "Not Now",
     "download": "Download and Install",
+    "download-manual": "Open Releases Page",
     "release-notes": "Release Notes:"
   }
 }

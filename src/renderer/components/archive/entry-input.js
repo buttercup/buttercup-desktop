@@ -2,8 +2,9 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { Generator, Meter, Input as BaseInput } from '@buttercup/ui';
+import { Button, Generator, Meter, Input as BaseInput } from '@buttercup/ui';
 import MagicIcon from 'react-icons/lib/fa/magic';
+import { translate } from 'react-i18next';
 
 export const Wrapper = styled(Flex).attrs({
   align: 'center'
@@ -37,27 +38,24 @@ const TitleInput = styled(BaseInput)`
 const GeneratorToggle = styled.div`
   position: absolute;
   right: 6px;
-  top: 4px;
+  top: 0px;
   cursor: pointer;
   padding: 5px;
-  border-radius: 2px;
-  background-color: ${props => (props.active ? 'var(--gray)' : 'transparent')};
+  background-color: 'transparent';
 
-  svg {
-    display: block;
-  }
-
-  &:hover {
-    background-color: var(--gray-light);
+  button {
+    bottom: 2px;
   }
 `;
 
-export default class Input extends PureComponent {
+class Input extends PureComponent {
   static propTypes = {
     type: PropTypes.string,
     placeholder: PropTypes.string,
     input: PropTypes.object,
-    meta: PropTypes.object
+    meta: PropTypes.object,
+    isBig: PropTypes.bool,
+    t: PropTypes.func
   };
 
   state = {
@@ -77,7 +75,7 @@ export default class Input extends PureComponent {
   }
 
   render() {
-    const { type, input, placeholder, meta } = this.props;
+    const { type, input, placeholder, meta, isBig, t } = this.props;
     const { name, value } = input;
     const commonProps = {
       ...input,
@@ -104,13 +102,17 @@ export default class Input extends PureComponent {
                 preferPlace="below"
               >
                 <GeneratorToggle active={this.state.isGeneratorOpen}>
-                  <MagicIcon onClick={() => this.handleGeneratorToggle()} />
+                  <Button
+                    icon={<MagicIcon />}
+                    title={t('password-generator.password-generator')}
+                    onClick={() => this.handleGeneratorToggle()}
+                  />
                 </GeneratorToggle>
               </Generator>
               <Meter input={value} />
             </PasswordWrapper>
           </When>
-          <When condition={name === 'properties.title'}>
+          <When condition={isBig}>
             <TitleInput {...commonProps} />
           </When>
           <Otherwise>
@@ -121,3 +123,5 @@ export default class Input extends PureComponent {
     );
   }
 }
+
+export default translate()(Input);

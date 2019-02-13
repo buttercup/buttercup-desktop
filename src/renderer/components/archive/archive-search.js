@@ -6,10 +6,6 @@ import { Input as BaseInput } from '@buttercup/ui';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { Flex, Box } from 'styled-flexbox';
 import EntryIcon from './entry-icon';
-import {
-  getMatchingEntriesForSearchTerm,
-  getNameForSource
-} from '../../../shared/actions/entries';
 
 const SearchWrapper = styled.div`
   position: fixed;
@@ -30,15 +26,16 @@ const SearchOverlay = styled.div`
 `;
 
 const Search = styled(Flex)`
+  box-shadow: 0 0 5px var(--black-20);
   background-color: #fff;
-  padding: var(--spacing-two);
+  padding: var(--spacing-one);
   position: absolute;
   border-radius: 5px;
   z-index: 4;
   top: 10%;
   left: 50%;
-  width: 50vw;
-  max-width: 400px;
+  max-width: 50vw;
+  min-width: 400px;
   transition: transform 0.3s;
   transform: translate(-50%, 0);
   width: 100%;
@@ -51,8 +48,8 @@ const Input = styled(BaseInput)`
 `;
 
 /**
-	* Entry-List
-	*/
+ * Entry-List
+ */
 const EntryList = styled(Box)`
   border: 0;
   margin: 0;
@@ -64,7 +61,7 @@ const EntryList = styled(Box)`
 const NothingFound = styled(EntryList)`
   color: #999;
   text-align: center;
-  font-size: 14px;
+  margin-bottom: var(--spacing-one);
 `;
 
 const ListItem = styled.div`
@@ -73,26 +70,22 @@ const ListItem = styled.div`
   padding: 15px;
   cursor: pointer;
   border-bottom: 1px solid #eee;
+  border-radius: 3px;
 
   &:last-child {
     border: 0;
   }
 
-  ${props =>
-    props.selected
-      ? `    background-color: #00b7ac;
-    color: #fff;
-    p {
-      color: #fff;
-    }`
-      : ''};
+  background-color: ${props =>
+    props.selected ? 'var(--brand-primary) !important' : 'transparent'};
+  color: ${props => (props.selected ? '#fff' : '')};
+
+  p {
+    color: ${props => (props.selected ? '#fff' : '')};
+  }
 
   &:hover {
-    background-color: #00b7ac;
-    color: #fff;
-    p {
-      color: #fff;
-    }
+    background-color: var(--gray-light);
   }
 `;
 
@@ -113,14 +106,22 @@ const Icon = styled.div`
 `;
 
 class ArchiveSearch extends PureComponent {
+  searchEntryList = null; // search entry list reference
+
   static propTypes = {
     getArchive: PropTypes.func,
     currentArchive: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     selectArchiveGroupAndEntry: PropTypes.func,
     setIsArchiveSearchVisible: PropTypes.func,
+    findEntryByTerm: PropTypes.func,
     t: PropTypes.func
   };
 
+  /**
+   * Creates an instance of ArchiveSearch
+   * @param {*} props
+   * @memberof ArchiveSearch
+   */
   constructor(props) {
     super(props);
 
@@ -128,58 +129,119 @@ class ArchiveSearch extends PureComponent {
       archive: null,
       entries: [],
       searchTerm: '',
-      selectedItem: -1
+      selectedItemIndex: -1
     };
-
-    this.changeInput = this.changeInput.bind(this);
-    this.closeSearch = this.closeSearch.bind(this);
-    this.highlightSearchResult = this.highlightSearchResult.bind(this);
-    this.onInputKeyDownOrDown = this.onInputKeyDownOrDown.bind(this);
-    this.openEntry = this.openEntry.bind(this);
   }
 
-  closeSearch() {
+  /**
+   * Close search popup
+   * @memberof ArchiveSearch
+   */
+  closeSearch = () => {
     this.props.setIsArchiveSearchVisible(false);
-  }
+  };
 
-  changeInput(e) {
+  /**
+   * Update search entry on input
+   * @param {object} e
+   * @memberof ArchiveSearch
+   */
+  changeSearchtermInput = e => {
     this.setState(
       {
         searchTerm: e.target.value,
-        selectedItem: -1
+        selectedItemIndex: -1
       },
       () =>
-        getMatchingEntriesForSearchTerm(this.state.searchTerm).then(entries => {
-          this.setState({
-            entries: this.state.searchTerm ? entries : []
-          });
+        this.props.findEntryByTerm(this.state.searchTerm).then(entries => {
+          this.setState(
+            {
+              entries: this.state.searchTerm ? entries : []
+            },
+            // check entries and select first one
+            () => this.state.entries.length && this.selectListItem()
+          );
         })
     );
-  }
+  };
 
-  highlightSearchResult(word) {
-    const regex = new RegExp('(' + this.state.searchTerm + ')', 'ig');
-    return word.replace(regex, '<mark>$1</mark>');
-  }
+  /**
+   * Wrap text with <mark> tag
+   * @param {string} text
+   * @memberof ArchiveSearch
+   */
+  highlightSearchResult = text => {
+    const startIndex = text
+      .toLowerCase()
+      .indexOf(this.state.searchTerm.toLowerCase());
+    if (startIndex >= 0) {
+      const endIndex = startIndex + this.state.searchTerm.length;
+      return (
+        text.substring(0, startIndex) +
+        '<mark>' +
+        text.substring(startIndex, endIndex) +
+        '</mark>' +
+        text.substring(endIndex)
+      );
+    }
+    return text;
+  };
 
-  onInputKeyDownOrDown(e) {
-    const { entries, selectedItem } = this.state;
+  /**
+   * Select list item by index
+   * @param {number} selectedItemIndex
+   * @memberof ArchiveSearch
+   */
+  selectListItem = (selectedItemIndex = 0) => {
+    this.setState(
+      {
+        selectedItemIndex
+      },
+      () => {
+        const { view, scrollTop } = this.searchEntryList;
+        const selectedItem = view.childNodes[selectedItemIndex];
+        let searchListScrollTop = view.scrollTop;
 
-    if (e.keyCode === 38 && selectedItem !== -1) {
-      this.setState(state => ({
-        selectedItem: state.selectedItem - 1
-      }));
+        if (selectedItem) {
+          if (
+            selectedItem.offsetTop +
+              selectedItem.offsetHeight * 2 -
+              view.scrollTop >
+            view.clientHeight
+          ) {
+            searchListScrollTop += selectedItem.offsetHeight;
+          } else {
+            searchListScrollTop -= selectedItem.offsetHeight;
+          }
+
+          scrollTop(searchListScrollTop);
+        }
+      }
+    );
+  };
+
+  /**
+   * Handle up/down/esc and enter keys
+   * @param {object} e
+   * @memberof ArchiveSearch
+   */
+  onInputKeyUpOrDown = e => {
+    const { entries, selectedItemIndex } = this.state;
+
+    // up
+    if (e.keyCode === 38 && selectedItemIndex !== -1) {
+      this.selectListItem(selectedItemIndex - 1);
     }
 
-    if (e.keyCode === 40 && selectedItem < entries.length - 1) {
-      this.setState(state => ({
-        selectedItem: state.selectedItem + 1
-      }));
+    // down
+    if (e.keyCode === 40 && selectedItemIndex < entries.length - 1) {
+      this.selectListItem(selectedItemIndex + 1);
     }
 
+    // enter
     if (e.keyCode === 13) {
-      if (entries.length > 0 && entries[selectedItem]) {
-        const result = entries[selectedItem];
+      if (entries.length > 0 && entries[selectedItemIndex]) {
+        const result = entries[selectedItemIndex];
         this.openEntry(result.sourceID, result.entry);
       }
     }
@@ -187,13 +249,19 @@ class ArchiveSearch extends PureComponent {
     if (e.keyCode === 27) {
       this.closeSearch();
     }
-  }
+  };
 
-  openEntry(sourceID, entry) {
+  /**
+   * Open archive entry
+   * @param {number} sourceID
+   * @param {object} entry
+   * @memberof ArchiveSearch
+   */
+  openEntry = (sourceID, entry) => {
     this.props.selectArchiveGroupAndEntry(sourceID, entry);
 
     this.closeSearch();
-  }
+  };
 
   componentDidMount() {
     const { getArchive, currentArchive } = this.props;
@@ -210,7 +278,7 @@ class ArchiveSearch extends PureComponent {
   }
 
   render() {
-    const { entries, searchTerm, selectedItem } = this.state;
+    const { entries, searchTerm, selectedItemIndex } = this.state;
     const { t } = this.props;
 
     return (
@@ -219,11 +287,11 @@ class ArchiveSearch extends PureComponent {
         <Search flexColumn>
           <Input
             bordered
-            onKeyDown={this.onInputKeyDownOrDown}
-            innerRef={input => {
+            onKeyDown={this.onInputKeyUpOrDown}
+            ref={input => {
               this._input = input;
             }}
-            onChange={this.changeInput}
+            onChange={this.changeSearchtermInput}
             value={this.state.searchTerm}
             placeholder={t('archive-search.searchterm')}
             type="text"
@@ -233,34 +301,44 @@ class ArchiveSearch extends PureComponent {
           <Choose>
             <When condition={entries.length > 0}>
               <EntryList flexAuto>
-                <Scrollbars autoHeight autoHeightMax={300}>
-                  {entries.map(({ entry, sourceID, groupID, icon }, index) => (
-                    <ListItem
-                      selected={selectedItem === index}
-                      key={index}
-                      onClick={() => this.openEntry(sourceID, entry)}
-                    >
-                      <Icon>
-                        <EntryIcon icon={icon} />
-                      </Icon>
-                      <EntryData>
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: entry.getProperty('title')
-                              ? this.highlightSearchResult(
-                                  entry.getProperty('title')
-                                )
-                              : '-'
-                          }}
-                        />
-                        <EntryFolder>{getNameForSource(sourceID)}</EntryFolder>
-                      </EntryData>
-                    </ListItem>
-                  ))}
+                <Scrollbars
+                  ref={el => (this.searchEntryList = el)}
+                  autoHeight
+                  autoHeightMax={300}
+                >
+                  {entries.map(
+                    ({ entry, sourceID, groupID, path }, entryIndex) => (
+                      <ListItem
+                        selected={selectedItemIndex === entryIndex}
+                        key={entryIndex}
+                        onClick={() => this.openEntry(sourceID, entry)}
+                      >
+                        <Icon>
+                          <EntryIcon entry={entry} />
+                        </Icon>
+                        <EntryData>
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: entry.getProperty('title')
+                                ? this.highlightSearchResult(
+                                    entry.getProperty('title')
+                                  )
+                                : '-'
+                            }}
+                          />
+                          <EntryFolder>
+                            <For each="group" index="groupIndex" of={path}>
+                              <If condition={groupIndex > 0}> › </If>
+                              {group}
+                            </For>
+                          </EntryFolder>
+                        </EntryData>
+                      </ListItem>
+                    )
+                  )}
                 </Scrollbars>
               </EntryList>
             </When>
-
             <When condition={entries.length === 0 && searchTerm !== ''}>
               <NothingFound>{t('archive-search.nothing-found')}</NothingFound>
             </When>

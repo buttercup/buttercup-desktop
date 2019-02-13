@@ -11,16 +11,21 @@
     },
     "archive": {
       "archive": "آرشیو",
-      "file": "پروند",
+      "file": "پرونده",
       "new": "ساخت آرشیو",
       "open": "باز کردن آرشیو",
       "search": "جستجو در آرشیوها",
       "connect-cloud-sources": "اتصال به منابع ابری",
       "import": {
-        "import": "درون ریزی",
+        "import": "درون‌ریزی",
         "import-from-type": "از آرشیو {{name}} (.{{extension}})",
         "import-to-type": "به {{name}}",
         "no-available-archives": "هیچ آرشیوی برای درون‌ریزی وجود ندارد."
+      },
+      "export": {
+        "export": "برون‌ریزی",
+        "export-archive": "برون‌ریزی آرشیو {{name}} به CSV",
+        "no-available-archives": "هیچ آرشیوی برای برون‌ریزی وجود ندارد."
       },
       "close": "بستن"
     },
@@ -58,6 +63,10 @@
       "zoom": "بزرگ‌نمایی",
       "front": "جلو"
     },
+    "system": {
+      "system": "سیستم",
+      "enable-browser-access": "فعال کردن دسترسی از مرورگرها"
+    },
     "help": {
       "help": "راهنمایی",
       "visit-our-website": "مشاهده سایت ما",
@@ -86,8 +95,9 @@
     "unlock": "رمزگشایی",
     "change-color": "تغییر رنگ",
     "change-password": "تغییر رمز عبور",
-    "import": "درون ریزی",
+    "import": "درون‌ریزی",
     "import-from-type": "از آرشیو {{name}} (.{{extension}})",
+    "export": "برون‌ریزی",
     "archive-remove-with-name": "حذف {{name}}",
     "open": "باز کردن",
     "lock": "قفل کردن"
@@ -143,7 +153,8 @@
     "entry-title-empty-info": "لطفا یک عنوان وارد کنید.",
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
     "are-you-sure-question": "برای این کار اطمینان دارید؟",
-    "displaying-entries": "در حال نمایش {{count}} سند"
+    "displaying-entries": "در حال نمایش {{count}} سند",
+    "no-value": "بدون محتوی"
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
@@ -205,6 +216,9 @@
     "confirm": "تایید",
     "nevermind": "بی‌خیال"
   },
+  "password-generator": {
+    "password-generator": "ایجاد گذرواژه"
+  },
   "search": {
     "search": "Search"
   },
@@ -220,6 +234,7 @@
     "new-version-available": "یک نسخه جدید باترکاپ آماده بارگزاری است!",
     "not-now": "الان نه",
     "download": "دریافت و نصب",
+    "download-manual": "باز کردن صفحه دریافت",
     "release-notes": "مشخصات این نسخه:"
   }
 }

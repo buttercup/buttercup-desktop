@@ -12,16 +12,14 @@ branches:
 skip_tags: true
 
 environment:
-  nodejs_version: "8"
+  nodejs_version: "10"
 
 #cache:
 #  - node_modules -> package.json
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm cache verify
-  # This is the danger zone (it fails often):
-  - appveyor-retry npm install --force
+  - npm ci
   - npm run build
 
 test_script:

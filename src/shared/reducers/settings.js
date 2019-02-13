@@ -33,6 +33,7 @@ const DEFAULT_SETTINGS = {
   menubarAutoHide: false,
   archivesLoading: false,
   isTrayIconEnabled: true,
+  isBrowserAccessEnabled: false,
   locale: ''
 };
 

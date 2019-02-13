@@ -1,4 +1,4 @@
-import { Group } from 'buttercup/dist/buttercup-web.min';
+import { Group } from './buttercup';
 import { getArchive, saveWorkspace } from './archive';
 import i18n from '../i18n';
 
@@ -82,7 +82,7 @@ export function moveGroup(archiveId, groupId, parentId) {
     throw new Error(i18n.t('error.group-not-found'));
   }
 
-  group.moveToGroup(parent);
+  group.moveTo(parent);
   saveWorkspace(archiveId);
 }
 

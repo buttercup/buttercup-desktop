@@ -1,11 +1,15 @@
 import { createAction } from 'redux-actions';
+import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
-import { getQueue } from '../../renderer/system/queue';
-import { getCurrentGroupId, getCurrentArchiveId } from '../selectors';
+import {
+  getCurrentGroupId,
+  getCurrentArchiveId,
+  getCurrentEntryMode,
+  getExpandedKeys
+} from '../selectors';
 import i18n from '../i18n';
-import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
-import { getSharedArchiveManager } from '../buttercup/archive';
+import { getSharedArchiveManager, getSourceName } from '../buttercup/archive';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -16,11 +20,33 @@ import {
   ENTRIES_CHANGE_MODE,
   ENTRIES_SET_SORT
 } from './types';
-
+import { setExpandedKeys } from '../../shared/actions/ui';
 import { loadOrUnlockArchive } from '../../shared/actions/archives';
 import { loadGroup } from '../../shared/actions/groups';
 
-export const selectEntry = createAction(ENTRIES_SELECTED);
+export const selectEntry = (entryId, isSavingNewEntry = false) => (
+  dispatch,
+  getState
+) => {
+  try {
+    const currentEntryMode = getCurrentEntryMode(getState());
+    (currentEntryMode === 'new' && !isSavingNewEntry) ||
+    (currentEntryMode === 'edit' && !isSavingNewEntry)
+      ? showConfirmDialog(i18n.t('entry.quit-unsave-entry'), choice =>
+          choice === 0
+            ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
+            : null
+        )
+      : dispatch({
+          type: ENTRIES_SELECTED,
+          payload: entryId
+        });
+  } catch (err) {
+    console.error(err);
+    showDialog(err);
+  }
+};
+
 export const setSortMode = createAction(ENTRIES_SET_SORT);
 
 export const changeMode = mode => () => ({
@@ -28,38 +54,34 @@ export const changeMode = mode => () => ({
   payload: mode
 });
 
-export const loadEntries = (archiveId, groupId) => async dispatch => {
+export const loadEntries = (archiveId, groupId) => dispatch => {
   try {
-    const entries = await entryTools.loadEntries(archiveId, groupId);
+    const entries = entryTools.loadEntries(archiveId, groupId);
     dispatch({ type: ENTRIES_LOADED, payload: entries });
-
-    const entriesWithoutIcon = entries.filter(entry => !entry.icon);
-    dispatch(fetchEntryIconsAndUpdate(archiveId, entriesWithoutIcon));
   } catch (err) {
+    console.error(err);
     showDialog(err);
   }
 };
 
-export const updateEntry = newValues => async (dispatch, getState) => {
+export const updateEntry = newValues => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
 
   try {
     // First create the new entry with the data
-    await entryTools.updateEntry(archiveId, newValues);
+    const entryObj = entryTools.updateEntry(archiveId, newValues);
     dispatch({
       type: ENTRIES_UPDATE,
-      payload: newValues
+      payload: entryObj
     });
     dispatch(changeMode('view')());
-
-    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    dispatch(fetchEntryIconsAndUpdate(archiveId, [newValues]));
   } catch (err) {
+    console.error(err);
     showDialog(err);
   }
 };
 
-export const newEntry = newValues => async (dispatch, getState) => {
+export const newEntry = newValues => (dispatch, getState) => {
   const state = getState();
   const currentGroupId = getCurrentGroupId(state);
   const archiveId = getCurrentArchiveId(state);
@@ -79,10 +101,7 @@ export const newEntry = newValues => async (dispatch, getState) => {
       type: ENTRIES_CREATE,
       payload: entryObj
     });
-    dispatch(selectEntry(entryObj.id));
-
-    // Then update the entry icon - might be slower, so we don't want the UI to wait for this
-    dispatch(fetchEntryIconsAndUpdate(archiveId, [entryObj]));
+    dispatch(selectEntry(entryObj.id, true));
   } catch (err) {
     showDialog(err);
   }
@@ -113,67 +132,60 @@ export const deleteEntry = entryId => (dispatch, getState) => {
   });
 };
 
-const fetchEntryIconsAndUpdate = (archiveId, entries) => dispatch => {
-  entries.forEach(entry => {
-    getQueue()
-      .channel('icons')
-      .enqueue(() => {
-        return entryTools.updateEntryIcon(archiveId, entry.id).then(entry => {
-          if (entry.icon) {
-            return dispatch({ type: ENTRIES_UPDATE, payload: entry });
-          }
-        });
-      });
-  });
-};
-
-export async function getMatchingEntriesForSearchTerm(term) {
+export const getMatchingEntriesForSearchTerm = term => dispatch => {
   const manager = getSharedArchiveManager();
 
   const unlockedSources = manager.unlockedSources;
   const lookup = unlockedSources.reduce(
     (current, next) => ({
       ...current,
-      [next.workspace.primary.archive.getID()]: next.id
+      [next.workspace.archive.id]: next.id
     }),
     {}
   );
-  const archives = unlockedSources.map(
-    source => source.workspace.primary.archive
-  );
+  const archives = unlockedSources.map(source => source.workspace.archive);
   const finder = new EntryFinder(archives);
 
   return Promise.all(
-    finder.search(term).map(async result => {
-      const archiveId = lookup[result.archive.getID()];
+    finder.search(term).map(result => {
+      const { entry } = result;
+      const archiveId = lookup[result.archive.id];
 
       return {
         sourceID: archiveId,
-        groupID: result.entry.getGroup().getID(),
-        icon: await entryTools.getIcon(result.entry),
-        entry: result.entry
+        groupID: entry.getGroup().id,
+        entry: entry,
+        path: [
+          getSourceName(archiveId),
+          ...entryTools
+            .getParentGroups(entry.getGroup())
+            .map(group => group.getTitle())
+        ]
       };
     })
   );
-}
-
-export function getNameForSource(sourceID) {
-  const manager = getSharedArchiveManager();
-  const source = manager.getSourceForID(sourceID);
-
-  if (!source) {
-    throw new Error(
-      `Unable to fetch source information: No source found for ID: ${sourceID}`
-    );
-  }
-  return source.name;
-}
+};
 
 export const selectArchiveGroupAndEntry = (archiveId, entry) => (
   dispatch,
   getState
 ) => {
+  // load archive
   dispatch(loadOrUnlockArchive(archiveId));
-  dispatch(loadGroup(entry.getGroup().getID()));
-  dispatch(selectEntry(entry.getID()));
+
+  // set expanded keys and remove duplicate keys
+  dispatch(
+    setExpandedKeys([
+      ...new Set([
+        ...getExpandedKeys(getState()),
+        ...entryTools.getParentGroups(entry.getGroup()).map(g => g.id)
+      ])
+    ])
+  );
+
+  // load group with entry
+  dispatch(loadGroup(entry.getGroup().id));
+
+  // select entry by id
+  dispatch(selectEntry(entry.id));
 };

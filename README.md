@@ -37,11 +37,39 @@ Ensure that you never share your master password or use it anywhere other than w
 
 If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
 
-``` bash
+```shell
 $ brew cask install buttercup
 ```
 
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only). Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install [Buttercup](https://chocolatey.org/packages/buttercup):
+
+```shell
+choco install buttercup
+```
+
+### Platforms and Operating Systems
+Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only).
+
+We actively support Buttercup on the following platforms:
+
+ * MacOS (latest)
+ * Windows 10
+ * Ubuntu 18.04
+
+Operating systems outside of these are not directly supported by staff - Issues will be followed on GitHub, however, and assistance provided where possible.
+
+#### Arch Linux
+Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/).
+
+Some users have reported segmentation faults on Arch - if you notice a similiar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
+
+### Portability
+
+Buttercup supports portable builds on the following platforms:
+
+ * Linux: [AppImage](https://github.com/buttercup/buttercup-desktop/releases/latest)
+
+_Portable versions for Windows and Mac will arrive in the not-so-distant future._
 
 ## Encryption & Format
 
@@ -57,7 +85,16 @@ Archives store groups and entries in a simple hierarchy. Both groups and entries
 
 Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
 
-You can import from other password managers (such as 1Password and KeePass) by opening your archive and choosing Import from the menu.
+### WebDAV
+
+Buttercup can connect to WebDAV-based services for the purpose of remotely-accessing vault files. Most WebDAV services and services supporting WebDAV are compatible.
+
+Please note that Buttercup **does not support self-signed certificates**.
+
+### Importing and Exporting
+You can import from other password managers (such as 1Password, Lastpass and KeePass) by opening your archive and choosing Import from the menu.
+
+You can also export Buttercup vaults to CSV format.
 
 ## Internationalization
 
@@ -69,11 +106,23 @@ Buttercup for Desktop supports the following languages:
  * French
  * Russian
  * Farsi
+ * Bahasa Indonesia
  * Italian
  * Brazilian Portuguese
  * Ukrainian
  * Hungarian
  * Czech
+ * Dutch
+ * Turkish
+ * Polish
+ * Finnish
+ * Catalan
+
+### Submitting internationalization configurations
+
+We welcome the addition of new languages to the Buttercup platform. Please follow the style of the current translations.
+
+If adding languages that are more specific than usual (eg. "pt_br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `_` and not a dash.
 
 ## Development
 
@@ -119,6 +168,16 @@ $ npm run package:mac
 $ npm run package:win
 $ npm run package:linux
 ```
+
+**NB**:
+
+The above is a naive release process, without signing. To sign and release, as is the standard approach, run the following:
+
+```shell
+GH_TOKEN=github_token WIN_CSC_LINK=file:///some/directory/buttercup_codesign.p12 WIN_CSC_KEY_PASSWORD="codesign_password" npm run release
+```
+
+_Where `GH_TOKEN` is your GitHub token, `WIN_CSC_LINK` is the location of the p12 code signing certificate and `WIN_CSC_KEY_PASSWORD` is the certificate password._
 
 ## Debugging
 

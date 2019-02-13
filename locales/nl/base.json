@@ -1,0 +1,235 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "Over",
+      "check-for-updates": "Controleren voor updates...",
+      "services": "Services",
+      "hide": "Verberg",
+      "hideothers": "Verberg anderen",
+      "unhide": "Weergeven",
+      "quit": "Afsluiten"
+    },
+    "archive": {
+      "archive": "Archief",
+      "file": "Bestand",
+      "new": "Nieuw archief",
+      "open": "Open archief",
+      "search": "Zoek in archief",
+      "connect-cloud-sources": "Verbind cloudbronnen",
+      "import": {
+        "import": "Importeren",
+        "import-from-type": "Van {{name}} archief (.{{extension}})",
+        "import-to-type": "Naar {{name}}",
+        "no-available-archives": "Geen archieven beschikbaar om naar te importeren."
+      },
+      "export": {
+        "export": "Exporteren",
+        "export-archive": "Exporteer {{name}} naar CSV",
+        "no-available-archives": "Geen archieven beschikbaar om te exporteren."
+      },
+      "close": "Sluiten"
+    },
+    "edit": {
+      "edit": "Bewerken",
+      "undo": "Ongedaan maken",
+      "redo": "Opnieuw",
+      "cut": "Knippen",
+      "copy": "Kopiëren",
+      "paste": "Plakken",
+      "pasteandmatchstyle": "Plak en combineer stijl",
+      "delete": "Verwijder",
+      "selectall": "Selecteer alles",
+      "speech": {
+        "speech": "Spreek",
+        "startspeaking": "Start spreken",
+        "stopspeaking": "Stop spreken"
+      }
+    },
+    "view": {
+      "view": "Beeld",
+      "condensed-sidebar": "Smalle zijbalk",
+      "language": "Taal",
+      "enable-tray-icon": "Geef weer in systeemiconen",
+      "reload": "Ververs",
+      "forcereload": "Geforceerd verversen",
+      "toggledevtools": "Dev tools in-/uitschakelen",
+      "togglefullscreen": "Full screen in-/uitschakelen",
+      "auto-hide-menubar": "Verberg menu automatisch"
+    },
+    "window": {
+      "window": "Venster",
+      "minimize": "Minimaliseren",
+      "close": "Sluiten",
+      "zoom": "Zoom",
+      "front": "Breng alles naar voorgrond"
+    },
+    "help": {
+      "help": "Help",
+      "visit-our-website": "Bezoek onze website",
+      "privacy-policy": "Privacy beleid",
+      "view-changelog-for-v": "Geef changelog weer voor v{{version}}"
+    },
+    "tray": {
+      "quit": "Afsluiten",
+      "open": "Open Buttercup"
+    }
+  },
+  "archive-search": {
+    "searchterm": "Zoeken...",
+    "nothing-found": "Niets gevonden"
+  },
+  "archive": {
+    "add-archive": "Voeg archief toe",
+    "archive-saved-loading-info": "Je archief wordt opgeslagen.<br>Dit venster sluit automatisch"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup archieven",
+    "load-a-buttercup-archive": "Laad een Buttercup archief",
+    "create-a-new-buttercup-archive": "Maak een nieuw Buttercup archief"
+  },
+  "archive-menu": {
+    "unlock": "Ontgrendelen",
+    "change-color": "Verander kleur",
+    "change-password": "Verander wachtwoord",
+    "import": "Importeren",
+    "import-from-type": "Van {{name}} archief (.{{extension}})",
+    "export": "Exporteer",
+    "archive-remove-with-name": "Verwijder {{name}}",
+    "open": "Open",
+    "lock": "Vergrendel"
+  },
+  "cloud-source": {
+    "cancel": "Annuleren",
+    "go-back": "Terug",
+    "new-archive": "Nieuw archief",
+    "open-in-buttercup": "Open in Buttercup",
+    "connect-to-dropbox": "Verbind met Dropbox",
+    "authenticate-with-dropbox": "Meld aan met Dropbox",
+    "dropbox-description-text": "Verbind Buttercup met Dropbox om jouw archieven te lezen en op te slaan.<br />Dropbox gebruikersnaam en wachtwoord worden niet opgeslagen.",
+    "connect-to-wedav": "Verbind met {{title}} server",
+    "username": "gebruikersnaam",
+    "password": "wachtwoord",
+    "connect": "Verbind",
+    "webdav-description-text": "Voer je {{title}} Endpoint adres, gebruikersnaam en wachtwoord in om te verbinden en kies een Buttercup archief. <strong>Inloggegevens worden versleuteld opgeslagen</strong>",
+    "name": "Naam",
+    "size": "Grootte",
+    "date": "Datum"
+  },
+  "confirm-dialog": {
+    "yes": "Ja",
+    "no": "Nee"
+  },
+  "copyable": {
+    "hide": "Verberg",
+    "reveal": "Tonen",
+    "copy": "Kopiëren"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "Kopieer naar klembord",
+    "reveal-password": "Toon wachtwoord"
+  },
+  "entry": {
+    "add-entry": "Voeg item toe",
+    "select-or-create-an-entry": "Selecteer een item of voeg er eentje toe",
+    "title": "Titel",
+    "untitled": "Geen titel",
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "secure-password": "Veilig wachtwoord",
+    "custom-fields": "Speciale velden",
+    "no-custom-fields-info-text": "Geen speciale velden gevonden. Waarom voeg je er geen toe?",
+    "add-new-field": "Voeg nieuw veld toe",
+    "label": "Label",
+    "new-field": "Nieuw veld",
+    "edit": "Bewerken",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "entry-inputs-empty-info": "Voer ministens een titel in.",
+    "entry-title-empty-info": "Voer een titel in.",
+    "custom-fields-label-empty-info": "Je bent vergeten om een label in te stellen voor een of meer speciale velden.",
+    "are-you-sure-question": "Weet je het zeker?",
+    "displaying-entries": "{{count}} items weergegeven"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "Kopieer naar klembord",
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "open-url-in-browser": "Open URL in Browser",
+    "move-to-group": "Verplaats naar groep",
+    "move-to-trash": "Verplaats naar prullenbak",
+    "delete-permanently": "Verwijder permanent"
+  },
+  "error": {
+    "archive-not-found": "Bron archief niet gevonden.",
+    "authentication-failed": "Authenticatie mislukt.",
+    "unknown": "Een onbekende error heeft plaatsgevonden.",
+    "passwords-dont-match": "De wachtwoorden komen niet overeen.",
+    "group-not-found": "Groep niet gevonden.",
+    "sort-definition-not-found": "Sorteer definitie niet gevonden.",
+    "insufficient-data-provided": "Onvoldoende data gegeven om te sorteren.",
+    "check-for-update": "Er heeft een error plaatsgevonden tijdens de update. Probeer het later nog eens.",
+    "invalid-import-type-requested": "Ongeldig import type gevraagd.",
+    "open-file-for-importing": "Importeer functies mogen niet draaien zonder dat het hoofdscherm openstaat.",
+    "entry-not-found": "Item niet gevonden",
+    "dropbox-connection-failed-info": "Verbinding met Dropbox-server mislukt. Probeer het later nog eens.",
+    "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals."
+  },
+  "group": {
+    "new-group": "Nieuwe groep",
+    "untitled": "Geen titel"
+  },
+  "group-menu": {
+    "new-group": "Nieuwe groep",
+    "add-group": "Voeg groep toe",
+    "move-to-root": "Verplaats naar root",
+    "move-to-group": "Verplaats naar groep",
+    "rename": "Hernoem",
+    "delete": "Naam wijzigen",
+    "move-to-group-custom": "Verplaats naar {{title}}",
+    "empty-trash": "Leeg prullenbak",
+    "empty-trash-question": "Weet je zeker dat je de prullenbak wilt leegmaken?",
+    "title-asc": "Titel: oplopend",
+    "title-desc": "Titel: aflopend"
+  },
+  "intro": {
+    "welcome-title": "Welkom bij Buttercup.",
+    "welcome-back-title": "Welkom terug bij Buttercup.",
+    "welcome-caption": "Je hebt nog geen archieven toegevoegd. Waarom voeg je er geen toe?",
+    "unlock-archive": "Ontgrendel archief om te beginnen ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "Open archief bestand",
+    "new-archive-file": "Nieuw archief bestand",
+    "connect-cloud-sources": "Verbind cloudbronnen"
+  },
+  "password-dialog": {
+    "master-password": "Hoofdwachtwoord",
+    "new-password": "Nieuw wachtwoord",
+    "password": "Wachtwoord",
+    "confirm-password": "Bevestig wachtwoord",
+    "confirm": "Bevestig",
+    "nevermind": "Maakt niet uit"
+  },
+  "password-generator": {
+    "password-generator": "Genereer wachtwoord"
+  },
+  "search": {
+    "search": "Zoeken"
+  },
+  "sort": {
+    "title-asc": "Titel: oplopend",
+    "title-desc": "Titel: aflopend",
+    "time-asc": "Tijd: oplopend",
+    "time-desc": "Tijd: aflopend"
+  },
+  "update": {
+    "installing": "Installeren",
+    "update-available-message": "Buttercup {{version}} is nu beschikbaar. Je hebt {{currentVersion}}. Wil je het nu downloaden?",
+    "new-version-available": "Een nieuwe versie van Buttercup is beschikbaar!",
+    "not-now": "Niet nu",
+    "download": "Download en installeer",
+    "download-manual": "Open versieoverzicht",
+    "release-notes": "Opmerkingen bij versie:"
+  }
+}

@@ -1,21 +1,20 @@
 import path from 'path';
-import {
-  ArchiveManager as OldArchiveManager,
-  createCredentials
-} from 'buttercup/dist/buttercup-web.min';
+import { ArchiveManager, ArchiveSource, Credentials } from './buttercup';
 import ElectronStorageInterface from './storage';
 import { getQueue } from '../../renderer/system/queue';
 import './ipc-datasource';
 import i18n from '../i18n';
 
-const { ArchiveManager, ArchiveSource } = OldArchiveManager.v2;
 let __sharedManager = null;
 
 export function addArchiveToArchiveManager(masterConfig, masterPassword) {
   const { credentials, datasource, type, path: filePath, isNew } = masterConfig;
 
-  const passwordCredentials = createCredentials.fromPassword(masterPassword);
-  const sourceCredentials = createCredentials(type, credentials);
+  const passwordCredentials = Credentials.fromPassword(masterPassword);
+  const sourceCredentials = new Credentials({
+    ...credentials,
+    type
+  });
   sourceCredentials.setValue(
     'datasource',
     JSON.stringify({
@@ -39,7 +38,13 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
       return manager
         .addSource(source)
         .then(() =>
-          unlockArchiveInArchiveManager(source.id, masterPassword, isNew)
+          unlockArchiveInArchiveManager(
+            source.id,
+            masterPassword,
+            isNew
+          ).catch(err =>
+            manager.removeSource(source.id).then(() => Promise.reject(err))
+          )
         );
     })
     .then(archiveId => {
@@ -102,7 +107,7 @@ export function getSharedArchiveManager() {
 export function getArchive(archiveId) {
   const manager = getSharedArchiveManager();
   const source = manager.getSourceForID(archiveId);
-  return source.workspace.primary.archive;
+  return source.workspace.archive;
 }
 
 export function updateArchivePassword(archiveId, newPassword) {
@@ -141,9 +146,7 @@ export function saveWorkspace(archiveId) {
           .localDiffersFromRemote()
           .then(
             differs =>
-              differs
-                ? workspace.mergeSaveablesFromRemote().then(() => true)
-                : false
+              differs ? workspace.mergeFromRemote().then(() => true) : false
           )
           .then(shouldSave => (shouldSave ? workspace.save() : null));
       },
@@ -155,4 +158,16 @@ export function saveWorkspace(archiveId) {
 export function saveArchiveManager() {
   const manager = getSharedArchiveManager();
   return manager.dehydrate();
+}
+
+export function getSourceName(sourceID) {
+  const manager = getSharedArchiveManager();
+  const source = manager.getSourceForID(sourceID);
+
+  if (!source) {
+    throw new Error(
+      `Unable to fetch source information: No source found for ID: ${sourceID}`
+    );
+  }
+  return source.name;
 }
