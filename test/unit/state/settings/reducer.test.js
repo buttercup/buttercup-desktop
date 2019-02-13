@@ -42,7 +42,10 @@ const initialState = {
     'entry.add-entry': 'CmdOrCtrl+N',
     'group.new-group': 'CmdOrCtrl+G',
     'app-menu.archive.search': 'CmdOrCtrl+F',
-    'app-menu.view.condensed-sidebar': 'CmdOrCtrl+Shift+B'
+    'app-menu.view.condensed-sidebar': 'CmdOrCtrl+Shift+B',
+    'entry-menu.username': 'CmdOrCtrl+B',
+    'entry-menu.password': 'CmdOrCtrl+C',
+    'archive-menu.lock': 'CmdOrCtrl+L'
   }
 };
 

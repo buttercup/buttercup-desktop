@@ -7,7 +7,7 @@ import { Translate } from '../../../shared/i18n';
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: 108px 1fr;
+  grid-template-rows: 110px 1fr;
   grid-template-columns: 1fr;
   width: 100%;
   background-color: #fff;

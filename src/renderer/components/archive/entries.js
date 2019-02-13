@@ -48,6 +48,7 @@ class Entries extends PureComponent {
     onSortModeChange: PropTypes.func,
     onEntryMove: PropTypes.func,
     onDelete: PropTypes.func,
+    globalShortcuts: PropTypes.object,
     handleAddEntry: PropTypes.func,
     t: PropTypes.func
   };
@@ -63,10 +64,11 @@ class Entries extends PureComponent {
       currentEntry,
       onEntryMove,
       onDelete,
+      globalShortcuts,
       t
     } = this.props;
     showContextMenu([
-      ...createCopyMenu(entry, currentEntry),
+      ...createCopyMenu(entry, currentEntry, globalShortcuts),
       { type: 'separator' },
       {
         label: t('entry-menu.move-to-group'),

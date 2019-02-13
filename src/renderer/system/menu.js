@@ -102,7 +102,7 @@ export function createSortMenu(sortDefinition = [], currentMode, onChange) {
   }, []);
 }
 
-export function createCopyMenu(entry, currentEntry) {
+export function createCopyMenu(entry, currentEntry, globalShortcuts) {
   const showKeys = currentEntry && currentEntry.id === entry.id;
   const url = getEntryURL(entry);
   const removeableFields = entry.facade.fields.filter(
@@ -111,12 +111,12 @@ export function createCopyMenu(entry, currentEntry) {
   const props = [
     {
       label: i18n.t('entry-menu.username'),
-      accelerator: showKeys ? 'CmdOrCtrl+B' : null,
+      accelerator: showKeys ? globalShortcuts['entry-menu.username'] : null,
       click: () => copyToClipboard(getFacadeFieldValue(entry, 'username'))
     },
     {
       label: i18n.t('entry-menu.password'),
-      accelerator: showKeys ? 'CmdOrCtrl+C' : null,
+      accelerator: showKeys ? globalShortcuts['entry-menu.password'] : null,
       click: () => copyToClipboard(getFacadeFieldValue(entry, 'password'))
     }
   ];
