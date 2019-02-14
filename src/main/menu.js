@@ -17,6 +17,7 @@ import { getMainWindow, reopenMainWindow } from './utils/window';
 import { setupTrayIcon } from './tray';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
+import { getShortcutByKey } from '../shared/utils/global-shortcuts';
 
 electronContextMenu();
 
@@ -31,7 +32,7 @@ export const setupMenu = store => {
   const globalShortcuts = getSetting(state, 'globalShortcuts');
 
   const shortcutByLabel = (key, isAppMenu = true) =>
-    globalShortcuts[isAppMenu ? `app-menu.${key}` : key];
+    getShortcutByKey(isAppMenu ? `app-menu.${key}` : key, globalShortcuts);
 
   // Default should be safe (always on) in case it isn't set.
   const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
@@ -44,7 +45,7 @@ export const setupMenu = store => {
     { type: 'separator' },
     {
       label: label('app.preferences'),
-      accelerator: shortcutByLabel('app.preferences') || `CmdOrCtrl+,`,
+      accelerator: shortcutByLabel('app.preferences'),
       click: () => {
         const windowManager = getWindowManager();
         const [preferencesWindow] = windowManager.getWindowsOfType(
@@ -76,23 +77,21 @@ export const setupMenu = store => {
       submenu: [
         {
           label: label('archive.new'),
-          accelerator: shortcutByLabel('archive.new') || 'CmdOrCtrl+Shift+N',
+          accelerator: shortcutByLabel('archive.new'),
           click: () => {
             reopenMainWindow(win => newFile(win));
           }
         },
         {
           label: label('archive.open'),
-          accelerator: shortcutByLabel('archive.open') || 'CmdOrCtrl+O',
+          accelerator: shortcutByLabel('archive.open'),
           click: () => {
             reopenMainWindow(win => openFile(win));
           }
         },
         {
           label: label('archive.connect-cloud-sources'),
-          accelerator:
-            shortcutByLabel('archive.connect-cloud-sources') ||
-            'CmdOrCtrl+Shift+C',
+          accelerator: shortcutByLabel('archive.connect-cloud-sources'),
           click: () => {
             reopenMainWindow(win => {
               getWindowManager().buildWindowOfType('file-manager', null, {
@@ -107,8 +106,7 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('entry.add-entry'),
-          accelerator:
-            shortcutByLabel('entry.add-entry', false) || 'CmdOrCtrl+N',
+          accelerator: shortcutByLabel('entry.add-entry', false),
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -118,8 +116,7 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('group.new-group'),
-          accelerator:
-            shortcutByLabel('group.new-group', false) || 'CmdOrCtrl+G',
+          accelerator: shortcutByLabel('group.new-group', false),
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -184,7 +181,7 @@ export const setupMenu = store => {
         },
         {
           label: label('archive.search'),
-          accelerator: shortcutByLabel('archive.search') || 'CmdOrCtrl+F',
+          accelerator: shortcutByLabel('archive.search'),
           click: (item, focusedWindow) => toggleArchiveSearch(focusedWindow)
         },
         {
@@ -241,8 +238,7 @@ export const setupMenu = store => {
           label: label('view.condensed-sidebar'),
           type: 'checkbox',
           checked: getSetting(state, 'condencedSidebar'),
-          accelerator:
-            shortcutByLabel('view.condensed-sidebar') || 'CmdOrCtrl+Shift+B',
+          accelerator: shortcutByLabel('view.condensed-sidebar'),
           click: item => {
             store.dispatch(setSetting('condencedSidebar', item.checked));
           }

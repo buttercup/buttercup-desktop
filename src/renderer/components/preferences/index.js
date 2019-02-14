@@ -9,7 +9,6 @@ import { IconStyles } from '../icon';
 import * as eva from 'eva-icons';
 
 import { Translate } from '../../../shared/i18n';
-import { closeCurrentWindow } from '../../system/utils';
 
 import { Wrapper, Menu, MenuInner, Content } from './ui-elements';
 
@@ -50,10 +49,6 @@ class Preferences extends PureComponent {
     general: 'options-outline',
     shortcuts: 'book-open-outline'
   };
-
-  handleClose() {
-    closeCurrentWindow();
-  }
 
   componentDidMount() {
     eva.replace();

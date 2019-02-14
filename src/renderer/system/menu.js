@@ -7,6 +7,7 @@ import {
   getFacadeFieldValue,
   getEntryURL
 } from '../../shared/buttercup/entries';
+import { getShortcutByKey } from '../../shared/utils/global-shortcuts';
 
 const { Menu } = remote;
 const currentWindow = remote.getCurrentWindow();
@@ -111,12 +112,16 @@ export function createCopyMenu(entry, currentEntry, globalShortcuts) {
   const props = [
     {
       label: i18n.t('entry-menu.username'),
-      accelerator: showKeys ? globalShortcuts['entry-menu.username'] : null,
+      accelerator: showKeys
+        ? getShortcutByKey('entry-menu.username', globalShortcuts)
+        : null,
       click: () => copyToClipboard(getFacadeFieldValue(entry, 'username'))
     },
     {
       label: i18n.t('entry-menu.password'),
-      accelerator: showKeys ? globalShortcuts['entry-menu.password'] : null,
+      accelerator: showKeys
+        ? getShortcutByKey('entry-menu.password', globalShortcuts)
+        : null,
       click: () => copyToClipboard(getFacadeFieldValue(entry, 'password'))
     }
   ];

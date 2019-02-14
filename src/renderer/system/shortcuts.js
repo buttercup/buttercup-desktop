@@ -8,6 +8,8 @@ import {
 } from '../../shared/selectors';
 import { copyToClipboard, readClipboard } from './utils';
 import { getFacadeFieldValue } from '../../shared/buttercup/entries';
+import { getShortcutByKey } from '../../shared/utils/global-shortcuts';
+
 const __cache = {
   timer: null,
   shortcuts: []
@@ -46,13 +48,13 @@ export const setupShortcuts = store => {
 
   __cache.shortcuts = {
     password: transformToMousetrapShortcut(
-      globalShortcuts['entry-menu.password'] || 'mod+c'
+      getShortcutByKey('entry-menu.password', globalShortcuts)
     ),
     username: transformToMousetrapShortcut(
-      globalShortcuts['entry-menu.username'] || 'mod+b'
+      getShortcutByKey('entry-menu.username', globalShortcuts)
     ),
     lock: transformToMousetrapShortcut(
-      globalShortcuts['archive-menu.lock'] || 'mod+l'
+      getShortcutByKey('archive-menu.lock', globalShortcuts)
     )
   };
 

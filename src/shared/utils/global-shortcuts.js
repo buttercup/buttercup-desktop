@@ -13,3 +13,6 @@ export const DEFAULT_GLOBAL_SHORTCUTS = {
   'entry-menu.password': 'CmdOrCtrl+C',
   'archive-menu.lock': 'CmdOrCtrl+L'
 };
+
+export const getShortcutByKey = (key, stateShortcuts) =>
+  stateShortcuts[key] || DEFAULT_GLOBAL_SHORTCUTS[key];
