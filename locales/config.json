@@ -52,6 +52,9 @@
     },
     "tr": {
       "name": "Turkish"
+    },
+    "zh_cn": {
+      "name": "简体中文"
     }
   }
 }
