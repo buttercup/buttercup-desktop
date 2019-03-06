@@ -26,7 +26,6 @@ const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 
 let appIsReady = false;
-let appTriedToQuit = false;
 let initialFile = null;
 
 // Crash reporter for alpha and beta releases
@@ -147,10 +146,7 @@ app.on('ready', async () => {
   // When user closes all windows
   // On Windows, the command practice is to quit the app.
   app.on('window-all-closed', () => {
-    if (
-      appTriedToQuit ||
-      (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
-    ) {
+    if (process.platform !== 'darwin') {
       app.quit();
     }
   });
