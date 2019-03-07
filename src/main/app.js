@@ -14,6 +14,7 @@ import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
+import { getSetting } from '../shared/selectors';
 
 log.info('Buttercup starting up...');
 
@@ -25,6 +26,7 @@ const storage = pify(jsonStorage);
 const windowManager = getWindowManager();
 
 let appIsReady = false;
+let appTriedToQuit = false;
 let initialFile = null;
 
 // Crash reporter for alpha and beta releases
@@ -145,7 +147,7 @@ app.on('ready', async () => {
   // When user closes all windows
   // On Windows, the command practice is to quit the app.
   app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+    if (appTriedToQuit || process.platform !== 'darwin') {
       app.quit();
     }
   });
