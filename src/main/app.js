@@ -14,7 +14,6 @@ import { sleep } from '../shared/utils/promise';
 import { setupActions } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
-import { getSetting } from '../shared/selectors';
 
 log.info('Buttercup starting up...');
 
