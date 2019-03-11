@@ -1,0 +1,241 @@
+{
+  "app-menu": {
+    "app": {
+      "about": "关于",
+      "check-for-updates": "检查更新...",
+      "services": "服务",
+      "hide": "隐藏",
+      "hideothers": "隐藏其他",
+      "unhide": "显示",
+      "quit": "退出"
+    },
+    "archive": {
+      "archive": "档案",
+      "file": "文件",
+      "new": "新建档案",
+      "open": "打开档案",
+      "search": "搜索档案",
+      "connect-cloud-sources": "链接云端存储",
+      "import": {
+        "import": "导入",
+        "import-from-type": "导入 {{name}} 档案 (.{{extension}})",
+        "import-to-type": "至 {{name}}",
+        "no-available-archives": "没有可导入的档案。"
+      },
+      "export": {
+        "export": "导出",
+        "export-archive": "导出 {{name}} 为 CSV",
+        "no-available-archives": "没有可导出的档案。"
+      },
+      "close": "关闭"
+    },
+    "edit": {
+      "edit": "编辑",
+      "undo": "撤销",
+      "redo": "重做",
+      "cut": "剪切",
+      "copy": "复制",
+      "paste": "粘贴",
+      "pasteandmatchstyle": "粘贴并匹配样式",
+      "delete": "删除",
+      "selectall": "全选",
+      "speech": {
+        "speech": "语音",
+        "startspeaking": "开始朗读",
+        "stopspeaking": "停止朗读"
+      }
+    },
+    "view": {
+      "view": "查看",
+      "condensed-sidebar": "简化侧边栏",
+      "language": "语言",
+      "enable-tray-icon": "显示任务栏图标",
+      "reload": "重新加载",
+      "forcereload": "强制重新加载",
+      "toggledevtools": "开发者工具",
+      "togglefullscreen": "全屏切换",
+      "auto-hide-menubar": "自动隐藏菜单栏"
+    },
+    "window": {
+      "window": "窗口",
+      "minimize": "最小化",
+      "close": "关闭",
+      "zoom": "缩放",
+      "front": "置顶"
+    },
+    "system": {
+      "system": "系统",
+      "enable-browser-access": "启用浏览器访问"
+    },
+    "help": {
+      "help": "帮助",
+      "visit-our-website": "访问官网",
+      "privacy-policy": "隐私策略",
+      "view-changelog-for-v": "查看 v{{version}}更新日志"
+    },
+    "tray": {
+      "quit": "退出",
+      "open": "显示Buttercup"
+    }
+  },
+  "archive-search": {
+    "searchterm": "搜索...",
+    "nothing-found": "未找到任何内容"
+  },
+  "archive": {
+    "add-archive": "添加档案",
+    "archive-saved-loading-info": "档案正在保存<br>自动退出*"
+  },
+  "archive-dialog": {
+    "buttercup-archives": "Buttercup档案",
+    "load-a-buttercup-archive": "加载Buttercup档案",
+    "create-a-new-buttercup-archive": "新建Buttercup档案"
+  },
+  "archive-menu": {
+    "unlock": "解锁",
+    "change-color": "更改颜色",
+    "change-password": "更改密码",
+    "import": "导入",
+    "import-from-type": "导入 {{name}} 档案 (.{{extension}})",
+    "export": "Export",
+    "archive-remove-with-name": "移除 {{name}}",
+    "open": "打开",
+    "lock": "锁定"
+  },
+  "cloud-source": {
+    "cancel": "取消",
+    "go-back": "返回",
+    "new-archive": "新建档案",
+    "open-in-buttercup": "在Buttercup中打开",
+    "connect-to-dropbox": "链接Dropbox",
+    "authenticate-with-dropbox": "Dropbox授权验证",
+    "dropbox-description-text": "将ButterCup链接至Dropbox帐户以读取和保存你的档案。<br />我们不会保存你的Dropbox用户名或密码。",
+    "connect-to-wedav": "链接{{title}}服务器",
+    "username": "用户名",
+    "password": "密码",
+    "connect": "链接",
+    "webdav-description-text": "输入你的{{title}}终结点地址、用户名和密码以进行链接然后选择Buttercup档案。我们将<strong>保存</strong>你的凭据并对其进行加密。",
+    "name": "名称",
+    "size": "大小",
+    "date": "日期"
+  },
+  "confirm-dialog": {
+    "yes": "是",
+    "no": "否"
+  },
+  "copyable": {
+    "hide": "隐藏",
+    "reveal": "显示",
+    "copy": "复制"
+  },
+  "copyable-menu": {
+    "copy-to-clipboard": "复制到剪贴板",
+    "reveal-password": "显示密码"
+  },
+  "entry": {
+    "add-entry": "添加条目",
+    "select-or-create-an-entry": "选择或创建条目",
+    "title": "标题",
+    "untitled": "未命名",
+    "username": "用户名",
+    "password": "密  码",
+    "secure-password": "请使用安全的密码",
+    "custom-fields": "自定义字段",
+    "no-custom-fields-info-text": "暂无自定义字段。何不添加一个呢？",
+    "add-new-field": "新增字段",
+    "label": "标签",
+    "new-field": "新建字段",
+    "edit": "编辑",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "entry-inputs-empty-info": "请至少输入标题。",
+    "entry-title-empty-info": "请输入标题。",
+    "custom-fields-label-empty-info": "你忘记为一个或多个自定义字段设置标签。",
+    "are-you-sure-question": "是否确认删除？",
+    "displaying-entries": "总计 {{count}} 项条目",
+    "no-value": "No Value",
+    "quit-unsave-entry": "你将丢失更改内容，是否确认？"
+  },
+  "entry-menu": {
+    "copy-to-clipboard": "复制到剪贴板",
+    "username": "用户名",
+    "password": "密  码",
+    "open-url-in-browser": "在浏览器中打开",
+    "move-to-group": "移动至分组",
+    "move-to-trash": "移动至垃圾桶",
+    "delete-permanently": "永久删除"
+  },
+  "error": {
+    "archive-not-found": "未找到档案。",
+    "authentication-failed": "验证失败。",
+    "unknown": "发生未知错误",
+    "passwords-dont-match": "你的密码不匹配。",
+    "group-not-found": "未找到分组。",
+    "sort-definition-not-found": "未找到排序定义",
+    "insufficient-data-provided": "提供的数据不足以进行排序",
+    "check-for-update": "更新时发生错误，请稍后再试。",
+    "invalid-import-type-requested": "请求的导入类型无效",
+    "open-file-for-importing": "导入函数不应在主窗口未运行的情况下运行。",
+    "entry-not-found": "未找到条目",
+    "dropbox-connection-failed-info": "与Dropbox服务器的链接失败。 请稍后再试",
+    "webdav-connection-failed-info": "与{{endpoint}}的链接失败。 请检查你的凭据后重试。"
+  },
+  "group": {
+    "new-group": "新建分组",
+    "untitled": "未命名"
+  },
+  "group-menu": {
+    "new-group": "新建分组",
+    "add-group": "添加分组",
+    "move-to-root": "移动至根目录",
+    "move-to-group": "移动至分组",
+    "rename": "重命名",
+    "delete": "删除",
+    "move-to-group-custom": "移动至{{title}}",
+    "empty-trash": "清空垃圾桶",
+    "empty-trash-question": "是否确认清空垃圾桶？",
+    "title-asc": "标题：升序",
+    "title-desc": "标题：降序"
+  },
+  "intro": {
+    "welcome-title": "欢迎使用Buttercup.",
+    "welcome-back-title": "欢迎使用Buttercup.",
+    "welcome-caption": "你尚未添加任何档案。何不添加一个呢？",
+    "unlock-archive": "解锁档案 ({{os}})."
+  },
+  "intro-menu": {
+    "open-archive-file": "打开档案文件",
+    "new-archive-file": "新建档案文件",
+    "connect-cloud-sources": "链接云端存储"
+  },
+  "password-dialog": {
+    "master-password": "主密码",
+    "new-password": "新密码",
+    "password": "密码",
+    "confirm-password": "确认密码",
+    "confirm": "确认",
+    "nevermind": "没关系"
+  },
+  "password-generator": {
+    "password-generator": "生成密码"
+  },
+  "search": {
+    "search": "搜索"
+  },
+  "sort": {
+    "title-asc": "标题：升序",
+    "title-desc": "标题：降序",
+    "time-asc": "时间：升序",
+    "time-desc": "时间：降序"
+  },
+  "update": {
+    "installing": "正在安装",
+    "update-available-message": "Buttercup {{version}}现已推出。 你的当前版本为{{currentVersion}}。 你需要现在下载吗？",
+    "new-version-available": "新版本Buttercup可供更新！",
+    "not-now": "暂时不用",
+    "download": "下载并安装",
+    "download-manual": "打开发行页面",
+    "release-notes": "发行说明:"
+  }
+}
