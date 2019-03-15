@@ -1,7 +1,7 @@
 {
   "app-menu": {
     "app": {
-      "about": "O Buttercupu",
+      "about": "O Buttercup",
       "check-for-updates": "Zkontrolovat aktualizace...",
       "services": "Služby",
       "hide": "Skrýt",
@@ -21,6 +21,11 @@
         "import-from-type": "Z {{name}} archivu (.{{extension}})",
         "import-to-type": "Do {{name}}",
         "no-available-archives": "Žádné archivy pro import."
+      },
+      "export": {
+        "export": "Export",
+        "export-archive": "Export {{name}} do CSV",
+        "no-available-archives": "Žádný dostupný archiv pro export."
       },
       "close": "Zavřít"
     },
@@ -42,13 +47,14 @@
     },
     "view": {
       "view": "Zobrazit",
-      "condensed-sidebar": "Zkrátit boční panel",
+      "condensed-sidebar": "Zmenšit boční panel",
       "language": "Jazyk",
+      "enable-tray-icon": "Zobrazit stavovou ikonu",
       "reload": "Obnovit",
-      "forcereload": "Vynutit obnovení ",
+      "forcereload": "Vynutit obnovení",
       "toggledevtools": "Vývojařské nástroje",
       "togglefullscreen": "Celá obrazovka",
-      "auto-hide-menubar": "Automaticky schovávat menu"
+      "auto-hide-menubar": "Automaticky schovávat stavovou ikonu"
     },
     "window": {
       "window": "Okno",
@@ -57,11 +63,19 @@
       "zoom": "Zoom",
       "front": "Přenést do popředí"
     },
+     "system": {
+      "system": "Systém",
+      "enable-browser-access": "Povolit přístup z prohlížečů"
+    },
     "help": {
       "help": "Nápověda",
       "visit-our-website": "Navštivte naše stránky",
       "privacy-policy": "Politika soukromí ",
-      "view-changelog-for-v": "Zobrazit změny v{{version}}"
+      "view-changelog-for-v": "Zobrazit změny ve verzi {{version}}"
+    },
+      "tray": {
+      "quit": "Ukončit",
+      "open": "Otevřít Buttercup"
     }
   },
   "archive-search": {
@@ -83,6 +97,7 @@
     "change-password": "Změnit heslo",
     "import": "Import",
     "import-from-type": "Z {{name}} archiv (.{{extension}})",
+    "export": "Export",
     "archive-remove-with-name": "Odebrat {{name}}",
     "open": "Otevřít",
     "lock": "Zamknout"
@@ -119,12 +134,12 @@
   },
   "entry": {
     "add-entry": "Přidat záznam",
-    "select-or-create-an-entry": "Vybrat nebo vytvořit záznam",
+    "select-or-create-an-entry": "Vyberte nebo vytvořte záznam",
     "title": "Název",
     "untitled": "Nepojmenováno",
     "username": "Uživatelské jméno",
     "password": "Heslo",
-    "secure-password": "Bezppečné heslo",
+    "secure-password": "Bezpečné heslo",
     "custom-fields": "Volitelná pole",
     "no-custom-fields-info-text": "Nemáte žádné volitelné pole. Nechcete si jedno přidat?",
     "add-new-field": "Přidat nové pole",
@@ -137,7 +152,10 @@
     "entry-inputs-empty-info": "Vložte prosím alespoň název.",
     "entry-title-empty-info": "Prosím vložte název.",
     "custom-fields-label-empty-info": "Zapomněli jste nastavit označení jednoho nebo více polí.",
-    "are-you-sure-question": "Jste si jistí?"
+    "are-you-sure-question": "Jste si jistí?",
+    "displaying-entries": "Zobrazeno {{count}} záznamů",
+    "no-value": "Žádná hodnota",
+    "quit-unsave-entry": "Všechny změny budou zahozeny. Jste si jistí?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Zkopírovat do schránky",
@@ -181,9 +199,9 @@
     "title-desc": "Název: Sestupně"
   },
   "intro": {
-    "welcome-title": "Vítejte v Buttercupu.",
-    "welcome-back-title": "Vítejte zpět v Buttercupu.",
-    "welcome-caption": "Zatím nemáte žádný archivt. Nechcete si jeden přidat?",
+    "welcome-title": "Vítejte v Buttercup.",
+    "welcome-back-title": "Vítejte zpět v Buttercup.",
+    "welcome-caption": "Zatím nemáte žádný archiv. Nechcete si jeden vytvořit nebo přidat?",
     "unlock-archive": "Pro začátek odemkněte archiv ({{os}})."
   },
   "intro-menu": {
@@ -213,10 +231,11 @@
   },
   "update": {
     "installing": "Instaluji",
-    "update-available-message": "Je dostupná {{version}} Buttercupu. Klikněte pro spuštění instalace.",
-    "new-version-available": "Nová verze Buttercupu je k dispozici!",
+    "update-available-message": "Je dostupná verze {{version}}. Klikněte pro spuštění instalace.",
+    "new-version-available": "Nová verze Buttercup je připravena!",
     "not-now": "Teď ne",
     "download": "Stáhnout a nainstalovat",
+    "download-manual": "Otevřít stránky s informacemi",
     "release-notes": "Popis změn:"
   }
-}
+} 
