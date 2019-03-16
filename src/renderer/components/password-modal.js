@@ -5,7 +5,7 @@ import { translate } from 'react-i18next';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Input as BaseInput, Button, Meter } from '@buttercup/ui';
-import ErrorIcon from 'react-icons/lib/md/warning';
+import { MdWarning as ErrorIcon } from 'react-icons/md';
 import { Translate } from '../../shared/i18n';
 
 const Input = styled(BaseInput)`

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Fragment } from 'react';
 import { Field, FieldArray } from 'redux-form';
-import PlusIcon from 'react-icons/lib/md/add';
-import RemoveIcon from 'react-icons/lib/fa/trash-o';
+import { MdAdd as PlusIcon } from 'react-icons/md';
+import { FaTrashO as RemoveIcon } from 'react-icons/fa';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
 import { Button } from '@buttercup/ui';

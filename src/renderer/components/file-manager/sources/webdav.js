@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import url from 'url';
-import InfoIcon from 'react-icons/lib/md/info-outline';
+import { MdInfoOutline as InfoIcon } from 'react-icons/md';
 import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
 import styled from 'styled-components';
@@ -84,8 +84,7 @@ class Webdav extends PureComponent {
       password
     });
 
-    fs
-      .readDirectory('/')
+    fs.readDirectory('/')
       .then(() => {
         this.fs = fs;
         this.setState({

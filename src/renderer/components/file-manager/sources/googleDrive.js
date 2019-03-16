@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import GoogleDriveIcon from 'react-icons/lib/fa/google-drive';
-import InfoIcon from 'react-icons/lib/md/info-outline';
+import { FaGoogleDrive as GoogleDriveIcon } from 'react-icons/fa';
+import { MdInfoOutline as InfoIcon } from 'react-icons/md';
 import { Button, SmallType, Center } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
