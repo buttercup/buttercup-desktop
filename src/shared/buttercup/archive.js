@@ -15,13 +15,10 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
     ...credentials,
     type
   });
-  sourceCredentials.setValue(
-    'datasource',
-    JSON.stringify({
-      type,
-      ...datasource
-    })
-  );
+  sourceCredentials.setValue('datasource', {
+    type,
+    ...datasource
+  });
 
   const manager = getSharedArchiveManager();
 
@@ -38,12 +35,9 @@ export function addArchiveToArchiveManager(masterConfig, masterPassword) {
       return manager
         .addSource(source)
         .then(() =>
-          unlockArchiveInArchiveManager(
-            source.id,
-            masterPassword,
-            isNew
-          ).catch(err =>
-            manager.removeSource(source.id).then(() => Promise.reject(err))
+          unlockArchiveInArchiveManager(source.id, masterPassword, isNew).catch(
+            err =>
+              manager.removeSource(source.id).then(() => Promise.reject(err))
           )
         );
     })
@@ -144,9 +138,8 @@ export function saveWorkspace(archiveId) {
       () => {
         return workspace
           .localDiffersFromRemote()
-          .then(
-            differs =>
-              differs ? workspace.mergeFromRemote().then(() => true) : false
+          .then(differs =>
+            differs ? workspace.mergeFromRemote().then(() => true) : false
           )
           .then(shouldSave => (shouldSave ? workspace.save() : null));
       },

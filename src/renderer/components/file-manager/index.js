@@ -14,6 +14,7 @@ import {
 } from '../../system/utils';
 import TypeSelector from './type-selector';
 import Dropbox from './sources/dropbox';
+import GoogleDrive from './sources/googleDrive';
 import Webdav from './sources/webdav';
 
 const Wrapper = styled(Flex)`
@@ -27,9 +28,12 @@ const Footer = styled(Flex)`
 `;
 
 const PathRenderer = ({ pathName, ...props }) => {
+  console.log('PATH', pathName);
   switch (pathName) {
     case '/dropbox':
       return <Dropbox {...props} />;
+    case '/googledrive':
+      return <GoogleDrive {...props} />;
     case '/owncloud':
       return <Webdav brand="owncloud" {...props} />;
     case '/nextcloud':

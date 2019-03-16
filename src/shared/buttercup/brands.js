@@ -1,4 +1,5 @@
 import dropboxLogo from '../../renderer/styles/img/logos/dropbox.svg';
+import googleDriveLogo from '../../renderer/styles/img/logos/googledrive.png';
 import ownCloud from '../../renderer/styles/img/logos/owncloud.png';
 import ownCloudSquare from '../../renderer/styles/img/logos/owncloud-square.svg';
 import nextCloud from '../../renderer/styles/img/logos/nextcloud.svg';
@@ -12,6 +13,12 @@ export const brands = {
     name: 'Dropbox',
     logo: dropboxLogo,
     icon: dropboxLogo
+  },
+  [ArchiveTypes.GOOGLEDRIVE]: {
+    remote: true,
+    name: 'Google Drive',
+    logo: googleDriveLogo,
+    icon: googleDriveLogo
   },
   [ArchiveTypes.OWNCLOUD]: {
     remote: true,

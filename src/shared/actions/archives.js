@@ -113,6 +113,21 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
           masterPassword
         )
       );
+    case ArchiveTypes.GOOGLEDRIVE:
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            datasource: {
+              token: config.token,
+              fileID: path
+            }
+          },
+          masterPassword
+        )
+      );
     case ArchiveTypes.OWNCLOUD:
     case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
