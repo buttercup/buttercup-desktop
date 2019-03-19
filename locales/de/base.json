@@ -56,6 +56,10 @@
       "zoom": "Zoomen",
       "front": "Alle nach vorn bringen"
     },
+    "system": {
+      "system": "System",
+      "enable-browser-access": "Browserzugriff aktivieren"
+    },
     "help": {
       "help": "Hilfe",
       "visit-our-website": "Besuche unsere Website",
@@ -83,6 +87,7 @@
   "archive-menu": {
     "unlock": "Entsperren",
     "change-color": "Farbe wechseln",
+    "change-password": "Passwort ändern",
     "import": "Importieren",
     "import-from-type": "Von {{name}} Archiv (.{{extension}})",
     "archive-remove-with-name": "Entferne {{name}}",
@@ -139,7 +144,10 @@
     "entry-inputs-empty-info": "Bitte gib mindestens einen Titel an.",
     "entry-title-empty-info": "Bitte gib einen Titel ein.",
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
-    "are-you-sure-question": "Bist du dir sicher?"
+    "are-you-sure-question": "Bist du dir sicher?",
+    "displaying-entries": "Anzeigen von {{count}}} Einträgen",
+    "no-value": "Kein Wert",
+    "quit-unsave-entry": "Du wirst deine Änderungen verlieren, bist du sicher?"
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
