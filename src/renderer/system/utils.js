@@ -1,10 +1,23 @@
 import path from 'path';
 import { clipboard, remote, shell } from 'electron';
+import ms from 'ms';
+
+const __cache = {
+  timer: null
+};
 
 const currentWindow = remote.getCurrentWindow();
 
 export function copyToClipboard(text) {
   clipboard.writeText(text);
+
+  // Clean the clipboard after 15s
+  // @TODO: Make a UI for this.
+  __cache.timer = setTimeout(function clipboardPurgerClosure() {
+    if (readClipboard() === text) {
+      copyToClipboard('');
+    }
+  }, ms('15s'));
 }
 
 export function readClipboard() {
