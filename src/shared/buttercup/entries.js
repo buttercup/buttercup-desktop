@@ -57,6 +57,18 @@ export function validateEntry(entry) {
     if (fields.filter(field => !field.property).length > 0) {
       errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
     }
+
+    if (fields.length > 3) {
+      var titleofFields = [];
+
+      for (var i = 3; i < fields.length; i++) {
+        titleofFields.push(fields[i].property);
+      }
+
+      if (titleofFields.length !== new Set(titleofFields).size) {
+        errorMessages.push(i18n.t('entry.duplicate-label-found'));
+      }
+    }
   }
 
   if (errorMessages.length > 0) {
