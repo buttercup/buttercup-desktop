@@ -8,7 +8,13 @@ import { languages } from '../../../shared/i18n';
 import { getSetting } from '../../../shared/selectors';
 import { setSetting } from '../../../shared/actions/settings';
 
-import { Grid, LabelWrapper, Checkbox, Input, Select } from './ui-elements';
+import {
+  Grid,
+  LabelWrapper,
+  Checkbox,
+  Input,
+  Select
+} from './elements/ui-elements';
 
 const DEFAULT_CLIPBOARD_CLEAR_SECONDS = '15';
 const DEFAULT_ARCHIVE_CLOSE_SECONDS = '0';

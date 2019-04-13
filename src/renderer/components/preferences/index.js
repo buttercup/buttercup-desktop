@@ -1,55 +1,30 @@
-import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { translate } from 'react-i18next';
-import orderBy from 'lodash/orderBy';
 import GlobalStyles from '../../components/global-styles';
 import { IconStyles } from '../icon';
 import * as eva from 'eva-icons';
 
 import { Translate } from '../../../shared/i18n';
 
-import { Wrapper, Menu, MenuInner, Content } from './ui-elements';
+import { Wrapper, Menu, MenuInner, Content } from './elements/ui-elements';
 
 // router views
-const preferencesFiles = require.context('./', true, /^\.\/(?!_).*\.js$/);
-const defaultView = 'general';
-const views = orderBy(
-  preferencesFiles
-    .keys()
-    .filter(
-      fileName =>
-        !fileName.includes('index') && preferencesFiles(fileName).default
-    )
-    .map(fileName => {
-      const component = preferencesFiles(fileName).default;
-      const key = fileName
-        .substr(0, fileName.lastIndexOf('.'))
-        .replace('./', '');
-
-      if (component) {
-        return {
-          key,
-          path: key === defaultView ? '/' : `/${key}`,
-          component
-        };
-      }
-    }),
-  [{ key: defaultView }],
-  ['desc']
-);
+const views = {
+  general: {
+    component: require('./general').default,
+    icon: 'options-outline',
+    default: true
+  },
+  shortcuts: {
+    component: require('./shortcuts').default,
+    icon: 'book-open-outline',
+    default: false
+  }
+};
 
 class Preferences extends PureComponent {
-  static propTypes = {
-    t: PropTypes.func
-  };
-
-  icons = {
-    general: 'options-outline',
-    shortcuts: 'book-open-outline'
-  };
-
   componentDidMount() {
     eva.replace();
   }
@@ -60,15 +35,15 @@ class Preferences extends PureComponent {
         <Wrapper>
           <Menu>
             <MenuInner>
-              {views.map(view => (
+              {Object.keys(views).map(view => (
                 <NavLink
-                  key={view.path}
+                  key={view}
                   exact
-                  to={view.path}
+                  to={'/' + (views[view].default ? '' : view)}
                   activeclass="active"
                 >
-                  <i data-eva={this.icons[view.key]} data-eva-fill="white" />
-                  <Translate i18nKey={`preferences.${view.key}`} parent="div" />
+                  <i data-eva={views[view].icon} data-eva-fill="white" />
+                  <Translate i18nKey={`preferences.${view}`} parent="div" />
                 </NavLink>
               ))}
             </MenuInner>
@@ -76,12 +51,17 @@ class Preferences extends PureComponent {
 
           <Scrollbars style={{ display: 'flex' }}>
             <Content>
-              {views.map(({ key, path, component: Component }) => (
+              {Object.keys(views).map(key => (
                 <Route
                   key={key}
                   exact
-                  path={path}
-                  render={props => <Component {...this.props} {...props} />}
+                  path={'/' + (views[key].default ? '' : key)}
+                  render={props =>
+                    React.createElement(views[key].component, {
+                      ...this.props,
+                      ...props
+                    })
+                  }
                 />
               ))}
             </Content>

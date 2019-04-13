@@ -5,7 +5,11 @@ import { ipcRenderer as ipc } from 'electron';
 import { setGlobalShortcut } from '../../../shared/actions/settings';
 import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/global-shortcuts';
 import { getSetting } from '../../../shared/selectors';
-import { Grid, Input } from './ui-elements';
+import { Grid } from './elements/ui-elements';
+import ShortcutInput, {
+  createShortcutObjectFromString,
+  createShortcutStringFromObject
+} from './elements/shortcut-input';
 import * as eva from 'eva-icons';
 
 class Items extends PureComponent {
@@ -19,27 +23,36 @@ class Items extends PureComponent {
   render() {
     const { list, t, changeInput, globalShortcuts } = this.props;
 
-    return list.map(shortcutName => (
-      <Input
-        key={shortcutName}
-        type="text"
-        name={shortcutName}
-        defaultValue={DEFAULT_GLOBAL_SHORTCUTS[shortcutName]}
-        title={t(shortcutName)}
-        onReset={e =>
-          ipc.send('register-global-shortcut', {
-            name: shortcutName,
-            accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
-          })}
-        onChange={e => changeInput(e)}
-        onBlur={e =>
-          ipc.send('register-global-shortcut', {
-            name: shortcutName,
-            accelerator: e.target.value
-          })}
-        value={globalShortcuts[shortcutName]}
-      />
-    ));
+    return list.map(shortcutName => {
+      return (
+        <ShortcutInput
+          key={shortcutName}
+          defaultShortcut={createShortcutObjectFromString(
+            DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+          )}
+          shortcut={createShortcutObjectFromString(
+            globalShortcuts[shortcutName]
+          )}
+          title={t(shortcutName) + ' - ' + globalShortcuts[shortcutName]}
+          onBlur={shortcut => {
+            ipc.send('register-global-shortcut', {
+              name: shortcutName,
+              accelerator: createShortcutStringFromObject(shortcut)
+            });
+
+            changeInput(shortcut, createShortcutStringFromObject(shortcut));
+          }}
+          onReset={shortcut => {
+            ipc.send('register-global-shortcut', {
+              name: shortcutName,
+              accelerator: DEFAULT_GLOBAL_SHORTCUTS[shortcutName]
+            });
+
+            changeInput(shortcut, createShortcutStringFromObject(shortcut));
+          }}
+        />
+      );
+    });
   }
 }
 
@@ -55,9 +68,9 @@ class Shortcuts extends PureComponent {
     ...this.props.globalShortcuts
   };
 
-  changeInput = ({ target: { name, value } }) => {
+  changeInput = (key, value) => {
     this.setState({
-      [name]: value
+      [key]: value
     });
   };
 

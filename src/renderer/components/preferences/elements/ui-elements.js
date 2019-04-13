@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Input as BaseInput } from '@buttercup/ui';
-import { isOSX } from '../../../shared/utils/platform';
-import { Translate } from '../../../shared/i18n';
+import { isOSX } from '../../../../shared/utils/platform';
+import { Translate } from '../../../../shared/i18n';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -245,7 +245,7 @@ const InputStyle = styled.input`
   }
 `;
 
-const ResetButton = styled.span`
+export const ResetButton = styled.span`
   position: absolute;
   right: 0;
   font-size: 0.9em;

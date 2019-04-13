@@ -67,10 +67,11 @@ const acceleratorIsValid = (store, accelerator, name) => {
     ...getSetting(state, 'globalShortcuts')
   };
 
-  const findAccelerator = Object.keys(globalShortcuts).find(
-    shortcutName =>
+  const findAccelerator = Object.keys(globalShortcuts).find(shortcutName => {
+    return (
       globalShortcuts[shortcutName] === accelerator && shortcutName !== name
-  );
+    );
+  });
 
   return !findAccelerator;
 };

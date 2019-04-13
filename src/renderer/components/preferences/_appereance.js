@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { getSetting } from '../../../shared/selectors';
 import { setSetting } from '../../../shared/actions/settings';
 
-import { Range, LabelWrapper } from './ui-elements';
+import { Range, LabelWrapper } from './elements/ui-elements';
 
 class Appearance extends PureComponent {
   static propTypes = {
