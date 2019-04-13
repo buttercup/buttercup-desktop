@@ -145,7 +145,7 @@
     "entry-title-empty-info": "Bitte gib einen Titel ein.",
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
     "are-you-sure-question": "Bist du dir sicher?",
-    "displaying-entries": "Anzeigen von {{count}}} Einträgen",
+    "displaying-entries": "Anzeigen von {{count}} Einträgen",
     "no-value": "Kein Wert",
     "quit-unsave-entry": "Du wirst deine Änderungen verlieren, bist du sicher?"
   },
