@@ -33,7 +33,7 @@ class Items extends PureComponent {
           shortcut={createShortcutObjectFromString(
             globalShortcuts[shortcutName]
           )}
-          title={t(shortcutName) + ' - ' + globalShortcuts[shortcutName]}
+          title={t(shortcutName)}
           onBlur={shortcut => {
             ipc.send('register-global-shortcut', {
               name: shortcutName,

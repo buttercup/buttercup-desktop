@@ -232,7 +232,7 @@ export default class ShortcutInput extends React.Component {
   inputRef = React.createRef();
 
   render() {
-    const { tabIndex, title, onChange } = this.props;
+    const { tabIndex, title, onChange, defaultShortcut, shortcut } = this.props;
     const className = classNames('box', {
       invalid: !this.isEmpty && !this.isValid
     });
@@ -254,13 +254,18 @@ export default class ShortcutInput extends React.Component {
             onChange={onChange}
           />
         </Box>
-        <ResetButton
-          type="button"
-          tabIndex={tabIndex}
-          onClick={this.clearShortcut}
-        >
-          <Translate i18nKey="preferences.reset" />
-        </ResetButton>
+        {createShortcutStringFromObject(defaultShortcut) !==
+        createShortcutStringFromObject(shortcut) ? (
+          <ResetButton
+            type="button"
+            tabIndex={tabIndex}
+            onClick={this.clearShortcut}
+          >
+            <Translate i18nKey="preferences.reset" />
+          </ResetButton>
+        ) : (
+          ''
+        )}
       </ShortcutInputWrapper>
     );
   }
