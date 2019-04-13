@@ -111,7 +111,6 @@ export const createShortcutObjectFromString = shortcutStr => {
  */
 export const createShortcutStringFromObject = shortcutObj => {
   const shortcutArr = [];
-  console.log(shortcutObj);
 
   if (shortcutObj.metaKey) {
     shortcutArr.push('Cmd');
@@ -147,7 +146,6 @@ export default class ShortcutInput extends React.Component {
     if (event.keyCode === 9) {
       return;
     }
-    console.log(event.keyCode);
 
     const CORRECT_KEYS = {
       188: 44, // comma
