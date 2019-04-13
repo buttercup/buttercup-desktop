@@ -81,7 +81,7 @@ class General extends PureComponent {
         ) : (
           ''
         )}
-        <div style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 15 }}>
           <Checkbox
             onChange={setUpdateOnStartDisabled}
             checked={updateOnStartDisabled}

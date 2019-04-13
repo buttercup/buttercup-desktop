@@ -10,7 +10,6 @@ import ShortcutInput, {
   createShortcutObjectFromString,
   createShortcutStringFromObject
 } from './elements/shortcut-input';
-import * as eva from 'eva-icons';
 
 class Items extends PureComponent {
   static propTypes = {
@@ -97,8 +96,6 @@ class Shortcuts extends PureComponent {
         });
       }
     );
-
-    eva.replace();
   }
 
   componentWillUnmount() {
@@ -131,10 +128,7 @@ class Shortcuts extends PureComponent {
       <div>
         <Grid gap={20}>
           <div>
-            <h3>
-              <i data-eva="globe-2-outline" width="24" />
-              {t('preferences.shortcuts-global')}
-            </h3>
+            <h3>{t('preferences.shortcuts-global')}</h3>
             <Items
               list={preferences}
               t={t}
@@ -142,10 +136,7 @@ class Shortcuts extends PureComponent {
               changeInput={this.changeInput}
             />
 
-            <h3>
-              <i data-eva="compass-outline" width="24" />
-              {t('preferences.shortcuts-others')}
-            </h3>
+            <h3>{t('preferences.shortcuts-others')}</h3>
             <Items
               list={others}
               t={t}
@@ -155,10 +146,7 @@ class Shortcuts extends PureComponent {
           </div>
 
           <div>
-            <h3>
-              <i data-eva="menu-arrow-outline" width="24" />
-              {t('preferences.shortcuts-menu')}
-            </h3>
+            <h3>{t('preferences.shortcuts-menu')}</h3>
             <Items
               list={menu}
               t={t}

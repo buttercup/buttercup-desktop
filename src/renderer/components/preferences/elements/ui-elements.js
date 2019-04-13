@@ -22,6 +22,35 @@ export const Menu = styled.div`
   align-self: center;
 `;
 
+export const LabelWrapper = styled.div`
+  position: relative;
+  min-height: var(--form-input-height);
+  margin-right: var(--spacing-half);
+  padding-right: var(--spacing-one);
+  display: block;
+  padding: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  margin: 0 5px 20px 0;
+  input,
+  select {
+    margin-top: 4px;
+    &[type='checkbox'] {
+      margin-top: 0;
+    }
+    &[type='text'],
+    &[type='number'] {
+      display: block;
+    }
+  }
+  label {
+    font-size: 0.9em;
+    color: #999;
+    font-weight: 100;
+  }
+`;
+
 export const MenuInner = styled.div`
   padding: 0;
   align-self: center;
@@ -110,15 +139,46 @@ export const Grid = styled.section`
   grid-gap: ${props => (props.gap ? props.gap : 0)}px;
 `;
 
+const CheckboxWrapper = styled(LabelWrapper)`
+  position: relative;
+  display: block;
+  text-transform: none;
+  font-weight: normal;
+  margin: 0 5px 0 0;
+  label {
+    font-size: 1em;
+    font-weight: 500;
+  }
+  span {
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    width: 12px;
+    height: 7px;
+    border-radius: 3px;
+    transform: rotate(-45deg);
+    border-width: 0 0 3px 3px;
+    z-index: 1;
+    border-color: ${props => (props.isChecked ? '#fff' : '#cecece')};
+    border-style: solid;
+    transition: all 0.3s;
+  }
+  &:hover {
+    span {
+      border-color: ${props => (props.isChecked ? '#fff' : '#a9a9a9')};
+    }
+  }
+`;
 const CheckboxStyle = styled.input`
   -webkit-appearance: none;
   position: absolute;
-  left: 5px;
+  left: -4px;
   top: -1px;
   cursor: pointer;
   &:after {
     content: '';
-    border-radius: 100%;
+    border-radius: 5px;
     font-size: 14px;
     position: absolute;
     width: 20px;
@@ -126,18 +186,8 @@ const CheckboxStyle = styled.input`
     top: 0;
     left: 0;
     color: #fff;
-    background-color: #eee;
     transition: all 0.3s;
-  }
-  &:before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-radius: 100%;
-    z-index: 4;
-    top: 6px;
-    left: 6px;
-    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #cecece;
   }
   &:hover {
     border-color: #cecece;
@@ -147,8 +197,11 @@ const CheckboxStyle = styled.input`
     &:after {
       content: '';
       padding: 0 0 0 5px;
-      background-color: #cecece;
+      border: 1px solid #999;
       color: #fff;
+    }
+    & + label {
+      color: #999;
     }
   }
   &:checked {
@@ -159,12 +212,12 @@ const CheckboxStyle = styled.input`
       content: '';
       padding: 0 0 0 5px;
       color: #fff;
-      background-color: var(--brand-primary-darker);
+      border-color: var(--brand-primary);
+      background-color: var(--brand-primary);
     }
     & + label {
-      background-color: var(--brand-primary);
-      border: 1px solid var(--brand-primary);
-      color: #fff;
+      /* font-weight: 600; */
+      color: #999;
     }
     &:hover {
       background-color: var(--brand-primary);
@@ -173,9 +226,9 @@ const CheckboxStyle = styled.input`
   & + label {
     cursor: pointer;
     transition: all 0.3s;
-    padding: 7px 12px 7px 30px;
+    padding: 0 0 0 25px;
     background-color: #fff;
-    border: 1px solid #ddd;
+    color: #a9a9a9;
     border-radius: 14px;
   }
 `;
@@ -194,36 +247,6 @@ export const Select = styled.select`
   border-radius: 0;
   &:focus {
     border-color: var(--brand-primary);
-  }
-`;
-
-export const LabelWrapper = styled.div`
-  position: relative;
-  min-height: var(--form-input-height);
-  margin-right: var(--spacing-half);
-  padding-right: var(--spacing-one);
-  display: ${props => (props.checkbox ? 'inline-block' : 'block')};
-  padding: 0;
-  text-transform: ${props => (props.checkbox ? 'none' : 'uppercase')};
-  font-weight: ${props => (props.checkbox ? 'normal' : 'bold')};
-  font-size: 0.75em;
-  margin: 0 ${props => (props.checkbox ? 5 : 0)}px
-    ${props => (props.checkbox ? '0' : '20px')} 0;
-  input,
-  select {
-    margin-top: 4px;
-    &[type='checkbox'] {
-      margin-top: 0;
-    }
-    &[type='text'],
-    &[type='number'] {
-      display: block;
-    }
-  }
-  label {
-    font-size: 0.9em;
-    color: #999;
-    font-weight: ${props => (props.checkbox ? 600 : 100)};
   }
 `;
 
@@ -328,7 +351,8 @@ Input.propTypes = {
 export const Checkbox = ({ title, onChange, checked }) => {
   const name = title && title.toLowerCase().replace(/\s/g, '');
   return (
-    <LabelWrapper checkbox>
+    <CheckboxWrapper isChecked={checked}>
+      <span />
       <CheckboxStyle
         type="checkbox"
         id={name}
@@ -336,7 +360,7 @@ export const Checkbox = ({ title, onChange, checked }) => {
         checked={checked}
       />
       <label htmlFor={name}>{title}</label>
-    </LabelWrapper>
+    </CheckboxWrapper>
   );
 };
 
