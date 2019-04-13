@@ -112,6 +112,10 @@ export const createShortcutObjectFromString = shortcutStr => {
 export const createShortcutStringFromObject = shortcutObj => {
   const shortcutArr = [];
 
+  if (!shortcutObj) {
+    return '';
+  }
+
   if (shortcutObj.metaKey) {
     shortcutArr.push('Cmd');
   }
