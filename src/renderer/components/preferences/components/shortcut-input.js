@@ -26,6 +26,8 @@ const Span = styled.span`
 
 const ShortcutInputWrapper = styled(LabelWrapper)`
   display: block;
+  cursor: pointer;
+  transition: all 0.3s;
   label {
     display: block;
   }
@@ -159,7 +161,7 @@ export default class ShortcutInput extends React.Component {
     const { metaKey, altKey, ctrlKey, shiftKey, keyCode } = event;
     const correctKeyCode = CORRECT_KEYS[keyCode] || keyCode;
 
-    const INVALID_KEYS = [17, 16, 91, 8, 18];
+    const INVALID_KEYS = [17, 16, 91, 8, 18, 13];
     const character = INVALID_KEYS.includes(correctKeyCode)
       ? ''
       : String.fromCharCode(correctKeyCode);
@@ -232,26 +234,22 @@ export default class ShortcutInput extends React.Component {
   inputRef = React.createRef();
 
   render() {
-    const { tabIndex, title, onChange, defaultShortcut, shortcut } = this.props;
+    const { tabIndex, title, defaultShortcut, shortcut } = this.props;
     const className = classNames('box', {
       invalid: !this.isEmpty && !this.isValid
     });
 
     return (
-      <ShortcutInputWrapper>
+      <ShortcutInputWrapper onClick={() => this.inputRef.current.focus()}>
         <label>{title}</label>
-        <Box
-          className={className}
-          onClick={() => this.inputRef.current.focus()}
-        >
+        <Box className={className}>
           {this.renderKeys()}
           <input
             ref={this.inputRef}
             tabIndex={tabIndex}
             onKeyUp={this.store}
             onKeyDown={this.handleKeyDown}
-            onBlur={this.handleBlur || (e => onChange(e))}
-            onChange={onChange}
+            onBlur={this.handleBlur}
           />
         </Box>
         {createShortcutStringFromObject(defaultShortcut) !==
@@ -273,7 +271,6 @@ export default class ShortcutInput extends React.Component {
 
 ShortcutInput.propTypes = {
   shortcut: PropTypes.object,
-  onChange: PropTypes.func,
   onReset: PropTypes.func,
   onBlur: PropTypes.func,
   tabIndex: PropTypes.number,

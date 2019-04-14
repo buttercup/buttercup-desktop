@@ -216,7 +216,6 @@ const CheckboxStyle = styled.input`
       background-color: var(--brand-primary);
     }
     & + label {
-      /* font-weight: 600; */
       color: #999;
     }
     &:hover {
