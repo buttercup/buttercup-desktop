@@ -14,31 +14,61 @@ import {
   Checkbox,
   Input,
   Select
-} from './elements/ui-elements';
+} from './components/ui-elements';
 
 const DEFAULT_CLIPBOARD_CLEAR_SECONDS = '15';
 const DEFAULT_ARCHIVE_CLOSE_SECONDS = '0';
+
+// to prevent large repetitive code blocks
+const generalData = {
+  fields: [
+    'isTrayIconEnabled',
+    'condencedSidebar',
+    'secondsUntilClearClipboard',
+    'autolockSeconds',
+    'lockArchiveOnMinimize',
+    'lockArchiveOnFocusout',
+    'menubarAutoHide',
+    'updateOnStartDisabled'
+  ],
+  generateFnName: name => 'set' + name.charAt(0).toUpperCase() + name.slice(1),
+  get propTypes() {
+    return this.fields.reduce(
+      (prev, current) => ({
+        ...prev,
+        [current]: PropTypes.any,
+        [this.generateFnName(current)]: PropTypes.func
+      }),
+      {}
+    );
+  },
+  mapStateToProps(state) {
+    return this.fields.reduce(
+      (prev, current) => ({
+        ...prev,
+        [current]: getSetting(state, current)
+      }),
+      {}
+    );
+  },
+  mapDispatchToProps(dispatch) {
+    return this.fields.reduce(
+      (prev, current) => ({
+        ...prev,
+        [this.generateFnName(current)]: payload =>
+          dispatch(setSetting(current, payload))
+      }),
+      {}
+    );
+  }
+};
 
 class General extends PureComponent {
   static propTypes = {
     t: PropTypes.func,
     locale: PropTypes.string,
-    isTrayIconEnabled: PropTypes.any,
-    setIsTrayIconEnabled: PropTypes.func,
-    condencedSidebar: PropTypes.any,
-    setCondencedSidebar: PropTypes.func,
-    secondsUntilClearClipboard: PropTypes.any,
-    setSecondsUntilClearClipboard: PropTypes.func,
-    autolockSeconds: PropTypes.any,
-    setAutolockSeconds: PropTypes.func,
-    lockArchiveOnMinimize: PropTypes.any,
-    setLockArchiveOnMinimize: PropTypes.func,
-    lockArchiveOnFocusout: PropTypes.any,
-    setLockArchiveOnFocusout: PropTypes.func,
-    menubarAutoHide: PropTypes.any,
-    setMenubarAutoHide: PropTypes.func,
-    updateOnStartDisabled: PropTypes.any,
-    setUpdateOnStartDisabled: PropTypes.func
+    // generate propTypes
+    ...generalData.propTypes
   };
 
   state = {
@@ -162,33 +192,13 @@ class General extends PureComponent {
 export default connect(
   state => ({
     locale: getSetting(state, 'locale'),
-    isTrayIconEnabled: getSetting(state, 'isTrayIconEnabled'),
-    condencedSidebar: getSetting(state, 'condencedSidebar'),
-    lockArchiveOnFocusout: getSetting(state, 'lockArchiveOnFocusout'),
-    secondsUntilClearClipboard: getSetting(state, 'secondsUntilClearClipboard'),
-    autolockSeconds: getSetting(state, 'autolockSeconds'),
-    lockArchiveOnMinimize: getSetting(state, 'lockArchiveOnMinimize'),
-    menubarAutoHide: getSetting(state, 'menubarAutoHide'),
-    updateOnStartDisabled: getSetting(state, 'updateOnStartDisabled')
+    // generate props from array
+    ...generalData.mapStateToProps(state)
   }),
   dispatch => {
     return {
-      setIsTrayIconEnabled: payload =>
-        dispatch(setSetting('isTrayIconEnabled', payload)),
-      setCondencedSidebar: payload =>
-        dispatch(setSetting('condencedSidebar', payload)),
-      setSecondsUntilClearClipboard: payload =>
-        dispatch(setSetting('secondsUntilClearClipboard', payload)),
-      setAutolockSeconds: payload =>
-        dispatch(setSetting('autolockSeconds', payload)),
-      setLockArchiveOnMinimize: payload =>
-        dispatch(setSetting('lockArchiveOnMinimize', payload)),
-      setLockArchiveOnFocusout: payload =>
-        dispatch(setSetting('lockArchiveOnFocusout', payload)),
-      setMenubarAutoHide: payload =>
-        dispatch(setSetting('menubarAutoHide', payload)),
-      setUpdateOnStartDisabled: payload =>
-        dispatch(setSetting('updateOnStartDisabled', payload))
+      // generate prop functions from array
+      ...generalData.mapDispatchToProps(dispatch)
     };
   }
 )(General, 'General');

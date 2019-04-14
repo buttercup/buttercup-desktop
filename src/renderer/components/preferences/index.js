@@ -8,7 +8,7 @@ import * as eva from 'eva-icons';
 
 import { Translate } from '../../../shared/i18n';
 
-import { Wrapper, Menu, MenuInner, Content } from './elements/ui-elements';
+import { Wrapper, Menu, MenuInner, Content } from './components/ui-elements';
 
 // router views
 const views = {

@@ -5,11 +5,11 @@ import { ipcRenderer as ipc } from 'electron';
 import { setGlobalShortcut } from '../../../shared/actions/settings';
 import { DEFAULT_GLOBAL_SHORTCUTS } from '../../../shared/utils/global-shortcuts';
 import { getSetting } from '../../../shared/selectors';
-import { Grid } from './elements/ui-elements';
+import { Grid } from './components/ui-elements';
 import ShortcutInput, {
   createShortcutObjectFromString,
   createShortcutStringFromObject
-} from './elements/shortcut-input';
+} from './components/shortcut-input';
 
 class Items extends PureComponent {
   static propTypes = {
