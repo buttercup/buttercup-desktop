@@ -2,7 +2,7 @@ import test from 'ava';
 import {
   createShortcutObjectFromString,
   createShortcutStringFromObject
-} from '../../src/renderer/components/preferences/elements/shortcut-input';
+} from '../../src/renderer/components/preferences/components/shortcut-input';
 import { isOSX } from '../../src/shared/utils/platform';
 
 test('createShortcutObjectFromString', async t => {
