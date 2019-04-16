@@ -162,6 +162,7 @@ const CheckboxWrapper = styled(LabelWrapper)`
     z-index: 1;
     border-color: ${props => (props.isChecked ? '#fff' : '#cecece')};
     border-style: solid;
+    pointer-events: none;
     transition: all 0.3s;
   }
   &:hover {
