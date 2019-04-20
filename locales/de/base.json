@@ -19,7 +19,13 @@
       "import": {
         "import": "Importieren",
         "import-from-type": "Von {{name}} Archiv (.{{extension}})",
-        "import-to-type": "Zu {{name}}"
+        "import-to-type": "Zu {{name}}",
+        "no-available-archives": "Es sind keine Archive verfügbar, in die importiert werden kann."
+      },
+      "export": {
+        "export": "Exportieren",
+        "export-archive": "{{name}} als CSV exportieren.",
+        "no-available-archives": "Keine Archive zum Exportieren verfügbar."
       },
       "close": "Schließen"
     },
@@ -47,6 +53,7 @@
       "reload": "Neuladen",
       "forcereload": "Neuladen erzwingen",
       "toggledevtools": "Entwicklerwerkzeug ein- und ausblenden",
+      "togglefullscreen": "Vollbildmodus umschalten",
       "auto-hide-menubar": "Menüleiste automatisch ausblenden"
     },
     "window": {
@@ -90,6 +97,7 @@
     "change-password": "Passwort ändern",
     "import": "Importieren",
     "import-from-type": "Von {{name}} Archiv (.{{extension}})",
+    "export": "Exportieren",
     "archive-remove-with-name": "Entferne {{name}}",
     "open": "Öffnen",
     "lock": "Sperren"
@@ -227,6 +235,7 @@
     "new-version-available": "Eine neue Version von Buttercup ist verfügbar!",
     "not-now": "Nicht jetzt",
     "download": "Herunterladen und installieren",
+    "download-manual": "Update manuell herunterladen",
     "release-notes": "Versionshinweise:"
   }
 }
