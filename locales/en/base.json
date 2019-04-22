@@ -156,7 +156,7 @@
     "displaying-entries": "Displaying {{count}} entries",
     "no-value": "No Value",
     "quit-unsave-entry": "You will lose your changes, are you sure?",
-    "duplicate-label-found": "Duplicate label found for custom fields. Please check your custom fields and make labels unique."
+    "duplicate-label-found": "Duplicate custom fields: Please check your custom fields and rename/remove duplicate labels."
   },
   "entry-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
