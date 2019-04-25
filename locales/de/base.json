@@ -20,7 +20,13 @@
       "import": {
         "import": "Importieren",
         "import-from-type": "Von {{name}} Archiv (.{{extension}})",
-        "import-to-type": "Zu {{name}}"
+        "import-to-type": "Zu {{name}}",
+        "no-available-archives": "Es sind keine Archive verfügbar, in die importiert werden kann."
+      },
+      "export": {
+        "export": "Exportieren",
+        "export-archive": "{{name}} als CSV exportieren.",
+        "no-available-archives": "Keine Archive zum Exportieren verfügbar."
       },
       "close": "Schließen"
     },
@@ -48,6 +54,7 @@
       "reload": "Neuladen",
       "forcereload": "Neuladen erzwingen",
       "toggledevtools": "Entwicklerwerkzeug ein- und ausblenden",
+      "togglefullscreen": "Vollbildmodus umschalten",
       "auto-hide-menubar": "Menüleiste automatisch ausblenden"
     },
     "window": {
@@ -56,6 +63,10 @@
       "close": "Schließen",
       "zoom": "Zoomen",
       "front": "Alle nach vorn bringen"
+    },
+    "system": {
+      "system": "System",
+      "enable-browser-access": "Browserzugriff aktivieren"
     },
     "help": {
       "help": "Hilfe",
@@ -87,8 +98,10 @@
   "archive-menu": {
     "unlock": "Entsperren",
     "change-color": "Farbe wechseln",
+    "change-password": "Passwort ändern",
     "import": "Importieren",
     "import-from-type": "Von {{name}} Archiv (.{{extension}})",
+    "export": "Exportieren",
     "archive-remove-with-name": "Entferne {{name}}",
     "open": "Öffnen",
     "lock": "Sperren"
@@ -144,9 +157,9 @@
     "entry-title-empty-info": "Bitte gib einen Titel ein.",
     "custom-fields-label-empty-info": "Du hast vergessen den Titel bei einem oder mehreren benutzerdefinierten Feldern anzugeben.",
     "are-you-sure-question": "Bist du dir sicher?",
-    "no-value": "Kein Wert hinterlegt",
-    "displaying-entries": "{{count}} Angezeigte Einträge",
-    "quit-unsave-entry": ""
+    "displaying-entries": "Anzeigen von {{count}} Einträgen",
+    "no-value": "Kein Wert",
+    "quit-unsave-entry": "Du wirst deine Änderungen verlieren, bist du sicher?"
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
@@ -226,6 +239,7 @@
     "new-version-available": "Eine neue Version von Buttercup ist verfügbar!",
     "not-now": "Nicht jetzt",
     "download": "Herunterladen und installieren",
+    "download-manual": "Update manuell herunterladen",
     "release-notes": "Versionshinweise:"
   },
   "preferences": {
