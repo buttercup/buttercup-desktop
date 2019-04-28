@@ -26,7 +26,7 @@ const Splitter = styled.div`
 `;
 
 const Column = styled(BaseColumn)`
-  background-color: #fff;
+  background-color: #f6f6f6;
 
   .content {
     padding: 1em;
