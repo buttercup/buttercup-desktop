@@ -211,7 +211,7 @@
     "is-error": "^2.2.1",
     "jsdom": "^9.8.3",
     "jsx-control-statements": "^3.2.5",
-    "lint-staged": "^4.2.3",
+    "lint-staged": "^7.0.5",
     "load-grunt-tasks": "^3.3.0",
     "lodash": "^4.17.10",
     "makedeb": "0.0.4",
