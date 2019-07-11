@@ -10,8 +10,8 @@
   "dependencies": {
     "@buttercup/exporter": "~0.1.0",
     "@buttercup/iconographer": "~1.1.1",
-    "@buttercup/importer": "~0.14.1",
-    "buttercup": "~2.7.0",
+    "@buttercup/importer": "~0.15.0",
+    "buttercup": "~2.13.0",
     "conf": "~1.0.0",
     "dropbox": "~2.3.0",
     "webdav": "~1.6.1",
