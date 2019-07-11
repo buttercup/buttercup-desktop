@@ -8,7 +8,7 @@
           "chrome": "66",
           "node": "10"
         },
-        "useBuiltIns": "usage",
+        "useBuiltIns": false,
         "modules": false,
         "loose": true
       }
