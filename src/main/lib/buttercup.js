@@ -2,6 +2,7 @@ import {
   importFromKDBX,
   importFrom1PIF,
   importFromLastPass,
+  importFromBitwarden,
   importFromButtercup
 } from '@buttercup/importer';
 import { ImportTypes } from '../../shared/buttercup/types';
@@ -24,6 +25,10 @@ export function importArchive(type, filename, password) {
       return importFrom1PIF(filename).then(archive => archive.getHistory());
     case ImportTypes.LASTPASS:
       return importFromLastPass(filename).then(archive => archive.getHistory());
+    case ImportTypes.BITWARDEN:
+      return importFromBitwarden(filename).then(archive =>
+        archive.getHistory()
+      );
     case ImportTypes.BUTTERCUP:
       return importFromButtercup(filename).then(archive =>
         archive.getHistory()
