@@ -96,8 +96,8 @@ class Copyable extends PureComponent {
     this.setState({ concealed: !this.state.concealed });
   }
 
-  handleCopy() {
-    copyToClipboard(this.props.children);
+  handleCopy(isSecret) {
+    copyToClipboard(this.props.children, isSecret);
   }
 
   renderPassword(content) {
@@ -141,7 +141,7 @@ class Copyable extends PureComponent {
             <Button
               icon={<CopyIcon />}
               title={t('copyable.copy')}
-              onClick={() => this.handleCopy()}
+              onClick={() => this.handleCopy(isSecret)}
             />
           </HiddenButtonRow>
         </If>

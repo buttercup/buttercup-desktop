@@ -1,10 +1,27 @@
 import path from 'path';
 import { clipboard, remote, shell } from 'electron';
+import ms from 'ms';
+
+const __cache = {
+  timer: null
+};
 
 const currentWindow = remote.getCurrentWindow();
 
-export function copyToClipboard(text) {
+export function copyToClipboard(text, isPassword) {
   clipboard.writeText(text);
+
+  // isPassword is a boolean
+  if (isPassword) {
+    if (__cache.timer) {
+      clearTimeout(__cache.timer);
+    }
+
+    // Clean the clipboard after 15s if selection is blank
+    __cache.timer = setTimeout(function clipboardPurgerClosure() {
+      clipboard.writeText('');
+    }, ms('15s'));
+  }
 }
 
 export function readClipboard() {

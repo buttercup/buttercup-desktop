@@ -181,6 +181,7 @@ class TreeView extends PureComponent {
         return (
           <TreeNode
             isTrash={node.isTrash}
+            isLeaf={false}
             isNew={node.isNew}
             isRenaming={node.isRenaming}
             key={node.id}
