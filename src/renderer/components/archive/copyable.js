@@ -14,6 +14,7 @@ const Password = styled(ColoredDigits)`
   font-family: Anonymous;
   font-size: 14px;
   font-weight: bold;
+  user-select: all !important;
 
   .num {
     color: var(--brand-primary-darker);
@@ -106,6 +107,10 @@ class Copyable extends PureComponent {
         role="content"
         value={content}
         concealed={this.state.concealed}
+        onCopy={e => {
+          e.preventDefault();
+          this.handleCopy(true);
+        }}
       />
     );
   }
