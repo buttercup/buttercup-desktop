@@ -1,22 +1,14 @@
 import Mousetrap from 'mousetrap';
-import ms from 'ms';
 import { lockArchive } from '../../shared/actions/archives';
 import { getCurrentArchiveId, getCurrentEntry } from '../../shared/selectors';
-import { copyToClipboard, readClipboard } from './utils';
+import { copyToClipboard } from './utils';
 import { getFacadeFieldValue } from '../../shared/buttercup/entries';
-const __cache = {
-  timer: null
-};
 
 export const setupShortcuts = store => {
   /**
    * Copy password to clipboard
    */
   Mousetrap.bind('mod+c', () => {
-    if (__cache.timer) {
-      clearTimeout(__cache.timer);
-    }
-
     const selection = window.getSelection().toString();
     const currentEntry = getCurrentEntry(store.getState());
 
@@ -27,15 +19,7 @@ export const setupShortcuts = store => {
         return;
       }
 
-      copyToClipboard(password);
-
-      // Clean the clipboard after 15s
-      // @TODO: Make a UI for this.
-      __cache.timer = setTimeout(function clipboardPurgerClosure() {
-        if (readClipboard() === password) {
-          copyToClipboard('');
-        }
-      }, ms('15s'));
+      copyToClipboard(password, true);
     }
   });
 
