@@ -109,6 +109,10 @@ const renderMeta = (
   </>
 );
 
+renderMeta.propTypes = {
+  fields: PropTypes.array
+};
+
 class EntryForm extends PureComponent {
   static propTypes = {
     handleSubmit: PropTypes.func,

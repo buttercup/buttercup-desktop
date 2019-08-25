@@ -11,7 +11,8 @@ export const ImportTypes = {
   BUTTERCUP: 'buttercup-csv',
   KEEPASS: 'keepass',
   LASTPASS: 'lastpass',
-  ONE_PASSWORD: '1password'
+  ONE_PASSWORD: '1password',
+  BITWARDEN: 'bitwarden'
 };
 
 export const ImportTypeInfo = {
@@ -29,6 +30,11 @@ export const ImportTypeInfo = {
     password: false,
     name: 'LastPass',
     extension: 'csv'
+  },
+  [ImportTypes.BITWARDEN]: {
+    password: false,
+    name: 'Bitwarden (JSON)',
+    extension: 'json'
   },
   [ImportTypes.BUTTERCUP]: {
     password: false,
