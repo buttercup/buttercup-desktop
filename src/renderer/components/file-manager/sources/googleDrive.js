@@ -7,7 +7,7 @@ import { Button, SmallType, Center } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
-import { authenticateDropbox, getFsInstance } from '../../../system/auth';
+import { getFsInstance, authenticateGoogleDrive } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
 import { showDialog } from '../../../system/dialog';
 import Manager from '../manager';
@@ -47,6 +47,11 @@ class GoogleDrive extends Component {
   };
 
   handleAuthClick = () => {
+    // authenticateGoogleDrive().then(tok => {
+    //   console.log(tok);
+    // });
+    const token =
+      '4/rAF8X3qNIPipkOSpFDbYkJ8lFPuD2bxRflbEuX0Ax6Etla-E3jpoJcs73nsYL7AKZ1k6MIOli_pFUl0Kb6oc1MQ';
     // const { t } = this.props;
     // authenticateDropbox()
     //   .then(token => {

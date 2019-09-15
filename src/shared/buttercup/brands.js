@@ -12,25 +12,29 @@ export const brands = {
     remote: true,
     name: 'Dropbox',
     logo: dropboxLogo,
-    icon: dropboxLogo
+    icon: dropboxLogo,
+    deprecated: false
   },
   [ArchiveTypes.GOOGLEDRIVE]: {
     remote: true,
     name: 'Google Drive',
     logo: googleDriveLogo,
-    icon: googleDriveLogo
+    icon: googleDriveLogo,
+    deprecated: false
   },
   [ArchiveTypes.OWNCLOUD]: {
     remote: true,
     name: 'OwnCloud',
     logo: ownCloud,
-    icon: ownCloudSquare
+    icon: ownCloudSquare,
+    deprecated: true
   },
   [ArchiveTypes.NEXTCLOUD]: {
     remote: true,
     name: 'Nextcloud',
     logo: nextCloud,
-    icon: nextCloudSquare
+    icon: nextCloudSquare,
+    deprecated: true
   },
   [ArchiveTypes.WEBDAV]: {
     remote: true,
