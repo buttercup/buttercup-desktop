@@ -1,8 +1,10 @@
 import { remote } from 'electron';
-import webdavFs from 'webdav-fs';
-import dropboxFs from 'dropbox-fs';
-import anyFs from 'any-fs';
 import { OAuth2Client } from '@buttercup/google-oauth2-client';
+import { instantiateInterface } from '@buttercup/file-interface';
+import { createClient as createGoogleDriveClient } from '@buttercup/googledrive-client';
+import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
+import { createClient as createWebdavClient } from 'webdav';
+import { ArchiveTypes } from '../../shared/buttercup/types';
 
 const { BrowserWindow } = remote;
 const currentWindow = BrowserWindow.getFocusedWindow();
@@ -49,7 +51,7 @@ export function authenticate(authUri, matchRegex) {
   });
 }
 
-export function authenticateGoogleDrive() {
+export async function authenticateGoogleDrive() {
   const oauth2Client = new OAuth2Client(
     '327941947801-fumr4be9juk0bu3ekfuq9fr5bm7trh30.apps.googleusercontent.com',
     '2zCBNDSXp1yIu5dyE5BVUWQZ',
@@ -61,7 +63,16 @@ export function authenticateGoogleDrive() {
     prompt: 'consent'
   });
 
-  return authenticate(url, /\?googleauth&code=([^&#?]+)/);
+  const authCode = await authenticate(url, /\?googleauth&code=([^&#?]+)/);
+  const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
+  const {
+    access_token: accessToken,
+    refresh_token: refreshToken
+  } = response.tokens;
+  return {
+    accessToken,
+    refreshToken
+  };
 }
 
 export function authenticateDropbox() {
@@ -74,16 +85,22 @@ export function authenticateDropbox() {
 
 export function getFsInstance(type, settings) {
   switch (type) {
-    case 'dropbox':
-      return anyFs(
-        dropboxFs({
-          apiKey: settings.token
+    case ArchiveTypes.DROPBOX:
+      return instantiateInterface('dropbox', {
+        dropboxClient: createDropboxClient(settings.token)
+      });
+    case ArchiveTypes.WEBDAV:
+      return instantiateInterface('webdav', {
+        webdavClient: createWebdavClient(settings.endpoint, {
+          username: settings.username,
+          password: settings.password
         })
-      );
-    case 'webdav':
-      return anyFs(
-        webdavFs(settings.endpoint, settings.username, settings.password)
-      );
+      });
+    case ArchiveTypes.GOOGLEDRIVE: {
+      return instantiateInterface('googledrive', {
+        googleDriveClient: createGoogleDriveClient(settings.token)
+      });
+    }
     default:
       return null;
   }

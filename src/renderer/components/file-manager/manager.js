@@ -1,10 +1,10 @@
-import path from 'path';
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import dimensions from 'react-dimensions';
 import styled from 'styled-components';
 import { Table as BaseTable, Column, Cell } from 'fixed-data-table-2';
 import { Translate } from '../../../shared/i18n';
+import spinner from '../../styles/img/spinner-dark.svg';
 import 'fixed-data-table-2/dist/fixed-data-table.css';
 import { TextCell, IconCell, SizeCell, DateCell } from './cells';
 
@@ -17,6 +17,12 @@ const Table = styled(BaseTable)`
     background: var(--brand-primary) !important;
     color: #fff;
   }
+`;
+
+const Spinner = styled.img`
+  position: relative;
+  top: -5px;
+  left: -5px;
 `;
 
 function sortContent(list) {
@@ -37,43 +43,53 @@ class Manager extends PureComponent {
   };
 
   state = {
-    currentPath: '/',
     contents: [],
     selectedIndex: null,
-    selectedPath: null
+    currentPath: null,
+    isLoading: false
   };
 
   navigate = index => {
-    const { currentPath, contents } = this.state;
-    let pathToNavigate = '/';
+    const { contents } = this.state;
+    let pathToNavigate = null;
 
     if (index !== null) {
       const fileObj = contents[index];
       if (fileObj.type !== 'directory') {
         return;
       }
-      pathToNavigate = path.posix.resolve(currentPath, fileObj.name);
+      pathToNavigate = fileObj;
     }
-
-    this.fs.readDirectory(pathToNavigate, { mode: 'stat' }).then(result => {
-      const files = result.map(item => ({
-        name: item.name,
-        type: item.isFile() ? 'file' : 'directory',
-        size: item.size,
-        mtime: item.mtime,
-        isNew: false
-      }));
-
-      if (pathToNavigate !== '/') {
-        files.unshift({ name: '..', type: 'directory', size: 0, mtime: null });
-      }
-
-      this.setSelectedFile(null);
-      this.setState({
-        currentPath: pathToNavigate,
-        contents: sortContent(files)
-      });
+    this.setState({
+      isLoading: true
     });
+
+    this.fs
+      .getDirectoryContents(
+        pathToNavigate && pathToNavigate.identifier ? pathToNavigate : null
+      )
+      .then(results => {
+        let files = sortContent(results);
+
+        if (pathToNavigate && pathToNavigate.identifier) {
+          files = [
+            {
+              ...(pathToNavigate.parent || {
+                identifier: null
+              }),
+              name: '..',
+              type: 'directory'
+            },
+            ...files
+          ];
+        }
+        this.setSelectedFile(null);
+        this.setState({
+          contents: files,
+          currentPath: pathToNavigate,
+          isLoading: false
+        });
+      });
   };
 
   handleCreateNewFile = () => {
@@ -81,11 +97,11 @@ class Manager extends PureComponent {
     this.setState({
       contents: sortContent([
         {
+          identifier: null,
           name: 'untitled.bcup',
           type: 'file',
           size: 0,
-          mtime: new Date(),
-          isNew: true,
+          modified: new Date().toUTCString(),
           editing: true
         },
         ...contents
@@ -122,24 +138,43 @@ class Manager extends PureComponent {
   };
 
   handleSaveFile = fileName => {
-    this.setState({
-      contents: this.state.contents.map(item => {
-        if (item.isNew) {
-          return {
-            ...item,
-            name: `${fileName}.bcup`,
-            editing: false,
-            mtime: new Date().getTime()
-          };
-        }
-        return item;
-      })
-    });
+    const { currentPath, contents } = this.state;
+    const fileNameWithExt = `${fileName}.bcup`;
+    this.setState({ isLoading: true });
+    this.fs
+      .putFileContents(
+        {
+          identifier:
+            currentPath && currentPath.identifier
+              ? currentPath.identifier
+              : null
+        },
+        {
+          identifier: null,
+          name: fileNameWithExt
+        },
+        ''
+      )
+      .then(fileObj => {
+        this.setState({
+          isLoading: false,
+          contents: contents.map(item => {
+            if (item.editing) {
+              return {
+                ...item,
+                ...fileObj,
+                editing: false
+              };
+            }
+            return item;
+          })
+        });
+      });
   };
 
   handleDismissFile = () => {
     this.setState({
-      contents: this.state.contents.filter(item => !item.isNew)
+      contents: this.state.contents.filter(item => !item.editing)
     });
   };
 
@@ -149,17 +184,14 @@ class Manager extends PureComponent {
     const file = this.state.contents[index] || null;
     const { onSelectFile } = this.props;
 
-    if (onSelectFile) {
-      onSelectFile(
-        file ? path.posix.resolve(this.state.currentPath, file.name) : null,
-        file ? file.isNew || false : null
-      );
+    if (onSelectFile && file) {
+      onSelectFile(file);
     }
   }
 
   render() {
     const { containerWidth, containerHeight } = this.props;
-    const { contents, selectedIndex } = this.state;
+    const { contents, selectedIndex, isLoading } = this.state;
     const scrollIndex = contents.findIndex(item => item.editing);
 
     return (
@@ -178,7 +210,9 @@ class Manager extends PureComponent {
       >
         <Column
           columnKey="icon"
-          header={<Cell />}
+          header={
+            <Cell>{isLoading ? <Spinner src={spinner} width={32} /> : ''}</Cell>
+          }
           cell={<IconCell data={contents} />}
           width={40}
           fixed
@@ -187,7 +221,6 @@ class Manager extends PureComponent {
           columnKey="name"
           header={
             <Cell>
-              {' '}
               <Translate i18nKey="cloud-source.name" parent="span" />
             </Cell>
           }
@@ -207,7 +240,6 @@ class Manager extends PureComponent {
           columnKey="size"
           header={
             <Cell>
-              {' '}
               <Translate i18nKey="cloud-source.size" parent="span" />
             </Cell>
           }
@@ -216,10 +248,9 @@ class Manager extends PureComponent {
           fixed
         />
         <Column
-          columnKey="mtime"
+          columnKey="modified"
           header={
             <Cell>
-              {' '}
               <Translate i18nKey="cloud-source.date" parent="span" />
             </Cell>
           }

@@ -30,41 +30,37 @@ class GoogleDrive extends Component {
 
   state = {
     established: false,
-    token: null
+    tokens: null
   };
 
-  handleSelect = (fileID, isNew) => {
-    if (!filePath || !isButtercupFile(filePath)) {
+  handleSelect = file => {
+    if (!file.identifier || !isButtercupFile(file.name)) {
       this.props.onSelect(null);
       return;
     }
+
     this.props.onSelect({
       type: 'googledrive',
-      token: this.state.token,
-      path: fileID,
-      isNew
+      tokens: this.state.tokens,
+      path: file.identifier,
+      isNew: file.size === 0
     });
   };
 
   handleAuthClick = () => {
-    // authenticateGoogleDrive().then(tok => {
-    //   console.log(tok);
-    // });
-    const token =
-      '4/rAF8X3qNIPipkOSpFDbYkJ8lFPuD2bxRflbEuX0Ax6Etla-E3jpoJcs73nsYL7AKZ1k6MIOli_pFUl0Kb6oc1MQ';
-    // const { t } = this.props;
-    // authenticateDropbox()
-    //   .then(token => {
-    //     this.fs = getFsInstance('dropbox', { token });
-    //     this.setState({
-    //       established: true,
-    //       token
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //     showDialog(t('error.dropbox-connection-failed-info'));
-    //   });
+    const { t } = this.props;
+    authenticateGoogleDrive()
+      .then(tokens => {
+        this.fs = getFsInstance('googledrive', { token: tokens.accessToken });
+        this.setState({
+          established: true,
+          tokens
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        showDialog(t('error.googledrive-connection-failed-info'));
+      });
   };
 
   componentDidMount() {

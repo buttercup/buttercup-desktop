@@ -33,16 +33,16 @@ class Dropbox extends Component {
     token: null
   };
 
-  handleSelect = (filePath, isNew) => {
-    if (!filePath || !isButtercupFile(filePath)) {
+  handleSelect = file => {
+    if (!file.identifier || !isButtercupFile(file.name)) {
       this.props.onSelect(null);
       return;
     }
     this.props.onSelect({
       type: 'dropbox',
       token: this.state.token,
-      path: filePath,
-      isNew
+      path: file.identifier,
+      isNew: file.size === 0
     });
   };
 

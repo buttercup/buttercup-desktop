@@ -97,6 +97,7 @@ export const addArchive = (payload, masterPassword) => async dispatch => {
 
 export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
   const { type, path, isNew, ...config } = payload;
+  console.log(payload, masterPassword);
   switch (type) {
     case ArchiveTypes.DROPBOX:
       return dispatch(
@@ -121,7 +122,8 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
-              token: config.token,
+              token: config.accessToken,
+              refreshToken: config.refreshToken,
               fileID: path
             }
           },

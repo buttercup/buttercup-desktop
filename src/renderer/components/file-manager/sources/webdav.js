@@ -36,22 +36,23 @@ class Webdav extends PureComponent {
     established: false
   };
 
-  handleSelect = (filePath, isNew) => {
+  handleSelect = file => {
     const { onSelect, brand } = this.props;
 
-    if (!filePath || !isButtercupFile(filePath)) {
-      onSelect(null);
+    if (!file.identifier || !isButtercupFile(file.name)) {
+      this.props.onSelect(null);
       return;
     }
-    this.props.onSelect({
+
+    onSelect({
       type: brand || 'webdav',
-      path: filePath,
+      path: file.identifier,
       endpoint: this.state.endpoint,
       credentials: {
         username: this.state.username,
         password: this.state.password
       },
-      isNew
+      isNew: file.size === 0
     });
   };
 
@@ -84,7 +85,7 @@ class Webdav extends PureComponent {
       password
     });
 
-    fs.readDirectory('/')
+    fs.getDirectoryContents(null)
       .then(() => {
         this.fs = fs;
         this.setState({
