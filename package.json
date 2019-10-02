@@ -143,7 +143,7 @@
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/exporter": "^0.1.0",
     "@buttercup/iconographer": "^1.2.0",
-    "@buttercup/importer": "^0.15.0",
+    "@buttercup/importer": "^1.0.0",
     "@buttercup/secure-file-host": "^0.2.1",
     "@buttercup/ui": "^1.4.2",
     "@types/node": "^6.14.6",
