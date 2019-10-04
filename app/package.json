@@ -10,7 +10,7 @@
   "dependencies": {
     "@buttercup/exporter": "~0.1.0",
     "@buttercup/iconographer": "~1.1.1",
-    "@buttercup/importer": "~0.15.0",
+    "@buttercup/importer": "~1.0.0",
     "buttercup": "~2.7.0",
     "conf": "~1.0.0",
     "dropbox": "~2.3.0",
