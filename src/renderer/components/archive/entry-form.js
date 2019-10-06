@@ -109,7 +109,7 @@ const renderMeta = (
 );
 
 renderMeta.propTypes = {
-  fields: PropTypes.array
+  fields: PropTypes.object
 };
 
 class EntryForm extends PureComponent {
