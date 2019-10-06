@@ -57,6 +57,16 @@ export function validateEntry(entry) {
     if (fields.filter(field => !field.property).length > 0) {
       errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
     }
+
+    if (
+      fields
+        .map(field => field.property)
+        .sort()
+        .filter((property, index, properties) => property === properties[index])
+        .length
+    ) {
+      errorMessages.push(i18n.t('entry.custom-fields-label-duplicate'));
+    }
   }
 
   if (errorMessages.length > 0) {
