@@ -31,7 +31,6 @@ unhandled();
 
 // Alter some Buttercup internals
 Buttercup.Web.HashingTools.patchCorePBKDF();
-// Buttercup.vendor.webdav.setFetchMethod(window.fetch);
 
 // Create store
 const store = configureStore({}, 'renderer');

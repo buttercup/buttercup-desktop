@@ -28,7 +28,6 @@ const Footer = styled(Flex)`
 `;
 
 const PathRenderer = ({ pathName, ...props }) => {
-  console.log('PATH', pathName);
   switch (pathName) {
     case '/dropbox':
       return <Dropbox {...props} />;

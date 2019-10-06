@@ -9,6 +9,8 @@ import { ArchiveTypes } from '../../shared/buttercup/types';
 const { BrowserWindow } = remote;
 const currentWindow = BrowserWindow.getFocusedWindow();
 
+let __googleDriveOAuthClient;
+
 export function authenticate(authUri, matchRegex) {
   return new Promise((resolve, reject) => {
     let foundToken = null;
@@ -51,12 +53,19 @@ export function authenticate(authUri, matchRegex) {
   });
 }
 
+function getGoogleDriveOAuthClient() {
+  if (!__googleDriveOAuthClient) {
+    __googleDriveOAuthClient = new OAuth2Client(
+      '327941947801-fumr4be9juk0bu3ekfuq9fr5bm7trh30.apps.googleusercontent.com',
+      '2zCBNDSXp1yIu5dyE5BVUWQZ',
+      'https://buttercup.pw?googleauth'
+    );
+  }
+  return __googleDriveOAuthClient;
+}
+
 export async function authenticateGoogleDrive() {
-  const oauth2Client = new OAuth2Client(
-    '327941947801-fumr4be9juk0bu3ekfuq9fr5bm7trh30.apps.googleusercontent.com',
-    '2zCBNDSXp1yIu5dyE5BVUWQZ',
-    'https://buttercup.pw?googleauth'
-  );
+  const oauth2Client = getGoogleDriveOAuthClient();
   const url = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: ['email', 'profile', 'https://www.googleapis.com/auth/drive'],
@@ -71,6 +80,19 @@ export async function authenticateGoogleDrive() {
   } = response.tokens;
   return {
     accessToken,
+    refreshToken
+  };
+}
+
+export async function authenticateGoogleDriveWithRefreshToken(
+  accessToken,
+  refreshToken
+) {
+  const oauth2Client = getGoogleDriveOAuthClient();
+  const results = await oauth2Client.refreshAccessToken(refreshToken);
+  const { access_token: newAccessToken } = results.tokens;
+  return {
+    accessToken: newAccessToken,
     refreshToken
   };
 }

@@ -1,5 +1,5 @@
 build: off
-image: Visual Studio 2019
+os: unstable
 
 platform:
   - x64

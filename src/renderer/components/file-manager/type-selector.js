@@ -1,20 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Flex } from 'styled-flexbox';
 import { brands } from '../../../shared/buttercup/brands';
 
-const Wrapper = styled(Flex)`
-  padding: var(--spacing-two) var(--spacing-one) 0;
+const Wrapper = styled.div`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-one);
 `;
 
 const LogoLink = styled(Link)`
   display: flex;
-  flex: 0 1 calc((100% / 2) - 20px);
+  flex: 1;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-bottom: var(--spacing-two);
+  margin: var(--spacing-one);
+  padding: var(--spacing-two);
   border: 1px solid var(--gray);
   border-radius: 5px;
   color: var(--gray-dark);
@@ -36,7 +40,7 @@ const LogoLink = styled(Link)`
 `;
 
 const TypeSelector = () => (
-  <Wrapper wraps flexAuto alignContent="stretch" justify="space-around">
+  <Wrapper>
     {Object.keys(brands)
       .filter(
         brand => brands[brand].remote && brands[brand].deprecated !== true

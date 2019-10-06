@@ -3,6 +3,7 @@ import { ArchiveManager, ArchiveSource, Credentials } from './buttercup';
 import ElectronStorageInterface from './storage';
 import { getQueue } from '../../renderer/system/queue';
 import './ipc-datasource';
+import './googledrive-datasource';
 import i18n from '../i18n';
 
 let __sharedManager = null;

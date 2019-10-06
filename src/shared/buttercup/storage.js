@@ -51,6 +51,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    * @returns {Promise} A promise that resolves when the value is set
    */
   setValue(name, value) {
+    console.log(name, value);
     return new Promise((resolve, reject) => {
       resolve(storage.set(name, value));
     });
