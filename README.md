@@ -119,6 +119,7 @@ Buttercup for Desktop supports the following languages:
  * Catalan
  * Simplified Chinese
  * Romanian
+ * Korean
 
 ### Submitting internationalization configurations
 

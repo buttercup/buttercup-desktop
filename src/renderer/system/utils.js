@@ -17,9 +17,12 @@ export function copyToClipboard(text, isPassword) {
       clearTimeout(__cache.timer);
     }
 
-    // Clean the clipboard after 15s if selection is blank
+    // Clean the clipboard after 15s if clipboard unchanged
+    // @TODO: Make a UI for this.
     __cache.timer = setTimeout(function clipboardPurgerClosure() {
-      clipboard.writeText('');
+      if (readClipboard() === text) {
+        clipboard.clear();
+      }
     }, ms('15s'));
   }
 }

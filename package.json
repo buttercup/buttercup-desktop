@@ -147,7 +147,7 @@
     "@buttercup/google-oauth2-client": "^0.2.0",
     "@buttercup/googledrive-client": "^0.2.1",
     "@buttercup/iconographer": "^1.2.0",
-    "@buttercup/importer": "^0.15.0",
+    "@buttercup/importer": "^1.0.0",
     "@buttercup/secure-file-host": "^0.2.1",
     "@buttercup/ui": "^1.4.2",
     "@hot-loader/react-dom": "^16.8.6",
