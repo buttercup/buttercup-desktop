@@ -1,6 +1,5 @@
 build: off
-
-os: unstable
+image: Visual Studio 2019
 
 platform:
   - x64
@@ -12,7 +11,7 @@ branches:
 skip_tags: true
 
 environment:
-  nodejs_version: "10"
+  nodejs_version: '12'
 
 #cache:
 #  - node_modules -> package.json
