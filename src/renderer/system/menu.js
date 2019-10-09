@@ -1,5 +1,5 @@
 import path from 'path';
-import { remote } from 'electron';
+import { remote, shell } from 'electron';
 import capitalize from 'lodash/capitalize';
 import { copyToClipboard, openUrl } from './utils';
 import i18n from '../../shared/i18n';
@@ -126,6 +126,10 @@ export function createCopyMenu(entry, currentEntry) {
     props.push({
       label: 'URL',
       click: () => copyToClipboard(url)
+    });
+    props.push({
+      label: 'Open in browser',
+      click: () => shell.openExternal(url)
     });
   }
 
