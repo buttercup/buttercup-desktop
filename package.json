@@ -143,7 +143,7 @@
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/dropbox-client": "^0.3.3",
     "@buttercup/exporter": "^0.1.0",
-    "@buttercup/file-interface": "^0.3.0",
+    "@buttercup/file-interface": "^0.3.2",
     "@buttercup/google-oauth2-client": "^0.2.0",
     "@buttercup/googledrive-client": "^0.2.1",
     "@buttercup/iconographer": "^1.2.0",
