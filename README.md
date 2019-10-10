@@ -79,7 +79,7 @@ Because security with password storage is of the utmost importance, Buttercup wi
 
 ## Features
 
-Buttercup supports loading and saving credentials archives both locally and remotely. Remote archives can be stored in a variety of service providers like Dropbox, ownCloud and Nextcloud (and others that support WebDAV, such as Yandex).
+Buttercup supports loading and saving credentials archives both locally and remotely. Remote archives can be stored in a variety of service providers like Dropbox, Google Drive and WebDAV-enabled services, such as Yandex.
 
 Archives store groups and entries in a simple hierarchy. Both groups and entries can be moved into other groups. Deleted items are trashed before being removed permanently.
 
