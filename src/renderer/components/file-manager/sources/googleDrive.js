@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FaDropbox as DropboxIcon } from 'react-icons/fa';
+import { FaGoogleDrive as GoogleDriveIcon } from 'react-icons/fa';
 import { MdInfoOutline as InfoIcon } from 'react-icons/md';
 import { Button, SmallType, Center } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
-import { authenticateDropbox, getFsInstance } from '../../../system/auth';
+import { getFsInstance, authenticateGoogleDrive } from '../../../system/auth';
 import { isButtercupFile } from '../../../system/utils';
 import { showDialog } from '../../../system/dialog';
 import Manager from '../manager';
 
-const DropboxButton = styled(Button)`
+const GoogleDriveButton = styled(Button)`
   background-color: #007ee5 !important;
   color: #fff !important;
 `;
@@ -21,7 +21,7 @@ const Wrapper = styled(Center)`
   width: 80%;
 `;
 
-class Dropbox extends Component {
+class GoogleDrive extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
     toggleCreateButton: PropTypes.func,
@@ -30,7 +30,7 @@ class Dropbox extends Component {
 
   state = {
     established: false,
-    token: null
+    tokens: null
   };
 
   handleSelect = file => {
@@ -38,9 +38,10 @@ class Dropbox extends Component {
       this.props.onSelect(null);
       return;
     }
+
     this.props.onSelect({
-      type: 'dropbox',
-      token: this.state.token,
+      type: 'googledrive',
+      tokens: this.state.tokens,
       path: file.identifier,
       isNew: file.size === 0
     });
@@ -48,17 +49,17 @@ class Dropbox extends Component {
 
   handleAuthClick = () => {
     const { t } = this.props;
-    authenticateDropbox()
-      .then(token => {
-        this.fs = getFsInstance('dropbox', { token });
+    authenticateGoogleDrive()
+      .then(tokens => {
+        this.fs = getFsInstance('googledrive', { token: tokens.accessToken });
         this.setState({
           established: true,
-          token
+          tokens
         });
       })
       .catch(err => {
         console.error(err);
-        showDialog(t('error.dropbox-connection-failed-info'));
+        showDialog(t('error.googledrive-connection-failed-info'));
       });
   };
 
@@ -83,18 +84,21 @@ class Dropbox extends Component {
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
           <h2>
-            <Translate i18nKey="cloud-source.connect-to-dropbox" />
+            <Translate i18nKey="cloud-source.connect-to-googledrive" />
           </h2>
-          <DropboxButton
+          <GoogleDriveButton
             large
             onClick={this.handleAuthClick}
-            icon={<DropboxIcon />}
+            icon={<GoogleDriveIcon />}
           >
-            <Translate i18nKey="cloud-source.authenticate-with-dropbox" />
-          </DropboxButton>
+            <Translate i18nKey="cloud-source.authenticate-with-googledrive" />
+          </GoogleDriveButton>
           <SmallType border>
             <InfoIcon />{' '}
-            <Translate html i18nKey="cloud-source.dropbox-description-text" />
+            <Translate
+              html
+              i18nKey="cloud-source.googledrive-description-text"
+            />
           </SmallType>
         </Wrapper>
       </Flex>
@@ -102,4 +106,4 @@ class Dropbox extends Component {
   }
 }
 
-export default translate()(Dropbox);
+export default translate()(GoogleDrive);

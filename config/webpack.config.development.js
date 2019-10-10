@@ -43,6 +43,10 @@ module.exports = merge(baseConfig, {
 
   externals: [],
 
+  resolve: {
+    alias: { 'react-dom': '@hot-loader/react-dom' }
+  },
+
   node: {
     __dirname: false
   },

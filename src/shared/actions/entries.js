@@ -1,5 +1,5 @@
 import { createAction } from 'redux-actions';
-import { EntryFinder } from 'buttercup/dist/buttercup-web.min';
+import { EntryFinder } from '../buttercup/buttercup';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import {

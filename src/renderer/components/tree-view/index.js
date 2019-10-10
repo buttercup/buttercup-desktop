@@ -4,7 +4,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import Tree, { TreeNode } from 'rc-tree';
 import styled from 'styled-components';
-import PlusIcon from 'react-icons/lib/md/add';
+import { MdAdd as PlusIcon } from 'react-icons/md';
 import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../shared/i18n';
