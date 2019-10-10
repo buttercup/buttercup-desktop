@@ -11,7 +11,7 @@
     "@buttercup/exporter": "~0.1.0",
     "@buttercup/iconographer": "~1.1.1",
     "@buttercup/importer": "~1.0.0",
-    "buttercup": "~2.7.0",
+    "buttercup": "~2.16.1",
     "conf": "~1.0.0",
     "webdav": "~1.6.1",
     "zxcvbn": "~4.4.2"
