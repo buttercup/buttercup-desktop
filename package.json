@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.16.2",
+  "version": "1.17.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -23,10 +23,10 @@
     "start:main": "cross-env HOT=1 BABEL_ENV=node NODE_ENV=development electron -r @babel/register ./src/main/app",
     "prerelease": "npm run clean",
     "release": "npm run build && npm run package",
-    "package:linux": "build --linux --ia32 --x64",
-    "package:mac": "build --mac",
-    "package:win": "build --win --x64 --ia32",
-    "package": "build --mac --win --linux --x64 --ia32 -p always",
+    "package:linux": "electron-builder --linux --ia32 --x64",
+    "package:mac": "electron-builder --mac",
+    "package:win": "electron-builder --win --x64 --ia32",
+    "package": "electron-builder --mac --win --linux --x64 --ia32 -p always",
     "package:current": "build",
     "postinstall": "opencollective postinstall",
     "i18next-parse-lang": "i18next-scanner --config ./config/i18next-scanner.config.js 'src/**/*.{js,jsx}'"
@@ -66,6 +66,9 @@
     },
     "nsis": {
       "perMachine": true
+    },
+    "win": {
+      "target": "nsis"
     },
     "linux": {
       "target": [
@@ -147,7 +150,7 @@
     "@buttercup/google-oauth2-client": "^0.2.0",
     "@buttercup/googledrive-client": "^0.2.1",
     "@buttercup/iconographer": "^1.2.0",
-    "@buttercup/importer": "^1.0.0",
+    "@buttercup/importer": "^0.15.0",
     "@buttercup/secure-file-host": "^0.2.1",
     "@buttercup/ui": "^1.4.2",
     "@hot-loader/react-dom": "^16.8.6",
@@ -177,7 +180,7 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "electron": "^3.1.11",
-    "electron-builder": "^20.44.4",
+    "electron-builder": "^21.2.0",
     "electron-context-menu": "^0.10.1",
     "electron-debug": "^2.2.0",
     "electron-devtools-installer": "^2.2.4",
