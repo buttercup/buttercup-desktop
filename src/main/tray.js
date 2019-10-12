@@ -1,10 +1,13 @@
 import { Menu, Tray } from 'electron';
 import checkTraySupport from 'check-os-tray-support';
-import { isWindows, isLinux } from '../shared/utils/platform';
-import { reopenMainWindow, checkDockVisibility } from './utils/window';
+import { isWindows, isLinux, isOSX } from '../shared/utils/platform';
+import { reopenMainWindow } from './utils/window';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile } from './lib/files';
 import { getSetting } from '../shared/selectors';
+import { setSetting } from '../shared/actions/settings';
+
+import { setupDockIcon } from './dock';
 import i18n from '../shared/i18n';
 import { getPathToFile } from './lib/utils';
 import { checkForUpdates } from './lib/updater';
@@ -26,7 +29,6 @@ export const setupTrayIcon = store => {
     tray = null;
     isTrayIconInitialized = false;
 
-    checkDockVisibility();
     return;
   }
 
@@ -34,8 +36,8 @@ export const setupTrayIcon = store => {
     const trayPath = isWindows()
       ? 'resources/icons/tray.ico'
       : isLinux()
-        ? 'resources/icons/tray-linux.png'
-        : 'resources/icons/trayTemplate.png';
+      ? 'resources/icons/tray-linux.png'
+      : 'resources/icons/trayTemplate.png';
 
     tray = new Tray(getPathToFile(trayPath));
   }
@@ -55,6 +57,16 @@ export const setupTrayIcon = store => {
       label: label('app.check-for-updates'),
       click: () => {
         checkForUpdates();
+      }
+    },
+    {
+      label: label('view.enable-dock-icon'),
+      type: 'checkbox',
+      checked: getSetting(state, 'isDockIconEnabled'),
+      visible: isOSX(),
+      click: item => {
+        store.dispatch(setSetting('isDockIconEnabled', item.checked));
+        setupDockIcon(store);
       }
     },
     {

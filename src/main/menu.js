@@ -17,6 +17,7 @@ import { getMainWindow, reopenMainWindow } from './utils/window';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
 import { setupTrayIcon } from './tray';
+import { setupDockIcon } from './dock';
 
 electronContextMenu();
 
@@ -214,6 +215,16 @@ export const setupMenu = store => {
             setupTrayIcon(store);
           }
         },
+        {
+          label: label('view.enable-dock-icon'),
+          type: 'checkbox',
+          checked: getSetting(state, 'isDockIconEnabled'),
+          visible: isOSX(),
+          click: item => {
+            store.dispatch(setSetting('isDockIconEnabled', item.checked));
+            setupDockIcon(store);
+          }
+        },
         { type: 'separator' },
         // Language menu point
         {
@@ -339,9 +350,7 @@ export const setupMenu = store => {
           }),
           click: () => {
             shell.openExternal(
-              `https://github.com/buttercup/buttercup/releases/tag/v${
-                pkg.version
-              }`
+              `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
             );
           }
         }

@@ -50,6 +50,7 @@
       "condensed-sidebar": "Condensed Sidebar",
       "language": "Language",
       "enable-tray-icon": "Display in Menubar",
+      "enable-dock-icon": "Show Dock Icon",
       "reload": "Reload",
       "forcereload": "Force reload",
       "toggledevtools": "Toggle dev tools",

@@ -1,6 +1,5 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow } from 'electron';
 import { getWindowManager } from '../lib/window-manager';
-import { isOSX } from '../../shared/utils/platform';
 
 export function getMainWindow(
   focusedWindow = BrowserWindow.getFocusedWindow()
@@ -26,12 +25,6 @@ export function sendEventToMainWindow(...args) {
   }
 }
 
-export function checkDockVisibility() {
-  if (isOSX() && !app.dock.isVisible()) {
-    app.dock.show();
-  }
-}
-
 export function reopenMainWindow(fn = () => {}) {
   return new Promise(resolve => {
     const windowManager = getWindowManager();
@@ -48,7 +41,5 @@ export function reopenMainWindow(fn = () => {}) {
         fn(win);
       });
     }
-
-    checkDockVisibility();
   });
 }

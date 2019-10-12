@@ -67,6 +67,11 @@
     "nsis": {
       "perMachine": true
     },
+    "mac": {
+      "extendInfo": {
+				"LSUIElement": 1
+			}
+    },
     "win": {
       "target": "nsis"
     },

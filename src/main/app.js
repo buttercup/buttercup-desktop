@@ -5,6 +5,7 @@ import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
 import { setupTrayIcon } from './tray';
+import { setupDockIcon } from './dock';
 import { getWindowManager } from './lib/window-manager';
 import { sendEventToMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
@@ -131,6 +132,7 @@ app.on('ready', async () => {
   setupActions(store);
   setupMenu(store);
   setupTrayIcon(store);
+  setupDockIcon(store);
 
   appIsReady = true;
 
@@ -154,16 +156,16 @@ app.on('ready', async () => {
       app.quit();
     }
   });
-});
 
-// Create a new window if all windows are closed.
-app.on('activate', () => {
-  if (windowManager.getCountOfType('main') === 0) {
-    if (isOSX()) {
-      app.dock.show();
+  // Create a new window if all windows are closed.
+  app.on('activate', () => {
+    if (windowManager.getCountOfType('main') === 0) {
+      if (isOSX() && getSetting(store.getState(), 'isDockIconEnabled')) {
+        app.dock.show();
+      }
+      windowManager.buildWindowOfType('main');
     }
-    windowManager.buildWindowOfType('main');
-  }
+  });
 });
 
 app.once('before-quit', e => {
