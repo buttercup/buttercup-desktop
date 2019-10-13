@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import PlusIcon from 'react-icons/lib/md/add';
+import { MdAdd as PlusIcon } from 'react-icons/md';
 import styled from 'styled-components';
 import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';

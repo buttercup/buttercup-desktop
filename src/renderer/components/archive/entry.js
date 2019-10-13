@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import TrashIcon from 'react-icons/lib/fa/trash-o';
-import EditIcon from 'react-icons/lib/fa/edit';
+import { FaEdit as EditIcon } from 'react-icons/fa';
+import { MdDelete as TrashIcon } from 'react-icons/md';
 import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
 import { Translate } from '../../../shared/i18n';

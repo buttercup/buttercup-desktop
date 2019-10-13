@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
 import { Button, Generator, Meter, Input as BaseInput } from '@buttercup/ui';
-import MagicIcon from 'react-icons/lib/fa/magic';
+import { FaMagic as MagicIcon } from 'react-icons/fa';
 import { translate } from 'react-i18next';
 
 export const Wrapper = styled(Flex).attrs({

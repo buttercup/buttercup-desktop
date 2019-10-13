@@ -1,15 +1,10 @@
-matrix:
-  include:
-    - language: node_js
-      #sudo: required
-      node_js: 10
-      env: 
-        - NAME="Node 10"
-      install:
-        #- sudo apt-get install build-essential g++ make -y
-        - npm ci
-      services:
-        - xvfb
-      script:
-        - npm run build
-        - npm test
+language: node_js
+env: 
+  - NAME="Node 10"
+install:
+  - npm ci
+services:
+  - xvfb
+script:
+  - npm run build
+  - npm test

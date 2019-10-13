@@ -1,6 +1,7 @@
 export const ArchiveTypes = {
   FILE: 'ipc',
   DROPBOX: 'dropbox',
+  GOOGLEDRIVE: 'googledrive',
   OWNCLOUD: 'owncloud',
   NEXTCLOUD: 'nextcloud',
   WEBDAV: 'webdav'

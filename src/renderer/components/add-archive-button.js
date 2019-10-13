@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'react-i18next';
 import { Button } from '@buttercup/ui';
-import ArchiveIcon from 'react-icons/lib/md/add';
+import { MdAdd as ArchiveIcon } from 'react-icons/md';
 import { showContextMenu } from '../system/menu';
 import { getShortcutByKey } from '../../shared/utils/global-shortcuts';
 

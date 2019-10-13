@@ -44,7 +44,6 @@ module.exports = {
     '@buttercup/importer',
     '@buttercup/iconographer',
     'zxcvbn',
-    'dropbox',
     'webdav',
     'conf'
   ]

@@ -2,8 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
-import LockOpen from 'react-icons/lib/md/lock-open';
-import LockClosed from 'react-icons/lib/md/lock-outline';
+import {
+  MdLockOutline as LockClosed,
+  MdLockOpen as LockOpen
+} from 'react-icons/md';
 import { TwitterPicker } from 'react-color';
 import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';

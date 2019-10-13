@@ -1,6 +1,6 @@
 import Mousetrap from 'mousetrap';
-import ms from 'ms';
 import { lockArchive } from '../../shared/actions/archives';
+
 import {
   getCurrentArchiveId,
   getCurrentEntry,
@@ -8,6 +8,7 @@ import {
 } from '../../shared/selectors';
 import { copyToClipboard, readClipboard } from './utils';
 import { getFacadeFieldValue } from '../../shared/buttercup/entries';
+
 import { getShortcutByKey } from '../../shared/utils/global-shortcuts';
 
 const __cache = {
@@ -77,16 +78,11 @@ export const setupShortcuts = store => {
         return;
       }
 
-      copyToClipboard(password);
-
-      if (state.settings.secondsUntilClearClipboard !== '0') {
-        // Clean the clipboard after n seconds
-        __cache.timer = setTimeout(function clipboardPurgerClosure() {
-          if (readClipboard() === password) {
-            copyToClipboard('');
-          }
-        }, ms((state.settings.secondsUntilClearClipboard || '15') + 's'));
-      }
+      copyToClipboard(
+        password,
+        true,
+        state.settings.secondsUntilClearClipboard
+      );
     }
   });
 

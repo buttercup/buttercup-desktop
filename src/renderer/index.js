@@ -1,4 +1,4 @@
-import Buttercup from 'buttercup/dist/buttercup-web.min';
+import * as Buttercup from '../shared/buttercup/buttercup';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import i18n from '../shared/i18n';
@@ -33,7 +33,6 @@ unhandled();
 
 // Alter some Buttercup internals
 Buttercup.Web.HashingTools.patchCorePBKDF();
-Buttercup.vendor.webdav.setFetchMethod(window.fetch);
 
 // Create store
 const store = configureStore({}, 'renderer');

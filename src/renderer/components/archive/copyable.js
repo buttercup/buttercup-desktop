@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import CopyIcon from 'react-icons/lib/go/clippy';
-import EyeIcon from 'react-icons/lib/fa/eye';
-import EyeSlashIcon from 'react-icons/lib/fa/eye-slash';
+import { GoClippy as CopyIcon } from 'react-icons/go';
+import { FaEye as EyeIcon, FaEyeSlash as EyeSlashIcon } from 'react-icons/fa';
 import { Button, ButtonRow, ColoredDigits } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { showContextMenu } from '../../system/menu';
@@ -14,6 +13,7 @@ const Password = styled(ColoredDigits)`
   font-family: Anonymous;
   font-size: 1em;
   font-weight: bold;
+  user-select: all !important;
 
   .num {
     color: var(--brand-primary-darker);
@@ -55,7 +55,8 @@ class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     isSecret: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    secondsUntilClearClipboard: PropTypes.string
   };
 
   constructor(props) {
@@ -97,7 +98,11 @@ class Copyable extends PureComponent {
   }
 
   handleCopy(isSecret) {
-    copyToClipboard(this.props.children, isSecret);
+    copyToClipboard(
+      this.props.children,
+      isSecret,
+      this.props.secondsUntilClearClipboard
+    );
   }
 
   renderPassword(content) {
@@ -106,6 +111,10 @@ class Copyable extends PureComponent {
         role="content"
         value={content}
         concealed={this.state.concealed}
+        onCopy={e => {
+          e.preventDefault();
+          this.handleCopy(true);
+        }}
       />
     );
   }

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import SortIcon from 'react-icons/lib/md/sort';
+import { MdSort as SortIcon } from 'react-icons/md';
 import { Button } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { showContextMenu, createSortMenu } from '../../system/menu';

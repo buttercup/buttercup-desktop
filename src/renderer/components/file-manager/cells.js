@@ -23,7 +23,8 @@ const propTypes = {
 
 class NewFileInput extends PureComponent {
   state = {
-    name: ''
+    name: '',
+    disabled: false
   };
 
   static propTypes = {
@@ -46,6 +47,7 @@ class NewFileInput extends PureComponent {
   };
 
   handleSubmit = () => {
+    this.setState({ disabled: true });
     let { name } = this.state;
     name = name
       .trim()
@@ -84,6 +86,7 @@ class NewFileInput extends PureComponent {
         onKeyUp={this.handleKeyup}
         onBlur={this.handleBlur}
         value={this.state.name}
+        disabled={this.state.disabled}
         ref={ref => {
           this.ref = ref;
         }}
@@ -115,16 +118,26 @@ TextCell.propTypes = {
   handleDismissFile: PropTypes.func
 };
 
-export const DateCell = ({ rowIndex, data, ...props }) => (
-  <Cell {...props}>
-    {data[rowIndex].mtime ? humanize.date('d M', data[rowIndex].mtime) : ''}
-  </Cell>
-);
+export const DateCell = ({ rowIndex, data, ...props }) => {
+  const date = data[rowIndex].modified;
+  return (
+    <Cell {...props}>
+      {typeof date === 'string' && date !== 'Invalid Date'
+        ? humanize.date('d M', new Date(date))
+        : ''}
+    </Cell>
+  );
+};
 DateCell.propTypes = propTypes;
 
-export const SizeCell = ({ rowIndex, data, ...props }) => (
-  <Cell {...props}>{humanize.filesize(data[rowIndex].size)}</Cell>
-);
+export const SizeCell = ({ rowIndex, data, ...props }) => {
+  const size = data[rowIndex].size;
+  return (
+    <Cell {...props}>
+      {humanize.filesize(typeof size === 'number' && !isNaN(size) ? size : 0)}
+    </Cell>
+  );
+};
 SizeCell.propTypes = propTypes;
 
 export const IconCell = ({ rowIndex, data, ...props }) => {
