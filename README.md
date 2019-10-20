@@ -61,7 +61,7 @@ Operating systems outside of these are not directly supported by staff - Issues 
 #### Arch Linux
 Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/). This release channel is maintained by our community.
 
-Some users have reported segmentation faults on Arch - if you notice a similiar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
+Some users have reported segmentation faults on Arch - if you notice a similar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
 
 ### Portability
 
