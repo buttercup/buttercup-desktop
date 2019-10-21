@@ -6,7 +6,7 @@ import {
   getCurrentEntry,
   getSetting
 } from '../../shared/selectors';
-import { copyToClipboard, readClipboard } from './utils';
+import { copyToClipboard } from './utils';
 import { getFacadeFieldValue } from '../../shared/buttercup/entries';
 
 import { getShortcutByKey } from '../../shared/utils/global-shortcuts';
