@@ -1,8 +1,6 @@
 {
   "parser": "babel-eslint",
-  "plugins": [
-    "jsx-control-statements"
-  ],
+  "plugins": ["jsx-control-statements"],
   "extends": [
     "standard",
     "standard-react",
@@ -21,10 +19,7 @@
         "allowGlobals": true
       }
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
+    "semi": ["error", "always"],
     "space-before-function-paren": [
       "error",
       {
@@ -36,6 +31,7 @@
     "jsx-quotes": "off",
     "comma-dangle": "off",
     "jsx-control-statements/jsx-use-if-tag": 0,
-    "jsx-control-statements/jsx-jcs-no-undef": "off"
+    "jsx-control-statements/jsx-jcs-no-undef": "off",
+    "standard/no-callback-literal": "off"
   }
 }

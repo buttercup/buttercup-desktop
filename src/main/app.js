@@ -1,4 +1,4 @@
-import { app } from 'electron';
+import { app, session } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
@@ -95,6 +95,12 @@ app.on('ready', async () => {
     // Install Dev Extensions
     await installExtensions();
   }
+
+  // Set origin for network requests
+  session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
+    details.requestHeaders['Origin'] = 'https://desktop.buttercup.pw';
+    callback({ cancel: false, requestHeaders: details.requestHeaders });
+  });
 
   // Create Store
   let state = {};
