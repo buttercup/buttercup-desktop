@@ -68,7 +68,8 @@
       "perMachine": true
     },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "publisherName": "MadDev Oy"
     },
     "linux": {
       "target": [
