@@ -148,7 +148,7 @@
     "@buttercup/dropbox-client": "^0.3.3",
     "@buttercup/exporter": "^0.1.0",
     "@buttercup/file-interface": "^0.3.2",
-    "@buttercup/google-oauth2-client": "^0.2.0",
+    "@buttercup/google-oauth2-client": "^0.2.1",
     "@buttercup/googledrive-client": "^0.2.1",
     "@buttercup/iconographer": "^1.2.0",
     "@buttercup/importer": "^0.15.0",
