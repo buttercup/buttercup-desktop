@@ -71,7 +71,7 @@
       "help": "Hilfe",
       "visit-our-website": "Besuche unsere Website",
       "privacy-policy": "Datenschutzrichtlinie",
-      "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
+      "view-changelog-for-v": "Changelog für v{{currentVersion}} aufrufen"
     },
     "tray": {
       "quit": "Beenden",

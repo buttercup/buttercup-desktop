@@ -71,7 +71,7 @@
       "help": "帮助",
       "visit-our-website": "访问官网",
       "privacy-policy": "隐私策略",
-      "view-changelog-for-v": "查看 v{{version}}更新日志"
+      "view-changelog-for-v": "查看 v{{currentVersion}}更新日志"
     },
     "tray": {
       "quit": "退出",

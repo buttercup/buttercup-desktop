@@ -67,7 +67,7 @@
       "help": "Yardım",
       "visit-our-website": "Web sitemizi ziyaret ediniz",
       "privacy-policy": "Gizlilik Politikası",
-      "view-changelog-for-v": "v{{version}}'de olan değişiklikler"
+      "view-changelog-for-v": "v{{currentVersion}}'de olan değişiklikler"
     },
     "tray": {
       "quit": "Çıkış",

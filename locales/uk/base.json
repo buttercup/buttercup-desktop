@@ -60,7 +60,7 @@
       "help": "Допомога",
       "visit-our-website": "Відвідайте наш сайт",
       "privacy-policy": "Політика конфіденційності",
-      "view-changelog-for-v": "Подивитися зміни у версії v{{version}}"
+      "view-changelog-for-v": "Подивитися зміни у версії v{{currentVersion}}"
     }
   },
   "archive": {

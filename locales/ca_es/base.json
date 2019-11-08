@@ -71,7 +71,7 @@
       "help": "Ajuda",
       "visit-our-website": "Visita el nostre lloc web",
       "privacy-policy": "Política de privadesa",
-      "view-changelog-for-v": "Mostra el registre de canvis de la v{{version}}"
+      "view-changelog-for-v": "Mostra el registre de canvis de la v{{currentVersion}}"
     },
     "tray": {
       "quit": "Surt",

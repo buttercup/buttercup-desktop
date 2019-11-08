@@ -71,7 +71,7 @@
       "help": "도움말",
       "visit-our-website": "웹사이트 방문",
       "privacy-policy": "개인정보 보호",
-      "view-changelog-for-v": "v{{version}} 변경사항 보기"
+      "view-changelog-for-v": "v{{currentVersion}} 변경사항 보기"
     },
     "tray": {
       "quit": "종료",

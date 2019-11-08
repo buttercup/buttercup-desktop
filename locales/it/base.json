@@ -62,7 +62,7 @@
       "help": "Aiuto",
       "visit-our-website": "Visita il nostro sito",
       "privacy-policy": "Privacy Policy",
-      "view-changelog-for-v": "Guarda il Changelog per v{{version}}"
+      "view-changelog-for-v": "Guarda il Changelog per v{{currentVersion}}"
     },
     "tray": {
       "quit": "Esci",
