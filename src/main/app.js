@@ -38,7 +38,7 @@ let initialFile = null;
 if (process.env.NODE_ENV !== 'development') {
   const { crashReporter } = require('electron');
   crashReporter.start({
-    productName: app.getName(),
+    productName: app.name,
     companyName: 'Buttercup LLC',
     submitURL:
       'https://electron-crash-reporter.appspot.com/5642489998344192/create/',
@@ -78,17 +78,14 @@ if (isWindows()) {
 }
 
 // Someone tried to run a second instance, we should focus our window.
-const isSecondInstance = app.makeSingleInstance(() => {
+app.requestSingleInstanceLock();
+app.on('second-instance', (event, argv, cwd) => {
   log.info(
     'Detected a newer instance. Closing this instance.',
     app.getVersion()
   );
   app.quit();
 });
-
-if (isSecondInstance) {
-  log.info('This is the newer version running.', app.getVersion());
-}
 
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development') {
