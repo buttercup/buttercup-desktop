@@ -150,7 +150,7 @@ export const emptyTrash = () => (dispatch, getState) => {
   const trashIds = getTrashChildrenIds(state);
   const trashGroupId = getTrashGroupId(state);
 
-  showConfirmDialog(i18n.t('group-menu.empty-trash-question'), resp => {
+  showConfirmDialog(i18n.t('group-menu.empty-trash-question')).then(resp => {
     if (resp === 0) {
       trashIds.forEach(id => dispatch(dismissGroup(id)));
       groupTools.emptyTrash(archiveId);

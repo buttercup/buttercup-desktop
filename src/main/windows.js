@@ -101,6 +101,9 @@ export function setupWindows(store) {
       modal: true,
       show: false,
       resizable: false,
+      webPreferences: {
+        nodeIntegration: true // @TODO: Remove this in future versions
+      },
       ...options
     });
 
@@ -153,6 +156,9 @@ export function setupWindows(store) {
         darkTheme: true,
         transparent: true,
         vibrancy: 'ultra-dark',
+        webPreferences: {
+          nodeIntegration: true // @TODO: Remove this in future versions
+        },
         ...options
       });
 

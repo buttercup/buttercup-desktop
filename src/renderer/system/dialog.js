@@ -4,11 +4,13 @@ import i18n from '../../shared/i18n';
 const { dialog } = remote;
 const currentWindow = remote.getCurrentWindow();
 
-export function showConfirmDialog(message, fn) {
-  const buttons = [i18n.t('confirm-dialog.yes'), i18n.t('confirm-dialog.no')];
-  dialog.showMessageBox(currentWindow, { message, buttons }, resp => {
-    fn(resp);
-  });
+export function showConfirmDialog(message) {
+  return dialog
+    .showMessageBox(currentWindow, {
+      message,
+      buttons: [i18n.t('confirm-dialog.yes'), i18n.t('confirm-dialog.no')]
+    })
+    .then(resp => resp.response);
 }
 
 export function showDialog(message, type = 'error') {
