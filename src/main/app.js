@@ -6,7 +6,7 @@ import configureStore from '../shared/store/configure-store';
 import { setupMenu } from './menu';
 import { setupTrayIcon } from './tray';
 import { getWindowManager } from './lib/window-manager';
-import { sendEventToMainWindow } from './utils/window';
+import { sendEventToMainWindow, getMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
 import { isWindows, isOSX } from '../shared/utils/platform';
@@ -38,7 +38,7 @@ let initialFile = null;
 if (process.env.NODE_ENV !== 'development') {
   const { crashReporter } = require('electron');
   crashReporter.start({
-    productName: app.getName(),
+    productName: app.name,
     companyName: 'Buttercup LLC',
     submitURL:
       'https://electron-crash-reporter.appspot.com/5642489998344192/create/',
@@ -78,17 +78,17 @@ if (isWindows()) {
 }
 
 // Someone tried to run a second instance, we should focus our window.
-const isSecondInstance = app.makeSingleInstance(() => {
-  log.info(
-    'Detected a newer instance. Closing this instance.',
-    app.getVersion()
-  );
+const lock = app.requestSingleInstanceLock();
+if (!lock) {
   app.quit();
-});
-
-if (isSecondInstance) {
-  log.info('This is the newer version running.', app.getVersion());
 }
+
+app.on('second-instance', () => {
+  const focusedWindow = getMainWindow();
+  if (!focusedWindow) {
+    windowManager.buildWindowOfType('main');
+  }
+});
 
 app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development') {

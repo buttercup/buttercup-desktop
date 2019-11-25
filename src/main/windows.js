@@ -23,7 +23,7 @@ export function setupWindows(store) {
       height,
       minWidth: 680,
       minHeight: 500,
-      title: app.getName(),
+      title: app.name,
       titleBarStyle: isOSX() && 'hiddenInset',
       // Temporary fix for High Sierra. See #339
       frame: !isOSX(),
@@ -32,7 +32,8 @@ export function setupWindows(store) {
       darkTheme: true,
       vibrancy: 'ultra-dark',
       webPreferences: {
-        navigateOnDragDrop: true
+        navigateOnDragDrop: true,
+        nodeIntegration: true // @TODO: Remove this in future versions
       }
     });
 
@@ -100,6 +101,9 @@ export function setupWindows(store) {
       modal: true,
       show: false,
       resizable: false,
+      webPreferences: {
+        nodeIntegration: true // @TODO: Remove this in future versions
+      },
       ...options
     });
 
@@ -152,6 +156,9 @@ export function setupWindows(store) {
         darkTheme: true,
         transparent: true,
         vibrancy: 'ultra-dark',
+        webPreferences: {
+          nodeIntegration: true // @TODO: Remove this in future versions
+        },
         ...options
       });
 
