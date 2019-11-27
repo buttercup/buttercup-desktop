@@ -36,7 +36,7 @@
       "help": "Помощь",
       "visit-our-website": "Посетите наш сайт",
       "privacy-policy": "Политика конфиденциальности",
-      "view-changelog-for-v": "Посмотреть изменения в версии v{{version}}"
+      "view-changelog-for-v": "Посмотреть изменения в версии v{{currentVersion}}"
     }
   },
   "archive": {

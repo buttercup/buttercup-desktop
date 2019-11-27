@@ -67,7 +67,7 @@
       "help": "Help",
       "visit-our-website": "Bezoek onze website",
       "privacy-policy": "Privacy beleid",
-      "view-changelog-for-v": "Geef changelog weer voor v{{version}}"
+      "view-changelog-for-v": "Geef changelog weer voor v{{currentVersion}}"
     },
     "tray": {
       "quit": "Afsluiten",

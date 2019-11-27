@@ -67,7 +67,7 @@
       "help": "Pomoc",
       "visit-our-website": "Odwiedź naszą stronę",
       "privacy-policy": "Polityka Prywatności",
-      "view-changelog-for-v": "Pokaż dziennik zmian dla v{{version}}"
+      "view-changelog-for-v": "Pokaż dziennik zmian dla v{{currentVersion}}"
     },
     "tray": {
       "quit": "Zamknij",

@@ -58,7 +58,7 @@
       "help": "Ayuda",
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
-      "view-changelog-for-v": "Ver cambios en v{{version}}"
+      "view-changelog-for-v": "Ver cambios en v{{currentVersion}}"
     }
   },
   "archive": {

@@ -71,7 +71,7 @@
       "help": "Nápověda",
       "visit-our-website": "Navštivte naše stránky",
       "privacy-policy": "Politika soukromí ",
-      "view-changelog-for-v": "Zobrazit změny ve verzi {{version}}"
+      "view-changelog-for-v": "Zobrazit změny ve verzi {{currentVersion}}"
     },
       "tray": {
       "quit": "Ukončit",
@@ -238,4 +238,4 @@
     "download-manual": "Otevřít stránky s informacemi",
     "release-notes": "Popis změn:"
   }
-} 
+}

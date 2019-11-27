@@ -71,7 +71,7 @@
       "help": "راهنمایی",
       "visit-our-website": "مشاهده سایت ما",
       "privacy-policy": "حریم شخصی",
-      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{currentVersion}}"
     },
     "tray": {
       "quit": "بستن",

@@ -60,7 +60,7 @@
       "help": "Ajuda",
       "visit-our-website": "Visite nosso Site",
       "privacy-policy": "Políticas de Privacidade",
-      "view-changelog-for-v": "Ver o Changelog da v{{version}}"
+      "view-changelog-for-v": "Ver o Changelog da v{{currentVersion}}"
     }
   },
   "archive": {

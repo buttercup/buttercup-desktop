@@ -71,7 +71,7 @@
       "help": "Bantuan",
       "visit-our-website": "Kunjungi Situs Kami",
       "privacy-policy": "Ketentuan Privasi",
-      "view-changelog-for-v": "Tampilkan Changelog untuk v{{version}}"
+      "view-changelog-for-v": "Tampilkan Changelog untuk v{{currentVersion}}"
     },
     "tray": {
       "quit": "Keluar",

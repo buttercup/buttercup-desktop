@@ -71,7 +71,7 @@
       "help": "Ohje",
       "visit-our-website": "Vieraile verkkosivullamme",
       "privacy-policy": "Yksityisyyskäytännöt",
-      "view-changelog-for-v": "Katso version {{version}} muutoshistoria"
+      "view-changelog-for-v": "Katso version {{currentVersion}} muutoshistoria"
     },
     "tray": {
       "quit": "Lopeta",
