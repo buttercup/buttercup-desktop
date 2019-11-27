@@ -71,7 +71,7 @@
       "help": "Ajutor",
       "visit-our-website": "Vizitează-ne website-ul",
       "privacy-policy": "Politică de confidentialitate",
-      "view-changelog-for-v": "Vizualizează schimbările pentru v{{version}}"
+      "view-changelog-for-v": "Vizualizează schimbările pentru v{{currentVersion}}"
     },
     "tray": {
       "quit": "Părăseşte",

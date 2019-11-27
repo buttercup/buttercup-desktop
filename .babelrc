@@ -5,8 +5,8 @@
       "@babel/preset-env",
       {
         "targets": {
-          "chrome": "66",
-          "node": "10"
+          "chrome": "78",
+          "node": "12"
         },
         "useBuiltIns": false,
         "modules": false,

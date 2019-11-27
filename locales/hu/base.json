@@ -61,7 +61,7 @@
       "help": "Segítség",
       "visit-our-website": "Látogasd meg weboldalunkat",
       "privacy-policy": "Adatvédelmi irányelvek",
-      "view-changelog-for-v": "Changelog megtekintése v{{version}}"
+      "view-changelog-for-v": "Changelog megtekintése v{{currentVersion}}"
     }
   },
   "archive-search": {
