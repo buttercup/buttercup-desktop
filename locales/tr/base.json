@@ -76,10 +76,10 @@
   },
   "archive-search": {
     "searchterm": "Ara ... ",
-    "nothing-found": "Hiçbirşey Bulunamadı"
+    "nothing-found": "Hiçbir Şey Bulunamadı"
   },
   "archive": {
-    "add-archive": "Arşiviniz kaydedildi",
+    "add-archive": "Arşiv Ekle",
     "archive-saved-loading-info": "Arşiviniz kaydedildi.<br>Otomatik kapatılıyor"
   },
   "archive-dialog": {
@@ -197,7 +197,7 @@
     "welcome-title": "Buttercup'a Hoşgeldiniz.",
     "welcome-back-title": "Buttercup'a Tekrar Hoşgeldiniz.",
     "welcome-caption": "Henüz hiç arşiv eklemediniz. Neden bir tane eklemiyorsunuz?",
-    "unlock-archive": "Başlamak için bir arşivin açın ({{os}})."
+    "unlock-archive": "Başlamak için bir arşivinizi açın ({{os}})."
   },
   "intro-menu": {
     "open-archive-file": "Arşiv Dosyasını Aç",
