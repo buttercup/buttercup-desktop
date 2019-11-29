@@ -13,7 +13,7 @@ const Column = styled(BaseColumn)`
       ? 'var(--sidebar-width-condenced)'
       : 'var(--sidebar-width)'};
   height: 100%;
-  background-color: ${isOSX() ? 'transparent' : 'var(--sidebar-bg)'};
+  background-color: var(--sidebar-bg);
   display: flex;
 `;
 

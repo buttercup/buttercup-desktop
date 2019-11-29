@@ -74,11 +74,9 @@ export default createGlobalStyle`
     --sidebar-width-condenced: 75px;
     --form-input-height: 35px;
     --password-input-height: 45px;
-    --sidebar-bg: RGBA(33, 37, 43, .9);
+    --sidebar-bg: #21252B;
     --groups-bg: #292C33;
-    --groups-bg-mac: rgba(0,0,0,.2);
     --entries-bg: #31353D;
-    --entries-bg-mac: rgba(0, 0, 0, .35);
     --modal-overlay: rgba(0,0,0,.40);
     --red: #EB5767;
     --gray-light: #F5F7FA;

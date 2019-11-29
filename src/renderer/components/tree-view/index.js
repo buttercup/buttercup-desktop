@@ -19,7 +19,7 @@ import TreeLabel from './tree-label';
 import Styles from './styles';
 
 const Column = styled(BaseColumn)`
-  background-color: ${isOSX() ? 'var(--groups-bg-mac)' : 'var(--groups-bg)'};
+  background-color: var(--groups-bg);
   color: #fff;
   padding-top: var(--spacing-one);
 `;

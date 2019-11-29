@@ -16,7 +16,7 @@ import List from './entries-list';
 import SortButton from './sort-button';
 
 const Column = styled(BaseColumn)`
-  background-color: ${isOSX() ? 'var(--entries-bg-mac)' : 'var(--entries-bg)'};
+  background-color: var(--entries-bg);
   color: #fff;
 `;
 

@@ -28,7 +28,7 @@ const Wrapper = styled(Flex)`
 `;
 
 const Code = styled.pre`
-  background-color: ${isOSX() ? 'transparent' : 'var(--entries-bg-mac)'};
+  background-color: transparent; // TODO Unsure what UI this is so please test
   flex: 1;
   padding: 0 var(--spacing-one);
   border: 1px solid var(--white-5);
