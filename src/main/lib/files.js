@@ -33,18 +33,16 @@ function normalizePath(filePath) {
  * @returns {void}
  */
 function showOpenDialog(focusedWindow) {
-  dialog.showOpenDialog(
-    focusedWindow,
-    {
+  dialog
+    .showOpenDialog(focusedWindow, {
       ...dialogOptions,
       title: i18n.t('archive-dialog.load-a-buttercup-archive')
-    },
-    filename => {
-      if (filename && filename.length > 0) {
-        loadFile(filename[0], focusedWindow);
+    })
+    .then(({ filePaths }) => {
+      if (filePaths && filePaths.length > 0) {
+        loadFile(filePaths[0], focusedWindow);
       }
-    }
-  );
+    });
 }
 
 /**
@@ -55,18 +53,16 @@ function showOpenDialog(focusedWindow) {
  * @returns {void}
  */
 function showSaveDialog(focusedWindow) {
-  dialog.showSaveDialog(
-    focusedWindow,
-    {
+  dialog
+    .showSaveDialog(focusedWindow, {
       ...dialogOptions,
       title: i18n.t('archive-dialog.create-a-new-buttercup-archive')
-    },
-    filename => {
-      if (typeof filename === 'string' && filename.length > 0) {
-        loadFile(filename, focusedWindow, true);
+    })
+    .then(({ filePath }) => {
+      if (typeof filePath === 'string' && filePath.length > 0) {
+        loadFile(filePath, focusedWindow, true);
       }
-    }
-  );
+    });
 }
 
 /**
@@ -157,9 +153,8 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
     focusedWindow.webContents.send('import-history', { history, archiveId });
   };
 
-  dialog.showOpenDialog(
-    focusedWindow,
-    {
+  dialog
+    .showOpenDialog(focusedWindow, {
       filters: [
         {
           name: `${typeInfo.name} Archives`,
@@ -167,12 +162,12 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
         }
       ],
       title: `Load a ${typeInfo.name} archive`
-    },
-    files => {
-      if (!files) {
+    })
+    .then(({ filePaths }) => {
+      if (!filePaths) {
         return;
       }
-      const [filename] = files;
+      const [filename] = filePaths;
       if (typeInfo.password) {
         focusedWindow.webContents.send('import-history-prompt', type);
         ipc.once('import-history-prompt-resp', (e, password) => {
@@ -185,8 +180,7 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
           .then(handleSuccess)
           .catch(handleError);
       }
-    }
-  );
+    });
 };
 
 /**

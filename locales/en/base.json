@@ -72,7 +72,7 @@
       "help": "Help",
       "visit-our-website": "Visit Our Website",
       "privacy-policy": "Privacy Policy",
-      "view-changelog-for-v": "View Changelog For v{{version}}"
+      "view-changelog-for-v": "View Changelog For v{{currentVersion}}"
     },
     "tray": {
       "quit": "Quit",
@@ -183,7 +183,8 @@
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
     "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
-    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
+    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "New Group",

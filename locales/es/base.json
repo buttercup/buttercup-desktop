@@ -59,7 +59,7 @@
       "help": "Ayuda",
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
-      "view-changelog-for-v": "Ver cambios en v{{version}}"
+      "view-changelog-for-v": "Ver cambios en v{{currentVersion}}"
     },
     "system": {
       "enable-browser-access": ""
@@ -98,7 +98,10 @@
     "webdav-description-text": "Escribe tu dirección de {{title}}, usuario y contraseña para conectar y elige un archivo de Buttercup. <strong>Vamos a guardar<strong> tus credenciales y encriptarlas.",
     "name": "Nombre",
     "size": "Tamaño",
-    "date": "Fecha"
+    "date": "Fecha",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Sí",
@@ -161,7 +164,8 @@
     "entry-not-found": "Entrada no encontrada.",
     "dropbox-connection-failed-info": "La conexión al servidor de Dropbox ha fallado. Por favor, inténtalo de nuevo más tarde.",
     "webdav-connection-failed-info": "La conexión a {{endpoint}} ha fallado. Por favor, comprueba tus credenciales e inténtalo de nuevo.",
-    "passwords-dont-match": ""
+    "passwords-dont-match": "",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Nuevo grupo",

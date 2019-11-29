@@ -377,9 +377,7 @@ export const setupMenu = store => {
           }),
           click: () => {
             shell.openExternal(
-              `https://github.com/buttercup/buttercup/releases/tag/v${
-                pkg.version
-              }`
+              `https://github.com/buttercup/buttercup/releases/tag/v${pkg.version}`
             );
           }
         }
@@ -389,7 +387,7 @@ export const setupMenu = store => {
 
   if (isOSX()) {
     defaultTemplate.unshift({
-      label: app.getName(),
+      label: app.name,
       submenu: [
         { role: 'services', submenu: [], label: label('app.services') },
         { type: 'separator' },

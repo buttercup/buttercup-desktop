@@ -67,7 +67,7 @@
       "help": "Help",
       "visit-our-website": "Bezoek onze website",
       "privacy-policy": "Privacy beleid",
-      "view-changelog-for-v": "Geef changelog weer voor v{{version}}"
+      "view-changelog-for-v": "Geef changelog weer voor v{{currentVersion}}"
     },
     "tray": {
       "quit": "Afsluiten",
@@ -116,7 +116,10 @@
     "webdav-description-text": "Voer je {{title}} Endpoint adres, gebruikersnaam en wachtwoord in om te verbinden en kies een Buttercup archief. <strong>Inloggegevens worden versleuteld opgeslagen</strong>",
     "name": "Naam",
     "size": "Grootte",
-    "date": "Datum"
+    "date": "Datum",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Ja",
@@ -178,7 +181,8 @@
     "open-file-for-importing": "Importeer functies mogen niet draaien zonder dat het hoofdscherm openstaat.",
     "entry-not-found": "Item niet gevonden",
     "dropbox-connection-failed-info": "Verbinding met Dropbox-server mislukt. Probeer het later nog eens.",
-    "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals."
+    "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Nieuwe groep",

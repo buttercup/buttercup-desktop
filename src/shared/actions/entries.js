@@ -32,7 +32,7 @@ export const selectEntry = (entryId, isSavingNewEntry = false) => (
     const currentEntryMode = getCurrentEntryMode(getState());
     (currentEntryMode === 'new' && !isSavingNewEntry) ||
     (currentEntryMode === 'edit' && !isSavingNewEntry)
-      ? showConfirmDialog(i18n.t('entry.quit-unsave-entry'), choice =>
+      ? showConfirmDialog(i18n.t('entry.quit-unsave-entry')).then(choice =>
           choice === 0
             ? dispatch({ type: ENTRIES_SELECTED, payload: entryId })
             : null
@@ -120,7 +120,7 @@ export const moveEntry = (entryId, groupId) => (dispatch, getState) => {
 
 export const deleteEntry = entryId => (dispatch, getState) => {
   const archiveId = getCurrentArchiveId(getState());
-  showConfirmDialog(i18n.t('entry.are-you-sure-question'), resp => {
+  showConfirmDialog(i18n.t('entry.are-you-sure-question')).then(resp => {
     if (resp === 0) {
       dispatch({
         type: ENTRIES_DELETE,

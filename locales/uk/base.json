@@ -61,7 +61,7 @@
       "help": "Допомога",
       "visit-our-website": "Відвідайте наш сайт",
       "privacy-policy": "Політика конфіденційності",
-      "view-changelog-for-v": "Подивитися зміни у версії v{{version}}"
+      "view-changelog-for-v": "Подивитися зміни у версії v{{currentVersion}}"
     },
     "system": {
       "enable-browser-access": ""
@@ -101,7 +101,10 @@
     "webdav-description-text": "Введіть Ваші адреса кінцевої точки, ім'я користувача і пароль від {{title}}для підключення і виберіть архів Buttercup. Ми <strong> збережемо </ strong> Ваші реєстраційні дані і зашіфруем їх.",
     "name": "Ім'я",
     "size": "Розмір",
-    "date": "Дата"
+    "date": "Дата",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Так",
@@ -163,7 +166,8 @@
     "open-file-for-importing": "Імпорт не може бути запущеним без відкритого головного вікна",
     "entry-not-found": "Не знайдено",
     "dropbox-connection-failed-info": "Підключення до сервера Dropbox не вдалося. Спробуйте пізніше ще раз.",
-    "webdav-connection-failed-info": "Підключення до {{endpoint}} не вдалося. Будь ласка, перевірте Ваші реєстраційні дані і спробуйте ще раз."
+    "webdav-connection-failed-info": "Підключення до {{endpoint}} не вдалося. Будь ласка, перевірте Ваші реєстраційні дані і спробуйте ще раз.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Нова група",

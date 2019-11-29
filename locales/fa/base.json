@@ -71,7 +71,7 @@
       "help": "راهنمایی",
       "visit-our-website": "مشاهده سایت ما",
       "privacy-policy": "حریم شخصی",
-      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{version}}"
+      "view-changelog-for-v": "مشاهده تغییرات نگارش v{{currentVersion}}"
     },
     "tray": {
       "quit": "بستن",
@@ -117,7 +117,10 @@
     "size": "حجم",
     "date": "تاریخ",
     "new-archive": "پرونده جدید",
-    "connect": "اتصال"
+    "connect": "اتصال",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "بله",
@@ -179,7 +182,8 @@
     "open-file-for-importing": "برای عملیات درون‌ریزی نیاز است که پنجره اصلی باترکاپ باز باشد.",
     "entry-not-found": "سند پیدا نشد.",
     "dropbox-connection-failed-info": "اتصال به دراپ‌باکس با خطا مواجه شد. لطفا دوباره سعی کنید.",
-    "webdav-connection-failed-info": "اتصال به WebDAV با خطا مواجه شد. لطفا دوباره سعی کنید."
+    "webdav-connection-failed-info": "اتصال به WebDAV با خطا مواجه شد. لطفا دوباره سعی کنید.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "گروه جدید",

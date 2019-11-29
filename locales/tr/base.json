@@ -67,7 +67,7 @@
       "help": "Yardım",
       "visit-our-website": "Web sitemizi ziyaret ediniz",
       "privacy-policy": "Gizlilik Politikası",
-      "view-changelog-for-v": "v{{version}}'de olan değişiklikler"
+      "view-changelog-for-v": "v{{currentVersion}}'de olan değişiklikler"
     },
     "tray": {
       "quit": "Çıkış",
@@ -79,10 +79,10 @@
   },
   "archive-search": {
     "searchterm": "Ara ... ",
-    "nothing-found": "Hiçbirşey Bulunamadı"
+    "nothing-found": "Hiçbir Şey Bulunamadı"
   },
   "archive": {
-    "add-archive": "Arşiviniz kaydedildi",
+    "add-archive": "Arşiv Ekle",
     "archive-saved-loading-info": "Arşiviniz kaydedildi.<br>Otomatik kapatılıyor"
   },
   "archive-dialog": {
@@ -116,7 +116,10 @@
     "webdav-description-text": "{{title}} Bağlanma adresi, Kullanıcı adı ve Şifrenizi giriniz ve Buttercup arşivini seçiniz. Sizin kimlik bilgileriniz <strong>kaydedilip şifrelenecektir</strong>.",
     "name": "İsim",
     "size": "Boyut",
-    "date": "Tarih"
+    "date": "Tarih",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Evet",
@@ -178,7 +181,8 @@
     "open-file-for-importing": "İçe aktarma fonksiyonu ana pencere çalışmadan çalıştırılamaz.",
     "entry-not-found": "Kayıt bulunamadı",
     "dropbox-connection-failed-info": "Dropbox sunucusuna bağlanamadı. Lütfen daha sonra tekrar deneyin",
-    "webdav-connection-failed-info": "{{Endpoint}} sunucusuna bağlanamadı. Lütfen kimlik bilgilerinizi kontrol edip tekrar deneyin."
+    "webdav-connection-failed-info": "{{Endpoint}} sunucusuna bağlanamadı. Lütfen kimlik bilgilerinizi kontrol edip tekrar deneyin.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Yeni Grup",
@@ -201,7 +205,7 @@
     "welcome-title": "Buttercup'a Hoşgeldiniz.",
     "welcome-back-title": "Buttercup'a Tekrar Hoşgeldiniz.",
     "welcome-caption": "Henüz hiç arşiv eklemediniz. Neden bir tane eklemiyorsunuz?",
-    "unlock-archive": "Başlamak için bir arşivin açın ({{os}})."
+    "unlock-archive": "Başlamak için bir arşivinizi açın ({{os}})."
   },
   "intro-menu": {
     "open-archive-file": "Arşiv Dosyasını Aç",

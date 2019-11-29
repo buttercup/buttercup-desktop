@@ -15,17 +15,17 @@
       "new": "Arsip Baru",
       "open": "Buka Arsip",
       "search": "Cari di Arsip",
-      "connect-cloud-sources": "Hubungkan Cloud Sources",
+      "connect-cloud-sources": "Hubungkan Penyimpanan Awan",
       "import": {
         "import": "Impor",
         "import-from-type": "Dari {{name}} arsip (.{{extension}})",
         "import-to-type": "Ke {{name}}",
-        "no-available-archives": "Tidak ada arsip tersedia untuk di impor."
+        "no-available-archives": "Tidak ada arsip tersedia untuk diimpor."
       },
       "export": {
         "export": "Ekspor",
         "export-archive": "Ekspor {{name}} ke CSV",
-        "no-available-archives": "Tidak ada arsip tersedia untuk di ekspor."
+        "no-available-archives": "Tidak ada arsip tersedia untuk diekspor."
       },
       "close": "Tutup"
     },
@@ -47,31 +47,31 @@
     },
     "view": {
       "view": "Tampilan",
-      "condensed-sidebar": "Ringkas Sidebar",
+      "condensed-sidebar": "Ringkas Bar Samping",
       "language": "Bahasa",
-      "enable-tray-icon": "Tampilkan di Menubar",
+      "enable-tray-icon": "Tampilkan di Bar Menu",
       "reload": "Muat Ulang",
       "forcereload": "Paksa Muat Ulang",
-      "toggledevtools": "Toggle dev tools",
-      "togglefullscreen": "Toggle full screen",
-      "auto-hide-menubar": "Auto Hide Menubar"
+      "toggledevtools": "Peralatan Developer",
+      "togglefullscreen": "Layar Penuh",
+      "auto-hide-menubar": "Sembunyikan Bar Menu"
     },
     "window": {
-      "window": "Window",
-      "minimize": "Kecilkan Window",
+      "window": "Jendela",
+      "minimize": "Kecilkan Jendela",
       "close": "Tutup",
-      "zoom": "Zoom",
-      "front": "Tampilkan semua Window ke atas"
+      "zoom": "Pembesaran",
+      "front": "Tampilkan semua Jendela di atas"
     },
     "system": {
       "system": "Sistem",
-      "enable-browser-access": "Aktifkan Akses Peramban/Browser"
+      "enable-browser-access": "Aktifkan Akses Peramban"
     },
     "help": {
       "help": "Bantuan",
       "visit-our-website": "Kunjungi Situs Kami",
       "privacy-policy": "Ketentuan Privasi",
-      "view-changelog-for-v": "Tampilkan Changelog untuk v{{version}}"
+      "view-changelog-for-v": "Tampilkan Log Perubahan untuk v{{currentVersion}}"
     },
     "tray": {
       "quit": "Keluar",
@@ -92,11 +92,11 @@
     "create-a-new-buttercup-archive": "Buat Arsip Buttercup Baru"
   },
   "archive-menu": {
-    "unlock": "Unlock",
+    "unlock": "Buka Kunci",
     "change-color": "Ubah Warna",
     "change-password": "Ubah Kata Sandi",
     "import": "Impor",
-    "import-from-type": "DAri {{name}} arsip (.{{extension}})",
+    "import-from-type": "Dari {{name}} arsip (.{{extension}})",
     "export": "Ekspor",
     "archive-remove-with-name": "Hapus {{name}}",
     "open": "Buka",
@@ -110,7 +110,10 @@
     "connect-to-dropbox": "Hubungkan ke Dropbox",
     "authenticate-with-dropbox": "Otentikasikan dengan Dropbox",
     "dropbox-description-text": "Hubungkan Buttercup ke akun Dropbox Anda untuk membaca dan menyimpan arsip.<br />Kami tidak akan menyimpan Nama Pengguna atau Kata Sandi Anda.",
-    "connect-to-wedav": "Hubungkan ke Server {{title}}",
+    "connect-to-googledrive": "Hubungkan ke Google Drive",
+    "authenticate-with-googledrive": "Otentikasikan dengan Google Drive",
+    "googledrive-description-text": "Hubungkan Buttercup ke akun Google Drive Anda untuk membaca dan menyimpan arsip.<br />Kami tidak akan menyimpan Nama Pengguna atau Kata Sandi Anda.",
+    "connect-to-wedav": "Hubungkan ke Peladen {{title}}",
     "username": "Nama Pengguna",
     "password": "Kata Sandi",
     "connect": "Hubungkan",
@@ -129,7 +132,7 @@
     "copy": "Salin"
   },
   "copyable-menu": {
-    "copy-to-clipboard": "Salin ke Clipboard",
+    "copy-to-clipboard": "Salin ke Papan Klip",
     "reveal-password": "Perlihatkan Kata Sandi"
   },
   "entry": {
@@ -158,10 +161,10 @@
     "quit-unsave-entry": ""
   },
   "entry-menu": {
-    "copy-to-clipboard": "Salin ke Clipboard",
+    "copy-to-clipboard": "Salin ke Papan Klip",
     "username": "Nama Pengguna",
     "password": "Kata Sandi",
-    "open-url-in-browser": "Buka URL di Browser",
+    "open-url-in-browser": "Buka URL di Peramban",
     "move-to-group": "Pindahkan ke Grup",
     "move-to-trash": "Pindahkan ke Sampah",
     "delete-permanently": "Hapus Secara Permanen"
@@ -178,8 +181,9 @@
     "invalid-import-type-requested": "Tipe impor yang diminta tidak valid",
     "open-file-for-importing": "Fungsi impor seharusnya tidak boleh berjalan tanpa Main Window juga berjalan.",
     "entry-not-found": "Entri tidak ditemukan",
-    "dropbox-connection-failed-info": "Koneksi ke Server Dropbox gagal. Mohon coba lagi nanti",
-    "webdav-connection-failed-info": "Koneksi ke {{endpoint}} gagal. Mohon periksa kembali kredensial Anda dan coba lagi."
+    "dropbox-connection-failed-info": "Koneksi ke Peladen Dropbox gagal. Mohon coba lagi nanti",
+    "webdav-connection-failed-info": "Koneksi ke {{endpoint}} gagal. Mohon periksa kembali kredensial Anda dan coba lagi.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Grup Baru",
@@ -195,8 +199,8 @@
     "move-to-group-custom": "Pindahkan ke {{title}}",
     "empty-trash": "Kosongkan Sampah",
     "empty-trash-question": "Anda yakin untuk mengosongkan Sampah?",
-    "title-asc": "Judul: Ascending",
-    "title-desc": "Judul: Descending"
+    "title-asc": "Judul: Urut dari Atas",
+    "title-desc": "Judul: Urut dari Bawah"
   },
   "intro": {
     "welcome-title": "Selamat datang di Buttercup.",
@@ -207,7 +211,7 @@
   "intro-menu": {
     "open-archive-file": "Buka Berkas Arsip",
     "new-archive-file": "Berkas Arsip Baru",
-    "connect-cloud-sources": "Hubungkan ke Cloud Sources"
+    "connect-cloud-sources": "Hubungkan ke Penyimpanan Awan"
   },
   "password-dialog": {
     "master-password": "Kata Sandi Utama",
@@ -215,7 +219,7 @@
     "password": "Kata Sandi",
     "confirm-password": "Konfirmasi Kata Sandu",
     "confirm": "Konfirmasi",
-    "nevermind": "Sudahlah"
+    "nevermind": "Abaikan"
   },
   "password-generator": {
     "password-generator": "Buat Kata Sandi"
@@ -224,17 +228,17 @@
     "search": "Cari"
   },
   "sort": {
-    "title-asc": "Judul: Ascending",
-    "title-desc": "Judul: Descending",
-    "time-asc": "Time: Ascending",
-    "time-desc": "Time: Descending"
+    "title-asc": "Judul: Urut dari Atas",
+    "title-desc": "Judul: Urut dari Bawah",
+    "time-asc": "Waktu: Urut dari Atas",
+    "time-desc": "Waktu: Urut dari Bawah"
   },
   "update": {
-    "installing": "Menginstal",
-    "update-available-message": "Buttercup {{version}} sudah ada. Versi sekarang {{currentVersion}}. Ingin mengunduh sekarang?",
-    "new-version-available": "Versi baru Buttercup sudah ada!",
+    "installing": "Memasang",
+    "update-available-message": "Buttercup {{version}} sudah tersedia. Versi sekarang {{currentVersion}}. Ingin mengunduh sekarang?",
+    "new-version-available": "Versi baru Buttercup sudah tersedia!",
     "not-now": "Tidak Sekarang",
-    "download": "Unduh dan instal",
+    "download": "Unduh dan Pasang",
     "download-manual": "Buka Halaman Rilis",
     "release-notes": "Catatan Rilis:"
   },

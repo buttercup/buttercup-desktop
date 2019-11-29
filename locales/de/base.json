@@ -65,21 +65,17 @@
       "front": "Alle nach vorn bringen"
     },
     "system": {
-      "system": "System",
-      "enable-browser-access": "Browserzugriff aktivieren"
+      "enable-browser-access": ""
     },
     "help": {
       "help": "Hilfe",
       "visit-our-website": "Besuche unsere Website",
       "privacy-policy": "Datenschutzrichtlinie",
-      "view-changelog-for-v": "Changelog für v{{version}} aufrufen"
+      "view-changelog-for-v": "Changelog für v{{currentVersion}} aufrufen"
     },
     "tray": {
       "quit": "Beenden",
       "open": "Buttercup öffnen"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -121,7 +117,10 @@
     "name": "Name",
     "size": "Größe",
     "date": "Datum",
-    "new-archive": "Neues Archiv"
+    "new-archive": "Neues Archiv",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Ja",
@@ -183,7 +182,8 @@
     "open-file-for-importing": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
     "entry-not-found": "Der Eintrag wurde nicht gefunden",
     "dropbox-connection-failed-info": "Die Verbindung zu Dropbox ist fehlgeschlagen. Bitte versuche es später erneut.",
-    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut."
+    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Neue Gruppe",

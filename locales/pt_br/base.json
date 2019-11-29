@@ -61,7 +61,7 @@
       "help": "Ajuda",
       "visit-our-website": "Visite nosso Site",
       "privacy-policy": "Políticas de Privacidade",
-      "view-changelog-for-v": "Ver o Changelog da v{{version}}"
+      "view-changelog-for-v": "Ver o Changelog da v{{currentVersion}}"
     },
     "system": {
       "enable-browser-access": ""
@@ -100,7 +100,10 @@
     "webdav-description-text": "Entre com seu {{title}} endereço Endpoint, Nome de Usuário e Senha para conectar e escolher um arquivo Buttercup. Nós <strong>vamos salvar</strong> suas credenciais e codificá-las.",
     "name": "Nome",
     "size": "Tamanho",
-    "date": "Data"
+    "date": "Data",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Sim",
@@ -162,7 +165,8 @@
     "open-file-for-importing": "A função de importação não deve ser executada sem a janela principal em execução.",
     "entry-not-found": "Entrada não encontrada",
     "dropbox-connection-failed-info": "Conexão com o server do Dropbox falhou. Por favor, tente novamente mais tarde",
-    "webdav-connection-failed-info": "Conexão com {{endpoint}} falhou. Por favor, verifique as credenciais e tente novamente."
+    "webdav-connection-failed-info": "Conexão com {{endpoint}} falhou. Por favor, verifique as credenciais e tente novamente.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Novo Grupo",

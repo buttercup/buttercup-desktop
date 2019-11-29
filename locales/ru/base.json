@@ -38,7 +38,7 @@
       "help": "Помощь",
       "visit-our-website": "Посетите наш сайт",
       "privacy-policy": "Политика конфиденциальности",
-      "view-changelog-for-v": "Посмотреть изменения в версии v{{version}}"
+      "view-changelog-for-v": "Посмотреть изменения в версии v{{currentVersion}}"
     },
     "system": {
       "enable-browser-access": ""
@@ -71,7 +71,10 @@
     "size": "Размер",
     "date": "Дата",
     "new-archive": "",
-    "connect": ""
+    "connect": "",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "copyable": {
     "hide": "Скрыть",
@@ -129,7 +132,8 @@
     "webdav-connection-failed-info": "Подключение к {{endpoint}} не удалось. Пожалуйста, проверьте Ваши регистрационные данные и попробуйте ещё раз.",
     "invalid-import-type-requested": "",
     "open-file-for-importing": "",
-    "entry-not-found": ""
+    "entry-not-found": "",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Новая группа",

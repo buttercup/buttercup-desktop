@@ -11,7 +11,7 @@ export function exportArchiveToCSVAndSave(archiveId) {
   if (!archive) {
     throw new Error(`No archive with ID ${archiveId} has been found.`);
   }
-  const fileName = dialog.showSaveDialog(currentWindow, {
+  const fileName = dialog.showSaveDialogSync(currentWindow, {
     filters: [
       {
         name: 'Buttercup Export File',
