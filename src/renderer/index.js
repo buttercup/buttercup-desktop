@@ -93,6 +93,10 @@ window.onbeforeunload = event => {
 const archiveActions = setupArchiveActions(store);
 const subscribe = initSubscriber(store);
 
+ipc.on('lock-all-archives', () => {
+  archiveActions.lockAllArchives();
+});
+
 subscribe('settings.globalShortcuts', state => setupShortcuts(store));
 
 subscribe('settings.isButtercupFocused', () =>
