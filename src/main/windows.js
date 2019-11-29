@@ -158,6 +158,9 @@ export function setupWindows(store) {
       minimizable: false,
       maximizable: false,
       fullscreenable: false,
+      webPreferences: {
+        nodeIntegration: true // @TODO: Remove this in future versions
+      },
       x: Math.ceil(x + (width - 650) / 2),
       y: Math.ceil(y + (height - 450) / 2),
       ...options
@@ -180,6 +183,10 @@ export function setupWindows(store) {
     win.once('closed', () => {
       windowManager.deregister(win);
     });
+
+    if (callback) {
+      callback(win);
+    }
 
     return win;
   });
