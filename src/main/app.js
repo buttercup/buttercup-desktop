@@ -3,6 +3,7 @@ import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
+import { filterStore } from '../shared/store/filter-store';
 import { setupMenu } from './menu';
 import { setupTrayIcon } from './tray';
 import { getWindowManager } from './lib/window-manager';
@@ -107,26 +108,20 @@ app.on('ready', async () => {
   try {
     state = await storage.get('state');
     log.info('Restoring state...', state);
-
-    // Temporary bridge to new format
-    // @TODO: remove this!
-    if (state.archives && !Array.isArray(state.archives)) {
-      storage.set('state.backup', state);
-      log.info('Updating old state format to new.');
-      state.archives = [];
-      state.settingsByArchiveId = {};
-    }
   } catch (err) {
     log.error('Unable to read state json file', err);
   }
-  const store = configureStore(state);
+  const store = configureStore(filterStore(state));
 
   // Persist Store to Disk
   store.subscribe(() => {
     getQueue()
       .channel('saves')
       .enqueue(
-        () => storage.set('state', store.getState()).then(() => sleep(100)),
+        () =>
+          storage
+            .set('state', filterStore(store.getState()))
+            .then(() => sleep(100)),
         undefined,
         'store'
       );
