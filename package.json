@@ -158,6 +158,7 @@
     "@types/node": "^6.14.6",
     "@types/react": "^0.14.41",
     "@types/redux": "^3.6.31",
+    "@welldone-software/why-did-you-render": "^3.3.9",
     "ava": "^1.4.1",
     "babel-eslint": "^8.2.6",
     "babel-loader": "^8.0.6",

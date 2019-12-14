@@ -1,7 +1,10 @@
+import React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { electronEnhancer } from 'redux-electron-store';
+import whyDidYouRender from '@welldone-software/why-did-you-render';
+
 import getRootReducer from '../reducers';
 
 /**
@@ -13,6 +16,13 @@ export default function configureStore(initialState, scope = 'main') {
   let middleware = [thunk];
 
   if (scope === 'renderer' && process.env.NODE_ENV === 'development') {
+    whyDidYouRender(React, {
+      include: [/^Connect/],
+      logOnDifferentValues: true,
+      trackHooks: true,
+      collapseGroups: true
+    });
+
     const logger = createLogger({
       level: 'info',
       collapsed: true
