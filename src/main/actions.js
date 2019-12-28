@@ -1,7 +1,6 @@
 import debounce from 'lodash/debounce';
-import http from 'http';
-import { ipcMain as ipc, BrowserWindow, app, shell } from 'electron';
-import { ipcMain as betterIpc } from 'electron-better-ipc';
+import log from 'electron-log';
+import { ipcMain as ipc, BrowserWindow, app } from 'electron';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
@@ -63,26 +62,40 @@ export function setupActions(store) {
     i18n.changeLanguage(locale);
     store.subscribe(debounce(() => setupMenu(store), 500));
   });
+}
 
-  betterIpc.answerRenderer('authenticate-google', async url => {
-    shell.openExternal(url);
-    return new Promise((resolve, reject) => {
-      const server = http.createServer((req, res) => {
-        res.setHeader('Access-Control-Allow-Origin', 'https://buttercup.pw');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+function handleAuthCall(args) {
+  log.info(args);
+  if (!Array.isArray(args) || args.length === 0) {
+    log.warn('Empty auth call. Abborting.');
+    return;
+  }
+  switch (args[0]) {
+    case 'google':
+      BrowserWindow.getAllWindows().forEach(win => {
+        win.webContents.send('protocol:auth/google', args.slice(1));
+      });
+      break;
+    default:
+      log.warn('Unable to handle google authentication result.');
+      break;
+  }
+}
 
-        if (req.url) {
-          const match = req.url.match(/\?googleauth&code=([^&#?]+)/);
-          if (match && match.length > 1) {
-            server.close(() => resolve(match[1]));
-          }
-        }
-        res.end();
-      });
-      server.on('error', e => {
-        server.close(() => reject(e));
-      });
-      server.listen(12822);
-    });
-  });
+export function handleProtocolCall(url) {
+  if (typeof url !== 'string' || url.length === 0) {
+    log.warn('Empty protocol call. Abborting.');
+    return;
+  }
+  const path = url.replace('buttercup://', '');
+  const parts = path.split('/');
+
+  switch (parts[0]) {
+    case 'auth':
+      handleAuthCall(parts.slice(1));
+      break;
+    default:
+      log.warn(`Unable to handle ${parts[0]}`);
+      break;
+  }
 }

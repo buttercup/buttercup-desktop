@@ -1,10 +1,9 @@
-import { remote } from 'electron';
+import { remote, ipcRenderer } from 'electron';
 import { OAuth2Client } from '@buttercup/google-oauth2-client';
 import { instantiateInterface } from '@buttercup/file-interface';
 import { createClient as createGoogleDriveClient } from '@buttercup/googledrive-client';
 import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
 import { createClient as createWebdavClient } from 'webdav';
-import { ipcRenderer as ipc } from 'electron-better-ipc';
 import { ArchiveTypes } from '../../shared/buttercup/types';
 
 const { BrowserWindow } = remote;
@@ -59,10 +58,29 @@ function getGoogleDriveOAuthClient() {
     __googleDriveOAuthClient = new OAuth2Client(
       '327941947801-fumr4be9juk0bu3ekfuq9fr5bm7trh30.apps.googleusercontent.com',
       '2zCBNDSXp1yIu5dyE5BVUWQZ',
-      'https://buttercup.pw?googleauth'
+      'https://buttercup.pw?googledesktopauth'
     );
   }
   return __googleDriveOAuthClient;
+}
+
+function listenForGoogleAuthCode() {
+  const channel = 'protocol:auth/google';
+  return new Promise((resolve, reject) => {
+    const callback = (e, args) => {
+      const path = args.join('/');
+      const match = path.match(/\?googledesktopauth&code=([^&#?]+)/);
+
+      if (match !== null && match.length > 0) {
+        ipcRenderer.removeAllListeners(channel);
+        resolve(match[1]);
+      } else {
+        reject(new Error('Authentication failed.'));
+      }
+    };
+    ipcRenderer.removeAllListeners(channel);
+    ipcRenderer.on(channel, callback);
+  });
 }
 
 export async function authenticateGoogleDrive() {
@@ -72,18 +90,18 @@ export async function authenticateGoogleDrive() {
     scope: ['email', 'profile', 'https://www.googleapis.com/auth/drive'],
     prompt: 'consent'
   });
-  const reply = await ipc.callMain('authenticate-google', url);
-  console.log(reply);
+  remote.shell.openExternal(url);
 
-  // const authCode = await authenticate(url, /\?googleauth&code=([^&#?]+)/);
-  // const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
-  // const {
-  //   access_token: accessToken,
-  //   refresh_token: refreshToken
-  // } = response.tokens;
+  const authCode = await listenForGoogleAuthCode();
+  const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
+  const {
+    access_token: accessToken,
+    refresh_token: refreshToken
+  } = response.tokens;
+
   return {
-    accessToken: null,
-    refreshToken: null
+    accessToken,
+    refreshToken
   };
 }
 
