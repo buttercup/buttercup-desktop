@@ -1,5 +1,7 @@
 import debounce from 'lodash/debounce';
-import { ipcMain as ipc, BrowserWindow, app } from 'electron';
+import http from 'http';
+import { ipcMain as ipc, BrowserWindow, app, shell } from 'electron';
+import { ipcMain as betterIpc } from 'electron-better-ipc';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile, openFileForImporting } from './lib/files';
 import { setupMenu } from './menu';
@@ -60,5 +62,27 @@ export function setupActions(store) {
 
     i18n.changeLanguage(locale);
     store.subscribe(debounce(() => setupMenu(store), 500));
+  });
+
+  betterIpc.answerRenderer('authenticate-google', async url => {
+    shell.openExternal(url);
+    return new Promise((resolve, reject) => {
+      const server = http.createServer((req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', 'https://buttercup.pw');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+
+        if (req.url) {
+          const match = req.url.match(/\?googleauth&code=([^&#?]+)/);
+          if (match && match.length > 1) {
+            server.close(() => resolve(match[1]));
+          }
+        }
+        res.end();
+      });
+      server.on('error', e => {
+        server.close(() => reject(e));
+      });
+      server.listen(12822);
+    });
   });
 }

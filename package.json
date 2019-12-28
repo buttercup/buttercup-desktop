@@ -85,6 +85,12 @@
       "name": "Buttercup Archive",
       "icon": "./build/icon.icns"
     },
+    "protocols": {
+      "name": "Buttercup",
+      "schemes": [
+        "buttercup"
+      ]
+    },
     "directories": {
       "output": "release"
     }
@@ -181,6 +187,7 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "electron": "^7.1.1",
+    "electron-better-ipc": "^0.7.0",
     "electron-builder": "^21.2.0",
     "electron-context-menu": "^0.10.1",
     "electron-debug": "^3.0.1",

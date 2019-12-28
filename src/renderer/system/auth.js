@@ -4,6 +4,7 @@ import { instantiateInterface } from '@buttercup/file-interface';
 import { createClient as createGoogleDriveClient } from '@buttercup/googledrive-client';
 import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
 import { createClient as createWebdavClient } from 'webdav';
+import { ipcRenderer as ipc } from 'electron-better-ipc';
 import { ArchiveTypes } from '../../shared/buttercup/types';
 
 const { BrowserWindow } = remote;
@@ -71,16 +72,18 @@ export async function authenticateGoogleDrive() {
     scope: ['email', 'profile', 'https://www.googleapis.com/auth/drive'],
     prompt: 'consent'
   });
+  const reply = await ipc.callMain('authenticate-google', url);
+  console.log(reply);
 
-  const authCode = await authenticate(url, /\?googleauth&code=([^&#?]+)/);
-  const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
-  const {
-    access_token: accessToken,
-    refresh_token: refreshToken
-  } = response.tokens;
+  // const authCode = await authenticate(url, /\?googleauth&code=([^&#?]+)/);
+  // const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
+  // const {
+  //   access_token: accessToken,
+  //   refresh_token: refreshToken
+  // } = response.tokens;
   return {
-    accessToken,
-    refreshToken
+    accessToken: null,
+    refreshToken: null
   };
 }
 

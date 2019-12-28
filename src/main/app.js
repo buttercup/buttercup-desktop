@@ -1,4 +1,4 @@
-import { app, session } from 'electron';
+import { app, session, protocol } from 'electron';
 import pify from 'pify';
 import log from 'electron-log';
 import jsonStorage from 'electron-json-storage';
@@ -84,11 +84,18 @@ if (!lock) {
   app.quit();
 }
 
-app.on('second-instance', () => {
+app.on('second-instance', (event, commandLine) => {
+  log.info(commandLine);
   const focusedWindow = getMainWindow();
   if (!focusedWindow) {
     windowManager.buildWindowOfType('main');
   }
+});
+
+// for Mac OS
+app.on('open-url', (e, url) => {
+  // URL Scheme から開いたときにここが実行される
+  log.info(url);
 });
 
 app.on('ready', async () => {
@@ -102,6 +109,19 @@ app.on('ready', async () => {
     details.requestHeaders['Origin'] = 'https://desktop.buttercup.pw';
     callback({ cancel: false, requestHeaders: details.requestHeaders });
   });
+
+  // protocol.registerStringProtocol(
+  //   'buttercup',
+  //   (request, callback) => {
+  //     console.log(request);
+  //     log.info(request);
+  //     callback('It works');
+  //   },
+  //   error => {
+  //     if (error) log.error('Failed to register protocol');
+  //     else log.info('success in registering protocol');
+  //   }
+  // );
 
   // Create Store
   let state = {};
