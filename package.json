@@ -65,7 +65,8 @@
       }
     },
     "nsis": {
-      "perMachine": true
+      "perMachine": true,
+      "include" : "build/installer.nsh" 
     },
     "win": {
       "target": "nsis",

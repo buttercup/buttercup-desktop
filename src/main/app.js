@@ -94,7 +94,6 @@ app.on('second-instance', (event, commandLine) => {
 
 // for Mac OS
 app.on('open-url', (e, url) => {
-  // URL Scheme から開いたときにここが実行される
   log.info(url);
 });
 
