@@ -7,7 +7,7 @@ import { filterStore } from '../shared/store/filter-store';
 import { setupMenu } from './menu';
 import { setupTrayIcon } from './tray';
 import { getWindowManager } from './lib/window-manager';
-import { sendEventToMainWindow, getOrBuildMainWindow } from './utils/window';
+import { sendEventToMainWindow, reopenMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
 import { isWindows, isOSX } from '../shared/utils/platform';
@@ -85,7 +85,7 @@ if (!lock) {
 }
 
 app.on('second-instance', (event, args) => {
-  getOrBuildMainWindow(() => {
+  reopenMainWindow(() => {
     // Handle Protocol URL for win32 & linux
     const protocolUrl = args.find(arg => arg.startsWith('buttercup://'));
     if (protocolUrl) {

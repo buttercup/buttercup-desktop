@@ -19,16 +19,6 @@ export function getMainWindow(
   return null;
 }
 
-export function getOrBuildMainWindow(fn = () => {}) {
-  const focusedWindow = getMainWindow();
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main', win => fn(win));
-  } else {
-    focusedWindow.focus();
-    fn(focusedWindow);
-  }
-}
-
 export function sendEventToMainWindow(...args) {
   const mainWindow = getMainWindow();
   if (mainWindow !== null) {
