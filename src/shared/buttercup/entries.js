@@ -58,7 +58,12 @@ export function validateEntry(entry) {
       errorMessages.push(i18n.t('entry.custom-fields-label-empty-info'));
     }
 
-    const fieldKeys = fields.map(field => field.property);
+    const fieldKeys = fields.reduce((output, field) => {
+      if (field.propertyType === 'property') {
+        output.push(field.property);
+      }
+      return output;
+    }, []);
 
     if (fieldKeys.length !== [...new Set(fieldKeys)].length) {
       errorMessages.push(i18n.t('entry.custom-fields-label-duplicate'));

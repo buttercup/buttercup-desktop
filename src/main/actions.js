@@ -65,15 +65,16 @@ export function setupActions(store) {
 }
 
 function handleAuthCall(args) {
-  log.info(args);
   if (!Array.isArray(args) || args.length === 0) {
     log.warn('Empty auth call. Abborting.');
     return;
   }
-  switch (args[0]) {
+  const [action, ...actionArgs] = args;
+
+  switch (action) {
     case 'google':
       BrowserWindow.getAllWindows().forEach(win => {
-        win.webContents.send('protocol:auth/google', args.slice(1));
+        win.webContents.send('protocol:auth/google', actionArgs);
       });
       break;
     default:
@@ -88,14 +89,14 @@ export function handleProtocolCall(url) {
     return;
   }
   const path = url.replace('buttercup://', '');
-  const parts = path.split('/');
+  const [action, ...args] = path.split('/');
 
-  switch (parts[0]) {
+  switch (action) {
     case 'auth':
-      handleAuthCall(parts.slice(1));
+      handleAuthCall(args);
       break;
     default:
-      log.warn(`Unable to handle ${parts[0]}`);
+      log.warn(`Unable to handle ${action}`);
       break;
   }
 }
