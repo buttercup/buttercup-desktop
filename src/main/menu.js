@@ -335,7 +335,7 @@ export const setupMenu = store => {
         },
         {
           label: label('help.view-changelog-for-v', {
-            version: pkg.version
+            currentVersion: pkg.version
           }),
           click: () => {
             shell.openExternal(

@@ -7,12 +7,12 @@ import { filterStore } from '../shared/store/filter-store';
 import { setupMenu } from './menu';
 import { setupTrayIcon } from './tray';
 import { getWindowManager } from './lib/window-manager';
-import { sendEventToMainWindow, getMainWindow } from './utils/window';
+import { sendEventToMainWindow, reopenMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
 import { getQueue } from './lib/queue';
 import { isWindows, isOSX } from '../shared/utils/platform';
 import { sleep } from '../shared/utils/promise';
-import { setupActions } from './actions';
+import { setupActions, handleProtocolCall } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
 import { getSetting } from '../shared/selectors';
@@ -84,10 +84,20 @@ if (!lock) {
   app.quit();
 }
 
-app.on('second-instance', () => {
-  const focusedWindow = getMainWindow();
-  if (!focusedWindow) {
-    windowManager.buildWindowOfType('main');
+app.on('second-instance', (event, args) => {
+  reopenMainWindow(() => {
+    // Handle Protocol URL for win32 & linux
+    const protocolUrl = args.find(arg => arg.startsWith('buttercup://'));
+    if (protocolUrl) {
+      handleProtocolCall(protocolUrl);
+    }
+  });
+});
+
+// Handle Protocol URL for macOS
+app.on('open-url', (e, url) => {
+  if (url.startsWith('buttercup://')) {
+    handleProtocolCall(url);
   }
 });
 
