@@ -48,20 +48,7 @@ class TreeLabel extends PureComponent {
       );
     }
 
-    return (
-      <Node onContextMenu={onRightClick}>
-        {node.isTrash ? (
-          <Translate i18nKey="common.trash" />
-        ) : (
-          title.trim() || (
-            <i>
-              {' '}
-              <Translate i18nKey="group.untitled" parent="span" />
-            </i>
-          )
-        )}
-      </Node>
-    );
+    return <Node onContextMenu={onRightClick}>{title.trim()}</Node>;
   }
 }
 
