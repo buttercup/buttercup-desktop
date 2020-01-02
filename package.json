@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.18.0",
+  "version": "1.18.2",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -65,7 +65,8 @@
       }
     },
     "nsis": {
-      "perMachine": true
+      "perMachine": true,
+      "include": "build/installer.nsh"
     },
     "win": {
       "target": "nsis",
@@ -84,6 +85,12 @@
       "ext": "bcup",
       "name": "Buttercup Archive",
       "icon": "./build/icon.icns"
+    },
+    "protocols": {
+      "name": "Buttercup",
+      "schemes": [
+        "buttercup"
+      ]
     },
     "directories": {
       "output": "release"

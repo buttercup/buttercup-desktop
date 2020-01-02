@@ -154,6 +154,7 @@
     "delete": "Supprimer",
     "entry-inputs-empty-info": "Veuillez saisir au moins un titre.",
     "entry-title-empty-info": "Veuillez saisir un titre.",
+    "custom-fields-label-duplicate": "Vous ne pouvez pas avoir plusieurs champs personnalisés avec le même nom",
     "custom-fields-label-empty-info": "Vous avez oublié de définir un label pour un ou plusieurs champs personnalisés.",
     "are-you-sure-question": "Confirmez-vous ?",
     "displaying-entries": "{{count}} entrées affichées",

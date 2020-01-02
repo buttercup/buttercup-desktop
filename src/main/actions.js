@@ -1,4 +1,5 @@
 import debounce from 'lodash/debounce';
+import log from 'electron-log';
 import { ipcMain as ipc, BrowserWindow, app } from 'electron';
 import { getWindowManager } from './lib/window-manager';
 import { openFile, newFile, openFileForImporting } from './lib/files';
@@ -67,4 +68,41 @@ export function setupActions(store) {
     i18n.changeLanguage(locale);
     store.subscribe(debounce(() => setupMenu(store), 200));
   });
+}
+
+function handleAuthCall(args) {
+  if (!Array.isArray(args) || args.length === 0) {
+    log.warn('Empty auth call. Abborting.');
+    return;
+  }
+  const [action, ...actionArgs] = args;
+
+  switch (action) {
+    case 'google':
+      BrowserWindow.getAllWindows().forEach(win => {
+        win.webContents.send('protocol:auth/google', actionArgs);
+      });
+      break;
+    default:
+      log.warn('Unable to handle google authentication result.');
+      break;
+  }
+}
+
+export function handleProtocolCall(url) {
+  if (typeof url !== 'string' || url.length === 0) {
+    log.warn('Empty protocol call. Abborting.');
+    return;
+  }
+  const path = url.replace('buttercup://', '');
+  const [action, ...args] = path.split('/');
+
+  switch (action) {
+    case 'auth':
+      handleAuthCall(args);
+      break;
+    default:
+      log.warn(`Unable to handle ${action}`);
+      break;
+  }
 }

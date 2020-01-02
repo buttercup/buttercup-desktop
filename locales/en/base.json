@@ -155,6 +155,7 @@
     "delete": "Delete",
     "entry-inputs-empty-info": "Please enter at least a title.",
     "entry-title-empty-info": "Please enter a title.",
+    "custom-fields-label-duplicate": "you cannot have custom fields with the same label",
     "custom-fields-label-empty-info": "You've forgotten to set a label for one or more custom fields.",
     "are-you-sure-question": "Are you sure?",
     "displaying-entries": "Displaying {{count}} entries",
