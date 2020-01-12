@@ -8,12 +8,13 @@
 
 > Cross-platform, free and open-source password manager based on NodeJS.
 
-[![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master) 
+[![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
 ![Latest version](https://img.shields.io/github/tag/buttercup/buttercup-desktop.svg?label=latest) [![Github All Releases](https://buttercup-download-count.now.sh/?)](https://github.com/buttercup/buttercup-desktop/releases) [![Backers on Open Collective](https://opencollective.com/buttercup/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup/sponsors/badge.svg)](#sponsors) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/buttercup)
 
 ![image](https://user-images.githubusercontent.com/3869469/35880367-6bd58770-0b86-11e8-879f-d1f9136274a9.png)
 
 ## About
+
 Buttercup is a **password manager** - an assistant for helping you store all of your login credentials. Buttercup helps you keep your accounts safe and assists you when you want to log in - all you need to do is remember just one password: your **master password**.
 
 This is the Desktop application in the Buttercup suite, and there's also a [mobile app](https://github.com/buttercup/buttercup-mobile) and [browser extension](https://github.com/buttercup/buttercup-browser-extension) so that you can access your credentials anywhere. You store your credentials (login information) in a secure archive, which can then be stored on your own computer or any of our supported **cloud services** (like Dropbox, for example).
@@ -21,6 +22,7 @@ This is the Desktop application in the Buttercup suite, and there's also a [mobi
 Archives are encrypted using the AES specification, and cannot be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
 
 ### Why you need software like Buttercup
+
 Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these with 1 or 2 passwords. Why? If an attacker gains access to one of the systems you have an account with, your password there may be easily stolen - if an attacker gets this it's highly likely they will try to log in to other accounts you have with the same password. If you're using the same password on more than one site, you risk having several accounts stolen if any one of them is breached.
 
 Buttercup helps you by remembering all of your passwords, and because you no longer have to remember them yourself, you can use **different passwords for every single site**.
@@ -48,17 +50,19 @@ choco install buttercup
 ```
 
 ### Platforms and Operating Systems
+
 Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only).
 
 We actively support Buttercup on the following platforms:
 
- * MacOS (latest)
- * Windows 10
- * Ubuntu 18.04
+- MacOS (latest)
+- Windows 10
+- Ubuntu 18.04
 
 Operating systems outside of these are not directly supported by staff - Issues will be followed on GitHub, however, and assistance provided where possible.
 
 #### Arch Linux
+
 Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/). This release channel is maintained by our community.
 
 Some users have reported segmentation faults on Arch - if you notice a similar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
@@ -67,7 +71,7 @@ Some users have reported segmentation faults on Arch - if you notice a similar i
 
 Buttercup supports portable builds on the following platforms:
 
- * Linux: [AppImage](https://github.com/buttercup/buttercup-desktop/releases/latest)
+- Linux: [AppImage](https://github.com/buttercup/buttercup-desktop/releases/latest)
 
 _Portable versions for Windows and Mac will arrive in the not-so-distant future._
 
@@ -92,6 +96,7 @@ Buttercup can connect to WebDAV-based services for the purpose of remotely-acces
 Please note that Buttercup **does not support self-signed certificates**.
 
 ### Importing and Exporting
+
 You can import from other password managers (such as 1Password, Lastpass and KeePass) by opening your archive and choosing Import from the menu.
 
 You can also export Buttercup vaults to CSV format.
@@ -100,32 +105,32 @@ You can also export Buttercup vaults to CSV format.
 
 Buttercup for Desktop supports the following languages:
 
- * **English** (Default)
- * Spanish
- * German
- * French
- * Russian
- * Farsi
- * Indonesian
- * Italian
- * Brazilian Portuguese
- * Ukrainian
- * Hungarian
- * Czech
- * Dutch
- * Turkish
- * Polish
- * Finnish
- * Catalan
- * Simplified Chinese
- * Romanian
- * Korean
+- **English** (Default)
+- Spanish
+- German
+- French
+- Russian
+- Farsi
+- Indonesian
+- Italian
+- Brazilian Portuguese
+- Ukrainian
+- Hungarian
+- Czech
+- Dutch
+- Turkish
+- Polish
+- Finnish
+- Catalan
+- Simplified Chinese
+- Romanian
+- Korean
 
 ### Submitting internationalization configurations
 
 We welcome the addition of new languages to the Buttercup platform. Please follow the style of the current translations.
 
-If adding languages that are more specific than usual (eg. "pt_br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `_` and not a dash.
+If adding languages that are more specific than usual (eg. "pt*br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `*` and not a dash.
 
 ## Development
 
@@ -133,7 +138,7 @@ If you're interested in developing Buttercup:
 
 ### Install Dependencies & Run
 
-``` bash
+```bash
 $ npm install
 $ npm run start
 ```
@@ -146,7 +151,7 @@ You will need some extra dependencies to build for different platforms on a sing
 
 ### Building libraries before releasing
 
-``` bash
+```bash
 $ npm run build
 ```
 
@@ -154,19 +159,21 @@ $ npm run build
 
 To package the app and make installers for all supported platforms:
 
-``` bash
+```bash
 $ npm run release
 ```
+
 This may take a while depending on how fast your computer is. All apps and installers will be in `app` directory.
 
 To package only for the current platform:
 
-``` bash
+```bash
 $ npm run package:current
 ```
 
 Or for a specific platform:
-``` bash
+
+```bash
 $ npm run package:mac
 $ npm run package:win
 $ npm run package:linux
@@ -174,28 +181,41 @@ $ npm run package:linux
 
 **NB**:
 
-The above is a naive release process, without signing. To sign and release, as is the standard approach, run the following:
+The above is a naive release process, without signing. To sign, notarize and release, as is the standard approach, first export the following environment variables:
 
 ```shell
-GH_TOKEN=github_token WIN_CSC_LINK=file:///some/directory/buttercup_codesign.p12 WIN_CSC_KEY_PASSWORD="codesign_password" npm run release
+export GH_TOKEN=github_token
+export WIN_CSC_LINK=file:///some/directory/buttercup_codesign.p12
+export WIN_CSC_KEY_PASSWORD="codesign_password"
+export APPLE_ID=apple_id
+export APPLE_ID_PASSWORD=app_specific_password
+export TEAM_SHORT_NAME=team_short_name # if your account is connected to multiple teams
 ```
 
 _Where `GH_TOKEN` is your GitHub token, `WIN_CSC_LINK` is the location of the p12 code signing certificate and `WIN_CSC_KEY_PASSWORD` is the certificate password._
+
+You can generate an Apple App-Specific password [here](https://appleid.apple.com/) and find your team short name according [to this guide](https://github.com/electron/electron-notarize#notes-on-your-team-short-name).
+
+Then run:
+
+```shell
+npm run release
+```
 
 ## Debugging
 
 In case you need to access Buttercup logs, they are located in:
 
-* **On Linux:** `~/.config/Buttercup/log.log`
-* **On macOS:** `~/Library/Logs/Buttercup/log.log`
-* **On Windows:** `%USERPROFILE%\AppData\Roaming\Buttercup\log.log`
+- **On Linux:** `~/.config/Buttercup/log.log`
+- **On macOS:** `~/Library/Logs/Buttercup/log.log`
+- **On Windows:** `%USERPROFILE%\AppData\Roaming\Buttercup\log.log`
 
 ## Contributors
 
 ### Creation
 
- * Sallar ([@sallar](https://twitter.com/sallar))
- * Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
+- Sallar ([@sallar](https://twitter.com/sallar))
+- Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
 
 ### Contributions
 
@@ -204,8 +224,8 @@ This project exists thanks to all the people who contribute. [[Contribute]](CONT
 
 We'd also like to thank:
 
- * Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
- * Arash Asghari (Brand & Identity) ([@_arashasghari](https://twitter.com/_arashasghari))
+- Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+- Arash Asghari (Brand & Identity) ([@\_arashasghari](https://twitter.com/_arashasghari))
 
 > We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
 
