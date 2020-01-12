@@ -130,7 +130,9 @@ Buttercup for Desktop supports the following languages:
 
 We welcome the addition of new languages to the Buttercup platform. Please follow the style of the current translations.
 
-If adding languages that are more specific than usual (eg. "pt*br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `*` and not a dash.
+<!-- prettier-ignore-start -->
+If adding languages that are more specific than usual (eg. "pt_br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `_` and not a dash.
+<!-- prettier-ignore-end -->
 
 ## Development
 
