@@ -41,7 +41,12 @@
     "asar": true,
     "appId": "pw.buttercup.desktop",
     "copyright": "Copyright © 2015-2018 MadDev Oy",
+    "afterSign": "electron-builder-notarize",
     "mac": {
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./build/entitlements.plist",
+      "entitlementsInherit": "./build/entitlements.plist",
       "category": "public.app-category.productivity"
     },
     "dmg": {
@@ -98,7 +103,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buttercup/buttercup-desktop.git"
+    "url": "https://github.com/buttercup/buttercup-desktop"
   },
   "keywords": [
     "password",
@@ -189,6 +194,7 @@
     "devtron": "^1.4.0",
     "electron": "^7.1.1",
     "electron-builder": "^21.2.0",
+    "electron-builder-notarize": "^1.1.2",
     "electron-context-menu": "^0.10.1",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
