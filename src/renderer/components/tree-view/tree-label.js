@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
