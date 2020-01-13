@@ -63,7 +63,7 @@
       "zoom": "Zoom",
       "front": "Přenést do popředí"
     },
-     "system": {
+    "system": {
       "system": "Systém",
       "enable-browser-access": "Povolit přístup z prohlížečů"
     },
@@ -73,7 +73,7 @@
       "privacy-policy": "Politika soukromí ",
       "view-changelog-for-v": "Zobrazit změny ve verzi {{currentVersion}}"
     },
-      "tray": {
+    "tray": {
       "quit": "Ukončit",
       "open": "Otevřít Buttercup"
     }
