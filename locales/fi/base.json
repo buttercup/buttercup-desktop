@@ -117,10 +117,7 @@
     "webdav-description-text": "Syötä {{title}} päätepisteosoite, Käyttäjätunnus ja Salasana yhdistääkseksi ja valitaksesi Buttercup Arkiston. Me <strong>tallenname</strong> sinun tunnistautumistiedot ja salaamme ne.",
     "name": "Nimi",
     "size": "Koko",
-    "date": "Päivämäärä",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Päivämäärä"
   },
   "confirm-dialog": {
     "yes": "Kyllä",
@@ -182,8 +179,7 @@
     "open-file-for-importing": "Tuo toiminto ei pitäisi olla ajossa ilman, että ohjelman pääikkuna on ajossa.",
     "entry-not-found": "Merkintää ei löydetty",
     "dropbox-connection-failed-info": "Yhteys Dropbox palvelimeen epäonnistui. Yritä myöhemmin uudestaan.",
-    "webdav-connection-failed-info": "Yhteys {{endpoint}} epäonnistui. Tarkista kirjautumistietosi ja kokeile uudestaan.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Yhteys {{endpoint}} epäonnistui. Tarkista kirjautumistietosi ja kokeile uudestaan."
   },
   "group": {
     "new-group": "Uusi Ryhmä",
@@ -241,29 +237,5 @@
     "download": "Lataa ja Asenna",
     "download-manual": "Avaa Julkaisut Näkymä",
     "release-notes": "Julkaisumuistio:"
-  },
-  "preferences": {
-    "preferences": "",
-    "appearance": "",
-    "font-size": "",
-    "reset": "",
-    "general": "",
-    "lock-archive-on-minimize": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
   }
 }

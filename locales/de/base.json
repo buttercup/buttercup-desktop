@@ -65,7 +65,7 @@
       "front": "Alle nach vorn bringen"
     },
     "system": {
-      "enable-browser-access": ""
+      "enable-browser-access": "Browser-Zugriff aktivieren"
     },
     "help": {
       "help": "Hilfe",
@@ -118,9 +118,9 @@
     "size": "Größe",
     "date": "Datum",
     "new-archive": "Neues Archiv",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "connect-to-googledrive": "Mit Google Drive verbinden",
+    "authenticate-with-googledrive": "Mit Google Drive authentifizieren",
+    "googledrive-description-text": "Verbinde Buttercup mit deinem Google Drive-Konto, um Archive zu lesen und zu speichern.<br />Wir werden deinen Google Drive-Benutzernamen oder dein Passwort nicht speichern."
   },
   "confirm-dialog": {
     "yes": "Ja",
@@ -158,7 +158,8 @@
     "are-you-sure-question": "Bist du dir sicher?",
     "displaying-entries": "Anzeigen von {{count}} Einträgen",
     "no-value": "Kein Wert",
-    "quit-unsave-entry": "Du wirst deine Änderungen verlieren, bist du sicher?"
+    "quit-unsave-entry": "Du wirst deine Änderungen verlieren, bist du sicher?",
+    "custom-fields-label-duplicate": "Du kannst keine benutzerdefinierten Felder mit der gleichen Bezeichnung haben"
   },
   "entry-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
@@ -182,8 +183,7 @@
     "open-file-for-importing": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
     "entry-not-found": "Der Eintrag wurde nicht gefunden",
     "dropbox-connection-failed-info": "Die Verbindung zu Dropbox ist fehlgeschlagen. Bitte versuche es später erneut.",
-    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut."
   },
   "group": {
     "new-group": "Neue Gruppe",

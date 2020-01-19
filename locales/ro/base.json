@@ -117,10 +117,7 @@
     "webdav-description-text": "Introdu adresa {{title}}, nume utilizator și parola pentru a te conecta și a alege arhiva Buttercup. <strong>Vom salva</strong> credențialele și le vom encripta.",
     "name": "Nume",
     "size": "Dimensiune",
-    "date": "Data",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Data"
   },
   "confirm-dialog": {
     "yes": "Da",
@@ -182,8 +179,7 @@
     "open-file-for-importing": "Funcția de import nu ar trebui să funcționeaze fără ecranul principal în funcțiune.",
     "entry-not-found": "Intrarea nu a fost găsită",
     "dropbox-connection-failed-info": "Conexiunea la server-ul Dropbox a eșuat. Te rugăm să încerci mai târziu.",
-    "webdav-connection-failed-info": "Conexiunea la {{endpoint}} a eșuat. Te rugăm verifică-ţi credențialele și încearcă din nou.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Conexiunea la {{endpoint}} a eșuat. Te rugăm verifică-ţi credențialele și încearcă din nou."
   },
   "group": {
     "new-group": "Grup nou",
@@ -241,24 +237,5 @@
     "download": "Descarcă și instalează",
     "download-manual": "Deschide pagina cu note de versiuni",
     "release-notes": "Note de versiuni:"
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "preferences": {
-    "preferences": "",
-    "reset": "",
-    "disable-update-on-start": "",
-    "lock-archive-on-minimize": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-onfocusout": "",
-    "shortcut-already-taken": "",
-    "shortcuts-global": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": ""
-  },
-  "common": {
-    "trash": ""
   }
 }

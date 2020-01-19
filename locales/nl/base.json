@@ -72,9 +72,6 @@
     "tray": {
       "quit": "Afsluiten",
       "open": "Open Buttercup"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -116,10 +113,7 @@
     "webdav-description-text": "Voer je {{title}} Endpoint adres, gebruikersnaam en wachtwoord in om te verbinden en kies een Buttercup archief. <strong>Inloggegevens worden versleuteld opgeslagen</strong>",
     "name": "Naam",
     "size": "Grootte",
-    "date": "Datum",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Datum"
   },
   "confirm-dialog": {
     "yes": "Ja",
@@ -155,9 +149,7 @@
     "entry-title-empty-info": "Voer een titel in.",
     "custom-fields-label-empty-info": "Je bent vergeten om een label in te stellen voor een of meer speciale velden.",
     "are-you-sure-question": "Weet je het zeker?",
-    "displaying-entries": "{{count}} items weergegeven",
-    "no-value": "",
-    "quit-unsave-entry": ""
+    "displaying-entries": "{{count}} items weergegeven"
   },
   "entry-menu": {
     "copy-to-clipboard": "Kopieer naar klembord",
@@ -181,8 +173,7 @@
     "open-file-for-importing": "Importeer functies mogen niet draaien zonder dat het hoofdscherm openstaat.",
     "entry-not-found": "Item niet gevonden",
     "dropbox-connection-failed-info": "Verbinding met Dropbox-server mislukt. Probeer het later nog eens.",
-    "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Verbinding met {{endpoint}} mislukt. Controleer uw inloggegevens en probeer het nogmaals."
   },
   "group": {
     "new-group": "Nieuwe groep",
@@ -240,29 +231,5 @@
     "download": "Download en installeer",
     "download-manual": "Open versieoverzicht",
     "release-notes": "Opmerkingen bij versie:"
-  },
-  "preferences": {
-    "general": "",
-    "appearance": "",
-    "preferences": "",
-    "font-size": "",
-    "reset": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
   }
 }
