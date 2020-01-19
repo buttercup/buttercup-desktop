@@ -8,11 +8,14 @@ const __cache = {
 
 export const setupArchiveActions = store => ({
   lockAllArchives() {
-    const archives = getAllArchives(store.getState());
-    if (archives) {
-      archives.forEach(
-        ({ id, status }) =>
-          status === 'unlocked' ? store.dispatch(lockArchive(id)) : ''
+    const state = store.getState();
+
+    const { savingArchive } = state.uiState;
+    const archives = getAllArchives(state);
+
+    if (!savingArchive && archives) {
+      archives.forEach(({ id, status }) =>
+        status === 'unlocked' ? store.dispatch(lockArchive(id)) : ''
       );
     }
   },
@@ -22,6 +25,7 @@ export const setupArchiveActions = store => ({
     }
     const state = store.getState();
 
+    const { savingArchive } = state.uiState;
     const {
       autolockSeconds,
       lockArchiveOnFocusout,
@@ -29,11 +33,13 @@ export const setupArchiveActions = store => ({
     } = state.settings;
 
     if (
-      (autolockSeconds === '0' &&
-        (lockArchiveOnFocusout && !isButtercupFocused)) ||
-      (autolockSeconds !== '0' &&
-        ((lockArchiveOnFocusout && !isButtercupFocused) ||
-          !lockArchiveOnFocusout))
+      !savingArchive &&
+      ((autolockSeconds === '0' &&
+        lockArchiveOnFocusout &&
+        !isButtercupFocused) ||
+        (autolockSeconds !== '0' &&
+          ((lockArchiveOnFocusout && !isButtercupFocused) ||
+            !lockArchiveOnFocusout)))
     ) {
       __cache.timer = setTimeout(() => {
         this.lockAllArchives();
