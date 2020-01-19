@@ -11,3 +11,7 @@ export const openArchive = () => () => {
 export const openFileManager = () => () => {
   ipcRenderer.send('show-file-manager');
 };
+
+export const openAppPreferences = () => () => {
+  ipcRenderer.send('show-app-preferences');
+};

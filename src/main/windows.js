@@ -8,6 +8,7 @@ import { getURIPathToFile } from './lib/utils';
 import { loadFile } from './lib/files';
 import { config } from '../shared/config';
 import { checkForUpdates } from './lib/updater';
+import { setSetting } from '../shared/actions/settings';
 
 const windowManager = getWindowManager();
 
@@ -72,6 +73,13 @@ export function setupWindows(store) {
       loadFile(url, win);
     });
 
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
+
     win.once('ready-to-show', () => {
       win.show();
     });
@@ -81,7 +89,17 @@ export function setupWindows(store) {
         callback(win);
       }
 
-      setTimeout(() => checkForUpdates(), ms('5s'));
+      if (!getSetting(store.getState(), 'updateOnStartDisabled')) {
+        setTimeout(() => {
+          checkForUpdates(true);
+        }, ms('5s'));
+      }
+    });
+
+    win.on('hide', () => {
+      if (getSetting(store.getState(), 'lockArchiveOnMinimize')) {
+        win.webContents.send('lock-all-archives');
+      }
     });
 
     win.once('closed', () => {
@@ -112,6 +130,63 @@ export function setupWindows(store) {
     win.once('ready-to-show', () => {
       win.show();
     });
+
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
+
+    win.once('closed', () => {
+      windowManager.deregister(win);
+    });
+
+    return win;
+  });
+
+  windowManager.setBuildProcedure('app-preferences', (callback, options) => {
+    const [x, y] = options.parent.getPosition();
+    const [width, height] = options.parent.getSize();
+
+    const win = new BrowserWindow({
+      width: 650,
+      height: 610,
+      minWidth: 650,
+      minHeight: 610,
+      minimizable: false,
+      maximizable: false,
+      fullscreenable: false,
+      webPreferences: {
+        nodeIntegration: true // @TODO: Remove this in future versions
+      },
+      x: Math.ceil(x + (width - 650) / 2),
+      y: Math.ceil(y + (height - 450) / 2),
+      ...options
+    });
+    win.setMenu(null);
+    win.setAutoHideMenuBar(true);
+
+    win.loadURL(getURIPathToFile('views/app-preferences.html'));
+
+    win.once('ready-to-show', () => win.show());
+
+    win.on('focus', () =>
+      store.dispatch(setSetting('isButtercupFocused', true))
+    );
+
+    win.on('blur', () =>
+      store.dispatch(setSetting('isButtercupFocused', false))
+    );
+
+    win.once('closed', () => {
+      windowManager.deregister(win);
+    });
+
+    if (callback) {
+      callback(win);
+    }
 
     return win;
   });

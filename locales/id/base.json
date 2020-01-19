@@ -112,7 +112,7 @@
     "dropbox-description-text": "Hubungkan Buttercup ke akun Dropbox Anda untuk membaca dan menyimpan arsip.<br />Kami tidak akan menyimpan Nama Pengguna atau Kata Sandi Anda.",
     "connect-to-googledrive": "Hubungkan ke Google Drive",
     "authenticate-with-googledrive": "Otentikasikan dengan Google Drive",
-    "googledrive-description-text": "Hubungkan Buttercup ke akun Google Drive Anda untuk membaca dan menyimpan arsip.<br />Kami tidak akan menyimpan Nama Pengguna atau Kata Sandi Anda.",    
+    "googledrive-description-text": "Hubungkan Buttercup ke akun Google Drive Anda untuk membaca dan menyimpan arsip.<br />Kami tidak akan menyimpan Nama Pengguna atau Kata Sandi Anda.",
     "connect-to-wedav": "Hubungkan ke Peladen {{title}}",
     "username": "Nama Pengguna",
     "password": "Kata Sandi",
@@ -157,7 +157,8 @@
     "custom-fields-label-empty-info": "Anda lupa untuk mengisi label untuk satu atau lebih dari kolom khusus.",
     "are-you-sure-question": "Anda yakin?",
     "displaying-entries": "Menampilkan {{count}} entri",
-    "no-value": "Tidak ada nilai"
+    "no-value": "Tidak ada nilai",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Salin ke Papan Klip",
@@ -181,7 +182,8 @@
     "open-file-for-importing": "Fungsi impor seharusnya tidak boleh berjalan tanpa Main Window juga berjalan.",
     "entry-not-found": "Entri tidak ditemukan",
     "dropbox-connection-failed-info": "Koneksi ke Peladen Dropbox gagal. Mohon coba lagi nanti",
-    "webdav-connection-failed-info": "Koneksi ke {{endpoint}} gagal. Mohon periksa kembali kredensial Anda dan coba lagi."
+    "webdav-connection-failed-info": "Koneksi ke {{endpoint}} gagal. Mohon periksa kembali kredensial Anda dan coba lagi.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Grup Baru",
@@ -239,5 +241,29 @@
     "download": "Unduh dan Pasang",
     "download-manual": "Buka Halaman Rilis",
     "release-notes": "Catatan Rilis:"
+  },
+  "preferences": {
+    "preferences": "",
+    "appearance": "",
+    "font-size": "",
+    "reset": "",
+    "general": "",
+    "lock-archive-on-minimize": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": "",
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

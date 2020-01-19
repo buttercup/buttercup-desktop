@@ -117,7 +117,10 @@
     "webdav-description-text": "Escriu la teva adreça de {{title}}, usuari i contrasenya per connectar i tria un arxiu de Buttercup. <strong>Guardarem<strong> les teves credencials i les xifrarem.",
     "name": "Nom",
     "size": "Mida",
-    "date": "Data"
+    "date": "Data",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Si",
@@ -179,7 +182,9 @@
     "open-file-for-importing": "La funció d'importació no s'hauria d'executar sense la finestra principal en execució.",
     "entry-not-found": "No s'ha trobat l'entrada",
     "dropbox-connection-failed-info": "La connexió al servidor de Dropbox ha fallat. Si us plau, torna-ho a intentar més tard.",
-    "webdav-connection-failed-info": "La connexió al {{endpoint}} ha fallat. Si us plau, comprova els teus credencials i torna-ho a intentar."
+    "webdav-connection-failed-info": "La connexió al {{endpoint}} ha fallat. Si us plau, comprova els teus credencials i torna-ho a intentar.",
+    "googledrive-connection-failed-info": "",
+    "passwords-dont-match": ""
   },
   "group": {
     "new-group": "Nou grup",
@@ -234,5 +239,27 @@
     "download": "Descarrega i instal·la",
     "download-manual": "Obre les Notes de la Versió",
     "release-notes": "Notes de la Versió"
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "preferences": {
+    "preferences": "",
+    "reset": "",
+    "disable-update-on-start": "",
+    "lock-archive-on-minimize": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-onfocusout": "",
+    "shortcut-already-taken": "",
+    "shortcuts-global": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": ""
+  },
+  "password-generator": {
+    "password-generator": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

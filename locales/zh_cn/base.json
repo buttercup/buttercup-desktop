@@ -117,7 +117,10 @@
     "webdav-description-text": "输入你的{{title}}终结点地址、用户名和密码以进行链接然后选择Buttercup档案。我们将<strong>保存</strong>你的凭据并对其进行加密。",
     "name": "名称",
     "size": "大小",
-    "date": "日期"
+    "date": "日期",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "是",
@@ -179,7 +182,8 @@
     "open-file-for-importing": "导入函数不应在主窗口未运行的情况下运行。",
     "entry-not-found": "未找到条目",
     "dropbox-connection-failed-info": "与Dropbox服务器的链接失败。 请稍后再试",
-    "webdav-connection-failed-info": "与{{endpoint}}的链接失败。 请检查你的凭据后重试。"
+    "webdav-connection-failed-info": "与{{endpoint}}的链接失败。 请检查你的凭据后重试。",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "新建分组",
@@ -237,5 +241,24 @@
     "download": "下载并安装",
     "download-manual": "打开发行页面",
     "release-notes": "发行说明:"
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "preferences": {
+    "preferences": "",
+    "reset": "",
+    "disable-update-on-start": "",
+    "lock-archive-on-minimize": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-onfocusout": "",
+    "shortcut-already-taken": "",
+    "shortcuts-global": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

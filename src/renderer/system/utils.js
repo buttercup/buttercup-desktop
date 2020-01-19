@@ -8,7 +8,11 @@ const __cache = {
 
 const currentWindow = remote.getCurrentWindow();
 
-export function copyToClipboard(text, isPassword) {
+export function copyToClipboard(
+  text,
+  isPassword,
+  secondsUntilClearClipboard = ''
+) {
   clipboard.writeText(text);
 
   // isPassword is a boolean
@@ -19,6 +23,15 @@ export function copyToClipboard(text, isPassword) {
 
     // Clean the clipboard after 15s if clipboard unchanged
     // @TODO: Make a UI for this.
+    if (secondsUntilClearClipboard !== '0') {
+      // Clean the clipboard after n seconds
+      __cache.timer = setTimeout(function clipboardPurgerClosure() {
+        if (readClipboard() === text) {
+          copyToClipboard('');
+        }
+      }, ms((secondsUntilClearClipboard || '15') + 's'));
+    }
+
     __cache.timer = setTimeout(function clipboardPurgerClosure() {
       if (readClipboard() === text) {
         clipboard.clear();

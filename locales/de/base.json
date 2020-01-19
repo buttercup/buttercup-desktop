@@ -7,7 +7,8 @@
       "hide": "Verbergen",
       "hideothers": "Alles andere ausblenden",
       "unhide": "Einblenden",
-      "quit": "Verlassen"
+      "quit": "Verlassen",
+      "preferences": "Einstellungen..."
     },
     "archive": {
       "archive": "Archiv",
@@ -64,8 +65,7 @@
       "front": "Alle nach vorn bringen"
     },
     "system": {
-      "system": "System",
-      "enable-browser-access": "Browserzugriff aktivieren"
+      "enable-browser-access": ""
     },
     "help": {
       "help": "Hilfe",
@@ -117,7 +117,10 @@
     "name": "Name",
     "size": "Größe",
     "date": "Datum",
-    "new-archive": "Neues Archiv"
+    "new-archive": "Neues Archiv",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Ja",
@@ -179,7 +182,8 @@
     "open-file-for-importing": "Die Importfunktion sollte nicht ausgeführt werden, wenn das Hauptfesnter nicht geöffnet ist.",
     "entry-not-found": "Der Eintrag wurde nicht gefunden",
     "dropbox-connection-failed-info": "Die Verbindung zu Dropbox ist fehlgeschlagen. Bitte versuche es später erneut.",
-    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut."
+    "webdav-connection-failed-info": "Verbindung zu {{endpoint}} fehlgeschlagen. Bitte prüfe deine Zugangsdaten un versuche es erneut.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Neue Gruppe",
@@ -237,5 +241,29 @@
     "download": "Herunterladen und installieren",
     "download-manual": "Update manuell herunterladen",
     "release-notes": "Versionshinweise:"
+  },
+  "preferences": {
+    "preferences": "Einstellungen",
+    "general": "Allgemein",
+    "appearance": "Erscheinungsbild",
+    "font-size": "Schriftgröße",
+    "reset": "Zurücksetzen",
+    "seconds-until-clear-clipboard": "Zwischenablagenleerung (Sekunden, 0 = keine Aktion)",
+    "seconds-until-archive-should-close": "Archiv automatisch sperren nach x Sekunden (0 = aus)",
+    "lock-archive-on-minimize": "Archiv sperren beim Minimieren",
+    "lock-archive-onfocusout": "Nur sperren, wenn das Fenster nicht mehr im Fokus ist",
+    "shortcuts": "Kurzbefehle",
+    "minimize-and-maximize": "Mini- und maximieren von Buttercup",
+    "shortcut-already-taken": "Diese Tastenkombination ist leider schon belegt",
+    "shortcuts-others": "Andere Kurzbefehle",
+    "shortcuts-menu": "Menü Kurzbefehle",
+    "shortcuts-global": "Globale Kurzbefehle",
+    "disable-update-on-start": "Updateanfrage beim Starten deaktivieren"
+  },
+  "info": {
+    "update-not-available": "Es sind momentan keine weiteren Updates verfügbar"
+  },
+  "common": {
+    "trash": "Papierkorb"
   }
 }

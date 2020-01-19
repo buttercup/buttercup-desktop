@@ -7,7 +7,8 @@
       "hide": "Hide",
       "hideothers": "Hide others",
       "unhide": "Unhide",
-      "quit": "Quit"
+      "quit": "Quit",
+      "preferences": "Preferences..."
     },
     "archive": {
       "archive": "Archive",
@@ -183,7 +184,8 @@
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
     "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
-    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
+    "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "New Group",
@@ -241,5 +243,29 @@
     "download": "Download and Install",
     "download-manual": "Open Releases Page",
     "release-notes": "Release Notes:"
+  },
+  "preferences": {
+    "general": "General",
+    "shortcuts": "Shortcuts",
+    "appearance": "Appearance",
+    "preferences": "Preferences",
+    "font-size": "Font size",
+    "reset": "Reset",
+    "seconds-until-clear-clipboard": "Clear clipboard (Seconds, 0 = no action)",
+    "seconds-until-archive-should-close": "Lock archive automatically after x seconds (0 = off)",
+    "lock-archive-on-minimize": "Lock archives on minimize",
+    "lock-archive-onfocusout": "Only lock archives, when buttercup is not focused",
+    "minimize-and-maximize": "Mini- and maximizing Buttercup",
+    "shortcut-already-taken": "Unfortunately, this key combination is already assigned",
+    "shortcuts-others": "Other Shortcuts",
+    "shortcuts-menu": "Menu Shortcuts",
+    "shortcuts-global": "Global Shortcuts",
+    "disable-update-on-start": "Disable update on start"
+  },
+  "info": {
+    "update-not-available": "There are currently no updates available"
+  },
+  "common": {
+    "trash": "Trash"
   }
 }

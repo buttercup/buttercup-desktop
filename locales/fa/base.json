@@ -117,7 +117,10 @@
     "size": "حجم",
     "date": "تاریخ",
     "new-archive": "پرونده جدید",
-    "connect": "اتصال"
+    "connect": "اتصال",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "بله",
@@ -154,7 +157,8 @@
     "custom-fields-label-empty-info": "شما افزودن عنوان به یکی از فیلدهای شخصی را فراموش کردید.",
     "are-you-sure-question": "برای این کار اطمینان دارید؟",
     "displaying-entries": "در حال نمایش {{count}} سند",
-    "no-value": "بدون محتوی"
+    "no-value": "بدون محتوی",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
@@ -178,7 +182,8 @@
     "open-file-for-importing": "برای عملیات درون‌ریزی نیاز است که پنجره اصلی باترکاپ باز باشد.",
     "entry-not-found": "سند پیدا نشد.",
     "dropbox-connection-failed-info": "اتصال به دراپ‌باکس با خطا مواجه شد. لطفا دوباره سعی کنید.",
-    "webdav-connection-failed-info": "اتصال به WebDAV با خطا مواجه شد. لطفا دوباره سعی کنید."
+    "webdav-connection-failed-info": "اتصال به WebDAV با خطا مواجه شد. لطفا دوباره سعی کنید.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "گروه جدید",
@@ -236,5 +241,29 @@
     "download": "دریافت و نصب",
     "download-manual": "باز کردن صفحه دریافت",
     "release-notes": "مشخصات این نسخه:"
+  },
+  "preferences": {
+    "general": "",
+    "appearance": "",
+    "preferences": "",
+    "font-size": "",
+    "reset": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": "",
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

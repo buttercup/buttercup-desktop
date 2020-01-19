@@ -143,6 +143,7 @@
   },
   "homepage": "https://buttercup.pw",
   "dependencies": {
+    "eva-icons": "^1.1.1",
     "opencollective": "^1.0.3"
   },
   "devDependencies": {
@@ -261,7 +262,9 @@
     "redux-electron-store": "^0.6.6",
     "redux-form": "^7.4.2",
     "redux-logger": "^3.0.0",
+    "redux-mock-store": "^1.5.3",
     "redux-persist": "^3.1.1",
+    "redux-subscriber": "^1.1.0",
     "redux-thunk": "^2.3.0",
     "reselect": "^2.5.4",
     "rimraf": "^2.6.3",

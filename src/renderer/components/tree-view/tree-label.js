@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -48,16 +47,7 @@ class TreeLabel extends PureComponent {
       );
     }
 
-    return (
-      <Node onContextMenu={onRightClick}>
-        {title.trim() || (
-          <i>
-            {' '}
-            <Translate i18nKey="group.untitled" parent="span" />
-          </i>
-        )}
-      </Node>
-    );
+    return <Node onContextMenu={onRightClick}>{title.trim()}</Node>;
   }
 }
 

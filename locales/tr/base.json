@@ -72,6 +72,9 @@
     "tray": {
       "quit": "Çıkış",
       "open": "Buttercup'ı aç"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -113,7 +116,10 @@
     "webdav-description-text": "{{title}} Bağlanma adresi, Kullanıcı adı ve Şifrenizi giriniz ve Buttercup arşivini seçiniz. Sizin kimlik bilgileriniz <strong>kaydedilip şifrelenecektir</strong>.",
     "name": "İsim",
     "size": "Boyut",
-    "date": "Tarih"
+    "date": "Tarih",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Evet",
@@ -150,7 +156,8 @@
     "custom-fields-label-empty-info": "Özel alanlarınızın biri veya daha fazlasına etiket yazmayı unutmuşsun.",
     "are-you-sure-question": "Emin misiniz?",
     "displaying-entries": "{{count}} kayıt görüntüleniyor",
-    "no-value": "İçeriksiz"
+    "no-value": "İçeriksiz",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Panoya kopyala",
@@ -174,7 +181,8 @@
     "open-file-for-importing": "İçe aktarma fonksiyonu ana pencere çalışmadan çalıştırılamaz.",
     "entry-not-found": "Kayıt bulunamadı",
     "dropbox-connection-failed-info": "Dropbox sunucusuna bağlanamadı. Lütfen daha sonra tekrar deneyin",
-    "webdav-connection-failed-info": "{{Endpoint}} sunucusuna bağlanamadı. Lütfen kimlik bilgilerinizi kontrol edip tekrar deneyin."
+    "webdav-connection-failed-info": "{{Endpoint}} sunucusuna bağlanamadı. Lütfen kimlik bilgilerinizi kontrol edip tekrar deneyin.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Yeni Grup",
@@ -232,5 +240,29 @@
     "download": "İndir ve Yükle",
     "download-manual": "Sürümler sayfasını aç",
     "release-notes": "Sürüm Notları:"
+  },
+  "preferences": {
+    "general": "",
+    "appearance": "",
+    "preferences": "",
+    "font-size": "",
+    "reset": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": "",
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

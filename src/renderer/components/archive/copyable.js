@@ -11,7 +11,7 @@ import { copyToClipboard } from '../../system/utils';
 
 const Password = styled(ColoredDigits)`
   font-family: Anonymous;
-  font-size: 14px;
+  font-size: 1em;
   font-weight: bold;
   user-select: all !important;
 
@@ -55,7 +55,8 @@ class Copyable extends PureComponent {
   static propTypes = {
     children: PropTypes.node,
     isSecret: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    secondsUntilClearClipboard: PropTypes.string
   };
 
   constructor(props) {
@@ -97,7 +98,11 @@ class Copyable extends PureComponent {
   }
 
   handleCopy(isSecret) {
-    copyToClipboard(this.props.children, isSecret);
+    copyToClipboard(
+      this.props.children,
+      isSecret,
+      this.props.secondsUntilClearClipboard
+    );
   }
 
   renderPassword(content) {

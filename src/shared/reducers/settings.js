@@ -2,8 +2,10 @@ import uiReducer from './ui';
 import {
   ARCHIVES_REMOVE,
   COLUMN_SIZE_SET,
+  GLOBAL_SHORTCUT_SET,
   SETTING_SET
 } from '../actions/types';
+import { DEFAULT_GLOBAL_SHORTCUTS } from '../utils/global-shortcuts';
 
 function itemReducer(state = {}, action) {
   return {
@@ -27,14 +29,24 @@ export function settingsByArchiveId(state = {}, action) {
   return state;
 }
 
-const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS = {
   columnSizes: { tree: 230, entries: 230 },
+  isButtercupFocused: true,
   condencedSidebar: true,
   menubarAutoHide: false,
   archivesLoading: false,
   isTrayIconEnabled: true,
+  secondsUntilClearClipboard: '15',
+  autolockSeconds: '0',
+  lockArchiveOnFocusout: false,
+  lockArchiveOnMinimize: false,
+  referenceFontSize: '1',
   isBrowserAccessEnabled: false,
-  locale: ''
+  updateOnStartDisabled: false,
+  locale: '',
+  globalShortcuts: {
+    ...DEFAULT_GLOBAL_SHORTCUTS
+  }
 };
 
 export function settings(state = DEFAULT_SETTINGS, action) {
@@ -45,6 +57,14 @@ export function settings(state = DEFAULT_SETTINGS, action) {
         columnSizes: {
           ...state.columnSizes,
           [action.payload.name]: action.payload.size
+        }
+      };
+    case GLOBAL_SHORTCUT_SET:
+      return {
+        ...state,
+        globalShortcuts: {
+          ...state.globalShortcuts,
+          [action.payload.name]: action.payload.accelerator
         }
       };
     case SETTING_SET:

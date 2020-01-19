@@ -117,7 +117,10 @@
     "webdav-description-text": "Entrez l’adresse de connexion à {{title}} ainsi que votre identifiant et votre mot de passe puis choisissez une archive Buttercup. Nous <strong>enregistrons</strong> et <strong>encryptons</strong> vos identifiants.",
     "name": "Nom",
     "size": "Taille",
-    "date": "Date"
+    "date": "Date",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Oui",
@@ -180,7 +183,8 @@
     "open-file-for-importing": "Le fenêtre principale doit être ouverte pour pouvoir importer.",
     "entry-not-found": "L’entrée n’a pas été trouvée",
     "dropbox-connection-failed-info": "Échec de la connexion au serveur Dropbox. Veuillez réessayer ultérieurement",
-    "webdav-connection-failed-info": "La connexion à {{endpoint}} a échoué. Veuillez vérifier vos identifiants et essayer à nouveau."
+    "webdav-connection-failed-info": "La connexion à {{endpoint}} a échoué. Veuillez vérifier vos identifiants et essayer à nouveau.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Nouveau groupe",
@@ -232,12 +236,35 @@
   },
   "update": {
     "installing": "En cours d’installation",
-    "new-version-available": "A new version of Buttercup is available!",
-    "update-available-message": "Buttercup {{version}} est disponible. Vous avez la {{currentVersion}}. Désirez-vous la télécharger maintenant ?",
     "new-version-available": "Une nouvelle version de Buttercup est disponible !",
+    "update-available-message": "Buttercup {{version}} est disponible. Vous avez la {{currentVersion}}. Désirez-vous la télécharger maintenant ?",
     "not-now": "Pas maintenant",
     "download": "Télécharger et Installer",
     "download-manual": "Ouvrir la page listant toutes les versions",
     "release-notes": "Notes de version :"
+  },
+  "preferences": {
+    "general": "",
+    "appearance": "",
+    "preferences": "",
+    "font-size": "",
+    "reset": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": "",
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

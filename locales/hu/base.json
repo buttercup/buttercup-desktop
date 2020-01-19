@@ -48,7 +48,8 @@
       "forcereload": "Kényszerített újratöltés",
       "toggledevtools": "Fejlesztői eszköz váltás",
       "togglefullscreen": "Teljes képernyőre váltás",
-      "auto-hide-menubar": "Automatikus menü elrejtése"
+      "auto-hide-menubar": "Automatikus menü elrejtése",
+      "enable-tray-icon": ""
     },
     "window": {
       "window": "Ablak",
@@ -62,6 +63,9 @@
       "visit-our-website": "Látogasd meg weboldalunkat",
       "privacy-policy": "Adatvédelmi irányelvek",
       "view-changelog-for-v": "Changelog megtekintése v{{currentVersion}}"
+    },
+    "system": {
+      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -102,7 +106,10 @@
     "webdav-description-text": "Adja meg a {{title}} végpont címét, felhasználónevét és jelszavát a Buttercup archívum kiválasztásához. A hitelesítő adatok titkosítva kerülnek <strong>mentésre</ strong>.",
     "name": "Név",
     "size": "Méret",
-    "date": "Dátum"
+    "date": "Dátum",
+    "connect-to-googledrive": "",
+    "authenticate-with-googledrive": "",
+    "googledrive-description-text": ""
   },
   "confirm-dialog": {
     "yes": "Igen",
@@ -137,7 +144,10 @@
     "entry-inputs-empty-info": "Kérjük, írjon be legalább egy címet.",
     "entry-title-empty-info": "Adjon meg egy címet.",
     "custom-fields-label-empty-info": "Elfelejtette beállítani a címkét egy vagy több egyedi mezőre.",
-    "are-you-sure-question": "Biztos?"
+    "are-you-sure-question": "Biztos?",
+    "no-value": "",
+    "displaying-entries": "",
+    "quit-unsave-entry": ""
   },
   "entry-menu": {
     "copy-to-clipboard": "Vágólapra másolás",
@@ -161,7 +171,8 @@
     "open-file-for-importing": "Az importfunkció nem futtatható a főablak futása nélkül.",
     "entry-not-found": "A fiók nem található",
     "dropbox-connection-failed-info": "A Dropbox szerverhez való csatlakozás nem sikerült. Kérlek, próbáld újra később.",
-    "webdav-connection-failed-info": "A(z) {{endpoint}} kapcsolódás sikertelen. Kérjük, ellenőrizze a hitelesítő adatait, és próbálja újra."
+    "webdav-connection-failed-info": "A(z) {{endpoint}} kapcsolódás sikertelen. Kérjük, ellenőrizze a hitelesítő adatait, és próbálja újra.",
+    "googledrive-connection-failed-info": ""
   },
   "group": {
     "new-group": "Új csoport",
@@ -218,5 +229,29 @@
     "not-now": "Most nem",
     "download": "Letöltés és telepítés",
     "release-notes": "Kiadási megjegyzések:"
+  },
+  "preferences": {
+    "general": "",
+    "appearance": "",
+    "preferences": "",
+    "font-size": "",
+    "reset": "",
+    "seconds-until-clear-clipboard": "",
+    "seconds-until-archive-should-close": "",
+    "lock-archive-on-minimize": "",
+    "lock-archive-onfocusout": "",
+    "shortcuts": "",
+    "minimize-and-maximize": "",
+    "shortcut-already-taken": "",
+    "shortcuts-others": "",
+    "shortcuts-menu": "",
+    "shortcuts-global": "",
+    "disable-update-on-start": ""
+  },
+  "info": {
+    "update-not-available": ""
+  },
+  "common": {
+    "trash": ""
   }
 }

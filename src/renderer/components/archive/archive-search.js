@@ -61,12 +61,13 @@ const EntryList = styled(Box)`
 const NothingFound = styled(EntryList)`
   color: #999;
   text-align: center;
+  font-size: 1em;
   margin-bottom: var(--spacing-one);
 `;
 
 const ListItem = styled.div`
   margin: 0;
-  font-size: 14px;
+  font-size: 1em;
   padding: 15px;
   cursor: pointer;
   border-bottom: 1px solid #eee;

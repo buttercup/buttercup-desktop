@@ -1,5 +1,5 @@
-import { app, shell, Menu } from 'electron';
 import electronContextMenu from 'electron-context-menu';
+import { app, shell, Menu } from 'electron';
 import { isOSX } from '../shared/utils/platform';
 import {
   getCurrentArchiveId,
@@ -14,18 +14,25 @@ import { getWindowManager } from './lib/window-manager';
 import { checkForUpdates } from './lib/updater';
 import { startHost, stopHost } from './lib/file-host';
 import { getMainWindow, reopenMainWindow } from './utils/window';
+import { setupTrayIcon } from './tray';
 import i18n, { languages } from '../shared/i18n';
 import pkg from '../../package.json';
-import { setupTrayIcon } from './tray';
+import { getShortcutByKey } from '../shared/utils/global-shortcuts';
 
 electronContextMenu();
 
 const label = (key, options) => i18n.t(`app-menu.${key}`, options);
 
 export const setupMenu = store => {
+  setupTrayIcon(store);
+
   const state = store.getState();
   const archives = getAllArchives(state);
   const currentArchiveId = getCurrentArchiveId(state);
+  const globalShortcuts = getSetting(state, 'globalShortcuts');
+
+  const shortcutByLabel = (key, isAppMenu = true) =>
+    getShortcutByKey(isAppMenu ? `app-menu.${key}` : key, globalShortcuts);
 
   // Default should be safe (always on) in case it isn't set.
   const menubarAutoHideSetting = getSetting(state, 'menubarAutoHide');
@@ -34,27 +41,57 @@ export const setupMenu = store => {
       ? menubarAutoHideSetting
       : false;
 
+  const preferencesSection = [
+    { type: 'separator' },
+    {
+      label: label('app.preferences'),
+      accelerator: shortcutByLabel('app.preferences'),
+      click: () => {
+        const windowManager = getWindowManager();
+        const [preferencesWindow] = windowManager.getWindowsOfType(
+          'app-preferences'
+        );
+
+        if (!preferencesWindow) {
+          if (isOSX()) {
+            app.dock.show();
+          }
+
+          reopenMainWindow(win => {
+            windowManager.buildWindowOfType('app-preferences', null, {
+              parent: win,
+              title: i18n.t('preferences.preferences'),
+              titleBarStyle: 'hiddenInset'
+            });
+          });
+        } else {
+          preferencesWindow.close();
+        }
+      }
+    }
+  ];
+
   const defaultTemplate = [
     {
       label: isOSX() ? label('archive.archive') : label('archive.file'),
       submenu: [
         {
           label: label('archive.new'),
-          accelerator: 'CmdOrCtrl+Shift+N',
+          accelerator: shortcutByLabel('archive.new'),
           click: () => {
             reopenMainWindow(win => newFile(win));
           }
         },
         {
           label: label('archive.open'),
-          accelerator: 'CmdOrCtrl+O',
+          accelerator: shortcutByLabel('archive.open'),
           click: () => {
             reopenMainWindow(win => openFile(win));
           }
         },
         {
           label: label('archive.connect-cloud-sources'),
-          accelerator: 'CmdOrCtrl+Shift+C',
+          accelerator: shortcutByLabel('archive.connect-cloud-sources'),
           click: () => {
             reopenMainWindow(win => {
               getWindowManager().buildWindowOfType('file-manager', null, {
@@ -63,12 +100,13 @@ export const setupMenu = store => {
             });
           }
         },
+        ...(!isOSX() ? preferencesSection : []),
         {
           type: 'separator'
         },
         {
           label: i18n.t('entry.add-entry'),
-          accelerator: 'CmdOrCtrl+N',
+          accelerator: shortcutByLabel('entry.add-entry', false),
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -78,7 +116,7 @@ export const setupMenu = store => {
         },
         {
           label: i18n.t('group.new-group'),
-          accelerator: 'CmdOrCtrl+G',
+          accelerator: shortcutByLabel('group.new-group', false),
           enabled: currentArchiveId !== null,
           click: () => {
             reopenMainWindow(win => {
@@ -143,7 +181,7 @@ export const setupMenu = store => {
         },
         {
           label: label('archive.search'),
-          accelerator: 'CmdOrCtrl+F',
+          accelerator: shortcutByLabel('archive.search'),
           click: (item, focusedWindow) => toggleArchiveSearch(focusedWindow)
         },
         {
@@ -200,7 +238,7 @@ export const setupMenu = store => {
           label: label('view.condensed-sidebar'),
           type: 'checkbox',
           checked: getSetting(state, 'condencedSidebar'),
-          accelerator: 'CmdOrCtrl+Shift+B',
+          accelerator: shortcutByLabel('view.condensed-sidebar'),
           click: item => {
             store.dispatch(setSetting('condencedSidebar', item.checked));
           }
@@ -401,6 +439,7 @@ export const setupMenu = store => {
         checkForUpdates();
       }
     },
+    ...preferencesSection,
     { type: 'separator' }
   );
 
