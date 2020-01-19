@@ -109,24 +109,8 @@ subscribe('archives', state => {
   }
 });
 
-subscribe('settings.referenceFontSize', state => {
-  document.documentElement.style.setProperty(
-    '--font-size',
-    state.settings.referenceFontSize + 'em'
-  );
-});
-
-// unsubscribe();
-
 const currentLocale = getSetting(store.getState(), 'locale');
-const referenceFontSize = getSetting(store.getState(), 'referenceFontSize');
 const renderApp = (RootContainer, i18n) => {
-  // set font-size
-  document.documentElement.style.setProperty(
-    '--font-size',
-    referenceFontSize + 'em'
-  );
-
   render(
     <I18nextProvider i18n={i18n}>
       <AppContainer>

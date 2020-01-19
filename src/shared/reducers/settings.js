@@ -40,7 +40,6 @@ export const DEFAULT_SETTINGS = {
   autolockSeconds: '0',
   lockArchiveOnFocusout: false,
   lockArchiveOnMinimize: false,
-  referenceFontSize: '1',
   isBrowserAccessEnabled: false,
   updateOnStartDisabled: false,
   locale: '',
