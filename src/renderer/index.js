@@ -97,17 +97,15 @@ ipc.on('lock-all-archives', () => {
   archiveActions.lockAllArchives();
 });
 
-subscribe('settings.globalShortcuts', state => setupShortcuts(store));
-
 subscribe('settings.isButtercupFocused', () =>
   archiveActions.lockArchiveTimer()
 );
 
 subscribe('archives', state => {
-  if (state.archives.some(archive => archive.status === 'unlocked')) {
-    archiveActions.lockArchiveTimer();
-  }
+  archiveActions.lockArchiveTimer();
 });
+
+subscribe('settings.globalShortcuts', state => setupShortcuts(store));
 
 const currentLocale = getSetting(store.getState(), 'locale');
 const renderApp = (RootContainer, i18n) => {
