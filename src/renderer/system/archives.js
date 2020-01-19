@@ -25,18 +25,19 @@ export const setupArchiveActions = store => ({
     }
     const state = store.getState();
 
-    const { savingArchive } = state.uiState;
     const {
-      autolockSeconds,
-      lockArchiveOnFocusout,
-      isButtercupFocused
+      uiState: { savingArchive },
+      settings: { autolockSeconds, lockArchiveOnFocusout, isButtercupFocused }
     } = state.settings;
 
     if (
       !savingArchive &&
+      // when buttercup is not focused, no seconds set and lock on unfocus is off
       ((autolockSeconds === '0' &&
         lockArchiveOnFocusout &&
         !isButtercupFocused) ||
+        // when seconds set and buttercup is not focused and lock on unfocus is on or
+        // lock on unfocus is off
         (autolockSeconds !== '0' &&
           ((lockArchiveOnFocusout && !isButtercupFocused) ||
             !lockArchiveOnFocusout)))
