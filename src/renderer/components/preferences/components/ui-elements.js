@@ -7,7 +7,9 @@ import { Translate } from '../../../../shared/i18n';
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: 110px 1fr;
+  grid-template-rows: ${isOSX()
+      ? 'calc(var(--preferences-tabs-height) + var(--spacing-two))'
+      : 'var(--preferences-tabs-height)'} 1fr;
   grid-template-columns: 1fr;
   width: 100%;
   background-color: #fff;
@@ -15,11 +17,52 @@ export const Wrapper = styled.div`
 `;
 
 export const Menu = styled.div`
-  background-color: var(--brand-primary);
-  border-radius: 10px;
-  margin: ${!isOSX() ? 18 : 38}px 25px 0;
+  background-color: var(--gray);
+  border-bottom: 1px solid var(--black-10);
+  padding-top: ${isOSX() ? 'var(--spacing-two)' : 0};
   box-sizing: border-box;
-  align-self: center;
+  height: 100%;
+  display: flex;
+`;
+
+export const MenuInner = styled.div`
+  align-self: flex-end;
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
+
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--gray-dark);
+    text-decoration: none;
+    padding: 12px 20px;
+    font-size: 12px;
+    position: relative;
+    border: 0;
+    transition: all 0.2s;
+    font-weight: 600;
+    text-align: center;
+    border-right: 1px solid var(--black-10);
+
+    svg {
+      margin-bottom: var(--spacing-half);
+    }
+
+    &.active {
+      background: linear-gradient(to top, var(--gray-light), transparent);
+    }
+
+    &.active,
+    &:hover {
+      color: var(--gray-darker);
+      svg {
+        opacity: 1;
+      }
+    }
+  }
 `;
 
 export const LabelWrapper = styled.div`
@@ -31,8 +74,9 @@ export const LabelWrapper = styled.div`
   padding: 0;
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 0.8em;
   margin: 0 5px 20px 0;
+
   input,
   select {
     margin-top: 4px;
@@ -45,44 +89,15 @@ export const LabelWrapper = styled.div`
     }
   }
   label {
-    font-size: 0.9em;
-    color: #999;
-    font-weight: 100;
-  }
-`;
-
-export const MenuInner = styled.div`
-  padding: 0;
-  align-self: center;
-  a {
-    list-style: none;
-    color: #fff;
-    text-decoration: none;
-    padding: 12px 20px;
-    font-size: 12px;
-    display: inline-block;
-    position: relative;
-    border: 0;
-    transition: all 0.2s;
-    color: rgba(255, 255, 255, 0.5);
-    font-weight: 600;
-    text-align: center;
-    svg {
-      transition: all 0.2s;
-      opacity: 0.5;
-    }
-    &.active,
-    &:hover {
-      color: #fff;
-      svg {
-        opacity: 1;
-      }
-    }
+    font-size: 0.95em;
+    color: var(--gray-dark);
+    font-weight: 300;
   }
 `;
 
 export const Content = styled.div`
-  margin: 40px;
+  padding: calc(var(--spacing-two) * 2) var(--spacing-two);
+
   h3 {
     font-size: 0.9em;
     margin: 0 0 15px;
@@ -150,7 +165,7 @@ const CheckboxWrapper = styled(LabelWrapper)`
     font-weight: 500;
   }
   span {
-    display: block;
+    display: ${props => (props.isChecked ? 'block' : 'none')};
     position: absolute;
     top: 4px;
     left: 3px;
@@ -201,9 +216,6 @@ const CheckboxStyle = styled.input`
       border: 1px solid #999;
       color: #fff;
     }
-    & + label {
-      color: #999;
-    }
   }
   &:checked {
     &:before {
@@ -217,7 +229,7 @@ const CheckboxStyle = styled.input`
       background-color: var(--brand-primary);
     }
     & + label {
-      color: #999;
+      color: var(--gray-darker);
     }
     &:hover {
       background-color: var(--brand-primary);
@@ -228,7 +240,7 @@ const CheckboxStyle = styled.input`
     transition: all 0.3s;
     padding: 0 0 0 25px;
     background-color: #fff;
-    color: #a9a9a9;
+    color: var(--gray-dark);
     border-radius: 14px;
   }
 `;
