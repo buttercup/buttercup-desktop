@@ -28,12 +28,14 @@ export const setupArchiveActions = store => {
     const isPerformingAnAction =
       getUIState(state, 'savingArchive') ||
       getUIState(state, 'isRenaming') ||
-      getCurrentEntryMode(state) === 'view';
+      getCurrentEntryMode(state) !== 'view';
+
+    const archives = state.archives;
 
     return {
       isPerformingAnAction,
-      archives: state.archives,
-      allArchivesLocked: state.archives.some(
+      archives,
+      areSomeArchivesUnlocked: archives.some(
         archive => archive.status === 'unlocked'
       ),
       autolockSeconds: getSetting(state, 'autolockSeconds'),
@@ -58,7 +60,7 @@ export const setupArchiveActions = store => {
     }
 
     const {
-      allArchivesLocked,
+      areSomeArchivesUnlocked,
       isPerformingAnAction,
       autolockSeconds,
       lockArchiveOnFocusout,
@@ -66,15 +68,13 @@ export const setupArchiveActions = store => {
     } = getStateData();
 
     if (
-      !allArchivesLocked &&
+      areSomeArchivesUnlocked &&
       !isPerformingAnAction &&
       // when buttercup is not focused, no seconds set and lock on unfocus is off
-      ((autolockSeconds === '0' &&
-        lockArchiveOnFocusout &&
-        !isButtercupFocused) ||
+      ((!autolockSeconds && lockArchiveOnFocusout && !isButtercupFocused) ||
         // when seconds set and buttercup is not focused and lock on unfocus is on or
         // lock on unfocus is off
-        (autolockSeconds !== '0' &&
+        (autolockSeconds > 0 &&
           ((lockArchiveOnFocusout && !isButtercupFocused) ||
             !lockArchiveOnFocusout)))
     ) {

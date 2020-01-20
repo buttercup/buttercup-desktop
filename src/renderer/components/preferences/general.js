@@ -16,8 +16,8 @@ import {
   Select
 } from './components/ui-elements';
 
-const DEFAULT_CLIPBOARD_CLEAR_SECONDS = '15';
-const DEFAULT_ARCHIVE_CLOSE_SECONDS = '0';
+const DEFAULT_CLIPBOARD_CLEAR_SECONDS = 15;
+const DEFAULT_ARCHIVE_CLOSE_SECONDS = 0;
 
 // to prevent large repetitive code blocks
 const generalData = {
@@ -55,8 +55,13 @@ const generalData = {
     return this.fields.reduce(
       (prev, current) => ({
         ...prev,
-        [this.generateFnName(current)]: payload =>
-          dispatch(setSetting(current, payload))
+        [this.generateFnName(current)]: (payload, type = 'string') => {
+          if (type === 'number') {
+            payload = parseInt(payload, 10);
+          }
+
+          dispatch(setSetting(current, payload));
+        }
       }),
       {}
     );
@@ -140,7 +145,9 @@ class General extends PureComponent {
           type="number"
           min="0"
           defaultValue={DEFAULT_CLIPBOARD_CLEAR_SECONDS}
-          onChange={e => setSecondsUntilClearClipboard(e.target.value)}
+          onChange={e =>
+            setSecondsUntilClearClipboard(e.target.value, 'number')
+          }
           value={secondsUntilClearClipboard}
           title={t('preferences.seconds-until-clear-clipboard')}
         />
@@ -149,7 +156,7 @@ class General extends PureComponent {
           type="number"
           min="0"
           defaultValue={DEFAULT_ARCHIVE_CLOSE_SECONDS}
-          onChange={e => setAutolockSeconds(e.target.value)}
+          onChange={e => setAutolockSeconds(e.target.value, 'number')}
           value={autolockSeconds}
           title={t('preferences.seconds-until-archive-should-close')}
         />
