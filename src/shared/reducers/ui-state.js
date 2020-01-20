@@ -3,8 +3,6 @@ import { UI_STATE_SET } from '../actions/types';
 const initialState = {
   savingArchive: false,
   isArchiveSearchVisible: false,
-  isEditingEntry: false,
-  isAddingEntry: false,
   isRenaming: false
 };
 

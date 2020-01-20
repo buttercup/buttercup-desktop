@@ -7,6 +7,7 @@ import {
   getExpandedKeys
 } from '../../shared/selectors';
 import { setExpandedKeys } from '../../shared/actions/ui';
+import { setIsRenaming } from '../../shared/actions/ui-state';
 
 export default connect(
   state => ({
@@ -16,6 +17,7 @@ export default connect(
     selectedKeys: [getCurrentGroupId(state)]
   }),
   {
+    setIsRenaming,
     onAddClick: groupTools.addGroup,
     onRemoveClick: groupTools.removeGroup,
     onSaveClick: groupTools.saveGroupTitle,

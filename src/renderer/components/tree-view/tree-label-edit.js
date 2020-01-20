@@ -17,6 +17,7 @@ class LabelEditor extends PureComponent {
     node: PropTypes.object.isRequired,
     onDismiss: PropTypes.func,
     onSave: PropTypes.func,
+    setIsRenaming: PropTypes.func,
     t: PropTypes.func
   };
 
@@ -39,6 +40,7 @@ class LabelEditor extends PureComponent {
     } else {
       this.props.onDismiss();
     }
+    this.props.setIsRenaming(false);
   }
 
   handleKeyUp(e) {
