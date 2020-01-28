@@ -22,6 +22,11 @@ function normalizePath(filePath) {
     filePath.replace(isWindows() ? /^file:[/]{2,3}/ : 'file://', '')
   );
   filePath = path.normalize(filePath);
+
+  if (path.extname(filePath).toLowerCase() !== '.bcup') {
+    filePath += '.bcup';
+  }
+
   return filePath;
 }
 
@@ -72,14 +77,13 @@ function showSaveDialog(focusedWindow) {
  * @param {BrowserWindow} win
  */
 export function loadFile(filePath, win, isNew = false) {
+  filePath = normalizePath(filePath);
   const payload = {
     type: ArchiveTypes.FILE,
-    path: normalizePath(filePath),
+    path: filePath,
     isNew
   };
-  if (path.extname(filePath).toLowerCase() !== '.bcup') {
-    return;
-  }
+
   if (!win) {
     win = getMainWindow();
   }
