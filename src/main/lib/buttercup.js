@@ -3,7 +3,8 @@ import {
   importFrom1PIF,
   importFromLastPass,
   importFromBitwarden,
-  importFromButtercup
+  importFromButtercup,
+  importFromCSV
 } from '@buttercup/importer';
 import { ImportTypes } from '../../shared/buttercup/types';
 
@@ -33,6 +34,8 @@ export function importArchive(type, filename, password) {
       return importFromButtercup(filename).then(archive =>
         archive.getHistory()
       );
+    case ImportTypes.BROWSERS:
+      return importFromCSV(filename).then(archive => archive.getHistory());
     default:
       throw new Error('Wrong import type provided');
   }

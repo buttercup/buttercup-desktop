@@ -12,6 +12,7 @@ export const ImportTypes = {
   KEEPASS: 'keepass',
   LASTPASS: 'lastpass',
   ONE_PASSWORD: '1password',
+  BROWSERS: 'browsers',
   BITWARDEN: 'bitwarden'
 };
 
@@ -40,6 +41,12 @@ export const ImportTypeInfo = {
     password: false,
     name: 'Buttercup (CSV)',
     extension: 'csv'
+  },
+  [ImportTypes.BROWSERS]: {
+    password: false,
+    name: 'Browsers (CSV)',
+    extension: 'csv',
+    hidden: true
   }
 };
 
