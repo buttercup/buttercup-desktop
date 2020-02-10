@@ -72,9 +72,6 @@
     "tray": {
       "quit": "Zamknij",
       "open": "Otwórz Buttercup"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive-search": {
@@ -116,10 +113,7 @@
     "webdav-description-text": "Podaj {{title}} adres, nazwę użytkownika oraz hasło aby uzyskać połączenie oraz wybierz archiwum Buttercup. Twoje dane <strong>zostaną zapisane</strong> i zaszyfrowane.",
     "name": "Nazwa",
     "size": "Rozmiar",
-    "date": "Data",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Data"
   },
   "confirm-dialog": {
     "yes": "Tak",
@@ -156,8 +150,7 @@
     "custom-fields-label-empty-info": "Zapomniałeś o uzupełnieniu etykiety dla przynajmniej jednego dodatkowego pola.",
     "are-you-sure-question": "Jesteś pewny?",
     "displaying-entries": "Liczba wpisów: {{count}}",
-    "no-value": "Brak wartości",
-    "quit-unsave-entry": ""
+    "no-value": "Brak wartości"
   },
   "entry-menu": {
     "copy-to-clipboard": "Kopiuj do schowka",
@@ -181,8 +174,7 @@
     "open-file-for-importing": "Import nie powinien być uruchomiony bez głównego okna",
     "entry-not-found": "Nie znaleziono wpisu",
     "dropbox-connection-failed-info": "Połączenie z serwerem Dropbox nie powiodło się. Spróbuj jeszcze raz później",
-    "webdav-connection-failed-info": "Połączenie z {{endpoint}} nie powiodło się. Sprawdź swoje dane i spróbuj jeszcze raz.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Połączenie z {{endpoint}} nie powiodło się. Sprawdź swoje dane i spróbuj jeszcze raz."
   },
   "group": {
     "new-group": "Nowa grupa",
@@ -240,29 +232,5 @@
     "download": "Pobierz i zainstaluj",
     "download-manual": "Otwórz stronę wydania",
     "release-notes": "Nota wydania:"
-  },
-  "preferences": {
-    "general": "",
-    "appearance": "",
-    "preferences": "",
-    "font-size": "",
-    "reset": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
   }
 }

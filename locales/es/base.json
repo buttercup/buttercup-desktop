@@ -45,8 +45,7 @@
       "reload": "Cargar de nuevo",
       "forcereload": "Forzar carga de nuevo",
       "toggledevtools": "Herramientas para desarrolladores",
-      "auto-hide-menubar": "Ocultar automáticamente la barra de menú",
-      "enable-tray-icon": ""
+      "auto-hide-menubar": "Ocultar automáticamente la barra de menú"
     },
     "window": {
       "window": "Ventana",
@@ -60,9 +59,6 @@
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
       "view-changelog-for-v": "Ver cambios en v{{currentVersion}}"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive": {
@@ -98,10 +94,7 @@
     "webdav-description-text": "Escribe tu dirección de {{title}}, usuario y contraseña para conectar y elige un archivo de Buttercup. <strong>Vamos a guardar<strong> tus credenciales y encriptarlas.",
     "name": "Nombre",
     "size": "Tamaño",
-    "date": "Fecha",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Fecha"
   },
   "confirm-dialog": {
     "yes": "Sí",
@@ -136,10 +129,7 @@
     "entry-inputs-empty-info": "Por favor, introduce al menos un título.",
     "entry-title-empty-info": "Por favor, introduce un título.",
     "custom-fields-label-empty-info": "Has olvidado añadir una etiqueta a uno o a varios campos personalizados.",
-    "are-you-sure-question": "¿Estás seguro?",
-    "no-value": "",
-    "displaying-entries": "",
-    "quit-unsave-entry": ""
+    "are-you-sure-question": "¿Estás seguro?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiar al portapapeles",
@@ -163,9 +153,7 @@
     "open-file-for-importing": "La función de importación no se debería ejecutar sin la ventana principal en ejecución.",
     "entry-not-found": "Entrada no encontrada.",
     "dropbox-connection-failed-info": "La conexión al servidor de Dropbox ha fallado. Por favor, inténtalo de nuevo más tarde.",
-    "webdav-connection-failed-info": "La conexión a {{endpoint}} ha fallado. Por favor, comprueba tus credenciales e inténtalo de nuevo.",
-    "passwords-dont-match": "",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "La conexión a {{endpoint}} ha fallado. Por favor, comprueba tus credenciales e inténtalo de nuevo."
   },
   "group": {
     "new-group": "Nuevo grupo",
@@ -200,8 +188,7 @@
     "password": "Contraseña",
     "confirm-password": "Confirma la contraseña",
     "confirm": "Confirmar",
-    "nevermind": "No importa",
-    "new-password": ""
+    "nevermind": "No importa"
   },
   "password-generator": {
     "password-generator": "Generar contraseña"
@@ -217,37 +204,6 @@
   },
   "update": {
     "installing": "Instalando",
-    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora.",
-    "new-version-available": "",
-    "release-notes": "",
-    "not-now": ""
-  },
-  "archive-search": {
-    "searchterm": "",
-    "nothing-found": ""
-  },
-  "preferences": {
-    "general": "",
-    "appearance": "",
-    "preferences": "",
-    "font-size": "",
-    "reset": "",
-    "seconds-until-clear-clipboard": "Seconds until clear clipboard",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
+    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora."
   }
 }

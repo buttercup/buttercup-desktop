@@ -117,10 +117,7 @@
     "webdav-description-text": "Vložte Vaši {{title}} cílovou adresu, uživatelské jméno a heslo pro připojení a vyberte Buttercup archiv. Vaše přihlašovací údaje <strong>ukládáme</strong> a šifrujeme.",
     "name": "Jméno",
     "size": "Velikost",
-    "date": "Datum",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Datum"
   },
   "confirm-dialog": {
     "yes": "Ano",
@@ -182,8 +179,7 @@
     "open-file-for-importing": "Import nemůže bežet bez spustěného hlavního okna.",
     "entry-not-found": "Záznam nenalezen",
     "dropbox-connection-failed-info": "Připojení k serveru Dropbox selhalo. Zkuste to prosím znovu.",
-    "webdav-connection-failed-info": "Připojení k {{endpoint}} selhalo. Prosím zkontrolujte své přihlašovací údaje a zkuste to znovu.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Připojení k {{endpoint}} selhalo. Prosím zkontrolujte své přihlašovací údaje a zkuste to znovu."
   },
   "group": {
     "new-group": "Nová skupina",
@@ -241,29 +237,5 @@
     "download": "Stáhnout a nainstalovat",
     "download-manual": "Otevřít stránky s informacemi",
     "release-notes": "Popis změn:"
-  },
-  "preferences": {
-    "general": "",
-    "appearance": "",
-    "preferences": "",
-    "font-size": "",
-    "reset": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
   }
 }

@@ -36,6 +36,7 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 
 // Create store
 const store = configureStore({}, 'renderer');
+const subscribe = initSubscriber(store);
 
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));
 linkArchiveManagerToStore(store);
@@ -90,43 +91,12 @@ window.onbeforeunload = event => {
 };
 
 // listen for store changes
-const archiveActions = setupArchiveActions(store);
-const subscribe = initSubscriber(store);
+setupArchiveActions(store);
 
-ipc.on('lock-all-archives', () => {
-  archiveActions.lockAllArchives();
-});
-
-subscribe('settings.globalShortcuts', state => setupShortcuts(store));
-
-subscribe('settings.isButtercupFocused', () =>
-  archiveActions.lockArchiveTimer()
-);
-
-subscribe('archives', state => {
-  if (state.archives.some(archive => archive.status === 'unlocked')) {
-    archiveActions.lockArchiveTimer();
-  }
-});
-
-subscribe('settings.referenceFontSize', state => {
-  document.documentElement.style.setProperty(
-    '--font-size',
-    state.settings.referenceFontSize + 'em'
-  );
-});
-
-// unsubscribe();
+subscribe('settings.globalShortcuts', () => setupShortcuts(store));
 
 const currentLocale = getSetting(store.getState(), 'locale');
-const referenceFontSize = getSetting(store.getState(), 'referenceFontSize');
 const renderApp = (RootContainer, i18n) => {
-  // set font-size
-  document.documentElement.style.setProperty(
-    '--font-size',
-    referenceFontSize + 'em'
-  );
-
   render(
     <I18nextProvider i18n={i18n}>
       <AppContainer>

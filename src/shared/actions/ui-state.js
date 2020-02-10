@@ -8,6 +8,8 @@ export const setUIState = (key, value) => ({
   }
 });
 
+export const setIsRenaming = isRenaming => setUIState('isRenaming', isRenaming);
+
 export const setSavingArchive = isSaving =>
   setUIState('savingArchive', isSaving);
 

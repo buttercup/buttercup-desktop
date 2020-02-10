@@ -15,7 +15,8 @@ class TreeLabel extends PureComponent {
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
-    onRightClick: PropTypes.func
+    onRightClick: PropTypes.func,
+    setIsRenaming: PropTypes.func
   };
 
   handleSave = title => {
@@ -32,7 +33,7 @@ class TreeLabel extends PureComponent {
   };
 
   render() {
-    const { node, onRightClick } = this.props;
+    const { node, onRightClick, setIsRenaming } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -42,6 +43,7 @@ class TreeLabel extends PureComponent {
             node={node}
             onSave={this.handleSave}
             onDismiss={this.handleDismiss}
+            setIsRenaming={setIsRenaming}
           />
         </Node>
       );

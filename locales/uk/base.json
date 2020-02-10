@@ -47,8 +47,7 @@
       "forcereload": "Примусове перезавантаження",
       "toggledevtools": "Засоби розробника",
       "togglefullscreen": "Повний екран",
-      "auto-hide-menubar": "Автоматично ховати панель меню",
-      "enable-tray-icon": ""
+      "auto-hide-menubar": "Автоматично ховати панель меню"
     },
     "window": {
       "window": "Вікно",
@@ -62,9 +61,6 @@
       "visit-our-website": "Відвідайте наш сайт",
       "privacy-policy": "Політика конфіденційності",
       "view-changelog-for-v": "Подивитися зміни у версії v{{currentVersion}}"
-    },
-    "system": {
-      "enable-browser-access": ""
     }
   },
   "archive": {
@@ -101,10 +97,7 @@
     "webdav-description-text": "Введіть Ваші адреса кінцевої точки, ім'я користувача і пароль від {{title}}для підключення і виберіть архів Buttercup. Ми <strong> збережемо </ strong> Ваші реєстраційні дані і зашіфруем їх.",
     "name": "Ім'я",
     "size": "Розмір",
-    "date": "Дата",
-    "connect-to-googledrive": "",
-    "authenticate-with-googledrive": "",
-    "googledrive-description-text": ""
+    "date": "Дата"
   },
   "confirm-dialog": {
     "yes": "Так",
@@ -139,10 +132,7 @@
     "entry-inputs-empty-info": "Введіть хоча б назву, будь ласка.",
     "entry-title-empty-info": "Введіть назву, будь ласка.",
     "custom-fields-label-empty-info": "Ви забули задати назву для одного чи більше довільних полів",
-    "are-you-sure-question": "Ви впевнені?",
-    "no-value": "",
-    "displaying-entries": "",
-    "quit-unsave-entry": ""
+    "are-you-sure-question": "Ви впевнені?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Скопіювати до буферу обміну",
@@ -166,8 +156,7 @@
     "open-file-for-importing": "Імпорт не може бути запущеним без відкритого головного вікна",
     "entry-not-found": "Не знайдено",
     "dropbox-connection-failed-info": "Підключення до сервера Dropbox не вдалося. Спробуйте пізніше ще раз.",
-    "webdav-connection-failed-info": "Підключення до {{endpoint}} не вдалося. Будь ласка, перевірте Ваші реєстраційні дані і спробуйте ще раз.",
-    "googledrive-connection-failed-info": ""
+    "webdav-connection-failed-info": "Підключення до {{endpoint}} не вдалося. Будь ласка, перевірте Ваші реєстраційні дані і спробуйте ще раз."
   },
   "group": {
     "new-group": "Нова група",
@@ -219,37 +208,6 @@
   },
   "update": {
     "installing": "Встановлення",
-    "update-available-message": "Доступний Buttercup версії {{version}}. Натисніть тут, щоб встановити зараз.",
-    "new-version-available": "",
-    "release-notes": "",
-    "not-now": ""
-  },
-  "archive-search": {
-    "searchterm": "",
-    "nothing-found": ""
-  },
-  "preferences": {
-    "general": "",
-    "appearance": "",
-    "preferences": "",
-    "font-size": "",
-    "reset": "",
-    "seconds-until-clear-clipboard": "",
-    "seconds-until-archive-should-close": "",
-    "lock-archive-on-minimize": "",
-    "lock-archive-onfocusout": "",
-    "shortcuts": "",
-    "minimize-and-maximize": "",
-    "shortcut-already-taken": "",
-    "shortcuts-others": "",
-    "shortcuts-menu": "",
-    "shortcuts-global": "",
-    "disable-update-on-start": ""
-  },
-  "info": {
-    "update-not-available": ""
-  },
-  "common": {
-    "trash": ""
+    "update-available-message": "Доступний Buttercup версії {{version}}. Натисніть тут, щоб встановити зараз."
   }
 }
