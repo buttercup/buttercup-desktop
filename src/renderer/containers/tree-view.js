@@ -17,7 +17,6 @@ export default connect(
     selectedKeys: [getCurrentGroupId(state)]
   }),
   {
-    setIsRenaming,
     onAddClick: groupTools.addGroup,
     onRemoveClick: groupTools.removeGroup,
     onSaveClick: groupTools.saveGroupTitle,
@@ -28,6 +27,7 @@ export default connect(
     onMoveGroup: groupTools.moveGroupToParent,
     onGroupSelect: groupTools.loadGroup,
     onSortModeChange: groupTools.setSortMode,
-    onExpand: setExpandedKeys
+    onExpand: setExpandedKeys,
+    setIsRenaming
   }
 )(TreeView, 'TreeView');
