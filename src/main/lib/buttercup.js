@@ -34,7 +34,7 @@ export function importArchive(type, filename, password) {
       return importFromButtercup(filename).then(archive =>
         archive.getHistory()
       );
-    case ImportTypes.BROWSERS:
+    case ImportTypes.CSV_GENERIC:
       return importFromCSV(filename).then(archive => archive.getHistory());
     default:
       throw new Error('Wrong import type provided');
