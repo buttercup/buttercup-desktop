@@ -17,6 +17,7 @@ import { isOSX } from '../../../shared/utils/platform';
 import BaseColumn from '../column';
 import TreeLabel from './tree-label';
 import Styles from './styles';
+import { isGroupInTrash } from '../../../shared/buttercup/groups';
 
 const Column = styled(BaseColumn)`
   background-color: ${isOSX() ? 'var(--groups-bg-mac)' : 'var(--groups-bg)'};
@@ -30,6 +31,7 @@ class TreeView extends PureComponent {
     selectedKeys: PropTypes.array,
     groups: PropTypes.array,
     sortMode: PropTypes.string,
+    currentArchive: PropTypes.string,
     onRemoveClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
@@ -84,6 +86,13 @@ class TreeView extends PureComponent {
         {
           label: t('group-menu.empty-trash'),
           click: () => this.props.onEmptyTrash()
+        }
+      ]);
+    } else if (isGroupInTrash(this.props.currentArchive, groupId)) {
+      showContextMenu([
+        {
+          label: t('group-menu.delete'),
+          click: () => this.handleRemoveClick(null, groupId)
         }
       ]);
     } else {

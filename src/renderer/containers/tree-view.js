@@ -13,7 +13,8 @@ export default connect(
     groups: getGroups(state),
     sortMode: state.groups.sortMode,
     expandedKeys: getExpandedKeys(state),
-    selectedKeys: [getCurrentGroupId(state)]
+    selectedKeys: [getCurrentGroupId(state)],
+    currentArchive: state.currentArchive
   }),
   {
     onAddClick: groupTools.addGroup,
