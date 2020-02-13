@@ -143,7 +143,6 @@
   },
   "homepage": "https://buttercup.pw",
   "dependencies": {
-    "eva-icons": "^1.1.1",
     "opencollective": "^1.0.3"
   },
   "devDependencies": {
@@ -217,6 +216,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-standard": "^3.1.0",
+    "eva-icons": "^1.1.1",
     "extract-domain": "^2.2.1",
     "file-loader": "^2.0.0",
     "fixed-data-table-2": "^0.7.12",
