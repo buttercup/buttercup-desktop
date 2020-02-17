@@ -4,15 +4,9 @@ import { translate } from 'react-i18next';
 
 const Translate = props => {
   // init props
-  const {
-    html,
-    i18nKey,
-    t,
-    text,
-    children,
-    parent: Parent = 'span',
-    values = {}
-  } = props;
+  const { html, i18nKey, t, text, children, parent, values = {} } = props;
+
+  let Parent = parent;
 
   // search translation and pass values
   const translatedText = t(i18nKey, values);
@@ -55,11 +49,15 @@ const Translate = props => {
   };
 
   // return html or plain text
-  return html ? (
-    <Parent dangerouslySetInnerHTML={{ __html: getContent() }} />
-  ) : (
-    <Parent>{getContent()}</Parent>
-  );
+  if (html) {
+    if (!Parent) {
+      Parent = 'span';
+    }
+    return <Parent dangerouslySetInnerHTML={{ __html: getContent() }} />;
+  } else if (Parent) {
+    return <Parent>{getContent()}</Parent>;
+  }
+  return getContent();
 };
 
 Translate.propTypes = {

@@ -42,7 +42,6 @@ export const selectEntry = (entryId, isSavingNewEntry = false) => (
           payload: entryId
         });
   } catch (err) {
-    console.error(err);
     showDialog(err);
   }
 };

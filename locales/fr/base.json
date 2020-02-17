@@ -232,9 +232,8 @@
   },
   "update": {
     "installing": "En cours d’installation",
-    "new-version-available": "A new version of Buttercup is available!",
-    "update-available-message": "Buttercup {{version}} est disponible. Vous avez la {{currentVersion}}. Désirez-vous la télécharger maintenant ?",
     "new-version-available": "Une nouvelle version de Buttercup est disponible !",
+    "update-available-message": "Buttercup {{version}} est disponible. Vous avez la {{currentVersion}}. Désirez-vous la télécharger maintenant ?",
     "not-now": "Pas maintenant",
     "download": "Télécharger et Installer",
     "download-manual": "Ouvrir la page listant toutes les versions",

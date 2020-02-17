@@ -5,7 +5,6 @@ import jsonStorage from 'electron-json-storage';
 import configureStore from '../shared/store/configure-store';
 import { filterStore } from '../shared/store/filter-store';
 import { setupMenu } from './menu';
-import { setupTrayIcon } from './tray';
 import { getWindowManager } from './lib/window-manager';
 import { sendEventToMainWindow, reopenMainWindow } from './utils/window';
 import { loadFile } from './lib/files';
@@ -16,6 +15,10 @@ import { setupActions, handleProtocolCall } from './actions';
 import { setupWindows } from './windows';
 import { getFilePathFromArgv } from './utils/argv';
 import { getSetting } from '../shared/selectors';
+import {
+  setupGlobalShortcuts,
+  unregisterGlobalShortcuts
+} from './global-shortcuts';
 
 log.info('Buttercup starting up...');
 
@@ -141,7 +144,7 @@ app.on('ready', async () => {
   setupWindows(store);
   setupActions(store);
   setupMenu(store);
-  setupTrayIcon(store);
+  setupGlobalShortcuts(store);
 
   appIsReady = true;
 
@@ -162,6 +165,8 @@ app.on('ready', async () => {
       appTriedToQuit ||
       (!isOSX() && !getSetting(store.getState(), 'isTrayIconEnabled'))
     ) {
+      unregisterGlobalShortcuts();
+
       app.quit();
     }
   });

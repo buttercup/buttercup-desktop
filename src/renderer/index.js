@@ -18,12 +18,14 @@ import {
   setIsArchiveSearchVisible
 } from '../shared/actions/ui-state';
 import { setupShortcuts } from './system/shortcuts';
+import { setupArchiveActions } from './system/archives';
 import { setSetting } from '../shared/actions/settings';
 import { changeMode } from '../shared/actions/entries';
 import { addGroup } from '../shared/actions/groups';
 import { getSetting, getUIState } from '../shared/selectors';
 import Root from './containers/root';
 import { getQueue } from './system/queue';
+import initSubscriber from 'redux-subscriber';
 
 // Unhandled rejections
 const unhandled = require('electron-unhandled');
@@ -34,6 +36,7 @@ Buttercup.Web.HashingTools.patchCorePBKDF();
 
 // Create store
 const store = configureStore({}, 'renderer');
+const subscribe = initSubscriber(store);
 
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));
 linkArchiveManagerToStore(store);
@@ -87,8 +90,13 @@ window.onbeforeunload = event => {
   }
 };
 
+// listen for store changes
+setupArchiveActions(store);
+
+subscribe('settings.globalShortcuts', () => setupShortcuts(store));
+
 const currentLocale = getSetting(store.getState(), 'locale');
-const renderApp = (RootContainer, i18n) =>
+const renderApp = (RootContainer, i18n) => {
   render(
     <I18nextProvider i18n={i18n}>
       <AppContainer>
@@ -97,6 +105,7 @@ const renderApp = (RootContainer, i18n) =>
     </I18nextProvider>,
     document.getElementById('root')
   );
+};
 
 // set lang on load
 ipc.send('change-locale-main', currentLocale);

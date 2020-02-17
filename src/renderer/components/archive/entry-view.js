@@ -7,7 +7,7 @@ import Heading from './heading';
 import bubbleImage from '../../styles/img/info-bubble.svg';
 import { Translate } from '../../../shared/i18n';
 import EmptyView from '../empty-view';
-import Copyable from './copyable';
+import Copyable from '../../containers/archive/copyable';
 import EntryIcon from './entry-icon';
 import { Wrapper } from './entry-input';
 

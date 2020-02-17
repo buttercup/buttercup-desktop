@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Translate } from '../../../shared/i18n';
 import LabelEditor from './tree-label-edit';
 
 const Node = styled.div`
@@ -16,7 +15,8 @@ class TreeLabel extends PureComponent {
     onDismissClick: PropTypes.func,
     onSaveClick: PropTypes.func,
     onCreateNew: PropTypes.func,
-    onRightClick: PropTypes.func
+    onRightClick: PropTypes.func,
+    setIsRenaming: PropTypes.func
   };
 
   handleSave = title => {
@@ -33,7 +33,7 @@ class TreeLabel extends PureComponent {
   };
 
   render() {
-    const { node, onRightClick } = this.props;
+    const { node, onRightClick, setIsRenaming } = this.props;
     const { title, isNew, isRenaming } = node;
 
     if (isNew || isRenaming) {
@@ -43,21 +43,13 @@ class TreeLabel extends PureComponent {
             node={node}
             onSave={this.handleSave}
             onDismiss={this.handleDismiss}
+            setIsRenaming={setIsRenaming}
           />
         </Node>
       );
     }
 
-    return (
-      <Node onContextMenu={onRightClick}>
-        {title.trim() || (
-          <i>
-            {' '}
-            <Translate i18nKey="group.untitled" parent="span" />
-          </i>
-        )}
-      </Node>
-    );
+    return <Node onContextMenu={onRightClick}>{title.trim()}</Node>;
   }
 }
 

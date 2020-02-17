@@ -4,7 +4,8 @@ import {
   getGroups,
   getCurrentEntry,
   getEntries,
-  getCurrentGroup
+  getCurrentGroup,
+  getSetting
 } from '../../../shared/selectors';
 import * as entries from '../../../shared/actions/entries';
 
@@ -14,7 +15,8 @@ export default connect(
     sortMode: state.entries.sortMode,
     entries: getEntries(state),
     currentEntry: getCurrentEntry(state),
-    currentGroup: getCurrentGroup(state)
+    currentGroup: getCurrentGroup(state),
+    globalShortcuts: getSetting(state, 'globalShortcuts')
   }),
   {
     onSelectEntry: entries.selectEntry,

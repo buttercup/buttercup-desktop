@@ -7,6 +7,7 @@ import {
   getExpandedKeys
 } from '../../shared/selectors';
 import { setExpandedKeys } from '../../shared/actions/ui';
+import { setIsRenaming } from '../../shared/actions/ui-state';
 
 export default connect(
   state => ({
@@ -27,6 +28,7 @@ export default connect(
     onMoveGroup: groupTools.moveGroupToParent,
     onGroupSelect: groupTools.loadGroup,
     onSortModeChange: groupTools.setSortMode,
-    onExpand: setExpandedKeys
+    onExpand: setExpandedKeys,
+    setIsRenaming
   }
 )(TreeView, 'TreeView');

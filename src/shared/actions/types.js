@@ -25,6 +25,7 @@ export const GROUPS_UPDATE = 'buttercup/groups/UPDATE';
 export const TREE_ADD_EXPANDED_KEY = 'buttercup/ui/TREE_ADD_EXPANDED_KEY';
 export const TREE_SET_EXPANDED_KEYS = 'buttercup/ui/TREE_SET_EXPANDED_KEYS';
 export const COLUMN_SIZE_SET = 'buttercup/ui/COLUMN_SIZE_SET';
+export const GLOBAL_SHORTCUT_SET = 'buttercup/ui/GLOBAL_SHORTCUT_SET';
 
 export const SETTING_SET = 'buttercup/settings/SET';
 export const UI_STATE_SET = 'buttercup/settings/UI_STATE_SET';

@@ -43,7 +43,8 @@ class TreeView extends PureComponent {
     onMoveGroup: PropTypes.func,
     onSortModeChange: PropTypes.func,
     onExpand: PropTypes.func,
-    t: PropTypes.func
+    t: PropTypes.func,
+    setIsRenaming: PropTypes.func
   };
 
   handleColumnRightClick() {
@@ -136,7 +137,10 @@ class TreeView extends PureComponent {
         },
         {
           label: t('group-menu.rename'),
-          click: () => this.props.onRenameClick(groupId)
+          click: () => {
+            this.props.onRenameClick(groupId);
+            this.props.setIsRenaming(true);
+          }
         },
         { type: 'separator' },
         {
@@ -208,6 +212,7 @@ class TreeView extends PureComponent {
                 onSaveClick={this.props.onSaveClick}
                 onCreateNew={this.props.onCreateNew}
                 onDismissClick={this.props.onDismissClick}
+                setIsRenaming={this.props.setIsRenaming}
               />
             }
           >
