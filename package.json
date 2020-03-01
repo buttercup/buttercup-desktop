@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.18.2",
+  "version": "1.19.0",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -194,7 +194,7 @@
     "del": "^2.2.1",
     "devtron": "^1.4.0",
     "electron": "^7.1.1",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^22.3.2",
     "electron-builder-notarize": "^1.1.2",
     "electron-context-menu": "^0.10.1",
     "electron-debug": "^3.0.1",
