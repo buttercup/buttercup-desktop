@@ -25,13 +25,15 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "@types/jest": "^25.2.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "@types/react-test-renderer": "^16.9.2",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "@typescript-eslint/parser": "^2.29.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^25.1.0",
+    "babel-jest": "^25.4.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-dev-expression": "^0.2.2",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
@@ -58,13 +60,16 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
-    "eslint-plugin-testcafe": "^0.2.1",
     "husky": "^4.2.5",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^25.4.0",
     "lint-staged": "^10.1.7",
     "opencollective-postinstall": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "^2.0.5",
+    "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
+    "spectron": "^10.0.1",
     "terser-webpack-plugin": "^2.3.6",
     "ts-loader": "^7.0.1",
     "tslint": "^6.1.0",
@@ -77,6 +82,7 @@
   },
   "scripts": {
     "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
+    "build:e2e": "cross-env E2E_BUILD=true npm run build",
     "build:main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js --colors",
     "build:renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
     "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 npm run start:renderer:dev",
@@ -94,7 +100,8 @@
     "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
     "start:main:dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./app/main.dev.ts",
     "start:renderer:dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
-    "test": "mocha"
+    "test": "npm run build:e2e && cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest",
+    "test:watch": "npm run test --watch"
   },
   "build": {
     "asar": true,
@@ -175,6 +182,27 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "jest": {
+    "testURL": "http://localhost/",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/node_modules"
+    ],
+    "setupFiles": [
+      "./internals/scripts/CheckBuildsExist.js"
+    ]
   },
   "browserslist": [
     "extends browserslist-config-erb"
