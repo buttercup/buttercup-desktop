@@ -5,7 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 document.addEventListener('DOMContentLoaded', () =>
   render(
     <AppContainer>
-      <h1>Hello2</h1>
+      <h1>Hello Siree</h1>
     </AppContainer>,
     document.getElementById('root')
   )

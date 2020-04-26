@@ -3,9 +3,15 @@
   "singleQuote": true,
   "overrides": [
     {
-      "files": "locales/**/*.json",
+      "files": [
+        "locales/**/*.json",
+        ".prettierrc",
+        ".babelrc",
+        ".eslintrc",
+        ".stylelintrc"
+      ],
       "options": {
-        "printWidth": 10000
+        "parser": "json"
       }
     }
   ]

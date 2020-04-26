@@ -1,3 +1,5 @@
+/* eslint global-require: off, no-console: off */
+
 import path from 'path';
 import { app, BrowserWindow } from 'electron';
 
@@ -18,7 +20,7 @@ if (
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+  const extensions = ['REACT_DEVELOPER_TOOLS'];
 
   return Promise.all(
     extensions.map((name) => installer.default(installer[name], forceDownload))
@@ -32,8 +34,6 @@ const createWindow = async () => {
   ) {
     await installExtensions();
   }
-
-  console.log(process.env.NODE_ENV);
 
   mainWindow = new BrowserWindow({
     show: false,
