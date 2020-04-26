@@ -1,0 +1,158 @@
+{
+  "name": "buttercup-desktop",
+  "version": "2.0.0",
+  "description": "Buttercup for Desktop",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@hot-loader/react-dom": "^16.13.0",
+    "devtron": "^1.4.0",
+    "electron-debug": "^3.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.12.20",
+    "source-map-support": "^0.5.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/plugin-proposal-do-expressions": "^7.8.3",
+    "@babel/plugin-proposal-export-default-from": "^7.8.3",
+    "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+    "@babel/plugin-proposal-function-bind": "^7.8.3",
+    "@babel/plugin-proposal-function-sent": "^7.8.3",
+    "@babel/plugin-proposal-json-strings": "^7.8.3",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.8.3",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@babel/plugin-proposal-numeric-separator": "^7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.9.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.8.3",
+    "@babel/plugin-proposal-throw-expressions": "^7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+    "@babel/plugin-syntax-import-meta": "^7.8.3",
+    "@babel/plugin-transform-react-constant-elements": "^7.9.0",
+    "@babel/plugin-transform-react-inline-elements": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.1.0",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "chalk": "^4.0.0",
+    "concurrently": "^5.2.0",
+    "cross-env": "^7.0.2",
+    "detect-port": "^1.3.0",
+    "electron": "^8.2.3",
+    "electron-builder": "^22.5.1",
+    "electron-builder-notarize": "^1.1.2",
+    "electron-devtools-installer": "^3.0.0",
+    "electron-rebuild": "^1.10.1",
+    "opencollective-postinstall": "^2.0.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "rimraf": "^3.0.2",
+    "terser-webpack-plugin": "^2.3.6",
+    "ts-loader": "^7.0.1",
+    "tslint": "^6.1.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-bundle-analyzer": "^3.7.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
+  },
+  "scripts": {
+    "build": "concurrently \"npm run build:main\" \"npm run build:renderer\"",
+    "build:main": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.main.prod.babel.js --colors",
+    "build:renderer": "cross-env NODE_ENV=production webpack --config ./configs/webpack.config.renderer.prod.babel.js --colors",
+    "dev": "cross-env START_HOT=1 node -r @babel/register ./internals/scripts/CheckPortInUse.js && cross-env START_HOT=1 npm run start:renderer:dev",
+    "build:dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
+    "electron-rebuild": "electron-rebuild --parallel --force --types prod,dev,optional --module-dir app",
+    "package": "npm run build && electron-builder build --publish never",
+    "postinstall": "node -r @babel/register internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && npm run build:dll && opencollective-postinstall",
+    "prestart": "npm run build",
+    "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
+    "start:main:dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./app/main.dev.ts",
+    "start:renderer:dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
+    "test": "mocha"
+  },
+  "build": {
+    "asar": true,
+    "appId": "pw.buttercup.desktop",
+    "copyright": "Copyright © 2015-2020 MadDev Oy",
+    "afterSign": "electron-builder-notarize",
+    "mac": {
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./build/entitlements.plist",
+      "entitlementsInherit": "./build/entitlements.plist",
+      "category": "public.app-category.productivity"
+    },
+    "dmg": {
+      "background": "./build/background@2x.png",
+      "contents": [
+        {
+          "x": 396,
+          "y": 345,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 396,
+          "y": 110,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 660,
+        "height": 480
+      }
+    },
+    "nsis": {
+      "perMachine": true,
+      "include": "build/installer.nsh"
+    },
+    "win": {
+      "target": "nsis",
+      "publisherName": "MadDev Oy"
+    },
+    "linux": {
+      "target": [
+        "rpm",
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "synopsis": "Free and Open Source Password Vault"
+    },
+    "fileAssociations": {
+      "ext": "bcup",
+      "name": "Buttercup Archive",
+      "icon": "./build/icon.icns"
+    },
+    "protocols": {
+      "name": "Buttercup",
+      "schemes": [
+        "buttercup"
+      ]
+    },
+    "directories": {
+      "output": "release"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buttercup/buttercup-desktop.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buttercup/buttercup-desktop/issues"
+  },
+  "homepage": "https://github.com/buttercup/buttercup-desktop#readme"
+}
