@@ -14,9 +14,9 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
       - uses: nanasess/setup-chromedriver@master
-        if: runner.os === "Linux"
+        if: runner.os == "Linux"
       - name: Setup Chromedriver
-        if: runner.os === "Linux"
+        if: runner.os == "Linux"
         run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
