@@ -33,6 +33,7 @@ const createWindow = async () => {
     process.env.DEBUG_PROD === 'true'
   ) {
     await installExtensions();
+    require('devtron').install();
   }
 
   mainWindow = new BrowserWindow({
@@ -49,7 +50,13 @@ const createWindow = async () => {
           },
   });
 
-  mainWindow.loadURL(`file://${__dirname}/app.html`);
+  mainWindow.loadURL(
+    `file://${path.resolve(
+      __dirname,
+      process.env.NODE_ENV === 'development' ? '../app' : './',
+      'app.html'
+    )}`
+  );
 
   // @TODO: Use 'ready-to-show' event
   //        https://github.com/electron/electron/blob/master/docs/api/browser-window.md#using-ready-to-show-event

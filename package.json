@@ -6,7 +6,6 @@
   "main": "dist/index.js",
   "dependencies": {
     "@hot-loader/react-dom": "^16.13.0",
-    "devtron": "^1.4.0",
     "electron-debug": "^3.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -42,6 +41,7 @@
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
     "detect-port": "^1.3.0",
+    "devtron": "^1.4.0",
     "electron": "^8.2.3",
     "electron-builder": "^22.5.1",
     "electron-builder-notarize": "^1.1.2",
@@ -98,7 +98,7 @@
     "postinstall": "node -r @babel/register internals/scripts/CheckNativeDep.js && electron-builder install-app-deps && npm run build:dll && opencollective-postinstall",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
-    "start:main:dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./app/main.dev.ts",
+    "start:main:dev": "cross-env START_HOT=1 NODE_ENV=development electron -r ./internals/scripts/BabelRegister ./src/main.dev.ts",
     "start:renderer:dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
     "test": "npm run build:e2e && cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest",
     "test:watch": "npm run test --watch"

@@ -21,7 +21,7 @@ export default merge.smart(baseConfig, {
 
   target: 'electron-main',
 
-  entry: './app/main.dev.ts',
+  entry: './src/main.dev.ts',
 
   output: {
     path: path.join(__dirname, '..'),
