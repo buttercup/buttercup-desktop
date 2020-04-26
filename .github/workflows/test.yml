@@ -14,7 +14,10 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
       - uses: nanasess/setup-chromedriver@master
-      - run: |
+        if: runner.os === "Linux"
+      - name: Setup Chromedriver
+        if: runner.os === "Linux"
+        run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
