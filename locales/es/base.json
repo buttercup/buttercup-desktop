@@ -7,18 +7,26 @@
       "hide": "Ocultar",
       "hideothers": "Ocultar otras",
       "unhide": "Mostrar",
-      "quit": "Salir"
+      "quit": "Salir",
+      "preferences": "Preferencias..."
     },
     "archive": {
       "archive": "Archivo",
       "file": "Archivo",
       "new": "Nuevo archivo",
       "open": "Abrir archivo",
+      "search": "Buscar en archivo",
       "connect-cloud-sources": "Conectar fuentes en la nube",
       "import": {
         "import": "Importar",
         "import-from-type": "De un archivo {{name}} (.{{extension}})",
-        "import-to-type": "A {{name}}"
+        "import-to-type": "A {{name}}",
+        "no-available-archives": "No hay ningún archivo disponible para importar."
+      },
+      "export": {
+        "export": "Exporta",
+        "export-archive": "Exporta {{name}} a CSV",
+        "no-available-archives": "No hay ningún archivo disponible para exportar."
       },
       "close": "Cerrar"
     },
@@ -33,7 +41,7 @@
       "delete": "Eliminar",
       "selectall": "Seleccionar todos",
       "speech": {
-        "speech": "Habla",
+        "speech": "Hablar",
         "startspeaking": "Iniciar locución",
         "stopspeaking": "Detener locución"
       }
@@ -42,9 +50,11 @@
       "view": "Ver",
       "condensed-sidebar": "Barra lateral reducida",
       "language": "Idioma",
+      "enable-tray-icon": "Mostrar en la barra de menú",
       "reload": "Cargar de nuevo",
       "forcereload": "Forzar carga de nuevo",
       "toggledevtools": "Herramientas para desarrolladores",
+      "togglefullscreen": "Cambiar a pantalla completa",
       "auto-hide-menubar": "Ocultar automáticamente la barra de menú"
     },
     "window": {
@@ -54,12 +64,24 @@
       "zoom": "Acercar",
       "front": "Traer todo al frente"
     },
+    "system": {
+      "system": "Sistema",
+      "enable-browser-access": "Habilitar el acceso al navegador"
+    },
     "help": {
       "help": "Ayuda",
       "visit-our-website": "Visita nuestra web",
       "privacy-policy": "Política de privacidad",
       "view-changelog-for-v": "Ver cambios en v{{currentVersion}}"
+    },
+    "tray": {
+      "quit": "Salir",
+      "open": "Abrir Buttercup"
     }
+  },
+  "archive-search": {
+    "searchterm": "Buscar...",
+    "nothing-found": "No se ha encontrado nada"
   },
   "archive": {
     "add-archive": "Añadir archivo",
@@ -73,8 +95,10 @@
   "archive-menu": {
     "unlock": "Desbloquear",
     "change-color": "Cambiar color",
+    "change-password": "Cambiar la contaseña",
     "import": "Importar",
     "import-from-type": "De un archivo {{name}} (.{{extension}})",
+    "export": "Exportar",
     "archive-remove-with-name": "Eliminar {{name}}",
     "open": "Abrir",
     "lock": "Bloquear"
@@ -85,8 +109,11 @@
     "new-archive": "Nuevo archivo",
     "open-in-buttercup": "Abrir en Buttercup",
     "connect-to-dropbox": "Conectar a Dropbox",
-    "authenticate-with-dropbox": "Autentificar with Dropbox",
+    "authenticate-with-dropbox": "Autentificar con Dropbox",
     "dropbox-description-text": "Conecta Buttercup a tu cuenta de Dropbox para leer y guardar tus archivos. <br />No vamos a guardar tu usuario ni tu contraseña.",
+    "connect-to-googledrive": "Conectar a Google Drive",
+    "authenticate-with-googledrive": "Autentificar con Google Drive",
+    "googledrive-description-text": "Conectar Buttercup a tu cuenta de Google Drive para leer y guardar tus archivos.<br />No vamos a guardar tu usuario ni tu contraseña.",
     "connect-to-wedav": "Conectar a un servidor {{title}}",
     "username": "Usuario",
     "password": "Password",
@@ -128,8 +155,12 @@
     "delete": "Eliminar",
     "entry-inputs-empty-info": "Por favor, introduce al menos un título.",
     "entry-title-empty-info": "Por favor, introduce un título.",
+    "custom-fields-label-duplicate": "no puedes tener varios campos personalizados con la misma etiqueta",
     "custom-fields-label-empty-info": "Has olvidado añadir una etiqueta a uno o a varios campos personalizados.",
-    "are-you-sure-question": "¿Estás seguro?"
+    "are-you-sure-question": "¿Estás seguro?",
+    "displaying-entries": "Mostrant {{count}} entrades",
+    "no-value": "Sense valor",
+    "quit-unsave-entry": "Perdràs els teus canvis, n'estàs segur?"
   },
   "entry-menu": {
     "copy-to-clipboard": "Copiar al portapapeles",
@@ -185,6 +216,7 @@
   },
   "password-dialog": {
     "master-password": "Contraseña maestra",
+    "new-password": "Nueva contraseña",
     "password": "Contraseña",
     "confirm-password": "Confirma la contraseña",
     "confirm": "Confirmar",
@@ -204,6 +236,35 @@
   },
   "update": {
     "installing": "Instalando",
-    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora."
+    "update-available-message": "Buttercup {{version}} está disponible. Haz click aquí para instalar ahora.",
+    "new-version-available": "Hay disponible una nueva versión de Buttercup!",
+    "not-now": "Ahora no",
+    "download": "Descargar e instalar",
+    "download-manual": "Abrir las notas de la versión",
+    "release-notes": "Notas de la versión"
+  },
+  "preferences": {
+    "general": "General",
+    "shortcuts": "Atajos",
+    "appearance": "Apariencia",
+    "preferences": "Preferencias",
+    "font-size": "Tamaño de la fuente",
+    "reset": "Restablecer",
+    "seconds-until-clear-clipboard": "Limpiar portapapeles (Segundos, 0 = sin acción)",
+    "seconds-until-archive-should-close": "Bloquear archivo inmediatamente despues de x segundos (0 = desactivado)",
+    "lock-archive-on-minimize": "Bloquear archivos al minimizar",
+    "lock-archive-onfocusout": "Solo bloquear archivos cuando Buttercup no está seleccionado",
+    "minimize-and-maximize": "Minimizar y maximizar Buttercup",
+    "shortcut-already-taken": "Desgraciadamente, esta combinación de teclado ya está asignada",
+    "shortcuts-others": "Otros atajos",
+    "shortcuts-menu": "Menú de atajos",
+    "shortcuts-global": "Atajos globales",
+    "disable-update-on-start": "Desactivar actualizaciones al inicio"
+  },
+  "info": {
+    "update-not-available": "Actualmente no hay ninguna actualización disponible"
+  },
+  "common": {
+    "trash": "Papelera"
   }
 }

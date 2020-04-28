@@ -7,7 +7,8 @@
       "hide": "Amaga",
       "hideothers": "Amaga els altres",
       "unhide": "Mostra",
-      "quit": "Surt"
+      "quit": "Surt",
+      "preferences": "Preferències..."
     },
     "archive": {
       "archive": "Arxiu",
@@ -109,7 +110,10 @@
     "open-in-buttercup": "Obre al Buttercup",
     "connect-to-dropbox": "Connecta al Dropbox",
     "authenticate-with-dropbox": "Autentica amb Dropbox",
-    "dropbox-description-text": "Connecta Buttercup al teu compte de Dropbox per llegir i desar els teus arxius. <br />No guardarem el vostre nom d'usuari ni la contrasenya de Dropbox.",
+    "dropbox-description-text": "Connecta Buttercup al teu compte de Dropbox per llegir i desar els teus arxius.<br />No guardarem el vostre nom d'usuari ni la contrasenya de Dropbox.",
+    "connect-to-googledrive": "Connectar a Google Drive",
+    "authenticate-with-googledrive": "Connectar amb Google Drive",
+    "googledrive-description-text": "Connectar Buttercup al teu compte de Google Drive per llegir i desar els teus arxius.<br />No guardarem el vostre nom d'usuari ni la contrasenya de Google Drive.",
     "connect-to-wedav": "Connecta a un servidor {{title}}",
     "username": "Usuari",
     "password": "Contrasenya",
@@ -144,13 +148,14 @@
     "no-custom-fields-info-text": "Sense camps personalitzats. Per què no afegir-ne un?",
     "add-new-field": "Afegeix un nou camp",
     "label": "Etiqueta",
-    "new-field": "Nou cam`",
+    "new-field": "Nou camp",
     "edit": "Edita",
     "save": "Desa",
     "cancel": "Cancel·la",
     "delete": "Suprimeix",
     "entry-inputs-empty-info": "Si us plau, introdueix com a mínim un títol.",
     "entry-title-empty-info": "Si us plau, introdueix un títol.",
+    "custom-fields-label-duplicate": "no pots tenir diversos camps personalitzats amb la mateixa etiqueta",
     "custom-fields-label-empty-info": "Has oblidat afegir una etiqueta a un o diversos camps personalitzats.",
     "are-you-sure-question": "N'estàs segur?",
     "displaying-entries": "Mostrant {{count}} entrades",
@@ -158,7 +163,7 @@
     "quit-unsave-entry": "Perdràs els teus canvis, n'estàs segur?"
   },
   "entry-menu": {
-    "copy-to-clipboard": "copia al porta-retalls",
+    "copy-to-clipboard": "Copia al porta-retalls",
     "username": "Usuari",
     "password": "Contrasenya",
     "open-url-in-browser": "Obre URL al navegador",
@@ -217,6 +222,9 @@
     "confirm": "Confirma",
     "nevermind": "No importa"
   },
+  "password-generator": {
+    "password-generator": "Generar contrasenya"
+  },
   "search": {
     "search": "Busca"
   },
@@ -230,9 +238,33 @@
     "installing": "Instal·lant",
     "update-available-message": "Buttercup {{version}} està disponible. Fes clic aquí per instal·lar-la ara.",
     "new-version-available": "Hi ha disponible una nova versió de Buttercup!",
-    "not-now": "Ara No",
+    "not-now": "Ara no",
     "download": "Descarrega i instal·la",
     "download-manual": "Obre les Notes de la Versió",
     "release-notes": "Notes de la Versió"
+  },
+  "preferences": {
+    "general": "General",
+    "shortcuts": "Dreceres",
+    "appearance": "Aparença",
+    "preferences": "Preferències",
+    "font-size": "Mida de la font",
+    "reset": "Restablir",
+    "seconds-until-clear-clipboard": "Netejar porta-retalls (Segons, 0 = sense acció)",
+    "seconds-until-archive-should-close": "Bloqueja arxiu inmediatament després de x segons (0 = desactivat)",
+    "lock-archive-on-minimize": "Bloquejar arxius al minimitzar",
+    "lock-archive-onfocusout": "Només bloquejar arxius quan Buttercup no està seleccionat",
+    "minimize-and-maximize": "Minimitza i maximitza Buttercup",
+    "shortcut-already-taken": "Malauradament, aquest combinació de tecles ja està assignada",
+    "shortcuts-others": "Altres dreceres",
+    "shortcuts-menu": "Menú de dreceres",
+    "shortcuts-global": "Dreceres global",
+    "disable-update-on-start": "Desactivar actualitzacions al inici"
+  },
+  "info": {
+    "update-not-available": "Actualment no hi ha cap actualització disponible"
+  },
+  "common": {
+    "trash": "Brossa"
   }
 }
