@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import chalk from 'chalk';
 import merge from 'webpack-merge';
 import { spawn, execSync } from 'child_process';
+import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
 
@@ -53,7 +54,40 @@ export default merge.smart(baseConfig, {
   },
 
   module: {
-    rules: [],
+    rules: [
+      {
+        test: /\.global\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /^((?!\.global).)*\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+              sourceMap: true,
+              importLoaders: 1,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
     alias: {
@@ -71,6 +105,10 @@ export default merge.smart(baseConfig, {
 
     new webpack.HotModuleReplacementPlugin({
       multiStep: true,
+    }),
+
+    new TypedCssModulesPlugin({
+      globPattern: 'src/**/*.{css}',
     }),
 
     new webpack.NoEmitOnErrorsPlugin(),
