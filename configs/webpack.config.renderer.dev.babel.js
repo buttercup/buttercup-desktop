@@ -56,7 +56,7 @@ export default merge.smart(baseConfig, {
   module: {
     rules: [
       {
-        test: /\.global\.css$/,
+        test: /\.css$/,
         use: [
           {
             loader: 'style-loader',
@@ -69,24 +69,24 @@ export default merge.smart(baseConfig, {
           },
         ],
       },
-      {
-        test: /^((?!\.global).)*\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[name]__[local]__[hash:base64:5]',
-              },
-              sourceMap: true,
-              importLoaders: 1,
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /^((?!\.global).)*\.css$/,
+      //   use: [
+      //     {
+      //       loader: 'style-loader',
+      //     },
+      //     {
+      //       loader: 'css-loader',
+      //       options: {
+      //         modules: {
+      //           localIdentName: '[name]__[local]__[hash:base64:5]',
+      //         },
+      //         sourceMap: true,
+      //         importLoaders: 1,
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
   resolve: {

@@ -4,18 +4,18 @@
     <meta charset="utf-8" />
     <title>Buttercup</title>
     <script>
-      // (() => {
-      //   if (
-      //     typeof process !== 'object' ||
-      //     (typeof process === 'object' && !process.env.START_HOT)
-      //   ) {
-      //     const link = document.createElement('link');
-      //     link.rel = 'stylesheet';
-      //     link.href = './dist/style.css';
-      //     // HACK: Writing the script path should be done with webpack
-      //     document.getElementsByTagName('head')[0].appendChild(link);
-      //   }
-      // })();
+      (() => {
+        if (
+          typeof process !== 'object' ||
+          (typeof process === 'object' && !process.env.START_HOT)
+        ) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = './dist/style.css';
+          // HACK: Writing the script path should be done with webpack
+          document.getElementsByTagName('head')[0].appendChild(link);
+        }
+      })();
     </script>
   </head>
   <body>
