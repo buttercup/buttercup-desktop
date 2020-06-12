@@ -55,7 +55,8 @@ class Input extends PureComponent {
     input: PropTypes.object,
     meta: PropTypes.object,
     isBig: PropTypes.bool,
-    t: PropTypes.func
+    t: PropTypes.func,
+    autoFocus: PropTypes.bool
   };
 
   state = {
@@ -77,13 +78,14 @@ class Input extends PureComponent {
   }
 
   render() {
-    const { type, input, placeholder, meta, isBig, t } = this.props;
+    const { type, input, placeholder, meta, isBig, t, autoFocus } = this.props;
     const { name, value } = input;
     const commonProps = {
       ...input,
       id: name,
       type: 'text',
-      placeholder
+      placeholder,
+      autoFocus
     };
     return (
       <Wrapper>

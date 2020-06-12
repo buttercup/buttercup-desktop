@@ -72,6 +72,7 @@ const renderMeta = (
                 component={Input}
                 placeholder={t(getPlaceholder(field.property))}
                 isBig={isTitle}
+                autoFocus={isTitle}
               />
               <If condition={field.removeable}>
                 <Button
