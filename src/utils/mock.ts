@@ -1,12 +1,13 @@
 import {
-  Vault,
+  Vault as VaultBase,
   Entry,
   FIELD_VALUE_TYPE_OTP,
   createVaultFacade,
 } from 'buttercup/web';
+import type Vault from 'core/Vault';
 
-export const createArchive = () => {
-  const vault = Vault.createWithDefaults();
+export const createArchive = (): Vault => {
+  const vault = VaultBase.createWithDefaults();
   const [general] = vault.findGroupsByTitle('General');
   general
     .createEntry('Home wi-fi')

@@ -1,12 +1,13 @@
-import path from 'path';
-import fs from 'fs';
-import webpack from 'webpack';
 import chalk from 'chalk';
-import merge from 'webpack-merge';
-import { spawn, execSync } from 'child_process';
+import { execSync, spawn } from 'child_process';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import fs from 'fs';
+import path from 'path';
 import { TypedCssModulesPlugin } from 'typed-css-modules-webpack-plugin';
-import baseConfig from './webpack.config.base';
+import webpack from 'webpack';
+import merge from 'webpack-merge';
 import CheckNodeEnv from '../internals/scripts/CheckNodeEnv';
+import baseConfig from './webpack.config.base';
 
 // When an ESLint server is running, we can't set the NODE_ENV so we'll check if it's
 // at the dev webpack config is not accidentally run in a production environment
@@ -113,24 +114,26 @@ export default merge.smart(baseConfig, {
 
     new webpack.NoEmitOnErrorsPlugin(),
 
-    /**
-     * Create global constants which can be configured at compile time.
-     *
-     * Useful for allowing different behaviour between development builds and
-     * release builds
-     *
-     * NODE_ENV should be production so that modules do not perform certain
-     * development checks
-     *
-     * By default, use 'development' as NODE_ENV. This can be overriden with
-     * 'staging', for example, by changing the ENV variables in the npm scripts
-     */
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'development',
     }),
 
     new webpack.LoaderOptionsPlugin({
       debug: true,
+    }),
+
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          flatten: true,
+          from: path.join(
+            path.dirname(require.resolve('@buttercup/ui')),
+            'icons',
+            '*.png'
+          ),
+          to: path.join(__dirname, '..', 'app', 'icons'),
+        },
+      ],
     }),
   ],
 
