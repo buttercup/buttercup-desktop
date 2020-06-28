@@ -1,10 +1,12 @@
 import omit from 'lodash/omit';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import { Archive, entryFacade, tools as buttercupTools } from './buttercup';
-
-const { consumeEntryFacade, createEntryFacade } = entryFacade;
-const { getEntryFacadeURLs, ENTRY_URL_TYPE_ANY } = buttercupTools.entry;
+import {
+  Archive,
+  consumeEntryFacade,
+  createEntryFacade,
+  ENTRY_URL_TYPE_ANY
+} from './buttercup';
 
 function entryToObj(entry) {
   const facade = createEntryFacade(entry);
@@ -24,10 +26,14 @@ export function getFacadeFieldValue(entry, fieldName) {
   }
 }
 
+// export function getEntryURL(entry) {
+//   const [url] = entry.facade
+//     ? getEntryFacadeURLs(entry.facade, ENTRY_URL_TYPE_ANY)
+//     : entry.getURLs([ENTRY_URL_TYPE_ANY]);
+//   return url;
+// }
 export function getEntryURL(entry) {
-  const [url] = entry.facade
-    ? getEntryFacadeURLs(entry.facade, ENTRY_URL_TYPE_ANY)
-    : entry.getURLs([ENTRY_URL_TYPE_ANY]);
+  const [url] = entry.getURLs([ENTRY_URL_TYPE_ANY]);
   return url;
 }
 

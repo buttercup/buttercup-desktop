@@ -1,7 +1,6 @@
 import Store from 'electron-store';
-import { storage as ButtercupStorage } from './buttercup';
+import { StorageInterface } from './buttercup';
 
-const { StorageInterface } = ButtercupStorage;
 const storage = new Store({
   name: 'archives'
 });

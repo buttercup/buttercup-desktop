@@ -1,6 +1,7 @@
-import * as Buttercup from '../shared/buttercup/buttercup';
+// import * as Buttercup from '../shared/buttercup/buttercup';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
+import { init } from '../shared/buttercup/buttercup';
 import i18n from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
@@ -32,7 +33,8 @@ const unhandled = require('electron-unhandled');
 unhandled();
 
 // Alter some Buttercup internals
-Buttercup.Web.HashingTools.patchCorePBKDF();
+// Buttercup.Web.HashingTools.patchCorePBKDF();
+init();
 
 // Create store
 const store = configureStore({}, 'renderer');

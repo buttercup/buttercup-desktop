@@ -1,7 +1,5 @@
 import fs from 'fs';
-import { Datasources } from './buttercup';
-
-const { TextDatasource, registerDatasource } = Datasources;
+import { TextDatasource, registerDatasource } from './buttercup';
 
 /**
  * Datasource for Ipc archives
