@@ -183,7 +183,7 @@
     "babel-plugin-transform-strict-mode": "^6.22.0",
     "babel-plugin-webpack-alias": "^2.1.2",
     "babel-plugin-webpack-loaders": "^0.9.0",
-    "buttercup": "^4.5.0",
+    "buttercup": "^4.5.1",
     "check-os-tray-support": "^2.0.0",
     "classnames": "^2.2.6",
     "concurrently": "^3.6.1",
