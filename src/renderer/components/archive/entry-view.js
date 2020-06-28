@@ -78,6 +78,7 @@ FieldsView.propTypes = {
 
 const EntryView = props => {
   const { entry, t } = props;
+
   return (
     <>
       <FieldsView

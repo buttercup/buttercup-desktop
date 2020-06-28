@@ -1,13 +1,13 @@
-import { Group } from './buttercup';
+import { createGroupFacade } from './buttercup';
 import { getArchive, saveWorkspace } from './archive';
 import i18n from '../i18n';
 
 export function groupToObject(group) {
-  const obj = group.toObject();
+  const obj = createGroupFacade(group);
   return {
     ...obj,
     isTrash: group.isTrash(),
-    groups: obj.groups.map(g => g.id)
+    groups: group.getGroups().map(g => g.id)
   };
 }
 
@@ -23,11 +23,16 @@ export function findParentId(groups, groupId) {
 
 export function getGroups(archiveId) {
   const arch = getArchive(archiveId);
-  return arch.getGroups().map(group =>
-    Object.assign(group.toObject(Group.OutputFlag.Groups), {
-      isTrash: group.isTrash()
-    })
-  );
+
+  const getNestedGroups = group => {
+    return {
+      ...createGroupFacade(group),
+      isTrash: group.isTrash(),
+      groups: group.getGroups().map(subGroup => getNestedGroups(subGroup))
+    };
+  };
+
+  return arch.getGroups().map(g => getNestedGroups(g));
 }
 
 export function createGroup(archiveId, parentId, groupName) {

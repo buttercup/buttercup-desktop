@@ -61,7 +61,7 @@ export const getCurrentEntry = createSelector(
       ...entry,
       facade: {
         ...entry.facade,
-        fields: entry.facade.fields.filter(f => f.field === 'property')
+        fields: entry.facade.fields.filter(f => f.propertyType === 'property')
       }
     };
   }

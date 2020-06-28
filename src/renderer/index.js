@@ -7,7 +7,7 @@ import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
-import { linkArchiveManagerToStore } from '../shared/buttercup/store';
+import { linkVaultManagerToStore } from '../shared/buttercup/store';
 import {
   setCurrentArchive,
   importHistoryIntoArchive,
@@ -41,7 +41,7 @@ const store = configureStore({}, 'renderer');
 const subscribe = initSubscriber(store);
 
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));
-linkArchiveManagerToStore(store);
+linkVaultManagerToStore(store);
 setupShortcuts(store);
 
 // Reset current archive

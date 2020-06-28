@@ -1,12 +1,7 @@
 import omit from 'lodash/omit';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import {
-  Archive,
-  consumeEntryFacade,
-  createEntryFacade,
-  ENTRY_URL_TYPE_ANY
-} from './buttercup';
+import { Archive, consumeEntryFacade, createEntryFacade } from './buttercup';
 
 function entryToObj(entry) {
   const facade = createEntryFacade(entry);
@@ -19,7 +14,7 @@ function entryToObj(entry) {
 
 export function getFacadeFieldValue(entry, fieldName) {
   const field = entry.facade.fields.find(
-    field => field.property === fieldName && field.field === 'property'
+    field => field.property === fieldName && field.propertyType === 'property'
   );
   if (field) {
     return field.value;
@@ -33,8 +28,10 @@ export function getFacadeFieldValue(entry, fieldName) {
 //   return url;
 // }
 export function getEntryURL(entry) {
-  const [url] = entry.getURLs([ENTRY_URL_TYPE_ANY]);
-  return url;
+  // console.log(entry);
+  // const [url] = entry.getURLs([ENTRY_URL_TYPE_ANY]);
+  // // return url;
+  return null;
 }
 
 export function getParentGroups(currentGroup) {
@@ -100,6 +97,7 @@ export function loadEntries(archiveId, groupId) {
   }
 
   const entries = group.getEntries();
+  console.log(entries.map(entry => entryToObj(entry)));
   return entries.map(entry => entryToObj(entry));
 }
 

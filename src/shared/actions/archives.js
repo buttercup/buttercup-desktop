@@ -12,10 +12,10 @@ import {
 } from './types';
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
-  addArchiveToArchiveManager,
-  lockArchiveInArchiveManager,
-  removeArchiveFromArchiveManager,
-  unlockArchiveInArchiveManager,
+  addArchiveToVaultManager,
+  lockArchiveInVaultManager,
+  removeArchiveFromVaultManager,
+  unlockArchiveInVaultManager,
   updateArchivePassword,
   updateArchiveColour,
   updateArchiveOrder
@@ -38,7 +38,7 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => dispatch => {
-  return removeArchiveFromArchiveManager(payload).then(() => {
+  return removeArchiveFromVaultManager(payload).then(() => {
     dispatch(removeArchiveFromStore(payload));
   });
 };
@@ -64,13 +64,13 @@ export const changeArchiveOrder = ({ archiveId, order }) => dispatch => {
 };
 
 export const lockArchive = payload => dispatch => {
-  return lockArchiveInArchiveManager(payload).then(archiveId => {
+  return lockArchiveInVaultManager(payload).then(archiveId => {
     dispatch(setCurrentArchive(null));
   });
 };
 
 export const unlockArchive = (archiveId, masterPassword) => dispatch => {
-  return unlockArchiveInArchiveManager(archiveId, masterPassword).then(
+  return unlockArchiveInVaultManager(archiveId, masterPassword).then(
     archiveId => dispatch(loadArchive(archiveId))
   );
 };
@@ -90,7 +90,7 @@ export const loadOrUnlockArchive = (archiveId, masterPassword) => (
 };
 
 export const addArchive = (payload, masterPassword) => async dispatch => {
-  return addArchiveToArchiveManager(payload, masterPassword).then(archiveId =>
+  return addArchiveToVaultManager(payload, masterPassword).then(archiveId =>
     dispatch(loadArchive(archiveId))
   );
 };

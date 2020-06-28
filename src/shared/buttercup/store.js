@@ -1,15 +1,26 @@
-import { getSharedArchiveManager } from './archive';
+import { getSharedVaultManager } from './archive';
 import { resetArchivesInStore } from '../actions/archives.js';
 import { setSetting } from '../actions/settings';
 
-export function linkArchiveManagerToStore(store) {
-  const archiveManager = getSharedArchiveManager();
+export function linkVaultManagerToStore(store) {
+  const manager = getSharedVaultManager();
 
-  archiveManager.on('sourcesUpdated', function __handleUpdatedSources(sources) {
+  manager.on('sourcesUpdated', function __handleUpdatedSources() {
     store.dispatch(setSetting('archivesLoading', false));
-    store.dispatch(resetArchivesInStore(sources));
+    store.dispatch(
+      resetArchivesInStore(
+        manager.sources.map(source => ({
+          name: source.name,
+          id: source.id,
+          type: source.type,
+          status: source.status,
+          colour: source.colour,
+          order: source.order
+        }))
+      )
+    );
   });
 
   // rehydrate
-  archiveManager.rehydrate();
+  manager.rehydrate();
 }
