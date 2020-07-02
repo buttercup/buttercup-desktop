@@ -96,14 +96,14 @@ export function getArchive(archiveId) {
   return source.vault;
 }
 
-export function updateArchivePassword(archiveId, newPassword) {
+export function updateArchivePassword(archiveId, newPassword, oldPassword) {
   const manager = getSharedVaultManager();
   const source = manager.getSourceForID(archiveId);
   return getQueue()
     .channel('saves')
     .enqueue(() =>
       source
-        .changeMasterPassword(newPassword)
+        .changeMasterPassword(oldPassword, newPassword)
         .then(() => manager.dehydrateSource(source))
     );
 }

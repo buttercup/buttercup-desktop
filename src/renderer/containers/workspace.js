@@ -28,7 +28,7 @@ export default connect(
   }),
   {
     setColumnSize,
-    onValidate: (modalRequest, password) => dispatch => {
+    onValidate: (modalRequest, password, oldPassword) => dispatch => {
       const { type, payload } = modalRequest;
       switch (type) {
         case PasswordDialogRequestTypes.UNLOCK:
@@ -36,7 +36,9 @@ export default connect(
         case PasswordDialogRequestTypes.NEW_VAULT:
           return dispatch(addArchiveFromSource(payload, password));
         case PasswordDialogRequestTypes.PASSWORD_CHANGE:
-          return dispatch(changeArchivePassword(payload, password));
+          return dispatch(
+            changeArchivePassword(payload, password, oldPassword)
+          );
         case PasswordDialogRequestTypes.IMPORT:
           ipcRenderer.send('import-history-prompt-resp', password);
           return Promise.resolve();

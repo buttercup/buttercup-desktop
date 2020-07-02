@@ -4,7 +4,8 @@ export const ArchiveTypes = {
   GOOGLEDRIVE: 'googledrive',
   OWNCLOUD: 'owncloud',
   NEXTCLOUD: 'nextcloud',
-  WEBDAV: 'webdav'
+  WEBDAV: 'webdav',
+  MY_BUTTERCUP: 'mybuttercup'
 };
 
 export const ImportTypes = {

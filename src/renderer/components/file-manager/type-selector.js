@@ -5,10 +5,9 @@ import { brands } from '../../../shared/buttercup/brands';
 
 const Wrapper = styled.div`
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 var(--spacing-one);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: var(--spacing-one);
 `;
 
 const LogoLink = styled(Link)`

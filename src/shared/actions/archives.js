@@ -43,8 +43,12 @@ export const removeArchive = payload => dispatch => {
   });
 };
 
-export const changeArchivePassword = (payload, masterPassword) => () => {
-  return updateArchivePassword(payload, masterPassword);
+export const changeArchivePassword = (
+  payload,
+  newPassword,
+  oldPassword
+) => () => {
+  return updateArchivePassword(payload, newPassword, oldPassword);
 };
 
 export const changeArchiveColour = ({ archiveId, colour }) => () => {
@@ -129,8 +133,6 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
           masterPassword
         )
       );
-    case ArchiveTypes.OWNCLOUD:
-    case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
       return dispatch(
         addArchive(
@@ -138,8 +140,8 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             type,
             isNew,
             path,
-            credentials: config.credentials,
             datasource: {
+              ...config.credentials,
               endpoint: config.endpoint,
               path
             }

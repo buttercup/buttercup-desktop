@@ -68,16 +68,13 @@ class Webdav extends PureComponent {
     }
 
     let { endpoint, username, password } = this.state;
-    const { brand, t } = this.props;
+    const { t } = this.props;
 
     if (!endpoint || !username || !password) {
       return;
     }
 
     endpoint = endpoint.substr(-1) !== '/' ? `${endpoint}/` : endpoint;
-    endpoint = ['owncloud', 'nextcloud'].includes(brand)
-      ? url.resolve(endpoint, './remote.php/webdav')
-      : endpoint;
 
     const fs = getFsInstance('webdav', {
       endpoint,

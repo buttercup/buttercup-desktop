@@ -51,9 +51,11 @@ const ButtonWrapper = styled.div`
 Modal.setAppElement('#root');
 
 const initialState = {
+  oldPassword: '',
   password: '',
   passwordConfirmation: '',
   passwordSubmitted: false,
+  oldPasswordSubmitted: false,
   errorMessage: null,
   loading: false
 };
@@ -67,7 +69,8 @@ class PasswordModal extends PureComponent {
     onSuccess: PropTypes.func,
     onCancel: PropTypes.func,
     t: PropTypes.func,
-    confirmPassword: PropTypes.bool
+    confirmPassword: PropTypes.bool,
+    askForOldPassword: PropTypes.bool
   };
 
   state = {
@@ -91,12 +94,24 @@ class PasswordModal extends PureComponent {
 
   handleFormSubmit = e => {
     e.preventDefault();
-    const { confirmPassword, t } = this.props;
-    const { password, passwordConfirmation, passwordSubmitted } = this.state;
+    const { confirmPassword, askForOldPassword, t } = this.props;
+    const {
+      password,
+      passwordConfirmation,
+      passwordSubmitted,
+      oldPasswordSubmitted
+    } = this.state;
 
     // No confirmation needed, validate the form
-    if (!confirmPassword) {
+    if (!confirmPassword && !askForOldPassword) {
       return this.handleSubmit();
+    }
+
+    // Render password
+    if (askForOldPassword && !oldPasswordSubmitted) {
+      return this.setState({
+        oldPasswordSubmitted: true
+      });
     }
 
     // Render password confirmation
@@ -127,7 +142,7 @@ class PasswordModal extends PureComponent {
         loading: true
       },
       () => {
-        onValidate(this.state.password)
+        onValidate(this.state.password, this.state.oldPassword)
           .then(() => {
             onSuccess();
           })
@@ -147,16 +162,9 @@ class PasswordModal extends PureComponent {
     );
   };
 
-  handlePasswordChange = e => {
+  handlePasswordChange = (e, field) => {
     this.setState({
-      password: e.target.value,
-      errorMessage: null
-    });
-  };
-
-  handlePasswordConfirmationChange = e => {
-    this.setState({
-      passwordConfirmation: e.target.value,
+      [field]: e.target.value,
       errorMessage: null
     });
   };
@@ -167,9 +175,11 @@ class PasswordModal extends PureComponent {
       loading,
       password,
       passwordConfirmation,
-      passwordSubmitted
+      passwordSubmitted,
+      oldPassword,
+      oldPasswordSubmitted
     } = this.state;
-    const { t, confirmPassword } = this.props;
+    const { t, confirmPassword, askForOldPassword } = this.props;
     const mainTitleKey = confirmPassword
       ? 'password-dialog.new-password'
       : 'password-dialog.master-password';
@@ -197,7 +207,9 @@ class PasswordModal extends PureComponent {
       >
         <Translate
           i18nKey={
-            !passwordSubmitted
+            askForOldPassword && !oldPasswordSubmitted
+              ? 'password-dialog.master-password'
+              : !passwordSubmitted
               ? mainTitleKey
               : 'password-dialog.confirm-password'
           }
@@ -205,6 +217,21 @@ class PasswordModal extends PureComponent {
         />
         <form onSubmit={this.handleFormSubmit}>
           <Choose>
+            <When condition={askForOldPassword && !oldPasswordSubmitted}>
+              <Input
+                bordered
+                className={errorMessage !== null ? 'has-error' : null}
+                type="password"
+                placeholder={`${t('password-dialog.master-password')}...`}
+                autoFocus
+                value={oldPassword}
+                onChange={e => this.handlePasswordChange(e, 'oldPassword')}
+                disabled={loading}
+                ref={input => {
+                  this._currentInputRef = input;
+                }}
+              />
+            </When>
             <When condition={!passwordSubmitted}>
               <Input
                 bordered
@@ -213,7 +240,7 @@ class PasswordModal extends PureComponent {
                 placeholder={`${t('password-dialog.password')}...`}
                 autoFocus
                 value={password}
-                onChange={this.handlePasswordChange}
+                onChange={e => this.handlePasswordChange(e, 'password')}
                 disabled={loading}
                 ref={input => {
                   this._currentInputRef = input;
@@ -231,7 +258,9 @@ class PasswordModal extends PureComponent {
                 placeholder={`${t('password-dialog.confirm-password')}...`}
                 autoFocus
                 value={passwordConfirmation}
-                onChange={this.handlePasswordConfirmationChange}
+                onChange={e =>
+                  this.handlePasswordChange(e, 'passwordConfirmation')
+                }
                 disabled={loading}
                 ref={input => {
                   this._currentInputRef = input;

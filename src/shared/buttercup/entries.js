@@ -1,7 +1,12 @@
 import omit from 'lodash/omit';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import { Archive, consumeEntryFacade, createEntryFacade } from './buttercup';
+import {
+  Archive,
+  consumeEntryFacade,
+  createEntryFacade,
+  getEntryURLs
+} from './buttercup';
 
 function entryToObj(entry) {
   const facade = createEntryFacade(entry);
@@ -28,9 +33,9 @@ export function getFacadeFieldValue(entry, fieldName) {
 //   return url;
 // }
 export function getEntryURL(entry) {
-  // console.log(entry);
-  // const [url] = entry.getURLs([ENTRY_URL_TYPE_ANY]);
-  // // return url;
+  // // console.log(entry);
+  // const [url] = getEntryURLs(entry.getProperty());
+  // // // return url;
   return null;
 }
 

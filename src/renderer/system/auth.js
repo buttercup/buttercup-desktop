@@ -126,6 +126,14 @@ export function authenticateDropbox() {
   return authenticate(authUri, /access_token=([^&]*)/);
 }
 
+export function authenticateMyButtercup() {
+  const redirectUri = 'https://buttercup.pw/';
+  const clientId = '5fstmwjaisrt06t';
+  const authUri = `https://www.dropbox.com/1/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token`;
+
+  return authenticate(authUri, /access_token=([^&]*)/);
+}
+
 export function getFsInstance(type, settings) {
   switch (type) {
     case ArchiveTypes.DROPBOX:

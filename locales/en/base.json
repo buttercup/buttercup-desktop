@@ -115,6 +115,9 @@
     "authenticate-with-googledrive": "Authenticate with Google Drive",
     "googledrive-description-text": "Connect Buttercup to your Google Drive account to read and save your archives.<br />We won't save your Google Drive username or password.",
     "connect-to-wedav": "Connect to {{title}} Server",
+    "connect-to-mybuttercup": "Connect to My Buttercup",
+    "authenticate-with-mybuttercup": "Authenticate with My Buttercup",
+    "mybuttercup-description-text": "This will safely connect to your My Buttercup account, we will not save your credentials.",
     "username": "Username",
     "password": "Password",
     "connect": "Connect",
@@ -184,6 +187,7 @@
     "open-file-for-importing": "Import function should not be running without the main window running.",
     "entry-not-found": "Entry has not been found",
     "dropbox-connection-failed-info": "Connection to Dropbox server failed. Please try again later",
+    "mybuttercup-connection-failed-info": "Connection to My Buttercup server failed. Please try again later",
     "webdav-connection-failed-info": "Connection to {{endpoint}} failed. Please check your credentials and try again."
   },
   "group": {
