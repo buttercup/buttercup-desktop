@@ -5,6 +5,13 @@ import { createClient as createGoogleDriveClient } from '@buttercup/googledrive-
 import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
 import { createClient as createWebdavClient } from 'webdav';
 import { ArchiveTypes } from '../../shared/buttercup/types';
+import { MyButtercupClient } from '../../shared/buttercup/buttercup';
+
+export const MYBUTTERCUP_CLIENT_ID = 'bcup_desktop';
+export const MYBUTTERCUP_CLIENT_SECRET = '6527c6a2f42dccbdfd3c9fe12f1051d8';
+export const MYBUTTERCUP_REDIRECT_URI =
+  'https://my.buttercup.pw/oauth/authorized/';
+// export const MYBUTTERCUP_REDIRECT_URI = "http://localhost:8000/oauth/authorized/";
 
 const { BrowserWindow } = remote;
 const currentWindow = BrowserWindow.getFocusedWindow();
@@ -29,7 +36,6 @@ export function authenticate(authUri, matchRegex) {
 
     const navigateCb = url => {
       const match = url.match(matchRegex);
-
       if (match !== null && match.length > 0) {
         foundToken = match[1];
         authWin.hide();
@@ -48,6 +54,7 @@ export function authenticate(authUri, matchRegex) {
     authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) =>
       navigateCb(newUrl)
     );
+    authWin.webContents.on('will-redirect', (e, url) => navigateCb(url));
     authWin.on('hide', closeCb);
     authWin.on('close', closeCb);
   });
@@ -127,11 +134,19 @@ export function authenticateDropbox() {
 }
 
 export function authenticateMyButtercup() {
-  const redirectUri = 'https://buttercup.pw/';
-  const clientId = '5fstmwjaisrt06t';
-  const authUri = `https://www.dropbox.com/1/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token`;
+  const authUri = MyButtercupClient.generateAuthorisationURL(
+    MYBUTTERCUP_CLIENT_ID
+  );
+  return authenticate(authUri, /code=([^&]*)/);
+}
 
-  return authenticate(authUri, /access_token=([^&]*)/);
+export function exchangeMyButtercupAuthCode(authCode) {
+  return MyButtercupClient.exchangeAuthCodeForTokens(
+    authCode,
+    MYBUTTERCUP_CLIENT_ID,
+    MYBUTTERCUP_CLIENT_SECRET,
+    MYBUTTERCUP_REDIRECT_URI
+  );
 }
 
 export function getFsInstance(type, settings) {

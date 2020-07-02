@@ -7,10 +7,11 @@ import { Button, SmallType, Center } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
-import { authenticateMyButtercup } from '../../../system/auth';
-import { isButtercupFile } from '../../../system/utils';
+import {
+  authenticateMyButtercup,
+  exchangeMyButtercupAuthCode
+} from '../../../system/auth';
 import { showDialog } from '../../../system/dialog';
-// import Manager from '../manager';
 
 const ConnectButton = styled(Button)`
   display: inline-flex;
@@ -36,31 +37,22 @@ class MyButtercup extends Component {
 
   state = {
     established: false,
-    token: null
-  };
-
-  handleSelect = file => {
-    if (!file.identifier || !isButtercupFile(file.name)) {
-      this.props.onSelect(null);
-      return;
-    }
-    this.props.onSelect({
-      type: 'mybuttercup',
-      token: this.state.token,
-      path: file.identifier,
-      isNew: file.size === 0
-    });
+    tokens: null
   };
 
   handleAuthClick = () => {
     const { t } = this.props;
     authenticateMyButtercup()
-      .then(token => {
-        // THIS SHOULD BE FIXED
-        // this.fs = getFsInstance('dropbox', { token });
+      .then(authCode => exchangeMyButtercupAuthCode(authCode))
+      .then(tokens => {
         this.setState({
           established: true,
-          token
+          tokens
+        });
+        this.props.onSelect({
+          type: 'mybuttercup',
+          tokens: this.state.tokens,
+          isNew: false
         });
       })
       .catch(err => {
@@ -74,19 +66,6 @@ class MyButtercup extends Component {
   }
 
   render() {
-    if (this.state.established) {
-      // THIS SHOULD BE FIXED
-      // return (
-      //   <Flex flexAuto>
-      //     <Manager
-      //       fs={this.fs}
-      //       onSelectFile={this.handleSelect}
-      //       toggleCreateButton={this.props.toggleCreateButton}
-      //     />
-      //   </Flex>
-      // );
-    }
-
     return (
       <Flex align="center" justify="center" flexColumn flexAuto>
         <Wrapper>
@@ -98,6 +77,7 @@ class MyButtercup extends Component {
             primary
             onClick={this.handleAuthClick}
             icon={<Logo src={mybuttercupLogo} />}
+            disabled={this.state.established}
           >
             <Translate i18nKey="cloud-source.authenticate-with-mybuttercup" />
           </ConnectButton>
