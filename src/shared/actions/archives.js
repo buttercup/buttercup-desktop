@@ -21,6 +21,10 @@ import {
   updateArchiveOrder
 } from '../buttercup/archive';
 import { exportArchiveToCSVAndSave } from '../buttercup/export';
+import {
+  MYBUTTERCUP_CLIENT_ID,
+  MYBUTTERCUP_CLIENT_SECRET
+} from '../../shared/myButtercup';
 
 // Store Actions
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
@@ -102,6 +106,26 @@ export const addArchive = (payload, masterPassword) => async dispatch => {
 export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
   const { type, path, isNew, ...config } = payload;
   switch (type) {
+    case ArchiveTypes.MY_BUTTERCUP:
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            name: config.details.name,
+            datasource: {
+              type,
+              accessToken: config.details.accessToken,
+              refreshToken: config.details.refreshToken,
+              clientID: MYBUTTERCUP_CLIENT_ID,
+              clientSecret: MYBUTTERCUP_CLIENT_SECRET,
+              vaultID: config.details.id
+            }
+          },
+          masterPassword
+        )
+      );
     case ArchiveTypes.DROPBOX:
       return dispatch(
         addArchive(
@@ -110,6 +134,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               token: config.token,
               path
             }
@@ -125,6 +150,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               token: config.tokens.accessToken,
               refreshToken: config.tokens.refreshToken,
               fileID: path
@@ -142,6 +168,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             path,
             datasource: {
               ...config.credentials,
+              type,
               endpoint: config.endpoint,
               path
             }
@@ -157,6 +184,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               path
             }
           },

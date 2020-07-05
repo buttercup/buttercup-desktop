@@ -9,7 +9,8 @@ import { Translate } from '../../../../shared/i18n';
 import { Flex } from 'styled-flexbox';
 import {
   authenticateMyButtercup,
-  exchangeMyButtercupAuthCode
+  exchangeMyButtercupAuthCode,
+  getMyButtercupAccountDetails
 } from '../../../system/auth';
 import { showDialog } from '../../../system/dialog';
 
@@ -37,21 +38,30 @@ class MyButtercup extends Component {
 
   state = {
     established: false,
-    tokens: null
+    details: null
   };
 
   handleAuthClick = () => {
     const { t } = this.props;
     authenticateMyButtercup()
       .then(authCode => exchangeMyButtercupAuthCode(authCode))
-      .then(tokens => {
+      .then(tokens =>
+        getMyButtercupAccountDetails(
+          tokens.accessToken,
+          tokens.refreshToken
+        ).then(details => ({
+          ...details,
+          ...tokens
+        }))
+      )
+      .then(details => {
         this.setState({
           established: true,
-          tokens
+          details
         });
         this.props.onSelect({
           type: 'mybuttercup',
-          tokens: this.state.tokens,
+          details,
           isNew: false
         });
       })

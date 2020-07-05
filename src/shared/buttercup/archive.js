@@ -9,7 +9,7 @@ import ElectronStorageInterface from './storage';
 let __sharedManager = null;
 
 export async function addArchiveToVaultManager(masterConfig, masterPassword) {
-  const { datasource, type, path: filePath, isNew } = masterConfig;
+  const { datasource, type, path: filePath, isNew, name } = masterConfig;
 
   const manager = getSharedVaultManager();
   const sourceCredentials = Credentials.fromDatasource(
@@ -19,7 +19,7 @@ export async function addArchiveToVaultManager(masterConfig, masterPassword) {
   const credentialString = await sourceCredentials.toSecureString();
 
   const source = new VaultSource(
-    path.basename(filePath),
+    name || path.basename(filePath),
     type,
     credentialString
   );

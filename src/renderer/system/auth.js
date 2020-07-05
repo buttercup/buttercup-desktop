@@ -6,12 +6,11 @@ import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
 import { createClient as createWebdavClient } from 'webdav';
 import { ArchiveTypes } from '../../shared/buttercup/types';
 import { MyButtercupClient } from '../../shared/buttercup/buttercup';
-
-export const MYBUTTERCUP_CLIENT_ID = 'bcup_desktop';
-export const MYBUTTERCUP_CLIENT_SECRET = '6527c6a2f42dccbdfd3c9fe12f1051d8';
-export const MYBUTTERCUP_REDIRECT_URI =
-  'https://my.buttercup.pw/oauth/authorized/';
-// export const MYBUTTERCUP_REDIRECT_URI = "http://localhost:8000/oauth/authorized/";
+import {
+  MYBUTTERCUP_CLIENT_ID,
+  MYBUTTERCUP_CLIENT_SECRET,
+  MYBUTTERCUP_REDIRECT_URI
+} from '../../shared/myButtercup';
 
 const { BrowserWindow } = remote;
 const currentWindow = BrowserWindow.getFocusedWindow();
@@ -170,4 +169,21 @@ export function getFsInstance(type, settings) {
     default:
       return null;
   }
+}
+
+export function getMyButtercupAccountDetails(accessToken, refreshToken) {
+  const client = new MyButtercupClient(
+    MYBUTTERCUP_CLIENT_ID,
+    MYBUTTERCUP_CLIENT_SECRET,
+    accessToken,
+    refreshToken
+  );
+  return Promise.all([
+    client.fetchUserVaultDetails(),
+    client.retrieveDigest()
+  ]).then(([details, digest]) => {
+    const { id } = details;
+    const { account_name: name } = digest;
+    return { id, name };
+  });
 }
