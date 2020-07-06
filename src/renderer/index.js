@@ -10,7 +10,7 @@ import configureStore from '../shared/store/configure-store';
 import { linkVaultManagerToStore } from '../shared/buttercup/store';
 import {
   setCurrentArchive,
-  importHistoryIntoArchive,
+  importFacadeIntoVault,
   resetArchivesInStore,
   exportArchive
 } from '../shared/actions/archives';
@@ -50,7 +50,7 @@ store.dispatch(setCurrentArchive(null));
 store.dispatch(resetArchivesInStore([]));
 
 ipc.on('import-history', (e, payload) => {
-  store.dispatch(importHistoryIntoArchive(payload));
+  store.dispatch(importFacadeIntoVault(payload));
 });
 
 ipc.on('export-archive', (e, payload) => {

@@ -2,7 +2,7 @@
 import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
-import { importHistory } from '../buttercup/import';
+import { importVaultFacade } from '../buttercup/import';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_SET,
@@ -196,9 +196,9 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
   }
 };
 
-export const importHistoryIntoArchive = payload => (dispatch, getState) => {
-  const { archiveId, history } = payload;
-  importHistory(archiveId, history);
+export const importFacadeIntoVault = payload => (dispatch, getState) => {
+  const { vaultFacade, history } = payload;
+  importVaultFacade(archiveId, vaultFacade);
   dispatch(reloadGroups());
 };
 

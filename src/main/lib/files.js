@@ -149,8 +149,11 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
     }, 10);
   };
 
-  const handleSuccess = history => {
-    focusedWindow.webContents.send('import-history', { history, archiveId });
+  const handleSuccess = vaultFacade => {
+    focusedWindow.webContents.send('import-history', {
+      vaultFacade,
+      archiveId
+    });
   };
 
   dialog
