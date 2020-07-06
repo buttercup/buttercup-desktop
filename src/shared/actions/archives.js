@@ -197,8 +197,8 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
 };
 
 export const importFacadeIntoVault = payload => (dispatch, getState) => {
-  const { vaultFacade, history } = payload;
-  importVaultFacade(archiveId, vaultFacade);
+  const { archiveId: sourceID, vaultFacade } = payload;
+  importVaultFacade(sourceID, vaultFacade);
   dispatch(reloadGroups());
 };
 

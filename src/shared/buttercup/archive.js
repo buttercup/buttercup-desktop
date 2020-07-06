@@ -90,9 +90,9 @@ export function getSharedVaultManager() {
   return __sharedManager;
 }
 
-export function getArchive(archiveId) {
+export function getArchive(sourceID) {
   const manager = getSharedVaultManager();
-  const source = manager.getSourceForID(archiveId);
+  const source = manager.getSourceForID(sourceID);
   return source.vault;
 }
 

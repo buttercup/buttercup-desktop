@@ -141,6 +141,7 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
   }
 
   const handleError = err => {
+    console.error(err);
     setTimeout(() => {
       dialog.showMessageBox(focusedWindow, {
         title: 'Import Failed',
