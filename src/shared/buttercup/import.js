@@ -1,13 +1,10 @@
-import { Archive } from './buttercup';
+import { consumeVaultFacade } from './buttercup';
 import { getArchive, saveWorkspace } from './archive';
 
-export function importHistory(archiveId, history) {
-  const tempArchive = Archive.createFromHistory(history);
-  const mainArchive = getArchive(archiveId);
-
-  tempArchive.getGroups().forEach(group => {
-    group.moveTo(mainArchive);
+export function importVaultFacade(archiveId, vaultFacade) {
+  const vault = getArchive(archiveId);
+  consumeVaultFacade(vault, vaultFacade, {
+    mergeMode: true
   });
-
   saveWorkspace(archiveId);
 }
