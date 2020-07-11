@@ -83,7 +83,7 @@ const Avatar = styled.div`
   }
 `;
 
-const Icon = styled.figure`
+const Icon = styled(({ fill, ...props }) => <div {...props} />)`
   margin: 0;
   padding: 0;
   position: absolute;

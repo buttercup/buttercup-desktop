@@ -197,6 +197,9 @@ export function setupWindows(store) {
       height: 470,
       show: false,
       resizable: false,
+      webPreferences: {
+        nodeIntegration: true // @TODO: Remove this in future versions
+      },
       ...options
     });
 
