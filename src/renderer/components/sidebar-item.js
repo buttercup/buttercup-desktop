@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import capitalize from 'lodash/capitalize';
-import {
-  MdLockOutline as LockClosed,
-  MdLockOpen as LockOpen
-} from 'react-icons/md';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { TwitterPicker } from 'react-color';
-import { PortalWithState } from 'react-portal';
 import { translate } from 'react-i18next';
+import {
+  MdLockOpen as LockOpen,
+  MdLockOutline as LockClosed
+} from 'react-icons/md';
+import { PortalWithState } from 'react-portal';
 import { SortableElement } from 'react-sortable-hoc';
+import styled from 'styled-components';
 import { brands } from '../../shared/buttercup/brands';
 import { ImportTypeInfo } from '../../shared/buttercup/types';
-import { getTextColor, COLORS } from '../../shared/utils/colors';
+import { COLORS, getTextColor } from '../../shared/utils/colors';
 import { showContextMenu } from '../system/menu';
 
 const Wrapper = styled.li`
@@ -92,14 +92,14 @@ const Icon = styled.figure`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: #fff;
+  border-radius: ${p => (p.fill ? '0' : '50%')};
+  background-color: ${p => (p.fill ? 'transparent' : '#fff')};
   width: 18px;
   height: 18px;
   transform: translate(20%, 20%);
 
   img {
-    width: 14px;
+    width: ${p => (p.fill ? '18px' : '14px')};
     display: block;
   }
 `;
@@ -244,7 +244,7 @@ class SidebarItem extends PureComponent {
         >
           <span>{briefName}</span>
           <If condition={condenced && brands[type] && brands[type].remote}>
-            <Icon>
+            <Icon fill={brands[type].iconFill}>
               <img src={brands[type].icon} alt={brands[type].name} />
             </Icon>
           </If>
