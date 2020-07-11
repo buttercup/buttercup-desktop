@@ -4,42 +4,61 @@ export const ArchiveTypes = {
   GOOGLEDRIVE: 'googledrive',
   OWNCLOUD: 'owncloud',
   NEXTCLOUD: 'nextcloud',
-  WEBDAV: 'webdav'
+  WEBDAV: 'webdav',
+  MY_BUTTERCUP: 'mybuttercup'
 };
 
 export const ImportTypes = {
-  BUTTERCUP: 'buttercup-csv',
+  BITWARDEN_JSON: 'bitwarden-json',
+  BUTTERCUP: 'buttercup',
+  BUTTERCUP_CSV: 'buttercup-csv',
+  CSV: 'csv',
   KEEPASS: 'keepass',
+  KEEPASS_XML: 'keepass-xml',
   LASTPASS: 'lastpass',
-  ONE_PASSWORD: '1password',
-  BITWARDEN: 'bitwarden'
+  ONE_PASSWORD: '1password'
 };
 
 export const ImportTypeInfo = {
-  [ImportTypes.ONE_PASSWORD]: {
+  [ImportTypes.BITWARDEN_JSON]: {
     password: false,
-    name: '1Password',
-    extension: '1pif'
+    name: 'Bitwarden (JSON)',
+    extension: 'json'
+  },
+  [ImportTypes.BUTTERCUP]: {
+    password: true,
+    name: 'Buttercup (BCUP)',
+    extension: 'bcup'
+  },
+  [ImportTypes.BUTTERCUP_CSV]: {
+    password: false,
+    name: 'Buttercup (CSV)',
+    extension: 'csv'
+  },
+  [ImportTypes.CSV]: {
+    password: false,
+    name: 'CSV export',
+    extension: 'csv'
   },
   [ImportTypes.KEEPASS]: {
     password: true,
     name: 'KeePass',
     extension: 'kdbx'
   },
+  [ImportTypes.KEEPASS_XML]: {
+    password: false,
+    name: 'KeePass (XML)',
+    extension: 'xml'
+  },
   [ImportTypes.LASTPASS]: {
     password: false,
-    name: 'LastPass',
+    name: 'LastPass (CSV)',
     extension: 'csv'
   },
-  [ImportTypes.BITWARDEN]: {
+  [ImportTypes.ONE_PASSWORD]: {
     password: false,
-    name: 'Bitwarden (JSON)',
-    extension: 'json'
-  },
-  [ImportTypes.BUTTERCUP]: {
-    password: false,
-    name: 'Buttercup (CSV)',
-    extension: 'csv'
+    name: '1Password',
+    extension: '1pif'
   }
 };
 

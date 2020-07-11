@@ -1,11 +1,26 @@
 import {
-  importFromKDBX,
-  importFrom1PIF,
-  importFromLastPass,
-  importFromBitwarden,
-  importFromButtercup
+  BitwardenImporter,
+  ButtercupCSVImporter,
+  ButtercupImporter,
+  CSVImporter,
+  KDBXImporter,
+  KeePass2XMLImporter,
+  LastPassImporter,
+  OnePasswordImporter
 } from '@buttercup/importer';
-import { ImportTypes } from '../../shared/buttercup/types';
+import { ImportTypes, ImportTypeInfo } from '../../shared/buttercup/types';
+import { createVaultFacade } from './buttercupCore';
+
+const IMPORTERS = {
+  [ImportTypes.BITWARDEN_JSON]: BitwardenImporter,
+  [ImportTypes.BUTTERCUP]: ButtercupImporter,
+  [ImportTypes.BUTTERCUP_CSV]: ButtercupCSVImporter,
+  [ImportTypes.CSV]: CSVImporter,
+  [ImportTypes.KEEPASS]: KDBXImporter,
+  [ImportTypes.KEEPASS_XML]: KeePass2XMLImporter,
+  [ImportTypes.LASTPASS]: LastPassImporter,
+  [ImportTypes.ONE_PASSWORD]: OnePasswordImporter
+};
 
 /**
  * Import archive from file
@@ -15,25 +30,15 @@ import { ImportTypes } from '../../shared/buttercup/types';
  * @param {string} filename
  * @param {string} password
  */
-export function importArchive(type, filename, password) {
-  switch (type) {
-    case ImportTypes.KEEPASS:
-      return importFromKDBX(filename, password).then(archive =>
-        archive.getHistory()
-      );
-    case ImportTypes.ONE_PASSWORD:
-      return importFrom1PIF(filename).then(archive => archive.getHistory());
-    case ImportTypes.LASTPASS:
-      return importFromLastPass(filename).then(archive => archive.getHistory());
-    case ImportTypes.BITWARDEN:
-      return importFromBitwarden(filename).then(archive =>
-        archive.getHistory()
-      );
-    case ImportTypes.BUTTERCUP:
-      return importFromButtercup(filename).then(archive =>
-        archive.getHistory()
-      );
-    default:
-      throw new Error('Wrong import type provided');
+export async function importArchive(type, filename, password) {
+  const Importer = IMPORTERS[type];
+  const { password: usesPassword } = ImportTypeInfo[type];
+  let importer;
+  if (usesPassword) {
+    importer = await Importer.loadFromFile(filename, password);
+  } else {
+    importer = await Importer.loadFromFile(filename);
   }
+  const vault = await importer.export();
+  return createVaultFacade(vault);
 }

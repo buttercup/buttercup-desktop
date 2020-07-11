@@ -141,6 +141,7 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
   }
 
   const handleError = err => {
+    console.error(err);
     setTimeout(() => {
       dialog.showMessageBox(focusedWindow, {
         title: 'Import Failed',
@@ -149,8 +150,11 @@ const showImportDialog = function(focusedWindow, type, archiveId) {
     }, 10);
   };
 
-  const handleSuccess = history => {
-    focusedWindow.webContents.send('import-history', { history, archiveId });
+  const handleSuccess = vaultFacade => {
+    focusedWindow.webContents.send('import-history', {
+      vaultFacade,
+      archiveId
+    });
   };
 
   dialog

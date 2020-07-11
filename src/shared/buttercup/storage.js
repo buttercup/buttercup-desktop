@@ -1,23 +1,26 @@
 import Store from 'electron-store';
-import { storage as ButtercupStorage } from './buttercup';
-
-const { StorageInterface } = ButtercupStorage;
-const storage = new Store({
-  name: 'archives'
-});
+import { StorageInterface } from './buttercup';
 
 /**
  * Interface for localStorage
  * @augments StorageInterface
  */
 export default class ElectronStorageInterface extends StorageInterface {
+  __storage;
+
+  constructor(name) {
+    super();
+    this.__storage = new Store({
+      name
+    });
+  }
   /**
    * Get all keys from storage
    * @returns {Promise.<Array.<String>>} A promise that resolves with an array of keys
    */
   getAllKeys() {
     return new Promise((resolve, reject) => {
-      const values = [...storage];
+      const values = [...this.__storage];
       resolve(values.map(val => val[0]));
     });
   }
@@ -29,7 +32,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   getValue(name) {
     return new Promise((resolve, reject) => {
-      resolve(storage.get(name));
+      resolve(this.__storage.get(name));
     });
   }
 
@@ -40,7 +43,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   removeKey(key) {
     return new Promise((resolve, reject) => {
-      resolve(storage.delete(key));
+      resolve(this.__storage.delete(key));
     });
   }
 
@@ -52,7 +55,7 @@ export default class ElectronStorageInterface extends StorageInterface {
    */
   setValue(name, value) {
     return new Promise((resolve, reject) => {
-      resolve(storage.set(name, value));
+      resolve(this.__storage.set(name, value));
     });
   }
 }

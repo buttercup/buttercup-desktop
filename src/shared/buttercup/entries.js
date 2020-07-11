@@ -1,10 +1,13 @@
 import omit from 'lodash/omit';
 import i18n from '../i18n';
 import { getArchive, saveWorkspace } from './archive';
-import { Archive, entryFacade, tools as buttercupTools } from './buttercup';
-
-const { consumeEntryFacade, createEntryFacade } = entryFacade;
-const { getEntryFacadeURLs, ENTRY_URL_TYPE_ANY } = buttercupTools.entry;
+import {
+  Vault,
+  consumeEntryFacade,
+  createEntryFacade,
+  fieldsToProperties,
+  getEntryURLs
+} from './buttercup';
 
 function entryToObj(entry) {
   const facade = createEntryFacade(entry);
@@ -17,7 +20,7 @@ function entryToObj(entry) {
 
 export function getFacadeFieldValue(entry, fieldName) {
   const field = entry.facade.fields.find(
-    field => field.property === fieldName && field.field === 'property'
+    field => field.property === fieldName && field.propertyType === 'property'
   );
   if (field) {
     return field.value;
@@ -25,10 +28,9 @@ export function getFacadeFieldValue(entry, fieldName) {
 }
 
 export function getEntryURL(entry) {
-  const [url] = entry.facade
-    ? getEntryFacadeURLs(entry.facade, ENTRY_URL_TYPE_ANY)
-    : entry.getURLs([ENTRY_URL_TYPE_ANY]);
-  return url;
+  const props = fieldsToProperties(entry.facade.fields);
+  const [url] = getEntryURLs(props);
+  return url || null;
 }
 
 export function getParentGroups(currentGroup) {
@@ -79,8 +81,8 @@ export function validateEntry(entry) {
 
 // @TODO: Add entry type when we take facades into use
 export function createNewEntryStructure() {
-  const archive = new Archive();
-  const group = archive.createGroup('temp');
+  const vault = new Vault();
+  const group = vault.createGroup('temp');
   const entry = entryToObj(group.createEntry());
   return omit(entry, 'id');
 }
@@ -94,6 +96,7 @@ export function loadEntries(archiveId, groupId) {
   }
 
   const entries = group.getEntries();
+  // console.log(entries.map(entry => entryToObj(entry)));
   return entries.map(entry => entryToObj(entry));
 }
 

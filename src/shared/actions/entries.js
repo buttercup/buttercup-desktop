@@ -9,7 +9,7 @@ import {
   getExpandedKeys
 } from '../selectors';
 import i18n from '../i18n';
-import { getSharedArchiveManager, getSourceName } from '../buttercup/archive';
+import { getSharedVaultManager, getSourceName } from '../buttercup/archive';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -132,7 +132,7 @@ export const deleteEntry = entryId => (dispatch, getState) => {
 };
 
 export const getMatchingEntriesForSearchTerm = term => dispatch => {
-  const manager = getSharedArchiveManager();
+  const manager = getSharedVaultManager();
 
   const unlockedSources = manager.unlockedSources;
   const lookup = unlockedSources.reduce(

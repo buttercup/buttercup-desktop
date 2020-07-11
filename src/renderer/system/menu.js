@@ -47,7 +47,7 @@ export function createMenuFromGroups(
         return !group.isTrash;
       })
       .map(group => {
-        if (group.type) {
+        if (group.type !== 'group') {
           return group;
         }
         return {

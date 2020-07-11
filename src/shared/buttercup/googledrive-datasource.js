@@ -1,11 +1,10 @@
-import { Datasources } from './buttercup';
+import { DatasourceAuthManager } from './buttercup';
 import {
   authenticateGoogleDrive,
   authenticateGoogleDriveWithRefreshToken
 } from '../../renderer/system/auth';
 
-const { AuthManager } = Datasources;
-AuthManager.getSharedManager().registerHandler(
+DatasourceAuthManager.getSharedManager().registerHandler(
   'googledrive',
   async datasource => {
     console.log('Google Drive datasource needs re-authentication');

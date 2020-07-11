@@ -1,15 +1,16 @@
-import * as Buttercup from '../shared/buttercup/buttercup';
+// import * as Buttercup from '../shared/buttercup/buttercup';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
+import { init } from '../shared/buttercup/buttercup';
 import i18n from '../shared/i18n';
 import { ipcRenderer as ipc } from 'electron';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from '../shared/store/configure-store';
-import { linkArchiveManagerToStore } from '../shared/buttercup/store';
+import { linkVaultManagerToStore } from '../shared/buttercup/store';
 import {
   setCurrentArchive,
-  importHistoryIntoArchive,
+  importFacadeIntoVault,
   resetArchivesInStore,
   exportArchive
 } from '../shared/actions/archives';
@@ -32,14 +33,15 @@ const unhandled = require('electron-unhandled');
 unhandled();
 
 // Alter some Buttercup internals
-Buttercup.Web.HashingTools.patchCorePBKDF();
+// Buttercup.Web.HashingTools.patchCorePBKDF();
+init();
 
 // Create store
 const store = configureStore({}, 'renderer');
 const subscribe = initSubscriber(store);
 
 i18n.changeLanguage(getSetting(store.getState(), 'locale'));
-linkArchiveManagerToStore(store);
+linkVaultManagerToStore(store);
 setupShortcuts(store);
 
 // Reset current archive
@@ -48,7 +50,7 @@ store.dispatch(setCurrentArchive(null));
 store.dispatch(resetArchivesInStore([]));
 
 ipc.on('import-history', (e, payload) => {
-  store.dispatch(importHistoryIntoArchive(payload));
+  store.dispatch(importFacadeIntoVault(payload));
 });
 
 ipc.on('export-archive', (e, payload) => {

@@ -2,7 +2,7 @@
 import { ipcRenderer as ipc } from 'electron';
 import { createAction } from 'redux-actions';
 import { ArchiveTypes } from '../buttercup/types';
-import { importHistory } from '../buttercup/import';
+import { importVaultFacade } from '../buttercup/import';
 import { reloadGroups } from './groups';
 import {
   ARCHIVES_SET,
@@ -12,15 +12,19 @@ import {
 } from './types';
 import { getArchive, getCurrentArchiveId } from '../selectors';
 import {
-  addArchiveToArchiveManager,
-  lockArchiveInArchiveManager,
-  removeArchiveFromArchiveManager,
-  unlockArchiveInArchiveManager,
+  addArchiveToVaultManager,
+  lockArchiveInVaultManager,
+  removeArchiveFromVaultManager,
+  unlockArchiveInVaultManager,
   updateArchivePassword,
   updateArchiveColour,
   updateArchiveOrder
 } from '../buttercup/archive';
 import { exportArchiveToCSVAndSave } from '../buttercup/export';
+import {
+  MYBUTTERCUP_CLIENT_ID,
+  MYBUTTERCUP_CLIENT_SECRET
+} from '../../shared/myButtercup';
 
 // Store Actions
 export const removeArchiveFromStore = createAction(ARCHIVES_REMOVE);
@@ -38,13 +42,17 @@ export const loadArchive = payload => (dispatch, getState) => {
 };
 
 export const removeArchive = payload => dispatch => {
-  return removeArchiveFromArchiveManager(payload).then(() => {
+  return removeArchiveFromVaultManager(payload).then(() => {
     dispatch(removeArchiveFromStore(payload));
   });
 };
 
-export const changeArchivePassword = (payload, masterPassword) => () => {
-  return updateArchivePassword(payload, masterPassword);
+export const changeArchivePassword = (
+  payload,
+  newPassword,
+  oldPassword
+) => () => {
+  return updateArchivePassword(payload, newPassword, oldPassword);
 };
 
 export const changeArchiveColour = ({ archiveId, colour }) => () => {
@@ -64,13 +72,13 @@ export const changeArchiveOrder = ({ archiveId, order }) => dispatch => {
 };
 
 export const lockArchive = payload => dispatch => {
-  return lockArchiveInArchiveManager(payload).then(archiveId => {
+  return lockArchiveInVaultManager(payload).then(archiveId => {
     dispatch(setCurrentArchive(null));
   });
 };
 
 export const unlockArchive = (archiveId, masterPassword) => dispatch => {
-  return unlockArchiveInArchiveManager(archiveId, masterPassword).then(
+  return unlockArchiveInVaultManager(archiveId, masterPassword).then(
     archiveId => dispatch(loadArchive(archiveId))
   );
 };
@@ -90,7 +98,7 @@ export const loadOrUnlockArchive = (archiveId, masterPassword) => (
 };
 
 export const addArchive = (payload, masterPassword) => async dispatch => {
-  return addArchiveToArchiveManager(payload, masterPassword).then(archiveId =>
+  return addArchiveToVaultManager(payload, masterPassword).then(archiveId =>
     dispatch(loadArchive(archiveId))
   );
 };
@@ -98,6 +106,26 @@ export const addArchive = (payload, masterPassword) => async dispatch => {
 export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
   const { type, path, isNew, ...config } = payload;
   switch (type) {
+    case ArchiveTypes.MY_BUTTERCUP:
+      return dispatch(
+        addArchive(
+          {
+            type,
+            isNew,
+            path,
+            name: config.details.name,
+            datasource: {
+              type,
+              accessToken: config.details.accessToken,
+              refreshToken: config.details.refreshToken,
+              clientID: MYBUTTERCUP_CLIENT_ID,
+              clientSecret: MYBUTTERCUP_CLIENT_SECRET,
+              vaultID: config.details.id
+            }
+          },
+          masterPassword
+        )
+      );
     case ArchiveTypes.DROPBOX:
       return dispatch(
         addArchive(
@@ -106,6 +134,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               token: config.token,
               path
             }
@@ -121,6 +150,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               token: config.tokens.accessToken,
               refreshToken: config.tokens.refreshToken,
               fileID: path
@@ -129,8 +159,6 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
           masterPassword
         )
       );
-    case ArchiveTypes.OWNCLOUD:
-    case ArchiveTypes.NEXTCLOUD:
     case ArchiveTypes.WEBDAV:
       return dispatch(
         addArchive(
@@ -138,8 +166,9 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             type,
             isNew,
             path,
-            credentials: config.credentials,
             datasource: {
+              ...config.credentials,
+              type,
               endpoint: config.endpoint,
               path
             }
@@ -155,6 +184,7 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
             isNew,
             path,
             datasource: {
+              type,
               path
             }
           },
@@ -166,9 +196,9 @@ export const addArchiveFromSource = (payload, masterPassword) => dispatch => {
   }
 };
 
-export const importHistoryIntoArchive = payload => (dispatch, getState) => {
-  const { archiveId, history } = payload;
-  importHistory(archiveId, history);
+export const importFacadeIntoVault = payload => (dispatch, getState) => {
+  const { archiveId: sourceID, vaultFacade } = payload;
+  importVaultFacade(sourceID, vaultFacade);
   dispatch(reloadGroups());
 };
 

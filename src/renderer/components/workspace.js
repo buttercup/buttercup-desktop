@@ -65,6 +65,7 @@ class Workspace extends PureComponent {
         modalRequest: {
           type: PasswordDialogRequestTypes.PASSWORD_CHANGE,
           confirm: true,
+          askForOldPassword: true,
           payload
         }
       });
@@ -146,10 +147,13 @@ class Workspace extends PureComponent {
         </Flex>
         <If condition={modalRequest !== null}>
           <PasswordModal
-            onValidate={password => onValidate(modalRequest, password)}
+            onValidate={(password, oldPassword) =>
+              onValidate(modalRequest, password, oldPassword)
+            }
             onCancel={this.handlePasswordModalClose}
             onSuccess={this.handlePasswordModalClose}
             confirmPassword={modalRequest.confirm}
+            askForOldPassword={!!modalRequest.askForOldPassword}
           />
         </If>
       </>

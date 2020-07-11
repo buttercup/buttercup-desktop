@@ -9,6 +9,7 @@ import Heading from './heading';
 import Input from './entry-input';
 import EntryIcon from './entry-icon';
 import { LabelWrapper, MetaWrapper, Row } from './entry-view';
+import { createFieldDescriptor } from '../../../shared/buttercup/buttercup';
 
 function getPlaceholder(propertyName) {
   switch (propertyName) {
@@ -40,6 +41,7 @@ const renderMeta = (
     <MetaWrapper>
       {fields.map((member, index) => {
         const field = fields.get(index);
+        if (field.propertyType !== 'property') return null;
         const isTitle =
           field.property === 'title' && field.removeable === false;
         return (
@@ -68,7 +70,7 @@ const renderMeta = (
               </LabelWrapper>
               <Field
                 name={`${member}.value`}
-                type={field.secret ? 'password' : 'text'}
+                type={field.valueType}
                 component={Input}
                 placeholder={t(getPlaceholder(field.property))}
                 isBig={isTitle}
@@ -91,12 +93,14 @@ const renderMeta = (
     <Button
       onClick={e => {
         fields.push({
-          title: '',
-          removeable: true,
-          field: 'property',
-          secret: false,
-          multiline: false,
-          formatting: false
+          ...createFieldDescriptor(
+            null, // entry
+            null, // title
+            'property', // type
+            '', // property
+            { removeable: true }
+          ),
+          value: ''
         });
         e.stopPropagation();
         e.preventDefault();

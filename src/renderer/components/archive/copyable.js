@@ -56,7 +56,7 @@ class Copyable extends PureComponent {
     children: PropTypes.node,
     isSecret: PropTypes.bool,
     t: PropTypes.func,
-    secondsUntilClearClipboard: PropTypes.string
+    secondsUntilClearClipboard: PropTypes.number
   };
 
   constructor(props) {

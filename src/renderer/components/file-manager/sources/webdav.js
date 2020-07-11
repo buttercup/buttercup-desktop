@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import url from 'url';
 import { MdInfoOutline as InfoIcon } from 'react-icons/md';
 import { Button, SmallType, Input } from '@buttercup/ui';
 import { Flex } from 'styled-flexbox';
@@ -68,16 +67,13 @@ class Webdav extends PureComponent {
     }
 
     let { endpoint, username, password } = this.state;
-    const { brand, t } = this.props;
+    const { t } = this.props;
 
     if (!endpoint || !username || !password) {
       return;
     }
 
     endpoint = endpoint.substr(-1) !== '/' ? `${endpoint}/` : endpoint;
-    endpoint = ['owncloud', 'nextcloud'].includes(brand)
-      ? url.resolve(endpoint, './remote.php/webdav')
-      : endpoint;
 
     const fs = getFsInstance('webdav', {
       endpoint,

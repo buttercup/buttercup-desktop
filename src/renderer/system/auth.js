@@ -5,6 +5,12 @@ import { createClient as createGoogleDriveClient } from '@buttercup/googledrive-
 import { createClient as createDropboxClient } from '@buttercup/dropbox-client';
 import { createClient as createWebdavClient } from 'webdav';
 import { ArchiveTypes } from '../../shared/buttercup/types';
+import { MyButtercupClient } from '../../shared/buttercup/buttercup';
+import {
+  MYBUTTERCUP_CLIENT_ID,
+  MYBUTTERCUP_CLIENT_SECRET,
+  MYBUTTERCUP_REDIRECT_URI
+} from '../../shared/myButtercup';
 
 const { BrowserWindow } = remote;
 const currentWindow = BrowserWindow.getFocusedWindow();
@@ -29,7 +35,6 @@ export function authenticate(authUri, matchRegex) {
 
     const navigateCb = url => {
       const match = url.match(matchRegex);
-
       if (match !== null && match.length > 0) {
         foundToken = match[1];
         authWin.hide();
@@ -48,6 +53,7 @@ export function authenticate(authUri, matchRegex) {
     authWin.webContents.on('did-get-redirect-request', (e, oldUrl, newUrl) =>
       navigateCb(newUrl)
     );
+    authWin.webContents.on('will-redirect', (e, url) => navigateCb(url));
     authWin.on('hide', closeCb);
     authWin.on('close', closeCb);
   });
@@ -126,6 +132,22 @@ export function authenticateDropbox() {
   return authenticate(authUri, /access_token=([^&]*)/);
 }
 
+export function authenticateMyButtercup() {
+  const authUri = MyButtercupClient.generateAuthorisationURL(
+    MYBUTTERCUP_CLIENT_ID
+  );
+  return authenticate(authUri, /code=([^&]*)/);
+}
+
+export function exchangeMyButtercupAuthCode(authCode) {
+  return MyButtercupClient.exchangeAuthCodeForTokens(
+    authCode,
+    MYBUTTERCUP_CLIENT_ID,
+    MYBUTTERCUP_CLIENT_SECRET,
+    MYBUTTERCUP_REDIRECT_URI
+  );
+}
+
 export function getFsInstance(type, settings) {
   switch (type) {
     case ArchiveTypes.DROPBOX:
@@ -147,4 +169,21 @@ export function getFsInstance(type, settings) {
     default:
       return null;
   }
+}
+
+export function getMyButtercupAccountDetails(accessToken, refreshToken) {
+  const client = new MyButtercupClient(
+    MYBUTTERCUP_CLIENT_ID,
+    MYBUTTERCUP_CLIENT_SECRET,
+    accessToken,
+    refreshToken
+  );
+  return Promise.all([
+    client.fetchUserVaultDetails(),
+    client.retrieveDigest()
+  ]).then(([details, digest]) => {
+    const { id } = details;
+    const { account_name: name } = digest;
+    return { id, name };
+  });
 }
