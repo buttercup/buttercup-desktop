@@ -32,7 +32,7 @@ const Logo = styled.img`
 class MyButtercup extends Component {
   static propTypes = {
     onSelect: PropTypes.func,
-    toggleCreateButton: PropTypes.func,
+    // toggleCreateButton: PropTypes.func,
     t: PropTypes.func
   };
 

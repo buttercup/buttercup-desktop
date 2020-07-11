@@ -90,7 +90,7 @@ test.serial('test if entries can be added', async t => {
   t.true(titleInput === 'title');
 
   // Click save
-  await app.client.elementIdClick(buttons.value[6].ELEMENT);
+  await app.client.elementIdClick(buttons.value[5].ELEMENT);
   await sleep(1000);
 
   const entries = await app.client.elements('.Pane2 .Pane1 li');
