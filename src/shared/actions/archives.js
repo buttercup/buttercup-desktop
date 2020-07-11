@@ -20,7 +20,7 @@ import {
   updateArchiveColour,
   updateArchiveOrder
 } from '../buttercup/archive';
-import { exportArchiveToCSVAndSave } from '../buttercup/export';
+import { exportVaultToCSVAndSave } from '../buttercup/export';
 import {
   MYBUTTERCUP_CLIENT_ID,
   MYBUTTERCUP_CLIENT_SECRET
@@ -207,5 +207,5 @@ export const showImportDialog = payload => () => {
 };
 
 export const exportArchive = archiveId => dispatch => {
-  exportArchiveToCSVAndSave(archiveId);
+  exportVaultToCSVAndSave(archiveId);
 };

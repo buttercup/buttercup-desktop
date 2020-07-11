@@ -1,12 +1,12 @@
 import fs from 'fs';
 import { remote } from 'electron';
-import { exportArchiveToCSV } from '@buttercup/exporter';
+import { exportVaultToCSV } from '@buttercup/exporter';
 import { getArchive } from './archive';
 
 const { dialog } = remote;
 const currentWindow = remote.getCurrentWindow();
 
-export function exportArchiveToCSVAndSave(archiveId) {
+export function exportVaultToCSVAndSave(archiveId) {
   const archive = getArchive(archiveId);
   if (!archive) {
     throw new Error(`No archive with ID ${archiveId} has been found.`);
@@ -23,7 +23,7 @@ export function exportArchiveToCSVAndSave(archiveId) {
     return;
   }
 
-  return exportArchiveToCSV(archive).then(csv => {
+  return exportVaultToCSV(archive).then(csv => {
     fs.writeFileSync(fileName, csv, {
       encoding: 'utf8'
     });
