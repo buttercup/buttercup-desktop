@@ -8,7 +8,7 @@
   "homepage": "https://buttercup.pw",
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
-    "@buttercup/exporter": "^1.0.0",
+    "@buttercup/exporter": "^1.1.0",
     "@buttercup/iconographer": "^1.1.1",
     "@buttercup/importer": "^2.0.3",
     "buttercup": "^2.16.1",

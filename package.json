@@ -158,7 +158,7 @@
     "@babel/runtime": "^7.5.4",
     "@buttercup/channel-queue": "^0.3.0",
     "@buttercup/dropbox-client": "^0.4.0",
-    "@buttercup/exporter": "^1.0.0",
+    "@buttercup/exporter": "^1.1.0",
     "@buttercup/file-interface": "^0.3.2",
     "@buttercup/google-oauth2-client": "^0.2.1",
     "@buttercup/googledrive-client": "^0.8.0",
