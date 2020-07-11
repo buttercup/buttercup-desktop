@@ -76,7 +76,9 @@ ipcMain.on('download-update', () => {
 export function checkForUpdates(silent = false) {
   isSilent = silent;
   try {
-    autoUpdater.checkForUpdates();
+    autoUpdater.checkForUpdates().catch(err => {
+      log.error(err);
+    });
   } catch (err) {
     log.error(err);
   }
