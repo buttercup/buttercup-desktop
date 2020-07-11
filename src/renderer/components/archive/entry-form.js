@@ -70,7 +70,7 @@ const renderMeta = (
               </LabelWrapper>
               <Field
                 name={`${member}.value`}
-                type={field.secret ? 'password' : 'text'}
+                type={field.valueType}
                 component={Input}
                 placeholder={t(getPlaceholder(field.property))}
                 isBig={isTitle}

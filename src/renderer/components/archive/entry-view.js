@@ -64,7 +64,9 @@ const FieldsView = ({ fields, entry, t }) => (
       <Wrapper
         isTitle={field.property === 'title' && field.removeable === false}
       >
-        <Copyable isSecret={field.secret}>{field.value}</Copyable>
+        <Copyable isSecret={field.valueType === 'password'}>
+          {field.value}
+        </Copyable>
       </Wrapper>
     </Row>
   </For>
