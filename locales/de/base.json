@@ -120,7 +120,10 @@
     "new-archive": "Neues Archiv",
     "connect-to-googledrive": "Mit Google Drive verbinden",
     "authenticate-with-googledrive": "Mit Google Drive authentifizieren",
-    "googledrive-description-text": "Verbinde Buttercup mit deinem Google Drive-Konto, um Archive zu lesen und zu speichern.<br />Wir werden deinen Google Drive-Benutzernamen oder dein Passwort nicht speichern."
+    "googledrive-description-text": "Verbinde Buttercup mit deinem Google Drive-Konto, um Archive zu lesen und zu speichern.<br />Wir werden deinen Google Drive-Benutzernamen oder dein Passwort nicht speichern.",
+    "connect-to-mybuttercup": "Mit My Buttercup verbinden",
+    "authenticate-with-mybuttercup": "Mit My Buttercup authentifizieren",
+    "mybuttercup-description-text": "Dies stellt eine sichere Verbindung zu deinem My Buttercup-Konto her, wir speichern deine Anmeldedaten nicht."
   },
   "confirm-dialog": {
     "yes": "Ja",
