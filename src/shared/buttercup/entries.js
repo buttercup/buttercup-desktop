@@ -28,14 +28,17 @@ export function getFacadeFieldValue(entry, fieldName) {
 }
 
 export function getEntryURL(entry) {
-  const props = fieldsToProperties(entry.facade.fields);
+  const fields = entry.facade
+    ? entry.facade.fields
+    : entryToObj(entry).facade.fields;
+  const props = fieldsToProperties(fields);
   const [url] = getEntryURLs(props);
   return url || null;
 }
 
 export function getParentGroups(currentGroup) {
   return currentGroup
-    ? [...getParentGroups(currentGroup.getGroup()), currentGroup]
+    ? [...getParentGroups(currentGroup.getParentGroup()), currentGroup]
     : [];
 }
 

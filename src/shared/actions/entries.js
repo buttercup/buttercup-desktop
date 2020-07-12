@@ -1,5 +1,4 @@
 import { createAction } from 'redux-actions';
-import { EntryFinder } from '../buttercup/buttercup';
 import * as entryTools from '../buttercup/entries';
 import { showDialog, showConfirmDialog } from '../../renderer/system/dialog';
 import {
@@ -9,7 +8,7 @@ import {
   getExpandedKeys
 } from '../selectors';
 import i18n from '../i18n';
-import { getSharedVaultManager, getSourceName } from '../buttercup/archive';
+import { getSharedVaultManager, getSharedSearch } from '../buttercup/archive';
 import {
   ENTRIES_LOADED,
   ENTRIES_SELECTED,
@@ -132,30 +131,29 @@ export const deleteEntry = entryId => (dispatch, getState) => {
 };
 
 export const getMatchingEntriesForSearchTerm = term => dispatch => {
+  const finder = getSharedSearch();
   const manager = getSharedVaultManager();
 
-  const unlockedSources = manager.unlockedSources;
-  const lookup = unlockedSources.reduce(
+  const lookup = manager.unlockedSources.reduce(
     (current, next) => ({
       ...current,
-      [next.workspace.archive.id]: next.id
+      [next.vault.id]: next
     }),
     {}
   );
-  const archives = unlockedSources.map(source => source.workspace.archive);
-  const finder = new EntryFinder(archives);
 
-  return Promise.all(
-    finder.search(term).map(result => {
-      const { entry } = result;
-      const archiveId = lookup[result.archive.id];
+  return Promise.resolve(
+    finder.searchByTerm(term).map(result => {
+      const vault = lookup[result.vaultID].vault;
+      const source = lookup[result.vaultID];
+      const entry = vault.findEntryByID(result.id);
 
       return {
-        sourceID: archiveId,
+        sourceID: source.id,
         groupID: entry.getGroup().id,
         entry: entry,
         path: [
-          getSourceName(archiveId),
+          source.name,
           ...entryTools
             .getParentGroups(entry.getGroup())
             .map(group => group.getTitle())

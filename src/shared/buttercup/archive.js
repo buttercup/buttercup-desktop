@@ -7,6 +7,7 @@ import './ipc-datasource';
 import ElectronStorageInterface from './storage';
 
 let __sharedManager = null;
+let __sharedSearch = null;
 
 export async function addArchiveToVaultManager(masterConfig, masterPassword) {
   const { datasource, type, path: filePath, isNew, name } = masterConfig;
@@ -145,3 +146,12 @@ export function getSourceName(sourceID) {
   }
   return source.name;
 }
+
+export const getSharedSearch = () => {
+  return __sharedSearch;
+};
+
+export const setSharedSearch = instance => {
+  __sharedSearch = instance;
+  return __sharedSearch;
+};

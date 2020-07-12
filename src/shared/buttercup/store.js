@@ -1,11 +1,12 @@
-import { getSharedVaultManager } from './archive';
+import { getSharedVaultManager, setSharedSearch } from './archive';
+import { Search } from './buttercup';
 import { resetArchivesInStore } from '../actions/archives.js';
 import { setSetting } from '../actions/settings';
 
 export function linkVaultManagerToStore(store) {
   const manager = getSharedVaultManager();
 
-  manager.on('sourcesUpdated', function __handleUpdatedSources() {
+  manager.on('sourcesUpdated', async function __handleUpdatedSources() {
     store.dispatch(setSetting('archivesLoading', false));
     store.dispatch(
       resetArchivesInStore(
@@ -19,6 +20,12 @@ export function linkVaultManagerToStore(store) {
         }))
       )
     );
+
+    const searchInstance = new Search(
+      manager.unlockedSources.map(source => source.vault)
+    );
+    setSharedSearch(searchInstance);
+    searchInstance.prepare();
   });
 
   // rehydrate
