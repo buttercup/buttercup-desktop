@@ -1,7 +1,7 @@
 {
   "name": "buttercup-desktop",
   "productName": "Buttercup",
-  "version": "1.20.1",
+  "version": "1.20.2",
   "description": "Free and Open Source password vault",
   "main": "app/dist/app.js",
   "scripts": {
@@ -163,7 +163,7 @@
     "@buttercup/google-oauth2-client": "^0.2.1",
     "@buttercup/googledrive-client": "^0.8.0",
     "@buttercup/iconographer": "^1.2.0",
-    "@buttercup/importer": "^2.0.3",
+    "@buttercup/importer": "^3.0.0",
     "@buttercup/secure-file-host": "^0.2.1",
     "@buttercup/ui": "^1.4.2",
     "@hot-loader/react-dom": "^16.8.6",
