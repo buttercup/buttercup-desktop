@@ -1,6 +1,6 @@
 {
   "name": "buttercup-desktop",
-  "version": "1.20.0",
+  "version": "1.20.1",
   "productName": "Buttercup",
   "main": "./dist/app.js",
   "description": "Free and Open Source password vault",
@@ -8,9 +8,9 @@
   "homepage": "https://buttercup.pw",
   "author": "Buttercup <info@buttercup.pw>",
   "dependencies": {
-    "@buttercup/exporter": "^1.0.0",
+    "@buttercup/exporter": "^1.1.0",
     "@buttercup/iconographer": "^1.1.1",
-    "@buttercup/importer": "^2.0.3",
+    "@buttercup/importer": "^3.0.0",
     "buttercup": "^2.16.1",
     "conf": "^1.0.0",
     "webdav": "^2.9.1",

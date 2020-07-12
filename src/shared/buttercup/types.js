@@ -14,7 +14,7 @@ export const ImportTypes = {
   BUTTERCUP_CSV: 'buttercup-csv',
   CSV: 'csv',
   KEEPASS: 'keepass',
-  KEEPASS_XML: 'keepass-xml',
+  // KEEPASS_XML: 'keepass-xml',
   LASTPASS: 'lastpass',
   ONE_PASSWORD: '1password'
 };
@@ -40,11 +40,11 @@ export const ImportTypeInfo = {
     name: 'CSV export',
     extension: 'csv'
   },
-  [ImportTypes.KEEPASS]: {
-    password: true,
-    name: 'KeePass',
-    extension: 'kdbx'
-  },
+  // [ImportTypes.KEEPASS]: {
+  //   password: true,
+  //   name: 'KeePass',
+  //   extension: 'kdbx'
+  // },
   [ImportTypes.KEEPASS_XML]: {
     password: false,
     name: 'KeePass (XML)',

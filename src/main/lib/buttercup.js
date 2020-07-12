@@ -3,7 +3,7 @@ import {
   ButtercupCSVImporter,
   ButtercupImporter,
   CSVImporter,
-  KDBXImporter,
+  // KDBXImporter,
   KeePass2XMLImporter,
   LastPassImporter,
   OnePasswordImporter
@@ -16,7 +16,7 @@ const IMPORTERS = {
   [ImportTypes.BUTTERCUP]: ButtercupImporter,
   [ImportTypes.BUTTERCUP_CSV]: ButtercupCSVImporter,
   [ImportTypes.CSV]: CSVImporter,
-  [ImportTypes.KEEPASS]: KDBXImporter,
+  // [ImportTypes.KEEPASS]: KDBXImporter,
   [ImportTypes.KEEPASS_XML]: KeePass2XMLImporter,
   [ImportTypes.LASTPASS]: LastPassImporter,
   [ImportTypes.ONE_PASSWORD]: OnePasswordImporter
