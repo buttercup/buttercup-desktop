@@ -280,7 +280,7 @@
     "tmp": "0.0.33",
     "url-loader": "^1.1.2",
     "uuid": "^2.0.3",
-    "webdav": "^2.9.1",
+    "webdav": "^2.10.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
