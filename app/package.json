@@ -13,7 +13,7 @@
     "@buttercup/importer": "^0.15.0",
     "buttercup": "^2.16.1",
     "conf": "^1.0.0",
-    "webdav": "^2.9.1",
+    "webdav": "^2.10.1",
     "zxcvbn": "^4.4.2"
   }
 }
