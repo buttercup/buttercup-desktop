@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "隐藏",
     "reveal": "显示",
-    "copy": "复制"
+    "copy": "复制",
+    "open-url-in-browser": "在浏览器中打开"
   },
   "copyable-menu": {
     "copy-to-clipboard": "复制到剪贴板",
-    "reveal-password": "显示密码"
+    "reveal-password": "显示密码",
+    "open-url-in-browser": "在浏览器中打开"
   },
   "entry": {
     "add-entry": "添加条目",

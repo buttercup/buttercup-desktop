@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "Piilota",
     "reveal": "Näytä",
-    "copy": "Kopioi"
+    "copy": "Kopioi",
+    "open-url-in-browser": "Avaa osoite selaimessa"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Kopioi Leikepöydälle",
-    "reveal-password": "Näytä Salasana"
+    "reveal-password": "Näytä Salasana",
+    "open-url-in-browser": "Avaa osoite selaimessa"
   },
   "entry": {
     "add-entry": "Lisää Merkintä",

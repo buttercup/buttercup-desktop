@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "숨기기",
     "reveal": "보이기",
-    "copy": "복사하기"
+    "copy": "복사하기",
+    "open-url-in-browser": "브라우저에서 URL 열기"
   },
   "copyable-menu": {
     "copy-to-clipboard": "클립보드에 복사",
-    "reveal-password": "비밀번호 보이기"
+    "reveal-password": "비밀번호 보이기",
+    "open-url-in-browser": "브라우저에서 URL 열기"
   },
   "entry": {
     "add-entry": "항목 추가",

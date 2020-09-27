@@ -44,10 +44,25 @@ export function readClipboard() {
   return clipboard.readText();
 }
 
+export function isUrl(url) {
+  var pattern = new RegExp(
+    '^(https?:\\/\\/)?' +
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+      '((\\d{1,3}\\.){3}\\d{1,3}))' +
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+      '(\\?[;&a-z\\d%_.~+=-]*)?' +
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  );
+
+  return !!pattern.test(url);
+}
+
 export function openUrl(url) {
-  if (!/^http(s)?:\/\//i.test(url)) {
+  if (!isUrl(url)) {
     url = `https://${url}`;
   }
+
   shell.openExternal(url);
 }
 

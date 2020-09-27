@@ -130,11 +130,13 @@
   "copyable": {
     "hide": "Ocultar",
     "reveal": "Mostrar",
-    "copy": "Copiar"
+    "copy": "Copiar",
+    "open-url-in-browser": "Abrir URL en el navegador"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copiar al portapapeles",
-    "reveal-password": "Mostrar contraseña"
+    "reveal-password": "Mostrar contraseña",
+    "open-url-in-browser": "Abrir URL en el navegador"
   },
   "entry": {
     "add-entry": "Añadir entrada",

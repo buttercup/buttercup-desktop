@@ -129,11 +129,13 @@
   "copyable": {
     "hide": "Sembunyikan",
     "reveal": "Perlihatkan",
-    "copy": "Salin"
+    "copy": "Salin",
+    "open-url-in-browser": "Buka URL di Peramban"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Salin ke Papan Klip",
-    "reveal-password": "Perlihatkan Kata Sandi"
+    "reveal-password": "Perlihatkan Kata Sandi",
+    "open-url-in-browser": "Buka URL di Peramban"
   },
   "entry": {
     "add-entry": "Tambah Entri",

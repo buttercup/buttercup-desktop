@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "مخفی",
     "reveal": "نمایش دادن",
-    "copy": "کپی"
+    "copy": "کپی",
+    "open-url-in-browser": "باز کردن لینک در مرورگر"
   },
   "copyable-menu": {
     "copy-to-clipboard": "کپی در کلیپ‌بورد",
-    "reveal-password": "نمایش رمزعبور"
+    "reveal-password": "نمایش رمزعبور",
+    "open-url-in-browser": "باز کردن لینک در مرورگر"
   },
   "entry": {
     "add-entry": "افزودن سند",

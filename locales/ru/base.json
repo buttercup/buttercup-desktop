@@ -69,11 +69,13 @@
   "copyable": {
     "hide": "Скрыть",
     "reveal": "Показать",
-    "copy": "Копировать"
+    "copy": "Копировать",
+    "open-url-in-browser": "Открыть ссылку в браузере"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Скопировать в буфер обмена",
-    "reveal-password": "Показать пароль"
+    "reveal-password": "Показать пароль",
+    "open-url-in-browser": "Открыть ссылку в браузере"
   },
   "entry": {
     "add-entry": "Добавить элемент",

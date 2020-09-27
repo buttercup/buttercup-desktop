@@ -111,11 +111,13 @@
   "copyable": {
     "hide": "Elrejtés",
     "reveal": "Megjelenítés",
-    "copy": "Másolás"
+    "copy": "Másolás",
+    "open-url-in-browser": "URL megnyitása böngészőben"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Vágólapra másolás",
-    "reveal-password": "Jelszó megjelenítése"
+    "reveal-password": "Jelszó megjelenítése",
+    "open-url-in-browser": "URL megnyitása böngészőben"
   },
   "entry": {
     "add-entry": "Új fiók",

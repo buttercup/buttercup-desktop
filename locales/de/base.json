@@ -132,11 +132,13 @@
   "copyable": {
     "hide": "Verstecken",
     "reveal": "Aufdecken",
-    "copy": "Kopieren"
+    "copy": "Kopieren",
+    "open-url-in-browser": "URL im Browser öffnen"
   },
   "copyable-menu": {
     "copy-to-clipboard": "In die Zwischenablage kopieren",
-    "reveal-password": "Passwort anzeigen"
+    "reveal-password": "Passwort anzeigen",
+    "open-url-in-browser": "URL im Browser öffnen"
   },
   "entry": {
     "add-entry": "Eintrag hinzufügen",
