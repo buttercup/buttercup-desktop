@@ -2,6 +2,8 @@ import path from 'path';
 import { clipboard, remote, shell } from 'electron';
 import ms from 'ms';
 
+const isValidUrl = require('is-valid-http-url');
+
 const __cache = {
   timer: null
 };
@@ -45,21 +47,11 @@ export function readClipboard() {
 }
 
 export function isUrl(url) {
-  var pattern = new RegExp(
-    '^(https?:\\/\\/)?' +
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
-      '((\\d{1,3}\\.){3}\\d{1,3}))' +
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
-      '(\\?[;&a-z\\d%_.~+=-]*)?' +
-      '(\\#[-a-z\\d_]*)?$',
-    'i'
-  );
-
-  return !!pattern.test(url);
+  return isValidUrl(url);
 }
 
 export function openUrl(url) {
-  if (!isUrl(url)) {
+  if (!/^http(s)?:\/\//i.test(url)) {
     url = `https://${url}`;
   }
 
