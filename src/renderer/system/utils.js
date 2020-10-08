@@ -2,13 +2,12 @@ import path from 'path';
 import { clipboard, remote, shell } from 'electron';
 import ms from 'ms';
 
+const currentWindow = remote.getCurrentWindow();
 const isValidUrl = require('is-valid-http-url');
 
 const __cache = {
   timer: null
 };
-
-const currentWindow = remote.getCurrentWindow();
 
 export function copyToClipboard(
   text,
@@ -54,7 +53,6 @@ export function openUrl(url) {
   if (!/^http(s)?:\/\//i.test(url)) {
     url = `https://${url}`;
   }
-
   shell.openExternal(url);
 }
 
