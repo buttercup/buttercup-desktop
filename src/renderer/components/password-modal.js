@@ -26,6 +26,15 @@ const Title = styled.h2`
   color: var(--gray-darker);
 `;
 
+const ArchiveName = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  font-size: 10px;
+  text-transform: lowercase;
+  font-weight: 400;
+  color: var(--gray-darker);
+`;
+
 const ErrorContainer = styled.div`
   background-color: var(--gray-light);
   border-radius: 3px;
@@ -70,7 +79,8 @@ class PasswordModal extends PureComponent {
     onCancel: PropTypes.func,
     t: PropTypes.func,
     confirmPassword: PropTypes.bool,
-    askForOldPassword: PropTypes.bool
+    askForOldPassword: PropTypes.bool,
+    selectedArchiveName: PropTypes.string
   };
 
   state = {
@@ -179,7 +189,12 @@ class PasswordModal extends PureComponent {
       oldPassword,
       oldPasswordSubmitted
     } = this.state;
-    const { t, confirmPassword, askForOldPassword } = this.props;
+    const {
+      t,
+      confirmPassword,
+      askForOldPassword,
+      selectedArchiveName
+    } = this.props;
     const mainTitleKey = confirmPassword
       ? 'password-dialog.new-password'
       : 'password-dialog.master-password';
@@ -205,6 +220,9 @@ class PasswordModal extends PureComponent {
         isOpen
         onRequestClose={loading ? () => {} : this.props.onCancel}
       >
+        <If condition={selectedArchiveName}>
+          <ArchiveName>{selectedArchiveName}</ArchiveName>
+        </If>
         <Translate
           i18nKey={
             askForOldPassword && !oldPasswordSubmitted
