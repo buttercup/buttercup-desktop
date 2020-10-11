@@ -78,7 +78,12 @@ export function loadFile(filePath, win, isNew = false) {
     isNew
   };
   if (path.extname(filePath).toLowerCase() !== '.bcup') {
-    return;
+    if (!isNew) {
+      return;
+    }
+
+    // automatically add the .bcup extension to new archive.
+    payload.path = normalizePath(filePath + '.bcup');
   }
   if (!win) {
     win = getMainWindow();
