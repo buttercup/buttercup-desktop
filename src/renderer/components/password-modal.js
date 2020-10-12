@@ -156,6 +156,7 @@ class PasswordModal extends PureComponent {
             });
             if (this._currentInputRef) {
               this._currentInputRef.focus();
+              this._currentInputRef.select();
             }
           });
       }
