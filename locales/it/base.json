@@ -116,11 +116,13 @@
   "copyable": {
     "hide": "Nascondi",
     "reveal": "Mostra",
-    "copy": "Copia"
+    "copy": "Copia",
+    "open-url-in-browser": "Apri l'URL nel Browser"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copia negli Appunti",
-    "reveal-password": "Mostra Password"
+    "reveal-password": "Mostra Password",
+    "open-url-in-browser": "Apri l'URL nel Browser"
   },
   "entry": {
     "add-entry": "Aggiungi Elemento",

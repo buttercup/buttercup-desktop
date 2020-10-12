@@ -106,11 +106,13 @@
   "copyable": {
     "hide": "Сховати",
     "reveal": "Показати",
-    "copy": "Копіювати"
+    "copy": "Копіювати",
+    "open-url-in-browser": "Відкрити посилання в браузері"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Скопіювати до буферу обміну",
-    "reveal-password": "Показати пароль"
+    "reveal-password": "Показати пароль",
+    "open-url-in-browser": "Відкрити посилання в браузері"
   },
   "entry": {
     "add-entry": "Додати елемент",

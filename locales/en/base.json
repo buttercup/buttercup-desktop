@@ -133,11 +133,13 @@
   "copyable": {
     "hide": "Hide",
     "reveal": "Reveal",
-    "copy": "Copy"
+    "copy": "Copy",
+    "open-url-in-browser": "Open URL in Browser"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copy To Clipboard",
-    "reveal-password": "Reveal Password"
+    "reveal-password": "Reveal Password",
+    "open-url-in-browser": "Open URL in Browser"
   },
   "entry": {
     "add-entry": "Add Entry",

@@ -122,11 +122,13 @@
   "copyable": {
     "hide": "Verberg",
     "reveal": "Tonen",
-    "copy": "Kopiëren"
+    "copy": "Kopiëren",
+    "open-url-in-browser": "Open URL in Browser"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Kopieer naar klembord",
-    "reveal-password": "Toon wachtwoord"
+    "reveal-password": "Toon wachtwoord",
+    "open-url-in-browser": "Open URL in Browser"
   },
   "entry": {
     "add-entry": "Voeg item toe",

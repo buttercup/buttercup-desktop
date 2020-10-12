@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "Skrýt",
     "reveal": "Odhalit",
-    "copy": "Kopírovat"
+    "copy": "Kopírovat",
+    "open-url-in-browser": "Otevřít URL v prohlížeči"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Zkopírovat do schránky",
-    "reveal-password": "Odhalit heslo"
+    "reveal-password": "Odhalit heslo",
+    "open-url-in-browser": "Otevřít URL v prohlížeči"
   },
   "entry": {
     "add-entry": "Přidat záznam",

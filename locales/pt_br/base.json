@@ -105,11 +105,13 @@
   "copyable": {
     "hide": "Esconder",
     "reveal": "Revelar",
-    "copy": "Copiar"
+    "copy": "Copiar",
+    "open-url-in-browser": "Abrir a URL no Navegador"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copiar para Área de Transferência",
-    "reveal-password": "Revelar Senha"
+    "reveal-password": "Revelar Senha",
+    "open-url-in-browser": "Abrir a URL no Navegador"
   },
   "entry": {
     "add-entry": "Adicionar Entrada",

@@ -130,11 +130,13 @@
   "copyable": {
     "hide": "Amaga",
     "reveal": "Mostra",
-    "copy": "Copia"
+    "copy": "Copia",
+    "open-url-in-browser": "Obre URL al navegador"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copia al porta-retalls",
-    "reveal-password": "Mostra contrasenya"
+    "reveal-password": "Mostra contrasenya",
+    "open-url-in-browser": "Obre URL al navegador"
   },
   "entry": {
     "add-entry": "Afegeix una entrada",

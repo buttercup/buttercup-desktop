@@ -122,11 +122,13 @@
   "copyable": {
     "hide": "Gizle",
     "reveal": "Göster",
-    "copy": "Kopyala"
+    "copy": "Kopyala",
+    "open-url-in-browser": "Tarayıcıda aç"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Panoya Kopyala",
-    "reveal-password": "Şifreyi Göster"
+    "reveal-password": "Şifreyi Göster",
+    "open-url-in-browser": "Tarayıcıda aç"
   },
   "entry": {
     "add-entry": "Kayıt Ekle",

@@ -126,11 +126,13 @@
   "copyable": {
     "hide": "Ascunde",
     "reveal": "Arată",
-    "copy": "Copiază"
+    "copy": "Copiază",
+    "open-url-in-browser": "Deschide URL in navigator"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Copiază în clipboard",
-    "reveal-password": "Arată parola"
+    "reveal-password": "Arată parola",
+    "open-url-in-browser": "Deschide URL in navigator"
   },
   "entry": {
     "add-entry": "Adaugă intrare",

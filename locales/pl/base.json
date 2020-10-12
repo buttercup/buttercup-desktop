@@ -122,11 +122,13 @@
   "copyable": {
     "hide": "Ukryj",
     "reveal": "Odsłoń",
-    "copy": "Kopiuj"
+    "copy": "Kopiuj",
+    "open-url-in-browser": "Otwórz URL w przeglądarce"
   },
   "copyable-menu": {
     "copy-to-clipboard": "Kopiuj do schowka",
-    "reveal-password": "Pokaż hasło"
+    "reveal-password": "Pokaż hasło",
+    "open-url-in-browser": "Otwórz URL w przeglądarce"
   },
   "entry": {
     "add-entry": "Dodaj wpis",

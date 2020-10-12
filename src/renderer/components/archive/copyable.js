@@ -2,12 +2,15 @@ import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Flex } from 'styled-flexbox';
-import { GoClippy as CopyIcon } from 'react-icons/go';
+import {
+  GoClippy as CopyIcon,
+  GoLinkExternal as UrlIcon
+} from 'react-icons/go';
 import { FaEye as EyeIcon, FaEyeSlash as EyeSlashIcon } from 'react-icons/fa';
 import { Button, ButtonRow, ColoredDigits } from '@buttercup/ui';
 import { translate } from 'react-i18next';
 import { showContextMenu } from '../../system/menu';
-import { copyToClipboard } from '../../system/utils';
+import { copyToClipboard, isUrl, openUrl } from '../../system/utils';
 
 const Password = styled(ColoredDigits)`
   font-family: Anonymous;
@@ -90,7 +93,18 @@ class Copyable extends PureComponent {
       });
     }
 
+    if (!isSecret && isUrl(children)) {
+      items.push({
+        label: t('copyable-menu.open-url-in-browser'),
+        click: () => this.handleOpenUrlInBrowser()
+      });
+    }
+
     showContextMenu(items);
+  }
+
+  handleOpenUrlInBrowser() {
+    openUrl(this.props.children);
   }
 
   handleReveal() {
@@ -145,6 +159,13 @@ class Copyable extends PureComponent {
                     : t('copyable.hide')
                 }
                 onClick={() => this.handleReveal()}
+              />
+            </If>
+            <If condition={!isSecret && isUrl(children)}>
+              <Button
+                icon={<UrlIcon />}
+                title={t('copyable.open-url-in-browser')}
+                onClick={() => this.handleOpenUrlInBrowser()}
               />
             </If>
             <Button
