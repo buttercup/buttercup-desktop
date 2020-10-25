@@ -47,6 +47,8 @@ export default connect(
       }
     },
     isVaultUnlocked: vaultId => (_, getState) =>
-      getArchive(getState(), vaultId).status === 'unlocked'
+      getArchive(getState(), vaultId).status === 'unlocked',
+    getSelectedArchiveName: vaultId => (_, getState) =>
+      getArchive(getState(), vaultId).name
   }
 )(Workspace, 'Workspace');
