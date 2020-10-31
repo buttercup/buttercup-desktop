@@ -33,6 +33,7 @@ const ArchiveName = styled.div`
   text-transform: lowercase;
   font-weight: 400;
   color: var(--gray-darker);
+  margin-top: -10px;
 `;
 
 const ErrorContainer = styled.div`
