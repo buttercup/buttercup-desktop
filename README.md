@@ -13,6 +13,35 @@
 
 ![image](https://user-images.githubusercontent.com/3869469/35880367-6bd58770-0b86-11e8-879f-d1f9136274a9.png)
 
+## Table of Contents
+
+- [About](#about)
+  - [Why you need software like Buttercup](#why-you-need-software-like-buttercup)
+- [Protecting your details](#protecting-your-details)
+- [Download & Install](#download--install)
+  - [Platforms and Operating Systems](#platforms-and-operating-systems)
+    - [Arch Linux](#arch-linux)
+  - [Portability](#portability)
+- [Encryption & Format](#encryption--format)
+- [Features](#features)
+  - [WebDAV](#webdav)
+  - [Importing and Exporting](#importing-and-exporting)
+- [Internationalization](#internationalization)
+  - [Submitting internationalization configurations](#submitting-internationalization-configurations)
+- [Development](#development)
+  - [Install Dependencies & Run](#install-dependencies--run)
+- [Package & Release](#package--release)
+  - [Install Dependencies](#install-dependencies)
+  - [Building libraries before releasing](#building-libraries-before-releasing)
+  - [Package](#package)
+- [Debugging](#debugging)
+- [Contributors](#contributors)
+  - [Creation](#creation)
+  - [Contributions](#contributions)
+  - [Backers](#backers)
+  - [Sponsors](#sponsors)
+- [License](#license)
+
 ## About
 
 Buttercup is a **password manager** - an assistant for helping you store all of your login credentials. Buttercup helps you keep your accounts safe and assists you when you want to log in - all you need to do is remember just one password: your **master password**.
