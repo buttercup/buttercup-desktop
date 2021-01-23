@@ -1,15 +1,18 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "strict": true,
         "esModuleInterop": true,
-        "outDir": "./build/main"
+        "outDir": "./build/main",
+        "skipLibCheck": true
     },
     "include": [
-        "source/main/**/*"
+        "./source/main/**/*"
     ],
     "exclude": [
+        "build",
+        "dist",
         "node_modules"
     ]
 }

@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/renderer",
+        "module": "commonjs",
+        "target": "es6",
+        "esModuleInterop": true,
+        "strict": true
+    },
+    "include": [
+        "./source/renderer/**/*"
+    ],
+    "exclude":[
+        "node_modules"
+    ]
+}
