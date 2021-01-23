@@ -1,6 +1,10 @@
 import { BrowserWindow, dialog } from "electron";
 
-export async function showAddFileVaultDialog(win: BrowserWindow) {
+export async function runAddFileVault(win: BrowserWindow) {
+
+}
+
+async function showAddFileVaultDialog(win: BrowserWindow) {
     const result = await dialog.showOpenDialog(win, {
         title: "Add Existing Vault",
         buttonLabel: "Add",
