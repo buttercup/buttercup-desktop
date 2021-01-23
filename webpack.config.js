@@ -2,7 +2,7 @@ const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = [{
-    entry: path.resolve(__dirname, "./source/renderer/index.ts"),
+    entry: path.resolve(__dirname, "./source/renderer/index.tsx"),
 
     module: {
         rules: [
@@ -11,7 +11,7 @@ module.exports = [{
                 use: [{
                     loader: "ts-loader",
                     options: {
-                        configFile: "tsconfig.web.json"
+                        configFile: path.resolve(__dirname, "./source/renderer/tsconfig.json")
                     }
                 }],
                 exclude: /node_modules/
@@ -31,7 +31,7 @@ module.exports = [{
     plugins: [
         new HTMLWebpackPlugin({
             filename: "index.html",
-            inject: "head",
+            inject: "body",
             template: path.resolve(__dirname, "./resources/renderer.pug")
         })
     ],
@@ -39,6 +39,8 @@ module.exports = [{
     resolve: {
         extensions: [".tsx", ".ts", ".js"]
     },
+
+    target: "web",
 
     watchOptions: {
         poll: 1000,

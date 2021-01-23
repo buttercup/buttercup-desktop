@@ -4,10 +4,12 @@
         "module": "commonjs",
         "target": "es6",
         "esModuleInterop": true,
-        "strict": false
+        "strict": false,
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true
     },
     "include": [
-        "./source/renderer/**/*"
+        "./**/*"
     ],
     "exclude":[
         "node_modules"
