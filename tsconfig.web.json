@@ -9,7 +9,8 @@
         "allowSyntheticDefaultImports": true
     },
     "include": [
-        "./**/*"
+        "./source/renderer/**/*",
+        "./source/shared/**/*"
     ],
     "exclude":[
         "node_modules"

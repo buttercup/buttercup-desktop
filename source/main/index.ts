@@ -1,5 +1,6 @@
 import path from "path";
 import { app, BrowserWindow } from "electron";
+import "./ipc";
 import { PLATFORM_MACOS } from "./symbols";
 
 function createVaultWindow() {

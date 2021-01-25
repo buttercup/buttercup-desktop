@@ -11,7 +11,7 @@ module.exports = [{
                 use: [{
                     loader: "ts-loader",
                     options: {
-                        configFile: path.resolve(__dirname, "./source/renderer/tsconfig.json")
+                        configFile: path.resolve(__dirname, "./tsconfig.web.json")
                     }
                 }],
                 exclude: /node_modules/
@@ -40,7 +40,7 @@ module.exports = [{
         extensions: [".tsx", ".ts", ".js"]
     },
 
-    target: "web",
+    target: "electron-renderer",
 
     watchOptions: {
         poll: 1000,
