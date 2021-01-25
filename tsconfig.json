@@ -4,7 +4,7 @@
         "module": "commonjs",
         "strict": false,
         "esModuleInterop": true,
-        "outDir": "./build/main",
+        "outDir": "./build",
         "skipLibCheck": true
     },
     "include": [

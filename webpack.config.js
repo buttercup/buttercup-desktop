@@ -37,6 +37,9 @@ module.exports = [{
     ],
 
     resolve: {
+        alias: {
+            buttercup: require.resolve("buttercup/web")
+        },
         extensions: [".tsx", ".ts", ".js"]
     },
 
