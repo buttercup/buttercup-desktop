@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState } from "@hookstate/core";
+import { Link } from "react-router-dom";
 import { VAULTS_LIST } from "../../state/vaults";
 import { startAddFileVault } from "../../actions/addVault";
-import { routeToVault } from "../../actions/routing";
 import { VaultSourceDescription } from "../../types";
 
 const SidebarContainer = styled.div`
@@ -36,7 +36,7 @@ export function VaultsSidebar() {
         <SidebarContainer>
             <VaultsListContainer>
                 {vaultsState.get().map(vaultItem => (
-                    <button onClick={() => routeToVault(vaultItem.id)}>{vaultItem.name}</button>
+                    <Link to={`/source/${vaultItem.id}`}>{vaultItem.name}</Link>
                 ))}
                 <BottomMenu>
                     <button onClick={() => startAddFileVault()}>Add</button>

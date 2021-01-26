@@ -11,6 +11,9 @@ export function App() {
     return (
         <Router>
             <Switch>
+                <Route path="/source/:id">
+                    <VaultManagement />
+                </Route>
                 <Route path="/">
                     <VaultManagement />
                 </Route>
