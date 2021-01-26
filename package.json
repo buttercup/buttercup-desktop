@@ -53,6 +53,6 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {
-    "buttercup": "^5.9.0"
+    "buttercup": "^5.9.1"
   }
 }
