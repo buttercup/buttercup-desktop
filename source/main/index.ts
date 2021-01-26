@@ -1,6 +1,7 @@
 import path from "path";
 import { app, BrowserWindow } from "electron";
 import "./ipc";
+import { initialise } from "./services/init";
 import { PLATFORM_MACOS } from "./symbols";
 
 function createVaultWindow() {
@@ -14,7 +15,10 @@ function createVaultWindow() {
     win.loadFile(path.resolve(__dirname, "../renderer/index.html"));
 }
 
-app.whenReady().then(createVaultWindow);
+app.whenReady().then(() => {
+    initialise();
+    createVaultWindow();
+});
 
 app.on("window-all-closed", () => {
   if (process.platform !== PLATFORM_MACOS) {
