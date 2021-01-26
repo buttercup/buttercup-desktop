@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "@hookstate/core";
 import { VAULTS_LIST } from "../../state/vaults";
 import { startAddFileVault } from "../../actions/addVault";
+import { routeToVault } from "../../actions/routing";
 import { VaultSourceDescription } from "../../types";
 
 const SidebarContainer = styled.div`
@@ -35,10 +36,10 @@ export function VaultsSidebar() {
         <SidebarContainer>
             <VaultsListContainer>
                 {vaultsState.get().map(vaultItem => (
-                    <span>{vaultItem.name}</span>
+                    <button onClick={() => routeToVault(vaultItem.id)}>{vaultItem.name}</button>
                 ))}
                 <BottomMenu>
-                    <button onClick={evt => startAddFileVault()}>Add</button>
+                    <button onClick={() => startAddFileVault()}>Add</button>
                 </BottomMenu>
             </VaultsListContainer>
         </SidebarContainer>
