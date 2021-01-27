@@ -1,5 +1,8 @@
 const path = require("path");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+const BCUPUI_ICONS_PATH = path.join(path.dirname(require.resolve("@buttercup/ui")), "icons");
 
 module.exports = [{
     entry: path.resolve(__dirname, "./source/renderer/index.tsx"),
@@ -19,6 +22,14 @@ module.exports = [{
             {
                 test: /\.pug$/,
                 use: "pug-loader"
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: "file-loader"
+            },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
@@ -33,6 +44,12 @@ module.exports = [{
             filename: "index.html",
             inject: "body",
             template: path.resolve(__dirname, "./resources/renderer.pug")
+        }),
+        new CopyWebpackPlugin({
+            patterns: [{
+                from: BCUPUI_ICONS_PATH,
+                to: "icons"
+            }]
         })
     ],
 
