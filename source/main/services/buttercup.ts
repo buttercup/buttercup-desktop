@@ -1,11 +1,17 @@
 import { BrowserWindow } from "electron";
 import {
     Credentials,
+    VaultFacade,
     VaultSource,
+    VaultSourceID,
+    VaultSourceStatus,
     VaultManager,
+    createVaultFacade,
     init
 } from "buttercup";
 import { describeSource } from "../library/sources";
+import { clearFacadeCache } from "./facades";
+import { notifyWindowsOfSourceUpdate } from "./windows";
 import { SourceType } from "../types";
 
 let __vaultManager: VaultManager;
@@ -25,6 +31,10 @@ export async function attachVaultManagerWatchers() {
     const vaultManager = getVaultManager();
     vaultManager.on("sourcesUpdated", () => {
         sendSourcesToWindows();
+        vaultManager.unlockedSources.forEach(source => {
+            source.removeListener("updated");
+            source.on("updated", () => onVaultSourceUpdated(source));
+        });
         // dispatch(setArchives(vaultManager.sources.map(source => describeSource(source))));
         // dispatch(setArchivesCount(vaultManager.sources.length));
         // dispatch(setUnlockedArchivesCount(vaultManager.unlockedSources.length));
@@ -39,6 +49,17 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    if (!source) {
+        throw new Error(`Cannot generate facade: No source found for ID: ${sourceID}`);
+    } else if (source.status !== VaultSourceStatus.Unlocked) {
+        throw new Error(`Cannot generate facade: Source is not unlocked: ${sourceID}`);
+    }
+    return createVaultFacade(source.vault);
+}
+
 function getVaultManager(): VaultManager {
     if (!__vaultManager) {
         init();
@@ -47,12 +68,16 @@ function getVaultManager(): VaultManager {
     return __vaultManager;
 }
 
+function onVaultSourceUpdated(source: VaultSource) {
+    clearFacadeCache(source.id);
+    notifyWindowsOfSourceUpdate(source.id);
+}
+
 export function sendSourcesToWindows() {
     const vaultManager = getVaultManager();
     const windows = BrowserWindow.getAllWindows();
     const sourceDescriptions = vaultManager.sources.map(source => describeSource(source));
     for (const win of windows) {
-        console.log("SENDING", JSON.stringify(sourceDescriptions));
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }
 }

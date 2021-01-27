@@ -36,7 +36,7 @@ export function VaultsSidebar() {
         <SidebarContainer>
             <VaultsListContainer>
                 {vaultsState.get().map(vaultItem => (
-                    <Link to={`/source/${vaultItem.id}`}>{vaultItem.name}</Link>
+                    <Link to={`/source/${vaultItem.id}`} key={vaultItem.id}>{vaultItem.name}</Link>
                 ))}
                 <BottomMenu>
                     <button onClick={() => startAddFileVault()}>Add</button>
