@@ -10,7 +10,8 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
     switch (payload.type) {
         case SourceType.File: {
             credentials = Credentials.fromDatasource({
-                path: payload.filename
+                path: payload.filename,
+                type: payload.type
             }, payload.masterPassword);
             name = path.basename(payload.filename).replace(/\.bcup$/i, "");
             break;

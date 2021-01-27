@@ -8,7 +8,7 @@ export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
             resolve(JSON.parse(facade));
         });
     });
-    ipcRenderer.send("get-vault-facade");
+    ipcRenderer.send("get-vault-facade", sourceID);
     const facade = await getVaultFacadePromise;
     setCurrentFacade(sourceID, facade);
 }
