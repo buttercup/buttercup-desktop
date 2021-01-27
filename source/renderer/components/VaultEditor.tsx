@@ -62,8 +62,8 @@ export function VaultEditor(props: VaultEditorProps) {
     const facade = currentFacadeState.get();
     console.log("FACADE", facade);
     return (
-        <div>
+        <>
             {facade && renderFacade(facade)}
-        </div>
+        </>
     );
 }
