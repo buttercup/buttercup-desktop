@@ -194,7 +194,7 @@
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
     "devtron": "^1.4.0",
-    "electron": "^7.1.1",
+    "electron": "^9.4.0",
     "electron-builder": "^22.7.0",
     "electron-builder-notarize": "^1.1.2",
     "electron-context-menu": "^0.10.1",
