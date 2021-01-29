@@ -1,5 +1,6 @@
-import { attachVaultManagerWatchers } from "./buttercup";
+import { attachVaultManagerWatchers, loadVaultsFromDisk } from "./buttercup";
 
-export function initialise() {
+export async function initialise() {
     attachVaultManagerWatchers();
+    await loadVaultsFromDisk()
 }

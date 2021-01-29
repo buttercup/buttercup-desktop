@@ -12,6 +12,10 @@ import {
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
+import {
+    getVaultCacheStorage,
+    getVaultStorage
+} from "./storage";
 import { SourceType } from "../types";
 
 let __vaultManager: VaultManager;
@@ -35,17 +39,6 @@ export async function attachVaultManagerWatchers() {
             source.removeListener("updated");
             source.on("updated", () => onVaultSourceUpdated(source));
         });
-        // dispatch(setArchives(vaultManager.sources.map(source => describeSource(source))));
-        // dispatch(setArchivesCount(vaultManager.sources.length));
-        // dispatch(setUnlockedArchivesCount(vaultManager.unlockedSources.length));
-        // updateFacades()
-        //     .then(() => {
-        //         __updateSearch();
-        //     })
-        //     .catch(err => {
-        //         log.error("Failed updating facades after sources updated");
-        //         console.error(err);
-        //     });
     });
 }
 
@@ -63,9 +56,16 @@ export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
 function getVaultManager(): VaultManager {
     if (!__vaultManager) {
         init();
-        __vaultManager = new VaultManager();
+        __vaultManager = new VaultManager({
+            cacheStorage: getVaultCacheStorage(),
+            sourceStorage: getVaultStorage()
+        });
     }
     return __vaultManager;
+}
+
+export async function loadVaultsFromDisk() {
+    await getVaultManager().rehydrate();
 }
 
 function onVaultSourceUpdated(source: VaultSource) {

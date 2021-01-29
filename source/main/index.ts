@@ -15,10 +15,14 @@ function createVaultWindow() {
     win.loadFile(path.resolve(__dirname, "../renderer/index.html"));
 }
 
-app.whenReady().then(() => {
-    initialise();
-    createVaultWindow();
-});
+app.whenReady()
+    .then(() => initialise())
+    .then(() => {
+        createVaultWindow();
+    })
+    .catch(err => {
+        console.error(err);
+    });
 
 app.on("window-all-closed", () => {
   if (process.platform !== PLATFORM_MACOS) {

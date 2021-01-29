@@ -59,7 +59,10 @@
     "webpack-cli": "^4.4.0"
   },
   "dependencies": {
+    "@buttercup/channel-queue": "^0.5.0",
     "buttercup": "^5.9.1",
-    "eventemitter3": "^4.0.7"
+    "env-paths": "^2.2.0",
+    "eventemitter3": "^4.0.7",
+    "pify": "^5.0.0"
   }
 }
