@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { VaultsSidebar } from "./navigation/VaultsSidebar";
 import { VaultEditor } from "./VaultEditor";
+import { PasswordPrompt } from "./PasswordPrompt";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -27,6 +28,7 @@ export function VaultManagement() {
                     <VaultEditor sourceID={id} />
                 )}
             </ContentContainer>
+            <PasswordPrompt />
         </PrimaryContainer>
     );
 }
