@@ -1,13 +1,14 @@
 import * as React from "react";
 import { useState } from "@hookstate/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
+import { VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
-import { CURRENT_FACADE, CURRENT_VAULT } from "../state/vaults";
+import { CURRENT_FACADE, CURRENT_VAULT, VAULTS_LIST } from "../state/vaults";
 import { fetchUpdatedFacade }from "../actions/facade";
 
 import "@buttercup/ui/dist/styles.css";
 
-const { useEffect } = React;
+const { useEffect, useMemo } = React;
 
 interface VaultEditorProps {
     sourceID: string;
@@ -55,12 +56,23 @@ function renderFacade(facade) {
 export function VaultEditor(props: VaultEditorProps) {
     const currentVaultState = useState(CURRENT_VAULT);
     const currentFacadeState = useState(CURRENT_FACADE);
+    const vaultListState = useState(VAULTS_LIST);
+    const vaultItem = useMemo(() => {
+        const vaultList = vaultListState.get();
+        return vaultList.find(item => item.id === props.sourceID) || null;
+    }, [vaultListState.get()]);
     useEffect(() => {
-        console.log("RUN!", props.sourceID);
-        fetchUpdatedFacade(props.sourceID);
-    }, [currentVaultState.get()]);
+        if (vaultItem && vaultItem.state === VaultSourceStatus.Unlocked) {
+            fetchUpdatedFacade(vaultItem.id);
+        }
+    }, [currentVaultState.get(), vaultItem]);
     const facade = currentFacadeState.get();
-    console.log("FACADE", facade);
+    // Optional rendering
+    if (!vaultItem) return null;
+    if (vaultItem.state !== VaultSourceStatus.Unlocked) {
+        return <span>Not unlocked</span>;
+    }
+    // Normal output
     return (
         <>
             {facade && renderFacade(facade)}
