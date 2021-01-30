@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState } from "@hookstate/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
-import { VaultSourceStatus } from "buttercup";
+import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
-import { CURRENT_FACADE, CURRENT_VAULT, VAULTS_LIST } from "../state/vaults";
+import { CURRENT_FACADE, VAULTS_LIST } from "../state/vaults";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { unlockVaultSource } from "../actions/unlockVault";
 
@@ -15,37 +15,15 @@ interface VaultEditorProps {
     sourceID: string;
 }
 
-function renderFacade(facade) {
+function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => void) {
     return (
         <ThemeProvider theme={true ? themes.dark : themes.light}>
             <VaultProvider
                 vault={facade}
-                // attachments
-                // attachmentPreviews={attachmentPreviews}
                 icons
                 iconsPath="icons"
-                // onAddAttachments={async (entryID, files) => {
-                //     const source = vaultManager.sources[0];
-                //     const entry = source.vault.findEntryByID(entryID);
-                //     for (const file of files) {
-                //         const buff = await file.arrayBuffer();
-                //         await source.attachmentManager.setAttachment(
-                //         entry,
-                //         AttachmentManager.newAttachmentID(),
-                //         buff,
-                //         file.name,
-                //         file.type || 'application/octet-stream'
-                //         );
-                //     }
-                //     setArchiveFacade(createVaultFacade(source.vault));
-                // }}
-                // onDeleteAttachment={deleteAttachment}
-                // onDownloadAttachment={downloadAttachment}
-                // onPreviewAttachment={previewAttachment}
                 onUpdate={vaultFacade => {
-                    // console.log('Saving vault...');
-                    // const source = vaultManager.sources[0];
-                    // setArchiveFacade(processVaultUpdate(source.vault, vaultFacade));
+                    onUpdate(vaultFacade);
                 }}
             >
                 <VaultUI />
@@ -55,7 +33,6 @@ function renderFacade(facade) {
 }
 
 export function VaultEditor(props: VaultEditorProps) {
-    const currentVaultState = useState(CURRENT_VAULT);
     const currentFacadeState = useState(CURRENT_FACADE);
     const vaultListState = useState(VAULTS_LIST);
     const vaultItem = useMemo(() => {
@@ -66,7 +43,7 @@ export function VaultEditor(props: VaultEditorProps) {
         if (vaultItem && vaultItem.state === VaultSourceStatus.Unlocked) {
             fetchUpdatedFacade(vaultItem.id);
         }
-    }, [currentVaultState.get(), vaultItem]);
+    }, [props.sourceID, vaultItem?.state]);
     useEffect(() => {
         // Check once on load whether or not the source is locked:
         //   If it is locked, start a prompt to unlock it..
@@ -85,7 +62,12 @@ export function VaultEditor(props: VaultEditorProps) {
     // Normal output
     return (
         <>
-            {facade && renderFacade(facade)}
+            {facade && renderFacade(
+                facade,
+                facade => {
+                    // @todo
+                }
+            )}
         </>
     );
 }
