@@ -12,6 +12,7 @@ const { useCallback } = React;
 
 const SidebarContainer = styled.div`
     width: 120px;
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
