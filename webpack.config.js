@@ -30,6 +30,10 @@ module.exports = [{
                 use: "file-loader"
             },
             {
+                test: /\.(ttf|otf|woff|woff2|eot)$/i,
+                use: "file-loader"
+            },
+            {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"]
             },
