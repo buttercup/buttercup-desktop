@@ -4,7 +4,8 @@ import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
 import { CURRENT_FACADE, CURRENT_VAULT, VAULTS_LIST } from "../state/vaults";
-import { fetchUpdatedFacade }from "../actions/facade";
+import { fetchUpdatedFacade } from "../actions/facade";
+import { unlockVaultSource } from "../actions/unlockVault";
 
 import "@buttercup/ui/dist/styles.css";
 
@@ -66,6 +67,15 @@ export function VaultEditor(props: VaultEditorProps) {
             fetchUpdatedFacade(vaultItem.id);
         }
     }, [currentVaultState.get(), vaultItem]);
+    useEffect(() => {
+        // Check once on load whether or not the source is locked:
+        //   If it is locked, start a prompt to unlock it..
+        if (vaultItem && vaultItem.state === VaultSourceStatus.Locked) {
+            setTimeout(() => {
+                unlockVaultSource(vaultItem.id);
+            }, 0);
+        }
+    }, [props.sourceID]);
     const facade = currentFacadeState.get();
     // Optional rendering
     if (!vaultItem) return null;

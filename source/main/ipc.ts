@@ -1,5 +1,6 @@
 import { BrowserWindow, ipcMain } from "electron";
 import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
+import { unlockSourceWithID } from "./actions/unlock";
 import { sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { AddVaultPayload } from "./types";
@@ -26,6 +27,15 @@ ipcMain.on("get-vault-facade", async (evt, sourceID) => {
     console.log("REQ SOURCE", sourceID);
     const facade = await getVaultFacade(sourceID);
     evt.reply("get-vault-facade:reply", JSON.stringify(facade));
+});
+
+ipcMain.on("unlock-source", async (evt, payload) => {
+    console.log("UNLOCK", payload);
+    const {
+        sourceID,
+        password
+    } = JSON.parse(payload);
+    await unlockSourceWithID(sourceID, password);
 });
 
 ipcMain.on("update-vault-windows", () => {

@@ -81,3 +81,9 @@ export function sendSourcesToWindows() {
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }
 }
+
+export async function unlockSource(sourceID: VaultSourceID, password: string) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    await source.unlock(Credentials.fromPassword(password));
+}
