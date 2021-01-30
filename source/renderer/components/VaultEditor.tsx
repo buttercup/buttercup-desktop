@@ -22,7 +22,7 @@ function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => vo
                 vault={facade}
                 icons
                 iconsPath="icons"
-                onUpdate={vaultFacade => {
+                onUpdate={(vaultFacade: VaultFacade) => {
                     onUpdate(vaultFacade);
                 }}
             >

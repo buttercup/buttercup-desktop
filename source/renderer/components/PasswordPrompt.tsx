@@ -8,7 +8,6 @@ import { SHOW_PROMPT } from "../state/password";
 const { useCallback, useMemo } = React;
 
 export function PasswordPrompt() {
-    console.log("RENDER PASSWD");
     const emitter = useMemo(getPasswordEmitter, []);
     const showPromptState = useState(SHOW_PROMPT);
     const currentPassword = useState("");
@@ -20,7 +19,11 @@ export function PasswordPrompt() {
         currentPassword.set(""); // clear
         emitter.emit("password", password);
     }, [emitter]);
-    console.log("RENDERER PASSWD, SHOW", showPromptState.get());
+    const handleKeyPress = useCallback(event => {
+        if (event.key === "Enter") {
+            submitAndClose(currentPassword.get());
+        }
+    }, []);
     return (
         <Dialog isOpen={showPromptState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>Vault Unlock</div>
@@ -36,6 +39,8 @@ export function PasswordPrompt() {
                         type="password"
                         value={currentPassword.get()}
                         onChange={evt => currentPassword.set(evt.target.value)}
+                        onKeyDown={handleKeyPress}
+                        autoFocus
                     />
                 </FormGroup>
             </div>
