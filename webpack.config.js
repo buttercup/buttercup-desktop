@@ -5,6 +5,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const BCUPUI_ICONS_PATH = path.join(path.dirname(require.resolve("@buttercup/ui")), "icons");
 
 module.exports = [{
+    devtool: false,
+
     entry: path.resolve(__dirname, "./source/renderer/index.tsx"),
 
     module: {
