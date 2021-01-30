@@ -1,25 +1,39 @@
 import path from "path";
 import { app, BrowserWindow } from "electron";
+import debounce from "debounce";
 import "./ipc";
 import { initialise } from "./services/init";
+import { getConfigValue, setConfigValue} from "./services/config";
 import { PLATFORM_MACOS } from "./symbols";
 
-function createVaultWindow() {
+async function createVaultWindow() {
+    const width = await getConfigValue<number>("windowWidth");
+    const height = await getConfigValue<number>("windowHeight");
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width,
+        height,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            spellcheck: false
         }
     })
+    win.on("resize", debounce(() => handleWindowResize(win), 750, false));
+    // win.on("resize", async () => {
+    //     const [newWidth, newHeight] = win.getSize();
+    //     console.log("SIZE", newWidth, newHeight);
+    // });
     win.loadFile(path.resolve(__dirname, "../renderer/index.html"));
+}
+
+async function handleWindowResize(win: BrowserWindow) {
+    const [newWidth, newHeight] = win.getSize();
+    await setConfigValue("windowWidth", newWidth);
+    await setConfigValue("windowHeight", newHeight);
 }
 
 app.whenReady()
     .then(() => initialise())
-    .then(() => {
-        createVaultWindow();
-    })
+    .then(() => createVaultWindow())
     .catch(err => {
         console.error(err);
     });
