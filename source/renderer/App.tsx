@@ -5,19 +5,33 @@ import {
     Route,
     Link
 } from "react-router-dom";
+import styled, { ThemeProvider } from "styled-components";
+import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
+import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
+
+const BaseContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: ${props => getThemeProp(props, "base.bgColor")};
+`;
 
 export function App() {
     return (
-        <Router>
-            <Switch>
-                <Route path="/source/:id">
-                    <VaultManagement />
-                </Route>
-                <Route path="/">
-                    <VaultManagement />
-                </Route>
-            </Switch>
-        </Router>
+        <ThemeProvider theme={true ? THEME_DARK: THEME_LIGHT}>
+            <BaseContainer className={true ? "bp3-dark" : ""}>
+                <Router>
+                    <Switch>
+                        <Route path="/source/:id">
+                            <VaultManagement />
+                        </Route>
+                        <Route path="/">
+                            <VaultManagement />
+                        </Route>
+                    </Switch>
+                </Router>
+            </BaseContainer>
+        </ThemeProvider>
     );
 }
