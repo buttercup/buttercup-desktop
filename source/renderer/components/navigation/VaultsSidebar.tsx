@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "@hookstate/core";
 import { VaultSourceStatus } from "buttercup";
 import { useHistory } from "react-router-dom";
+import { Button, Intent } from "@blueprintjs/core";
 import { VAULTS_LIST } from "../../state/vaults";
 import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
@@ -13,6 +14,7 @@ const { useCallback } = React;
 
 const SidebarContainer = styled.div`
     width: 100px;
+    padding: 10px 0px;
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
@@ -57,7 +59,13 @@ export function VaultsSidebar() {
                     />
                 ))}
                 <BottomMenu>
-                    <button onClick={() => startAddFileVault()}>Add</button>
+                    <Button
+                        icon="add"
+                        intent={Intent.PRIMARY}
+                        minimal
+                        onClick={() => startAddFileVault()}
+                        text="Add"
+                    />
                 </BottomMenu>
             </VaultsListContainer>
         </SidebarContainer>
