@@ -6,6 +6,7 @@ import {
     VaultSourceID,
     VaultSourceStatus,
     VaultManager,
+    consumeVaultFacade,
     createVaultFacade,
     init
 } from "buttercup";
@@ -71,6 +72,14 @@ export async function loadVaultsFromDisk() {
 function onVaultSourceUpdated(source: VaultSource) {
     clearFacadeCache(source.id);
     notifyWindowsOfSourceUpdate(source.id);
+}
+
+export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFacade): Promise<void> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    consumeVaultFacade(source.vault, facade);
+    await source.save();
+    // return createVaultFacade(source.vault);
 }
 
 export function sendSourcesToWindows() {

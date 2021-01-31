@@ -5,7 +5,6 @@ import { VaultSourceDescription } from "./types";
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {
     const currentSourceID = getCurrentSourceID();
-    console.log("SOURCE UPDATED", sourceID);
     if (sourceID === currentSourceID) {
         fetchUpdatedFacade(sourceID);
     }

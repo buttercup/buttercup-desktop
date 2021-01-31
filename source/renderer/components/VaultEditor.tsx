@@ -5,6 +5,7 @@ import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
 import { CURRENT_FACADE, VAULTS_LIST } from "../state/vaults";
 import { fetchUpdatedFacade } from "../actions/facade";
+import { saveVaultFacade } from "../actions/saveVault";
 
 import "@buttercup/ui/dist/styles.css";
 
@@ -22,6 +23,7 @@ function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => vo
                 icons
                 iconsPath="icons"
                 onUpdate={(vaultFacade: VaultFacade) => {
+                    console.log("UPDATE1");
                     onUpdate(vaultFacade);
                 }}
             >
@@ -55,7 +57,7 @@ export function VaultEditor(props: VaultEditorProps) {
             {facade && renderFacade(
                 facade,
                 facade => {
-                    // @todo
+                    saveVaultFacade(vaultItem.id, facade);
                 }
             )}
         </>

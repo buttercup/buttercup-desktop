@@ -1,7 +1,8 @@
+import { VaultFacade, VaultSourceID } from "buttercup";
 import { BrowserWindow, ipcMain } from "electron";
 import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
-import { sendSourcesToWindows } from "./services/buttercup";
+import { saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { AddVaultPayload } from "./types";
 
@@ -24,13 +25,23 @@ ipcMain.on("get-vault-facade", async (evt, sourceID) => {
     if (!win) {
         // @todo record error
     }
-    console.log("REQ SOURCE", sourceID);
     const facade = await getVaultFacade(sourceID);
     evt.reply("get-vault-facade:reply", JSON.stringify(facade));
 });
 
+ipcMain.on("save-vault-facade", async (evt, payload) => {
+    const { sourceID, vaultFacade } = JSON.parse(payload) as {
+        sourceID: VaultSourceID,
+        vaultFacade: VaultFacade
+    };
+    console.log("SAVE", sourceID);
+    await saveVaultFacade(sourceID, vaultFacade);
+    evt.reply("save-vault-facade:reply", JSON.stringify({
+        ok: true
+    }));
+});
+
 ipcMain.on("unlock-source", async (evt, payload) => {
-    console.log("UNLOCK", payload);
     const {
         sourceID,
         password

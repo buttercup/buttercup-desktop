@@ -5,6 +5,7 @@ import { setCurrentFacade } from "../state/vaults";
 export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
     const getVaultFacadePromise = new Promise<VaultFacade>((resolve, reject) => {
         ipcRenderer.once("get-vault-facade:reply", (evt, facade) => {
+            console.log("GOT UPDATED FACADE", facade);
             resolve(JSON.parse(facade));
         });
     });
