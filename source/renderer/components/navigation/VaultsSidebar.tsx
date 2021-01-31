@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState } from "@hookstate/core";
-import { VaultSourceID, VaultSourceStatus } from "buttercup";
+import { VaultSourceStatus } from "buttercup";
 import { useHistory } from "react-router-dom";
-import { CURRENT_VAULT, VAULTS_LIST } from "../../state/vaults";
+import { VAULTS_LIST } from "../../state/vaults";
 import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { VaultsSidebarButton } from "./VaultsSidebarButton";
@@ -38,15 +38,11 @@ const BottomMenu = styled.div`
 
 export function VaultsSidebar() {
     const history = useHistory();
-    // const currentVaultState = useState<VaultSourceID>(CURRENT_VAULT);
     const vaultsState = useState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const handleLinkClick = useCallback((vaultItem: VaultSourceDescription) => {
         if (vaultItem.state === VaultSourceStatus.Locked) {
             unlockVaultSource(vaultItem.id);
         }
-        // if (currentVaultState.get() === vaultItem.id) {
-        //     event.preventDefault();
-        // }
     }, []);
     return (
         <SidebarContainer>
@@ -59,13 +55,6 @@ export function VaultsSidebar() {
                         }}
                         vault={vaultItem}
                     />
-                    // <Link
-                    //     to={`/source/${vaultItem.id}`}
-                    //     key={vaultItem.id}
-                    //     onClick={evt => handleLinkClick(evt, vaultItem)}
-                    // >
-                    //     {vaultItem.name}
-                    // </Link>
                 ))}
                 <BottomMenu>
                     <button onClick={() => startAddFileVault()}>Add</button>
