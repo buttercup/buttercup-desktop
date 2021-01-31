@@ -79,7 +79,6 @@ export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFaca
     const source = vaultManager.getSourceForID(sourceID);
     consumeVaultFacade(source.vault, facade);
     await source.save();
-    // return createVaultFacade(source.vault);
 }
 
 export function sendSourcesToWindows() {

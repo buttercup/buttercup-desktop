@@ -34,7 +34,6 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
         sourceID: VaultSourceID,
         vaultFacade: VaultFacade
     };
-    console.log("SAVE", sourceID);
     await saveVaultFacade(sourceID, vaultFacade);
     evt.reply("save-vault-facade:reply", JSON.stringify({
         ok: true

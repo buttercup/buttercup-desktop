@@ -23,7 +23,6 @@ function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => vo
                 icons
                 iconsPath="icons"
                 onUpdate={(vaultFacade: VaultFacade) => {
-                    console.log("UPDATE1");
                     onUpdate(vaultFacade);
                 }}
             >
