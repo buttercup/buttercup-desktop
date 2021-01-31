@@ -4,6 +4,7 @@ import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
 import { CURRENT_FACADE, VAULTS_LIST } from "../state/vaults";
+import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
 
@@ -15,7 +16,7 @@ interface VaultEditorProps {
     sourceID: string;
 }
 
-function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => void) {
+function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => void, isSaving: boolean = false) {
     return (
         <ThemeProvider theme={true ? themes.dark : themes.light}>
             <VaultProvider
@@ -25,6 +26,7 @@ function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => vo
                 onUpdate={(vaultFacade: VaultFacade) => {
                     onUpdate(vaultFacade);
                 }}
+                readOnly={isSaving}
             >
                 <VaultUI />
             </VaultProvider>
@@ -35,6 +37,7 @@ function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => vo
 export function VaultEditor(props: VaultEditorProps) {
     const currentFacadeState = useState(CURRENT_FACADE);
     const vaultListState = useState(VAULTS_LIST);
+    const savingState = useState(SAVING);
     const vaultItem = useMemo(() => {
         const vaultList = vaultListState.get();
         return vaultList.find(item => item.id === props.sourceID) || null;
@@ -57,7 +60,8 @@ export function VaultEditor(props: VaultEditorProps) {
                 facade,
                 facade => {
                     saveVaultFacade(vaultItem.id, facade);
-                }
+                },
+                savingState.get()
             )}
         </>
     );
