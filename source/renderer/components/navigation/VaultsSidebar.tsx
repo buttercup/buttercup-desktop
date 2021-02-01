@@ -5,7 +5,8 @@ import { VaultSourceStatus } from "buttercup";
 import { useHistory } from "react-router-dom";
 import { Button, Intent } from "@blueprintjs/core";
 import { VAULTS_LIST } from "../../state/vaults";
-import { startAddFileVault } from "../../actions/addVault";
+import { showAddVaultMenu } from "../../state/addVault";
+// import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { VaultsSidebarButton } from "./VaultsSidebarButton";
 import { VaultSourceDescription } from "../../types";
@@ -63,7 +64,7 @@ export function VaultsSidebar() {
                         icon="add"
                         intent={Intent.PRIMARY}
                         minimal
-                        onClick={() => startAddFileVault()}
+                        onClick={() => showAddVaultMenu(true)}
                         text="Add"
                     />
                 </BottomMenu>

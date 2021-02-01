@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { VaultsSidebar } from "./navigation/VaultsSidebar";
 import { VaultEditor } from "./VaultEditor";
 import { PasswordPrompt } from "./PasswordPrompt";
+import { AddVaultMenu } from "./AddVaultMenu";
 import { Notifications } from "./Notifications";
 import { ErrorBoundary } from "./ErrorBoundary";
 
@@ -33,6 +34,7 @@ export function VaultManagement() {
                 )}
             </ContentContainer>
             <PasswordPrompt />
+            <AddVaultMenu />
             <Notifications />
         </PrimaryContainer>
     );
