@@ -2,13 +2,13 @@ import * as React from "react";
 import {
     HashRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
+import { LoadingScreen } from "./components/navigation/LoadingScreen";
 
 const BaseContainer = styled.div`
     width: 100%;
@@ -31,6 +31,7 @@ export function App() {
                         </Route>
                     </Switch>
                 </Router>
+                <LoadingScreen />
             </BaseContainer>
         </ThemeProvider>
     );

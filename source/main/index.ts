@@ -13,15 +13,12 @@ async function createVaultWindow() {
         width,
         height,
         webPreferences: {
+            enableRemoteModule: true,
             nodeIntegration: true,
             spellcheck: false
         }
     })
     win.on("resize", debounce(() => handleWindowResize(win), 750, false));
-    // win.on("resize", async () => {
-    //     const [newWidth, newHeight] = win.getSize();
-    //     console.log("SIZE", newWidth, newHeight);
-    // });
     win.loadFile(path.resolve(__dirname, "../renderer/index.html"));
 }
 
@@ -31,12 +28,10 @@ async function handleWindowResize(win: BrowserWindow) {
     await setConfigValue("windowHeight", newHeight);
 }
 
-app.whenReady()
-    .then(() => initialise())
-    .then(() => createVaultWindow())
-    .catch(err => {
-        console.error(err);
-    });
+const lock = app.requestSingleInstanceLock();
+if (!lock) {
+    app.quit();
+}
 
 app.on("window-all-closed", () => {
   if (process.platform !== PLATFORM_MACOS) {
@@ -49,3 +44,14 @@ app.on("activate", () => {
         createVaultWindow();
     }
 });
+
+app.on("second-instance", (event, args) => {
+    // @todo handle second instance
+});
+
+app.whenReady()
+    .then(() => initialise())
+    .then(() => createVaultWindow())
+    .catch(err => {
+        console.error(err);
+    });

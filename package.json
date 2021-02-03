@@ -62,11 +62,15 @@
   },
   "dependencies": {
     "@buttercup/channel-queue": "^0.5.0",
+    "@buttercup/dropbox-client": "^0.5.0",
+    "@buttercup/google-oauth2-client": "^0.3.0",
+    "@buttercup/googledrive-client": "^1.2.0",
     "buttercup": "^5.9.1",
     "debounce": "^1.2.0",
     "env-paths": "^2.2.0",
     "eventemitter3": "^4.0.7",
     "nested-property": "^4.0.0",
-    "pify": "^5.0.0"
+    "pify": "^5.0.0",
+    "webdav": "^4.0.0"
   }
 }

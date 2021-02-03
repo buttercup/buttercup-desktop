@@ -52,6 +52,7 @@ export function VaultsSidebar() {
             <VaultsListContainer>
                 {vaultsState.get().map(vaultItem => (
                     <VaultsSidebarButton
+                        key={vaultItem.id}
                         onClick={() => {
                             handleLinkClick(vaultItem);
                             history.push(`/source/${vaultItem.id}`);
