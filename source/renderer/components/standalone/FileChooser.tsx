@@ -1,9 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Icon } from "@blueprintjs/core";
+import { Icon, IPanelProps, PanelStack } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { useState } from "@hookstate/core";
 import { FSItem } from "../../library/fsInterface";
+
+interface FileChooserPanelProps {
+    items: Array<FSItem>;
+    // onEnterDirectory: (dirName: string) => void;
+    path: string;
+}
 
 interface FileChooserProps {
     callback: (path: string | null) => void;
@@ -12,26 +18,19 @@ interface FileChooserProps {
 
 const FOLDER_COLOUR = "#F7D774";
 const ICON_SIZE = 34;
+const ITEM_WIDTH = 75;
 
-const Chooser = styled.div`
+const CHOOSER_WIDTH = ITEM_WIDTH * 6 + 10;
+
+const Chooser = styled(PanelStack)`
     width: 100%;
-    min-width: 450px;
+    min-width: ${CHOOSER_WIDTH}px;
     height: 100%;
     min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-items: space-between;
     align-items: stretch;
-`;
-const ChooserTitle = styled.div`
-    height: 28px;
-    flex: 0 0 auto;
-    text-align: center;
-    font-weight: bold;
-    font-size: 110%;
-    padding-top: 4px;
-    padding-bottom: 2px;
-    margin-bottom: 8px;
 `;
 const ChooserContents = styled.div`
     flex: 10 10 auto;
@@ -40,11 +39,12 @@ const ChooserContents = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     flex-wrap: wrap;
+    padding: 4px;
 `;
 const ChooserItem = styled.div`
-    width: 75px;
-    max-width: 75px;
-    min-width: 75px;
+    width: ${ITEM_WIDTH}px;
+    max-width: ${ITEM_WIDTH}px;
+    min-width: ${ITEM_WIDTH}px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -59,8 +59,7 @@ const ChooserItem = styled.div`
 `;
 const ChooserItemText = styled.div`
     text-align: center;
-    color: #333;
-    font-weight: 550;
+    font-weight: 450;
     font-size: 80%;
     overflow-wrap: break-word;
     width: 80%;
@@ -68,12 +67,9 @@ const ChooserItemText = styled.div`
     user-select: none;
 `;
 
-export function FileChooser(props: FileChooserProps) {
-    const currentPath = useState("/");
-    const currentItems = useState([] as Array<FSItem>);
-    return (
-        <Chooser>
-            <ChooserTitle>{currentPath.get()}</ChooserTitle>
+class FileChooserPanel extends React.Component<IPanelProps & FileChooserPanelProps> {
+    render() {
+        return (
             <ChooserContents>
                 <ChooserItem>
                     <Icon icon="folder-close" iconSize={ICON_SIZE} color={FOLDER_COLOUR} />
@@ -112,6 +108,17 @@ export function FileChooser(props: FileChooserProps) {
                     <ChooserItemText>dump.rdb</ChooserItemText>
                 </ChooserItem>
             </ChooserContents>
-        </Chooser>
+        );
+    }
+}
+
+export function FileChooser(props: FileChooserProps) {
+    const currentPath = useState("/");
+    const currentItems = useState([] as Array<FSItem>);
+    return (
+        <Chooser initialPanel={{
+            component: FileChooserPanel,
+            title: "/"
+        }} />
     );
 }
