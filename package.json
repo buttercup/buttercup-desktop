@@ -63,6 +63,7 @@
   "dependencies": {
     "@buttercup/channel-queue": "^0.5.0",
     "@buttercup/dropbox-client": "^0.5.0",
+    "@buttercup/file-interface": "^0.3.2",
     "@buttercup/google-oauth2-client": "^0.3.0",
     "@buttercup/googledrive-client": "^1.2.0",
     "buttercup": "^5.9.1",

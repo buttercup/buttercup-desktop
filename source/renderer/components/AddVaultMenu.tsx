@@ -7,6 +7,9 @@ import { setBusy } from "../state/app";
 import { authDropbox } from "../actions/dropbox";
 import { SourceType } from "../types";
 
+// @todo remove
+import { FileChooser } from "./standalone/FileChooser";
+
 const ICON_BUTTERCUP = require("../../../resources/images/buttercup-file-256.png").default;
 const ICON_DROPBOX = require("../../../resources/images/dropbox-256.png").default;
 const ICON_GOOGLEDRIVE = require("../../../resources/images/googledrive-256.png").default;
@@ -121,7 +124,8 @@ export function AddVaultMenu() {
     // Pages
     const pageType = () => (
         <>
-            <p>Choose a vault type to add:</p>
+            <FileChooser callback={() => {}} fsInterface={null} />
+            {/* <p>Choose a vault type to add:</p>
             <TypeIcons>
                 {VAULT_TYPES.map(vaultType => (
                     <TypeIcon key={vaultType.type} interactive elevation={Elevation.TWO} onClick={() => handleVaultTypeClick(vaultType.type)}>
@@ -129,7 +133,7 @@ export function AddVaultMenu() {
                         <TypeText>{vaultType.title}</TypeText>
                     </TypeIcon>
                 ))}
-            </TypeIcons>
+            </TypeIcons> */}
         </>
     );
     const pageAuth = () => (
