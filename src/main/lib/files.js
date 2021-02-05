@@ -60,7 +60,7 @@ function showSaveDialog(focusedWindow) {
     })
     .then(({ filePath }) => {
       if (typeof filePath === 'string' && filePath.length > 0) {
-        if (path.extname(filePath).toLowerCase() != '.bcup') {
+        if (path.extname(filePath).toLowerCase() !== '.bcup') {
           filePath += '.bcup';
         }
         loadFile(filePath, focusedWindow, true);
