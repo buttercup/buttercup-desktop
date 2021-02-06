@@ -81,13 +81,6 @@ const ChooserItemText = styled.div`
 `;
 
 class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & FileChooserPanelProps> {
-    // componentDidUpdate(prevProps) {
-    //     console.log("DID UPDATE", {
-    //         props: this.props,
-    //         prevProps
-    //     });
-    // }
-
     handleItemClick(evt, item: FSItem) {
         evt.preventDefault();
         if (item.type === "directory") {
@@ -112,42 +105,6 @@ class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & 
                         <ChooserItemText>{item.name}</ChooserItemText>
                     </ChooserItem>
                 )) : null}
-                {/* <ChooserItem>
-                    <Icon icon="folder-close" iconSize={ICON_SIZE} color={FOLDER_COLOUR} />
-                    <ChooserItemText>My Folder</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="folder-close" iconSize={ICON_SIZE} color={FOLDER_COLOUR} />
-                    <ChooserItemText>Another</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="folder-close" iconSize={ICON_SIZE} color={FOLDER_COLOUR} />
-                    <ChooserItemText>This is a long name</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>example.doc</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>taxes.xlsx</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>Funny stuff.url</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>Stupid-really-long-web-clip.gif</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>vault.bcup</ChooserItemText>
-                </ChooserItem>
-                <ChooserItem>
-                    <Icon icon="document" iconSize={ICON_SIZE} />
-                    <ChooserItemText>dump.rdb</ChooserItemText>
-                </ChooserItem> */}
             </ChooserContents>
         );
     }
