@@ -1,16 +1,22 @@
 import * as React from "react";
 import styled from "styled-components";
 import { basename } from "path-posix";
-import { Icon, IPanel, IPanelProps, IPanelStackProps, PanelStack } from "@blueprintjs/core";
+import { Icon, IPanel, IPanelProps, IPanelStackProps, PanelStack, Spinner } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
-import { State, useState } from "@hookstate/core";
+// import { State, useState } from "@hookstate/core";
 import { FSItem } from "../../library/fsInterface";
 
-const { useCallback, useEffect } = React;
+const { useCallback, useEffect, useState } = React;
+
+interface DirectoryStatus {
+    path: string;
+    loading: boolean;
+    contents: Array<FSItem>;
+}
 
 interface FileChooserPanelProps {
     // items: Array<FSItem>;
-    items: Array<FSItem>;
+    status: DirectoryStatus;
     onEnterDirectory: (path: string) => void;
     path: string;
     // pathsLoading: State<Array<string>>;
@@ -90,16 +96,13 @@ class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & 
     }
 
     render() {
-        const { items } = this.props;
-        // const items = []
-        // const loadedPaths = this.props.pathsLoaded.get();
-        // const items = Array.isArray(loadedPaths[this.props.path])
-        //     ? loadedPaths[this.props.path]
-        //     : [];
-        console.log("ITEMS", items);
+        const { contents, loading } = this.props.status;
         return (
             <ChooserContents>
-                {items.map(item => (
+                {loading && (
+                    <Spinner />
+                )}
+                {!loading ? contents.map(item => (
                     <ChooserItem key={item.identifier} onClick={evt => this.handleItemClick(evt, item)}>
                         <Icon
                             icon={item.type === "directory" ? "folder-close" : "document"}
@@ -108,7 +111,7 @@ class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & 
                         />
                         <ChooserItemText>{item.name}</ChooserItemText>
                     </ChooserItem>
-                ))}
+                )) : null}
                 {/* <ChooserItem>
                     <Icon icon="folder-close" iconSize={ICON_SIZE} color={FOLDER_COLOUR} />
                     <ChooserItemText>My Folder</ChooserItemText>
@@ -151,78 +154,90 @@ class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & 
 }
 
 export function FileChooser(props: FileChooserProps) {
-    const pathsLoading = useState([] as Array<string>);
-    const pathsLoaded = useState({} as Record<string, Array<FSItem>>);
-    const pathStack = useState([] as Array<IPanel>);
-    const fetchPath = useCallback(async path => {
-        pathsLoading.set([
-            ...pathsLoading.get(),
-            path
-        ]);
+    const [paths, setPaths] = useState<Record<string, DirectoryStatus>>({});
+    const [pathStack, setPathStack] = useState<Array<IPanel>>([]);
+    const [addPath, setAddPath] = useState(null);
+    const fetchPath = useCallback(async (path, status = null) => {
+        const thisStatus = status || {
+            path,
+            loading: true,
+            contents: []
+        };
+        setPaths({
+            ...paths,
+            [path]: thisStatus
+        });
         const results = await props.fsInterface.getDirectoryContents({
             identifier: path,
             name: basename(path)
         });
-        pathsLoaded.set({
-            ...pathsLoaded.get(),
-            [path]: results
+        setPaths({
+            ...paths,
+            [path]: {
+                ...thisStatus,
+                loading: false,
+                contents: results
+            }
         });
-        pathsLoading.set(pathsLoading.get().filter(item => item !== path));
-    }, [pathsLoading, pathsLoaded]);
+    }, [paths]);
     const handleEnterDirectory = useCallback(path => {
-        if (pathsLoaded.get().hasOwnProperty(path) || pathsLoading.get().includes(path)) return;
+        if (paths[path]) return;
         fetchPath(path);
-    }, [fetchPath, pathsLoaded, pathsLoading]);
+        setAddPath(path);
+    }, [fetchPath, pathStack]);
+    const handlePanelClose = useCallback(() => {
+        const newStack = [...pathStack];
+        newStack.pop();
+        setPathStack(newStack);
+    }, [pathStack]);
     useEffect(() => {
-        // pathStack.set([{
-        //     component: FileChooserPanel,
-        //     title: "/",
-        //     props: {
-        //         items: [],
-        //         onEnterDirectory: handleEnterDirectory,
-        //         path: "/"
-        //     }
-        // }]);
         fetchPath("/");
     }, []);
     useEffect(() => {
-        const panelItems = [...pathStack.get()];
-        for (const pi in panelItems) {
-            const panelProps = panelItems[pi].props as FileChooserPanelProps;
-            panelItems[pi] = {
-                ...panelItems[pi],
-                props: {
-                    ...panelProps,
-                    items: pathsLoading.get()[panelProps.path] || !pathsLoaded.get()[panelProps.path]
-                        ? []
-                        : [...pathsLoaded.get()[panelProps.path]]
-                }
-            };
+        if (Object.keys(paths).length === 0) {
+            setPathStack([]);
+            return;
         }
-        console.log("SET!", [...panelItems]);
-        pathStack.set(panelItems);
-    }, [pathsLoaded.get(), pathsLoading.get()]);
-    if (pathStack.get().length === 0) return null;
+        if (pathStack.length === 0) {
+            setPathStack([{
+                component: FileChooserPanel,
+                title: "/",
+                props: {
+                    status: paths["/"],
+                    onEnterDirectory: handleEnterDirectory,
+                    path: "/"
+                }
+            }]);
+            return;
+        }
+        console.log("ADD STACK", [...pathStack], paths);
+        const updatedStack: Array<IPanel> = pathStack.map(previousStack => ({
+            ...previousStack,
+            props: {
+                ...previousStack.props,
+                status: paths[(previousStack.props as FileChooserPanelProps).path]
+            }
+        }));
+        if (addPath) {
+            updatedStack.push({
+                component: FileChooserPanel,
+                title: addPath,
+                props: {
+                    status: paths[addPath],
+                    onEnterDirectory: handleEnterDirectory,
+                    path: addPath
+                }
+            });
+            setAddPath(null);
+        }
+        setPathStack(updatedStack);
+    }, [paths, addPath]);
+    if (pathStack.length === 0) return null;
     return (
         <Chooser
-            stack={pathStack.get()}
+            onClose={handlePanelClose}
+            showPanelHeader
+            stack={pathStack}
         />
     );
-    // console.log(pathsLoaded.get());
-    // return (
-    //     <Chooser initialPanel={{
-    //         component: FileChooserPanel,
-    //         title: "/",
-    //         props: {
-    //             // items: Array.isArray(pathsLoaded.get()["/"]) ? [...pathsLoaded.get()["/"]] : [],
-    //             onEnterDirectory: path => {
-    //                 if (pathsLoaded.get().hasOwnProperty(path) || pathsLoading.get().includes(path)) return;
-    //                 fetchPath(path);
-    //             },
-    //             path: "/",
-    //             pathsLoading,
-    //             pathsLoaded
-    //         }
-    //     }} />
-    // );
 }
