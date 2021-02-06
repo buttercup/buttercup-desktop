@@ -46,6 +46,7 @@
     "html-webpack-plugin": "^4.5.1",
     "node-sass": "^5.0.0",
     "npm-run-all": "^4.1.5",
+    "path-posix": "^1.0.0",
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
     "react": "^17.0.1",

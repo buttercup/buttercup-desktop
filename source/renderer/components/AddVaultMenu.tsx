@@ -1,13 +1,13 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button, Card, Classes, Dialog, Elevation, Spinner } from "@blueprintjs/core";
+import { Button, Card, Classes, Dialog, Elevation } from "@blueprintjs/core";
 import { useState } from "@hookstate/core";
+import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
 import { authDropbox } from "../actions/dropbox";
+import { getFSInstance } from "../library/fsInterface";
 import { SourceType } from "../types";
-
-// @todo remove
 import { FileChooser } from "./standalone/FileChooser";
 
 const ICON_BUTTERCUP = require("../../../resources/images/buttercup-file-256.png").default;
@@ -85,22 +85,26 @@ const TypeText = styled.div`
 `;
 
 export function AddVaultMenu() {
-    const showAddVaultState = useState(SHOW_ADD_VAULT);
+    const showAddVault = useState(SHOW_ADD_VAULT);
     const previousShowAddVault = useState(false);
     const currentPage = useState(PAGE_TYPE);
     const selectedType = useState<SourceType>(null);
     const datasourcePayload = useState<{ [key: string]: any }>({});
+    const fsInstance = useState<FileSystemInterface>(null);
     useEffect(() => {
-        const newValue = showAddVaultState.get();
+        const newValue = showAddVault.get();
         if (previousShowAddVault.get() !== newValue) {
-            previousShowAddVault.set(showAddVaultState.get());
+            previousShowAddVault.set(showAddVault.get());
             if (newValue) {
                 currentPage.set(PAGE_TYPE);
             }
         }
-    }, [showAddVaultState.get()]);
+    }, [showAddVault.get()]);
     const close = useCallback(() => {
-        showAddVaultState.set(false);
+        showAddVault.set(false);
+        fsInstance.set(null);
+        currentPage.set(PAGE_TYPE);
+        datasourcePayload.set({});
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         selectedType.set(type);
@@ -108,7 +112,6 @@ export function AddVaultMenu() {
         if (type === SourceType.Dropbox) {
             setBusy(true);
             const token = await authDropbox();
-            console.log("GOT TOKEN", token);
             setBusy(false);
             if (!token) {
                 close();
@@ -119,13 +122,14 @@ export function AddVaultMenu() {
                 type,
                 token
             });
+            fsInstance.set(getFSInstance(type, { token }));
+            currentPage.set(PAGE_CHOOSE);
         }
     }, []);
     // Pages
     const pageType = () => (
         <>
-            <FileChooser callback={() => {}} fsInterface={null} />
-            {/* <p>Choose a vault type to add:</p>
+            <p>Choose a vault type to add:</p>
             <TypeIcons>
                 {VAULT_TYPES.map(vaultType => (
                     <TypeIcon key={vaultType.type} interactive elevation={Elevation.TWO} onClick={() => handleVaultTypeClick(vaultType.type)}>
@@ -133,7 +137,7 @@ export function AddVaultMenu() {
                         <TypeText>{vaultType.title}</TypeText>
                     </TypeIcon>
                 ))}
-            </TypeIcons> */}
+            </TypeIcons>
         </>
     );
     const pageAuth = () => (
@@ -145,13 +149,20 @@ export function AddVaultMenu() {
             )}
         </>
     );
+    const pageChoose = () => (
+        <>
+            <p>Choose a vault file or create a new vault:</p>
+            <FileChooser callback={() => {}} fsInterface={fsInstance.get()} />
+        </>
+    );
     // Output
     return (
-        <DialogFreeWidth isOpen={showAddVaultState.get()} onClose={close}>
+        <DialogFreeWidth isOpen={showAddVault.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>Add Vault</div>
             <div className={Classes.DIALOG_BODY}>
                 {currentPage.get() === PAGE_TYPE && pageType()}
                 {currentPage.get() === PAGE_AUTH && pageAuth()}
+                {currentPage.get() === PAGE_CHOOSE && pageChoose()}
             </div>
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
