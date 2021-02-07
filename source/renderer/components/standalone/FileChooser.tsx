@@ -1,9 +1,11 @@
 import * as React from "react";
 import styled from "styled-components";
 import { basename } from "path-posix";
-import { Alignment, Breadcrumb, Breadcrumbs, Button, IBreadcrumbProps, Icon, Navbar, Spinner } from "@blueprintjs/core";
+import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, IBreadcrumbProps, Icon, Navbar, Spinner } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { FSItem } from "../../library/fsInterface";
+
+const ICON_BUTTERCUP = require("../../../../resources/images/buttercup-256.png").default;
 
 const { useCallback, useEffect, useState } = React;
 
@@ -22,11 +24,13 @@ const FOLDER_COLOUR = "#F7D774";
 const ICON_SIZE = 34;
 const ITEM_WIDTH = 75;
 
-const CHOOSER_WIDTH = ITEM_WIDTH * 8 + 10;
+const CHOOSER_MAX_WIDTH = ITEM_WIDTH * 8 + 10;
+const CHOOSER_MIN_WIDTH = ITEM_WIDTH * 6 + 10;
 
 const Chooser = styled.div`
     width: 100%;
-    min-width: ${CHOOSER_WIDTH}px;
+    min-width: ${CHOOSER_MIN_WIDTH}px;
+    max-width: ${CHOOSER_MAX_WIDTH}px;
     height: 100%;
     min-height: 250px;
     display: flex;
@@ -34,7 +38,8 @@ const Chooser = styled.div`
     justify-items: space-between;
     align-items: stretch;
 `;
-const ChooserContents = styled.div`
+const ChooserContents = styled(Card)`
+    margin-top: 6px;
     flex: 10 10 auto;
     display: flex;
     flex-direction: row;
@@ -42,6 +47,8 @@ const ChooserContents = styled.div`
     align-items: flex-start;
     flex-wrap: wrap;
     padding: 4px;
+    max-height: 60vh;
+    overflow-y: scroll;
 `;
 const ChooserItem = styled.div`
     width: ${ITEM_WIDTH}px;
@@ -67,6 +74,10 @@ const ChooserItemText = styled.div`
     width: 80%;
     margin-top: 4px;
     user-select: none;
+`;
+const IconImg = styled.img`
+    width: ${ICON_SIZE}px;
+    height: ${ICON_SIZE}px;
 `;
 
 export function FileChooser(props: FileChooserProps) {
@@ -142,7 +153,13 @@ export function FileChooser(props: FileChooserProps) {
                 {!loading && currentItems.map(item => (
                     <ChooserItem key={item.identifier} onClick={() => handleItemClick(item)}>
                         <Icon
-                            icon={item.type === "directory" ? "folder-close" : "document"}
+                            icon={
+                                item.type === "directory"
+                                    ? "folder-close"
+                                    : /\.bcup$/i.test(item.name)
+                                        ? <IconImg src={ICON_BUTTERCUP} />
+                                        : "document"
+                            }
                             iconSize={ICON_SIZE}
                             color={item.type === "directory" ? FOLDER_COLOUR : FILE_COLOUR}
                         />
