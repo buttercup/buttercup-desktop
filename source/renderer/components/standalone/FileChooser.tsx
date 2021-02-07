@@ -113,82 +113,193 @@ class FileChooserPanel extends React.Component<IPanelProps & IPanelStackProps & 
 export function FileChooser(props: FileChooserProps) {
     const [paths, setPaths] = useState<Record<string, DirectoryStatus>>({});
     const [pathStack, setPathStack] = useState<Array<IPanel>>([]);
-    const [addPath, setAddPath] = useState(null);
-    const fetchPath = useCallback(async (path, status = null) => {
-        const thisStatus = status || {
-            path,
-            loading: true,
-            contents: []
-        };
-        setPaths({
-            ...paths,
-            [path]: thisStatus
-        });
-        const results = await props.fsInterface.getDirectoryContents({
-            identifier: path,
-            name: basename(path)
-        });
-        setPaths({
-            ...paths,
-            [path]: {
-                ...thisStatus,
+
+
+    const addNewPath = useCallback(async path => {
+        let _paths = paths,
+            targetPathStatus;
+        const hasPath = !!paths[path];
+        if (hasPath) {
+            targetPathStatus = paths[path];
+        } else {
+            targetPathStatus = {
+                path,
+                loading: true,
+                contents: []
+            };
+            _paths = {
+                ...paths,
+                [path]: targetPathStatus
+            };
+            // setPaths(_paths);
+            // return;
+        }
+        if (hasPath) {
+            setPathStack(pathStack.map(pathStackItem => {
+                if ((pathStackItem.props as FileChooserPanelProps).path !== path) return pathStackItem;
+                return {
+                    ...pathStackItem,
+                    props: {
+                        ...pathStackItem.props,
+                        status: targetPathStatus
+                    }
+                };
+            }));
+            // setPathStack([
+            //     ...pathStack,
+            //     {
+            //         component: FileChooserPanel,
+            //         title: path,
+            //         props: {
+            //             status: targetPathStatus,
+            //             onEnterDirectory: handleEnterDirectory,
+            //             path
+            //         }
+            //     }
+            // ]);
+        } else {
+            const results = await props.fsInterface.getDirectoryContents({
+                identifier: path,
+                name: basename(path)
+            });
+            const newStatus = {
+                ...targetPathStatus,
                 loading: false,
                 contents: results
-            }
-        });
-    }, [paths]);
+            };
+            setPaths({
+                ..._paths,
+                [path]: newStatus
+            });
+            setPathStack([
+                ...pathStack,
+                {
+                    component: FileChooserPanel,
+                    title: path,
+                    props: {
+                        status: newStatus,
+                        onEnterDirectory: handleEnterDirectory,
+                        path
+                    }
+                }
+            ]);
+        }
+    }, [paths, pathStack]);
     const handleEnterDirectory = useCallback(path => {
-        if (paths[path]) return;
-        fetchPath(path);
-        setAddPath(path);
-    }, [fetchPath, pathStack]);
+        addNewPath(path);
+    }, [addNewPath, pathStack, paths]);
     const handlePanelClose = useCallback(() => {
         const newStack = [...pathStack];
         newStack.pop();
         setPathStack(newStack);
     }, [pathStack]);
+    // useEffect(() => {
+    //     let dirty = false;
+    //     const newStack = pathStack.map(item => {
+    //         const associatedPath = paths[(item.props as FileChooserPanelProps).path];
+    //         if ((item.props as FileChooserPanelProps).status.loading && associatedPath && !associatedPath.loading) {
+    //             dirty = true;
+    //             return {
+    //                 ...item,
+    //                 props: {
+    //                     ...item.props,
+    //                     status: {
+    //                         ...(item.props as FileChooserPanelProps).status,
+    //                         loading: false,
+    //                         contents: associatedPath.contents
+    //                     }
+    //                 }
+    //             };
+    //         }
+    //         return item;
+    //     });
+    //     if (dirty) {
+    //         console.log("SET PATH STACK (2)", Date.now());
+    //         setPathStack(newStack);
+    //     }
+    // }, [paths, pathStack]);
     useEffect(() => {
-        fetchPath("/");
+        addNewPath("/");
     }, []);
-    useEffect(() => {
-        if (Object.keys(paths).length === 0) {
-            setPathStack([]);
-            return;
-        }
-        if (pathStack.length === 0) {
-            setPathStack([{
-                component: FileChooserPanel,
-                title: "/",
-                props: {
-                    status: paths["/"],
-                    onEnterDirectory: handleEnterDirectory,
-                    path: "/"
-                }
-            }]);
-            return;
-        }
-        console.log("ADD STACK", [...pathStack], paths);
-        const updatedStack: Array<IPanel> = pathStack.map(previousStack => ({
-            ...previousStack,
-            props: {
-                ...previousStack.props,
-                status: paths[(previousStack.props as FileChooserPanelProps).path]
-            }
-        }));
-        if (addPath) {
-            updatedStack.push({
-                component: FileChooserPanel,
-                title: addPath,
-                props: {
-                    status: paths[addPath],
-                    onEnterDirectory: handleEnterDirectory,
-                    path: addPath
-                }
-            });
-            setAddPath(null);
-        }
-        setPathStack(updatedStack);
-    }, [paths, addPath]);
+
+
+    // const [addPath, setAddPath] = useState(null);
+    // const fetchPath = useCallback(async (path, status = null) => {
+    //     const thisStatus = status || {
+    //         path,
+    //         loading: true,
+    //         contents: []
+    //     };
+    //     setPaths({
+    //         ...paths,
+    //         [path]: thisStatus
+    //     });
+    //     const results = await props.fsInterface.getDirectoryContents({
+    //         identifier: path,
+    //         name: basename(path)
+    //     });
+    //     setPaths({
+    //         ...paths,
+    //         [path]: {
+    //             ...thisStatus,
+    //             loading: false,
+    //             contents: results
+    //         }
+    //     });
+    // }, [paths]);
+    // const handleEnterDirectory = useCallback(path => {
+    //     if (paths[path]) return;
+    //     fetchPath(path);
+    //     setAddPath(path);
+    // }, [fetchPath, pathStack]);
+    // const handlePanelClose = useCallback(() => {
+    //     const newStack = [...pathStack];
+    //     newStack.pop();
+    //     setPathStack(newStack);
+    // }, [pathStack]);
+    // useEffect(() => {
+    //     fetchPath("/");
+    // }, []);
+    // useEffect(() => {
+    //     if (Object.keys(paths).length === 0) {
+    //         setPathStack([]);
+    //         return;
+    //     }
+    //     if (pathStack.length === 0) {
+    //         setPathStack([{
+    //             component: FileChooserPanel,
+    //             title: "/",
+    //             props: {
+    //                 status: paths["/"],
+    //                 onEnterDirectory: handleEnterDirectory,
+    //                 path: "/"
+    //             }
+    //         }]);
+    //         return;
+    //     }
+    //     console.log("ADD STACK", [...pathStack], paths);
+    //     const updatedStack: Array<IPanel> = pathStack.map(previousStack => ({
+    //         ...previousStack,
+    //         props: {
+    //             ...previousStack.props,
+    //             status: paths[(previousStack.props as FileChooserPanelProps).path]
+    //         }
+    //     }));
+    //     if (addPath) {
+    //         updatedStack.push({
+    //             component: FileChooserPanel,
+    //             title: addPath,
+    //             props: {
+    //                 status: paths[addPath],
+    //                 onEnterDirectory: handleEnterDirectory,
+    //                 path: addPath
+    //             }
+    //         });
+    //         setAddPath(null);
+    //     }
+    //     setPathStack(updatedStack);
+    // }, [paths, addPath]);
+    console.log("PATH STACK", pathStack);
     if (pathStack.length === 0) return null;
     return (
         <Chooser
