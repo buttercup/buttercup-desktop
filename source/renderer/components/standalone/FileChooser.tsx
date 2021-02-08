@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { basename } from "path-posix";
-import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, IBreadcrumbProps, Icon, Navbar, Spinner } from "@blueprintjs/core";
+import { basename, dirname, join as joinPath } from "path-posix";
+import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, Classes, Dialog, IBreadcrumbProps, Icon, InputGroup, Intent, Navbar, Spinner } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { FSItem } from "../../library/fsInterface";
 
@@ -79,12 +79,18 @@ const IconImg = styled.img`
     width: ${ICON_SIZE}px;
     height: ${ICON_SIZE}px;
 `;
+const IconInline = styled(Icon)`
+    display: inline-block;
+`;
 
 export function FileChooser(props: FileChooserProps) {
     const [currentItems, setCurrentItems] = useState<Array<FSItem>>([]);
     const [currentPath, setCurrentPath] = useState("/");
     const [loading, setLoading] = useState(false);
     const [breadcrumbs, setBreadcrumbs] = useState<Array<BreadcrumbProps>>([]);
+    const [showNewVaultFilenamePrompt, setShowNewVaultFilenamePrompt] = useState(false);
+    const [newVaultFilename, setNewVaultFilename] = useState(null);
+    const [newVault, setNewVault] = useState(null);
     const loadPath = useCallback(async path => {
         setLoading(true);
         const results = await props.fsInterface.getDirectoryContents({
@@ -107,6 +113,7 @@ export function FileChooser(props: FileChooserProps) {
             ]);
             loadPath(item.identifier);
             setCurrentPath(item.identifier);
+            setNewVault(null);
         }
     }, [breadcrumbs, currentPath]);
     const handlePreviousPathClick = useCallback((event, path: string) => {
@@ -114,7 +121,24 @@ export function FileChooser(props: FileChooserProps) {
         setBreadcrumbs(breadcrumbs.filter(bc => bc.path.length < path.length));
         loadPath(path);
         setCurrentPath(path);
+        setNewVault(null);
     }, [breadcrumbs]);
+    const handleNewVaultPromptClose = useCallback(() => {
+        setShowNewVaultFilenamePrompt(false);
+        setNewVaultFilename(null);
+    }, []);
+    const handleNewVaultPromptSubmit = useCallback(() => {
+        setShowNewVaultFilenamePrompt(false);
+        let newPath = joinPath(currentPath, newVaultFilename);
+        newPath = /\.bcup$/i.test(newPath) ? newPath : `${newPath}.bcup`;
+        setNewVault(newPath);
+        setNewVaultFilename(null);
+    }, [newVaultFilename, currentPath]);
+    const showNewVaultPrompt = useCallback(() => {
+        setNewVaultFilename(currentPath);
+        setNewVaultFilename("");
+        setShowNewVaultFilenamePrompt(true);
+    }, [currentPath]);
     const renderBreadcrumb = useCallback(({ text, ...restProps }: IBreadcrumbProps) => (
             <Breadcrumb {...restProps}>
                 {text}
@@ -129,7 +153,10 @@ export function FileChooser(props: FileChooserProps) {
         <Chooser>
             <Navbar>
                 <Navbar.Group align={Alignment.LEFT}>
-                    <Button className="bp3-minimal" icon="new-object" text="New Vault" />
+                    <Button className="bp3-minimal" icon="new-object" text="New Vault" onClick={showNewVaultPrompt} />
+                    {newVault && (
+                        <Button className="bp3-minimal" icon="graph-remove" text="Cancel New" onClick={() => setNewVault(null)} />
+                    )}
                     <Navbar.Divider />
                     <Breadcrumbs
                         currentBreadcrumbRenderer={renderBreadcrumb as any}
@@ -166,7 +193,45 @@ export function FileChooser(props: FileChooserProps) {
                         <ChooserItemText>{item.name}</ChooserItemText>
                     </ChooserItem>
                 ))}
+                {newVault && (
+                    <ChooserItem onClick={() => {}}>
+                        <Icon
+                            icon={<IconImg src={ICON_BUTTERCUP} />}
+                            iconSize={ICON_SIZE}
+                        />
+                        <ChooserItemText><IconInline icon="plus" iconSize={10} color="#ff7373" /> {basename(newVault)}</ChooserItemText>
+                    </ChooserItem>
+                )}
             </ChooserContents>
+            <Dialog isOpen={showNewVaultFilenamePrompt} onClose={handleNewVaultPromptClose}>
+                <div className={Classes.DIALOG_HEADER}>Add Vault</div>
+                <div className={Classes.DIALOG_BODY}>
+                    <p>Enter a filename for the new vault:</p>
+                    <InputGroup
+                        onChange={evt => setNewVaultFilename(evt.target.value)}
+                        placeholder="new-vault.bcup"
+                        value={newVaultFilename || ""}
+                    />
+                </div>
+                <div className={Classes.DIALOG_FOOTER}>
+                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                        <Button
+                            disabled={!/[^\.]+/.test(newVaultFilename) || /[\/\\]/.test(newVaultFilename)}
+                            intent={Intent.PRIMARY}
+                            onClick={handleNewVaultPromptSubmit}
+                            title="Confirm new vault filename"
+                        >
+                            Set Vault Target
+                        </Button>
+                        <Button
+                            onClick={handleNewVaultPromptClose}
+                            title="Cancel new vault creation"
+                        >
+                            Cancel
+                        </Button>
+                    </div>
+                </div>
+            </Dialog>
         </Chooser>
     );
 }
