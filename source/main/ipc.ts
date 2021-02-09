@@ -6,9 +6,20 @@ import { saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { AddVaultPayload } from "./types";
 
-ipcMain.on("add-existing-vault", async (evt, payload) => {
+ipcMain.on("add-vault-config", async (evt, payload) => {
     const addVaultPayload: AddVaultPayload = JSON.parse(payload);
-    await addVaultFromPayload(addVaultPayload);
+    try {
+        await addVaultFromPayload(addVaultPayload);
+        evt.reply("add-vault-config:reply", JSON.stringify({
+            ok: true,
+        }));
+    } catch (err) {
+        console.error(err);
+        evt.reply("add-vault-config:reply", JSON.stringify({
+            ok: false,
+            error: err.message
+        }));
+    }
 });
 
 ipcMain.on("get-add-vault-filename", async evt => {

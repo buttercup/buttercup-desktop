@@ -2,10 +2,11 @@ import { VaultSourceID, VaultSourceStatus } from "buttercup";
 
 export interface AddVaultPayload {
     existing: boolean;
-    filename?: string;
+    datasourceConfig: DatasourceConfig;
     masterPassword: string;
-    type: SourceType;
 }
+
+export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
 export enum SourceType {
     Dropbox = "dropbox",

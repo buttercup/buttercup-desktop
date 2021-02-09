@@ -1,14 +1,15 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
+import { Button, Card, Classes, Dialog, Elevation, InputGroup, Intent } from "@blueprintjs/core";
 import { useState as useHookState } from "@hookstate/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
 import { authDropbox } from "../actions/dropbox";
 import { getFSInstance } from "../library/fsInterface";
-import { SourceType } from "../types";
 import { FileChooser } from "./standalone/FileChooser";
+import { addNewVaultTarget } from "../actions/addVault";
+import { DatasourceConfig, SourceType } from "../types";
 
 const ICON_BUTTERCUP = require("../../../resources/images/buttercup-file-256.png").default;
 const ICON_DROPBOX = require("../../../resources/images/dropbox-256.png").default;
@@ -17,6 +18,7 @@ const ICON_WEBDAV = require("../../../resources/images/webdav-256.png").default;
 
 const { useCallback, useEffect, useState } = React;
 
+const EMPTY_DATASOURCE_CONFIG = { type: null };
 const PAGE_TYPE = "type";
 const PAGE_AUTH = "auth";
 const PAGE_CHOOSE = "choose";
@@ -90,7 +92,7 @@ export function AddVaultMenu() {
     const [currentPage, setCurrentPage] = useState(PAGE_TYPE);
     const [selectedType, setSelectedType] = useState<SourceType>(null);
     const [selectedRemotePath, setSelectedRemotePath] = useState<string>(null);
-    const [datasourcePayload, setDatasourcePayload] = useState<{ [key: string]: any }>({});
+    const [datasourcePayload, setDatasourcePayload] = useState<DatasourceConfig>({ ...EMPTY_DATASOURCE_CONFIG });
     const [fsInstance, setFsInstance] = useState<FileSystemInterface>(null);
     const [createNew, setCreateNew] = useState(false);
     const [vaultPassword, setVaultPassword] = useState("");
@@ -107,7 +109,7 @@ export function AddVaultMenu() {
         showAddVault.set(false);
         setFsInstance(null);
         setCurrentPage(PAGE_TYPE);
-        setDatasourcePayload({});
+        setDatasourcePayload({ ...EMPTY_DATASOURCE_CONFIG });
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
@@ -142,6 +144,10 @@ export function AddVaultMenu() {
             setCurrentPage(PAGE_CONFIRM);
         }
     }, [selectedRemotePath, selectedType, datasourcePayload]);
+    const handleFinalConfirm = useCallback(() => {
+        addNewVaultTarget(datasourcePayload, vaultPassword, createNew);
+        showAddVault.set(false);
+    }, [datasourcePayload, vaultPassword]);
     // Pages
     const pageType = () => (
         <>
@@ -215,7 +221,7 @@ export function AddVaultMenu() {
                         <Button
                             disabled={vaultPassword.length === 0}
                             intent={Intent.PRIMARY}
-                            onClick={() => {}}
+                            onClick={handleFinalConfirm}
                             title="Confirm vault addition"
                         >
                             Add Vault

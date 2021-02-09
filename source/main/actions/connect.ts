@@ -7,19 +7,18 @@ import { AddVaultPayload, SourceType } from "../types";
 export async function addVaultFromPayload(payload: AddVaultPayload) {
     let credentials: Credentials,
         name: string;
-    switch (payload.type) {
+    switch (payload.datasourceConfig.type) {
+        case SourceType.Dropbox:
+        /* falls-through */
         case SourceType.File: {
-            credentials = Credentials.fromDatasource({
-                path: payload.filename,
-                type: payload.type
-            }, payload.masterPassword);
-            name = path.basename(payload.filename).replace(/\.bcup$/i, "");
+            credentials = Credentials.fromDatasource(payload.datasourceConfig, payload.masterPassword);
+            name = path.basename(payload.datasourceConfig.path).replace(/\.bcup$/i, "");
             break;
         }
         default:
-            throw new Error(`Unsupported vault type: ${payload.type}`);
+            throw new Error(`Unsupported vault type: ${payload.datasourceConfig.type}`);
     }
-    await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.type, false);
+    await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, false);
 }
 
 export async function showAddFileVaultDialog(win: BrowserWindow): Promise<string> {
