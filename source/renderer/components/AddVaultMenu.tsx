@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button, Card, Classes, Dialog, Elevation } from "@blueprintjs/core";
-import { useState } from "@hookstate/core";
+import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
+import { useState as useHookState } from "@hookstate/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
@@ -15,7 +15,7 @@ const ICON_DROPBOX = require("../../../resources/images/dropbox-256.png").defaul
 const ICON_GOOGLEDRIVE = require("../../../resources/images/googledrive-256.png").default;
 const ICON_WEBDAV = require("../../../resources/images/webdav-256.png").default;
 
-const { useCallback, useEffect } = React;
+const { useCallback, useEffect, useState } = React;
 
 const PAGE_TYPE = "type";
 const PAGE_AUTH = "auth";
@@ -85,30 +85,33 @@ const TypeText = styled.div`
 `;
 
 export function AddVaultMenu() {
-    const showAddVault = useState(SHOW_ADD_VAULT);
-    const previousShowAddVault = useState(false);
-    const currentPage = useState(PAGE_TYPE);
-    const selectedType = useState<SourceType>(null);
-    const datasourcePayload = useState<{ [key: string]: any }>({});
-    const fsInstance = useState<FileSystemInterface>(null);
+    const showAddVault = useHookState(SHOW_ADD_VAULT);
+    const [previousShowAddVault, setPreviousShowAddVault] = useState(false);
+    const [currentPage, setCurrentPage] = useState(PAGE_TYPE);
+    const [selectedType, setSelectedType] = useState<SourceType>(null);
+    const [selectedRemotePath, setSelectedRemotePath] = useState<string>(null);
+    const [datasourcePayload, setDatasourcePayload] = useState<{ [key: string]: any }>({});
+    const [fsInstance, setFsInstance] = useState<FileSystemInterface>(null);
+    const [createNew, setCreateNew] = useState(false);
+    const [vaultPassword, setVaultPassword] = useState("");
     useEffect(() => {
         const newValue = showAddVault.get();
-        if (previousShowAddVault.get() !== newValue) {
-            previousShowAddVault.set(showAddVault.get());
+        if (previousShowAddVault !== newValue) {
+            setPreviousShowAddVault(showAddVault.get());
             if (newValue) {
-                currentPage.set(PAGE_TYPE);
+                setCurrentPage(PAGE_TYPE);
             }
         }
-    }, [showAddVault.get()]);
+    }, [showAddVault.get(), previousShowAddVault]);
     const close = useCallback(() => {
         showAddVault.set(false);
-        fsInstance.set(null);
-        currentPage.set(PAGE_TYPE);
-        datasourcePayload.set({});
+        setFsInstance(null);
+        setCurrentPage(PAGE_TYPE);
+        setDatasourcePayload({});
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
-        selectedType.set(type);
-        currentPage.set(PAGE_AUTH);
+        setSelectedType(type);
+        setCurrentPage(PAGE_AUTH);
         if (type === SourceType.Dropbox) {
             setBusy(true);
             const token = await authDropbox();
@@ -117,15 +120,28 @@ export function AddVaultMenu() {
                 close();
                 return;
             }
-            datasourcePayload.set({
-                ...datasourcePayload.get(),
+            setDatasourcePayload({
+                ...datasourcePayload,
                 type,
                 token
             });
-            fsInstance.set(getFSInstance(type, { token }));
-            currentPage.set(PAGE_CHOOSE);
+            setFsInstance(getFSInstance(type, { token }));
+            setCurrentPage(PAGE_CHOOSE);
         }
+    }, [datasourcePayload]);
+    const handleSelectedPathChange = useCallback((selectedPath: string, isNew: boolean) => {
+        setSelectedRemotePath(selectedPath);
+        setCreateNew(isNew);
     }, []);
+    const handleVaultFileSelect = useCallback(() => {
+        if (selectedType === SourceType.Dropbox) {
+            setDatasourcePayload({
+                ...datasourcePayload,
+                path: selectedRemotePath
+            });
+            setCurrentPage(PAGE_CONFIRM);
+        }
+    }, [selectedRemotePath, selectedType, datasourcePayload]);
     // Pages
     const pageType = () => (
         <>
@@ -142,7 +158,7 @@ export function AddVaultMenu() {
     );
     const pageAuth = () => (
         <>
-            {selectedType.get() === SourceType.Dropbox && (
+            {selectedType === SourceType.Dropbox && (
                 <LoadingContainer>
                     <i>A separate window will open for authentication</i>
                 </LoadingContainer>
@@ -152,7 +168,25 @@ export function AddVaultMenu() {
     const pageChoose = () => (
         <>
             <p>Choose a vault file or create a new vault:</p>
-            <FileChooser callback={() => {}} fsInterface={fsInstance.get()} />
+            <FileChooser callback={handleSelectedPathChange} fsInterface={fsInstance} />
+        </>
+    );
+    const pageConfirm = () => (
+        <>
+            {createNew && (
+                <p>Enter a new primary vault password:</p>
+            )}
+            {!createNew && (
+                <p>Enter the primary vault password:</p>
+            )}
+            <InputGroup
+                id="password"
+                placeholder="Vault password..."
+                type="password"
+                value={vaultPassword}
+                onChange={evt => setVaultPassword(evt.target.value)}
+                autoFocus
+            />
         </>
     );
     // Output
@@ -160,19 +194,33 @@ export function AddVaultMenu() {
         <DialogFreeWidth isOpen={showAddVault.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>Add Vault</div>
             <div className={Classes.DIALOG_BODY}>
-                {currentPage.get() === PAGE_TYPE && pageType()}
-                {currentPage.get() === PAGE_AUTH && pageAuth()}
-                {currentPage.get() === PAGE_CHOOSE && pageChoose()}
+                {currentPage === PAGE_TYPE && pageType()}
+                {currentPage === PAGE_AUTH && pageAuth()}
+                {currentPage === PAGE_CHOOSE && pageChoose()}
+                {currentPage === PAGE_CONFIRM && pageConfirm()}
             </div>
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                    {/* <Button
-                        intent={Intent.PRIMARY}
-                        onClick={() => submitAndClose(currentPassword.get())}
-                        title="Confirm vault unlock"
-                    >
-                        Unlock
-                    </Button> */}
+                    {currentPage === PAGE_CHOOSE && (
+                        <Button
+                            disabled={!selectedRemotePath}
+                            intent={Intent.PRIMARY}
+                            onClick={handleVaultFileSelect}
+                            title="Continue adding vault"
+                        >
+                            Next
+                        </Button>
+                    )}
+                    {currentPage === PAGE_CONFIRM && (
+                        <Button
+                            disabled={vaultPassword.length === 0}
+                            intent={Intent.PRIMARY}
+                            onClick={() => {}}
+                            title="Confirm vault addition"
+                        >
+                            Add Vault
+                        </Button>
+                    )}
                     <Button
                         onClick={close}
                         title="Cancel Unlock"

@@ -20,7 +20,7 @@ interface BreadcrumbProps {
 }
 
 interface FileChooserProps {
-    callback: (path: string | null) => void;
+    callback: (path: string | null, isNew: boolean) => void;
     fsInterface: FileSystemInterface;
 }
 
@@ -109,7 +109,9 @@ export function FileChooser(props: FileChooserProps) {
     }, []);
     const handleItemClick = useCallback((item: FSItem) => {
         if (item.type === "file") {
-            setSelectedVaultPath(item.identifier);
+            if (/\.bcup$/i.test(item.name) === true) {
+                setSelectedVaultPath(item.identifier);
+            }
         } else {
             setBreadcrumbs([
                 ...breadcrumbs,
@@ -128,8 +130,11 @@ export function FileChooser(props: FileChooserProps) {
         setBreadcrumbs(breadcrumbs.filter(bc => bc.path.length < path.length));
         loadPath(path);
         setCurrentPath(path);
+        if (newVault === selectedVaultPath) {
+            setSelectedVaultPath(null);
+        }
         setNewVault(null);
-    }, [breadcrumbs]);
+    }, [breadcrumbs, newVault, selectedVaultPath]);
     const handleNewVaultPromptClose = useCallback(() => {
         setShowNewVaultFilenamePrompt(false);
         setNewVaultFilename(null);
@@ -163,6 +168,9 @@ export function FileChooser(props: FileChooserProps) {
     useEffect(() => {
         loadPath("/");
     }, []);
+    useEffect(() => {
+        props.callback(selectedVaultPath, !!newVault);
+    }, [selectedVaultPath, props.callback]);
     return (
         <Chooser>
             <Navbar>
