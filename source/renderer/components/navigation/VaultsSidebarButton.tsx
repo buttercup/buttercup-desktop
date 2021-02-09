@@ -1,5 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
+import { Icon } from "@blueprintjs/core";
+import { VaultSourceStatus } from "buttercup";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../../shared/types";
 
@@ -14,6 +16,7 @@ const Button = styled.button`
     border-radius: 3px;
     outline: none;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 80px;
@@ -28,6 +31,9 @@ export function VaultsSidebarButton(props: VaultsSidebarButtonProps) {
         <Button
             onClick={() => onClick(vault)}
             title={`${vault.name} (${vault.state})`}
-        >{vault.name}</Button>
+        >
+            <Icon icon={vault.state === VaultSourceStatus.Unlocked ? "unlock" : "lock"} />
+            {vault.name}
+        </Button>
     );
 }
