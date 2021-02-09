@@ -1,9 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Icon } from "@blueprintjs/core";
+import { Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
+import { Popover2 as Popover, Popover2InteractionKind as PopoverInteractionKind } from "@blueprintjs/popover2";
 import { VaultSourceStatus } from "buttercup";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../../shared/types";
+
+const { useState } = React;
 
 interface VaultsSidebarButtonProps {
     onClick: (vault: VaultSourceDescription) => void;
@@ -27,13 +30,32 @@ const Button = styled.button`
 
 export function VaultsSidebarButton(props: VaultsSidebarButtonProps) {
     const { onClick, vault } = props;
+    const [showContextMenu, setShowContextMenu] = useState(false);
     return (
-        <Button
-            onClick={() => onClick(vault)}
-            title={`${vault.name} (${vault.state})`}
+        <Popover
+            content={
+                <Menu>
+                    <MenuItem text="Unlock" icon="unlock" disabled={vault.state === VaultSourceStatus.Unlocked} />
+                    <MenuItem text="Lock" icon="lock" disabled={vault.state === VaultSourceStatus.Locked} />
+                    <MenuDivider />
+                    <MenuItem text="Info" icon="info-sign" disabled />
+                    <MenuItem text="Optimise" icon="clean" disabled />
+                    <MenuItem text="Backup" icon="send-to" disabled />
+                    <MenuDivider />
+                    <MenuItem text="Remove" icon="cross" />
+                </Menu>
+            }
+            isOpen={showContextMenu}
+            onClose={() => setShowContextMenu(false)}
         >
-            <Icon icon={vault.state === VaultSourceStatus.Unlocked ? "unlock" : "lock"} />
-            {vault.name}
-        </Button>
+            <Button
+                onClick={() => onClick(vault)}
+                onContextMenu={() => setShowContextMenu(true)}
+                title={`${vault.name} (${vault.state})`}
+            >
+                <Icon icon={vault.state === VaultSourceStatus.Unlocked ? "unlock" : "lock"} />
+                {vault.name}
+            </Button>
+        </Popover>
     );
 }

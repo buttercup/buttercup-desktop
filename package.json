@@ -32,6 +32,7 @@
   "homepage": "https://github.com/buttercup/desktop#readme",
   "devDependencies": {
     "@blueprintjs/core": "^3.38.1",
+    "@blueprintjs/popover2": "^0.2.0",
     "@buttercup/ui": "^4.3.0",
     "@hookstate/core": "^3.0.3",
     "@types/node": "^14.14.22",
