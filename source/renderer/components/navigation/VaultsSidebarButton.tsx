@@ -8,8 +8,12 @@ import { VaultSourceDescription } from "../../../shared/types";
 
 const { useState } = React;
 
+const NOOP = () => {};
+
 interface VaultsSidebarButtonProps {
     onClick: (vault: VaultSourceDescription) => void;
+    onLock?: (vault: VaultSourceDescription) => void;
+    onUnlock?: (vault: VaultSourceDescription) => void;
     vault: VaultSourceDescription;
 }
 
@@ -29,14 +33,24 @@ const Button = styled.button`
 `;
 
 export function VaultsSidebarButton(props: VaultsSidebarButtonProps) {
-    const { onClick, vault } = props;
+    const { onClick, onLock = NOOP, onUnlock = NOOP, vault } = props;
     const [showContextMenu, setShowContextMenu] = useState(false);
     return (
         <Popover
             content={
                 <Menu>
-                    <MenuItem text="Unlock" icon="unlock" disabled={vault.state === VaultSourceStatus.Unlocked} />
-                    <MenuItem text="Lock" icon="lock" disabled={vault.state === VaultSourceStatus.Locked} />
+                    <MenuItem
+                        text="Unlock"
+                        icon="unlock"
+                        disabled={vault.state === VaultSourceStatus.Unlocked}
+                        onClick={() => onUnlock(vault)}
+                    />
+                    <MenuItem
+                        text="Lock"
+                        icon="lock"
+                        disabled={vault.state === VaultSourceStatus.Locked}
+                        onClick={() => onLock(vault)}
+                    />
                     <MenuDivider />
                     <MenuItem text="Info" icon="info-sign" disabled />
                     <MenuItem text="Optimise" icon="clean" disabled />

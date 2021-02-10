@@ -8,6 +8,7 @@ import { VAULTS_LIST } from "../../state/vaults";
 import { showAddVaultMenu } from "../../state/addVault";
 // import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
+import { lockVaultSource } from "../../actions/lockVault";
 import { VaultsSidebarButton } from "./VaultsSidebarButton";
 import { VaultSourceDescription } from "../../types";
 
@@ -47,6 +48,16 @@ export function VaultsSidebar() {
             unlockVaultSource(vaultItem.id);
         }
     }, []);
+    const handleLock = useCallback((vaultItem: VaultSourceDescription) => {
+        if (vaultItem.state === VaultSourceStatus.Unlocked) {
+            lockVaultSource(vaultItem.id);
+        }
+    }, []);
+    const handleUnlock = useCallback((vaultItem: VaultSourceDescription) => {
+        if (vaultItem.state === VaultSourceStatus.Locked) {
+            unlockVaultSource(vaultItem.id);
+        }
+    }, []);
     return (
         <SidebarContainer>
             <VaultsListContainer>
@@ -55,6 +66,14 @@ export function VaultsSidebar() {
                         key={vaultItem.id}
                         onClick={() => {
                             handleLinkClick(vaultItem);
+                            history.push(`/source/${vaultItem.id}`);
+                        }}
+                        onLock={() => {
+                            handleLock(vaultItem);
+                            history.push("/");
+                        }}
+                        onUnlock={() => {
+                            handleUnlock(vaultItem);
                             history.push(`/source/${vaultItem.id}`);
                         }}
                         vault={vaultItem}

@@ -69,6 +69,12 @@ export async function loadVaultsFromDisk() {
     await getVaultManager().rehydrate();
 }
 
+export async function lockSource(sourceID: VaultSourceID) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    await source.lock();
+}
+
 function onVaultSourceUpdated(source: VaultSource) {
     clearFacadeCache(source.id);
     notifyWindowsOfSourceUpdate(source.id);
