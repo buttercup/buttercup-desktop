@@ -13,6 +13,7 @@ const NOOP = () => {};
 interface VaultsSidebarButtonProps {
     onClick: (vault: VaultSourceDescription) => void;
     onLock?: (vault: VaultSourceDescription) => void;
+    onRemove?: (vault: VaultSourceDescription) => void;
     onUnlock?: (vault: VaultSourceDescription) => void;
     vault: VaultSourceDescription;
 }
@@ -33,7 +34,7 @@ const Button = styled.button`
 `;
 
 export function VaultsSidebarButton(props: VaultsSidebarButtonProps) {
-    const { onClick, onLock = NOOP, onUnlock = NOOP, vault } = props;
+    const { onClick, onLock = NOOP, onRemove = NOOP, onUnlock = NOOP, vault } = props;
     const [showContextMenu, setShowContextMenu] = useState(false);
     return (
         <Popover
@@ -56,7 +57,12 @@ export function VaultsSidebarButton(props: VaultsSidebarButtonProps) {
                     <MenuItem text="Optimise" icon="clean" disabled />
                     <MenuItem text="Backup" icon="send-to" disabled />
                     <MenuDivider />
-                    <MenuItem text="Remove" icon="cross" />
+                    <MenuItem
+                        text="Remove"
+                        icon="cross"
+                        disabled={vault.state === VaultSourceStatus.Pending}
+                        onClick={() => onRemove(vault)}
+                    />
                 </Menu>
             }
             isOpen={showContextMenu}

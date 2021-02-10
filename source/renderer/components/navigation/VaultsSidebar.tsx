@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { useState } from "@hookstate/core";
+import { useState as useHookState } from "@hookstate/core";
 import { VaultSourceStatus } from "buttercup";
 import { useHistory } from "react-router-dom";
 import { Button, Intent } from "@blueprintjs/core";
@@ -9,10 +9,13 @@ import { showAddVaultMenu } from "../../state/addVault";
 // import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { lockVaultSource } from "../../actions/lockVault";
+import { removeVaultSource } from "../../actions/removeVault";
 import { VaultsSidebarButton } from "./VaultsSidebarButton";
+import { ConfirmDialog } from "../prompt/ConfirmDialog";
 import { VaultSourceDescription } from "../../types";
+import VaultItem from "buttercup/dist/core/VaultItem";
 
-const { useCallback } = React;
+const { useCallback, useState } = React;
 
 const SidebarContainer = styled.div`
     width: 100px;
@@ -42,7 +45,8 @@ const BottomMenu = styled.div`
 
 export function VaultsSidebar() {
     const history = useHistory();
-    const vaultsState = useState<Array<VaultSourceDescription>>(VAULTS_LIST);
+    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
+    const [removingSource, setRemovingSource] = useState<VaultSourceDescription>(null);
     const handleLinkClick = useCallback((vaultItem: VaultSourceDescription) => {
         if (vaultItem.state === VaultSourceStatus.Locked) {
             unlockVaultSource(vaultItem.id);
@@ -58,37 +62,55 @@ export function VaultsSidebar() {
             unlockVaultSource(vaultItem.id);
         }
     }, []);
+    const handleRemoveDialogClose = useCallback((didConfirm: boolean) => {
+        if (didConfirm) {
+            removeVaultSource(removingSource.id);
+        }
+        setRemovingSource(null);
+    }, [removingSource]);
     return (
-        <SidebarContainer>
-            <VaultsListContainer>
-                {vaultsState.get().map(vaultItem => (
-                    <VaultsSidebarButton
-                        key={vaultItem.id}
-                        onClick={() => {
-                            handleLinkClick(vaultItem);
-                            history.push(`/source/${vaultItem.id}`);
-                        }}
-                        onLock={() => {
-                            handleLock(vaultItem);
-                            history.push("/");
-                        }}
-                        onUnlock={() => {
-                            handleUnlock(vaultItem);
-                            history.push(`/source/${vaultItem.id}`);
-                        }}
-                        vault={vaultItem}
-                    />
-                ))}
-                <BottomMenu>
-                    <Button
-                        icon="add"
-                        intent={Intent.PRIMARY}
-                        minimal
-                        onClick={() => showAddVaultMenu(true)}
-                        text="Add"
-                    />
-                </BottomMenu>
-            </VaultsListContainer>
-        </SidebarContainer>
+        <>
+            <SidebarContainer>
+                <VaultsListContainer>
+                    {vaultsState.get().map(vaultItem => (
+                        <VaultsSidebarButton
+                            key={vaultItem.id}
+                            onClick={() => {
+                                handleLinkClick(vaultItem);
+                                history.push(`/source/${vaultItem.id}`);
+                            }}
+                            onLock={() => {
+                                handleLock(vaultItem);
+                                history.push("/");
+                            }}
+                            onRemove={() => setRemovingSource(vaultItem)}
+                            onUnlock={() => {
+                                handleUnlock(vaultItem);
+                                history.push(`/source/${vaultItem.id}`);
+                            }}
+                            vault={vaultItem}
+                        />
+                    ))}
+                    <BottomMenu>
+                        <Button
+                            icon="add"
+                            intent={Intent.PRIMARY}
+                            minimal
+                            onClick={() => showAddVaultMenu(true)}
+                            text="Add"
+                        />
+                    </BottomMenu>
+                </VaultsListContainer>
+            </SidebarContainer>
+            <ConfirmDialog
+                confirmIntent={Intent.WARNING}
+                confirmText="Remove"
+                onClose={handleRemoveDialogClose}
+                open={!!removingSource}
+                title="Remove Vault"
+            >
+                {removingSource && `Are you sure that you want to remove "${removingSource.name}"?`}
+            </ConfirmDialog>
+        </>
     );
 }

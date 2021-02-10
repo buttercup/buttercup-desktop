@@ -3,6 +3,7 @@ import { BrowserWindow, ipcMain } from "electron";
 import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
+import { removeSourceWithID } from "./actions/remove";
 import { saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { AddVaultPayload } from "./types";
@@ -46,6 +47,13 @@ ipcMain.on("lock-source", async (evt, payload) => {
         sourceID
     } = JSON.parse(payload);
     await lockSourceWithID(sourceID);
+});
+
+ipcMain.on("remove-source", async (evt, payload) => {
+    const {
+        sourceID
+    } = JSON.parse(payload);
+    await removeSourceWithID(sourceID);
 });
 
 ipcMain.on("save-vault-facade", async (evt, payload) => {
