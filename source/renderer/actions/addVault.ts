@@ -17,7 +17,7 @@ export async function addNewVaultTarget(
         });
     });
     const payload: AddVaultPayload = {
-        existing: createNew,
+        createNew,
         datasourceConfig,
         masterPassword: password
     };

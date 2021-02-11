@@ -1,15 +1,23 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button, Card, Classes, Dialog, Elevation, InputGroup, Intent } from "@blueprintjs/core";
+import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
 import { useState as useHookState } from "@hookstate/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
 import { authDropbox } from "../actions/dropbox";
+import { testWebDAV } from "../actions/webdav";
 import { getFSInstance } from "../library/fsInterface";
 import { FileChooser } from "./standalone/FileChooser";
 import { addNewVaultTarget } from "../actions/addVault";
+import { showError } from "../services/notifications";
 import { DatasourceConfig, SourceType } from "../types";
+
+interface WebDAVCredentialsState {
+    url: string;
+    username: string;
+    password: string;
+}
 
 const ICON_BUTTERCUP = require("../../../resources/images/buttercup-file-256.png").default;
 const ICON_DROPBOX = require("../../../resources/images/dropbox-256.png").default;
@@ -19,6 +27,7 @@ const ICON_WEBDAV = require("../../../resources/images/webdav-256.png").default;
 const { useCallback, useEffect, useState } = React;
 
 const EMPTY_DATASOURCE_CONFIG = { type: null };
+const EMPTY_WEBDAV_CREDENTIALS: WebDAVCredentialsState = { url: "", username: "", password: "" };
 const PAGE_TYPE = "type";
 const PAGE_AUTH = "auth";
 const PAGE_CHOOSE = "choose";
@@ -85,6 +94,14 @@ const TypeText = styled.div`
     text-align: center;
     color: grey;
 `;
+const WideFormGroup = styled(FormGroup)`
+    input {
+        width: 350px !important;
+    }
+    label {
+        width: 130px !important;
+    }
+`;
 
 export function AddVaultMenu() {
     const showAddVault = useHookState(SHOW_ADD_VAULT);
@@ -96,6 +113,7 @@ export function AddVaultMenu() {
     const [fsInstance, setFsInstance] = useState<FileSystemInterface>(null);
     const [createNew, setCreateNew] = useState(false);
     const [vaultPassword, setVaultPassword] = useState("");
+    const [webdavCredentials, setWebDAVCredentials] = useState<WebDAVCredentialsState>({ ...EMPTY_WEBDAV_CREDENTIALS });
     useEffect(() => {
         const newValue = showAddVault.get();
         if (previousShowAddVault !== newValue) {
@@ -110,10 +128,11 @@ export function AddVaultMenu() {
         setFsInstance(null);
         setCurrentPage(PAGE_TYPE);
         setDatasourcePayload({ ...EMPTY_DATASOURCE_CONFIG });
+        setWebDAVCredentials({ ...EMPTY_WEBDAV_CREDENTIALS });
+        setVaultPassword("");
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
-        setCurrentPage(PAGE_AUTH);
         if (type === SourceType.Dropbox) {
             setBusy(true);
             const token = await authDropbox();
@@ -129,14 +148,54 @@ export function AddVaultMenu() {
             });
             setFsInstance(getFSInstance(type, { token }));
             setCurrentPage(PAGE_CHOOSE);
+        } else if (type === SourceType.WebDAV) {
+            setDatasourcePayload({
+                ...datasourcePayload,
+                type
+            });
+            setCurrentPage(PAGE_AUTH);
         }
     }, [datasourcePayload]);
+    const handleAuthSubmit = useCallback(async () => {
+        if (selectedType === SourceType.WebDAV) {
+            setBusy(true);
+            try {
+                await testWebDAV(webdavCredentials.url, webdavCredentials.username, webdavCredentials.password);
+            } catch (err) {
+                showError(err.message);
+                setBusy(false);
+                return;
+            }
+            setBusy(false);
+            const newPayload = {
+                endpoint: webdavCredentials.url
+            };
+            if (webdavCredentials.username && webdavCredentials.password) {
+                Object.assign(newPayload, {
+                    username: webdavCredentials.username,
+                    password: webdavCredentials.password
+                });
+            }
+            setDatasourcePayload({
+                ...datasourcePayload,
+                ...newPayload
+            });
+            setFsInstance(getFSInstance(SourceType.WebDAV, newPayload));
+            setCurrentPage(PAGE_CHOOSE);
+        }
+    }, [selectedType, datasourcePayload, webdavCredentials]);
     const handleSelectedPathChange = useCallback((selectedPath: string, isNew: boolean) => {
         setSelectedRemotePath(selectedPath);
         setCreateNew(isNew);
     }, []);
     const handleVaultFileSelect = useCallback(() => {
         if (selectedType === SourceType.Dropbox) {
+            setDatasourcePayload({
+                ...datasourcePayload,
+                path: selectedRemotePath
+            });
+            setCurrentPage(PAGE_CONFIRM);
+        } else if (selectedType ===  SourceType.WebDAV) {
             setDatasourcePayload({
                 ...datasourcePayload,
                 path: selectedRemotePath
@@ -168,6 +227,51 @@ export function AddVaultMenu() {
                 <LoadingContainer>
                     <i>A separate window will open for authentication</i>
                 </LoadingContainer>
+            )}
+            {selectedType === SourceType.WebDAV && (
+                <>
+                    <WideFormGroup
+                        inline
+                        label="WebDAV Service"
+                    >
+                        <InputGroup
+                            placeholder="https://..."
+                            onChange={evt => setWebDAVCredentials({
+                                ...webdavCredentials,
+                                url: evt.target.value
+                            })}
+                            value={webdavCredentials.url}
+                            autoFocus
+                        />
+                    </WideFormGroup>
+                    <WideFormGroup
+                        inline
+                        label="Username"
+                    >
+                        <InputGroup
+                            placeholder="WebDAV Username"
+                            onChange={evt => setWebDAVCredentials({
+                                ...webdavCredentials,
+                                username: evt.target.value
+                            })}
+                            value={webdavCredentials.username}
+                        />
+                    </WideFormGroup>
+                    <WideFormGroup
+                        inline
+                        label="Password"
+                    >
+                        <InputGroup
+                            placeholder="WebDAV Password"
+                            onChange={evt => setWebDAVCredentials({
+                                ...webdavCredentials,
+                                password: evt.target.value
+                            })}
+                            type="password"
+                            value={webdavCredentials.password}
+                        />
+                    </WideFormGroup>
+                </>
             )}
         </>
     );
@@ -213,6 +317,16 @@ export function AddVaultMenu() {
                             intent={Intent.PRIMARY}
                             onClick={handleVaultFileSelect}
                             title="Continue adding vault"
+                        >
+                            Next
+                        </Button>
+                    )}
+                    {currentPage === PAGE_AUTH && selectedType === SourceType.WebDAV && (
+                        <Button
+                            disabled={!webdavCredentials.url}
+                            intent={Intent.PRIMARY}
+                            onClick={handleAuthSubmit}
+                            title="Connect using WebDAV"
                         >
                             Next
                         </Button>

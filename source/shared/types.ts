@@ -1,7 +1,7 @@
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
 
 export interface AddVaultPayload {
-    existing: boolean;
+    createNew: boolean;
     datasourceConfig: DatasourceConfig;
     masterPassword: string;
 }

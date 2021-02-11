@@ -10,6 +10,8 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
     switch (payload.datasourceConfig.type) {
         case SourceType.Dropbox:
         /* falls-through */
+        case SourceType.WebDAV:
+        /* falls-through */
         case SourceType.File: {
             credentials = Credentials.fromDatasource(payload.datasourceConfig, payload.masterPassword);
             name = path.basename(payload.datasourceConfig.path).replace(/\.bcup$/i, "");
@@ -18,7 +20,7 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
         default:
             throw new Error(`Unsupported vault type: ${payload.datasourceConfig.type}`);
     }
-    await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, false);
+    await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, payload.createNew);
 }
 
 export async function showAddFileVaultDialog(win: BrowserWindow): Promise<string> {
