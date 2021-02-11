@@ -205,7 +205,7 @@ export function AddVaultMenu() {
     }, [selectedRemotePath, selectedType, datasourcePayload]);
     const handleFinalConfirm = useCallback(() => {
         addNewVaultTarget(datasourcePayload, vaultPassword, createNew);
-        showAddVault.set(false);
+        close(); // This also clears sensitive state items
     }, [datasourcePayload, vaultPassword]);
     // Pages
     const pageType = () => (
