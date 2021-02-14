@@ -1,32 +1,9 @@
-import path from "path";
-import { app, BrowserWindow } from "electron";
-import debounce from "debounce";
+import { app } from "electron";
 import "./ipc";
 import { initialise } from "./services/init";
-import { getConfigValue, setConfigValue} from "./services/config";
-import { PLATFORM_MACOS } from "./symbols";
-
-async function createVaultWindow() {
-    const width = await getConfigValue<number>("windowWidth");
-    const height = await getConfigValue<number>("windowHeight");
-    const win = new BrowserWindow({
-        width,
-        height,
-        webPreferences: {
-            enableRemoteModule: true,
-            nodeIntegration: true,
-            spellcheck: false
-        }
-    })
-    win.on("resize", debounce(() => handleWindowResize(win), 750, false));
-    win.loadFile(path.resolve(__dirname, "../renderer/index.html"));
-}
-
-async function handleWindowResize(win: BrowserWindow) {
-    const [newWidth, newHeight] = win.getSize();
-    await setConfigValue("windowWidth", newWidth);
-    await setConfigValue("windowHeight", newHeight);
-}
+import { openMainWindow } from "./services/windows";
+import { handleProtocolCall } from "./services/protocol";
+import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
 
 const lock = app.requestSingleInstanceLock();
 if (!lock) {
@@ -40,18 +17,27 @@ app.on("window-all-closed", () => {
 });
 
 app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createVaultWindow();
-    }
+    openMainWindow();
 });
 
-app.on("second-instance", (event, args) => {
-    // @todo handle second instance
+app.on("second-instance", async (event, args) => {
+    await openMainWindow();
+    // Protocol URL for Linux/Windows
+    const protocolURL = args.find(arg => arg.startsWith(BUTTERCUP_PROTOCOL));
+    if (protocolURL) {
+        handleProtocolCall(protocolURL);
+    }
+});
+app.on("open-url", (e, url) => {
+    // Protocol URL for MacOS
+    if (url.startsWith(BUTTERCUP_PROTOCOL)) {
+        handleProtocolCall(url);
+    }
 });
 
 app.whenReady()
     .then(() => initialise())
-    .then(() => createVaultWindow())
+    .then(() => openMainWindow())
     .catch(err => {
         console.error(err);
     });
