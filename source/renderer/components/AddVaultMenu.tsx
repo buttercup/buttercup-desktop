@@ -9,7 +9,7 @@ import { authDropbox } from "../actions/dropbox";
 import { testWebDAV } from "../actions/webdav";
 import { getFSInstance } from "../library/fsInterface";
 import { FileChooser } from "./standalone/FileChooser";
-import { addNewVaultTarget } from "../actions/addVault";
+import { addNewVaultTarget, getFileVaultParameters } from "../actions/addVault";
 import { showError } from "../services/notifications";
 import { DatasourceConfig, SourceType } from "../types";
 
@@ -133,8 +133,23 @@ export function AddVaultMenu() {
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
-        if (type === SourceType.Dropbox) {
+        if (type === SourceType.File) {
+            setCurrentPage(PAGE_AUTH);
+            const { filename, createNew } = await getFileVaultParameters();
+            if (!filename) {
+                close();
+                return;
+            }
+            setDatasourcePayload({
+                ...datasourcePayload,
+                type,
+                path: filename
+            });
+            setCreateNew(createNew);
+            setCurrentPage(PAGE_CONFIRM);
+        } else if (type === SourceType.Dropbox) {
             setBusy(true);
+            setCurrentPage(PAGE_AUTH);
             const token = await authDropbox();
             setBusy(false);
             if (!token) {
@@ -223,6 +238,11 @@ export function AddVaultMenu() {
     );
     const pageAuth = () => (
         <>
+            {selectedType === SourceType.File && (
+                <LoadingContainer>
+                    <i>A dialog will open for choosing a vault file</i>
+                </LoadingContainer>
+            )}
             {selectedType === SourceType.Dropbox && (
                 <LoadingContainer>
                     <i>A separate window will open for authentication</i>

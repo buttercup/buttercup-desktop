@@ -30,7 +30,10 @@ ipcMain.on("get-add-vault-filename", async evt => {
         // @todo record error
     }
     const filename = await showAddFileVaultDialog(win as BrowserWindow);
-    evt.reply("get-add-vault-filename:reply", JSON.stringify(filename));
+    evt.reply("get-add-vault-filename:reply", JSON.stringify({
+        filename,
+        createNew: false
+    }));
 });
 
 ipcMain.on("get-vault-facade", async (evt, sourceID) => {

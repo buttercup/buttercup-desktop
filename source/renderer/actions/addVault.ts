@@ -1,7 +1,6 @@
 import { ipcRenderer } from "electron";
-import { getPrimaryPassword } from "./password";
 import { setBusy } from "../state/app";
-import { AddVaultPayload, DatasourceConfig, SourceType } from "../types";
+import { AddVaultPayload, DatasourceConfig } from "../types";
 
 export async function addNewVaultTarget(
     datasourceConfig: DatasourceConfig,
@@ -32,19 +31,19 @@ export async function addNewVaultTarget(
     }
 }
 
-export async function startAddFileVault() {
-    const getVaultFilenamePromise = new Promise<string>((resolve, reject) => {
-        ipcRenderer.once("get-add-vault-filename:reply", (evt, filename) => {
-            resolve(JSON.parse(filename));
+export async function getFileVaultParameters(): Promise<{ filename: string, createNew: boolean } | null> {
+    const getVaultDetailsPromise = new Promise<{ filename: string, createNew: boolean }>(resolve => {
+        ipcRenderer.once("get-add-vault-filename:reply", (evt, payload) => {
+            resolve(JSON.parse(payload));
         });
     });
     ipcRenderer.send("get-add-vault-filename");
-    const filename: string = await getVaultFilenamePromise;
-    if (!filename) return;
-    const password = await getPrimaryPassword();
-    if (!password) return;
-    return addNewVaultTarget({
-        path: filename,
-        type: SourceType.File
-    }, password, true);
+    const {
+        filename,
+        createNew
+    } = await getVaultDetailsPromise;
+    return {
+        filename,
+        createNew
+    };
 }
