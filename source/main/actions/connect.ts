@@ -8,6 +8,10 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
     let credentials: Credentials,
         name: string;
     switch (payload.datasourceConfig.type) {
+        case SourceType.GoogleDrive:
+            credentials = Credentials.fromDatasource(payload.datasourceConfig, payload.masterPassword);
+            name = payload.datasourceConfig.fileID; // @todo fix
+            break;
         case SourceType.Dropbox:
         /* falls-through */
         case SourceType.WebDAV:

@@ -23,10 +23,11 @@ type Identifier = FileChooserPath | null;
 
 interface FileChooserPath {
     identifier: string;
+    name: string;
 }
 
 interface FileChooserProps {
-    callback: (path: string | null, isNew: boolean) => void;
+    callback: (identifier: string | null, isNew: boolean) => void;
     fsInterface: FileSystemInterface;
 }
 
@@ -106,7 +107,6 @@ export function FileChooser(props: FileChooserProps) {
     const [selectedVaultPath, setSelectedVaultPath] = useState(null);
     const loadPath = useCallback(async (identifier: Identifier) => {
         setLoading(true);
-        console.log("LOAD", identifier);
         const results = await props.fsInterface.getDirectoryContents(identifier);
         setCurrentItems(results);
         setLoading(false);
@@ -120,12 +120,12 @@ export function FileChooser(props: FileChooserProps) {
             setBreadcrumbs([
                 ...breadcrumbs,
                 {
-                    text: currentPath === null ? "/" : basename(currentPath.identifier),
+                    text: currentPath === null ? "/" : item.name,
                     identifier: currentPath
                 }
             ]);
-            loadPath({ identifier: item.identifier });
-            setCurrentPath({ identifier: item.identifier });
+            loadPath({ identifier: item.identifier, name: item.name });
+            setCurrentPath({ identifier: item.identifier, name: item.name });
             setNewVault(null);
         }
     }, [breadcrumbs, currentPath]);
@@ -198,7 +198,7 @@ export function FileChooser(props: FileChooserProps) {
                                 onClick: evt => handlePreviousPathClick(evt, ind)
                             })),
                             {
-                                text: currentPath === null ? "/" : basename(currentPath.identifier)
+                                text: currentPath === null ? "/" : currentPath.name
                             }
                         ]}
                         minVisibleItems={1}

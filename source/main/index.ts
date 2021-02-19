@@ -20,6 +20,9 @@ app.on("activate", () => {
     openMainWindow();
 });
 
+// **
+// ** App protocol handling
+// **
 app.on("second-instance", async (event, args) => {
     await openMainWindow();
     // Protocol URL for Linux/Windows
@@ -34,6 +37,12 @@ app.on("open-url", (e, url) => {
         handleProtocolCall(url);
     }
 });
+
+app.setAsDefaultProtocolClient(BUTTERCUP_PROTOCOL.replace("://", ""));
+
+// **
+// ** Boot
+// **
 
 app.whenReady()
     .then(() => initialise())

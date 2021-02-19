@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
+import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, Switch } from "@blueprintjs/core";
 import { useState as useHookState } from "@hookstate/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
@@ -11,6 +11,8 @@ import { getFSInstance } from "../library/fsInterface";
 import { FileChooser } from "./standalone/FileChooser";
 import { addNewVaultTarget, getFileVaultParameters } from "../actions/addVault";
 import { showError } from "../services/notifications";
+import { authenticateGoogleDrive } from "../services/authGoogle";
+import { showWarning } from "../services/notifications";
 import { DatasourceConfig, SourceType } from "../types";
 
 interface WebDAVCredentialsState {
@@ -95,6 +97,8 @@ const TypeText = styled.div`
     color: grey;
 `;
 const WideFormGroup = styled(FormGroup)`
+    display: flex;
+    justify-content: center;
     input {
         width: 350px !important;
     }
@@ -114,6 +118,8 @@ export function AddVaultMenu() {
     const [createNew, setCreateNew] = useState(false);
     const [vaultPassword, setVaultPassword] = useState("");
     const [webdavCredentials, setWebDAVCredentials] = useState<WebDAVCredentialsState>({ ...EMPTY_WEBDAV_CREDENTIALS });
+    const [authenticatingGoogleDrive, setAuthenticatingGoogleDrive] = useState(false);
+    const [googleDriveOpenPerms, setGoogleDriveOpenPerms] = useState(false);
     useEffect(() => {
         const newValue = showAddVault.get();
         if (previousShowAddVault !== newValue) {
@@ -130,6 +136,8 @@ export function AddVaultMenu() {
         setDatasourcePayload({ ...EMPTY_DATASOURCE_CONFIG });
         setWebDAVCredentials({ ...EMPTY_WEBDAV_CREDENTIALS });
         setVaultPassword("");
+        setGoogleDriveOpenPerms(false);
+        setAuthenticatingGoogleDrive(false);
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
@@ -163,6 +171,12 @@ export function AddVaultMenu() {
             });
             setFsInstance(getFSInstance(type, { token }));
             setCurrentPage(PAGE_CHOOSE);
+        } else if (type === SourceType.GoogleDrive) {
+            setDatasourcePayload({
+                ...datasourcePayload,
+                type
+            });
+            setCurrentPage(PAGE_AUTH);
         } else if (type === SourceType.WebDAV) {
             setDatasourcePayload({
                 ...datasourcePayload,
@@ -172,7 +186,24 @@ export function AddVaultMenu() {
         }
     }, [datasourcePayload]);
     const handleAuthSubmit = useCallback(async () => {
-        if (selectedType === SourceType.WebDAV) {
+        if (selectedType === SourceType.GoogleDrive) {
+            try {
+                const { accessToken, refreshToken } = await authenticateGoogleDrive(googleDriveOpenPerms);
+                setDatasourcePayload({
+                    ...datasourcePayload,
+                    token: accessToken,
+                    refreshToken
+                });
+                setFsInstance(getFSInstance(SourceType.GoogleDrive, {
+                    token: accessToken
+                }));
+                setCurrentPage(PAGE_CHOOSE);
+            } catch (err) {
+                console.error(err);
+                showWarning(`Google authentication failed: ${err.message}`);
+                setAuthenticatingGoogleDrive(false);
+            }
+        } else if (selectedType === SourceType.WebDAV) {
             setBusy(true);
             try {
                 await testWebDAV(webdavCredentials.url, webdavCredentials.username, webdavCredentials.password);
@@ -198,7 +229,7 @@ export function AddVaultMenu() {
             setFsInstance(getFSInstance(SourceType.WebDAV, newPayload));
             setCurrentPage(PAGE_CHOOSE);
         }
-    }, [selectedType, datasourcePayload, webdavCredentials]);
+    }, [selectedType, datasourcePayload, webdavCredentials, googleDriveOpenPerms]);
     const handleSelectedPathChange = useCallback((selectedPath: string, isNew: boolean) => {
         setSelectedRemotePath(selectedPath);
         setCreateNew(isNew);
@@ -208,6 +239,12 @@ export function AddVaultMenu() {
             setDatasourcePayload({
                 ...datasourcePayload,
                 path: selectedRemotePath
+            });
+            setCurrentPage(PAGE_CONFIRM);
+        } else if (selectedType === SourceType.GoogleDrive) {
+            setDatasourcePayload({
+                ...datasourcePayload,
+                fileID: selectedRemotePath
             });
             setCurrentPage(PAGE_CONFIRM);
         } else if (selectedType ===  SourceType.WebDAV) {
@@ -247,6 +284,24 @@ export function AddVaultMenu() {
                 <LoadingContainer>
                     <i>A separate window will open for authentication</i>
                 </LoadingContainer>
+            )}
+            {selectedType === SourceType.GoogleDrive && (
+                <>
+                    <p>You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.</p>
+                    <p>Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares</p>
+                    <p>Selected a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.</p>
+                    <WideFormGroup
+                        inline
+                        label="Permissions"
+                    >
+                        <Switch
+                            disabled={authenticatingGoogleDrive}
+                            label="Open"
+                            checked={googleDriveOpenPerms}
+                            onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
+                        />
+                    </WideFormGroup>
+                </>
             )}
             {selectedType === SourceType.WebDAV && (
                 <>
@@ -339,6 +394,16 @@ export function AddVaultMenu() {
                             title="Continue adding vault"
                         >
                             Next
+                        </Button>
+                    )}
+                    {currentPage === PAGE_AUTH && selectedType === SourceType.GoogleDrive && (
+                        <Button
+                        disabled={authenticatingGoogleDrive}
+                            intent={Intent.PRIMARY}
+                            onClick={handleAuthSubmit}
+                            title="Authenticate with Google Drive"
+                        >
+                            Authenticate
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.WebDAV && (

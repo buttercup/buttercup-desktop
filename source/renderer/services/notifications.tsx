@@ -53,3 +53,7 @@ function showNotification(message: any, intent: Intent = Intent.NONE, timeout: n
 export function showSuccess(message: string) {
     showNotification(message, Intent.SUCCESS);
 }
+
+export function showWarning(message: string) {
+    showNotification(message, Intent.WARNING, 10000);
+}
