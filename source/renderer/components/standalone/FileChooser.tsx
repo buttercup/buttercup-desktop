@@ -16,7 +16,13 @@ const { useCallback, useEffect, useState } = React;
 
 interface BreadcrumbProps {
     text: string;
-    path: string;
+    identifier: Identifier;
+}
+
+type Identifier = FileChooserPath | null;
+
+interface FileChooserPath {
+    identifier: string;
 }
 
 interface FileChooserProps {
@@ -91,19 +97,17 @@ const IconInline = styled(Icon)`
 
 export function FileChooser(props: FileChooserProps) {
     const [currentItems, setCurrentItems] = useState<Array<FSItem>>([]);
-    const [currentPath, setCurrentPath] = useState("/");
+    const [currentPath, setCurrentPath] = useState<Identifier>(null);
     const [loading, setLoading] = useState(false);
     const [breadcrumbs, setBreadcrumbs] = useState<Array<BreadcrumbProps>>([]);
     const [showNewVaultFilenamePrompt, setShowNewVaultFilenamePrompt] = useState(false);
     const [newVaultFilename, setNewVaultFilename] = useState(null);
     const [newVault, setNewVault] = useState(null);
     const [selectedVaultPath, setSelectedVaultPath] = useState(null);
-    const loadPath = useCallback(async path => {
+    const loadPath = useCallback(async (identifier: Identifier) => {
         setLoading(true);
-        const results = await props.fsInterface.getDirectoryContents({
-            identifier: path,
-            name: basename(path)
-        });
+        console.log("LOAD", identifier);
+        const results = await props.fsInterface.getDirectoryContents(identifier);
         setCurrentItems(results);
         setLoading(false);
     }, []);
@@ -116,20 +120,21 @@ export function FileChooser(props: FileChooserProps) {
             setBreadcrumbs([
                 ...breadcrumbs,
                 {
-                    text: currentPath === "/" ? "/" : basename(currentPath),
-                    path: currentPath
+                    text: currentPath === null ? "/" : basename(currentPath.identifier),
+                    identifier: currentPath
                 }
             ]);
-            loadPath(item.identifier);
-            setCurrentPath(item.identifier);
+            loadPath({ identifier: item.identifier });
+            setCurrentPath({ identifier: item.identifier });
             setNewVault(null);
         }
     }, [breadcrumbs, currentPath]);
-    const handlePreviousPathClick = useCallback((event, path: string) => {
+    const handlePreviousPathClick = useCallback((event, index: number) => {
         event.preventDefault();
-        setBreadcrumbs(breadcrumbs.filter(bc => bc.path.length < path.length));
-        loadPath(path);
-        setCurrentPath(path);
+        const bc = breadcrumbs[index];
+        setBreadcrumbs(breadcrumbs.slice(0, index));
+        loadPath(bc.identifier);
+        setCurrentPath(bc.identifier);
         if (newVault === selectedVaultPath) {
             setSelectedVaultPath(null);
         }
@@ -166,7 +171,7 @@ export function FileChooser(props: FileChooserProps) {
         []
     );
     useEffect(() => {
-        loadPath("/");
+        loadPath(null);
     }, []);
     useEffect(() => {
         props.callback(selectedVaultPath, !!newVault);
@@ -188,12 +193,12 @@ export function FileChooser(props: FileChooserProps) {
                     <Breadcrumbs
                         currentBreadcrumbRenderer={renderBreadcrumb as any}
                         items={[
-                            ...breadcrumbs.map(bc => ({
+                            ...breadcrumbs.map((bc, ind) => ({
                                 text: bc.text,
-                                onClick: evt => handlePreviousPathClick(evt, bc.path)
+                                onClick: evt => handlePreviousPathClick(evt, ind)
                             })),
                             {
-                                text: currentPath === "/" ? "/" : basename(currentPath)
+                                text: currentPath === null ? "/" : basename(currentPath.identifier)
                             }
                         ]}
                         minVisibleItems={1}
