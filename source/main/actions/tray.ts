@@ -2,7 +2,8 @@ import path from "path";
 import { Menu, Tray } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { isLinux, isWindows } from "../../shared/library/platform";
-import { getSourceDescriptions } from "../services/buttercup";
+import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
+import { openMainWindow } from "../services/windows";
 
 let __tray: Tray = null;
 
@@ -19,21 +20,21 @@ async function getContextMenu(): Promise<Menu> {
         },
         {
             label: "Open",
-            click: () => {}
+            click: () => openMainWindow()
         },
         {
             type: "separator"
         },
         {
             label: "Lock All",
-            click: () => {}
+            click: () => lockAllSources()
         },
         {
             type: "separator"
         },
         {
             label: "Quit",
-            click: () => {}
+            role: "quit"
         }
     ]);
 }

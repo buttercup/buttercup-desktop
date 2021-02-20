@@ -83,6 +83,12 @@ export async function loadVaultsFromDisk() {
     await getVaultManager().rehydrate();
 }
 
+export async function lockAllSources() {
+    const vaultManager = getVaultManager();
+    if (vaultManager.unlockedSources.length === 0) return;
+    await Promise.all(vaultManager.unlockedSources.map(source => source.lock()));
+}
+
 export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
