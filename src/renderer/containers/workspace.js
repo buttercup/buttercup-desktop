@@ -47,6 +47,13 @@ export default connect(
       }
     },
     isVaultUnlocked: vaultId => (_, getState) =>
-      getArchive(getState(), vaultId).status === 'unlocked'
+      getArchive(getState(), vaultId).status === 'unlocked',
+    getSelectedArchiveName: vaultId => (_, getState) => {
+      const archive = getArchive(getState(), vaultId);
+
+      if (archive) return archive.name;
+
+      return null;
+    }
   }
 )(Workspace, 'Workspace');

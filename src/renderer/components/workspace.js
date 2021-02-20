@@ -28,7 +28,8 @@ class Workspace extends PureComponent {
     isArchiveSearchVisible: PropTypes.bool,
     setColumnSize: PropTypes.func,
     isVaultUnlocked: PropTypes.func,
-    onValidate: PropTypes.func
+    onValidate: PropTypes.func,
+    getSelectedArchiveName: PropTypes.func
   };
 
   state = {
@@ -100,16 +101,23 @@ class Workspace extends PureComponent {
       archivesLoading,
       savingArchive,
       isArchiveSearchVisible,
-      onValidate
+      onValidate,
+      getSelectedArchiveName
     } = this.props;
     const { modalRequest } = this.state;
+
+    // the modal object have the selected archive id as payload.
+    const selectedArchive = modalRequest && modalRequest.payload;
 
     return (
       <>
         <GlobalStyles />
         <Flex flexAuto>
           <If condition={archivesCount > 0}>
-            <Sidebar condenced={condencedSidebar} />
+            <Sidebar
+              condenced={condencedSidebar}
+              selectedArchive={selectedArchive}
+            />
           </If>
           <Primary flexAuto>
             <Choose>
@@ -154,6 +162,7 @@ class Workspace extends PureComponent {
             onSuccess={this.handlePasswordModalClose}
             confirmPassword={modalRequest.confirm}
             askForOldPassword={!!modalRequest.askForOldPassword}
+            selectedArchiveName={getSelectedArchiveName(modalRequest.payload)}
           />
         </If>
       </>

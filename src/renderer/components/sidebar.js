@@ -35,7 +35,8 @@ class RecentFiles extends PureComponent {
     onChangeColour: PropTypes.func.isRequired,
     onChangeOrder: PropTypes.func.isRequired,
     showImportDialog: PropTypes.func.isRequired,
-    onExportArchive: PropTypes.func.isRequired
+    onExportArchive: PropTypes.func.isRequired,
+    selectedArchive: PropTypes.string
   };
 
   onSortEnd = ({ oldIndex, newIndex }) => {
@@ -47,7 +48,12 @@ class RecentFiles extends PureComponent {
   };
 
   render() {
-    const { archives, currentArchiveId, condenced } = this.props;
+    const {
+      archives,
+      currentArchiveId,
+      condenced,
+      selectedArchive
+    } = this.props;
 
     const footer = <AddArchiveButton dark full condenced={condenced} />;
 
@@ -61,7 +67,10 @@ class RecentFiles extends PureComponent {
         >
           {archives.map((archive, i) => (
             <SidebarItem
-              active={archive.id === currentArchiveId}
+              active={
+                archive.id === currentArchiveId ||
+                selectedArchive === archive.id
+              }
               archive={archive}
               key={archive.id}
               index={i}
