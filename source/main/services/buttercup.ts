@@ -19,7 +19,7 @@ import {
     getVaultCacheStorage,
     getVaultStorage
 } from "./storage";
-import { SourceType } from "../types";
+import { SourceType, VaultSourceDescription } from "../types";
 
 let __vaultManager: VaultManager;
 
@@ -43,6 +43,11 @@ export async function attachVaultManagerWatchers() {
             source.on("updated", () => onVaultSourceUpdated(source));
         });
     });
+}
+
+export function getSourceDescriptions(): Array<VaultSourceDescription> {
+    const vaultManager = getVaultManager();
+    return vaultManager.sources.map(source => describeSource(source));
 }
 
 export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
@@ -82,6 +87,13 @@ export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
     await source.lock();
+}
+
+export function onSourcesUpdated(callback: () => void): () => void {
+    const vaultManager = getVaultManager();
+    const innerCB = () => callback();
+    vaultManager.on("sourcesUpdated", innerCB);
+    return () => vaultManager.off("sourcesUpdated", innerCB);
 }
 
 function onVaultSourceUpdated(source: VaultSource) {
