@@ -4,7 +4,7 @@ import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
-import { saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
+import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { AddVaultPayload } from "./types";
 
@@ -34,6 +34,14 @@ ipcMain.on("get-add-vault-filename", async evt => {
         filename,
         createNew: false
     }));
+});
+
+ipcMain.on("get-empty-vault", async (evt, payload) => {
+    const {
+        password
+    } = JSON.parse(payload);
+    const vault = await getEmptyVault(password);
+    evt.reply("get-empty-vault:reply", vault);
 });
 
 ipcMain.on("get-vault-facade", async (evt, sourceID) => {

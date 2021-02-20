@@ -15,7 +15,6 @@ export async function authenticateGoogleDrive(
     openPermissions: boolean = false
 ): Promise<{ accessToken: string, refreshToken: string }> {
     const scopes = openPermissions ? GOOGLE_DRIVE_SCOPES_PERMISSIVE : GOOGLE_DRIVE_SCOPES_STANDARD;
-    console.log("GDRIVE", openPermissions, scopes);
     const oauth2Client = getGoogleDriveOAuthClient();
     const url = oauth2Client.generateAuthUrl({
         access_type: "offline",

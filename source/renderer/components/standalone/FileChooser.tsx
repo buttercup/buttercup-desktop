@@ -4,6 +4,7 @@ import { basename, join as joinPath } from "path-posix";
 import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, Classes, Dialog, IBreadcrumbProps, Icon, InputGroup, Intent, Navbar, Spinner } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { FSItem } from "../../library/fsInterface";
+import { NewVaultPlaceholder } from "../../types";
 
 /*
     File Manager for connecting vaults
@@ -27,7 +28,7 @@ interface FileChooserPath {
 }
 
 interface FileChooserProps {
-    callback: (identifier: string | null, isNew: boolean) => void;
+    callback: (parentIdentifier: string | null, identifier: string | null, isNew: boolean) => void;
     fsInterface: FileSystemInterface;
 }
 
@@ -103,8 +104,8 @@ export function FileChooser(props: FileChooserProps) {
     const [breadcrumbs, setBreadcrumbs] = useState<Array<BreadcrumbProps>>([]);
     const [showNewVaultFilenamePrompt, setShowNewVaultFilenamePrompt] = useState(false);
     const [newVaultFilename, setNewVaultFilename] = useState(null);
-    const [newVault, setNewVault] = useState(null);
-    const [selectedVaultPath, setSelectedVaultPath] = useState(null);
+    const [newVault, setNewVault] = useState<NewVaultPlaceholder>(null);
+    const [selectedVaultPath, setSelectedVaultPath] = useState<Identifier>(null);
     const loadPath = useCallback(async (identifier: Identifier) => {
         setLoading(true);
         const results = await props.fsInterface.getDirectoryContents(identifier);
@@ -114,7 +115,7 @@ export function FileChooser(props: FileChooserProps) {
     const handleItemClick = useCallback((item: FSItem) => {
         if (item.type === "file") {
             if (/\.bcup$/i.test(item.name) === true) {
-                setSelectedVaultPath(item.identifier);
+                setSelectedVaultPath(item);
             }
         } else {
             setBreadcrumbs([
@@ -126,6 +127,7 @@ export function FileChooser(props: FileChooserProps) {
             ]);
             loadPath({ identifier: item.identifier, name: item.name });
             setCurrentPath({ identifier: item.identifier, name: item.name });
+            setSelectedVaultPath(null);
             setNewVault(null);
         }
     }, [breadcrumbs, currentPath]);
@@ -135,9 +137,7 @@ export function FileChooser(props: FileChooserProps) {
         setBreadcrumbs(breadcrumbs.slice(0, index));
         loadPath(bc.identifier);
         setCurrentPath(bc.identifier);
-        if (newVault === selectedVaultPath) {
-            setSelectedVaultPath(null);
-        }
+        setSelectedVaultPath(null);
         setNewVault(null);
     }, [breadcrumbs, newVault, selectedVaultPath]);
     const handleNewVaultPromptClose = useCallback(() => {
@@ -146,16 +146,21 @@ export function FileChooser(props: FileChooserProps) {
     }, []);
     const handleNewVaultPromptSubmit = useCallback(() => {
         setShowNewVaultFilenamePrompt(false);
-        let newPath = joinPath(currentPath, newVaultFilename);
-        newPath = /\.bcup$/i.test(newPath) ? newPath : `${newPath}.bcup`;
-        if (currentItems.find(ci => ci.identifier === newPath)) {
+        const targetNewFileName = /\.bcup$/i.test(newVaultFilename) ? newVaultFilename : `${newVaultFilename}.bcup`;
+        if (currentItems.find(ci => ci.name === targetNewFileName)) {
             setNewVaultFilename(null);
             setNewVault(null);
             setSelectedVaultPath(null);
             return;
         }
-        setNewVault(newPath);
-        setSelectedVaultPath(newPath);
+        setNewVault({
+            filename: targetNewFileName,
+            parentIdentifier: currentPath ? currentPath.identifier : null
+        });
+        setSelectedVaultPath({
+            identifier: targetNewFileName,
+            name: targetNewFileName
+        });
         setNewVaultFilename(null);
     }, [newVaultFilename, currentPath, currentItems]);
     const showNewVaultPrompt = useCallback(() => {
@@ -174,8 +179,12 @@ export function FileChooser(props: FileChooserProps) {
         loadPath(null);
     }, []);
     useEffect(() => {
-        props.callback(selectedVaultPath, !!newVault);
-    }, [selectedVaultPath, props.callback]);
+        props.callback(
+            newVault ? newVault.parentIdentifier : null,
+            selectedVaultPath ? selectedVaultPath.identifier : null,
+            !!newVault
+        );
+    }, [selectedVaultPath, props.callback, newVault]);
     return (
         <Chooser>
             <Navbar>
@@ -183,7 +192,7 @@ export function FileChooser(props: FileChooserProps) {
                     <Button className="bp3-minimal" icon="new-object" text="New Vault" onClick={showNewVaultPrompt} />
                     {newVault && (
                         <Button className="bp3-minimal" icon="graph-remove" text="Cancel New" onClick={() => {
-                            if (newVault ===  selectedVaultPath) {
+                            if (newVault.filename === selectedVaultPath.name) {
                                 setSelectedVaultPath(null);
                             }
                             setNewVault(null);
@@ -213,7 +222,7 @@ export function FileChooser(props: FileChooserProps) {
                     <ChooserItem
                         key={item.identifier}
                         onClick={() => handleItemClick(item)}
-                        selected={item.identifier === selectedVaultPath}
+                        selected={selectedVaultPath && item.identifier === selectedVaultPath.identifier}
                     >
                         <Icon
                             icon={
@@ -230,12 +239,18 @@ export function FileChooser(props: FileChooserProps) {
                     </ChooserItem>
                 ))}
                 {newVault && (
-                    <ChooserItem onClick={() => setSelectedVaultPath(newVault)} selected={newVault === selectedVaultPath}>
+                    <ChooserItem
+                        onClick={() => setSelectedVaultPath({
+                            identifier: newVault.filename,
+                            name: newVault.filename
+                        })}
+                        selected={newVault.filename === selectedVaultPath.name}
+                    >
                         <Icon
                             icon={<IconImg src={ICON_BUTTERCUP} />}
                             iconSize={ICON_SIZE}
                         />
-                        <ChooserItemText><IconInline icon="plus" iconSize={10} color="#ff7373" /> {basename(newVault)}</ChooserItemText>
+                        <ChooserItemText><IconInline icon="plus" iconSize={10} color="#ff7373" /> {newVault.filename}</ChooserItemText>
                     </ChooserItem>
                 )}
             </ChooserContents>

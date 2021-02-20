@@ -4,7 +4,6 @@ import { getVaultFacadeBySource } from "./buttercup";
 const __cachedFacades: Record<VaultSourceID, VaultFacade> = {};
 
 export function cacheFacade(sourceID: VaultSourceID, vaultFacade: VaultFacade): void {
-    console.log("CACHE FACADE", sourceID, typeof vaultFacade);
     __cachedFacades[sourceID] = vaultFacade;
 }
 

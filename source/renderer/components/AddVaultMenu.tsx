@@ -12,6 +12,7 @@ import { FileChooser } from "./standalone/FileChooser";
 import { addNewVaultTarget, getFileVaultParameters } from "../actions/addVault";
 import { showError } from "../services/notifications";
 import { authenticateGoogleDrive } from "../services/authGoogle";
+import { createEmptyVault as createEmptyGoogleDriveVault } from "../services/googleDrive";
 import { showWarning } from "../services/notifications";
 import { DatasourceConfig, SourceType } from "../types";
 
@@ -230,10 +231,14 @@ export function AddVaultMenu() {
             setCurrentPage(PAGE_CHOOSE);
         }
     }, [selectedType, datasourcePayload, webdavCredentials, googleDriveOpenPerms]);
-    const handleSelectedPathChange = useCallback((selectedPath: string, isNew: boolean) => {
-        setSelectedRemotePath(selectedPath);
+    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean) => {
+        if (selectedType === SourceType.GoogleDrive) {
+            setSelectedRemotePath(JSON.stringify([parentIdentifier, identifier]));
+        } else {
+            setSelectedRemotePath(identifier);
+        }
         setCreateNew(isNew);
-    }, []);
+    }, [selectedType]);
     const handleVaultFileSelect = useCallback(() => {
         if (selectedType === SourceType.Dropbox) {
             setDatasourcePayload({
@@ -242,10 +247,9 @@ export function AddVaultMenu() {
             });
             setCurrentPage(PAGE_CONFIRM);
         } else if (selectedType === SourceType.GoogleDrive) {
-            setDatasourcePayload({
-                ...datasourcePayload,
-                fileID: selectedRemotePath
-            });
+            // We don't set the Google Drive datasource properties yet because we don't know
+            // if we need to create a new file or not. Google Drive uses file IDs and not
+            // names, so the data in state potentially isn't correct yet.
             setCurrentPage(PAGE_CONFIRM);
         } else if (selectedType ===  SourceType.WebDAV) {
             setDatasourcePayload({
@@ -255,10 +259,17 @@ export function AddVaultMenu() {
             setCurrentPage(PAGE_CONFIRM);
         }
     }, [selectedRemotePath, selectedType, datasourcePayload]);
-    const handleFinalConfirm = useCallback(() => {
-        addNewVaultTarget(datasourcePayload, vaultPassword, createNew);
+    const handleFinalConfirm = useCallback(async () => {
+        const datasource = { ...datasourcePayload };
+        if (selectedType === SourceType.GoogleDrive) {
+            const [parentIdentifier, identifier] = JSON.parse(selectedRemotePath);
+            datasource.fileID = createNew
+                ? await createEmptyGoogleDriveVault(datasource.token, parentIdentifier, identifier, vaultPassword)
+                : identifier;
+        }
+        addNewVaultTarget(datasource, vaultPassword, createNew);
         close(); // This also clears sensitive state items
-    }, [datasourcePayload, vaultPassword]);
+    }, [datasourcePayload, vaultPassword, selectedType, selectedRemotePath, createNew]);
     // Pages
     const pageType = () => (
         <>

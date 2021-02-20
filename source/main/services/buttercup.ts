@@ -1,6 +1,8 @@
 import { BrowserWindow } from "electron";
 import {
     Credentials,
+    TextDatasource,
+    Vault,
     VaultFacade,
     VaultSource,
     VaultSourceID,
@@ -52,6 +54,13 @@ export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
         throw new Error(`Cannot generate facade: Source is not unlocked: ${sourceID}`);
     }
     return createVaultFacade(source.vault);
+}
+
+export async function getEmptyVault(password: string): Promise<string> {
+    const creds = Credentials.fromPassword(password);
+    const vault = Vault.createWithDefaults();
+    const tds = new TextDatasource(Credentials.fromPassword(password));
+    return tds.save(vault.format.getHistory(), creds);
 }
 
 function getVaultManager(): VaultManager {
