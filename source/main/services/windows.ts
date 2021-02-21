@@ -17,7 +17,15 @@ async function createVaultWindow() {
         }
     })
     win.on("resize", debounce(() => handleWindowResize(win), 750, false));
+    const loadedPromise = new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error("Timed-out waiting for window to load")), 10000);
+        win.webContents.once("did-finish-load", () => {
+            clearTimeout(timeout);
+            resolve();
+        });
+    });
     win.loadFile(path.resolve(__dirname, "../../renderer/index.html"));
+    await loadedPromise;
 }
 
 async function handleWindowResize(win: BrowserWindow) {
@@ -32,7 +40,7 @@ export function notifyWindowsOfSourceUpdate(sourceID: VaultSourceID) {
     });
 }
 
-export async function openMainWindow() {
+export async function openMainWindow(targetRoute: string = null): Promise<BrowserWindow> {
     const windows = BrowserWindow.getAllWindows();
     if (windows.length === 0) {
         await createVaultWindow();
@@ -40,4 +48,9 @@ export async function openMainWindow() {
         windows[0].show();
         windows[0].focus();
     }
+    if (targetRoute) {
+        const [currentURL] = windows[0].webContents.getURL().split("#");
+        windows[0].loadURL(`${currentURL}#${targetRoute}`);
+    }
+    return windows[0];
 }

@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import { getCurrentSourceID, setVaultsList } from "./state/vaults";
 import { fetchUpdatedFacade } from "./actions/facade";
+import { unlockVaultSource } from "./actions/unlockVault";
 import { VaultSourceDescription } from "./types";
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {
@@ -8,6 +9,10 @@ ipcRenderer.on("source-updated", (evt, sourceID) => {
     if (sourceID === currentSourceID) {
         fetchUpdatedFacade(sourceID);
     }
+});
+
+ipcRenderer.on("unlock-vault", async (evt, sourceID) => {
+    await unlockVaultSource(sourceID);
 });
 
 ipcRenderer.on("vaults-list", (evt, payload) => {

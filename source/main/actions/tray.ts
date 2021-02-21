@@ -30,6 +30,17 @@ async function getContextMenu(): Promise<Menu> {
             click: () => lockAllSources()
         },
         {
+            label: "Unlock",
+            submenu: sources.map(source => ({
+                label: source.name,
+                enabled: source.state === VaultSourceStatus.Locked,
+                click: async () => {
+                    const window = await openMainWindow(`/source/${source.id}`);
+                    window.webContents.send("unlock-vault", source.id);
+                }
+            }))
+        },
+        {
             type: "separator"
         },
         {
