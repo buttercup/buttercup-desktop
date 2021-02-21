@@ -1,8 +1,12 @@
 import { session } from "electron";
 import { attachVaultManagerWatchers, loadVaultsFromDisk, onSourcesUpdated } from "./buttercup";
+import { initialise as initialiseLogging } from "./log";
+import { logInfo } from "../library/log";
 import { updateTrayIcon } from "../actions/tray";
 
 export async function initialise() {
+    await initialiseLogging();
+    logInfo("Application session started:", new Date());
     attachVaultManagerWatchers();
     await loadVaultsFromDisk();
     session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
@@ -13,4 +17,5 @@ export async function initialise() {
     onSourcesUpdated(async () => {
         await updateTrayIcon();
     });
+    logInfo("Initialisation completed");
 }

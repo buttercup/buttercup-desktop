@@ -6,7 +6,8 @@ import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
-import { AddVaultPayload } from "./types";
+import { log as logRaw } from "./library/log";
+import { AddVaultPayload, LogLevel } from "./types";
 
 ipcMain.on("add-vault-config", async (evt, payload) => {
     const addVaultPayload: AddVaultPayload = JSON.parse(payload);
@@ -58,6 +59,17 @@ ipcMain.on("lock-source", async (evt, payload) => {
         sourceID
     } = JSON.parse(payload);
     await lockSourceWithID(sourceID);
+});
+
+ipcMain.on("log", async (evt, payload) => {
+    const {
+        level,
+        log
+    } = JSON.parse(payload) as {
+        level: LogLevel,
+        log: string
+    };
+    logRaw(level, [log]);
 });
 
 ipcMain.on("remove-source", async (evt, payload) => {

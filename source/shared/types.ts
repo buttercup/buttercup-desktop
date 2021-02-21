@@ -8,6 +8,12 @@ export interface AddVaultPayload {
 
 export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
+export enum LogLevel {
+    Error = "error",
+    Info = "info",
+    Warning = "warning"
+}
+
 export enum SourceType {
     Dropbox = "dropbox",
     File = "file",

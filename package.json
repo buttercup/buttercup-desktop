@@ -73,6 +73,7 @@
     "env-paths": "^2.2.0",
     "eventemitter3": "^4.0.7",
     "layerr": "^0.1.2",
+    "log-rotate": "^0.2.8",
     "nested-property": "^4.0.0",
     "pify": "^5.0.0",
     "webdav": "^4.0.0"
