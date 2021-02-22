@@ -1,9 +1,10 @@
 import { ipcRenderer } from "electron";
+import { Intent } from "@blueprintjs/core";
 import { VaultFacade, VaultSourceID } from "buttercup";
 import { setSaving } from "../state/app";
 import { createProgressNotification } from "../services/notifications";
+import { logInfo } from "../library/log";
 import { ICON_UPLOAD } from "../../shared/symbols";
-import { Intent } from "@blueprintjs/core";
 
 export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: VaultFacade) {
     const progNotification = createProgressNotification(ICON_UPLOAD, 100);
@@ -23,9 +24,11 @@ export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: Vaul
         });
     });
     setSaving(true);
+    logInfo(`Saving vault facade: ${sourceID}`);
     ipcRenderer.send("save-vault-facade", JSON.stringify({
         sourceID,
         vaultFacade
     }));
     await savePromise;
+    logInfo(`Saved vault facade: ${sourceID}`);
 }

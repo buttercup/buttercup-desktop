@@ -1,9 +1,11 @@
 import { remote } from "electron";
+import { logInfo } from "../library/log";
 
 const { BrowserWindow } = remote;
 
 export async function authenticate(authURL: string, matchRegex: RegExp): Promise<string | null> {
     const currentWindow = BrowserWindow.getFocusedWindow();
+    logInfo(`Starting 3rd party authentication procedure: ${authURL}`);
     return new Promise<string>(resolve => {
         let foundToken = null;
         const authWin = new BrowserWindow({
@@ -29,8 +31,10 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
         };
         const closeCB = () => {
             if (foundToken) {
+                logInfo("Completing 3rd party authentication with token");
                 return resolve(foundToken);
             }
+            logInfo("Completing 3rd party authentication without token");
             resolve(null);
         };
 

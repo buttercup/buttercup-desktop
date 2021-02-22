@@ -1,13 +1,16 @@
 import { createClient } from "webdav";
-import { Layerr} from "layerr";
+import { Layerr } from "layerr";
+import { logInfo } from "../library/log";
 
 export async function testWebDAV(url: string, username?: string, password?: string): Promise<void> {
-    const client = username && password
+    const authentication = !!(username && password);
+    const client = authentication
         ? createClient(url, {
             username,
             password
         })
         : createClient(url);
+    logInfo(`Testing WebDAV connection: ${url} (authenticated: ${authentication ? "yes" : "no"})`);
     try {
         await client.getDirectoryContents("/");
     } catch (err) {
