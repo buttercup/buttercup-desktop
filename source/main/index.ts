@@ -50,4 +50,5 @@ app.whenReady()
     .then(() => openMainWindow())
     .catch(err => {
         logErr(err);
+        app.quit();
     });
