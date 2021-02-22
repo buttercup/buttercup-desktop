@@ -2,6 +2,7 @@ import path from "path";
 import { BrowserWindow, dialog } from "electron";
 import { Credentials } from "buttercup";
 import { addVault } from "../services/buttercup";
+import { logInfo } from "../library/log";
 import { AddVaultPayload, SourceType } from "../types";
 
 export async function addVaultFromPayload(payload: AddVaultPayload) {
@@ -24,7 +25,9 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
         default:
             throw new Error(`Unsupported vault type: ${payload.datasourceConfig.type}`);
     }
+    logInfo(`Adding vault "${name}" (${payload.datasourceConfig.type}) (new = ${payload.createNew ? "yes" : "no"})`);
     await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, payload.createNew);
+    logInfo(`Added vault "${name}"`);
 }
 
 export async function showAddFileVaultDialog(win: BrowserWindow): Promise<string> {

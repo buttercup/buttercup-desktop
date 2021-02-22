@@ -1,4 +1,5 @@
 import { BrowserWindow } from "electron";
+import { logInfo } from "../library/log";
 import { BUTTERCUP_PROTOCOL } from "../symbols";
 
 function handleAuthCall(args) {
@@ -21,7 +22,7 @@ function handleAuthCall(args) {
 
 export function handleProtocolCall(protocolURL: string) {
     const path = protocolURL.replace(BUTTERCUP_PROTOCOL, "");
-    console.log(`Protocol URL call: ${path}`);
+    logInfo(`Protocol URL call: ${path}`);
     const [action, ...args] = path.split("/");
     switch (action) {
         case "auth":

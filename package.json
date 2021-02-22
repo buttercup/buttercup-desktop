@@ -76,6 +76,7 @@
     "log-rotate": "^0.2.8",
     "nested-property": "^4.0.0",
     "pify": "^5.0.0",
+    "stacktracey": "^2.0.16",
     "webdav": "^4.0.0"
   }
 }

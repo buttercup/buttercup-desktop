@@ -3,6 +3,7 @@ import "./ipc";
 import { initialise } from "./services/init";
 import { openMainWindow } from "./services/windows";
 import { handleProtocolCall } from "./services/protocol";
+import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
 
 const lock = app.requestSingleInstanceLock();
@@ -48,5 +49,5 @@ app.whenReady()
     .then(() => initialise())
     .then(() => openMainWindow())
     .catch(err => {
-        console.error(err);
+        logErr(err);
     });
