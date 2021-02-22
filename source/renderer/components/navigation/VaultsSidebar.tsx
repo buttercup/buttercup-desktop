@@ -1,19 +1,18 @@
 import * as React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
 import { VaultSourceStatus } from "buttercup";
-import { useHistory } from "react-router-dom";
 import { Button, Intent } from "@blueprintjs/core";
+import { Generator } from "@buttercup/ui";
 import { VAULTS_LIST } from "../../state/vaults";
 import { showAddVaultMenu } from "../../state/addVault";
-// import { startAddFileVault } from "../../actions/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { lockVaultSource } from "../../actions/lockVault";
 import { removeVaultSource } from "../../actions/removeVault";
 import { VaultsSidebarButton } from "./VaultsSidebarButton";
 import { ConfirmDialog } from "../prompt/ConfirmDialog";
 import { VaultSourceDescription } from "../../types";
-import VaultItem from "buttercup/dist/core/VaultItem";
 
 const { useCallback, useState } = React;
 
@@ -47,6 +46,7 @@ export function VaultsSidebar() {
     const history = useHistory();
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const [removingSource, setRemovingSource] = useState<VaultSourceDescription>(null);
+    const [showGenerator, setShowGenerator] = useState(false);
     const handleLinkClick = useCallback((vaultItem: VaultSourceDescription) => {
         if (vaultItem.state === VaultSourceStatus.Locked) {
             unlockVaultSource(vaultItem.id);
@@ -99,6 +99,17 @@ export function VaultsSidebar() {
                             onClick={() => showAddVaultMenu(true)}
                             text="Add"
                         />
+                        <Generator
+                            onGenerate={() => setShowGenerator(false)}
+                            isOpen={showGenerator}
+                        >
+                            <Button
+                                icon="key"
+                                minimal
+                                onClick={() => setShowGenerator(!showGenerator)}
+                                text="Generate"
+                            />
+                        </Generator>
                     </BottomMenu>
                 </VaultsListContainer>
             </SidebarContainer>

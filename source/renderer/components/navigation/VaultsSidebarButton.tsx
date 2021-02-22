@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
-import { Popover2 as Popover, Popover2InteractionKind as PopoverInteractionKind } from "@blueprintjs/popover2";
+import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { VaultSourceStatus } from "buttercup";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../../shared/types";
