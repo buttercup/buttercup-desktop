@@ -1,6 +1,9 @@
 import { getConfigStorage } from "./storage";
+import { naiveClone } from "../../shared/library/clone";
+import { PREFERENCES_DEFAULT } from "../../shared/symbols";
 
 const DEFAULT_CONFIG = {
+    preferences: naiveClone(PREFERENCES_DEFAULT),
     windowHeight: 600,
     windowWidth: 800
 };

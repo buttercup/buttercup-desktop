@@ -10,7 +10,13 @@ async function getContextMenu(): Promise<Menu> {
             label: "",
             submenu: [
                 { label: "About" },
-                { label: "Preferences" },
+                {
+                    label: "Preferences",
+                    click: async () => {
+                        const window = await openMainWindow();
+                        window.webContents.send("open-preferences");
+                    }
+                },
                 { type: "separator" },
                 {
                     label: "Close Window",
@@ -50,6 +56,12 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: "Edit",
             role: "editMenu"
+        },
+        {
+            label: "Debug",
+            submenu: [
+                { label: "Devtool", role: "toggleDevTools" }
+            ]
         }
     ]);
 }

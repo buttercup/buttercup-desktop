@@ -8,10 +8,22 @@ export interface AddVaultPayload {
 
 export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
+export interface Language {
+    name: string;
+    slug: string;
+}
+
 export enum LogLevel {
     Error = "error",
     Info = "info",
     Warning = "warning"
+}
+
+export interface Preferences {
+    autoClearClipboard: false | number;
+    language: null | string;
+    lockVaultsAfterTime: false | number;
+    lockVaultsOnWindowClose: boolean;
 }
 
 export enum SourceType {

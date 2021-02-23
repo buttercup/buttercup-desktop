@@ -6,8 +6,9 @@ import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
+import { getConfigValue } from "./services/config";
 import { log as logRaw } from "./library/log";
-import { AddVaultPayload, LogLevel } from "./types";
+import { AddVaultPayload, LogLevel, Preferences } from "./types";
 
 ipcMain.on("add-vault-config", async (evt, payload) => {
     const addVaultPayload: AddVaultPayload = JSON.parse(payload);
@@ -45,11 +46,12 @@ ipcMain.on("get-empty-vault", async (evt, payload) => {
     evt.reply("get-empty-vault:reply", vault);
 });
 
+ipcMain.on("get-preferences", async (evt, sourceID) => {
+    const prefs = await getConfigValue<Preferences>("preferences");
+    evt.reply("get-preferences:reply", JSON.stringify(prefs));
+});
+
 ipcMain.on("get-vault-facade", async (evt, sourceID) => {
-    const win = BrowserWindow.fromWebContents(evt.sender);
-    if (!win) {
-        // @todo record error
-    }
     const facade = await getVaultFacade(sourceID);
     evt.reply("get-vault-facade:reply", JSON.stringify(facade));
 });
