@@ -12,13 +12,20 @@ import { showError } from "../services/notifications";
 import { PREFERENCES_DEFAULT } from "../../shared/symbols";
 import { Language, Preferences } from "../types";
 
-const { useCallback, useEffect, useState } = React;
+const { useCallback, useEffect, useMemo, useState } = React;
 const LanguageSelect = Select.ofType<Language>();
+
+const LANG_AUTO_NAME = "Auto (OS default)";
+const PAGE_GENERAL = "general";
+const PAGE_SECURITY = "security";
 
 const DialogFreeWidth = styled(Dialog)`
     width: 85%;
     max-width: 800px;
     min-width: 600px;
+    height: 100%;
+    min-height: 400px;
+    max-height: 700px;
 `;
 const PreferencesContent = styled.div`
     display: flex;
@@ -34,18 +41,35 @@ const PreferencesSidebar = styled.div`
     flex: 0 0 auto;
     margin-right: 6px;
 `;
+const PageContent = styled.div`
+    flex: 1 1 auto;
+    margin-left: 12px;
+`;
 
 export function PreferencesDialog() {
     const showPreferences = useHookState(SHOW_PREFERENCES);
-    const [preferences, setPreferences] = useState<Preferences>(naiveClone(PREFERENCES_DEFAULT));
+    const [currentPage, setCurrentPage] = useState(PAGE_GENERAL);
+    const [dirty, setDirty] = useState(false);
+    const [preferences, _setPreferences] = useState<Preferences>(naiveClone(PREFERENCES_DEFAULT));
     const [languages, setLanguages] = useState<Array<Language>>([]);
+    const setPreferences = useCallback((prefs: Preferences) => {
+        _setPreferences(prefs);
+        setDirty(true);
+    }, [_setPreferences]);
+    const selectedLanguageName = useMemo(() => {
+        if (languages.length === 0 || !preferences.language) return LANG_AUTO_NAME;
+        const lang = languages.find(lang => lang.slug === preferences.language);
+        return lang && lang.name || LANG_AUTO_NAME;
+    }, [preferences, languages]);
     const close = useCallback(() => {
         setShowPreferences(false);
+        setCurrentPage(PAGE_GENERAL);
     }, []);
     useEffect(() => {
         getPreferences()
             .then(prefs => {
-                setPreferences(naiveClone(prefs));
+                _setPreferences(naiveClone(prefs));
+                setDirty(false);
             })
             .catch(err => {
                 showError("Failed loading preferences");
@@ -56,7 +80,7 @@ export function PreferencesDialog() {
             .then(langs => {
                 setLanguages([
                     {
-                        name: "Auto (OS default)",
+                        name: LANG_AUTO_NAME,
                         slug: null
                     },
                     ...langs
@@ -75,9 +99,11 @@ export function PreferencesDialog() {
                 <LanguageSelect
                     filterable={false}
                     items={languages}
-                    itemRenderer={(item: Language) => (
+                    itemRenderer={(item: Language, { handleClick }) => (
                         <MenuItem
-                            icon="add"
+                            icon={item.slug === null ? "translate" : null}
+                            key={item.name}
+                            onClick={handleClick}
                             text={item.name}
                         />
                     )}
@@ -88,7 +114,10 @@ export function PreferencesDialog() {
                         });
                     }}
                 >
-                    <Button text={languages.length > 0 ? languages[0].name : "(Loading)"} rightIcon="double-caret-vertical" />
+                    <Button
+                        text={selectedLanguageName}
+                        rightIcon="double-caret-vertical"
+                    />
                 </LanguageSelect>
             </FormGroup>
         </>
@@ -106,11 +135,15 @@ export function PreferencesDialog() {
                                 vertical
                             >
                                 <Button
+                                    active={currentPage === PAGE_GENERAL}
                                     icon="modal"
+                                    onClick={() => setCurrentPage(PAGE_GENERAL)}
                                     text="General"
                                 />
                                 <Button
+                                    active={currentPage === PAGE_SECURITY}
                                     icon="shield"
+                                    onClick={() => setCurrentPage(PAGE_SECURITY)}
                                     text="Security"
                                 />
                                 <Button
@@ -125,19 +158,22 @@ export function PreferencesDialog() {
                                 />
                             </PreferencesMenu>
                         </PreferencesSidebar>
+                        <PageContent>
+                            {currentPage === PAGE_GENERAL && pageGeneral()}
+                        </PageContent>
                     </PreferencesContent>
                 )}
             </div>
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                    {/* <Button
-                        disabled={vaultPassword.length === 0}
+                    <Button
+                        disabled={!dirty}
                         intent={Intent.PRIMARY}
-                        onClick={handleFinalConfirm}
-                        title="Confirm vault addition"
+                        onClick={() => {}}
+                        title="Save changes"
                     >
-                        Add Vault
-                    </Button> */}
+                        Save
+                    </Button>
                     <Button
                         onClick={close}
                         title="Cancel Preferences update"
