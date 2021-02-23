@@ -1,8 +1,10 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, MenuItem, Switch } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, MenuItem, Slider } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
+import ms from "ms";
+import prettyMS from "pretty-ms";
 import { naiveClone } from "../../shared/library/clone";
 import { SHOW_PREFERENCES, showPreferences as setShowPreferences } from "../state/preferences";
 import { getPreferences } from "../services/preferences";
@@ -15,6 +17,7 @@ import { Language, Preferences } from "../types";
 const { useCallback, useEffect, useMemo, useState } = React;
 const LanguageSelect = Select.ofType<Language>();
 
+const AUTO_CLEAR_CP_MAX = ms("30m") / 1000;
 const LANG_AUTO_NAME = "Auto (OS default)";
 const PAGE_GENERAL = "general";
 const PAGE_SECURITY = "security";
@@ -43,7 +46,9 @@ const PreferencesSidebar = styled.div`
 `;
 const PageContent = styled.div`
     flex: 1 1 auto;
-    margin-left: 12px;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
 `;
 
 export function PreferencesDialog() {
@@ -107,18 +112,34 @@ export function PreferencesDialog() {
                             text={item.name}
                         />
                     )}
-                    onItemSelect={(item: Language) => {
-                        setPreferences({
-                            ...naiveClone(preferences),
-                            language: item.slug
-                        });
-                    }}
+                    onItemSelect={(item: Language) => setPreferences({
+                        ...naiveClone(preferences),
+                        language: item.slug
+                    })}
                 >
                     <Button
                         text={selectedLanguageName}
                         rightIcon="double-caret-vertical"
                     />
                 </LanguageSelect>
+            </FormGroup>
+        </>
+    );
+    const pageSecurity = () => (
+        <>
+            <FormGroup label="Automatically clear clipboard">
+                <Slider
+                    labelRenderer={value => value > 0 ? prettyMS(value * 1000) : "Off"}
+                    labelStepSize={60 * 5}
+                    max={AUTO_CLEAR_CP_MAX}
+                    min={0}
+                    onChange={value => setPreferences({
+                        ...naiveClone(preferences),
+                        autoClearClipboard: value === 0 ? false : value
+                    })}
+                    stepSize={30}
+                    value={preferences.autoClearClipboard === false ? 0 : preferences.autoClearClipboard}
+                />
             </FormGroup>
         </>
     );
@@ -160,6 +181,7 @@ export function PreferencesDialog() {
                         </PreferencesSidebar>
                         <PageContent>
                             {currentPage === PAGE_GENERAL && pageGeneral()}
+                            {currentPage === PAGE_SECURITY && pageSecurity()}
                         </PageContent>
                     </PreferencesContent>
                 )}
