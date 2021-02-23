@@ -4,6 +4,13 @@ import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
 import { getConfigValue, setConfigValue} from "./config";
 
+export async function closeWindows(): Promise<void> {
+    const windows = BrowserWindow.getAllWindows();
+    windows.forEach(win => {
+        win.close();
+    });
+}
+
 async function createVaultWindow() {
     const width = await getConfigValue<number>("windowWidth");
     const height = await getConfigValue<number>("windowHeight");
@@ -41,9 +48,10 @@ export function notifyWindowsOfSourceUpdate(sourceID: VaultSourceID) {
 }
 
 export async function openMainWindow(targetRoute: string = null): Promise<BrowserWindow> {
-    const windows = BrowserWindow.getAllWindows();
+    let windows = BrowserWindow.getAllWindows();
     if (windows.length === 0) {
         await createVaultWindow();
+        windows = BrowserWindow.getAllWindows();
     } else {
         windows[0].show();
         windows[0].focus();

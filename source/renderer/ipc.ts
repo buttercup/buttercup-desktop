@@ -1,8 +1,13 @@
 import { ipcRenderer } from "electron";
 import { getCurrentSourceID, setVaultsList } from "./state/vaults";
+import { showAddVaultMenu } from "./state/addVault";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
 import { VaultSourceDescription } from "./types";
+
+ipcRenderer.on("add-vault", evt => {
+    showAddVaultMenu(true);
+});
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {
     const currentSourceID = getCurrentSourceID();

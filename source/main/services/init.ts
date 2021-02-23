@@ -3,6 +3,7 @@ import { attachVaultManagerWatchers, loadVaultsFromDisk, onSourcesUpdated } from
 import { initialise as initialiseLogging } from "./log";
 import { logInfo } from "../library/log";
 import { updateTrayIcon } from "../actions/tray";
+import { updateAppMenu } from "../actions/appMenu";
 
 export async function initialise() {
     await initialiseLogging();
@@ -14,7 +15,9 @@ export async function initialise() {
         callback({ cancel: false, requestHeaders: details.requestHeaders });
     });
     await updateTrayIcon();
+    await updateAppMenu();
     onSourcesUpdated(async () => {
+        await updateAppMenu();
         await updateTrayIcon();
     });
     logInfo("Initialisation completed");
