@@ -46,6 +46,10 @@ async function getContextMenu(): Promise<Menu> {
                     click: () => lockAllSources()
                 }
             ]
+        },
+        {
+            label: "Edit",
+            role: "editMenu"
         }
     ]);
 }
