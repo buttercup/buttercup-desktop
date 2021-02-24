@@ -6,7 +6,7 @@ import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
-import { getConfigValue } from "./services/config";
+import { getConfigValue, setConfigValue } from "./services/config";
 import { log as logRaw } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences } from "./types";
 
@@ -102,4 +102,9 @@ ipcMain.on("unlock-source", async (evt, payload) => {
 
 ipcMain.on("update-vault-windows", () => {
     sendSourcesToWindows();
+});
+
+ipcMain.on("write-preferences", async (evt, payload) => {
+    const { preferences } = JSON.parse(payload) as { preferences: Preferences };
+    await setConfigValue("preferences", preferences);
 });

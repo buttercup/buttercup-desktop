@@ -11,3 +11,9 @@ export async function getPreferences(): Promise<Preferences> {
     const prefs = await getPreferencesPromise;
     return prefs;
 }
+
+export async function savePreferences(preferences: Preferences): Promise<void> {
+    ipcRenderer.send("write-preferences", JSON.stringify({
+        preferences
+    }));
+}

@@ -7,10 +7,11 @@ import ms from "ms";
 import prettyMS from "pretty-ms";
 import { naiveClone } from "../../shared/library/clone";
 import { SHOW_PREFERENCES, showPreferences as setShowPreferences } from "../state/preferences";
-import { getPreferences } from "../services/preferences";
+import { getPreferences, savePreferences } from "../services/preferences";
 import { getAvailableLanguages } from "../services/i18n";
-import { logErr } from "../library/log";
-import { showError } from "../services/notifications";
+import { logErr, logInfo } from "../library/log";
+import { showError, showSuccess } from "../services/notifications";
+import { setBusy } from "../state/app";
 import { PREFERENCES_DEFAULT } from "../../shared/symbols";
 import { Language, Preferences } from "../types";
 
@@ -73,6 +74,21 @@ export function PreferencesDialog() {
         setShowPreferences(false);
         setCurrentPage(PAGE_GENERAL);
     }, []);
+    const save = useCallback(() => {
+        setBusy(true);
+        savePreferences(preferences)
+            .then(() => {
+                showSuccess("Saved preferences");
+                logInfo("Saved preferences");
+                setDirty(false);
+                setBusy(false);
+            })
+            .catch(err => {
+                setBusy(false);
+                showError("Failed saving preferences");
+                logErr("Failed saving preferences", err);
+            });
+    }, [preferences]);
     useEffect(() => {
         getPreferences()
             .then(prefs => {
@@ -246,7 +262,7 @@ export function PreferencesDialog() {
                     <Button
                         disabled={!dirty}
                         intent={Intent.PRIMARY}
-                        onClick={() => {}}
+                        onClick={() => save()}
                         title="Save changes"
                     >
                         Save

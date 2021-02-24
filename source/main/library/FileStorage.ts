@@ -23,7 +23,7 @@ export class FileStorage extends StorageInterface {
         return Object.keys(data);
     }
 
-    async getValue(name: string): Promise<string | null> {
+    async getValue(name: string): Promise<any | null> {
         const data = await this._getContents();
         return typeof data[name] !== "undefined" ? data[name] : null;
     }
@@ -36,7 +36,7 @@ export class FileStorage extends StorageInterface {
         });
     }
 
-    async setValue(name: string, value: string): Promise<void> {
+    async setValue(name: string, value: any): Promise<void> {
         return this._queue.channel("update").enqueue(async () => {
             const data = await this._getContents();
             data[name] = value;
