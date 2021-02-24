@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, MenuItem, Slider } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import ms from "ms";
 import prettyMS from "pretty-ms";
@@ -16,11 +16,14 @@ import { Language, Preferences } from "../types";
 
 const { useCallback, useEffect, useMemo, useState } = React;
 const LanguageSelect = Select.ofType<Language>();
+const ThemeSelect = Select.ofType<null | "dark" | "light">();
 
 const AUTO_CLEAR_CP_MAX = ms("30m") / 1000;
-const LANG_AUTO_NAME = "Auto (OS default)";
+const LANG_AUTO_NAME = "Auto (OS)";
+const LOCK_VAULTS_TIME_MAX = ms("1d") / 1000;
 const PAGE_GENERAL = "general";
 const PAGE_SECURITY = "security";
+const THEME_AUTO_NAME = "Auto (OS)";
 
 const DialogFreeWidth = styled(Dialog)`
     width: 85%;
@@ -123,6 +126,33 @@ export function PreferencesDialog() {
                     />
                 </LanguageSelect>
             </FormGroup>
+            <FormGroup label="Theme">
+                <ThemeSelect
+                    filterable={false}
+                    items={[
+                        null,
+                        "dark",
+                        "light"
+                    ]}
+                    itemRenderer={(item: null | "dark" | "light", { handleClick }) => (
+                        <MenuItem
+                            icon={item === null ? "modal-filled" : null}
+                            key={item || "none"}
+                            onClick={handleClick}
+                            text={item === null ? THEME_AUTO_NAME : item === "dark" ? "Dark" : "Light"}
+                        />
+                    )}
+                    onItemSelect={(item: null | "dark" | "light") => setPreferences({
+                        ...naiveClone(preferences),
+                        uiTheme: item
+                    })}
+                >
+                    <Button
+                        text={preferences.uiTheme === null ? THEME_AUTO_NAME : preferences.uiTheme === "dark" ? "Dark" : "Light"}
+                        rightIcon="double-caret-vertical"
+                    />
+                </ThemeSelect>
+            </FormGroup>
         </>
     );
     const pageSecurity = () => (
@@ -139,6 +169,31 @@ export function PreferencesDialog() {
                     })}
                     stepSize={30}
                     value={preferences.autoClearClipboard === false ? 0 : preferences.autoClearClipboard}
+                />
+            </FormGroup>
+            <FormGroup label="Lock vaults after time">
+                <Slider
+                    labelRenderer={value => value > 0 ? prettyMS(value * 1000) : "Off"}
+                    labelStepSize={ms("1h") / 1000}
+                    max={LOCK_VAULTS_TIME_MAX}
+                    min={0}
+                    onChange={value => setPreferences({
+                        ...naiveClone(preferences),
+                        lockVaultsAfterTime: value === 0 ? false : value
+                    })}
+                    stepSize={60}
+                    value={preferences.lockVaultsAfterTime === false ? 0 : preferences.lockVaultsAfterTime}
+                />
+                <p>Automatically lock vaults after some period of inactivity.</p>
+            </FormGroup>
+            <FormGroup label="Lock vaults if vault window closed">
+                <Switch
+                    checked={preferences.lockVaultsOnWindowClose}
+                    label="Lock on close"
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                        ...naiveClone(preferences),
+                        lockVaultsOnWindowClose: evt.target.checked
+                    })}
                 />
             </FormGroup>
         </>

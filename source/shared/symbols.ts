@@ -10,5 +10,6 @@ export const PREFERENCES_DEFAULT: Preferences = {
     autoClearClipboard: false, // seconds
     language: null,
     lockVaultsAfterTime: false, // seconds
-    lockVaultsOnWindowClose: false
+    lockVaultsOnWindowClose: false,
+    uiTheme: null
 };

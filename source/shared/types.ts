@@ -24,6 +24,7 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
+    uiTheme: null | "dark" | "light";
 }
 
 export enum SourceType {
