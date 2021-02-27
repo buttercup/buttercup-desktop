@@ -14,6 +14,7 @@ import { showError } from "../services/notifications";
 import { authenticateGoogleDrive } from "../services/authGoogle";
 import { createEmptyVault as createEmptyGoogleDriveVault } from "../services/googleDrive";
 import { showWarning } from "../services/notifications";
+import { getIconForProvider } from "../library/icons";
 import { DatasourceConfig, SourceType } from "../types";
 
 interface WebDAVCredentialsState {
@@ -21,11 +22,6 @@ interface WebDAVCredentialsState {
     username: string;
     password: string;
 }
-
-const ICON_BUTTERCUP = require("../../../resources/images/buttercup-file-256.png").default;
-const ICON_DROPBOX = require("../../../resources/images/dropbox-256.png").default;
-const ICON_GOOGLEDRIVE = require("../../../resources/images/googledrive-256.png").default;
-const ICON_WEBDAV = require("../../../resources/images/webdav-256.png").default;
 
 const { useCallback, useEffect, useState } = React;
 
@@ -40,22 +36,22 @@ const VAULT_TYPES = [
     {
         title: "File",
         type: SourceType.File,
-        icon: ICON_BUTTERCUP
+        icon: getIconForProvider(SourceType.File)
     },
     {
         title: "Dropbox",
         type: SourceType.Dropbox,
-        icon: ICON_DROPBOX
+        icon: getIconForProvider(SourceType.Dropbox)
     },
     {
         title: "Google Drive",
         type: SourceType.GoogleDrive,
-        icon: ICON_GOOGLEDRIVE
+        icon: getIconForProvider(SourceType.GoogleDrive)
     },
     {
         title: "WebDAV",
         type: SourceType.WebDAV,
-        icon: ICON_WEBDAV
+        icon: getIconForProvider(SourceType.WebDAV)
     }
 ];
 

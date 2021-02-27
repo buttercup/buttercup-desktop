@@ -7,7 +7,7 @@ import { removeSourceWithID } from "./actions/remove";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
-import { log as logRaw } from "./library/log";
+import { log as logRaw, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences } from "./types";
 
 ipcMain.on("add-vault-config", async (evt, payload) => {
@@ -86,10 +86,18 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
         sourceID: VaultSourceID,
         vaultFacade: VaultFacade
     };
-    await saveVaultFacade(sourceID, vaultFacade);
-    evt.reply("save-vault-facade:reply", JSON.stringify({
-        ok: true
-    }));
+    try {
+        await saveVaultFacade(sourceID, vaultFacade);
+        evt.reply("save-vault-facade:reply", JSON.stringify({
+            ok: true
+        }));
+    } catch (err) {
+        logErr("Failed saving vault facade", err);
+        evt.reply("save-vault-facade:reply", JSON.stringify({
+            ok: false,
+            error: err.message
+        }));
+    }
 });
 
 ipcMain.on("unlock-source", async (evt, payload) => {
@@ -97,7 +105,18 @@ ipcMain.on("unlock-source", async (evt, payload) => {
         sourceID,
         password
     } = JSON.parse(payload);
-    await unlockSourceWithID(sourceID, password);
+    try {
+        await unlockSourceWithID(sourceID, password);
+        evt.reply("unlock-source:reply", JSON.stringify({
+            ok: true
+        }));
+    } catch (err) {
+        logErr("Failed unlocking vault source", err);
+        evt.reply("unlock-source:reply", JSON.stringify({
+            ok: false,
+            error: err.message
+        }));
+    }
 });
 
 ipcMain.on("update-vault-windows", () => {

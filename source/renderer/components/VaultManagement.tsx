@@ -3,10 +3,6 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { VaultsSidebar } from "./navigation/VaultsSidebar";
 import { VaultEditor } from "./VaultEditor";
-import { PasswordPrompt } from "./PasswordPrompt";
-import { AddVaultMenu } from "./AddVaultMenu";
-import { PreferencesDialog } from "./PreferencesDialog";
-import { Notifications } from "./Notifications";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 const PrimaryContainer = styled.div`
@@ -34,10 +30,7 @@ export function VaultManagement() {
                     </ErrorBoundary>
                 )}
             </ContentContainer>
-            <PasswordPrompt />
-            <AddVaultMenu />
-            <PreferencesDialog />
-            <Notifications />
+
         </PrimaryContainer>
     );
 }

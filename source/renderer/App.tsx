@@ -8,7 +8,12 @@ import styled, { ThemeProvider } from "styled-components";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
+import { VaultChooser } from "./components/navigation/VaultChooser";
 import { LoadingScreen } from "./components/navigation/LoadingScreen";
+import { PasswordPrompt } from "./components/PasswordPrompt";
+import { AddVaultMenu } from "./components/AddVaultMenu";
+import { PreferencesDialog } from "./components/PreferencesDialog";
+import { Notifications } from "./components/Notifications";
 
 const BaseContainer = styled.div`
     width: 100%;
@@ -27,11 +32,17 @@ export function App() {
                             <VaultManagement />
                         </Route>
                         <Route path="/">
-                            <VaultManagement />
+                            <VaultChooser />
                         </Route>
                     </Switch>
                 </Router>
-                <LoadingScreen />
+                <>
+                    <PasswordPrompt />
+                    <AddVaultMenu />
+                    <PreferencesDialog />
+                    <Notifications />
+                    <LoadingScreen />
+                </>
             </BaseContainer>
         </ThemeProvider>
     );
