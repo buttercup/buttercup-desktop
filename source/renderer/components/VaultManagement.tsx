@@ -1,9 +1,11 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { VaultSidebar } from "./navigation/VaultSidebar";
+import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
 import { ErrorBoundary } from "./ErrorBoundary";
+
+const { useCallback, useState } = React;
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -20,13 +22,20 @@ const ContentContainer = styled.div`
 
 export function VaultManagement() {
     const { id = null } = useParams();
+    const [selectedSidebarItem, setSelectedSidebarItem] = useState<VaultSidebarItem>("contents");
+    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem) => {
+        setSelectedSidebarItem(item);
+    }, []);
     return (
         <PrimaryContainer>
-            <VaultSidebar />
+            <VaultSidebar
+                onSelect={item => handleSidebarItemSelect(item)}
+                selected={selectedSidebarItem}
+            />
             <ContentContainer>
                 {id && (
                     <ErrorBoundary>
-                        <VaultEditor sourceID={id} />
+                        {selectedSidebarItem === "contents" && <VaultEditor sourceID={id} />}
                     </ErrorBoundary>
                 )}
             </ContentContainer>
