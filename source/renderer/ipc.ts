@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import { browserHistory } from "react-router-dom";
 import { getCurrentSourceID, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
@@ -14,6 +15,10 @@ ipcRenderer.on("open-preferences", evt => {
     showPreferences(true);
 });
 
+ipcRenderer.on("open-source", (evt, sourceID) => {
+    window.location.hash = `/source/${sourceID}`;
+});
+
 ipcRenderer.on("source-updated", (evt, sourceID) => {
     const currentSourceID = getCurrentSourceID();
     if (sourceID === currentSourceID) {
@@ -23,6 +28,11 @@ ipcRenderer.on("source-updated", (evt, sourceID) => {
 
 ipcRenderer.on("unlock-vault", async (evt, sourceID) => {
     await unlockVaultSource(sourceID);
+});
+
+ipcRenderer.on("unlock-vault-open", async (evt, sourceID) => {
+    await unlockVaultSource(sourceID);
+    window.location.hash = `/source/${sourceID}`;
 });
 
 ipcRenderer.on("vaults-list", (evt, payload) => {
