@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { VaultsSidebar } from "./navigation/VaultsSidebar";
+import { VaultSidebar } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
 import { ErrorBoundary } from "./ErrorBoundary";
 
@@ -22,7 +22,7 @@ export function VaultManagement() {
     const { id = null } = useParams();
     return (
         <PrimaryContainer>
-            <VaultsSidebar />
+            <VaultSidebar />
             <ContentContainer>
                 {id && (
                     <ErrorBoundary>
