@@ -2,12 +2,13 @@ import * as React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Card, Elevation, NonIdealState } from "@blueprintjs/core";
+import { Button, Card, Elevation, Icon, NonIdealState } from "@blueprintjs/core";
 import { VAULTS_LIST } from "../../state/vaults";
 import { showAddVaultMenu } from "../../state/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { getIconForProvider } from "../../library/icons";
 import { VaultSourceDescription } from "../../types";
+import { VaultSourceStatus } from "buttercup";
 
 const { useCallback, useMemo, useState } = React;
 
@@ -61,11 +62,13 @@ export function VaultChooser() {
             : null,
         [selectedSourceID, vaultsState.get()]
     );
-    const unlockSource = useCallback(sourceID => {
-        unlockVaultSource(sourceID).then(() => {
-            history.push(`/source/${sourceID}`);
-        });
-    }, []);
+    const unlockSource = useCallback(async sourceID => {
+        const source = vaultsState.get().find(item => item.id === sourceID);
+        if (source.state !== VaultSourceStatus.Unlocked) {
+            await unlockVaultSource(sourceID);
+        }
+        history.push(`/source/${sourceID}`);
+    }, [vaultsState.get()]);
     return (
         <ChooserContainer>
             {vaultsState.get().length <= 0 && noVaults()}
