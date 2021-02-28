@@ -10,6 +10,12 @@ interface AppTheme {
             bgColor: string;
             borderColor: string;
         }
+    },
+    vaultChooser: {
+        selectVaultAnchor: {
+            color: string;
+            hover: string;
+        }
     }
 }
 
@@ -23,6 +29,12 @@ export const THEME_DARK: AppTheme = {
             bgColor: Colors.DARK_GRAY4,
             borderColor: Colors.GRAY3
         }
+    },
+    vaultChooser: {
+        selectVaultAnchor: {
+            color: Colors.GRAY2,
+            hover: Colors.GRAY3
+        }
     }
 };
 
@@ -35,6 +47,12 @@ export const THEME_LIGHT: AppTheme = {
         button: {
             bgColor: Colors.DARK_GRAY4,
             borderColor: Colors.GRAY3
+        }
+    },
+    vaultChooser: {
+        selectVaultAnchor: {
+            color: Colors.GRAY2,
+            hover: Colors.GRAY3
         }
     }
 };

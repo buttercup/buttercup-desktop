@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Classes, Dialog, FormGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import ms from "ms";
 import prettyMS from "pretty-ms";
