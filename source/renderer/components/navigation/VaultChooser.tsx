@@ -80,7 +80,10 @@ export function VaultChooser() {
                 >
                     <TargetVaultContents>
                         <TargetVaultImg src={getIconForProvider(selectedSource.type)} />
-                        <h3>{selectedSource.name}</h3>
+                        <h3>
+                            <Icon icon={selectedSource.state === VaultSourceStatus.Unlocked ? "unlock" : "lock"} />&nbsp;
+                            {selectedSource.name}
+                        </h3>
                     </TargetVaultContents>
                 </TargetVault>
             )}
