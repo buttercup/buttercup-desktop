@@ -60,7 +60,18 @@ ipcMain.on("lock-source", async (evt, payload) => {
     const {
         sourceID
     } = JSON.parse(payload);
-    await lockSourceWithID(sourceID);
+    try {
+        await lockSourceWithID(sourceID);
+        evt.reply("lock-source:reply", JSON.stringify({
+            ok: true
+        }));
+    } catch (err) {
+        logErr("Failed locking vault source", err);
+        evt.reply("lock-source:reply", JSON.stringify({
+            ok: false,
+            error: err.message
+        }));
+    }
 });
 
 ipcMain.on("log", async (evt, payload) => {

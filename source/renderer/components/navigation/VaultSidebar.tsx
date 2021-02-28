@@ -1,6 +1,13 @@
 import * as React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Alignment, Button, ButtonGroup } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
+import { Popover2 as Popover } from "@blueprintjs/popover2";
+import { useState as useHookState } from "@hookstate/core";
+import { lockVaultSource } from "../../actions/lockVault";
+import { CURRENT_VAULT } from "../../state/vaults";
+
+const { useCallback, useState } = React;
 
 export type VaultSidebarItem = "contents";
 
@@ -20,7 +27,15 @@ const SidebarContainer = styled.div`
 `;
 
 export function VaultSidebar(props: VaultSidebarProps) {
+    const history = useHistory();
+    const currentVaultState = useHookState(CURRENT_VAULT);
     const { onSelect: handleSelection, selected: selectedItem } = props;
+    const [showMoreMenu, setShowMoreMenu] = useState(false);
+    const handleVaultLock = useCallback(async () => {
+        const sourceID = currentVaultState.get();
+        await lockVaultSource(sourceID);
+        history.push("/");
+    }, [currentVaultState]);
     return (
         <SidebarContainer>
             <ButtonGroup
@@ -48,11 +63,32 @@ export function VaultSidebar(props: VaultSidebarProps) {
                     large
                     minimal
                 />
-                <Button
-                    icon="more"
-                    large
-                    minimal
-                />
+                <Popover
+                    content={
+                        <Menu>
+                            <MenuItem
+                                text="Lock current vault"
+                                icon="lock"
+                                onClick={handleVaultLock}
+                            />
+                            <MenuDivider />
+                            <MenuItem
+                                text="Choose vault"
+                                icon="menu"
+                                onClick={() => history.push("/")}
+                            />
+                        </Menu>
+                    }
+                    isOpen={showMoreMenu}
+                    onClose={() => setShowMoreMenu(false)}
+                >
+                    <Button
+                        icon="more"
+                        large
+                        minimal
+                        onClick={() => setShowMoreMenu(!showMoreMenu)}
+                    />
+                </Popover>
             </ButtonGroup>
         </SidebarContainer>
     );
