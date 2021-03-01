@@ -7,7 +7,7 @@ async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
     return Menu.buildFromTemplate([
         {
-            label: "",
+            label: "Buttercup",
             submenu: [
                 { label: "About" },
                 {
