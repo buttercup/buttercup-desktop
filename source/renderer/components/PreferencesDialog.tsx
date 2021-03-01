@@ -13,11 +13,11 @@ import { logErr, logInfo } from "../library/log";
 import { showError, showSuccess } from "../services/notifications";
 import { setBusy } from "../state/app";
 import { PREFERENCES_DEFAULT } from "../../shared/symbols";
-import { Language, Preferences } from "../types";
+import { Language, Preferences, ThemeSource } from "../types";
 
 const { useCallback, useEffect, useMemo, useState } = React;
 const LanguageSelect = Select.ofType<Language>();
-const ThemeSelect = Select.ofType<null | "dark" | "light">();
+const ThemeSelect = Select.ofType<ThemeSource>();
 
 const AUTO_CLEAR_CP_MAX = ms("30m") / 1000;
 const LANG_AUTO_NAME = "Auto (OS)";
@@ -145,26 +145,22 @@ export function PreferencesDialog() {
             <FormGroup label="Theme">
                 <ThemeSelect
                     filterable={false}
-                    items={[
-                        null,
-                        "dark",
-                        "light"
-                    ]}
-                    itemRenderer={(item: null | "dark" | "light", { handleClick }) => (
+                    items={Object.values(ThemeSource)}
+                    itemRenderer={(item: ThemeSource, { handleClick }) => (
                         <MenuItem
-                            icon={item === null ? "modal-filled" : null}
+                            icon={item === ThemeSource.System ? "modal-filled" : null}
                             key={item || "none"}
                             onClick={handleClick}
-                            text={item === null ? THEME_AUTO_NAME : item === "dark" ? "Dark" : "Light"}
+                            text={item === ThemeSource.System ? THEME_AUTO_NAME : item === ThemeSource.Dark ? "Dark" : "Light"}
                         />
                     )}
-                    onItemSelect={(item: null | "dark" | "light") => setPreferences({
+                    onItemSelect={(item: ThemeSource) => setPreferences({
                         ...naiveClone(preferences),
                         uiTheme: item
                     })}
                 >
                     <Button
-                        text={preferences.uiTheme === null ? THEME_AUTO_NAME : preferences.uiTheme === "dark" ? "Dark" : "Light"}
+                        text={preferences.uiTheme === ThemeSource.System ? THEME_AUTO_NAME : preferences.uiTheme === ThemeSource.Dark ? "Dark" : "Light"}
                         rightIcon="double-caret-vertical"
                     />
                 </ThemeSelect>

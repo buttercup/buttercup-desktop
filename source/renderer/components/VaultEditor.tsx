@@ -7,6 +7,8 @@ import { CURRENT_FACADE, VAULTS_LIST } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
+import { useTheme } from "../hooks/theme";
+import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
 
@@ -16,9 +18,14 @@ interface VaultEditorProps {
     sourceID: string;
 }
 
-function renderFacade(facade: VaultFacade, onUpdate: (facade: VaultFacade) => void, isSaving: boolean = false) {
+function renderFacade(
+    facade: VaultFacade,
+    onUpdate: (facade: VaultFacade) => void,
+    theme: Theme,
+    isSaving: boolean = false
+) {
     return (
-        <ThemeProvider theme={true ? themes.dark : themes.light}>
+        <ThemeProvider theme={theme === Theme.Dark ? themes.dark : themes.light}>
             <VaultProvider
                 vault={facade}
                 icons
@@ -42,6 +49,7 @@ export function VaultEditor(props: VaultEditorProps) {
         const vaultList = vaultListState.get();
         return vaultList.find(item => item.id === props.sourceID) || null;
     }, [vaultListState.get()]);
+    const themeType = useTheme();
     useEffect(() => {
         if (vaultItem && vaultItem.state === VaultSourceStatus.Unlocked) {
             fetchUpdatedFacade(vaultItem.id);
@@ -61,6 +69,7 @@ export function VaultEditor(props: VaultEditorProps) {
                 facade => {
                     saveVaultFacade(vaultItem.id, facade);
                 },
+                themeType,
                 savingState.get()
             )}
         </>

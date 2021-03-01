@@ -1,4 +1,4 @@
-import { Preferences } from "./types";
+import { Preferences, ThemeSource } from "./types";
 
 export const DROPBOX_CLIENT_ID = "5fstmwjaisrt06t";
 export const GOOGLE_AUTH_REDIRECT = "https://buttercup.pw?googledesktopauth";
@@ -11,5 +11,5 @@ export const PREFERENCES_DEFAULT: Preferences = {
     language: null,
     lockVaultsAfterTime: false, // seconds
     lockVaultsOnWindowClose: false,
-    uiTheme: null
+    uiTheme: ThemeSource.System
 };

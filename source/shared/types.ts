@@ -24,7 +24,7 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
-    uiTheme: null | "dark" | "light";
+    uiTheme: ThemeSource;
 }
 
 export enum SourceType {
@@ -32,6 +32,12 @@ export enum SourceType {
     File = "file",
     GoogleDrive = "googledrive",
     WebDAV = "webdav"
+}
+
+export enum ThemeSource {
+    System = "system",
+    Dark = "dark",
+    Light = "light"
 }
 
 export interface VaultSourceDescription {

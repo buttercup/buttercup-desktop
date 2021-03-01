@@ -7,6 +7,7 @@ import { removeSourceWithID } from "./actions/remove";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
+import { applyCurrentTheme } from "./services/theme";
 import { log as logRaw, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences } from "./types";
 
@@ -137,4 +138,6 @@ ipcMain.on("update-vault-windows", () => {
 ipcMain.on("write-preferences", async (evt, payload) => {
     const { preferences } = JSON.parse(payload) as { preferences: Preferences };
     await setConfigValue("preferences", preferences);
+    // Apply theme change
+    applyCurrentTheme(preferences);
 });

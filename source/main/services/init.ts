@@ -2,6 +2,7 @@ import { session } from "electron";
 import { attachVaultManagerWatchers, loadVaultsFromDisk, onSourcesUpdated } from "./buttercup";
 import { initialise as initialiseLogging } from "./log";
 import { logInfo } from "../library/log";
+import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
 
@@ -20,5 +21,6 @@ export async function initialise() {
         await updateAppMenu();
         await updateTrayIcon();
     });
+    await applyCurrentTheme();
     logInfo("Initialisation completed");
 }

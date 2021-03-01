@@ -7,6 +7,7 @@ import {
 import styled, { ThemeProvider } from "styled-components";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
+import { getThemeType } from "./library/theme";
 import { VaultManagement } from "./components/VaultManagement";
 import { VaultChooser } from "./components/navigation/VaultChooser";
 import { LoadingScreen } from "./components/navigation/LoadingScreen";
@@ -14,6 +15,8 @@ import { PasswordPrompt } from "./components/PasswordPrompt";
 import { AddVaultMenu } from "./components/AddVaultMenu";
 import { PreferencesDialog } from "./components/PreferencesDialog";
 import { Notifications } from "./components/Notifications";
+import { useTheme } from "./hooks/theme";
+import { Theme } from "./types";
 
 const BaseContainer = styled.div`
     width: 100%;
@@ -23,9 +26,12 @@ const BaseContainer = styled.div`
 `;
 
 export function App() {
+    const themeType = useTheme();
     return (
-        <ThemeProvider theme={true ? THEME_DARK: THEME_LIGHT}>
-            <BaseContainer className={true ? "bp3-dark" : ""}>
+        <ThemeProvider
+            theme={themeType === Theme.Dark ? THEME_DARK: THEME_LIGHT}
+        >
+            <BaseContainer>
                 <Router>
                     <Switch>
                         <Route path="/source/:id">
