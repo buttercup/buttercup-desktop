@@ -23,8 +23,10 @@ const ChooserContainer = styled.div`
     justify-content: center;
     align-items: center;
 `;
-const SelectVaultAnchor = styled.a`
+const ChooserVerticalSpacer = styled.div`
     margin-top: 8px;
+`;
+const SelectVaultAnchor = styled.a`
     font-style: italic;
     color: ${props => getThemeProp(props, "vaultChooser.selectVaultAnchor.color")} !important;
     &:hover {
@@ -106,33 +108,39 @@ export function VaultChooser() {
                     </TargetVault>
                     {selectingVault && (
                         <>
-                            <VaultSelect
-                                filterable={false}
-                                items={vaultsState.get()}
-                                itemRenderer={(item: VaultSourceDescription, { handleClick }) => (
-                                    <MenuItem
-                                        icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
-                                        key={item.id}
-                                        onClick={handleClick}
-                                        text={item.name}
+                            <ChooserVerticalSpacer>
+                                <VaultSelect
+                                    filterable={false}
+                                    items={vaultsState.get()}
+                                    itemRenderer={(item: VaultSourceDescription, { handleClick }) => (
+                                        <MenuItem
+                                            icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
+                                            key={item.id}
+                                            onClick={handleClick}
+                                            text={item.name}
+                                        />
+                                    )}
+                                    onItemSelect={(item: VaultSourceDescription) => {
+                                        setSelectedSourceID(item.id);
+                                        setSelectingVault(false);
+                                    }}
+                                >
+                                    <Button
+                                        icon={<SelectVaultImage src={getIconForProvider(selectedSource.type)} />}
+                                        text={selectedSource && selectedSource.name}
+                                        rightIcon="double-caret-vertical"
                                     />
-                                )}
-                                onItemSelect={(item: VaultSourceDescription) => {
-                                    setSelectedSourceID(item.id);
-                                    setSelectingVault(false);
-                                }}
-                            >
-                                <Button
-                                    icon={<SelectVaultImage src={getIconForProvider(selectedSource.type)} />}
-                                    text={selectedSource && selectedSource.name}
-                                    rightIcon="double-caret-vertical"
-                                />
-                            </VaultSelect>
-                            <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>Hide vault chooser</SelectVaultAnchor>
+                                </VaultSelect>
+                            </ChooserVerticalSpacer>
+                            <ChooserVerticalSpacer>
+                                <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>Hide vault chooser</SelectVaultAnchor>
+                            </ChooserVerticalSpacer>
                         </>
                     )}
                     {!selectingVault && (
-                        <SelectVaultAnchor href="#" onClick={() => setSelectingVault(true)}>Select another vault</SelectVaultAnchor>
+                        <ChooserVerticalSpacer>
+                            <SelectVaultAnchor href="#" onClick={() => setSelectingVault(true)}>Select another vault</SelectVaultAnchor>
+                        </ChooserVerticalSpacer>
                     )}
                 </>
             )}
