@@ -46,6 +46,9 @@ app.setAsDefaultProtocolClient(BUTTERCUP_PROTOCOL.replace("://", ""));
 // **
 
 app.whenReady()
+    .then(() => {
+        logInfo("Application ready");
+    })
     .then(() => initialise())
     .then(() => openMainWindow())
     .catch(err => {

@@ -18,6 +18,7 @@ async function createVaultWindow() {
         width,
         height,
         webPreferences: {
+            contextIsolation: false,
             enableRemoteModule: true,
             nodeIntegration: true,
             spellcheck: false
