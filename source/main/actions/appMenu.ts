@@ -2,6 +2,7 @@ import { Menu } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { closeWindows, openMainWindow } from "../services/windows";
+import { t } from "../../shared/i18n/trans";
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
@@ -9,9 +10,9 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: "Buttercup",
             submenu: [
-                { label: "About" },
+                { label: t("app-menu.about") },
                 {
-                    label: "Preferences",
+                    label: t("app-menu.preferences"),
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-preferences");
@@ -19,17 +20,17 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: "Close Window",
+                    label: t("app-menu.close-window"),
                     click: () => closeWindows()
                 },
-                { label: "Quit", role: "quit" }
+                { label: t("app-menu.quit"), role: "quit" }
             ]
         },
         {
-            label: "Vault",
+            label: t("app-menu.vault"),
             submenu: [
                 {
-                    label: "Add New",
+                    label: t("app-menu.add-new-vault"),
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("add-vault");
@@ -37,7 +38,7 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: "Unlock",
+                    label: t("app-menu.unlock-vault"),
                     submenu: sources.map(source => ({
                         label: source.name,
                         enabled: source.state === VaultSourceStatus.Locked,
@@ -48,19 +49,19 @@ async function getContextMenu(): Promise<Menu> {
                     }))
                 },
                 {
-                    label: "Lock All",
+                    label: t("app-menu.lock-all"),
                     click: () => lockAllSources()
                 }
             ]
         },
         {
-            label: "Edit",
+            label: t("app-menu.edit"),
             role: "editMenu"
         },
         {
-            label: "Debug",
+            label: t("app-menu.debug"),
             submenu: [
-                { label: "Devtool", role: "toggleDevTools" }
+                { label: t("app-menu.devtool"), role: "toggleDevTools" }
             ]
         }
     ]);

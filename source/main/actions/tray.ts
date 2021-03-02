@@ -3,6 +3,7 @@ import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { openMainWindow } from "../services/windows";
 import { getIconPath } from "../library/tray";
+import { t } from "../../shared/i18n/trans";
 
 let __tray: Tray = null;
 
@@ -11,25 +12,25 @@ async function getContextMenu(): Promise<Menu> {
     const unlockedCount = sources.reduce((count, desc) => desc.state === VaultSourceStatus.Unlocked ? count + 1 : count, 0);
     return Menu.buildFromTemplate([
         {
-            label: `${unlockedCount} unlocked vaults`,
+            label: t("app-menu.unlocked-vaults", { count: unlockedCount }),
             enabled: false,
         },
         {
             type: "separator"
         },
         {
-            label: "Open",
+            label: t("app-menu.open"),
             click: () => openMainWindow()
         },
         {
             type: "separator"
         },
         {
-            label: "Lock All",
+            label: t("app-menu.lock-all"),
             click: () => lockAllSources()
         },
         {
-            label: "Open Vault",
+            label: t("app-menu.open-vault"),
             submenu: sources.map(source => ({
                 label: source.name,
                 click: async () => {
@@ -46,7 +47,7 @@ async function getContextMenu(): Promise<Menu> {
             type: "separator"
         },
         {
-            label: "Quit",
+            label: t("app-menu.quit"),
             role: "quit"
         }
     ]);

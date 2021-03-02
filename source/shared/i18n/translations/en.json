@@ -1,0 +1,19 @@
+{
+    "app-menu": {
+        "about": "About",
+        "add-new-vault": "Add New",
+        "close-window": "Close Window",
+        "debug": "Debug",
+        "devtool": "Devtool",
+        "edit": "Edit",
+        "lock-all": "Lock All",
+        "open": "Open",
+        "open-vault": "Open Vault",
+        "preferences": "Preferences",
+        "quit": "Quit",
+        "unlock-vault": "Unlock",
+        "unlocked-vaults": "{{count}} unlocked vault",
+        "unlocked-vaults_plural": "{{count}} unlocked vaults",
+        "vault": "Vault"
+    }
+}
