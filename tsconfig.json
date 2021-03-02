@@ -5,7 +5,9 @@
         "strict": false,
         "esModuleInterop": true,
         "outDir": "./build",
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "types": ["node"]
     },
     "include": [
         "./source/main/**/*",

@@ -6,7 +6,9 @@
         "esModuleInterop": true,
         "strict": false,
         "jsx": "react",
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "types": ["react", "react-dom", "styled-components"]
     },
     "include": [
         "./source/renderer/**/*",
