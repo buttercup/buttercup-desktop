@@ -5,9 +5,9 @@ import { setBusy } from "../state/app";
 import { showError } from "../services/notifications";
 import { logInfo } from "../library/log";
 
-export async function unlockVaultSource(sourceID: VaultSourceID) {
+export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolean> {
     const password = await getPrimaryPassword();
-    if (!password) return;
+    if (!password) return false;
     setBusy(true);
     logInfo(`Unlocking source: ${sourceID}`);
     const unlockPromise = new Promise<void>((resolve, reject) => {
@@ -30,4 +30,5 @@ export async function unlockVaultSource(sourceID: VaultSourceID) {
     }));
     await unlockPromise;
     logInfo(`Unlocked source: ${sourceID}`);
+    return true;
 }

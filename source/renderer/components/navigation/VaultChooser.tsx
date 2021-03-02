@@ -84,7 +84,8 @@ export function VaultChooser() {
     const unlockSource = useCallback(async sourceID => {
         const source = vaultsState.get().find(item => item.id === sourceID);
         if (source.state !== VaultSourceStatus.Unlocked) {
-            await unlockVaultSource(sourceID);
+            const didUnlock = await unlockVaultSource(sourceID);
+            if (!didUnlock) return;
         }
         history.push(`/source/${sourceID}`);
     }, [vaultsState.get()]);
