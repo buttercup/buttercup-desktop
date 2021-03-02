@@ -3,6 +3,7 @@ import { BrowserWindow } from "electron";
 import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
 import { getConfigValue, setConfigValue} from "./config";
+import { getIconPath } from "../library/tray";
 
 export async function closeWindows(): Promise<void> {
     const windows = BrowserWindow.getAllWindows();
@@ -17,6 +18,7 @@ async function createVaultWindow() {
     const win = new BrowserWindow({
         width,
         height,
+        icon: getIconPath(),
         webPreferences: {
             contextIsolation: false,
             enableRemoteModule: true,

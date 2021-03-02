@@ -1,9 +1,8 @@
-import path from "path";
 import { Menu, Tray } from "electron";
 import { VaultSourceStatus } from "buttercup";
-import { isLinux, isWindows } from "../../shared/library/platform";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { openMainWindow } from "../services/windows";
+import { getIconPath } from "../library/tray";
 
 let __tray: Tray = null;
 
@@ -54,14 +53,8 @@ async function getContextMenu(): Promise<Menu> {
 }
 
 export async function updateTrayIcon() {
-    let trayPath = isWindows()
-        ? "tray.ico"
-        : isLinux()
-            ? "tray-linux.png"
-            : "trayTemplate.png";
-    trayPath = path.resolve(__dirname, "../../../resources/icons", trayPath);
     if (!__tray) {
-        __tray = new Tray(trayPath);
+        __tray = new Tray(getIconPath());
     }
     const contextMenu = await getContextMenu();
     __tray.setContextMenu(contextMenu);

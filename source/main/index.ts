@@ -11,11 +11,13 @@ if (!lock) {
     app.quit();
 }
 
-app.on("window-all-closed", () => {
-  if (process.platform !== PLATFORM_MACOS) {
-      app.quit();
-  }
-});
+// app.on("window-all-closed", () => {
+//   if (process.platform !== PLATFORM_MACOS) {
+//       app.quit();
+//   }
+// });
+
+app.on("window-all-closed", (event: Event) => event.preventDefault());
 
 app.on("activate", () => {
     openMainWindow();
