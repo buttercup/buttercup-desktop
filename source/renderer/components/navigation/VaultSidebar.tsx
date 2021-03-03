@@ -53,15 +53,38 @@ export function VaultSidebar(props: VaultSidebarProps) {
                 />
                 <Button
                     disabled
+                    icon="barcode"
+                    large
+                    minimal
+                    title="OTP Codes"
+                />
+                <Button
+                    disabled
+                    icon="paperclip"
+                    large
+                    minimal
+                    title="Attachments"
+                />
+                <Button
+                    disabled
                     icon="diagnosis"
                     large
                     minimal
+                    title="Vault optimisation"
                 />
                 <Button
                     disabled
                     icon="console"
                     large
                     minimal
+                    title="Vault terminal"
+                />
+                <Button
+                    disabled
+                    icon="key"
+                    large
+                    minimal
+                    title="Password generator"
                 />
                 <Popover
                     content={
