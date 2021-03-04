@@ -4,6 +4,9 @@ import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
 import { getConfigValue, setConfigValue} from "./config";
 import { getIconPath } from "../library/tray";
+import { lockAllSources } from "./buttercup";
+import { logErr, logInfo } from "../library/log";
+import { Preferences } from "../types";
 
 export async function closeWindows(): Promise<void> {
     const windows = BrowserWindow.getAllWindows();
@@ -26,6 +29,10 @@ async function createVaultWindow() {
             spellcheck: false
         }
     })
+    win.on("closed", () => {
+        win.removeAllListeners();
+        handleWindowClosed();
+    });
     win.on("resize", debounce(() => handleWindowResize(win), 750, false));
     const loadedPromise = new Promise<void>((resolve, reject) => {
         const timeout = setTimeout(() => reject(new Error("Timed-out waiting for window to load")), 10000);
@@ -36,6 +43,18 @@ async function createVaultWindow() {
     });
     win.loadFile(path.resolve(__dirname, "../../renderer/index.html"));
     await loadedPromise;
+}
+
+async function handleWindowClosed() {
+    const preferences: Preferences = await getConfigValue("preferences");
+    if (preferences.lockVaultsOnWindowClose) {
+        logInfo("Locking vaults on window close");
+        try {
+            await lockAllSources();
+        } catch (err) {
+            logErr("Failed locking vaults on window close", err);
+        }
+    }
 }
 
 async function handleWindowResize(win: BrowserWindow) {
