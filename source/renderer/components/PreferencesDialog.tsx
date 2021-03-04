@@ -82,6 +82,7 @@ export function PreferencesDialog() {
                 logInfo("Saved preferences");
                 setDirty(false);
                 setBusy(false);
+                close();
             })
             .catch(err => {
                 setBusy(false);

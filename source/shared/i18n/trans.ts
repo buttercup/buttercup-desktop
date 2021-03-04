@@ -5,7 +5,7 @@ export async function initialise() {
     await i18next.init({
         lng: "en",
         fallbackLng: "en",
-        debug: true,
+        debug: false,
         resources: Object.keys(translations).reduce((output, lang) => ({
             ...output,
             [lang]: {
