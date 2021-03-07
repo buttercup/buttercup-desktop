@@ -6,14 +6,15 @@ import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
 import { getConfigValue } from "./config";
-import { initialise as initialiseI18n } from "../../shared/i18n/trans";
+import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { DEFAULT_LANGUAGE } from "../../shared/symbols";
+import { Preferences } from "../types";
 
 export async function initialise() {
     await initialiseLogging();
     logInfo("Application session started:", new Date());
-    const preferredLang = await getConfigValue<string>("language");
-    const language = preferredLang || DEFAULT_LANGUAGE;
+    const preferences = await getConfigValue<Preferences>("preferences");
+    const language = preferences.language || DEFAULT_LANGUAGE;
     logInfo(`Starting with language: ${language}`);
     await initialiseI18n(language);
     attachVaultManagerWatchers();
@@ -27,6 +28,10 @@ export async function initialise() {
     onSourcesUpdated(async () => {
         await updateAppMenu();
         await updateTrayIcon();
+    });
+    onLanguageChanged(async () => {
+        await updateTrayIcon();
+        await updateAppMenu();
     });
     await applyCurrentTheme();
     logInfo("Initialisation completed");
