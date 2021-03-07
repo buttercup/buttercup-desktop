@@ -1,8 +1,12 @@
+import LANGUAGES from "../../shared/i18n/translations/index";
 import { Language } from "../types";
 
 export async function getAvailableLanguages(): Promise<Array<Language>> {
-    return [{
-        name: "English (UK)",
-        slug: "en-gb"
-    }];
+    return Object.keys(LANGUAGES).reduce((output, slug) => [
+        ...output,
+        {
+            name: LANGUAGES[slug]._ || `Unknown (${slug})`,
+            slug
+        }
+    ], []);
 }

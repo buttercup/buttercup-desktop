@@ -5,12 +5,17 @@ import { logInfo } from "../library/log";
 import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
+import { getConfigValue } from "./config";
 import { initialise as initialiseI18n } from "../../shared/i18n/trans";
+import { DEFAULT_LANGUAGE } from "../../shared/symbols";
 
 export async function initialise() {
     await initialiseLogging();
     logInfo("Application session started:", new Date());
-    await initialiseI18n();
+    const preferredLang = await getConfigValue<string>("language");
+    const language = preferredLang || DEFAULT_LANGUAGE;
+    logInfo(`Starting with language: ${language}`);
+    await initialiseI18n(language);
     attachVaultManagerWatchers();
     await loadVaultsFromDisk();
     session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {

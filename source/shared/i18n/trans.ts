@@ -1,10 +1,11 @@
 import i18next, { TOptions } from "i18next";
 import translations from "./translations/index";
+import { DEFAULT_LANGUAGE } from "../symbols";
 
-export async function initialise() {
+export async function initialise(lang: string) {
     await i18next.init({
-        lng: "en",
-        fallbackLng: "en",
+        lng: lang,
+        fallbackLng: DEFAULT_LANGUAGE,
         debug: false,
         resources: Object.keys(translations).reduce((output, lang) => ({
             ...output,
