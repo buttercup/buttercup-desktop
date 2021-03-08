@@ -3,6 +3,7 @@ import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { openMainWindow } from "../services/windows";
 import { getIconPath } from "../library/tray";
+import { logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 
 let __tray: Tray = null;
@@ -27,7 +28,10 @@ async function getContextMenu(): Promise<Menu> {
         },
         {
             label: t("app-menu.lock-all"),
-            click: () => lockAllSources()
+            click: () => {
+                logInfo("Locking all sources");
+                lockAllSources();
+            }
         },
         {
             label: t("app-menu.open-vault"),
