@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import { VaultFacade, VaultSourceID } from "buttercup";
-import { setCurrentFacade } from "../state/vaults";
+import { setCurrentVault } from "../state/vaults";
+import { setCurrentFacade } from "../services/facade";
 
 export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
     const getVaultFacadePromise = new Promise<VaultFacade>((resolve, reject) => {
@@ -10,5 +11,6 @@ export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
     });
     ipcRenderer.send("get-vault-facade", sourceID);
     const facade = await getVaultFacadePromise;
-    setCurrentFacade(sourceID, facade);
+    setCurrentFacade(facade);
+    setCurrentVault(sourceID);
 }

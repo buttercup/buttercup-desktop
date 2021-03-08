@@ -3,10 +3,11 @@ import { useState } from "@hookstate/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
-import { CURRENT_FACADE, VAULTS_LIST } from "../state/vaults";
+import { VAULTS_LIST } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
+import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
 import { Theme } from "../types";
 
@@ -42,7 +43,7 @@ function renderFacade(
 }
 
 export function VaultEditor(props: VaultEditorProps) {
-    const currentFacadeState = useState(CURRENT_FACADE);
+    const currentFacade = useCurrentFacade();
     const vaultListState = useState(VAULTS_LIST);
     const savingState = useState(SAVING);
     const vaultItem = useMemo(() => {
@@ -55,7 +56,6 @@ export function VaultEditor(props: VaultEditorProps) {
             fetchUpdatedFacade(vaultItem.id);
         }
     }, [props.sourceID, vaultItem?.state]);
-    const facade = currentFacadeState.get();
     // Optional rendering
     if (!vaultItem) return null;
     if (vaultItem.state !== VaultSourceStatus.Unlocked) {
@@ -64,8 +64,8 @@ export function VaultEditor(props: VaultEditorProps) {
     // Normal output
     return (
         <>
-            {facade && renderFacade(
-                facade,
+            {currentFacade && renderFacade(
+                currentFacade,
                 facade => {
                     saveVaultFacade(vaultItem.id, facade);
                 },

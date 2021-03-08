@@ -1,5 +1,4 @@
 import { ipcRenderer } from "electron";
-import { browserHistory } from "react-router-dom";
 import { getCurrentSourceID, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
