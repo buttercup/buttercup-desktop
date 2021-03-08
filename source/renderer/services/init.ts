@@ -2,12 +2,14 @@ import { ipcRenderer } from "electron";
 import { logInfo } from "../library/log";
 import { attachUpdatedListener, getThemeType, updateBodyTheme } from "../library/theme";
 import { changeLanguage, initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
+import { getLanguage } from "../../shared/library/i18n";
+import { getOSLocale } from "./i18n";
 import { getPreferences } from "./preferences";
-import { DEFAULT_LANGUAGE } from "../../shared/symbols";
 
 export async function initialise() {
     const preferences = await getPreferences();
-    const language = preferences.language || DEFAULT_LANGUAGE;
+    const locale = await getOSLocale();
+    const language = await getLanguage(preferences, locale);
     logInfo(`Starting with language: ${language}`);
     await initialiseI18n(language);
     onLanguageChanged(newLang => {

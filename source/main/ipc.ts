@@ -8,8 +8,13 @@ import { handleConfigUpdate } from "./actions/config";
 import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
+import { getOSLocale } from "./services/locale";
 import { log as logRaw, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences } from "./types";
+
+// **
+// ** IPC Events
+// **
 
 ipcMain.on("add-vault-config", async (evt, payload) => {
     const addVaultPayload: AddVaultPayload = JSON.parse(payload);
@@ -141,3 +146,9 @@ ipcMain.on("write-preferences", async (evt, payload) => {
     // Apply theme change
     await handleConfigUpdate(preferences);
 });
+
+// **
+// ** IPC Handlers
+// **
+
+ipcMain.handle("get-locale", getOSLocale);
