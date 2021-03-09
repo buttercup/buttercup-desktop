@@ -70,6 +70,7 @@
     "@buttercup/file-interface": "^0.3.2",
     "@buttercup/google-oauth2-client": "^0.3.0",
     "@buttercup/googledrive-client": "^1.2.0",
+    "@buttercup/secure-file-host": "^0.3.0",
     "buttercup": "^5.9.1",
     "debounce": "^1.2.0",
     "env-paths": "^2.2.1",
