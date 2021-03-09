@@ -2,10 +2,14 @@ import { Menu } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { closeWindows, openMainWindow } from "../services/windows";
+import { getConfigValue, setConfigValue } from "../services/config";
+import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
+import { Preferences } from "../types";
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
+    const preferences = await getConfigValue<Preferences>("preferences");
     return Menu.buildFromTemplate([
         {
             label: "Buttercup",
@@ -51,6 +55,23 @@ async function getContextMenu(): Promise<Menu> {
                 {
                     label: t("app-menu.lock-all"),
                     click: () => lockAllSources()
+                }
+            ]
+        },
+        {
+            label: "Connection",
+            submenu: [
+                {
+                    label: "Enable secure file host",
+                    type: "checkbox",
+                    checked: preferences.fileHostEnabled,
+                    click: async () => {
+                        const prefs = await getConfigValue<Preferences>("preferences");
+                        prefs.fileHostEnabled = !prefs.fileHostEnabled;
+                        await setConfigValue("preferences", prefs);
+                        await updateAppMenu();
+                        await handleConfigUpdate(prefs);
+                    }
                 }
             ]
         },

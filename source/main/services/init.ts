@@ -7,6 +7,7 @@ import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
 import { getConfigValue } from "./config";
 import { getOSLocale } from "./locale";
+import { startFileHost } from "./fileHost";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -37,5 +38,8 @@ export async function initialise() {
         await updateAppMenu();
     });
     await applyCurrentTheme();
+    if (preferences.fileHostEnabled) {
+        await startFileHost();
+    }
     logInfo("Initialisation completed");
 }

@@ -21,6 +21,7 @@ export enum LogLevel {
 
 export interface Preferences {
     autoClearClipboard: false | number;
+    fileHostEnabled: boolean;
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Classes, Dialog, FormGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Callout, Classes, Dialog, FormGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import ms from "ms";
 import prettyMS from "pretty-ms";
@@ -22,6 +22,7 @@ const ThemeSelect = Select.ofType<ThemeSource>();
 const AUTO_CLEAR_CP_MAX = ms("30m") / 1000;
 const LANG_AUTO_NAME = "Auto (OS)";
 const LOCK_VAULTS_TIME_MAX = ms("1d") / 1000;
+const PAGE_CONNECTIVITY = "connectivity";
 const PAGE_GENERAL = "general";
 const PAGE_SECURITY = "security";
 const THEME_AUTO_NAME = "Auto (OS)";
@@ -211,6 +212,23 @@ export function PreferencesDialog() {
             </FormGroup>
         </>
     );
+    const pageConnectivity = () => (
+        <>
+            <FormGroup label="Secure file host">
+                <Callout icon="info-sign">
+                    The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.
+                </Callout>
+                <Switch
+                    checked={preferences.fileHostEnabled}
+                    label="Enable secure file host"
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                        ...naiveClone(preferences),
+                        fileHostEnabled: evt.target.checked
+                    })}
+                />
+            </FormGroup>
+        </>
+    );
     // Render
     return (
         <DialogFreeWidth isOpen={showPreferences.get()} onClose={close}>
@@ -236,6 +254,12 @@ export function PreferencesDialog() {
                                     text="Security"
                                 />
                                 <Button
+                                    active={currentPage === PAGE_CONNECTIVITY}
+                                    icon="offline"
+                                    onClick={() => setCurrentPage(PAGE_CONNECTIVITY)}
+                                    text="Connectivity"
+                                />
+                                <Button
                                     disabled
                                     icon="eye-off"
                                     text="Privacy"
@@ -250,6 +274,7 @@ export function PreferencesDialog() {
                         <PageContent>
                             {currentPage === PAGE_GENERAL && pageGeneral()}
                             {currentPage === PAGE_SECURITY && pageSecurity()}
+                            {currentPage === PAGE_CONNECTIVITY && pageConnectivity()}
                         </PageContent>
                     </PreferencesContent>
                 )}
