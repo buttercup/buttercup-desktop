@@ -1,5 +1,5 @@
 import { VaultFacade, VaultSourceID } from "buttercup";
-import { BrowserWindow, ipcMain } from "electron";
+import { BrowserWindow, clipboard, ipcMain } from "electron";
 import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
@@ -152,3 +152,7 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // **
 
 ipcMain.handle("get-locale", getOSLocale);
+
+ipcMain.handle("write-clipboard", (_, text: string) => {
+    clipboard.writeText(text);
+});
