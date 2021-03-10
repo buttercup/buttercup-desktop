@@ -3,11 +3,12 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { VaultSourceStatus } from "buttercup";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Card, Elevation, Icon, MenuItem, NonIdealState } from "@blueprintjs/core";
+import { Button, ButtonGroup, Card, Classes, Dialog, Elevation, Icon, Intent, MenuItem, NonIdealState } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import { VAULTS_LIST } from "../../state/vaults";
 import { showAddVaultMenu } from "../../state/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
+import { removeVaultSource } from "../../actions/removeVault";
 import { getIconForProvider } from "../../library/icons";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../types";
@@ -51,6 +52,11 @@ const TargetVaultImg = styled.img`
     width: 128px;
     height: auto;
 `;
+const ConfigureIcon = styled(Icon)`
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+`;
 
 function noVaults() {
     return (
@@ -81,6 +87,11 @@ export function VaultChooser() {
             : null,
         [selectedSourceID, vaultsState.get()]
     );
+    const [removeSourceID, setRemoveSourceID] = useState<string>(null);
+    const removeSourceTitle = useMemo(() => {
+        const source = vaultsState.get().find(item => item.id === removeSourceID);
+        return source && source.name || "";
+    }, [removeSourceID]);
     const unlockSource = useCallback(async sourceID => {
         const source = vaultsState.get().find(item => item.id === sourceID);
         if (source.state !== VaultSourceStatus.Unlocked) {
@@ -88,6 +99,12 @@ export function VaultChooser() {
             if (!didUnlock) return;
         }
         history.push(`/source/${sourceID}`);
+    }, [vaultsState.get()]);
+    const removeSource = useCallback(async sourceID => {
+        const nextSource = vaultsState.get().find(source => source.id !== sourceID);
+        setRemoveSourceID(null);
+        await removeVaultSource(sourceID);
+        setSelectedSourceID(nextSource ? nextSource.id : null);
     }, [vaultsState.get()]);
     return (
         <ChooserContainer>
@@ -110,39 +127,73 @@ export function VaultChooser() {
                     {selectingVault && (
                         <>
                             <ChooserVerticalSpacer>
-                                <VaultSelect
-                                    filterable={false}
-                                    items={vaultsState.get()}
-                                    itemRenderer={(item: VaultSourceDescription, { handleClick }) => (
-                                        <MenuItem
-                                            icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
-                                            key={item.id}
-                                            onClick={handleClick}
-                                            text={item.name}
+                                <ButtonGroup>
+                                    <VaultSelect
+                                        filterable={false}
+                                        items={vaultsState.get()}
+                                        itemRenderer={(item: VaultSourceDescription, { handleClick }) => (
+                                            <MenuItem
+                                                icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
+                                                key={item.id}
+                                                onClick={handleClick}
+                                                text={item.name}
+                                            />
+                                        )}
+                                        onItemSelect={(item: VaultSourceDescription) => {
+                                            setSelectedSourceID(item.id);
+                                            setSelectingVault(false);
+                                        }}
+                                    >
+                                        <Button
+                                            icon={<SelectVaultImage src={getIconForProvider(selectedSource.type)} />}
+                                            text={selectedSource && selectedSource.name}
+                                            rightIcon="double-caret-vertical"
                                         />
-                                    )}
-                                    onItemSelect={(item: VaultSourceDescription) => {
-                                        setSelectedSourceID(item.id);
-                                        setSelectingVault(false);
-                                    }}
-                                >
+                                    </VaultSelect>
                                     <Button
-                                        icon={<SelectVaultImage src={getIconForProvider(selectedSource.type)} />}
-                                        text={selectedSource && selectedSource.name}
-                                        rightIcon="double-caret-vertical"
+                                        icon="cross"
+                                        intent={Intent.DANGER}
+                                        onClick={() => setRemoveSourceID(selectedSourceID)}
+                                        small
                                     />
-                                </VaultSelect>
+                                </ButtonGroup>
                             </ChooserVerticalSpacer>
                             <ChooserVerticalSpacer>
-                                <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>Hide vault chooser</SelectVaultAnchor>
+                                <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>Hide configuration</SelectVaultAnchor>
                             </ChooserVerticalSpacer>
                         </>
                     )}
                     {!selectingVault && (
                         <ChooserVerticalSpacer>
-                            <SelectVaultAnchor href="#" onClick={() => setSelectingVault(true)}>Select another vault</SelectVaultAnchor>
+                            <SelectVaultAnchor href="#" onClick={() => setSelectingVault(true)}>
+                                <ConfigureIcon icon="cog" />
+                                Configure vault
+                            </SelectVaultAnchor>
                         </ChooserVerticalSpacer>
                     )}
+                    <Dialog isOpen={!!removeSourceID} onClose={() => setRemoveSourceID(null)}>
+                        <div className={Classes.DIALOG_HEADER}>Remove Vault</div>
+                        <div className={Classes.DIALOG_BODY}>
+                            <p>Are you sure that you want to remove the vault "{removeSourceTitle}"?</p>
+                        </div>
+                        <div className={Classes.DIALOG_FOOTER}>
+                            <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                                <Button
+                                    intent={Intent.DANGER}
+                                    onClick={() => removeSource(removeSourceID)}
+                                    title="Confirm vault removal"
+                                >
+                                    Remove
+                                </Button>
+                                <Button
+                                    onClick={() => setRemoveSourceID(null)}
+                                    title="Cancel removal"
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </div>
+                    </Dialog>
                 </>
             )}
         </ChooserContainer>
