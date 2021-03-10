@@ -45,6 +45,11 @@ async function createVaultWindow() {
     await loadedPromise;
 }
 
+export function getMainWindow(): BrowserWindow {
+    const [win = null] = BrowserWindow.getAllWindows();
+    return win;
+}
+
 async function handleWindowClosed() {
     const preferences: Preferences = await getConfigValue("preferences");
     if (preferences.lockVaultsOnWindowClose) {

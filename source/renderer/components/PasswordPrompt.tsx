@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useState } from "@hookstate/core";
-import styled from "styled-components";
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
 import { getPasswordEmitter } from "../services/password";
 import { SHOW_PROMPT } from "../state/password";
