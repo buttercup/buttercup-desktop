@@ -4,7 +4,7 @@
   "description": "Buttercup for desktop",
   "main": "build/main/index.js",
   "scripts": {
-    "build": "run-s clean build:main build:renderer",
+    "build": "run-s clean build:renderer build:main",
     "build:main": "tsc --build tsconfig.json",
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
