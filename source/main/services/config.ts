@@ -5,6 +5,7 @@ import { PREFERENCES_DEFAULT } from "../../shared/symbols";
 const DEFAULT_CONFIG = {
     fileHostKey: null,
     preferences: naiveClone(PREFERENCES_DEFAULT),
+    selectedSource: null,
     windowHeight: 600,
     windowWidth: 800
 };

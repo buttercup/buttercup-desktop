@@ -151,7 +151,16 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle("get-selected-source", async () => {
+    const sourceID = await getConfigValue<VaultSourceID>("selectedSource");
+    return sourceID;
+});
+
 ipcMain.handle("get-locale", getOSLocale);
+
+ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
+    await setConfigValue("selectedSource", sourceID);
+});
 
 ipcMain.handle("write-clipboard", (_, text: string) => {
     clipboard.writeText(text);

@@ -10,10 +10,11 @@ import { showAddVaultMenu } from "../../state/addVault";
 import { unlockVaultSource } from "../../actions/unlockVault";
 import { removeVaultSource } from "../../actions/removeVault";
 import { getIconForProvider } from "../../library/icons";
+import { getSelectedSource as getConfigSelectedSource, setSelectedSource as setConfigSelectedSource } from "../../services/config";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../types";
 
-const { useCallback, useMemo, useState } = React;
+const { useCallback, useEffect, useMemo, useState } = React;
 const VaultSelect = Select.ofType<VaultSourceDescription>();
 
 const ChooserContainer = styled.div`
@@ -87,6 +88,16 @@ export function VaultChooser() {
             : null,
         [selectedSourceID, vaultsState.get()]
     );
+    useEffect(() => { // INIT
+        getConfigSelectedSource().then(sourceID => {
+            if (sourceID) {
+                setSelectedSourceID(sourceID);
+            }
+        });
+    }, []);
+    useEffect(() => {
+        setConfigSelectedSource(selectedSourceID);
+    }, [selectedSourceID]);
     const [removeSourceID, setRemoveSourceID] = useState<string>(null);
     const removeSourceTitle = useMemo(() => {
         const source = vaultsState.get().find(item => item.id === removeSourceID);
@@ -153,7 +164,7 @@ export function VaultChooser() {
                                     <Button
                                         icon="cross"
                                         intent={Intent.DANGER}
-                                        onClick={() => setRemoveSourceID(selectedSourceID)}
+                                        onClick={() => console.log("REMOVE", selectedSourceID) as any || setRemoveSourceID(selectedSourceID)}
                                         small
                                     />
                                 </ButtonGroup>
@@ -171,7 +182,7 @@ export function VaultChooser() {
                             </SelectVaultAnchor>
                         </ChooserVerticalSpacer>
                     )}
-                    <Dialog isOpen={!!removeSourceID} onClose={() => setRemoveSourceID(null)}>
+                    <Dialog isOpen={removeSourceID !== null} onClose={() => setRemoveSourceID(null)}>
                         <div className={Classes.DIALOG_HEADER}>Remove Vault</div>
                         <div className={Classes.DIALOG_BODY}>
                             <p>Are you sure that you want to remove the vault "{removeSourceTitle}"?</p>
