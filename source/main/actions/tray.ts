@@ -27,6 +27,13 @@ async function getContextMenu(): Promise<Menu> {
             type: "separator"
         },
         {
+            label: t("app-menu.add-new-vault"),
+            click: async () => {
+                const window = await openMainWindow();
+                window.webContents.send("add-vault");
+            }
+        },
+        {
             label: t("app-menu.lock-all"),
             click: () => {
                 logInfo("Locking all sources");
