@@ -19,9 +19,10 @@ import { AddVaultPayload, LogLevel, Preferences } from "./types";
 ipcMain.on("add-vault-config", async (evt, payload) => {
     const addVaultPayload: AddVaultPayload = JSON.parse(payload);
     try {
-        await addVaultFromPayload(addVaultPayload);
+        const sourceID = await addVaultFromPayload(addVaultPayload);
         evt.reply("add-vault-config:reply", JSON.stringify({
             ok: true,
+            sourceID
         }));
     } catch (err) {
         console.error(err);

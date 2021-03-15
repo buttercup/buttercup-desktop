@@ -23,7 +23,7 @@ import { SourceType, VaultSourceDescription } from "../types";
 
 let __vaultManager: VaultManager;
 
-export async function addVault(name: string, sourceCredentials: Credentials, passCredentials: Credentials, type: SourceType, createNew: boolean = false) {
+export async function addVault(name: string, sourceCredentials: Credentials, passCredentials: Credentials, type: SourceType, createNew: boolean = false): Promise<VaultSourceID> {
     const credsSecure = await sourceCredentials.toSecureString();
     const vaultManager = getVaultManager();
     const source = new VaultSource(name, type, credsSecure);
@@ -32,6 +32,7 @@ export async function addVault(name: string, sourceCredentials: Credentials, pas
         await source.unlock(passCredentials, { initialiseRemote: createNew });
         await vaultManager.dehydrateSource(source);
     });
+    return source.id;
 }
 
 export async function attachVaultManagerWatchers() {

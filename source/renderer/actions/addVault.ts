@@ -1,7 +1,8 @@
 import { ipcRenderer } from "electron";
+import { VaultSourceID } from "buttercup";
 import { setBusy } from "../state/app";
 import { logErr, logInfo } from "../library/log";
-import { getCreateNewFilePromptEmitter } from "../services/addVault";
+import { getCreateNewFilePromptEmitter, getVaultAdditionEmitter } from "../services/addVault";
 import { showNewFilePrompt } from "../state/addVault";
 import { AddVaultPayload, DatasourceConfig } from "../types";
 
@@ -13,10 +14,10 @@ export async function addNewVaultTarget(
     createNew: boolean
 ) {
     setBusy(true);
-    const addNewVaultPromise = new Promise<void>((resolve, reject) => {
+    const addNewVaultPromise = new Promise<VaultSourceID>((resolve, reject) => {
         ipcRenderer.once("add-vault-config:reply", (evt, payload) => {
-            const { ok, error } = JSON.parse(payload) as { ok: boolean, error?: string };
-            if (ok) return resolve();
+            const { ok, error, sourceID } = JSON.parse(payload) as { ok: boolean, error?: string, sourceID?: VaultSourceID };
+            if (ok) return resolve(sourceID);
             reject(new Error(`Failed adding vault: ${error}`));
         });
     });
@@ -28,8 +29,9 @@ export async function addNewVaultTarget(
     logInfo(`Adding new vault: ${datasourceConfig.type}`);
     ipcRenderer.send("add-vault-config", JSON.stringify(payload));
     try {
-        await addNewVaultPromise;
+        const sourceID = await addNewVaultPromise;
         setBusy(false);
+        getVaultAdditionEmitter().emit("vault-added", sourceID);
     } catch (err) {
         logErr(err);
         setBusy(false);

@@ -1,11 +1,11 @@
 import path from "path";
 import { BrowserWindow, dialog } from "electron";
-import { Credentials } from "buttercup";
+import { Credentials, VaultSourceID } from "buttercup";
 import { addVault } from "../services/buttercup";
 import { logInfo } from "../library/log";
 import { AddVaultPayload, SourceType } from "../types";
 
-export async function addVaultFromPayload(payload: AddVaultPayload) {
+export async function addVaultFromPayload(payload: AddVaultPayload): Promise<VaultSourceID> {
     let credentials: Credentials,
         name: string;
     switch (payload.datasourceConfig.type) {
@@ -26,8 +26,9 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
             throw new Error(`Unsupported vault type: ${payload.datasourceConfig.type}`);
     }
     logInfo(`Adding vault "${name}" (${payload.datasourceConfig.type}) (new = ${payload.createNew ? "yes" : "no"})`);
-    await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, payload.createNew);
-    logInfo(`Added vault "${name}"`);
+    const sourceID = await addVault(name, credentials, Credentials.fromPassword(payload.masterPassword), payload.datasourceConfig.type, payload.createNew);
+    logInfo(`Added vault "${name}" (${sourceID})`);
+    return sourceID;
 }
 
 export async function showExistingFileVaultDialog(win: BrowserWindow): Promise<string> {

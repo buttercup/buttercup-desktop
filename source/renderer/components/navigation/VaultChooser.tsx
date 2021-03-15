@@ -11,6 +11,7 @@ import { unlockVaultSource } from "../../actions/unlockVault";
 import { removeVaultSource } from "../../actions/removeVault";
 import { getIconForProvider } from "../../library/icons";
 import { getSelectedSource as getConfigSelectedSource, setSelectedSource as setConfigSelectedSource } from "../../services/config";
+import { getVaultAdditionEmitter } from "../../services/addVault";
 import { getThemeProp } from "../../styles/theme";
 import { VaultSourceDescription } from "../../types";
 
@@ -88,6 +89,7 @@ export function VaultChooser() {
             : null,
         [selectedSourceID, vaultsState.get()]
     );
+    const vaultAdditionEmitter = useMemo(getVaultAdditionEmitter, []);
     useEffect(() => { // INIT
         getConfigSelectedSource().then(sourceID => {
             if (sourceID) {
@@ -99,6 +101,17 @@ export function VaultChooser() {
         if (!selectedSource) return;
         setConfigSelectedSource(selectedSourceID);
     }, [selectedSource]);
+    useEffect(() => {
+        const cb = (newSourceID) => {
+            setTimeout(() => {
+                setSelectedSourceID(newSourceID);
+            }, 50);
+        };
+        vaultAdditionEmitter.on("vault-added", cb);
+        return () => {
+            vaultAdditionEmitter.off("vault-added", cb);
+        };
+    }, [vaultAdditionEmitter]);
     const [removeSourceID, setRemoveSourceID] = useState<string>(null);
     const removeSourceTitle = useMemo(() => {
         const source = vaultsState.get().find(item => item.id === removeSourceID);
