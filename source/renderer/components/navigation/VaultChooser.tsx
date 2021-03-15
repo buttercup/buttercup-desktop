@@ -123,7 +123,7 @@ export function VaultChooser() {
             {selectedSource && (
                 <>
                     <TargetVault
-                        elevation={Elevation.ONE}
+                        elevation={Elevation.TWO}
                         interactive
                         onClick={() => unlockSource(selectedSource.id)}
                     >
@@ -162,9 +162,15 @@ export function VaultChooser() {
                                         />
                                     </VaultSelect>
                                     <Button
+                                        icon="add"
+                                        intent={Intent.PRIMARY}
+                                        onClick={() => showAddVaultMenu(true)}
+                                        small
+                                    />
+                                    <Button
                                         icon="cross"
                                         intent={Intent.DANGER}
-                                        onClick={() => console.log("REMOVE", selectedSourceID) as any || setRemoveSourceID(selectedSourceID)}
+                                        onClick={() => setRemoveSourceID(selectedSourceID)}
                                         small
                                     />
                                 </ButtonGroup>
