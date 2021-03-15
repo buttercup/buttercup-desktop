@@ -19,6 +19,7 @@ import {
     getVaultCacheStorage,
     getVaultStorage
 } from "./storage";
+import { updateSearchCaches } from "./search";
 import { SourceType, VaultSourceDescription } from "../types";
 
 let __vaultManager: VaultManager;
@@ -37,12 +38,13 @@ export async function addVault(name: string, sourceCredentials: Credentials, pas
 
 export async function attachVaultManagerWatchers() {
     const vaultManager = getVaultManager();
-    vaultManager.on("sourcesUpdated", () => {
+    vaultManager.on("sourcesUpdated", async () => {
         sendSourcesToWindows();
         vaultManager.unlockedSources.forEach(source => {
             source.removeListener("updated");
             source.on("updated", () => onVaultSourceUpdated(source));
         });
+        await updateSearchCaches(vaultManager.unlockedSources);
     });
 }
 
