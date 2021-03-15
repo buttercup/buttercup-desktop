@@ -83,7 +83,7 @@ export function VaultChooser() {
     const selectedSource = useMemo(
         () => vaultsState.get().length > 0
             ? selectedSourceID
-                ? vaultsState.get().find(item => item.id === selectedSourceID) || null
+                ? vaultsState.get().find(item => item.id === selectedSourceID) || vaultsState.get()[0]
                 : vaultsState.get()[0]
             : null,
         [selectedSourceID, vaultsState.get()]
@@ -96,8 +96,9 @@ export function VaultChooser() {
         });
     }, []);
     useEffect(() => {
+        if (!selectedSource) return;
         setConfigSelectedSource(selectedSourceID);
-    }, [selectedSourceID]);
+    }, [selectedSource]);
     const [removeSourceID, setRemoveSourceID] = useState<string>(null);
     const removeSourceTitle = useMemo(() => {
         const source = vaultsState.get().find(item => item.id === removeSourceID);
@@ -142,21 +143,23 @@ export function VaultChooser() {
                                     <VaultSelect
                                         filterable={false}
                                         items={vaultsState.get()}
-                                        itemRenderer={(item: VaultSourceDescription, { handleClick }) => (
-                                            <MenuItem
-                                                icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
-                                                key={item.id}
-                                                onClick={handleClick}
-                                                text={item.name}
-                                            />
-                                        )}
+                                        itemRenderer={(item: VaultSourceDescription, { handleClick }) =>
+                                            item ? (
+                                                <MenuItem
+                                                    icon={<SelectVaultImage src={getIconForProvider(item.type)} />}
+                                                    key={item.id}
+                                                    onClick={handleClick}
+                                                    text={item.name}
+                                                />
+                                            ) : null
+                                        }
                                         onItemSelect={(item: VaultSourceDescription) => {
                                             setSelectedSourceID(item.id);
                                             setSelectingVault(false);
                                         }}
                                     >
                                         <Button
-                                            icon={<SelectVaultImage src={getIconForProvider(selectedSource.type)} />}
+                                            icon={selectedSource && <SelectVaultImage src={getIconForProvider(selectedSource.type)} /> || null}
                                             text={selectedSource && selectedSource.name}
                                             rightIcon="double-caret-vertical"
                                         />
