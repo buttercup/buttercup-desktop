@@ -1,6 +1,6 @@
 import { VaultFacade, VaultSourceID } from "buttercup";
 import { BrowserWindow, clipboard, ipcMain } from "electron";
-import { addVaultFromPayload, showAddFileVaultDialog } from "./actions/connect";
+import { addVaultFromPayload, showExistingFileVaultDialog, showNewFileVaultDialog } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
@@ -30,18 +30,6 @@ ipcMain.on("add-vault-config", async (evt, payload) => {
             error: err.message
         }));
     }
-});
-
-ipcMain.on("get-add-vault-filename", async evt => {
-    const win = BrowserWindow.fromWebContents(evt.sender);
-    if (!win) {
-        // @todo record error
-    }
-    const filename = await showAddFileVaultDialog(win as BrowserWindow);
-    evt.reply("get-add-vault-filename:reply", JSON.stringify({
-        filename,
-        createNew: false
-    }));
 });
 
 ipcMain.on("get-empty-vault", async (evt, payload) => {
@@ -150,6 +138,24 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // **
 // ** IPC Handlers
 // **
+
+ipcMain.handle("get-existing-vault-filename", async evt => {
+    const win = BrowserWindow.fromWebContents(evt.sender);
+    if (!win) {
+        // @todo record error
+    }
+    const filename = await showExistingFileVaultDialog(win as BrowserWindow);
+    return filename;
+});
+
+ipcMain.handle("get-new-vault-filename", async evt => {
+    const win = BrowserWindow.fromWebContents(evt.sender);
+    if (!win) {
+        // @todo record error
+    }
+    const filename = await showNewFileVaultDialog(win as BrowserWindow);
+    return filename;
+});
 
 ipcMain.handle("get-selected-source", async () => {
     const sourceID = await getConfigValue<VaultSourceID>("selectedSource");

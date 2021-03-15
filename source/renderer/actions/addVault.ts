@@ -1,7 +1,11 @@
 import { ipcRenderer } from "electron";
 import { setBusy } from "../state/app";
 import { logErr, logInfo } from "../library/log";
+import { getCreateNewFilePromptEmitter } from "../services/addVault";
+import { showNewFilePrompt } from "../state/addVault";
 import { AddVaultPayload, DatasourceConfig } from "../types";
+
+type NewVaultChoice = "new" | "existing" | null;
 
 export async function addNewVaultTarget(
     datasourceConfig: DatasourceConfig,
@@ -34,18 +38,30 @@ export async function addNewVaultTarget(
 }
 
 export async function getFileVaultParameters(): Promise<{ filename: string, createNew: boolean } | null> {
-    const getVaultDetailsPromise = new Promise<{ filename: string, createNew: boolean }>(resolve => {
-        ipcRenderer.once("get-add-vault-filename:reply", (evt, payload) => {
-            resolve(JSON.parse(payload));
-        });
+    showNewFilePrompt(true);
+    const emitter = getCreateNewFilePromptEmitter();
+    const choice: NewVaultChoice = await new Promise<NewVaultChoice>(resolve => {
+        const callback = (choice: NewVaultChoice) => {
+            resolve(choice);
+            emitter.removeListener("choice", callback);
+        };
+        emitter.once("choice", callback);
     });
-    ipcRenderer.send("get-add-vault-filename");
-    const {
-        filename,
-        createNew
-    } = await getVaultDetailsPromise;
-    return {
-        filename,
-        createNew
-    };
+    showNewFilePrompt(false);
+    if (!choice) return null;
+    if (choice === "new") {
+        const filename = await ipcRenderer.invoke("get-new-vault-filename");
+        if (!filename) return null;
+        return {
+            filename,
+            createNew: true
+        };
+    } else {
+        const filename = await ipcRenderer.invoke("get-existing-vault-filename");
+        if (!filename) return null;
+        return {
+            filename,
+            createNew: false
+        };
+    }
 }

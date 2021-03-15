@@ -15,6 +15,7 @@ import { AddVaultMenu } from "./components/AddVaultMenu";
 import { PreferencesDialog } from "./components/PreferencesDialog";
 import { Notifications } from "./components/Notifications";
 import { FileHostConnectionNotice } from "./components/FileHostConnectionNotice";
+import { CreateNewFilePrompt } from "./components/CreateNewFilePrompt";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
 
@@ -45,6 +46,7 @@ export function App() {
                 <>
                     <PasswordPrompt />
                     <FileHostConnectionNotice />
+                    <CreateNewFilePrompt />
                     <AddVaultMenu />
                     <PreferencesDialog />
                     <Notifications />

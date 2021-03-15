@@ -140,7 +140,12 @@ export function AddVaultMenu() {
         setSelectedType(type);
         if (type === SourceType.File) {
             setCurrentPage(PAGE_AUTH);
-            const { filename, createNew } = await getFileVaultParameters();
+            const result = await getFileVaultParameters();
+            if (!result) {
+                close();
+                return;
+            }
+            const { filename, createNew } = result;
             if (!filename) {
                 close();
                 return;

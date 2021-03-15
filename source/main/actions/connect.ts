@@ -30,7 +30,7 @@ export async function addVaultFromPayload(payload: AddVaultPayload) {
     logInfo(`Added vault "${name}"`);
 }
 
-export async function showAddFileVaultDialog(win: BrowserWindow): Promise<string> {
+export async function showExistingFileVaultDialog(win: BrowserWindow): Promise<string> {
     const result = await dialog.showOpenDialog(win, {
         title: "Add Existing Vault",
         buttonLabel: "Add",
@@ -41,4 +41,21 @@ export async function showAddFileVaultDialog(win: BrowserWindow): Promise<string
     });
     const [vaultPath] = result.filePaths;
     return vaultPath || null;
+}
+
+export async function showNewFileVaultDialog(win: BrowserWindow): Promise<string> {
+    const result = await dialog.showSaveDialog(win, {
+        title: "Add New Vault",
+        buttonLabel: "Create",
+        filters: [
+            { name: "Buttercup Vaults", extensions: ["bcup"] }
+        ],
+        properties: ["createDirectory", "dontAddToRecent", "showOverwriteConfirmation"]
+    });
+    let vaultPath = result.filePath;
+    if (!vaultPath) return null;
+    if (/\.bcup$/i.test(vaultPath) === false) {
+        vaultPath = `${vaultPath}.bcup`;
+    }
+    return vaultPath;
 }
