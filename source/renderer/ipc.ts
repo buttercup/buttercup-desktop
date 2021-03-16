@@ -3,6 +3,7 @@ import { getCurrentSourceID, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
 import { setFileHostCode } from "./state/fileHost";
+import { setSearchVisible } from "./state/search";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
 import { VaultSourceDescription } from "./types";
@@ -18,6 +19,10 @@ ipcRenderer.on("file-host-code", (evt, payload) => {
 
 ipcRenderer.on("open-preferences", evt => {
     showPreferences(true);
+});
+
+ipcRenderer.on("open-search", evt => {
+    setSearchVisible(true);
 });
 
 ipcRenderer.on("open-source", (evt, sourceID) => {

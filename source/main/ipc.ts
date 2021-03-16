@@ -9,8 +9,9 @@ import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
 import { getOSLocale } from "./services/locale";
+import { searchSingleVault } from "./services/search";
 import { log as logRaw, logErr } from "./library/log";
-import { AddVaultPayload, LogLevel, Preferences } from "./types";
+import { AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
 
 // **
 // ** IPC Events
@@ -164,6 +165,14 @@ ipcMain.handle("get-selected-source", async () => {
 });
 
 ipcMain.handle("get-locale", getOSLocale);
+
+ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
+    const results = await searchSingleVault(sourceID, term);
+    return results.map(res => ({
+        type: "entry",
+        result: res
+    }));
+});
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);

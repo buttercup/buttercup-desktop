@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
+import { SearchManager } from "./search/SearchManager";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 const { useCallback, useState } = React;
@@ -39,7 +40,7 @@ export function VaultManagement() {
                     </ErrorBoundary>
                 )}
             </ContentContainer>
-
+            <SearchManager sourceID={id} />
         </PrimaryContainer>
     );
 }

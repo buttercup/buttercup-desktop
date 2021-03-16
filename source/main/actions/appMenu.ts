@@ -55,7 +55,16 @@ async function getContextMenu(): Promise<Menu> {
                 {
                     label: t("app-menu.lock-all"),
                     click: () => lockAllSources()
+                },
+                { type: "separator" },
+                {
+                    label: "Search",
+                    click: async () => {
+                        const window = await openMainWindow();
+                        window.webContents.send("open-search");
+                    }
                 }
+
             ]
         },
         {

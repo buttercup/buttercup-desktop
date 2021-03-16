@@ -29,10 +29,14 @@ export async function updateSearchCaches(unlockedSources: Array<VaultSource>) {
     for (const missing of missingVaults) {
         delete __searchCache[missing];
     }
+    for (const source of unlockedSources) {
+        __searchCache[source.id] = __searchCache[source.id] || new VaultEntrySearch([source.vault]);
+    }
     __primarySearch = new VaultEntrySearch(unlockedSources.map(source => source.vault));
     await Promise.all([
         __primarySearch.prepare(),
         ...Object.keys(__searchCache).map(async sourceID => {
+            logInfo(`Update search record for vault: ${sourceID}`);
             await __searchCache[sourceID].prepare();
         })
     ]);
