@@ -1,8 +1,11 @@
 import * as React from "react";
-import { Intent, MenuItem } from "@blueprintjs/core";
+import { Intent, MenuItem, Tag } from "@blueprintjs/core";
 import { Omnibar } from "@blueprintjs/select";
 import { SiteIcon } from "@buttercup/ui";
+import { EntryType } from "buttercup";
 import styled from "styled-components";
+import { extractSSHPubKeyName } from "../../library/entryType";
+import { trimWithEllipses } from "../../library/trim";
 import { SearchResult } from "../../types";
 
 interface SearchModalProps {
@@ -35,6 +38,27 @@ function getDomain(res: SearchResult): string | null {
     return null;
 }
 
+function getResultLabel(res: SearchResult): string | React.ReactNode {
+    const {
+        result: {
+            entryType,
+            properties
+        }
+    } = res;
+    switch (entryType) {
+        case EntryType.Login:
+            /* falls through */
+        case EntryType.Website:
+            return properties.username ? <Tag icon="user" minimal>{properties.username}</Tag> : ""
+        case EntryType.CreditCard:
+            return properties.username ? <Tag icon="credit-card" minimal>{properties.username}</Tag> : ""
+        case EntryType.SSHKey:
+            return properties.publicKey ? <Tag icon="id-number" minimal>{trimWithEllipses(extractSSHPubKeyName(properties.publicKey), 12)}</Tag> : ""
+        default:
+            return "";
+    }
+}
+
 function renderResult(res: SearchResult, { handleClick, modifiers }) {
     if (!modifiers.matchesPredicate) return null;
     if (!res) return null;
@@ -43,7 +67,7 @@ function renderResult(res: SearchResult, { handleClick, modifiers }) {
             <MenuItem
                 active={modifiers.active}
                 disabled={modifiers.disabled}
-                label={res.result.vaultID}
+                labelElement={getResultLabel(res)}
                 key={res.result.id}
                 onClick={handleClick}
                 icon={<ResultIcon domain={getDomain(res)} />}
