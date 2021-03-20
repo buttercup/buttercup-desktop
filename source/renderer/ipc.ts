@@ -22,6 +22,8 @@ ipcRenderer.on("open-preferences", evt => {
 });
 
 ipcRenderer.on("open-search", evt => {
+    const currentSourceID = getCurrentSourceID();
+    if (!currentSourceID) return;
     setSearchVisible(true);
 });
 

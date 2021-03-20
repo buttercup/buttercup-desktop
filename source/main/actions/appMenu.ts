@@ -5,6 +5,7 @@ import { closeWindows, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
+import { isOSX } from "../../shared/library/platform";
 import { Preferences } from "../types";
 
 async function getContextMenu(): Promise<Menu> {
@@ -59,6 +60,7 @@ async function getContextMenu(): Promise<Menu> {
                 { type: "separator" },
                 {
                     label: "Search",
+                    accelerator: isOSX() ? "Cmd+F" : "Ctrl+F",
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-search");
