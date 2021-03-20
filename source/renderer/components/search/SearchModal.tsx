@@ -8,6 +8,7 @@ import { SearchResult } from "../../types";
 interface SearchModalProps {
     onClose: () => void;
     onSearch: (term: string) => void;
+    onSelect: (result: SearchResult) => void;
     results: Array<SearchResult>;
     visible: boolean;
 }
@@ -59,6 +60,7 @@ export function SearchModal(props: SearchModalProps) {
     const {
         onClose,
         onSearch,
+        onSelect,
         results,
         visible
     } = props;
@@ -68,7 +70,7 @@ export function SearchModal(props: SearchModalProps) {
             items={results}
             noResults={<MenuItem disabled text="No results..." />}
             onClose={onClose}
-            onItemSelect={() => {}}
+            onItemSelect={onSelect}
             onQueryChange={onSearch}
             isOpen={visible}
         />

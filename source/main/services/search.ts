@@ -1,5 +1,5 @@
 import {
-    SearchResult,
+    SearchResult as CoreSearchResult,
     VaultEntrySearch,
     VaultSource,
     VaultSourceID
@@ -13,12 +13,12 @@ interface SearchCache {
 let __primarySearch: VaultEntrySearch = null;
 const __searchCache: SearchCache = {};
 
-export async function searchAllVaults(term: string): Promise<Array<SearchResult>> {
+export async function searchAllVaults(term: string): Promise<Array<CoreSearchResult>> {
     if (!__primarySearch) return [];
     return __primarySearch.searchByTerm(term);
 }
 
-export async function searchSingleVault(sourceID: VaultSourceID, term: string): Promise<Array<SearchResult>> {
+export async function searchSingleVault(sourceID: VaultSourceID, term: string): Promise<Array<CoreSearchResult>> {
     const search = __searchCache[sourceID];
     if (!search) return [];
     return search.searchByTerm(term);
