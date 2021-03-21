@@ -1,5 +1,7 @@
-# desktop
-Buttercup desktop application
+# Buttercup Desktop
+> Buttercup for Desktop - Mac, Linux and Windows
+
+**:warning: This is a Work-in-Progress! It will soon be in beta release mode. Please do not submit any issues or PRs regarding this project until this notice is removed.**
 
 ## Configuration
 
