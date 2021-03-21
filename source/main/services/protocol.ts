@@ -1,10 +1,10 @@
 import { BrowserWindow } from "electron";
-import { logInfo } from "../library/log";
+import { logErr, logInfo, logWarn } from "../library/log";
 import { BUTTERCUP_PROTOCOL } from "../symbols";
 
 function handleAuthCall(args) {
     if (!Array.isArray(args) || args.length === 0) {
-        console.warn("Empty auth call: aborting");
+        logErr("Empty auth call: aborting");
         return;
     }
     const [action, ...actionArgs] = args;
@@ -15,7 +15,7 @@ function handleAuthCall(args) {
             });
             break;
         default:
-            console.warn("Unable to handle authentication protocol execution");
+            logWarn("Unable to handle authentication protocol execution");
             break;
     }
 }
@@ -29,7 +29,7 @@ export function handleProtocolCall(protocolURL: string) {
             handleAuthCall(args);
             break;
         default:
-            console.warn(`Failed handling protocol URL: ${protocolURL}`);
+            logWarn(`Failed handling protocol URL: ${protocolURL}`);
             break;
     }
 }

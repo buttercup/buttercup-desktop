@@ -1,6 +1,6 @@
 import * as React from "react";
-// import styled from "styled-components";
 import { Button, Classes, Dialog, Intent } from "@blueprintjs/core";
+import { t } from "../../../shared/i18n/trans";
 
 export interface ConfirmDialogProps {
     cancelText?: string;
@@ -13,7 +13,15 @@ export interface ConfirmDialogProps {
 }
 
 export function ConfirmDialog(props: ConfirmDialogProps) {
-    const { cancelText = "Cancel", children, confirmIntent = Intent.PRIMARY, confirmText = "Confirm", onClose, open, title } = props;
+    const {
+        cancelText = t("dialog.confirm-generic.cancel-button"),
+        children,
+        confirmIntent = Intent.PRIMARY,
+        confirmText = t("dialog.confirm-generic.confirm-button"),
+        onClose,
+        open,
+        title
+    } = props;
     return (
         <Dialog isOpen={open} onClose={() => onClose(false)}>
             <div className={Classes.DIALOG_HEADER}>{title}</div>

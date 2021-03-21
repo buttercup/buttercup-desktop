@@ -4,6 +4,7 @@ import { VaultFacade, VaultSourceID } from "buttercup";
 import { setSaving } from "../state/app";
 import { createProgressNotification } from "../services/notifications";
 import { logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 import { ICON_UPLOAD } from "../../shared/symbols";
 
 export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: VaultFacade) {
@@ -16,10 +17,10 @@ export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: Vaul
                 error?: string
             };
             if (!ok) {
-                progNotification.clear(`Vault failed to save: ${error || "Unknown error"}`, Intent.DANGER, 10000);
+                progNotification.clear(`${t("notification.error.vault-save-failed")}: ${error || t("notification.error.unknown-error")}`, Intent.DANGER, 10000);
                 return reject(new Error(`Failed saving vault: ${error}`));
             }
-            progNotification.clear("Vault saved", Intent.SUCCESS);
+            progNotification.clear(t("notification.vault-saved"), Intent.SUCCESS);
             resolve();
         });
     });

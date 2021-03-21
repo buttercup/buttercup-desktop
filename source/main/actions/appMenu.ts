@@ -59,7 +59,7 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: "Search",
+                    label: t("app-menu.search"),
                     accelerator: isOSX() ? "Cmd+F" : "Ctrl+F",
                     click: async () => {
                         const window = await openMainWindow();
@@ -70,10 +70,10 @@ async function getContextMenu(): Promise<Menu> {
             ]
         },
         {
-            label: "Connection",
+            label: t("app-menu.connection"),
             submenu: [
                 {
-                    label: "Enable browser access",
+                    label: t("app-menu.enable-secure-file-host"),
                     type: "checkbox",
                     checked: preferences.fileHostEnabled,
                     click: async () => {

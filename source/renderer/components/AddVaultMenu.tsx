@@ -15,6 +15,7 @@ import { authenticateGoogleDrive } from "../services/authGoogle";
 import { createEmptyVault as createEmptyGoogleDriveVault } from "../services/googleDrive";
 import { showWarning } from "../services/notifications";
 import { getIconForProvider } from "../library/icons";
+import { t } from "../../shared/i18n/trans";
 import { DatasourceConfig, SourceType } from "../types";
 
 interface WebDAVCredentialsState {
@@ -34,22 +35,22 @@ const PAGE_CONFIRM = "confirm";
 
 const VAULT_TYPES = [
     {
-        title: "File",
+        i18n: "source-type.file",
         type: SourceType.File,
         icon: getIconForProvider(SourceType.File)
     },
     {
-        title: "Dropbox",
+        i18n: "source-type.dropbox",
         type: SourceType.Dropbox,
         icon: getIconForProvider(SourceType.Dropbox)
     },
     {
-        title: "Google Drive",
+        i18n: "source-type.googledrive",
         type: SourceType.GoogleDrive,
         icon: getIconForProvider(SourceType.GoogleDrive)
     },
     {
-        title: "WebDAV",
+        i18n: "source-type.webdav",
         type: SourceType.WebDAV,
         icon: getIconForProvider(SourceType.WebDAV)
     }
@@ -202,7 +203,7 @@ export function AddVaultMenu() {
                 setCurrentPage(PAGE_CHOOSE);
             } catch (err) {
                 console.error(err);
-                showWarning(`Google authentication failed: ${err.message}`);
+                showWarning(`${t("add-vault-menu.google-auth-error")}: ${err.message}`);
                 setAuthenticatingGoogleDrive(false);
             }
         } else if (selectedType === SourceType.WebDAV) {
@@ -274,12 +275,12 @@ export function AddVaultMenu() {
     // Pages
     const pageType = () => (
         <>
-            <p>Choose a vault type to add:</p>
+            <p>{t("add-vault-menu.choose-type-prompt")}</p>
             <TypeIcons>
                 {VAULT_TYPES.map(vaultType => (
                     <TypeIcon key={vaultType.type} interactive elevation={Elevation.TWO} onClick={() => handleVaultTypeClick(vaultType.type)}>
                         <TypeIconImage src={vaultType.icon} />
-                        <TypeText>{vaultType.title}</TypeText>
+                        <TypeText>{t(vaultType.i18n)}</TypeText>
                     </TypeIcon>
                 ))}
             </TypeIcons>
@@ -289,26 +290,26 @@ export function AddVaultMenu() {
         <>
             {selectedType === SourceType.File && (
                 <LoadingContainer>
-                    <i>A dialog will open for choosing a vault file</i>
+                    <i>{t("add-vault-menu.loader.file-prompt")}</i>
                 </LoadingContainer>
             )}
             {selectedType === SourceType.Dropbox && (
                 <LoadingContainer>
-                    <i>A separate window will open for authentication</i>
+                    <i>{t("add-vault-menu.loader.dropbox-auth")}</i>
                 </LoadingContainer>
             )}
             {selectedType === SourceType.GoogleDrive && (
                 <>
-                    <p>You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.</p>
-                    <p>Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares</p>
-                    <p>Selected a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.</p>
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-1") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-2") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-3") }} />
                     <WideFormGroup
                         inline
-                        label="Permissions"
+                        label={t("add-vault-menu.google-auth.perm-label")}
                     >
                         <Switch
                             disabled={authenticatingGoogleDrive}
-                            label="Open"
+                            label={t("add-vault-menu.google-auth.perm-switch")}
                             checked={googleDriveOpenPerms}
                             onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
                         />

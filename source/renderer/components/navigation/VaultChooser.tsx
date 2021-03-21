@@ -13,6 +13,7 @@ import { getIconForProvider } from "../../library/icons";
 import { getSelectedSource as getConfigSelectedSource, setSelectedSource as setConfigSelectedSource } from "../../services/config";
 import { getVaultAdditionEmitter } from "../../services/addVault";
 import { getThemeProp } from "../../styles/theme";
+import { t } from "../../../shared/i18n/trans";
 import { VaultSourceDescription } from "../../types";
 
 const { useCallback, useEffect, useMemo, useState } = React;
@@ -64,13 +65,13 @@ function noVaults() {
     return (
         <NonIdealState
             icon="key"
-            title="A Clean Slate"
-            description="No vaults have been added yet..."
+            title={t("vault-chooser.no-vaults.title")}
+            description={t("vault-chooser.no-vaults.description")}
         >
             <Button
                 icon="add"
                 onClick={() => showAddVaultMenu(true)}
-                text="Add Vault"
+                text={t("vault-chooser.no-vaults.cta-button")}
             />
         </NonIdealState>
     );
@@ -192,7 +193,7 @@ export function VaultChooser() {
                                 </ButtonGroup>
                             </ChooserVerticalSpacer>
                             <ChooserVerticalSpacer>
-                                <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>Hide configuration</SelectVaultAnchor>
+                                <SelectVaultAnchor href="#" onClick={() => setSelectingVault(false)}>{t("vault-chooser.configure-vault-hide")}</SelectVaultAnchor>
                             </ChooserVerticalSpacer>
                         </>
                     )}
@@ -200,29 +201,29 @@ export function VaultChooser() {
                         <ChooserVerticalSpacer>
                             <SelectVaultAnchor href="#" onClick={() => setSelectingVault(true)}>
                                 <ConfigureIcon icon="cog" />
-                                Configure vault
+                                {t("vault-chooser.configure-vault")}
                             </SelectVaultAnchor>
                         </ChooserVerticalSpacer>
                     )}
                     <Dialog isOpen={removeSourceID !== null} onClose={() => setRemoveSourceID(null)}>
-                        <div className={Classes.DIALOG_HEADER}>Remove Vault</div>
+                        <div className={Classes.DIALOG_HEADER}>{t("vault-chooser.remove-vault-dialog.title")}</div>
                         <div className={Classes.DIALOG_BODY}>
-                            <p>Are you sure that you want to remove the vault "{removeSourceTitle}"?</p>
+                            <p>{t("vault-chooser.remove-vault-dialog.description", { title: removeSourceTitle })}</p>
                         </div>
                         <div className={Classes.DIALOG_FOOTER}>
                             <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                                 <Button
                                     intent={Intent.DANGER}
                                     onClick={() => removeSource(removeSourceID)}
-                                    title="Confirm vault removal"
+                                    title={t("vault-chooser.remove-vault-dialog.remove-button-title")}
                                 >
-                                    Remove
+                                    {t("vault-chooser.remove-vault-dialog.remove-button")}
                                 </Button>
                                 <Button
                                     onClick={() => setRemoveSourceID(null)}
-                                    title="Cancel removal"
+                                    title={t("vault-chooser.remove-vault-dialog.cancel-button-title")}
                                 >
-                                    Cancel
+                                    {t("vault-chooser.remove-vault-dialog.cancel-button")}
                                 </Button>
                             </div>
                         </div>

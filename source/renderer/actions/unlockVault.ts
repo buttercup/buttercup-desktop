@@ -4,6 +4,7 @@ import { getPrimaryPassword } from "./password";
 import { setBusy } from "../state/app";
 import { showError } from "../services/notifications";
 import { logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 
 export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolean> {
     const password = await getPrimaryPassword();
@@ -18,7 +19,7 @@ export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolea
                 error?: string
             };
             if (!ok) {
-                showError(`Vault unlock failed: ${error || "Unknown error"}`);
+                showError(`${t("notification.error.vault-unlock-failed")}: ${error || t("notification.error.unknown-error")}`);
                 return reject(new Error(`Failed unlocking vault: ${error}`));
             }
             resolve();

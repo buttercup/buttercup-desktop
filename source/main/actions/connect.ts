@@ -3,6 +3,7 @@ import { BrowserWindow, dialog } from "electron";
 import { Credentials, VaultSourceID } from "buttercup";
 import { addVault } from "../services/buttercup";
 import { logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 import { AddVaultPayload, SourceType } from "../types";
 
 export async function addVaultFromPayload(payload: AddVaultPayload): Promise<VaultSourceID> {
@@ -33,10 +34,10 @@ export async function addVaultFromPayload(payload: AddVaultPayload): Promise<Vau
 
 export async function showExistingFileVaultDialog(win: BrowserWindow): Promise<string> {
     const result = await dialog.showOpenDialog(win, {
-        title: "Add Existing Vault",
-        buttonLabel: "Add",
+        title: t("dialog.file-vault.add-existing.title"),
+        buttonLabel: t("dialog.file-vault.add-existing.confirm-button"),
         filters: [
-            { name: "Buttercup Vaults", extensions: ["bcup"] }
+            { name: t("dialog.file-vault.add-existing.bcup-filter"), extensions: ["bcup"] }
         ],
         properties: ["openFile"]
     });
@@ -46,10 +47,10 @@ export async function showExistingFileVaultDialog(win: BrowserWindow): Promise<s
 
 export async function showNewFileVaultDialog(win: BrowserWindow): Promise<string> {
     const result = await dialog.showSaveDialog(win, {
-        title: "Add New Vault",
-        buttonLabel: "Create",
+        title: t("dialog.file-vault.add-new.title"),
+        buttonLabel: t("dialog.file-vault.add-new.confirm-button"),
         filters: [
-            { name: "Buttercup Vaults", extensions: ["bcup"] }
+            { name: t("dialog.file-vault.add-new.bcup-filter"), extensions: ["bcup"] }
         ],
         properties: ["createDirectory", "dontAddToRecent", "showOverwriteConfirmation"]
     });
