@@ -5,12 +5,12 @@ import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
-import { getEmptyVault, saveVaultFacade, sendSourcesToWindows } from "./services/buttercup";
+import { getEmptyVault, saveVaultFacade, sendSourcesToWindows, toggleAutoUpdate } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
 import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
-import { log as logRaw, logErr } from "./library/log";
+import { log as logRaw, logInfo, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
 
 // **
@@ -176,6 +176,15 @@ ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<S
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
+});
+
+ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {
+    await toggleAutoUpdate(enable);
+    if (enable) {
+        logInfo("Enabled auto-update");
+    } else {
+        logInfo("Disabled auto-update");
+    }
 });
 
 ipcMain.handle("write-clipboard", (_, text: string) => {

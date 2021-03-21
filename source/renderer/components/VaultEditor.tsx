@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
@@ -8,54 +8,16 @@ import { VAULTS_LIST } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
+import { toggleAutoUpdate } from "../actions/autoUpdate";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
+import { logErr, logInfo } from "../library/log";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
 
 interface VaultEditorProps {
     sourceID: string;
-}
-
-function renderFacade(
-    facade: VaultFacade,
-    onUpdate: (facade: VaultFacade) => void,
-    theme: Theme,
-    isSaving: boolean = false
-) {
-    const {
-        resetSelection,
-        selectedEntryID,
-        selectedGroupID,
-        setSelectedEntryID,
-        setSelectedGroupID
-    } = useContext(SearchContext);
-    useEffect(() => {
-        return () => {
-            // Reset search on unmount
-            resetSelection();
-        };
-    }, []);
-    return (
-        <ThemeProvider theme={theme === Theme.Dark ? themes.dark : themes.light}>
-            <VaultProvider
-                icons
-                iconsPath="icons"
-                onSelectEntry={setSelectedEntryID}
-                onSelectGroup={setSelectedGroupID}
-                onUpdate={(vaultFacade: VaultFacade) => {
-                    onUpdate(vaultFacade);
-                }}
-                readOnly={isSaving}
-                selectedEntry={selectedEntryID}
-                selectedGroup={selectedGroupID}
-                vault={facade}
-            >
-                <VaultUI />
-            </VaultProvider>
-        </ThemeProvider>
-    );
 }
 
 export function VaultEditor(props: VaultEditorProps) {
@@ -67,11 +29,18 @@ export function VaultEditor(props: VaultEditorProps) {
         return vaultList.find(item => item.id === props.sourceID) || null;
     }, [vaultListState.get()]);
     const themeType = useTheme();
+    const [currentlyEditing, setCurrentlyEditing] = useState(false);
     useEffect(() => {
         if (vaultItem && vaultItem.state === VaultSourceStatus.Unlocked) {
             fetchUpdatedFacade(vaultItem.id);
         }
     }, [props.sourceID, vaultItem?.state]);
+    useEffect(() => {
+        logInfo(`Toggling auto-update for vault editing (editing=${currentlyEditing}, auto-update=${!currentlyEditing})`);
+        toggleAutoUpdate(!currentlyEditing).catch(err => {
+            logErr("Failed toggling auto-update", err);
+        });
+    }, [currentlyEditing]);
     // Search
     const {
         resetSelection,
@@ -99,6 +68,7 @@ export function VaultEditor(props: VaultEditorProps) {
                     <VaultProvider
                         icons
                         iconsPath="icons"
+                        onEditing={setCurrentlyEditing}
                         onSelectEntry={setSelectedEntryID}
                         onSelectGroup={setSelectedGroupID}
                         onUpdate={(vaultFacade: VaultFacade) => {

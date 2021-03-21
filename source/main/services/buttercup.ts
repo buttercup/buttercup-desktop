@@ -20,6 +20,7 @@ import {
     getVaultStorage
 } from "./storage";
 import { updateSearchCaches } from "./search";
+import { logErr } from "../library/log";
 import { SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
@@ -39,6 +40,9 @@ export async function addVault(name: string, sourceCredentials: Credentials, pas
 
 export async function attachVaultManagerWatchers() {
     const vaultManager = getVaultManager();
+    vaultManager.on("autoUpdateFailed", ({ source, error }) => {
+        logErr(`Auto update failed for source: ${source.id}`, error);
+    });
     vaultManager.on("sourcesUpdated", async () => {
         sendSourcesToWindows();
         vaultManager.unlockedSources.forEach(source => {
@@ -132,6 +136,12 @@ export function sendSourcesToWindows() {
     for (const win of windows) {
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }
+}
+
+export async function toggleAutoUpdate(enable: boolean = true) {
+    const vaultManager = getVaultManager();
+    await vaultManager.enqueueStateChange(() => {});
+    vaultManager.toggleAutoUpdating(enable);
 }
 
 export async function unlockSource(sourceID: VaultSourceID, password: string) {
