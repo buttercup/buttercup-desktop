@@ -1,8 +1,9 @@
-import * as React from "react";
-import { useState } from "@hookstate/core";
+import React, { useCallback, useContext, useEffect, useMemo } from "react";
+import { useState as useHookState } from "@hookstate/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { ThemeProvider } from "styled-components";
+import { SearchContext } from "./search/SearchContext";
 import { VAULTS_LIST } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
@@ -12,8 +13,6 @@ import { useTheme } from "../hooks/theme";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
-
-const { useEffect, useMemo } = React;
 
 interface VaultEditorProps {
     sourceID: string;
@@ -25,16 +24,33 @@ function renderFacade(
     theme: Theme,
     isSaving: boolean = false
 ) {
+    const {
+        resetSelection,
+        selectedEntryID,
+        selectedGroupID,
+        setSelectedEntryID,
+        setSelectedGroupID
+    } = useContext(SearchContext);
+    useEffect(() => {
+        return () => {
+            // Reset search on unmount
+            resetSelection();
+        };
+    }, []);
     return (
         <ThemeProvider theme={theme === Theme.Dark ? themes.dark : themes.light}>
             <VaultProvider
-                vault={facade}
                 icons
                 iconsPath="icons"
+                onSelectEntry={setSelectedEntryID}
+                onSelectGroup={setSelectedGroupID}
                 onUpdate={(vaultFacade: VaultFacade) => {
                     onUpdate(vaultFacade);
                 }}
                 readOnly={isSaving}
+                selectedEntry={selectedEntryID}
+                selectedGroup={selectedGroupID}
+                vault={facade}
             >
                 <VaultUI />
             </VaultProvider>
@@ -44,8 +60,8 @@ function renderFacade(
 
 export function VaultEditor(props: VaultEditorProps) {
     const currentFacade = useCurrentFacade();
-    const vaultListState = useState(VAULTS_LIST);
-    const savingState = useState(SAVING);
+    const vaultListState = useHookState(VAULTS_LIST);
+    const savingState = useHookState(SAVING);
     const vaultItem = useMemo(() => {
         const vaultList = vaultListState.get();
         return vaultList.find(item => item.id === props.sourceID) || null;
@@ -56,6 +72,20 @@ export function VaultEditor(props: VaultEditorProps) {
             fetchUpdatedFacade(vaultItem.id);
         }
     }, [props.sourceID, vaultItem?.state]);
+    // Search
+    const {
+        resetSelection,
+        selectedEntryID,
+        selectedGroupID,
+        setSelectedEntryID,
+        setSelectedGroupID
+    } = useContext(SearchContext);
+    useEffect(() => {
+        return () => {
+            // Reset search on unmount
+            resetSelection();
+        };
+    }, []);
     // Optional rendering
     if (!vaultItem) return null;
     if (vaultItem.state !== VaultSourceStatus.Unlocked) {
@@ -64,13 +94,24 @@ export function VaultEditor(props: VaultEditorProps) {
     // Normal output
     return (
         <>
-            {currentFacade && renderFacade(
-                currentFacade,
-                facade => {
-                    saveVaultFacade(vaultItem.id, facade);
-                },
-                themeType,
-                savingState.get()
+            {currentFacade && (
+                <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
+                    <VaultProvider
+                        icons
+                        iconsPath="icons"
+                        onSelectEntry={setSelectedEntryID}
+                        onSelectGroup={setSelectedGroupID}
+                        onUpdate={(vaultFacade: VaultFacade) => {
+                            saveVaultFacade(vaultItem.id, vaultFacade);
+                        }}
+                        readOnly={savingState.get()}
+                        selectedEntry={selectedEntryID}
+                        selectedGroup={selectedGroupID}
+                        vault={currentFacade}
+                    >
+                        <VaultUI />
+                    </VaultProvider>
+                </ThemeProvider>
             )}
         </>
     );

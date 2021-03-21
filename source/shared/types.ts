@@ -1,4 +1,4 @@
-import { VaultSourceID, VaultSourceStatus } from "buttercup";
+import { SearchResult as CoreSearchResult, VaultSourceID, VaultSourceStatus } from "buttercup";
 
 export interface AddVaultPayload {
     createNew: boolean;
@@ -26,6 +26,11 @@ export interface Preferences {
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
     uiTheme: ThemeSource;
+}
+
+export interface SearchResult {
+    type: "entry";
+    result: CoreSearchResult;
 }
 
 export enum SourceType {

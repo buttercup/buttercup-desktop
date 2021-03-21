@@ -1,11 +1,11 @@
-import * as React from "react";
+import React, { useCallback, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
+import { VaultSearchManager } from "./search/VaultSearchManager";
+import { SearchProvider } from "./search/SearchContext";
 import { ErrorBoundary } from "./ErrorBoundary";
-
-const { useCallback, useState } = React;
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -28,18 +28,20 @@ export function VaultManagement() {
     }, []);
     return (
         <PrimaryContainer>
-            <VaultSidebar
-                onSelect={item => handleSidebarItemSelect(item)}
-                selected={selectedSidebarItem}
-            />
-            <ContentContainer>
-                {id && (
-                    <ErrorBoundary>
-                        {selectedSidebarItem === "contents" && <VaultEditor sourceID={id} />}
-                    </ErrorBoundary>
-                )}
-            </ContentContainer>
-
+            <SearchProvider>
+                <VaultSidebar
+                    onSelect={item => handleSidebarItemSelect(item)}
+                    selected={selectedSidebarItem}
+                />
+                <ContentContainer>
+                    {id && (
+                        <ErrorBoundary>
+                            {selectedSidebarItem === "contents" && <VaultEditor sourceID={id} />}
+                        </ErrorBoundary>
+                    )}
+                </ContentContainer>
+                <VaultSearchManager sourceID={id} />
+            </SearchProvider>
         </PrimaryContainer>
     );
 }
