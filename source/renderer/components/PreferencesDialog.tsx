@@ -12,6 +12,7 @@ import { getAvailableLanguages } from "../services/i18n";
 import { logErr, logInfo } from "../library/log";
 import { showError, showSuccess } from "../services/notifications";
 import { setBusy } from "../state/app";
+import { t } from "../../shared/i18n/trans";
 import { PREFERENCES_DEFAULT } from "../../shared/symbols";
 import { Language, Preferences, ThemeSource } from "../types";
 
@@ -79,7 +80,7 @@ export function PreferencesDialog() {
         setBusy(true);
         savePreferences(preferences)
             .then(() => {
-                showSuccess("Saved preferences");
+                showSuccess(t("notification.preferences-saved"));
                 logInfo("Saved preferences");
                 setDirty(false);
                 setBusy(false);
@@ -87,7 +88,7 @@ export function PreferencesDialog() {
             })
             .catch(err => {
                 setBusy(false);
-                showError("Failed saving preferences");
+                showError(t("notification.error.preferences-save"));
                 logErr("Failed saving preferences", err);
             });
     }, [preferences]);
@@ -98,7 +99,7 @@ export function PreferencesDialog() {
                 setDirty(false);
             })
             .catch(err => {
-                showError("Failed loading preferences");
+                showError(t("notification.error.preferences-load"));
                 logErr("Failed loading preferences", err);
                 setShowPreferences(false);
             });
@@ -113,7 +114,7 @@ export function PreferencesDialog() {
                 ]);
             })
             .catch(err => {
-                showError("Failed loading languages");
+                showError(t("notification.error.languages-load"));
                 logErr("Failed loading languages", err);
                 setShowPreferences(false);
             });
@@ -121,7 +122,7 @@ export function PreferencesDialog() {
     // Pages
     const pageGeneral = () => (
         <>
-            <FormGroup label="Language">
+            <FormGroup label={t("preferences.item.language")}>
                 <LanguageSelect
                     filterable={false}
                     items={languages}
@@ -144,7 +145,7 @@ export function PreferencesDialog() {
                     />
                 </LanguageSelect>
             </FormGroup>
-            <FormGroup label="Theme">
+            <FormGroup label={t("preferences.item.theme")}>
                 <ThemeSelect
                     filterable={false}
                     items={Object.values(ThemeSource)}
@@ -153,7 +154,7 @@ export function PreferencesDialog() {
                             icon={item === ThemeSource.System ? "modal-filled" : null}
                             key={item || "none"}
                             onClick={handleClick}
-                            text={item === ThemeSource.System ? THEME_AUTO_NAME : item === ThemeSource.Dark ? "Dark" : "Light"}
+                            text={item === ThemeSource.System ? THEME_AUTO_NAME : item === ThemeSource.Dark ? t("theme.dark") : t("theme.light")}
                         />
                     )}
                     onItemSelect={(item: ThemeSource) => setPreferences({
@@ -162,7 +163,7 @@ export function PreferencesDialog() {
                     })}
                 >
                     <Button
-                        text={preferences.uiTheme === ThemeSource.System ? THEME_AUTO_NAME : preferences.uiTheme === ThemeSource.Dark ? "Dark" : "Light"}
+                        text={preferences.uiTheme === ThemeSource.System ? THEME_AUTO_NAME : preferences.uiTheme === ThemeSource.Dark ? t("theme.dark") : t("theme.light")}
                         rightIcon="double-caret-vertical"
                     />
                 </ThemeSelect>
@@ -171,7 +172,7 @@ export function PreferencesDialog() {
     );
     const pageSecurity = () => (
         <>
-            <FormGroup label="Automatically clear clipboard">
+            <FormGroup label={t("preferences.item.clear-clipboard")}>
                 <Slider
                     labelRenderer={value => value > 0 ? prettyMS(value * 1000) : "Off"}
                     labelStepSize={60 * 5}
@@ -185,7 +186,7 @@ export function PreferencesDialog() {
                     value={preferences.autoClearClipboard === false ? 0 : preferences.autoClearClipboard}
                 />
             </FormGroup>
-            <FormGroup label="Lock vaults after time">
+            <FormGroup label={t("preferences.item.lock-vaults-after-time")}>
                 <Slider
                     labelRenderer={value => value > 0 ? prettyMS(value * 1000) : "Off"}
                     labelStepSize={ms("1h") / 1000}
@@ -198,12 +199,12 @@ export function PreferencesDialog() {
                     stepSize={60}
                     value={preferences.lockVaultsAfterTime === false ? 0 : preferences.lockVaultsAfterTime}
                 />
-                <p>Automatically lock vaults after some period of inactivity.</p>
+                <p>{t("preferences.item.lock-vaults-after-time-desc")}</p>
             </FormGroup>
-            <FormGroup label="Lock vaults if vault window closed">
+            <FormGroup label={t("preferences.item.lock-vaults-window-closed")}>
                 <Switch
                     checked={preferences.lockVaultsOnWindowClose}
-                    label="Lock on close"
+                    label={t("preferences.item.lock-vaults-window-closed-label")}
                     onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
                         ...naiveClone(preferences),
                         lockVaultsOnWindowClose: evt.target.checked
@@ -214,13 +215,11 @@ export function PreferencesDialog() {
     );
     const pageConnectivity = () => (
         <>
-            <FormGroup label="Secure file host">
-                <Callout icon="info-sign">
-                    The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.
-                </Callout>
+            <FormGroup label={t("preferences.item.secure-file-host.title")}>
+                <Callout icon="info-sign" dangerouslySetInnerHTML={{ __html: t("preferences.item.secure-file-host.desccription") }} />
                 <Switch
                     checked={preferences.fileHostEnabled}
-                    label="Enable secure file host"
+                    label={t("preferences.item.secure-file-host.label")}
                     onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
                         ...naiveClone(preferences),
                         fileHostEnabled: evt.target.checked
@@ -232,7 +231,7 @@ export function PreferencesDialog() {
     // Render
     return (
         <DialogFreeWidth isOpen={showPreferences.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Preferences</div>
+            <div className={Classes.DIALOG_HEADER}>{t("preferences.title")}</div>
             <div className={Classes.DIALOG_BODY}>
                 {showPreferences.get() && (
                     <PreferencesContent>
@@ -245,29 +244,29 @@ export function PreferencesDialog() {
                                     active={currentPage === PAGE_GENERAL}
                                     icon="modal"
                                     onClick={() => setCurrentPage(PAGE_GENERAL)}
-                                    text="General"
+                                    text={t("preferences.section.general")}
                                 />
                                 <Button
                                     active={currentPage === PAGE_SECURITY}
                                     icon="shield"
                                     onClick={() => setCurrentPage(PAGE_SECURITY)}
-                                    text="Security"
+                                    text={t("preferences.section.security")}
                                 />
                                 <Button
                                     active={currentPage === PAGE_CONNECTIVITY}
                                     icon="offline"
                                     onClick={() => setCurrentPage(PAGE_CONNECTIVITY)}
-                                    text="Connectivity"
+                                    text={t("preferences.section.connectivity")}
                                 />
                                 <Button
                                     disabled
                                     icon="eye-off"
-                                    text="Privacy"
+                                    text={t("preferences.section.privacy")}
                                 />
                                 <Button
                                     disabled
                                     icon="lab-test"
-                                    text="Debug"
+                                    text={t("preferences.section.debug")}
                                 />
                             </PreferencesMenu>
                         </PreferencesSidebar>
@@ -285,15 +284,15 @@ export function PreferencesDialog() {
                         disabled={!dirty}
                         intent={Intent.PRIMARY}
                         onClick={() => save()}
-                        title="Save changes"
+                        title={t("preferences.button.save-title")}
                     >
-                        Save
+                        {t("preferences.button.save")}
                     </Button>
                     <Button
                         onClick={close}
-                        title="Cancel Preferences update"
+                        title={t("preferences.button.cancel-title")}
                     >
-                        Cancel
+                        {t("preferences.button.cancel")}
                     </Button>
                 </div>
             </div>

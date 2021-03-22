@@ -133,12 +133,46 @@
     "input-required": "(required)",
     "notification": {
         "error": {
+            "languages-load": "Failed loading languages",
+            "preferences-load": "Failed loading preferences",
+            "preferences-save": "Failed saving preferences",
             "unknown-error": "Unknown error",
             "vault-lock-failed": "Vault lock failed",
             "vault-save-failed": "Vault failed to save",
             "vault-unlock-failed": "Vault unlock failed"
         },
+        "preferences-saved": "Saved preferences",
         "vault-saved": "Vault saved"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Cancel",
+            "cancel-title": "Cancel Preferences update",
+            "save": "Save",
+            "save-title": "Save changes"
+        },
+        "item": {
+            "clear-clipboard": "Automatically clear clipboard",
+            "language": "Language",
+            "lock-vaults-after-time": "Lock vaults after time",
+            "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
+            "lock-vaults-window-closed": "Lock vaults if vault window closed",
+            "lock-vaults-window-closed-label": "Lock on close",
+            "secure-file-host": {
+                "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
+                "label": "Enable secure file host",
+                "title:": "Secure file host"
+            },
+            "theme": "Theme"
+        },
+        "section": {
+            "connectivity": "Connectivity",
+            "debug": "Debug",
+            "general": "General",
+            "privacy": "Privacy",
+            "security": "Security"
+        },
+        "title": "Preferences"
     },
     "search": {
         "modal": {
@@ -151,6 +185,10 @@
         "file": "File",
         "googledrive": "Google Drive",
         "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Dark",
+        "light": "Light"
     },
     "vault-chooser": {
         "configure-vault": "Configure vault",
