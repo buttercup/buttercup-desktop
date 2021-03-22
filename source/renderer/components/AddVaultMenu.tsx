@@ -320,7 +320,7 @@ export function AddVaultMenu() {
                 <>
                     <WideFormGroup
                         inline
-                        label="WebDAV Service"
+                        label={t("add-vault-menu.webdav-auth.url-label")}
                     >
                         <InputGroup
                             placeholder="https://..."
@@ -334,10 +334,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label="Username"
+                        label={t("add-vault-menu.webdav-auth.username-label")}
                     >
                         <InputGroup
-                            placeholder="WebDAV Username"
+                            placeholder={t("add-vault-menu.webdav-auth.username-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 username: evt.target.value
@@ -347,10 +347,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label="Password"
+                        label={t("add-vault-menu.webdav-auth.password-label")}
                     >
                         <InputGroup
-                            placeholder="WebDAV Password"
+                            placeholder={t("add-vault-menu.webdav-auth.password-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 password: evt.target.value
@@ -365,21 +365,21 @@ export function AddVaultMenu() {
     );
     const pageChoose = () => (
         <>
-            <p>Choose a vault file or create a new vault:</p>
+            <p>{t("add-vault-menu.choose-file-prompt")}</p>
             <FileChooser callback={handleSelectedPathChange} fsInterface={fsInstance} />
         </>
     );
     const pageConfirm = () => (
         <>
             {createNew && (
-                <p>Enter a new primary vault password:</p>
+                <p>{t("add-vault-menu.confirm.new-password")}</p>
             )}
             {!createNew && (
-                <p>Enter the primary vault password:</p>
+                <p>{t("add-vault-menu.confirm.existing-password")}</p>
             )}
             <InputGroup
                 id="password"
-                placeholder="Vault password..."
+                placeholder={t("add-vault-menu.confirm.password-placeholder")}
                 type="password"
                 value={vaultPassword}
                 onChange={evt => setVaultPassword(evt.target.value)}
@@ -390,7 +390,7 @@ export function AddVaultMenu() {
     // Output
     return (
         <DialogFreeWidth isOpen={showAddVault.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Add Vault</div>
+            <div className={Classes.DIALOG_HEADER}>{t("add-vault-menu.title")}</div>
             <div className={Classes.DIALOG_BODY}>
                 {currentPage === PAGE_TYPE && pageType()}
                 {currentPage === PAGE_AUTH && pageAuth()}
@@ -404,9 +404,9 @@ export function AddVaultMenu() {
                             disabled={!selectedRemotePath}
                             intent={Intent.PRIMARY}
                             onClick={handleVaultFileSelect}
-                            title="Continue adding vault"
+                            title={t("add-vault-menu.page-choose-next-title")}
                         >
-                            Next
+                            {t("add-vault-menu.page-choose-next")}
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.GoogleDrive && (
@@ -414,9 +414,9 @@ export function AddVaultMenu() {
                         disabled={authenticatingGoogleDrive}
                             intent={Intent.PRIMARY}
                             onClick={handleAuthSubmit}
-                            title="Authenticate with Google Drive"
+                            title={t("add-vault-menu.google-auth-button-title")}
                         >
-                            Authenticate
+                            {t("add-vault-menu.google-auth-button")}
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.WebDAV && (
@@ -424,9 +424,9 @@ export function AddVaultMenu() {
                             disabled={!webdavCredentials.url}
                             intent={Intent.PRIMARY}
                             onClick={handleAuthSubmit}
-                            title="Connect using WebDAV"
+                            title={t("add-vault-menu.webdav-continue-title")}
                         >
-                            Next
+                            {t("add-vault-menu.webdav-continue")}
                         </Button>
                     )}
                     {currentPage === PAGE_CONFIRM && (
@@ -434,16 +434,16 @@ export function AddVaultMenu() {
                             disabled={vaultPassword.length === 0}
                             intent={Intent.PRIMARY}
                             onClick={handleFinalConfirm}
-                            title="Confirm vault addition"
+                            title={t("add-vault-menu.page-confirm-finish-title")}
                         >
-                            Add Vault
+                            {t("add-vault-menu.page-confirm-finish")}
                         </Button>
                     )}
                     <Button
                         onClick={close}
-                        title="Cancel Unlock"
+                        title={t("add-vault-menu.page-confirm-cancel-title")}
                     >
-                        Cancel
+                        {t("add-vault-menu.page-confirm-cancel")}
                     </Button>
                 </div>
             </div>
