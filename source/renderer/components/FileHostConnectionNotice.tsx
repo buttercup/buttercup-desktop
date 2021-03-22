@@ -5,6 +5,7 @@ import { Button, Card, Classes, Dialog } from "@blueprintjs/core";
 import { FILE_HOST_CODE } from "../state/fileHost";
 import { copyText } from "../actions/clipboard";
 import { showSuccess } from "../services/notifications";
+import { t } from "../../shared/i18n/trans";
 
 const { useCallback } = React;
 
@@ -25,14 +26,14 @@ export function FileHostConnectionNotice() {
     }, []);
     const copyCode = useCallback(async (code: string) => {
         await copyText(code);
-        showSuccess("File host code copied");
+        showSuccess(t("file-host.code-copied"));
     }, []);
     return (
         <Dialog isOpen={!!fileHostCodeState.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Secure File Host Connection</div>
+            <div className={Classes.DIALOG_HEADER}>{t("file-host.dialog.title")}</div>
             <div className={Classes.DIALOG_BODY}>
-                <p>A new connection has been made to this application, requesting remote access to the file system.</p>
-                <p>Use the following code to authorise it.</p>
+                <p>{t("file-host.dialog.instruction.new-connection")}</p>
+                <p>{t("file-host.dialog.instruction.use-code")}</p>
                 <CodeCard interactive onClick={() => copyCode(fileHostCodeState.get())}>
                     {fileHostCodeState.get()}
                 </CodeCard>
@@ -41,9 +42,9 @@ export function FileHostConnectionNotice() {
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                     <Button
                         onClick={close}
-                        title="Close connection dialog"
+                        title={t("file-host.dialog.close-button-title")}
                     >
-                        Close
+                        {t("file-host.dialog.close-button")}
                     </Button>
                 </div>
             </div>

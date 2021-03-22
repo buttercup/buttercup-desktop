@@ -6,6 +6,7 @@ import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { CURRENT_VAULT } from "../../state/vaults";
+import { t } from "../../../shared/i18n/trans";
 
 const { useCallback, useState } = React;
 
@@ -49,9 +50,9 @@ export function VaultSidebar(props: VaultSidebarProps) {
                     large
                     minimal
                     onClick={() => handleSelection("contents")}
-                    title="Vault contents"
+                    title={t("vault-sidebar.vault-contents")}
                 />
-                <Button
+                {/* <Button
                     disabled
                     icon="barcode"
                     large
@@ -85,18 +86,18 @@ export function VaultSidebar(props: VaultSidebarProps) {
                     large
                     minimal
                     title="Password generator"
-                />
+                /> */}
                 <Popover
                     content={
                         <Menu>
                             <MenuItem
-                                text="Lock current vault"
+                                text={t("vault-sidebar.options-popup.lock-current-vault")}
                                 icon="lock"
                                 onClick={handleVaultLock}
                             />
                             <MenuDivider />
                             <MenuItem
-                                text="Choose vault"
+                                text={t("vault-sidebar.options-popup.choose-vault")}
                                 icon="menu"
                                 onClick={() => history.push("/")}
                             />

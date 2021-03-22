@@ -3,6 +3,7 @@ import { useState } from "@hookstate/core";
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
 import { getPasswordEmitter } from "../services/password";
 import { SHOW_PROMPT } from "../state/password";
+import { t } from "../../shared/i18n/trans";
 
 const { useCallback, useMemo } = React;
 
@@ -28,13 +29,13 @@ export function PasswordPrompt() {
             <div className={Classes.DIALOG_HEADER}>Vault Unlock</div>
             <div className={Classes.DIALOG_BODY}>
                 <FormGroup
-                    label="Vault Password"
+                    label={t("dialog.password-prompt.label")}
                     labelFor="password"
-                    labelInfo="(required)"
+                    labelInfo={t("input-required")}
                 >
                     <InputGroup
                         id="password"
-                        placeholder="Vault password..."
+                        placeholder={t("dialog.password-prompt.placeholder")}
                         type="password"
                         value={currentPassword.get()}
                         onChange={evt => currentPassword.set(evt.target.value)}
@@ -48,15 +49,15 @@ export function PasswordPrompt() {
                     <Button
                         intent={Intent.PRIMARY}
                         onClick={() => submitAndClose(currentPassword.get())}
-                        title="Confirm vault unlock"
+                        title={t("dialog.password-prompt.button-unlock-title")}
                     >
-                        Unlock
+                        {t("dialog.password-prompt.button-unlock")}
                     </Button>
                     <Button
                         onClick={close}
-                        title="Cancel Unlock"
+                        title={t("dialog.password-prompt.button-cancel-title")}
                     >
-                        Cancel
+                        {t("dialog.password-prompt.button-cancel")}
                     </Button>
                 </div>
             </div>

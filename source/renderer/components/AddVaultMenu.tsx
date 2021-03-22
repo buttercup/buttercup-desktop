@@ -15,6 +15,7 @@ import { authenticateGoogleDrive } from "../services/authGoogle";
 import { createEmptyVault as createEmptyGoogleDriveVault } from "../services/googleDrive";
 import { showWarning } from "../services/notifications";
 import { getIconForProvider } from "../library/icons";
+import { t } from "../../shared/i18n/trans";
 import { DatasourceConfig, SourceType } from "../types";
 
 interface WebDAVCredentialsState {
@@ -34,22 +35,22 @@ const PAGE_CONFIRM = "confirm";
 
 const VAULT_TYPES = [
     {
-        title: "File",
+        i18n: "source-type.file",
         type: SourceType.File,
         icon: getIconForProvider(SourceType.File)
     },
     {
-        title: "Dropbox",
+        i18n: "source-type.dropbox",
         type: SourceType.Dropbox,
         icon: getIconForProvider(SourceType.Dropbox)
     },
     {
-        title: "Google Drive",
+        i18n: "source-type.googledrive",
         type: SourceType.GoogleDrive,
         icon: getIconForProvider(SourceType.GoogleDrive)
     },
     {
-        title: "WebDAV",
+        i18n: "source-type.webdav",
         type: SourceType.WebDAV,
         icon: getIconForProvider(SourceType.WebDAV)
     }
@@ -202,7 +203,7 @@ export function AddVaultMenu() {
                 setCurrentPage(PAGE_CHOOSE);
             } catch (err) {
                 console.error(err);
-                showWarning(`Google authentication failed: ${err.message}`);
+                showWarning(`${t("add-vault-menu.google-auth-error")}: ${err.message}`);
                 setAuthenticatingGoogleDrive(false);
             }
         } else if (selectedType === SourceType.WebDAV) {
@@ -274,12 +275,12 @@ export function AddVaultMenu() {
     // Pages
     const pageType = () => (
         <>
-            <p>Choose a vault type to add:</p>
+            <p>{t("add-vault-menu.choose-type-prompt")}</p>
             <TypeIcons>
                 {VAULT_TYPES.map(vaultType => (
                     <TypeIcon key={vaultType.type} interactive elevation={Elevation.TWO} onClick={() => handleVaultTypeClick(vaultType.type)}>
                         <TypeIconImage src={vaultType.icon} />
-                        <TypeText>{vaultType.title}</TypeText>
+                        <TypeText>{t(vaultType.i18n)}</TypeText>
                     </TypeIcon>
                 ))}
             </TypeIcons>
@@ -289,26 +290,26 @@ export function AddVaultMenu() {
         <>
             {selectedType === SourceType.File && (
                 <LoadingContainer>
-                    <i>A dialog will open for choosing a vault file</i>
+                    <i>{t("add-vault-menu.loader.file-prompt")}</i>
                 </LoadingContainer>
             )}
             {selectedType === SourceType.Dropbox && (
                 <LoadingContainer>
-                    <i>A separate window will open for authentication</i>
+                    <i>{t("add-vault-menu.loader.dropbox-auth")}</i>
                 </LoadingContainer>
             )}
             {selectedType === SourceType.GoogleDrive && (
                 <>
-                    <p>You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.</p>
-                    <p>Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares</p>
-                    <p>Selected a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.</p>
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-1") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-2") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-3") }} />
                     <WideFormGroup
                         inline
-                        label="Permissions"
+                        label={t("add-vault-menu.google-auth.perm-label")}
                     >
                         <Switch
                             disabled={authenticatingGoogleDrive}
-                            label="Open"
+                            label={t("add-vault-menu.google-auth.perm-switch")}
                             checked={googleDriveOpenPerms}
                             onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
                         />
@@ -319,7 +320,7 @@ export function AddVaultMenu() {
                 <>
                     <WideFormGroup
                         inline
-                        label="WebDAV Service"
+                        label={t("add-vault-menu.webdav-auth.url-label")}
                     >
                         <InputGroup
                             placeholder="https://..."
@@ -333,10 +334,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label="Username"
+                        label={t("add-vault-menu.webdav-auth.username-label")}
                     >
                         <InputGroup
-                            placeholder="WebDAV Username"
+                            placeholder={t("add-vault-menu.webdav-auth.username-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 username: evt.target.value
@@ -346,10 +347,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label="Password"
+                        label={t("add-vault-menu.webdav-auth.password-label")}
                     >
                         <InputGroup
-                            placeholder="WebDAV Password"
+                            placeholder={t("add-vault-menu.webdav-auth.password-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 password: evt.target.value
@@ -364,21 +365,21 @@ export function AddVaultMenu() {
     );
     const pageChoose = () => (
         <>
-            <p>Choose a vault file or create a new vault:</p>
+            <p>{t("add-vault-menu.choose-file-prompt")}</p>
             <FileChooser callback={handleSelectedPathChange} fsInterface={fsInstance} />
         </>
     );
     const pageConfirm = () => (
         <>
             {createNew && (
-                <p>Enter a new primary vault password:</p>
+                <p>{t("add-vault-menu.confirm.new-password")}</p>
             )}
             {!createNew && (
-                <p>Enter the primary vault password:</p>
+                <p>{t("add-vault-menu.confirm.existing-password")}</p>
             )}
             <InputGroup
                 id="password"
-                placeholder="Vault password..."
+                placeholder={t("add-vault-menu.confirm.password-placeholder")}
                 type="password"
                 value={vaultPassword}
                 onChange={evt => setVaultPassword(evt.target.value)}
@@ -389,7 +390,7 @@ export function AddVaultMenu() {
     // Output
     return (
         <DialogFreeWidth isOpen={showAddVault.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Add Vault</div>
+            <div className={Classes.DIALOG_HEADER}>{t("add-vault-menu.title")}</div>
             <div className={Classes.DIALOG_BODY}>
                 {currentPage === PAGE_TYPE && pageType()}
                 {currentPage === PAGE_AUTH && pageAuth()}
@@ -403,9 +404,9 @@ export function AddVaultMenu() {
                             disabled={!selectedRemotePath}
                             intent={Intent.PRIMARY}
                             onClick={handleVaultFileSelect}
-                            title="Continue adding vault"
+                            title={t("add-vault-menu.page-choose-next-title")}
                         >
-                            Next
+                            {t("add-vault-menu.page-choose-next")}
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.GoogleDrive && (
@@ -413,9 +414,9 @@ export function AddVaultMenu() {
                         disabled={authenticatingGoogleDrive}
                             intent={Intent.PRIMARY}
                             onClick={handleAuthSubmit}
-                            title="Authenticate with Google Drive"
+                            title={t("add-vault-menu.google-auth-button-title")}
                         >
-                            Authenticate
+                            {t("add-vault-menu.google-auth-button")}
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.WebDAV && (
@@ -423,9 +424,9 @@ export function AddVaultMenu() {
                             disabled={!webdavCredentials.url}
                             intent={Intent.PRIMARY}
                             onClick={handleAuthSubmit}
-                            title="Connect using WebDAV"
+                            title={t("add-vault-menu.webdav-continue-title")}
                         >
-                            Next
+                            {t("add-vault-menu.webdav-continue")}
                         </Button>
                     )}
                     {currentPage === PAGE_CONFIRM && (
@@ -433,16 +434,16 @@ export function AddVaultMenu() {
                             disabled={vaultPassword.length === 0}
                             intent={Intent.PRIMARY}
                             onClick={handleFinalConfirm}
-                            title="Confirm vault addition"
+                            title={t("add-vault-menu.page-confirm-finish-title")}
                         >
-                            Add Vault
+                            {t("add-vault-menu.page-confirm-finish")}
                         </Button>
                     )}
                     <Button
                         onClick={close}
-                        title="Cancel Unlock"
+                        title={t("add-vault-menu.page-confirm-cancel-title")}
                     >
-                        Cancel
+                        {t("add-vault-menu.page-confirm-cancel")}
                     </Button>
                 </div>
             </div>

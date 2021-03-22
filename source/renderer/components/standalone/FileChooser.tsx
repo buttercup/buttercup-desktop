@@ -1,9 +1,9 @@
 import * as React from "react";
 import styled from "styled-components";
-import { basename, join as joinPath } from "path-posix";
 import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, Classes, Dialog, IBreadcrumbProps, Icon, InputGroup, Intent, Navbar, Spinner } from "@blueprintjs/core";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { FSItem } from "../../library/fsInterface";
+import { t } from "../../../shared/i18n/trans";
 import { NewVaultPlaceholder } from "../../types";
 
 /*
@@ -189,9 +189,9 @@ export function FileChooser(props: FileChooserProps) {
         <Chooser>
             <Navbar>
                 <Navbar.Group align={Alignment.LEFT}>
-                    <Button className="bp3-minimal" icon="new-object" text="New Vault" onClick={showNewVaultPrompt} />
+                    <Button className="bp3-minimal" icon="new-object" text={t("dialog.file-chooser.nav.create-new")} onClick={showNewVaultPrompt} />
                     {newVault && (
-                        <Button className="bp3-minimal" icon="graph-remove" text="Cancel New" onClick={() => {
+                        <Button className="bp3-minimal" icon="graph-remove" text={t("dialog.file-chooser.nav.cancel-new")} onClick={() => {
                             if (newVault.filename === selectedVaultPath.name) {
                                 setSelectedVaultPath(null);
                             }
@@ -255,9 +255,9 @@ export function FileChooser(props: FileChooserProps) {
                 )}
             </ChooserContents>
             <Dialog isOpen={showNewVaultFilenamePrompt} onClose={handleNewVaultPromptClose}>
-                <div className={Classes.DIALOG_HEADER}>Add Vault</div>
+                <div className={Classes.DIALOG_HEADER}>{t("dialog.file-chooser.add.title")}</div>
                 <div className={Classes.DIALOG_BODY}>
-                    <p>Enter a filename for the new vault:</p>
+                    <p>{t("dialog.file-chooser.add.description")}</p>
                     <InputGroup
                         onChange={evt => setNewVaultFilename(evt.target.value)}
                         placeholder="new-vault.bcup"
@@ -270,15 +270,15 @@ export function FileChooser(props: FileChooserProps) {
                             disabled={!/[^\.]+/.test(newVaultFilename) || /[\/\\]/.test(newVaultFilename)}
                             intent={Intent.PRIMARY}
                             onClick={handleNewVaultPromptSubmit}
-                            title="Confirm new vault filename"
+                            title={t("dialog.file-chooser.add.confirm-title")}
                         >
-                            Set Vault Target
+                            {t("dialog.file-chooser.add.confirm")}
                         </Button>
                         <Button
                             onClick={handleNewVaultPromptClose}
-                            title="Cancel new vault creation"
+                            title={t("dialog.file-chooser.add.cancel-title")}
                         >
-                            Cancel
+                            {t("dialog.file-chooser.add.cancel")}
                         </Button>
                     </div>
                 </div>

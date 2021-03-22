@@ -6,6 +6,7 @@ import { EntryType } from "buttercup";
 import styled from "styled-components";
 import { extractSSHPubKeyName } from "../../library/entryType";
 import { trimWithEllipses } from "../../library/trim";
+import { t } from "../../../shared/i18n/trans";
 import { SearchResult } from "../../types";
 
 interface SearchModalProps {
@@ -76,7 +77,7 @@ function renderResult(res: SearchResult, { handleClick, modifiers }) {
         );
     }
     return (
-        <MenuItem disabled intent={Intent.DANGER} text="Failed rendering search result" />
+        <MenuItem disabled intent={Intent.DANGER} text={t("search.modal.result-render-error")} />
     );
 }
 
@@ -92,7 +93,7 @@ export function SearchModal(props: SearchModalProps) {
         <SearchOmnibar
             itemRenderer={renderResult}
             items={results}
-            noResults={<MenuItem disabled text="No results..." />}
+            noResults={<MenuItem disabled text={t("search.modal.no-results")} />}
             onClose={onClose}
             onItemSelect={onSelect}
             onQueryChange={onSearch}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Callout, Intent } from "@blueprintjs/core";
+import { t } from "../../shared/i18n/trans";
 
 const ErrorCallout = styled(Callout)`
     margin: 4px;
@@ -39,10 +40,7 @@ export class ErrorBoundary extends Component {
         }
         return (
             <ErrorCallout intent={Intent.DANGER} icon="heart-broken" title="Error">
-                <p>
-                    A fatal error has occurred - we're sorry this happened. Please check out the details below
-                    in case they help diagnose the issue:
-                </p>
+                <p>{t("error.fatal-boundary")}</p>
                 <code>
                     <PreForm>{this.state.error.toString()}</PreForm>
                 </code>

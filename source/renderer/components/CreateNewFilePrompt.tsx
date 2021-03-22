@@ -3,6 +3,7 @@ import { useState as useHookState } from "@hookstate/core";
 import { Button, Classes, Dialog, Intent } from "@blueprintjs/core";
 import { SHOW_NEW_FILE_PROMPT } from "../state/addVault";
 import { getCreateNewFilePromptEmitter } from "../services/addVault";
+import { t } from "../../shared/i18n/trans";
 
 const { useCallback, useMemo } = React;
 
@@ -23,31 +24,31 @@ export function CreateNewFilePrompt() {
     }, [emitter]);
     return (
         <Dialog isOpen={!!showPromptState.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Add Vault File</div>
+            <div className={Classes.DIALOG_HEADER}>{t("dialog.new-file-prompt.title")}</div>
             <div className={Classes.DIALOG_BODY}>
-                <p>Do you wish to create a <i>new</i> vault, or read an existing one?</p>
+                <p dangerouslySetInnerHTML={{ __html: t("dialog.new-file-prompt.prompt") }} />
             </div>
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                     <Button
                         intent={Intent.WARNING}
                         onClick={chooseNew}
-                        title="Create new vault file"
+                        title={t("dialog.new-file-prompt.button-new.title")}
                     >
-                        Create New
+                        {t("dialog.new-file-prompt.button-new.text")}
                     </Button>
                     <Button
                         intent={Intent.PRIMARY}
                         onClick={chooseExisting}
-                        title="Loading existing vault file"
+                        title={t("dialog.new-file-prompt.button-existing.title")}
                     >
-                        Load Existing
+                        {t("dialog.new-file-prompt.button-existing.text")}
                     </Button>
                     <Button
                         onClick={close}
-                        title="Close prompt"
+                        title={t("dialog.new-file-prompt.button-cancel.title")}
                     >
-                        Close
+                        {t("dialog.new-file-prompt.button-cancel.text")}
                     </Button>
                 </div>
             </div>

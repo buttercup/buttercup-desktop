@@ -3,6 +3,7 @@ import { VaultSourceID } from "buttercup";
 import { setBusy } from "../state/app";
 import { showError } from "../services/notifications";
 import { logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 
 export async function lockVaultSource(sourceID: VaultSourceID) {
     setBusy(true);
@@ -15,7 +16,7 @@ export async function lockVaultSource(sourceID: VaultSourceID) {
                 error?: string
             };
             if (!ok) {
-                showError(`Vault lock failed: ${error || "Unknown error"}`);
+                showError(`${t("notification.error.vault-lock-failed")}: ${error || t("notification.error.unknown-error")}`);
                 return reject(new Error(`Failed locking vault: ${error}`));
             }
             resolve();

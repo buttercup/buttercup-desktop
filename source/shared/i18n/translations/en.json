@@ -1,20 +1,217 @@
 {
     "_": "English (UK)",
+    "add-vault-menu": {
+        "choose-file-prompt": "Choose a vault file or create a new vault:",
+        "choose-type-prompt": "Choose a vault type to add:",
+        "confirm": {
+            "existing-password": "Enter the primary vault password:",
+            "new-password": "Enter a new primary vault password:",
+            "password-placeholder": "Vault password..."
+        },
+        "google-auth-button": "Authenticate",
+        "google-auth-button-title": "Authenticate with Google Drive",
+        "google-auth-error": "Google authentication failed",
+        "loader": {
+            "dropbox-auth": "A separate window will open for authentication",
+            "file-prompt": "A dialog will open for choosing a vault file",
+            "google-auth": {
+                "instr-1": "You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.",
+                "instr-2": "Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares.",
+                "instr-3": "Selecting a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.",
+                "perm-label": "Permissions",
+                "perm-switch": "Open"
+            },
+            "webdav-auth": {
+                "password-label": "Password",
+                "password-plc": "WebDAV Password",
+                "url-label": "WebDAV Service",
+                "username-label": "Username",
+                "username-plc": "WebDAV Username"
+            }
+        },
+        "page-choose-next": "Next",
+        "page-choose-next-title": "Continue adding vault",
+        "page-confirm-cancel": "Cancel",
+        "page-confirm-cancel-title": "Cancel unlock",
+        "page-confirm-finish": "Add Vault",
+        "page-confirm-finish-title": "Confirm vault addition",
+        "title": "Add Vault",
+        "webdav-continue": "Next",
+        "webdav-continue-title": "Connect using WebDAV"
+    },
     "app-menu": {
         "about": "About",
         "add-new-vault": "Add New",
         "close-window": "Close Window",
+        "connection": "Connection",
         "debug": "Debug",
         "devtool": "Devtool",
         "edit": "Edit",
+        "enable-secure-file-host": "Enable browser access",
         "lock-all": "Lock All",
         "open": "Open",
         "open-vault": "Open Vault",
         "preferences": "Preferences",
         "quit": "Quit",
+        "search": "Search",
         "unlock-vault": "Unlock",
         "unlocked-vaults": "{{count}} unlocked vault",
         "unlocked-vaults_plural": "{{count}} unlocked vaults",
         "vault": "Vault"
+    },
+    "dialog": {
+        "confirm-generic": {
+            "cancel-button": "Cancel",
+            "confirm-button": "Confirm"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Cancel",
+                "cancel-title": "Cancel new vault creation",
+                "confirm": "Set Vault Target",
+                "confirm-title": "Confirm new vault filename",
+                "description": "Enter a filename for the new vault:",
+                "title": "Add Vault"
+            },
+            "nav": {
+                "cancel-new": "Cancel New",
+                "create-new": "New Vault"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup Vaults",
+                "confirm-button": "Add",
+                "title": "Add Existing Vault"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup Vaults",
+                "confirm-button": "Create",
+                "title": "Add New Vault"
+            }
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Close",
+                "title": "Close prompt"
+            },
+            "button-existing": {
+                "text": "Load Existing",
+                "title": "Loading existing vault file"
+            },
+            "button-new": {
+                "text": "Create New",
+                "title": "Create new vault file"
+            },
+            "prompt": "Do you wish to create a <i>new</i> vault, or read an existing one?",
+            "title": "Add Vault File"
+        },
+        "password-prompt": {
+            "button-cancel": "Cancel",
+            "button-cancel-title": "Cancel unlock",
+            "button-unlock": "Unlock",
+            "button-unlock-title": "Confirm vault unlock",
+            "label": "Vault Password",
+            "placeholder": "Vault password..."
+        }
+    },
+    "error": {
+        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
+    },
+    "file-host": {
+        "code-copied": "File host code copied",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close connection dialog",
+            "instruction": {
+                "new-connection": "A new connection has been made to this application, requesting remote access to the file system.",
+                "use-code": "Use the following code to authorise it."
+            },
+            "title": "Secure File Host Connection"
+        }
+    },
+    "input-required": "(required)",
+    "notification": {
+        "error": {
+            "languages-load": "Failed loading languages",
+            "preferences-load": "Failed loading preferences",
+            "preferences-save": "Failed saving preferences",
+            "unknown-error": "Unknown error",
+            "vault-lock-failed": "Vault lock failed",
+            "vault-save-failed": "Vault failed to save",
+            "vault-unlock-failed": "Vault unlock failed"
+        },
+        "preferences-saved": "Saved preferences",
+        "vault-saved": "Vault saved"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Cancel",
+            "cancel-title": "Cancel Preferences update",
+            "save": "Save",
+            "save-title": "Save changes"
+        },
+        "item": {
+            "clear-clipboard": "Automatically clear clipboard",
+            "language": "Language",
+            "lock-vaults-after-time": "Lock vaults after time",
+            "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
+            "lock-vaults-window-closed": "Lock vaults if vault window closed",
+            "lock-vaults-window-closed-label": "Lock on close",
+            "secure-file-host": {
+                "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
+                "label": "Enable secure file host",
+                "title:": "Secure file host"
+            },
+            "theme": "Theme"
+        },
+        "section": {
+            "connectivity": "Connectivity",
+            "debug": "Debug",
+            "general": "General",
+            "privacy": "Privacy",
+            "security": "Security"
+        },
+        "title": "Preferences"
+    },
+    "search": {
+        "modal": {
+            "no-results": "No results...",
+            "result-render-error": "Failed rendering search result"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "File",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Dark",
+        "light": "Light"
+    },
+    "vault-chooser": {
+        "configure-vault": "Configure vault",
+        "configure-vault-hide": "Hide configuration",
+        "no-vaults": {
+            "cta-button": "Add Vault",
+            "description": "No vaults have been added yet...",
+            "title": "A Fresh Start"
+        },
+        "remove-vault-dialog": {
+            "cancel-button": "Cancel",
+            "cancel-button-title": "Cancel removal",
+            "description": "Are you sure that you want to remove the vault \"{{title}}\"?",
+            "remove-button": "Remove",
+            "remove-button-title": "Confirm vault removal",
+            "title": "Remove Vault"
+        }
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "choose-vault": "Choose vault",
+            "lock-current-vault": "Lock current vault"
+        },
+        "vault-contents": "Vault contents"
     }
 }
