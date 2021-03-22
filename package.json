@@ -1,13 +1,18 @@
 {
-  "name": "@buttercup/desktop",
+  "name": "Buttercup",
   "version": "0.0.0",
-  "description": "Buttercup for desktop",
+  "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
     "build": "run-s clean build:renderer build:main",
     "build:main": "tsc --build tsconfig.json",
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
+    "package": "electron-builder --mac --win --linux --x64 --ia32 -p always",
+    "package:linux": "electron-builder --linux --ia32 --x64",
+    "package:mac": "electron-builder --mac",
+    "package:win": "electron-builder --win --x64 --ia32",
+    "release": "run-s build package",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,12 +29,78 @@
     "vault",
     "security"
   ],
-  "author": "Perry Mitchell <perry@perrymitchell.net>",
+  "author": "MadDev",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/buttercup/desktop/issues"
   },
   "homepage": "https://github.com/buttercup/desktop#readme",
+  "build": {
+    "afterSign": "electron-builder-notarize",
+    "appId": "pw.buttercup.desktop",
+    "asar": true,
+    "copyright": "Copyright © MadDev Oy",
+    "dmg": {
+      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "background": "./resources/build/background@2x.png",
+      "contents": [
+        {
+          "x": 396,
+          "y": 345,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 396,
+          "y": 110,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 660,
+        "height": 480
+      }
+    },
+    "fileAssociations": {
+      "ext": "bcup",
+      "name": "Buttercup Vault",
+      "icon": "./resources/build/icon.icns"
+    },
+    "linux": {
+      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "synopsis": "Free and Open Source Password Vault"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "entitlements": "./resources/build/entitlements.plist",
+      "entitlementsInherit": "./resources/build/entitlements.plist",
+      "gatekeeperAssess": false,
+      "hardenedRuntime": true
+    },
+    "nsis": {
+      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "perMachine": true,
+      "include": "./resources/build/installer.nsh"
+    },
+    "protocols": {
+      "name": "Buttercup",
+      "schemes": [
+        "buttercup"
+      ]
+    },
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "publisherName": "MadDev Oy"
+    }
+  },
   "dependencies": {
     "@buttercup/channel-queue": "^0.5.0",
     "@buttercup/dropbox-client": "^0.5.0",
@@ -66,6 +137,8 @@
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.1.1",
     "electron": "^12.0.0",
+    "electron-builder": "^22.10.5",
+    "electron-builder-notarize": "^1.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.0",
     "node-sass": "^5.0.0",
