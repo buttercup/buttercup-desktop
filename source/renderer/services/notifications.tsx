@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Classes, Intent, IToastProps, ProgressBar } from "@blueprintjs/core";
 import { getToaster } from "../components/Notifications";
+import { logWarn } from "../library/log";
 
 export function createProgressNotification(icon: IToastProps["icon"], initialAmount = 0) {
     const key = `prog${Math.floor(Math.random() * 999999)}`;
@@ -41,7 +42,7 @@ export function showError(message: string) {
 function showNotification(message: any, intent: Intent = Intent.NONE, timeout: number = 5000) {
     const toaster = getToaster();
     if (!toaster) {
-        console.warn("No notifications toaster ready for notification:", message);;
+        logWarn("No notifications toaster ready for notification:", message);;
     }
     toaster.show({
         message,

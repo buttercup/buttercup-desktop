@@ -12,6 +12,7 @@ import { toggleAutoUpdate } from "../actions/autoUpdate";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
 import { logErr, logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
@@ -58,6 +59,7 @@ export function VaultEditor(props: VaultEditorProps) {
     // Optional rendering
     if (!vaultItem) return null;
     if (vaultItem.state !== VaultSourceStatus.Unlocked) {
+        // @todo use proper non-ideal component
         return <span>Not unlocked</span>;
     }
     // Normal output
