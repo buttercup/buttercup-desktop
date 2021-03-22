@@ -105,11 +105,32 @@
             },
             "prompt": "Do you wish to create a <i>new</i> vault, or read an existing one?",
             "title": "Add Vault File"
+        },
+        "password-prompt": {
+            "button-cancel": "Cancel",
+            "button-cancel-title": "Cancel unlock",
+            "button-unlock": "Unlock",
+            "button-unlock-title": "Confirm vault unlock",
+            "label": "Vault Password",
+            "placeholder": "Vault password..."
         }
     },
     "error": {
         "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
     },
+    "file-host": {
+        "code-copied": "File host code copied",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close connection dialog",
+            "instruction": {
+                "new-connection": "A new connection has been made to this application, requesting remote access to the file system.",
+                "use-code": "Use the following code to authorise it."
+            },
+            "title": "Secure File Host Connection"
+        }
+    },
+    "input-required": "(required)",
     "notification": {
         "error": {
             "unknown-error": "Unknown error",
