@@ -43,6 +43,7 @@
     "dmg": {
       "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
       "background": "./resources/build/background@2x.png",
+      "icon": "./resources/build/icon.icns",
       "contents": [
         {
           "x": 396,
@@ -72,6 +73,7 @@
     },
     "linux": {
       "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "icon": "./resources/build/icons",
       "target": [
         "AppImage"
       ],
@@ -84,7 +86,8 @@
       "entitlements": "./resources/build/entitlements.plist",
       "entitlementsInherit": "./resources/build/entitlements.plist",
       "gatekeeperAssess": false,
-      "hardenedRuntime": true
+      "hardenedRuntime": true,
+      "icon": "./resources/build/icon.icns"
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
@@ -101,6 +104,7 @@
       "output": "dist"
     },
     "win": {
+      "icon": "./resources/build/icon.ico",
       "target": "nsis",
       "publisherName": "MadDev Oy"
     }
