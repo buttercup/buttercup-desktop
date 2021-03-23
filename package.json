@@ -8,10 +8,10 @@
     "build:main": "tsc --build tsconfig.json",
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
-    "package": "electron-builder --mac --win --linux --x64 --ia32 -p always",
-    "package:linux": "electron-builder --linux --ia32 --x64",
-    "package:mac": "electron-builder --mac",
-    "package:win": "electron-builder --win --x64 --ia32",
+    "package": "electron-builder --mac --win --linux --x64 -p always",
+    "package:linux": "electron-builder --linux --x64",
+    "package:mac": "electron-builder --mac --x64",
+    "package:win": "electron-builder --win --x64",
     "release": "run-s build package",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
@@ -61,6 +61,10 @@
         "height": 480
       }
     },
+    "files": [
+      "build/**/*",
+      "package.json"
+    ],
     "fileAssociations": {
       "ext": "bcup",
       "name": "Buttercup Vault",
