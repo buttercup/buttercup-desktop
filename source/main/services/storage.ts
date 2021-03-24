@@ -4,7 +4,8 @@ import { FileStorage } from "../library/FileStorage";
 
 const ENV_PATHS = envPaths("Buttercup");
 const CONFIG_PATH = path.join(ENV_PATHS.config, "desktop.config.json");
-export const LOG_PATH = path.join(ENV_PATHS.log, "buttercup-desktop.log");
+export const LOG_FILENAME = "buttercup-desktop.log";
+export const LOG_PATH = path.join(ENV_PATHS.log, LOG_FILENAME);
 const VAULTS_CACHE_PATH = path.join(ENV_PATHS.temp, "vaults-offline.cache.json");
 const VAULTS_PATH = path.join(ENV_PATHS.data, "vaults.json");
 
