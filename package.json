@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -108,7 +108,10 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "publisherName": "MadDev Oy"
     }
   },
