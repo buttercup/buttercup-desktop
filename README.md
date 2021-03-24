@@ -30,3 +30,11 @@ Stored copies of vaults for offline use.
  * Linux: `$(node -e "console.log(os.tmpdir())")/$(whoami)/Buttercup/vaults-offline.cache.json`
  * Mac: `$(node -e "console.log(os.tmpdir())")/Buttercup/vaults-offline.cache.json`
  * Windows: `$(node -e "console.log(os.tmpdir())")/Buttercup/vaults-offline.cache.json`
+
+### Logs
+
+Logs are written for all app sessions.
+
+ * Linux: `~/.local/state/Buttercup-nodejs` or `$XDG_STATE_HOME/Buttercup-nodejs`
+ * Mac: `~/Library/Logs/Buttercup-nodejs`
+ * Windows: `%LOCALAPPDATA%\Buttercup-nodejs\Log`

@@ -9,6 +9,7 @@ import { getConfigValue } from "./config";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
 import { isPortable } from "../library/portability";
+import { LOG_PATH } from "./storage";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -16,6 +17,7 @@ import { Preferences } from "../types";
 export async function initialise() {
     await initialiseLogging();
     logInfo("Application session started:", new Date());
+    logInfo(`Logs location: ${LOG_PATH}`);
     const preferences = await getConfigValue<Preferences>("preferences");
     const locale = await getOSLocale();
     logInfo(`System locale detected: ${locale}`);
