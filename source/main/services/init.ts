@@ -8,6 +8,7 @@ import { updateAppMenu } from "../actions/appMenu";
 import { getConfigValue } from "./config";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
+import { isPortable } from "../library/portability";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -41,5 +42,6 @@ export async function initialise() {
     if (preferences.fileHostEnabled) {
         await startFileHost();
     }
+    logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
     logInfo("Initialisation completed");
 }
