@@ -95,7 +95,7 @@
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${os}-x64-${version}.${ext}"
+      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
     },
     "protocols": {
       "name": "Buttercup",
