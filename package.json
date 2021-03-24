@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -41,7 +41,7 @@
     "asar": true,
     "copyright": "Copyright © MadDev Oy",
     "dmg": {
-      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "background": "./resources/build/background@2x.png",
       "icon": "./resources/build/icon.icns",
       "contents": [
@@ -72,7 +72,7 @@
       "icon": "./resources/build/icon.icns"
     },
     "linux": {
-      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "icon": "./resources/build/icons",
       "target": [
         "AppImage"
@@ -90,9 +90,12 @@
       "icon": "./resources/build/icon.icns"
     },
     "nsis": {
-      "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
       "perMachine": true,
       "include": "./resources/build/installer.nsh"
+    },
+    "portable": {
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}"
     },
     "protocols": {
       "name": "Buttercup",
@@ -105,7 +108,7 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
-      "target": "nsis",
+      "target": ["nsis", "portable"],
       "publisherName": "MadDev Oy"
     }
   },
