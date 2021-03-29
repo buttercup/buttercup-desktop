@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -13,13 +13,14 @@
     "package:mac": "electron-builder --mac --x64",
     "package:win": "electron-builder --win --x64",
     "release": "run-s build package",
+    "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buttercup/desktop.git"
+    "url": "git+https://github.com/buttercup/desktop-v2-beta.git"
   },
   "keywords": [
     "buttercup",
@@ -64,6 +65,7 @@
     },
     "files": [
       "build/**/*",
+      "resources/**/*",
       "package.json"
     ],
     "fileAssociations": {
@@ -103,6 +105,13 @@
         "buttercup"
       ]
     },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "buttercup",
+        "repo": "desktop-v2-beta"
+      }
+    ],
     "directories": {
       "output": "dist"
     },
@@ -124,6 +133,8 @@
     "@buttercup/secure-file-host": "^0.3.0",
     "buttercup": "^5.12.2",
     "debounce": "^1.2.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-updater": "^4.3.8",
     "env-paths": "^2.2.1",
     "eventemitter3": "^4.0.7",
     "execution-time": "^1.4.1",
