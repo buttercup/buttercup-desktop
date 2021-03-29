@@ -38,8 +38,10 @@
   "homepage": "https://github.com/buttercup/desktop#readme",
   "build": {
     "afterSign": "electron-builder-notarize",
+    "afterAllArtifactBuild": "./resources/scripts/fix-mac-zip.js",
     "appId": "pw.buttercup.desktop",
     "asar": true,
+    "productName": "Buttercup",
     "copyright": "Copyright © MadDev Oy",
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
