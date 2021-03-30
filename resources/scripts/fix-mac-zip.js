@@ -20,28 +20,6 @@ console.log("Zipping Completed");
 
 const APP_GENERATED_BINARY_PATH = path.join(APP_DIST_PATH, `${APP_NAME}-${APP_VERSION}-mac.zip`);
 
-// (function() {
-//     try {
-//         let output = execSync(
-//             `${appBuilderPath} blockmap --input="${APP_GENERATED_BINARY_PATH}" --output="${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip.blockmap" --compression=gzip`
-//         );
-//         let { sha512, size } = JSON.parse(output);
-
-//         const ymlPath = path.join(APP_DIST_PATH, "latest-mac.yml");
-//         let ymlData = yaml.load(fs.readFileSync(ymlPath, "utf8"));
-//         console.log(ymlData);
-//         ymlData.sha512 = sha512;
-//         ymlData.files[0].sha512 = sha512;
-//         ymlData.files[0].size = size;
-//         let yamlStr = yaml.dump(ymlData);
-//         console.log(yamlStr);
-//         fs.writeFileSync(ymlPath, yamlStr, "utf8");
-//         console.log("Successfully updated YAML file and configurations with blockmap.");
-//     } catch (e) {
-//         console.log("Error in updating YAML file and configurations with blockmap.", e);
-//     }
-// })();
-
 module.exports = buildResults => {
     const hasMacZip = buildResults.artifactPaths.some(artPath => /mac*\.zip$/.test(artPath));
     if (!hasMacZip) return;
