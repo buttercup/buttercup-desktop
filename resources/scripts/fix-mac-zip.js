@@ -9,20 +9,16 @@ const packageInfo = require(path.join(currentWorkingDirectory, "package.json"));
 const APP_NAME = packageInfo.build.productName;
 const APP_VERSION = process.argv[2] ? process.argv[2] : packageInfo.version;
 const APP_DIST_PATH = path.join(currentWorkingDirectory, "dist");
-
-console.log("Zipping Started");
-
-execSync(
-    `ditto -c -k --sequesterRsrc --keepParent --zlibCompressionLevel 9 "${APP_DIST_PATH}/mac/${APP_NAME}.app" "${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip"`
-);
-
-console.log("Zipping Completed");
-
 const APP_GENERATED_BINARY_PATH = path.join(APP_DIST_PATH, `${APP_NAME}-${APP_VERSION}-mac.zip`);
 
 module.exports = buildResults => {
     const hasMacZip = buildResults.artifactPaths.some(artPath => /mac*\.zip$/.test(artPath));
     if (!hasMacZip) return;
+    console.log("Zipping Started");
+    execSync(
+        `ditto -c -k --sequesterRsrc --keepParent --zlibCompressionLevel 9 "${APP_DIST_PATH}/mac/${APP_NAME}.app" "${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip"`
+    );
+    console.log("Zipping Completed");
     try {
         let output = execSync(
             `${appBuilderPath} blockmap --input="${APP_GENERATED_BINARY_PATH}" --output="${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip.blockmap" --compression=gzip`
