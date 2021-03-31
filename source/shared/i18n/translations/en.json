@@ -199,6 +199,7 @@
             "update-button": "Update",
             "update-button-title": "Update the application now"
         },
+        "downloaded": "Update downloaded",
         "installed-restart": "Restart",
         "ready": "Update ready: {{version}}",
         "view": "View"

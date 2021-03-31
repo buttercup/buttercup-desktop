@@ -46,6 +46,13 @@ export enum ThemeSource {
     Light = "light"
 }
 
+export interface UpdateProgressInfo {
+    bytesPerSecond: number;
+    percent: number;
+    total: number;
+    transferred: number;
+}
+
 export interface VaultSourceDescription {
     id: VaultSourceID;
     name: string;

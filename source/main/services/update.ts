@@ -5,6 +5,7 @@ import isDev from "electron-is-dev";
 import { getMainWindow } from "./windows";
 import { logErr, logInfo, logWarn } from "../library/log";
 import { fileExists } from "../library/file";
+import { UpdateProgressInfo } from "../types";
 
 let __eventListenersAttached = false,
     __currentUpdate: UpdateInfo = null,
@@ -21,6 +22,12 @@ function attachEventListeners(updater = autoUpdater) {
             win.webContents.send("update-error", err.message);
         }
     });
+    updater.on("download-progress", (progress: UpdateProgressInfo) => {
+        const win = getMainWindow();
+        if (win) {
+            win.webContents.send("update-progress", JSON.stringify(progress));
+        }
+    });
     updater.on("update-available", (updateInfo: UpdateInfo) => {
         console.log(JSON.stringify(updateInfo, undefined, 2));
         logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
@@ -34,13 +41,16 @@ function attachEventListeners(updater = autoUpdater) {
     });
     updater.on("update-downloaded", (updateInfo: UpdateInfo) => {
         logInfo(`Update downloaded: ${updateInfo.version}`);
+        const win = getMainWindow();
+        if (win) {
+            win.webContents.send("update-progress", JSON.stringify(null));
+        }
         if (__updateErrored) {
             logWarn("Skipping update-ready notification due to preview error");
             return;
         }
         __readyUpdate = updateInfo;
         __currentUpdate = null;
-        const win = getMainWindow();
         if (win) {
             win.webContents.send("update-downloaded", JSON.stringify(updateInfo));
         }

@@ -4,7 +4,12 @@ import { getToaster, getUpdateToaster } from "../components/Notifications";
 import { logWarn } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 
-export function createProgressNotification(icon: IToastProps["icon"], initialAmount = 0) {
+export interface ProgressNotification {
+    clear: (message: any, intent: Intent, timeout?: number) => void;
+    setProgress: (progress: number) => void;
+}
+
+export function createProgressNotification(icon: IToastProps["icon"], initialAmount = 0): ProgressNotification {
     const key = `prog${Math.floor(Math.random() * 999999)}`;
     const update = (amount = initialAmount, timeout = 0) => {
         const toaster = getToaster();

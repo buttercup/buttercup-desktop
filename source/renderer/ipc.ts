@@ -7,9 +7,9 @@ import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
-import { applyCurrentUpdateState, applyReadyUpdateState } from "./services/update";
+import { applyCurrentUpdateState, applyReadyUpdateState, applyUpdateProgress } from "./services/update";
 import { showUpdateError } from "./services/notifications";
-import { VaultSourceDescription } from "./types";
+import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
 ipcRenderer.on("add-vault", evt => {
     showAddVaultMenu(true);
@@ -62,6 +62,11 @@ ipcRenderer.on("update-downloaded", async (evt, updatePayload) => {
 
 ipcRenderer.on("update-error", (evt, err) => {
     showUpdateError(err);
+});
+
+ipcRenderer.on("update-progress", (evt, prog) => {
+    const progress = JSON.parse(prog) as UpdateProgressInfo;
+    applyUpdateProgress(progress);
 });
 
 ipcRenderer.on("vaults-list", (evt, payload) => {

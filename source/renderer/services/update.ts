@@ -1,8 +1,13 @@
 import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
+import { Intent } from "@blueprintjs/core";
 import { setCurrentUpdate, setShowUpdateDialog } from "../state/update";
-import { showUpdateAvailable, showUpdateDownloaded } from "./notifications";
+import { ProgressNotification, createProgressNotification, showUpdateAvailable, showUpdateDownloaded } from "./notifications";
 import { logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
+import { UpdateProgressInfo } from "../types";
+
+let __updateProgress: ProgressNotification = null;
 
 export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promise<void> {
     const updateInfo: UpdateInfo = infoOverride || await ipcRenderer.invoke("get-current-update");
@@ -36,6 +41,21 @@ export async function applyReadyUpdateState(infoOverride?: UpdateInfo) {
                 logInfo("Update complete notification closed");
             }
         );
+    }
+}
+
+export function applyUpdateProgress(progress: UpdateProgressInfo) {
+    if (progress === null) {
+        if (__updateProgress) {
+            __updateProgress.clear(t("update.downloaded"), Intent.SUCCESS);
+        }
+        __updateProgress = null;
+        return;
+    }
+    if (__updateProgress) {
+        __updateProgress.setProgress(progress.percent);
+    } else {
+        __updateProgress = createProgressNotification("cloud-download", progress.percent);
     }
 }
 
