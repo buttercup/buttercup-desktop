@@ -79,6 +79,38 @@ export function showUpdateAvailable(version: string, onUpdate: () => void, onCan
     }, key);
 }
 
+export function showUpdateDownloaded(version: string, onUpdate: () => void, onCancel: () => void) {
+    const key = `upd-down${Math.floor(Math.random() * 999999)}`;
+    const toaster = getUpdateToaster();
+    let closed = false;
+    toaster.show({
+        icon: "compressed",
+        intent: Intent.PRIMARY,
+        message: t("update.ready", { version }),
+        timeout: 0,
+        onDismiss: (didTimeoutExpire: boolean) => {
+            if (closed) return;
+            if (!didTimeoutExpire) onCancel();
+        },
+        action: {
+            text: t("update.installed-restart"),
+            onClick: () => {
+                closed = true;
+                onUpdate();
+            },
+        }
+    }, key);
+}
+
+export function showUpdateError(message: string) {
+    const toaster = getUpdateToaster();
+    toaster.show({
+        message: `Update failed: ${message}`,
+        intent: Intent.DANGER,
+        timeout: 15000
+    });
+}
+
 export function showWarning(message: string) {
     showNotification(message, Intent.WARNING, 10000);
 }

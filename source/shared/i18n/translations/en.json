@@ -199,6 +199,8 @@
             "update-button": "Update",
             "update-button-title": "Update the application now"
         },
+        "installed-restart": "Restart",
+        "ready": "Update ready: {{version}}",
         "view": "View"
     },
     "vault-chooser": {

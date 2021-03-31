@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
 import { setCurrentUpdate, setShowUpdateDialog } from "../state/update";
-import { showUpdateAvailable } from "./notifications";
+import { showUpdateAvailable, showUpdateDownloaded } from "./notifications";
 import { logInfo } from "../library/log";
 
 export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promise<void> {
@@ -17,6 +17,23 @@ export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promis
             () => {
                 logInfo("Update notification closed");
                 setCurrentUpdate(null);
+            }
+        );
+    }
+}
+
+export async function applyReadyUpdateState(infoOverride?: UpdateInfo) {
+    const updateInfo: UpdateInfo = infoOverride || await ipcRenderer.invoke("get-ready-update");
+    if (updateInfo) {
+        setCurrentUpdate(updateInfo);
+        showUpdateDownloaded(
+            updateInfo.version,
+            () => {
+                logInfo(`Installing update: ${updateInfo.version}`);
+
+            },
+            () => {
+                logInfo("Update complete notification closed");
             }
         );
     }

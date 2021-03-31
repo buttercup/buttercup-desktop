@@ -3,16 +3,23 @@ import { app } from "electron";
 import { UpdateInfo, autoUpdater } from "electron-updater";
 import isDev from "electron-is-dev";
 import { getMainWindow } from "./windows";
-import { logErr, logInfo } from "../library/log";
+import { logErr, logInfo, logWarn } from "../library/log";
 import { fileExists } from "../library/file";
 
 let __eventListenersAttached = false,
     __currentUpdate: UpdateInfo = null,
+    __readyUpdate: UpdateInfo = null,
+    __updateErrored: boolean = false,
     __updateMuted: boolean = false;
 
 function attachEventListeners(updater = autoUpdater) {
-    updater.on("error", err => {
+    updater.on("error", (err: Error) => {
         logErr("Error processing update", err);
+        __updateErrored = true;
+        const win = getMainWindow();
+        if (win) {
+            win.webContents.send("update-error", err.message);
+        }
     });
     updater.on("update-available", (updateInfo: UpdateInfo) => {
         console.log(JSON.stringify(updateInfo, undefined, 2));
@@ -25,6 +32,19 @@ function attachEventListeners(updater = autoUpdater) {
     updater.on("update-not-available", () => {
         logInfo("No update available");
     });
+    updater.on("update-downloaded", (updateInfo: UpdateInfo) => {
+        logInfo(`Update downloaded: ${updateInfo.version}`);
+        if (__updateErrored) {
+            logWarn("Skipping update-ready notification due to preview error");
+            return;
+        }
+        __readyUpdate = updateInfo;
+        __currentUpdate = null;
+        const win = getMainWindow();
+        if (win) {
+            win.webContents.send("update-downloaded", JSON.stringify(updateInfo));
+        }
+    });
 }
 
 export async function checkForUpdate() {
@@ -32,6 +52,9 @@ export async function checkForUpdate() {
         __eventListenersAttached = true;
         attachEventListeners();
     }
+    __currentUpdate = null;
+    __readyUpdate = null;
+    __updateErrored = false;
     autoUpdater.autoDownload = false;
     autoUpdater.setFeedURL({
         provider: "github",
@@ -51,6 +74,10 @@ export async function checkForUpdate() {
 
 export function getCurrentUpdate(): UpdateInfo {
     return !__updateMuted && __currentUpdate ? __currentUpdate : null;
+}
+
+export function getReadyUpdate(): UpdateInfo {
+    return __readyUpdate;
 }
 
 async function hasDevUpdate(): Promise<boolean> {
