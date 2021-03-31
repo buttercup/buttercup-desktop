@@ -10,7 +10,7 @@ import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
 import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
-import { getCurrentUpdate, getReadyUpdate, muteUpdate, startUpdate } from "./services/update";
+import { getCurrentUpdate, getReadyUpdate, installUpdate, muteUpdate, startUpdate } from "./services/update";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
 
@@ -170,6 +170,8 @@ ipcMain.handle("get-selected-source", async () => {
 });
 
 ipcMain.handle("get-locale", getOSLocale);
+
+ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
 

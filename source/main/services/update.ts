@@ -94,6 +94,10 @@ async function hasDevUpdate(): Promise<boolean> {
     return fileExists(path.join(app.getAppPath(), "dev-app-update.yml"));
 }
 
+export function installUpdate() {
+    autoUpdater.quitAndInstall();
+}
+
 export function muteUpdate() {
     logInfo("Update notification muted");
     __updateMuted = true;

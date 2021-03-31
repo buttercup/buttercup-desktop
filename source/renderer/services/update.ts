@@ -35,7 +35,7 @@ export async function applyReadyUpdateState(infoOverride?: UpdateInfo) {
             updateInfo.version,
             () => {
                 logInfo(`Installing update: ${updateInfo.version}`);
-
+                ipcRenderer.invoke("install-update");
             },
             () => {
                 logInfo("Update complete notification closed");
