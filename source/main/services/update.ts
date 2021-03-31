@@ -2,20 +2,25 @@ import path from "path";
 import { app } from "electron";
 import { UpdateInfo, autoUpdater } from "electron-updater";
 import isDev from "electron-is-dev";
+import { getMainWindow } from "./windows";
 import { logErr, logInfo } from "../library/log";
 import { fileExists } from "../library/file";
 
 let __eventListenersAttached = false,
     __currentUpdate: UpdateInfo = null,
     __updateMuted: boolean = false;
-    // __updater: AppUpdater = null;
 
 function attachEventListeners(updater = autoUpdater) {
     updater.on("error", err => {
         logErr("Error processing update", err);
     });
     updater.on("update-available", (updateInfo: UpdateInfo) => {
+        console.log(JSON.stringify(updateInfo, undefined, 2));
         logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
+        const win = getMainWindow();
+        if (win) {
+            win.webContents.send("update-available", JSON.stringify(updateInfo));
+        }
     });
     updater.on("update-not-available", () => {
         logInfo("No update available");
@@ -48,14 +53,6 @@ export function getCurrentUpdate(): UpdateInfo {
     return !__updateMuted && __currentUpdate ? __currentUpdate : null;
 }
 
-// function getUpdater(): AppUpdater {
-//     if (!__updater) {
-//         __updater = new AppUpdater({
-
-//         });
-//     }
-// }
-
 async function hasDevUpdate(): Promise<boolean> {
     return fileExists(path.join(app.getAppPath(), "dev-app-update.yml"));
 }
@@ -63,4 +60,10 @@ async function hasDevUpdate(): Promise<boolean> {
 export function muteUpdate() {
     logInfo("Update notification muted");
     __updateMuted = true;
+}
+
+export async function startUpdate(): Promise<void> {
+    console.time("dl");
+    await autoUpdater.downloadUpdate();
+    console.timeEnd("dl");
 }

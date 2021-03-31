@@ -190,6 +190,17 @@
         "dark": "Dark",
         "light": "Light"
     },
+    "update": {
+        "available": "Update available: {{version}}",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close update information",
+            "title": "Upgrade to {{version}}",
+            "update-button": "Update",
+            "update-button-title": "Update the application now"
+        },
+        "view": "View"
+    },
     "vault-chooser": {
         "configure-vault": "Configure vault",
         "configure-vault-hide": "Hide configuration",

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Classes, Intent, IToastProps, ProgressBar } from "@blueprintjs/core";
-import { getToaster } from "../components/Notifications";
+import { getToaster, getUpdateToaster } from "../components/Notifications";
 import { logWarn } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 
 export function createProgressNotification(icon: IToastProps["icon"], initialAmount = 0) {
     const key = `prog${Math.floor(Math.random() * 999999)}`;
@@ -53,6 +54,29 @@ function showNotification(message: any, intent: Intent = Intent.NONE, timeout: n
 
 export function showSuccess(message: string) {
     showNotification(message, Intent.SUCCESS);
+}
+
+export function showUpdateAvailable(version: string, onUpdate: () => void, onCancel: () => void) {
+    const key = `upd${Math.floor(Math.random() * 999999)}`;
+    const toaster = getUpdateToaster();
+    let closed = false;
+    toaster.show({
+        icon: "automatic-updates",
+        intent: Intent.PRIMARY,
+        message: t("update.available", { version }),
+        timeout: 0,
+        onDismiss: (didTimeoutExpire: boolean) => {
+            if (closed) return;
+            if (!didTimeoutExpire) onCancel();
+        },
+        action: {
+            text: t("update.view"),
+            onClick: () => {
+                closed = true;
+                onUpdate();
+            },
+        }
+    }, key);
 }
 
 export function showWarning(message: string) {

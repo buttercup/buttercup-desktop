@@ -5,6 +5,7 @@ import { changeLanguage, initialise as initialiseI18n, onLanguageChanged } from 
 import { getLanguage } from "../../shared/library/i18n";
 import { getOSLocale } from "./i18n";
 import { getPreferences } from "./preferences";
+import { applyCurrentUpdateState } from "./update";
 
 export async function initialise() {
     const preferences = await getPreferences();
@@ -20,4 +21,5 @@ export async function initialise() {
     logInfo("Window opened and initialised");
     attachUpdatedListener();
     updateBodyTheme(getThemeType());
+    await applyCurrentUpdateState();
 }
