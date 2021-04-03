@@ -12,7 +12,8 @@ import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
 import { getCurrentUpdate, getReadyUpdate, installUpdate, muteUpdate, startUpdate } from "./services/update";
 import { log as logRaw, logInfo, logErr } from "./library/log";
-import { AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
+import { isPortable } from "./library/portability";
+import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
 
 // **
 // ** IPC Events
@@ -141,6 +142,10 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // **
 // ** IPC Handlers
 // **
+
+ipcMain.handle("get-app-environment", async (): Promise<AppEnvironmentFlags> => ({
+    portable: isPortable()
+}));
 
 ipcMain.handle("get-current-update", getCurrentUpdate);
 

@@ -15,7 +15,13 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: "Buttercup",
             submenu: [
-                { label: t("app-menu.about") },
+                {
+                    label: t("app-menu.about"),
+                    click: async () => {
+                        const window = await openMainWindow();
+                        window.webContents.send("open-about");
+                    }
+                },
                 {
                     label: t("app-menu.preferences"),
                     click: async () => {

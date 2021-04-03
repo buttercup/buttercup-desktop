@@ -6,6 +6,10 @@ export interface AddVaultPayload {
     masterPassword: string;
 }
 
+export interface AppEnvironmentFlags {
+    portable: boolean;
+}
+
 export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
 export interface Language {

@@ -17,6 +17,7 @@ import { Notifications } from "./components/Notifications";
 import { FileHostConnectionNotice } from "./components/FileHostConnectionNotice";
 import { CreateNewFilePrompt } from "./components/CreateNewFilePrompt";
 import { UpdateDialog } from "./components/UpdateDialog";
+import { AboutDialog } from "./components/AboutDialog";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
 
@@ -51,6 +52,7 @@ export function App() {
                     <AddVaultMenu />
                     <PreferencesDialog />
                     <UpdateDialog />
+                    <AboutDialog />
                     <Notifications />
                     <LoadingScreen />
                 </>

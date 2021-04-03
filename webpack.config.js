@@ -1,8 +1,12 @@
 const path = require("path");
+const { DefinePlugin } = require("webpack");
 const HTMLWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 const BCUPUI_ICONS_PATH = path.join(path.dirname(require.resolve("@buttercup/ui")), "icons");
+
+const pkgInfo = require("./package.json");
+const bcupCoreInfo = require("buttercup/package.json");
 
 module.exports = [{
     devtool: false,
@@ -64,6 +68,10 @@ module.exports = [{
                 from: BCUPUI_ICONS_PATH,
                 to: "icons"
             }]
+        }),
+        new DefinePlugin({
+            __CORE_VERSION__: JSON.stringify(bcupCoreInfo.version),
+            __VERSION__: JSON.stringify(pkgInfo.version)
         })
     ],
 

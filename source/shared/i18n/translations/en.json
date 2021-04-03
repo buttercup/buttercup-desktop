@@ -1,5 +1,17 @@
 {
     "_": "English (UK)",
+    "about": {
+        "description": "A free, open-source and cross-platform password manager.",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close about dialog"
+        },
+        "title": "About",
+        "version": {
+            "core": "Core",
+            "desktop": "Desktop"
+        }
+    },
     "add-vault-menu": {
         "choose-file-prompt": "Choose a vault file or create a new vault:",
         "choose-type-prompt": "Choose a vault type to add:",

@@ -3,6 +3,7 @@ import { UpdateInfo } from "electron-updater";
 import { getCurrentSourceID, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
+import { showAbout } from "./state/about";
 import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { fetchUpdatedFacade } from "./actions/facade";
@@ -18,6 +19,10 @@ ipcRenderer.on("add-vault", evt => {
 ipcRenderer.on("file-host-code", (evt, payload) => {
     const { code } = JSON.parse(payload);
     setFileHostCode(code);
+});
+
+ipcRenderer.on("open-about", evt => {
+    showAbout(true);
 });
 
 ipcRenderer.on("open-preferences", evt => {

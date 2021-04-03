@@ -16,7 +16,7 @@
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "run-s build"
   },
   "repository": {
     "type": "git",
