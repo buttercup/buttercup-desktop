@@ -10,6 +10,7 @@ import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
 import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
+import { getCurrentUpdate, getReadyUpdate, installUpdate, muteUpdate, startUpdate } from "./services/update";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
 
@@ -141,6 +142,8 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle("get-current-update", getCurrentUpdate);
+
 ipcMain.handle("get-existing-vault-filename", async evt => {
     const win = BrowserWindow.fromWebContents(evt.sender);
     if (!win) {
@@ -159,12 +162,18 @@ ipcMain.handle("get-new-vault-filename", async evt => {
     return filename;
 });
 
+ipcMain.handle("get-ready-update", getReadyUpdate);
+
 ipcMain.handle("get-selected-source", async () => {
     const sourceID = await getConfigValue<VaultSourceID>("selectedSource");
     return sourceID;
 });
 
 ipcMain.handle("get-locale", getOSLocale);
+
+ipcMain.handle("install-update", installUpdate);
+
+ipcMain.handle("mute-current-update", muteUpdate);
 
 ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
     const results = await searchSingleVault(sourceID, term);
@@ -176,6 +185,10 @@ ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<S
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
+});
+
+ipcMain.handle("start-current-update", async () => {
+    await startUpdate();
 });
 
 ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {

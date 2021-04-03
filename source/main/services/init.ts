@@ -8,6 +8,9 @@ import { updateAppMenu } from "../actions/appMenu";
 import { getConfigValue } from "./config";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
+import { isPortable } from "../library/portability";
+import { getLogPath } from "./log";
+import { checkForUpdate } from "./update";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -15,6 +18,7 @@ import { Preferences } from "../types";
 export async function initialise() {
     await initialiseLogging();
     logInfo("Application session started:", new Date());
+    logInfo(`Logs location: ${getLogPath()}`);
     const preferences = await getConfigValue<Preferences>("preferences");
     const locale = await getOSLocale();
     logInfo(`System locale detected: ${locale}`);
@@ -41,5 +45,7 @@ export async function initialise() {
     if (preferences.fileHostEnabled) {
         await startFileHost();
     }
+    logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
+    setTimeout(() => checkForUpdate(), 2500);
     logInfo("Initialisation completed");
 }
