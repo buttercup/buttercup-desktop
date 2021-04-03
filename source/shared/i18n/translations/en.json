@@ -161,7 +161,7 @@
             "secure-file-host": {
                 "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
                 "label": "Enable secure file host",
-                "title:": "Secure file host"
+                "title": "Secure file host"
             },
             "theme": "Theme"
         },

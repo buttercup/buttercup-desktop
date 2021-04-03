@@ -216,7 +216,9 @@ export function PreferencesDialog() {
     const pageConnectivity = () => (
         <>
             <FormGroup label={t("preferences.item.secure-file-host.title")}>
-                <Callout icon="info-sign" dangerouslySetInnerHTML={{ __html: t("preferences.item.secure-file-host.desccription") }} />
+                <Callout icon="info-sign">
+                    <div dangerouslySetInnerHTML={{ __html: t("preferences.item.secure-file-host.description") }} />
+                </Callout>
                 <Switch
                     checked={preferences.fileHostEnabled}
                     label={t("preferences.item.secure-file-host.label")}
