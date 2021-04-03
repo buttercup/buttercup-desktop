@@ -1,0 +1,6 @@
+*.log
+.DS_Store
+node_modules
+/build
+/dist
+dev-app-update.yml

@@ -1,0 +1,189 @@
+{
+  "name": "Buttercup",
+  "version": "0.0.8",
+  "description": "Buttercup Password Manager",
+  "main": "build/main/index.js",
+  "scripts": {
+    "build": "run-s clean build:renderer build:main",
+    "build:main": "tsc --build tsconfig.json",
+    "build:renderer": "webpack --config webpack.config.js --mode production",
+    "clean": "rimraf build dist",
+    "package": "electron-builder --mac --win --linux --x64 -p always",
+    "package:linux": "electron-builder --linux --x64",
+    "package:mac": "electron-builder --mac --x64",
+    "package:win": "electron-builder --win --x64",
+    "release": "run-s build package",
+    "start": "npm run start:main",
+    "start:main": "electron .",
+    "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
+    "test": "run-s build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buttercup/desktop-v2-beta.git"
+  },
+  "keywords": [
+    "buttercup",
+    "password",
+    "manager",
+    "password",
+    "vault",
+    "security"
+  ],
+  "author": "MadDev",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/buttercup/desktop/issues"
+  },
+  "homepage": "https://github.com/buttercup/desktop#readme",
+  "build": {
+    "afterSign": "electron-builder-notarize",
+    "afterAllArtifactBuild": "./resources/scripts/fix-mac-zip.js",
+    "appId": "pw.buttercup.desktop",
+    "asar": true,
+    "productName": "Buttercup",
+    "copyright": "Copyright © MadDev Oy",
+    "dmg": {
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
+      "background": "./resources/build/background@2x.png",
+      "icon": "./resources/build/icon.icns",
+      "contents": [
+        {
+          "x": 396,
+          "y": 345,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 396,
+          "y": 110,
+          "type": "file"
+        }
+      ],
+      "window": {
+        "width": 660,
+        "height": 480
+      }
+    },
+    "files": [
+      "build/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "fileAssociations": {
+      "ext": "bcup",
+      "name": "Buttercup Vault",
+      "icon": "./resources/build/icon.icns"
+    },
+    "linux": {
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
+      "icon": "./resources/build/icons",
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "synopsis": "Free and Open Source Password Vault"
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "entitlements": "./resources/build/entitlements.plist",
+      "entitlementsInherit": "./resources/build/entitlements.plist",
+      "gatekeeperAssess": false,
+      "hardenedRuntime": true,
+      "icon": "./resources/build/icon.icns"
+    },
+    "nsis": {
+      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
+      "perMachine": true,
+      "include": "./resources/build/installer.nsh"
+    },
+    "portable": {
+      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
+    },
+    "protocols": {
+      "name": "Buttercup",
+      "schemes": [
+        "buttercup"
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "buttercup",
+        "repo": "desktop-v2-beta"
+      }
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "icon": "./resources/build/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "publisherName": "MadDev Oy"
+    }
+  },
+  "dependencies": {
+    "@buttercup/channel-queue": "^0.5.0",
+    "@buttercup/dropbox-client": "^0.5.0",
+    "@buttercup/file-interface": "^0.3.2",
+    "@buttercup/google-oauth2-client": "^0.3.0",
+    "@buttercup/googledrive-client": "^1.2.0",
+    "@buttercup/secure-file-host": "^0.3.0",
+    "buttercup": "^5.12.2",
+    "debounce": "^1.2.1",
+    "electron-is-dev": "^2.0.0",
+    "electron-updater": "^4.3.8",
+    "env-paths": "^2.2.1",
+    "eventemitter3": "^4.0.7",
+    "execution-time": "^1.4.1",
+    "i18next": "^19.9.1",
+    "layerr": "^0.1.2",
+    "log-rotate": "^0.2.8",
+    "ms": "^2.1.3",
+    "nested-property": "^4.0.0",
+    "os-locale": "^5.0.0",
+    "pify": "^5.0.0",
+    "stacktracey": "^2.0.18",
+    "webdav": "^4.2.1"
+  },
+  "devDependencies": {
+    "@blueprintjs/core": "^3.40.0",
+    "@blueprintjs/popover2": "^0.3.1",
+    "@blueprintjs/select": "^3.15.6",
+    "@buttercup/ui": "^4.8.0",
+    "@hookstate/core": "^3.0.6",
+    "@types/node": "^14.14.32",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.1",
+    "@types/styled-components": "^5.1.7",
+    "concurrently": "^6.0.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.1.1",
+    "electron": "^12.0.0",
+    "electron-builder": "^22.10.5",
+    "electron-builder-notarize": "^1.2.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.0",
+    "node-sass": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "path-posix": "^1.0.0",
+    "pretty-ms": "^7.0.1",
+    "pug": "^3.0.2",
+    "pug-loader": "^2.4.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "rimraf": "^3.0.2",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "styled-components": "^5.2.1",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.3",
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0"
+  }
+}
