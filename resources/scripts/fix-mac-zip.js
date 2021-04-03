@@ -19,13 +19,12 @@ module.exports = buildResults => {
         `ditto -c -k --sequesterRsrc --keepParent --zlibCompressionLevel 9 "${APP_DIST_PATH}/mac/${APP_NAME}.app" "${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip"`
     );
     console.log("Zipping Completed");
+    const ymlPath = path.join(APP_DIST_PATH, "latest-mac.yml");
     try {
         let output = execSync(
             `${appBuilderPath} blockmap --input="${APP_GENERATED_BINARY_PATH}" --output="${APP_DIST_PATH}/${APP_NAME}-${APP_VERSION}-mac.zip.blockmap" --compression=gzip`
         );
         let { sha512, size } = JSON.parse(output);
-
-        const ymlPath = path.join(APP_DIST_PATH, "latest-mac.yml");
         let ymlData = yaml.load(fs.readFileSync(ymlPath, "utf8"));
         console.log(ymlData);
         ymlData.sha512 = sha512;
@@ -34,8 +33,12 @@ module.exports = buildResults => {
         let yamlStr = yaml.dump(ymlData);
         console.log(yamlStr);
         fs.writeFileSync(ymlPath, yamlStr, "utf8");
-        console.log("Successfully updated YAML file and configurations with blockmap.");
+        console.log("Successfully updated YAML file and configurations with blockmap");
     } catch (e) {
-        console.log("Error in updating YAML file and configurations with blockmap.", e);
+        if (e.code === "ENOENT") {
+            console.log(`No file at: ${ymlPath}`);
+        } else {
+            console.error("Error in updating YAML file and configurations with blockmap", e);
+        }
     }
 };
