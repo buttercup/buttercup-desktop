@@ -3,6 +3,8 @@
 
 [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) ![Latest version](https://img.shields.io/github/tag/buttercup/buttercup-desktop.svg?label=latest) [![Chat securely on Keybase](https://img.shields.io/badge/keybase-bcup-blueviolet)](https://keybase.io/team/bcup) [![Discuss on Reddit](https://img.shields.io/badge/reddit-bcup-red)](https://www.reddit.com/r/bcup/)
 
+![Buttercup Desktop](preview.png) ²
+
 ## About
 
 Buttercup is a free, open-source and cross-platform **password manager**, built on NodeJS with Typescript. It uses strong industry-standard encryption to protect your passwords and credentials (among other data you store in Buttercup vaults) at rest, within vault files (`.bcup`). Vaults can be loaded from and saved to a number of sources, such as the **local filesystem**, **Dropbox**, **Google Drive** or any **WebDAV**-enabled service (like _ownCloud_ or _Nextcloud_ ¹).
@@ -158,3 +160,4 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 ## Notes and Caveats
 
  * ¹ External services like Nextcloud and ownCloud must be configured correctly to support access via the web (using WebDAV). CORS must permit access from any source.
+ * ² Buttercup (including MadDev Oy) is not affiliated with any of the companies represented in screenshots or preview images.
