@@ -63,6 +63,25 @@ We provide an **AppImage** build for Linux, because it is the most desirable for
 
 We won't be supporting formats like Snapcraft, deb or rpm images as they do not align with our requirements. Issues requesting these formats will be closed immediately. Discussion on topics like this should be started on other social channels.
 
+## Contributing
+
+There are a number of ways you can contribute to Buttercup!
+
+### Features & Bug fixes
+
+We welcome pull-requests and issues that serve to better Buttercup as a platform. Please remain respecful (this is free & open source after all) with your ideas and observations, and always consider opening an issue before starting on a substantial pull request.
+
+### Translations
+
+Buttercup relies on the community for translating its interfaces into languages besides English. We use British English (en_GB) as the base language, and translate into all others that our contributors are kind enough to provide.
+
+To add support for a language, make sure to add the translations for our [**vault UI**](https://github.com/buttercup/ui#translations--i18n) first. After that, you can follow these instructions to add another language to the desktop application:
+
+ * Copy the `source/shared/i18n/translations/en.json` file to the language code you're providing (eg. `fi.json` for Finnish).
+ * Edit the `source/shared/i18n/translations/index.ts` file and:
+   * Import the new JSON file: `import fi from "./fi.json";`.
+   * Export the imported constant inside the default export already in that file.
+
 ## Notes and Caveats
 
  * ¹ External services like Nextcloud and ownCloud must be configured correctly to support access via the web (using WebDAV). CORS must permit access from any source.
