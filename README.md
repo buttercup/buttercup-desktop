@@ -134,8 +134,6 @@ We'd also like to thank:
 - Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
 - Arash Asghari (Brand & Identity) ([@\_arashasghari](https://twitter.com/_arashasghari))
 
-> We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
-
 #### Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/buttercup#backer)]
