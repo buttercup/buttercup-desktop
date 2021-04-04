@@ -13,6 +13,42 @@ Password management is a crucial tool when you have _any_ online presence. It's 
 
 Without a password manager, such as Buttercup, it would be very tedious to manage different passwords for each service. If you remember your passwords it's a good sign that they're not strong enough. Ideally you should memorise a primary password for your vault, and not know any of the account-specific passwords off the top of your head.
 
+### Precautions
+
+Buttercup securely encrypts your data in protected files, but this security is only as strong as the weakest component - and this is very often the primary password used to lock and unlock your vault. Follow these basic guidelines to ensure that your vault is safe even if exposed:
+
+ * Choose a **unique** password that is not used elsewhere
+ * Use a highly-varied set of different characters - such as alpha-numeric, symbols and spaces
+ * Use a long password - the longer the better
+ * Don't include words or names in the password
+ * Never share your password with anyone
+
+_It is very important to note that no one associated with Buttercup will ever request your personal vault or its primary password. Do not share it or any of its related details with anyone. Developers or contributors working with Buttercup may request **example** vaults created via your system to try and reproduce issues, but please ensure to never use your real password or store actual credentails within such vaults._
+
+### Versions
+
+The current stable version is **2**. We recommend upgrading if you're still on v1, as it is no longer being actively maintained. You can still browse the v1 source and documentation [here](https://github.com/buttercup/buttercup-desktop/tree/v1).
+
+### Operating Systems
+
+Buttercup Desktop is officially supported on:
+
+ * Most linux distributions (x64), such as Ubuntu
+ * MacOS (x64, non-ARM)
+ * Windows 10 (x64)
+
+#### Arch Linux
+
+Buttercup is also available for [Arch via the AUR](https://aur.archlinux.org/packages/buttercup-desktop/). This release channel is maintained by our community.
+
+Some Arch users have reported the occasional segfault - if you experience this please try [this solution](https://github.com/buttercup/buttercup-desktop/issues/643#issuecomment-413852760) before creating an issue.
+
+#### Portability
+
+Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version.
+
+Although not explicitly portable, both the Mac **zip** and Linux **AppImage** formats are more or less standalone. They still write to the standard config/log destinations, however.
+
 ## Configuration
 
 Configuration files are stored in OS-specific locations.
