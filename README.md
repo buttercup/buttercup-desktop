@@ -99,15 +99,21 @@ We provide an **AppImage** build for Linux, because it is the most desirable for
 
 We won't be supporting formats like Snapcraft, deb or rpm images as they do not align with our requirements. Issues requesting these formats will be closed immediately. Discussion on topics like this should be started on other social channels.
 
-## Contributing
+## Development
+
+To begin developing features or bug-fixes for Buttercup Desktop, make sure that you first have Node v14 installed with a current version of NPM.
+
+Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:renderer` in one and `npm run start:main` in the other.
+
+### Contributing
 
 There are a number of ways you can contribute to Buttercup!
 
-### Features & Bug fixes
+#### Features & Bug fixes
 
 We welcome pull-requests and issues that serve to better Buttercup as a platform. Please remain respecful (this is free & open source after all) with your ideas and observations, and always consider opening an issue before starting on a substantial pull request.
 
-### Translations
+#### Translations
 
 Buttercup relies on the community for translating its interfaces into languages besides English. We use British English (en_GB) as the base language, and translate into all others that our contributors are kind enough to provide.
 
@@ -117,6 +123,39 @@ To add support for a language, make sure to add the translations for our [**vaul
  * Edit the `source/shared/i18n/translations/index.ts` file and:
    * Import the new JSON file: `import fi from "./fi.json";`.
    * Export the imported constant inside the default export already in that file.
+
+#### Contributions
+
+This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
+<a href="https://github.com/buttercup/buttercup-desktop/graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
+
+We'd also like to thank:
+
+- Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
+- Arash Asghari (Brand & Identity) ([@\_arashasghari](https://twitter.com/_arashasghari))
+
+> We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
+
+#### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/buttercup#backer)]
+
+<a href="https://opencollective.com/buttercup#backers" target="_blank"><img src="https://opencollective.com/buttercup/backers.svg?width=890"></a>
+
+#### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/buttercup#sponsor)]
+
+<a href="https://opencollective.com/buttercup/sponsor/0/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/1/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/2/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/3/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/4/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/5/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/6/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/7/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/8/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/buttercup/sponsor/9/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/9/avatar.svg"></a>
 
 ## Notes and Caveats
 
