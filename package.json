@@ -8,6 +8,7 @@
     "build:main": "tsc --build tsconfig.json",
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
+    "format": "prettier --write '{resources,source,test}/**/*.{js,ts}'",
     "package": "electron-builder --mac --win --linux --x64 -p always",
     "package:linux": "electron-builder --linux --x64",
     "package:mac": "electron-builder --mac --x64",
@@ -16,11 +17,22 @@
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "run-s build"
+    "test": "run-s build test:format",
+    "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/buttercup/buttercup-desktop.git"
+  },
+  "lint-staged": {
+    "{resources,source,test}/**/*.{js,ts}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "keywords": [
     "buttercup",
@@ -168,9 +180,13 @@
     "electron-builder-notarize": "^1.2.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
     "node-sass": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "path-posix": "^1.0.0",
+    "prettier": "^2.2.1",
+    "prettier-check": "^2.0.0",
     "pretty-ms": "^7.0.1",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
