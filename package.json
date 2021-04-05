@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/buttercup/desktop-v2-beta.git"
+    "url": "git+https://github.com/buttercup/buttercup-desktop.git"
   },
   "keywords": [
     "buttercup",
@@ -111,7 +111,7 @@
       {
         "provider": "github",
         "owner": "buttercup",
-        "repo": "desktop-v2-beta"
+        "repo": "buttercup-desktop"
       }
     ],
     "directories": {
