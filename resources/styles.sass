@@ -1,0 +1,20 @@
+// All of this beautiful commented stuff can be brought back in when the Blueprint peeps
+// figure out dart-sass (sass). For now we're stuck with the standard colours due to
+// how rubbish node-sass is.
+
+// @use "~@blueprintjs/core/src/common/_colors.scss" as colors
+// @use "~@blueprintjs/core/src/common/_color-aliases.scss" as color_aliases
+
+// $buttercup-primary: #00B7AC
+
+// $pt-intent-primary: $buttercup-primary !default
+
+// $button-intents: ("primary": ($pt-intent-primary, $pt-intent-primary, $pt-intent-primary), "success": (colors.$pt-intent-success, colors.$green2, colors.$green1), "warning": (colors.$pt-intent-warning, colors.$orange2, colors.$orange1), "danger": (colors.$pt-intent-danger, colors.$red2, colors.$red1)) !default
+
+@import "~@blueprintjs/core/src/common/_colors.scss"
+@import "~@blueprintjs/core/src/blueprint.scss"
+@import "~@blueprintjs/select/src/blueprint-select.scss"
+
+.bp3-overlay.bp3-omnibar-overlay
+    .bp3-overlay-backdrop
+        background-color: rgba(16,22,26,.55);

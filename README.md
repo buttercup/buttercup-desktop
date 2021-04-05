@@ -1,254 +1,134 @@
-<h1 align="center">
-  <br/>
-  <img src="https://cdn.rawgit.com/buttercup-pw/buttercup-assets/054fc0fa/badge/desktop.svg" alt="Buttercup Desktop">
-  <br/>
-  <br/>
-  <br/>
-</h1>
+# Buttercup Desktop
+> Buttercup for Desktop - Mac, Linux and Windows
 
-> Cross-platform, free and open-source password manager based on NodeJS.
+[![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) ![Latest version](https://img.shields.io/github/tag/buttercup/buttercup-desktop.svg?label=latest) [![Chat securely on Keybase](https://img.shields.io/badge/keybase-bcup-blueviolet)](https://keybase.io/team/bcup) [![Discuss on Reddit](https://img.shields.io/badge/reddit-bcup-red)](https://www.reddit.com/r/bcup/)
 
-[![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) [![Build Status](https://travis-ci.org/buttercup/buttercup-desktop.svg?branch=master)](https://travis-ci.org/buttercup/buttercup-desktop) [![Build status](https://ci.appveyor.com/api/projects/status/tvthn0hnrsrr4ugy/branch/master?svg=true)](https://ci.appveyor.com/project/sallar/buttercup/branch/master)
-![Latest version](https://img.shields.io/github/tag/buttercup/buttercup-desktop.svg?label=latest) [![Github All Releases](https://buttercup-download-count.now.sh/?)](https://github.com/buttercup/buttercup-desktop/releases) [![Backers on Open Collective](https://opencollective.com/buttercup/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/buttercup/sponsors/badge.svg)](#sponsors) [![encryption](https://img.shields.io/badge/Encryption-AES%20256%20CBC-red.svg)](https://tools.ietf.org/html/rfc3602) [![Chat securely on Keybase](https://img.shields.io/badge/keybase-bcup-blueviolet)](https://keybase.io/team/bcup)
+![Buttercup Desktop](preview.png) ²
 
-![image](https://user-images.githubusercontent.com/3869469/35880367-6bd58770-0b86-11e8-879f-d1f9136274a9.png)
-
-## Table of Contents
-
-- [About](#about)
-  - [Why you need software like Buttercup](#why-you-need-software-like-buttercup)
-- [Protecting your details](#protecting-your-details)
-- [Download & Install](#download--install)
-  - [Platforms and Operating Systems](#platforms-and-operating-systems)
-    - [Arch Linux](#arch-linux)
-  - [Portability](#portability)
-- [Encryption & Format](#encryption--format)
-- [Features](#features)
-  - [WebDAV](#webdav)
-  - [Importing and Exporting](#importing-and-exporting)
-- [Internationalization](#internationalization)
-  - [Submitting internationalization configurations](#submitting-internationalization-configurations)
-- [Development](#development)
-  - [Install Dependencies & Run](#install-dependencies--run)
-- [Package & Release](#package--release)
-  - [Install Dependencies](#install-dependencies)
-  - [Building libraries before releasing](#building-libraries-before-releasing)
-  - [Package](#package)
-- [Debugging](#debugging)
-- [Contributors](#contributors)
-  - [Creation](#creation)
-  - [Contributions](#contributions)
-  - [Backers](#backers)
-  - [Sponsors](#sponsors)
-- [License](#license)
+# :warning: Buttercup v2 is in pre-release - It will reach its stable release channel soon
 
 ## About
 
-Buttercup is a **password manager** - an assistant for helping you store all of your login credentials. Buttercup helps you keep your accounts safe and assists you when you want to log in - all you need to do is remember just one password: your **master password**.
+Buttercup is a free, open-source and cross-platform **password manager**, built on NodeJS with Typescript. It uses strong industry-standard encryption to protect your passwords and credentials (among other data you store in Buttercup vaults) at rest, within vault files (`.bcup`). Vaults can be loaded from and saved to a number of sources, such as the **local filesystem**, **Dropbox**, **Google Drive** or any **WebDAV**-enabled service (like _ownCloud_ or _Nextcloud_ ¹).
 
-This is the Desktop application in the Buttercup suite, and there's also a [mobile app](https://github.com/buttercup/buttercup-mobile) and [browser extension](https://github.com/buttercup/buttercup-browser-extension) so that you can access your credentials anywhere. You store your credentials (login information) in a secure archive, which can then be stored on your own computer or any of our supported **cloud services** (like Dropbox, for example).
+### Why you need a password manager
 
-Archives are encrypted using the AES specification, and cannot be read by anyone besides those with the master password. Brute-force decryption is not technically possible. You should not share your archive with anyone, but rest assured: your contents are safe.
+Password management is a crucial tool when you have _any_ online presence. It's vital that all of your accounts online use strong and unique passwords so that they're much more difficult to break in to. Even if one of your accounts are breached, having unique passwords means that the likelihood of the attacker gaining further access to your accounts portfolio is greatly reduced.
 
-### Why you need software like Buttercup
+Without a password manager, such as Buttercup, it would be very tedious to manage different passwords for each service. If you remember your passwords it's a good sign that they're not strong enough. Ideally you should memorise a primary password for your vault, and not know any of the account-specific passwords off the top of your head.
 
-Many of us have 10s or 100s of accounts, and it would be _crazy_ to secure these with 1 or 2 passwords. Why? If an attacker gains access to one of the systems you have an account with, your password there may be easily stolen - if an attacker gets this it's highly likely they will try to log in to other accounts you have with the same password. If you're using the same password on more than one site, you risk having several accounts stolen if any one of them is breached.
+### Precautions
 
-Buttercup helps you by remembering all of your passwords, and because you no longer have to remember them yourself, you can use **different passwords for every single site**.
+Buttercup securely encrypts your data in protected files, but this security is only as strong as the weakest component - and this is very often the primary password used to lock and unlock your vault. Follow these basic guidelines to ensure that your vault is safe even if exposed:
 
-## Protecting your details
+ * Choose a **unique** password that is not used elsewhere
+ * Use a highly-varied set of different characters - such as alpha-numeric, symbols and spaces
+ * Use a long password - the longer the better
+ * Don't include words or names in the password
+ * Never share your password with anyone
 
-Buttercup provides a secure way of storing your details, but it is only as secure as how you treat your master password and archive files.
+_It is very important to note that no one associated with Buttercup will ever request your personal vault or its primary password. Do not share it or any of its related details with anyone. Developers or contributors working with Buttercup may request **example** vaults created via your system to try and reproduce issues, but please ensure to never use your real password or store actual credentails within such vaults._
 
-Ensure that you never share your master password or use it anywhere other than with your archive. Never share or store your archive in a non-private environment. Always remember to make **regular** backups of your archive.
+### Versions
 
-## Download & Install
+The current stable version is **2**. We recommend upgrading if you're still on v1, as it is no longer being actively maintained. You can still browse the v1 source and documentation [here](https://github.com/buttercup/buttercup-desktop/tree/v1).
 
-[Head over to our website](https://buttercup.pw), or checkout the [releases page](https://github.com/buttercup/buttercup-desktop/releases) to download different builds and versions.
+### Operating Systems
 
-If you're using macOS, you can also use **Homebrew Cask** to download and install Buttercup:
+Buttercup Desktop is officially supported on:
 
-```shell
-$ brew install --cask buttercup
-```
-
-If you're using Windows, you can use [**Chocolatey**](https://chocolatey.org/) to download and install [Buttercup](https://chocolatey.org/packages/buttercup):
-
-```shell
-choco install buttercup
-```
-
-### Platforms and Operating Systems
-
-Buttercup is available for **macOS (dmg)**, **Windows (exe)** and **Linux (deb, rpm, tarball)** (64bit only).
-
-We actively support Buttercup on the following platforms:
-
-- MacOS (latest)
-- Windows 10
-- Ubuntu 18.04
-
-Operating systems outside of these are not directly supported by staff - Issues will be followed on GitHub, however, and assistance provided where possible.
+ * Most linux distributions (x64), such as Ubuntu
+ * MacOS (x64, non-ARM)
+ * Windows 10 (x64)
 
 #### Arch Linux
 
-Buttercup is also available for [Arch Linux (32/64bit) (AUR)](https://aur.archlinux.org/packages/buttercup-desktop/). This release channel is maintained by our community.
+Buttercup is also available for [Arch via the AUR](https://aur.archlinux.org/packages/buttercup-desktop/). This release channel is maintained by our community.
 
-Some users have reported segmentation faults on Arch - if you notice a similar issue, perhaps check out [this solution](https://github.com/buttercup/buttercup-desktop/issues/643).
+Some Arch users have reported the occasional segfault - if you experience this please try [this solution](https://github.com/buttercup/buttercup-desktop/issues/643#issuecomment-413852760) before creating an issue.
 
-### Portability
+#### Portability
 
-Buttercup supports portable builds on the following platforms:
+Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version.
 
-- Linux: [AppImage](https://github.com/buttercup/buttercup-desktop/releases/latest)
+Although not explicitly portable, both the Mac **zip** and Linux **AppImage** formats are more or less standalone. They still write to the standard config/log destinations, however.
 
-_Portable versions for Windows and Mac will arrive in the not-so-distant future._
+## Configuration
 
-## Encryption & Format
+Configuration files are stored in OS-specific locations.
 
-Buttercup uses a delta-system to manage archive changes and save conflicts. The archive, upon saving, is encrypted with AES 256bit CBC mode with a SHA256 HMAC. Encryption is performed once the password has been salted and prepared with PBKDF2 at between 200-250k iterations.
+### App config
 
-Because security with password storage is of the utmost importance, Buttercup will remain in alpha/beta release mode until some level of professional scrutiny has occurred. It is completely possible that security-related changes will occur, but this is inevitable and we handle every question and criticism with great care when it comes to the safety of using our software.
+Application configuration.
 
-## Features
+ * Linux: `$XDG_CONFIG_HOME/Buttercup/desktop.config.json`
+ * Mac: `~/Library/Preferences/Buttercup/desktop.config.json`
+ * Windows: `$APPDATA/Buttercup/Config/desktop.config.json`
 
-Buttercup supports loading and saving credentials archives both locally and remotely. Remote archives can be stored in a variety of service providers like Dropbox, Google Drive and WebDAV-enabled services, such as Yandex.
+### Vault storage
 
-Archives store groups and entries in a simple hierarchy. Both groups and entries can be moved into other groups. Deleted items are trashed before being removed permanently.
+Storage of connected vaults (not actual vault contents).
 
-Buttercup has basic merge conflict resolution when 2 changes are made at once on the file (locally or remote).
+ * Linux: `$XDG_DATA_HOME/Buttercup/vaults.json`
+ * Mac: `~/Library/Application\ Support/Buttercup/vaults.json`
+ * Windows: `$LOCALAPPDATA/Buttercup/Data/vaults.json`
 
-### WebDAV
+### Offline vault cache
 
-Buttercup can connect to WebDAV-based services for the purpose of remotely-accessing vault files. Most WebDAV services and services supporting WebDAV are compatible.
+Stored copies of vaults for offline use.
 
-Please note that Buttercup **does not support self-signed certificates**.
+ * Linux: `$(node -e "console.log(os.tmpdir())")/$(whoami)/Buttercup/vaults-offline.cache.json`
+ * Mac: `$(node -e "console.log(os.tmpdir())")/Buttercup/vaults-offline.cache.json`
+ * Windows: `$(node -e "console.log(os.tmpdir())")/Buttercup/vaults-offline.cache.json`
 
-### Importing and Exporting
+### Logs
 
-You can import from other password managers (such as 1Password, Lastpass and KeePass) by opening your archive and choosing Import from the menu.
+Logs are written for all app sessions.
 
-You can also export Buttercup vaults to CSV format.
+ * Linux: `~/.local/state/Buttercup-nodejs` or `$XDG_STATE_HOME/Buttercup-nodejs`
+ * Mac: `~/Library/Logs/Buttercup-nodejs`
+ * Windows: `%LOCALAPPDATA%\Buttercup-nodejs\Log`
 
-## Internationalization
+_Note that logs for portable Windows applications will be written to the same directory that the executable resides in._
 
-Buttercup for Desktop supports the following languages:
+## Published Applications
 
-- **English** (Default)
-- Spanish
-- German
-- French
-- Russian
-- Farsi
-- Indonesian
-- Italian
-- Brazilian Portuguese
-- Ukrainian
-- Hungarian
-- Czech
-- Dutch
-- Turkish
-- Polish
-- Finnish
-- Catalan
-- Simplified Chinese
-- Romanian
-- Korean
+You can view the current releases on the [Buttercup Desktop releases page](https://github.com/buttercup/buttercup-desktop/releases). Under each release are some assets - the various binaries and installers for each platform Buttercup supports. When installing or downloading, make sure to pick the right operating system and architecture for your machine.
 
-### Submitting internationalization configurations
+_Note that at this time, Buttercup only supports x64 (64 bit) machines._
 
-We welcome the addition of new languages to the Buttercup platform. Please follow the style of the current translations.
+### Linux
 
-<!-- prettier-ignore-start -->
-If adding languages that are more specific than usual (eg. "pt_br" - Brazilian Portuguese), ensure that you separate the parts by an underscore `_` and not a dash.
-<!-- prettier-ignore-end -->
+We provide an **AppImage** build for Linux, because it is the most desirable format for us to release. AppImages support auto-updating, a crucial feature (we feel) for a security application. The other build types do not.
+
+We won't be supporting formats like Snapcraft, deb or rpm images as they do not align with our requirements. Issues requesting these formats will be closed immediately. Discussion on topics like this should be started on other social channels.
 
 ## Development
 
-If you're interested in developing Buttercup:
+To begin developing features or bug-fixes for Buttercup Desktop, make sure that you first have Node v14 installed with a current version of NPM.
 
-### Install Dependencies & Run
+Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:renderer` in one and `npm run start:main` in the other.
 
-```bash
-$ npm install
-$ npm run start
-```
+### Contributing
 
-## Package & Release
+There are a number of ways you can contribute to Buttercup!
 
-### Install Dependencies
+#### Features & Bug fixes
 
-You will need some extra dependencies to build for different platforms on a single platform. Please refer to [this guide](https://github.com/electron-userland/electron-builder/wiki/Multi-Platform-Build) and install required software for your platform.
+We welcome pull-requests and issues that serve to better Buttercup as a platform. Please remain respecful (this is free & open source after all) with your ideas and observations, and always consider opening an issue before starting on a substantial pull request.
 
-### Building libraries before releasing
+#### Translations
 
-```bash
-$ npm run build
-```
+Buttercup relies on the community for translating its interfaces into languages besides English. We use British English (en_GB) as the base language, and translate into all others that our contributors are kind enough to provide.
 
-### Package
+To add support for a language, make sure to add the translations for our [**vault UI**](https://github.com/buttercup/ui#translations--i18n) first. After that, you can follow these instructions to add another language to the desktop application:
 
-To package the app and make installers for all supported platforms:
+ * Copy the `source/shared/i18n/translations/en.json` file to the language code you're providing (eg. `fi.json` for Finnish).
+ * Edit the `source/shared/i18n/translations/index.ts` file and:
+   * Import the new JSON file: `import fi from "./fi.json";`.
+   * Export the imported constant inside the default export already in that file.
 
-```bash
-$ npm run release
-```
-
-This may take a while depending on how fast your computer is. All apps and installers will be in `app` directory.
-
-To package only for the current platform:
-
-```bash
-$ npm run package:current
-```
-
-Or for a specific platform:
-
-```bash
-$ npm run package:mac
-$ npm run package:win
-$ npm run package:linux
-```
-
-**NB**:
-
-The above is a naive release process, without signing. To sign, notarize and release, as is the standard approach, first export the following environment variables:
-
-```shell
-export GH_TOKEN=github_token
-export WIN_CSC_LINK=file:///some/directory/buttercup_codesign.p12
-export WIN_CSC_KEY_PASSWORD="codesign_password"
-export APPLE_ID=apple_id
-export APPLE_ID_PASSWORD=app_specific_password
-export TEAM_SHORT_NAME=team_short_name # if your account is connected to multiple teams
-```
-
-_Where `GH_TOKEN` is your GitHub token, `WIN_CSC_LINK` is the location of the p12 code signing certificate and `WIN_CSC_KEY_PASSWORD` is the certificate password._
-
-You can generate an Apple App-Specific password [here](https://appleid.apple.com/) and find your team short name according [to this guide](https://github.com/electron/electron-notarize#notes-on-your-team-short-name).
-
-Then run:
-
-```shell
-npm run release
-```
-
-## Debugging
-
-In case you need to access Buttercup logs, they are located in:
-
-- **On Linux:** `~/.config/Buttercup/log.log`
-- **On macOS:** `~/Library/Logs/Buttercup/log.log`
-- **On Windows:** `%USERPROFILE%\AppData\Roaming\Buttercup\log.log`
-
-## Contributors
-
-### Creation
-
-- Sallar ([@sallar](https://twitter.com/sallar))
-- Perry ([@perry_mitchell](https://twitter.com/perry_mitchell))
-
-### Contributions
+#### Contributions
 
 This project exists thanks to all the people who contribute. [[Contribute]](CONTRIBUTING.md).
 <a href="https://github.com/buttercup/buttercup-desktop/graphs/contributors"><img src="https://opencollective.com/buttercup/contributors.svg?width=890" /></a>
@@ -258,15 +138,13 @@ We'd also like to thank:
 - Mohammad Amiri (Brand & Identity) ([@pixelvisualize](https://twitter.com/pixelvisualize))
 - Arash Asghari (Brand & Identity) ([@\_arashasghari](https://twitter.com/_arashasghari))
 
-> We welcome contributions. Please read [Contribution Guide](CONTRIBUTING.md) before sending a PR.
-
-### Backers
+#### Backers
 
 Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/buttercup#backer)]
 
 <a href="https://opencollective.com/buttercup#backers" target="_blank"><img src="https://opencollective.com/buttercup/backers.svg?width=890"></a>
 
-### Sponsors
+#### Sponsors
 
 Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/buttercup#sponsor)]
 
@@ -281,6 +159,7 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/buttercup/sponsor/8/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/buttercup/sponsor/9/website" target="_blank"><img src="https://opencollective.com/buttercup/sponsor/9/avatar.svg"></a>
 
-## License
+## Notes and Caveats
 
-Released under [GNU/GPL Version 3](LICENSE)
+ * ¹ External services like Nextcloud and ownCloud must be configured correctly to support access via the web (using WebDAV). CORS must permit access from any source.
+ * ² Buttercup (including MadDev Oy) is not affiliated with any of the companies represented in screenshots or preview images.

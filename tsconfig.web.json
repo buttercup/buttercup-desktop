@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "outDir": "./build/renderer",
+        "module": "commonjs",
+        "target": "es6",
+        "esModuleInterop": true,
+        "strict": false,
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "types": ["react", "react-dom", "styled-components"]
+    },
+    "include": [
+        "./source/renderer/**/*",
+        "./source/shared/**/*"
+    ],
+    "exclude":[
+        "build",
+        "dist",
+        "node_modules"
+    ]
+}
