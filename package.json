@@ -17,8 +17,10 @@
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "run-s build test:format",
-    "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'"
+    "test": "run-s build:main test:specs test:format",
+    "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'",
+    "test:specs": "run-s test:specs:main",
+    "test:specs:main": "mocha -r test/main/index.js 'test/main/**/*.spec.js'"
   },
   "repository": {
     "type": "git",
@@ -172,6 +174,7 @@
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.1",
     "@types/styled-components": "^5.1.7",
+    "chai": "^4.3.4",
     "concurrently": "^6.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^5.1.1",
@@ -182,6 +185,7 @@
     "html-webpack-plugin": "^5.3.0",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
+    "mocha": "^8.3.2",
     "node-sass": "^5.0.0",
     "npm-run-all": "^4.1.5",
     "path-posix": "^1.0.0",
@@ -195,6 +199,7 @@
     "react-router-dom": "^5.2.0",
     "rimraf": "^3.0.2",
     "sass-loader": "^11.0.1",
+    "sinon": "^10.0.0",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.1",
     "ts-loader": "^8.0.17",
