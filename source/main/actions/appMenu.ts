@@ -20,22 +20,22 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-about");
-                    }
+                    },
                 },
                 {
                     label: t("app-menu.preferences"),
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-preferences");
-                    }
+                    },
                 },
                 { type: "separator" },
                 {
                     label: t("app-menu.close-window"),
-                    click: () => closeWindows()
+                    click: () => closeWindows(),
                 },
-                { label: t("app-menu.quit"), role: "quit" }
-            ]
+                { label: t("app-menu.quit"), role: "quit" },
+            ],
         },
         {
             label: t("app-menu.vault"),
@@ -45,23 +45,23 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("add-vault");
-                    }
+                    },
                 },
                 { type: "separator" },
                 {
                     label: t("app-menu.unlock-vault"),
-                    submenu: sources.map(source => ({
+                    submenu: sources.map((source) => ({
                         label: source.name,
                         enabled: source.state === VaultSourceStatus.Locked,
                         click: async () => {
                             const window = await openMainWindow(`/source/${source.id}`);
                             window.webContents.send("unlock-vault", source.id);
-                        }
-                    }))
+                        },
+                    })),
                 },
                 {
                     label: t("app-menu.lock-all"),
-                    click: () => lockAllSources()
+                    click: () => lockAllSources(),
                 },
                 { type: "separator" },
                 {
@@ -70,10 +70,9 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-search");
-                    }
-                }
-
-            ]
+                    },
+                },
+            ],
         },
         {
             label: t("app-menu.connection"),
@@ -88,20 +87,18 @@ async function getContextMenu(): Promise<Menu> {
                         await setConfigValue("preferences", prefs);
                         await updateAppMenu();
                         await handleConfigUpdate(prefs);
-                    }
-                }
-            ]
+                    },
+                },
+            ],
         },
         {
             label: t("app-menu.edit"),
-            role: "editMenu"
+            role: "editMenu",
         },
         {
             label: t("app-menu.debug"),
-            submenu: [
-                { label: t("app-menu.devtool"), role: "toggleDevTools" }
-            ]
-        }
+            submenu: [{ label: t("app-menu.devtool"), role: "toggleDevTools" }],
+        },
     ]);
 }
 

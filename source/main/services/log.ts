@@ -11,16 +11,14 @@ const mkdir = pify(fs.mkdir);
 const LOG_RETENTION = 10;
 
 export function getLogPath(): string {
-    return isPortable()
-        ? path.join(getPortableExeDir(), LOG_FILENAME)
-        : LOG_PATH;
+    return isPortable() ? path.join(getPortableExeDir(), LOG_FILENAME) : LOG_PATH;
 }
 
 export async function initialise() {
     const logPath = getLogPath();
     await mkdir(path.dirname(logPath), { recursive: true });
     await new Promise<void>((resolve, reject) => {
-        rotate(logPath, { count: LOG_RETENTION, compress: false }, error => {
+        rotate(logPath, { count: LOG_RETENTION, compress: false }, (error) => {
             if (error) return reject(error);
             resolve();
         });

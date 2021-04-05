@@ -7,7 +7,7 @@ const DEFAULT_CONFIG = {
     preferences: naiveClone(PREFERENCES_DEFAULT),
     selectedSource: null,
     windowHeight: 600,
-    windowWidth: 800
+    windowWidth: 800,
 };
 
 export async function getConfigValue<T>(key: string): Promise<T> {
@@ -16,7 +16,10 @@ export async function getConfigValue<T>(key: string): Promise<T> {
     return typeof value === "undefined" || value === null ? DEFAULT_CONFIG[key] || null : value;
 }
 
-export async function setConfigValue(key: string, value: object | string | number | boolean | null): Promise<void> {
+export async function setConfigValue(
+    key: string,
+    value: object | string | number | boolean | null
+): Promise<void> {
     const storage = getConfigStorage();
     await storage.setValue(key, value);
 }

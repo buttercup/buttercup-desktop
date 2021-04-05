@@ -12,16 +12,19 @@ export async function createEmptyVault(
             resolve(vaultSrc);
         });
     });
-    ipcRenderer.send("get-empty-vault", JSON.stringify({
-        password
-    }));
+    ipcRenderer.send(
+        "get-empty-vault",
+        JSON.stringify({
+            password,
+        })
+    );
     const vaultSrc = await getVaultSourcePromise;
     const client = createClient(accessToken);
     const fileID = await client.putFileContents({
         contents: vaultSrc,
         id: null,
         name: filename,
-        parent: parentIdentifier
+        parent: parentIdentifier,
     });
     return fileID;
 }

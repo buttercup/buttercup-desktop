@@ -15,20 +15,27 @@ export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolea
         ipcRenderer.once("unlock-source:reply", (evt, result) => {
             setBusy(false);
             const { ok, error } = JSON.parse(result) as {
-                ok: boolean,
-                error?: string
+                ok: boolean;
+                error?: string;
             };
             if (!ok) {
-                showError(`${t("notification.error.vault-unlock-failed")}: ${error || t("notification.error.unknown-error")}`);
+                showError(
+                    `${t("notification.error.vault-unlock-failed")}: ${
+                        error || t("notification.error.unknown-error")
+                    }`
+                );
                 return reject(new Error(`Failed unlocking vault: ${error}`));
             }
             resolve();
         });
     });
-    ipcRenderer.send("unlock-source", JSON.stringify({
-        sourceID,
-        password
-    }));
+    ipcRenderer.send(
+        "unlock-source",
+        JSON.stringify({
+            sourceID,
+            password,
+        })
+    );
     await unlockPromise;
     logInfo(`Unlocked source: ${sourceID}`);
     return true;

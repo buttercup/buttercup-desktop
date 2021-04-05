@@ -13,11 +13,17 @@ export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: Vaul
         ipcRenderer.once("save-vault-facade:reply", (evt, result) => {
             setSaving(false);
             const { ok, error } = JSON.parse(result) as {
-                ok: boolean,
-                error?: string
+                ok: boolean;
+                error?: string;
             };
             if (!ok) {
-                progNotification.clear(`${t("notification.error.vault-save-failed")}: ${error || t("notification.error.unknown-error")}`, Intent.DANGER, 10000);
+                progNotification.clear(
+                    `${t("notification.error.vault-save-failed")}: ${
+                        error || t("notification.error.unknown-error")
+                    }`,
+                    Intent.DANGER,
+                    10000
+                );
                 return reject(new Error(`Failed saving vault: ${error}`));
             }
             progNotification.clear(t("notification.vault-saved"), Intent.SUCCESS);
@@ -26,10 +32,13 @@ export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: Vaul
     });
     setSaving(true);
     logInfo(`Saving vault facade: ${sourceID}`);
-    ipcRenderer.send("save-vault-facade", JSON.stringify({
-        sourceID,
-        vaultFacade
-    }));
+    ipcRenderer.send(
+        "save-vault-facade",
+        JSON.stringify({
+            sourceID,
+            vaultFacade,
+        })
+    );
     await savePromise;
     logInfo(`Saved vault facade: ${sourceID}`);
 }

@@ -29,7 +29,7 @@ app.on("activate", () => {
 app.on("second-instance", async (event, args) => {
     await openMainWindow();
     // Protocol URL for Linux/Windows
-    const protocolURL = args.find(arg => arg.startsWith(BUTTERCUP_PROTOCOL));
+    const protocolURL = args.find((arg) => arg.startsWith(BUTTERCUP_PROTOCOL));
     if (protocolURL) {
         handleProtocolCall(protocolURL);
     }
@@ -53,7 +53,7 @@ app.whenReady()
     })
     .then(() => initialise())
     .then(() => openMainWindow())
-    .catch(err => {
+    .catch((err) => {
         logErr(err);
         app.quit();
     });

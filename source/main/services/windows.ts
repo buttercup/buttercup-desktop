@@ -2,7 +2,7 @@ import path from "path";
 import { BrowserWindow } from "electron";
 import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
-import { getConfigValue, setConfigValue} from "./config";
+import { getConfigValue, setConfigValue } from "./config";
 import { getIconPath } from "../library/tray";
 import { lockAllSources } from "./buttercup";
 import { logErr, logInfo } from "../library/log";
@@ -10,7 +10,7 @@ import { Preferences } from "../types";
 
 export async function closeWindows(): Promise<void> {
     const windows = BrowserWindow.getAllWindows();
-    windows.forEach(win => {
+    windows.forEach((win) => {
         win.close();
     });
 }
@@ -26,16 +26,22 @@ async function createVaultWindow() {
             contextIsolation: false,
             enableRemoteModule: true,
             nodeIntegration: true,
-            spellcheck: false
-        }
-    })
+            spellcheck: false,
+        },
+    });
     win.on("closed", () => {
         win.removeAllListeners();
         handleWindowClosed();
     });
-    win.on("resize", debounce(() => handleWindowResize(win), 750, false));
+    win.on(
+        "resize",
+        debounce(() => handleWindowResize(win), 750, false)
+    );
     const loadedPromise = new Promise<void>((resolve, reject) => {
-        const timeout = setTimeout(() => reject(new Error("Timed-out waiting for window to load")), 10000);
+        const timeout = setTimeout(
+            () => reject(new Error("Timed-out waiting for window to load")),
+            10000
+        );
         win.webContents.once("did-finish-load", () => {
             clearTimeout(timeout);
             resolve();
@@ -69,7 +75,7 @@ async function handleWindowResize(win: BrowserWindow) {
 }
 
 export function notifyWindowsOfSourceUpdate(sourceID: VaultSourceID) {
-    BrowserWindow.getAllWindows().forEach(win => {
+    BrowserWindow.getAllWindows().forEach((win) => {
         win.webContents.send("source-updated", sourceID);
     });
 }

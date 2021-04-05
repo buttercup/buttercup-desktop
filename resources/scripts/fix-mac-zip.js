@@ -11,8 +11,8 @@ const APP_VERSION = process.argv[2] ? process.argv[2] : packageInfo.version;
 const APP_DIST_PATH = path.join(currentWorkingDirectory, "dist");
 const APP_GENERATED_BINARY_PATH = path.join(APP_DIST_PATH, `${APP_NAME}-${APP_VERSION}-mac.zip`);
 
-module.exports = buildResults => {
-    const hasMacZip = buildResults.artifactPaths.some(artPath => /mac*\.zip$/.test(artPath));
+module.exports = (buildResults) => {
+    const hasMacZip = buildResults.artifactPaths.some((artPath) => /mac*\.zip$/.test(artPath));
     if (!hasMacZip) return;
     console.log("Zipping Started");
     execSync(

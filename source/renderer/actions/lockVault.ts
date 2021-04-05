@@ -12,19 +12,26 @@ export async function lockVaultSource(sourceID: VaultSourceID) {
         ipcRenderer.once("lock-source:reply", (evt, result) => {
             setBusy(false);
             const { ok, error } = JSON.parse(result) as {
-                ok: boolean,
-                error?: string
+                ok: boolean;
+                error?: string;
             };
             if (!ok) {
-                showError(`${t("notification.error.vault-lock-failed")}: ${error || t("notification.error.unknown-error")}`);
+                showError(
+                    `${t("notification.error.vault-lock-failed")}: ${
+                        error || t("notification.error.unknown-error")
+                    }`
+                );
                 return reject(new Error(`Failed locking vault: ${error}`));
             }
             resolve();
         });
     });
-    ipcRenderer.send("lock-source", JSON.stringify({
-        sourceID
-    }));
+    ipcRenderer.send(
+        "lock-source",
+        JSON.stringify({
+            sourceID,
+        })
+    );
     await lockPromise;
     logInfo(`Locked source: ${sourceID}`);
 }

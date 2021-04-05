@@ -65,11 +65,9 @@ export class FileStorage extends StorageInterface {
     }
 
     async _putContents(data: Object): Promise<void> {
-        return this._queue.channel("io").enqueue(
-            async () => {
-                await mkdir(path.dirname(this._path,), { recursive: true });
-                await writeFile(this._path, JSON.stringify(data));
-            }
-        );
+        return this._queue.channel("io").enqueue(async () => {
+            await mkdir(path.dirname(this._path), { recursive: true });
+            await writeFile(this._path, JSON.stringify(data));
+        });
     }
 }

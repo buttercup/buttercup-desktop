@@ -10,39 +10,42 @@ let __tray: Tray = null;
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
-    const unlockedCount = sources.reduce((count, desc) => desc.state === VaultSourceStatus.Unlocked ? count + 1 : count, 0);
+    const unlockedCount = sources.reduce(
+        (count, desc) => (desc.state === VaultSourceStatus.Unlocked ? count + 1 : count),
+        0
+    );
     return Menu.buildFromTemplate([
         {
             label: t("app-menu.unlocked-vaults", { count: unlockedCount }),
             enabled: false,
         },
         {
-            type: "separator"
+            type: "separator",
         },
         {
             label: t("app-menu.open"),
-            click: () => openMainWindow()
+            click: () => openMainWindow(),
         },
         {
-            type: "separator"
+            type: "separator",
         },
         {
             label: t("app-menu.add-new-vault"),
             click: async () => {
                 const window = await openMainWindow();
                 window.webContents.send("add-vault");
-            }
+            },
         },
         {
             label: t("app-menu.lock-all"),
             click: () => {
                 logInfo("Locking all sources");
                 lockAllSources();
-            }
+            },
         },
         {
             label: t("app-menu.open-vault"),
-            submenu: sources.map(source => ({
+            submenu: sources.map((source) => ({
                 label: source.name,
                 click: async () => {
                     const window = await openMainWindow();
@@ -51,16 +54,16 @@ async function getContextMenu(): Promise<Menu> {
                     } else {
                         window.webContents.send("unlock-vault-open", source.id);
                     }
-                }
-            }))
+                },
+            })),
         },
         {
-            type: "separator"
+            type: "separator",
         },
         {
             label: t("app-menu.quit"),
-            role: "quit"
-        }
+            role: "quit",
+        },
     ]);
 }
 

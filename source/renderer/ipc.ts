@@ -8,11 +8,15 @@ import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
-import { applyCurrentUpdateState, applyReadyUpdateState, applyUpdateProgress } from "./services/update";
+import {
+    applyCurrentUpdateState,
+    applyReadyUpdateState,
+    applyUpdateProgress,
+} from "./services/update";
 import { showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
-ipcRenderer.on("add-vault", evt => {
+ipcRenderer.on("add-vault", (evt) => {
     showAddVaultMenu(true);
 });
 
@@ -21,15 +25,15 @@ ipcRenderer.on("file-host-code", (evt, payload) => {
     setFileHostCode(code);
 });
 
-ipcRenderer.on("open-about", evt => {
+ipcRenderer.on("open-about", (evt) => {
     showAbout(true);
 });
 
-ipcRenderer.on("open-preferences", evt => {
+ipcRenderer.on("open-preferences", (evt) => {
     showPreferences(true);
 });
 
-ipcRenderer.on("open-search", evt => {
+ipcRenderer.on("open-search", (evt) => {
     const currentSourceID = getCurrentSourceID();
     if (!currentSourceID) return;
     setSearchVisible(true);

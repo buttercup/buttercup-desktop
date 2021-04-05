@@ -11,12 +11,15 @@ export async function initialise(lang: string) {
         lng: lang,
         fallbackLng: DEFAULT_LANGUAGE,
         debug: false,
-        resources: Object.keys(translations).reduce((output, lang) => ({
-            ...output,
-            [lang]: {
-                translation: translations[lang]
-            }
-        }), {})
+        resources: Object.keys(translations).reduce(
+            (output, lang) => ({
+                ...output,
+                [lang]: {
+                    translation: translations[lang],
+                },
+            }),
+            {}
+        ),
     });
 }
 

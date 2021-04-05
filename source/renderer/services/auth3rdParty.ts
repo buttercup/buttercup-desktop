@@ -6,7 +6,7 @@ const { BrowserWindow } = remote;
 export async function authenticate(authURL: string, matchRegex: RegExp): Promise<string | null> {
     const currentWindow = BrowserWindow.getFocusedWindow();
     logInfo(`Starting 3rd party authentication procedure: ${authURL}`);
-    return new Promise<string>(resolve => {
+    return new Promise<string>((resolve) => {
         let foundToken = null;
         const authWin = new BrowserWindow({
             parent: currentWindow,
@@ -15,8 +15,8 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
             webPreferences: {
                 nodeIntegration: false,
                 webSecurity: false,
-                sandbox: true
-            }
+                sandbox: true,
+            },
         });
 
         authWin.loadURL(authURL);

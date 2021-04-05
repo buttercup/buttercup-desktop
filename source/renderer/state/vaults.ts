@@ -3,7 +3,9 @@ import { VaultSourceID } from "buttercup";
 import { VaultSourceDescription } from "../types";
 
 export const CURRENT_VAULT: State<VaultSourceID | null> = createState(null as VaultSourceID | null);
-export const VAULTS_LIST: State<Array<VaultSourceDescription>> = createState([] as Array<VaultSourceDescription>);
+export const VAULTS_LIST: State<Array<VaultSourceDescription>> = createState(
+    [] as Array<VaultSourceDescription>
+);
 
 export function getCurrentSourceID(): VaultSourceID | null {
     return CURRENT_VAULT.get();

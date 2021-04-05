@@ -13,7 +13,7 @@ let __write: () => Promise<void>;
 function generateLogPrefix(level: LogLevel): string {
     const date = new Date();
     let levelPrefix: string;
-    switch(level) {
+    switch (level) {
         case LogLevel.Error:
             levelPrefix = "ERR";
             break;
@@ -26,7 +26,11 @@ function generateLogPrefix(level: LogLevel): string {
         default:
             throw new Error(`Invalid log level: ${level}`);
     }
-    const [hours, minutes, seconds] = [date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()].map(val => {
+    const [hours, minutes, seconds] = [
+        date.getUTCHours(),
+        date.getUTCMinutes(),
+        date.getUTCSeconds(),
+    ].map((val) => {
         const str = `${val}`;
         return str.length === 2 ? str : `0${str}`;
     });
@@ -60,10 +64,14 @@ async function write() {
     if (!__queue) {
         __queue = new ChannelQueue();
     }
-    await __queue.channel("write").enqueue(async () => {
-        const toWrite = [...__lines];
-        __lines.splice(0, Infinity);
-        if (toWrite.length === 0) return;
-        await writeLines(toWrite);
-    }, undefined, "write-stack");
+    await __queue.channel("write").enqueue(
+        async () => {
+            const toWrite = [...__lines];
+            __lines.splice(0, Infinity);
+            if (toWrite.length === 0) return;
+            await writeLines(toWrite);
+        },
+        undefined,
+        "write-stack"
+    );
 }

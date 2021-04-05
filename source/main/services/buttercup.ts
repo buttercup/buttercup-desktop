@@ -10,15 +10,12 @@ import {
     VaultManager,
     consumeVaultFacade,
     createVaultFacade,
-    init
+    init,
 } from "buttercup";
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
-import {
-    getVaultCacheStorage,
-    getVaultStorage
-} from "./storage";
+import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
 import { logErr } from "../library/log";
 import { SourceType, VaultSourceDescription } from "../types";
@@ -26,7 +23,13 @@ import { SourceType, VaultSourceDescription } from "../types";
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
 
-export async function addVault(name: string, sourceCredentials: Credentials, passCredentials: Credentials, type: SourceType, createNew: boolean = false): Promise<VaultSourceID> {
+export async function addVault(
+    name: string,
+    sourceCredentials: Credentials,
+    passCredentials: Credentials,
+    type: SourceType,
+    createNew: boolean = false
+): Promise<VaultSourceID> {
     const credsSecure = await sourceCredentials.toSecureString();
     const vaultManager = getVaultManager();
     const source = new VaultSource(name, type, credsSecure);
@@ -45,7 +48,7 @@ export async function attachVaultManagerWatchers() {
     });
     vaultManager.on("sourcesUpdated", async () => {
         sendSourcesToWindows();
-        vaultManager.unlockedSources.forEach(source => {
+        vaultManager.unlockedSources.forEach((source) => {
             if (!__watchedVaultSources.includes(source.id)) {
                 source.on("updated", () => onVaultSourceUpdated(source));
                 __watchedVaultSources.push(source.id);
@@ -57,7 +60,7 @@ export async function attachVaultManagerWatchers() {
 
 export function getSourceDescriptions(): Array<VaultSourceDescription> {
     const vaultManager = getVaultManager();
-    return vaultManager.sources.map(source => describeSource(source));
+    return vaultManager.sources.map((source) => describeSource(source));
 }
 
 export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
@@ -83,7 +86,7 @@ function getVaultManager(): VaultManager {
         init();
         __vaultManager = new VaultManager({
             cacheStorage: getVaultCacheStorage(),
-            sourceStorage: getVaultStorage()
+            sourceStorage: getVaultStorage(),
         });
     }
     return __vaultManager;
@@ -96,7 +99,7 @@ export async function loadVaultsFromDisk() {
 export async function lockAllSources() {
     const vaultManager = getVaultManager();
     if (vaultManager.unlockedSources.length === 0) return;
-    await Promise.all(vaultManager.unlockedSources.map(source => source.lock()));
+    await Promise.all(vaultManager.unlockedSources.map((source) => source.lock()));
 }
 
 export async function lockSource(sourceID: VaultSourceID) {
@@ -132,7 +135,7 @@ export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFaca
 export function sendSourcesToWindows() {
     const vaultManager = getVaultManager();
     const windows = BrowserWindow.getAllWindows();
-    const sourceDescriptions = vaultManager.sources.map(source => describeSource(source));
+    const sourceDescriptions = vaultManager.sources.map((source) => describeSource(source));
     for (const win of windows) {
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }

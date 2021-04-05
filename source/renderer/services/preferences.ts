@@ -2,7 +2,7 @@ import { ipcRenderer } from "electron";
 import { Preferences } from "../types";
 
 export async function getPreferences(): Promise<Preferences> {
-    const getPreferencesPromise = new Promise<Preferences>(resolve => {
+    const getPreferencesPromise = new Promise<Preferences>((resolve) => {
         ipcRenderer.once("get-preferences:reply", (evt, payload) => {
             resolve(JSON.parse(payload));
         });
@@ -13,7 +13,10 @@ export async function getPreferences(): Promise<Preferences> {
 }
 
 export async function savePreferences(preferences: Preferences): Promise<void> {
-    ipcRenderer.send("write-preferences", JSON.stringify({
-        preferences
-    }));
+    ipcRenderer.send(
+        "write-preferences",
+        JSON.stringify({
+            preferences,
+        })
+    );
 }

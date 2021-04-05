@@ -69,7 +69,7 @@ export async function checkForUpdate() {
     autoUpdater.setFeedURL({
         provider: "github",
         owner: "buttercup",
-        repo: "buttercup-desktop"
+        repo: "buttercup-desktop",
     });
     if (isDev) {
         const hasDevConfig = await hasDevUpdate();

@@ -7,7 +7,11 @@ import { SearchResult } from "../types";
 const __deb_searchSingleVault = debounce(__searchSingleVault, 200, /* immediate: */ false);
 
 async function __searchSingleVault(sourceID: VaultSourceID, term: string) {
-    const results: Array<SearchResult> = await ipcRenderer.invoke("search-single-vault", sourceID, term);
+    const results: Array<SearchResult> = await ipcRenderer.invoke(
+        "search-single-vault",
+        sourceID,
+        term
+    );
     setSearchResults(results);
 }
 

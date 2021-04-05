@@ -16,7 +16,11 @@ export async function addNewVaultTarget(
     setBusy(true);
     const addNewVaultPromise = new Promise<VaultSourceID>((resolve, reject) => {
         ipcRenderer.once("add-vault-config:reply", (evt, payload) => {
-            const { ok, error, sourceID } = JSON.parse(payload) as { ok: boolean, error?: string, sourceID?: VaultSourceID };
+            const { ok, error, sourceID } = JSON.parse(payload) as {
+                ok: boolean;
+                error?: string;
+                sourceID?: VaultSourceID;
+            };
             if (ok) return resolve(sourceID);
             reject(new Error(`Failed adding vault: ${error}`));
         });
@@ -24,7 +28,7 @@ export async function addNewVaultTarget(
     const payload: AddVaultPayload = {
         createNew,
         datasourceConfig,
-        masterPassword: password
+        masterPassword: password,
     };
     logInfo(`Adding new vault: ${datasourceConfig.type}`);
     ipcRenderer.send("add-vault-config", JSON.stringify(payload));
@@ -39,10 +43,13 @@ export async function addNewVaultTarget(
     }
 }
 
-export async function getFileVaultParameters(): Promise<{ filename: string, createNew: boolean } | null> {
+export async function getFileVaultParameters(): Promise<{
+    filename: string;
+    createNew: boolean;
+} | null> {
     showNewFilePrompt(true);
     const emitter = getCreateNewFilePromptEmitter();
-    const choice: NewVaultChoice = await new Promise<NewVaultChoice>(resolve => {
+    const choice: NewVaultChoice = await new Promise<NewVaultChoice>((resolve) => {
         const callback = (choice: NewVaultChoice) => {
             resolve(choice);
             emitter.removeListener("choice", callback);
@@ -56,14 +63,14 @@ export async function getFileVaultParameters(): Promise<{ filename: string, crea
         if (!filename) return null;
         return {
             filename,
-            createNew: true
+            createNew: true,
         };
     } else {
         const filename = await ipcRenderer.invoke("get-existing-vault-filename");
         if (!filename) return null;
         return {
             filename,
-            createNew: false
+            createNew: false,
         };
     }
 }

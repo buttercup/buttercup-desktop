@@ -2,7 +2,12 @@ import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
 import { Intent } from "@blueprintjs/core";
 import { setCurrentUpdate, setShowUpdateDialog } from "../state/update";
-import { ProgressNotification, createProgressNotification, showUpdateAvailable, showUpdateDownloaded } from "./notifications";
+import {
+    ProgressNotification,
+    createProgressNotification,
+    showUpdateAvailable,
+    showUpdateDownloaded,
+} from "./notifications";
 import { logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 import { UpdateProgressInfo } from "../types";
@@ -10,7 +15,7 @@ import { UpdateProgressInfo } from "../types";
 let __updateProgress: ProgressNotification = null;
 
 export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promise<void> {
-    const updateInfo: UpdateInfo = infoOverride || await ipcRenderer.invoke("get-current-update");
+    const updateInfo: UpdateInfo = infoOverride || (await ipcRenderer.invoke("get-current-update"));
     if (updateInfo) {
         setCurrentUpdate(updateInfo);
         showUpdateAvailable(
@@ -28,7 +33,7 @@ export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promis
 }
 
 export async function applyReadyUpdateState(infoOverride?: UpdateInfo) {
-    const updateInfo: UpdateInfo = infoOverride || await ipcRenderer.invoke("get-ready-update");
+    const updateInfo: UpdateInfo = infoOverride || (await ipcRenderer.invoke("get-ready-update"));
     if (updateInfo) {
         setCurrentUpdate(updateInfo);
         showUpdateDownloaded(

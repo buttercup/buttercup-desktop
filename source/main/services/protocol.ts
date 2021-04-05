@@ -10,7 +10,7 @@ function handleAuthCall(args) {
     const [action, ...actionArgs] = args;
     switch (action) {
         case "google":
-            BrowserWindow.getAllWindows().forEach(win => {
+            BrowserWindow.getAllWindows().forEach((win) => {
                 win.webContents.send("protocol:auth/google", actionArgs);
             });
             break;

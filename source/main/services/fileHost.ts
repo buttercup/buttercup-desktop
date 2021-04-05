@@ -10,7 +10,9 @@ export async function startFileHost() {
     if (__host) return;
     const fileHostKey = await getConfigValue<string>("fileHostKey");
     logInfo(`Starting file host (key exists: ${!!fileHostKey})`);
-    __host = fileHostKey ? startSecureFileHost(SECURE_FILE_HOST_PORT, fileHostKey) : startSecureFileHost(SECURE_FILE_HOST_PORT);
+    __host = fileHostKey
+        ? startSecureFileHost(SECURE_FILE_HOST_PORT, fileHostKey)
+        : startSecureFileHost(SECURE_FILE_HOST_PORT);
     __host.emitter.on("codeReady", async ({ code }) => {
         logInfo("File host: code received (incoming connection request)");
         try {
