@@ -1,0 +1,243 @@
+{
+    "_": "Polski",
+    "about": {
+        "description": "Darmowy, otwartoźródłowy i wieloplatformowy menedżer haseł.",
+        "dialog": {
+            "close-button": "Zamknij",
+            "close-button-title": "Zamknij O Buttercup"
+        },
+        "title": "O Buttercup",
+        "version": {
+            "core": "Źródło",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Wybierz plik archiwum lub utwórz nowe archiwum:",
+        "choose-type-prompt": "Wybierz typ archiwum do dodania:",
+        "confirm": {
+            "existing-password": "Wprowadź hasło główne do archiwum:",
+            "new-password": "Wprowadź nowe hasło do archiwum:",
+            "password-placeholder": "Hasło archiwum..."
+        },
+        "google-auth-button": "Uwierzytelnienie",
+        "google-auth-button-title": "Uwierzytelnienie z Google Drive",
+        "google-auth-error": "Uwierzytelnienie Google nie powiodło się",
+        "loader": {
+            "dropbox-auth": "W celu uwierzytelnienia otworzy się osobne okno",
+            "file-prompt": "Otworzy się okno dialogowe umożliwiające wybór pliku archiwum",
+            "google-auth": {
+                "instr-1": "Możesz wybrać poziom uprawnień, których będzie używać Buttercup podczas uzyskiwania dostępu do twojego konta <strong>Google Drive</strong>.",
+                "instr-2": "Wybranie <strong>pełnych</strong> uprawnień zapewni Buttercup dostęp do wszystkich plików i folderów na twoim koncie oraz podłączonych udostępnień.",
+                "instr-3": "Wybranie <i>nie-</i>pełnych uprawnień zapewni Buttercup dostęp do plików, które menedżer haseł wcześniej utworzył lub do których uzyskał dostęp.",
+                "perm-label": "Uprawnienia",
+                "perm-switch": "Pełne"
+            },
+            "webdav-auth": {
+                "password-label": "Hasło",
+                "password-plc": "Hasło WebDAV",
+                "url-label": "Usługa WebDAV",
+                "username-label": "Nazwa użytkownika",
+                "username-plc": "Nazwa użytkownika WebDAV"
+            }
+        },
+        "page-choose-next": "Następnie",
+        "page-choose-next-title": "Kontynuuj dodawanie archiwum",
+        "page-confirm-cancel": "Anuluj",
+        "page-confirm-cancel-title": "Anuluj odblokowanie",
+        "page-confirm-finish": "Dodaj archiwum",
+        "page-confirm-finish-title": "Potwierdź dodanie archiwum",
+        "title": "Dodaj archiwum",
+        "webdav-continue": "Następnie",
+        "webdav-continue-title": "Połącz za pomocą WebDAV"
+    },
+    "app-menu": {
+        "about": "O Buttercup",
+        "add-new-vault": "Dodaj nowe",
+        "close-window": "Zamknij okno",
+        "connection": "Połączenie",
+        "debug": "Debugowanie",
+        "devtool": "Narzędzie programistyczne",
+        "edit": "Edytuj",
+        "enable-secure-file-host": "Włącz dostęp przeglądarki",
+        "lock-all": "Zablokuj",
+        "open": "Otwórz",
+        "open-vault": "Otwórz archiwum",
+        "preferences": "Ustawienia",
+        "quit": "Wyjdź",
+        "search": "Szukaj",
+        "unlock-vault": "Odblokuj",
+        "unlocked-vaults": "{{count}} odblokowane archiwum",
+        "unlocked-vaults_plural": "{{count}} odblokowane archiwa",
+        "vault": "Archiwum"
+    },
+    "dialog": {
+        "confirm-generic": {
+            "cancel-button": "Anuluj",
+            "confirm-button": "Potwierdź"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Anuluj",
+                "cancel-title": "Anuluj tworzenie nowego archiwum",
+                "confirm": "Podaj nazwę archiwum",
+                "confirm-title": "Potwierdź nazwę pliku nowego archiwum",
+                "description": "Podaj nazwę pliku dla nowego archiwum:",
+                "title": "Dodaj archiwum"
+            },
+            "nav": {
+                "cancel-new": "Anuluj utworzenie nowego archiwum",
+                "create-new": "Nowe archiwum"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Archiwa Buttercup",
+                "confirm-button": "Dodaj",
+                "title": "Dodaj istniejące archiwum"
+            },
+            "add-new": {
+                "bcup-filter": "Archiwa Buttercup",
+                "confirm-button": "Utwórz",
+                "title": "Dodaj nowe archiwum"
+            }
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Zamknij",
+                "title": "Monit o zamknięciu"
+            },
+            "button-existing": {
+                "text": "Wczytaj istniejące",
+                "title": "Wczytywanie istniejącego pliku archiwum"
+            },
+            "button-new": {
+                "text": "Utwórz nowy",
+                "title": "Utwórz nowy plik archiwum"
+            },
+            "prompt": "Czy chcesz utworzyć <i>nowe</i> archiwum czy otworzyć już istniejące?",
+            "title": "Dodaj plik archiwum"
+        },
+        "password-prompt": {
+            "button-cancel": "Anuluj",
+            "button-cancel-title": "Anuluj odblokowanie",
+            "button-unlock": "Odblokuj",
+            "button-unlock-title": "Potwierdź odblokowanie archiwum",
+            "label": "Hasło archiwum",
+            "placeholder": "Hasło archiwum..."
+        }
+    },
+    "error": {
+        "fatal-boundary": "Wystąpił błąd krytyczny - przepraszamy za jego wystąpienie. Prosimy zapoznać się z poniższymi szczegółami, w celu pomocy z rozpoznaniem problem:"
+    },
+    "file-host": {
+        "code-copied": "Skopiowano kod hosta pliku",
+        "dialog": {
+            "close-button": "Zamknij",
+            "close-button-title": "Zamknij okno połączenia",
+            "instruction": {
+                "new-connection": "Nawiązano nowe połączenie z tą aplikacją, żądając zdalnego dostępu do systemu plików.",
+                "use-code": "Użyj poniższego kodu, aby go autoryzować."
+            },
+            "title": "Bezpieczne połączenie z hostem plików"
+        }
+    },
+    "input-required": "(wymagane)",
+    "notification": {
+        "error": {
+            "languages-load": "Nie udało się załadować języków",
+            "preferences-load": "Nie udało się załadować ustawień",
+            "preferences-save": "Nie udało się zapisać ustawień",
+            "unknown-error": "Nieznany błąd",
+            "vault-lock-failed": "Zablokowanie archiwum nie powiodło się",
+            "vault-save-failed": "Nie udało się zapisać archiwum",
+            "vault-unlock-failed": "Odblokowanie archiwum nie powiodło się"
+        },
+        "preferences-saved": "Zapisane ustawienia",
+        "vault-saved": "Archiwum zostało zapisane"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Anuluj",
+            "cancel-title": "Anuluj aktualizację ustawień",
+            "save": "Zapisz",
+            "save-title": "Zapisz zmiany"
+        },
+        "item": {
+            "clear-clipboard": "Automatyczne czyszczenie schowka",
+            "language": "Język",
+            "lock-vaults-after-time": "Zablokuj archiwa po pewnym czasie",
+            "lock-vaults-after-time-desc": "Automatyczne zablokowanie archiwów po pewnym okresie bezczynności.",
+            "lock-vaults-window-closed": "Zablokuj archiwa po zamknięciu okna archiwum",
+            "lock-vaults-window-closed-label": "Zablokuj podczas zamknięcia",
+            "secure-file-host": {
+                "description": "Bezpieczny host plików umożliwia <strong>rozszerzeniu przeglądarki Buttercup</strong> łączenie się z lokalnymi archiwami na tym komputerze za pośrednictwem tej aplikacji.",
+                "label": "Włącz bezpieczny host plików",
+                "title": "Bezpieczny host plików"
+            },
+            "theme": "Motyw"
+        },
+        "section": {
+            "connectivity": "Łączność",
+            "debug": "Debugowanie",
+            "general": "Ogólne",
+            "privacy": "Prywatność",
+            "security": "Bezpieczeństwo"
+        },
+        "title": "Ustawnienia"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Brak wyników...",
+            "result-render-error": "Nie udało się wyświetlić wyniku wyszukiwania"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Plik",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Ciemny",
+        "light": "Jasny"
+    },
+    "update": {
+        "available": "Dostępna aktualizacja: {{version}}",
+        "dialog": {
+            "close-button": "Zamknij",
+            "close-button-title": "Zamknij informacje o aktualizacji",
+            "title": "Zaktualizuj do {{version}}",
+            "update-button": "Aktualizacja",
+            "update-button-title": "Zaktualizuj aplikację teraz"
+        },
+        "downloaded": "Pobrano aktualizację",
+        "installed-restart": "Uruchom ponownie",
+        "ready": "Aktualizacja gotowa: {{version}}",
+        "view": "Widok"
+    },
+    "vault-chooser": {
+        "configure-vault": "Skonfiguruj archiwum",
+        "configure-vault-hide": "Ukryj konfigurację",
+        "no-vaults": {
+            "cta-button": "Dodaj archiwum",
+            "description": "Nie dodano jeszcze żadnych archiwów...",
+            "title": "Zacznij od początku"
+        },
+        "remove-vault-dialog": {
+            "cancel-button": "Anuluj",
+            "cancel-button-title": "Anuluj usunięcie",
+            "description": "Czy na pewno chcesz usunąć archiwum \"{{title}}\"?",
+            "remove-button": "Usuń",
+            "remove-button-title": "Potwierdź usunięcie archiwum",
+            "title": "Usuń archiwum"
+        }
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "choose-vault": "Wybierz archiwum",
+            "lock-current-vault": "Zablokuj aktualne archiwum"
+        },
+        "vault-contents": "Zawartość archiwum"
+    }
+}
