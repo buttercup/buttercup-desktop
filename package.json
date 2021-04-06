@@ -149,6 +149,8 @@
     "@buttercup/secure-file-host": "^0.3.0",
     "buttercup": "^5.12.2",
     "debounce": "^1.2.1",
+    "debounce-promise": "^3.1.2",
+    "delayable-setinterval": "^0.1.1",
     "electron-is-dev": "^2.0.0",
     "electron-updater": "^4.3.8",
     "env-paths": "^2.2.1",
