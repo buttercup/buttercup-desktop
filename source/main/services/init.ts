@@ -10,7 +10,7 @@ import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
 import { isPortable } from "../library/portability";
 import { getLogPath } from "./log";
-import { checkForUpdate } from "./update";
+import { startUpdateWatcher } from "./update";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -46,6 +46,6 @@ export async function initialise() {
         await startFileHost();
     }
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
-    setTimeout(() => checkForUpdate(), 2500);
+    setTimeout(() => startUpdateWatcher(), 0);
     logInfo("Initialisation completed");
 }
