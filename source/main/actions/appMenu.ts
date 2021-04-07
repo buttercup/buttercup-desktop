@@ -3,14 +3,29 @@ import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { closeWindows, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
+import { getLastSourceID } from "../services/lastVault";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
+import { getIconForProvider, getNativeImageMenuIcon } from "../library/icons";
 import { Preferences } from "../types";
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
+    const lastSourceID = getLastSourceID();
+    const lastSource = sources.find((source) => source.id === lastSourceID) || null;
     const preferences = await getConfigValue<Preferences>("preferences");
+    const currentVaultPrefix = [];
+    if (lastSource) {
+        currentVaultPrefix.push(
+            {
+                label: lastSource.name,
+                enabled: false,
+                icon: await getNativeImageMenuIcon(getIconForProvider(lastSource.type)),
+            },
+            { type: "separator" }
+        );
+    }
     return Menu.buildFromTemplate([
         {
             label: "Buttercup",
@@ -38,7 +53,7 @@ async function getContextMenu(): Promise<Menu> {
             ],
         },
         {
-            label: t("app-menu.vault"),
+            label: t("app-menu.vaults"),
             submenu: [
                 {
                     label: t("app-menu.add-new-vault"),
@@ -63,14 +78,26 @@ async function getContextMenu(): Promise<Menu> {
                     label: t("app-menu.lock-all"),
                     click: () => lockAllSources(),
                 },
-                { type: "separator" },
+            ],
+        },
+        {
+            label: t("app-menu.current"),
+            submenu: [
+                ...currentVaultPrefix,
                 {
                     label: t("app-menu.search"),
+                    enabled: !!lastSource,
                     accelerator: isOSX() ? "Cmd+F" : "Ctrl+F",
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-search");
                     },
+                },
+                { type: "separator" },
+                {
+                    label: "Enable biometric unlock",
+                    enabled: !!lastSource,
+                    click: async () => {},
                 },
             ],
         },
@@ -94,6 +121,10 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: t("app-menu.edit"),
             role: "editMenu",
+        },
+        {
+            label: t("app-menu.view"),
+            role: "viewMenu",
         },
         {
             label: t("app-menu.debug"),

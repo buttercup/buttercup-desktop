@@ -81,6 +81,12 @@ export async function getEmptyVault(password: string): Promise<string> {
     return tds.save(vault.format.getHistory(), creds);
 }
 
+export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    return (source && source.status) || null;
+}
+
 function getVaultManager(): VaultManager {
     if (!__vaultManager) {
         init();

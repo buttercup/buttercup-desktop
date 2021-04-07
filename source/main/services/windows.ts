@@ -5,6 +5,7 @@ import debounce from "debounce";
 import { getConfigValue, setConfigValue } from "./config";
 import { getIconPath } from "../library/tray";
 import { lockAllSources } from "./buttercup";
+import { setLastSourceID } from "./lastVault";
 import { logErr, logInfo } from "../library/log";
 import { Preferences } from "../types";
 
@@ -66,6 +67,7 @@ async function handleWindowClosed() {
             logErr("Failed locking vaults on window close", err);
         }
     }
+    setLastSourceID(null);
 }
 
 async function handleWindowResize(win: BrowserWindow) {
