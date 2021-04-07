@@ -142,40 +142,40 @@
             "title": "Sécurisation de la connexion au serveur de fichiers"
         }
     },
-    "input-required": "(required)",
+    "input-required": "(requis)",
     "notification": {
         "error": {
-            "languages-load": "Failed loading languages",
-            "preferences-load": "Failed loading preferences",
-            "preferences-save": "Failed saving preferences",
-            "unknown-error": "Unknown error",
-            "vault-lock-failed": "Vault lock failed",
-            "vault-save-failed": "Vault failed to save",
-            "vault-unlock-failed": "Vault unlock failed"
+            "languages-load": "Échec du chargement des langues",
+            "preferences-load": "Échec du chargement des préférences",
+            "preferences-save": "Échec de la sauvegarde des préférences",
+            "unknown-error": "Erreur inconnue",
+            "vault-lock-failed": "Le verrouillage du coffre-fort a échoué",
+            "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
+            "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
         },
-        "preferences-saved": "Saved preferences",
-        "vault-saved": "Vault saved"
+        "preferences-saved": "Préférences enregistrées",
+        "vault-saved": "Coffre-fort enregistré"
     },
     "preferences": {
         "button": {
-            "cancel": "Cancel",
-            "cancel-title": "Cancel Preferences update",
-            "save": "Save",
-            "save-title": "Save changes"
+            "cancel": "Annuler",
+            "cancel-title": "Annuler la mise à jour des préférences",
+            "save": "Enregistrer",
+            "save-title": "Enregistrer les modifications"
         },
         "item": {
-            "clear-clipboard": "Automatically clear clipboard",
-            "language": "Language",
-            "lock-vaults-after-time": "Lock vaults after time",
-            "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
-            "lock-vaults-window-closed": "Lock vaults if vault window closed",
-            "lock-vaults-window-closed-label": "Lock on close",
+            "clear-clipboard": "Effacer automatiquement le presse-papiers",
+            "language": "Langue",
+            "lock-vaults-after-time": "Verrouiller les coffre-forts après un certain délai.",
+            "lock-vaults-after-time-desc": "Verrouiller automatiquement les coffres-forts après une certaine période d’inactivité.",
+            "lock-vaults-window-closed": "Verrouiller les coffres-forts si la fenêtre du coffre-fort est fermée",
+            "lock-vaults-window-closed-label": "Verrouillage à la fermeture",
             "secure-file-host": {
-                "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
-                "label": "Enable secure file host",
-                "title": "Secure file host"
+                "description": "Le serveur de fichiers sécurisé permet à l’<strong>extension de navigateur Buttercup</strong> de se connecter aux coffres-forts locaux de cet ordinateur via cette application.",
+                "label": "Activer le serveur de fichiers sécurisé",
+                "title": "Serveur de fichiers sécurisé"
             },
-            "theme": "Theme"
+            "theme": "Thème"
         },
         "section": {
             "connectivity": "Connectivity",
