@@ -4,6 +4,7 @@ import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
 import { closeWindows, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
 import { getLastSourceID } from "../services/lastVault";
+import { sourceEnabledForBiometricUnlock } from "../services/biometrics";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
@@ -16,6 +17,7 @@ async function getContextMenu(): Promise<Menu> {
     const lastSource = sources.find((source) => source.id === lastSourceID) || null;
     const preferences = await getConfigValue<Preferences>("preferences");
     const currentVaultPrefix = [];
+    let biometricsEnabled = false;
     if (lastSource) {
         currentVaultPrefix.push(
             {
@@ -25,6 +27,7 @@ async function getContextMenu(): Promise<Menu> {
             },
             { type: "separator" }
         );
+        biometricsEnabled = await sourceEnabledForBiometricUnlock(lastSource.id);
     }
     return Menu.buildFromTemplate([
         {
@@ -95,7 +98,9 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: "Enable biometric unlock",
+                    label: biometricsEnabled
+                        ? t("app-menu.biometric-disable")
+                        : t("app-menu.biometric-enable"),
                     enabled: !!lastSource,
                     click: async () => {},
                 },

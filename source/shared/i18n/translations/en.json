@@ -54,6 +54,8 @@
     "app-menu": {
         "about": "About",
         "add-new-vault": "Add New",
+        "biometric-disable": "Disable biometric unlock",
+        "biometric-enable": "Enable biometric unlock",
         "close-window": "Close Window",
         "connection": "Connection",
         "current": "Current Vault",
