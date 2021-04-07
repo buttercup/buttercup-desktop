@@ -20,74 +20,74 @@
             "new-password": "Saisissez un nouveau mot de passe pour le coffre-fort principal :",
             "password-placeholder": "Mot de passe du coffre-fort..."
         },
-        "google-auth-button": "S'authentifier",
-        "google-auth-button-title": "S'authentifier avec Google Drive",
-        "google-auth-error": "L'authentification Google a échoué",
+        "google-auth-button": "S’authentifier",
+        "google-auth-button-title": "S’authentifier avec Google Drive",
+        "google-auth-error": "L’authentification Google a échoué",
         "loader": {
-            "dropbox-auth": "Une fenêtre séparée s'ouvrira pour l'authentification",
-            "file-prompt": "Une boîte de dialogue s'ouvrira pour choisir un fichier de coffre-fort.",
+            "dropbox-auth": "Une fenêtre séparée s’ouvrira pour l’authentification",
+            "file-prompt": "Une boîte de dialogue s’ouvrira pour choisir un fichier de coffre-fort.",
             "google-auth": {
-                "instr-1": "Vous pouvez sélectionner le niveau de permission que Buttercup utilisera lors de l'accès à votre compte <strong>Google Drive</strong>.",
+                "instr-1": "Vous pouvez sélectionner le niveau de permission que Buttercup utilisera lors de l’accès à votre compte <strong>Google Drive</strong>.",
                 "instr-2": "En sélectionnant un paramètre de permission <strong>étendu</strong>, Buttercup aura accès à tous les fichiers et dossiers de votre compte et aux partages connectés.",
-                "instr-3": "La sélection d'un paramètre <i>non-</i>étendu permettra à Buttercup d'accéder aux fichiers qu'il a créés ou auxquels il a accédé précédemment.",
+                "instr-3": "La sélection d’un paramètre <i>non-</i>étendu permettra à Buttercup d'accéder aux fichiers qu’il a créés ou auxquels il a accédé précédemment.",
                 "perm-label": "Permissions",
                 "perm-switch": "Étendu"
             },
             "webdav-auth": {
-                "password-label": "Password",
-                "password-plc": "WebDAV Password",
-                "url-label": "WebDAV Service",
-                "username-label": "Username",
-                "username-plc": "WebDAV Username"
+                "password-label": "Mot de passe",
+                "password-plc": "Mot de passe WebDAV",
+                "url-label": "Service WebDAV",
+                "username-label": "Nom d’utilisateur :",
+                "username-plc": "Nom d’utilisateur WebDAV"
             }
         },
-        "page-choose-next": "Next",
-        "page-choose-next-title": "Continue adding vault",
-        "page-confirm-cancel": "Cancel",
-        "page-confirm-cancel-title": "Cancel unlock",
-        "page-confirm-finish": "Add Vault",
-        "page-confirm-finish-title": "Confirm vault addition",
-        "title": "Add Vault",
-        "webdav-continue": "Next",
-        "webdav-continue-title": "Connect using WebDAV"
+        "page-choose-next": "Suivant",
+        "page-choose-next-title": "Continuer en ajoutant le coffre-fort",
+        "page-confirm-cancel": "Annuler",
+        "page-confirm-cancel-title": "Annuler le déverrouillage",
+        "page-confirm-finish": "Ajouter le coffre-fort",
+        "page-confirm-finish-title": "Confirmer l’ajout du coffre-fort",
+        "title": "Ajout d’un coffre-fort",
+        "webdav-continue": "Suivant",
+        "webdav-continue-title": "Se connecter à l’aide de WebDAV"
     },
     "app-menu": {
-        "about": "About",
-        "add-new-vault": "Add New",
-        "close-window": "Close Window",
-        "connection": "Connection",
+        "about": "À propos",
+        "add-new-vault": "Ajouter un nouveau",
+        "close-window": "Fermer la fenêtre",
+        "connection": "Connexion",
         "debug": "Debug",
         "devtool": "Devtool",
-        "edit": "Edit",
-        "enable-secure-file-host": "Enable browser access",
-        "lock-all": "Lock All",
-        "open": "Open",
-        "open-vault": "Open Vault",
-        "preferences": "Preferences",
-        "quit": "Quit",
-        "search": "Search",
-        "unlock-vault": "Unlock",
-        "unlocked-vaults": "{{count}} unlocked vault",
-        "unlocked-vaults_plural": "{{count}} unlocked vaults",
-        "vault": "Vault"
+        "edit": "Modifier",
+        "enable-secure-file-host": "Activer l’accès par navigateur",
+        "lock-all": "Tout verrouiller",
+        "open": "Ouvrir",
+        "open-vault": "Ouvrir le coffre-fort",
+        "preferences": "Préférences",
+        "quit": "Quitter",
+        "search": "Rechercher",
+        "unlock-vault": "Déverrouiller",
+        "unlocked-vaults": "{{count}} coffre-fort déverrouillé",
+        "unlocked-vaults_plural": "{{count}} coffres-forts déverrouillés",
+        "vault": "Coffre-fort"
     },
     "dialog": {
         "confirm-generic": {
-            "cancel-button": "Cancel",
-            "confirm-button": "Confirm"
+            "cancel-button": "Annuler",
+            "confirm-button": "OK"
         },
         "file-chooser": {
             "add": {
-                "cancel": "Cancel",
-                "cancel-title": "Cancel new vault creation",
-                "confirm": "Set Vault Target",
-                "confirm-title": "Confirm new vault filename",
-                "description": "Enter a filename for the new vault:",
-                "title": "Add Vault"
+                "cancel": "Annuler",
+                "cancel-title": "Annule la création d’un nouveau coffre-fort",
+                "confirm": "Définir",
+                "confirm-title": "Confirmer le nom de fichier du nouveau coffre-fort",
+                "description": "Saisissez un nom de fichier pour le nouveau coffre-fort :",
+                "title": "Ajouter un coffre-fort"
             },
             "nav": {
-                "cancel-new": "Cancel New",
-                "create-new": "New Vault"
+                "cancel-new": "Annuler la création",
+                "create-new": "Nouveau coffre-fort"
             }
         },
         "file-vault": {
