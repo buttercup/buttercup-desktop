@@ -13,7 +13,7 @@
         }
     },
     "add-vault-menu": {
-        "choose-file-prompt": "Choisissez le fichier d'un coffre-fort existant ou créez un nouveau coffre-fort :",
+        "choose-file-prompt": "Choisissez le fichier d’un coffre-fort existant ou créez un nouveau coffre-fort :",
         "choose-type-prompt": "Choisissez un type de coffre-fort à ajouter :",
         "confirm": {
             "existing-password": "Saisissez le mot de passe du coffre-fort principal :",
@@ -209,7 +209,7 @@
             "close-button-title": "Close update information",
             "title": "Mise à jour vers {{version}}",
             "update-button": "Mise à jour",
-            "update-button-title": "Mise à jour de l'application maintenant"
+            "update-button-title": "Mise à jour de l’application maintenant"
         },
         "downloaded": "Mise à jour téléchargée",
         "installed-restart": "Redémarrer",
@@ -221,7 +221,7 @@
         "configure-vault-hide": "Masquer la configuration",
         "no-vaults": {
             "cta-button": "Ajouter un coffre-fort",
-            "description": "Aucun coffre-fort n'a encore été ajouté...",
+            "description": "Aucun coffre-fort n’a encore été ajouté...",
             "title": "Premier démarrage"
         },
         "remove-vault-dialog": {
