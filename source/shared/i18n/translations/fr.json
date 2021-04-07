@@ -83,7 +83,7 @@
                 "confirm": "Définir",
                 "confirm-title": "Confirmer le nom de fichier du nouveau coffre-fort",
                 "description": "Saisissez un nom de fichier pour le nouveau coffre-fort :",
-                "title": "Ajouter un coffre-fort"
+                "title": "Ajout d’un coffre-fort"
             },
             "nav": {
                 "cancel-new": "Annuler la création",
@@ -92,54 +92,54 @@
         },
         "file-vault": {
             "add-existing": {
-                "bcup-filter": "Buttercup Vaults",
-                "confirm-button": "Add",
-                "title": "Add Existing Vault"
+                "bcup-filter": "Coffres-forts Buttercup",
+                "confirm-button": "Ajouter",
+                "title": "Ajout d’un coffre-fort existant"
             },
             "add-new": {
-                "bcup-filter": "Buttercup Vaults",
-                "confirm-button": "Create",
-                "title": "Add New Vault"
+                "bcup-filter": "Coffres-forts Buttercup",
+                "confirm-button": "Créer",
+                "title": "Ajout d’un nouveau coffre-fort"
             }
         },
         "new-file-prompt": {
             "button-cancel": {
-                "text": "Close",
-                "title": "Close prompt"
+                "text": "Fermer",
+                "title": "Fermeture"
             },
             "button-existing": {
-                "text": "Load Existing",
-                "title": "Loading existing vault file"
+                "text": "Charger existant",
+                "title": "Chargement d’un fichier de coffre-fort existant"
             },
             "button-new": {
-                "text": "Create New",
-                "title": "Create new vault file"
+                "text": "Créer un nouveau",
+                "title": "Création d’un nouveau fichier de coffre-fort"
             },
-            "prompt": "Do you wish to create a <i>new</i> vault, or read an existing one?",
-            "title": "Add Vault File"
+            "prompt": "Souhaitez-vous créer un <i>nouveau</i> coffre-fort, ou en lire un existant ?",
+            "title": "Ajout d’un fichier de coffre-fort"
         },
         "password-prompt": {
-            "button-cancel": "Cancel",
-            "button-cancel-title": "Cancel unlock",
-            "button-unlock": "Unlock",
-            "button-unlock-title": "Confirm vault unlock",
-            "label": "Vault Password",
-            "placeholder": "Vault password..."
+            "button-cancel": "Annuler",
+            "button-cancel-title": "Annuler le déverrouillage",
+            "button-unlock": "Déverrouiller",
+            "button-unlock-title": "Confirmer le déverrouillage du coffre-fort.",
+            "label": "Mot de passe du coffre-fort",
+            "placeholder": "Mot de passe du coffre..."
         }
     },
     "error": {
-        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
+        "fatal-boundary": "Une erreur fatale s’est produite – nous sommes désolés que cela soit arrivé. Veuillez vérifier les détails ci-dessous au cas où ils aideraient à diagnostiquer le problème :"
     },
     "file-host": {
-        "code-copied": "File host code copied",
+        "code-copied": "Code du serveur de fichiers copié",
         "dialog": {
-            "close-button": "Close",
-            "close-button-title": "Close connection dialog",
+            "close-button": "Fermer",
+            "close-button-title": "Fermer la fenêtre de connexion",
             "instruction": {
-                "new-connection": "A new connection has been made to this application, requesting remote access to the file system.",
-                "use-code": "Use the following code to authorise it."
+                "new-connection": "Une nouvelle connexion a été établie avec cette application, demandant un accès à distance au serveur de fichiers.",
+                "use-code": "Utilisez le code suivant pour l’autoriser."
             },
-            "title": "Secure File Host Connection"
+            "title": "Sécurisation de la connexion au serveur de fichiers"
         }
     },
     "input-required": "(required)",
