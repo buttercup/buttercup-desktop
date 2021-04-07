@@ -178,66 +178,66 @@
             "theme": "Thème"
         },
         "section": {
-            "connectivity": "Connectivity",
-            "debug": "Debug",
-            "general": "General",
-            "privacy": "Privacy",
-            "security": "Security"
+            "connectivity": "Connexion",
+            "debug": "Débogage",
+            "general": "Général",
+            "privacy": "Vie privée",
+            "security": "Sécurité"
         },
-        "title": "Preferences"
+        "title": "Préférences"
     },
     "search": {
         "modal": {
-            "no-results": "No results...",
-            "result-render-error": "Failed rendering search result"
+            "no-results": "Aucun résultat...",
+            "result-render-error": "Échec de restitution du résultat de recherche."
         }
     },
     "source-type": {
         "dropbox": "Dropbox",
-        "file": "File",
+        "file": "Fichier",
         "googledrive": "Google Drive",
         "webdav": "WebDAV"
     },
     "theme": {
-        "dark": "Dark",
-        "light": "Light"
+        "dark": "Foncé",
+        "light": "Clair"
     },
     "update": {
-        "available": "Update available: {{version}}",
+        "available": "Mise à jour disponible : {{version}}",
         "dialog": {
-            "close-button": "Close",
+            "close-button": "Fermer",
             "close-button-title": "Close update information",
-            "title": "Upgrade to {{version}}",
-            "update-button": "Update",
-            "update-button-title": "Update the application now"
+            "title": "Mise à jour vers {{version}}",
+            "update-button": "Mise à jour",
+            "update-button-title": "Mise à jour de l'application maintenant"
         },
-        "downloaded": "Update downloaded",
-        "installed-restart": "Restart",
-        "ready": "Update ready: {{version}}",
-        "view": "View"
+        "downloaded": "Mise à jour téléchargée",
+        "installed-restart": "Redémarrer",
+        "ready": "Prêt pour la mise à jour : {{version}}",
+        "view": "Voir"
     },
     "vault-chooser": {
-        "configure-vault": "Configure vault",
-        "configure-vault-hide": "Hide configuration",
+        "configure-vault": "Configurer le coffre-fort",
+        "configure-vault-hide": "Masquer la configuration",
         "no-vaults": {
-            "cta-button": "Add Vault",
-            "description": "No vaults have been added yet...",
-            "title": "A Fresh Start"
+            "cta-button": "Ajouter un coffre-fort",
+            "description": "Aucun coffre-fort n'a encore été ajouté...",
+            "title": "Premier démarrage"
         },
         "remove-vault-dialog": {
-            "cancel-button": "Cancel",
-            "cancel-button-title": "Cancel removal",
-            "description": "Are you sure that you want to remove the vault \"{{title}}\"?",
-            "remove-button": "Remove",
-            "remove-button-title": "Confirm vault removal",
-            "title": "Remove Vault"
+            "cancel-button": "Annuler",
+            "cancel-button-title": "Annuler la suppression",
+            "description": "Êtes-vous certain(e) de vouloir supprimer le coffre-fort \"{{title}}\" ?",
+            "remove-button": "Supprimer",
+            "remove-button-title": "Confirmer la suppression du coffre-fort",
+            "title": "Supprimer le coffre-fort"
         }
     },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Choose vault",
-            "lock-current-vault": "Lock current vault"
+            "choose-vault": "Choisir un coffre-fort",
+            "lock-current-vault": "Verrouiller le coffre-fort actuel"
         },
-        "vault-contents": "Vault contents"
+        "vault-contents": "Contenu du coffre-fort"
     }
 }
