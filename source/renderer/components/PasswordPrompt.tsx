@@ -26,7 +26,7 @@ export function PasswordPrompt() {
     }, []);
     return (
         <Dialog isOpen={showPromptState.get()} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>Vault Unlock</div>
+            <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
             <div className={Classes.DIALOG_BODY}>
                 <FormGroup
                     label={t("dialog.password-prompt.label")}

@@ -76,6 +76,15 @@
         "view": "View"
     },
     "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Cancel",
+            "button-cancel-title": "Cancel registration",
+            "button-reg": "Register",
+            "button-reg-title": "Register biometrics",
+            "label": "Vault Password",
+            "placeholder": "Vault password...",
+            "title": "Register Biometrics"
+        },
         "confirm-generic": {
             "cancel-button": "Cancel",
             "confirm-button": "Confirm"
@@ -128,7 +137,8 @@
             "button-unlock": "Unlock",
             "button-unlock-title": "Confirm vault unlock",
             "label": "Vault Password",
-            "placeholder": "Vault password..."
+            "placeholder": "Vault password...",
+            "title": "Vault Unlock"
         }
     },
     "error": {
