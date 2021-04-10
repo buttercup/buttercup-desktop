@@ -1,5 +1,6 @@
-import { VaultFacade, VaultSourceID } from "buttercup";
+import { VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
 import { BrowserWindow, clipboard, ipcMain } from "electron";
+import { Layerr } from "layerr";
 import {
     addVaultFromPayload,
     showExistingFileVaultDialog,
@@ -11,6 +12,7 @@ import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
 import {
     getEmptyVault,
+    getSourceStatus,
     saveVaultFacade,
     sendSourcesToWindows,
     toggleAutoUpdate,
@@ -26,6 +28,13 @@ import {
     muteUpdate,
     startUpdate,
 } from "./services/update";
+import { getLastSourceID, setLastSourceID } from "./services/lastVault";
+import {
+    enableSourceBiometricUnlock,
+    getSourcePasswordViaBiometrics,
+    sourceEnabledForBiometricUnlock,
+    supportsBiometricUnlock,
+} from "./services/biometrics";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
@@ -77,6 +86,9 @@ ipcMain.on("lock-source", async (evt, payload) => {
     const { sourceID } = JSON.parse(payload);
     try {
         await lockSourceWithID(sourceID);
+        if (getLastSourceID() === sourceID) {
+            setLastSourceID(null);
+        }
         evt.reply(
             "lock-source:reply",
             JSON.stringify({
@@ -133,28 +145,6 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
     }
 });
 
-ipcMain.on("unlock-source", async (evt, payload) => {
-    const { sourceID, password } = JSON.parse(payload);
-    try {
-        await unlockSourceWithID(sourceID, password);
-        evt.reply(
-            "unlock-source:reply",
-            JSON.stringify({
-                ok: true,
-            })
-        );
-    } catch (err) {
-        logErr("Failed unlocking vault source", err);
-        evt.reply(
-            "unlock-source:reply",
-            JSON.stringify({
-                ok: false,
-                error: err.message,
-            })
-        );
-    }
-});
-
 ipcMain.on("update-vault-windows", () => {
     sendSourcesToWindows();
 });
@@ -170,12 +160,22 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
+    const supportsBiometrics = await supportsBiometricUnlock();
+    if (!supportsBiometrics) return false;
+    return sourceEnabledForBiometricUnlock(sourceID);
+});
+
 ipcMain.handle(
     "get-app-environment",
     async (): Promise<AppEnvironmentFlags> => ({
         portable: isPortable(),
     })
 );
+
+ipcMain.handle("get-biometric-source-password", async (_, sourceID: VaultSourceID) => {
+    return getSourcePasswordViaBiometrics(sourceID);
+});
 
 ipcMain.handle("get-current-update", getCurrentUpdate);
 
@@ -211,6 +211,13 @@ ipcMain.handle("install-update", installUpdate);
 ipcMain.handle("mute-current-update", muteUpdate);
 
 ipcMain.handle(
+    "register-biometric-unlock",
+    async (_, sourceID: VaultSourceID, password: string) => {
+        await enableSourceBiometricUnlock(sourceID, password);
+    }
+);
+
+ipcMain.handle(
     "search-single-vault",
     async (_, sourceID, term): Promise<Array<SearchResult>> => {
         const results = await searchSingleVault(sourceID, term);
@@ -223,6 +230,12 @@ ipcMain.handle(
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
+    const status = getSourceStatus(sourceID);
+    if (status === VaultSourceStatus.Unlocked) {
+        setLastSourceID(sourceID);
+    } else {
+        setLastSourceID(null);
+    }
 });
 
 ipcMain.handle("start-current-update", async () => {
@@ -235,6 +248,16 @@ ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {
         logInfo("Enabled auto-update");
     } else {
         logInfo("Disabled auto-update");
+    }
+});
+
+ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: string) => {
+    try {
+        await unlockSourceWithID(sourceID, password);
+        setLastSourceID(sourceID);
+    } catch (err) {
+        logErr("Failed unlocking vault source", err);
+        throw Layerr(err, "Failed unlocking vault source");
     }
 });
 

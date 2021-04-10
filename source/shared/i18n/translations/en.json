@@ -54,8 +54,10 @@
     "app-menu": {
         "about": "About",
         "add-new-vault": "Add New",
+        "biometrics": "Use biometric unlock",
         "close-window": "Close Window",
         "connection": "Connection",
+        "current": "Current Vault",
         "debug": "Debug",
         "devtool": "Devtool",
         "edit": "Edit",
@@ -69,9 +71,26 @@
         "unlock-vault": "Unlock",
         "unlocked-vaults": "{{count}} unlocked vault",
         "unlocked-vaults_plural": "{{count}} unlocked vaults",
-        "vault": "Vault"
+        "vaults": "Vaults",
+        "view": "View"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "store login for vault '{{name}}'",
+            "unlock-vault": "unlock vault '{{name}}'"
+        }
     },
     "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Cancel",
+            "button-cancel-title": "Cancel registration",
+            "button-reg": "Register",
+            "button-reg-title": "Register biometrics",
+            "label": "Vault Password",
+            "placeholder": "Vault password...",
+            "success": "Successfully registered biometrics",
+            "title": "Register Biometrics"
+        },
         "confirm-generic": {
             "cancel-button": "Cancel",
             "confirm-button": "Confirm"
@@ -124,10 +143,14 @@
             "button-unlock": "Unlock",
             "button-unlock-title": "Confirm vault unlock",
             "label": "Vault Password",
-            "placeholder": "Vault password..."
+            "placeholder": "Vault password...",
+            "title": "Vault Unlock"
         }
     },
     "error": {
+        "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
+        "biometric-store-failed": "Failed storing biometric details",
+        "biometric-unlock-failed": "Failed unlocking vault using biometrics",
         "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
     },
     "file-host": {
@@ -144,7 +167,9 @@
     },
     "input-required": "(required)",
     "notification": {
+        "biometrics-disabled": "Biometrics disabled for vault",
         "error": {
+            "biometrics-disable-failed": "Failed disabling biometrics for vault: {{error}}",
             "languages-load": "Failed loading languages",
             "preferences-load": "Failed loading preferences",
             "preferences-save": "Failed saving preferences",

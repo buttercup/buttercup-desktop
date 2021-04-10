@@ -1,7 +1,15 @@
+import { VaultSourceID } from "buttercup";
 import { getPasswordEmitter } from "../services/password";
-import { showPasswordPrompt } from "../state/password";
+import { sourceHasBiometricAvailability } from "../services/biometrics";
+import { setBiometricSourceID, showPasswordPrompt } from "../state/password";
 
-export async function getPrimaryPassword(): Promise<string | null> {
+export async function getPrimaryPassword(sourceID?: VaultSourceID): Promise<string | null> {
+    if (sourceID) {
+        const supportsBiometrics = await sourceHasBiometricAvailability(sourceID);
+        if (supportsBiometrics) {
+            setBiometricSourceID(sourceID);
+        }
+    }
     showPasswordPrompt(true);
     const emitter = getPasswordEmitter();
     const password = await new Promise<string | null>((resolve) => {
@@ -11,6 +19,6 @@ export async function getPrimaryPassword(): Promise<string | null> {
         };
         emitter.once("password", callback);
     });
-    showPasswordPrompt(false);
+    setBiometricSourceID(null);
     return password;
 }
