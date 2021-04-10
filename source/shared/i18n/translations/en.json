@@ -54,8 +54,7 @@
     "app-menu": {
         "about": "About",
         "add-new-vault": "Add New",
-        "biometric-disable": "Disable biometric unlock",
-        "biometric-enable": "Enable biometric unlock",
+        "biometrics": "Use biometric unlock",
         "close-window": "Close Window",
         "connection": "Connection",
         "current": "Current Vault",
@@ -145,6 +144,7 @@
     "error": {
         "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
         "biometric-store-failed": "Failed storing biometric details",
+        "biometric-unlock-failed": "Failed unlocking vault using biometrics",
         "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
     },
     "file-host": {

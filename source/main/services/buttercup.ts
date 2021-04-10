@@ -58,6 +58,12 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    return source ? describeSource(source) : null;
+}
+
 export function getSourceDescriptions(): Array<VaultSourceDescription> {
     const vaultManager = getVaultManager();
     return vaultManager.sources.map((source) => describeSource(source));

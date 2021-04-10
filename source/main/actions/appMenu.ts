@@ -7,6 +7,7 @@ import { getLastSourceID } from "../services/lastVault";
 import {
     disableSourceBiometricUnlock,
     sourceEnabledForBiometricUnlock,
+    supportsBiometricUnlock,
 } from "../services/biometrics";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
@@ -21,6 +22,7 @@ async function getContextMenu(): Promise<Menu> {
     const lastSource = sources.find((source) => source.id === lastSourceID) || null;
     const preferences = await getConfigValue<Preferences>("preferences");
     const currentVaultPrefix = [];
+    const biometricsSupported = await supportsBiometricUnlock();
     let biometricsEnabled = false;
     if (lastSource) {
         currentVaultPrefix.push(
@@ -102,10 +104,10 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: biometricsEnabled
-                        ? t("app-menu.biometric-disable")
-                        : t("app-menu.biometric-enable"),
-                    enabled: !!lastSource,
+                    label: t("app-menu.biometrics"),
+                    enabled: !!lastSource && biometricsSupported,
+                    type: "checkbox",
+                    checked: biometricsEnabled,
                     click: async () => {
                         if (biometricsEnabled) {
                             const mainWindow = getMainWindow();

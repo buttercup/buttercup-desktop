@@ -1,29 +1,54 @@
-import * as React from "react";
-import { useState } from "@hookstate/core";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useState as useHookState } from "@hookstate/core";
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
+import { Layerr } from "layerr";
 import { getPasswordEmitter } from "../services/password";
-import { SHOW_PROMPT } from "../state/password";
+import { getBiometricSourcePassword } from "../services/biometrics";
+import { PASSWORD_VIA_BIOMETRIC_SOURCE, SHOW_PROMPT } from "../state/password";
+import { showError } from "../services/notifications";
 import { t } from "../../shared/i18n/trans";
-
-const { useCallback, useMemo } = React;
+import { logErr } from "../library/log";
 
 export function PasswordPrompt() {
     const emitter = useMemo(getPasswordEmitter, []);
-    const showPromptState = useState(SHOW_PROMPT);
-    const currentPassword = useState("");
+    const showPromptState = useHookState(SHOW_PROMPT);
+    const biometricSourceState = useHookState(PASSWORD_VIA_BIOMETRIC_SOURCE);
+    const [promptedBiometrics, setPromptedBiometrics] = useState(false);
+    const [currentPassword, setCurrentPassword] = useState("");
     const close = useCallback(() => {
-        currentPassword.set(""); // clear
+        setCurrentPassword(""); // clear
+        showPromptState.set(false);
         emitter.emit("password", null);
+        setPromptedBiometrics(false);
     }, [emitter]);
     const submitAndClose = useCallback(password => {
-        currentPassword.set(""); // clear
+        setCurrentPassword(""); // clear
+        showPromptState.set(false);
         emitter.emit("password", password);
+        setPromptedBiometrics(false);
     }, [emitter]);
     const handleKeyPress = useCallback(event => {
         if (event.key === "Enter") {
-            submitAndClose(currentPassword.get());
+            submitAndClose(currentPassword);
         }
-    }, []);
+    }, [currentPassword]);
+    useEffect(() => {
+        const showPrompt = showPromptState.get();
+        const sourceID = biometricSourceState.get();
+        if (!showPrompt || !sourceID || promptedBiometrics) return;
+        setPromptedBiometrics(true);
+        getBiometricSourcePassword(sourceID)
+            .then(sourcePassword => {
+                if (!sourcePassword) return;
+                submitAndClose(sourcePassword);
+            })
+            .catch(err => {
+                logErr(`Failed getting biometrics password for source: ${sourceID}`, err);
+                const errInfo = Layerr.info(err);
+                const message = errInfo?.i18n && t(errInfo.i18n) || err.message;
+                showError(message);
+            });
+    }, [showPromptState.get(), biometricSourceState.get(), promptedBiometrics]);
     return (
         <Dialog isOpen={showPromptState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
@@ -37,8 +62,8 @@ export function PasswordPrompt() {
                         id="password"
                         placeholder={t("dialog.password-prompt.placeholder")}
                         type="password"
-                        value={currentPassword.get()}
-                        onChange={evt => currentPassword.set(evt.target.value)}
+                        value={currentPassword}
+                        onChange={evt => setCurrentPassword(evt.target.value)}
                         onKeyDown={handleKeyPress}
                         autoFocus
                     />
@@ -48,7 +73,7 @@ export function PasswordPrompt() {
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                     <Button
                         intent={Intent.PRIMARY}
-                        onClick={() => submitAndClose(currentPassword.get())}
+                        onClick={() => submitAndClose(currentPassword)}
                         title={t("dialog.password-prompt.button-unlock-title")}
                     >
                         {t("dialog.password-prompt.button-unlock")}

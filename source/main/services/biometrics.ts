@@ -2,14 +2,19 @@ import { systemPreferences } from "electron";
 import { VaultSourceID } from "buttercup";
 import { Layerr } from "layerr";
 import keytar from "keytar";
-import { testSourceMasterPassword } from "./buttercup";
+import { getSourceDescription, testSourceMasterPassword } from "./buttercup";
 import { APP_ID } from "../../shared/symbols";
 import { updateAppMenu } from "../actions/appMenu";
 import { logInfo, logWarn } from "../library/log";
 
 export async function disableSourceBiometricUnlock(sourceID: VaultSourceID): Promise<void> {
     logInfo(`Removing keychain source password (${sourceID}) for app: ${APP_ID}`);
-    await keytar.deletePassword(APP_ID, sourceID);
+    const deleted = await keytar.deletePassword(APP_ID, sourceID);
+    if (!deleted) {
+        logWarn(
+            `System reported that it did not successfully delete biometric registration for source: ${sourceID}`
+        );
+    }
     await updateAppMenu();
 }
 
@@ -30,6 +35,29 @@ export async function enableSourceBiometricUnlock(
     }
     await storePassword(sourceID, password);
     await updateAppMenu();
+}
+
+export async function getSourcePasswordViaBiometrics(sourceID: VaultSourceID): Promise<string> {
+    const { name } = getSourceDescription(sourceID);
+    try {
+        await systemPreferences.promptTouchID("Unlock vault: " + name);
+        return keytar.getPassword(APP_ID, sourceID);
+    } catch (err) {
+        if (/Canceled by user/i.test(err.message)) {
+            logInfo(`Touch unlock cancelled by user for source: ${sourceID}`);
+            return null;
+        }
+        logWarn("Touch ID failed", err);
+        throw new Layerr(
+            {
+                cause: err,
+                info: {
+                    i18n: "error.biometric-unlock-failed",
+                },
+            },
+            `Validating biometric details failed for unlocking source: ${sourceID}`
+        );
+    }
 }
 
 export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): Promise<boolean> {

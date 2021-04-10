@@ -16,6 +16,7 @@ export function BiometricRegistrationDialog() {
     const close = useCallback(() => {
         setPassword("");
         showPromptState.set(false);
+        setPrompting(false);
     }, []);
     const submitPassword = useCallback(() => {
         setPrompting(true);
