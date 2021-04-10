@@ -58,6 +58,12 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    return source ? describeSource(source) : null;
+}
+
 export function getSourceDescriptions(): Array<VaultSourceDescription> {
     const vaultManager = getVaultManager();
     return vaultManager.sources.map((source) => describeSource(source));
@@ -79,6 +85,12 @@ export async function getEmptyVault(password: string): Promise<string> {
     const vault = Vault.createWithDefaults();
     const tds = new TextDatasource(Credentials.fromPassword(password));
     return tds.save(vault.format.getHistory(), creds);
+}
+
+export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    return (source && source.status) || null;
 }
 
 function getVaultManager(): VaultManager {
@@ -139,6 +151,14 @@ export function sendSourcesToWindows() {
     for (const win of windows) {
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }
+}
+
+export async function testSourceMasterPassword(
+    sourceID: VaultSourceID,
+    password: string
+): Promise<boolean> {
+    const source = getVaultManager().getSourceForID(sourceID);
+    return source.testMasterPassword(password);
 }
 
 export async function toggleAutoUpdate(enable: boolean = true) {

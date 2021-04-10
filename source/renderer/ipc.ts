@@ -6,6 +6,7 @@ import { showPreferences } from "./state/preferences";
 import { showAbout } from "./state/about";
 import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
+import { showRegistrationPrompt } from "./state/biometrics";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
 import {
@@ -13,7 +14,7 @@ import {
     applyReadyUpdateState,
     applyUpdateProgress,
 } from "./services/update";
-import { showUpdateError } from "./services/notifications";
+import { showError, showSuccess, showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
 ipcRenderer.on("add-vault", (evt) => {
@@ -25,8 +26,20 @@ ipcRenderer.on("file-host-code", (evt, payload) => {
     setFileHostCode(code);
 });
 
+ipcRenderer.on("notify-error", (_, message: string) => {
+    showError(message);
+});
+
+ipcRenderer.on("notify-success", (_, message: string) => {
+    showSuccess(message);
+});
+
 ipcRenderer.on("open-about", (evt) => {
     showAbout(true);
+});
+
+ipcRenderer.on("open-biometric-registration", () => {
+    showRegistrationPrompt(true);
 });
 
 ipcRenderer.on("open-preferences", (evt) => {
@@ -41,6 +54,10 @@ ipcRenderer.on("open-search", (evt) => {
 
 ipcRenderer.on("open-source", (evt, sourceID) => {
     window.location.hash = `/source/${sourceID}`;
+});
+
+ipcRenderer.on("route", (_, newRoute) => {
+    window.location.hash = newRoute;
 });
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {

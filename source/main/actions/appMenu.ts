@@ -1,16 +1,40 @@
 import { Menu } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
-import { closeWindows, openMainWindow } from "../services/windows";
+import { closeWindows, getMainWindow, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
+import { getLastSourceID } from "../services/lastVault";
+import {
+    disableSourceBiometricUnlock,
+    sourceEnabledForBiometricUnlock,
+    supportsBiometricUnlock,
+} from "../services/biometrics";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
+import { getIconForProvider, getNativeImageMenuIcon } from "../library/icons";
 import { Preferences } from "../types";
+import { logErr } from "../library/log";
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
+    const lastSourceID = getLastSourceID();
+    const lastSource = sources.find((source) => source.id === lastSourceID) || null;
     const preferences = await getConfigValue<Preferences>("preferences");
+    const currentVaultPrefix = [];
+    const biometricsSupported = await supportsBiometricUnlock();
+    let biometricsEnabled = false;
+    if (lastSource) {
+        currentVaultPrefix.push(
+            {
+                label: lastSource.name,
+                enabled: false,
+                icon: await getNativeImageMenuIcon(getIconForProvider(lastSource.type)),
+            },
+            { type: "separator" }
+        );
+        biometricsEnabled = await sourceEnabledForBiometricUnlock(lastSource.id);
+    }
     return Menu.buildFromTemplate([
         {
             label: "Buttercup",
@@ -38,7 +62,7 @@ async function getContextMenu(): Promise<Menu> {
             ],
         },
         {
-            label: t("app-menu.vault"),
+            label: t("app-menu.vaults"),
             submenu: [
                 {
                     label: t("app-menu.add-new-vault"),
@@ -63,13 +87,56 @@ async function getContextMenu(): Promise<Menu> {
                     label: t("app-menu.lock-all"),
                     click: () => lockAllSources(),
                 },
-                { type: "separator" },
+            ],
+        },
+        {
+            label: t("app-menu.current"),
+            submenu: [
+                ...currentVaultPrefix,
                 {
                     label: t("app-menu.search"),
+                    enabled: !!lastSource,
                     accelerator: isOSX() ? "Cmd+F" : "Ctrl+F",
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-search");
+                    },
+                },
+                { type: "separator" },
+                {
+                    label: t("app-menu.biometrics"),
+                    enabled: !!lastSource && biometricsSupported,
+                    type: "checkbox",
+                    checked: biometricsEnabled,
+                    click: async () => {
+                        if (biometricsEnabled) {
+                            const mainWindow = getMainWindow();
+                            try {
+                                await disableSourceBiometricUnlock(lastSourceID);
+                                if (mainWindow) {
+                                    mainWindow.webContents.send(
+                                        "notify-success",
+                                        t("notification.biometrics-disabled")
+                                    );
+                                }
+                            } catch (err) {
+                                logErr(
+                                    `Failed disabling biometrics for source: ${lastSourceID}`,
+                                    err
+                                );
+                                if (mainWindow) {
+                                    mainWindow.webContents.send(
+                                        "notify-error",
+                                        t("notification.error.biometrics-disable-failed", {
+                                            error: err.message,
+                                        })
+                                    );
+                                }
+                            }
+                        } else {
+                            const window = await openMainWindow(`/source/${lastSourceID}`);
+                            window.webContents.send("open-biometric-registration");
+                        }
                     },
                 },
             ],
@@ -94,6 +161,10 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: t("app-menu.edit"),
             role: "editMenu",
+        },
+        {
+            label: t("app-menu.view"),
+            role: "viewMenu",
         },
         {
             label: t("app-menu.debug"),

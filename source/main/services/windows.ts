@@ -5,6 +5,7 @@ import debounce from "debounce";
 import { getConfigValue, setConfigValue } from "./config";
 import { getIconPath } from "../library/tray";
 import { lockAllSources } from "./buttercup";
+import { setLastSourceID } from "./lastVault";
 import { logErr, logInfo } from "../library/log";
 import { Preferences } from "../types";
 
@@ -66,6 +67,7 @@ async function handleWindowClosed() {
             logErr("Failed locking vaults on window close", err);
         }
     }
+    setLastSourceID(null);
 }
 
 async function handleWindowResize(win: BrowserWindow) {
@@ -90,8 +92,7 @@ export async function openMainWindow(targetRoute: string = null): Promise<Browse
         windows[0].focus();
     }
     if (targetRoute) {
-        const [currentURL] = windows[0].webContents.getURL().split("#");
-        windows[0].loadURL(`${currentURL}#${targetRoute}`);
+        windows[0].webContents.send("route", targetRoute);
     }
     return windows[0];
 }

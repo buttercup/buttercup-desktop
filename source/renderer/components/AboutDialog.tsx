@@ -55,7 +55,7 @@ export function AboutDialog() {
         return () => {
             mounted = false;
         };
-    });
+    }, []);
     return (
         <Dialog isOpen={showDialogState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("about.title")}</div>

@@ -7,36 +7,22 @@ import { logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 
 export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolean> {
-    const password = await getPrimaryPassword();
+    const password = await getPrimaryPassword(sourceID);
     if (!password) return false;
     setBusy(true);
     logInfo(`Unlocking source: ${sourceID}`);
-    const unlockPromise = new Promise<void>((resolve, reject) => {
-        ipcRenderer.once("unlock-source:reply", (evt, result) => {
-            setBusy(false);
-            const { ok, error } = JSON.parse(result) as {
-                ok: boolean;
-                error?: string;
-            };
-            if (!ok) {
-                showError(
-                    `${t("notification.error.vault-unlock-failed")}: ${
-                        error || t("notification.error.unknown-error")
-                    }`
-                );
-                return reject(new Error(`Failed unlocking vault: ${error}`));
-            }
-            resolve();
-        });
-    });
-    ipcRenderer.send(
-        "unlock-source",
-        JSON.stringify({
-            sourceID,
-            password,
-        })
-    );
-    await unlockPromise;
+    try {
+        await ipcRenderer.invoke("unlock-source", sourceID, password);
+    } catch (err) {
+        showError(
+            `${t("notification.error.vault-unlock-failed")}: ${
+                err?.message ?? t("notification.error.unknown-error")
+            }`
+        );
+        setBusy(false);
+        return false;
+    }
+    setBusy(false);
     logInfo(`Unlocked source: ${sourceID}`);
     return true;
 }

@@ -2,14 +2,22 @@ import path from "path";
 import { app } from "electron";
 import { UpdateInfo, autoUpdater } from "electron-updater";
 import isDev from "electron-is-dev";
+import debounce from "debounce-promise";
+import ms from "ms";
+import { clearDelayedInterval, setDelayedInterval } from "delayable-setinterval";
 import { getMainWindow } from "./windows";
 import { logErr, logInfo, logWarn } from "../library/log";
 import { fileExists } from "../library/file";
 import { UpdateProgressInfo } from "../types";
 
+const UPDATE_AUTO_CHECK = ms("30m");
+
+export const checkForUpdate = debounce(checkForUpdateInternal, 2500);
+
 let __eventListenersAttached = false,
     __currentUpdate: UpdateInfo = null,
     __readyUpdate: UpdateInfo = null,
+    __updateCheckTimer: string = null,
     __updateErrored: boolean = false,
     __updateMuted: boolean = false;
 
@@ -57,7 +65,7 @@ function attachEventListeners(updater = autoUpdater) {
     });
 }
 
-export async function checkForUpdate() {
+async function checkForUpdateInternal() {
     if (!__eventListenersAttached) {
         __eventListenersAttached = true;
         attachEventListeners();
@@ -79,7 +87,7 @@ export async function checkForUpdate() {
         }
     }
     logInfo("Checking for updates");
-    autoUpdater.checkForUpdates();
+    await autoUpdater.checkForUpdates();
 }
 
 export function getCurrentUpdate(): UpdateInfo {
@@ -104,7 +112,14 @@ export function muteUpdate() {
 }
 
 export async function startUpdate(): Promise<void> {
-    console.time("dl");
     await autoUpdater.downloadUpdate();
-    console.timeEnd("dl");
+}
+
+export async function startUpdateWatcher(): Promise<void> {
+    await checkForUpdate();
+    __updateCheckTimer = setDelayedInterval(checkForUpdate, UPDATE_AUTO_CHECK);
+}
+
+export function stopUpdateWatcher(): void {
+    clearDelayedInterval(__updateCheckTimer);
 }
