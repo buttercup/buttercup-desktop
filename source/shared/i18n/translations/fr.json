@@ -1,0 +1,243 @@
+{
+    "_": "Français (FR)",
+    "about": {
+        "description": "Un gestionnaire de mots de passe libre, open-source et multiplateforme.",
+        "dialog": {
+            "close-button": "Fermer",
+            "close-button-title": "Fermer la boîte de dialogue à propos"
+        },
+        "title": "À propos",
+        "version": {
+            "core": "Core",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Choisissez le fichier d’un coffre-fort existant ou créez un nouveau coffre-fort :",
+        "choose-type-prompt": "Choisissez un type de coffre-fort à ajouter :",
+        "confirm": {
+            "existing-password": "Saisissez le mot de passe du coffre-fort principal :",
+            "new-password": "Saisissez un nouveau mot de passe pour le coffre-fort principal :",
+            "password-placeholder": "Mot de passe du coffre-fort..."
+        },
+        "google-auth-button": "S’authentifier",
+        "google-auth-button-title": "S’authentifier avec Google Drive",
+        "google-auth-error": "L’authentification Google a échoué",
+        "loader": {
+            "dropbox-auth": "Une fenêtre séparée s’ouvrira pour l’authentification",
+            "file-prompt": "Une boîte de dialogue s’ouvrira pour choisir un fichier de coffre-fort.",
+            "google-auth": {
+                "instr-1": "Vous pouvez sélectionner le niveau de permission que Buttercup utilisera lors de l’accès à votre compte <strong>Google Drive</strong>.",
+                "instr-2": "En sélectionnant un paramètre de permission <strong>étendu</strong>, Buttercup aura accès à tous les fichiers et dossiers de votre compte et aux partages connectés.",
+                "instr-3": "La sélection d’un paramètre <i>non-</i>étendu permettra à Buttercup d'accéder aux fichiers qu’il a créés ou auxquels il a accédé précédemment.",
+                "perm-label": "Permissions",
+                "perm-switch": "Étendu"
+            },
+            "webdav-auth": {
+                "password-label": "Mot de passe",
+                "password-plc": "Mot de passe WebDAV",
+                "url-label": "Service WebDAV",
+                "username-label": "Nom d’utilisateur :",
+                "username-plc": "Nom d’utilisateur WebDAV"
+            }
+        },
+        "page-choose-next": "Suivant",
+        "page-choose-next-title": "Continuer en ajoutant le coffre-fort",
+        "page-confirm-cancel": "Annuler",
+        "page-confirm-cancel-title": "Annuler le déverrouillage",
+        "page-confirm-finish": "Ajouter le coffre-fort",
+        "page-confirm-finish-title": "Confirmer l’ajout du coffre-fort",
+        "title": "Ajout d’un coffre-fort",
+        "webdav-continue": "Suivant",
+        "webdav-continue-title": "Se connecter à l’aide de WebDAV"
+    },
+    "app-menu": {
+        "about": "À propos",
+        "add-new-vault": "Ajouter un nouveau",
+        "close-window": "Fermer la fenêtre",
+        "connection": "Connexion",
+        "debug": "Debug",
+        "devtool": "Devtool",
+        "edit": "Modifier",
+        "enable-secure-file-host": "Activer l’accès par navigateur",
+        "lock-all": "Tout verrouiller",
+        "open": "Ouvrir",
+        "open-vault": "Ouvrir le coffre-fort",
+        "preferences": "Préférences",
+        "quit": "Quitter",
+        "search": "Rechercher",
+        "unlock-vault": "Déverrouiller",
+        "unlocked-vaults": "{{count}} coffre-fort déverrouillé",
+        "unlocked-vaults_plural": "{{count}} coffres-forts déverrouillés",
+        "vault": "Coffre-fort"
+    },
+    "dialog": {
+        "confirm-generic": {
+            "cancel-button": "Annuler",
+            "confirm-button": "OK"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Annuler",
+                "cancel-title": "Annule la création d’un nouveau coffre-fort",
+                "confirm": "Définir",
+                "confirm-title": "Confirmer le nom de fichier du nouveau coffre-fort",
+                "description": "Saisissez un nom de fichier pour le nouveau coffre-fort :",
+                "title": "Ajout d’un coffre-fort"
+            },
+            "nav": {
+                "cancel-new": "Annuler la création",
+                "create-new": "Nouveau coffre-fort"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Coffres-forts Buttercup",
+                "confirm-button": "Ajouter",
+                "title": "Ajout d’un coffre-fort existant"
+            },
+            "add-new": {
+                "bcup-filter": "Coffres-forts Buttercup",
+                "confirm-button": "Créer",
+                "title": "Ajout d’un nouveau coffre-fort"
+            }
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Fermer",
+                "title": "Fermeture"
+            },
+            "button-existing": {
+                "text": "Charger existant",
+                "title": "Chargement d’un fichier de coffre-fort existant"
+            },
+            "button-new": {
+                "text": "Créer un nouveau",
+                "title": "Création d’un nouveau fichier de coffre-fort"
+            },
+            "prompt": "Souhaitez-vous créer un <i>nouveau</i> coffre-fort, ou en lire un existant ?",
+            "title": "Ajout d’un fichier de coffre-fort"
+        },
+        "password-prompt": {
+            "button-cancel": "Annuler",
+            "button-cancel-title": "Annuler le déverrouillage",
+            "button-unlock": "Déverrouiller",
+            "button-unlock-title": "Confirmer le déverrouillage du coffre-fort.",
+            "label": "Mot de passe du coffre-fort",
+            "placeholder": "Mot de passe du coffre..."
+        }
+    },
+    "error": {
+        "fatal-boundary": "Une erreur fatale s’est produite – nous sommes désolés que cela soit arrivé. Veuillez vérifier les détails ci-dessous au cas où ils aideraient à diagnostiquer le problème :"
+    },
+    "file-host": {
+        "code-copied": "Code du serveur de fichiers copié",
+        "dialog": {
+            "close-button": "Fermer",
+            "close-button-title": "Fermer la fenêtre de connexion",
+            "instruction": {
+                "new-connection": "Une nouvelle connexion a été établie avec cette application, demandant un accès à distance au serveur de fichiers.",
+                "use-code": "Utilisez le code suivant pour l’autoriser."
+            },
+            "title": "Sécurisation de la connexion au serveur de fichiers"
+        }
+    },
+    "input-required": "(requis)",
+    "notification": {
+        "error": {
+            "languages-load": "Échec du chargement des langues",
+            "preferences-load": "Échec du chargement des préférences",
+            "preferences-save": "Échec de la sauvegarde des préférences",
+            "unknown-error": "Erreur inconnue",
+            "vault-lock-failed": "Le verrouillage du coffre-fort a échoué",
+            "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
+            "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
+        },
+        "preferences-saved": "Préférences enregistrées",
+        "vault-saved": "Coffre-fort enregistré"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Annuler",
+            "cancel-title": "Annuler la mise à jour des préférences",
+            "save": "Enregistrer",
+            "save-title": "Enregistrer les modifications"
+        },
+        "item": {
+            "clear-clipboard": "Effacer automatiquement le presse-papiers",
+            "language": "Langue",
+            "lock-vaults-after-time": "Verrouiller les coffre-forts après un certain délai.",
+            "lock-vaults-after-time-desc": "Verrouiller automatiquement les coffres-forts après une certaine période d’inactivité.",
+            "lock-vaults-window-closed": "Verrouiller les coffres-forts si la fenêtre du coffre-fort est fermée",
+            "lock-vaults-window-closed-label": "Verrouillage à la fermeture",
+            "secure-file-host": {
+                "description": "Le serveur de fichiers sécurisé permet à l’<strong>extension de navigateur Buttercup</strong> de se connecter aux coffres-forts locaux de cet ordinateur via cette application.",
+                "label": "Activer le serveur de fichiers sécurisé",
+                "title": "Serveur de fichiers sécurisé"
+            },
+            "theme": "Thème"
+        },
+        "section": {
+            "connectivity": "Connexion",
+            "debug": "Débogage",
+            "general": "Général",
+            "privacy": "Vie privée",
+            "security": "Sécurité"
+        },
+        "title": "Préférences"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Aucun résultat...",
+            "result-render-error": "Échec de restitution du résultat de recherche."
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Fichier",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Foncé",
+        "light": "Clair"
+    },
+    "update": {
+        "available": "Mise à jour disponible : {{version}}",
+        "dialog": {
+            "close-button": "Fermer",
+            "close-button-title": "Close update information",
+            "title": "Mise à jour vers {{version}}",
+            "update-button": "Mise à jour",
+            "update-button-title": "Mise à jour de l’application maintenant"
+        },
+        "downloaded": "Mise à jour téléchargée",
+        "installed-restart": "Redémarrer",
+        "ready": "Prêt pour la mise à jour : {{version}}",
+        "view": "Voir"
+    },
+    "vault-chooser": {
+        "configure-vault": "Configurer le coffre-fort",
+        "configure-vault-hide": "Masquer la configuration",
+        "no-vaults": {
+            "cta-button": "Ajouter un coffre-fort",
+            "description": "Aucun coffre-fort n’a encore été ajouté...",
+            "title": "Premier démarrage"
+        },
+        "remove-vault-dialog": {
+            "cancel-button": "Annuler",
+            "cancel-button-title": "Annuler la suppression",
+            "description": "Êtes-vous certain(e) de vouloir supprimer le coffre-fort \"{{title}}\" ?",
+            "remove-button": "Supprimer",
+            "remove-button-title": "Confirmer la suppression du coffre-fort",
+            "title": "Supprimer le coffre-fort"
+        }
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "choose-vault": "Choisir un coffre-fort",
+            "lock-current-vault": "Verrouiller le coffre-fort actuel"
+        },
+        "vault-contents": "Contenu du coffre-fort"
+    }
+}
