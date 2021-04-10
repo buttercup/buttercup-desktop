@@ -74,6 +74,12 @@
         "vaults": "Vaults",
         "view": "View"
     },
+    "biometrics": {
+        "prompt": {
+            "store": "store login for vault '{{name}}'",
+            "unlock-vault": "unlock vault '{{name}}'"
+        }
+    },
     "dialog": {
         "biometric-reg": {
             "button-cancel": "Cancel",

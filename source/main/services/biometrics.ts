@@ -6,6 +6,7 @@ import { getSourceDescription, testSourceMasterPassword } from "./buttercup";
 import { APP_ID } from "../../shared/symbols";
 import { updateAppMenu } from "../actions/appMenu";
 import { logInfo, logWarn } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 
 export async function disableSourceBiometricUnlock(sourceID: VaultSourceID): Promise<void> {
     logInfo(`Removing keychain source password (${sourceID}) for app: ${APP_ID}`);
@@ -40,7 +41,7 @@ export async function enableSourceBiometricUnlock(
 export async function getSourcePasswordViaBiometrics(sourceID: VaultSourceID): Promise<string> {
     const { name } = getSourceDescription(sourceID);
     try {
-        await systemPreferences.promptTouchID("Unlock vault: " + name);
+        await systemPreferences.promptTouchID(t("biometrics.prompt.unlock-vault", { name }));
         return keytar.getPassword(APP_ID, sourceID);
     } catch (err) {
         if (/Canceled by user/i.test(err.message)) {
@@ -70,8 +71,9 @@ export async function supportsBiometricUnlock(): Promise<boolean> {
 }
 
 async function storePassword(sourceID: VaultSourceID, password: string): Promise<void> {
+    const { name } = getSourceDescription(sourceID);
     try {
-        await systemPreferences.promptTouchID("Store vault credentials");
+        await systemPreferences.promptTouchID(t("biometrics.prompt.store", { name }));
     } catch (err) {
         logWarn("Touch ID failed", err);
         throw new Layerr(
