@@ -28,6 +28,7 @@ import {
     startUpdate,
 } from "./services/update";
 import { getLastSourceID, setLastSourceID } from "./services/lastVault";
+import { enableSourceBiometricUnlock } from "./services/biometrics";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
@@ -215,6 +216,13 @@ ipcMain.handle("get-locale", getOSLocale);
 ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
+
+ipcMain.handle(
+    "register-biometric-unlock",
+    async (_, sourceID: VaultSourceID, password: string) => {
+        await enableSourceBiometricUnlock(sourceID, password);
+    }
+);
 
 ipcMain.handle(
     "search-single-vault",

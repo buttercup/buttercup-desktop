@@ -1,15 +1,19 @@
 import { Menu } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
-import { closeWindows, openMainWindow } from "../services/windows";
+import { closeWindows, getMainWindow, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
 import { getLastSourceID } from "../services/lastVault";
-import { sourceEnabledForBiometricUnlock } from "../services/biometrics";
+import {
+    disableSourceBiometricUnlock,
+    sourceEnabledForBiometricUnlock,
+} from "../services/biometrics";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
 import { getIconForProvider, getNativeImageMenuIcon } from "../library/icons";
 import { Preferences } from "../types";
+import { logErr } from "../library/log";
 
 async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
@@ -102,7 +106,36 @@ async function getContextMenu(): Promise<Menu> {
                         ? t("app-menu.biometric-disable")
                         : t("app-menu.biometric-enable"),
                     enabled: !!lastSource,
-                    click: async () => {},
+                    click: async () => {
+                        if (biometricsEnabled) {
+                            const mainWindow = getMainWindow();
+                            try {
+                                await disableSourceBiometricUnlock(lastSourceID);
+                                if (mainWindow) {
+                                    mainWindow.webContents.send(
+                                        "notify-success",
+                                        t("notification.biometrics-disabled")
+                                    );
+                                }
+                            } catch (err) {
+                                logErr(
+                                    `Failed disabling biometrics for source: ${lastSourceID}`,
+                                    err
+                                );
+                                if (mainWindow) {
+                                    mainWindow.webContents.send(
+                                        "notify-error",
+                                        t("notification.error.biometrics-disable-failed", {
+                                            error: err.message,
+                                        })
+                                    );
+                                }
+                            }
+                        } else {
+                            const window = await openMainWindow(`/source/${lastSourceID}`);
+                            window.webContents.send("open-biometric-registration");
+                        }
+                    },
                 },
             ],
         },

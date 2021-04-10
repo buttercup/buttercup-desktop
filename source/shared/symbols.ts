@@ -1,5 +1,6 @@
 import { Preferences, ThemeSource } from "./types";
 
+export const APP_ID = "pw.buttercup.desktop";
 export const DEFAULT_LANGUAGE = "en";
 export const DROPBOX_CLIENT_ID = "5fstmwjaisrt06t";
 export const GOOGLE_AUTH_REDIRECT = "https://buttercup.pw?googledesktopauth";

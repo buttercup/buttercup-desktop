@@ -83,6 +83,7 @@
             "button-reg-title": "Register biometrics",
             "label": "Vault Password",
             "placeholder": "Vault password...",
+            "success": "Successfully registered biometrics",
             "title": "Register Biometrics"
         },
         "confirm-generic": {
@@ -142,6 +143,8 @@
         }
     },
     "error": {
+        "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
+        "biometric-store-failed": "Failed storing biometric details",
         "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
     },
     "file-host": {
@@ -158,7 +161,9 @@
     },
     "input-required": "(required)",
     "notification": {
+        "biometrics-disabled": "Biometrics disabled for vault",
         "error": {
+            "biometrics-disable-failed": "Failed disabling biometrics for vault: {{error}}",
             "languages-load": "Failed loading languages",
             "preferences-load": "Failed loading preferences",
             "preferences-save": "Failed saving preferences",

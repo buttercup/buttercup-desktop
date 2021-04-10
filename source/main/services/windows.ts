@@ -92,8 +92,7 @@ export async function openMainWindow(targetRoute: string = null): Promise<Browse
         windows[0].focus();
     }
     if (targetRoute) {
-        const [currentURL] = windows[0].webContents.getURL().split("#");
-        windows[0].loadURL(`${currentURL}#${targetRoute}`);
+        windows[0].webContents.send("route", targetRoute);
     }
     return windows[0];
 }

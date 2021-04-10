@@ -147,6 +147,14 @@ export function sendSourcesToWindows() {
     }
 }
 
+export async function testSourceMasterPassword(
+    sourceID: VaultSourceID,
+    password: string
+): Promise<boolean> {
+    const source = getVaultManager().getSourceForID(sourceID);
+    return source.testMasterPassword(password);
+}
+
 export async function toggleAutoUpdate(enable: boolean = true) {
     const vaultManager = getVaultManager();
     await vaultManager.enqueueStateChange(() => {});
