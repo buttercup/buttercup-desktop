@@ -6,5 +6,5 @@ export default {
     en, // Keep as first item
     // All others sorted alphabetically:
     fr,
-    pl,
+    pl
 };

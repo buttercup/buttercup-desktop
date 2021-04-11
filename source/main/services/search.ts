@@ -2,7 +2,7 @@ import {
     SearchResult as CoreSearchResult,
     VaultEntrySearch,
     VaultSource,
-    VaultSourceID,
+    VaultSourceID
 } from "buttercup";
 import { logInfo } from "../library/log";
 
@@ -43,7 +43,7 @@ export async function updateSearchCaches(unlockedSources: Array<VaultSource>) {
         ...Object.keys(__searchCache).map(async (sourceID) => {
             logInfo(`Update search record for vault: ${sourceID}`);
             await __searchCache[sourceID].prepare();
-        }),
+        })
     ]);
     logInfo(`Updated search records for ${unlockedSources.length} vaults`);
 }

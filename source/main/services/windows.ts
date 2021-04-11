@@ -27,8 +27,8 @@ async function createVaultWindow() {
             contextIsolation: false,
             enableRemoteModule: true,
             nodeIntegration: true,
-            spellcheck: false,
-        },
+            spellcheck: false
+        }
     });
     win.on("closed", () => {
         win.removeAllListeners();

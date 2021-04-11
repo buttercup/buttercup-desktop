@@ -15,8 +15,8 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
             webPreferences: {
                 nodeIntegration: false,
                 webSecurity: false,
-                sandbox: true,
-            },
+                sandbox: true
+            }
         });
 
         authWin.loadURL(authURL);

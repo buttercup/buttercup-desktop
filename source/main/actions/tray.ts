@@ -17,31 +17,31 @@ async function getContextMenu(): Promise<Menu> {
     return Menu.buildFromTemplate([
         {
             label: t("app-menu.unlocked-vaults", { count: unlockedCount }),
-            enabled: false,
+            enabled: false
         },
         {
-            type: "separator",
+            type: "separator"
         },
         {
             label: t("app-menu.open"),
-            click: () => openMainWindow(),
+            click: () => openMainWindow()
         },
         {
-            type: "separator",
+            type: "separator"
         },
         {
             label: t("app-menu.add-new-vault"),
             click: async () => {
                 const window = await openMainWindow();
                 window.webContents.send("add-vault");
-            },
+            }
         },
         {
             label: t("app-menu.lock-all"),
             click: () => {
                 logInfo("Locking all sources");
                 lockAllSources();
-            },
+            }
         },
         {
             label: t("app-menu.open-vault"),
@@ -54,16 +54,16 @@ async function getContextMenu(): Promise<Menu> {
                     } else {
                         window.webContents.send("unlock-vault-open", source.id);
                     }
-                },
-            })),
+                }
+            }))
         },
         {
-            type: "separator",
+            type: "separator"
         },
         {
             label: t("app-menu.quit"),
-            role: "quit",
-        },
+            role: "quit"
+        }
     ]);
 }
 

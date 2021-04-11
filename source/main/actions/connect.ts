@@ -52,7 +52,7 @@ export async function showExistingFileVaultDialog(win: BrowserWindow): Promise<s
         title: t("dialog.file-vault.add-existing.title"),
         buttonLabel: t("dialog.file-vault.add-existing.confirm-button"),
         filters: [{ name: t("dialog.file-vault.add-existing.bcup-filter"), extensions: ["bcup"] }],
-        properties: ["openFile"],
+        properties: ["openFile"]
     });
     const [vaultPath] = result.filePaths;
     return vaultPath || null;
@@ -63,7 +63,7 @@ export async function showNewFileVaultDialog(win: BrowserWindow): Promise<string
         title: t("dialog.file-vault.add-new.title"),
         buttonLabel: t("dialog.file-vault.add-new.confirm-button"),
         filters: [{ name: t("dialog.file-vault.add-new.bcup-filter"), extensions: ["bcup"] }],
-        properties: ["createDirectory", "dontAddToRecent", "showOverwriteConfirmation"],
+        properties: ["createDirectory", "dontAddToRecent", "showOverwriteConfirmation"]
     });
     let vaultPath = result.filePath;
     if (!vaultPath) return null;

@@ -5,7 +5,7 @@ export async function removeVaultSource(sourceID: VaultSourceID) {
     ipcRenderer.send(
         "remove-source",
         JSON.stringify({
-            sourceID,
+            sourceID
         })
     );
 }

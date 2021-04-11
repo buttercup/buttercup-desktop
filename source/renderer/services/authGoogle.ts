@@ -6,11 +6,11 @@ import { GOOGLE_AUTH_REDIRECT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from "..
 const GOOGLE_DRIVE_BASE_SCOPES = ["email", "profile"];
 const GOOGLE_DRIVE_SCOPES_STANDARD = [
     ...GOOGLE_DRIVE_BASE_SCOPES,
-    "https://www.googleapis.com/auth/drive.file", // Per-file access
+    "https://www.googleapis.com/auth/drive.file" // Per-file access
 ];
 const GOOGLE_DRIVE_SCOPES_PERMISSIVE = [
     ...GOOGLE_DRIVE_BASE_SCOPES,
-    "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/drive"
 ];
 
 let __googleDriveOAuthClient: OAuth2Client = null;
@@ -24,7 +24,7 @@ export async function authenticateGoogleDrive(
     const url = oauth2Client.generateAuthUrl({
         access_type: "offline",
         scope: [...scopes],
-        prompt: "consent select_account",
+        prompt: "consent select_account"
     });
     logInfo(`Google Drive: Opening authentication URL: ${url}`);
     remote.shell.openExternal(url);
@@ -35,7 +35,7 @@ export async function authenticateGoogleDrive(
     logInfo("Google Drive: tokens received");
     return {
         accessToken,
-        refreshToken,
+        refreshToken
     };
 }
 
@@ -49,7 +49,7 @@ export async function authenticateGoogleDriveWithRefreshToken(
     logInfo("Refreshed Google Drive token");
     return {
         accessToken: newAccessToken,
-        refreshToken,
+        refreshToken
     };
 }
 

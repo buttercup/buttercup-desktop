@@ -9,7 +9,7 @@ describe("library/sources", function () {
                     type: "googledrive",
                     fileID: "x123",
                     token: "abc",
-                    refreshToken: "abc",
+                    refreshToken: "abc"
                 },
                 "test"
             );
@@ -23,7 +23,7 @@ describe("library/sources", function () {
                 id: this.source.id,
                 name: "Test Source",
                 state: VaultSourceStatus.Locked,
-                type: "googledrive",
+                type: "googledrive"
             });
         });
     });

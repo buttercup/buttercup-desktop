@@ -15,11 +15,11 @@ export async function initialise(lang: string) {
             (output, lang) => ({
                 ...output,
                 [lang]: {
-                    translation: translations[lang],
-                },
+                    translation: translations[lang]
+                }
             }),
             {}
-        ),
+        )
     });
 }
 

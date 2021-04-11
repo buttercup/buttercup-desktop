@@ -4,7 +4,7 @@ import { attachUpdatedListener, getThemeType, updateBodyTheme } from "../library
 import {
     changeLanguage,
     initialise as initialiseI18n,
-    onLanguageChanged,
+    onLanguageChanged
 } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { getOSLocale } from "./i18n";

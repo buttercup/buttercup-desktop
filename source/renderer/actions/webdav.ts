@@ -7,7 +7,7 @@ export async function testWebDAV(url: string, username?: string, password?: stri
     const client = authentication
         ? createClient(url, {
               username,
-              password,
+              password
           })
         : createClient(url);
     logInfo(`Testing WebDAV connection: ${url} (authenticated: ${authentication ? "yes" : "no"})`);

@@ -6,7 +6,7 @@ import {
     ProgressNotification,
     createProgressNotification,
     showUpdateAvailable,
-    showUpdateDownloaded,
+    showUpdateDownloaded
 } from "./notifications";
 import { logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";

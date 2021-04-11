@@ -20,7 +20,7 @@ export interface Language {
 export enum LogLevel {
     Error = "error",
     Info = "info",
-    Warning = "warning",
+    Warning = "warning"
 }
 
 export interface Preferences {
@@ -41,13 +41,13 @@ export enum SourceType {
     Dropbox = "dropbox",
     File = "file",
     GoogleDrive = "googledrive",
-    WebDAV = "webdav",
+    WebDAV = "webdav"
 }
 
 export enum ThemeSource {
     System = "system",
     Dark = "dark",
-    Light = "light",
+    Light = "light"
 }
 
 export interface UpdateProgressInfo {
