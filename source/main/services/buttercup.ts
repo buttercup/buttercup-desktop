@@ -10,7 +10,7 @@ import {
     VaultManager,
     consumeVaultFacade,
     createVaultFacade,
-    init,
+    init
 } from "buttercup";
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
@@ -98,7 +98,7 @@ function getVaultManager(): VaultManager {
         init();
         __vaultManager = new VaultManager({
             cacheStorage: getVaultCacheStorage(),
-            sourceStorage: getVaultStorage(),
+            sourceStorage: getVaultStorage()
         });
     }
     return __vaultManager;
@@ -118,6 +118,14 @@ export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
     await source.lock();
+}
+
+export async function mergeVaults(targetSourceID: VaultSourceID, incomingVault: Vault) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(targetSourceID);
+    const incomingFacade = createVaultFacade(incomingVault);
+    consumeVaultFacade(source.vault, incomingFacade, { mergeMode: true });
+    await source.save();
 }
 
 export function onSourcesUpdated(callback: () => void): () => void {

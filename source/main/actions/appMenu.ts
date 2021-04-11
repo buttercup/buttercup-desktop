@@ -7,8 +7,9 @@ import { getLastSourceID } from "../services/lastVault";
 import {
     disableSourceBiometricUnlock,
     sourceEnabledForBiometricUnlock,
-    supportsBiometricUnlock,
+    supportsBiometricUnlock
 } from "../services/biometrics";
+import { IMPORTERS, startImport } from "../services/import";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
@@ -23,13 +24,15 @@ async function getContextMenu(): Promise<Menu> {
     const preferences = await getConfigValue<Preferences>("preferences");
     const currentVaultPrefix = [];
     const biometricsSupported = await supportsBiometricUnlock();
-    let biometricsEnabled = false;
+    let biometricsEnabled = false,
+        lastSourceUnlocked = false;
     if (lastSource) {
+        lastSourceUnlocked = lastSource.state === VaultSourceStatus.Unlocked;
         currentVaultPrefix.push(
             {
                 label: lastSource.name,
                 enabled: false,
-                icon: await getNativeImageMenuIcon(getIconForProvider(lastSource.type)),
+                icon: await getNativeImageMenuIcon(getIconForProvider(lastSource.type))
             },
             { type: "separator" }
         );
@@ -44,22 +47,22 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-about");
-                    },
+                    }
                 },
                 {
                     label: t("app-menu.preferences"),
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-preferences");
-                    },
+                    }
                 },
                 { type: "separator" },
                 {
                     label: t("app-menu.close-window"),
-                    click: () => closeWindows(),
+                    click: () => closeWindows()
                 },
-                { label: t("app-menu.quit"), role: "quit" },
-            ],
+                { label: t("app-menu.quit"), role: "quit" }
+            ]
         },
         {
             label: t("app-menu.vaults"),
@@ -69,7 +72,7 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("add-vault");
-                    },
+                    }
                 },
                 { type: "separator" },
                 {
@@ -80,14 +83,14 @@ async function getContextMenu(): Promise<Menu> {
                         click: async () => {
                             const window = await openMainWindow(`/source/${source.id}`);
                             window.webContents.send("unlock-vault", source.id);
-                        },
-                    })),
+                        }
+                    }))
                 },
                 {
                     label: t("app-menu.lock-all"),
-                    click: () => lockAllSources(),
-                },
-            ],
+                    click: () => lockAllSources()
+                }
+            ]
         },
         {
             label: t("app-menu.current"),
@@ -100,7 +103,7 @@ async function getContextMenu(): Promise<Menu> {
                     click: async () => {
                         const window = await openMainWindow();
                         window.webContents.send("open-search");
-                    },
+                    }
                 },
                 { type: "separator" },
                 {
@@ -128,7 +131,7 @@ async function getContextMenu(): Promise<Menu> {
                                     mainWindow.webContents.send(
                                         "notify-error",
                                         t("notification.error.biometrics-disable-failed", {
-                                            error: err.message,
+                                            error: err.message
                                         })
                                     );
                                 }
@@ -137,9 +140,30 @@ async function getContextMenu(): Promise<Menu> {
                             const window = await openMainWindow(`/source/${lastSourceID}`);
                             window.webContents.send("open-biometric-registration");
                         }
-                    },
+                    }
                 },
-            ],
+                { type: "separator" },
+                {
+                    label: t("app-menu.import"),
+                    enabled: !!lastSource && lastSourceUnlocked,
+                    submenu: IMPORTERS.map(([importer, extension, importerConstructor]) => ({
+                        label: `${importer} (${extension.toUpperCase()})`,
+                        enabled: !!lastSource && lastSourceUnlocked,
+                        click: () => {
+                            startImport(
+                                lastSourceID,
+                                importer,
+                                extension,
+                                importerConstructor
+                            ).catch(async (err) => {
+                                logErr("Import failed", err);
+                                const window = await openMainWindow();
+                                window.webContents.send("notify-error", err.message);
+                            });
+                        }
+                    }))
+                }
+            ]
         },
         {
             label: t("app-menu.connection"),
@@ -154,22 +178,22 @@ async function getContextMenu(): Promise<Menu> {
                         await setConfigValue("preferences", prefs);
                         await updateAppMenu();
                         await handleConfigUpdate(prefs);
-                    },
-                },
-            ],
+                    }
+                }
+            ]
         },
         {
             label: t("app-menu.edit"),
-            role: "editMenu",
+            role: "editMenu"
         },
         {
             label: t("app-menu.view"),
-            role: "viewMenu",
+            role: "viewMenu"
         },
         {
             label: t("app-menu.debug"),
-            submenu: [{ label: t("app-menu.devtool"), role: "toggleDevTools" }],
-        },
+            submenu: [{ label: t("app-menu.devtool"), role: "toggleDevTools" }]
+        }
     ]);
 }
 
