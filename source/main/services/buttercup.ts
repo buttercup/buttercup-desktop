@@ -12,6 +12,7 @@ import {
     createVaultFacade,
     init
 } from "buttercup";
+import { exportVaultToCSV } from "@buttercup/exporter";
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
@@ -56,6 +57,13 @@ export async function attachVaultManagerWatchers() {
         });
         await updateSearchCaches(vaultManager.unlockedSources);
     });
+}
+
+export async function exportVault(sourceID: VaultSourceID): Promise<string> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const exported = await exportVaultToCSV(source.vault);
+    return exported;
 }
 
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {

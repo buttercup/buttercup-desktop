@@ -10,6 +10,7 @@ import {
     supportsBiometricUnlock
 } from "../services/biometrics";
 import { IMPORTERS, startImport } from "../services/import";
+import { exportVaultSource } from "../services/export";
 import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
@@ -162,6 +163,13 @@ async function getContextMenu(): Promise<Menu> {
                             });
                         }
                     }))
+                },
+                {
+                    label: t("app-menu.export"),
+                    enabled: !!lastSource && lastSourceUnlocked,
+                    click: async () => {
+                        await exportVaultSource(lastSourceID);
+                    }
                 }
             ]
         },
