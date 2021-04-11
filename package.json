@@ -146,6 +146,7 @@
     "@buttercup/file-interface": "^0.3.3",
     "@buttercup/google-oauth2-client": "^0.3.0",
     "@buttercup/googledrive-client": "^1.2.0",
+    "@buttercup/importer": "^3.0.1",
     "@buttercup/secure-file-host": "^0.3.0",
     "buttercup": "^5.13.0",
     "debounce": "^1.2.1",
