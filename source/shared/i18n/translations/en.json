@@ -122,6 +122,10 @@
                 "title": "Add New Vault"
             }
         },
+        "import-file-chooser": {
+            "submit-button": "Import",
+            "title": "Import from {{importer}} vault"
+        },
         "new-file-prompt": {
             "button-cancel": {
                 "text": "Close",
@@ -171,6 +175,7 @@
         "biometrics-disabled": "Biometrics disabled for vault",
         "error": {
             "biometrics-disable-failed": "Failed disabling biometrics for vault: {{error}}",
+            "import-failed": "Failed importing: {{error}}",
             "languages-load": "Failed loading languages",
             "preferences-load": "Failed loading preferences",
             "preferences-save": "Failed saving preferences",
@@ -179,6 +184,7 @@
             "vault-save-failed": "Vault failed to save",
             "vault-unlock-failed": "Vault unlock failed"
         },
+        "import-success": "Successfully imported vault: {{filename}}",
         "preferences-saved": "Saved preferences",
         "vault-saved": "Vault saved"
     },

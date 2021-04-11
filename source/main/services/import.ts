@@ -42,13 +42,10 @@ export async function startImport(
 ): Promise<void> {
     const mainWindow = getMainWindow();
     const result = await dialog.showOpenDialog(mainWindow, {
-        title: `Import from ${name} vault`,
-        buttonLabel: "Import",
-        // title: t("dialog.file-vault.add-existing.title"),
-        // buttonLabel: t("dialog.file-vault.add-existing.confirm-button"),
+        title: t("dialog.import-file-chooser.title", { importer: name }),
+        buttonLabel: t("dialog.import-file-chooser.submit-button"),
         filters: [
             {
-                // name: t("dialog.file-vault.add-existing.bcup-filter"),
                 name,
                 extensions: [extension]
             }
@@ -67,11 +64,14 @@ export async function startImport(
         // Notify
         mainWindow.webContents.send(
             "notify-success",
-            `Successfully imported vault: ${path.basename(vaultPath)}`
+            t("notification.import-success", { filename: path.basename(vaultPath) })
         );
     } catch (err) {
         logErr("Failed importing", err);
-        mainWindow.webContents.send("notify-error", `Failed importing: ${err.message}`);
+        mainWindow.webContents.send(
+            "notify-error",
+            t("notification.error.import-failed", { error: err.message })
+        );
     } finally {
         mainWindow.webContents.send("set-busy", false);
     }
