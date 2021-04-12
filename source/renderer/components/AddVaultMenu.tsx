@@ -305,11 +305,11 @@ export function AddVaultMenu() {
                     <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-3") }} />
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.google-auth.perm-label")}
+                        label={t("add-vault-menu.loader.google-auth.perm-label")}
                     >
                         <Switch
                             disabled={authenticatingGoogleDrive}
-                            label={t("add-vault-menu.google-auth.perm-switch")}
+                            label={t("add-vault-menu.loader.google-auth.perm-switch")}
                             checked={googleDriveOpenPerms}
                             onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
                         />
@@ -320,7 +320,7 @@ export function AddVaultMenu() {
                 <>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.url-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.url-label")}
                     >
                         <InputGroup
                             placeholder="https://..."
@@ -334,10 +334,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.username-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.username-label")}
                     >
                         <InputGroup
-                            placeholder={t("add-vault-menu.webdav-auth.username-plc")}
+                            placeholder={t("add-vault-menu.loader.webdav-auth.username-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 username: evt.target.value
@@ -347,10 +347,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.password-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.password-label")}
                     >
                         <InputGroup
-                            placeholder={t("add-vault-menu.webdav-auth.password-plc")}
+                            placeholder={t("add-vault-menu.loader.webdav-auth.password-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 password: evt.target.value
