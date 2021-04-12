@@ -67,7 +67,11 @@ export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): 
 }
 
 export async function supportsBiometricUnlock(): Promise<boolean> {
-    return systemPreferences.canPromptTouchID();
+    try {
+        return systemPreferences.canPromptTouchID();
+    } catch (err) {
+        return false;
+    }
 }
 
 async function storePassword(sourceID: VaultSourceID, password: string): Promise<void> {
