@@ -7,6 +7,7 @@ import { APP_ID } from "../../shared/symbols";
 import { updateAppMenu } from "../actions/appMenu";
 import { logInfo, logWarn } from "../library/log";
 import { t } from "../../shared/i18n/trans";
+import { isOSX } from "../../shared/library/platform";
 
 export async function disableSourceBiometricUnlock(sourceID: VaultSourceID): Promise<void> {
     logInfo(`Removing keychain source password (${sourceID}) for app: ${APP_ID}`);
@@ -67,11 +68,8 @@ export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): 
 }
 
 export async function supportsBiometricUnlock(): Promise<boolean> {
-    try {
-        return systemPreferences.canPromptTouchID();
-    } catch (err) {
-        return false;
-    }
+    if (!isOSX()) return false;
+    return systemPreferences.canPromptTouchID();
 }
 
 async function storePassword(sourceID: VaultSourceID, password: string): Promise<void> {
