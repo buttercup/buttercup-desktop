@@ -17,7 +17,7 @@
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "run-s build:main test:specs test:integration test:format",
+    "test": "run-s build test:specs test:integration test:format",
     "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'",
     "test:integration": "mocha --timeout 10000 -r test/index.js 'test/integration/**/*.spec.js'",
     "test:specs": "run-s test:specs:main",
