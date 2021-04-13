@@ -16,7 +16,7 @@
         "choose-file-prompt": "Wähle eine Tresor-Datei oder erstelle einen neuen Tresor:",
         "choose-type-prompt": "Wähle den Typ des Tresors:",
         "confirm": {
-            "existing-password": "Gib das Primärpasswort ein:",
+            "existing-password": "Setze ein Primärpasswort:",
             "new-password": "Setze ein neues Primärpasswort für den Tresor:",
             "password-placeholder": "Tresor Passwort..."
         },
@@ -27,7 +27,7 @@
             "dropbox-auth": "Es wird sich ein neues Fenster für die Authentifizierung öffnen",
             "file-prompt": "Es wird sich ein Dialogfenster für die Auswahl des Tresors öffnen",
             "google-auth": {
-                "instr-1": "You kannst die Berechtigung auswählen, die Buttercup nutzen wird, während es auf deinen <strong>Google Drive</strong> Account zugreift.",
+                "instr-1": "Du kannst die Berechtigung auswählen, die Buttercup nutzen wird, während es auf deinen <strong>Google Drive</strong> Konto zugreift.",
                 "instr-2": "Wenn Du eine <strong>offene</strong> Berechtigung auswählst, erlaubst Du Buttercup auf alle deine Dateien und Ordner deines Accounts und verbundenen Freigaben zuzugreifen.",
                 "instr-3": "Wenn Du eine <i>nicht-</i>offene Berechtigung auswählst, erlaubst Du Buttercup auf Dateien zuzugreifen, die zuvor erstellt oder auf die zuvor zugegriffen wurde.",
                 "perm-label": "Berechtigungen",
@@ -60,7 +60,7 @@
         "current": "Aktueller Tresor",
         "debug": "Debug",
         "devtool": "Devtool",
-        "edit": "bearbeiten",
+        "edit": "Bearbeiten",
         "enable-secure-file-host": "Erlaube Browser Zugriff",
         "export": "Exportieren",
         "import": "Importieren",
@@ -85,7 +85,7 @@
     "dialog": {
         "biometric-reg": {
             "button-cancel": "Abbrechen",
-            "button-cancel-title": "Breche Registrierung ab",
+            "button-cancel-title": "Registrierung abbrechen",
             "button-reg": "Registrieren",
             "button-reg-title": "Registriere biometrische Daten",
             "label": "Tresor Passwort",
@@ -107,11 +107,11 @@
                 "cancel-title": "Tresorerstellung abbrechen",
                 "confirm": "Setze Tresor Ziel",
                 "confirm-title": "Bestätige neuen Tresornamen",
-                "description": "Gib einen Dateinamen für den neuen Tresor an:",
+                "description": "Setze einen Dateinamen für den neuen Tresor:",
                 "title": "Füge Tresor hinzu"
             },
             "nav": {
-                "cancel-new": "Breche Neu ab",
+                "cancel-new": "Erstellung abbrechen",
                 "create-new": "Neuer Tresor"
             }
         },
@@ -149,7 +149,7 @@
         },
         "password-prompt": {
             "button-cancel": "Abbrechen",
-            "button-cancel-title": "Breche entsperren ab",
+            "button-cancel-title": "Entsperren abbrechen",
             "button-unlock": "Entsperren",
             "button-unlock-title": "Bestätige das Entsperren des Tresors",
             "label": "Tresor Passwort",
@@ -158,13 +158,13 @@
         }
     },
     "error": {
-        "biometric-invalid-password": "Ein ungültiges Passwort wurde für das Aktivieren von Biometrie auf einem Tresor angegeben",
-        "biometric-store-failed": "Das Speichern der biometrischen Details ist fehlgeschlagen",
+        "biometric-invalid-password": "Es wurde ein ungültiges Passwort für die Aktivierung von Biometrie auf einem Tresor angegeben",
+        "biometric-store-failed": "Das Speichern der biometrischen Daten ist fehlgeschlagen",
         "biometric-unlock-failed": "Das Entsperren des Tresors via Biometrie ist fehlgeschlagen",
-        "fatal-boundary": "Ein kritischer Fehler ist aufgetreten - wir entschuldigen uns was geschehen ist. Bitte sichte die Details darunter, da sie für die Fehlerdiagnose hilfreich sein könnten:"
+        "fatal-boundary": "Leider ist ein kritischer Fehler aufgetreten - wir entschuldigen für die Unannehmlichkeiten. Bitte sichte die Details darunter, da sie für die Fehlerdiagnose hilfreich sein könnten:"
     },
     "file-host": {
-        "code-copied": "Datei Host Code wurde kopiert",
+        "code-copied": "File Host Code wurde kopiert",
         "dialog": {
             "close-button": "Schließen",
             "close-button-title": "Schließe Verbindungs-Dialog",
@@ -172,7 +172,7 @@
                 "new-connection": "Eine neue Verbindung wurde zu dieser Applikation hergestellt und Fernzugriff zu dem Dateisystem angefragt.",
                 "use-code": "Nutze für die Authentifizierung folgenden Code."
             },
-            "title": "Sichere Datei Host Verbindung"
+            "title": "Secure File Host Verbindung"
         }
     },
     "input-required": "(erforderlich)",
@@ -206,12 +206,12 @@
             "language": "Sprache",
             "lock-vaults-after-time": "Sperre Tresore nach bestimmter Zeit",
             "lock-vaults-after-time-desc": "Sperre Tresore nach einer bestimmten Zeit mit Inaktivität automatisch.",
-            "lock-vaults-window-closed": "Sperre Tresore sobald das Tresor Fenster geschlossen wurde",
-            "lock-vaults-window-closed-label": "Sperre nach dem Schlie0en",
+            "lock-vaults-window-closed": "Sperre Tresore sobald das Fenster geschlossen wurde",
+            "lock-vaults-window-closed-label": "Sperre nach dem Schließen",
             "secure-file-host": {
-                "description": "Der sichere Datei Host erlaubt der <strong>Buttercup Browser Erweiterung</strong> sich zu den lokalen Tresoren auf diesem PC mit dieser Applikation zu verbinden.",
-                "label": "Aktiviere den sicheren Datei Host",
-                "title": "Sicherer Datei Host"
+                "description": "Der Secure File Host erlaubt der <strong>Buttercup Browser Erweiterung</strong> sich zu den lokalen Tresoren auf diesem PC mit dieser Applikation zu verbinden.",
+                "label": "Aktiviere den Secure File Host",
+                "title": "Secure File Host"
             },
             "theme": "Design"
         },
