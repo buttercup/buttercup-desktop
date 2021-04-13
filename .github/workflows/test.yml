@@ -3,11 +3,12 @@ name: Node.js tests
 on: push
 
 jobs:
-  building:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [14.x]
+        os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v2
       - name: Build w/ Node ${{ matrix.node-version }}
@@ -16,21 +17,4 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run build
-#   web-specs:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [14.x]
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Node.js web specs ${{ matrix.node-version }}
-#         uses: actions/setup-node@v1
-#         with:
-#           node-version: ${{ matrix.node-version }}
-#         env:
-#           MOZ_HEADLESS: 1
-#           CI: travis
-#       - run: sudo apt install google-chrome-stable firefox
-#       - run: google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
-#       - run: npm ci
-#       - run: npm run test:web
+
