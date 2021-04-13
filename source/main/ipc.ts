@@ -257,7 +257,7 @@ ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: s
         setLastSourceID(sourceID);
     } catch (err) {
         logErr("Failed unlocking vault source", err);
-        throw Layerr(err, "Failed unlocking vault source");
+        throw new Layerr(err, "Failed unlocking vault source");
     }
 });
 

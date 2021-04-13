@@ -11,6 +11,7 @@ import { startFileHost } from "./fileHost";
 import { isPortable } from "../library/portability";
 import { getLogPath } from "./log";
 import { startUpdateWatcher } from "./update";
+import { registerGoogleDriveAuthHandlers } from "./googleDrive";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -45,6 +46,7 @@ export async function initialise() {
     if (preferences.fileHostEnabled) {
         await startFileHost();
     }
+    registerGoogleDriveAuthHandlers();
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
     setTimeout(() => startUpdateWatcher(), 0);
     logInfo("Initialisation completed");
