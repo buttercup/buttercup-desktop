@@ -4,6 +4,7 @@ export interface AddVaultPayload {
     createNew: boolean;
     datasourceConfig: DatasourceConfig;
     masterPassword: string;
+    fileNameOverride?: string;
 }
 
 export interface AppEnvironmentFlags {

@@ -118,6 +118,7 @@ export function AddVaultMenu() {
     const [webdavCredentials, setWebDAVCredentials] = useState<WebDAVCredentialsState>({ ...EMPTY_WEBDAV_CREDENTIALS });
     const [authenticatingGoogleDrive, setAuthenticatingGoogleDrive] = useState(false);
     const [googleDriveOpenPerms, setGoogleDriveOpenPerms] = useState(false);
+    const [vaultFilenameOverride, setVaultFilenameOverride] = useState(null);
     useEffect(() => {
         const newValue = showAddVault.get();
         if (previousShowAddVault !== newValue) {
@@ -136,6 +137,7 @@ export function AddVaultMenu() {
         setVaultPassword("");
         setGoogleDriveOpenPerms(false);
         setAuthenticatingGoogleDrive(false);
+        setVaultFilenameOverride(null);
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
@@ -233,9 +235,10 @@ export function AddVaultMenu() {
             setCurrentPage(PAGE_CHOOSE);
         }
     }, [selectedType, datasourcePayload, webdavCredentials, googleDriveOpenPerms]);
-    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean) => {
+    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean, fileName: string | null) => {
         if (selectedType === SourceType.GoogleDrive) {
             setSelectedRemotePath(JSON.stringify([parentIdentifier, identifier]));
+            setVaultFilenameOverride(fileName);
         } else {
             setSelectedRemotePath(identifier);
         }
@@ -269,7 +272,7 @@ export function AddVaultMenu() {
                 ? await createEmptyGoogleDriveVault(datasource.token, parentIdentifier, identifier, vaultPassword)
                 : identifier;
         }
-        addNewVaultTarget(datasource, vaultPassword, createNew);
+        addNewVaultTarget(datasource, vaultPassword, createNew, vaultFilenameOverride);
         close(); // This also clears sensitive state items
     }, [datasourcePayload, vaultPassword, selectedType, selectedRemotePath, createNew]);
     // Pages
@@ -300,9 +303,9 @@ export function AddVaultMenu() {
             )}
             {selectedType === SourceType.GoogleDrive && (
                 <>
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-1") }} />
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-2") }} />
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-3") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-1") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-2") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-3") }} />
                     <WideFormGroup
                         inline
                         label={t("add-vault-menu.loader.google-auth.perm-label")}

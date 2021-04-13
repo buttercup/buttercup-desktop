@@ -14,7 +14,7 @@ export async function addVaultFromPayload(payload: AddVaultPayload): Promise<Vau
                 payload.datasourceConfig,
                 payload.masterPassword
             );
-            name = payload.datasourceConfig.fileID; // @todo fix
+            name = payload.fileNameOverride || payload.datasourceConfig.fileID;
             break;
         case SourceType.Dropbox:
         /* falls-through */
