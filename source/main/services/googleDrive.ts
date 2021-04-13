@@ -1,8 +1,11 @@
-import { ipcRenderer, remote } from "electron";
+import { shell } from "electron";
+import { DatasourceAuthManager, GoogleDriveDatasource } from "buttercup";
 import { OAuth2Client } from "@buttercup/google-oauth2-client";
-import { logInfo } from "../library/log";
+import { getProtocolEmitter } from "./protocol";
+import { logInfo, logWarn } from "../library/log";
 import {
     GOOGLE_AUTH_REDIRECT,
+    GOOGLE_AUTH_TIMEOUT,
     GOOGLE_DRIVE_SCOPES_PERMISSIVE,
     GOOGLE_DRIVE_SCOPES_STANDARD,
     GOOGLE_CLIENT_ID,
@@ -11,7 +14,7 @@ import {
 
 let __googleDriveOAuthClient: OAuth2Client = null;
 
-export async function authenticateGoogleDrive(
+async function authenticateGoogleDrive(
     openPermissions: boolean = false
 ): Promise<{ accessToken: string; refreshToken: string }> {
     logInfo(`Authenticating Google Drive (permissive: ${openPermissions ? "yes" : "no"})`);
@@ -23,7 +26,7 @@ export async function authenticateGoogleDrive(
         prompt: "consent select_account"
     });
     logInfo(`Google Drive: Opening authentication URL: ${url}`);
-    remote.shell.openExternal(url);
+    shell.openExternal(url);
     const authCode = await listenForGoogleAuthCode();
     logInfo("Google Drive:  Received auth code - exchanging for tokens");
     const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
@@ -35,7 +38,7 @@ export async function authenticateGoogleDrive(
     };
 }
 
-export async function authenticateGoogleDriveWithRefreshToken(
+async function authenticateGoogleDriveWithRefreshToken(
     refreshToken: string
 ): Promise<{ accessToken: string; refreshToken: string }> {
     logInfo("Refreshing Google Drive token");
@@ -61,19 +64,49 @@ function getGoogleDriveOAuthClient(): OAuth2Client {
 }
 
 async function listenForGoogleAuthCode(): Promise<string> {
-    const channel = "protocol:auth/google";
     return new Promise<string>((resolve, reject) => {
-        const callback = (e, args) => {
+        const emitter = getProtocolEmitter();
+        const onAuth = (args: Array<string>) => {
             const path = args.join("/");
             const match = path.match(/\?googledesktopauth&code=([^&#?]+)/);
             if (match !== null && match.length > 0) {
-                ipcRenderer.removeAllListeners(channel);
                 resolve(match[1]);
             } else {
                 reject(new Error("Authentication failed"));
             }
+            clearTimeout(timeout);
         };
-        ipcRenderer.removeAllListeners(channel);
-        ipcRenderer.on(channel, callback);
+        const timeout = setTimeout(() => {
+            reject(new Error("Timed-out waiting for Google authentication"));
+            emitter.off("authGoogle", onAuth);
+        }, GOOGLE_AUTH_TIMEOUT);
+        emitter.once("authGoogle", onAuth);
     });
+}
+
+export function registerGoogleDriveAuthHandlers() {
+    DatasourceAuthManager.getSharedManager().registerHandler(
+        "googledrive",
+        async (datasource: GoogleDriveDatasource) => {
+            logInfo("Google Drive datasource needs re-authentication");
+            const { refreshToken: currentRefreshToken } = datasource;
+            if (!currentRefreshToken) {
+                logInfo(
+                    "Datasource does not contain a refresh token: Performing full authorisation"
+                );
+                const { accessToken, refreshToken } = await authenticateGoogleDrive();
+                datasource.updateTokens(accessToken, refreshToken);
+                if (!refreshToken) {
+                    logWarn("Updating Google Drive datasource access token without refresh token");
+                }
+            } else {
+                logInfo("Datasource contains refresh token: Refreshing authorisation");
+                const { accessToken } = await authenticateGoogleDriveWithRefreshToken(
+                    currentRefreshToken
+                );
+                datasource.updateTokens(accessToken, currentRefreshToken);
+            }
+            logInfo("Google Drive datasource tokens updated");
+        }
+    );
 }

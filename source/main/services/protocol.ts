@@ -1,6 +1,16 @@
 import { BrowserWindow } from "electron";
+import EventEmitter from "eventemitter3";
 import { logErr, logInfo, logWarn } from "../library/log";
 import { BUTTERCUP_PROTOCOL } from "../symbols";
+
+let __protocolEmitter: EventEmitter = null;
+
+export function getProtocolEmitter(): EventEmitter {
+    if (!__protocolEmitter) {
+        __protocolEmitter = new EventEmitter();
+    }
+    return __protocolEmitter;
+}
 
 function handleAuthCall(args) {
     if (!Array.isArray(args) || args.length === 0) {
@@ -10,6 +20,7 @@ function handleAuthCall(args) {
     const [action, ...actionArgs] = args;
     switch (action) {
         case "google":
+            getProtocolEmitter().emit("authGoogle", actionArgs);
             BrowserWindow.getAllWindows().forEach((win) => {
                 win.webContents.send("protocol:auth/google", actionArgs);
             });
