@@ -17,8 +17,9 @@
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "run-s build:main test:specs test:format",
+    "test": "run-s build test:specs test:integration test:format",
     "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'",
+    "test:integration": "mocha --timeout 10000 -r test/index.js 'test/integration/**/*.spec.js'",
     "test:specs": "run-s test:specs:main",
     "test:specs:main": "mocha -r test/main/index.js 'test/main/**/*.spec.js'"
   },
@@ -205,6 +206,7 @@
     "rimraf": "^3.0.2",
     "sass-loader": "^11.0.1",
     "sinon": "^10.0.0",
+    "spectron": "^14.0.0",
     "style-loader": "^2.0.0",
     "styled-components": "^5.2.3",
     "ts-loader": "^8.1.0",
