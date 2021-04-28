@@ -74,7 +74,9 @@
         "unlocked-vaults": "{{count}} unlocked vault",
         "unlocked-vaults_plural": "{{count}} unlocked vaults",
         "vaults": "Vaults",
-        "view": "View"
+        "view": "View",
+        "window": "Window",
+        "window-reposition": "Reposition"
     },
     "biometrics": {
         "prompt": {

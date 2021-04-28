@@ -1,5 +1,5 @@
 import path from "path";
-import { BrowserWindow } from "electron";
+import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
 import { getConfigValue, setConfigValue } from "./config";
@@ -19,7 +19,9 @@ export async function closeWindows(): Promise<void> {
 async function createVaultWindow() {
     const width = await getConfigValue<number>("windowWidth");
     const height = await getConfigValue<number>("windowHeight");
-    const win = new BrowserWindow({
+    const x = await getConfigValue<number>("windowX");
+    const y = await getConfigValue<number>("windowY");
+    const config: BrowserWindowConstructorOptions = {
         width,
         height,
         icon: getIconPath(),
@@ -29,14 +31,23 @@ async function createVaultWindow() {
             nodeIntegration: true,
             spellcheck: false
         }
-    });
+    };
+    if (typeof x === "number" && typeof y === "number" && !isNaN(x) && !isNaN(y)) {
+        config.x = x;
+        config.y = y;
+    }
+    const win = new BrowserWindow(config);
     win.on("closed", () => {
         win.removeAllListeners();
         handleWindowClosed();
     });
     win.on(
         "resize",
-        debounce(() => handleWindowResize(win), 750, false)
+        debounce(() => handleWindowBoundsUpdate(win), 750, false)
+    );
+    win.on(
+        "move",
+        debounce(() => handleWindowBoundsUpdate(win), 750, false)
     );
     const loadedPromise = new Promise<void>((resolve, reject) => {
         const timeout = setTimeout(
@@ -57,6 +68,14 @@ export function getMainWindow(): BrowserWindow {
     return win;
 }
 
+async function handleWindowBoundsUpdate(win: BrowserWindow) {
+    const { x, y, width, height } = win.getBounds();
+    await setConfigValue("windowWidth", width);
+    await setConfigValue("windowHeight", height);
+    await setConfigValue("windowX", x);
+    await setConfigValue("windowY", y);
+}
+
 async function handleWindowClosed() {
     const preferences: Preferences = await getConfigValue("preferences");
     if (preferences.lockVaultsOnWindowClose) {
@@ -70,16 +89,19 @@ async function handleWindowClosed() {
     setLastSourceID(null);
 }
 
-async function handleWindowResize(win: BrowserWindow) {
-    const [newWidth, newHeight] = win.getSize();
-    await setConfigValue("windowWidth", newWidth);
-    await setConfigValue("windowHeight", newHeight);
-}
-
 export function notifyWindowsOfSourceUpdate(sourceID: VaultSourceID) {
     BrowserWindow.getAllWindows().forEach((win) => {
         win.webContents.send("source-updated", sourceID);
     });
+}
+
+export async function openAndRepositionMainWindow(): Promise<BrowserWindow> {
+    const win = await openMainWindow();
+    win.setBounds({
+        x: 50,
+        y: 50
+    });
+    return win;
 }
 
 export async function openMainWindow(targetRoute: string = null): Promise<BrowserWindow> {
