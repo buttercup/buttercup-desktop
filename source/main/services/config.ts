@@ -7,7 +7,9 @@ const DEFAULT_CONFIG = {
     preferences: naiveClone(PREFERENCES_DEFAULT),
     selectedSource: null,
     windowHeight: 600,
-    windowWidth: 800
+    windowWidth: 800,
+    windowX: null,
+    windowY: null
 };
 
 export async function getConfigValue<T>(key: string): Promise<T> {
