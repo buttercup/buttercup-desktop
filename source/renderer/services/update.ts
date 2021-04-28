@@ -23,10 +23,12 @@ export async function applyCurrentUpdateState(infoOverride?: UpdateInfo): Promis
             () => {
                 logInfo(`Opening update info: ${updateInfo.version}`);
                 setShowUpdateDialog(true);
+                muteCurrentUpdate();
             },
             () => {
                 logInfo("Update notification closed");
                 setCurrentUpdate(null);
+                muteCurrentUpdate();
             }
         );
     }
