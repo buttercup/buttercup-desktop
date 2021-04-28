@@ -1,7 +1,7 @@
 import { Menu, Tray } from "electron";
 import { VaultSourceStatus } from "buttercup";
 import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
-import { openMainWindow } from "../services/windows";
+import { openAndRepositionMainWindow, openMainWindow } from "../services/windows";
 import { getIconPath } from "../library/tray";
 import { logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";
@@ -25,6 +25,15 @@ async function getContextMenu(): Promise<Menu> {
         {
             label: t("app-menu.open"),
             click: () => openMainWindow()
+        },
+        {
+            label: t("app-menu.window"),
+            submenu: [
+                {
+                    label: t("app-menu.window-reposition"),
+                    click: () => openAndRepositionMainWindow()
+                }
+            ]
         },
         {
             type: "separator"

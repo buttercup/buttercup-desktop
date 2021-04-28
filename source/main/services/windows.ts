@@ -95,6 +95,15 @@ export function notifyWindowsOfSourceUpdate(sourceID: VaultSourceID) {
     });
 }
 
+export async function openAndRepositionMainWindow(): Promise<BrowserWindow> {
+    const win = await openMainWindow();
+    win.setBounds({
+        x: 50,
+        y: 50
+    });
+    return win;
+}
+
 export async function openMainWindow(targetRoute: string = null): Promise<BrowserWindow> {
     let windows = BrowserWindow.getAllWindows();
     if (windows.length === 0) {
