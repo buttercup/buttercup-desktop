@@ -12,11 +12,13 @@ import { isPortable } from "../library/portability";
 import { getLogPath } from "./log";
 import { startUpdateWatcher } from "./update";
 import { registerGoogleDriveAuthHandlers } from "./googleDrive";
+import { processCLFlags } from "./arguments";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
 
 export async function initialise() {
+    processCLFlags();
     await initialiseLogging();
     logInfo("Application session started:", new Date());
     logInfo(`Logs location: ${getLogPath()}`);
