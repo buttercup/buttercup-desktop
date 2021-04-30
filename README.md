@@ -55,6 +55,14 @@ Although not explicitly portable, both the Mac **zip** and Linux **AppImage** fo
 
 Configuration files are stored in OS-specific locations.
 
+### Command-Line arguments
+
+The following arguments can be provided to Buttercup, but are all optional.
+
+| Argument              | Description                           |
+|-----------------------|---------------------------------------|
+| `--no-window`         | Disables the automatic opening of the main window upon launch. Useful for when Buttercup is automatically started at boot time. |
+
 ### App config
 
 Application configuration.
