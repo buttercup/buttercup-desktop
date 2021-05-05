@@ -46,8 +46,8 @@
         "page-confirm-cancel": "Cancelar",
         "page-confirm-cancel-title": "Cancelar desbloqueo",
         "page-confirm-finish": "Añadir cofre",
-        "page-confirm-finish-title": "Confirmar adición de cofre",
-        "title": "Añadir cofre Vault",
+        "page-confirm-finish-title": "Confirmar adición del cofre",
+        "title": "Añadir cofre",
         "webdav-continue": "Siguiente",
         "webdav-continue-title": "Conectar usando WebDAV"
     },
@@ -55,7 +55,7 @@
         "about": "Acerca de",
         "add-new-vault": "Añadir nuevo",
         "biometrics": "Usar desbloqueo biométrico",
-        "close-window": "Cerrar ventanda",
+        "close-window": "Cerrar ventana",
         "connection": "Conexión",
         "current": "Cofre actual",
         "debug": "Depurador",
@@ -67,13 +67,13 @@
         "lock-all": "Bloquear todos",
         "open": "Abrir",
         "open-vault": "Abrir cofre",
-        "preferences": "Prefencias",
+        "preferences": "Preferencias",
         "quit": "Salir",
         "search": "Buscar",
         "unlock-vault": "Desbloquear",
         "unlocked-vaults": "{{count}} cofre desbloqueado",
-        "unlocked-vaults_plural": "{{count}} archivos de contraseñas desbloqueados",
-        "vaults": "Archivos de contraseñas",
+        "unlocked-vaults_plural": "{{count}} cofres desbloqueados",
+        "vaults": "Cofres",
         "view": "Ver",
         "window": "Ventana",
         "window-reposition": "Reposicionar"
@@ -93,7 +93,7 @@
             "label": "Contraseña principal del cofre",
             "placeholder": "Contraseña del cofre...",
             "success": "Biometría registrada correctamente",
-            "title": "Registra biometría"
+            "title": "Registrar biometría"
         },
         "confirm-generic": {
             "cancel-button": "Cancelar",
@@ -126,7 +126,7 @@
             "add-new": {
                 "bcup-filter": "Cofres Buttercup",
                 "confirm-button": "Crear",
-                "title": "Añadir nuevo cofre"
+                "title": "Añadir cofre nuevo"
             }
         },
         "import-file-chooser": {
@@ -161,9 +161,9 @@
     },
     "error": {
         "biometric-invalid-password": "La contraseña introducida no es válida",
-        "biometric-store-failed": "No se pudieron almacenar los detalles biométricos",
+        "biometric-store-failed": "No se pudieron almacenar los datos biométricos",
         "biometric-unlock-failed": "Error al desbloquear el cofre usando datos biométricos",
-        "fatal-boundary": "Se ha producido un error grave. Lamentamos que haya ocurrido. Consulta los detalles saber que ha pasado:"
+        "fatal-boundary": "Se ha producido un error grave. Lamentamos que haya ocurrido. Consulta los detalles para saber que ha pasado:"
     },
     "file-host": {
         "code-copied": "Código del servidor de archivos copiado",
@@ -179,7 +179,7 @@
     },
     "input-required": "(requerido)",
     "notification": {
-        "biometrics-disabled": "Biometría deshabilidada para cofres",
+        "biometrics-disabled": "Biometría deshabilitada para cofres",
         "error": {
             "biometrics-disable-failed": "No se puede deshabilitar la biometría para el cofre: {{error}}",
             "import-failed": "Fallo importando: {{error}}",
@@ -207,8 +207,8 @@
             "clear-clipboard": "Limpiar portapapeles automáticamente",
             "language": "Idioma",
             "lock-vaults-after-time": "Bloquear cofres después de un tiempo",
-            "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
-            "lock-vaults-window-closed": "Bloquear cofres automáticamente después de un período de inactividad.",
+            "lock-vaults-after-time-desc": "Bloquear cofres automáticamente después de un período de inactividad.",
+            "lock-vaults-window-closed": "Bloquear cofres si la ventana está cerrada",
             "lock-vaults-window-closed-label": "Bloquear al cerrar",
             "secure-file-host": {
                 "description": "El servidor de archivos permite que la <strong>extensión del navegador Buttercup</strong> se conecte a los cofres locales del ordenador a través de esta aplicación.",
@@ -248,7 +248,7 @@
             "close-button": "Cerrar",
             "close-button-title": "Cerrar información de la actualización",
             "title": "Actualizar a {{version}}",
-            "update-button": "Actualitzar",
+            "update-button": "Actualizar",
             "update-button-title": "Actualizar la aplicación ahora"
         },
         "downloaded": "Actualización descargada",

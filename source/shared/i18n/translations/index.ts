@@ -7,8 +7,8 @@ import pl from "./pl.json";
 export default {
     en, // Keep as first item
     // All others sorted alphabetically:
-    es,
     de,
+    es,
     fr,
     pl
 };
