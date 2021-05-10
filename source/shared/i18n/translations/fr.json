@@ -54,8 +54,10 @@
     "app-menu": {
         "about": "À propos",
         "add-new-vault": "Ajouter un nouveau",
+        "biometrics": "Utiliser le déverrouillage biométrique",
         "close-window": "Fermer la fenêtre",
         "connection": "Connexion",
+        "current": "Coffre-fort actuel",
         "debug": "Debug",
         "devtool": "Devtool",
         "edit": "Modifier",
@@ -69,10 +71,27 @@
         "unlock-vault": "Déverrouiller",
         "unlocked-vaults": "{{count}} coffre-fort déverrouillé",
         "unlocked-vaults_plural": "{{count}} coffres-forts déverrouillés",
-        "vault": "Coffre-fort"
+        "vaults": "Coffres-forts",
+        "view": "Voir"
     },
-    "dialog": {
-        "confirm-generic": {
+    "biometrics": {
+        "prompt": {
+            "store": "Enregistrer l'empreinte pour le coffre-fort '{{name}}'",
+            "unlock-vault": "déverrouiller le coffre-fort '{{name}}'"
+        }
+    },
+"dialog": {
+    "biometric-reg": {
+        "button-cancel": "Annuler",
+        "button-cancel-title": "Annuler l'enregistrement",
+        "button-reg": "Enregistrer",
+        "button-reg-title": "Enregistrement des données biométriques",
+        "label": "Mot de passe du coffre-fort",
+        "placeholder": "Mot de passe du coffre-fort...",
+        "success": "Enregistrement des données biométriques réussi",
+        "title": "Enregistrer les données biométriques"
+    },
+    "confirm-generic": {
             "cancel-button": "Annuler",
             "confirm-button": "OK"
         },
@@ -124,10 +143,14 @@
             "button-unlock": "Déverrouiller",
             "button-unlock-title": "Confirmer le déverrouillage du coffre-fort.",
             "label": "Mot de passe du coffre-fort",
-            "placeholder": "Mot de passe du coffre..."
+            "placeholder": "Mot de passe du coffre...",
+            "title": "Déverrouillage du coffre-fort"
         }
     },
     "error": {
+        "biometric-invalid-password": "Un mot de passe invalide a été fourni pour activer les données biométriques sur un coffre-fort.",
+        "biometric-store-failed": "Échec du stockage des données biométriques",
+        "biometric-unlock-failed": "Échec du déverrouillage du coffre-fort par la biométrie",
         "fatal-boundary": "Une erreur fatale s’est produite – nous sommes désolés que cela soit arrivé. Veuillez vérifier les détails ci-dessous au cas où ils aideraient à diagnostiquer le problème :"
     },
     "file-host": {
@@ -144,7 +167,9 @@
     },
     "input-required": "(requis)",
     "notification": {
+        "biometrics-disabled": "La biométrie est désactivée pour ce coffre-fort.",
         "error": {
+            "biometrics-disable-failed": "Échec de la désactivation des données biométriques pour le coffre-fort : {{error}}",
             "languages-load": "Échec du chargement des langues",
             "preferences-load": "Échec du chargement des préférences",
             "preferences-save": "Échec de la sauvegarde des préférences",
