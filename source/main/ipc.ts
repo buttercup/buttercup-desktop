@@ -4,7 +4,7 @@ import { Layerr } from "layerr";
 import {
     addVaultFromPayload,
     showExistingFileVaultDialog,
-    showNewFileVaultDialog,
+    showNewFileVaultDialog
 } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
@@ -15,7 +15,7 @@ import {
     getSourceStatus,
     saveVaultFacade,
     sendSourcesToWindows,
-    toggleAutoUpdate,
+    toggleAutoUpdate
 } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
@@ -26,14 +26,14 @@ import {
     getReadyUpdate,
     installUpdate,
     muteUpdate,
-    startUpdate,
+    startUpdate
 } from "./services/update";
 import { getLastSourceID, setLastSourceID } from "./services/lastVault";
 import {
     enableSourceBiometricUnlock,
     getSourcePasswordViaBiometrics,
     sourceEnabledForBiometricUnlock,
-    supportsBiometricUnlock,
+    supportsBiometricUnlock
 } from "./services/biometrics";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
@@ -51,7 +51,7 @@ ipcMain.on("add-vault-config", async (evt, payload) => {
             "add-vault-config:reply",
             JSON.stringify({
                 ok: true,
-                sourceID,
+                sourceID
             })
         );
     } catch (err) {
@@ -60,7 +60,7 @@ ipcMain.on("add-vault-config", async (evt, payload) => {
             "add-vault-config:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -92,7 +92,7 @@ ipcMain.on("lock-source", async (evt, payload) => {
         evt.reply(
             "lock-source:reply",
             JSON.stringify({
-                ok: true,
+                ok: true
             })
         );
     } catch (err) {
@@ -101,7 +101,7 @@ ipcMain.on("lock-source", async (evt, payload) => {
             "lock-source:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -130,7 +130,7 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
         evt.reply(
             "save-vault-facade:reply",
             JSON.stringify({
-                ok: true,
+                ok: true
             })
         );
     } catch (err) {
@@ -139,7 +139,7 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
             "save-vault-facade:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -169,7 +169,7 @@ ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => 
 ipcMain.handle(
     "get-app-environment",
     async (): Promise<AppEnvironmentFlags> => ({
-        portable: isPortable(),
+        portable: isPortable()
     })
 );
 
@@ -223,7 +223,7 @@ ipcMain.handle(
         const results = await searchSingleVault(sourceID, term);
         return results.map((res) => ({
             type: "entry",
-            result: res,
+            result: res
         }));
     }
 );
@@ -257,7 +257,7 @@ ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: s
         setLastSourceID(sourceID);
     } catch (err) {
         logErr("Failed unlocking vault source", err);
-        throw Layerr(err, "Failed unlocking vault source");
+        throw new Layerr(err, "Failed unlocking vault source");
     }
 });
 

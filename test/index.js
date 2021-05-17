@@ -3,5 +3,5 @@ const sinon = require("sinon");
 
 Object.assign(global, {
     expect,
-    sinon,
+    sinon
 });

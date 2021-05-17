@@ -10,8 +10,9 @@ import {
     VaultManager,
     consumeVaultFacade,
     createVaultFacade,
-    init,
+    init
 } from "buttercup";
+import { exportVaultToCSV } from "@buttercup/exporter";
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
@@ -58,6 +59,13 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export async function exportVault(sourceID: VaultSourceID): Promise<string> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const exported = await exportVaultToCSV(source.vault);
+    return exported;
+}
+
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
@@ -98,7 +106,7 @@ function getVaultManager(): VaultManager {
         init();
         __vaultManager = new VaultManager({
             cacheStorage: getVaultCacheStorage(),
-            sourceStorage: getVaultStorage(),
+            sourceStorage: getVaultStorage()
         });
     }
     return __vaultManager;
@@ -118,6 +126,14 @@ export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
     await source.lock();
+}
+
+export async function mergeVaults(targetSourceID: VaultSourceID, incomingVault: Vault) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(targetSourceID);
+    const incomingFacade = createVaultFacade(incomingVault);
+    consumeVaultFacade(source.vault, incomingFacade, { mergeMode: true });
+    await source.save();
 }
 
 export function onSourcesUpdated(callback: () => void): () => void {

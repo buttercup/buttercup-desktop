@@ -39,6 +39,10 @@ function attachEventListeners(updater = autoUpdater) {
     updater.on("update-available", (updateInfo: UpdateInfo) => {
         console.log(JSON.stringify(updateInfo, undefined, 2));
         logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
+        if (__updateMuted) {
+            logInfo("Updates muted: will not notify");
+            return;
+        }
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-available", JSON.stringify(updateInfo));
@@ -77,7 +81,7 @@ async function checkForUpdateInternal() {
     autoUpdater.setFeedURL({
         provider: "github",
         owner: "buttercup",
-        repo: "buttercup-desktop",
+        repo: "buttercup-desktop"
     });
     if (isDev) {
         const hasDevConfig = await hasDevUpdate();

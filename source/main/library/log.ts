@@ -29,7 +29,7 @@ function generateLogPrefix(level: LogLevel): string {
     const [hours, minutes, seconds] = [
         date.getUTCHours(),
         date.getUTCMinutes(),
-        date.getUTCSeconds(),
+        date.getUTCSeconds()
     ].map((val) => {
         const str = `${val}`;
         return str.length === 2 ? str : `0${str}`;

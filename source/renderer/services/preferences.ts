@@ -16,7 +16,7 @@ export async function savePreferences(preferences: Preferences): Promise<void> {
     ipcRenderer.send(
         "write-preferences",
         JSON.stringify({
-            preferences,
+            preferences
         })
     );
 }

@@ -5,8 +5,6 @@
 
 ![Buttercup Desktop](preview.png) ²
 
-# :warning: Buttercup v2 is in pre-release - It will reach its stable release channel soon
-
 ## About
 
 Buttercup is a free, open-source and cross-platform **password manager**, built on NodeJS with Typescript. It uses strong industry-standard encryption to protect your passwords and credentials (among other data you store in Buttercup vaults) at rest, within vault files (`.bcup`). Vaults can be loaded from and saved to a number of sources, such as the **local filesystem**, **Dropbox**, **Google Drive** or any **WebDAV**-enabled service (like _ownCloud_ or _Nextcloud_ ¹).
@@ -56,6 +54,14 @@ Although not explicitly portable, both the Mac **zip** and Linux **AppImage** fo
 ## Configuration
 
 Configuration files are stored in OS-specific locations.
+
+### Command-Line arguments
+
+The following arguments can be provided to Buttercup, but are all optional.
+
+| Argument              | Description                           |
+|-----------------------|---------------------------------------|
+| `--no-window`         | Disables the automatic opening of the main window upon launch. Useful for when Buttercup is automatically started at boot time. |
 
 ### App config
 

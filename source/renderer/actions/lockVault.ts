@@ -29,7 +29,7 @@ export async function lockVaultSource(sourceID: VaultSourceID) {
     ipcRenderer.send(
         "lock-source",
         JSON.stringify({
-            sourceID,
+            sourceID
         })
     );
     await lockPromise;

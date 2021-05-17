@@ -1,0 +1,281 @@
+{
+    "_": "German (DE)",
+    "about": {
+        "description": "Ein kostenloser, quelloffener and platform-übergreifender Passwort Manager.",
+        "dialog": {
+            "close-button": "Schließen",
+            "close-button-title": "Schließe Über-Dialog"
+        },
+        "title": "Über",
+        "version": {
+            "core": "Core",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Wähle eine Tresor-Datei oder erstelle einen neuen Tresor:",
+        "choose-type-prompt": "Wähle den Typ des Tresors:",
+        "confirm": {
+            "existing-password": "Setze ein Primärpasswort:",
+            "new-password": "Setze ein neues Primärpasswort für den Tresor:",
+            "password-placeholder": "Tresor Passwort..."
+        },
+        "google-auth-button": "Authentifiziere",
+        "google-auth-button-title": "Authentifiziere mit Google Drive",
+        "google-auth-error": "Google Authentifizierung fehlgeschlagen",
+        "loader": {
+            "dropbox-auth": "Es wird sich ein neues Fenster für die Authentifizierung öffnen",
+            "file-prompt": "Es wird sich ein Dialogfenster für die Auswahl des Tresors öffnen",
+            "google-auth": {
+                "instr-1": "Du kannst die Berechtigung auswählen, die Buttercup nutzen wird, während es auf deinen <strong>Google Drive</strong> Konto zugreift.",
+                "instr-2": "Wenn Du eine <strong>offene</strong> Berechtigung auswählst, erlaubst Du Buttercup auf alle deine Dateien und Ordner deines Accounts und verbundenen Freigaben zuzugreifen.",
+                "instr-3": "Wenn Du eine <i>nicht-</i>offene Berechtigung auswählst, erlaubst Du Buttercup auf Dateien zuzugreifen, die zuvor erstellt oder auf die zuvor zugegriffen wurde.",
+                "perm-label": "Berechtigungen",
+                "perm-switch": "Offen"
+            },
+            "webdav-auth": {
+                "password-label": "Passwort",
+                "password-plc": "WebDAV Passwort",
+                "url-label": "WebDAV Service",
+                "username-label": "Nutzername",
+                "username-plc": "WebDAV Nutzername"
+            }
+        },
+        "page-choose-next": "Weiter",
+        "page-choose-next-title": "Setze das Erstellen des Tresors fort",
+        "page-confirm-cancel": "Abbrechen",
+        "page-confirm-cancel-title": "Das Entsperren abbrechen",
+        "page-confirm-finish": "Tresor hinzufügen",
+        "page-confirm-finish-title": "Bestätige das Hinzufügen des Tresors",
+        "title": "Tresor hinzufügen",
+        "webdav-continue": "Weiter",
+        "webdav-continue-title": "Verbinde via WebDAV"
+    },
+    "app-menu": {
+        "about": "Über",
+        "add-new-vault": "Füge neuen Tresor hinzu",
+        "biometrics": "Nutze biometrisches Entsperren",
+        "close-window": "Schließe Fenster",
+        "connection": "Verbindung",
+        "current": "Aktueller Tresor",
+        "debug": "Debug",
+        "devtool": "Devtool",
+        "edit": "Bearbeiten",
+        "enable-secure-file-host": "Erlaube Browser Zugriff",
+        "export": "Exportieren",
+        "import": "Importieren",
+        "lock-all": "Sperre Alles",
+        "open": "Öffnen",
+        "open-vault": "Öffne Tresor",
+        "preferences": "Einstellungen",
+        "quit": "Beenden",
+        "search": "Suche",
+        "unlock-vault": "Entsperren",
+        "unlocked-vaults": "{{count}} entsperrter Tresor",
+        "unlocked-vaults_plural": "{{count}} entsperrte Tresore",
+        "vaults": "Tresore",
+        "view": "Ansicht"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "Speichere biometrische Anmeldung für Tresor '{{name}}'",
+            "unlock-vault": "Entsperre Tresor '{{name}}'"
+        }
+    },
+    "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Abbrechen",
+            "button-cancel-title": "Registrierung abbrechen",
+            "button-reg": "Registrieren",
+            "button-reg-title": "Registriere biometrische Daten",
+            "label": "Tresor Passwort",
+            "placeholder": "Tresor Passwort...",
+            "success": "Biometrische Daten wurden erfolgreich registriert",
+            "title": "Registriere biometrische Daten"
+        },
+        "confirm-generic": {
+            "cancel-button": "Abbrechen",
+            "confirm-button": "Bestätigen"
+        },
+        "export-file-chooser": {
+            "submit-button": "Exportieren",
+            "title": "Exportiere Tresor '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Abbrechen",
+                "cancel-title": "Tresorerstellung abbrechen",
+                "confirm": "Setze Tresor Ziel",
+                "confirm-title": "Bestätige neuen Tresornamen",
+                "description": "Setze einen Dateinamen für den neuen Tresor:",
+                "title": "Füge Tresor hinzu"
+            },
+            "nav": {
+                "cancel-new": "Erstellung abbrechen",
+                "create-new": "Neuer Tresor"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup Tresore",
+                "confirm-button": "Hinzufügen",
+                "title": "Füge existierenden Tresor hinzu"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup Tresore",
+                "confirm-button": "Hinzufügen",
+                "title": "Füge neuen Tresor hinzu"
+            }
+        },
+        "import-file-chooser": {
+            "submit-button": "Importieren",
+            "title": "Importiere von {{importer}} Tresor"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Schließen",
+                "title": "Schließe Prompt"
+            },
+            "button-existing": {
+                "text": "Lade existierenden Tresor",
+                "title": "Lade existierende Tresor Datei"
+            },
+            "button-new": {
+                "text": "Erstelle neu",
+                "title": "Erstelle neue Tresor Datei"
+            },
+            "prompt": "Möchtest Du einen <i>neuen</i> Tresor erstellen oder einen existierenden laden?",
+            "title": "Füge Tresor Datei hinzu"
+        },
+        "password-prompt": {
+            "button-cancel": "Abbrechen",
+            "button-cancel-title": "Entsperren abbrechen",
+            "button-unlock": "Entsperren",
+            "button-unlock-title": "Bestätige das Entsperren des Tresors",
+            "label": "Tresor Passwort",
+            "placeholder": "Tresor Passwort...",
+            "title": "Tresor entsperren"
+        }
+    },
+    "error": {
+        "biometric-invalid-password": "Es wurde ein ungültiges Passwort für die Aktivierung von Biometrie auf einem Tresor angegeben",
+        "biometric-store-failed": "Das Speichern der biometrischen Daten ist fehlgeschlagen",
+        "biometric-unlock-failed": "Das Entsperren des Tresors via Biometrie ist fehlgeschlagen",
+        "fatal-boundary": "Leider ist ein kritischer Fehler aufgetreten - wir entschuldigen für die Unannehmlichkeiten. Bitte sichte die Details darunter, da sie für die Fehlerdiagnose hilfreich sein könnten:"
+    },
+    "file-host": {
+        "code-copied": "File Host Code wurde kopiert",
+        "dialog": {
+            "close-button": "Schließen",
+            "close-button-title": "Schließe Verbindungs-Dialog",
+            "instruction": {
+                "new-connection": "Eine neue Verbindung wurde zu dieser Applikation hergestellt und Fernzugriff zu dem Dateisystem angefragt.",
+                "use-code": "Nutze für die Authentifizierung folgenden Code."
+            },
+            "title": "Secure File Host Verbindung"
+        }
+    },
+    "input-required": "(erforderlich)",
+    "notification": {
+        "biometrics-disabled": "Biometrie für diesen Tresor deaktiviert",
+        "error": {
+            "biometrics-disable-failed": "Das Deaktivieren der Biometrie für den Tresor ist fehlgeschlagen: {{error}}",
+            "import-failed": "Das Importieren ist fehlgeschlagen: {{error}}",
+            "languages-load": "Das Laden von Sprachen ist fehlgeschlagen",
+            "preferences-load": "Das Laden von Einstellungen ist fehlgeschlagen",
+            "preferences-save": "Das Speichern von Einstellungen ist fehlgeschlagen",
+            "unknown-error": "Unbekannter Fehler",
+            "vault-lock-failed": "Das Sperren des Tresors schlug fehl",
+            "vault-save-failed": "Das Speichern des Tresors schlug fehl",
+            "vault-unlock-failed": "Das Entsperren des Tresors schlug fehl"
+        },
+        "export-success": "Tresor wurde erfolgreich exportiert: {{name}}",
+        "import-success": "Tresor wurde erfolgreich importiert: {{filename}}",
+        "preferences-saved": "Einstellungen wurden gespeichert",
+        "vault-saved": "Tresor gespeichert"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Abbrechen",
+            "cancel-title": "Breche das Aktualisieren der Einstellungen ab",
+            "save": "Speichern",
+            "save-title": "Speichere Änderungen"
+        },
+        "item": {
+            "clear-clipboard": "Leere die Zwischenablage automatisch",
+            "language": "Sprache",
+            "lock-vaults-after-time": "Sperre Tresore nach bestimmter Zeit",
+            "lock-vaults-after-time-desc": "Sperre Tresore nach einer bestimmten Zeit mit Inaktivität automatisch.",
+            "lock-vaults-window-closed": "Sperre Tresore sobald das Fenster geschlossen wurde",
+            "lock-vaults-window-closed-label": "Sperre nach dem Schließen",
+            "secure-file-host": {
+                "description": "Der Secure File Host erlaubt der <strong>Buttercup Browser Erweiterung</strong> sich zu den lokalen Tresoren auf diesem PC mit dieser Applikation zu verbinden.",
+                "label": "Aktiviere den Secure File Host",
+                "title": "Secure File Host"
+            },
+            "theme": "Design"
+        },
+        "section": {
+            "connectivity": "Konnektivität",
+            "debug": "Debug",
+            "general": "Allgemein",
+            "privacy": "Datenschutz",
+            "security": "Sicherheit"
+        },
+        "title": "Einstellungen"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Keine Ergebnisse...",
+            "result-render-error": "Das Rendern der Ergebnisse schlug fehl"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Datei",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Dunkel",
+        "light": "Hell"
+    },
+    "update": {
+        "available": "Aktualisierung verfügbar: {{version}}",
+        "dialog": {
+            "close-button": "Schließen",
+            "close-button-title": "Schließe die Aktualisierungs-Informationen",
+            "title": "Aktualisiere auf {{version}}",
+            "update-button": "Aktualisieren",
+            "update-button-title": "Jetzt die Applikation aktualisieren"
+        },
+        "downloaded": "Aktualisierung heruntergeladen",
+        "installed-restart": "Neustart",
+        "ready": "Aktualisierung bereit: {{version}}",
+        "view": "Ansicht"
+    },
+    "vault-chooser": {
+        "configure-vault": "Konfiguiere Tresor",
+        "configure-vault-hide": "Verstecke Konfiguration",
+        "no-vaults": {
+            "cta-button": "Füge Tresor hinzu",
+            "description": "Es wurden noch keine Tresor hinzugefügt...",
+            "title": "Ein neuer Start"
+        },
+        "remove-vault-dialog": {
+            "cancel-button": "Abbrechen",
+            "cancel-button-title": "Das Entfernen abbrechen",
+            "description": "Bist Du dir sicher, dass Du den Tresor \"{{title}}\" entfernen möchtest?",
+            "remove-button": "Entfernen",
+            "remove-button-title": "Bestätige das Entfernen des Tresors",
+            "title": "Tresor entfernen"
+        }
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "choose-vault": "Wähle Tresor",
+            "lock-current-vault": "Sperre aktuellen Tresor"
+        },
+        "vault-contents": "Tresor Inhalte"
+    }
+}

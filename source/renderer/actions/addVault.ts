@@ -11,7 +11,8 @@ type NewVaultChoice = "new" | "existing" | null;
 export async function addNewVaultTarget(
     datasourceConfig: DatasourceConfig,
     password: string,
-    createNew: boolean
+    createNew: boolean,
+    fileNameOverride: string = null
 ) {
     setBusy(true);
     const addNewVaultPromise = new Promise<VaultSourceID>((resolve, reject) => {
@@ -29,6 +30,7 @@ export async function addNewVaultTarget(
         createNew,
         datasourceConfig,
         masterPassword: password,
+        fileNameOverride
     };
     logInfo(`Adding new vault: ${datasourceConfig.type}`);
     ipcRenderer.send("add-vault-config", JSON.stringify(payload));
@@ -63,14 +65,14 @@ export async function getFileVaultParameters(): Promise<{
         if (!filename) return null;
         return {
             filename,
-            createNew: true,
+            createNew: true
         };
     } else {
         const filename = await ipcRenderer.invoke("get-existing-vault-filename");
         if (!filename) return null;
         return {
             filename,
-            createNew: false,
+            createNew: false
         };
     }
 }

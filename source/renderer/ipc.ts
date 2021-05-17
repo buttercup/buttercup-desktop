@@ -7,12 +7,13 @@ import { showAbout } from "./state/about";
 import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { showRegistrationPrompt } from "./state/biometrics";
+import { setBusy } from "./state/app";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
 import {
     applyCurrentUpdateState,
     applyReadyUpdateState,
-    applyUpdateProgress,
+    applyUpdateProgress
 } from "./services/update";
 import { showError, showSuccess, showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
@@ -58,6 +59,10 @@ ipcRenderer.on("open-source", (evt, sourceID) => {
 
 ipcRenderer.on("route", (_, newRoute) => {
     window.location.hash = newRoute;
+});
+
+ipcRenderer.on("set-busy", (_, busy: boolean) => {
+    setBusy(busy);
 });
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {

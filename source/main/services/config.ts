@@ -8,6 +8,8 @@ const DEFAULT_CONFIG = {
     selectedSource: null,
     windowHeight: 600,
     windowWidth: 800,
+    windowX: null,
+    windowY: null
 };
 
 export async function getConfigValue<T>(key: string): Promise<T> {

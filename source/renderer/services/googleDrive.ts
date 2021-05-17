@@ -15,7 +15,7 @@ export async function createEmptyVault(
     ipcRenderer.send(
         "get-empty-vault",
         JSON.stringify({
-            password,
+            password
         })
     );
     const vaultSrc = await getVaultSourcePromise;
@@ -24,7 +24,7 @@ export async function createEmptyVault(
         contents: vaultSrc,
         id: null,
         name: filename,
-        parent: parentIdentifier,
+        parent: parentIdentifier
     });
     return fileID;
 }

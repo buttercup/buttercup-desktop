@@ -7,5 +7,5 @@ export interface NewVaultPlaceholder {
 
 export enum Theme {
     Dark = "dark",
-    Light = "light",
+    Light = "light"
 }

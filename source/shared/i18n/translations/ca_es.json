@@ -1,0 +1,283 @@
+{
+    "_": "Catalan (CA_ES)",
+    "about": {
+        "description": "Un administrador de contrasenyes gratuït, de codi obert i multiplataforma.",
+        "dialog": {
+            "close-button": "Tancar",
+            "close-button-title": "Tancar finestra Quant a"
+        },
+        "title": "Quant a",
+        "version": {
+            "core": "Core",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Tria un cofre o crea un nou:",
+        "choose-type-prompt": "Tria un tipus de cofre a afegir:",
+        "confirm": {
+            "existing-password": "Introdueix la contrasenya principal del cofre:",
+            "new-password": "Introdueix una nova contrasenya principal:",
+            "password-placeholder": "Contrasenya principal del cofre..."
+        },
+        "google-auth-button": "Autentificar",
+        "google-auth-button-title": "Autentificar amb Google Drive",
+        "google-auth-error": "Autentificació amb Google fallida",
+        "loader": {
+            "dropbox-auth": "Una finestra separada s'obrirà per autentificar",
+            "file-prompt": "Una finestra s'obrirà per triar un cofre",
+            "google-auth": {
+                "instr-1": "Pots seleccionar el nivell de permisos que utilitzarà Buttercup al accedir a la teva compte de <strong>Google Drive</strong>.",
+                "instr-2": "Seleccionar una configuració de permís <strong>oberta</strong> atorgarà a Buttercup accés a tots els arxius i carpetes del seu compte i els recursos compartits connectats.",
+"instr-3": "Seleccionar una configuració <i>no</i> oberta atorgarà a Buttercup accés als arxius que ha creat / accedit prèviament.",
+                "perm-label": "Permisos",
+                "perm-switch": "Obert"
+            },
+            "webdav-auth": {
+                "password-label": "Contrasenya",
+                "password-plc": "Contrasenya WebDAV",
+                "url-label": "Servei WebDAV ",
+                "username-label": "Usuari",
+                "username-plc": "Usuari WebDAV"
+            }
+        },
+        "page-choose-next": "Següent",
+        "page-choose-next-title": "Continuar afegint cofre",
+        "page-confirm-cancel": "Cancel·lar",
+        "page-confirm-cancel-title": "Cancel·lar desbloqueig",
+        "page-confirm-finish": "Afegir cofre",
+        "page-confirm-finish-title": "Confirmar adició del cofre",
+        "title": "Afegir cofre",
+        "webdav-continue": "Següent",
+        "webdav-continue-title": "Connectar fent servir WebDAV"
+    },
+    "app-menu": {
+        "about": "Quant a",
+        "add-new-vault": "Afegir nou",
+        "biometrics": "Fer servir desbloqueig biomètric",
+        "close-window": "Tancar finestra",
+        "connection": "Connexió",
+        "current": "Cofre actual",
+        "debug": "Depurador",
+        "devtool": "Devtool",
+        "edit": "Editar",
+        "enable-secure-file-host": "Activar accés per navegador",
+        "export": "Exportar",
+        "import": "Importar",
+        "lock-all": "Bloquejar tots",
+        "open": "Obrir",
+        "open-vault": "Obrir cofre",
+        "preferences": "Preferències",
+        "quit": "Sortir",
+        "search": "Cercar",
+        "unlock-vault": "Desbloquejar",
+        "unlocked-vaults": "{{count}} cofre desbloquejat",
+        "unlocked-vaults_plural": "{{count}} cofres desbloquejats",
+        "vaults": "Cofres",
+        "view": "Veure",
+        "window": "Finestra",
+        "window-reposition": "Reposicionar"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "guardar inici de sessió per cofre '{{name}}'",
+            "unlock-vault": "desbloquejar cofre '{{name}}'"
+        }
+    },
+    "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Cancel·lar",
+            "button-cancel-title": "Cancel·lar registre",
+            "button-reg": "Registre",
+            "button-reg-title": "Registrar biometria",
+            "label": "Contrasenya principal del cofre",
+            "placeholder": "Contraseya del cofre...",
+            "success": "Biometria registrada correctament",
+            "title": "Registrar biometría"
+        },
+        "confirm-generic": {
+            "cancel-button": "Cancel·lar",
+            "confirm-button": "Confirmar"
+        },
+        "export-file-chooser": {
+            "submit-button": "Exportar",
+            "title": "Exportar cofre '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Cancel·lar",
+                "cancel-title": "Cancel·lar creació de cofre",
+                "confirm": "Definir",
+                "confirm-title": "Confirmar nom del arxiu del cofre nou",
+                "description": "Introdueix el nom del arxiu pel cofre:",
+                "title": "Afegir cofre"
+            },
+            "nav": {
+                "cancel-new": "Cancel·lar nou",
+                "create-new": "Nou cofre"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Cofres Buttercup",
+                "confirm-button": "Afegir",
+                "title": "Afegir cofre existent"
+            },
+            "add-new": {
+                "bcup-filter": "Cofres Buttercup",
+                "confirm-button": "Crear",
+                "title": "Afegir cofre nou"
+            }
+        },
+        "import-file-chooser": {
+            "submit-button": "Importar",
+            "title": "Importar des del cofre {{importer}}"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Tancar",
+                "title": "Tancar missatge"
+            },
+            "button-existing": {
+                "text": "Carregar existent",
+                "title": "Carregar arxiu de cofre existent"
+            },
+            "button-new": {
+                "text": "Crear nou",
+                "title": "Crear arxiu de cofre nou"
+            },
+            "prompt": "Vols crear un <i>nou</i> cofre o carregar un existent?",
+            "title": "Afegir arxiu de cofre"
+        },
+        "password-prompt": {
+            "button-cancel": "Cancel·lar",
+            "button-cancel-title": "Cancel·lar desbloqueig",
+            "button-unlock": "Desbloquejar",
+            "button-unlock-title": "Confirmar desbloqueig de cofre",
+            "label": "Contrasenya del cofre",
+            "placeholder": "Contrasenya principal...",
+            "title": "Desbloqueig del cofre"
+        }
+    },
+    "error": {
+        "biometric-invalid-password": "La contrasenya introduïda no és vàlida",
+        "biometric-store-failed": "No s'han pogut guardar les dades biomètriques",
+        "biometric-unlock-failed": "Error al desbloquejar el cofre fent servir dades biomètriques",
+        "fatal-boundary": "S'ha produït un error greu. Lamentem que hagi passat. Consulta els detalls per a saber que ha passat:"
+    },
+    "file-host": {
+        "code-copied": "Codi del servidor d'arxius copiat",
+        "dialog": {
+            "close-button": "Tancar",
+            "close-button-title": "Tancar finestra de connexió",
+            "instruction": {
+                "new-connection": "S'ha realitzat una nova connexió a aquesta aplicació, sol·licitant accés remot al sistema d'arxius.",
+                "use-code": "Utilitza el següent codi per a autoritzar-lo."
+            },
+            "title": "Connexió segura al servidor d'arxius"
+        }
+    },
+    "input-required": "(requerit)",
+    "notification": {
+        "biometrics-disabled": "Biometría deshabilitada per a cofres",
+        "error": {
+            "biometrics-disable-failed": "No es pot deshabilitar la biometria per al cofre: {{error}}",
+            "import-failed": "Error durant la importació: {{error}}",
+            "languages-load": "Error carregant idiomes",
+            "preferences-load": "Error carregant preferències",
+            "preferences-save": "Error guardant preferències",
+            "unknown-error": "Error desconegut",
+            "vault-lock-failed": "Error al bloquejar el cofre",
+            "vault-save-failed": "No s'ha pogut guardar el cofre",
+            "vault-unlock-failed": "Error al desbloquejar el cofre"
+        },
+        "export-success": "Cofre exportat correctament: {{name}}",
+        "import-success": "Cofre importat correctament: {{filename}}",
+        "preferences-saved": "Preferències guardades",
+        "vault-saved": "Cofre guardat"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Cancel·lar",
+            "cancel-title": "Cancel·lar actualizació de preferèncias",
+            "save": "Guardar",
+            "save-title": "Guardar canvis"
+        },
+        "item": {
+            "clear-clipboard": "Netejar porta-retalls automàticament",
+            "language": "Idioma",
+            "lock-vaults-after-time": "Bloquejar cofres després d'un temps",
+            "lock-vaults-after-time-desc": "Bloquejar cofres automàticament després d'un període d'inactivitat.",
+            "lock-vaults-window-closed": "Bloquejar cofres si la finestra està tancada",
+            "lock-vaults-window-closed-label": "Bloquejar al tancar",
+            "secure-file-host": {
+                "description": "El servidor d'arxius permet que l'extensió <strong>del navegador Buttercup</strong> es connecti als cofres locals de l'ordinador a través d'aquesta aplicació.",
+                "label": "Activar el servidor d'arxius segur",
+                "title": "Servidor d'arxius segur"
+            },
+            "theme": "Tema"
+        },
+        "section": {
+            "connectivity": "Connectivitat",
+            "debug": "Depurar",
+            "general": "General",
+            "privacy": "Privacitat",
+            "security": "Seguretat"
+        },
+        "title": "Preferències"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Sense resultats...",
+            "result-render-error": "Error monstrant els resultats de la cerca"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Archivo",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Fosc",
+        "light": "Clar"
+    },
+    "update": {
+        "available": "Actualizació disponible: {{version}}",
+        "dialog": {
+            "close-button": "Tancar",
+            "close-button-title": "Tancar informació de l'actualització",
+            "title": "Actualitzar a {{version}}",
+            "update-button": "Actualitzar",
+            "update-button-title": "Actualitzar l'aplicació ara"
+        },
+        "downloaded": "Actualització descarregada",
+        "installed-restart": "Reiniciar",
+        "ready": "Actualització preparada: {{version}}",
+        "view": "Veure"
+    },
+    "vault-chooser": {
+        "configure-vault": "Configurar cofre",
+        "configure-vault-hide": "Amagar configuració",
+        "no-vaults": {
+            "cta-button": "Afegir cofre",
+            "description": "Encara no s'han afegit cofres...",
+            "title": "Primeres passes"
+        },
+        "remove-vault-dialog": {
+            "cancel-button": "Cancel·lar",
+            "cancel-button-title": "Cancel·lar retirada",
+            "description": "Estàs segur que quieres retirar el cofre \"{{title}}\"?",
+            "remove-button": "Retirar",
+            "remove-button-title": "Confirmar retirada del cofre",
+            "title": "Retirar cofre"
+        }
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "choose-vault": "Triar cofre",
+            "lock-current-vault": "Bloquejar cofre actual"
+        },
+        "vault-contents": "Contingut del cofre"
+    }
+}

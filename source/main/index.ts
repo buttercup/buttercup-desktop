@@ -3,6 +3,7 @@ import "./ipc";
 import { initialise } from "./services/init";
 import { openMainWindow } from "./services/windows";
 import { handleProtocolCall } from "./services/protocol";
+import { shouldShowMainWindow } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
 
@@ -52,7 +53,13 @@ app.whenReady()
         logInfo("Application ready");
     })
     .then(() => initialise())
-    .then(() => openMainWindow())
+    .then(() => {
+        if (!shouldShowMainWindow()) {
+            logInfo("Opening initial window disabled");
+            return;
+        }
+        openMainWindow();
+    })
     .catch((err) => {
         logErr(err);
         app.quit();
