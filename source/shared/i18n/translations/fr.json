@@ -80,18 +80,18 @@
             "unlock-vault": "déverrouiller le coffre-fort '{{name}}'"
         }
     },
-"dialog": {
-    "biometric-reg": {
-        "button-cancel": "Annuler",
-        "button-cancel-title": "Annuler l'enregistrement",
-        "button-reg": "Enregistrer",
-        "button-reg-title": "Enregistrement des données biométriques",
-        "label": "Mot de passe du coffre-fort",
-        "placeholder": "Mot de passe du coffre-fort...",
-        "success": "Enregistrement des données biométriques réussi",
-        "title": "Enregistrer les données biométriques"
-    },
-    "confirm-generic": {
+    "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Annuler",
+            "button-cancel-title": "Annuler l'enregistrement",
+            "button-reg": "Enregistrer",
+            "button-reg-title": "Enregistrement des données biométriques",
+            "label": "Mot de passe du coffre-fort",
+            "placeholder": "Mot de passe du coffre-fort...",
+            "success": "Enregistrement des données biométriques réussi",
+            "title": "Enregistrer les données biométriques"
+        },
+        "confirm-generic": {
             "cancel-button": "Annuler",
             "confirm-button": "OK"
         },
