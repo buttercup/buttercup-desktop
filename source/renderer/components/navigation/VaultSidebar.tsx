@@ -1,12 +1,14 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Alignment, Button, ButtonGroup, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Divider, Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
-import { CURRENT_VAULT } from "../../state/vaults";
+import { getIconForProvider } from "../../library/icons";
+import { CURRENT_VAULT, VAULTS_LIST } from "../../state/vaults";
 import { t } from "../../../shared/i18n/trans";
+import { VaultSourceDescription } from "../../types";
 
 const { useCallback, useState } = React;
 
@@ -17,6 +19,17 @@ interface VaultSidebarProps {
     selected: null | VaultSidebarItem;
 }
 
+const SidebarButton = styled(Button)`
+    border-radius: 0px;
+    > img {
+        margin: 0px !important;
+    }
+`;
+const SidebarButtonCornerIcon = styled(Icon)`
+    position: absolute;
+    top: calc(50% - 5px);
+    left: calc(50% - 16px);
+`;
 const SidebarContainer = styled.div`
     width: 60px;
     padding: 10px 0px;
@@ -26,10 +39,15 @@ const SidebarContainer = styled.div`
     justify-content: space-between;
     align-items: stretch;
 `;
+const VaultIcon = styled.img`
+    width: 100%;
+    height: auto;
+`;
 
 export function VaultSidebar(props: VaultSidebarProps) {
     const history = useHistory();
     const currentVaultState = useHookState(CURRENT_VAULT);
+    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const { onSelect: handleSelection, selected: selectedItem } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const handleVaultLock = useCallback(async () => {
@@ -44,43 +62,58 @@ export function VaultSidebar(props: VaultSidebarProps) {
                 minimal
                 vertical
             >
-                <Button
+                {vaultsState.get().map(vault => (
+                    <SidebarButton
+                        active={vault.id === currentVaultState.get()}
+                        icon={(
+                            <VaultIcon src={getIconForProvider(vault.type)} />
+                        )}
+                        large
+                        minimal
+                        onClick={() => handleSelection("contents")}
+                        title={vault.name}
+                    >
+                        <SidebarButtonCornerIcon icon="lock" iconSize={10} />
+                    </SidebarButton>
+                ))}
+                <Divider />
+                {/* <SidebarButton
                     active={selectedItem === "contents"}
                     icon="control"
                     large
                     minimal
                     onClick={() => handleSelection("contents")}
                     title={t("vault-sidebar.vault-contents")}
-                />
-                {/* <Button
+                /> */}
+                {/* <SidebarButton
                     disabled
                     icon="barcode"
                     large
                     minimal
                     title="OTP Codes"
                 />
-                <Button
+                <SidebarButton
                     disabled
                     icon="paperclip"
                     large
                     minimal
                     title="Attachments"
                 />
-                <Button
+                <SidebarButton
                     disabled
                     icon="diagnosis"
                     large
                     minimal
                     title="Vault optimisation"
                 />
-                <Button
+                <SidebarButton
                     disabled
                     icon="console"
                     large
                     minimal
                     title="Vault terminal"
                 />
-                <Button
+                <SidebarButton
                     disabled
                     icon="key"
                     large
@@ -106,7 +139,7 @@ export function VaultSidebar(props: VaultSidebarProps) {
                     isOpen={showMoreMenu}
                     onClose={() => setShowMoreMenu(false)}
                 >
-                    <Button
+                    <SidebarButton
                         icon="more"
                         large
                         minimal
