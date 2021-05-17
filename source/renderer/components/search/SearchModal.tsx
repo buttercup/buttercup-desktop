@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Intent, MenuItem, Tag } from "@blueprintjs/core";
+import React, { useEffect, useMemo, useRef } from "react";
+import { IInputGroupProps2, Intent, MenuItem, Tag } from "@blueprintjs/core";
 import { Omnibar } from "@blueprintjs/select";
 import { SiteIcon } from "@buttercup/ui";
 import { EntryType } from "buttercup";
@@ -89,8 +89,18 @@ export function SearchModal(props: SearchModalProps) {
         results,
         visible
     } = props;
+    const searchInputRef = useRef<HTMLInputElement>();
+    const searchInputProps = useMemo(() => ({
+        inputRef: searchInputRef
+    }), [searchInputRef]);
+    useEffect(() => {
+        if (visible && searchInputRef.current) {
+            searchInputRef.current.select();
+        }
+    }, [visible]);
     return (
         <SearchOmnibar
+            inputProps={searchInputProps as IInputGroupProps2}
             itemRenderer={renderResult}
             items={results}
             noResults={<MenuItem disabled text={t("search.modal.no-results")} />}
