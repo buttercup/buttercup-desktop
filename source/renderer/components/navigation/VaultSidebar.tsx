@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useCallback, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { VaultSourceStatus } from "buttercup";
@@ -8,10 +8,13 @@ import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { getIconForProvider } from "../../library/icons";
 import { CURRENT_VAULT, VAULTS_LIST } from "../../state/vaults";
+import { getThemeProp } from "../../styles/theme";
 import { t } from "../../../shared/i18n/trans";
 import { VaultSourceDescription } from "../../types";
 
-const { useCallback, useState } = React;
+interface VaultHoverDescriptionProps {
+    visible: boolean;
+}
 
 export type VaultSidebarItem = "contents";
 
@@ -26,6 +29,7 @@ const SidebarButton = styled(Button)`
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+    position: relative;
     > img {
         margin: 0px !important;
     }
@@ -48,6 +52,21 @@ const SidebarContainer = styled.div`
     justify-content: space-between;
     align-items: stretch;
 `;
+const VaultHoverDescription = styled.div<VaultHoverDescriptionProps>`
+    display: ${p => p.visible ? "flex" : "none"};
+    position: absolute;
+    height: 100%;
+    width: 260px;
+    background: linear-gradient(to right, ${props => getThemeProp(props, "sidebar.hoverName.bgColor")} 75%, rgba(0,0,0,0) 97%);
+    left: 100%;
+    flex-flow: row no-wrap;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+    color: ${props => getThemeProp(props, "sidebar.hoverName.color")};
+    font-size: 15px;
+`;
 const VaultIcon = styled.img`
     height: 24px;
     max-width: 24px;
@@ -60,6 +79,7 @@ export function VaultSidebar(props: VaultSidebarProps) {
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const { onSelect: handleSelection, selected: selectedItem } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
+    const [hoveringSource, setHoveringSource] = useState(null);
     const handleVaultLock = useCallback(async () => {
         const sourceID = currentVaultState.get();
         await lockVaultSource(sourceID);
@@ -78,9 +98,11 @@ export function VaultSidebar(props: VaultSidebarProps) {
                         icon={(
                             <VaultIcon src={getIconForProvider(vault.type)} />
                         )}
+                        key={vault.id}
                         large
-                        // minimal
                         onClick={() => handleSelection("contents")}
+                        onMouseEnter={() => setHoveringSource(vault.id)}
+                        onMouseLeave={() => setHoveringSource(null)}
                         text={(
                             <SidebarButtonIcon
                                 color={vault.state === VaultSourceStatus.Locked ? Colors.GRAY1 : Colors.GREEN3}
@@ -89,7 +111,13 @@ export function VaultSidebar(props: VaultSidebarProps) {
                             />
                         )}
                         title={vault.name}
-                    />
+                    >
+                        <VaultHoverDescription
+                            visible={hoveringSource === vault.id}
+                        >
+                            {vault.name}
+                        </VaultHoverDescription>
+                    </SidebarButton>
                 ))}
                 <Divider />
                 {/* <SidebarButton

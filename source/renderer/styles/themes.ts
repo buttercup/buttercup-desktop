@@ -10,6 +10,10 @@ interface AppTheme {
             bgColor: string;
             borderColor: string;
         };
+        hoverName: {
+            bgColor: string;
+            color: string;
+        };
     };
     vaultChooser: {
         selectVaultAnchor: {
@@ -28,6 +32,10 @@ export const THEME_DARK: AppTheme = {
         button: {
             bgColor: Colors.DARK_GRAY4,
             borderColor: Colors.GRAY3
+        },
+        hoverName: {
+            bgColor: Colors.DARK_GRAY4,
+            color: Colors.LIGHT_GRAY2
         }
     },
     vaultChooser: {
@@ -47,6 +55,10 @@ export const THEME_LIGHT: AppTheme = {
         button: {
             bgColor: Colors.DARK_GRAY4,
             borderColor: Colors.GRAY3
+        },
+        hoverName: {
+            bgColor: "#fff",
+            color: Colors.GRAY2
         }
     },
     vaultChooser: {
