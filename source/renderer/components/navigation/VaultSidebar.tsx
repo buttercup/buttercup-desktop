@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { Alignment, Button, ButtonGroup, Divider, Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
+import { VaultSourceStatus } from "buttercup";
+import { Alignment, Button, ButtonGroup, Classes, Colors, Divider, Icon, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
@@ -21,17 +22,25 @@ interface VaultSidebarProps {
 
 const SidebarButton = styled(Button)`
     border-radius: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
     > img {
         margin: 0px !important;
     }
+    > .${Classes.BUTTON_TEXT} {
+        display: flex;
+        align-items: center;
+    }
 `;
-const SidebarButtonCornerIcon = styled(Icon)`
-    position: absolute;
-    top: calc(50% - 5px);
-    left: calc(50% - 16px);
+const SidebarButtonIcon = styled(Icon)`
+    width: 10px;
+    height: 10px;
+    margin: 0 0 0 6px !important;
 `;
 const SidebarContainer = styled.div`
-    width: 60px;
+    width: 72px;
     padding: 10px 0px;
     flex: 0 0 auto;
     display: flex;
@@ -40,8 +49,9 @@ const SidebarContainer = styled.div`
     align-items: stretch;
 `;
 const VaultIcon = styled.img`
-    width: 100%;
-    height: auto;
+    height: 24px;
+    max-width: 24px;
+    width: auto;
 `;
 
 export function VaultSidebar(props: VaultSidebarProps) {
@@ -69,12 +79,17 @@ export function VaultSidebar(props: VaultSidebarProps) {
                             <VaultIcon src={getIconForProvider(vault.type)} />
                         )}
                         large
-                        minimal
+                        // minimal
                         onClick={() => handleSelection("contents")}
+                        text={(
+                            <SidebarButtonIcon
+                                color={vault.state === VaultSourceStatus.Locked ? Colors.GRAY1 : Colors.GREEN3}
+                                icon={vault.state === VaultSourceStatus.Locked ? "lock" : "unlock"}
+                                iconSize={10}
+                            />
+                        )}
                         title={vault.name}
-                    >
-                        <SidebarButtonCornerIcon icon="lock" iconSize={10} />
-                    </SidebarButton>
+                    />
                 ))}
                 <Divider />
                 {/* <SidebarButton
