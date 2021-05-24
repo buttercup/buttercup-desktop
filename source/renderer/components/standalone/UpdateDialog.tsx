@@ -2,9 +2,9 @@ import React, { useCallback, useMemo } from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
 import { Button, Card, Classes, Dialog, Intent } from "@blueprintjs/core";
-import { muteCurrentUpdate, startCurrentUpdate } from "../services/update";
-import { CURRENT_UPDATE, SHOW_UPDATE_DIALOG } from "../state/update";
-import { t } from "../../shared/i18n/trans";
+import { muteCurrentUpdate, startCurrentUpdate } from "../../services/update";
+import { CURRENT_UPDATE, SHOW_UPDATE_DIALOG } from "../../state/update";
+import { t } from "../../../shared/i18n/trans";
 
 const ReleaseHeading = styled.h2`
     margin-top: 0px;
