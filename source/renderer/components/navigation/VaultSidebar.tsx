@@ -19,8 +19,9 @@ interface VaultHoverDescriptionProps {
 export type VaultSidebarItem = "contents";
 
 interface VaultSidebarProps {
-    onSelect: (item: VaultSidebarItem) => void;
+    onSelect: (item: VaultSidebarItem, sourceID?: string) => void;
     selected: null | VaultSidebarItem;
+    sourceID: string;
 }
 
 const SidebarButton = styled(Button)`
@@ -53,7 +54,10 @@ const SidebarContainer = styled.div`
     align-items: stretch;
 `;
 const VaultHoverDescription = styled.div<VaultHoverDescriptionProps>`
-    display: ${p => p.visible ? "flex" : "none"};
+    visibility: ${p => p.visible ? "visible" : "hidden"};
+    opacity: ${p => p.visible ? 1 : 0};
+    transition: visibility 0.25s, opacity 0.25s linear;
+    display: flex;
     position: absolute;
     height: 100%;
     width: 260px;
@@ -77,9 +81,13 @@ export function VaultSidebar(props: VaultSidebarProps) {
     const history = useHistory();
     const currentVaultState = useHookState(CURRENT_VAULT);
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
-    const { onSelect: handleSelection, selected: selectedItem } = props;
+    const { onSelect: handleSelection, selected: selectedItem, sourceID: selectedSourceID } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [hoveringSource, setHoveringSource] = useState(null);
+    const handleVaultClick = useCallback(sourceID => {
+        setHoveringSource(null);
+        handleSelection("contents", sourceID);
+    }, [handleSelection]);
     const handleVaultLock = useCallback(async () => {
         const sourceID = currentVaultState.get();
         await lockVaultSource(sourceID);
@@ -94,13 +102,13 @@ export function VaultSidebar(props: VaultSidebarProps) {
             >
                 {vaultsState.get().map(vault => (
                     <SidebarButton
-                        active={vault.id === currentVaultState.get()}
+                        active={vault.id === selectedSourceID}
                         icon={(
                             <VaultIcon src={getIconForProvider(vault.type)} />
                         )}
                         key={vault.id}
                         large
-                        onClick={() => handleSelection("contents")}
+                        onClick={() => handleVaultClick(vault.id)}
                         onMouseEnter={() => setHoveringSource(vault.id)}
                         onMouseLeave={() => setHoveringSource(null)}
                         text={(

@@ -4,6 +4,7 @@ interface AppTheme {
     dark: boolean;
     base: {
         bgColor: string;
+        contentBgColor: string;
     };
     sidebar: {
         button: {
@@ -26,7 +27,8 @@ interface AppTheme {
 export const THEME_DARK: AppTheme = {
     dark: true,
     base: {
-        bgColor: Colors.DARK_GRAY4
+        bgColor: Colors.DARK_GRAY4,
+        contentBgColor: Colors.DARK_GRAY3
     },
     sidebar: {
         button: {
@@ -49,7 +51,8 @@ export const THEME_DARK: AppTheme = {
 export const THEME_LIGHT: AppTheme = {
     dark: false,
     base: {
-        bgColor: "#fff"
+        bgColor: "#fff",
+        contentBgColor: Colors.LIGHT_GRAY5
     },
     sidebar: {
         button: {
