@@ -7,6 +7,8 @@ import { shouldShowMainWindow } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
 
+logInfo("Application starting");
+
 const lock = app.requestSingleInstanceLock();
 if (!lock) {
     app.quit();
@@ -27,6 +29,7 @@ app.on("activate", () => {
 // **
 // ** App protocol handling
 // **
+
 app.on("second-instance", async (event, args) => {
     await openMainWindow();
     // Protocol URL for Linux/Windows
@@ -42,7 +45,18 @@ app.on("open-url", (e, url) => {
     }
 });
 
-app.setAsDefaultProtocolClient(BUTTERCUP_PROTOCOL.replace("://", ""));
+{
+    const protocol = BUTTERCUP_PROTOCOL.replace("://", "");
+    if (!app.isDefaultProtocolClient(protocol)) {
+        logInfo(`Registering protocol: ${protocol}`);
+        const protoReg = app.setAsDefaultProtocolClient(protocol);
+        if (!protoReg) {
+            logErr(`Failed registering protocol: ${protocol}`);
+        }
+    } else {
+        logInfo(`Protocol already registered: ${protocol}`);
+    }
+}
 
 // **
 // ** Boot
