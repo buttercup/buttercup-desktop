@@ -74,10 +74,14 @@
         "AppImage"
       ],
       "category": "Utility",
-      "synopsis": "Free and Open Source Password Vault"
-    },
-    "appImage": {
-      "artifactName": "${productName}-${os}-x64.${ext}"
+      "synopsis": "Free and Open Source Password Vault",
+      "artifactName": "${productName}-${os}-x64.${ext}",
+      "desktop": {
+        "Name": "Buttercup Password Manager",
+        "Type": "Application",
+        "Comment": "A free and open-source password management application",
+        "Terminal": "false"
+      }
     },
     "mac": {
       "category": "public.app-category.productivity",
@@ -110,12 +114,10 @@
         "height": 480
       }
     },
-    "protocols": {
-      "name": "Buttercup",
-      "schemes": [
-        "buttercup"
-      ]
-    },
+    "protocols": [{
+      "name": "buttercup",
+      "schemes": ["buttercup"]
+    }],
     "publish": [
       {
         "provider": "github",

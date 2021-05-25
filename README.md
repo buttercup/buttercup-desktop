@@ -107,6 +107,8 @@ _Note that at this time, Buttercup only supports x64 (64 bit) machines._
 
 We provide an **AppImage** build for Linux, because it is the most desirable format for us to release. AppImages support auto-updating, a crucial feature (we feel) for a security application. The other build types do not.
 
+**Important:** Buttercup uses Electron to build its desktop application, which relies on [**AppImageLauncher**](https://github.com/TheAssassin/AppImageLauncher#readme) for correct integration of AppImages into the host OS. Features like **Google Drive** authentication and correct `.desktop` icon use is only performed when integrating via AppImageLauncher. We highly recommend that you install it.
+
 We won't be supporting formats like Snapcraft, deb or rpm images as they do not align with our requirements. Issues requesting these formats will be closed immediately. Discussion on topics like this should be started on other social channels.
 
 ## Development
