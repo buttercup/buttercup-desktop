@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -114,10 +114,14 @@
         "height": 480
       }
     },
-    "protocols": [{
-      "name": "buttercup",
-      "schemes": ["buttercup"]
-    }],
+    "protocols": [
+      {
+        "name": "buttercup",
+        "schemes": [
+          "buttercup"
+        ]
+      }
+    ],
     "publish": [
       {
         "provider": "github",
