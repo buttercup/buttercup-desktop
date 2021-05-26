@@ -1,5 +1,4 @@
-name: Release
-
+name: Win Release
 on: [push]
 
 jobs:
