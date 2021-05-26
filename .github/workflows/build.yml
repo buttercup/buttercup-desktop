@@ -27,4 +27,4 @@ jobs:
           github_token: ${{ secrets.github_token }}
           
       - name: Tree
-        run: cd build && tree /F
+        run: tree /F
