@@ -1,4 +1,5 @@
-name: Win Release
+name: Release
+
 on: [push]
 
 jobs:
@@ -22,6 +23,7 @@ jobs:
       - name: Build & Release app
         uses: samuelmeuli/action-electron-builder@v1
         with:
-          args: "--x64 --ia32 --win portable"
           github_token: ${{ secrets.github_token }}
-          release: true
+          
+      - name: Tree
+        run: tree
