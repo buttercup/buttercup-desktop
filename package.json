@@ -73,7 +73,7 @@
       ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
-      "artifactName": "${productName}-${os}-x64.${ext}",
+      "artifactName": "${productName}-${os}-x86.${ext}",
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
@@ -91,7 +91,7 @@
       "icon": "./resources/build/icon.icns"
     },
     "dmg": {
-      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x86-${version}.${ext}",
       "background": "./resources/build/background@2x.png",
       "icon": "./resources/build/icon.icns",
       "contents": [
@@ -139,12 +139,12 @@
       "publisherName": "MadDev Oy"
     },
     "nsis": {
-      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
+      "artifactName": "${productName}-${os}-x86-${version}-installer.${ext}",
       "perMachine": true,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
+      "artifactName": "${productName}-${os}-x86-${version}-portable.${ext}"
     }
   },
   "dependencies": {
