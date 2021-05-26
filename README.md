@@ -1,3 +1,5 @@
+#  Trying To Add Support For Windows 32bit And Using .zip Insted Of .exe In Portable For Faster Start Up
+
 # Buttercup Desktop
 > Buttercup for Desktop - Mac, Linux and Windows
 
