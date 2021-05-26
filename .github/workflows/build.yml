@@ -27,4 +27,15 @@ jobs:
           github_token: ${{ secrets.github_token }}
           
       - name: Tree
-        run: tree /F
+        run: cd dist && tree /F
+        
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: dist/Buttercup-win-x86-2.5.2-portable.exe
+          asset_name: mything
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+          body: "My Files"
