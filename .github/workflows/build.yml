@@ -29,7 +29,7 @@ jobs:
 
         - os: windows-latest
           NODE_ARCHITECTURE: x86
-          ELECTRON_ARGS: --x86
+          ELECTRON_ARGS: --ia32
 
     steps:
       - name: Check out Git repository
