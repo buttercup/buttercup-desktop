@@ -129,6 +129,7 @@
         },
         "win": {
             "icon": "./resources/build/icon.ico",
+            "artifactName": "${productName}-${os}-${arch}-${version}-portable.${ext}",
             "target": [
                 "nsis",
                 "portable",
@@ -140,12 +141,6 @@
             "artifactName": "${productName}-${os}-${arch}-${version}-installer.${ext}",
             "perMachine": true,
             "include": "./resources/build/installer.nsh"
-        },
-        "zip": {
-            "artifactName": "${productName}-${os}-${arch}-${version}-portable.${ext}"
-        },
-        "portable": {
-            "artifactName": "${productName}-${os}-${arch}-${version}-portable.${ext}"
         }
     },
     "dependencies": {
