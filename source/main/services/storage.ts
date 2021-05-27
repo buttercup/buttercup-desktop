@@ -2,7 +2,19 @@ import path from "path";
 import envPaths from "env-paths";
 import { FileStorage } from "../library/FileStorage";
 
-const ENV_PATHS = envPaths("Buttercup");
+if('BUTTERCUP_HOME_DIR' in process.env) { 
+    const ENV_PATHS = {
+		data: path.join(process.env.BUTTERCUP_HOME_DIR, 'Data'),
+		config: path.join(process.env.BUTTERCUP_CONFIG_DIR || process.env.BUTTERCUP_HOME_DIR, 'Config'),
+		cache: path.join(process.env.BUTTERCUP_HOME_DIR, 'Cache'),
+		log: path.join(process.env.BUTTERCUP_HOME_DIR, 'Log'),
+		temp: path.join(process.env.BUTTERCUP_TEMP_DIR || process.env.BUTTERCUP_HOME_DIR, 'Temp')
+	};
+}
+else { 
+    const ENV_PATHS = envPaths("Buttercup");
+}
+
 const CONFIG_PATH = path.join(ENV_PATHS.config, "desktop.config.json");
 export const LOG_FILENAME = "buttercup-desktop.log";
 export const LOG_PATH = path.join(ENV_PATHS.log, LOG_FILENAME);
