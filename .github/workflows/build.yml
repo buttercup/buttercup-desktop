@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, ubuntu-latest, windows-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest, windows-latest]
         include:
         - os: macos-latest
           NODE_ARCHITECTURE: x64
@@ -22,10 +22,6 @@ jobs:
         - os: ubuntu-latest
           NODE_ARCHITECTURE: x64
           ELECTRON_ARGS: --x64
-
-        - os: ubuntu-latest
-          NODE_ARCHITECTURE: x86
-          ELECTRON_ARGS: --x86
 
         - os: windows-latest
           NODE_ARCHITECTURE: x64
