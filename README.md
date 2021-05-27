@@ -63,6 +63,7 @@ To get the full portability some enviroment variables are suported.
 rem ButtercupLauncher.bat it uses local storage for saving user data, but uses host system temprory folder
 
 @ECHO OFF
+if not exist "%~dp0Buttercup" mkdir "%~dp0Buttercup"
 set "BUTTERCUP_HOME_DIR=%~dp0Buttercup"
 set "BUTTERCUP_TEMP_DIR=%temp%"
 start %~dp0Buttercup.exe %*
