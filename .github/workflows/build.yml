@@ -13,6 +13,7 @@ jobs:
 
     strategy:
       matrix:
+        include:
         os: [macos-latest, ubuntu-latest, ubuntu-latest, windows-latest, windows-latest]
         - os: macos-latest
           NODE_ARCHITECTURE: x64
