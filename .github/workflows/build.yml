@@ -1,6 +1,11 @@
 name: Release
 
-on: [push]
+on:
+  push:
+    branches:
+      - "patch-1" # "!*"
+    tags:
+      - "v*"
 
 jobs:
   release:
@@ -8,7 +13,26 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [macos-latest, ubuntu-latest, ubuntu-latest, windows-latest, windows-latest]
+        - os: macos-latest
+          NODE_ARCHITECTURE: x64
+          ELECTRON_ARGS: --x64
+
+        - os: ubuntu-latest
+          NODE_ARCHITECTURE: x64
+          ELECTRON_ARGS: --x64
+
+        - os: ubuntu-latest
+          NODE_ARCHITECTURE: x86
+          ELECTRON_ARGS: --x86
+
+        - os: windows-latest
+          NODE_ARCHITECTURE: x64
+          ELECTRON_ARGS: --x64
+
+        - os: windows-latest
+          NODE_ARCHITECTURE: x86
+          ELECTRON_ARGS: --x86
 
     steps:
       - name: Check out Git repository
@@ -18,24 +42,29 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-          architecture: 'x86'
+          architecture: ${{matrix.NODE_ARCHITECTURE}}
 
+      - name: Prepare for app notarization
+        if: startsWith(matrix.os, 'macos')
+        # Import Apple API key for app notarization on macOS
+        run: |
+            mkdir -p ~/private_keys/
+            echo '${{ secrets.api_key }}' > ~/private_keys/AuthKey_${{ secrets.api_key_id }}.p8
 
       - name: Build & Release app
         uses: samuelmeuli/action-electron-builder@v1
         with:
+          args: ${{matrix.ELECTRON_ARGS}}
+          mac_certs: ${{ secrets.mac_certs }}
+          mac_certs_password: ${{ secrets.mac_certs_password }}
+          windows_certs: ${{ secrets.windows_certs }}
+          windows_certs_password: ${{ secrets.windows_certs_password }}
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
           github_token: ${{ secrets.github_token }}
-          
-      - name: Tree
-        run: cd dist && tree /F
-        
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/Buttercup-win-x86-2.5.2-portable.exe
-          asset_name: mything
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
-          body: "My Files"
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: true
+        env:
+          API_KEY_ID: ${{ secrets.api_key_id }}
+          API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
