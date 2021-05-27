@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - "patch-1" # "!*"
+      - "!*"
     tags:
       - "v*"
 
@@ -46,7 +46,6 @@ jobs:
         run: |
             mkdir -p ~/private_keys/
             echo '${{ secrets.api_key }}' > ~/private_keys/AuthKey_${{ secrets.api_key_id }}.p8
-
       - name: Build & Release app
         uses: samuelmeuli/action-electron-builder@v1
         with:
@@ -65,14 +64,3 @@ jobs:
           API_KEY_ID: ${{ secrets.api_key_id }}
           API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
-
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/*
-          asset_name: mything
-          tag: ${{ github.ref }}
-          overwrite: true
-          file_glob: true
-          body: "My Files"
