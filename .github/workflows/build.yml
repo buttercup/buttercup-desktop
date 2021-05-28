@@ -74,4 +74,4 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
-          body: "My Files"
+          body: "My Files."
