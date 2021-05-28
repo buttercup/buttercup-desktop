@@ -8,7 +8,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
-import { VaultChooser } from "./components/navigation/VaultChooser";
+import { AutoNav } from "./components/navigation/AutoNav";
 import { LoadingScreen } from "./components/navigation/LoadingScreen";
 import { PasswordPrompt } from "./components/PasswordPrompt";
 import { AddVaultMenu } from "./components/AddVaultMenu";
@@ -43,7 +43,7 @@ export function App() {
                             <VaultManagement />
                         </Route>
                         <Route path="/">
-                            <VaultChooser />
+                            <AutoNav />
                         </Route>
                     </Switch>
                 </Router>

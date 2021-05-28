@@ -7,6 +7,7 @@ import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { getIconForProvider } from "../../library/icons";
+import { sortVaults } from "../../library/vault";
 import { CURRENT_VAULT, VAULTS_LIST, setShowVaultManagement } from "../../state/vaults";
 import { VAULTS_WITH_BIOMETRICS } from "../../state/biometrics";
 import { getThemeProp } from "../../styles/theme";
@@ -83,14 +84,7 @@ export function VaultSidebar(props: VaultSidebarProps) {
     const currentVaultState = useHookState(CURRENT_VAULT);
     const biometricVaultsState = useHookState(VAULTS_WITH_BIOMETRICS);
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
-    const vaults = useMemo(() => [...vaultsState.get()].sort((a, b) => {
-        if (a.order > b.order) {
-            return 1;
-        } else if (b.order > a.order) {
-            return -1;
-        }
-        return 0;
-    }), [vaultsState]);
+    const vaults = useMemo(() => sortVaults([...vaultsState.get()]), [vaultsState]);
     const { onSelect: handleSelection, selected: selectedItem, sourceID: selectedSourceID } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [hoveringSource, setHoveringSource] = useState(null);
