@@ -8,6 +8,7 @@ import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { getIconForProvider } from "../../library/icons";
 import { CURRENT_VAULT, VAULTS_LIST, setShowVaultManagement } from "../../state/vaults";
+import { VAULTS_WITH_BIOMETRICS } from "../../state/biometrics";
 import { getThemeProp } from "../../styles/theme";
 import { t } from "../../../shared/i18n/trans";
 import { VaultSourceDescription } from "../../types";
@@ -80,6 +81,7 @@ const VaultIcon = styled.img`
 export function VaultSidebar(props: VaultSidebarProps) {
     const history = useHistory();
     const currentVaultState = useHookState(CURRENT_VAULT);
+    const biometricVaultsState = useHookState(VAULTS_WITH_BIOMETRICS);
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const vaults = useMemo(() => [...vaultsState.get()].sort((a, b) => {
         if (a.order > b.order) {
@@ -88,7 +90,7 @@ export function VaultSidebar(props: VaultSidebarProps) {
             return -1;
         }
         return 0;
-    }), [vaultsState.get()]);
+    }), [vaultsState]);
     const { onSelect: handleSelection, selected: selectedItem, sourceID: selectedSourceID } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [hoveringSource, setHoveringSource] = useState(null);
@@ -122,7 +124,11 @@ export function VaultSidebar(props: VaultSidebarProps) {
                         text={(
                             <SidebarButtonIcon
                                 color={vault.state === VaultSourceStatus.Locked ? Colors.GRAY1 : Colors.GREEN3}
-                                icon={vault.state === VaultSourceStatus.Locked ? "lock" : "unlock"}
+                                icon={
+                                    vault.state === VaultSourceStatus.Locked
+                                        ? biometricVaultsState.get().includes(vault.id) ? "eye-open" : "lock"
+                                        : "unlock"
+                                }
                                 iconSize={10}
                             />
                         )}

@@ -15,6 +15,7 @@ import {
     applyReadyUpdateState,
     applyUpdateProgress
 } from "./services/update";
+import { updateVaultsBiometricsStates } from "./services/biometrics";
 import { showError, showSuccess, showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
@@ -103,4 +104,5 @@ ipcRenderer.on("update-progress", (evt, prog) => {
 ipcRenderer.on("vaults-list", (evt, payload) => {
     const vaults = JSON.parse(payload) as Array<VaultSourceDescription>;
     setVaultsList(vaults);
+    updateVaultsBiometricsStates(vaults);
 });

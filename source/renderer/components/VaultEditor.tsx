@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
-import { NonIdealState } from "@blueprintjs/core";
+import { Button, Intent, NonIdealState, Tag } from "@blueprintjs/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import styled, { ThemeProvider } from "styled-components";
@@ -19,15 +19,27 @@ import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
 
+const BENCH_IMAGE = require("../../../resources/images/bench.png").default;
+
 interface VaultEditorProps {
+    onUnlockRequest: () => void;
     sourceID: string;
 }
 
+const LockedImage = styled.img`
+    max-height: 308px;
+    width: auto;
+`;
 const LockedNonIdealState = styled(NonIdealState)`
     background-color: ${props => getThemeProp(props, "base.contentBgColor")};
+
+    > .bp3-non-ideal-state-visual {
+        margin-bottom: 0;
+    }
 `;
 
 export function VaultEditor(props: VaultEditorProps) {
+    const { onUnlockRequest } = props;
     const currentFacade = useCurrentFacade();
     const vaultListState = useHookState(VAULTS_LIST);
     const savingState = useHookState(SAVING);
@@ -67,9 +79,22 @@ export function VaultEditor(props: VaultEditorProps) {
     if (vaultItem.state !== VaultSourceStatus.Unlocked) {
         return (
             <LockedNonIdealState
-                icon="document-open"
+                icon={
+                    <LockedImage src={BENCH_IMAGE} />
+                }
                 title="Vault Locked"
-                description="This vault is currently locked. Why not unlock it?"
+                action={
+                    <Tag
+                        icon="unlock"
+                        interactive
+                        intent={Intent.PRIMARY}
+                        large
+                        onClick={() => onUnlockRequest()}
+                        round
+                    >
+                        {vaultItem.name}
+                    </Tag>
+                }
             />
         );
     }

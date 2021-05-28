@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { VaultSourceStatus } from "buttercup";
+import { VaultSourceID, VaultSourceStatus } from "buttercup";
 import { useState as useHookState } from "@hookstate/core";
 import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
@@ -31,7 +31,13 @@ export function VaultManagement() {
     const history = useHistory();
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<VaultSidebarItem>("contents");
-    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem, sourceID?: string) => {
+    const handleSourceUnlockRequest = useCallback((sourceID: VaultSourceID) => {
+        const vault = vaultsState.get().find(vault => vault.id === sourceID);
+        if (vault.state === VaultSourceStatus.Locked) {
+            unlockVaultSource(sourceID).catch(handleError);
+        }
+    }, [vaultsState]);
+    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem, sourceID?: VaultSourceID) => {
         setSelectedSidebarItem(item);
         if (sourceID) {
             history.push(`/source/${sourceID}`);
@@ -40,7 +46,7 @@ export function VaultManagement() {
                 unlockVaultSource(sourceID).catch(handleError);
             }
         }
-    }, []);
+    }, [vaultsState]);
     return (
         <PrimaryContainer>
             <SearchProvider>
@@ -52,7 +58,9 @@ export function VaultManagement() {
                 <ContentContainer>
                     {id && (
                         <ErrorBoundary>
-                            {selectedSidebarItem === "contents" && <VaultEditor sourceID={id} />}
+                            {selectedSidebarItem === "contents" && (
+                                <VaultEditor onUnlockRequest={() => handleSourceUnlockRequest(id)} sourceID={id} />
+                            )}
                         </ErrorBoundary>
                     )}
                 </ContentContainer>
