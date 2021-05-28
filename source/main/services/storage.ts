@@ -2,13 +2,13 @@ import path from "path";
 import envPaths from "env-paths";
 import { FileStorage } from "../library/FileStorage";
 
-if ('BUTTERCUP_HOME_DIR' in process.env) {
+if ("BUTTERCUP_HOME_DIR" in process.env) {
     var ENV_PATHS = {
-		data: path.join(process.env.BUTTERCUP_HOME_DIR, 'Data'),
-		config: path.join(process.env.BUTTERCUP_CONFIG_DIR || process.env.BUTTERCUP_HOME_DIR, 'Config'),
-		cache: path.join(process.env.BUTTERCUP_HOME_DIR, 'Cache'),
-		log: path.join(process.env.BUTTERCUP_HOME_DIR, 'Log'),
-		temp: path.join(process.env.BUTTERCUP_TEMP_DIR || process.env.BUTTERCUP_HOME_DIR, 'Temp')
+		data: path.join(process.env.BUTTERCUP_HOME_DIR, "data"),
+		config: path.join(process.env.BUTTERCUP_CONFIG_DIR || process.env.BUTTERCUP_HOME_DIR, "config"),
+		cache: path.join(process.env.BUTTERCUP_HOME_DIR, "cache"),
+		log: path.join(process.env.BUTTERCUP_HOME_DIR, "log"),
+		temp: path.join(process.env.BUTTERCUP_TEMP_DIR || process.env.BUTTERCUP_HOME_DIR, "temp")
 	};
 }
 else { 
