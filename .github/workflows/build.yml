@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - "!*"
+      - "patch-1"
     tags:
       - "v*"
 
