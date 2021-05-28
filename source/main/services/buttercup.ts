@@ -169,6 +169,12 @@ export function sendSourcesToWindows() {
     }
 }
 
+export async function setSourceOrder(sourceID: VaultSourceID, newOrder: number) {
+    const vaultManager = getVaultManager();
+    await vaultManager.reorderSource(sourceID, newOrder);
+    await vaultManager.dehydrate();
+}
+
 export async function testSourceMasterPassword(
     sourceID: VaultSourceID,
     password: string

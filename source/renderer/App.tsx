@@ -18,6 +18,7 @@ import { FileHostConnectionNotice } from "./components/FileHostConnectionNotice"
 import { CreateNewFilePrompt } from "./components/CreateNewFilePrompt";
 import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
+import { VaultManagementDialog } from "./components/standalone/VaultManagementDialog";
 import { BiometricRegistrationDialog } from "./components/BiometricRegistrationDialog";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
@@ -54,6 +55,7 @@ export function App() {
                     <PreferencesDialog />
                     <UpdateDialog />
                     <AboutDialog />
+                    <VaultManagementDialog />
                     <BiometricRegistrationDialog />
                     <Notifications />
                     <LoadingScreen />

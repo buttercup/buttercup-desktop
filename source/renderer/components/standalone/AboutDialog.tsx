@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Card, Classes, Dialog, Intent } from "@blueprintjs/core";
+import { Button, Card, Classes, Dialog } from "@blueprintjs/core";
 import { SHOW_ABOUT } from "../../state/about";
 import { CORE_VERSION, VERSION } from "../../library/version";
 import { logErr } from "../../library/log";

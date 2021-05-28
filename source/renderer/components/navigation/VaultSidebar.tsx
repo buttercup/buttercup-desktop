@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { VaultSourceStatus } from "buttercup";
@@ -7,7 +7,7 @@ import { Popover2 as Popover } from "@blueprintjs/popover2";
 import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { getIconForProvider } from "../../library/icons";
-import { CURRENT_VAULT, VAULTS_LIST } from "../../state/vaults";
+import { CURRENT_VAULT, VAULTS_LIST, setShowVaultManagement } from "../../state/vaults";
 import { getThemeProp } from "../../styles/theme";
 import { t } from "../../../shared/i18n/trans";
 import { VaultSourceDescription } from "../../types";
@@ -81,6 +81,14 @@ export function VaultSidebar(props: VaultSidebarProps) {
     const history = useHistory();
     const currentVaultState = useHookState(CURRENT_VAULT);
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
+    const vaults = useMemo(() => [...vaultsState.get()].sort((a, b) => {
+        if (a.order > b.order) {
+            return 1;
+        } else if (b.order > a.order) {
+            return -1;
+        }
+        return 0;
+    }), [vaultsState.get()]);
     const { onSelect: handleSelection, selected: selectedItem, sourceID: selectedSourceID } = props;
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [hoveringSource, setHoveringSource] = useState(null);
@@ -100,7 +108,7 @@ export function VaultSidebar(props: VaultSidebarProps) {
                 minimal
                 vertical
             >
-                {vaultsState.get().map(vault => (
+                {vaults.map(vault => (
                     <SidebarButton
                         active={vault.id === selectedSourceID}
                         icon={(
@@ -184,6 +192,11 @@ export function VaultSidebar(props: VaultSidebarProps) {
                                 text={t("vault-sidebar.options-popup.choose-vault")}
                                 icon="menu"
                                 onClick={() => history.push("/")}
+                            />
+                            <MenuItem
+                                text={t("vault-sidebar.options-popup.manage-vaults")}
+                                icon="numbered-list"
+                                onClick={() => setShowVaultManagement(true)}
                             />
                         </Menu>
                     }

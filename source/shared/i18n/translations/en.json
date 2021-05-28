@@ -276,7 +276,8 @@
     "vault-sidebar": {
         "options-popup": {
             "choose-vault": "Choose vault",
-            "lock-current-vault": "Lock current vault"
+            "lock-current-vault": "Lock current vault",
+            "manage-vaults": "Manage vaults"
         },
         "vault-contents": "Vault contents"
     }
