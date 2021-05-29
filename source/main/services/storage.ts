@@ -14,11 +14,11 @@ if ("BUTTERCUP_HOME_DIR" in process.env) {
 else { 
     const TEMP_ENV_PATHS = envPaths("Buttercup");
     var ENV_PATHS = {
-		data: TEMP_ENV_PATHS.log,
+		data: TEMP_ENV_PATHS.data,
 		config: TEMP_ENV_PATHS.config,
-		cache: TEMP_ENV_PATHS.log,
+		cache: TEMP_ENV_PATHS.cache,
 		log: TEMP_ENV_PATHS.log,
-		temp: TEMP_ENV_PATHS.log
+		temp: TEMP_ENV_PATHS.temp
 	}
 }
 const CONFIG_PATH = path.join(ENV_PATHS.config, "desktop.config.json");
