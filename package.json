@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.5.2",
+  "version": "2.6.0",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
