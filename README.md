@@ -58,8 +58,10 @@ To get the full portability some enviroment variables are suported.
 | `BUTTERCUP_CONFIG_DIR` | Stores __user settings__, not allways needed but can be used to change config location or will default to BUTTERCUP_HOME_DIR `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
 | `BUTTERCUP_TEMP_DIR`   | Same as BUTTERCUP_CONFIG_DIR but stores __temprory files__ `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
 
-###### Sample ButtercupLauncher.bat for windows portable zip
-###### This example stores user settings and cache on the portable folder, but stores temprory files on the host PC.
+### Sample `ButtercupLauncher.bat` for Windows portable executable
+
+> This example stores user settings and cache on the portable folder, but stores temprory files on the host PC.
+
 ```bat
 @ECHO OFF
 if not exist "%~dp0Buttercup" mkdir "%~dp0Buttercup"
