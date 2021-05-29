@@ -51,6 +51,11 @@
         "webdav-continue": "Następnie",
         "webdav-continue-title": "Połącz za pomocą WebDAV"
     },
+    "add-vault-page": {
+        "cta-button": "Dodaj archiwum",
+        "description": "Nie dodano jeszcze żadnych archiwów...",
+        "title": "Zacznij od początku"
+    },
     "app-menu": {
         "about": "O Buttercup",
         "add-new-vault": "Dodaj nowe",
@@ -233,9 +238,20 @@
             "title": "Usuń archiwum"
         }
     },
+    "vault-management": {
+        "close-button": "Zamknij",
+        "remove-vault-dialog": {
+            "cancel-button": "Anuluj",
+            "cancel-button-title": "Anuluj usunięcie",
+            "description": "Czy na pewno chcesz usunąć archiwum \"{{title}}\"?",
+            "remove-button": "Usuń",
+            "remove-button-title": "Potwierdź usunięcie archiwum",
+            "title": "Usuń archiwum"
+        }
+    },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Wybierz archiwum",
+            "add-vault": "Dodaj archiwum",
             "lock-current-vault": "Zablokuj aktualne archiwum"
         },
         "vault-contents": "Zawartość archiwum"

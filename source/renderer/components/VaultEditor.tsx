@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Intent, NonIdealState, Tag } from "@blueprintjs/core";
+import { Intent, NonIdealState, Tag } from "@blueprintjs/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import styled, { ThemeProvider } from "styled-components";
@@ -10,6 +11,7 @@ import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
 import { toggleAutoUpdate } from "../actions/autoUpdate";
+import { setSelectedSource } from "../services/config";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
 import { logErr, logInfo } from "../library/log";
@@ -40,6 +42,7 @@ const LockedNonIdealState = styled(NonIdealState)`
 
 export function VaultEditor(props: VaultEditorProps) {
     const { onUnlockRequest } = props;
+    const history = useHistory();
     const currentFacade = useCurrentFacade();
     const vaultListState = useHookState(VAULTS_LIST);
     const savingState = useHookState(SAVING);
@@ -60,6 +63,9 @@ export function VaultEditor(props: VaultEditorProps) {
             logErr("Failed toggling auto-update", err);
         });
     }, [currentlyEditing]);
+    useEffect(() => {
+        setSelectedSource(props.sourceID);
+    }, [props.sourceID]);
     // Search
     const {
         resetSelection,
@@ -74,6 +80,15 @@ export function VaultEditor(props: VaultEditorProps) {
             resetSelection();
         };
     }, []);
+    useEffect(() => {
+        if (vaultItem) return;
+        const resetTimer = setTimeout(() => {
+            history.push("/");
+        }, 50);
+        return () => {
+            clearTimeout(resetTimer);
+        };
+    }, [vaultItem]);
     // Optional rendering
     if (!vaultItem) return null;
     if (vaultItem.state !== VaultSourceStatus.Unlocked) {
@@ -82,7 +97,7 @@ export function VaultEditor(props: VaultEditorProps) {
                 icon={
                     <LockedImage src={BENCH_IMAGE} />
                 }
-                title="Vault Locked"
+                title={t("vault-editor.locked-state")}
                 action={
                     <Tag
                         icon="unlock"

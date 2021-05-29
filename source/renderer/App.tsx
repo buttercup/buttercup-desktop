@@ -9,6 +9,7 @@ import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
 import { AutoNav } from "./components/navigation/AutoNav";
+import { AddVaultLanding } from "./components/AddVaultLanding";
 import { LoadingScreen } from "./components/navigation/LoadingScreen";
 import { PasswordPrompt } from "./components/PasswordPrompt";
 import { AddVaultMenu } from "./components/AddVaultMenu";
@@ -39,6 +40,9 @@ export function App() {
             <BaseContainer>
                 <Router>
                     <Switch>
+                        <Route path="/add-vault">
+                            <AddVaultLanding />
+                        </Route>
                         <Route path="/source/:id">
                             <VaultManagement />
                         </Route>
@@ -46,20 +50,20 @@ export function App() {
                             <AutoNav />
                         </Route>
                     </Switch>
+                    <>
+                        <PasswordPrompt />
+                        <FileHostConnectionNotice />
+                        <CreateNewFilePrompt />
+                        <AddVaultMenu />
+                        <PreferencesDialog />
+                        <UpdateDialog />
+                        <AboutDialog />
+                        <VaultManagementDialog />
+                        <BiometricRegistrationDialog />
+                        <Notifications />
+                        <LoadingScreen />
+                    </>
                 </Router>
-                <>
-                    <PasswordPrompt />
-                    <FileHostConnectionNotice />
-                    <CreateNewFilePrompt />
-                    <AddVaultMenu />
-                    <PreferencesDialog />
-                    <UpdateDialog />
-                    <AboutDialog />
-                    <VaultManagementDialog />
-                    <BiometricRegistrationDialog />
-                    <Notifications />
-                    <LoadingScreen />
-                </>
             </BaseContainer>
         </ThemeProvider>
     );

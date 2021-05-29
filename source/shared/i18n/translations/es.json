@@ -51,6 +51,11 @@
         "webdav-continue": "Siguiente",
         "webdav-continue-title": "Conectar usando WebDAV"
     },
+    "add-vault-page": {
+        "cta-button": "Añadir cofre",
+        "description": "Aún no se han añadido cofres...",
+        "title": "Primeros pasos"
+    },
     "app-menu": {
         "about": "Acerca de",
         "add-new-vault": "Añadir nuevo",
@@ -273,9 +278,21 @@
             "title": "Retirar cofre"
         }
     },
+    "vault-management": {
+        "close-button": "Cerrar",
+        "remove-vault-dialog": {
+            "cancel-button": "Cancelar",
+            "cancel-button-title": "Cancelar retiro",
+            "description": "Estás seguro que quieres retirar el cofre \"{{title}}\"?",
+            "remove-button": "Retirar",
+            "remove-button-title": "Confirmar retiro del cofre",
+            "title": "Retirar cofre"
+        },
+        "title": "Cofres"
+    },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Elegir cofre",
+            "add-vault": "Añadir cofre",
             "lock-current-vault": "Bloquear cofre actual"
         },
         "vault-contents": "Contenido del cofre"

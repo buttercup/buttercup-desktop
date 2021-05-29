@@ -8,6 +8,7 @@ import { useState as useHookState } from "@hookstate/core";
 import { lockVaultSource } from "../../actions/lockVault";
 import { getIconForProvider } from "../../library/icons";
 import { sortVaults } from "../../library/vault";
+import { showAddVaultMenu } from "../../state/addVault";
 import { CURRENT_VAULT, VAULTS_LIST, setShowVaultManagement } from "../../state/vaults";
 import { VAULTS_WITH_BIOMETRICS } from "../../state/biometrics";
 import { getThemeProp } from "../../styles/theme";
@@ -189,9 +190,9 @@ export function VaultSidebar(props: VaultSidebarProps) {
                             />
                             <MenuDivider />
                             <MenuItem
-                                text={t("vault-sidebar.options-popup.choose-vault")}
-                                icon="menu"
-                                onClick={() => history.push("/")}
+                                text={t("vault-sidebar.options-popup.add-vault")}
+                                icon="add"
+                                onClick={() => showAddVaultMenu(true)}
                             />
                             <MenuItem
                                 text={t("vault-sidebar.options-popup.manage-vaults")}
