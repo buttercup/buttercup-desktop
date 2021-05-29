@@ -10,8 +10,7 @@ if ("BUTTERCUP_HOME_DIR" in process.env) {
 		log: path.join(process.env.BUTTERCUP_HOME_DIR, "log"),
 		temp: path.join(process.env.BUTTERCUP_TEMP_DIR || process.env.BUTTERCUP_HOME_DIR, "temp")
 	};
-}
-else { 
+} else { 
     const TEMP_ENV_PATHS = envPaths("Buttercup");
     var ENV_PATHS = {
 		data: TEMP_ENV_PATHS.data,
