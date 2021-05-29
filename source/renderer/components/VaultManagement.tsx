@@ -1,11 +1,17 @@
 import React, { useCallback, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { VaultSourceID, VaultSourceStatus } from "buttercup";
+import { useState as useHookState } from "@hookstate/core";
 import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
 import { VaultSearchManager } from "./search/VaultSearchManager";
 import { SearchProvider } from "./search/SearchContext";
+import { VAULTS_LIST } from "../state/vaults";
+import { unlockVaultSource } from "../actions/unlockVault";
+import { handleError } from "../actions/error";
 import { ErrorBoundary } from "./ErrorBoundary";
+import { VaultSourceDescription } from "../types";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -22,21 +28,39 @@ const ContentContainer = styled.div`
 
 export function VaultManagement() {
     const { id = null } = useParams();
+    const history = useHistory();
+    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<VaultSidebarItem>("contents");
-    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem) => {
+    const handleSourceUnlockRequest = useCallback((sourceID: VaultSourceID) => {
+        const vault = vaultsState.get().find(vault => vault.id === sourceID);
+        if (vault.state === VaultSourceStatus.Locked) {
+            unlockVaultSource(sourceID).catch(handleError);
+        }
+    }, [vaultsState]);
+    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem, sourceID?: VaultSourceID) => {
         setSelectedSidebarItem(item);
-    }, []);
+        if (sourceID) {
+            history.push(`/source/${sourceID}`);
+            const vault = vaultsState.get().find(vault => vault.id === sourceID);
+            if (vault.state === VaultSourceStatus.Locked) {
+                unlockVaultSource(sourceID).catch(handleError);
+            }
+        }
+    }, [vaultsState]);
     return (
         <PrimaryContainer>
             <SearchProvider>
                 <VaultSidebar
-                    onSelect={item => handleSidebarItemSelect(item)}
+                    onSelect={handleSidebarItemSelect}
                     selected={selectedSidebarItem}
+                    sourceID={id}
                 />
                 <ContentContainer>
                     {id && (
                         <ErrorBoundary>
-                            {selectedSidebarItem === "contents" && <VaultEditor sourceID={id} />}
+                            {selectedSidebarItem === "contents" && (
+                                <VaultEditor onUnlockRequest={() => handleSourceUnlockRequest(id)} sourceID={id} />
+                            )}
                         </ErrorBoundary>
                     )}
                 </ContentContainer>

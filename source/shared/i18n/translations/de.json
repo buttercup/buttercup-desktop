@@ -51,6 +51,11 @@
         "webdav-continue": "Weiter",
         "webdav-continue-title": "Verbinde via WebDAV"
     },
+    "add-vault-page": {
+        "cta-button": "Füge Tresor hinzu",
+        "description": "Es wurden noch keine Tresor hinzugefügt...",
+        "title": "Ein neuer Start"
+    },
     "app-menu": {
         "about": "Über",
         "add-new-vault": "Füge neuen Tresor hinzu",
@@ -254,14 +259,8 @@
         "ready": "Aktualisierung bereit: {{version}}",
         "view": "Ansicht"
     },
-    "vault-chooser": {
-        "configure-vault": "Konfiguiere Tresor",
-        "configure-vault-hide": "Verstecke Konfiguration",
-        "no-vaults": {
-            "cta-button": "Füge Tresor hinzu",
-            "description": "Es wurden noch keine Tresor hinzugefügt...",
-            "title": "Ein neuer Start"
-        },
+    "vault-management": {
+        "close-button": "Schließen",
         "remove-vault-dialog": {
             "cancel-button": "Abbrechen",
             "cancel-button-title": "Das Entfernen abbrechen",
@@ -269,11 +268,12 @@
             "remove-button": "Entfernen",
             "remove-button-title": "Bestätige das Entfernen des Tresors",
             "title": "Tresor entfernen"
-        }
+        },
+        "title": "Tresore"
     },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Wähle Tresor",
+            "add-vault": "Füge Tresor hinzu",
             "lock-current-vault": "Sperre aktuellen Tresor"
         },
         "vault-contents": "Tresor Inhalte"

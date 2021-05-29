@@ -1,15 +1,15 @@
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Card, Classes, Dialog, Intent } from "@blueprintjs/core";
-import { SHOW_ABOUT } from "../state/about";
-import { CORE_VERSION, VERSION } from "../library/version";
-import { logErr } from "../library/log";
-import { getAppEnvironmentFlags } from "../services/appEnvironment";
-import { t } from "../../shared/i18n/trans";
-import { AppEnvironmentFlags } from "../types";
+import { Button, Card, Classes, Dialog } from "@blueprintjs/core";
+import { SHOW_ABOUT } from "../../state/about";
+import { CORE_VERSION, VERSION } from "../../library/version";
+import { logErr } from "../../library/log";
+import { getAppEnvironmentFlags } from "../../services/appEnvironment";
+import { t } from "../../../shared/i18n/trans";
+import { AppEnvironmentFlags } from "../../types";
 
-const BUTTERCUP_IMG = require("../../../resources/images/buttercup-256.png").default;
+const BUTTERCUP_IMG = require("../../../../resources/images/buttercup-256.png").default;
 
 const AboutContent = styled.div`
     width: 100%;

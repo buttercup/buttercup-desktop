@@ -8,7 +8,8 @@ import styled, { ThemeProvider } from "styled-components";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
-import { VaultChooser } from "./components/navigation/VaultChooser";
+import { AutoNav } from "./components/navigation/AutoNav";
+import { AddVaultLanding } from "./components/AddVaultLanding";
 import { LoadingScreen } from "./components/navigation/LoadingScreen";
 import { PasswordPrompt } from "./components/PasswordPrompt";
 import { AddVaultMenu } from "./components/AddVaultMenu";
@@ -16,8 +17,9 @@ import { PreferencesDialog } from "./components/PreferencesDialog";
 import { Notifications } from "./components/Notifications";
 import { FileHostConnectionNotice } from "./components/FileHostConnectionNotice";
 import { CreateNewFilePrompt } from "./components/CreateNewFilePrompt";
-import { UpdateDialog } from "./components/UpdateDialog";
-import { AboutDialog } from "./components/AboutDialog";
+import { UpdateDialog } from "./components/standalone/UpdateDialog";
+import { AboutDialog } from "./components/standalone/AboutDialog";
+import { VaultManagementDialog } from "./components/standalone/VaultManagementDialog";
 import { BiometricRegistrationDialog } from "./components/BiometricRegistrationDialog";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
@@ -38,26 +40,30 @@ export function App() {
             <BaseContainer>
                 <Router>
                     <Switch>
+                        <Route path="/add-vault">
+                            <AddVaultLanding />
+                        </Route>
                         <Route path="/source/:id">
                             <VaultManagement />
                         </Route>
                         <Route path="/">
-                            <VaultChooser />
+                            <AutoNav />
                         </Route>
                     </Switch>
+                    <>
+                        <PasswordPrompt />
+                        <FileHostConnectionNotice />
+                        <CreateNewFilePrompt />
+                        <AddVaultMenu />
+                        <PreferencesDialog />
+                        <UpdateDialog />
+                        <AboutDialog />
+                        <VaultManagementDialog />
+                        <BiometricRegistrationDialog />
+                        <Notifications />
+                        <LoadingScreen />
+                    </>
                 </Router>
-                <>
-                    <PasswordPrompt />
-                    <FileHostConnectionNotice />
-                    <CreateNewFilePrompt />
-                    <AddVaultMenu />
-                    <PreferencesDialog />
-                    <UpdateDialog />
-                    <AboutDialog />
-                    <BiometricRegistrationDialog />
-                    <Notifications />
-                    <LoadingScreen />
-                </>
             </BaseContainer>
         </ThemeProvider>
     );

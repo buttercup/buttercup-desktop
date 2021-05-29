@@ -51,6 +51,11 @@
         "webdav-continue": "Següent",
         "webdav-continue-title": "Connectar fent servir WebDAV"
     },
+    "add-vault-page": {
+        "cta-button": "Afegir cofre",
+        "description": "Encara no s'han afegit cofres...",
+        "title": "Primeres passes"
+    },
     "app-menu": {
         "about": "Quant a",
         "add-new-vault": "Afegir nou",
@@ -256,14 +261,8 @@
         "ready": "Actualització preparada: {{version}}",
         "view": "Veure"
     },
-    "vault-chooser": {
-        "configure-vault": "Configurar cofre",
-        "configure-vault-hide": "Amagar configuració",
-        "no-vaults": {
-            "cta-button": "Afegir cofre",
-            "description": "Encara no s'han afegit cofres...",
-            "title": "Primeres passes"
-        },
+    "vault-management": {
+        "close-button": "Tancar",
         "remove-vault-dialog": {
             "cancel-button": "Cancel·lar",
             "cancel-button-title": "Cancel·lar retirada",
@@ -271,11 +270,12 @@
             "remove-button": "Retirar",
             "remove-button-title": "Confirmar retirada del cofre",
             "title": "Retirar cofre"
-        }
+        },
+        "title": "Cofres"
     },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Triar cofre",
+            "add-vault": "Afegir cofre",
             "lock-current-vault": "Bloquejar cofre actual"
         },
         "vault-contents": "Contingut del cofre"

@@ -125,7 +125,9 @@ export async function lockAllSources() {
 export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
-    await source.lock();
+    if (source.status === VaultSourceStatus.Unlocked) {
+        await source.lock();
+    }
 }
 
 export async function mergeVaults(targetSourceID: VaultSourceID, incomingVault: Vault) {
@@ -150,6 +152,7 @@ function onVaultSourceUpdated(source: VaultSource) {
 
 export async function removeSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
+    clearFacadeCache(sourceID);
     await vaultManager.removeSource(sourceID);
 }
 
@@ -167,6 +170,12 @@ export function sendSourcesToWindows() {
     for (const win of windows) {
         win.webContents.send("vaults-list", JSON.stringify(sourceDescriptions));
     }
+}
+
+export async function setSourceOrder(sourceID: VaultSourceID, newOrder: number) {
+    const vaultManager = getVaultManager();
+    await vaultManager.reorderSource(sourceID, newOrder);
+    await vaultManager.dehydrate();
 }
 
 export async function testSourceMasterPassword(

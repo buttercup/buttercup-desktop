@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
-import { getCurrentSourceID, setVaultsList } from "./state/vaults";
+import { getCurrentSourceID, setCurrentVault, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
 import { showAbout } from "./state/about";
@@ -10,11 +10,13 @@ import { showRegistrationPrompt } from "./state/biometrics";
 import { setBusy } from "./state/app";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
+import { logInfo } from "./library/log";
 import {
     applyCurrentUpdateState,
     applyReadyUpdateState,
     applyUpdateProgress
 } from "./services/update";
+import { updateVaultsBiometricsStates } from "./services/biometrics";
 import { showError, showSuccess, showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
@@ -102,5 +104,12 @@ ipcRenderer.on("update-progress", (evt, prog) => {
 
 ipcRenderer.on("vaults-list", (evt, payload) => {
     const vaults = JSON.parse(payload) as Array<VaultSourceDescription>;
+    logInfo(`Updated ${vaults.length} vaults from back-end`);
     setVaultsList(vaults);
+    updateVaultsBiometricsStates(vaults);
+    const currentSourceID = getCurrentSourceID();
+    if (currentSourceID && !vaults.find((vault) => vault.id === currentSourceID)) {
+        logInfo("Resetting current vault as it no longer exists on back-end");
+        setCurrentVault(null);
+    }
 });

@@ -63,4 +63,5 @@ export interface VaultSourceDescription {
     name: string;
     state: VaultSourceStatus;
     type: SourceType;
+    order: number;
 }
