@@ -259,23 +259,6 @@
         "ready": "Aktualisierung bereit: {{version}}",
         "view": "Ansicht"
     },
-    "vault-chooser": {
-        "configure-vault": "Konfiguiere Tresor",
-        "configure-vault-hide": "Verstecke Konfiguration",
-        "no-vaults": {
-            "cta-button": "Füge Tresor hinzu",
-            "description": "Es wurden noch keine Tresor hinzugefügt...",
-            "title": "Ein neuer Start"
-        },
-        "remove-vault-dialog": {
-            "cancel-button": "Abbrechen",
-            "cancel-button-title": "Das Entfernen abbrechen",
-            "description": "Bist Du dir sicher, dass Du den Tresor \"{{title}}\" entfernen möchtest?",
-            "remove-button": "Entfernen",
-            "remove-button-title": "Bestätige das Entfernen des Tresors",
-            "title": "Tresor entfernen"
-        }
-    },
     "vault-management": {
         "close-button": "Schließen",
         "remove-vault-dialog": {

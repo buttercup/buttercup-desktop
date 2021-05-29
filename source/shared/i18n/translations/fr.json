@@ -246,23 +246,6 @@
         "ready": "Prêt pour la mise à jour : {{version}}",
         "view": "Voir"
     },
-    "vault-chooser": {
-        "configure-vault": "Configurer le coffre-fort",
-        "configure-vault-hide": "Masquer la configuration",
-        "no-vaults": {
-            "cta-button": "Ajouter un coffre-fort",
-            "description": "Aucun coffre-fort n’a encore été ajouté...",
-            "title": "Premier démarrage"
-        },
-        "remove-vault-dialog": {
-            "cancel-button": "Annuler",
-            "cancel-button-title": "Annuler la suppression",
-            "description": "Êtes-vous certain(e) de vouloir supprimer le coffre-fort \"{{title}}\" ?",
-            "remove-button": "Supprimer",
-            "remove-button-title": "Confirmer la suppression du coffre-fort",
-            "title": "Supprimer le coffre-fort"
-        }
-    },
     "vault-management": {
         "close-button": "Fermer",
         "remove-vault-dialog": {

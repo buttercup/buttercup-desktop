@@ -261,23 +261,6 @@
         "ready": "Update ready: {{version}}",
         "view": "View"
     },
-    "vault-chooser": {
-        "configure-vault": "Configure vault",
-        "configure-vault-hide": "Hide configuration",
-        "no-vaults": {
-            "cta-button": "Add Vault",
-            "description": "No vaults have been added yet...",
-            "title": "A Fresh Start"
-        },
-        "remove-vault-dialog": {
-            "cancel-button": "Cancel",
-            "cancel-button-title": "Cancel removal",
-            "description": "Are you sure that you want to remove the vault \"{{title}}\"?",
-            "remove-button": "Remove",
-            "remove-button-title": "Confirm vault removal",
-            "title": "Remove Vault"
-        }
-    },
     "vault-editor": {
         "locked-state": "Vault Locked"
     },

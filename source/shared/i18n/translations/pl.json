@@ -221,23 +221,6 @@
         "ready": "Aktualizacja gotowa: {{version}}",
         "view": "Widok"
     },
-    "vault-chooser": {
-        "configure-vault": "Skonfiguruj archiwum",
-        "configure-vault-hide": "Ukryj konfigurację",
-        "no-vaults": {
-            "cta-button": "Dodaj archiwum",
-            "description": "Nie dodano jeszcze żadnych archiwów...",
-            "title": "Zacznij od początku"
-        },
-        "remove-vault-dialog": {
-            "cancel-button": "Anuluj",
-            "cancel-button-title": "Anuluj usunięcie",
-            "description": "Czy na pewno chcesz usunąć archiwum \"{{title}}\"?",
-            "remove-button": "Usuń",
-            "remove-button-title": "Potwierdź usunięcie archiwum",
-            "title": "Usuń archiwum"
-        }
-    },
     "vault-management": {
         "close-button": "Zamknij",
         "remove-vault-dialog": {

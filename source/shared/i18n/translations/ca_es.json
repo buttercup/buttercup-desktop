@@ -261,23 +261,6 @@
         "ready": "Actualització preparada: {{version}}",
         "view": "Veure"
     },
-    "vault-chooser": {
-        "configure-vault": "Configurar cofre",
-        "configure-vault-hide": "Amagar configuració",
-        "no-vaults": {
-            "cta-button": "Afegir cofre",
-            "description": "Encara no s'han afegit cofres...",
-            "title": "Primeres passes"
-        },
-        "remove-vault-dialog": {
-            "cancel-button": "Cancel·lar",
-            "cancel-button-title": "Cancel·lar retirada",
-            "description": "Estàs segur que quieres retirar el cofre \"{{title}}\"?",
-            "remove-button": "Retirar",
-            "remove-button-title": "Confirmar retirada del cofre",
-            "title": "Retirar cofre"
-        }
-    },
     "vault-management": {
         "close-button": "Tancar",
         "remove-vault-dialog": {
