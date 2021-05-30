@@ -9,10 +9,10 @@
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
     "format": "prettier --write '{resources,source,test}/**/*.{js,ts}'",
-    "package": "electron-builder --mac --win --linux --x64 -p always",
-    "package:linux": "electron-builder --linux --x64",
-    "package:mac": "electron-builder --mac --x64",
-    "package:win": "electron-builder --win --x64",
+    "package": "electron-builder --mac --win --linux -p always",
+    "package:linux": "electron-builder --linux",
+    "package:mac": "electron-builder --mac",
+    "package:win": "electron-builder --win",
     "release": "run-s build package",
     "start": "npm run start:main",
     "start:main": "electron .",
@@ -75,7 +75,7 @@
       ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
-      "artifactName": "${productName}-${os}-x64.${ext}",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}.${ext}",
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
@@ -134,19 +134,21 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
       "target": [
         "nsis",
-        "portable"
+        "portable",
+        "7z"
       ],
       "publisherName": "MadDev Oy"
     },
     "nsis": {
-      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
       "perMachine": true,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
     }
   },
   "dependencies": {

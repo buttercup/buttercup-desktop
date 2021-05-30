@@ -45,11 +45,30 @@ Buttercup is also available for [Arch via the AUR](https://aur.archlinux.org/pac
 
 Some Arch users have reported the occasional segfault - if you experience this please try [this solution](https://github.com/buttercup/buttercup-desktop/issues/643#issuecomment-413852760) before creating an issue.
 
-#### Portability
+## Portability
 
-Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version.
+Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version and `x64` is the architecture.
 
 Although not explicitly portable, both the Mac **zip** and Linux **AppImage** formats are more or less standalone. They still write to the standard config/log destinations, however.
+
+To get the full portability some enviroment variables are suported.
+| Enviroment Variables   | Description |
+|------------------------|-------------|
+| `BUTTERCUP_HOME_DIR`   | If provided buttercup will use this path for saving __configrations__ , __user settings__ or even __temprorary files__ |
+| `BUTTERCUP_CONFIG_DIR` | Stores __user settings__, not allways needed but can be used to change config location or will default to BUTTERCUP_HOME_DIR `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
+| `BUTTERCUP_TEMP_DIR`   | Same as BUTTERCUP_CONFIG_DIR but stores __temprory files__ `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
+
+### Sample `ButtercupLauncher.bat` for Windows portable executable
+
+> This example stores user settings and cache on the portable folder, but stores temprory files on the host PC.
+
+```bat
+@ECHO OFF
+if not exist "%~dp0Buttercup" mkdir "%~dp0Buttercup"
+set "BUTTERCUP_HOME_DIR=%~dp0Buttercup"
+set "BUTTERCUP_TEMP_DIR=%temp%"
+start %~dp0Buttercup.exe %*
+```
 
 ## Configuration
 
