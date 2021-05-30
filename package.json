@@ -134,23 +134,21 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
       "target": [
-        {
-          "target": "nsis",
-          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
-          "perMachine": true,
-          "include": "./resources/build/installer.nsh"
-        },
-        {
-          "target": "portable",
-          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
-        },
-        {
-          "target": "7z",
-          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
-        }
+        "nsis",
+        "portable",
+        "7z"
       ],
       "publisherName": "MadDev Oy"
+    },
+    "nsis": {
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
+      "perMachine": true,
+      "include": "./resources/build/installer.nsh"
+    },
+    "portable": {
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
     }
   },
   "dependencies": {
