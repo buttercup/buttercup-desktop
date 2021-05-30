@@ -45,13 +45,18 @@ Buttercup is also available for [Arch via the AUR](https://aur.archlinux.org/pac
 
 Some Arch users have reported the occasional segfault - if you experience this please try [this solution](https://github.com/buttercup/buttercup-desktop/issues/643#issuecomment-413852760) before creating an issue.
 
+#### 32bit builds (x86)
+
+There are some 32bit builds available, but please note that these are **not officially supported**. Issues, bug reports and questions regarding 32bit binaries are not allowed and will be closed without notice. PRs to fix 32bit support are permitted.
+
 ## Portability
 
 Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version and `x64` is the architecture.
 
 Although not explicitly portable, both the Mac **zip** and Linux **AppImage** formats are more or less standalone. They still write to the standard config/log destinations, however.
 
-To get the full portability some enviroment variables are suported.
+To make the most of the portable version, some enviroment variables are required:
+
 | Enviroment Variables   | Description |
 |------------------------|-------------|
 | `BUTTERCUP_HOME_DIR`   | If provided buttercup will use this path for saving __configrations__ , __user settings__ or even __temprorary files__ |
