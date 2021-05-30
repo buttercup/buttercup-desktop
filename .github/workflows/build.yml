@@ -75,5 +75,3 @@ jobs:
           overwrite: true
           file_glob: true
           body: "My Files"
-          file_glob: true
-          body: "My Files"
