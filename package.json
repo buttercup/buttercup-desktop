@@ -75,7 +75,7 @@
       ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}.${ext}",
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
@@ -134,18 +134,23 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}",
       "target": [
-        "nsis",
-        "portable",
-        "zip"
+        {
+          "target": "nsis",
+          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
+          "perMachine": true,
+          "include": "./resources/build/installer.nsh"
+        },
+        {
+          "target": "portable",
+          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
+        },
+        {
+          "target": "7z",
+          "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
+        }
       ],
       "publisherName": "MadDev Oy"
-    },
-    "nsis": {
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
-      "perMachine": true,
-      "include": "./resources/build/installer.nsh"
     }
   },
   "dependencies": {
