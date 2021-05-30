@@ -26,9 +26,9 @@ jobs:
           NODE_ARCHITECTURE: x64
           ELECTRON_ARGS: --x64
 
-        - os: windows-latest
-          NODE_ARCHITECTURE: x86
-          ELECTRON_ARGS: --ia32
+        # - os: windows-latest
+        #   NODE_ARCHITECTURE: x86
+        #   ELECTRON_ARGS: --ia32
 
     steps:
       - name: Check out Git repository
