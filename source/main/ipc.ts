@@ -1,4 +1,4 @@
-import { VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
+import { EntryID, VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
 import { BrowserWindow, clipboard, ipcMain } from "electron";
 import { Layerr } from "layerr";
 import {
@@ -11,7 +11,9 @@ import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
 import {
+    deleteAttachment,
     getEmptyVault,
+    getSourceAttachmentsSupport,
     getSourceStatus,
     saveVaultFacade,
     sendSourcesToWindows,
@@ -76,11 +78,6 @@ ipcMain.on("get-empty-vault", async (evt, payload) => {
 ipcMain.on("get-preferences", async (evt, sourceID) => {
     const prefs = await getConfigValue<Preferences>("preferences");
     evt.reply("get-preferences:reply", JSON.stringify(prefs));
-});
-
-ipcMain.on("get-vault-facade", async (evt, sourceID) => {
-    const facade = await getVaultFacade(sourceID);
-    evt.reply("get-vault-facade:reply", JSON.stringify(facade));
 });
 
 ipcMain.on("lock-source", async (evt, payload) => {
@@ -161,6 +158,13 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle(
+    "attachment-delete",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        await deleteAttachment(sourceID, entryID, attachmentID);
+    }
+);
+
 ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
     const supportsBiometrics = await supportsBiometricUnlock();
     if (!supportsBiometrics) return false;
@@ -189,6 +193,8 @@ ipcMain.handle("get-existing-vault-filename", async (evt) => {
     return filename;
 });
 
+ipcMain.handle("get-locale", getOSLocale);
+
 ipcMain.handle("get-new-vault-filename", async (evt) => {
     const win = BrowserWindow.fromWebContents(evt.sender);
     if (!win) {
@@ -205,7 +211,14 @@ ipcMain.handle("get-selected-source", async () => {
     return sourceID;
 });
 
-ipcMain.handle("get-locale", getOSLocale);
+ipcMain.handle("get-vault-facade", async (evt, sourceID) => {
+    const facade = await getVaultFacade(sourceID);
+    const attachments = getSourceAttachmentsSupport(sourceID);
+    return {
+        attachments,
+        facade: JSON.stringify(facade)
+    };
+});
 
 ipcMain.handle("install-update", installUpdate);
 

@@ -1,6 +1,7 @@
 import { BrowserWindow } from "electron";
 import {
     Credentials,
+    EntryID,
     TextDatasource,
     Vault,
     VaultFacade,
@@ -59,6 +60,18 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export async function deleteAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.removeAttachment(entry, attachmentID);
+    await source.save();
+}
+
 export async function exportVault(sourceID: VaultSourceID): Promise<string> {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
@@ -93,6 +106,12 @@ export async function getEmptyVault(password: string): Promise<string> {
     const vault = Vault.createWithDefaults();
     const tds = new TextDatasource(Credentials.fromPassword(password));
     return tds.save(vault.format.getHistory(), creds);
+}
+
+export function getSourceAttachmentsSupport(sourceID: VaultSourceID): boolean {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    return source.supportsAttachments();
 }
 
 export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
