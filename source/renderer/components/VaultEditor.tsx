@@ -6,7 +6,7 @@ import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import styled, { ThemeProvider } from "styled-components";
 import { SearchContext } from "./search/SearchContext";
-import { VAULTS_LIST } from "../state/vaults";
+import { CURRENT_VAULT_ATTACHMENTS, VAULTS_LIST } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
@@ -14,9 +14,11 @@ import { toggleAutoUpdate } from "../actions/autoUpdate";
 import { setSelectedSource } from "../services/config";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
+import { useAttachments } from "../hooks/attachments";
 import { logErr, logInfo } from "../library/log";
 import { getThemeProp } from "../styles/theme";
 import { t } from "../../shared/i18n/trans";
+import { ATTACHMENTS_MAX_SIZE } from "../../shared/symbols";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
@@ -44,8 +46,16 @@ export function VaultEditor(props: VaultEditorProps) {
     const { onUnlockRequest } = props;
     const history = useHistory();
     const currentFacade = useCurrentFacade();
+    const currentSupportsAttachmentsState = useHookState(CURRENT_VAULT_ATTACHMENTS);
     const vaultListState = useHookState(VAULTS_LIST);
     const savingState = useHookState(SAVING);
+    const {
+        addAttachments,
+        attachmentPreviews,
+        deleteAttachment,
+        downloadAttachment,
+        previewAttachment
+    } = useAttachments(props.sourceID);
     const vaultItem = useMemo(() => {
         const vaultList = vaultListState.get();
         return vaultList.find(item => item.id === props.sourceID) || null;
@@ -119,9 +129,16 @@ export function VaultEditor(props: VaultEditorProps) {
             {currentFacade && (
                 <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
                     <VaultProvider
+                        attachments={!!currentSupportsAttachmentsState.get()}
+                        attachmentsMaxSize={ATTACHMENTS_MAX_SIZE}
+                        attachmentPreviews={attachmentPreviews}
                         icons
                         iconsPath="icons"
+                        onAddAttachments={addAttachments}
+                        onDeleteAttachment={deleteAttachment}
+                        onDownloadAttachment={downloadAttachment}
                         onEditing={setCurrentlyEditing}
+                        onPreviewAttachment={previewAttachment}
                         onSelectEntry={setSelectedEntryID}
                         onSelectGroup={setSelectedGroupID}
                         onUpdate={(vaultFacade: VaultFacade) => {

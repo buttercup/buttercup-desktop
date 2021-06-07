@@ -1,6 +1,9 @@
 import { BrowserWindow } from "electron";
 import {
+    AttachmentDetails,
+    AttachmentManager,
     Credentials,
+    EntryID,
     TextDatasource,
     Vault,
     VaultFacade,
@@ -23,6 +26,25 @@ import { SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
+
+export async function addAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    filename: string,
+    type: string,
+    data: Buffer
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.setAttachment(
+        entry,
+        AttachmentManager.newAttachmentID(),
+        data,
+        filename,
+        type
+    );
+}
 
 export async function addVault(
     name: string,
@@ -59,11 +81,45 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export async function deleteAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.removeAttachment(entry, attachmentID);
+    await source.save();
+}
+
 export async function exportVault(sourceID: VaultSourceID): Promise<string> {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
     const exported = await exportVaultToCSV(source.vault);
     return exported;
+}
+
+export async function getAttachmentData(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<Buffer> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachment(entry, attachmentID) as Promise<Buffer>;
+}
+
+export async function getAttachmentDetails(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<AttachmentDetails> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachmentDetails(entry, attachmentID);
 }
 
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
@@ -93,6 +149,12 @@ export async function getEmptyVault(password: string): Promise<string> {
     const vault = Vault.createWithDefaults();
     const tds = new TextDatasource(Credentials.fromPassword(password));
     return tds.save(vault.format.getHistory(), creds);
+}
+
+export function getSourceAttachmentsSupport(sourceID: VaultSourceID): boolean {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    return source.supportsAttachments();
 }
 
 export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
@@ -154,6 +216,12 @@ export async function removeSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     clearFacadeCache(sourceID);
     await vaultManager.removeSource(sourceID);
+}
+
+export async function saveSource(sourceID: VaultSourceID) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    await source.save();
 }
 
 export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFacade): Promise<void> {

@@ -1,5 +1,5 @@
-import { VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
-import { BrowserWindow, clipboard, ipcMain } from "electron";
+import { EntryID, VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
+import { BrowserWindow, clipboard, ipcMain, shell } from "electron";
 import { Layerr } from "layerr";
 import {
     addVaultFromPayload,
@@ -10,9 +10,15 @@ import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
+import { startAttachmentDownload } from "./actions/attachments";
 import {
+    addAttachment,
+    deleteAttachment,
+    getAttachmentData,
     getEmptyVault,
+    getSourceAttachmentsSupport,
     getSourceStatus,
+    saveSource,
     saveVaultFacade,
     sendSourcesToWindows,
     setSourceOrder,
@@ -76,11 +82,6 @@ ipcMain.on("get-empty-vault", async (evt, payload) => {
 ipcMain.on("get-preferences", async (evt, sourceID) => {
     const prefs = await getConfigValue<Preferences>("preferences");
     evt.reply("get-preferences:reply", JSON.stringify(prefs));
-});
-
-ipcMain.on("get-vault-facade", async (evt, sourceID) => {
-    const facade = await getVaultFacade(sourceID);
-    evt.reply("get-vault-facade:reply", JSON.stringify(facade));
 });
 
 ipcMain.on("lock-source", async (evt, payload) => {
@@ -161,6 +162,42 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle(
+    "attachment-add",
+    async (
+        _,
+        sourceID: VaultSourceID,
+        entryID: EntryID,
+        filename: string,
+        type: string,
+        data: Uint8Array
+    ) => {
+        await addAttachment(sourceID, entryID, filename, type, Buffer.from(data.buffer));
+    }
+);
+
+ipcMain.handle(
+    "attachment-delete",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        await deleteAttachment(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-download",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        return startAttachmentDownload(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-get-data",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        const buffer = await getAttachmentData(sourceID, entryID, attachmentID);
+        return new Uint8Array(buffer);
+    }
+);
+
 ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
     const supportsBiometrics = await supportsBiometricUnlock();
     if (!supportsBiometrics) return false;
@@ -189,6 +226,8 @@ ipcMain.handle("get-existing-vault-filename", async (evt) => {
     return filename;
 });
 
+ipcMain.handle("get-locale", getOSLocale);
+
 ipcMain.handle("get-new-vault-filename", async (evt) => {
     const win = BrowserWindow.fromWebContents(evt.sender);
     if (!win) {
@@ -205,11 +244,23 @@ ipcMain.handle("get-selected-source", async () => {
     return sourceID;
 });
 
-ipcMain.handle("get-locale", getOSLocale);
+ipcMain.handle("get-vault-facade", async (evt, sourceID) => {
+    const facade = await getVaultFacade(sourceID);
+    const attachments = getSourceAttachmentsSupport(sourceID);
+    return {
+        attachments,
+        facade: JSON.stringify(facade)
+    };
+});
 
 ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
+
+ipcMain.handle("open-link", (_, link: string) => {
+    logInfo(`Opening external link: ${link}`);
+    shell.openExternal(link);
+});
 
 ipcMain.handle(
     "register-biometric-unlock",
@@ -217,6 +268,10 @@ ipcMain.handle(
         await enableSourceBiometricUnlock(sourceID, password);
     }
 );
+
+ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
+    await saveSource(sourceID);
+});
 
 ipcMain.handle(
     "search-single-vault",
