@@ -3,9 +3,11 @@ import { useCallback, useEffect, useState } from "react";
 import { Layerr } from "layerr";
 import {
     addAttachments as _addAttachments,
-    deleteAttachment as _deleteAttachment
+    deleteAttachment as _deleteAttachment,
+    getAttachmentData as _getAttachmentData
 } from "../actions/attachment";
 import { handleError } from "../actions/error";
+import { arrayBufferToBase64 } from "../library/encoding";
 
 export function useAttachments(sourceID: VaultSourceID) {
     const [attachmentPreviews, setAttachmentPreviews] = useState({});
@@ -63,6 +65,15 @@ export function useAttachments(sourceID: VaultSourceID) {
             //     ...attachmentPreviews,
             //     [attachmentID]: arrayBufferToBase64(attachmentData)
             // });
+            try {
+                const data: Uint8Array = await _getAttachmentData(sourceID, entryID, attachmentID);
+                setAttachmentPreviews({
+                    ...attachmentPreviews,
+                    [attachmentID]: arrayBufferToBase64(data)
+                });
+            } catch (err) {
+                handleError(new Layerr(err, "Failed deleting attachment"));
+            }
         },
         [attachmentPreviews, sourceID]
     );

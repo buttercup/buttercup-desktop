@@ -31,3 +31,17 @@ export async function deleteAttachment(
     await ipcRenderer.invoke("attachment-delete", sourceID, entryID, attachmentID);
     await fetchUpdatedFacade(sourceID);
 }
+
+export async function getAttachmentData(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<Uint8Array> {
+    const uint8Arr = await ipcRenderer.invoke(
+        "attachment-get-data",
+        sourceID,
+        entryID,
+        attachmentID
+    );
+    return uint8Arr;
+}

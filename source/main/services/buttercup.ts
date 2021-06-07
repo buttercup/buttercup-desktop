@@ -99,6 +99,17 @@ export async function exportVault(sourceID: VaultSourceID): Promise<string> {
     return exported;
 }
 
+export async function getAttachmentData(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<Buffer> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachment(entry, attachmentID) as Promise<Buffer>;
+}
+
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);

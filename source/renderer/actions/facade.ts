@@ -8,7 +8,7 @@ export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
         "get-vault-facade",
         sourceID
     );
-    const facade = JSON.parse(rawFacade);
+    const facade: VaultFacade = JSON.parse(rawFacade);
     setCurrentVaultSupportsAttachments(attachments);
     setCurrentVault(sourceID);
     if (!facade) {

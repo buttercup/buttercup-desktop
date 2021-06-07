@@ -13,6 +13,7 @@ import { handleConfigUpdate } from "./actions/config";
 import {
     addAttachment,
     deleteAttachment,
+    getAttachmentData,
     getEmptyVault,
     getSourceAttachmentsSupport,
     getSourceStatus,
@@ -178,6 +179,14 @@ ipcMain.handle(
     "attachment-delete",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
         await deleteAttachment(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-get-data",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        const buffer = await getAttachmentData(sourceID, entryID, attachmentID);
+        return new Uint8Array(buffer);
     }
 );
 
