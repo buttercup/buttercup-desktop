@@ -36,8 +36,14 @@ export async function downloadAttachment(
     sourceID: VaultSourceID,
     entryID: EntryID,
     attachmentID: string
-): Promise<void> {
-    await ipcRenderer.invoke("attachment-download", sourceID, entryID, attachmentID);
+): Promise<boolean> {
+    const downloaded = await ipcRenderer.invoke(
+        "attachment-download",
+        sourceID,
+        entryID,
+        attachmentID
+    );
+    return downloaded;
 }
 
 export async function getAttachmentData(

@@ -186,7 +186,7 @@ ipcMain.handle(
 ipcMain.handle(
     "attachment-download",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
-        await startAttachmentDownload(sourceID, entryID, attachmentID);
+        return startAttachmentDownload(sourceID, entryID, attachmentID);
     }
 );
 
