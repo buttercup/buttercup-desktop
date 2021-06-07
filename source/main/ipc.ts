@@ -172,6 +172,9 @@ ipcMain.handle(
         type: string,
         data: Uint8Array
     ) => {
+        logInfo(
+            `Adding attachment to source/entry (${sourceID}/${entryID}): ${filename} (${type}, ${data.byteLength} bytes)`
+        );
         await addAttachment(sourceID, entryID, filename, type, Buffer.from(data.buffer));
     }
 );
@@ -179,6 +182,7 @@ ipcMain.handle(
 ipcMain.handle(
     "attachment-delete",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        logInfo(`Deleting attachment on source/entry: ${sourceID}/${entryID})`);
         await deleteAttachment(sourceID, entryID, attachmentID);
     }
 );
@@ -186,6 +190,7 @@ ipcMain.handle(
 ipcMain.handle(
     "attachment-download",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        logInfo(`Downloading attachment from source/entry: ${sourceID}/${entryID})`);
         return startAttachmentDownload(sourceID, entryID, attachmentID);
     }
 );
