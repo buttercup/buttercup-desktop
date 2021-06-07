@@ -1,25 +1,21 @@
 import { VaultSourceID } from "buttercup";
 import { useCallback, useEffect, useState } from "react";
-import { deleteAttachment as _deleteAttachment } from "../actions/attachment";
+import { Layerr } from "layerr";
+import {
+    addAttachments as _addAttachments,
+    deleteAttachment as _deleteAttachment
+} from "../actions/attachment";
 import { handleError } from "../actions/error";
 
 export function useAttachments(sourceID: VaultSourceID) {
     const [attachmentPreviews, setAttachmentPreviews] = useState({});
     const addAttachments = useCallback(
         async (entryID, files) => {
-            // const source = vaultManager.sources[0];
-            // const entry = source.vault.findEntryByID(entryID);
-            // for (const file of files) {
-            //   const buff = await file.arrayBuffer();
-            //   await source.attachmentManager.setAttachment(
-            //     entry,
-            //     AttachmentManager.newAttachmentID(),
-            //     buff,
-            //     file.name,
-            //     file.type || 'application/octet-stream'
-            //   );
-            // }
-            // setArchiveFacade(createVaultFacade(source.vault));
+            try {
+                await _addAttachments(sourceID, entryID, files);
+            } catch (err) {
+                handleError(new Layerr(err, "Failed adding attachments"));
+            }
         },
         [sourceID]
     );
@@ -28,7 +24,7 @@ export function useAttachments(sourceID: VaultSourceID) {
             try {
                 await _deleteAttachment(sourceID, entryID, attachmentID);
             } catch (err) {
-                handleError(err);
+                handleError(new Layerr(err, "Failed deleting attachment"));
             }
         },
         [attachmentPreviews, sourceID]

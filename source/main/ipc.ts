@@ -11,10 +11,12 @@ import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
 import {
+    addAttachment,
     deleteAttachment,
     getEmptyVault,
     getSourceAttachmentsSupport,
     getSourceStatus,
+    saveSource,
     saveVaultFacade,
     sendSourcesToWindows,
     setSourceOrder,
@@ -159,6 +161,20 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // **
 
 ipcMain.handle(
+    "attachment-add",
+    async (
+        _,
+        sourceID: VaultSourceID,
+        entryID: EntryID,
+        filename: string,
+        type: string,
+        data: Uint8Array
+    ) => {
+        await addAttachment(sourceID, entryID, filename, type, Buffer.from(data.buffer));
+    }
+);
+
+ipcMain.handle(
     "attachment-delete",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
         await deleteAttachment(sourceID, entryID, attachmentID);
@@ -230,6 +246,10 @@ ipcMain.handle(
         await enableSourceBiometricUnlock(sourceID, password);
     }
 );
+
+ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
+    await saveSource(sourceID);
+});
 
 ipcMain.handle(
     "search-single-vault",

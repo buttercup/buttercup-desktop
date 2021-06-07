@@ -4,7 +4,11 @@ import { setCurrentVault, setCurrentVaultSupportsAttachments } from "../state/va
 import { setCurrentFacade } from "../services/facade";
 
 export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
-    const { attachments, facade } = await ipcRenderer.invoke("get-vault-facade", sourceID);
+    const { attachments, facade: rawFacade } = await ipcRenderer.invoke(
+        "get-vault-facade",
+        sourceID
+    );
+    const facade = JSON.parse(rawFacade);
     setCurrentVaultSupportsAttachments(attachments);
     setCurrentVault(sourceID);
     if (!facade) {

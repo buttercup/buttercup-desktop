@@ -1,5 +1,6 @@
 import { BrowserWindow } from "electron";
 import {
+    AttachmentManager,
     Credentials,
     EntryID,
     TextDatasource,
@@ -24,6 +25,25 @@ import { SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
+
+export async function addAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    filename: string,
+    type: string,
+    data: Buffer
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.setAttachment(
+        entry,
+        AttachmentManager.newAttachmentID(),
+        data,
+        filename,
+        type
+    );
+}
 
 export async function addVault(
     name: string,
@@ -173,6 +193,12 @@ export async function removeSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     clearFacadeCache(sourceID);
     await vaultManager.removeSource(sourceID);
+}
+
+export async function saveSource(sourceID: VaultSourceID) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    await source.save();
 }
 
 export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFacade): Promise<void> {

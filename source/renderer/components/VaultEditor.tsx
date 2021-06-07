@@ -129,7 +129,7 @@ export function VaultEditor(props: VaultEditorProps) {
             {currentFacade && (
                 <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
                     <VaultProvider
-                        attachments={currentSupportsAttachmentsState.get()}
+                        attachments={!!currentSupportsAttachmentsState.get()}
                         attachmentsMaxSize={ATTACHMENTS_MAX_SIZE}
                         attachmentPreviews={attachmentPreviews}
                         icons
