@@ -4,6 +4,7 @@ import { useState as useHookState } from "@hookstate/core";
 import { Button, Card, Classes, Dialog, Intent } from "@blueprintjs/core";
 import { muteCurrentUpdate, startCurrentUpdate } from "../../services/update";
 import { CURRENT_UPDATE, SHOW_UPDATE_DIALOG } from "../../state/update";
+import { openLinkExternally } from "../../actions/link";
 import { t } from "../../../shared/i18n/trans";
 
 const ReleaseHeading = styled.h2`
@@ -24,6 +25,15 @@ export function UpdateDialog() {
         showDialogState.set(false);
         startCurrentUpdate();
     }, []);
+    const updateContentRef = useCallback(node => {
+        const anchors = [...node.getElementsByTagName("a")];
+        anchors.forEach(anchor => {
+            anchor.addEventListener("click", event => {
+                event.preventDefault();
+                openLinkExternally(event.target.href);
+            });
+        });
+    }, []);
     return (
         <Dialog isOpen={showDialogState.get() && !!currentUpdateState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("update.dialog.title", { version })}</div>
@@ -33,7 +43,7 @@ export function UpdateDialog() {
                 )}
                 {currentUpdate && (
                     <Card>
-                        <div dangerouslySetInnerHTML={{ __html: currentUpdate.releaseNotes as string }} />
+                        <div dangerouslySetInnerHTML={{ __html: currentUpdate.releaseNotes as string }} ref={updateContentRef} />
                     </Card>
                 )}
             </div>

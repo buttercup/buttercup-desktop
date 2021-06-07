@@ -1,5 +1,5 @@
 import { EntryID, VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
-import { BrowserWindow, clipboard, ipcMain } from "electron";
+import { BrowserWindow, clipboard, ipcMain, shell } from "electron";
 import { Layerr } from "layerr";
 import {
     addVaultFromPayload,
@@ -256,6 +256,11 @@ ipcMain.handle("get-vault-facade", async (evt, sourceID) => {
 ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
+
+ipcMain.handle("open-link", (_, link: string) => {
+    logInfo(`Opening external link: ${link}`);
+    shell.openExternal(link);
+});
 
 ipcMain.handle(
     "register-biometric-unlock",
