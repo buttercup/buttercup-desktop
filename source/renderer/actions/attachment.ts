@@ -32,6 +32,14 @@ export async function deleteAttachment(
     await fetchUpdatedFacade(sourceID);
 }
 
+export async function downloadAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<void> {
+    await ipcRenderer.invoke("attachment-download", sourceID, entryID, attachmentID);
+}
+
 export async function getAttachmentData(
     sourceID: VaultSourceID,
     entryID: EntryID,

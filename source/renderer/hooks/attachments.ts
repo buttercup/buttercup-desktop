@@ -4,10 +4,13 @@ import { Layerr } from "layerr";
 import {
     addAttachments as _addAttachments,
     deleteAttachment as _deleteAttachment,
+    downloadAttachment as _downloadAttachment,
     getAttachmentData as _getAttachmentData
 } from "../actions/attachment";
 import { handleError } from "../actions/error";
+import { showSuccess } from "../services/notifications";
 import { arrayBufferToBase64 } from "../library/encoding";
+import { t } from "../../shared/i18n/trans";
 
 export function useAttachments(sourceID: VaultSourceID) {
     const [attachmentPreviews, setAttachmentPreviews] = useState({});
@@ -33,38 +36,18 @@ export function useAttachments(sourceID: VaultSourceID) {
     );
     const downloadAttachment = useCallback(
         async (entryID, attachmentID) => {
-            // const source = vaultManager.sources[0];
-            // const entry = source.vault.findEntryByID(entryID);
-            // const attachmentDetails = await source.attachmentManager.getAttachmentDetails(
-            //     entry,
-            //     attachmentID
-            // );
-            // const attachmentData = await source.attachmentManager.getAttachment(entry, attachmentID);
-            // // Download
-            // const blob = new Blob([attachmentData], { type: attachmentDetails.type });
-            // const objectUrl = URL.createObjectURL(blob);
-            // const anchor = document.createElement('a');
-            // anchor.href = objectUrl;
-            // anchor.download = attachmentDetails.name;
-            // document.body.appendChild(anchor);
-            // anchor.click();
-            // setTimeout(() => {
-            //     URL.revokeObjectURL(objectUrl);
-            //     document.body.removeChild(anchor);
-            // }, 0);
+            try {
+                await _downloadAttachment(sourceID, entryID, attachmentID);
+                showSuccess(t("notification.attachment-downloaded"));
+            } catch (err) {
+                handleError(new Layerr(err, "Failed downloading attachment"));
+            }
         },
         [sourceID]
     );
     const previewAttachment = useCallback(
         async (entryID, attachmentID) => {
             if (attachmentPreviews[attachmentID]) return;
-            // const source = vaultManager.sources[0];
-            // const entry = source.vault.findEntryByID(entryID);
-            // const attachmentData = await source.attachmentManager.getAttachment(entry, attachmentID);
-            // setAttachmentPreviews({
-            //     ...attachmentPreviews,
-            //     [attachmentID]: arrayBufferToBase64(attachmentData)
-            // });
             try {
                 const data: Uint8Array = await _getAttachmentData(sourceID, entryID, attachmentID);
                 setAttachmentPreviews({

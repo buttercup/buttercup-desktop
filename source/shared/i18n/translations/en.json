@@ -90,6 +90,10 @@
         }
     },
     "dialog": {
+        "attachment-save": {
+            "confirm-button": "Save",
+            "title": "Download Attachment"
+        },
         "biometric-reg": {
             "button-cancel": "Cancel",
             "button-cancel-title": "Cancel registration",
@@ -184,6 +188,7 @@
     },
     "input-required": "(required)",
     "notification": {
+        "attachment-downloaded": "Attachment saved successfully",
         "biometrics-disabled": "Biometrics disabled for vault",
         "error": {
             "biometrics-disable-failed": "Failed disabling biometrics for vault: {{error}}",

@@ -1,5 +1,6 @@
 import { BrowserWindow } from "electron";
 import {
+    AttachmentDetails,
     AttachmentManager,
     Credentials,
     EntryID,
@@ -108,6 +109,17 @@ export async function getAttachmentData(
     const source = vaultManager.getSourceForID(sourceID);
     const entry = source.vault.findEntryByID(entryID);
     return source.attachmentManager.getAttachment(entry, attachmentID) as Promise<Buffer>;
+}
+
+export async function getAttachmentDetails(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<AttachmentDetails> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachmentDetails(entry, attachmentID);
 }
 
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {

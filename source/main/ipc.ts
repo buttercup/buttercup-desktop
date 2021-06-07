@@ -10,6 +10,7 @@ import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
+import { startAttachmentDownload } from "./actions/attachments";
 import {
     addAttachment,
     deleteAttachment,
@@ -179,6 +180,13 @@ ipcMain.handle(
     "attachment-delete",
     async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
         await deleteAttachment(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-download",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        await startAttachmentDownload(sourceID, entryID, attachmentID);
     }
 );
 
