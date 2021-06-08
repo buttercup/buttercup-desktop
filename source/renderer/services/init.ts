@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import { init } from "buttercup";
 import { logInfo } from "../library/log";
 import { attachUpdatedListener, getThemeType, updateBodyTheme } from "../library/theme";
 import {
@@ -20,6 +21,8 @@ export async function initialise() {
 }
 
 async function initialiseInternal() {
+    logInfo("Initialising Buttercup core");
+    init();
     const preferences = await getPreferences();
     const locale = await getOSLocale();
     const language = getLanguage(preferences, locale);
