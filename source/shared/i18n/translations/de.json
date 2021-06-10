@@ -79,7 +79,9 @@
         "unlocked-vaults": "{{count}} entsperrter Tresor",
         "unlocked-vaults_plural": "{{count}} entsperrte Tresore",
         "vaults": "Tresore",
-        "view": "Ansicht"
+        "view": "Ansicht",
+        "window": "Fenster",
+        "window-reposition": "Fenster zurücksetzen"
     },
     "biometrics": {
         "prompt": {
@@ -88,6 +90,10 @@
         }
     },
     "dialog": {
+        "attachment-save": {
+            "confirm-button": "Speichern",
+            "title": "Anhang herunterladen"
+        },
         "biometric-reg": {
             "button-cancel": "Abbrechen",
             "button-cancel-title": "Registrierung abbrechen",
@@ -182,6 +188,7 @@
     },
     "input-required": "(erforderlich)",
     "notification": {
+        "attachment-downloaded": "Anhang wurde erfolgreich gespeichert",
         "biometrics-disabled": "Biometrie für diesen Tresor deaktiviert",
         "error": {
             "biometrics-disable-failed": "Das Deaktivieren der Biometrie für den Tresor ist fehlgeschlagen: {{error}}",
@@ -259,8 +266,12 @@
         "ready": "Aktualisierung bereit: {{version}}",
         "view": "Ansicht"
     },
+    "vault-editor": {
+        "locked-state": "Tresor gesperrt"
+    },
     "vault-management": {
         "close-button": "Schließen",
+        "close-button-title": "Schließe Tresor-Verwaltung",
         "remove-vault-dialog": {
             "cancel-button": "Abbrechen",
             "cancel-button-title": "Das Entfernen abbrechen",
@@ -274,7 +285,8 @@
     "vault-sidebar": {
         "options-popup": {
             "add-vault": "Füge Tresor hinzu",
-            "lock-current-vault": "Sperre aktuellen Tresor"
+            "lock-current-vault": "Sperre aktuellen Tresor",
+            "manage-vaults": "Tresore verwalten"
         },
         "vault-contents": "Tresor Inhalte"
     }
