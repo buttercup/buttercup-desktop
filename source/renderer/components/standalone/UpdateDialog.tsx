@@ -26,13 +26,16 @@ export function UpdateDialog() {
         startCurrentUpdate();
     }, []);
     const updateContentRef = useCallback(node => {
-        const anchors = [...node.getElementsByTagName("a")];
-        anchors.forEach(anchor => {
-            anchor.addEventListener("click", event => {
-                event.preventDefault();
-                openLinkExternally(event.target.href);
+        if (!node) return;
+        try {
+            const anchors = [...node.getElementsByTagName("a")];
+            anchors.forEach(anchor => {
+                anchor.addEventListener("click", event => {
+                    event.preventDefault();
+                    openLinkExternally(event.target.href);
+                });
             });
-        });
+        } catch (err) {}
     }, []);
     return (
         <Dialog isOpen={showDialogState.get() && !!currentUpdateState.get()} onClose={close}>
