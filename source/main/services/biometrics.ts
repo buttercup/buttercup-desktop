@@ -69,7 +69,6 @@ export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): 
     } catch (e) {
         logWarn("keytar.getPassword failed", e);
     }
-
     return false;
 }
 
