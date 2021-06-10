@@ -63,8 +63,14 @@ export async function getSourcePasswordViaBiometrics(sourceID: VaultSourceID): P
 }
 
 export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): Promise<boolean> {
-    const password = await keytar.getPassword(APP_ID, sourceID);
-    return !!password;
+    try {
+        const password = await keytar.getPassword(APP_ID, sourceID);
+        return !!password;
+    } catch (e) {
+        logWarn("keytar.getPassword failed", e);
+    }
+
+    return false;
 }
 
 export async function supportsBiometricUnlock(): Promise<boolean> {
