@@ -23,8 +23,12 @@ let __eventListenersAttached = false,
 
 function attachEventListeners(updater = autoUpdater) {
     updater.on("error", (err: Error) => {
-        logErr("Error processing update", err);
         __updateErrored = true;
+        if (err?.message === "net::ERR_INTERNET_DISCONNECTED") {
+            logInfo("Update failed due to no internet connection");
+            return;
+        }
+        logErr("Error processing update", err);
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-error", err.message);
@@ -91,7 +95,9 @@ async function checkForUpdateInternal() {
         }
     }
     logInfo("Checking for updates");
-    await autoUpdater.checkForUpdates();
+    try {
+        await autoUpdater.checkForUpdates();
+    } catch (err) {}
 }
 
 export function getCurrentUpdate(): UpdateInfo {
