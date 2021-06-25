@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, Switch } from "@blueprintjs/core";
 import { useState as useHookState } from "@hookstate/core";
+import path from "path-posix";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
@@ -240,7 +241,11 @@ export function AddVaultMenu() {
             setSelectedRemotePath(JSON.stringify([parentIdentifier, identifier]));
             setVaultFilenameOverride(fileName);
         } else {
-            setSelectedRemotePath(identifier);
+            if (!identifier) {
+                setSelectedRemotePath(null);
+            } else {
+                setSelectedRemotePath(path.join(parentIdentifier || "/", identifier));
+            }
         }
         setCreateNew(isNew);
     }, [selectedType]);
