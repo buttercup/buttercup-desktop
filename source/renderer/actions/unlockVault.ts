@@ -20,7 +20,7 @@ export async function unlockVaultSource(sourceID: VaultSourceID): Promise<boolea
             }`
         );
         setBusy(false);
-        return false;
+        unlockVaultSource(sourceID);
     }
     setBusy(false);
     logInfo(`Unlocked source: ${sourceID}`);
