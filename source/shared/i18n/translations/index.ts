@@ -13,6 +13,6 @@ export default {
     de,
     es,
     fr,
-	it,
+    it,
     pl
 };
