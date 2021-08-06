@@ -1,0 +1,293 @@
+{
+    "_": "Romanian (RO)",
+    "about": {
+        "description": "Un manager de parole gratis, open-source și cross-platform.",
+        "dialog": {
+            "close-button": "Închide",
+            "close-button-title": "Închide dialogul \"Despre\""
+        },
+        "title": "Despre",
+        "version": {
+            "core": "Nucleu",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Alege un fișier seif sau creează unul nou:",
+        "choose-type-prompt": "Alege tipul seifului pentru adăugare:",
+        "confirm": {
+            "existing-password": "Introdu parola primară a seifului:",
+            "new-password": "Adaugă o nouă parolă primară pentru seif:",
+            "password-placeholder": "Parola seifului..."
+        },
+        "google-auth-button": "Autentificare",
+        "google-auth-button-title": "Autentificare cu Google Drive",
+        "google-auth-error": "Autentificare Google nereușită",
+        "loader": {
+            "dropbox-auth": "O fereastră separată se va deschide pentru autentificare",
+            "file-prompt": "O fereastră de dialog se va deschide pentru alegerea fișierului seif",
+            "google-auth": {
+                "instr-1": "Poți selecta nivelul permisiunilor pe care Buttercup le va folosi în timp ce-ți accesează contul <strong>Google Drive</strong>.",
+                "instr-2": "Selectând permisiunea <strong>deschisă</strong>, vei permite aplicației Buttercup să acceseze toate fișierele și dosarele contului tău și totodată toate conexiunile împărtășite.",
+                "instr-3": "Selectând permisiunea <i>non-</i>deschisă, vei permite aplicației Buttercup să acceseze doar fișierele pe care le-a creat/accesat anterior.",
+                "perm-label": "Permisiune",
+                "perm-switch": "Deschisă"
+            },
+            "webdav-auth": {
+                "password-label": "Parolă",
+                "password-plc": "Parolă WebDAV",
+                "url-label": "Serviciu WebDAV",
+                "username-label": "Nume de utilizator",
+                "username-plc": "Nume de utilizator WebDAV"
+            }
+        },
+        "page-choose-next": "Continuă",
+        "page-choose-next-title": "Continuă adăugarea seifului",
+        "page-confirm-cancel": "Anulare",
+        "page-confirm-cancel-title": "Anulează deblocarea",
+        "page-confirm-finish": "Adaugă Seiful",
+        "page-confirm-finish-title": "Confirmă adăugarea seifului",
+        "title": "Adaugă Seif",
+        "webdav-continue": "Continuă",
+        "webdav-continue-title": "Conectează-te folosind WebDAV"
+    },
+    "add-vault-page": {
+        "cta-button": "Adaugă Seif",
+        "description": "Niciun seif nu a fost adăugat încă...",
+        "title": "Un Nou Început"
+    },
+    "app-menu": {
+        "about": "Despre",
+        "add-new-vault": "Adaugă Seif Nou",
+        "biometrics": "Folosește deblocarea biometrică",
+        "close-window": "Închide Fereastra",
+        "connection": "Conexiune",
+        "current": "Seif-ul Curent",
+        "debug": "Debug",
+        "devtool": "Devtool",
+        "edit": "Editează",
+        "enable-secure-file-host": "Permite accesul browser-ului",
+        "export": "Exportă",
+        "import": "Importă",
+        "lock-all": "Blochează-le pe Toate",
+        "open": "Deschide",
+        "open-vault": "Deschide Seiful",
+        "preferences": "Preferințe",
+        "quit": "Ieșire",
+        "search": "Caută",
+        "unlock-vault": "Deschide",
+        "unlocked-vaults": "{{count}} seif deblocat",
+        "unlocked-vaults_plural": "{{count}} seifuri deblocate",
+        "vaults": "Seifuri",
+        "view": "Vizualizare",
+        "window": "Fereastră",
+        "window-reposition": "Repoziționare"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "depozitează datele de logare pentru seiful '{{name}}'",
+            "unlock-vault": "deblochează seiful '{{name}}'"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "Salvează",
+            "title": "Descarcă Atașament"
+        },
+        "biometric-reg": {
+            "button-cancel": "Anulează",
+            "button-cancel-title": "Anulează înregistrarea",
+            "button-reg": "Înregistrează",
+            "button-reg-title": "Înregistrează datele biometrice",
+            "label": "Parola Seifului",
+            "placeholder": "Parola seifului...",
+            "success": "Datele biometrice înregistrate cu succes",
+            "title": "Înregistrează Datele Biometrice"
+        },
+        "confirm-generic": {
+            "cancel-button": "Anulează",
+            "confirm-button": "Confirmă"
+        },
+        "export-file-chooser": {
+            "submit-button": "Exportă",
+            "title": "Exportă seiful '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Anulează",
+                "cancel-title": "Anulează procesul de creare a unui nou seif",
+                "confirm": "Stabilește Locația Seifului",
+                "confirm-title": "Confirmă numele noului fișier seif",
+                "description": "Introdu un nume pentru noul seif:",
+                "title": "Adaugă Seif"
+            },
+            "nav": {
+                "cancel-new": "Anulează",
+                "create-new": "Seif Nou"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Seifuri Buttercup",
+                "confirm-button": "Adaugă",
+                "title": "Adaugă Seif Existent"
+            },
+            "add-new": {
+                "bcup-filter": "Seifuri Buttercup",
+                "confirm-button": "Creează",
+                "title": "Adaugă Seif Nou"
+            }
+        },
+        "import-file-chooser": {
+            "submit-button": "Importă",
+            "title": "Importă din seiful {{importer}}"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Închide",
+                "title": "Închide caseta prompt"
+            },
+            "button-existing": {
+                "text": "Încarcă unul existent",
+                "title": "Încarcă un fișier seif existent"
+            },
+            "button-new": {
+                "text": "Creează Nou",
+                "title": "Creează un nou fișier seif"
+            },
+            "prompt": "Dorești să creezi un <i>nou</i> seif, sau să accesezi unul existent?",
+            "title": "Adaugă Fișier Seif"
+        },
+        "password-prompt": {
+            "button-cancel": "Închide",
+            "button-cancel-title": "Anulează deblocarea",
+            "button-unlock": "Deblochează",
+            "button-unlock-title": "Confirmă deblocarea seifului",
+            "label": "Parola Seifului",
+            "placeholder": "Parola seifului...",
+            "title": "Deblochează Seiful"
+        }
+    },
+    "error": {
+        "biometric-invalid-password": "Parola introdusă pentru activarea autentificarea biometrică este invalidă",
+        "biometric-store-failed": "Stocarea datelor biometrice a eșuat",
+        "biometric-unlock-failed": "Deblocarea biometrică a seifului a eșuat",
+        "fatal-boundary": "O eroare fatală s-a produs - ne pare rău ca s-a întamplat așa ceva. Te rugăm, verifică detaliile de jos în caz că ajută la diagnosticarea problemei:"
+    },
+    "file-host": {
+        "code-copied": "Codul gazdei de fișiere a fost copiat",
+        "dialog": {
+            "close-button": "Închide",
+            "close-button-title": "Închide fereastra de dialog a conexiunii",
+            "instruction": {
+                "new-connection": "O nouă conexiune a fost stabilită pentru aplicație, se cere accesul de la distanță a sistemului de fișiere.",
+                "use-code": "Folosește următorul cod pentru a-l autoriza."
+            },
+            "title": "Conexiunea Gazdei Securizată a Fișierelor"
+        }
+    },
+    "input-required": "(necesar)",
+    "notification": {
+        "attachment-downloaded": "Atașamentul a fost salvat cu succes",
+        "biometrics-disabled": "Autentificarea biometrică dezactivată pentru acest seif",
+        "error": {
+            "biometrics-disable-failed": "Eșuare în dezactivarea autentificării biometrice pentru seif: {{error}}",
+            "import-failed": "Importare eșuată: {{error}}",
+            "languages-load": "Eșuare la încărcarea limbilor",
+            "preferences-load": "Eșuare la încărcarea preferințelor",
+            "preferences-save": "Eșuare la salvarea preferințelor",
+            "unknown-error": "Eroare necunoscută",
+            "vault-lock-failed": "Blocarea seifului eșuată",
+            "vault-save-failed": "Eșuare la salvarea seifului",
+            "vault-unlock-failed": "Eșuare la deblocarea seifului"
+        },
+        "export-success": "Seif exportat cu succes: {{name}}",
+        "import-success": "Seif importat cu succes: {{filename}}",
+        "preferences-saved": "Preferințe salvate",
+        "vault-saved": "Seif salvat"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Anulează",
+            "cancel-title": "Anulează actualizarea Preferințelor",
+            "save": "Salvează",
+            "save-title": "Salvează schimbările"
+        },
+        "item": {
+            "clear-clipboard": "Șterge automat clipboard-ul după intervalul de timp",
+            "language": "Limbă",
+            "lock-vaults-after-time": "Blochează seifurile după intervalul de timp",
+            "lock-vaults-after-time-desc": "Blochează automatic seifurile după o perioadă de inactivitate.",
+            "lock-vaults-window-closed": "Blochează seifurile dacă fereastra se închide",
+            "lock-vaults-window-closed-label": "Blochează la închidere",
+            "secure-file-host": {
+                "description": "<strong>Extensia Browser Buttercup</strong> pentru a te conecta la seifurile locale prin această aplicație.",
+                "label": "Activează găzduirea securizată fișierelor",
+                "title": "Găzduirea Securizată a Fișierelor"
+            },
+            "theme": "Temă"
+        },
+        "section": {
+            "connectivity": "Conectivitate",
+            "debug": "Debug",
+            "general": "General",
+            "privacy": "Confidențialitate",
+            "security": "Securitate"
+        },
+        "title": "Preferințe"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Niciun rezultat...",
+            "result-render-error": "Eroare la redarea rezultatului căutării"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Fișier",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Întunecată",
+        "light": "Luminoasă"
+    },
+    "update": {
+        "available": "Actualizare disponibilă: {{version}}",
+        "dialog": {
+            "close-button": "Închide",
+            "close-button-title": "Închide fereastra informațiilor despre actualizare",
+            "title": "Actualizează la {{version}}",
+            "update-button": "Actualizează",
+            "update-button-title": "Actualizează acum aplicația"
+        },
+        "downloaded": "Actualizare descărcată",
+        "installed-restart": "Repornire",
+        "ready": "Actualizare terminată: {{version}}",
+        "view": "Vizualizează"
+    },
+    "vault-editor": {
+        "locked-state": "Seif Blocat"
+    },
+    "vault-management": {
+        "close-button": "Închide",
+        "close-button-title": "Închide fereastra de gestionare a seifurilor",
+        "remove-vault-dialog": {
+            "cancel-button": "Anulează",
+            "cancel-button-title": "Anulează eliminarea",
+            "description": "Ești sigur(ă) că vrei să elimini seiful \"{{title}}\"?",
+            "remove-button": "Elimină",
+            "remove-button-title": "Confirmă eliminarea seifului",
+            "title": "Elimină Seif"
+        },
+        "title": "Seifuri"
+    },
+    "vault-sidebar": {
+        "options-popup": {
+            "add-vault": "Adaugă Seif",
+            "lock-current-vault": "Blochează Seiful Curent",
+            "manage-vaults": "Gestionează seifurile"
+        },
+        "vault-contents": "Conținutul seifului"
+    }
+}
