@@ -278,16 +278,13 @@ ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
     await saveSource(sourceID);
 });
 
-ipcMain.handle(
-    "search-single-vault",
-    async (_, sourceID, term): Promise<Array<SearchResult>> => {
-        const results = await searchSingleVault(sourceID, term);
-        return results.map((res) => ({
-            type: "entry",
-            result: res
-        }));
-    }
-);
+ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
+    const results = await searchSingleVault(sourceID, term);
+    return results.map((res) => ({
+        type: "entry",
+        result: res
+    }));
+});
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
