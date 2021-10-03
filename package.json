@@ -82,7 +82,7 @@
       ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}.${ext}",
+      "artifactName": "${productName}-${os}-${arch}.${ext}",
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
