@@ -1,4 +1,5 @@
-import { ipcRenderer, remote } from "electron";
+import { ipcRenderer } from "electron";
+import { shell } from "@electron/remote";
 import { OAuth2Client } from "@buttercup/google-oauth2-client";
 import { logInfo } from "../library/log";
 import {
@@ -23,7 +24,7 @@ export async function authenticateGoogleDrive(
         prompt: "consent select_account"
     });
     logInfo(`Google Drive: Opening authentication URL: ${url}`);
-    remote.shell.openExternal(url);
+    shell.openExternal(url);
     const authCode = await listenForGoogleAuthCode();
     logInfo("Google Drive:  Received auth code - exchanging for tokens");
     const response = await oauth2Client.exchangeAuthCodeForToken(authCode);

@@ -1,7 +1,5 @@
-import { remote } from "electron";
+import { BrowserWindow } from "@electron/remote";
 import { logInfo } from "../library/log";
-
-const { BrowserWindow } = remote;
 
 export async function authenticate(authURL: string, matchRegex: RegExp): Promise<string | null> {
     const currentWindow = BrowserWindow.getFocusedWindow();

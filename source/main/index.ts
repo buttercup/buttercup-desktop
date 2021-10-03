@@ -1,4 +1,5 @@
 import { app } from "electron";
+import { initialize as initialiseElectronRemote } from "@electron/remote/main";
 import "./ipc";
 import { initialise } from "./services/init";
 import { openMainWindow } from "./services/windows";
@@ -65,6 +66,7 @@ app.on("open-url", (e, url) => {
 app.whenReady()
     .then(() => {
         logInfo("Application ready");
+        initialiseElectronRemote();
     })
     .then(() => initialise())
     .then(() => {

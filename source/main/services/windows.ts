@@ -1,5 +1,6 @@
 import path from "path";
 import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import { enable as enableWebContents } from "@electron/remote/main";
 import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
 import { getConfigValue, setConfigValue } from "./config";
@@ -27,7 +28,6 @@ async function createVaultWindow() {
         icon: getIconPath(),
         webPreferences: {
             contextIsolation: false,
-            enableRemoteModule: true,
             nodeIntegration: true,
             spellcheck: false
         }
@@ -37,6 +37,7 @@ async function createVaultWindow() {
         config.y = y;
     }
     const win = new BrowserWindow(config);
+    enableWebContents(win.webContents);
     win.on("closed", () => {
         win.removeAllListeners();
         handleWindowClosed();
