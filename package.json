@@ -70,8 +70,16 @@
     },
     "linux": {
       "icon": "./resources/build/icons",
-      "target": [
-        "AppImage"
+      "target":
+        [
+          {
+            "target": "appImage",
+            "arch": [
+              "x64",
+              "armv7l",
+              "arm64"
+            ]
+          }
       ],
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
