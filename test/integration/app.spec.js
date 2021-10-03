@@ -2,7 +2,7 @@ const path = require("path");
 const { Application } = require("spectron");
 const electronPath = require("electron");
 
-describe("Buttercup application", function () {
+xdescribe("Buttercup application", function () {
     beforeEach(async function () {
         this.app = new Application({
             path: electronPath,
