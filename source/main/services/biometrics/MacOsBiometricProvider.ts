@@ -1,4 +1,4 @@
-import { BiometricProvider } from "./BiometricProvider";
+import BiometricProvider from "./BiometricProvider";
 import { VaultSourceID } from "buttercup";
 import { logInfo, logWarn } from "../../library/log";
 import { APP_ID } from "../../../shared/symbols";
@@ -18,7 +18,7 @@ export default class MacOsBiometricProvider implements BiometricProvider {
                 `System reported that it did not successfully delete biometric registration for source: ${sourceID}`
             );
         }
-        await updateAppMenu()
+        await updateAppMenu();
     }
 
     public async getSourcePasswordViaBiometrics(sourceID: VaultSourceID): Promise<string> {

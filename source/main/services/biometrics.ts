@@ -2,10 +2,10 @@ import { VaultSourceID } from "buttercup";
 import { Layerr } from "layerr";
 import { testSourceMasterPassword } from "./buttercup";
 import { updateAppMenu } from "../actions/appMenu";
-import { getBiometricProvider } from "./biometrics/BiometricProvider";
+import BiometricProvider from "./biometrics/BiometricProvider";
 
 export async function disableSourceBiometricUnlock(sourceID: VaultSourceID): Promise<void> {
-    return getBiometricProvider().disableSourceBiometricUnlock(sourceID);
+    return BiometricProvider.getInstance().disableSourceBiometricUnlock(sourceID);
 }
 
 export async function enableSourceBiometricUnlock(
@@ -28,17 +28,17 @@ export async function enableSourceBiometricUnlock(
 }
 
 export async function getSourcePasswordViaBiometrics(sourceID: VaultSourceID): Promise<string> {
-    return getBiometricProvider().getSourcePasswordViaBiometrics(sourceID);
+    return BiometricProvider.getInstance().getSourcePasswordViaBiometrics(sourceID);
 }
 
 export async function sourceEnabledForBiometricUnlock(sourceID: VaultSourceID): Promise<boolean> {
-    return getBiometricProvider().sourceEnabledForBiometricUnlock(sourceID);
+    return BiometricProvider.getInstance().sourceEnabledForBiometricUnlock(sourceID);
 }
 
 export async function supportsBiometricUnlock(): Promise<boolean> {
-    return getBiometricProvider().supportsBiometricUnlock();
+    return BiometricProvider.getInstance().supportsBiometricUnlock();
 }
 
 async function storePassword(sourceID: VaultSourceID, password: string): Promise<void> {
-    return getBiometricProvider().storePassword(sourceID, password);
+    return BiometricProvider.getInstance().storePassword(sourceID, password);
 }
