@@ -82,14 +82,7 @@ export default class WindowsBiometricProvider implements BiometricProvider {
      * causes electron to not load unpacked modules.
      */
     public constructor() {
-        if (!PassportModule.available()) return;
-        if (PassportModule.csModuleLocation.includes("\\app.asar\\")) {
-            // This is packaged in an .asar file
-            PassportModule.csModuleLocation = PassportModule.csModuleLocation.replace(
-                "\\app.asar\\",
-                "\\app.asar.unpacked\\"
-            );
-        }
+        PassportModule.electronAsarFix();
     }
 
     /**
