@@ -2,7 +2,6 @@ import BiometricProvider from "./BiometricProvider";
 import { VaultSourceID } from "buttercup";
 import { Layerr } from "layerr";
 
-
 /**
  * A biometric provider dummy.
  * This will be returned on all systems not
