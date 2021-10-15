@@ -1,5 +1,5 @@
 import path from "path";
-import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import { BrowserWindow, BrowserWindowConstructorOptions, shell } from "electron";
 import { enable as enableWebContents } from "@electron/remote/main";
 import { VaultSourceID } from "buttercup";
 import debounce from "debounce";
@@ -50,6 +50,11 @@ async function createVaultWindow() {
         "move",
         debounce(() => handleWindowBoundsUpdate(win), 750, false)
     );
+    win.webContents.on("new-window", (e, url) => {
+        e.preventDefault();
+        logInfo(`Request to open external URL: ${url}`);
+        shell.openExternal(url);
+    });
     const loadedPromise = new Promise<void>((resolve, reject) => {
         const timeout = setTimeout(
             () => reject(new Error("Timed-out waiting for window to load")),
