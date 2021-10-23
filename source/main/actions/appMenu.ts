@@ -89,6 +89,7 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 {
                     label: t("app-menu.lock-all"),
+                    accelerator: isOSX() ? "Cmd+Alt+L" : "Ctrl+Alt+L",
                     click: () => lockAllSources()
                 }
             ]
