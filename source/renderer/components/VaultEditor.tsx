@@ -11,6 +11,7 @@ import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
 import { toggleAutoUpdate } from "../actions/autoUpdate";
+import { userCopiedText } from "../actions/clipboard";
 import { setSelectedSource } from "../services/config";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
@@ -22,7 +23,6 @@ import { ATTACHMENTS_MAX_SIZE } from "../../shared/symbols";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
-import { userCopiedText } from "../actions/clipboard";
 
 const BENCH_IMAGE = require("../../../resources/images/bench.png").default;
 
