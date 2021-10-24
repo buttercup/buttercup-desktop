@@ -5,12 +5,6 @@ import { getConfigValue } from "./config";
 
 let autoVaultLockTimeout: NodeJS.Timeout | null = null;
 
-export function stopAutoVaultLockTimer() {
-    if (autoVaultLockTimeout) {
-        clearTimeout(autoVaultLockTimeout);
-    }
-}
-
 export async function startAutoVaultLockTimer() {
     const { lockVaultsAfterTime } = await getConfigValue<Preferences>("preferences");
     stopAutoVaultLockTimer();
@@ -21,4 +15,10 @@ export async function startAutoVaultLockTimer() {
         logInfo("Timer elapsed. Auto lock all vaults");
         lockAllSources();
     }, lockVaultsAfterTime * 1000);
+}
+
+export function stopAutoVaultLockTimer() {
+    if (autoVaultLockTimeout) {
+        clearTimeout(autoVaultLockTimeout);
+    }
 }
