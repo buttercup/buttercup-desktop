@@ -22,6 +22,7 @@ import { ATTACHMENTS_MAX_SIZE } from "../../shared/symbols";
 import { Theme } from "../types";
 
 import "@buttercup/ui/dist/styles.css";
+import { userCopiedText } from "../actions/clipboard";
 
 const BENCH_IMAGE = require("../../../resources/images/bench.png").default;
 
@@ -141,6 +142,7 @@ export function VaultEditor(props: VaultEditorProps) {
                         onPreviewAttachment={previewAttachment}
                         onSelectEntry={setSelectedEntryID}
                         onSelectGroup={setSelectedGroupID}
+                        onUserCopy={userCopiedText}
                         onUpdate={(vaultFacade: VaultFacade) => {
                             saveVaultFacade(vaultItem.id, vaultFacade);
                         }}
