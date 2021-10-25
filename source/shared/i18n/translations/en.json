@@ -70,7 +70,7 @@
         "export": "Export",
         "import": "Import",
         "lock-all": "Lock All",
-        "lock-vault": "Lock current vault",
+        "lock-current-vault": "Lock current vault",
         "open": "Open",
         "open-vault": "Open Vault",
         "preferences": "Preferences",

@@ -68,7 +68,7 @@
         "edit": "Modifier",
         "enable-secure-file-host": "Activer l’accès par navigateur",
         "lock-all": "Tout verrouiller",
-        "lock-vault": "Verouiller le coffre-fort courant",
+        "lock-current-vault": "Verrouiller le coffre-fort actuel",
         "open": "Ouvrir",
         "open-vault": "Ouvrir le coffre-fort",
         "preferences": "Préférences",

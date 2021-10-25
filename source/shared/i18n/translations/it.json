@@ -70,6 +70,7 @@
         "export": "Esporta",
         "import": "Importa",
         "lock-all": "Blocca tutti",
+        "lock-current-vault": "Blocca l'archivio corrente",
         "open": "Apri",
         "open-vault": "Apri archivio",
         "preferences": "Preferenze",

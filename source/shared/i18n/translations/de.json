@@ -70,6 +70,7 @@
         "export": "Exportieren",
         "import": "Importieren",
         "lock-all": "Sperre Alles",
+        "lock-current-vault": "Sperre aktuellen Tresor",
         "open": "Öffnen",
         "open-vault": "Öffne Tresor",
         "preferences": "Einstellungen",

@@ -146,14 +146,13 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 { type: "separator" },
                 {
-                    label: t("app-menu.lock-vault"),
+                    label: t("app-menu.lock-current-vault"),
                     enabled: !!lastSource,
                     accelerator: isOSX() ? "Cmd+L" : "Ctrl+L",
                     click: async () => {
                         if (lastSource.state !== VaultSourceStatus.Unlocked) {
                             return;
                         }
-
                         return lockSource(lastSource.id);
                     }
                 },
