@@ -70,6 +70,7 @@
         "export": "Exportă",
         "import": "Importă",
         "lock-all": "Blochează-le pe Toate",
+        "lock-current-vault": "Blochează Seiful Curent",
         "open": "Deschide",
         "open-vault": "Deschide Seiful",
         "preferences": "Preferințe",

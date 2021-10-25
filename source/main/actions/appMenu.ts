@@ -1,6 +1,6 @@
 import { Menu } from "electron";
 import { VaultSourceStatus } from "buttercup";
-import { getSourceDescriptions, lockAllSources } from "../services/buttercup";
+import { getSourceDescriptions, lockAllSources, lockSource } from "../services/buttercup";
 import { closeWindows, getMainWindow, openMainWindow } from "../services/windows";
 import { getConfigValue, setConfigValue } from "../services/config";
 import { getLastSourceID } from "../services/lastVault";
@@ -89,6 +89,7 @@ async function getContextMenu(): Promise<Menu> {
                 },
                 {
                     label: t("app-menu.lock-all"),
+                    accelerator: isOSX() ? "Cmd+Alt+L" : "Ctrl+Alt+L",
                     click: () => lockAllSources()
                 }
             ]
@@ -141,6 +142,18 @@ async function getContextMenu(): Promise<Menu> {
                             const window = await openMainWindow(`/source/${lastSourceID}`);
                             window.webContents.send("open-biometric-registration");
                         }
+                    }
+                },
+                { type: "separator" },
+                {
+                    label: t("app-menu.lock-current-vault"),
+                    enabled: !!lastSource,
+                    accelerator: isOSX() ? "Cmd+L" : "Ctrl+L",
+                    click: async () => {
+                        if (lastSource.state !== VaultSourceStatus.Unlocked) {
+                            return;
+                        }
+                        return lockSource(lastSource.id);
                     }
                 },
                 { type: "separator" },

@@ -70,6 +70,7 @@
         "export": "Exportar",
         "import": "Importar",
         "lock-all": "Bloquejar tots",
+        "lock-current-vault": "Bloquejar cofre actual",
         "open": "Obrir",
         "open-vault": "Obrir cofre",
         "preferences": "Preferències",

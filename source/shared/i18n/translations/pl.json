@@ -66,6 +66,7 @@
         "edit": "Edytuj",
         "enable-secure-file-host": "Włącz dostęp przeglądarki",
         "lock-all": "Zablokuj",
+        "lock-current-vault": "Zablokuj aktualne archiwum",
         "open": "Otwórz",
         "open-vault": "Otwórz archiwum",
         "preferences": "Ustawienia",
