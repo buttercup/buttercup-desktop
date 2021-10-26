@@ -11,6 +11,7 @@ import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
 import { toggleAutoUpdate } from "../actions/autoUpdate";
+import { userCopiedText } from "../actions/clipboard";
 import { setSelectedSource } from "../services/config";
 import { useCurrentFacade } from "../hooks/facade";
 import { useTheme } from "../hooks/theme";
@@ -141,6 +142,7 @@ export function VaultEditor(props: VaultEditorProps) {
                         onPreviewAttachment={previewAttachment}
                         onSelectEntry={setSelectedEntryID}
                         onSelectGroup={setSelectedGroupID}
+                        onUserCopy={userCopiedText}
                         onUpdate={(vaultFacade: VaultFacade) => {
                             saveVaultFacade(vaultItem.id, vaultFacade);
                         }}

@@ -23,6 +23,7 @@ import { VaultManagementDialog } from "./components/standalone/VaultManagementDi
 import { BiometricRegistrationDialog } from "./components/BiometricRegistrationDialog";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
+import { userCopiedText } from "./actions/clipboard";
 
 const BaseContainer = styled.div`
     width: 100%;
@@ -37,7 +38,7 @@ export function App() {
         <ThemeProvider
             theme={themeType === Theme.Dark ? THEME_DARK: THEME_LIGHT}
         >
-            <BaseContainer>
+            <BaseContainer onCopy={() => userCopiedText(document.getSelection().toString())}>
                 <Router>
                     <Switch>
                         <Route path="/add-vault">

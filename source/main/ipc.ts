@@ -45,6 +45,7 @@ import {
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
+import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
 
 // **
 // ** IPC Events
@@ -325,4 +326,8 @@ ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: s
 
 ipcMain.handle("write-clipboard", (_, text: string) => {
     clipboard.writeText(text);
+});
+
+ipcMain.handle("copied-into-clipboard", (_, text: string) => {
+    restartAutoClearClipboardTimer(text);
 });

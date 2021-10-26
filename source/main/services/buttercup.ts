@@ -23,6 +23,7 @@ import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
 import { logErr } from "../library/log";
 import { SourceType, VaultSourceDescription } from "../types";
+import { setAutoUpdate } from "./autoLock";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
@@ -255,6 +256,7 @@ export async function testSourceMasterPassword(
 }
 
 export async function toggleAutoUpdate(enable: boolean = true) {
+    setAutoUpdate(enable);
     const vaultManager = getVaultManager();
     await vaultManager.enqueueStateChange(() => {});
     vaultManager.toggleAutoUpdating(enable);
