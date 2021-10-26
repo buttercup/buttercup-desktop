@@ -21,9 +21,9 @@ import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
 import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
+import { setAutoLockEnabled } from "./autoLock";
 import { logErr } from "../library/log";
 import { SourceType, VaultSourceDescription } from "../types";
-import { setAutoUpdate } from "./autoLock";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
@@ -255,11 +255,11 @@ export async function testSourceMasterPassword(
     return source.testMasterPassword(password);
 }
 
-export async function toggleAutoUpdate(enable: boolean = true) {
-    setAutoUpdate(enable);
+export async function toggleAutoUpdate(autoUpdateEnabled: boolean = true) {
+    setAutoLockEnabled(autoUpdateEnabled);
     const vaultManager = getVaultManager();
     await vaultManager.enqueueStateChange(() => {});
-    vaultManager.toggleAutoUpdating(enable);
+    vaultManager.toggleAutoUpdating(autoUpdateEnabled);
 }
 
 export async function unlockSource(sourceID: VaultSourceID, password: string) {
