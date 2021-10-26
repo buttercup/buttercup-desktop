@@ -4,8 +4,12 @@ import { lockAllSources } from "./buttercup";
 import { getConfigValue } from "./config";
 
 let autoVaultLockTimeout: NodeJS.Timeout | null = null;
+let autoUpdate = false;
 
 export async function startAutoVaultLockTimer() {
+    if (!autoUpdate) {
+        return;
+    }
     const { lockVaultsAfterTime } = await getConfigValue<Preferences>("preferences");
     stopAutoVaultLockTimer();
     if (!lockVaultsAfterTime) {
@@ -21,4 +25,8 @@ export function stopAutoVaultLockTimer() {
     if (autoVaultLockTimeout) {
         clearTimeout(autoVaultLockTimeout);
     }
+}
+
+export async function setAutoUpdate(value: boolean) {
+    autoUpdate = value;
 }
