@@ -1,6 +1,6 @@
 import { Preferences } from "../../shared/types";
 import { logInfo } from "../library/log";
-import { lockAllSources } from "./buttercup";
+import { getUnlockedSourcesCount, lockAllSources } from "./buttercup";
 import { getConfigValue } from "./config";
 
 let __autoVaultLockTimeout: NodeJS.Timeout | null = null,
@@ -11,11 +11,12 @@ export async function setAutoLockEnabled(value: boolean) {
 }
 
 export async function startAutoVaultLockTimer() {
+    stopAutoVaultLockTimer();
     if (!__autoLockEnabled) return;
     const { lockVaultsAfterTime } = await getConfigValue<Preferences>("preferences");
-    stopAutoVaultLockTimer();
     if (!lockVaultsAfterTime) return;
     __autoVaultLockTimeout = setTimeout(() => {
+        if (getUnlockedSourcesCount() === 0) return;
         logInfo("Timer elapsed. Auto lock all vaults");
         lockAllSources();
     }, lockVaultsAfterTime * 1000);

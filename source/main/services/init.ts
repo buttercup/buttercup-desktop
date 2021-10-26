@@ -14,6 +14,7 @@ import { startUpdateWatcher } from "./update";
 import { registerGoogleDriveAuthHandlers } from "./googleDrive";
 import { processCLFlags } from "./arguments";
 import { supportsBiometricUnlock } from "./biometrics";
+import { startAutoVaultLockTimer } from "./autoLock";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
@@ -53,5 +54,11 @@ export async function initialise() {
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
     logInfo(`Biometrics: ${supportsBiometricUnlock() ? "yes" : "no"}`);
     setTimeout(() => startUpdateWatcher(), 0);
+    logInfo(
+        `Auto-lock: ${
+            preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "no"
+        }`
+    );
+    startAutoVaultLockTimer();
     logInfo("Initialisation completed");
 }

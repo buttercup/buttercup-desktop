@@ -7,7 +7,6 @@ import { handleProtocolCall } from "./services/protocol";
 import { shouldShowMainWindow } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
-import { startAutoVaultLockTimer, stopAutoVaultLockTimer } from "./services/autoLock";
 
 logInfo("Application starting");
 
@@ -24,7 +23,6 @@ if (!lock) {
 
 app.on("window-all-closed", (event: Event) => {
     event.preventDefault();
-    startAutoVaultLockTimer();
 });
 
 app.on("activate", () => {
@@ -48,14 +46,6 @@ app.on("open-url", (e, url) => {
     if (url.startsWith(BUTTERCUP_PROTOCOL)) {
         handleProtocolCall(url);
     }
-});
-
-app.on("browser-window-blur", () => {
-    startAutoVaultLockTimer();
-});
-
-app.on("browser-window-focus", () => {
-    stopAutoVaultLockTimer();
 });
 
 {

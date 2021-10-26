@@ -164,6 +164,11 @@ export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
     return (source && source.status) || null;
 }
 
+export function getUnlockedSourcesCount(): number {
+    const mgr = getVaultManager();
+    return mgr.unlockedSources.length;
+}
+
 function getVaultManager(): VaultManager {
     if (!__vaultManager) {
         init();

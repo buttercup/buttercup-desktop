@@ -42,10 +42,11 @@ import {
     sourceEnabledForBiometricUnlock,
     supportsBiometricUnlock
 } from "./services/biometrics";
+import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
+import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
-import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
 
 // **
 // ** IPC Events
@@ -311,6 +312,14 @@ ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {
         logInfo("Enabled auto-update");
     } else {
         logInfo("Disabled auto-update");
+    }
+});
+
+ipcMain.handle("trigger-user-presence", async () => {
+    try {
+        await startAutoVaultLockTimer();
+    } catch (err) {
+        logErr(err);
     }
 });
 
