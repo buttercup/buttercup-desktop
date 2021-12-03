@@ -9,7 +9,7 @@ import "../../resources/styles.sass";
 
 const root = document.getElementById("root");
 
-initialise()
+initialise(root)
     .then(() => {
         logInfo("Rendering application");
         ReactDOM.render(<App />, root);

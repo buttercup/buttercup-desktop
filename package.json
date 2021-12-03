@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.0.0-r.6",
+  "version": "2.13.0",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -9,16 +9,17 @@
     "build:renderer": "webpack --config webpack.config.js --mode production",
     "clean": "rimraf build dist",
     "format": "prettier --write '{resources,source,test}/**/*.{js,ts}'",
-    "package": "electron-builder --mac --win --linux --x64 -p always",
-    "package:linux": "electron-builder --linux --x64",
-    "package:mac": "electron-builder --mac --x64",
-    "package:win": "electron-builder --win --x64",
+    "package": "electron-builder --mac --win --linux -p always",
+    "package:linux": "electron-builder --linux",
+    "package:mac": "electron-builder --mac",
+    "package:win": "electron-builder --win",
     "release": "run-s build package",
     "start": "npm run start:main",
     "start:main": "electron .",
     "start:renderer": "concurrently \"tsc --build tsconfig.json -w\" \"webpack --mode development --watch\"",
-    "test": "run-s build:main test:specs test:format",
+    "test": "run-s build test:specs test:integration test:format",
     "test:format": "prettier-check '{resources,source,test}/**/*.{js,ts}'",
+    "test:integration": "mocha --timeout 10000 -r test/index.js 'test/integration/**/*.spec.js'",
     "test:specs": "run-s test:specs:main",
     "test:specs:main": "mocha -r test/main/index.js 'test/main/**/*.spec.js'"
   },
@@ -57,6 +58,47 @@
     "asar": true,
     "productName": "Buttercup",
     "copyright": "Copyright © MadDev Oy",
+    "files": [
+      "build/**/*",
+      "resources/**/*",
+      "package.json"
+    ],
+    "fileAssociations": {
+      "ext": "bcup",
+      "name": "Buttercup Vault",
+      "icon": "./resources/build/icon.icns"
+    },
+    "linux": {
+      "icon": "./resources/build/icons",
+      "target": [
+        {
+          "target": "appImage",
+          "arch": [
+            "x64",
+            "armv7l",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Utility",
+      "synopsis": "Free and Open Source Password Vault",
+      "artifactName": "${productName}-${os}-${arch}.${ext}",
+      "desktop": {
+        "Name": "Buttercup Password Manager",
+        "Type": "Application",
+        "Comment": "A free and open-source password management application",
+        "Terminal": "false"
+      }
+    },
+    "mac": {
+      "category": "public.app-category.productivity",
+      "darkModeSupport": true,
+      "entitlements": "./resources/build/entitlements.plist",
+      "entitlementsInherit": "./resources/build/entitlements.plist",
+      "gatekeeperAssess": false,
+      "hardenedRuntime": true,
+      "icon": "./resources/build/icon.icns"
+    },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "background": "./resources/build/background@2x.png",
@@ -79,48 +121,14 @@
         "height": 480
       }
     },
-    "files": [
-      "build/**/*",
-      "resources/**/*",
-      "package.json"
+    "protocols": [
+      {
+        "name": "buttercup",
+        "schemes": [
+          "buttercup"
+        ]
+      }
     ],
-    "fileAssociations": {
-      "ext": "bcup",
-      "name": "Buttercup Vault",
-      "icon": "./resources/build/icon.icns"
-    },
-    "linux": {
-      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
-      "icon": "./resources/build/icons",
-      "target": [
-        "AppImage"
-      ],
-      "category": "Utility",
-      "synopsis": "Free and Open Source Password Vault"
-    },
-    "mac": {
-      "category": "public.app-category.productivity",
-      "darkModeSupport": true,
-      "entitlements": "./resources/build/entitlements.plist",
-      "entitlementsInherit": "./resources/build/entitlements.plist",
-      "gatekeeperAssess": false,
-      "hardenedRuntime": true,
-      "icon": "./resources/build/icon.icns"
-    },
-    "nsis": {
-      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
-      "perMachine": true,
-      "include": "./resources/build/installer.nsh"
-    },
-    "portable": {
-      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
-    },
-    "protocols": {
-      "name": "Buttercup",
-      "schemes": [
-        "buttercup"
-      ]
-    },
     "publish": [
       {
         "provider": "github",
@@ -133,81 +141,95 @@
     },
     "win": {
       "icon": "./resources/build/icon.ico",
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
       "target": [
         "nsis",
-        "portable"
+        "portable",
+        "7z"
       ],
       "publisherName": "MadDev Oy"
+    },
+    "nsis": {
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
+      "perMachine": true,
+      "include": "./resources/build/installer.nsh"
+    },
+    "portable": {
+      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
     }
   },
   "dependencies": {
     "@buttercup/channel-queue": "^0.5.0",
     "@buttercup/dropbox-client": "^0.5.0",
+    "@buttercup/exporter": "^1.1.0",
     "@buttercup/file-interface": "^0.3.3",
     "@buttercup/google-oauth2-client": "^0.3.0",
     "@buttercup/googledrive-client": "^1.2.0",
+    "@buttercup/importer": "^3.0.1",
     "@buttercup/secure-file-host": "^0.3.0",
-    "buttercup": "^5.13.0",
+    "@electron/remote": "^2.0.1",
+    "buttercup": "^6.2.0",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
     "delayable-setinterval": "^0.1.1",
     "electron-is-dev": "^2.0.0",
-    "electron-updater": "^4.3.8",
+    "electron-updater": "^4.3.9",
     "env-paths": "^2.2.1",
     "eventemitter3": "^4.0.7",
     "execution-time": "^1.4.1",
-    "i18next": "^19.9.1",
-    "keytar": "^7.6.0",
+    "i18next": "^21.2.4",
+    "keytar": "^7.7.0",
     "layerr": "^0.1.2",
     "log-rotate": "^0.2.8",
     "ms": "^2.1.3",
     "nested-property": "^4.0.0",
     "os-locale": "^5.0.0",
     "pify": "^5.0.0",
-    "stacktracey": "^2.0.18",
-    "webdav": "^4.2.1"
+    "stacktracey": "^2.1.7",
+    "webdav": "^4.7.0"
   },
   "devDependencies": {
-    "@blueprintjs/core": "^3.40.0",
-    "@blueprintjs/popover2": "^0.3.1",
-    "@blueprintjs/select": "^3.15.6",
-    "@buttercup/ui": "^4.9.1",
-    "@hookstate/core": "^3.0.6",
-    "@types/node": "^14.14.32",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.1",
-    "@types/styled-components": "^5.1.7",
+    "@blueprintjs/core": "^3.50.4",
+    "@blueprintjs/popover2": "^0.12.4",
+    "@blueprintjs/select": "^3.18.6",
+    "@buttercup/ui": "^5.1.1",
+    "@hookstate/core": "^3.0.13",
+    "@types/node": "^16.10.2",
+    "@types/react": "^17.0.26",
+    "@types/react-dom": "^17.0.9",
+    "@types/styled-components": "^5.1.14",
     "chai": "^4.3.4",
-    "concurrently": "^6.0.0",
+    "concurrently": "^6.3.0",
     "copy-webpack-plugin": "^7.0.0",
-    "css-loader": "^5.1.1",
-    "electron": "^12.0.0",
-    "electron-builder": "^22.10.5",
+    "css-loader": "^6.3.0",
+    "electron": "^15.1.0",
+    "electron-builder": "^22.11.7",
     "electron-builder-notarize": "^1.2.0",
     "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.3.0",
+    "html-webpack-plugin": "^5.3.2",
     "husky": "^4.3.8",
     "lint-staged": "^10.5.4",
-    "mocha": "^8.3.2",
-    "node-sass": "^5.0.0",
+    "mocha": "^9.1.2",
+    "node-sass": "^6.0.1",
     "npm-run-all": "^4.1.5",
     "path-posix": "^1.0.0",
-    "prettier": "^2.2.1",
+    "prettier": "^2.4.1",
     "prettier-check": "^2.0.0",
     "pretty-ms": "^7.0.1",
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-router-dom": "^5.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.3.0",
     "rimraf": "^3.0.2",
-    "sass-loader": "^11.0.1",
-    "sinon": "^10.0.0",
-    "style-loader": "^2.0.0",
-    "styled-components": "^5.2.1",
-    "ts-loader": "^8.0.17",
-    "typescript": "^4.2.3",
-    "webpack": "^5.24.4",
-    "webpack-cli": "^4.5.0"
+    "sass-loader": "^12.1.0",
+    "sinon": "^11.1.2",
+    "spectron": "^15.0.0",
+    "style-loader": "^3.3.0",
+    "styled-components": "^5.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.3",
+    "webpack": "^5.56.0",
+    "webpack-cli": "^4.8.0"
   }
 }

@@ -1,9 +1,8 @@
-import { remote } from "electron";
+import { nativeTheme } from "@electron/remote";
 import * as React from "react";
 import { getThemeType } from "../library/theme";
 import { Theme } from "../types";
 
-const { nativeTheme } = remote;
 const { useEffect, useState } = React;
 
 export function useTheme(): Theme {

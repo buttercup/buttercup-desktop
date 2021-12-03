@@ -36,7 +36,7 @@ export async function saveVaultFacade(sourceID: VaultSourceID, vaultFacade: Vaul
         "save-vault-facade",
         JSON.stringify({
             sourceID,
-            vaultFacade,
+            vaultFacade
         })
     );
     await savePromise;

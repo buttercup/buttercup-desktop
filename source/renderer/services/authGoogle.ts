@@ -1,17 +1,14 @@
-import { ipcRenderer, remote } from "electron";
+import { ipcRenderer } from "electron";
+import { shell } from "@electron/remote";
 import { OAuth2Client } from "@buttercup/google-oauth2-client";
 import { logInfo } from "../library/log";
-import { GOOGLE_AUTH_REDIRECT, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } from "../../shared/symbols";
-
-const GOOGLE_DRIVE_BASE_SCOPES = ["email", "profile"];
-const GOOGLE_DRIVE_SCOPES_STANDARD = [
-    ...GOOGLE_DRIVE_BASE_SCOPES,
-    "https://www.googleapis.com/auth/drive.file", // Per-file access
-];
-const GOOGLE_DRIVE_SCOPES_PERMISSIVE = [
-    ...GOOGLE_DRIVE_BASE_SCOPES,
-    "https://www.googleapis.com/auth/drive",
-];
+import {
+    GOOGLE_AUTH_REDIRECT,
+    GOOGLE_DRIVE_SCOPES_PERMISSIVE,
+    GOOGLE_DRIVE_SCOPES_STANDARD,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET
+} from "../../shared/symbols";
 
 let __googleDriveOAuthClient: OAuth2Client = null;
 
@@ -24,10 +21,10 @@ export async function authenticateGoogleDrive(
     const url = oauth2Client.generateAuthUrl({
         access_type: "offline",
         scope: [...scopes],
-        prompt: "consent select_account",
+        prompt: "consent select_account"
     });
     logInfo(`Google Drive: Opening authentication URL: ${url}`);
-    remote.shell.openExternal(url);
+    shell.openExternal(url);
     const authCode = await listenForGoogleAuthCode();
     logInfo("Google Drive:  Received auth code - exchanging for tokens");
     const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
@@ -35,7 +32,7 @@ export async function authenticateGoogleDrive(
     logInfo("Google Drive: tokens received");
     return {
         accessToken,
-        refreshToken,
+        refreshToken
     };
 }
 
@@ -49,7 +46,7 @@ export async function authenticateGoogleDriveWithRefreshToken(
     logInfo("Refreshed Google Drive token");
     return {
         accessToken: newAccessToken,
-        refreshToken,
+        refreshToken
     };
 }
 

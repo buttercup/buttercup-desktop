@@ -1,7 +1,5 @@
-import { remote } from "electron";
+import { BrowserWindow } from "@electron/remote";
 import { logInfo } from "../library/log";
-
-const { BrowserWindow } = remote;
 
 export async function authenticate(authURL: string, matchRegex: RegExp): Promise<string | null> {
     const currentWindow = BrowserWindow.getFocusedWindow();
@@ -15,8 +13,8 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
             webPreferences: {
                 nodeIntegration: false,
                 webSecurity: false,
-                sandbox: true,
-            },
+                sandbox: true
+            }
         });
 
         authWin.loadURL(authURL);
@@ -26,7 +24,7 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
             const match = url.match(matchRegex);
             if (match !== null && match.length > 0) {
                 foundToken = match[1];
-                authWin.hide();
+                authWin.close();
             }
         };
         const closeCB = () => {
@@ -40,7 +38,7 @@ export async function authenticate(authURL: string, matchRegex: RegExp): Promise
 
         authWin.webContents.on("did-start-navigation", (e, url) => navigateCB(url));
         authWin.webContents.on("will-redirect", (e, url) => navigateCB(url));
-        authWin.on("hide", closeCB);
         authWin.on("close", closeCB);
+        authWin.on("closed", closeCB);
     });
 }

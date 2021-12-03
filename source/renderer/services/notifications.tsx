@@ -62,7 +62,6 @@ export function showSuccess(message: string) {
 }
 
 export function showUpdateAvailable(version: string, onUpdate: () => void, onCancel: () => void) {
-    const key = `upd${Math.floor(Math.random() * 999999)}`;
     const toaster = getUpdateToaster();
     let closed = false;
     toaster.show({
@@ -81,11 +80,10 @@ export function showUpdateAvailable(version: string, onUpdate: () => void, onCan
                 onUpdate();
             },
         }
-    }, key);
+    }, "update-available");
 }
 
 export function showUpdateDownloaded(version: string, onUpdate: () => void, onCancel: () => void) {
-    const key = `upd-down${Math.floor(Math.random() * 999999)}`;
     const toaster = getUpdateToaster();
     let closed = false;
     toaster.show({
@@ -104,7 +102,7 @@ export function showUpdateDownloaded(version: string, onUpdate: () => void, onCa
                 onUpdate();
             },
         }
-    }, key);
+    }, "update-downloaded");
 }
 
 export function showUpdateError(message: string) {

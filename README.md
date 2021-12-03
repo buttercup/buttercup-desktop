@@ -5,8 +5,6 @@
 
 ![Buttercup Desktop](preview.png) ²
 
-# :warning: Buttercup v2 is in pre-release - It will reach its stable release channel soon
-
 ## About
 
 Buttercup is a free, open-source and cross-platform **password manager**, built on NodeJS with Typescript. It uses strong industry-standard encryption to protect your passwords and credentials (among other data you store in Buttercup vaults) at rest, within vault files (`.bcup`). Vaults can be loaded from and saved to a number of sources, such as the **local filesystem**, **Dropbox**, **Google Drive** or any **WebDAV**-enabled service (like _ownCloud_ or _Nextcloud_ ¹).
@@ -47,15 +45,47 @@ Buttercup is also available for [Arch via the AUR](https://aur.archlinux.org/pac
 
 Some Arch users have reported the occasional segfault - if you experience this please try [this solution](https://github.com/buttercup/buttercup-desktop/issues/643#issuecomment-413852760) before creating an issue.
 
-#### Portability
+#### 32bit builds (x86)
 
-Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version.
+There are some 32bit builds available, but please note that these are **not officially supported**. Issues, bug reports and questions regarding 32bit binaries are not allowed and will be closed without notice. PRs to fix 32bit support are permitted.
+
+## Portability
+
+Buttercup provides a portable **Windows** version. Look for the release with the name `Buttercup-win-x64-2.0.0-portable.exe` where `2.0.0` is the version and `x64` is the architecture.
 
 Although not explicitly portable, both the Mac **zip** and Linux **AppImage** formats are more or less standalone. They still write to the standard config/log destinations, however.
+
+To make the most of the portable version, some enviroment variables are required:
+
+| Enviroment Variables   | Description |
+|------------------------|-------------|
+| `BUTTERCUP_HOME_DIR`   | If provided buttercup will use this path for saving __configrations__ , __user settings__ or even __temprorary files__ |
+| `BUTTERCUP_CONFIG_DIR` | Stores __user settings__, not allways needed but can be used to change config location or will default to BUTTERCUP_HOME_DIR `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
+| `BUTTERCUP_TEMP_DIR`   | Same as BUTTERCUP_CONFIG_DIR but stores __temprory files__ `Optional: Only activates if BUTTERCUP_HOME_DIR is provided` |
+
+### Sample `ButtercupLauncher.bat` for Windows portable executable
+
+> This example stores user settings and cache on the portable folder, but stores temprory files on the host PC.
+
+```bat
+@ECHO OFF
+if not exist "%~dp0Buttercup" mkdir "%~dp0Buttercup"
+set "BUTTERCUP_HOME_DIR=%~dp0Buttercup"
+set "BUTTERCUP_TEMP_DIR=%temp%"
+start %~dp0Buttercup.exe %*
+```
 
 ## Configuration
 
 Configuration files are stored in OS-specific locations.
+
+### Command-Line arguments
+
+The following arguments can be provided to Buttercup, but are all optional.
+
+| Argument              | Description                           |
+|-----------------------|---------------------------------------|
+| `--no-window`         | Disables the automatic opening of the main window upon launch. Useful for when Buttercup is automatically started at boot time. |
 
 ### App config
 
@@ -100,6 +130,8 @@ _Note that at this time, Buttercup only supports x64 (64 bit) machines._
 ### Linux
 
 We provide an **AppImage** build for Linux, because it is the most desirable format for us to release. AppImages support auto-updating, a crucial feature (we feel) for a security application. The other build types do not.
+
+**Important:** Buttercup uses Electron to build its desktop application, which relies on [**AppImageLauncher**](https://github.com/TheAssassin/AppImageLauncher#readme) for correct integration of AppImages into the host OS. Features like **Google Drive** authentication and correct `.desktop` icon use is only performed when integrating via AppImageLauncher. We highly recommend that you install it.
 
 We won't be supporting formats like Snapcraft, deb or rpm images as they do not align with our requirements. Issues requesting these formats will be closed immediately. Discussion on topics like this should be started on other social channels.
 

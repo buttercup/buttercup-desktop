@@ -1,25 +1,29 @@
 import { ipcRenderer } from "electron";
+import { init } from "buttercup";
 import { logInfo } from "../library/log";
 import { attachUpdatedListener, getThemeType, updateBodyTheme } from "../library/theme";
 import {
     changeLanguage,
     initialise as initialiseI18n,
-    onLanguageChanged,
+    onLanguageChanged
 } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { getOSLocale } from "./i18n";
 import { getPreferences } from "./preferences";
 import { applyCurrentUpdateState, applyReadyUpdateState } from "./update";
+import { initialisePresence } from "./presence";
 
 let __lastInit: Promise<void> = null;
 
-export async function initialise() {
+export async function initialise(rootElement: HTMLElement) {
     if (__lastInit) return __lastInit;
-    __lastInit = initialiseInternal();
+    __lastInit = initialiseInternal(rootElement);
     return __lastInit;
 }
 
-async function initialiseInternal() {
+async function initialiseInternal(rootElement: HTMLElement) {
+    logInfo("Initialising Buttercup core");
+    init();
     const preferences = await getPreferences();
     const locale = await getOSLocale();
     const language = getLanguage(preferences, locale);
@@ -35,4 +39,5 @@ async function initialiseInternal() {
     updateBodyTheme(getThemeType());
     await applyCurrentUpdateState();
     await applyReadyUpdateState();
+    initialisePresence(rootElement);
 }

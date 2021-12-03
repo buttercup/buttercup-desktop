@@ -28,7 +28,12 @@ interface FileChooserPath {
 }
 
 interface FileChooserProps {
-    callback: (parentIdentifier: string | null, identifier: string | null, isNew: boolean) => void;
+    callback: (
+        parentIdentifier: string | null,
+        identifier: string | null,
+        isNew: boolean,
+        fileName: string | null
+    ) => void;
     fsInterface: FileSystemInterface;
 }
 
@@ -182,7 +187,8 @@ export function FileChooser(props: FileChooserProps) {
         props.callback(
             newVault ? newVault.parentIdentifier : null,
             selectedVaultPath ? selectedVaultPath.identifier : null,
-            !!newVault
+            !!newVault,
+            selectedVaultPath ? selectedVaultPath.name : null
         );
     }, [selectedVaultPath, props.callback, newVault]);
     return (

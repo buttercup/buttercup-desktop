@@ -7,5 +7,6 @@ export function describeSource(source: VaultSource): VaultSourceDescription {
         name: source.name,
         state: source.status,
         type: source.type as SourceType,
+        order: source.order
     };
 }

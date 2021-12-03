@@ -51,6 +51,11 @@
         "webdav-continue": "Suivant",
         "webdav-continue-title": "Se connecter à l’aide de WebDAV"
     },
+    "add-vault-page": {
+        "cta-button": "Ajouter un coffre-fort",
+        "description": "Aucun coffre-fort n’a encore été ajouté...",
+        "title": "Premier démarrage"
+    },
     "app-menu": {
         "about": "À propos",
         "add-new-vault": "Ajouter un nouveau",
@@ -63,6 +68,7 @@
         "edit": "Modifier",
         "enable-secure-file-host": "Activer l’accès par navigateur",
         "lock-all": "Tout verrouiller",
+        "lock-current-vault": "Verrouiller le coffre-fort actuel",
         "open": "Ouvrir",
         "open-vault": "Ouvrir le coffre-fort",
         "preferences": "Préférences",
@@ -80,18 +86,18 @@
             "unlock-vault": "déverrouiller le coffre-fort '{{name}}'"
         }
     },
-"dialog": {
-    "biometric-reg": {
-        "button-cancel": "Annuler",
-        "button-cancel-title": "Annuler l'enregistrement",
-        "button-reg": "Enregistrer",
-        "button-reg-title": "Enregistrement des données biométriques",
-        "label": "Mot de passe du coffre-fort",
-        "placeholder": "Mot de passe du coffre-fort...",
-        "success": "Enregistrement des données biométriques réussi",
-        "title": "Enregistrer les données biométriques"
-    },
-    "confirm-generic": {
+    "dialog": {
+        "biometric-reg": {
+            "button-cancel": "Annuler",
+            "button-cancel-title": "Annuler l'enregistrement",
+            "button-reg": "Enregistrer",
+            "button-reg-title": "Enregistrement des données biométriques",
+            "label": "Mot de passe du coffre-fort",
+            "placeholder": "Mot de passe du coffre-fort...",
+            "success": "Enregistrement des données biométriques réussi",
+            "title": "Enregistrer les données biométriques"
+        },
+        "confirm-generic": {
             "cancel-button": "Annuler",
             "confirm-button": "OK"
         },
@@ -241,14 +247,8 @@
         "ready": "Prêt pour la mise à jour : {{version}}",
         "view": "Voir"
     },
-    "vault-chooser": {
-        "configure-vault": "Configurer le coffre-fort",
-        "configure-vault-hide": "Masquer la configuration",
-        "no-vaults": {
-            "cta-button": "Ajouter un coffre-fort",
-            "description": "Aucun coffre-fort n’a encore été ajouté...",
-            "title": "Premier démarrage"
-        },
+    "vault-management": {
+        "close-button": "Fermer",
         "remove-vault-dialog": {
             "cancel-button": "Annuler",
             "cancel-button-title": "Annuler la suppression",
@@ -256,11 +256,12 @@
             "remove-button": "Supprimer",
             "remove-button-title": "Confirmer la suppression du coffre-fort",
             "title": "Supprimer le coffre-fort"
-        }
+        },
+        "title": "Coffres-forts"
     },
     "vault-sidebar": {
         "options-popup": {
-            "choose-vault": "Choisir un coffre-fort",
+            "add-vault": "Ajouter un coffre-fort",
             "lock-current-vault": "Verrouiller le coffre-fort actuel"
         },
         "vault-contents": "Contenu du coffre-fort"

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
-import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
+import { Button, Classes, Dialog, FormGroup, InputGroup, Intent, NonIdealState } from "@blueprintjs/core";
 import { Layerr } from "layerr";
 import { getPasswordEmitter } from "../services/password";
 import { getBiometricSourcePassword } from "../services/biometrics";
@@ -14,6 +14,7 @@ export function PasswordPrompt() {
     const showPromptState = useHookState(SHOW_PROMPT);
     const biometricSourceState = useHookState(PASSWORD_VIA_BIOMETRIC_SOURCE);
     const [promptedBiometrics, setPromptedBiometrics] = useState(false);
+    const [biometricsPromptActive, setBiometricsPromptActive] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const close = useCallback(() => {
         setCurrentPassword(""); // clear
@@ -37,12 +38,15 @@ export function PasswordPrompt() {
         const sourceID = biometricSourceState.get();
         if (!showPrompt || !sourceID || promptedBiometrics) return;
         setPromptedBiometrics(true);
+        setBiometricsPromptActive(true);
         getBiometricSourcePassword(sourceID)
             .then(sourcePassword => {
+                setBiometricsPromptActive(false);
                 if (!sourcePassword) return;
                 submitAndClose(sourcePassword);
             })
             .catch(err => {
+                setBiometricsPromptActive(false);
                 logErr(`Failed getting biometrics password for source: ${sourceID}`, err);
                 const errInfo = Layerr.info(err);
                 const message = errInfo?.i18n && t(errInfo.i18n) || err.message;
@@ -53,25 +57,35 @@ export function PasswordPrompt() {
         <Dialog isOpen={showPromptState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
             <div className={Classes.DIALOG_BODY}>
-                <FormGroup
-                    label={t("dialog.password-prompt.label")}
-                    labelFor="password"
-                    labelInfo={t("input-required")}
-                >
-                    <InputGroup
-                        id="password"
-                        placeholder={t("dialog.password-prompt.placeholder")}
-                        type="password"
-                        value={currentPassword}
-                        onChange={evt => setCurrentPassword(evt.target.value)}
-                        onKeyDown={handleKeyPress}
-                        autoFocus
+                {!biometricsPromptActive && (
+                    <FormGroup
+                        label={t("dialog.password-prompt.label")}
+                        labelFor="password"
+                        labelInfo={t("input-required")}
+                    >
+                        <InputGroup
+                            id="password"
+                            placeholder={t("dialog.password-prompt.placeholder")}
+                            type="password"
+                            value={currentPassword}
+                            onChange={evt => setCurrentPassword(evt.target.value)}
+                            onKeyDown={handleKeyPress}
+                            autoFocus
+                        />
+                    </FormGroup>
+                )}
+                {biometricsPromptActive && (
+                    <NonIdealState
+                        icon="hand"
+                        title="Biometric authentication active"
+                        description="Complete biometric authentication to unlock automatically, or cancel it to show a password input."
                     />
-                </FormGroup>
+                )}
             </div>
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                     <Button
+                        disabled={biometricsPromptActive}
                         intent={Intent.PRIMARY}
                         onClick={() => submitAndClose(currentPassword)}
                         title={t("dialog.password-prompt.button-unlock-title")}

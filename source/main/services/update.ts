@@ -23,8 +23,12 @@ let __eventListenersAttached = false,
 
 function attachEventListeners(updater = autoUpdater) {
     updater.on("error", (err: Error) => {
-        logErr("Error processing update", err);
         __updateErrored = true;
+        if (err?.message === "net::ERR_INTERNET_DISCONNECTED") {
+            logInfo("Update failed due to no internet connection");
+            return;
+        }
+        logErr("Error processing update", err);
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-error", err.message);
@@ -39,6 +43,10 @@ function attachEventListeners(updater = autoUpdater) {
     updater.on("update-available", (updateInfo: UpdateInfo) => {
         console.log(JSON.stringify(updateInfo, undefined, 2));
         logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
+        if (__updateMuted) {
+            logInfo("Updates muted: will not notify");
+            return;
+        }
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-available", JSON.stringify(updateInfo));
@@ -77,7 +85,7 @@ async function checkForUpdateInternal() {
     autoUpdater.setFeedURL({
         provider: "github",
         owner: "buttercup",
-        repo: "buttercup-desktop",
+        repo: "buttercup-desktop"
     });
     if (isDev) {
         const hasDevConfig = await hasDevUpdate();
@@ -87,7 +95,9 @@ async function checkForUpdateInternal() {
         }
     }
     logInfo("Checking for updates");
-    await autoUpdater.checkForUpdates();
+    try {
+        await autoUpdater.checkForUpdates();
+    } catch (err) {}
 }
 
 export function getCurrentUpdate(): UpdateInfo {

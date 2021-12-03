@@ -8,8 +8,8 @@ export async function getAvailableLanguages(): Promise<Array<Language>> {
             ...output,
             {
                 name: LANGUAGES[slug]._ || `Unknown (${slug})`,
-                slug,
-            },
+                slug
+            }
         ],
         []
     );

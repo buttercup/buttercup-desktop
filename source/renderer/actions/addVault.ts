@@ -1,9 +1,10 @@
 import { ipcRenderer } from "electron";
 import { VaultSourceID } from "buttercup";
 import { setBusy } from "../state/app";
-import { logErr, logInfo } from "../library/log";
+import { logInfo } from "../library/log";
 import { getCreateNewFilePromptEmitter, getVaultAdditionEmitter } from "../services/addVault";
 import { showNewFilePrompt } from "../state/addVault";
+import { handleError } from "../actions/error";
 import { AddVaultPayload, DatasourceConfig } from "../types";
 
 type NewVaultChoice = "new" | "existing" | null;
@@ -11,8 +12,9 @@ type NewVaultChoice = "new" | "existing" | null;
 export async function addNewVaultTarget(
     datasourceConfig: DatasourceConfig,
     password: string,
-    createNew: boolean
-) {
+    createNew: boolean,
+    fileNameOverride: string = null
+): Promise<VaultSourceID> {
     setBusy(true);
     const addNewVaultPromise = new Promise<VaultSourceID>((resolve, reject) => {
         ipcRenderer.once("add-vault-config:reply", (evt, payload) => {
@@ -29,6 +31,7 @@ export async function addNewVaultTarget(
         createNew,
         datasourceConfig,
         masterPassword: password,
+        fileNameOverride
     };
     logInfo(`Adding new vault: ${datasourceConfig.type}`);
     ipcRenderer.send("add-vault-config", JSON.stringify(payload));
@@ -36,11 +39,12 @@ export async function addNewVaultTarget(
         const sourceID = await addNewVaultPromise;
         setBusy(false);
         getVaultAdditionEmitter().emit("vault-added", sourceID);
+        return sourceID;
     } catch (err) {
-        logErr(err);
+        handleError(err);
         setBusy(false);
-        // @todo show error
     }
+    return null;
 }
 
 export async function getFileVaultParameters(): Promise<{
@@ -63,14 +67,14 @@ export async function getFileVaultParameters(): Promise<{
         if (!filename) return null;
         return {
             filename,
-            createNew: true,
+            createNew: true
         };
     } else {
         const filename = await ipcRenderer.invoke("get-existing-vault-filename");
         if (!filename) return null;
         return {
             filename,
-            createNew: false,
+            createNew: false
         };
     }
 }

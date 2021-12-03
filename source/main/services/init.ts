@@ -11,11 +11,16 @@ import { startFileHost } from "./fileHost";
 import { isPortable } from "../library/portability";
 import { getLogPath } from "./log";
 import { startUpdateWatcher } from "./update";
+import { registerGoogleDriveAuthHandlers } from "./googleDrive";
+import { processCLFlags } from "./arguments";
+import { supportsBiometricUnlock } from "./biometrics";
+import { startAutoVaultLockTimer } from "./autoLock";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { Preferences } from "../types";
 
 export async function initialise() {
+    processCLFlags();
     await initialiseLogging();
     logInfo("Application session started:", new Date());
     logInfo(`Logs location: ${getLogPath()}`);
@@ -45,7 +50,15 @@ export async function initialise() {
     if (preferences.fileHostEnabled) {
         await startFileHost();
     }
+    registerGoogleDriveAuthHandlers();
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
+    logInfo(`Biometrics: ${supportsBiometricUnlock() ? "yes" : "no"}`);
     setTimeout(() => startUpdateWatcher(), 0);
+    logInfo(
+        `Auto-lock: ${
+            preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "no"
+        }`
+    );
+    startAutoVaultLockTimer();
     logInfo("Initialisation completed");
 }

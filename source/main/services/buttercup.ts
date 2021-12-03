@@ -1,6 +1,9 @@
 import { BrowserWindow } from "electron";
 import {
+    AttachmentDetails,
+    AttachmentManager,
     Credentials,
+    EntryID,
     TextDatasource,
     Vault,
     VaultFacade,
@@ -10,18 +13,39 @@ import {
     VaultManager,
     consumeVaultFacade,
     createVaultFacade,
-    init,
+    init
 } from "buttercup";
+import { exportVaultToCSV } from "@buttercup/exporter";
 import { describeSource } from "../library/sources";
 import { clearFacadeCache } from "./facades";
 import { notifyWindowsOfSourceUpdate } from "./windows";
 import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
+import { setAutoLockEnabled } from "./autoLock";
 import { logErr } from "../library/log";
 import { SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
+
+export async function addAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    filename: string,
+    type: string,
+    data: Buffer
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.setAttachment(
+        entry,
+        AttachmentManager.newAttachmentID(),
+        data,
+        filename,
+        type
+    );
+}
 
 export async function addVault(
     name: string,
@@ -58,6 +82,47 @@ export async function attachVaultManagerWatchers() {
     });
 }
 
+export async function deleteAttachment(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    await source.attachmentManager.removeAttachment(entry, attachmentID);
+    await source.save();
+}
+
+export async function exportVault(sourceID: VaultSourceID): Promise<string> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const exported = await exportVaultToCSV(source.vault);
+    return exported;
+}
+
+export async function getAttachmentData(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<Buffer> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachment(entry, attachmentID) as Promise<Buffer>;
+}
+
+export async function getAttachmentDetails(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    attachmentID: string
+): Promise<AttachmentDetails> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    return source.attachmentManager.getAttachmentDetails(entry, attachmentID);
+}
+
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
@@ -87,10 +152,21 @@ export async function getEmptyVault(password: string): Promise<string> {
     return tds.save(vault.format.getHistory(), creds);
 }
 
+export function getSourceAttachmentsSupport(sourceID: VaultSourceID): boolean {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    return source.supportsAttachments();
+}
+
 export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
     const mgr = getVaultManager();
     const source = mgr.getSourceForID(sourceID);
     return (source && source.status) || null;
+}
+
+export function getUnlockedSourcesCount(): number {
+    const mgr = getVaultManager();
+    return mgr.unlockedSources.length;
 }
 
 function getVaultManager(): VaultManager {
@@ -98,7 +174,7 @@ function getVaultManager(): VaultManager {
         init();
         __vaultManager = new VaultManager({
             cacheStorage: getVaultCacheStorage(),
-            sourceStorage: getVaultStorage(),
+            sourceStorage: getVaultStorage()
         });
     }
     return __vaultManager;
@@ -117,7 +193,17 @@ export async function lockAllSources() {
 export async function lockSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
-    await source.lock();
+    if (source.status === VaultSourceStatus.Unlocked) {
+        await source.lock();
+    }
+}
+
+export async function mergeVaults(targetSourceID: VaultSourceID, incomingVault: Vault) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(targetSourceID);
+    const incomingFacade = createVaultFacade(incomingVault);
+    consumeVaultFacade(source.vault, incomingFacade, { mergeMode: true });
+    await source.save();
 }
 
 export function onSourcesUpdated(callback: () => void): () => void {
@@ -134,7 +220,14 @@ function onVaultSourceUpdated(source: VaultSource) {
 
 export async function removeSource(sourceID: VaultSourceID) {
     const vaultManager = getVaultManager();
+    clearFacadeCache(sourceID);
     await vaultManager.removeSource(sourceID);
+}
+
+export async function saveSource(sourceID: VaultSourceID) {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    await source.save();
 }
 
 export async function saveVaultFacade(sourceID: VaultSourceID, facade: VaultFacade): Promise<void> {
@@ -153,6 +246,12 @@ export function sendSourcesToWindows() {
     }
 }
 
+export async function setSourceOrder(sourceID: VaultSourceID, newOrder: number) {
+    const vaultManager = getVaultManager();
+    await vaultManager.reorderSource(sourceID, newOrder);
+    await vaultManager.dehydrate();
+}
+
 export async function testSourceMasterPassword(
     sourceID: VaultSourceID,
     password: string
@@ -161,10 +260,11 @@ export async function testSourceMasterPassword(
     return source.testMasterPassword(password);
 }
 
-export async function toggleAutoUpdate(enable: boolean = true) {
+export async function toggleAutoUpdate(autoUpdateEnabled: boolean = true) {
+    setAutoLockEnabled(autoUpdateEnabled);
     const vaultManager = getVaultManager();
     await vaultManager.enqueueStateChange(() => {});
-    vaultManager.toggleAutoUpdating(enable);
+    vaultManager.toggleAutoUpdating(autoUpdateEnabled);
 }
 
 export async function unlockSource(sourceID: VaultSourceID, password: string) {

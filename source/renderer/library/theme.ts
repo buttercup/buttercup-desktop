@@ -1,8 +1,6 @@
-import { remote } from "electron";
+import { nativeTheme } from "@electron/remote";
 import { logInfo } from "./log";
 import { Theme } from "../types";
-
-const { nativeTheme } = remote;
 
 let __listening = false;
 

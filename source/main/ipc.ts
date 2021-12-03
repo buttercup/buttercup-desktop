@@ -1,21 +1,28 @@
-import { VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
-import { BrowserWindow, clipboard, ipcMain } from "electron";
+import { EntryID, VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
+import { BrowserWindow, clipboard, ipcMain, shell } from "electron";
 import { Layerr } from "layerr";
 import {
     addVaultFromPayload,
     showExistingFileVaultDialog,
-    showNewFileVaultDialog,
+    showNewFileVaultDialog
 } from "./actions/connect";
 import { unlockSourceWithID } from "./actions/unlock";
 import { lockSourceWithID } from "./actions/lock";
 import { removeSourceWithID } from "./actions/remove";
 import { handleConfigUpdate } from "./actions/config";
+import { startAttachmentDownload } from "./actions/attachments";
 import {
+    addAttachment,
+    deleteAttachment,
+    getAttachmentData,
     getEmptyVault,
+    getSourceAttachmentsSupport,
     getSourceStatus,
+    saveSource,
     saveVaultFacade,
     sendSourcesToWindows,
-    toggleAutoUpdate,
+    setSourceOrder,
+    toggleAutoUpdate
 } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
@@ -26,15 +33,17 @@ import {
     getReadyUpdate,
     installUpdate,
     muteUpdate,
-    startUpdate,
+    startUpdate
 } from "./services/update";
 import { getLastSourceID, setLastSourceID } from "./services/lastVault";
 import {
     enableSourceBiometricUnlock,
     getSourcePasswordViaBiometrics,
     sourceEnabledForBiometricUnlock,
-    supportsBiometricUnlock,
+    supportsBiometricUnlock
 } from "./services/biometrics";
+import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
+import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
@@ -51,7 +60,7 @@ ipcMain.on("add-vault-config", async (evt, payload) => {
             "add-vault-config:reply",
             JSON.stringify({
                 ok: true,
-                sourceID,
+                sourceID
             })
         );
     } catch (err) {
@@ -60,7 +69,7 @@ ipcMain.on("add-vault-config", async (evt, payload) => {
             "add-vault-config:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -77,11 +86,6 @@ ipcMain.on("get-preferences", async (evt, sourceID) => {
     evt.reply("get-preferences:reply", JSON.stringify(prefs));
 });
 
-ipcMain.on("get-vault-facade", async (evt, sourceID) => {
-    const facade = await getVaultFacade(sourceID);
-    evt.reply("get-vault-facade:reply", JSON.stringify(facade));
-});
-
 ipcMain.on("lock-source", async (evt, payload) => {
     const { sourceID } = JSON.parse(payload);
     try {
@@ -92,7 +96,7 @@ ipcMain.on("lock-source", async (evt, payload) => {
         evt.reply(
             "lock-source:reply",
             JSON.stringify({
-                ok: true,
+                ok: true
             })
         );
     } catch (err) {
@@ -101,7 +105,7 @@ ipcMain.on("lock-source", async (evt, payload) => {
             "lock-source:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -130,7 +134,7 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
         evt.reply(
             "save-vault-facade:reply",
             JSON.stringify({
-                ok: true,
+                ok: true
             })
         );
     } catch (err) {
@@ -139,7 +143,7 @@ ipcMain.on("save-vault-facade", async (evt, payload) => {
             "save-vault-facade:reply",
             JSON.stringify({
                 ok: false,
-                error: err.message,
+                error: err.message
             })
         );
     }
@@ -160,6 +164,47 @@ ipcMain.on("write-preferences", async (evt, payload) => {
 // ** IPC Handlers
 // **
 
+ipcMain.handle(
+    "attachment-add",
+    async (
+        _,
+        sourceID: VaultSourceID,
+        entryID: EntryID,
+        filename: string,
+        type: string,
+        data: Uint8Array
+    ) => {
+        logInfo(
+            `Adding attachment to source/entry (${sourceID}/${entryID}): ${filename} (${type}, ${data.byteLength} bytes)`
+        );
+        await addAttachment(sourceID, entryID, filename, type, Buffer.from(data.buffer));
+    }
+);
+
+ipcMain.handle(
+    "attachment-delete",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        logInfo(`Deleting attachment on source/entry: ${sourceID}/${entryID})`);
+        await deleteAttachment(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-download",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        logInfo(`Downloading attachment from source/entry: ${sourceID}/${entryID})`);
+        return startAttachmentDownload(sourceID, entryID, attachmentID);
+    }
+);
+
+ipcMain.handle(
+    "attachment-get-data",
+    async (_, sourceID: VaultSourceID, entryID: EntryID, attachmentID: string) => {
+        const buffer = await getAttachmentData(sourceID, entryID, attachmentID);
+        return new Uint8Array(buffer);
+    }
+);
+
 ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
     const supportsBiometrics = await supportsBiometricUnlock();
     if (!supportsBiometrics) return false;
@@ -169,7 +214,7 @@ ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => 
 ipcMain.handle(
     "get-app-environment",
     async (): Promise<AppEnvironmentFlags> => ({
-        portable: isPortable(),
+        portable: isPortable()
     })
 );
 
@@ -188,6 +233,8 @@ ipcMain.handle("get-existing-vault-filename", async (evt) => {
     return filename;
 });
 
+ipcMain.handle("get-locale", getOSLocale);
+
 ipcMain.handle("get-new-vault-filename", async (evt) => {
     const win = BrowserWindow.fromWebContents(evt.sender);
     if (!win) {
@@ -204,11 +251,23 @@ ipcMain.handle("get-selected-source", async () => {
     return sourceID;
 });
 
-ipcMain.handle("get-locale", getOSLocale);
+ipcMain.handle("get-vault-facade", async (evt, sourceID) => {
+    const facade = await getVaultFacade(sourceID);
+    const attachments = getSourceAttachmentsSupport(sourceID);
+    return {
+        attachments,
+        facade: JSON.stringify(facade)
+    };
+});
 
 ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
+
+ipcMain.handle("open-link", (_, link: string) => {
+    logInfo(`Opening external link: ${link}`);
+    shell.openExternal(link);
+});
 
 ipcMain.handle(
     "register-biometric-unlock",
@@ -217,16 +276,17 @@ ipcMain.handle(
     }
 );
 
-ipcMain.handle(
-    "search-single-vault",
-    async (_, sourceID, term): Promise<Array<SearchResult>> => {
-        const results = await searchSingleVault(sourceID, term);
-        return results.map((res) => ({
-            type: "entry",
-            result: res,
-        }));
-    }
-);
+ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
+    await saveSource(sourceID);
+});
+
+ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
+    const results = await searchSingleVault(sourceID, term);
+    return results.map((res) => ({
+        type: "entry",
+        result: res
+    }));
+});
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
@@ -236,6 +296,10 @@ ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     } else {
         setLastSourceID(null);
     }
+});
+
+ipcMain.handle("set-source-order", async (_, sourceID: VaultSourceID, newOrder: number) => {
+    await setSourceOrder(sourceID, newOrder);
 });
 
 ipcMain.handle("start-current-update", async () => {
@@ -251,16 +315,28 @@ ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {
     }
 });
 
+ipcMain.handle("trigger-user-presence", async () => {
+    try {
+        await startAutoVaultLockTimer();
+    } catch (err) {
+        logErr(err);
+    }
+});
+
 ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: string) => {
     try {
         await unlockSourceWithID(sourceID, password);
         setLastSourceID(sourceID);
     } catch (err) {
         logErr("Failed unlocking vault source", err);
-        throw Layerr(err, "Failed unlocking vault source");
+        throw new Layerr(err, "Failed unlocking vault source");
     }
 });
 
 ipcMain.handle("write-clipboard", (_, text: string) => {
     clipboard.writeText(text);
+});
+
+ipcMain.handle("copied-into-clipboard", (_, text: string) => {
+    restartAutoClearClipboardTimer(text);
 });

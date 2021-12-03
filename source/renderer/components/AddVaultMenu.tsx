@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { Button, Card, Classes, Dialog, Elevation, FormGroup, InputGroup, Intent, Switch } from "@blueprintjs/core";
 import { useState as useHookState } from "@hookstate/core";
+import path from "path-posix";
 import { FileSystemInterface } from "@buttercup/file-interface";
 import { SHOW_ADD_VAULT } from "../state/addVault";
 import { setBusy } from "../state/app";
@@ -118,6 +119,7 @@ export function AddVaultMenu() {
     const [webdavCredentials, setWebDAVCredentials] = useState<WebDAVCredentialsState>({ ...EMPTY_WEBDAV_CREDENTIALS });
     const [authenticatingGoogleDrive, setAuthenticatingGoogleDrive] = useState(false);
     const [googleDriveOpenPerms, setGoogleDriveOpenPerms] = useState(false);
+    const [vaultFilenameOverride, setVaultFilenameOverride] = useState(null);
     useEffect(() => {
         const newValue = showAddVault.get();
         if (previousShowAddVault !== newValue) {
@@ -136,6 +138,7 @@ export function AddVaultMenu() {
         setVaultPassword("");
         setGoogleDriveOpenPerms(false);
         setAuthenticatingGoogleDrive(false);
+        setVaultFilenameOverride(null);
     }, []);
     const handleVaultTypeClick = useCallback(async type => {
         setSelectedType(type);
@@ -233,11 +236,16 @@ export function AddVaultMenu() {
             setCurrentPage(PAGE_CHOOSE);
         }
     }, [selectedType, datasourcePayload, webdavCredentials, googleDriveOpenPerms]);
-    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean) => {
+    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean, fileName: string | null) => {
         if (selectedType === SourceType.GoogleDrive) {
             setSelectedRemotePath(JSON.stringify([parentIdentifier, identifier]));
+            setVaultFilenameOverride(fileName);
         } else {
-            setSelectedRemotePath(identifier);
+            if (!identifier) {
+                setSelectedRemotePath(null);
+            } else {
+                setSelectedRemotePath(path.join(parentIdentifier || "/", identifier));
+            }
         }
         setCreateNew(isNew);
     }, [selectedType]);
@@ -269,7 +277,7 @@ export function AddVaultMenu() {
                 ? await createEmptyGoogleDriveVault(datasource.token, parentIdentifier, identifier, vaultPassword)
                 : identifier;
         }
-        addNewVaultTarget(datasource, vaultPassword, createNew);
+        addNewVaultTarget(datasource, vaultPassword, createNew, vaultFilenameOverride);
         close(); // This also clears sensitive state items
     }, [datasourcePayload, vaultPassword, selectedType, selectedRemotePath, createNew]);
     // Pages
@@ -300,16 +308,16 @@ export function AddVaultMenu() {
             )}
             {selectedType === SourceType.GoogleDrive && (
                 <>
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-1") }} />
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-2") }} />
-                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.google-auth.instr-3") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-1") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-2") }} />
+                    <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-3") }} />
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.google-auth.perm-label")}
+                        label={t("add-vault-menu.loader.google-auth.perm-label")}
                     >
                         <Switch
                             disabled={authenticatingGoogleDrive}
-                            label={t("add-vault-menu.google-auth.perm-switch")}
+                            label={t("add-vault-menu.loader.google-auth.perm-switch")}
                             checked={googleDriveOpenPerms}
                             onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
                         />
@@ -320,7 +328,7 @@ export function AddVaultMenu() {
                 <>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.url-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.url-label")}
                     >
                         <InputGroup
                             placeholder="https://..."
@@ -334,10 +342,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.username-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.username-label")}
                     >
                         <InputGroup
-                            placeholder={t("add-vault-menu.webdav-auth.username-plc")}
+                            placeholder={t("add-vault-menu.loader.webdav-auth.username-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 username: evt.target.value
@@ -347,10 +355,10 @@ export function AddVaultMenu() {
                     </WideFormGroup>
                     <WideFormGroup
                         inline
-                        label={t("add-vault-menu.webdav-auth.password-label")}
+                        label={t("add-vault-menu.loader.webdav-auth.password-label")}
                     >
                         <InputGroup
-                            placeholder={t("add-vault-menu.webdav-auth.password-plc")}
+                            placeholder={t("add-vault-menu.loader.webdav-auth.password-plc")}
                             onChange={evt => setWebDAVCredentials({
                                 ...webdavCredentials,
                                 password: evt.target.value

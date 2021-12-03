@@ -31,7 +31,7 @@ export async function getNativeImageMenuIcon(fileSource: string) {
     const resized = nImg.resize({
         width: MENU_ICON_SIZE,
         height: MENU_ICON_SIZE,
-        quality: "better",
+        quality: "better"
     });
     return resized;
 }

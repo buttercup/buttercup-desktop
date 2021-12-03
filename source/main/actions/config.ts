@@ -15,6 +15,8 @@ export async function handleConfigUpdate(preferences: Preferences) {
     logInfo(` - Language updated: ${language}`);
     await changeLanguage(language);
     logInfo(` - File host: ${preferences.fileHostEnabled ? "Enabled" : "Disabled"}`);
+    logInfo(` - Auto clear clipboard: ${preferences.autoClearClipboard}s`);
+    logInfo(` - Lock vaults after: ${preferences.lockVaultsAfterTime}s`);
     if (preferences.fileHostEnabled) {
         await startFileHost();
     } else {
