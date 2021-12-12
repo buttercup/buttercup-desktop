@@ -67,6 +67,8 @@
         "devtool": "Devtool",
         "edit": "Modifier",
         "enable-secure-file-host": "Activer l’accès par navigateur",
+        "export": "Exporter",
+        "import": "Importer",
         "lock-all": "Tout verrouiller",
         "lock-current-vault": "Verrouiller le coffre-fort actuel",
         "open": "Ouvrir",
@@ -78,7 +80,9 @@
         "unlocked-vaults": "{{count}} coffre-fort déverrouillé",
         "unlocked-vaults_plural": "{{count}} coffres-forts déverrouillés",
         "vaults": "Coffres-forts",
-        "view": "Voir"
+        "view": "Voir",
+        "window": "Fenêtre",
+        "window-reposition": "Repositionner"
     },
     "biometrics": {
         "prompt": {
@@ -87,6 +91,10 @@
         }
     },
     "dialog": {
+        "attachment-save": {
+            "confirm-button": "Sauvegarder",
+            "title": "Télécharger la pièce jointe"
+        },
         "biometric-reg": {
             "button-cancel": "Annuler",
             "button-cancel-title": "Annuler l'enregistrement",
@@ -100,6 +108,10 @@
         "confirm-generic": {
             "cancel-button": "Annuler",
             "confirm-button": "OK"
+        },
+        "export-file-chooser": {
+            "submit-button": "Exporter",
+            "title": "Exporter le coffre-fort '{{name}}'"
         },
         "file-chooser": {
             "add": {
@@ -127,6 +139,10 @@
                 "title": "Ajout d’un nouveau coffre-fort"
             }
         },
+        "import-file-chooser": {
+            "submit-button": "Importer",
+            "title": "Importation depuis le coffre-fort {{importer}}."
+        },
         "new-file-prompt": {
             "button-cancel": {
                 "text": "Fermer",
@@ -140,7 +156,7 @@
                 "text": "Créer un nouveau",
                 "title": "Création d’un nouveau fichier de coffre-fort"
             },
-            "prompt": "Souhaitez-vous créer un <i>nouveau</i> coffre-fort, ou en lire un existant ?",
+            "prompt": "Souhaitez-vous créer un <i>nouveau</i> coffre-fort, ou en lire un existant ?",
             "title": "Ajout d’un fichier de coffre-fort"
         },
         "password-prompt": {
@@ -173,9 +189,11 @@
     },
     "input-required": "(requis)",
     "notification": {
+        "attachment-downloaded": "La pièce jointe a été enregistrée avec succès",
         "biometrics-disabled": "La biométrie est désactivée pour ce coffre-fort.",
         "error": {
-            "biometrics-disable-failed": "Échec de la désactivation des données biométriques pour le coffre-fort : {{error}}",
+            "biometrics-disable-failed": "Échec de la désactivation des données biométriques pour le coffre-fort : {{error}}",
+            "import-failed": "Échec de l'importation : {{error}}",
             "languages-load": "Échec du chargement des langues",
             "preferences-load": "Échec du chargement des préférences",
             "preferences-save": "Échec de la sauvegarde des préférences",
@@ -184,6 +202,8 @@
             "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
             "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
         },
+        "export-success": "Exportation réussie du coffre-fort : {{name}}",
+        "import-success": "Importation réussie du coffre-fort : {{filename}}",
         "preferences-saved": "Préférences enregistrées",
         "vault-saved": "Coffre-fort enregistré"
     },
@@ -247,12 +267,16 @@
         "ready": "Prêt pour la mise à jour : {{version}}",
         "view": "Voir"
     },
+    "vault-editor": {
+        "locked-state": "Coffre-fort verrouillé"
+    },
     "vault-management": {
         "close-button": "Fermer",
+        "close-button-title": "Gestion de la fermeture d'un coffre-fort",
         "remove-vault-dialog": {
             "cancel-button": "Annuler",
             "cancel-button-title": "Annuler la suppression",
-            "description": "Êtes-vous certain(e) de vouloir supprimer le coffre-fort \"{{title}}\" ?",
+            "description": "Êtes-vous certain(e) de vouloir supprimer le coffre-fort \"{{title}}\" ?",
             "remove-button": "Supprimer",
             "remove-button-title": "Confirmer la suppression du coffre-fort",
             "title": "Supprimer le coffre-fort"
@@ -262,7 +286,8 @@
     "vault-sidebar": {
         "options-popup": {
             "add-vault": "Ajouter un coffre-fort",
-            "lock-current-vault": "Verrouiller le coffre-fort actuel"
+            "lock-current-vault": "Verrouiller le coffre-fort actuel",
+            "manage-vaults": "Gérer les coffres-forts"
         },
         "vault-contents": "Contenu du coffre-fort"
     }
