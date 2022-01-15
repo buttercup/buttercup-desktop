@@ -27,6 +27,10 @@
     "type": "git",
     "url": "git+https://github.com/buttercup/buttercup-desktop.git"
   },
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
   "lint-staged": {
     "{resources,source,test}/**/*.{js,ts}": [
       "prettier --write"
