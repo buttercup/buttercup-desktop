@@ -2,11 +2,11 @@ import React, { useCallback, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
 import { Layerr } from "layerr";
-import { SHOW_REGISTER_PROMPT } from "../state/biometrics";
-import { CURRENT_VAULT } from "../state/vaults";
-import { registerBiometricUnlock } from "../services/biometrics";
-import { showError, showSuccess } from "../services/notifications";
-import { t } from "../../shared/i18n/trans";
+import { SHOW_REGISTER_PROMPT } from "../../state/biometrics";
+import { CURRENT_VAULT } from "../../state/vaults";
+import { registerBiometricUnlock } from "../../services/biometrics";
+import { showError, showSuccess } from "../../services/notifications";
+import { t } from "../../../shared/i18n/trans";
 
 export function BiometricRegistrationDialog() {
     const showPromptState = useHookState(SHOW_REGISTER_PROMPT);
