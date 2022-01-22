@@ -43,6 +43,10 @@ let __configStorage: FileStorage = null,
     __vaultStorage: FileStorage = null,
     __vaultCacheStorage: FileStorage = null;
 
+export function getConfigPath(): string {
+    return CONFIG_PATH;
+}
+
 export function getConfigStorage(): FileStorage {
     if (!__configStorage) {
         __configStorage = new FileStorage(CONFIG_PATH);
@@ -62,4 +66,8 @@ export function getVaultStorage(): FileStorage {
         __vaultStorage = new FileStorage(VAULTS_PATH);
     }
     return __vaultStorage;
+}
+
+export function getVaultStoragePath(): string {
+    return VAULTS_PATH;
 }

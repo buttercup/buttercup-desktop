@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { Button, Classes, Dialog, Intent } from "@blueprintjs/core";
-import { SHOW_NEW_FILE_PROMPT } from "../state/addVault";
-import { getCreateNewFilePromptEmitter } from "../services/addVault";
-import { t } from "../../shared/i18n/trans";
+import { SHOW_NEW_FILE_PROMPT } from "../../state/addVault";
+import { getCreateNewFilePromptEmitter } from "../../services/addVault";
+import { t } from "../../../shared/i18n/trans";
 
 const { useCallback, useMemo } = React;
 

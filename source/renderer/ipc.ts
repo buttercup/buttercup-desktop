@@ -1,5 +1,6 @@
 import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
+import { VaultSourceID } from "buttercup";
 import { getCurrentSourceID, setCurrentVault, setVaultsList } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
@@ -7,10 +8,11 @@ import { showAbout } from "./state/about";
 import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { showRegistrationPrompt } from "./state/biometrics";
+import { setGoogleReAuthSource } from "./state/google";
 import { setBusy } from "./state/app";
 import { fetchUpdatedFacade } from "./actions/facade";
 import { unlockVaultSource } from "./actions/unlockVault";
-import { logInfo } from "./library/log";
+import { logInfo, logWarn } from "./library/log";
 import {
     applyCurrentUpdateState,
     applyReadyUpdateState,
@@ -27,6 +29,15 @@ ipcRenderer.on("add-vault", (evt) => {
 ipcRenderer.on("file-host-code", (evt, payload) => {
     const { code } = JSON.parse(payload);
     setFileHostCode(code);
+});
+
+ipcRenderer.on("google-reauth", (evt, sourceID: VaultSourceID) => {
+    if (!sourceID) {
+        logWarn("Google re-authentication requested with no source ID");
+        return;
+    }
+    logInfo(`Google re-authentication requested for source: ${sourceID}`);
+    setGoogleReAuthSource(sourceID);
 });
 
 ipcRenderer.on("notify-error", (_, message: string) => {
@@ -55,7 +66,7 @@ ipcRenderer.on("open-search", (evt) => {
     setSearchVisible(true);
 });
 
-ipcRenderer.on("open-source", (evt, sourceID) => {
+ipcRenderer.on("open-source", (evt, sourceID: VaultSourceID) => {
     window.location.hash = `/source/${sourceID}`;
 });
 
