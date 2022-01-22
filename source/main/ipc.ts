@@ -350,15 +350,6 @@ ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: s
     }
 });
 
-// ipcMain.handle("update-source-google-tokens", async (_, sourceID: VaultSourceID, accessToken: string, refreshToken: string) => {
-//     try {
-//         await updateSourceTokens(sourceID, accessToken, refreshToken);
-//     } catch (err) {
-//         logErr("Failed updating tokens", err);
-//         throw new Layerr(err, "Failed updating tokens");
-//     }
-// });
-
 ipcMain.handle("write-clipboard", (_, text: string) => {
     clipboard.writeText(text);
 });
