@@ -9,6 +9,7 @@ import {
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET
 } from "../../shared/symbols";
+import { VaultSourceID } from "buttercup";
 
 let __googleDriveOAuthClient: OAuth2Client = null;
 
@@ -77,4 +78,11 @@ async function listenForGoogleAuthCode(): Promise<string> {
         ipcRenderer.removeAllListeners(channel);
         ipcRenderer.on(channel, callback);
     });
+}
+
+export async function updateGoogleTokensForSource(
+    sourceID: VaultSourceID,
+    tokens: { accessToken: string; refreshToken: string }
+): Promise<void> {
+    await ipcRenderer.invoke("set-reauth-google-tokens", sourceID, tokens);
 }

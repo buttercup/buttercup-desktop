@@ -17,6 +17,7 @@ import {
     getAttachmentData,
     getEmptyVault,
     getSourceAttachmentsSupport,
+    getSourceDescription,
     getSourceStatus,
     saveSource,
     saveVaultFacade,
@@ -28,6 +29,7 @@ import { getVaultFacade } from "./services/facades";
 import { getConfigValue, setConfigValue } from "./services/config";
 import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
+import { addGoogleTokens } from "./services/googleDrive";
 import {
     getCurrentUpdate,
     getReadyUpdate,
@@ -211,6 +213,10 @@ ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => 
     return sourceEnabledForBiometricUnlock(sourceID);
 });
 
+ipcMain.handle("copied-into-clipboard", (_, text: string) => {
+    restartAutoClearClipboardTimer(text);
+});
+
 ipcMain.handle(
     "get-app-environment",
     async (): Promise<AppEnvironmentFlags> => ({
@@ -251,7 +257,11 @@ ipcMain.handle("get-selected-source", async () => {
     return sourceID;
 });
 
-ipcMain.handle("get-vault-facade", async (evt, sourceID) => {
+ipcMain.handle("get-vault-description", (evt, sourceID: VaultSourceID) => {
+    return getSourceDescription(sourceID);
+});
+
+ipcMain.handle("get-vault-facade", async (evt, sourceID: VaultSourceID) => {
     const facade = await getVaultFacade(sourceID);
     const attachments = getSourceAttachmentsSupport(sourceID);
     return {
@@ -287,6 +297,13 @@ ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<S
         result: res
     }));
 });
+
+ipcMain.handle(
+    "set-reauth-google-tokens",
+    function (_, sourceID: VaultSourceID, tokens: { accessToken: string; refreshToken: string }) {
+        addGoogleTokens(sourceID, tokens);
+    }
+);
 
 ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
     await setConfigValue("selectedSource", sourceID);
@@ -333,10 +350,15 @@ ipcMain.handle("unlock-source", async (evt, sourceID: VaultSourceID, password: s
     }
 });
 
+// ipcMain.handle("update-source-google-tokens", async (_, sourceID: VaultSourceID, accessToken: string, refreshToken: string) => {
+//     try {
+//         await updateSourceTokens(sourceID, accessToken, refreshToken);
+//     } catch (err) {
+//         logErr("Failed updating tokens", err);
+//         throw new Layerr(err, "Failed updating tokens");
+//     }
+// });
+
 ipcMain.handle("write-clipboard", (_, text: string) => {
     clipboard.writeText(text);
-});
-
-ipcMain.handle("copied-into-clipboard", (_, text: string) => {
-    restartAutoClearClipboardTimer(text);
 });

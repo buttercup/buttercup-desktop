@@ -1,7 +1,9 @@
 import { shell } from "electron";
-import { DatasourceAuthManager, GoogleDriveDatasource } from "buttercup";
-import { OAuth2Client } from "@buttercup/google-oauth2-client";
+import { DatasourceAuthManager, GoogleDriveDatasource, VaultSourceID } from "buttercup";
+import { ERR_REFRESH_FAILED, GoogleToken, OAuth2Client } from "@buttercup/google-oauth2-client";
+import { Layerr } from "layerr";
 import { getProtocolEmitter } from "./protocol";
+import { getMainWindow } from "./windows";
 import { logInfo, logWarn } from "../library/log";
 import {
     GOOGLE_AUTH_REDIRECT,
@@ -12,7 +14,16 @@ import {
     GOOGLE_CLIENT_SECRET
 } from "../../shared/symbols";
 
+const __googleDriveTokens: Record<VaultSourceID, { accessToken: string; refreshToken: string }> =
+    {};
 let __googleDriveOAuthClient: OAuth2Client = null;
+
+export function addGoogleTokens(
+    sourceID: VaultSourceID,
+    tokens: { accessToken: string; refreshToken: string }
+) {
+    __googleDriveTokens[sourceID] = tokens;
+}
 
 async function authenticateGoogleDrive(
     openPermissions: boolean = false
@@ -43,7 +54,16 @@ async function authenticateGoogleDriveWithRefreshToken(
 ): Promise<{ accessToken: string; refreshToken: string }> {
     logInfo("Refreshing Google Drive token");
     const oauth2Client = getGoogleDriveOAuthClient();
-    const results = await oauth2Client.refreshAccessToken(refreshToken);
+    let results: { tokens: GoogleToken };
+    try {
+        results = await oauth2Client.refreshAccessToken(refreshToken);
+    } catch (err) {
+        const { code, status } = Layerr.info(err);
+        if (code === ERR_REFRESH_FAILED && status === 400) {
+            return null;
+        }
+        throw err;
+    }
     const { access_token: newAccessToken } = results.tokens;
     logInfo("Refreshed Google Drive token");
     return {
@@ -88,7 +108,20 @@ export function registerGoogleDriveAuthHandlers() {
     DatasourceAuthManager.getSharedManager().registerHandler(
         "googledrive",
         async (datasource: GoogleDriveDatasource) => {
-            logInfo("Google Drive datasource needs re-authentication");
+            if (datasource.sourceID && __googleDriveTokens[datasource.sourceID]) {
+                logInfo(
+                    `Refreshed auth tokens available for Google Drive source: ${datasource.sourceID}`
+                );
+                datasource.updateTokens(
+                    __googleDriveTokens[datasource.sourceID].accessToken,
+                    __googleDriveTokens[datasource.sourceID].refreshToken
+                );
+                delete __googleDriveTokens[datasource.sourceID];
+                return;
+            }
+            logInfo(
+                `Google Drive datasource needs re-authentication (source: ${datasource.sourceID})`
+            );
             const { refreshToken: currentRefreshToken } = datasource;
             if (!currentRefreshToken) {
                 logInfo(
@@ -101,10 +134,18 @@ export function registerGoogleDriveAuthHandlers() {
                 }
             } else {
                 logInfo("Datasource contains refresh token: Refreshing authorisation");
-                const { accessToken } = await authenticateGoogleDriveWithRefreshToken(
-                    currentRefreshToken
-                );
-                datasource.updateTokens(accessToken, currentRefreshToken);
+                const result = await authenticateGoogleDriveWithRefreshToken(currentRefreshToken);
+                if (result === null) {
+                    const win = getMainWindow();
+                    if (win) {
+                        logInfo("Refresh token expired: prompting for new authentication");
+                        win.webContents.send("google-reauth", datasource.sourceID);
+                    } else {
+                        logWarn("Refresh token expired, but no window open for prompt");
+                    }
+                    return;
+                }
+                datasource.updateTokens(result.accessToken, currentRefreshToken);
             }
             logInfo("Google Drive datasource tokens updated");
         }

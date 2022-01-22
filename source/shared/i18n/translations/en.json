@@ -139,6 +139,19 @@
                 "title": "Add New Vault"
             }
         },
+        "google-reauth": {
+            "close-button": {
+                "text": "Cancel",
+                "title": "Cancel authentication"
+            },
+            "description": "Re-authenticating a Google Drive vault: {{vault}}",
+            "error": {
+                "reauth-failed": "Failed re-authenticating"
+            },
+            "header": "Authentication expired for vault",
+            "success": "Successfully re-authenticated Google Drive: Please unlock again",
+            "title": "Google Re-authentication"
+        },
         "import-file-chooser": {
             "submit-button": "Import",
             "title": "Import from {{importer}} vault"

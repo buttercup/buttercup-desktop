@@ -21,6 +21,7 @@ import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
 import { VaultManagementDialog } from "./components/standalone/VaultManagementDialog";
 import { BiometricRegistrationDialog } from "./components/standalone/BiometricRegistrationDialog";
+import { GoogleReAuthDialog } from "./components/standalone/GoogleReAuthDialog";
 import { useTheme } from "./hooks/theme";
 import { Theme } from "./types";
 import { userCopiedText } from "./actions/clipboard";
@@ -57,6 +58,7 @@ export function App() {
                         <CreateNewFilePrompt />
                         <AddVaultMenu />
                         <PreferencesDialog />
+                        <GoogleReAuthDialog />
                         <UpdateDialog />
                         <AboutDialog />
                         <VaultManagementDialog />
