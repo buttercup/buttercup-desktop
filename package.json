@@ -106,7 +106,6 @@
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "background": "./resources/build/background@2x.png",
-      "icon": "./resources/build/icon.icns",
       "contents": [
         {
           "x": 396,
