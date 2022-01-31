@@ -16,6 +16,7 @@ export function PasswordPrompt() {
     const [promptedBiometrics, setPromptedBiometrics] = useState(false);
     const [biometricsPromptActive, setBiometricsPromptActive] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const close = useCallback(() => {
         setCurrentPassword(""); // clear
         showPromptState.set(false);
@@ -53,6 +54,21 @@ export function PasswordPrompt() {
                 showError(message);
             });
     }, [showPromptState.get(), biometricSourceState.get(), promptedBiometrics]);
+    const lockButton = (
+        <Button
+            icon={showPassword ? "unlock" : "lock"}
+            intent={Intent.NONE}
+            minimal={true}
+            onMouseEnter={() => {
+                setShowPassword(true);
+            }}
+            onMouseLeave={() => {
+                setShowPassword(false);
+            }}
+            active={showPassword}
+            style={{ userSelect: "none" }}
+        />
+    );
     return (
         <Dialog isOpen={showPromptState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
@@ -66,7 +82,8 @@ export function PasswordPrompt() {
                         <InputGroup
                             id="password"
                             placeholder={t("dialog.password-prompt.placeholder")}
-                            type="password"
+                            type={showPassword ? "text" : "password"}
+                            rightElement={lockButton}
                             value={currentPassword}
                             onChange={evt => setCurrentPassword(evt.target.value)}
                             onKeyDown={handleKeyPress}
