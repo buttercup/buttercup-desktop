@@ -21,8 +21,8 @@ export function getThemeType(): Theme {
 export function updateBodyTheme(theme: Theme) {
     logInfo(`Setting body theme: ${theme}`);
     if (theme === Theme.Dark) {
-        window.document.body.classList.add("bp3-dark");
+        window.document.body.classList.add("bp4-dark");
     } else {
-        window.document.body.classList.remove("bp3-dark");
+        window.document.body.classList.remove("bp4-dark");
     }
 }
