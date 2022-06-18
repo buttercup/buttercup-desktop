@@ -1,6 +1,6 @@
 import { FileSystemInterface, instantiateInterface } from "@buttercup/file-interface";
 import { createClient as createGoogleDriveClient } from "@buttercup/googledrive-client";
-import { createClient as createDropboxClient } from "@buttercup/dropbox-client";
+import { DropboxClient } from "@buttercup/dropbox-client";
 import { createClient as createWebdavClient } from "webdav";
 import { SourceType } from "../types";
 
@@ -23,7 +23,7 @@ export function getFSInstance(type: SourceType, settings: FSInstanceSettings): F
     switch (type) {
         case SourceType.Dropbox:
             return instantiateInterface("dropbox", {
-                dropboxClient: createDropboxClient(settings.token)
+                dropboxClient: new DropboxClient(settings.token)
             });
         case SourceType.WebDAV:
             return instantiateInterface("webdav", {

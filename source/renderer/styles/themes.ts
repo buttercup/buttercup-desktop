@@ -51,7 +51,7 @@ export const THEME_DARK: AppTheme = {
 export const THEME_LIGHT: AppTheme = {
     dark: false,
     base: {
-        bgColor: "#fff",
+        bgColor: Colors.LIGHT_GRAY4,
         contentBgColor: Colors.LIGHT_GRAY5
     },
     sidebar: {
