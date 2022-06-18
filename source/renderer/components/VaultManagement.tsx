@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import cn from "classnames";
 import styled from "styled-components";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
 import { useState as useHookState } from "@hookstate/core";
@@ -10,8 +11,9 @@ import { SearchProvider } from "./search/SearchContext";
 import { VAULTS_LIST } from "../state/vaults";
 import { unlockVaultSource } from "../actions/unlockVault";
 import { handleError } from "../actions/error";
+import { useTheme } from "../hooks/theme";
 import { ErrorBoundary } from "./ErrorBoundary";
-import { VaultSourceDescription } from "../types";
+import { Theme, VaultSourceDescription } from "../types";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -29,6 +31,7 @@ const ContentContainer = styled.div`
 export function VaultManagement() {
     const { id = null } = useParams();
     const history = useHistory();
+    const themeType = useTheme();
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
     const [selectedSidebarItem, setSelectedSidebarItem] = useState<VaultSidebarItem>("contents");
     const handleSourceUnlockRequest = useCallback((sourceID: VaultSourceID) => {
@@ -55,7 +58,9 @@ export function VaultManagement() {
                     selected={selectedSidebarItem}
                     sourceID={id}
                 />
-                <ContentContainer>
+                <ContentContainer className={cn({
+                    "bp4-dark": themeType === Theme.Dark
+                })}>
                     {id && (
                         <ErrorBoundary>
                             {selectedSidebarItem === "contents" && (
