@@ -1,10 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import cn from "classnames";
 import styled from "styled-components";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
 import { useState as useHookState } from "@hookstate/core";
-import { VaultSidebar, VaultSidebarItem } from "./navigation/VaultSidebar";
 import { VaultEditor } from "./VaultEditor";
 import { VaultSearchManager } from "./search/VaultSearchManager";
 import { SearchProvider } from "./search/SearchContext";
@@ -14,12 +13,15 @@ import { handleError } from "../actions/error";
 import { useTheme } from "../hooks/theme";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { Theme, VaultSourceDescription } from "../types";
+import { Tab, VaultTabs } from "./navigation/VaultTabs";
+import { setVaultSourcesOrder } from "../actions/vaultOrder";
+import { logErr } from "../library/log";
 
 const PrimaryContainer = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: stretch;
 `;
@@ -33,29 +35,27 @@ export function VaultManagement() {
     const history = useHistory();
     const themeType = useTheme();
     const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
-    const [selectedSidebarItem, setSelectedSidebarItem] = useState<VaultSidebarItem>("contents");
     const handleSourceUnlockRequest = useCallback((sourceID: VaultSourceID) => {
         const vault = vaultsState.get().find(vault => vault.id === sourceID);
         if (vault.state === VaultSourceStatus.Locked) {
             unlockVaultSource(sourceID).catch(handleError);
         }
     }, [vaultsState]);
-    const handleSidebarItemSelect = useCallback((item: VaultSidebarItem, sourceID?: VaultSourceID) => {
-        setSelectedSidebarItem(item);
-        if (sourceID) {
-            history.push(`/source/${sourceID}`);
-            const vault = vaultsState.get().find(vault => vault.id === sourceID);
-            if (vault.state === VaultSourceStatus.Locked) {
-                unlockVaultSource(sourceID).catch(handleError);
-            }
-        }
-    }, [vaultsState]);
+    const handleSourceSelect = useCallback((sourceID: VaultSourceID) => {
+        history.push(`/source/${sourceID}`);
+    }, [history, id]);
+    const handleSourcesReoder = useCallback((newTabsOrder: Array<Tab>) => {
+        setVaultSourcesOrder(newTabsOrder.map(tab => tab.id)).catch(err => {
+            logErr("Failed reordering vaults", err);
+        });
+    }, []);
     return (
         <PrimaryContainer>
             <SearchProvider>
-                <VaultSidebar
-                    onSelect={handleSidebarItemSelect}
-                    selected={selectedSidebarItem}
+                <VaultTabs
+                    onAddVault={() => {}}
+                    onReorder={handleSourcesReoder}
+                    onSelectVault={handleSourceSelect}
                     sourceID={id}
                 />
                 <ContentContainer className={cn({
@@ -63,7 +63,7 @@ export function VaultManagement() {
                 })}>
                     {id && (
                         <ErrorBoundary>
-                            {selectedSidebarItem === "contents" && (
+                            {id && (
                                 <VaultEditor onUnlockRequest={() => handleSourceUnlockRequest(id)} sourceID={id} />
                             )}
                         </ErrorBoundary>

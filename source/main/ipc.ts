@@ -23,6 +23,7 @@ import {
     saveVaultFacade,
     sendSourcesToWindows,
     setSourceOrder,
+    setSourcesOrder,
     toggleAutoUpdate
 } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
@@ -317,6 +318,10 @@ ipcMain.handle("set-selected-source", async (_, sourceID: VaultSourceID) => {
 
 ipcMain.handle("set-source-order", async (_, sourceID: VaultSourceID, newOrder: number) => {
     await setSourceOrder(sourceID, newOrder);
+});
+
+ipcMain.handle("set-sources-order", async (_, sources: Array<VaultSourceID>) => {
+    await setSourcesOrder(sources);
 });
 
 ipcMain.handle("start-current-update", async () => {

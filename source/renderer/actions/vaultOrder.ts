@@ -7,3 +7,7 @@ export async function setVaultSourceOrder(
 ): Promise<void> {
     await ipcRenderer.invoke("set-source-order", sourceID, newOrder);
 }
+
+export async function setVaultSourcesOrder(newOrders: Array<VaultSourceID>): Promise<void> {
+    await ipcRenderer.invoke("set-sources-order", newOrders);
+}

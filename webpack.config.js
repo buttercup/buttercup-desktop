@@ -87,7 +87,9 @@ module.exports = [
 
         resolve: {
             alias: {
-                buttercup: require.resolve("buttercup/web")
+                buttercup: require.resolve("buttercup/web"),
+                "react-dnd": path.resolve("node_modules/react-dnd"),
+                "react/jsx-runtime": "react/jsx-runtime.js"
             },
             extensions: [".tsx", ".ts", ".js"]
         },
