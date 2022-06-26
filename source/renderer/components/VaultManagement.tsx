@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import cn from "classnames";
 import styled from "styled-components";
+import { Intent } from "@blueprintjs/core";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
 import { useState as useHookState } from "@hookstate/core";
 import { VaultEditor } from "./VaultEditor";
@@ -9,18 +10,18 @@ import { VaultSearchManager } from "./search/VaultSearchManager";
 import { SearchProvider } from "./search/SearchContext";
 import { ConfirmDialog } from "./prompt/ConfirmDialog";
 import { VAULTS_LIST } from "../state/vaults";
-import { unlockVaultSource } from "../actions/unlockVault";
+import { showAddVaultMenu } from "../state/addVault";
 import { handleError } from "../actions/error";
 import { useTheme } from "../hooks/theme";
 import { ErrorBoundary } from "./ErrorBoundary";
-import { Theme, VaultSourceDescription } from "../types";
 import { Tab, VaultTabs } from "./navigation/VaultTabs";
 import { setVaultSourcesOrder } from "../actions/vaultOrder";
-import { logErr, logInfo } from "../library/log";
-import { t } from "../../shared/i18n/trans";
-import { Intent } from "@blueprintjs/core";
 import { removeVaultSource } from "../actions/removeVault";
+import { unlockVaultSource } from "../actions/unlockVault";
+import { logErr } from "../library/log";
+import { t } from "../../shared/i18n/trans";
 import { showSuccess } from "../services/notifications";
+import { Theme, VaultSourceDescription } from "../types";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -49,6 +50,9 @@ export function VaultManagement() {
             unlockVaultSource(sourceID).catch(handleError);
         }
     }, [vaultsState]);
+    const handleSourceAdd = useCallback(() => {
+        showAddVaultMenu(true);
+    }, [history]);
     const handleSourceSelect = useCallback((sourceID: VaultSourceID) => {
         history.push(`/source/${sourceID}`);
     }, [history, id]);
@@ -78,7 +82,7 @@ export function VaultManagement() {
         <PrimaryContainer>
             <SearchProvider>
                 <VaultTabs
-                    onAddVault={() => {}}
+                    onAddVault={handleSourceAdd}
                     onRemoveVault={handleSourceRemove}
                     onReorder={handleSourcesReoder}
                     onSelectVault={handleSourceSelect}

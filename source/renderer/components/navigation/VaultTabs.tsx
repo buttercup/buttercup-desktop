@@ -34,7 +34,7 @@ export function VaultTabs(props: VaultTabsProps) {
     })), [vaults]);
     return (
         <Tabs
-            onAdd={() => onAddVault()}
+            onAdd={onAddVault}
             onClose={onRemoveVault}
             onReorder={onReorder}
             onSelect={onSelectVault}
