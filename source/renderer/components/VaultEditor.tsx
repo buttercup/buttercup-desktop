@@ -34,6 +34,7 @@ interface VaultEditorProps {
 const LockedImage = styled.img`
     max-height: 308px;
     width: auto;
+    user-select: none;
 `;
 const LockedNonIdealState = styled(NonIdealState)`
     background-color: ${props => getThemeProp(props, "base.contentBgColor")};

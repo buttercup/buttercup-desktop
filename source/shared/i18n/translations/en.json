@@ -218,6 +218,7 @@
         "export-success": "Successfully exported vault: {{name}}",
         "import-success": "Successfully imported vault: {{filename}}",
         "preferences-saved": "Saved preferences",
+        "vault-removed": "Vault removed: {{name}}",
         "vault-saved": "Vault saved"
     },
     "preferences": {
