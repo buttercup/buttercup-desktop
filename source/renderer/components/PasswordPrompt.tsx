@@ -54,21 +54,6 @@ export function PasswordPrompt() {
                 showError(message);
             });
     }, [showPromptState.get(), biometricSourceState.get(), promptedBiometrics]);
-    const lockButton = (
-        <Button
-            icon={showPassword ? "unlock" : "lock"}
-            intent={Intent.NONE}
-            minimal={true}
-            onMouseEnter={() => {
-                setShowPassword(true);
-            }}
-            onMouseLeave={() => {
-                setShowPassword(false);
-            }}
-            active={showPassword}
-            style={{ userSelect: "none" }}
-        />
-    );
     return (
         <Dialog isOpen={showPromptState.get()} onClose={close}>
             <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
@@ -83,7 +68,21 @@ export function PasswordPrompt() {
                             id="password"
                             placeholder={t("dialog.password-prompt.placeholder")}
                             type={showPassword ? "text" : "password"}
-                            rightElement={lockButton}
+                            rightElement={(
+                                <Button
+                                    icon={showPassword ? "unlock" : "lock"}
+                                    intent={Intent.NONE}
+                                    minimal
+                                    onMouseEnter={() => {
+                                        setShowPassword(true);
+                                    }}
+                                    onMouseLeave={() => {
+                                        setShowPassword(false);
+                                    }}
+                                    active={showPassword}
+                                    style={{ outline: "none", userSelect: "none" }}
+                                />
+                            )}
                             value={currentPassword}
                             onChange={evt => setCurrentPassword(evt.target.value)}
                             onKeyDown={handleKeyPress}
