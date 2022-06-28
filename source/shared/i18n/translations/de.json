@@ -283,12 +283,9 @@
         },
         "title": "Tresore"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Füge Tresor hinzu",
-            "lock-current-vault": "Sperre aktuellen Tresor",
-            "manage-vaults": "Tresore verwalten"
-        },
-        "vault-contents": "Tresor Inhalte"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Entsperren"
+        }
     }
 }

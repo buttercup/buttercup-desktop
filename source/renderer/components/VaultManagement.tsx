@@ -22,6 +22,7 @@ import { logErr } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 import { showSuccess } from "../services/notifications";
 import { Theme, VaultSourceDescription } from "../types";
+import { lockVaultSource } from "../actions/lockVault";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -53,6 +54,12 @@ export function VaultManagement() {
     const handleSourceAdd = useCallback(() => {
         showAddVaultMenu(true);
     }, [history]);
+    const handleSourceLock = useCallback((sourceID: VaultSourceID) => {
+        const vault = vaultsState.get().find(vault => vault.id === sourceID);
+        if (vault.state === VaultSourceStatus.Unlocked) {
+            lockVaultSource(sourceID).catch(handleError);
+        }
+    }, []);
     const handleSourceSelect = useCallback((sourceID: VaultSourceID) => {
         history.push(`/source/${sourceID}`);
     }, [history, id]);
@@ -83,9 +90,11 @@ export function VaultManagement() {
             <SearchProvider>
                 <VaultTabs
                     onAddVault={handleSourceAdd}
+                    onLockVault={handleSourceLock}
                     onRemoveVault={handleSourceRemove}
                     onReorder={handleSourcesReoder}
                     onSelectVault={handleSourceSelect}
+                    onUnlockVault={handleSourceUnlockRequest}
                     sourceID={id}
                 />
                 <ContentContainer className={cn({

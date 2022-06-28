@@ -283,12 +283,9 @@
         },
         "title": "Seifuri"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Adaugă Seif",
-            "lock-current-vault": "Blochează Seiful Curent",
-            "manage-vaults": "Gestionează seifurile"
-        },
-        "vault-contents": "Conținutul seifului"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Deschide"
+        }
     }
 }
