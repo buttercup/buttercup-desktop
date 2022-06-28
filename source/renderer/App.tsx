@@ -16,7 +16,6 @@ import { FileHostConnectionNotice } from "./components/standalone/FileHostConnec
 import { CreateNewFilePrompt } from "./components/standalone/CreateNewFilePrompt";
 import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
-import { VaultManagementDialog } from "./components/standalone/VaultManagementDialog";
 import { BiometricRegistrationDialog } from "./components/standalone/BiometricRegistrationDialog";
 import { GoogleReAuthDialog } from "./components/standalone/GoogleReAuthDialog";
 import { useTheme } from "./hooks/theme";
@@ -60,7 +59,6 @@ export function App() {
                                 <GoogleReAuthDialog />
                                 <UpdateDialog />
                                 <AboutDialog />
-                                <VaultManagementDialog />
                                 <BiometricRegistrationDialog />
                                 <Notifications />
                                 <LoadingScreen />
