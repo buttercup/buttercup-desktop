@@ -283,12 +283,9 @@
         },
         "title": "Coffres-forts"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Ajouter un coffre-fort",
-            "lock-current-vault": "Verrouiller le coffre-fort actuel",
-            "manage-vaults": "Gérer les coffres-forts"
-        },
-        "vault-contents": "Contenu du coffre-fort"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Déverrouiller"
+        }
     }
 }

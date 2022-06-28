@@ -1,10 +1,7 @@
 import * as React from "react";
-import {
-    HashRouter as Router,
-    Switch,
-    Route
-} from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import { DndProvider, HTML5Backend, themes } from "@buttercup/ui";
 import { THEME_DARK, THEME_LIGHT } from "./styles/themes";
 import { getThemeProp } from "./styles/theme";
 import { VaultManagement } from "./components/VaultManagement";
@@ -19,7 +16,6 @@ import { FileHostConnectionNotice } from "./components/standalone/FileHostConnec
 import { CreateNewFilePrompt } from "./components/standalone/CreateNewFilePrompt";
 import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
-import { VaultManagementDialog } from "./components/standalone/VaultManagementDialog";
 import { BiometricRegistrationDialog } from "./components/standalone/BiometricRegistrationDialog";
 import { GoogleReAuthDialog } from "./components/standalone/GoogleReAuthDialog";
 import { useTheme } from "./hooks/theme";
@@ -39,35 +35,38 @@ export function App() {
         <ThemeProvider
             theme={themeType === Theme.Dark ? THEME_DARK: THEME_LIGHT}
         >
-            <BaseContainer onCopy={() => userCopiedText(document.getSelection().toString())}>
-                <Router>
-                    <Switch>
-                        <Route path="/add-vault">
-                            <AddVaultLanding />
-                        </Route>
-                        <Route path="/source/:id">
-                            <VaultManagement />
-                        </Route>
-                        <Route path="/">
-                            <AutoNav />
-                        </Route>
-                    </Switch>
-                    <>
-                        <PasswordPrompt />
-                        <FileHostConnectionNotice />
-                        <CreateNewFilePrompt />
-                        <AddVaultMenu />
-                        <PreferencesDialog />
-                        <GoogleReAuthDialog />
-                        <UpdateDialog />
-                        <AboutDialog />
-                        <VaultManagementDialog />
-                        <BiometricRegistrationDialog />
-                        <Notifications />
-                        <LoadingScreen />
-                    </>
-                </Router>
-            </BaseContainer>
+            <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
+                <DndProvider backend={HTML5Backend}>
+                    <BaseContainer onCopy={() => userCopiedText(document.getSelection().toString())}>
+                        <Router>
+                            <Switch>
+                                <Route path="/add-vault">
+                                    <AddVaultLanding />
+                                </Route>
+                                <Route path="/source/:id">
+                                    <VaultManagement />
+                                </Route>
+                                <Route path="/">
+                                    <AutoNav />
+                                </Route>
+                            </Switch>
+                            <>
+                                <PasswordPrompt />
+                                <FileHostConnectionNotice />
+                                <CreateNewFilePrompt />
+                                <AddVaultMenu />
+                                <PreferencesDialog />
+                                <GoogleReAuthDialog />
+                                <UpdateDialog />
+                                <AboutDialog />
+                                <BiometricRegistrationDialog />
+                                <Notifications />
+                                <LoadingScreen />
+                            </>
+                        </Router>
+                    </BaseContainer>
+                </DndProvider>
+            </ThemeProvider>
         </ThemeProvider>
     );
 }

@@ -41,7 +41,6 @@ function attachEventListeners(updater = autoUpdater) {
         }
     });
     updater.on("update-available", (updateInfo: UpdateInfo) => {
-        console.log(JSON.stringify(updateInfo, undefined, 2));
         logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
         if (__updateMuted) {
             logInfo("Updates muted: will not notify");

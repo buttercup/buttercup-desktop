@@ -233,11 +233,9 @@
             "title": "Usuń archiwum"
         }
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Dodaj archiwum",
-            "lock-current-vault": "Zablokuj aktualne archiwum"
-        },
-        "vault-contents": "Zawartość archiwum"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Odblokuj"
+        }
     }
 }

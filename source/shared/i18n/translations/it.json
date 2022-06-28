@@ -283,12 +283,9 @@
         },
         "title": "Gestione archivi"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Aggiungi archivio",
-            "lock-current-vault": "Blocca l'archivio corrente",
-            "manage-vaults": "Gestione archivi"
-        },
-        "vault-contents": "Contenuti archivi"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Sblocca"
+        }
     }
 }

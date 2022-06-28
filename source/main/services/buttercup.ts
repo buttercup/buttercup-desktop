@@ -252,6 +252,16 @@ export async function setSourceOrder(sourceID: VaultSourceID, newOrder: number) 
     await vaultManager.dehydrate();
 }
 
+export async function setSourcesOrder(sourceIDs: Array<VaultSourceID>) {
+    const vaultManager = getVaultManager();
+    for (let i = 0; i < sourceIDs.length; i += 1) {
+        const source = vaultManager.getSourceForID(sourceIDs[i]);
+        source.order = i;
+    }
+    vaultManager.reorderSources();
+    await vaultManager.dehydrate();
+}
+
 export async function testSourceMasterPassword(
     sourceID: VaultSourceID,
     password: string

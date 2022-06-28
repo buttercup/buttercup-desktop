@@ -274,11 +274,9 @@
         },
         "title": "Cofres"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Añadir cofre",
-            "lock-current-vault": "Bloquear cofre actual"
-        },
-        "vault-contents": "Contenido del cofre"
+    "vault-tabs": {
+        "context-menu": {
+            "unlock-vault": "Desbloquear"
+        }
     }
 }

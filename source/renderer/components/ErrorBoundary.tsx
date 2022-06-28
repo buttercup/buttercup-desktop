@@ -21,7 +21,7 @@ function stripBlanks(txt = '') {
 }
 
 export class ErrorBoundary extends Component {
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error: Error) {
         return { error };
     }
 
@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component {
         errorStack: null
     };
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error: Error, errorInfo) {
         this.setState({ errorStack: errorInfo.componentStack || null });
     }
 

@@ -218,6 +218,7 @@
         "export-success": "Successfully exported vault: {{name}}",
         "import-success": "Successfully imported vault: {{filename}}",
         "preferences-saved": "Saved preferences",
+        "vault-removed": "Vault removed: {{name}}",
         "vault-saved": "Vault saved"
     },
     "preferences": {
@@ -281,7 +282,9 @@
         "view": "View"
     },
     "vault-editor": {
-        "locked-state": "Vault Locked"
+        "locked-state": "Vault Locked",
+        "pending-state": "Vault Busy",
+        "unlocked-state": "Vault Unlocked"
     },
     "vault-management": {
         "close-button": "Close",
@@ -296,12 +299,11 @@
         },
         "title": "Vaults"
     },
-    "vault-sidebar": {
-        "options-popup": {
-            "add-vault": "Add Vault",
-            "lock-current-vault": "Lock current vault",
-            "manage-vaults": "Manage vaults"
-        },
-        "vault-contents": "Vault contents"
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "Lock vault",
+            "remove-vault": "Remove vault",
+            "unlock-vault": "Unlock vault"
+        }
     }
 }
