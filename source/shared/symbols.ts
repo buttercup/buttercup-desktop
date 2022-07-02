@@ -1,4 +1,4 @@
-import { Preferences, ThemeSource } from "./types";
+import { Preferences, ThemeSource, VaultSettingsLocal } from "./types";
 
 export const APP_ID = "pw.buttercup.desktop";
 export const ATTACHMENTS_MAX_SIZE = 20 * 1024 * 1024;
@@ -27,4 +27,9 @@ export const PREFERENCES_DEFAULT: Preferences = {
     lockVaultsAfterTime: false, // seconds
     lockVaultsOnWindowClose: false,
     uiTheme: ThemeSource.System
+};
+
+export const VAULT_SETTINGS_DEFAULT: VaultSettingsLocal = {
+    localBackup: false,
+    localBackupLocation: null
 };

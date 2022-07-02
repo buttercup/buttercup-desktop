@@ -1,6 +1,7 @@
 import path from "path";
 import envPaths from "env-paths";
 import { FileStorage } from "../library/FileStorage";
+import { VaultSourceID } from "buttercup";
 
 interface EnvPaths {
     data: string;
@@ -38,6 +39,7 @@ export const LOG_FILENAME = "buttercup-desktop.log";
 export const LOG_PATH = path.join(__envPaths.log, LOG_FILENAME);
 const VAULTS_CACHE_PATH = path.join(__envPaths.temp, "vaults-offline.cache.json");
 const VAULTS_PATH = path.join(__envPaths.data, "vaults.json");
+const VAULT_SETTINGS_PATH = path.join(__envPaths.config, "vault-config-SOURCEID.json");
 
 let __configStorage: FileStorage = null,
     __vaultStorage: FileStorage = null,
@@ -59,6 +61,10 @@ export function getVaultCacheStorage(): FileStorage {
         __vaultCacheStorage = new FileStorage(VAULTS_CACHE_PATH);
     }
     return __vaultCacheStorage;
+}
+
+export function getVaultSettingsStorage(sourceID: VaultSourceID): FileStorage {
+    return new FileStorage(VAULT_SETTINGS_PATH.replace("SOURCEID", sourceID));
 }
 
 export function getVaultStorage(): FileStorage {

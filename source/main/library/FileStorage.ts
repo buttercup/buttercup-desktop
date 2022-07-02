@@ -3,6 +3,7 @@ import path from "path";
 import { StorageInterface } from "buttercup";
 import ChannelQueue from "@buttercup/channel-queue";
 import pify from "pify";
+import { naiveClone } from "../../shared/library/clone";
 
 const mkdir = pify(fs.mkdir);
 const readFile = pify(fs.readFile);
@@ -28,6 +29,18 @@ export class FileStorage extends StorageInterface {
         return typeof data[name] !== "undefined" ? data[name] : null;
     }
 
+    async getValues(properties: Array<string>): Promise<Record<string, unknown>> {
+        const data = await this._getContents();
+        const result = properties.reduce(
+            (output, key) => ({
+                ...output,
+                [key]: data[key]
+            }),
+            {}
+        );
+        return naiveClone(result);
+    }
+
     async removeKey(name: string): Promise<void> {
         return this._queue.channel("update").enqueue(async () => {
             const data = await this._getContents();
@@ -40,6 +53,16 @@ export class FileStorage extends StorageInterface {
         return this._queue.channel("update").enqueue(async () => {
             const data = await this._getContents();
             data[name] = value;
+            await this._putContents(data);
+        });
+    }
+
+    async setValues(values: Record<string, any>): Promise<void> {
+        return this._queue.channel("update").enqueue(async () => {
+            const data = await this._getContents();
+            for (const key in values) {
+                data[key] = values[key];
+            }
             await this._putContents(data);
         });
     }
