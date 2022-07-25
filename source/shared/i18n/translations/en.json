@@ -213,13 +213,16 @@
             "unknown-error": "Unknown error",
             "vault-lock-failed": "Vault lock failed",
             "vault-save-failed": "Vault failed to save",
+            "vault-settings-load": "Failed loading vault settings",
+            "vault-settings-save": "Failed saving vault settings",
             "vault-unlock-failed": "Vault unlock failed"
         },
         "export-success": "Successfully exported vault: {{name}}",
         "import-success": "Successfully imported vault: {{filename}}",
         "preferences-saved": "Saved preferences",
         "vault-removed": "Vault removed: {{name}}",
-        "vault-saved": "Vault saved"
+        "vault-saved": "Vault saved",
+        "vault-settings-saved": "Saved vault settings"
     },
     "preferences": {
         "button": {
@@ -299,11 +302,32 @@
         },
         "title": "Vaults"
     },
+    "vault-settings": {
+        "backup": {
+            "description": "Securely backup your vault locally when saving.",
+            "path": {
+                "helper": "Leave blank for default path",
+                "label": "Backup Path",
+                "placeholder": "Absolute backup path"
+            },
+            "switch": "Enable local backups",
+            "title": "Backup"
+        },
+        "format": {
+            "a-description": "Format A is the original Buttercup vault format that uses deltas to store vault structure.",
+            "a-upgrade-b": "You can upgrade to Format B, which is currently in <strong>beta testing</strong>. It is not recommended unless you are taking appropriate measures to secure your data.",
+            "description": "Manage current vault format and updates.",
+            "format-type": "Format {{format}}",
+            "title": "Format"
+        },
+        "title": "Vault Settings: {{title}}"
+    },
     "vault-tabs": {
         "context-menu": {
             "lock-vault": "Lock vault",
             "remove-vault": "Remove vault",
-            "unlock-vault": "Unlock vault"
+            "unlock-vault": "Unlock vault",
+            "vault-settings": "Vault settings"
         }
     }
 }

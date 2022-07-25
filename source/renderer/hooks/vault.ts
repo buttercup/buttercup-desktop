@@ -8,6 +8,10 @@ import { showError } from "../services/notifications";
 export function useSourceDetails(sourceID: VaultSourceID): VaultSourceDescription {
     const [details, setDetails] = useState<VaultSourceDescription>(null);
     useEffect(() => {
+        if (!sourceID) {
+            setDetails(null);
+            return;
+        }
         let mounted = true;
         ipcRenderer
             .invoke("get-vault-description", sourceID)

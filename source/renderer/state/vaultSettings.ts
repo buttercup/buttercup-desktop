@@ -1,7 +1,8 @@
 import { State, createState } from "@hookstate/core";
+import { VaultSourceID } from "buttercup";
 
-export const SHOW_SETTINGS: State<boolean> = createState(false as boolean);
+export const SHOW_VAULT_SETTINGS: State<VaultSourceID> = createState(null as VaultSourceID);
 
-export function showVaultSettings(show = true) {
-    SHOW_SETTINGS.set(show);
+export function showVaultSettingsForSource(sourceID: VaultSourceID) {
+    SHOW_VAULT_SETTINGS.set(sourceID);
 }

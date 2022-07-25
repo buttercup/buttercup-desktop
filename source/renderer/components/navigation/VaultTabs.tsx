@@ -3,10 +3,11 @@ import React, { useMemo } from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
 import { Tabs } from "@buttercup/ui";
-import { Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
+import { Intent, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 import { sortVaults } from "../../library/vault";
 import { getIconForProvider } from "../../library/icons";
 import { VAULTS_LIST } from "../../state/vaults";
+import { showVaultSettingsForSource } from "../../state/vaultSettings";
 import { t } from "../../../shared/i18n/trans";
 import { VaultSourceDescription } from "../../types";
 
@@ -65,8 +66,15 @@ function TabMenu(props: TabMenuProps) {
             <MenuItem
                 disabled={vaultDetails?.state === VaultSourceStatus.Pending}
                 icon="remove"
+                intent={Intent.WARNING}
                 onClick={() => onRemoveVault(id)}
                 text={t("vault-tabs.context-menu.remove-vault")}
+            />
+            <MenuDivider />
+            <MenuItem
+                icon="settings"
+                onClick={() => showVaultSettingsForSource(id)}
+                text={t("vault-tabs.context-menu.vault-settings")}
             />
         </Menu>
     );
