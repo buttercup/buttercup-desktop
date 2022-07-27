@@ -1,8 +1,10 @@
+import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
-import { getConfigStorage, getVaultSettingsStorage } from "./storage";
+import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
 import { naiveClone } from "../../shared/library/clone";
 import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
 import { VaultSettingsLocal } from "../types";
+import { logErr } from "../library/log";
 
 const DEFAULT_CONFIG = {
     fileHostKey: null,
@@ -26,6 +28,15 @@ export async function getVaultSettings(sourceID: VaultSourceID): Promise<VaultSe
     if (keys.length === 0) return naiveClone(VAULT_SETTINGS_DEFAULT);
     const settings = await storage.getValues(keys);
     return settings as unknown as VaultSettingsLocal;
+}
+
+export async function removeVaultSettings(sourceID: VaultSourceID): Promise<void> {
+    const path = getVaultSettingsPath(sourceID);
+    try {
+        await fs.unlink(path);
+    } catch (err) {
+        logErr(`Failed removing vault settings: ${sourceID}`, err);
+    }
 }
 
 export async function setConfigValue(

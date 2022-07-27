@@ -64,8 +64,12 @@ export function getVaultCacheStorage(): FileStorage {
     return __vaultCacheStorage;
 }
 
+export function getVaultSettingsPath(sourceID: VaultSourceID): string {
+    return VAULT_SETTINGS_PATH.replace("SOURCEID", sourceID);
+}
+
 export function getVaultSettingsStorage(sourceID: VaultSourceID): FileStorage {
-    return new FileStorage(VAULT_SETTINGS_PATH.replace("SOURCEID", sourceID));
+    return new FileStorage(getVaultSettingsPath(sourceID));
 }
 
 export function getVaultStorage(): FileStorage {
