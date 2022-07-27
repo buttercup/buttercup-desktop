@@ -27,7 +27,12 @@ import {
     toggleAutoUpdate
 } from "./services/buttercup";
 import { getVaultFacade } from "./services/facades";
-import { getConfigValue, setConfigValue } from "./services/config";
+import {
+    getConfigValue,
+    getVaultSettings,
+    setConfigValue,
+    setVaultSettings
+} from "./services/config";
 import { getOSLocale } from "./services/locale";
 import { searchSingleVault } from "./services/search";
 import { addGoogleTokens } from "./services/googleDrive";
@@ -49,7 +54,14 @@ import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
 import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
-import { AppEnvironmentFlags, AddVaultPayload, LogLevel, Preferences, SearchResult } from "./types";
+import {
+    AppEnvironmentFlags,
+    AddVaultPayload,
+    LogLevel,
+    Preferences,
+    SearchResult,
+    VaultSettingsLocal
+} from "./types";
 
 // **
 // ** IPC Events
@@ -271,6 +283,11 @@ ipcMain.handle("get-vault-facade", async (evt, sourceID: VaultSourceID) => {
     };
 });
 
+ipcMain.handle("get-vault-settings", async (evt, sourceID: VaultSourceID) => {
+    const settings = await getVaultSettings(sourceID);
+    return settings;
+});
+
 ipcMain.handle("install-update", installUpdate);
 
 ipcMain.handle("mute-current-update", muteUpdate);
@@ -323,6 +340,13 @@ ipcMain.handle("set-source-order", async (_, sourceID: VaultSourceID, newOrder: 
 ipcMain.handle("set-sources-order", async (_, sources: Array<VaultSourceID>) => {
     await setSourcesOrder(sources);
 });
+
+ipcMain.handle(
+    "set-vault-settings",
+    async (_, sourceID: VaultSourceID, vaultSettings: VaultSettingsLocal) => {
+        await setVaultSettings(sourceID, vaultSettings);
+    }
+);
 
 ipcMain.handle("start-current-update", async () => {
     await startUpdate();

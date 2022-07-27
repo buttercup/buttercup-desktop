@@ -18,9 +18,10 @@ import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
 import { BiometricRegistrationDialog } from "./components/standalone/BiometricRegistrationDialog";
 import { GoogleReAuthDialog } from "./components/standalone/GoogleReAuthDialog";
+import { VaultSettingsDialog } from "./components/VaultSettingsDialog";
 import { useTheme } from "./hooks/theme";
-import { Theme } from "./types";
 import { userCopiedText } from "./actions/clipboard";
+import { Theme } from "./types";
 
 const BaseContainer = styled.div`
     width: 100%;
@@ -56,6 +57,7 @@ export function App() {
                                 <CreateNewFilePrompt />
                                 <AddVaultMenu />
                                 <PreferencesDialog />
+                                <VaultSettingsDialog />
                                 <GoogleReAuthDialog />
                                 <UpdateDialog />
                                 <AboutDialog />

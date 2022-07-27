@@ -15,7 +15,7 @@ export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
 export interface Language {
     name: string;
-    slug: string;
+    slug: string | null;
 }
 
 export enum LogLevel {
@@ -56,6 +56,11 @@ export interface UpdateProgressInfo {
     percent: number;
     total: number;
     transferred: number;
+}
+
+export interface VaultSettingsLocal {
+    localBackup: boolean;
+    localBackupLocation: null | string;
 }
 
 export interface VaultSourceDescription {
