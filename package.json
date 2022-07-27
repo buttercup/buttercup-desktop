@@ -192,9 +192,9 @@
     "webdav": "^4.7.0"
   },
   "devDependencies": {
-    "@blueprintjs/core": "^4.5.1",
-    "@blueprintjs/popover2": "^1.4.1",
-    "@blueprintjs/select": "^4.4.1",
+    "@blueprintjs/core": "^4.6.1",
+    "@blueprintjs/popover2": "^1.4.3",
+    "@blueprintjs/select": "^4.5.1",
     "@buttercup/ui": "^6.2.1",
     "@hookstate/core": "^3.0.13",
     "@types/node": "^16.10.2",

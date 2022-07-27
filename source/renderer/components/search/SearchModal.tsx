@@ -101,13 +101,13 @@ export function SearchModal(props: SearchModalProps) {
     return (
         <SearchOmnibar
             inputProps={searchInputProps as IInputGroupProps2}
+            isOpen={visible}
             itemRenderer={renderResult}
             items={results}
             noResults={<MenuItem disabled text={t("search.modal.no-results")} />}
             onClose={onClose}
             onItemSelect={onSelect}
             onQueryChange={onSearch}
-            isOpen={visible}
         />
     );
 }
