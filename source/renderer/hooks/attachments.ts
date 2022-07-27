@@ -23,7 +23,7 @@ export function useAttachments(sourceID: VaultSourceID) {
             try {
                 await _addAttachments(sourceID, entryID, files);
             } catch (err) {
-                handleError(new Layerr(err, "Failed adding attachments"));
+                handleError(new Layerr(err, t("error.attachment-add")));
             }
             appBusyState.set(false);
         },
@@ -35,7 +35,7 @@ export function useAttachments(sourceID: VaultSourceID) {
             try {
                 await _deleteAttachment(sourceID, entryID, attachmentID);
             } catch (err) {
-                handleError(new Layerr(err, "Failed deleting attachment"));
+                handleError(new Layerr(err, t("error.attachment-delete")));
             }
             appBusyState.set(false);
         },
@@ -48,7 +48,7 @@ export function useAttachments(sourceID: VaultSourceID) {
                 const didDownload = await _downloadAttachment(sourceID, entryID, attachmentID);
                 if (didDownload) showSuccess(t("notification.attachment-downloaded"));
             } catch (err) {
-                handleError(new Layerr(err, "Failed downloading attachment"));
+                handleError(new Layerr(err, t("error.attachment-download")));
             }
             appBusyState.set(false);
         },
@@ -64,7 +64,7 @@ export function useAttachments(sourceID: VaultSourceID) {
                     [attachmentID]: arrayBufferToBase64(data)
                 });
             } catch (err) {
-                handleError(new Layerr(err, "Failed deleting attachment"));
+                handleError(new Layerr(err, t("error.attachment-preview")));
             }
         },
         [attachmentPreviews, sourceID]

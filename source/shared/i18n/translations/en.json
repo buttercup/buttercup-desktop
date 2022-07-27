@@ -183,6 +183,10 @@
         }
     },
     "error": {
+        "attachment-add": "Failed adding attachments",
+        "attachment-delete": "Failed deleting attachment",
+        "attachment-download": "Failed downloading attachment",
+        "attachment-preview": "Failed previewing attachment",
         "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
         "biometric-store-failed": "Failed storing biometric details",
         "biometric-unlock-failed": "Failed unlocking vault using biometrics",
