@@ -1,7 +1,7 @@
+import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsStorage } from "./storage";
 import { naiveClone } from "../../shared/library/clone";
 import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
-import { VaultSourceID } from "buttercup";
 import { VaultSettingsLocal } from "../types";
 
 const DEFAULT_CONFIG = {

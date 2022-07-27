@@ -23,6 +23,7 @@ import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
 import { setAutoLockEnabled } from "./autoLock";
 import { logErr } from "../library/log";
+import { attachSourceEncryptedListeners } from "./backup";
 import { SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
@@ -77,6 +78,7 @@ export async function attachVaultManagerWatchers() {
                 source.on("updated", () => onVaultSourceUpdated(source));
                 __watchedVaultSources.push(source.id);
             }
+            attachSourceEncryptedListeners(source);
         });
         await updateSearchCaches(vaultManager.unlockedSources);
     });
