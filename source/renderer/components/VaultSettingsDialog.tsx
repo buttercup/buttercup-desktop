@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
 import { Alignment, Button, ButtonGroup, Callout, Classes, Dialog, FormGroup, Icon, InputGroup, Intent, Switch, Text } from "@blueprintjs/core";
-import { VaultFormatID } from "buttercup";
+import { VaultFormatID, VaultSourceStatus } from "buttercup";
+import { ConfirmDialog } from "./prompt/ConfirmDialog";
 import { t } from "../../shared/i18n/trans";
 import { SHOW_VAULT_SETTINGS } from "../state/vaultSettings";
 import { naiveClone } from "../../shared/library/clone";
@@ -13,10 +14,17 @@ import { getVaultSettings, saveVaultSettings } from "../services/vaultSettings";
 import { logErr, logInfo } from "../library/log";
 import { VaultSettingsLocal } from "../types";
 import { showError, showSuccess } from "../services/notifications";
+import { convertVaultToFormat } from "../actions/format";
 
 const PAGE_BACKUP = "backup";
 const PAGE_FORMAT = "format";
 
+const ContentNotice = styled.div`
+    margin-top: 12px;
+`;
+const ContentNoticeIcon = styled(Icon)`
+    margin-right: 8px;
+`;
 const DialogFreeWidth = styled(Dialog)`
     width: 85%;
     max-width: 800px;
@@ -83,14 +91,18 @@ export function VaultSettingsDialog() {
     const [currentPage, setCurrentPage] = useState(PAGE_FORMAT);
     const [dirty, setDirty] = useState(false);
     const [settings, _setSettings] = useState<VaultSettingsLocal>(naiveClone(VAULT_SETTINGS_DEFAULT));
-    const { id: sourceID, name: vaultName } = useSourceDetails(showSettingsState.get()) || {};
-    const [vaultFormat, setVaultFormat] = useState<VaultFormatID>(VaultFormatID.A);
+    const [
+        sourceDetails,
+        updateSourceDescription
+    ] = useSourceDetails(showSettingsState.get());
+    const { id: sourceID, name: vaultName, format: vaultFormat, state = VaultSourceStatus.Locked } = sourceDetails || {};
+    const [promptFormatB, setPromptFormatB] = useState<boolean>(false);
     const setSettings = useCallback((settings: VaultSettingsLocal) => {
         _setSettings(settings);
         setDirty(true);
     }, [_setSettings]);
     const close = useCallback(() => {
-        showSettingsState.set(null);
+        showSettingsState.set("");
         setCurrentPage(PAGE_FORMAT);
     }, []);
     const save = useCallback(() => {
@@ -109,6 +121,11 @@ export function VaultSettingsDialog() {
                 logErr("Failed saving vault settings", err);
             });
     }, [settings, sourceID]);
+    const changeFormatToB = useCallback(() => {
+        convertVaultToFormat(sourceID, VaultFormatID.B).then(() => {
+            updateSourceDescription();
+        });
+    }, [sourceID, updateSourceDescription]);
     useEffect(() => {
         if (!sourceID) return;
         getVaultSettings(sourceID)
@@ -119,7 +136,7 @@ export function VaultSettingsDialog() {
             .catch(err => {
                 showError(t("notification.error.vault-settings-load"));
                 logErr("Failed loading vault settings", err);
-                showSettingsState.set(null);
+                showSettingsState.set("");
             });
     }, [sourceID]);
     // Pages
@@ -129,21 +146,35 @@ export function VaultSettingsDialog() {
                 <Callout icon="info-sign">
                     <div dangerouslySetInnerHTML={{ __html: t("vault-settings.format.description") }} />
                 </Callout>
-                <SplitSection>
-                    <FormatContainer>
-                        <Icon icon="data-connection" size={60} />
-                        <FormatTitle>{t("vault-settings.format.format-type", { format: vaultFormat.toUpperCase() })}</FormatTitle>
-                    </FormatContainer>
-                    <FormatDescriptionContainer>
-                        <FormatDescriptionText>{t("vault-settings.format.a-description")}</FormatDescriptionText>
-                        {vaultFormat === VaultFormatID.A && (
-                            <>
-                                <FormatDescriptionText dangerouslySetInnerHTML={{ __html: t("vault-settings.format.a-upgrade-b") }} />
-                                <Button disabled text="Upgrade" icon="circle-arrow-up" intent={Intent.DANGER} />
-                            </>
-                        )}
-                    </FormatDescriptionContainer>
-                </SplitSection>
+                {state === VaultSourceStatus.Unlocked && (
+                    <SplitSection>
+                        <FormatContainer>
+                            <Icon icon="data-connection" size={60} />
+                            <FormatTitle>{t("vault-settings.format.format-type", { format: vaultFormat?.toUpperCase() })}</FormatTitle>
+                        </FormatContainer>
+                        <FormatDescriptionContainer>
+                            <FormatDescriptionText>
+                                {vaultFormat === VaultFormatID.A ? t("vault-settings.format.a-description") : t("vault-settings.format.b-description")}
+                            </FormatDescriptionText>
+                            {vaultFormat === VaultFormatID.A && (
+                                <>
+                                    <FormatDescriptionText dangerouslySetInnerHTML={{ __html: t("vault-settings.format.a-upgrade-b") }} />
+                                    <Button
+                                        text={t("vault-settings.format.upgrade-button")}
+                                        icon="circle-arrow-up"
+                                        intent={Intent.DANGER}
+                                        onClick={() => setPromptFormatB(true)}
+                                    />
+                                </>
+                            )}
+                        </FormatDescriptionContainer>
+                    </SplitSection>
+                ) || (
+                    <ContentNotice>
+                        <ContentNoticeIcon icon="disable" />
+                        <span>{t("vault-settings.not-unlocked")}</span>
+                    </ContentNotice>
+                )}
             </FormGroup>
         </>
     );
@@ -176,55 +207,70 @@ export function VaultSettingsDialog() {
         </>
     );
     return (
-        <DialogFreeWidth isOpen={showSettingsState.get() !== null} onClose={close}>
-            <div className={Classes.DIALOG_HEADER}>{t("vault-settings.title", { title: vaultName || "" })}</div>
-            <div className={Classes.DIALOG_BODY}>
-                {showSettingsState.get() && (
-                    <SettingsContent>
-                        <SettingsSidebar>
-                            <SettingsMenu
-                                alignText={Alignment.LEFT}
-                                vertical
-                            >
-                                <Button
-                                    active={currentPage === PAGE_FORMAT}
-                                    icon="database"
-                                    onClick={() => setCurrentPage(PAGE_FORMAT)}
-                                    text={t("vault-settings.format.title")}
-                                />
-                                <Button
-                                    active={currentPage === PAGE_BACKUP}
-                                    icon="duplicate"
-                                    onClick={() => setCurrentPage(PAGE_BACKUP)}
-                                    text={t("vault-settings.backup.title")}
-                                />
-                            </SettingsMenu>
-                        </SettingsSidebar>
-                        <PageContent>
-                            {currentPage === PAGE_FORMAT && pageFormat()}
-                            {currentPage === PAGE_BACKUP && pageBackup()}
-                        </PageContent>
-                    </SettingsContent>
-                )}
-            </div>
-            <div className={Classes.DIALOG_FOOTER}>
-                <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                    <Button
-                        disabled={!dirty}
-                        intent={Intent.PRIMARY}
-                        onClick={() => save()}
-                        title={t("preferences.button.save-title")}
-                    >
-                        {t("preferences.button.save")}
-                    </Button>
-                    <Button
-                        onClick={close}
-                        title={t("preferences.button.cancel-title")}
-                    >
-                        {t("preferences.button.cancel")}
-                    </Button>
+        <Fragment>
+            <DialogFreeWidth isOpen={!!showSettingsState.get()} onClose={close}>
+                <div className={Classes.DIALOG_HEADER}>{t("vault-settings.title", { title: vaultName || "" })}</div>
+                <div className={Classes.DIALOG_BODY}>
+                    {showSettingsState.get() && (
+                        <SettingsContent>
+                            <SettingsSidebar>
+                                <SettingsMenu
+                                    alignText={Alignment.LEFT}
+                                    vertical
+                                >
+                                    <Button
+                                        active={currentPage === PAGE_FORMAT}
+                                        icon="database"
+                                        onClick={() => setCurrentPage(PAGE_FORMAT)}
+                                        text={t("vault-settings.format.title")}
+                                    />
+                                    <Button
+                                        active={currentPage === PAGE_BACKUP}
+                                        icon="duplicate"
+                                        onClick={() => setCurrentPage(PAGE_BACKUP)}
+                                        text={t("vault-settings.backup.title")}
+                                    />
+                                </SettingsMenu>
+                            </SettingsSidebar>
+                            <PageContent>
+                                {currentPage === PAGE_FORMAT && pageFormat()}
+                                {currentPage === PAGE_BACKUP && pageBackup()}
+                            </PageContent>
+                        </SettingsContent>
+                    )}
                 </div>
-            </div>
-        </DialogFreeWidth>
+                <div className={Classes.DIALOG_FOOTER}>
+                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                        <Button
+                            disabled={!dirty}
+                            intent={Intent.PRIMARY}
+                            onClick={() => save()}
+                            title={t("preferences.button.save-title")}
+                        >
+                            {t("preferences.button.save")}
+                        </Button>
+                        <Button
+                            onClick={close}
+                            title={t("preferences.button.cancel-title")}
+                        >
+                            {t("preferences.button.cancel")}
+                        </Button>
+                    </div>
+                </div>
+            </DialogFreeWidth>
+            <ConfirmDialog
+                confirmIntent={Intent.DANGER}
+                onClose={(confirmed: boolean) => {
+                    if (confirmed) {
+                        changeFormatToB();
+                    }
+                    setPromptFormatB(false);
+                }}
+                open={promptFormatB}
+                title="Confirm Format Upgrade"
+            >
+                <p>Changing format cannot be reversed: Ensure that you have a backup in place before performing this action.</p>
+            </ConfirmDialog>
+        </Fragment>
     );
 }

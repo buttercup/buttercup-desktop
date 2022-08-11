@@ -1,4 +1,9 @@
-import { SearchResult as CoreSearchResult, VaultSourceID, VaultSourceStatus } from "buttercup";
+import {
+    SearchResult as CoreSearchResult,
+    VaultFormatID,
+    VaultSourceID,
+    VaultSourceStatus
+} from "buttercup";
 
 export interface AddVaultPayload {
     createNew: boolean;
@@ -69,4 +74,5 @@ export interface VaultSourceDescription {
     state: VaultSourceStatus;
     type: SourceType;
     order: number;
+    format?: VaultFormatID;
 }

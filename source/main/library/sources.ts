@@ -1,4 +1,4 @@
-import { VaultSource } from "buttercup";
+import { VaultSource, VaultSourceStatus } from "buttercup";
 import { SourceType, VaultSourceDescription } from "../types";
 
 export function describeSource(source: VaultSource): VaultSourceDescription {
@@ -7,6 +7,10 @@ export function describeSource(source: VaultSource): VaultSourceDescription {
         name: source.name,
         state: source.status,
         type: source.type as SourceType,
-        order: source.order
+        order: source.order,
+        format:
+            source.status === VaultSourceStatus.Unlocked
+                ? source.vault.format.getFormat().getFormatID()
+                : null
     };
 }
