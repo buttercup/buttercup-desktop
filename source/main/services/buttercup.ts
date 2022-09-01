@@ -13,7 +13,8 @@ import {
     VaultManager,
     consumeVaultFacade,
     createVaultFacade,
-    init
+    init,
+    VaultFormatID
 } from "buttercup";
 import { exportVaultToCSV } from "@buttercup/exporter";
 import { describeSource } from "../library/sources";
@@ -22,7 +23,7 @@ import { notifyWindowsOfSourceUpdate } from "./windows";
 import { getVaultCacheStorage, getVaultStorage } from "./storage";
 import { updateSearchCaches } from "./search";
 import { setAutoLockEnabled } from "./autoLock";
-import { logErr } from "../library/log";
+import { logErr, logInfo } from "../library/log";
 import { attachSourceEncryptedListeners } from "./backup";
 import { SourceType, VaultSourceDescription } from "../types";
 
@@ -82,6 +83,14 @@ export async function attachVaultManagerWatchers() {
         });
         await updateSearchCaches(vaultManager.unlockedSources);
     });
+}
+
+export async function convertVaultFormatAToB(sourceID: VaultSourceID): Promise<void> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    logInfo(`converting source to format B: ${sourceID}`);
+    await source.convert(VaultFormatID.B);
+    await source.write();
 }
 
 export async function deleteAttachment(
@@ -169,6 +178,13 @@ export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
 export function getUnlockedSourcesCount(): number {
     const mgr = getVaultManager();
     return mgr.unlockedSources.length;
+}
+
+export function getVaultFormat(sourceID: VaultSourceID): VaultFormatID {
+    const mgr = getVaultManager();
+    const source = mgr.getSourceForID(sourceID);
+    if (source.status !== VaultSourceStatus.Unlocked) return null;
+    return source.vault.format.getFormat().getFormatID();
 }
 
 function getVaultManager(): VaultManager {

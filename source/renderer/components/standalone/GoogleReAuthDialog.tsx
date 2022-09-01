@@ -27,7 +27,7 @@ const Logo = styled.img`
 export function GoogleReAuthDialog() {
     const googleReAuthState = useHookState(GOOGLE_REAUTH_SOURCE);
     const sourceID = googleReAuthState.get();
-    const details = useSourceDetails(sourceID);
+    const [details] = useSourceDetails(sourceID);
     const vaultName = useMemo(() => details?.name ?? "", [details]);
     const [calledAuthenticate, setCalledAuthenticate] = useState<boolean>(false);
     const close = useCallback(() => {

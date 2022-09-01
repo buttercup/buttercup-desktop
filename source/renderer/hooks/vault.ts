@@ -1,31 +1,29 @@
 import { VaultSourceID } from "buttercup";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ipcRenderer } from "electron";
-import { VaultSourceDescription } from "../types";
 import { logErr } from "../library/log";
 import { showError } from "../services/notifications";
+import { VaultSourceDescription } from "../types";
 
-export function useSourceDetails(sourceID: VaultSourceID): VaultSourceDescription {
+export function useSourceDetails(sourceID: VaultSourceID): [VaultSourceDescription, () => void] {
     const [details, setDetails] = useState<VaultSourceDescription>(null);
-    useEffect(() => {
-        if (!sourceID) {
-            setDetails(null);
-            return;
-        }
-        let mounted = true;
+    const updateDescription = useCallback(() => {
         ipcRenderer
             .invoke("get-vault-description", sourceID)
             .then((desc: VaultSourceDescription) => {
-                if (!mounted) return;
                 setDetails(desc);
             })
             .catch((err) => {
                 logErr(err);
                 showError(`Failed fetching vault details: ${err.message}`);
             });
-        return () => {
-            mounted = false;
-        };
     }, [sourceID]);
-    return details;
+    useEffect(() => {
+        if (!sourceID) {
+            setDetails(null);
+            return;
+        }
+        updateDescription();
+    }, [sourceID]);
+    return [details, updateDescription];
 }

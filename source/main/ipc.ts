@@ -1,4 +1,4 @@
-import { EntryID, VaultFacade, VaultSourceID, VaultSourceStatus } from "buttercup";
+import { EntryID, VaultFacade, VaultFormatID, VaultSourceID, VaultSourceStatus } from "buttercup";
 import { BrowserWindow, clipboard, ipcMain, shell } from "electron";
 import { Layerr } from "layerr";
 import {
@@ -62,6 +62,7 @@ import {
     SearchResult,
     VaultSettingsLocal
 } from "./types";
+import { convertVaultFormat } from "./services/format";
 
 // **
 // ** IPC Events
@@ -225,6 +226,14 @@ ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => 
     if (!supportsBiometrics) return false;
     return sourceEnabledForBiometricUnlock(sourceID);
 });
+
+ipcMain.handle(
+    "convert-vault-format",
+    async (_, sourceID: VaultSourceID, format: VaultFormatID) => {
+        const converted = await convertVaultFormat(sourceID, format);
+        return converted;
+    }
+);
 
 ipcMain.handle("copied-into-clipboard", (_, text: string) => {
     restartAutoClearClipboardTimer(text);
