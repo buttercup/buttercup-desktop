@@ -23,11 +23,11 @@ export function getFSInstance(type: SourceType, settings: FSInstanceSettings): F
     switch (type) {
         case SourceType.Dropbox:
             return instantiateInterface("dropbox", {
-                dropboxClient: new DropboxClient(settings.token)
+                dropboxClient: new DropboxClient(settings.token as string)
             });
         case SourceType.WebDAV:
             return instantiateInterface("webdav", {
-                webdavClient: createWebdavClient(settings.endpoint, {
+                webdavClient: createWebdavClient(settings.endpoint as string, {
                     username: settings.username,
                     password: settings.password
                 })

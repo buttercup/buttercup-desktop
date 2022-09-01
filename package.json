@@ -163,7 +163,7 @@
   },
   "dependencies": {
     "@buttercup/channel-queue": "^0.5.0",
-    "@buttercup/dropbox-client": "^1.0.0",
+    "@buttercup/dropbox-client": "^1.1.1",
     "@buttercup/exporter": "^1.1.0",
     "@buttercup/file-interface": "^0.3.3",
     "@buttercup/google-oauth2-client": "^1.0.0",
@@ -171,7 +171,7 @@
     "@buttercup/importer": "^3.0.1",
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.1",
-    "buttercup": "^6.15.2",
+    "buttercup": "^6.16.2",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
     "delayable-setinterval": "^0.1.1",
