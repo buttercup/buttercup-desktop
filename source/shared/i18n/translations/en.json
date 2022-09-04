@@ -62,6 +62,7 @@
         "biometrics": "Use biometric unlock",
         "close-window": "Close Window",
         "connection": "Connection",
+        "change-vault-password": "Change Vault Password",
         "current": "Current Vault",
         "debug": "Debug",
         "devtool": "Devtool",
@@ -104,6 +105,19 @@
             "placeholder": "Vault password...",
             "success": "Successfully registered biometrics",
             "title": "Register Biometrics"
+        },
+        "change-vault-password": {
+            "title": "Change Vault Password",
+            "button-cancel": "Cancel",
+            "button-cancel-title": "Cancel unlock",
+            "button-change": "Change password",
+            "button-change-title": "Change vault password",
+            "current-password-label": "Current vault password",
+            "current-password-placeholder": "Current vault password...",
+            "new-password-label": "New vault password",
+            "new-password-placeholder": "New vault password...",
+            "new-password-confirm-label": "Confirm new vault password",
+            "new-password-confirm-placeholder": "Confirm new vault password..."
         },
         "confirm-generic": {
             "cancel-button": "Cancel",

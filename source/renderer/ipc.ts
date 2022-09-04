@@ -5,6 +5,7 @@ import { getCurrentSourceID, setCurrentVault, setVaultsList } from "./state/vaul
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
 import { showAbout } from "./state/about";
+import { changeVaultPassword } from "./state/password";
 import { setFileHostCode } from "./state/fileHost";
 import { setSearchVisible } from "./state/search";
 import { showRegistrationPrompt } from "./state/biometrics";
@@ -50,6 +51,10 @@ ipcRenderer.on("notify-success", (_, message: string) => {
 
 ipcRenderer.on("open-about", (evt) => {
     showAbout(true);
+});
+
+ipcRenderer.on("change-vault-password", (evt) => {
+    changeVaultPassword(true);
 });
 
 ipcRenderer.on("open-biometric-registration", () => {

@@ -16,3 +16,9 @@ export function showPasswordPrompt(show = true) {
         PASSWORD_VIA_BIOMETRIC_SOURCE.set(null);
     }
 }
+
+export const SHOW_CHANGE_VAULT_PASSWORD: State<boolean> = createState(false as boolean);
+
+export function changeVaultPassword(show = true) {
+    SHOW_CHANGE_VAULT_PASSWORD.set(show);
+}

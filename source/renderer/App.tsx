@@ -16,6 +16,7 @@ import { FileHostConnectionNotice } from "./components/standalone/FileHostConnec
 import { CreateNewFilePrompt } from "./components/standalone/CreateNewFilePrompt";
 import { UpdateDialog } from "./components/standalone/UpdateDialog";
 import { AboutDialog } from "./components/standalone/AboutDialog";
+import { ChangeVaultPasswordDialog } from "./components/standalone/ChangeVaultPasswordDialog";
 import { BiometricRegistrationDialog } from "./components/standalone/BiometricRegistrationDialog";
 import { GoogleReAuthDialog } from "./components/standalone/GoogleReAuthDialog";
 import { VaultSettingsDialog } from "./components/VaultSettingsDialog";
@@ -61,6 +62,7 @@ export function App() {
                                 <GoogleReAuthDialog />
                                 <UpdateDialog />
                                 <AboutDialog />
+                                <ChangeVaultPasswordDialog />
                                 <BiometricRegistrationDialog />
                                 <Notifications />
                                 <LoadingScreen />

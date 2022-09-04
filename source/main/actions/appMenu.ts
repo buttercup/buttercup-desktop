@@ -99,6 +99,15 @@ async function getContextMenu(): Promise<Menu> {
             submenu: [
                 ...currentVaultPrefix,
                 {
+                    label: t("app-menu.change-vault-password"),
+                    enabled: lastSourceUnlocked,
+                    click: async () => {
+                        logErr("Changing vault password");
+                        const window = await openMainWindow();
+                        window.webContents.send("change-vault-password");
+                    }
+                },
+                {
                     label: t("app-menu.search"),
                     enabled: !!lastSource,
                     accelerator: isOSX() ? "Cmd+F" : "Ctrl+F",

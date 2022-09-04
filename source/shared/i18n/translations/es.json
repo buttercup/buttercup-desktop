@@ -60,6 +60,7 @@
         "about": "Acerca de",
         "add-new-vault": "Añadir nuevo",
         "biometrics": "Usar desbloqueo biométrico",
+        "change-vault-password": "Cambiar contraseña de cofre",
         "close-window": "Cerrar ventana",
         "connection": "Conexión",
         "current": "Cofre actual",
@@ -100,6 +101,17 @@
             "placeholder": "Contraseña del cofre...",
             "success": "Biometría registrada correctamente",
             "title": "Registrar biometría"
+        },
+        "change-vault-password": {
+            "title": "Cambiar contraseña de cofre",
+            "button-cancel": "TODO",
+            "button-cancel-title": "TODO",
+            "current-password-label": "TODO",
+            "current-password-placeholder": "TODO",
+            "new-password-label": "TODO",
+            "new-password-placeholder": "TODO",
+            "new-password-confirm-label": "TODO",
+            "new-password-confirm-placeholder": "TODO"
         },
         "confirm-generic": {
             "cancel-button": "Cancelar",

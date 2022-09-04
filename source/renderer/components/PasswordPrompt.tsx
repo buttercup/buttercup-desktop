@@ -9,6 +9,53 @@ import { showError } from "../services/notifications";
 import { t } from "../../shared/i18n/trans";
 import { logErr } from "../library/log";
 
+interface PasswordInputFieldProps {
+    id: string;
+    placeholder: string;
+    autoFocus: boolean;
+    currentPassword: string;
+    setCurrentPassword: (password: string) => void;
+    handleKeyPress: (arg0: any) => void;
+}
+
+export function PasswordInputField(props: PasswordInputFieldProps) {
+    const {
+        id,
+        placeholder,
+        autoFocus,
+        currentPassword,
+        setCurrentPassword,
+        handleKeyPress,
+    } = props;
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    return ( <InputGroup
+        id={id}
+        placeholder={placeholder}
+        type={showPassword ? "text" : "password"}
+        rightElement={(
+            <Button
+                icon={showPassword ? "unlock" : "lock"}
+                intent={Intent.NONE}
+                minimal
+                onMouseEnter={() => {
+                    setShowPassword(true);
+                }}
+                onMouseLeave={() => {
+                    setShowPassword(false);
+                }}
+                active={showPassword}
+                style={{ outline: "none", userSelect: "none" }}
+            />
+        )}
+        value={currentPassword}
+        onChange={evt => setCurrentPassword(evt.target.value)}
+        onKeyDown={handleKeyPress}
+        autoFocus={autoFocus}
+    />);
+}
+
 export function PasswordPrompt() {
     const emitter = useMemo(getPasswordEmitter, []);
     const showPromptState = useHookState(SHOW_PROMPT);
@@ -64,29 +111,13 @@ export function PasswordPrompt() {
                         labelFor="password"
                         labelInfo={t("input-required")}
                     >
-                        <InputGroup
+                        <PasswordInputField
                             id="password"
                             placeholder={t("dialog.password-prompt.placeholder")}
-                            type={showPassword ? "text" : "password"}
-                            rightElement={(
-                                <Button
-                                    icon={showPassword ? "unlock" : "lock"}
-                                    intent={Intent.NONE}
-                                    minimal
-                                    onMouseEnter={() => {
-                                        setShowPassword(true);
-                                    }}
-                                    onMouseLeave={() => {
-                                        setShowPassword(false);
-                                    }}
-                                    active={showPassword}
-                                    style={{ outline: "none", userSelect: "none" }}
-                                />
-                            )}
-                            value={currentPassword}
-                            onChange={evt => setCurrentPassword(evt.target.value)}
-                            onKeyDown={handleKeyPress}
-                            autoFocus
+                            autoFocus={true}
+                            currentPassword={currentPassword}
+                            setCurrentPassword={setCurrentPassword}
+                            handleKeyPress={handleKeyPress}
                         />
                     </FormGroup>
                 )}
