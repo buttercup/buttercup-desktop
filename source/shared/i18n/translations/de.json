@@ -139,6 +139,19 @@
                 "title": "Füge neuen Tresor hinzu"
             }
         },
+        "google-reauth": {
+            "close-button": {
+                "text": "Abbrechen",
+                "title": "Authentifizierung abbrechen"
+            },
+            "description": "Erneute Authentifizierung eines Google Drive Tresors: {{vault}}",
+            "error": {
+                "reauth-failed": "Erneute Authentifizierung fehlgeschlagen"
+            },
+            "header": "Authentifizierung für Tresor abgelaufen",
+            "success": "Google Drive wurde erfolgreich erneut authentifiziert: Bitte erneut entsperren",
+            "title": "Erneute Google Authentifizierung"
+        },
         "import-file-chooser": {
             "submit-button": "Importieren",
             "title": "Importiere von {{importer}} Tresor"
@@ -170,6 +183,10 @@
         }
     },
     "error": {
+        "attachment-add": "Das Hinzufügen von Anhängen ist fehlgeschlagen",
+        "attachment-delete": "Das Entfernen eines Anhangs ist fehlgeschlagen",
+        "attachment-download": "Das Herunterladen eines Anhangs ist fehlgeschlagen",
+        "attachment-preview": "Die Vorschau eines Anhangs ist fehlgeschlagen",
         "biometric-invalid-password": "Es wurde ein ungültiges Passwort für die Aktivierung von Biometrie auf einem Tresor angegeben",
         "biometric-store-failed": "Das Speichern der biometrischen Daten ist fehlgeschlagen",
         "biometric-unlock-failed": "Das Entsperren des Tresors via Biometrie ist fehlgeschlagen",
@@ -198,14 +215,19 @@
             "preferences-load": "Das Laden von Einstellungen ist fehlgeschlagen",
             "preferences-save": "Das Speichern von Einstellungen ist fehlgeschlagen",
             "unknown-error": "Unbekannter Fehler",
+            "vault-format-upgrade-failed": "Das Upgrade des Tresorformates ist fehlgeschlagen",
             "vault-lock-failed": "Das Sperren des Tresors schlug fehl",
             "vault-save-failed": "Das Speichern des Tresors schlug fehl",
+            "vault-settings-load": "Das Laden der Tresoreinstellungen ist fehlgeschlagen",
+            "vault-settings-save": "Das Speichern der Tresoreinstellungen ist fehlgeschlagen",
             "vault-unlock-failed": "Das Entsperren des Tresors schlug fehl"
         },
         "export-success": "Tresor wurde erfolgreich exportiert: {{name}}",
         "import-success": "Tresor wurde erfolgreich importiert: {{filename}}",
-        "preferences-saved": "Einstellungen wurden gespeichert",
-        "vault-saved": "Tresor gespeichert"
+        "preferences-saved": "Einstellungen gespeichert",
+        "vault-removed": "Tresor entfernt: {{name}}",
+        "vault-saved": "Tresor gespeichert",
+        "vault-settings-saved": "Tresor Einstellungen gespeichert"
     },
     "preferences": {
         "button": {
@@ -268,7 +290,9 @@
         "view": "Ansicht"
     },
     "vault-editor": {
-        "locked-state": "Tresor gesperrt"
+        "locked-state": "Tresor gesperrt",
+        "pending-state": "Tresor beschäftigt",
+        "unlocked-state": "Tresor entsperrt"
     },
     "vault-management": {
         "close-button": "Schließen",
@@ -283,9 +307,35 @@
         },
         "title": "Tresore"
     },
+    "vault-settings": {
+        "backup": {
+            "description": "Sichere deinen geschützten Tresor lokal beim Speichern.",
+            "path": {
+                "helper": "Leer lassen für Standardpfad",
+                "label": "Sicherungspfad",
+                "placeholder": "Absoluter Sicherungspfad"
+            },
+            "switch": "Lokale Sicherungen aktivieren",
+            "title": "Sicherung"
+        },
+        "format": {
+            "a-description": "Format A ist das ursprüngliche Buttercup Tresorformat, das Deltas für die Speicherung der Tresorstruktur nutzt.",
+            "b-description": "Format B ist das neue Buttercup Tresorformat, das eine JSON Struktur verwendet, um die Struktur und den Verlauf des Tresors zu organisieren.",
+            "a-upgrade-b": "Du kannst zu Format B upgraden, das sich aktuell in der <strong>Beta Testphase befindet</strong>. Es wird nicht empfohlen, solange Du nicht als Vorsichtma0nahme deine Daten gesichert hast.",
+            "description": "Verwalte aktuelles Tresorformat und Updates",
+            "format-type": "Format {{format}}",
+            "title": "Format",
+            "upgrade-button": "Upgraden"
+        },
+        "not-unlocked": "Tresor muss entsperrt sein, um diesen Bereich zu erreichen.",
+        "title": "Tresoreinstellungen: {{title}}"
+    },
     "vault-tabs": {
         "context-menu": {
-            "unlock-vault": "Entsperren"
+            "lock-vault": "Sperre Tresor",
+            "remove-vault": "Entferne Tresor",
+            "unlock-vault": "Entsperre Tresor",
+            "vault-settings": "Tresoreinstellungen"
         }
     }
 }
