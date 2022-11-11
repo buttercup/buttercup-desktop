@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { StorageInterface } from "buttercup";
-import ChannelQueue from "@buttercup/channel-queue";
+import { ChannelQueue } from "@buttercup/channel-queue";
 import pify from "pify";
 import { naiveClone } from "../../shared/library/clone";
 

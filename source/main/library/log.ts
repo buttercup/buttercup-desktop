@@ -1,5 +1,5 @@
 import debounce from "debounce";
-import ChannelQueue from "@buttercup/channel-queue";
+import { ChannelQueue } from "@buttercup/channel-queue";
 import { writeLines } from "../services/log";
 import { serialiseLogItems } from "../../shared/library/log";
 import { LogLevel } from "../types";

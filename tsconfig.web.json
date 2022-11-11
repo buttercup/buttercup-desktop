@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
-        "outDir": "./build/renderer",
-        "module": "commonjs",
-        "target": "es6",
-        "esModuleInterop": true,
-        "strict": false,
-        "jsx": "react",
         "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "jsx": "react",
+        "module": "commonjs",
+        "outDir": "./build/renderer",
         "resolveJsonModule": true,
+        "strict": false,
+        "strictNullChecks": false,
+        "target": "es6",
         "types": ["react", "react-dom", "styled-components"]
     },
     "include": [

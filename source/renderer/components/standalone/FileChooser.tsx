@@ -1,8 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { Alignment, Breadcrumb, Breadcrumbs, Button, Card, Classes, Dialog, IBreadcrumbProps, Icon, InputGroup, Intent, Navbar, Spinner } from "@blueprintjs/core";
-import { FileSystemInterface } from "@buttercup/file-interface";
-import { FSItem } from "../../library/fsInterface";
+import { FileIdentifier, FileItem, FileSystemInterface, PathIdentifier } from "@buttercup/file-interface";
 import { t } from "../../../shared/i18n/trans";
 import { NewVaultPlaceholder } from "../../types";
 
@@ -23,14 +22,14 @@ interface BreadcrumbProps {
 type Identifier = FileChooserPath | null;
 
 interface FileChooserPath {
-    identifier: string;
+    identifier: string | number;
     name: string;
 }
 
 interface FileChooserProps {
     callback: (
-        parentIdentifier: string | null,
-        identifier: string | null,
+        parentIdentifier: string | number | null,
+        identifier: string | number | null,
         isNew: boolean,
         fileName: string | null
     ) => void;
@@ -103,21 +102,21 @@ const IconInline = styled(Icon)`
 `;
 
 export function FileChooser(props: FileChooserProps) {
-    const [currentItems, setCurrentItems] = useState<Array<FSItem>>([]);
+    const [currentItems, setCurrentItems] = useState<Array<FileItem>>([]);
     const [currentPath, setCurrentPath] = useState<Identifier>(null);
     const [loading, setLoading] = useState(false);
     const [breadcrumbs, setBreadcrumbs] = useState<Array<BreadcrumbProps>>([]);
     const [showNewVaultFilenamePrompt, setShowNewVaultFilenamePrompt] = useState(false);
     const [newVaultFilename, setNewVaultFilename] = useState(null);
     const [newVault, setNewVault] = useState<NewVaultPlaceholder>(null);
-    const [selectedVaultPath, setSelectedVaultPath] = useState<Identifier>(null);
+    const [selectedVaultPath, setSelectedVaultPath] = useState<FileIdentifier>(null);
     const loadPath = useCallback(async (identifier: Identifier) => {
         setLoading(true);
-        const results = await props.fsInterface.getDirectoryContents(identifier);
+        const results = await props.fsInterface.getDirectoryContents(identifier as PathIdentifier);
         setCurrentItems(results);
         setLoading(false);
     }, []);
-    const handleItemClick = useCallback((item: FSItem) => {
+    const handleItemClick = useCallback((item: FileItem) => {
         if (item.type === "file") {
             if (/\.bcup$/i.test(item.name) === true) {
                 setSelectedVaultPath(item);
