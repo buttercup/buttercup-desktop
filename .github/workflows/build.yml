@@ -17,6 +17,7 @@ jobs:
         - os: macos-latest
           NODE_ARCHITECTURE: x64
           ELECTRON_ARGS: --x64
+          USE_HARD_LINKS: false
 
         - os: ubuntu-latest
           NODE_ARCHITECTURE: x64
