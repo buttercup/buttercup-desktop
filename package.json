@@ -168,7 +168,7 @@
     "@buttercup/file-interface": "^2.0.0",
     "@buttercup/google-oauth2-client": "^1.0.0",
     "@buttercup/googledrive-client": "^1.3.3",
-    "@buttercup/importer": "^3.0.1",
+    "@buttercup/importer": "^3.1.0",
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.8",
     "buttercup": "^6.16.5",
