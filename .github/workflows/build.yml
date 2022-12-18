@@ -37,7 +37,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v2
         with:
-          node-version: 14
+          node-version: 18
           architecture: ${{matrix.NODE_ARCHITECTURE}}
 
       - name: Prepare for app notarization

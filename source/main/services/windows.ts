@@ -50,10 +50,10 @@ async function createVaultWindow() {
         "move",
         debounce(() => handleWindowBoundsUpdate(win), 750, false)
     );
-    win.webContents.on("new-window", (e, url) => {
-        e.preventDefault();
-        logInfo(`Request to open external URL: ${url}`);
-        shell.openExternal(url);
+    win.webContents.setWindowOpenHandler((details) => {
+        logInfo(`Request to open external URL: ${details.url}`);
+        shell.openExternal(details.url);
+        return { action: "deny" };
     });
     const loadedPromise = new Promise<void>((resolve, reject) => {
         const timeout = setTimeout(
