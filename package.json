@@ -207,7 +207,7 @@
     "copy-webpack-plugin": "^7.0.0",
     "css-loader": "^6.7.3",
     "electron": "^22.0.0",
-    "electron-builder": "22.11.11",
+    "electron-builder": "^23.6.0",
     "electron-builder-notarize": "^1.5.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",

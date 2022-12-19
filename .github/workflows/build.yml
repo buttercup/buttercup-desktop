@@ -17,7 +17,6 @@ jobs:
         - os: macos-latest
           NODE_ARCHITECTURE: x64
           ELECTRON_ARGS: --x64
-          USE_HARD_LINKS: false
 
         - os: ubuntu-latest
           NODE_ARCHITECTURE: x64
@@ -65,3 +64,4 @@ jobs:
           API_KEY_ID: ${{ secrets.api_key_id }}
           API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
+          USE_HARD_LINKS: false
