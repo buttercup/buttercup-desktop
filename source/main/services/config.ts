@@ -2,11 +2,23 @@ import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
 import { naiveClone } from "../../shared/library/clone";
-import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
-import { VaultSettingsLocal } from "../types";
 import { logErr } from "../library/log";
+import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
+import { Preferences, VaultSettingsLocal } from "../types";
 
-const DEFAULT_CONFIG = {
+interface Config {
+    browserAPIKey: null | string;
+    fileHostKey: null | string;
+    preferences: Preferences;
+    selectedSource: null | string;
+    windowHeight: number;
+    windowWidth: number;
+    windowX: null | number;
+    windowY: null | number;
+}
+
+const DEFAULT_CONFIG: Config = {
+    browserAPIKey: null,
     fileHostKey: null,
     preferences: naiveClone(PREFERENCES_DEFAULT),
     selectedSource: null,
@@ -16,7 +28,7 @@ const DEFAULT_CONFIG = {
     windowY: null
 };
 
-export async function getConfigValue<T>(key: string): Promise<T> {
+export async function getConfigValue<K extends keyof Config>(key: K): Promise<Config[K]> {
     const storage = getConfigStorage();
     const value = await storage.getValue(key);
     return typeof value === "undefined" || value === null ? DEFAULT_CONFIG[key] || null : value;

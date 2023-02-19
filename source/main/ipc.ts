@@ -98,7 +98,7 @@ ipcMain.on("get-empty-vault", async (evt, payload) => {
 });
 
 ipcMain.on("get-preferences", async (evt, sourceID) => {
-    const prefs = await getConfigValue<Preferences>("preferences");
+    const prefs = await getConfigValue("preferences");
     evt.reply("get-preferences:reply", JSON.stringify(prefs));
 });
 
@@ -275,7 +275,7 @@ ipcMain.handle("get-new-vault-filename", async (evt) => {
 ipcMain.handle("get-ready-update", getReadyUpdate);
 
 ipcMain.handle("get-selected-source", async () => {
-    const sourceID = await getConfigValue<VaultSourceID>("selectedSource");
+    const sourceID = await getConfigValue("selectedSource");
     return sourceID;
 });
 

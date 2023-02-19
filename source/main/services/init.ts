@@ -27,7 +27,7 @@ export async function initialise() {
     logInfo(`Logs location: ${getLogPath()}`);
     logInfo(`Config location: ${getConfigPath()}`);
     logInfo(`Vault config storage location: ${getVaultStoragePath()}`);
-    const preferences = await getConfigValue<Preferences>("preferences");
+    const preferences = await getConfigValue("preferences");
     const locale = await getOSLocale();
     logInfo(`System locale detected: ${locale}`);
     const language = getLanguage(preferences, locale);

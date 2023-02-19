@@ -18,10 +18,10 @@ export async function closeWindows(): Promise<void> {
 }
 
 async function createVaultWindow() {
-    const width = await getConfigValue<number>("windowWidth");
-    const height = await getConfigValue<number>("windowHeight");
-    const x = await getConfigValue<number>("windowX");
-    const y = await getConfigValue<number>("windowY");
+    const width = await getConfigValue("windowWidth");
+    const height = await getConfigValue("windowHeight");
+    const x = await getConfigValue("windowX");
+    const y = await getConfigValue("windowY");
     const config: BrowserWindowConstructorOptions = {
         width,
         height,
