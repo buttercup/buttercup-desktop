@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import createRouter from "express-promise-router";
 import { VERSION } from "../../library/build";
+import { searchEntries } from "./controllers/entries";
 import { requireBrowserToken } from "./middleware";
 
 export function buildApplication(): express.Application {
@@ -19,6 +20,8 @@ export function buildApplication(): express.Application {
 function createRoutes(app: express.Application): void {
     const router = createRouter();
     router.post("/auth/request", () => {});
+    router.get("/entries", requireBrowserToken, searchEntries);
     router.get("/vaults", requireBrowserToken, () => {});
+    router.post("/vaults/:id/unlock", requireBrowserToken, () => {});
     app.use("/v1", router);
 }
