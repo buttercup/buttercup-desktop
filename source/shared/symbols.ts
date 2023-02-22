@@ -22,6 +22,7 @@ export const ICON_UPLOAD = "upload";
 
 export const PREFERENCES_DEFAULT: Preferences = {
     autoClearClipboard: false, // seconds
+    browserAPIEnabled: true,
     fileHostEnabled: false,
     language: null,
     lockVaultsAfterTime: false, // seconds
