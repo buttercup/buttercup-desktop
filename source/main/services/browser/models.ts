@@ -1,5 +1,11 @@
 import { z } from "zod";
 
+export const AuthRequestSchema = z.object({
+    client: z.literal("browser"),
+    purpose: z.literal("vaults-access"),
+    rev: z.literal(1)
+});
+
 export enum EntriesSearchType {
     Term = "term",
     URL = "url"
