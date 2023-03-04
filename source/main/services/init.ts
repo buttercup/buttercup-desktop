@@ -5,7 +5,7 @@ import { logInfo } from "../library/log";
 import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
-import { getConfigValue } from "./config";
+import { getConfigValue, initialise as initialiseConfig } from "./config";
 import { getConfigPath, getVaultStoragePath } from "./storage";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
@@ -16,9 +16,9 @@ import { registerGoogleDriveAuthHandlers } from "./googleDrive";
 import { processCLFlags } from "./arguments";
 import { supportsBiometricUnlock } from "./biometrics";
 import { startAutoVaultLockTimer } from "./autoLock";
+import { start as startBrowserAPI } from "./browser/index";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
-import { Preferences } from "../types";
 
 export async function initialise() {
     processCLFlags();
@@ -27,6 +27,7 @@ export async function initialise() {
     logInfo(`Logs location: ${getLogPath()}`);
     logInfo(`Config location: ${getConfigPath()}`);
     logInfo(`Vault config storage location: ${getVaultStoragePath()}`);
+    await initialiseConfig();
     const preferences = await getConfigValue("preferences");
     const locale = await getOSLocale();
     logInfo(`System locale detected: ${locale}`);
@@ -52,6 +53,9 @@ export async function initialise() {
     await applyCurrentTheme();
     if (preferences.fileHostEnabled) {
         await startFileHost();
+    }
+    if (preferences.browserAPIEnabled) {
+        await startBrowserAPI();
     }
     registerGoogleDriveAuthHandlers();
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);
