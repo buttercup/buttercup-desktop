@@ -11,6 +11,7 @@ import { LoadingScreen } from "./components/navigation/LoadingScreen";
 import { PasswordPrompt } from "./components/PasswordPrompt";
 import { AddVaultMenu } from "./components/AddVaultMenu";
 import { PreferencesDialog } from "./components/PreferencesDialog";
+import { BrowserAccessDialog } from "./components/standalone/BrowserAccessDialog";
 import { Notifications } from "./components/Notifications";
 import { FileHostConnectionNotice } from "./components/standalone/FileHostConnectionNotice";
 import { CreateNewFilePrompt } from "./components/standalone/CreateNewFilePrompt";
@@ -38,7 +39,7 @@ export function App() {
         >
             <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
                 <DndProvider backend={HTML5Backend}>
-                    <BaseContainer onCopy={() => userCopiedText(document.getSelection().toString())}>
+                    <BaseContainer onCopy={() => userCopiedText(document.getSelection()?.toString() ?? "")}>
                         <Router>
                             <Switch>
                                 <Route path="/add-vault">
@@ -54,6 +55,7 @@ export function App() {
                             <>
                                 <PasswordPrompt />
                                 <FileHostConnectionNotice />
+                                <BrowserAccessDialog />
                                 <CreateNewFilePrompt />
                                 <AddVaultMenu />
                                 <PreferencesDialog />

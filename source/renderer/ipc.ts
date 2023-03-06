@@ -21,9 +21,19 @@ import {
 import { updateVaultsBiometricsStates } from "./services/biometrics";
 import { showError, showSuccess, showUpdateError } from "./services/notifications";
 import { UpdateProgressInfo, VaultSourceDescription } from "./types";
+import { setBrowserAccessCode } from "./state/browserAccess";
 
 ipcRenderer.on("add-vault", (evt) => {
     showAddVaultMenu(true);
+});
+
+ipcRenderer.on("browser-access-code", (evt, payload) => {
+    const { code } = JSON.parse(payload);
+    setBrowserAccessCode(code);
+});
+
+ipcRenderer.on("browser-access-code-hide", (evt) => {
+    setBrowserAccessCode(null);
 });
 
 ipcRenderer.on("file-host-code", (evt, payload) => {

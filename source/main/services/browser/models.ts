@@ -6,6 +6,10 @@ export const AuthRequestSchema = z.object({
     rev: z.literal(1)
 });
 
+export const AuthResponseSchema = z.object({
+    code: z.string().min(1)
+});
+
 export enum EntriesSearchType {
     Term = "term",
     URL = "url"

@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import createRouter from "express-promise-router";
 import { VERSION } from "../../library/build";
-import { processAuthRequest } from "./controllers/auth";
+import { processAuthRequest, processAuthResponse } from "./controllers/auth";
 import { searchEntries } from "./controllers/entries";
 import { getVaults } from "./controllers/vaults";
 import { handleError } from "./error";
@@ -13,7 +13,7 @@ export function buildApplication(): express.Application {
     app.disable("x-powered-by");
     app.use(express.json());
     app.use((req: Request, res: Response, next: NextFunction) => {
-        console.log(req.headers);
+        console.log(req.method, req.path, req.headers);
         res.set("Server", `ButtercupDesktop/${VERSION}`);
         next();
     });
@@ -25,6 +25,7 @@ export function buildApplication(): express.Application {
 function createRoutes(app: express.Application): void {
     const router = createRouter();
     router.post("/auth/request", processAuthRequest);
+    router.post("/auth/response", processAuthResponse);
     router.get("/entries", requireBrowserToken, searchEntries);
     router.get("/vaults", requireBrowserToken, getVaults);
     router.post("/vaults/:id/unlock", requireBrowserToken, () => {});

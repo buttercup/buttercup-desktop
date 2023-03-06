@@ -90,6 +90,18 @@
             "unlock-vault": "unlock vault '{{name}}'"
         }
     },
+    "browser-access-dialog": {
+        "code-copied": "Browser access code copied",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close connection dialog",
+            "instruction": {
+                "new-connection": "A new connection has been made to this application, requesting remote access to all desktop vaults (while unlocked).",
+                "use-code": "Use the following code to authorise it."
+            },
+            "title": "Browser Access Request"
+        }
+    },
     "dialog": {
         "attachment-save": {
             "confirm-button": "Save",

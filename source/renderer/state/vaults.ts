@@ -12,7 +12,7 @@ export function getCurrentSourceID(): VaultSourceID | null {
     return CURRENT_VAULT.get();
 }
 
-export function setCurrentVault(sourceID: VaultSourceID) {
+export function setCurrentVault(sourceID: VaultSourceID | null) {
     CURRENT_VAULT.set(sourceID);
 }
 

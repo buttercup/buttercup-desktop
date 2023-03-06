@@ -2,7 +2,8 @@ import type { BrowserWindow } from "electron";
 import { Layerr } from "layerr";
 import { getMainWindow, openMainWindow } from "../windows";
 
-const CODE_LENGTH = 8;
+const CODE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890";
+const CODE_LENGTH = 12;
 
 let __code: string | null = null;
 
@@ -15,9 +16,10 @@ export async function clearCode(): Promise<void> {
 }
 
 function generateCode(length: number): string {
+    const chars = CODE_CHARS.length;
     let code = "";
     while (code.length < length) {
-        code = `${code}${Math.floor(Math.random() * 10)}`;
+        code = `${code}${CODE_CHARS[Math.floor(Math.random() * chars)]}`;
     }
     return code;
 }

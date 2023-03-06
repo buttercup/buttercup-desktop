@@ -54,6 +54,8 @@ import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
 import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
+import { convertVaultFormat } from "./services/format";
+import { clearCode } from "./services/browser/interaction";
 import {
     AppEnvironmentFlags,
     AddVaultPayload,
@@ -62,7 +64,6 @@ import {
     SearchResult,
     VaultSettingsLocal
 } from "./types";
-import { convertVaultFormat } from "./services/format";
 
 // **
 // ** IPC Events
@@ -220,6 +221,10 @@ ipcMain.handle(
         return new Uint8Array(buffer);
     }
 );
+
+ipcMain.handle("browser-access-code-clear", async (_) => {
+    await clearCode();
+});
 
 ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
     const supportsBiometrics = await supportsBiometricUnlock();
