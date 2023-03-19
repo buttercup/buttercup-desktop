@@ -4,7 +4,7 @@ import { EntriesSearchPayloadSchema, EntriesSearchType } from "../models";
 import { searchAllVaultsByTerm, searchAllVaultsByURL } from "../../search";
 
 export async function searchEntries(req: Request, res: Response) {
-    const config = EntriesSearchPayloadSchema.parse(req.body);
+    const config = EntriesSearchPayloadSchema.parse(req.query);
     let results: Array<SearchResult> = [];
     if (config.type === EntriesSearchType.Term) {
         results = await searchAllVaultsByTerm(config.term);

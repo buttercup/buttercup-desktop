@@ -13,7 +13,6 @@ export function buildApplication(): express.Application {
     app.disable("x-powered-by");
     app.use(express.json());
     app.use((req: Request, res: Response, next: NextFunction) => {
-        console.log(req.method, req.path, req.headers);
         res.set("Server", `ButtercupDesktop/${VERSION}`);
         next();
     });
