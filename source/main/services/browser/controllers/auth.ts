@@ -7,6 +7,10 @@ import { generateTokens } from "../auth";
 import { promptUserForBrowserAccess, validateEnteredCode } from "../interaction";
 import { AuthRequestSchema, AuthResponseSchema } from "../models";
 
+export async function handleAuthPing(req: Request, res: Response) {
+    res.send("OK");
+}
+
 export async function processAuthRequest(req: Request, res: Response) {
     logInfo(`Browser access authorisation request received: ${req.get("origin")}`);
     AuthRequestSchema.parse(req.body);

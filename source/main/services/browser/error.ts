@@ -36,6 +36,7 @@ export function handleError(err: Error, req: Request, res: Response, next: NextF
         responseCode = status;
     }
     const responseText = statuses(responseCode) as string;
+    logWarn(`API request failed: ${req.url}: ${responseCode} ${responseText} (${code})`);
     res.status(responseCode);
     res.set("Content-Type", "text/plain").send(responseText);
 }
