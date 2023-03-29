@@ -3,6 +3,7 @@ import createRouter from "express-promise-router";
 import { VERSION } from "../../library/build";
 import { handleAuthPing, processAuthRequest, processAuthResponse } from "./controllers/auth";
 import { searchEntries } from "./controllers/entries";
+import { getAllOTPs } from "./controllers/otp";
 import { getVaults } from "./controllers/vaults";
 import { handleError } from "./error";
 import { requireBrowserToken } from "./middleware";
@@ -27,6 +28,7 @@ function createRoutes(app: express.Application): void {
     router.post("/auth/response", processAuthResponse);
     router.post("/auth/test", requireBrowserToken, handleAuthPing);
     router.get("/entries", requireBrowserToken, searchEntries);
+    router.get("/otps", requireBrowserToken, getAllOTPs);
     router.get("/vaults", requireBrowserToken, getVaults);
     router.post("/vaults/:id/unlock", requireBrowserToken, () => {});
     app.use("/v1", router);

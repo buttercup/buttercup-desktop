@@ -25,7 +25,8 @@ import { updateSearchCaches } from "./search";
 import { setAutoLockEnabled } from "./autoLock";
 import { logErr, logInfo } from "../library/log";
 import { attachSourceEncryptedListeners } from "./backup";
-import { SourceType, VaultSourceDescription } from "../types";
+import { extractVaultOTPItems } from "../library/otp";
+import { OTP, SourceType, VaultSourceDescription } from "../types";
 
 const __watchedVaultSources: Array<VaultSourceID> = [];
 let __vaultManager: VaultManager;
@@ -110,6 +111,13 @@ export async function exportVault(sourceID: VaultSourceID): Promise<string> {
     const source = vaultManager.getSourceForID(sourceID);
     const exported = await exportVaultToCSV(source.vault);
     return exported;
+}
+
+export function getAllOTPs(): Array<OTP> {
+    const vaultManager = getVaultManager();
+    return vaultManager.unlockedSources.reduce((otps: Array<OTP>, source: VaultSource) => {
+        return [...otps, ...extractVaultOTPItems(source)];
+    }, [] as Array<OTP>);
 }
 
 export async function getAttachmentData(
