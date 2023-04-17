@@ -16,13 +16,11 @@ module.exports = [
         entry: path.resolve(__dirname, "./source/main/index.ts"),
 
         externals: [
-            // "@buttercup/secure-file-host",
             "@electron/remote",
             "electron",
             "electron-builder",
             "electron-is-dev",
             "electron-updater",
-            // "env-paths",
             "express",
             "keytar",
             "os-locale",
