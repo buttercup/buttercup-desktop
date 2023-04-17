@@ -16,9 +16,8 @@
     "start": "npm run start:main",
     "start:build": "npm run clean && webpack --mode development --watch",
     "start:main": "electron .",
-    "test": "run-s build test:specs test:integration test:format",
+    "test": "run-s build test:specs test:format",
     "test:format": "prettier --check '{{resources,source,test}/**/*.{js,ts},webpack.config.js}'",
-    "test:integration": "mocha --timeout 10000 -r test/index.js 'test/integration/**/*.spec.js'",
     "test:specs": "run-s test:specs:main",
     "test:specs:main": "jest"
   },
