@@ -9,7 +9,7 @@
         "strict": false,
         "strictNullChecks": false,
         "resolveJsonModule": true,
-        "types": ["node"]
+        "types": ["node", "jest"]
     },
     "include": [
         "./source/main/**/*",
