@@ -4,7 +4,7 @@ import {
     GoogleDriveInterface,
     WebDAVInterface
 } from "@buttercup/file-interface";
-import { createClient as createGoogleDriveClient } from "@buttercup/googledrive-client";
+import { GoogleDriveClient } from "@buttercup/googledrive-client";
 import { DropboxClient } from "@buttercup/dropbox-client";
 import { createClient as createWebdavClient } from "webdav";
 import { SourceType } from "../types";
@@ -31,7 +31,7 @@ export function getFSInstance(type: SourceType, settings: FSInstanceSettings): F
             });
         case SourceType.GoogleDrive: {
             return new GoogleDriveInterface({
-                googleDriveClient: createGoogleDriveClient(settings.token)
+                googleDriveClient: new GoogleDriveClient(settings.token as string)
             });
         }
         default:

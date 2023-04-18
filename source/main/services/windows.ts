@@ -9,6 +9,7 @@ import { lockAllSources } from "./buttercup";
 import { setLastSourceID } from "./lastVault";
 import { logErr, logInfo } from "../library/log";
 import { Preferences } from "../types";
+import { getRootProjectPath } from "../library/paths";
 
 export async function closeWindows(): Promise<void> {
     const windows = BrowserWindow.getAllWindows();
@@ -65,7 +66,8 @@ async function createVaultWindow() {
             resolve();
         });
     });
-    win.loadFile(path.resolve(__dirname, "../../renderer/index.html"));
+    const root = getRootProjectPath();
+    win.loadFile(path.join(root, "build/renderer/index.html"));
     await loadedPromise;
 }
 
