@@ -6,7 +6,6 @@
         "esModuleInterop": true,
         "outDir": "./build",
         "skipLibCheck": true,
-        "strict": false,
         "strictNullChecks": false,
         "resolveJsonModule": true,
         "types": ["node", "jest"]

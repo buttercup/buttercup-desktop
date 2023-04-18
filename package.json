@@ -19,7 +19,7 @@
     "test": "run-s build test:specs test:format",
     "test:format": "prettier --check '{{resources,source,test}/**/*.{js,ts},webpack.config.js}'",
     "test:specs": "run-s test:specs:main",
-    "test:specs:main": "jest"
+    "test:specs:main": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -160,7 +160,11 @@
     }
   },
   "jest": {
-    "globalSetup": "<rootDir>/test/jest.setup.ts",
+    "extensionsToTreatAsEsm": [
+      ".jsx",
+      ".ts",
+      ".tsx"
+    ],
     "modulePaths": [
       "<rootDir>/source/"
     ],

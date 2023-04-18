@@ -1,9 +1,13 @@
-import { VaultSource, VaultSourceStatus } from "buttercup";
+import { VaultSource, VaultSourceStatus, init } from "buttercup";
 import { describeSource } from "./sources";
 
 function getFakeSource() {
     return new VaultSource("Test", "dropbox", "");
 }
+
+beforeAll(() => {
+    init();
+});
 
 test("outputs ID and name", () => {
     const output = describeSource(getFakeSource());
