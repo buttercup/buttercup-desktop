@@ -1,0 +1,341 @@
+{
+    "_": "China (Simplified Chinese)",
+    "about": {
+        "description": "免费、开源和跨平台的密码管理器。",
+        "dialog": {
+            "close-button": "关闭",
+            "close-button-title": "关闭关于对话框"
+        },
+        "title": "关于",
+        "version": {
+            "core": "核心",
+            "desktop": "桌面版"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "选择一个保险柜文件或创建一个新的保险柜:",
+        "choose-type-prompt": "选择要添加的保险柜类型:",
+        "confirm": {
+            "existing-password": "输入主保险柜密码:",
+            "new-password": "输入新的主保险柜密码:",
+            "password-placeholder": "保险柜密码..."
+        },
+        "google-auth-button": "认证",
+        "google-auth-button-title": "使用 Google Drive 进行身份验证",
+        "google-auth-error": "Google 认证失败",
+        "loader": {
+            "dropbox-auth": "将打开一个单独的窗口进行身份验证",
+            "file-prompt": "将打开一个对话框以选择保险柜文件",
+            "google-auth": {
+                "instr-1": "您可以选择 Buttercup 在访问您的 <strong>Google Drive</strong> 帐户时使用的权限级别。",
+                "instr-2": "选择<strong>打开</strong>权限设置将授予 Buttercup 访问您帐户和关联共享中的所有文件和文件夹的权限。",
+                "instr-3": "选择<i>非</i>打开设置将授予 Buttercup 访问它之前创建/访问的文件的权限。",
+                "perm-label": "权限",
+                "perm-switch": "打开"
+            },
+            "webdav-auth": {
+                "password-label": "密码",
+                "password-plc": "WebDAV 密码",
+                "url-label": "WebDAV 服务",
+                "username-label": "用户名",
+                "username-plc": "WebDAV 用户名"
+            }
+        },
+        "page-choose-next": "下一步",
+        "page-choose-next-title": "继续添加保险柜",
+        "page-confirm-cancel": "取消",
+        "page-confirm-cancel-title": "取消解锁",
+        "page-confirm-finish": "添加保险柜",
+        "page-confirm-finish-title": "确认保险柜添加",
+        "title": "添加保险柜",
+        "webdav-continue": "下一步",
+        "webdav-continue-title": "使用 WebDAV 连接"
+    },
+    "add-vault-page": {
+        "cta-button": "添加保险柜",
+        "description": "尚未添加保险柜...",
+        "title": "一个新的开始"
+    },
+    "app-menu": {
+        "about": "关于",
+        "add-new-vault": "添加新的",
+        "biometrics": "使用生物识别解锁",
+        "close-window": "关闭窗口",
+        "connection": "连接",
+        "current": "当前保险柜",
+        "debug": "调试",
+        "devtool": "开发工具",
+        "edit": "编辑",
+        "enable-secure-file-host": "启用浏览器访问",
+        "export": "导出",
+        "import": "导入",
+        "lock-all": "锁定全部",
+        "lock-current-vault": "锁定当前保险柜",
+        "open": "打开",
+        "open-vault": "打开保险柜",
+        "preferences": "首选项",
+        "quit": "退出",
+        "search": "搜索",
+        "unlock-vault": "解锁",
+        "unlocked-vaults": "{{count}} 已解锁保险柜",
+        "unlocked-vaults_plural": "{{count}} 已解锁保险柜",
+        "vaults": "保险柜",
+        "view": "查看",
+        "window": "窗口",
+        "window-reposition": "复位"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "存储保险柜 '{{name}}' 的登录信息",
+            "unlock-vault": "解锁 '{{name}}' 保险柜"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "保存",
+            "title": "下载附件"
+        },
+        "biometric-reg": {
+            "button-cancel": "取消",
+            "button-cancel-title": "取消注册",
+            "button-reg": "注册",
+            "button-reg-title": "注册生物特征",
+            "label": "保险柜密码",
+            "placeholder": "保险柜密码...",
+            "success": "成功注册生物识别",
+            "title": "注册生物特征"
+        },
+        "confirm-generic": {
+            "cancel-button": "取消",
+            "confirm-button": "确认"
+        },
+        "export-file-chooser": {
+            "submit-button": "导出",
+            "title": "导出 '{{name}}' 保险柜"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "取消",
+                "cancel-title": "取消新的保险柜创建",
+                "confirm": "设置保险柜目标",
+                "confirm-title": "确认新的保险柜文件名",
+                "description": "输入新保险柜的文件名:",
+                "title": "添加保险柜"
+            },
+            "nav": {
+                "cancel-new": "取消新建",
+                "create-new": "新建保险柜"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup 保险柜",
+                "confirm-button": "添加",
+                "title": "添加现有保险柜"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup 保险柜",
+                "confirm-button": "创建",
+                "title": "添加新的保险柜"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "取消",
+                "title": "取消认证"
+            },
+            "description": "重新验证 Google Drive 保险柜: {{vault}}",
+            "error": {
+                "reauth-failed": "重新认证失败"
+            },
+            "header": "保险柜的身份验证已过期",
+            "success": "已成功重新验证 Google Drive：请重新解锁",
+            "title": "Google 重新认证"
+        },
+        "import-file-chooser": {
+            "submit-button": "导入",
+            "title": "从 {{importer}} 保险柜导入"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "关闭",
+                "title": "关闭提示"
+            },
+            "button-existing": {
+                "text": "加载现有",
+                "title": "加载现有的保险柜文件"
+            },
+            "button-new": {
+                "text": "创建新的",
+                "title": "创建新的保险柜文件"
+            },
+            "prompt": "您是想创建一个<i>新的</i>保险柜，还是读取现有的保险柜？",
+            "title": "添加保险柜文件"
+        },
+        "password-prompt": {
+            "button-cancel": "取消",
+            "button-cancel-title": "取消解锁",
+            "button-unlock": "解锁",
+            "button-unlock-title": "确认保险柜解锁",
+            "label": "保险柜密码",
+            "placeholder": "保险柜密码...",
+            "title": "保险柜解锁"
+        }
+    },
+    "error": {
+        "attachment-add": "添加附件失败",
+        "attachment-delete": "删除附件失败",
+        "attachment-download": "下载附件失败",
+        "attachment-preview": "预览附件失败",
+        "biometric-invalid-password": "为在保险柜上启用生物识别提供的密码无效",
+        "biometric-store-failed": "存储生物特征详细信息失败",
+        "biometric-unlock-failed": "使用生物识别技术解锁保险柜失败",
+        "fatal-boundary": "发生了致命错误 - 很抱歉发生了这种情况。 请查看以下详细信息，以帮助诊断问题:"
+    },
+    "file-host": {
+        "code-copied": "已复制文件主机代码",
+        "dialog": {
+            "close-button": "关闭",
+            "close-button-title": "关闭连接对话框",
+            "instruction": {
+                "new-connection": "已与此应用程序建立新连接，请求远程访问文件系统。",
+                "use-code": "使用以下代码对其进行授权。"
+            },
+            "title": "安全文件主机连接"
+        }
+    },
+    "input-required": "(必需)",
+    "notification": {
+        "attachment-downloaded": "附件保存成功",
+        "biometrics-disabled": "保险柜禁用生物识别",
+        "error": {
+            "biometrics-disable-failed": "未能为保险柜禁用生物识别: {{error}}",
+            "import-failed": "导入失败: {{error}}",
+            "languages-load": "加载语言失败",
+            "preferences-load": "加载首选项失败",
+            "preferences-save": "保存首选项失败",
+            "unknown-error": "未知错误",
+            "vault-format-upgrade-failed": "保险柜格式升级失败",
+            "vault-lock-failed": "保险柜锁定失败",
+            "vault-save-failed": "保险柜保存失败",
+            "vault-settings-load": "加载库设置失败",
+            "vault-settings-save": "无法保存保险柜设置",
+            "vault-unlock-failed": "保险柜解锁失败"
+        },
+        "export-success": "成功导出保险柜: {{name}}",
+        "import-success": "成功导入保险柜: {{filename}}",
+        "preferences-saved": "已保存首选项",
+        "vault-removed": "保险柜已删除: {{name}}",
+        "vault-saved": "保险柜已保存",
+        "vault-settings-saved": "已保存保险柜设置"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "取消",
+            "cancel-title": "取消首选项更新",
+            "save": "保存",
+            "save-title": "保存更改"
+        },
+        "item": {
+            "clear-clipboard": "自动清除剪贴板",
+            "language": "语言",
+            "lock-vaults-after-time": "时间过后锁定保险柜",
+            "lock-vaults-after-time-desc": "在一段时间不活动后自动锁定保险柜。",
+            "lock-vaults-window-closed": "如果保险柜窗口关闭，则锁定保险柜",
+            "lock-vaults-window-closed-label": "锁定关闭",
+            "secure-file-host": {
+                "description": "安全文件主机允许 <strong>Buttercup 浏览器扩展</strong> 通过此应用程序连接到此 PC 上的本地保险柜。",
+                "label": "启用安全文件主机",
+                "title": "安全文件主机"
+            },
+            "theme": "主题"
+        },
+        "section": {
+            "connectivity": "连接",
+            "debug": "调试",
+            "general": "常规",
+            "privacy": "隐私",
+            "security": "安全"
+        },
+        "title": "首选项"
+    },
+    "search": {
+        "modal": {
+            "no-results": "没有结果...",
+            "result-render-error": "渲染搜索结果失败"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "文件",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "深色",
+        "light": "浅色"
+    },
+    "update": {
+        "available": "更新可用: {{version}}",
+        "dialog": {
+            "close-button": "关闭",
+            "close-button-title": "关闭更新信息",
+            "title": "更新到 {{version}}",
+            "update-button": "更新",
+            "update-button-title": "立即更新应用程序"
+        },
+        "downloaded": "已下载更新",
+        "installed-restart": "重新启动",
+        "ready": "更新就绪: {{version}}",
+        "view": "查看"
+    },
+    "vault-editor": {
+        "locked-state": "保险柜已锁定",
+        "pending-state": "保险柜管繁忙",
+        "unlocked-state": "保险柜已解锁"
+    },
+    "vault-management": {
+        "close-button": "关闭",
+        "close-button-title": "关闭保险柜管理",
+        "remove-vault-dialog": {
+            "cancel-button": "取消",
+            "cancel-button-title": "取消删除",
+            "description": "您确定要删除 \"{{title}}\" 保险柜吗?",
+            "remove-button": "删除",
+            "remove-button-title": "确认保险柜删除",
+            "title": "删除保险柜"
+        },
+        "title": "保险柜"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "保存时在本地安全地备份您的保险柜。",
+            "path": {
+                "helper": "默认路径留空",
+                "label": "备份路径",
+                "placeholder": "绝对备份路径"
+            },
+            "switch": "启用本地备份",
+            "title": "备份"
+        },
+        "format": {
+            "a-description": "格式 A 是原始的 Buttercup 保险柜格式，它使用增量来存储保险柜结构。",
+            "b-description": "格式 B 是新的 Buttercup 保险柜格式，它使用 JSON 结构来管理保险柜结构和历史记录。",
+            "a-upgrade-b": "您可以升级到目前处于<strong>Beta 测试</strong>中的格式 B。 除非您正在采取适当的措施来保护您的数据，否则不建议这样做。",
+            "description": "管理当前的保险柜格式和更新。",
+            "format-type": "格式 {{format}}",
+            "title": "格式",
+            "upgrade-button": "升级"
+        },
+        "not-unlocked": "必须解锁保险柜才能访问该区域。",
+        "title": "保险柜设置: {{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "锁定保险柜",
+            "remove-vault": "删除保险柜",
+            "unlock-vault": "解锁保险柜",
+            "vault-settings": "保险柜设置"
+        }
+    }
+}
