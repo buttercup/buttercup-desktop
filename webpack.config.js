@@ -13,6 +13,57 @@ module.exports = [
     {
         devtool: false,
 
+        entry: path.resolve(__dirname, "./source/main/index.ts"),
+
+        externals: [
+            "@electron/remote",
+            "electron",
+            "electron-builder",
+            "electron-is-dev",
+            "electron-updater",
+            "express",
+            "keytar",
+            "os-locale",
+            "stacktracey"
+        ].reduce((output, name) => ({ ...output, [name]: name }), {}),
+
+        module: {
+            rules: [
+                {
+                    test: /\.ts$/,
+                    use: [
+                        {
+                            loader: "ts-loader",
+                            options: {
+                                configFile: path.resolve(__dirname, "./tsconfig.json")
+                            }
+                        }
+                    ],
+                    exclude: /node_modules/
+                }
+            ]
+        },
+
+        output: {
+            filename: "index.js",
+            libraryTarget: "commonjs2",
+            path: path.resolve(__dirname, "./build/main")
+        },
+
+        resolve: {
+            extensions: [".ts", ".js"]
+        },
+
+        target: "electron-main",
+
+        watchOptions: {
+            poll: 1000,
+            ignored: /node_modules/
+        }
+    },
+    {
+        devtool: false,
+
         entry: path.resolve(__dirname, "./source/renderer/index.tsx"),
 
         module: {

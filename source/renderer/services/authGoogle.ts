@@ -11,7 +11,7 @@ import {
 } from "../../shared/symbols";
 import { VaultSourceID } from "buttercup";
 
-let __googleDriveOAuthClient: OAuth2Client = null;
+let __googleDriveOAuthClient: OAuth2Client | null = null;
 
 export async function authenticateGoogleDrive(
     openPermissions: boolean = false
