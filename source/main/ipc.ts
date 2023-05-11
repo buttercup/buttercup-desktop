@@ -54,6 +54,7 @@ import { restartAutoClearClipboardTimer } from "./services/autoClearClipboard";
 import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
+import { convertVaultFormat } from "./services/format";
 import {
     AppEnvironmentFlags,
     AddVaultPayload,
@@ -62,7 +63,6 @@ import {
     SearchResult,
     VaultSettingsLocal
 } from "./types";
-import { convertVaultFormat } from "./services/format";
 
 // **
 // ** IPC Events
@@ -138,31 +138,6 @@ ipcMain.on("log", async (evt, payload) => {
 ipcMain.on("remove-source", async (evt, payload) => {
     const { sourceID } = JSON.parse(payload);
     await removeSourceWithID(sourceID);
-});
-
-ipcMain.on("save-vault-facade", async (evt, payload) => {
-    const { sourceID, vaultFacade } = JSON.parse(payload) as {
-        sourceID: VaultSourceID;
-        vaultFacade: VaultFacade;
-    };
-    try {
-        await saveVaultFacade(sourceID, vaultFacade);
-        evt.reply(
-            "save-vault-facade:reply",
-            JSON.stringify({
-                ok: true
-            })
-        );
-    } catch (err) {
-        logErr("Failed saving vault facade", err);
-        evt.reply(
-            "save-vault-facade:reply",
-            JSON.stringify({
-                ok: false,
-                error: err.message
-            })
-        );
-    }
 });
 
 ipcMain.on("update-vault-windows", () => {
@@ -316,6 +291,13 @@ ipcMain.handle(
 ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
     await saveSource(sourceID);
 });
+
+ipcMain.handle(
+    "save-vault-facade",
+    async (_, sourceID: VaultSourceID, vaultFacade: VaultFacade) => {
+        await saveVaultFacade(sourceID, vaultFacade);
+    }
+);
 
 ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
     const results = await searchSingleVault(sourceID, term);
