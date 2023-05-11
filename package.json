@@ -194,7 +194,7 @@
     "@buttercup/importer": "^3.1.0",
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.8",
-    "buttercup": "^7.1.1",
+    "buttercup": "^7.2.1",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
     "delayable-setinterval": "^0.1.1",
@@ -212,7 +212,7 @@
     "os-locale": "^5.0.0",
     "pify": "^5.0.0",
     "stacktracey": "^2.1.7",
-    "webdav": "^4.11.2"
+    "webdav": "^5.0.0-r4"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
@@ -254,14 +254,14 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.3.3",
     "rimraf": "^3.0.2",
-    "sass": "^1.57.0",
-    "sass-loader": "^13.2.0",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
     "spectron": "^15.0.0",
-    "style-loader": "^3.3.0",
+    "style-loader": "^3.3.2",
     "styled-components": "^5.3.6",
     "ts-loader": "^9.4.2",
     "typescript": "^4.9.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "webpack": "^5.82.1",
+    "webpack-cli": "^5.1.1"
   }
 }
