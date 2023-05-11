@@ -321,7 +321,6 @@
         "format": {
             "a-description": "格式 A 是原始的 Buttercup 保险柜格式，它使用增量来存储保险柜结构。",
             "b-description": "格式 B 是新的 Buttercup 保险柜格式，它使用 JSON 结构来管理保险柜结构和历史记录。",
-            "a-upgrade-b": "您可以升级到目前处于<strong>Beta 测试</strong>中的格式 B。 除非您正在采取适当的措施来保护您的数据，否则不建议这样做。",
             "description": "管理当前的保险柜格式和更新。",
             "format-type": "格式 {{format}}",
             "title": "格式",
