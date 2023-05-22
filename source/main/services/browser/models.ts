@@ -25,3 +25,9 @@ export const EntriesSearchPayloadSchema = z.discriminatedUnion("type", [
         url: z.string().url()
     })
 ]);
+
+export const VaultUnlockParamSchema = z
+    .object({
+        id: z.string().min(1)
+    })
+    .strict();

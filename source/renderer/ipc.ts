@@ -20,8 +20,8 @@ import {
 } from "./services/update";
 import { updateVaultsBiometricsStates } from "./services/biometrics";
 import { showError, showSuccess, showUpdateError } from "./services/notifications";
-import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 import { setBrowserAccessCode } from "./state/browserAccess";
+import { UpdateProgressInfo, VaultSourceDescription } from "./types";
 
 ipcRenderer.on("add-vault", (evt) => {
     showAddVaultMenu(true);
@@ -100,8 +100,8 @@ ipcRenderer.on("unlock-vault", async (evt, sourceID) => {
 });
 
 ipcRenderer.on("unlock-vault-open", async (evt, sourceID) => {
-    await unlockVaultSource(sourceID);
     window.location.hash = `/source/${sourceID}`;
+    await unlockVaultSource(sourceID);
 });
 
 ipcRenderer.on("update-available", async (evt, updatePayload) => {

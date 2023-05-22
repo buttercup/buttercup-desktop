@@ -177,7 +177,7 @@ export function getSourceAttachmentsSupport(sourceID: VaultSourceID): boolean {
     return source.supportsAttachments();
 }
 
-export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus {
+export function getSourceStatus(sourceID: VaultSourceID): VaultSourceStatus | null {
     const mgr = getVaultManager();
     const source = mgr.getSourceForID(sourceID);
     return (source && source.status) || null;

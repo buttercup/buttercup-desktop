@@ -216,7 +216,7 @@
     "pify": "^5.0.0",
     "stacktracey": "^2.1.7",
     "statuses": "^2.0.1",
-    "webdav": "^4.11.2",
+    "webdav": "^5.0.0-r4",
     "zod": "^3.20.6"
   },
   "devDependencies": {

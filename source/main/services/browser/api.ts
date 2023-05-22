@@ -5,6 +5,7 @@ import { handleAuthPing, processAuthRequest, processAuthResponse } from "./contr
 import { searchEntries } from "./controllers/entries";
 import { getAllOTPs } from "./controllers/otp";
 import { getVaults } from "./controllers/vaults";
+import { promptVaultUnlock } from "./controllers/unlock";
 import { handleError } from "./error";
 import { requireBrowserToken } from "./middleware";
 
@@ -30,6 +31,7 @@ function createRoutes(app: express.Application): void {
     router.get("/entries", requireBrowserToken, searchEntries);
     router.get("/otps", requireBrowserToken, getAllOTPs);
     router.get("/vaults", requireBrowserToken, getVaults);
-    router.post("/vaults/:id/unlock", requireBrowserToken, () => {});
+    router.post("/vaults/:id/lock", requireBrowserToken, () => {});
+    router.post("/vaults/:id/unlock", requireBrowserToken, promptVaultUnlock);
     app.use("/v1", router);
 }
