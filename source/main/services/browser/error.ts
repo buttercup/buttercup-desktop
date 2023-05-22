@@ -31,6 +31,9 @@ export function handleError(err: Error, req: Request, res: Response, next: NextF
         case BrowserAPIErrorType.NoAuthorization:
             responseCode = 401;
             break;
+        case BrowserAPIErrorType.VaultInvalidState:
+            responseCode = 500;
+            break;
     }
     if (status && typeof status === "number") {
         responseCode = status;
