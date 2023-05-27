@@ -4,6 +4,7 @@ import { Layerr } from "layerr";
 import { getSourceDescriptions, getSourceStatus, lockSource } from "../../buttercup";
 import { VaultUnlockParamSchema } from "../models";
 import { openMainWindow } from "../../windows";
+import { logErr, logInfo } from "../../../library/log";
 import { BrowserAPIErrorType } from "../../../types";
 
 export async function getVaults(req: Request, res: Response) {
@@ -16,7 +17,9 @@ export async function getVaults(req: Request, res: Response) {
 export async function promptVaultLock(req: Request, res: Response) {
     const { id: sourceID } = VaultUnlockParamSchema.parse(req.params);
     const sourceStatus = getSourceStatus(sourceID);
+    logInfo(`(api) prompt vault lock: ${sourceID}`);
     if (!sourceStatus) {
+        logErr(`(api) no source exists for locking: ${sourceID}`);
         res.status(404).send("Not Found");
         return;
     }
@@ -40,7 +43,9 @@ export async function promptVaultLock(req: Request, res: Response) {
 export async function promptVaultUnlock(req: Request, res: Response) {
     const { id: sourceID } = VaultUnlockParamSchema.parse(req.params);
     const sourceStatus = getSourceStatus(sourceID);
+    logInfo(`(api) prompt vault unlock: ${sourceID}`);
     if (!sourceStatus) {
+        logErr(`(api) no source exists for unlocking: ${sourceID}`);
         res.status(404).send("Not Found");
         return;
     }

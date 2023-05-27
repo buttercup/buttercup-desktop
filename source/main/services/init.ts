@@ -53,8 +53,6 @@ export async function initialise() {
     await applyCurrentTheme();
     if (preferences.fileHostEnabled) {
         await startFileHost();
-    }
-    if (preferences.browserAPIEnabled) {
         await startBrowserAPI();
     }
     registerGoogleDriveAuthHandlers();
