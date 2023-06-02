@@ -221,7 +221,7 @@
     "@blueprintjs/core": "^4.13.0",
     "@blueprintjs/popover2": "^1.10.2",
     "@blueprintjs/select": "^4.8.12",
-    "@buttercup/ui": "^6.2.1",
+    "@buttercup/ui": "^6.2.2",
     "@hookstate/core": "^3.0.13",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.11.17",
