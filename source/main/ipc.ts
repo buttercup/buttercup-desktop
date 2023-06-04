@@ -141,31 +141,6 @@ ipcMain.on("remove-source", async (evt, payload) => {
     await removeSourceWithID(sourceID);
 });
 
-ipcMain.on("save-vault-facade", async (evt, payload) => {
-    const { sourceID, vaultFacade } = JSON.parse(payload) as {
-        sourceID: VaultSourceID;
-        vaultFacade: VaultFacade;
-    };
-    try {
-        await saveVaultFacade(sourceID, vaultFacade);
-        evt.reply(
-            "save-vault-facade:reply",
-            JSON.stringify({
-                ok: true
-            })
-        );
-    } catch (err) {
-        logErr("Failed saving vault facade", err);
-        evt.reply(
-            "save-vault-facade:reply",
-            JSON.stringify({
-                ok: false,
-                error: err.message
-            })
-        );
-    }
-});
-
 ipcMain.on("update-vault-windows", () => {
     sendSourcesToWindows();
 });
@@ -321,6 +296,13 @@ ipcMain.handle(
 ipcMain.handle("save-source", async (_, sourceID: VaultSourceID) => {
     await saveSource(sourceID);
 });
+
+ipcMain.handle(
+    "save-vault-facade",
+    async (_, sourceID: VaultSourceID, vaultFacade: VaultFacade) => {
+        await saveVaultFacade(sourceID, vaultFacade);
+    }
+);
 
 ipcMain.handle("search-single-vault", async (_, sourceID, term): Promise<Array<SearchResult>> => {
     const results = await searchSingleVault(sourceID, term);

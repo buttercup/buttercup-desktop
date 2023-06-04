@@ -321,7 +321,6 @@
         "format": {
             "a-description": "Format A ist das ursprüngliche Buttercup Tresorformat, das Deltas für die Speicherung der Tresorstruktur nutzt.",
             "b-description": "Format B ist das neue Buttercup Tresorformat, das eine JSON Struktur verwendet, um die Struktur und den Verlauf des Tresors zu organisieren.",
-            "a-upgrade-b": "Du kannst zu Format B upgraden, das sich aktuell in der <strong>Beta Testphase befindet</strong>. Es wird nicht empfohlen, solange Du nicht als Vorsichtma0nahme deine Daten gesichert hast.",
             "description": "Verwalte aktuelles Tresorformat und Updates",
             "format-type": "Format {{format}}",
             "title": "Format",

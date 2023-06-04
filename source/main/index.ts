@@ -48,19 +48,6 @@ app.on("open-url", (e, url) => {
     }
 });
 
-{
-    const protocol = BUTTERCUP_PROTOCOL.replace("://", "");
-    if (!app.isDefaultProtocolClient(protocol)) {
-        logInfo(`Registering protocol: ${protocol}`);
-        const protoReg = app.setAsDefaultProtocolClient(protocol);
-        if (!protoReg) {
-            logErr(`Failed registering protocol: ${protocol}`);
-        }
-    } else {
-        logInfo(`Protocol already registered: ${protocol}`);
-    }
-}
-
 // **
 // ** Boot
 // **
@@ -71,6 +58,18 @@ app.whenReady()
         initialiseElectronRemote();
     })
     .then(() => initialise())
+    .then(() => {
+        const protocol = BUTTERCUP_PROTOCOL.replace("://", "");
+        if (!app.isDefaultProtocolClient(protocol)) {
+            logInfo(`Registering protocol: ${protocol}`);
+            const protoReg = app.setAsDefaultProtocolClient(protocol);
+            if (!protoReg) {
+                logErr(`Failed registering protocol: ${protocol}`);
+            }
+        } else {
+            logInfo(`Protocol already registered: ${protocol}`);
+        }
+    })
     .then(() => {
         if (!shouldShowMainWindow()) {
             logInfo("Opening initial window disabled");

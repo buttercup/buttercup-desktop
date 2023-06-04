@@ -1,3 +1,3 @@
 // This file updated automatically: changes made here will be overwritten!
 
-export const VERSION = "2.19.0";
+export const VERSION = "2.20.3";

@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import { shell } from "@electron/remote";
 import { OAuth2Client } from "@buttercup/google-oauth2-client";
+import type { VaultSourceID } from "buttercup";
 import { logInfo } from "../library/log";
 import {
     GOOGLE_AUTH_REDIRECT,
@@ -9,7 +10,6 @@ import {
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET
 } from "../../shared/symbols";
-import { VaultSourceID } from "buttercup";
 
 let __googleDriveOAuthClient: OAuth2Client | null = null;
 

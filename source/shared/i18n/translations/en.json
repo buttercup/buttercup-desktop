@@ -333,7 +333,7 @@
         "format": {
             "a-description": "Format A is the original Buttercup vault format that uses deltas to store vault structure.",
             "b-description": "Format B is the new Buttercup vault format that uses a JSON structure to manage vault structure and history.",
-            "a-upgrade-b": "You can upgrade to Format B, which is currently in <strong>beta testing</strong>. It is not recommended unless you are taking appropriate measures to secure your data.",
+            "a-upgrade-b": "You should upgrade to Format B, which is currently <strong>stable</strong>. It is recommended that you backup your vault before doing this.",
             "description": "Manage current vault format and updates.",
             "format-type": "Format {{format}}",
             "title": "Format",
