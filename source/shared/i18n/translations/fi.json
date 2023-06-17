@@ -1,0 +1,341 @@
+{
+    "_": "Finnish (FI)",
+    "about": {
+        "description": "Ilmainen, avoimen lähdekoodin ja eri alustojen salasanojen hallintasovellus.",
+        "dialog": {
+            "close-button": "Sulje",
+            "close-button-title": "Sulje dialogi"
+        },
+        "title": "Noin",
+        "version": {
+            "core": "Ydin",
+            "desktop": "Työpöytä"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Valitse holvitiedosto tai luo uusi Holvi:",
+        "choose-type-prompt": "Valitse lisättävän holvin tyyppi:",
+        "confirm": {
+            "existing-password": "Anna ensisijainen holvin salasana:",
+            "new-password": "Anna uusi ensisijainen holvin salasana:",
+            "password-placeholder": "Holvin salasana..."
+        },
+        "google-auth-button": "Todennus",
+        "google-auth-button-title": "Todenna Google Drivella",
+        "google-auth-error": "Googlen tunnistautuminen epäonnistui",
+        "loader": {
+            "dropbox-auth": "Todennusta varten avautuu erillinen ikkuna",
+            "file-prompt": "Valintaikkuna avautuu holvitiedoston valitsemista varten",
+            "google-auth": {
+                "instr-1": "Voit valita käyttöoikeustason, jota Buttercup käyttää käyttäessään <strong>Google Drive</strong> tiliäsi.",
+                "instr-2": "Selecting an <strong>open</strong> Avoimen käyttöoikeusasetuksen valitseminen antaa Buttercupille pääsyn kaikkiin tilisi tiedostoihin ja kansioihin sekä yhdistettyihin jaettuihin jakoihin.",
+                "instr-3": "<i>ei-</i>avoin asetuksen valitseminen antaa Buttercupille pääsyn tiedostoihin, jotka se on luonut tai käyttänyt aiemmin.",
+                "perm-label": "Käyttöoikeudet",
+                "perm-switch": "Avaa"
+            },
+            "webdav-auth": {
+                "password-label": "Salasana",
+                "password-plc": "WebDAV salasana",
+                "url-label": "WebDAV palvelu",
+                "username-label": "Käyttäjätunnus",
+                "username-plc": "WebDAV käyttäjänimi"
+            }
+        },
+        "page-choose-next": "Seuraava",
+        "page-choose-next-title": "Jatka holvin lisäämistä",
+        "page-confirm-cancel": "Peruuta",
+        "page-confirm-cancel-title": "Peruuta lukituksen avaus",
+        "page-confirm-finish": "Lisää Holvi",
+        "page-confirm-finish-title": "Vahvista holvin lisäys",
+        "title": "Lisää Holvi",
+        "webdav-continue": "Seuraava",
+        "webdav-continue-title": "Muodosta yhteys WebDAV:n avulla"
+    },
+    "add-vault-page": {
+        "cta-button": "Lisää Holvi",
+        "description": "Holveja ei ole vielä lisätty...",
+        "title": "Uusi aloitus"
+    },
+    "app-menu": {
+        "about": "Noin",
+        "add-new-vault": "Lisää uusi",
+        "biometrics": "Käytä biometristä lukituksen avaamista",
+        "close-window": "Sulje ikkuna",
+        "connection": "Yhteys",
+        "current": "Nykyinen holvi",
+        "debug": "Vianmääritys",
+        "devtool": "Kehitystyökalu",
+        "edit": "Muokkaa",
+        "enable-secure-file-host": "Ota selainkäyttöoikeus käyttöön",
+        "export": "Vie",
+        "import": "Tuo",
+        "lock-all": "Lukitse kaikki",
+        "lock-current-vault": "Lukitse nykyinen holvi",
+        "open": "Avaa",
+        "open-vault": "Avaa Holvi",
+        "preferences": "Asetukset",
+        "quit": "Lopeta",
+        "search": "Hae",
+        "unlock-vault": "Avaa",
+        "unlocked-vaults": "{{count}} lukitsematon holvi",
+        "unlocked-vaults_plural": "{{count}} lukitsemattomat holvit",
+        "vaults": "Holvit",
+        "view": "Näytä",
+        "window": "Ikkuna",
+        "window-reposition": "Aseta uudelleen"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "tallenna kirjautuminen holviin '{{name}}'",
+            "unlock-vault": "avaa holvin lukitus '{{name}}'"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "Tallenna",
+            "title": "Lataa liite"
+        },
+        "biometric-reg": {
+            "button-cancel": "Peruuta",
+            "button-cancel-title": "Peruuta rekisteröinti",
+            "button-reg": "Rekisteröidy",
+            "button-reg-title": "Rekisteröi biometriset tiedot",
+            "label": "Holvin salasana",
+            "placeholder": "Holvin salasana...",
+            "success": "Biometristen tietojen rekisteröinti onnistui",
+            "title": "Rekisteröi biometriset tiedot"
+        },
+        "confirm-generic": {
+            "cancel-button": "Peruuta",
+            "confirm-button": "Vahvista"
+        },
+        "export-file-chooser": {
+            "submit-button": "Vie",
+            "title": "Vie holvi '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Peruuta",
+                "cancel-title": "Peruuta uuden holvin luominen",
+                "confirm": "Aseta Holvin kohde",
+                "confirm-title": "Vahvista uusi holvin tiedostonimi",
+                "description": "Anna tiedostonimi uudelle holville:",
+                "title": "Lisää Holvi"
+            },
+            "nav": {
+                "cancel-new": "Peruuta Uusi",
+                "create-new": "Uusi Holvi"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup Holvi",
+                "confirm-button": "Lisää",
+                "title": "Lisää olemassa oleva Holvi"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup Holvi",
+                "confirm-button": "Luo",
+                "title": "Lisää Uusi Holvi"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "Peruuta",
+                "title": "Peruuta todennus"
+            },
+            "description": "Holvin uudelleen todentaminen Google Drive:sta: {{vault}}",
+            "error": {
+                "reauth-failed": "Uudelleentodennus epäonnistui"
+            },
+            "header": "Holvin todennus on vanhentunut",
+            "success": "Google Driven uudelleentodennus onnistui: avaa lukitus uudelleen",
+            "title": "Googlen uudelleentodennus"
+        },
+        "import-file-chooser": {
+            "submit-button": "Tuo",
+            "title": "Tuo {{importer}} varastosta"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Sulje",
+                "title": "Sulje kehote"
+            },
+            "button-existing": {
+                "text": "Lataa olemassa oleva",
+                "title": "Ladataan olemassa olevaa holvitiedostoa"
+            },
+            "button-new": {
+                "text": "Luo Uusi",
+                "title": "Luo uusi holvitiedosto"
+            },
+            "prompt": "Haluatko luoda <i>uuden</i> holvin, vai lukea olemassa olevan?",
+            "title": "Lisää Holvi Tiedosto"
+        },
+        "password-prompt": {
+            "button-cancel": "Peruuta",
+            "button-cancel-title": "Peruuta lukituksen avaus",
+            "button-unlock": "Avaa",
+            "button-unlock-title": "Vahvista holvin lukituksen avaaminen",
+            "label": "Holvin salasana",
+            "placeholder": "Holvin salasana...",
+            "title": "Holvin lukituksen avaaminen"
+        }
+    },
+    "error": {
+        "attachment-add": "Liitteiden lisääminen epäonnistui",
+        "attachment-delete": "Liitteen poistaminen epäonnistui",
+        "attachment-download": "Liitteen lataaminen epäonnistui",
+        "attachment-preview": "Liitteen esikatselu epäonnistui",
+        "biometric-invalid-password": "Holvin biometristen tunnisteiden käyttöönottoa varten annettiin virheellinen salasana",
+        "biometric-store-failed": "Biometristen tietojen tallennus epäonnistui",
+        "biometric-unlock-failed": "Holvin lukituksen avaaminen biometristen tietojen avulla epäonnistui",
+        "fatal-boundary": "Tapahtui kohtalokas virhe - olemme pahoillamme, että näin on tapahtunut. Tarkista alla olevat tiedot, jos ne auttavat diagnosoimaan ongelman:"
+    },
+    "file-host": {
+        "code-copied": "Tiedoston isäntäkoodi kopioitu",
+        "dialog": {
+            "close-button": "Sulje",
+            "close-button-title": "Sulje yhteysikkuna",
+            "instruction": {
+                "new-connection": "Tähän sovellukseen on muodostettu uusi yhteys, joka pyytää etäyhteyttä tiedostojärjestelmään.",
+                "use-code": "Käytä seuraavaa koodia valtuuttamaan se."
+            },
+            "title": "Suojattu tiedoston isäntäyhteys"
+        }
+    },
+    "input-required": "(required)",
+    "notification": {
+        "attachment-downloaded": "Liite tallennettu onnistuneesti",
+        "biometrics-disabled": "Biometriset tiedot poissa käytöstä holvissa",
+        "error": {
+            "biometrics-disable-failed": "Holvin biometriikan poistaminen käytöstä epäonnistui: {{error}}",
+            "import-failed": "Tuonti epäonnistui: {{error}}",
+            "languages-load": "Kielten lataus epäonnistui",
+            "preferences-load": "Asetusten lataus epäonnistui",
+            "preferences-save": "Asetusten tallennus epäonnistui",
+            "unknown-error": "Tuntematon virhe",
+            "vault-format-upgrade-failed": "Holvin muodon päivitys epäonnistui",
+            "vault-lock-failed": "Holvin lukitus epäonnistui",
+            "vault-save-failed": "Holvin tallentaminen epäonnistui",
+            "vault-settings-load": "Holvin asetusten lataus epäonnistui",
+            "vault-settings-save": "Holvin asetusten tallentaminen epäonnistui",
+            "vault-unlock-failed": "Holvin lukituksen avaus epäonnistui"
+        },
+        "export-success": "Holvin vienti onnistui: {{name}}",
+        "import-success": "Holvin tuonti onnistui: {{filename}}",
+        "preferences-saved": "Tallennetut asetukset",
+        "vault-removed": "Holvi poistettu: {{name}}",
+        "vault-saved": "Holvi tallennettu",
+        "vault-settings-saved": "Tallennetut holvin asetukset"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Peruuta",
+            "cancel-title": "Peruuta asetusten päivitys",
+            "save": "Tallenna",
+            "save-title": "Tallenna muutokset"
+        },
+        "item": {
+            "clear-clipboard": "Tyhjennä leikepöytä automaattisesti",
+            "language": "Kieli",
+            "lock-vaults-after-time": "Lukitse holvit ajan kuluttua",
+            "lock-vaults-after-time-desc": "Lukitsee holvit automaattisesti jonkin aikaa käyttämättömänä.",
+            "lock-vaults-window-closed": "Lukitse holvit, jos holvin ikkuna suljetaan",
+            "lock-vaults-window-closed-label": "Lukitus kiinni",
+            "secure-file-host": {
+                "description": "Suojatun tiedostopalvelimen avulla <strong>Buttercup selainlaajennus</strong> voi muodostaa yhteyden tämän tietokoneen paikallisiin varastoihin tämän sovelluksen kautta.",
+                "label": "Ota suojattu tiedostopalvelin käyttöön",
+                "title": "Suojattu tiedoston isäntä"
+            },
+            "theme": "Teema"
+        },
+        "section": {
+            "connectivity": "Yhteydet",
+            "debug": "Vianmääritys",
+            "general": "Yleinen",
+            "privacy": "Yksityisyys",
+            "security": "Turvallisuus"
+        },
+        "title": "Asetukset"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Ei tuloksia...",
+            "result-render-error": "Hakutuloksen näyttäminen epäonnistui"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Tiedosto",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Tumma",
+        "light": "Vaalea"
+    },
+    "update": {
+        "available": "Päivitys saatavilla: {{version}}",
+        "dialog": {
+            "close-button": "Sulje",
+            "close-button-title": "Sulje päivityksen tiedot",
+            "title": "Päivitä {{version}}",
+            "update-button": "Päivitys",
+            "update-button-title": "Päivitä sovellus nyt"
+        },
+        "downloaded": "Päivitys ladattu",
+        "installed-restart": "Uudelleenkäynnistä",
+        "ready": "Päivitys valmis: {{version}}",
+        "view": "Näytä"
+    },
+    "vault-editor": {
+        "locked-state": "Holvi lukittu",
+        "pending-state": "Holvi varattu",
+        "unlocked-state": "Holvin lukitus avattu"
+    },
+    "vault-management": {
+        "close-button": "Sulje",
+        "close-button-title": "Sulje varaston hallinta",
+        "remove-vault-dialog": {
+            "cancel-button": "Peruuta",
+            "cancel-button-title": "Peruuta poisto",
+            "description": "Oletko varma, että haluat poistaa holvin \"{{title}}\"?",
+            "remove-button": "Poista",
+            "remove-button-title": "Vahvista holvin poistaminen",
+            "title": "Poista Holvi"
+        },
+        "title": "Holvit"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "Varmuuskopioi varastosi turvallisesti paikallisesti tallennuksen aikana.",
+            "path": {
+                "helper": "Jätä tyhjäksi oletuspoluksi",
+                "label": "Varapolku",
+                "placeholder": "Absoluuttinen varapolku"
+            },
+            "switch": "Ota paikalliset varmuuskopiot käyttöön",
+            "title": "Varmuuskopio"
+        },
+        "format": {
+            "a-description": "Formaatti A on alkuperäinen Buttercup-holvi muoto, joka käyttää deltaa varastorakenteen tallentamiseen.",
+            "b-description": "Formaatti B on uusi Buttercup-holvi muoto, joka käyttää JSON-rakennetta holvin rakenteen ja historian hallintaan.",
+            "a-upgrade-b": "Voit päivittää Formaatti B:hen, joka on tällä hetkellä betatestauksessa. Sitä ei suositella, ellet ryhdy asianmukaisiin toimenpiteisiin tietojesi suojaamiseksi.",
+            "description": "Hallitse nykyistä holvin muotoa ja päivityksiä.",
+            "format-type": "Format {{format}}",
+            "title": "Formaatti",
+            "upgrade-button": "Päivitä"
+        },
+        "not-unlocked": "Holvin lukitus on avattava, jotta tälle alueelle pääsee.",
+        "title": "Holvin asetukset: {{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "Lukitse Holvi",
+            "remove-vault": "Poista holvi",
+            "unlock-vault": "Avaa holvin lukitus",
+            "vault-settings": "Holvin asetukset"
+        }
+    }
+}
