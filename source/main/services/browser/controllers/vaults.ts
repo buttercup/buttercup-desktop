@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
-import { VaultSourceStatus } from "buttercup";
+import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { Layerr } from "layerr";
-import { getSourceDescriptions, getSourceStatus, lockSource } from "../../buttercup";
+import {
+    getSourceDescriptions,
+    getSourceStatus,
+    getUnlockedSourceIDs,
+    getVaultFacadeBySource,
+    lockSource
+} from "../../buttercup";
 import { VaultUnlockParamSchema } from "../models";
 import { openMainWindow } from "../../windows";
 import { logErr, logInfo } from "../../../library/log";
@@ -11,6 +17,20 @@ export async function getVaults(req: Request, res: Response) {
     const sources = getSourceDescriptions();
     res.json({
         sources
+    });
+}
+
+export async function getVaultsTree(req: Request, res: Response) {
+    const sourceIDs = getUnlockedSourceIDs();
+    const tree = sourceIDs.reduce(
+        (output: Record<string, VaultFacade>, sourceID) => ({
+            ...output,
+            [sourceID]: getVaultFacadeBySource(sourceID)
+        }),
+        {}
+    );
+    res.json({
+        tree
     });
 }
 
