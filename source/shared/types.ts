@@ -66,6 +66,10 @@ export interface UpdateProgressInfo {
 export interface VaultSettingsLocal {
     localBackup: boolean;
     localBackupLocation: null | string;
+    biometricForcePasswordMaxInterval: string;
+    biometricForcePasswordCount: string;
+    biometricLastManualUnlock: number;
+    biometricUnlockCount: number;
 }
 
 export interface VaultSourceDescription {
