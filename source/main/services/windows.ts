@@ -124,5 +124,6 @@ export async function openMainWindow(targetRoute: string = null): Promise<Browse
     if (targetRoute) {
         windows[0].webContents.send("route", targetRoute);
     }
-    return windows[0].maximize();
+    windows[0].maximize();
+    return windows[0];
 }
