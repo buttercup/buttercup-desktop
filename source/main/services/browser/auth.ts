@@ -1,49 +1,77 @@
+import { constants as CryptoConstants, privateDecrypt, publicEncrypt } from "node:crypto";
 import { Layerr } from "layerr";
-import { createHash, randomInt } from "node:crypto";
+import { getBrowserPublicKeyString } from "../browserAuth";
+import { getConfigValue, setConfigValue } from "../config";
+import { BrowserAPIErrorType } from "../../types";
+import { base64ToBytes, bytesToBase64 } from "buttercup";
 
-const TOKEN_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-~._";
-const TOKEN_LENGTH = 64;
-
-async function generateRandomIntArray(
-    length: number,
-    min: number,
-    max: number
-): Promise<Array<number>> {
-    const work: Array<Promise<number>> = [];
-    for (let i = 0; i < length; i += 1) {
-        work.push(
-            new Promise((resolve) => {
-                randomInt(min, max, (err, val) => {
-                    if (err) {
-                        throw new Layerr(err, "Failed generating random token for browser access");
-                    }
-                    resolve(val);
-                });
-            })
+export async function decryptPayload(clientID: string, payload: string): Promise<string> {
+    // Check that the client is registered, we don't actually
+    // use their key for decryption..
+    const clients = await getConfigValue("browserClients");
+    const clientConfig = clients[clientID];
+    if (!clientConfig) {
+        throw new Layerr(
+            {
+                info: {
+                    clientID,
+                    code: BrowserAPIErrorType.NoAPIKey
+                }
+            },
+            "No client key registered for decryption"
         );
     }
-    return Promise.all(work);
+    // Key private key for decryption
+    const browserPrivateKey = await getConfigValue("browserPrivateKey");
+    console.log("PAYLOAD", payload);
+    // console.log("DEC", base64ToBytes(payload));
+    // Decrypt
+    const decryptedData = privateDecrypt(
+        {
+            key: browserPrivateKey,
+            padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
+            oaepHash: "sha256"
+        },
+        base64ToBytes(payload)
+    );
+    return decryptedData.toString("utf-8");
 }
 
-export async function generateTokens(): Promise<{ token: string; verifier: string }> {
-    const indexes = await generateRandomIntArray(TOKEN_LENGTH, 0, TOKEN_CHARS.length);
-    let token: string = "";
-    for (const ind of indexes) {
-        token = `${token}${TOKEN_CHARS[ind]}`;
+export async function encryptPayload(clientID: string, payload: string): Promise<string> {
+    const clients = await getConfigValue("browserClients");
+    const clientConfig = clients[clientID];
+    if (!clientConfig) {
+        throw new Layerr(
+            {
+                info: {
+                    clientID,
+                    code: BrowserAPIErrorType.NoAPIKey
+                }
+            },
+            "No client key registered for encryption"
+        );
     }
-    return {
-        token,
-        verifier: hashValueSHA512(token)
-    };
+    // Encrypt
+    const encryptedData = publicEncrypt(
+        {
+            key: clientConfig.publicKey,
+            padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
+            oaepHash: "sha256"
+        },
+        Buffer.from(payload, "utf-8")
+    );
+    return bytesToBase64(encryptedData);
+    // return encryptedData.toString("utf-8");
 }
 
-function hashValueSHA512(value: string): string {
-    const hash = createHash("sha512");
-    hash.update(value);
-    return hash.digest().toString("hex");
-}
-
-export function verifyToken(currentKeys: Array<string>, token: string): boolean {
-    const hash = hashValueSHA512(token);
-    return currentKeys.includes(hash);
+export async function registerPublicKey(id: string, publicKey: string): Promise<string> {
+    const clients = await getConfigValue("browserClients");
+    await setConfigValue("browserClients", {
+        ...clients,
+        [id]: {
+            publicKey
+        }
+    });
+    const serverPublicKey = await getBrowserPublicKeyString();
+    return serverPublicKey;
 }

@@ -10,8 +10,8 @@ let __app: Application | null = null,
 
 export async function start(): Promise<void> {
     if (__app) return;
-    const apiKeys = await getConfigValue("browserAPIKeys");
-    logInfo(`Starting browser API (${apiKeys.length} keys registered)`);
+    const apiClients = await getConfigValue("browserClients");
+    logInfo(`Starting browser API (${Object.keys(apiClients).length} keys registered)`);
     __app = buildApplication();
     return new Promise<void>((resolve) => {
         __server = __app.listen(BROWSER_API_HOST_PORT, resolve);

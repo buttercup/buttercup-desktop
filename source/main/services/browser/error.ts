@@ -12,6 +12,7 @@ export function handleError(err: Error, req: Request, res: Response, next: NextF
         res.status(400).send("Bad Request");
         return;
     }
+    logErr(`API error: ${err.message} ${Layerr.fullStack(err)}`);
     let responseCode = 500,
         errorInfo: LayerrInfo;
     try {

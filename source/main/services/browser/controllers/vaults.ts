@@ -10,12 +10,13 @@ import {
 } from "../../buttercup";
 import { VaultUnlockParamSchema } from "../models";
 import { openMainWindow } from "../../windows";
+import { respondJSON, respondText } from "../response";
 import { logErr, logInfo } from "../../../library/log";
 import { BrowserAPIErrorType } from "../../../types";
 
 export async function getVaults(req: Request, res: Response) {
     const sources = getSourceDescriptions();
-    res.json({
+    await respondJSON(res, {
         sources
     });
 }
@@ -29,7 +30,7 @@ export async function getVaultsTree(req: Request, res: Response) {
         }),
         {}
     );
-    res.json({
+    await respondJSON(res, {
         tree
     });
 }
@@ -57,7 +58,8 @@ export async function promptVaultLock(req: Request, res: Response) {
         return;
     }
     await lockSource(sourceID);
-    res.status(200).send("OK");
+    res.status(200);
+    await respondText(res, "OK");
 }
 
 export async function promptVaultUnlock(req: Request, res: Response) {
@@ -72,5 +74,6 @@ export async function promptVaultUnlock(req: Request, res: Response) {
     const window = await openMainWindow();
     window.webContents.send("unlock-vault-open", sourceID);
     window.focus();
-    res.status(200).send("OK");
+    res.status(200);
+    await respondText(res, "OK");
 }

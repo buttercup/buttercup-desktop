@@ -17,6 +17,7 @@ import { processCLFlags } from "./arguments";
 import { supportsBiometricUnlock } from "./biometrics";
 import { startAutoVaultLockTimer } from "./autoLock";
 import { start as startBrowserAPI } from "./browser/index";
+import { generateBrowserKeys } from "./browserAuth";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 
@@ -34,6 +35,7 @@ export async function initialise() {
     const language = getLanguage(preferences, locale);
     logInfo(`Starting with language: ${language}`);
     await initialiseI18n(language);
+    await generateBrowserKeys();
     attachVaultManagerWatchers();
     await loadVaultsFromDisk();
     session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {

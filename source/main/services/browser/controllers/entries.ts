@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { SearchResult } from "buttercup";
 import { EntriesSearchPayloadSchema, EntriesSearchType } from "../models";
 import { searchAllVaultsByTerm, searchAllVaultsByURL } from "../../search";
+import { respondJSON } from "../response";
 
 export async function searchEntries(req: Request, res: Response) {
     const config = EntriesSearchPayloadSchema.parse(req.query);
@@ -11,7 +12,7 @@ export async function searchEntries(req: Request, res: Response) {
     } else if (config.type === EntriesSearchType.URL) {
         results = await searchAllVaultsByURL(config.url);
     }
-    res.json({
+    await respondJSON(res, {
         results
     });
 }

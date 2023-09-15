@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+const PUBLIC_KEY = z.string().regex(/^-----BEGIN PUBLIC KEY-----(\n|.)+-----END PUBLIC KEY-----$/m);
+const ULID = z.string().regex(/^[a-z0-9]{26}$/i);
+
 export const AuthRequestSchema = z.object({
     client: z.literal("browser"),
     purpose: z.literal("vaults-access"),
@@ -7,7 +10,9 @@ export const AuthRequestSchema = z.object({
 });
 
 export const AuthResponseSchema = z.object({
-    code: z.string().min(1)
+    code: z.string().min(1),
+    id: ULID,
+    publicKey: PUBLIC_KEY
 });
 
 export enum EntriesSearchType {

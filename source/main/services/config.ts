@@ -7,7 +7,14 @@ import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbol
 import { Preferences, VaultSettingsLocal } from "../types";
 
 interface Config {
-    browserAPIKeys: Array<string>;
+    browserClients: Record<
+        string,
+        {
+            publicKey: string;
+        }
+    >;
+    browserPrivateKey: string | null;
+    browserPublicKey: string | null;
     fileHostKey: null | string;
     preferences: Preferences;
     selectedSource: null | string;
@@ -18,7 +25,9 @@ interface Config {
 }
 
 const DEFAULT_CONFIG: Config = {
-    browserAPIKeys: [],
+    browserClients: {},
+    browserPrivateKey: null,
+    browserPublicKey: null,
     fileHostKey: null,
     preferences: naiveClone(PREFERENCES_DEFAULT),
     selectedSource: null,

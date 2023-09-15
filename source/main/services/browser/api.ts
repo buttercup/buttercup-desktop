@@ -6,11 +6,12 @@ import { searchEntries } from "./controllers/entries";
 import { getAllOTPs } from "./controllers/otp";
 import { getVaults, getVaultsTree, promptVaultLock, promptVaultUnlock } from "./controllers/vaults";
 import { handleError } from "./error";
-import { requireBrowserToken } from "./middleware";
+import { requireClient, requireKeyAuth } from "./middleware";
 
 export function buildApplication(): express.Application {
     const app = express();
     app.disable("x-powered-by");
+    app.use(express.text());
     app.use(express.json());
     app.use((req: Request, res: Response, next: NextFunction) => {
         res.set("Server", `ButtercupDesktop/${VERSION}`);
@@ -25,12 +26,12 @@ function createRoutes(app: express.Application): void {
     const router = createRouter();
     router.post("/auth/request", processAuthRequest);
     router.post("/auth/response", processAuthResponse);
-    router.post("/auth/test", requireBrowserToken, handleAuthPing);
-    router.get("/entries", requireBrowserToken, searchEntries);
-    router.get("/otps", requireBrowserToken, getAllOTPs);
-    router.get("/vaults", requireBrowserToken, getVaults);
-    router.get("/vaults-tree", requireBrowserToken, getVaultsTree);
-    router.post("/vaults/:id/lock", requireBrowserToken, promptVaultLock);
-    router.post("/vaults/:id/unlock", requireBrowserToken, promptVaultUnlock);
+    router.post("/auth/test", requireClient, requireKeyAuth, handleAuthPing);
+    router.get("/entries", requireClient, searchEntries);
+    router.get("/otps", requireClient, getAllOTPs);
+    router.get("/vaults", requireClient, getVaults);
+    router.get("/vaults-tree", requireClient, getVaultsTree);
+    router.post("/vaults/:id/lock", requireClient, requireKeyAuth, promptVaultLock);
+    router.post("/vaults/:id/unlock", requireClient, requireKeyAuth, promptVaultUnlock);
     app.use("/v1", router);
 }
