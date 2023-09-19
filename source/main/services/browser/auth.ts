@@ -1,9 +1,9 @@
 import { constants as CryptoConstants, privateDecrypt, publicEncrypt } from "node:crypto";
 import { Layerr } from "layerr";
+import { base64ToBytes, bytesToBase64 } from "buttercup";
 import { getBrowserPublicKeyString } from "../browserAuth";
 import { getConfigValue, setConfigValue } from "../config";
 import { BrowserAPIErrorType } from "../../types";
-import { base64ToBytes, bytesToBase64 } from "buttercup";
 
 export async function decryptPayload(clientID: string, payload: string): Promise<string> {
     // Check that the client is registered, we don't actually
@@ -30,6 +30,7 @@ export async function decryptPayload(clientID: string, payload: string): Promise
         {
             key: browserPrivateKey,
             padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
+            // padding: CryptoConstants.RSA_NO_PADDING,
             oaepHash: "sha256"
         },
         base64ToBytes(payload)
@@ -51,11 +52,13 @@ export async function encryptPayload(clientID: string, payload: string): Promise
             "No client key registered for encryption"
         );
     }
+    console.log("\n\n\nGOING TO ENCRYPT", clientConfig, payload);
     // Encrypt
     const encryptedData = publicEncrypt(
         {
             key: clientConfig.publicKey,
             padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
+            // padding: CryptoConstants.RSA_NO_PADDING,
             oaepHash: "sha256"
         },
         Buffer.from(payload, "utf-8")
