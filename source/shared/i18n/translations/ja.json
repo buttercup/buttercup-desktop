@@ -1,0 +1,341 @@
+{
+    "_": "日本語",
+    "about": {
+        "description": "無料、オープンソースでクロスプラットフォームなパスワードマネージャー",
+        "dialog": {
+            "close-button": "閉じる",
+            "close-button-title": "ダイアログを閉じる"
+        },
+        "title": "このアプリについて",
+        "version": {
+            "core": "コア",
+            "desktop": "デスクトップ"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "保管庫ファイルを選択するか新しく作成:",
+        "choose-type-prompt": "追加する保管庫のタイプを選択:",
+        "confirm": {
+            "existing-password": "保管庫のパスワードを入力:",
+            "new-password": "新しい保管庫のパスワードを入力:",
+            "password-placeholder": "保管庫のパスワード..."
+        },
+        "google-auth-button": "認証",
+        "google-auth-button-title": "グーグルドライブで認証",
+        "google-auth-error": "グーグルの認証に失敗",
+        "loader": {
+            "dropbox-auth": "認証用の別ウィンドウが開きます",
+            "file-prompt": "保管庫ファイルを選択するダイアログが開きます",
+            "google-auth": {
+                "instr-1": "You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.",
+                "instr-2": "Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares.",
+                "instr-3": "Selecting a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.",
+                "perm-label": "権限",
+                "perm-switch": "開く"
+            },
+            "webdav-auth": {
+                "password-label": "パスワード",
+                "password-plc": "WebDAVのパスワード",
+                "url-label": "WebDAVサービス",
+                "username-label": "ユーザー名",
+                "username-plc": "WebDAVユーザー名"
+            }
+        },
+        "page-choose-next": "次へ",
+        "page-choose-next-title": "保管庫の追加を続ける",
+        "page-confirm-cancel": "キャンセル",
+        "page-confirm-cancel-title": "アンロックをキャンセル",
+        "page-confirm-finish": "保管庫を追加",
+        "page-confirm-finish-title": "保管庫の追加を確認",
+        "title": "保管庫を追加",
+        "webdav-continue": "次へ",
+        "webdav-continue-title": "WebDAVを使用して接続"
+    },
+    "add-vault-page": {
+        "cta-button": "保管庫を追加",
+        "description": "No vaults have been added yet...",
+        "title": "新しいスタート"
+    },
+    "app-menu": {
+        "about": "このアプリについて",
+        "add-new-vault": "新しく追加",
+        "biometrics": "生体認証によるアンロック",
+        "close-window": "ウィンドウを閉じる",
+        "connection": "接続",
+        "current": "現在の保管庫",
+        "debug": "デバッグ",
+        "devtool": "開発者ツール",
+        "edit": "編集",
+        "enable-secure-file-host": "ブラウザアクセスを有効化",
+        "export": "エクスポート",
+        "import": "インポート",
+        "lock-all": "すべてロック",
+        "lock-current-vault": "現在の保管庫をロック",
+        "open": "開く",
+        "open-vault": "保管庫を開く",
+        "preferences": "設定",
+        "quit": "退出",
+        "search": "検索",
+        "unlock-vault": "アンロック",
+        "unlocked-vaults": "{{count}} unlocked vault",
+        "unlocked-vaults_plural": "{{count}} unlocked vaults",
+        "vaults": "保管庫",
+        "view": "表示",
+        "window": "ウィンドウ",
+        "window-reposition": "Reposition"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "store login for vault '{{name}}'",
+            "unlock-vault": "'{{name}}'をアンロック"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "保存",
+            "title": "添付ファイルをダウンロード"
+        },
+        "biometric-reg": {
+            "button-cancel": "キャンセル",
+            "button-cancel-title": "登録をキャンセル",
+            "button-reg": "登録",
+            "button-reg-title": "生体認証の登録",
+            "label": "保管庫のパスワード",
+            "placeholder": "保管庫のパスワード...",
+            "success": "生体認証の登録に成功",
+            "title": "生体認証の登録"
+        },
+        "confirm-generic": {
+            "cancel-button": "キャンセル",
+            "confirm-button": "確認"
+        },
+        "export-file-chooser": {
+            "submit-button": "エクスポート",
+            "title": "保管庫 '{{name}}' をエクスポート"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "キャンセル",
+                "cancel-title": "新しい保管庫の作成をキャンセル",
+                "confirm": "保管庫のターゲットを設定",
+                "confirm-title": "新しい保管庫ファイルの名前を確認",
+                "description": "新しい保管庫ファイルの名前を入力:",
+                "title": "保管庫を追加"
+            },
+            "nav": {
+                "cancel-new": "Cancel New",
+                "create-new": "新しい保管庫"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercupの保管庫",
+                "confirm-button": "追加",
+                "title": "既存の保管庫を追加"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercupの保管庫",
+                "confirm-button": "作成",
+                "title": "新しい保管庫を追加"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "キャンセル",
+                "title": "認証をキャンセル"
+            },
+            "description": "グーグルドライブの保管庫を再認証: {{vault}}",
+            "error": {
+                "reauth-failed": "再認証に失敗"
+            },
+            "header": "保管庫の認証期限切れ",
+            "success": "グーグルドライブの再認証に成功: 再度アンロックしてください",
+            "title": "グーグルの再認証"
+        },
+        "import-file-chooser": {
+            "submit-button": "インポート",
+            "title": "保管庫を {{importer}} からインポート"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "閉じる",
+                "title": "プロンプトを閉じる"
+            },
+            "button-existing": {
+                "text": "既存のロード",
+                "title": "既存の保管庫ファイルを読み込み"
+            },
+            "button-new": {
+                "text": "新規作成",
+                "title": "新規保管庫ファイルを作成"
+            },
+            "prompt": "Do you wish to create a <i>new</i> vault, or read an existing one?",
+            "title": "新しい保管庫ファイルを追加"
+        },
+        "password-prompt": {
+            "button-cancel": "キャンセル",
+            "button-cancel-title": "アンロックをキャンセル",
+            "button-unlock": "アンロック",
+            "button-unlock-title": "保管庫のアンロックを確認",
+            "label": "保管庫のパスワード",
+            "placeholder": "保管庫のパスワード...",
+            "title": "保管庫をアンロック"
+        }
+    },
+    "error": {
+        "attachment-add": "添付ファイルの追加に失敗",
+        "attachment-delete": "添付ファイルの削除に失敗",
+        "attachment-download": "添付ファイルのダウンロードに失敗",
+        "attachment-preview": "添付ファイルのプレビューに失敗",
+        "biometric-invalid-password": "生体認証を有効化するためのパスワード認証に失敗",
+        "biometric-store-failed": "生体情報の保存に失敗",
+        "biometric-unlock-failed": "生体認証による保管庫のアンロックに失敗",
+        "fatal-boundary": "致命的なエラーが発生しました。以下の詳細を確認してください:"
+    },
+    "file-host": {
+        "code-copied": "ファイルのホストコードをコピー",
+        "dialog": {
+            "close-button": "閉じる",
+            "close-button-title": "接続ダイアログを閉じる",
+            "instruction": {
+                "new-connection": "このアプリケーションに新しい接続が確率され、ファイルシステムへのリモートアクセスが要求されました。",
+                "use-code": "以下のコードを使用して承認"
+            },
+            "title": "安全なファイルホスト接続"
+        }
+    },
+    "input-required": "(必須)",
+    "notification": {
+        "attachment-downloaded": "添付ファイルの保存に成功",
+        "biometrics-disabled": "保管庫の生体認証は無効",
+        "error": {
+            "biometrics-disable-failed": "保管庫の生体認証無効化に失敗: {{error}}",
+            "import-failed": "インポートに失敗: {{error}}",
+            "languages-load": "言語の読み込みに失敗",
+            "preferences-load": "設定の読み込みに失敗",
+            "preferences-save": "設定の保存に失敗",
+            "unknown-error": "未知のエラー",
+            "vault-format-upgrade-failed": "保管庫のフォーマットのアップグレードに失敗",
+            "vault-lock-failed": "保管庫のロックに失敗",
+            "vault-save-failed": "保管庫の保存に失敗",
+            "vault-settings-load": "保管庫の設定の読み込みに失敗",
+            "vault-settings-save": "保管庫の設定の保存に失敗",
+            "vault-unlock-failed": "保管庫のアンロックに失敗"
+        },
+        "export-success": "Successfully exported vault: {{name}}",
+        "import-success": "Successfully imported vault: {{filename}}",
+        "preferences-saved": "Saved preferences",
+        "vault-removed": "Vault removed: {{name}}",
+        "vault-saved": "Vault saved",
+        "vault-settings-saved": "Saved vault settings"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Cancel",
+            "cancel-title": "Cancel Preferences update",
+            "save": "Save",
+            "save-title": "Save changes"
+        },
+        "item": {
+            "clear-clipboard": "Automatically clear clipboard",
+            "language": "Language",
+            "lock-vaults-after-time": "Lock vaults after time",
+            "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
+            "lock-vaults-window-closed": "Lock vaults if vault window closed",
+            "lock-vaults-window-closed-label": "Lock on close",
+            "secure-file-host": {
+                "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
+                "label": "Enable secure file host",
+                "title": "Secure file host"
+            },
+            "theme": "Theme"
+        },
+        "section": {
+            "connectivity": "Connectivity",
+            "debug": "Debug",
+            "general": "General",
+            "privacy": "Privacy",
+            "security": "Security"
+        },
+        "title": "Preferences"
+    },
+    "search": {
+        "modal": {
+            "no-results": "No results...",
+            "result-render-error": "Failed rendering search result"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "File",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Dark",
+        "light": "Light"
+    },
+    "update": {
+        "available": "Update available: {{version}}",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close update information",
+            "title": "Upgrade to {{version}}",
+            "update-button": "Update",
+            "update-button-title": "Update the application now"
+        },
+        "downloaded": "Update downloaded",
+        "installed-restart": "Restart",
+        "ready": "Update ready: {{version}}",
+        "view": "View"
+    },
+    "vault-editor": {
+        "locked-state": "Vault Locked",
+        "pending-state": "Vault Busy",
+        "unlocked-state": "Vault Unlocked"
+    },
+    "vault-management": {
+        "close-button": "Close",
+        "close-button-title": "Close vault management",
+        "remove-vault-dialog": {
+            "cancel-button": "Cancel",
+            "cancel-button-title": "Cancel removal",
+            "description": "Are you sure that you want to remove the vault \"{{title}}\"?",
+            "remove-button": "Remove",
+            "remove-button-title": "Confirm vault removal",
+            "title": "Remove Vault"
+        },
+        "title": "Vaults"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "Securely backup your vault locally when saving.",
+            "path": {
+                "helper": "Leave blank for default path",
+                "label": "Backup Path",
+                "placeholder": "Absolute backup path"
+            },
+            "switch": "Enable local backups",
+            "title": "Backup"
+        },
+        "format": {
+            "a-description": "Format A is the original Buttercup vault format that uses deltas to store vault structure.",
+            "b-description": "Format B is the new Buttercup vault format that uses a JSON structure to manage vault structure and history.",
+            "a-upgrade-b": "You should upgrade to Format B, which is currently <strong>stable</strong>. It is recommended that you backup your vault before doing this.",
+            "description": "Manage current vault format and updates.",
+            "format-type": "Format {{format}}",
+            "title": "Format",
+            "upgrade-button": "Upgrade"
+        },
+        "not-unlocked": "Vault must be unlocked to access this area.",
+        "title": "Vault Settings: {{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "Lock vault",
+            "remove-vault": "Remove vault",
+            "unlock-vault": "Unlock vault",
+            "vault-settings": "Vault settings"
+        }
+    }
+}
