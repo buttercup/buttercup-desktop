@@ -1,7 +1,7 @@
 import { Response } from "express";
 import { Layerr } from "layerr";
 import { BrowserAPIErrorType } from "../../types";
-import { encryptPayload } from "./auth";
+import { encryptAPIPayload } from "./auth";
 
 export async function respondJSON(res: Response, obj: Record<string, any>) {
     const { clientID } = res.locals as { clientID: string };
@@ -15,7 +15,7 @@ export async function respondJSON(res: Response, obj: Record<string, any>) {
             "No client ID set: Invalid response state"
         );
     }
-    const data = await encryptPayload(clientID, JSON.stringify(obj));
+    const data = await encryptAPIPayload(clientID, JSON.stringify(obj));
     res.set("X-Bcup-API", "enc,1");
     res.set("Content-Type", "text/plain");
     res.set("X-Content-Type", "application/json");
@@ -34,7 +34,7 @@ export async function respondText(res: Response, text: string) {
             "No client ID set: Invalid response state"
         );
     }
-    const data = await encryptPayload(clientID, text);
+    const data = await encryptAPIPayload(clientID, text);
     res.set("X-Bcup-API", "enc,1");
     res.set("Content-Type", "text/plain");
     res.send(data);

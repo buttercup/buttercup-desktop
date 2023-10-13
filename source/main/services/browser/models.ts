@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const PUBLIC_KEY = z.string().regex(/^-----BEGIN PUBLIC KEY-----(\n|.)+-----END PUBLIC KEY-----$/m);
+const PUBLIC_KEY = z.string();
 const ULID = z.string().regex(/^[a-z0-9]{26}$/i);
 
 export const AuthRequestSchema = z.object({

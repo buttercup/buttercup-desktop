@@ -207,6 +207,7 @@
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
     "i18next": "^21.9.1",
+    "iocane": "^5.1.1",
     "keytar": "^7.9.0",
     "layerr": "^2.0.0",
     "log-rotate": "^0.2.8",

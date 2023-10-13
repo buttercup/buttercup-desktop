@@ -1,11 +1,9 @@
-import { constants as CryptoConstants, privateDecrypt, publicEncrypt } from "node:crypto";
 import { Layerr } from "layerr";
-import { base64ToBytes, bytesToBase64 } from "buttercup";
-import { getBrowserPublicKeyString } from "../browserAuth";
+import { decryptPayload, encryptPayload, getBrowserPublicKeyString } from "../browserAuth";
 import { getConfigValue, setConfigValue } from "../config";
 import { BrowserAPIErrorType } from "../../types";
 
-export async function decryptPayload(clientID: string, payload: string): Promise<string> {
+export async function decryptAPIPayload(clientID: string, payload: string): Promise<string> {
     // Check that the client is registered, we don't actually
     // use their key for decryption..
     const clients = await getConfigValue("browserClients");
@@ -21,24 +19,15 @@ export async function decryptPayload(clientID: string, payload: string): Promise
             "No client key registered for decryption"
         );
     }
-    // Key private key for decryption
+    // Private key for decryption
     const browserPrivateKey = await getConfigValue("browserPrivateKey");
-    console.log("PAYLOAD", payload);
-    // console.log("DEC", base64ToBytes(payload));
     // Decrypt
-    const decryptedData = privateDecrypt(
-        {
-            key: browserPrivateKey,
-            padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
-            // padding: CryptoConstants.RSA_NO_PADDING,
-            oaepHash: "sha256"
-        },
-        base64ToBytes(payload)
-    );
-    return decryptedData.toString("utf-8");
+    return decryptPayload(payload, clientConfig.publicKey, browserPrivateKey);
 }
 
-export async function encryptPayload(clientID: string, payload: string): Promise<string> {
+export async function encryptAPIPayload(clientID: string, payload: string): Promise<string> {
+    // Check that the client is registered, we don't actually
+    // use their key for decryption..
     const clients = await getConfigValue("browserClients");
     const clientConfig = clients[clientID];
     if (!clientConfig) {
@@ -52,19 +41,10 @@ export async function encryptPayload(clientID: string, payload: string): Promise
             "No client key registered for encryption"
         );
     }
-    console.log("\n\n\nGOING TO ENCRYPT", clientConfig, payload);
+    // Private key for decryption
+    const browserPrivateKey = await getConfigValue("browserPrivateKey");
     // Encrypt
-    const encryptedData = publicEncrypt(
-        {
-            key: clientConfig.publicKey,
-            padding: CryptoConstants.RSA_PKCS1_OAEP_PADDING,
-            // padding: CryptoConstants.RSA_NO_PADDING,
-            oaepHash: "sha256"
-        },
-        Buffer.from(payload, "utf-8")
-    );
-    return bytesToBase64(encryptedData);
-    // return encryptedData.toString("utf-8");
+    return encryptPayload(payload, browserPrivateKey, clientConfig.publicKey);
 }
 
 export async function registerPublicKey(id: string, publicKey: string): Promise<string> {

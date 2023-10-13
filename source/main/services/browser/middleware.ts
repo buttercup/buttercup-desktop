@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Layerr } from "layerr";
-import { decryptPayload } from "./auth";
+import { decryptAPIPayload } from "./auth";
 import { BrowserAPIErrorType } from "../../types";
 import { getConfigValue } from "../config";
 
@@ -38,7 +38,7 @@ export async function requireKeyAuth(req: Request, res: Response, next: NextFunc
         );
     }
     // Decrypt body
-    const decryptedStr = await decryptPayload(clientID, req.body);
+    const decryptedStr = await decryptAPIPayload(clientID, req.body);
     if (/^application\/json/.test(bodyType)) {
         req.headers["content-type"] = bodyType;
         req.body = JSON.parse(decryptedStr);
