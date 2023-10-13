@@ -123,7 +123,7 @@
                 "title": "保管庫を追加"
             },
             "nav": {
-                "cancel-new": "Cancel New",
+                "cancel-new": "新規保管庫をキャンセル",
                 "create-new": "新しい保管庫"
             }
         },
@@ -280,7 +280,7 @@
         "dialog": {
             "close-button": "閉じる",
             "close-button-title": "更新情報を閉じる",
-            "title": "{{version}}にアップデート",
+            "title": "{{version}} にアップデート",
             "update-button": "アップデート",
             "update-button-title": "今このアプリケーションをアップデート"
         },
