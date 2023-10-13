@@ -50,12 +50,8 @@ export async function encryptPayload(
 }
 
 async function exportECDHKey(key: CryptoKey): Promise<string> {
-    if (key.type === "private") {
-        const exported = await webcrypto.subtle.exportKey("jwk", key);
-        return Buffer.from(exported.d).toString("base64");
-    }
-    const exported = await webcrypto.subtle.exportKey("raw", key);
-    return Buffer.from(exported).toString("base64");
+    const exported = await webcrypto.subtle.exportKey("jwk", key);
+    return JSON.stringify(exported);
 }
 
 export async function generateBrowserKeys(): Promise<void> {
@@ -85,15 +81,17 @@ export async function getBrowserPublicKeyString(): Promise<string> {
 }
 
 async function importECDHKey(key: string): Promise<CryptoKey> {
-    const buffer = Buffer.from(key, "base64").buffer;
+    const jwk = JSON.parse(key) as JsonWebKey;
+    const usages: Array<KeyUsage> =
+        jwk.key_ops && jwk.key_ops.includes("deriveKey") ? ["deriveKey"] : [];
     return webcrypto.subtle.importKey(
-        "raw",
-        buffer,
+        "jwk",
+        jwk,
         {
             name: API_KEY_ALGO,
             namedCurve: API_KEY_CURVE
         },
-        false,
-        ["deriveKey"]
+        true,
+        usages
     );
 }
