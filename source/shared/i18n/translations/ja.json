@@ -1,0 +1,341 @@
+{
+    "_": "日本語",
+    "about": {
+        "description": "無料、オープンソースでクロスプラットフォームなパスワードマネージャー",
+        "dialog": {
+            "close-button": "閉じる",
+            "close-button-title": "ダイアログを閉じる"
+        },
+        "title": "このアプリについて",
+        "version": {
+            "core": "コア",
+            "desktop": "デスクトップ"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "保管庫ファイルを選択するか新しく作成:",
+        "choose-type-prompt": "追加する保管庫のタイプを選択:",
+        "confirm": {
+            "existing-password": "保管庫のパスワードを入力:",
+            "new-password": "新しい保管庫のパスワードを入力:",
+            "password-placeholder": "保管庫のパスワード..."
+        },
+        "google-auth-button": "認証",
+        "google-auth-button-title": "Google Drive で認証",
+        "google-auth-error": "Google の認証に失敗",
+        "loader": {
+            "dropbox-auth": "認証用の別ウィンドウが開きます",
+            "file-prompt": "保管庫ファイルを選択するダイアログが開きます",
+            "google-auth": {
+                "instr-1": "あなたの <strong>Google Drive</strong> アカウントにアクセスする際に、Buttercupが使用する許可レベルを選択することができます。",
+                "instr-2": "<strong>open</strong> 設定を選択すると、アカウント内のすべてのファイルとフォルダ、および接続された共有へのアクセスが許可されます。",
+                "instr-3": "open<i>以外の</i> 設定を選択すると、Buttercupが以前に作成/アクセスしたファイルにアクセスできるようになります。",
+                "perm-label": "権限",
+                "perm-switch": "開く"
+            },
+            "webdav-auth": {
+                "password-label": "パスワード",
+                "password-plc": "WebDAVのパスワード",
+                "url-label": "WebDAVサービス",
+                "username-label": "ユーザー名",
+                "username-plc": "WebDAVユーザー名"
+            }
+        },
+        "page-choose-next": "次へ",
+        "page-choose-next-title": "保管庫の追加を続ける",
+        "page-confirm-cancel": "キャンセル",
+        "page-confirm-cancel-title": "アンロックをキャンセル",
+        "page-confirm-finish": "保管庫を追加",
+        "page-confirm-finish-title": "保管庫の追加を確認",
+        "title": "保管庫を追加",
+        "webdav-continue": "次へ",
+        "webdav-continue-title": "WebDAVを使用して接続"
+    },
+    "add-vault-page": {
+        "cta-button": "保管庫を追加",
+        "description": "保管庫はまだ追加されていません...",
+        "title": "新しいスタート"
+    },
+    "app-menu": {
+        "about": "このアプリについて",
+        "add-new-vault": "新しく追加",
+        "biometrics": "生体認証によるアンロック",
+        "close-window": "ウィンドウを閉じる",
+        "connection": "接続",
+        "current": "現在の保管庫",
+        "debug": "デバッグ",
+        "devtool": "開発者ツール",
+        "edit": "編集",
+        "enable-secure-file-host": "ブラウザアクセスを有効化",
+        "export": "エクスポート",
+        "import": "インポート",
+        "lock-all": "すべてロック",
+        "lock-current-vault": "現在の保管庫をロック",
+        "open": "開く",
+        "open-vault": "保管庫を開く",
+        "preferences": "設定",
+        "quit": "退出",
+        "search": "検索",
+        "unlock-vault": "アンロック",
+        "unlocked-vaults": "{{count}} 保管庫をアンロック",
+        "unlocked-vaults_plural": "{{count}} 保管庫をアンロック済み",
+        "vaults": "保管庫",
+        "view": "表示",
+        "window": "ウィンドウ",
+        "window-reposition": "再配置"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "保管庫 '{{name}}' のログインを保存",
+            "unlock-vault": "'{{name}}'をアンロック"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "保存",
+            "title": "添付ファイルをダウンロード"
+        },
+        "biometric-reg": {
+            "button-cancel": "キャンセル",
+            "button-cancel-title": "登録をキャンセル",
+            "button-reg": "登録",
+            "button-reg-title": "生体認証の登録",
+            "label": "保管庫のパスワード",
+            "placeholder": "保管庫のパスワード...",
+            "success": "生体認証の登録に成功",
+            "title": "生体認証の登録"
+        },
+        "confirm-generic": {
+            "cancel-button": "キャンセル",
+            "confirm-button": "確認"
+        },
+        "export-file-chooser": {
+            "submit-button": "エクスポート",
+            "title": "保管庫 '{{name}}' をエクスポート"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "キャンセル",
+                "cancel-title": "新しい保管庫の作成をキャンセル",
+                "confirm": "保管庫のターゲットを設定",
+                "confirm-title": "新しい保管庫ファイルの名前を確認",
+                "description": "新しい保管庫ファイルの名前を入力:",
+                "title": "保管庫を追加"
+            },
+            "nav": {
+                "cancel-new": "新規保管庫をキャンセル",
+                "create-new": "新しい保管庫"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercupの保管庫",
+                "confirm-button": "追加",
+                "title": "既存の保管庫を追加"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercupの保管庫",
+                "confirm-button": "作成",
+                "title": "新しい保管庫を追加"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "キャンセル",
+                "title": "認証をキャンセル"
+            },
+            "description": "Google Drive の保管庫を再認証: {{vault}}",
+            "error": {
+                "reauth-failed": "再認証に失敗"
+            },
+            "header": "保管庫の認証期限切れ",
+            "success": "Google Drive の再認証に成功: 再度アンロックしてください",
+            "title": "Google の再認証"
+        },
+        "import-file-chooser": {
+            "submit-button": "インポート",
+            "title": "保管庫を {{importer}} からインポート"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "閉じる",
+                "title": "プロンプトを閉じる"
+            },
+            "button-existing": {
+                "text": "既存のロード",
+                "title": "既存の保管庫ファイルを読み込み"
+            },
+            "button-new": {
+                "text": "新規作成",
+                "title": "新規保管庫ファイルを作成"
+            },
+            "prompt": "<i>新しい</i>保管庫を作成しますか、それとも既存のものを読み込みますか?",
+            "title": "新しい保管庫ファイルを追加"
+        },
+        "password-prompt": {
+            "button-cancel": "キャンセル",
+            "button-cancel-title": "アンロックをキャンセル",
+            "button-unlock": "アンロック",
+            "button-unlock-title": "保管庫のアンロックを確認",
+            "label": "保管庫のパスワード",
+            "placeholder": "保管庫のパスワード...",
+            "title": "保管庫をアンロック"
+        }
+    },
+    "error": {
+        "attachment-add": "添付ファイルの追加に失敗",
+        "attachment-delete": "添付ファイルの削除に失敗",
+        "attachment-download": "添付ファイルのダウンロードに失敗",
+        "attachment-preview": "添付ファイルのプレビューに失敗",
+        "biometric-invalid-password": "生体認証を有効化するためのパスワード認証に失敗",
+        "biometric-store-failed": "生体情報の保存に失敗",
+        "biometric-unlock-failed": "生体認証による保管庫のアンロックに失敗",
+        "fatal-boundary": "致命的なエラーが発生しました。以下の詳細を確認してください:"
+    },
+    "file-host": {
+        "code-copied": "ファイルのホストコードをコピー",
+        "dialog": {
+            "close-button": "閉じる",
+            "close-button-title": "接続ダイアログを閉じる",
+            "instruction": {
+                "new-connection": "このアプリケーションに新しい接続が確率され、ファイルシステムへのリモートアクセスが要求されました。",
+                "use-code": "以下のコードを使用して承認"
+            },
+            "title": "安全なファイルホスト接続"
+        }
+    },
+    "input-required": "(必須)",
+    "notification": {
+        "attachment-downloaded": "添付ファイルの保存に成功",
+        "biometrics-disabled": "保管庫の生体認証は無効",
+        "error": {
+            "biometrics-disable-failed": "保管庫の生体認証無効化に失敗: {{error}}",
+            "import-failed": "インポートに失敗: {{error}}",
+            "languages-load": "言語の読み込みに失敗",
+            "preferences-load": "設定の読み込みに失敗",
+            "preferences-save": "設定の保存に失敗",
+            "unknown-error": "未知のエラー",
+            "vault-format-upgrade-failed": "保管庫のフォーマットのアップグレードに失敗",
+            "vault-lock-failed": "保管庫のロックに失敗",
+            "vault-save-failed": "保管庫の保存に失敗",
+            "vault-settings-load": "保管庫の設定の読み込みに失敗",
+            "vault-settings-save": "保管庫の設定の保存に失敗",
+            "vault-unlock-failed": "保管庫のアンロックに失敗"
+        },
+        "export-success": "保管庫のエクスポートに成功: {{name}}",
+        "import-success": "保管庫のインポートに成功: {{filename}}",
+        "preferences-saved": "設定を保存済み",
+        "vault-removed": "保管庫は削除済み: {{name}}",
+        "vault-saved": "保管庫は保存済み",
+        "vault-settings-saved": "保管庫の設定は保存済み"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "キャンセル",
+            "cancel-title": "設定の変更をキャンセル",
+            "save": "保存",
+            "save-title": "変更を保存"
+        },
+        "item": {
+            "clear-clipboard": "クリップボードを自動的にクリア",
+            "language": "言語",
+            "lock-vaults-after-time": "時間経過後に保管庫をロック",
+            "lock-vaults-after-time-desc": "一定時間操作がない場合、保管庫を自動的にロックします。",
+            "lock-vaults-window-closed": "保管庫のウィンドウが閉じられた場合にロック",
+            "lock-vaults-window-closed-label": "閉じた際ににロック",
+            "secure-file-host": {
+                "description": "セキュアファイルホストは、<strong>Buttercup Browser Extension</strong>がこのアプリケーションを介してこのPC上のローカル保管庫に接続することを可能にします。",
+                "label": "安全なファイルホストを有効化",
+                "title": "安全なファイルホスト"
+            },
+            "theme": "テーマ"
+        },
+        "section": {
+            "connectivity": "接続性",
+            "debug": "デバッグ",
+            "general": "一般的",
+            "privacy": "プライバシー",
+            "security": "セキュリティ"
+        },
+        "title": "設定"
+    },
+    "search": {
+        "modal": {
+            "no-results": "結果なし...",
+            "result-render-error": "検索結果の表示に失敗"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "ファイル",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "ダーク",
+        "light": "ライト"
+    },
+    "update": {
+        "available": "アップデートが利用可能: {{version}}",
+        "dialog": {
+            "close-button": "閉じる",
+            "close-button-title": "更新情報を閉じる",
+            "title": "{{version}} にアップデート",
+            "update-button": "アップデート",
+            "update-button-title": "今このアプリケーションをアップデート"
+        },
+        "downloaded": "アップデートはダウンロード済み",
+        "installed-restart": "再起動",
+        "ready": "更新準備完了: {{version}}",
+        "view": "表示"
+    },
+    "vault-editor": {
+        "locked-state": "保管庫はロック済み",
+        "pending-state": "保管庫は作業中",
+        "unlocked-state": "保管庫はアンロック済み"
+    },
+    "vault-management": {
+        "close-button": "閉じる",
+        "close-button-title": "保管庫の管理を閉じる",
+        "remove-vault-dialog": {
+            "cancel-button": "キャンセル",
+            "cancel-button-title": "削除をキャンセル",
+            "description": "保管庫 \"{{title}}\" を削除しますか?",
+            "remove-button": "削除",
+            "remove-button-title": "保管庫の削除を確認",
+            "title": "保管庫の削除"
+        },
+        "title": "保管庫"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "保存時に保管庫をローカルに安全にバックアップ",
+            "path": {
+                "helper": "デフォルトパスは空白",
+                "label": "パスをバックアップ",
+                "placeholder": "バックアップの絶対パス"
+            },
+            "switch": "ローカルバックアップを有効化",
+            "title": "バックアップ"
+        },
+        "format": {
+            "a-description": "フォーマット A はButtercupオリジナルの保管庫フォーマットで、保管庫の構造を保存するためにデルタを使用します。",
+            "b-description": "フォーマット B は、保管庫の構造と履歴を管理するためにJSONを使用する新しいButtercup保管庫フォーマットです。",
+            "a-upgrade-b": "現在 <strong>推奨されている</strong>フォーマット B にアップグレードしてください。これを行う前に、保管庫をバックアップすることを推奨します。",
+            "description": "現在の保管庫のフォーマットとアップデートを管理",
+            "format-type": "フォーマット {{format}}",
+            "title": "フォーマット",
+            "upgrade-button": "アップグレード"
+        },
+        "not-unlocked": "このエリアにアクセスするには、金庫のロックを解除する必要があります。",
+        "title": "保管庫の設定: {{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "保管庫をロック",
+            "remove-vault": "保管庫を削除",
+            "unlock-vault": "保管庫をアンロック",
+            "vault-settings": "保管庫の設定"
+        }
+    }
+}
