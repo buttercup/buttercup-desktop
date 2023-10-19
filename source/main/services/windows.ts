@@ -23,6 +23,7 @@ async function createVaultWindow() {
     const height = await getConfigValue<number>("windowHeight");
     const x = await getConfigValue<number>("windowX");
     const y = await getConfigValue<number>("windowY");
+    const isMaximize = await getConfigValue<boolean>("isMaximize");
     const config: BrowserWindowConstructorOptions = {
         width,
         height,
@@ -38,6 +39,9 @@ async function createVaultWindow() {
         config.y = y;
     }
     const win = new BrowserWindow(config);
+    if (isMaximize) {
+        win.maximize();
+    }
     enableWebContents(win.webContents);
     win.on("closed", () => {
         win.removeAllListeners();
@@ -47,6 +51,15 @@ async function createVaultWindow() {
         "resize",
         debounce(() => handleWindowBoundsUpdate(win), 750, false)
     );
+
+    win.on("maximize", async () => {
+        await setConfigValue("isMaximize", win.isMaximized());
+    });
+
+    win.on("unmaximize", async () => {
+        await setConfigValue("isMaximize", win.isMaximized());
+    });
+
     win.on(
         "move",
         debounce(() => handleWindowBoundsUpdate(win), 750, false)
@@ -124,6 +137,5 @@ export async function openMainWindow(targetRoute: string = null): Promise<Browse
     if (targetRoute) {
         windows[0].webContents.send("route", targetRoute);
     }
-    windows[0].maximize();
     return windows[0];
 }

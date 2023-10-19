@@ -13,7 +13,8 @@ const DEFAULT_CONFIG = {
     windowHeight: 600,
     windowWidth: 800,
     windowX: null,
-    windowY: null
+    windowY: null,
+    isMaximize: false
 };
 
 export async function getConfigValue<T>(key: string): Promise<T> {
