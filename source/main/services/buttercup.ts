@@ -2,19 +2,22 @@ import { BrowserWindow } from "electron";
 import {
     AttachmentDetails,
     AttachmentManager,
+    consumeVaultFacade,
+    createVaultFacade,
     Credentials,
+    Entry,
     EntryID,
+    EntryType,
+    GroupID,
     TextDatasource,
     Vault,
     VaultFacade,
+    VaultFormatID,
+    VaultManager,
     VaultSource,
     VaultSourceID,
     VaultSourceStatus,
-    VaultManager,
-    consumeVaultFacade,
-    createVaultFacade,
-    init,
-    VaultFormatID
+    init
 } from "buttercup";
 import { exportVaultToCSV } from "@buttercup/exporter";
 import { describeSource } from "../library/sources";
@@ -92,6 +95,25 @@ export async function convertVaultFormatAToB(sourceID: VaultSourceID): Promise<v
     logInfo(`converting source to format B: ${sourceID}`);
     await source.convert(VaultFormatID.B);
     await source.write();
+}
+
+export async function createNewEntry(
+    sourceID: VaultSourceID,
+    groupID: GroupID,
+    type: EntryType,
+    properties: Record<string, string>
+): Promise<string> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const group = source.vault.findGroupByID(groupID);
+    const title = (properties.title || "").trim() || "Untitled";
+    const entry = group.createEntry(title);
+    entry.setAttribute(Entry.Attributes.FacadeType, type);
+    for (const key in properties) {
+        entry.setProperty(key, properties[key]);
+    }
+    await source.save();
+    return entry.id;
 }
 
 export async function deleteAttachment(
@@ -312,4 +334,18 @@ export async function unlockSource(sourceID: VaultSourceID, password: string) {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);
     await source.unlock(Credentials.fromPassword(password));
+}
+
+export async function updateExistingEntry(
+    sourceID: VaultSourceID,
+    entryID: EntryID,
+    properties: Record<string, string>
+): Promise<void> {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    const entry = source.vault.findEntryByID(entryID);
+    for (const key in properties) {
+        entry.setProperty(key, properties[key]);
+    }
+    await source.save();
 }

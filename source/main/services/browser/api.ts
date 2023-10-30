@@ -7,6 +7,7 @@ import { getAllOTPs } from "./controllers/otp";
 import { getVaults, getVaultsTree, promptVaultLock, promptVaultUnlock } from "./controllers/vaults";
 import { handleError } from "./error";
 import { requireClient, requireKeyAuth } from "./middleware";
+import { saveExistingEntry, saveNewEntry } from "./controllers/save";
 
 export function buildApplication(): express.Application {
     const app = express();
@@ -31,6 +32,13 @@ function createRoutes(app: express.Application): void {
     router.get("/otps", requireClient, getAllOTPs);
     router.get("/vaults", requireClient, getVaults);
     router.get("/vaults-tree", requireClient, getVaultsTree);
+    router.patch(
+        "/vaults/:id/group/:gid/entry/:eid",
+        requireClient,
+        requireKeyAuth,
+        saveExistingEntry
+    );
+    router.post("/vaults/:id/group/:gid/entry", requireClient, requireKeyAuth, saveNewEntry);
     router.post("/vaults/:id/lock", requireClient, requireKeyAuth, promptVaultLock);
     router.post("/vaults/:id/unlock", requireClient, requireKeyAuth, promptVaultUnlock);
     app.use("/v1", router);

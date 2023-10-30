@@ -1,3 +1,4 @@
+import { EntryType } from "buttercup";
 import { z } from "zod";
 
 const PUBLIC_KEY = z.string();
@@ -30,6 +31,30 @@ export const EntriesSearchPayloadSchema = z.discriminatedUnion("type", [
         url: z.string().url()
     })
 ]);
+
+export const SaveExistingEntryParamSchema = z
+    .object({
+        eid: z.string().min(1),
+        gid: z.string().min(1), // not explicitly used
+        id: z.string().min(1)
+    })
+    .strict();
+
+export const SaveExistingEntryPayloadSchema = z.object({
+    properties: z.record(z.string())
+});
+
+export const SaveNewEntryParamSchema = z
+    .object({
+        gid: z.string().min(1),
+        id: z.string().min(1)
+    })
+    .strict();
+
+export const SaveNewEntryPayloadSchema = z.object({
+    properties: z.record(z.string()),
+    type: z.nativeEnum(EntryType)
+});
 
 export const VaultUnlockParamSchema = z
     .object({
