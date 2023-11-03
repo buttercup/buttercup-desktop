@@ -8,7 +8,7 @@ let __host = null;
 
 export async function startFileHost() {
     if (__host) return;
-    const fileHostKey = await getConfigValue<string>("fileHostKey");
+    const fileHostKey = await getConfigValue("fileHostKey");
     logInfo(`Starting file host (key exists: ${!!fileHostKey})`);
     __host = fileHostKey
         ? startSecureFileHost(SECURE_FILE_HOST_PORT, fileHostKey)

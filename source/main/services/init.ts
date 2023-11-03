@@ -5,7 +5,7 @@ import { logInfo } from "../library/log";
 import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
-import { getConfigValue } from "./config";
+import { getConfigValue, initialise as initialiseConfig } from "./config";
 import { getConfigPath, getVaultStoragePath } from "./storage";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
@@ -16,9 +16,10 @@ import { registerGoogleDriveAuthHandlers } from "./googleDrive";
 import { processCLFlags } from "./arguments";
 import { supportsBiometricUnlock } from "./biometrics";
 import { startAutoVaultLockTimer } from "./autoLock";
+import { start as startBrowserAPI } from "./browser/index";
+import { generateBrowserKeys } from "./browserAuth";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
-import { Preferences } from "../types";
 
 export async function initialise() {
     processCLFlags();
@@ -27,12 +28,14 @@ export async function initialise() {
     logInfo(`Logs location: ${getLogPath()}`);
     logInfo(`Config location: ${getConfigPath()}`);
     logInfo(`Vault config storage location: ${getVaultStoragePath()}`);
-    const preferences = await getConfigValue<Preferences>("preferences");
+    await initialiseConfig();
+    const preferences = await getConfigValue("preferences");
     const locale = await getOSLocale();
     logInfo(`System locale detected: ${locale}`);
     const language = getLanguage(preferences, locale);
     logInfo(`Starting with language: ${language}`);
     await initialiseI18n(language);
+    await generateBrowserKeys();
     attachVaultManagerWatchers();
     await loadVaultsFromDisk();
     session.defaultSession.webRequest.onBeforeSendHeaders((details, callback) => {
@@ -52,6 +55,7 @@ export async function initialise() {
     await applyCurrentTheme();
     if (preferences.fileHostEnabled) {
         await startFileHost();
+        await startBrowserAPI();
     }
     registerGoogleDriveAuthHandlers();
     logInfo(`Portable mode: ${isPortable() ? "yes" : "no"}`);

@@ -17,6 +17,7 @@ module.exports = [
 
         externals: [
             "@electron/remote",
+            "delayable-setinterval",
             "electron",
             "electron-builder",
             "electron-is-dev",
@@ -24,7 +25,8 @@ module.exports = [
             "express",
             "keytar",
             "os-locale",
-            "stacktracey"
+            "stacktracey",
+            "zod"
         ].reduce((output, name) => ({ ...output, [name]: name }), {}),
 
         module: {

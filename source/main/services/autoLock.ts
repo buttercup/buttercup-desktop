@@ -13,7 +13,7 @@ export async function setAutoLockEnabled(value: boolean) {
 export async function startAutoVaultLockTimer() {
     stopAutoVaultLockTimer();
     if (!__autoLockEnabled) return;
-    const { lockVaultsAfterTime } = await getConfigValue<Preferences>("preferences");
+    const { lockVaultsAfterTime } = await getConfigValue("preferences");
     if (!lockVaultsAfterTime) return;
     __autoVaultLockTimeout = setTimeout(() => {
         if (getUnlockedSourcesCount() === 0) return;

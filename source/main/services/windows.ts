@@ -19,11 +19,11 @@ export async function closeWindows(): Promise<void> {
 }
 
 async function createVaultWindow() {
-    const width = await getConfigValue<number>("windowWidth");
-    const height = await getConfigValue<number>("windowHeight");
-    const x = await getConfigValue<number>("windowX");
-    const y = await getConfigValue<number>("windowY");
-    const isMaximize = await getConfigValue<boolean>("isMaximize");
+    const width = await getConfigValue("windowWidth");
+    const height = await getConfigValue("windowHeight");
+    const x = await getConfigValue("windowX");
+    const y = await getConfigValue("windowY");
+    const isMaximised = await getConfigValue("isMaximised");
     const config: BrowserWindowConstructorOptions = {
         width,
         height,
@@ -39,7 +39,7 @@ async function createVaultWindow() {
         config.y = y;
     }
     const win = new BrowserWindow(config);
-    if (isMaximize) {
+    if (isMaximised) {
         win.maximize();
     }
     enableWebContents(win.webContents);
@@ -53,11 +53,11 @@ async function createVaultWindow() {
     );
 
     win.on("maximize", async () => {
-        await setConfigValue("isMaximize", win.isMaximized());
+        await setConfigValue("isMaximised", win.isMaximized());
     });
 
     win.on("unmaximize", async () => {
-        await setConfigValue("isMaximize", win.isMaximized());
+        await setConfigValue("isMaximised", win.isMaximized());
     });
 
     win.on(

@@ -8,7 +8,7 @@ let lastCopiedText = "";
 
 export async function restartAutoClearClipboardTimer(text: string) {
     lastCopiedText = text;
-    const { autoClearClipboard } = await getConfigValue<Preferences>("preferences");
+    const { autoClearClipboard } = await getConfigValue("preferences");
     if (!autoClearClipboard) {
         return;
     }

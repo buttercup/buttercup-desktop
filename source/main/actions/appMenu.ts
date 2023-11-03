@@ -22,7 +22,7 @@ async function getContextMenu(): Promise<Menu> {
     const sources = getSourceDescriptions();
     const lastSourceID = getLastSourceID();
     const lastSource = sources.find((source) => source.id === lastSourceID) || null;
-    const preferences = await getConfigValue<Preferences>("preferences");
+    const preferences = await getConfigValue("preferences");
     const currentVaultPrefix = [];
     const biometricsSupported = await supportsBiometricUnlock();
     let biometricsEnabled = false,
@@ -194,7 +194,7 @@ async function getContextMenu(): Promise<Menu> {
                     type: "checkbox",
                     checked: preferences.fileHostEnabled,
                     click: async () => {
-                        const prefs = await getConfigValue<Preferences>("preferences");
+                        const prefs = await getConfigValue("preferences");
                         prefs.fileHostEnabled = !prefs.fileHostEnabled;
                         await setConfigValue("preferences", prefs);
                         await updateAppMenu();

@@ -13,9 +13,14 @@ interface SearchCache {
 let __primarySearch: VaultEntrySearch = null;
 const __searchCache: SearchCache = {};
 
-export async function searchAllVaults(term: string): Promise<Array<CoreSearchResult>> {
+export async function searchAllVaultsByTerm(term: string): Promise<Array<CoreSearchResult>> {
     if (!__primarySearch) return [];
     return __primarySearch.searchByTerm(term);
+}
+
+export async function searchAllVaultsByURL(url: string): Promise<Array<CoreSearchResult>> {
+    if (!__primarySearch) return [];
+    return __primarySearch.searchByURL(url);
 }
 
 export async function searchSingleVault(

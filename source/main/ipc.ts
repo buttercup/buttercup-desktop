@@ -55,6 +55,7 @@ import { startAutoVaultLockTimer } from "./services/autoLock";
 import { log as logRaw, logInfo, logErr } from "./library/log";
 import { isPortable } from "./library/portability";
 import { convertVaultFormat } from "./services/format";
+import { clearCode } from "./services/browser/interaction";
 import {
     AppEnvironmentFlags,
     AddVaultPayload,
@@ -98,7 +99,7 @@ ipcMain.on("get-empty-vault", async (evt, payload) => {
 });
 
 ipcMain.on("get-preferences", async (evt, sourceID) => {
-    const prefs = await getConfigValue<Preferences>("preferences");
+    const prefs = await getConfigValue("preferences");
     evt.reply("get-preferences:reply", JSON.stringify(prefs));
 });
 
@@ -196,6 +197,10 @@ ipcMain.handle(
     }
 );
 
+ipcMain.handle("browser-access-code-clear", async (_) => {
+    await clearCode();
+});
+
 ipcMain.handle("check-source-biometrics", async (_, sourceID: VaultSourceID) => {
     const supportsBiometrics = await supportsBiometricUnlock();
     if (!supportsBiometrics) return false;
@@ -250,7 +255,7 @@ ipcMain.handle("get-new-vault-filename", async (evt) => {
 ipcMain.handle("get-ready-update", getReadyUpdate);
 
 ipcMain.handle("get-selected-source", async () => {
-    const sourceID = await getConfigValue<VaultSourceID>("selectedSource");
+    const sourceID = await getConfigValue("selectedSource");
     return sourceID;
 });
 
