@@ -16,6 +16,7 @@ interface Config {
     browserPrivateKey: string | null;
     browserPublicKey: string | null;
     fileHostKey: null | string;
+    isMaximised: boolean;
     preferences: Preferences;
     selectedSource: null | string;
     windowHeight: number;
@@ -29,13 +30,13 @@ const DEFAULT_CONFIG: Config = {
     browserPrivateKey: null,
     browserPublicKey: null,
     fileHostKey: null,
+    isMaximised: false,
     preferences: naiveClone(PREFERENCES_DEFAULT),
     selectedSource: null,
     windowHeight: 600,
     windowWidth: 800,
     windowX: null,
-    windowY: null,
-    isMaximize: false
+    windowY: null
 };
 
 export async function getConfigValue<K extends keyof Config>(key: K): Promise<Config[K]> {
