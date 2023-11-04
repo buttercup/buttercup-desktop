@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.21.0",
+  "version": "2.20.3",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -243,7 +243,7 @@
     "css-loader": "^6.7.3",
     "electron": "^22.0.0",
     "electron-builder": "^23.6.0",
-    "electron-builder-notarize": "^1.5.0",
+    "electron-builder-notarize": "^1.5.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.3",
     "husky": "^4.3.8",
