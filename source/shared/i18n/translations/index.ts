@@ -2,6 +2,7 @@ import en from "./en.json";
 import ca_es from "./ca_es.json";
 import de from "./de.json";
 import es from "./es.json";
+import fi from "./fi.json";
 import fr from "./fr.json";
 import it from "./it.json";
 import ja from "./ja.json";
@@ -15,6 +16,7 @@ export default {
     ca_es,
     de,
     es,
+    fi,
     fr,
     it,
     ja,
