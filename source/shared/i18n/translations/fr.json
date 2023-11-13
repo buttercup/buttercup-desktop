@@ -90,6 +90,18 @@
             "unlock-vault": "déverrouiller le coffre-fort '{{name}}'"
         }
     },
+    "browser-access-dialog": {
+        "code-copied": "Browser access code copied",
+        "dialog": {
+            "close-button": "Close",
+            "close-button-title": "Close connection dialog",
+            "instruction": {
+                "new-connection": "A new connection has been made to this application, requesting remote access to all desktop vaults (while unlocked).",
+                "use-code": "Use the following code to authorise it."
+            },
+            "title": "Browser Access Request"
+        }
+    },
     "dialog": {
         "attachment-save": {
             "confirm-button": "Sauvegarder",
@@ -139,6 +151,19 @@
                 "title": "Ajout d’un nouveau coffre-fort"
             }
         },
+        "google-reauth": {
+            "close-button": {
+                "text": "Cancel",
+                "title": "Cancel authentication"
+            },
+            "description": "Re-authenticating a Google Drive vault: {{vault}}",
+            "error": {
+                "reauth-failed": "Failed re-authenticating"
+            },
+            "header": "Authentication expired for vault",
+            "success": "Successfully re-authenticated Google Drive: Please unlock again",
+            "title": "Google Re-authentication"
+        },
         "import-file-chooser": {
             "submit-button": "Importer",
             "title": "Importation depuis le coffre-fort {{importer}}."
@@ -170,6 +195,10 @@
         }
     },
     "error": {
+        "attachment-add": "Failed adding attachments",
+        "attachment-delete": "Failed deleting attachment",
+        "attachment-download": "Failed downloading attachment",
+        "attachment-preview": "Failed previewing attachment",
         "biometric-invalid-password": "Un mot de passe invalide a été fourni pour activer les données biométriques sur un coffre-fort.",
         "biometric-store-failed": "Échec du stockage des données biométriques",
         "biometric-unlock-failed": "Échec du déverrouillage du coffre-fort par la biométrie",
@@ -198,14 +227,19 @@
             "preferences-load": "Échec du chargement des préférences",
             "preferences-save": "Échec de la sauvegarde des préférences",
             "unknown-error": "Erreur inconnue",
+            "vault-format-upgrade-failed": "Vault format upgrade failed",
             "vault-lock-failed": "Le verrouillage du coffre-fort a échoué",
             "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
+            "vault-settings-load": "Failed loading vault settings",
+            "vault-settings-save": "Failed saving vault settings",
             "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
         },
         "export-success": "Exportation réussie du coffre-fort : {{name}}",
         "import-success": "Importation réussie du coffre-fort : {{filename}}",
         "preferences-saved": "Préférences enregistrées",
-        "vault-saved": "Coffre-fort enregistré"
+        "vault-removed": "Vault removed: {{name}}",
+        "vault-saved": "Vault saved",
+        "vault-settings-saved": "Saved vault settings"
     },
     "preferences": {
         "button": {
@@ -268,7 +302,9 @@
         "view": "Voir"
     },
     "vault-editor": {
-        "locked-state": "Coffre-fort verrouillé"
+        "locked-state": "Coffre-fort verrouillé",
+        "pending-state": "Vault Busy",
+        "unlocked-state": "Vault Unlocked"
     },
     "vault-management": {
         "close-button": "Fermer",
@@ -283,9 +319,35 @@
         },
         "title": "Coffres-forts"
     },
+    "vault-settings": {
+        "backup": {
+            "description": "Securely backup your vault locally when saving.",
+            "path": {
+                "helper": "Leave blank for default path",
+                "label": "Backup Path",
+                "placeholder": "Absolute backup path"
+            },
+            "switch": "Enable local backups",
+            "title": "Backup"
+        },
+        "format": {
+            "a-description": "Format A is the original Buttercup vault format that uses deltas to store vault structure.",
+            "b-description": "Format B is the new Buttercup vault format that uses a JSON structure to manage vault structure and history.",
+            "a-upgrade-b": "You should upgrade to Format B, which is currently <strong>stable</strong>. It is recommended that you backup your vault before doing this.",
+            "description": "Manage current vault format and updates.",
+            "format-type": "Format {{format}}",
+            "title": "Format",
+            "upgrade-button": "Upgrade"
+        },
+        "not-unlocked": "Vault must be unlocked to access this area.",
+        "title": "Vault Settings: {{title}}"
+    },
     "vault-tabs": {
         "context-menu": {
-            "unlock-vault": "Déverrouiller"
+            "lock-vault": "Lock vault",
+            "remove-vault": "Remove vault",
+            "unlock-vault": "Déverrouiller",
+            "vault-settings": "Vault settings"
         }
     }
 }
