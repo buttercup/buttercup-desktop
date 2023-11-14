@@ -90,6 +90,18 @@
             "unlock-vault": "déverrouiller le coffre-fort '{{name}}'"
         }
     },
+    "browser-access-dialog": {
+        "code-copied": "Code d'accès par navigateur copié",
+        "dialog": {
+            "close-button": "Fermer",
+            "close-button-title": "Fermer la boîte de dialogue de connexion",
+            "instruction": {
+                "new-connection": "Une nouvelle connexion a été établie avec cette application, demandant un accès à distance à tous les coffres-forts de bureau (déverrouillés).",
+                "use-code": "Utilisez le code suivant pour l'autoriser."
+            },
+            "title": "Demande d'accès par navigateur"
+        }
+    },
     "dialog": {
         "attachment-save": {
             "confirm-button": "Sauvegarder",
@@ -139,6 +151,19 @@
                 "title": "Ajout d’un nouveau coffre-fort"
             }
         },
+        "google-reauth": {
+            "close-button": {
+                "text": "Annuler",
+                "title": "Annuler l'authentification"
+            },
+            "description": "Réauthentification d'un coffre-fort Google Drive : {{vault}}",
+            "error": {
+                "reauth-failed": "Échec de la réauthentification"
+            },
+            "header": "L'authentification a expiré pour le coffre-fort",
+            "success": "Réauthentification réussie de Google Drive : Veuillez déverrouiller à nouveau",
+            "title": "Réauthentification Google"
+        },
         "import-file-chooser": {
             "submit-button": "Importer",
             "title": "Importation depuis le coffre-fort {{importer}}."
@@ -170,6 +195,10 @@
         }
     },
     "error": {
+        "attachment-add": "Échec de l'ajout des pièces jointes",
+        "attachment-delete": "Échec de la suppression de la pièce jointe",
+        "attachment-download": "Échec du téléchargement de la pièce jointe",
+        "attachment-preview": "Échec de la prévisualisation de la pièce jointe",
         "biometric-invalid-password": "Un mot de passe invalide a été fourni pour activer les données biométriques sur un coffre-fort.",
         "biometric-store-failed": "Échec du stockage des données biométriques",
         "biometric-unlock-failed": "Échec du déverrouillage du coffre-fort par la biométrie",
@@ -198,14 +227,19 @@
             "preferences-load": "Échec du chargement des préférences",
             "preferences-save": "Échec de la sauvegarde des préférences",
             "unknown-error": "Erreur inconnue",
+            "vault-format-upgrade-failed": "Échec de la mise à niveau du format du coffre-fort",
             "vault-lock-failed": "Le verrouillage du coffre-fort a échoué",
             "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
+            "vault-settings-load": "Échec du chargement des paramètres du coffre-fort",
+            "vault-settings-save": "Échec de l'enregistrement des paramètres du coffre-fort",            
             "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
         },
         "export-success": "Exportation réussie du coffre-fort : {{name}}",
         "import-success": "Importation réussie du coffre-fort : {{filename}}",
         "preferences-saved": "Préférences enregistrées",
-        "vault-saved": "Coffre-fort enregistré"
+        "vault-removed": "Coffre-fort supprimé : {{name}}",
+        "vault-saved": "Coffre-fort enregistré",
+        "vault-settings-saved": "Paramètres du coffre-fort enregistrés"
     },
     "preferences": {
         "button": {
@@ -257,7 +291,7 @@
         "available": "Mise à jour disponible : {{version}}",
         "dialog": {
             "close-button": "Fermer",
-            "close-button-title": "Close update information",
+            "close-button-title": "Fermer les informations de mise à jour",
             "title": "Mise à jour vers {{version}}",
             "update-button": "Mise à jour",
             "update-button-title": "Mise à jour de l’application maintenant"
@@ -268,8 +302,10 @@
         "view": "Voir"
     },
     "vault-editor": {
-        "locked-state": "Coffre-fort verrouillé"
-    },
+        "locked-state": "Coffre-fort verrouillé",
+        "pending-state": "Coffre-fort occupé",
+        "unlocked-state": "Coffre-fort déverrouillé"
+    },    
     "vault-management": {
         "close-button": "Fermer",
         "close-button-title": "Gestion de la fermeture d'un coffre-fort",
@@ -283,9 +319,35 @@
         },
         "title": "Coffres-forts"
     },
+    "vault-settings": {
+        "backup": {
+            "description": "Sauvegardez de manière sécurisée votre coffre-fort localement lors de la sauvegarde.",
+            "path": {
+                "helper": "Laissez vide pour le chemin par défaut",
+                "label": "Chemin de sauvegarde",
+                "placeholder": "Chemin absolu de sauvegarde"
+            },
+            "switch": "Activer les sauvegardes locales",
+            "title": "Sauvegarde"
+        },
+        "format": {
+            "a-description": "Le format A est le format original du coffre-fort Buttercup qui utilise des deltas pour stocker la structure du coffre-fort.",
+            "b-description": "Le format B est le nouveau format de coffre-fort Buttercup qui utilise une structure JSON pour gérer la structure et l'historique du coffre-fort.",
+            "a-upgrade-b": "Vous devriez passer au Format B, qui est actuellement <strong>stable</strong>. Il est recommandé de sauvegarder votre coffre-fort avant de le faire.",
+            "description": "Gérez le format actuel du coffre-fort et les mises à jour.",
+            "format-type": "Format {{format}}",
+            "title": "Format",
+            "upgrade-button": "Mise à niveau"
+        },
+        "not-unlocked": "Le coffre-fort doit être déverrouillé pour accéder à cette zone.",
+        "title": "Paramètres du coffre-fort : {{title}}"
+    },
     "vault-tabs": {
         "context-menu": {
-            "unlock-vault": "Déverrouiller"
+            "lock-vault": "Verrouiller le coffre-fort",
+            "remove-vault": "Supprimer le coffre-fort",
+            "unlock-vault": "Déverrouiller",
+            "vault-settings": "Paramètres du coffre-fort"
         }
     }
 }
