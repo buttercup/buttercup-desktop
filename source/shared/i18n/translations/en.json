@@ -339,6 +339,20 @@
             "title": "Format",
             "upgrade-button": "Upgrade"
         },
+        "biometric": {
+            "title": "Biometric",
+            "description": "Configure when requiring to type in password",
+            "enable-password-prompt-timeout": {
+                "label": "Maximum number of days before prompting to type in password",
+                "placeholder": "Number of days",
+                "helper": "Leave blank or set it to '0' to disable"
+            },
+            "enable-password-prompt-count": {
+                "label": "Maximum number of biometric unlocks before prompting to type in password",
+                "placeholder": "Number of biometric unlock",
+                "helper": "Leave blank or set it to '0' to disable"
+            }
+        },
         "not-unlocked": "Vault must be unlocked to access this area.",
         "title": "Vault Settings: {{title}}"
     },

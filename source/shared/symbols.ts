@@ -31,5 +31,9 @@ export const PREFERENCES_DEFAULT: Preferences = {
 
 export const VAULT_SETTINGS_DEFAULT: VaultSettingsLocal = {
     localBackup: false,
-    localBackupLocation: null
+    localBackupLocation: null,
+    biometricForcePasswordMaxInterval: "",
+    biometricForcePasswordCount: "",
+    biometricLastManualUnlock: +Infinity,
+    biometricUnlockCount: 0
 };

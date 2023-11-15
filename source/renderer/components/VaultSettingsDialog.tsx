@@ -1,7 +1,21 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Callout, Classes, Dialog, FormGroup, Icon, InputGroup, Intent, Switch, Text } from "@blueprintjs/core";
+import {
+    Alignment,
+    Button,
+    ButtonGroup,
+    Callout,
+    Classes,
+    Dialog,
+    FormGroup,
+    Icon,
+    InputGroup,
+    Intent,
+    NumericInput,
+    Switch,
+    Text
+} from "@blueprintjs/core";
 import { VaultFormatID, VaultSourceStatus } from "buttercup";
 import { ConfirmDialog } from "./prompt/ConfirmDialog";
 import { t } from "../../shared/i18n/trans";
@@ -18,6 +32,7 @@ import { convertVaultToFormat } from "../actions/format";
 
 const PAGE_BACKUP = "backup";
 const PAGE_FORMAT = "format";
+const PAGE_BIOMETRIC = "biometric";
 
 const ContentNotice = styled.div`
     margin-top: 12px;
@@ -206,6 +221,41 @@ export function VaultSettingsDialog() {
             </FormGroup>
         </>
     );
+    const pageBiometric = () => (
+        <>
+            <Callout icon="info-sign">
+                <div dangerouslySetInnerHTML={{ __html: t("vault-settings.biometric.description") }} />
+            </Callout>
+            <FormGroup label={t("vault-settings.biometric.enable-password-prompt-timeout.label")} helperText={t("vault-settings.biometric.enable-password-prompt-timeout.helper")}>
+                <NumericInput
+                    allowNumericCharactersOnly
+                    min={0}
+                    value={settings.biometricForcePasswordMaxInterval}
+                    placeholder={t("vault-settings.biometric.enable-password-prompt-timeout.placeholder")}
+                    onValueChange={(valueAsNumber: number, valueAsString: string) => {
+                        setSettings({
+                            ...naiveClone(settings),
+                            biometricForcePasswordMaxInterval: valueAsString
+                        })
+                    }}
+                />
+            </FormGroup>
+            <FormGroup label={t("vault-settings.biometric.enable-password-prompt-count.label")} helperText={t("vault-settings.biometric.enable-password-prompt-count.helper")}>
+                <NumericInput
+                    allowNumericCharactersOnly
+                    min={0}
+                    onValueChange={(valueAsNumber: number, valueAsString: string) => {
+                        setSettings({
+                            ...naiveClone(settings),
+                            biometricForcePasswordCount: valueAsString
+                        })
+                    }}
+                    placeholder={t("vault-settings.biometric.enable-password-prompt-count.placeholder")}
+                    value={settings.biometricForcePasswordCount}
+                />
+            </FormGroup>
+        </>
+    )
     return (
         <Fragment>
             <DialogFreeWidth isOpen={!!showSettingsState.get()} onClose={close}>
@@ -230,11 +280,18 @@ export function VaultSettingsDialog() {
                                         onClick={() => setCurrentPage(PAGE_BACKUP)}
                                         text={t("vault-settings.backup.title")}
                                     />
+                                    <Button
+                                        active={currentPage === PAGE_BIOMETRIC}
+                                        icon="desktop"
+                                        onClick={() => setCurrentPage(PAGE_BIOMETRIC)}
+                                        text={t("vault-settings.biometric.title")}
+                                    />
                                 </SettingsMenu>
                             </SettingsSidebar>
                             <PageContent>
                                 {currentPage === PAGE_FORMAT && pageFormat()}
                                 {currentPage === PAGE_BACKUP && pageBackup()}
+                                {currentPage === PAGE_BIOMETRIC && pageBiometric()}
                             </PageContent>
                         </SettingsContent>
                     )}
