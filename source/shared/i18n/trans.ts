@@ -1,9 +1,11 @@
 import i18next, { TOptions } from "i18next";
 import translations from "./translations/index";
 import { DEFAULT_LANGUAGE } from "../symbols";
+import changeLanguage from "@buttercup/ui";
 
 export async function changeLanguage(lang: string) {
     await i18next.changeLanguage(lang);
+    await changeLanguage(lang);
 }
 
 export async function initialise(lang: string) {
