@@ -153,7 +153,8 @@
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
-      "perMachine": true,
+      "oneClick" : false,
+      "perMachine": false,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
