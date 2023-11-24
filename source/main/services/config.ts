@@ -89,3 +89,12 @@ export async function setVaultSettings(
     const storage = getVaultSettingsStorage(sourceID);
     await storage.setValues(settings);
 }
+
+export async function getStartInBackground(): Promise<boolean> {
+    const storage = getConfigStorage();
+    const preferences = await storage.getValue("preferences");
+    if (typeof preferences === "undefined") {
+        return false;
+    }
+    return preferences.startInBackground;
+}
