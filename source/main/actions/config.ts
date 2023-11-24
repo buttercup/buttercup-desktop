@@ -15,9 +15,18 @@ export async function handleConfigUpdate(preferences: Preferences) {
     const language = getLanguage(preferences, locale);
     logInfo(` - Language updated: ${language}`);
     await changeLanguage(language);
+    logInfo(
+        ` - Auto clear clipboard: ${
+            preferences.autoClearClipboard ? preferences.autoClearClipboard + "s" : "Off"
+        }`
+    );
+    logInfo(
+        ` - Lock vaults after: ${
+            preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "Off"
+        }`
+    );
+    logInfo(` - Start in background: ${preferences.startInBackground ? "Enabled" : "Disabled"}`);
     logInfo(` - File host: ${preferences.fileHostEnabled ? "Enabled" : "Disabled"}`);
-    logInfo(` - Auto clear clipboard: ${preferences.autoClearClipboard}s`);
-    logInfo(` - Lock vaults after: ${preferences.lockVaultsAfterTime}s`);
     if (preferences.fileHostEnabled) {
         await startBrowserAPI();
         await startFileHost();
