@@ -26,6 +26,7 @@ export const PREFERENCES_DEFAULT: Preferences = {
     language: null,
     lockVaultsAfterTime: false, // seconds
     lockVaultsOnWindowClose: false,
+    startInBackground: false,
     uiTheme: ThemeSource.System
 };
 

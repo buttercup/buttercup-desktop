@@ -260,6 +260,10 @@
                 "label": "Enable secure file host",
                 "title": "Secure file host"
             },
+            "startup-options": {
+                "title": "Startup options",
+                "start-in-background": "Start application in background"
+            },
             "theme": "Theme"
         },
         "section": {

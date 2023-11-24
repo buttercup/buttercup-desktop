@@ -168,6 +168,16 @@ export function PreferencesDialog() {
                     />
                 </ThemeSelect>
             </FormGroup>
+            <FormGroup label={t("preferences.item.startup-options.title")}>
+                <Switch
+                    checked={preferences.startInBackground}
+                    label={t("preferences.item.startup-options.start-in-background")}
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                        ...naiveClone(preferences),
+                        startInBackground: evt.target.checked
+                    })}
+                />
+            </FormGroup>
         </>
     );
     const pageSecurity = () => (
