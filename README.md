@@ -139,7 +139,7 @@ We won't be supporting formats like Snapcraft, deb or rpm images as they do not 
 
 To begin developing features or bug-fixes for Buttercup Desktop, make sure that you first have Node v14 installed with a current version of NPM.
 
-Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:renderer` in one and `npm run start:main` in the other.
+Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:build` on one, and then `npm run start:main` in the other.
 
 ### Contributing
 
