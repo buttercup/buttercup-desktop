@@ -1,3 +1,4 @@
+import { autoLaunch } from "auto-launch";
 import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
@@ -97,4 +98,20 @@ export async function getStartInBackground(): Promise<boolean> {
         return false;
     }
     return preferences.startInBackground;
+}
+
+export async function setStartWithSession(enable: boolean): Promise<boolean> {
+    var AutoLaunch = require("auto-launch");
+
+    var autoLauncher = new AutoLaunch({
+        name: "Buttercup"
+    });
+
+    if (enable) {
+        autoLauncher.enable();
+    } else {
+        autoLauncher.disable();
+    }
+
+    return autoLauncher.isEnabled();
 }
