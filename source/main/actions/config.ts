@@ -10,22 +10,31 @@ import { Preferences } from "../types";
 export async function handleConfigUpdate(preferences: Preferences) {
     logInfo("Config updated");
     applyCurrentTheme(preferences);
+
     const locale = await getOSLocale();
     logInfo(` - System locale detected: ${locale}`);
+
     const language = getLanguage(preferences, locale);
     logInfo(` - Language updated: ${language}`);
     await changeLanguage(language);
+
     logInfo(
         ` - Auto clear clipboard: ${
             preferences.autoClearClipboard ? preferences.autoClearClipboard + "s" : "Off"
         }`
     );
+
     logInfo(
         ` - Lock vaults after: ${
             preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "Off"
         }`
     );
+
     logInfo(` - Start in background: ${preferences.startInBackground ? "Enabled" : "Disabled"}`);
+
+    logInfo(
+        ` - Start with session launch: ${preferences.startWithSession ? "Enabled" : "Disabled"}`
+    );
     logInfo(` - File host: ${preferences.fileHostEnabled ? "Enabled" : "Disabled"}`);
     if (preferences.fileHostEnabled) {
         await startBrowserAPI();
