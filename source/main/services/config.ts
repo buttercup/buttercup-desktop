@@ -100,7 +100,7 @@ export async function getStartInBackground(): Promise<boolean> {
     return preferences.startInBackground;
 }
 
-export async function setStartWithSession(enable: boolean): Promise<boolean> {
+export async function setStartWithSession(enable: boolean): Promise<void> {
     var AutoLaunch = require("auto-launch");
 
     var autoLauncher = new AutoLaunch({
@@ -108,10 +108,16 @@ export async function setStartWithSession(enable: boolean): Promise<boolean> {
     });
 
     if (enable) {
-        autoLauncher.enable();
+        autoLauncher.isEnabled().then((enabled) => {
+            if (!enabled) {
+                autoLauncher.enable();
+            }
+        });
     } else {
-        autoLauncher.disable();
+        autoLauncher.isEnabled().then((enabled) => {
+            if (enabled) {
+                autoLauncher.disable();
+            }
+        });
     }
-
-    return autoLauncher.isEnabled();
 }
