@@ -6,6 +6,7 @@ import { getLanguage } from "../../shared/library/i18n";
 import { startFileHost, stopFileHost } from "../services/fileHost";
 import { start as startBrowserAPI, stop as stopBrowserAPI } from "../services/browser/index";
 import { Preferences } from "../types";
+import { setStartWithSession } from "../services/config";
 
 export async function handleConfigUpdate(preferences: Preferences) {
     logInfo("Config updated");
@@ -35,6 +36,8 @@ export async function handleConfigUpdate(preferences: Preferences) {
     logInfo(
         ` - Start with session launch: ${preferences.startWithSession ? "Enabled" : "Disabled"}`
     );
+    await setStartWithSession(preferences.startWithSession);
+
     logInfo(` - File host: ${preferences.fileHostEnabled ? "Enabled" : "Disabled"}`);
     if (preferences.fileHostEnabled) {
         await startBrowserAPI();
