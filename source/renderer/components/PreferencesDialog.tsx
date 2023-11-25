@@ -170,6 +170,14 @@ export function PreferencesDialog() {
             </FormGroup>
             <FormGroup label={t("preferences.item.startup-options.title")}>
                 <Switch
+                    checked={preferences.startWithSession}
+                    label={t("preferences.item.startup-options.start-with-session")}
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                        ...naiveClone(preferences),
+                        startWithSession: evt.target.checked,
+                    })}
+                />
+                <Switch
                     checked={preferences.startInBackground}
                     label={t("preferences.item.startup-options.start-in-background")}
                     onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
