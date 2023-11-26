@@ -202,7 +202,8 @@
         "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
         "biometric-store-failed": "Failed storing biometric details",
         "biometric-unlock-failed": "Failed unlocking vault using biometrics",
-        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
+        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:",
+        "vault-settings-fetch-failed": "Failed fetching vault settings"
     },
     "file-host": {
         "code-copied": "File host code copied",
