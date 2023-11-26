@@ -4,12 +4,12 @@ import cn from "classnames";
 import styled from "styled-components";
 import { Intent } from "@blueprintjs/core";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
-import { useState as useHookState } from "@hookstate/core";
+import { useSingleState } from "react-obstate";
 import { VaultEditor } from "./VaultEditor";
 import { VaultSearchManager } from "./search/VaultSearchManager";
 import { SearchProvider } from "./search/SearchContext";
 import { ConfirmDialog } from "./prompt/ConfirmDialog";
-import { VAULTS_LIST } from "../state/vaults";
+import { VAULTS_STATE } from "../state/vaults";
 import { showAddVaultMenu } from "../state/addVault";
 import { handleError } from "../actions/error";
 import { useTheme } from "../hooks/theme";
@@ -21,8 +21,8 @@ import { unlockVaultSource } from "../actions/unlockVault";
 import { logErr } from "../library/log";
 import { t } from "../../shared/i18n/trans";
 import { showSuccess } from "../services/notifications";
-import { Theme, VaultSourceDescription } from "../types";
 import { lockVaultSource } from "../actions/lockVault";
+import { Theme } from "../types";
 
 const PrimaryContainer = styled.div`
     width: 100%;
@@ -42,27 +42,31 @@ export function VaultManagement() {
     const { id = null } = useParams();
     const history = useHistory();
     const themeType = useTheme();
-    const [removingSourceID, setRemovingSourceID] = useState<VaultSourceID>(null);
-    const [currentTitle, setCurrentTitle] = useState<VaultSourceID>(null);
-    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
+    const [removingSourceID, setRemovingSourceID] = useState<VaultSourceID | null>(null);
+    const [currentTitle, setCurrentTitle] = useState<VaultSourceID | null>(null);
+    const [vaults] = useSingleState(VAULTS_STATE, "vaultsList");
+    const [, setCurrentVault] = useSingleState(VAULTS_STATE, "currentVault");
     const handleSourceUnlockRequest = useCallback((sourceID: VaultSourceID) => {
-        const vault = vaultsState.get().find(vault => vault.id === sourceID);
+        const vault = vaults.find(vault => vault.id === sourceID);
+        if (!vault) return;
         if (vault.state === VaultSourceStatus.Locked) {
             unlockVaultSource(sourceID).catch(handleError);
         }
-    }, [vaultsState]);
+    }, [vaults]);
     const handleSourceAdd = useCallback(() => {
         showAddVaultMenu(true);
     }, [history]);
     const handleSourceLock = useCallback((sourceID: VaultSourceID) => {
-        const vault = vaultsState.get().find(vault => vault.id === sourceID);
+        const vault = vaults.find(vault => vault.id === sourceID);
+        if (!vault) return;
         if (vault.state === VaultSourceStatus.Unlocked) {
             lockVaultSource(sourceID).catch(handleError);
         }
-    }, []);
+    }, [vaults]);
     const handleSourceSelect = useCallback((sourceID: VaultSourceID) => {
         history.push(`/source/${sourceID}`);
-    }, [history, id]);
+        setCurrentVault(sourceID);
+    }, [history, id, setCurrentVault]);
     const handleSourcesReoder = useCallback((newTabsOrder: Array<Tab>) => {
         setVaultSourcesOrder(newTabsOrder.map(tab => tab.id)).catch(err => {
             logErr("Failed reordering vaults", err);
@@ -70,10 +74,10 @@ export function VaultManagement() {
     }, []);
     const handleSourceRemove = useCallback((sourceID: VaultSourceID) => {
         setRemovingSourceID(sourceID);
-        setCurrentTitle(vaultsState.get().find(source => source.id === sourceID).name);
-    }, [vaultsState]);
+        setCurrentTitle(vaults.find(source => source.id === sourceID)?.name ?? "");
+    }, [vaults]);
     const handleSourceRemoveConfirm = useCallback((remove: boolean) => {
-        if (remove) {
+        if (remove && removingSourceID) {
             removeVaultSource(removingSourceID)
                 .then(() => {
                     showSuccess(t("notification.vault-removed", { name: currentTitle }));

@@ -1,29 +1,30 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useState as useHookState } from "@hookstate/core";
+import { useSingleState } from "react-obstate";
 import { sortVaults } from "../../library/vault";
 import { logInfo } from "../../library/log";
-import { CURRENT_VAULT, VAULTS_LIST } from "../../state/vaults";
+import { VAULTS_STATE } from "../../state/vaults";
 
 export function AutoNav() {
     const history = useHistory();
-    const currentVaultState = useHookState(CURRENT_VAULT);
-    const vaultsState = useHookState(VAULTS_LIST);
+    const [currentVault, setCurrentVault] = useSingleState(VAULTS_STATE, "currentVault");
+    const [vaults] = useSingleState(VAULTS_STATE, "vaultsList");
     useEffect(() => {
-        const currentVault = currentVaultState.get();
         if (currentVault) {
             logInfo(`Auto-nav: Current vault available: ${currentVault}`);
             history.push(`/source/${currentVault}`);
+            setCurrentVault(currentVault);
             return;
         }
-        const vaults = sortVaults(vaultsState.get());
-        if (vaults.length > 0) {
-            logInfo(`Auto-nav: First vault in order: ${vaults[0].id}`);
-            history.push(`/source/${vaults[0].id}`);
+        const sortedVaults = sortVaults(vaults);
+        if (sortedVaults.length > 0) {
+            logInfo(`Auto-nav: First vault in order: ${sortedVaults[0].id}`);
+            history.push(`/source/${sortedVaults[0].id}`);
+            setCurrentVault(sortedVaults[0].id);
             return;
         }
         logInfo("Auto-nav: No vaults, new-vault page");
         history.push("/add-vault");
-    }, [history, currentVaultState, vaultsState]);
+    }, [history, currentVault, setCurrentVault, vaults]);
     return null;
 }

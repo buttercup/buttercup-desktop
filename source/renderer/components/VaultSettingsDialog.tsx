@@ -226,34 +226,43 @@ export function VaultSettingsDialog() {
             <Callout icon="info-sign">
                 <div dangerouslySetInnerHTML={{ __html: t("vault-settings.biometric.description") }} />
             </Callout>
-            <FormGroup label={t("vault-settings.biometric.enable-password-prompt-timeout.label")} helperText={t("vault-settings.biometric.enable-password-prompt-timeout.helper")}>
-                <NumericInput
-                    allowNumericCharactersOnly
-                    min={0}
-                    value={settings.biometricForcePasswordMaxInterval}
-                    placeholder={t("vault-settings.biometric.enable-password-prompt-timeout.placeholder")}
-                    onValueChange={(valueAsNumber: number, valueAsString: string) => {
-                        setSettings({
-                            ...naiveClone(settings),
-                            biometricForcePasswordMaxInterval: valueAsString
-                        })
-                    }}
-                />
-            </FormGroup>
-            <FormGroup label={t("vault-settings.biometric.enable-password-prompt-count.label")} helperText={t("vault-settings.biometric.enable-password-prompt-count.helper")}>
-                <NumericInput
-                    allowNumericCharactersOnly
-                    min={0}
-                    onValueChange={(valueAsNumber: number, valueAsString: string) => {
-                        setSettings({
-                            ...naiveClone(settings),
-                            biometricForcePasswordCount: valueAsString
-                        })
-                    }}
-                    placeholder={t("vault-settings.biometric.enable-password-prompt-count.placeholder")}
-                    value={settings.biometricForcePasswordCount}
-                />
-            </FormGroup>
+            {state === VaultSourceStatus.Unlocked && (
+                <>
+                    <FormGroup label={t("vault-settings.biometric.enable-password-prompt-timeout.label")} helperText={t("vault-settings.biometric.enable-password-prompt-timeout.helper")}>
+                        <NumericInput
+                            allowNumericCharactersOnly
+                            min={0}
+                            value={settings.biometricForcePasswordMaxInterval}
+                            placeholder={t("vault-settings.biometric.enable-password-prompt-timeout.placeholder")}
+                            onValueChange={(valueAsNumber: number, valueAsString: string) => {
+                                setSettings({
+                                    ...naiveClone(settings),
+                                    biometricForcePasswordMaxInterval: valueAsString
+                                })
+                            }}
+                        />
+                    </FormGroup>
+                    <FormGroup label={t("vault-settings.biometric.enable-password-prompt-count.label")} helperText={t("vault-settings.biometric.enable-password-prompt-count.helper")}>
+                        <NumericInput
+                            allowNumericCharactersOnly
+                            min={0}
+                            onValueChange={(valueAsNumber: number, valueAsString: string) => {
+                                setSettings({
+                                    ...naiveClone(settings),
+                                    biometricForcePasswordCount: valueAsString
+                                })
+                            }}
+                            placeholder={t("vault-settings.biometric.enable-password-prompt-count.placeholder")}
+                            value={settings.biometricForcePasswordCount}
+                        />
+                    </FormGroup>
+                </>
+            ) || (
+                <ContentNotice>
+                    <ContentNoticeIcon icon="disable" />
+                    <span>{t("vault-settings.not-unlocked")}</span>
+                </ContentNotice>
+            )}
         </>
     )
     return (

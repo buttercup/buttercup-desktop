@@ -185,6 +185,10 @@
             "title": "Add Vault File"
         },
         "password-prompt": {
+            "biometric-fallback": {
+                "unlock-count-exceeded": "Maximum biometric unlock count exceeded: password required",
+                "unlock-period-exceeded": "Biometric unlock time period expired: password required"
+            },
             "button-cancel": "Cancel",
             "button-cancel-title": "Cancel unlock",
             "button-unlock": "Unlock",
@@ -202,7 +206,8 @@
         "biometric-invalid-password": "An invalid password was provided for enabling biometrics on a vault",
         "biometric-store-failed": "Failed storing biometric details",
         "biometric-unlock-failed": "Failed unlocking vault using biometrics",
-        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:"
+        "fatal-boundary": "A fatal error has occurred - we're sorry this has happened. Please check out the details below in case they help diagnose the issue:",
+        "vault-settings-fetch-failed": "Failed fetching vault settings"
     },
     "file-host": {
         "code-copied": "File host code copied",
@@ -330,6 +335,20 @@
             "switch": "Enable local backups",
             "title": "Backup"
         },
+        "biometric": {
+            "description": "Configure password requirement when using biometrics",
+            "enable-password-prompt-count": {
+                "label": "Maximum number of biometric unlocks before prompting to type in password",
+                "placeholder": "Number of biometric unlock",
+                "helper": "Leave blank or set it to '0' to disable"
+            },
+            "enable-password-prompt-timeout": {
+                "label": "Maximum number of days before prompting to type in password",
+                "placeholder": "Number of days",
+                "helper": "Leave blank or set it to '0' to disable"
+            },
+            "title": "Biometrics"
+        },
         "format": {
             "a-description": "Format A is the original Buttercup vault format that uses deltas to store vault structure.",
             "b-description": "Format B is the new Buttercup vault format that uses a JSON structure to manage vault structure and history.",
@@ -338,20 +357,6 @@
             "format-type": "Format {{format}}",
             "title": "Format",
             "upgrade-button": "Upgrade"
-        },
-        "biometric": {
-            "title": "Biometric",
-            "description": "Configure when requiring to type in password",
-            "enable-password-prompt-timeout": {
-                "label": "Maximum number of days before prompting to type in password",
-                "placeholder": "Number of days",
-                "helper": "Leave blank or set it to '0' to disable"
-            },
-            "enable-password-prompt-count": {
-                "label": "Maximum number of biometric unlocks before prompting to type in password",
-                "placeholder": "Number of biometric unlock",
-                "helper": "Leave blank or set it to '0' to disable"
-            }
         },
         "not-unlocked": "Vault must be unlocked to access this area.",
         "title": "Vault Settings: {{title}}"
