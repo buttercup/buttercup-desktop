@@ -1,6 +1,6 @@
 import { ipcRenderer } from "electron";
 import { VaultFacade, VaultSourceID } from "buttercup";
-import { setCurrentVault, setCurrentVaultSupportsAttachments } from "../state/vaults";
+import { VAULTS_STATE } from "../state/vaults";
 import { setCurrentFacade } from "../services/facade";
 
 export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
@@ -9,8 +9,8 @@ export async function fetchUpdatedFacade(sourceID: VaultSourceID) {
         sourceID
     );
     const facade: VaultFacade = JSON.parse(rawFacade);
-    setCurrentVaultSupportsAttachments(attachments);
-    setCurrentVault(sourceID);
+    VAULTS_STATE.currentVaultAttachments = !!attachments;
+    VAULTS_STATE.currentVault = sourceID;
     if (!facade) {
         setCurrentFacade(null);
         return;

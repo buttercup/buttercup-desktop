@@ -2,15 +2,16 @@ import React, { useCallback, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { Button, Classes, Dialog, FormGroup, InputGroup, Intent } from "@blueprintjs/core";
 import { Layerr } from "layerr";
+import { useSingleState } from "react-obstate";
 import { SHOW_REGISTER_PROMPT } from "../../state/biometrics";
-import { CURRENT_VAULT } from "../../state/vaults";
+import { VAULTS_STATE } from "../../state/vaults";
 import { registerBiometricUnlock } from "../../services/biometrics";
 import { showError, showSuccess } from "../../services/notifications";
 import { t } from "../../../shared/i18n/trans";
 
 export function BiometricRegistrationDialog() {
     const showPromptState = useHookState(SHOW_REGISTER_PROMPT);
-    const currentVaultState = useHookState(CURRENT_VAULT);
+    const [currentVault] = useSingleState(VAULTS_STATE, "currentVault");
     const [password, setPassword] = useState("");
     const [prompting, setPrompting] = useState(false);
     const close = useCallback(() => {
@@ -19,8 +20,9 @@ export function BiometricRegistrationDialog() {
         setPrompting(false);
     }, []);
     const submitPassword = useCallback(() => {
+        if (!currentVault) return;
         setPrompting(true);
-        registerBiometricUnlock(currentVaultState.get(), password)
+        registerBiometricUnlock(currentVault, password)
             .then(() => {
                 close();
                 showSuccess(t("dialog.biometric-reg.success"));
@@ -30,7 +32,7 @@ export function BiometricRegistrationDialog() {
                 showError(info?.i18n && t(info.i18n) || err.message);
                 setPrompting(false);
             });
-    }, [close, currentVaultState]);
+    }, [close, currentVault]);
     const handleKeyPress = useCallback(event => {
         if (event.key === "Enter") {
             submitPassword();

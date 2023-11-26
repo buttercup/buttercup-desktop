@@ -1,15 +1,14 @@
 
 import React, { useMemo } from "react";
-import { useState as useHookState } from "@hookstate/core";
 import { VaultSourceID, VaultSourceStatus } from "buttercup";
+import { useSingleState } from "react-obstate";
 import { Tabs } from "@buttercup/ui";
 import { Intent, Menu, MenuDivider, MenuItem } from "@blueprintjs/core";
 import { sortVaults } from "../../library/vault";
 import { getIconForProvider } from "../../library/icons";
-import { VAULTS_LIST } from "../../state/vaults";
+import { VAULTS_STATE } from "../../state/vaults";
 import { showVaultSettingsForSource } from "../../state/vaultSettings";
 import { t } from "../../../shared/i18n/trans";
-import { VaultSourceDescription } from "../../types";
 
 export interface Tab {
     content: string;
@@ -41,8 +40,8 @@ function TabMenu(props: TabMenuProps) {
         onRemoveVault,
         onUnlockVault
     } = props;
-    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
-    const vaultDetails = useMemo(() => vaultsState.get().find(item => item.id === id), [id, vaultsState]);
+    const [vaults] = useSingleState(VAULTS_STATE, "vaultsList");
+    const vaultDetails = useMemo(() => vaults.find(item => item.id === id), [id, vaults]);
     return (
         <Menu>
             <MenuItem
@@ -82,8 +81,8 @@ function TabMenu(props: TabMenuProps) {
 
 export function VaultTabs(props: VaultTabsProps) {
     const { onAddVault, onLockVault, onRemoveVault, onReorder, onSelectVault, onUnlockVault, sourceID } = props;
-    const vaultsState = useHookState<Array<VaultSourceDescription>>(VAULTS_LIST);
-    const vaults = useMemo(() => sortVaults([...vaultsState.get()]), [vaultsState]);
+    const [rawVaults] = useSingleState(VAULTS_STATE, "vaultsList");
+    const vaults = useMemo(() => sortVaults(rawVaults), [rawVaults]);
     const tabs: Array<Tab> = useMemo(() => vaults.map(vault => ({
         content: vault.name,
         id: vault.id,

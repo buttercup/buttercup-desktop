@@ -1,10 +1,10 @@
 import { VaultFacade } from "buttercup";
 import EventEmitter from "eventemitter3";
 
-let __currentFacade = null,
-    __emitter: EventEmitter = null;
+let __currentFacade: VaultFacade | null = null,
+    __emitter: EventEmitter | null = null;
 
-export function getCurrentFacade(): VaultFacade {
+export function getCurrentFacade(): VaultFacade | null {
     return __currentFacade;
 }
 
@@ -15,7 +15,7 @@ export function getFacadeEmitter(): EventEmitter {
     return __emitter;
 }
 
-export function setCurrentFacade(facade: VaultFacade) {
+export function setCurrentFacade(facade: VaultFacade | null) {
     __currentFacade = facade;
-    __emitter.emit("facadeUpdated");
+    getFacadeEmitter().emit("facadeUpdated");
 }
