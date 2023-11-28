@@ -10,6 +10,13 @@ import { setLastSourceID } from "./lastVault";
 import { logErr, logInfo } from "../library/log";
 import { Preferences } from "../types";
 import { getRootProjectPath } from "../library/paths";
+import { sleep } from "../../shared/library/promise";
+
+export async function closeAndReopenMainWindow(): Promise<BrowserWindow> {
+    await closeWindows();
+    await sleep(500);
+    return openMainWindow();
+}
 
 export async function closeWindows(): Promise<void> {
     const windows = BrowserWindow.getAllWindows();

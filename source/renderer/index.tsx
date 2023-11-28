@@ -1,5 +1,6 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import assert from "assert";
+import React from "react";
+import ReactDOM from "react-dom";
 import "./ipc";
 import { initialise } from "./services/init";
 import { App } from "./App";
@@ -7,13 +8,12 @@ import { logErr, logInfo } from "./library/log";
 
 import "../../resources/styles.sass";
 
-const root = document.getElementById("root");
-
-initialise(root)
-    .then(() => {
-        logInfo("Rendering application");
-        ReactDOM.render(<App />, root);
-    })
-    .catch(err => {
-        logErr("Failed initialising", err);
-    });
+(async function() {
+    const root = document.getElementById("root");
+    assert(!!root, "No root element found");
+    await initialise(root);
+    logInfo("Rendering application");
+    ReactDOM.render(<App />, root);
+})().catch(err => {
+    logErr("Failed initialising", err);
+});
