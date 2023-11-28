@@ -7,6 +7,7 @@ import { handleProtocolCall } from "./services/protocol";
 import { shouldShowMainWindow } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
+import { getStartInBackground } from "./services/config";
 
 logInfo("Application starting");
 
@@ -70,9 +71,10 @@ app.whenReady()
             logInfo(`Protocol already registered: ${protocol}`);
         }
     })
-    .then(() => {
-        if (!shouldShowMainWindow()) {
-            logInfo("Opening initial window disabled");
+    .then(async () => {
+        const hideInTray = await getStartInBackground();
+        if (!shouldShowMainWindow() || hideInTray) {
+            logInfo("Opening initial window disabled by CL or preferences");
             return;
         }
         openMainWindow();

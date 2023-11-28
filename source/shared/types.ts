@@ -35,6 +35,8 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
+    startWithSession: boolean;
+    startInBackground: boolean;
     uiTheme: ThemeSource;
 }
 

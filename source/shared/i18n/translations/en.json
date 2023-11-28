@@ -265,6 +265,11 @@
                 "label": "Enable secure file host",
                 "title": "Secure file host"
             },
+            "startup-options": {
+                "title": "Startup options",
+                "start-with-session" : "Auto-start application when my session launches",
+                "start-in-background": "Start application in background"
+            },
             "theme": "Theme"
         },
         "section": {

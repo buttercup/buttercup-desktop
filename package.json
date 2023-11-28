@@ -86,6 +86,8 @@
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
       "artifactName": "${productName}-${os}-${arch}.${ext}",
+      "mimeTypes": ["x-scheme-handler/buttercup"],
+      "executableArgs": ["%u"],
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
@@ -153,7 +155,8 @@
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
-      "perMachine": true,
+      "oneClick": false,
+      "perMachine": false,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
@@ -195,6 +198,7 @@
     "@buttercup/importer": "^3.1.0",
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.8",
+    "auto-launch": "^5.0.6",
     "buttercup": "^7.3.0",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
