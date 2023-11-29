@@ -1,7 +1,7 @@
 import { ipcRenderer } from "electron";
 import { UpdateInfo } from "electron-updater";
 import { VaultSourceID } from "buttercup";
-import { getCurrentSourceID, setCurrentVault, setVaultsList } from "./state/vaults";
+import { VAULTS_STATE } from "./state/vaults";
 import { showAddVaultMenu } from "./state/addVault";
 import { showPreferences } from "./state/preferences";
 import { showAbout } from "./state/about";
@@ -71,7 +71,7 @@ ipcRenderer.on("open-preferences", (evt) => {
 });
 
 ipcRenderer.on("open-search", (evt) => {
-    const currentSourceID = getCurrentSourceID();
+    const currentSourceID = VAULTS_STATE.currentVault;
     if (!currentSourceID) return;
     setSearchVisible(true);
 });
@@ -89,7 +89,7 @@ ipcRenderer.on("set-busy", (_, busy: boolean) => {
 });
 
 ipcRenderer.on("source-updated", (evt, sourceID) => {
-    const currentSourceID = getCurrentSourceID();
+    const currentSourceID = VAULTS_STATE.currentVault;
     if (sourceID === currentSourceID) {
         fetchUpdatedFacade(sourceID);
     }
@@ -126,11 +126,11 @@ ipcRenderer.on("update-progress", (evt, prog) => {
 ipcRenderer.on("vaults-list", (evt, payload) => {
     const vaults = JSON.parse(payload) as Array<VaultSourceDescription>;
     logInfo(`Updated ${vaults.length} vaults from back-end`);
-    setVaultsList(vaults);
+    VAULTS_STATE.vaultsList = vaults;
     updateVaultsBiometricsStates(vaults);
-    const currentSourceID = getCurrentSourceID();
+    const currentSourceID = VAULTS_STATE.currentVault;
     if (currentSourceID && !vaults.find((vault) => vault.id === currentSourceID)) {
         logInfo("Resetting current vault as it no longer exists on back-end");
-        setCurrentVault(null);
+        VAULTS_STATE.currentVault = null;
     }
 });

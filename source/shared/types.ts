@@ -35,6 +35,8 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
+    startWithSession: boolean;
+    startInBackground: boolean;
     uiTheme: ThemeSource;
 }
 
@@ -64,12 +66,12 @@ export interface UpdateProgressInfo {
 }
 
 export interface VaultSettingsLocal {
+    biometricForcePasswordCount: string;
+    biometricForcePasswordMaxInterval: string;
+    biometricLastManualUnlock: number | null;
+    biometricUnlockCount: number;
     localBackup: boolean;
     localBackupLocation: null | string;
-    biometricForcePasswordMaxInterval: string;
-    biometricForcePasswordCount: string;
-    biometricLastManualUnlock: number;
-    biometricUnlockCount: number;
 }
 
 export interface VaultSourceDescription {

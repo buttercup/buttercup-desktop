@@ -6,7 +6,7 @@ import { applyCurrentTheme } from "./theme";
 import { updateTrayIcon } from "../actions/tray";
 import { updateAppMenu } from "../actions/appMenu";
 import { getConfigValue, initialise as initialiseConfig } from "./config";
-import { getConfigPath, getVaultStoragePath } from "./storage";
+import { getConfigPath, getVaultSettingsPath, getVaultStoragePath } from "./storage";
 import { getOSLocale } from "./locale";
 import { startFileHost } from "./fileHost";
 import { isPortable } from "../library/portability";
@@ -28,6 +28,7 @@ export async function initialise() {
     logInfo(`Logs location: ${getLogPath()}`);
     logInfo(`Config location: ${getConfigPath()}`);
     logInfo(`Vault config storage location: ${getVaultStoragePath()}`);
+    logInfo(`Vault-specific settings path: ${getVaultSettingsPath("<ID>")}`);
     await initialiseConfig();
     const preferences = await getConfigValue("preferences");
     const locale = await getOSLocale();

@@ -1,173 +1,190 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { useState as useHookState } from "@hookstate/core";
-import {
-    Button,
-    Classes,
-    Dialog,
-    FormGroup,
-    InputGroup,
-    Intent,
-    NonIdealState
-} from "@blueprintjs/core";
+import { useSingleState } from "react-obstate";
+import { Button, Classes, Colors, Dialog, FormGroup, InputGroup, Intent, NonIdealState } from "@blueprintjs/core";
 import { Layerr } from "layerr";
+import ms from "ms";
+import styled from "styled-components";
+import { PASSWORD_STATE } from "../state/password";
+import { VAULTS_STATE } from "../state/vaults";
 import { getPasswordEmitter } from "../services/password";
 import { getBiometricSourcePassword } from "../services/biometrics";
-import { PASSWORD_VIA_BIOMETRIC_SOURCE, SHOW_PROMPT } from "../state/password";
-import { showError } from "../services/notifications";
-import { t } from "../../shared/i18n/trans";
-import { logErr } from "../library/log";
-import { VaultSettingsLocal } from "../../shared/types";
-import { naiveClone } from "../../shared/library/clone";
 import { getVaultSettings, saveVaultSettings } from "../services/vaultSettings";
+import { showError } from "../services/notifications";
+import { logErr, logInfo } from "../library/log";
+import { t } from "../../shared/i18n/trans";
+import { VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
+import { VaultSettingsLocal } from "../../shared/types";
 
-const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
+enum PromptType {
+    Biometric = "biometric",
+    None = "none",
+    Password = "password"
+}
+
+const DAY_MS = ms("1d");
+
+const FallbackText = styled.i`
+    color: ${Colors.RED3};
+    font-weight: 500;
+    display: block;
+    margin-bottom: 12px;
+`;
 
 export function PasswordPrompt() {
     const emitter = useMemo(getPasswordEmitter, []);
-    const showPromptState = useHookState(SHOW_PROMPT);
-    const biometricSourceState = useHookState(PASSWORD_VIA_BIOMETRIC_SOURCE);
-    const [promptedBiometrics, setPromptedBiometrics] = useState(false);
-    const [biometricsPromptActive, setBiometricsPromptActive] = useState(false);
+    const [biometricSourceID] = useSingleState(PASSWORD_STATE, "passwordViaBiometricSource");
+    const [showPrompt, setShowPrompt] = useSingleState(PASSWORD_STATE, "showPrompt");
     const [currentPassword, setCurrentPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [settings, _setSettings] = useState<VaultSettingsLocal>(null);
-    const saveAndReloadSettings = (sourceID, settings) => {
-        saveVaultSettings(sourceID, settings)
-            .then(() => {
-                _setSettings(settings);
-            })
-            .catch((err) => {
-                logErr("Failed saving vault settings", err);
-            });
-    }
-    const close = useCallback(() => {
+    const [sourceID] = useSingleState(VAULTS_STATE, "currentVault");
+    const [settings, setSettings] = useState<VaultSettingsLocal | null>(null);
+    const [promptedBiometrics, setPromptedBiometrics] = useState<boolean>(false);
+    // Callbacks
+    const closePrompt = useCallback(() => {
         setCurrentPassword(""); // clear
-        showPromptState.set(false);
-        emitter.emit("password", null);
+        setShowPrompt(false);
         setPromptedBiometrics(false);
-    }, [emitter]);
-    const submitAndClose = useCallback(
-        (password, isBioUnlock = false) => {
-            setCurrentPassword(""); // clear
-            showPromptState.set(false);
-            emitter.emit("password", password);
-            setPromptedBiometrics(false);
-            const sourceID = biometricSourceState.get();
-            if (isBioUnlock) {
-                const biometricUnlockCount = settings.biometricUnlockCount + 1;
-                const _settings = {
-                    ...naiveClone(settings),
-                    biometricUnlockCount
-                };
-                saveAndReloadSettings(sourceID, _settings);
-            } else {
-                if (sourceID) {
-                    const _settings = {
-                        ...naiveClone(settings),
-                        biometricUnlockCount: 0,
-                        biometricLastManualUnlock: Date.now()
-                    };
-                    saveAndReloadSettings(sourceID, _settings);
-                }
-            }
-        },
-        [emitter, settings]
-    );
+        emitter.emit("password", null);
+    }, [emitter, setShowPrompt]);
+    const submitPasswordPrompt = useCallback((password: string, usedBiometrics: boolean) => {
+        emitter.emit("password", password, usedBiometrics);
+        setShowPrompt(false);
+        setCurrentPassword("");
+        setPromptedBiometrics(false);
+    }, [emitter, setShowPrompt]);
     const handleKeyPress = useCallback(
         (event) => {
             if (event.key === "Enter") {
-                submitAndClose(currentPassword);
+                submitPasswordPrompt(currentPassword, false);
             }
         },
-        [currentPassword]
+        [currentPassword, submitPasswordPrompt]
     );
-    useEffect(() => {
-        const sourceID = biometricSourceState.get();
-        if (!sourceID) return;
-        getVaultSettings(sourceID)
-            .then((settings) => {
-                _setSettings(naiveClone(settings));
+    // Living data
+    const [promptType, fallbackReason] = useMemo<[PromptType, string | null]>(() => {
+        if (!showPrompt) return [PromptType.None, null];
+        const currentSettings = settings || { ...VAULT_SETTINGS_DEFAULT };
+        const {
+            biometricForcePasswordCount,
+            biometricForcePasswordMaxInterval,
+            biometricLastManualUnlock,
+            biometricUnlockCount
+        } = currentSettings;
+        const bioPassCount = parseInt(biometricForcePasswordCount, 10);
+        const bioInterval = parseInt(biometricForcePasswordMaxInterval, 10);
+        const bioPassCountExceeded = !isNaN(bioPassCount) && bioPassCount > 0 && biometricUnlockCount >= bioPassCount;
+        const bioIntervalPassed = !isNaN(bioInterval) &&
+            bioInterval > 0 &&
+            typeof biometricLastManualUnlock === "number" &&
+            biometricLastManualUnlock < (Date.now() - (bioInterval * DAY_MS));
+        if (biometricSourceID && biometricSourceID === sourceID) {
+            if (bioPassCountExceeded) {
+                return [PromptType.Password, t("dialog.password-prompt.biometric-fallback.unlock-count-exceeded")];
+            } else if (bioIntervalPassed) {
+                return [PromptType.Password, t("dialog.password-prompt.biometric-fallback.unlock-period-exceeded")];
+            }
+            return [PromptType.Biometric, null];
+        } else if (sourceID) {
+            return [PromptType.Password, null];
+        }
+        return [PromptType.None, null];
+    }, [biometricSourceID, sourceID, settings, showPrompt]);
+    // Helpers
+    const updateVaultSettings = useCallback(async (): Promise<VaultSettingsLocal> => {
+        if (!sourceID) {
+            const newSettings = {
+                ...VAULT_SETTINGS_DEFAULT
+            };
+            setSettings(newSettings);
+            return newSettings;
+        }
+        return getVaultSettings(sourceID)
+            .then(newSettings => {
+                setSettings(newSettings);
+                return newSettings;
             })
-            .catch((err) => {
-                showError(t("notification.error.vault-settings-load"));
+            .catch(err => {
+                showError(t("error.vault-settings-fetch-failed"));
                 logErr("Failed loading vault settings", err);
+                return {
+                    ...VAULT_SETTINGS_DEFAULT
+                };
             });
-    }, [biometricSourceState.get()]);
+    }, [sourceID]);
+    // Effects
     useEffect(() => {
-        if (settings === null) return;
-        const showPrompt = showPromptState.get();
-        const sourceID = biometricSourceState.get();
-        if (!showPrompt || !sourceID || promptedBiometrics) return;
-        const biometricForcePasswordCount = Number(settings.biometricForcePasswordCount) || 0;
-        if (
-            biometricForcePasswordCount > 0 &&
-            biometricForcePasswordCount <= settings.biometricUnlockCount
-        ) {
-            setBiometricsPromptActive(false);
-            return;
+        updateVaultSettings();
+    }, [updateVaultSettings]);
+    useEffect(() => {
+        if (!showPrompt) return;
+        updateVaultSettings();
+    }, [showPrompt, updateVaultSettings]);
+    const promptBiometrics = useCallback(async () => {
+        if (!biometricSourceID) {
+            throw new Error("Environment not ready for biometric prompt");
         }
-        const biometricForcePasswordTimeout = Number(settings.biometricForcePasswordMaxInterval) || 0;
-        if (
-            biometricForcePasswordTimeout > 0 &&
-            Date.now() >
-                settings.biometricLastManualUnlock + ONE_DAY_IN_MS * biometricForcePasswordTimeout
-        ) {
-            setBiometricsPromptActive(false);
-            return;
-        }
-        setBiometricsPromptActive(true);
-        setPromptedBiometrics(true);
-        getBiometricSourcePassword(sourceID)
-            .then((sourcePassword) => {
-                setBiometricsPromptActive(false);
-                if (!sourcePassword) return;
-                submitAndClose(sourcePassword, true);
-            })
-            .catch((err) => {
-                setBiometricsPromptActive(false);
+        const sourcePassword = await getBiometricSourcePassword(biometricSourceID);
+        if (!sourcePassword) return;
+        submitPasswordPrompt(sourcePassword, true);
+    }, [biometricSourceID, submitPasswordPrompt]);
+    useEffect(() => {
+        if (!showPrompt || promptType !== PromptType.Biometric || promptedBiometrics || !biometricSourceID) return;
+        const timeout = setTimeout(() => {
+            setPromptedBiometrics(true);
+            promptBiometrics().catch((err) => {
                 logErr(`Failed getting biometrics password for source: ${sourceID}`, err);
                 const errInfo = Layerr.info(err);
                 const message = (errInfo?.i18n && t(errInfo.i18n)) || err.message;
                 showError(message);
             });
-    }, [showPromptState.get(), biometricSourceState.get(), promptedBiometrics, settings]);
+        }, 250);
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [biometricSourceID, promptBiometrics, promptType, showPrompt]);
+    // Render
     return (
-        <Dialog isOpen={showPromptState.get()} onClose={close}>
+        <Dialog isOpen={showPrompt} onClose={closePrompt}>
             <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
             <div className={Classes.DIALOG_BODY}>
-                {!biometricsPromptActive && (
-                    <FormGroup
-                        label={t("dialog.password-prompt.label")}
-                        labelFor="password"
-                        labelInfo={t("input-required")}
-                    >
-                        <InputGroup
-                            id="password"
-                            placeholder={t("dialog.password-prompt.placeholder")}
-                            type={showPassword ? "text" : "password"}
-                            rightElement={
-                                <Button
-                                    icon={showPassword ? "unlock" : "lock"}
-                                    intent={Intent.NONE}
-                                    minimal
-                                    onMouseEnter={() => {
-                                        setShowPassword(true);
-                                    }}
-                                    onMouseLeave={() => {
-                                        setShowPassword(false);
-                                    }}
-                                    active={showPassword}
-                                    style={{ outline: "none", userSelect: "none" }}
-                                />
-                            }
-                            value={currentPassword}
-                            onChange={(evt) => setCurrentPassword(evt.target.value)}
-                            onKeyDown={handleKeyPress}
-                            autoFocus
-                        />
-                    </FormGroup>
+                {promptType === PromptType.Password && (
+                    <>
+                        {fallbackReason && (
+                            <FallbackText>{fallbackReason}</FallbackText>
+                        )}
+                        <FormGroup
+                            label={t("dialog.password-prompt.label")}
+                            labelFor="password"
+                            labelInfo={t("input-required")}
+                        >
+                            <InputGroup
+                                id="password"
+                                placeholder={t("dialog.password-prompt.placeholder")}
+                                type={showPassword ? "text" : "password"}
+                                rightElement={
+                                    <Button
+                                        icon={showPassword ? "unlock" : "lock"}
+                                        intent={Intent.NONE}
+                                        minimal
+                                        onMouseEnter={() => {
+                                            setShowPassword(true);
+                                        }}
+                                        onMouseLeave={() => {
+                                            setShowPassword(false);
+                                        }}
+                                        active={showPassword}
+                                        style={{ outline: "none", userSelect: "none" }}
+                                    />
+                                }
+                                value={currentPassword}
+                                onChange={(evt) => setCurrentPassword(evt.target.value)}
+                                onKeyDown={handleKeyPress}
+                                autoFocus
+                            />
+                        </FormGroup>
+                    </>
                 )}
-                {biometricsPromptActive && (
+                {promptType === PromptType.Biometric && (
                     <NonIdealState
                         icon="hand"
                         title="Biometric authentication active"
@@ -178,14 +195,14 @@ export function PasswordPrompt() {
             <div className={Classes.DIALOG_FOOTER}>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                     <Button
-                        disabled={biometricsPromptActive}
+                        disabled={promptType !== PromptType.Password}
                         intent={Intent.PRIMARY}
-                        onClick={() => submitAndClose(currentPassword)}
+                        onClick={() => submitPasswordPrompt(currentPassword, false)}
                         title={t("dialog.password-prompt.button-unlock-title")}
                     >
                         {t("dialog.password-prompt.button-unlock")}
                     </Button>
-                    <Button onClick={close} title={t("dialog.password-prompt.button-cancel-title")}>
+                    <Button onClick={closePrompt} title={t("dialog.password-prompt.button-cancel-title")}>
                         {t("dialog.password-prompt.button-cancel")}
                     </Button>
                 </div>

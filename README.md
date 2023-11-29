@@ -3,7 +3,8 @@
 
 [![Buttercup](https://cdn.rawgit.com/buttercup-pw/buttercup-assets/6582a033/badge/buttercup-slim.svg)](https://buttercup.pw) ![Latest version](https://img.shields.io/github/tag/buttercup/buttercup-desktop.svg?label=latest) [![Chat securely on Keybase](https://img.shields.io/badge/keybase-bcup-blueviolet)](https://keybase.io/team/bcup) [![Discuss on Reddit](https://img.shields.io/badge/reddit-bcup-red)](https://www.reddit.com/r/bcup/)
 
-![Buttercup Desktop](preview.png) ²
+<img width="1406" alt="Buttercup Desktop screenshot" src="https://github.com/buttercup/buttercup-desktop/assets/3869469/1320b163-3e5c-4423-a4fd-8de7ffad2a0e">
+²
 
 ## About
 
@@ -137,9 +138,9 @@ We won't be supporting formats like Snapcraft, deb or rpm images as they do not 
 
 ## Development
 
-To begin developing features or bug-fixes for Buttercup Desktop, make sure that you first have Node v14 installed with a current version of NPM.
+To begin developing features or bug-fixes for Buttercup Desktop, make sure that you first have Node v16 or greater installed with NPM v7 or greater.
 
-Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:renderer` in one and `npm run start:main` in the other.
+Once cloned, make sure to install all dependencies: `npm install`. After that, open 2 terminals and run `npm run start:build` on one, and then `npm run start:main` in the other.
 
 ### Contributing
 

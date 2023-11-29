@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useState as useHookState } from "@hookstate/core";
+import { useSingleState } from "react-obstate";
 import { Intent, NonIdealState, Tag } from "@blueprintjs/core";
 import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import styled, { ThemeProvider } from "styled-components";
 import { SearchContext } from "./search/SearchContext";
-import { CURRENT_VAULT_ATTACHMENTS, VAULTS_LIST } from "../state/vaults";
+import { VAULTS_STATE } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
 import { saveVaultFacade } from "../actions/saveVault";
@@ -45,11 +46,11 @@ const LockedNonIdealState = styled(NonIdealState)`
 `;
 
 export function VaultEditor(props: VaultEditorProps) {
-    const { onUnlockRequest } = props;
+    const { onUnlockRequest, sourceID } = props;
     const history = useHistory();
     const currentFacade = useCurrentFacade();
-    const currentSupportsAttachmentsState = useHookState(CURRENT_VAULT_ATTACHMENTS);
-    const vaultListState = useHookState(VAULTS_LIST);
+    const [currentSupportsAttachments] = useSingleState(VAULTS_STATE, "currentVaultAttachments");
+    const [vaultList] = useSingleState(VAULTS_STATE, "vaultsList");
     const savingState = useHookState(SAVING);
     const {
         addAttachments,
@@ -57,18 +58,17 @@ export function VaultEditor(props: VaultEditorProps) {
         deleteAttachment,
         downloadAttachment,
         previewAttachment
-    } = useAttachments(props.sourceID);
+    } = useAttachments(sourceID);
     const vaultItem = useMemo(() => {
-        const vaultList = vaultListState.get();
-        return vaultList.find(item => item.id === props.sourceID) || null;
-    }, [vaultListState.get()]);
+        return vaultList.find(item => item.id === sourceID) || null;
+    }, [sourceID, vaultList]);
     const themeType = useTheme();
     const [currentlyEditing, setCurrentlyEditing] = useState(false);
     useEffect(() => {
         if (vaultItem && vaultItem.state === VaultSourceStatus.Unlocked) {
             fetchUpdatedFacade(vaultItem.id);
         }
-    }, [props.sourceID, vaultItem?.state]);
+    }, [sourceID, vaultItem?.state]);
     useEffect(() => {
         logInfo(`Toggling auto-update for vault editing (editing=${currentlyEditing}, auto-update=${!currentlyEditing})`);
         toggleAutoUpdate(!currentlyEditing).catch(err => {
@@ -76,8 +76,8 @@ export function VaultEditor(props: VaultEditorProps) {
         });
     }, [currentlyEditing]);
     useEffect(() => {
-        setSelectedSource(props.sourceID);
-    }, [props.sourceID]);
+        setSelectedSource(sourceID);
+    }, [sourceID]);
     // Search
     const {
         resetSelection,
@@ -131,7 +131,7 @@ export function VaultEditor(props: VaultEditorProps) {
             {currentFacade && (
                 <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
                     <VaultProvider
-                        attachments={!!currentSupportsAttachmentsState.get()}
+                        attachments={currentSupportsAttachments}
                         attachmentsMaxSize={ATTACHMENTS_MAX_SIZE}
                         attachmentPreviews={attachmentPreviews}
                         icons

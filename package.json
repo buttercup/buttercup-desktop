@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.21.0",
+  "version": "2.22.0",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -86,6 +86,8 @@
       "category": "Utility",
       "synopsis": "Free and Open Source Password Vault",
       "artifactName": "${productName}-${os}-${arch}.${ext}",
+      "mimeTypes": ["x-scheme-handler/buttercup"],
+      "executableArgs": ["%u"],
       "desktop": {
         "Name": "Buttercup Password Manager",
         "Type": "Application",
@@ -153,7 +155,8 @@
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
-      "perMachine": true,
+      "oneClick": false,
+      "perMachine": false,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
@@ -187,15 +190,16 @@
   },
   "dependencies": {
     "@buttercup/channel-queue": "^1.2.0",
-    "@buttercup/dropbox-client": "^2.1.2",
+    "@buttercup/dropbox-client": "^2.2.0",
     "@buttercup/exporter": "^1.1.0",
     "@buttercup/file-interface": "^3.0.1",
-    "@buttercup/google-oauth2-client": "^2.1.2",
-    "@buttercup/googledrive-client": "^2.2.2",
+    "@buttercup/google-oauth2-client": "^2.2.0",
+    "@buttercup/googledrive-client": "^2.3.0",
     "@buttercup/importer": "^3.1.0",
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.8",
-    "buttercup": "^7.2.4",
+    "auto-launch": "^5.0.6",
+    "buttercup": "^7.3.0",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
     "delayable-setinterval": "^0.1.1",
@@ -267,9 +271,9 @@
     "sass-loader": "^13.3.2",
     "spectron": "^15.0.0",
     "style-loader": "^3.3.2",
-    "styled-components": "^6.1.0",
-    "ts-loader": "^9.5.0",
-    "typescript": "^5.2.2",
+    "styled-components": "^6.1.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   }

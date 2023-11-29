@@ -1,3 +1,4 @@
+import AutoLaunch from "auto-launch";
 import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
@@ -88,4 +89,33 @@ export async function setVaultSettings(
 ): Promise<void> {
     const storage = getVaultSettingsStorage(sourceID);
     await storage.setValues(settings);
+}
+
+export async function getStartInBackground(): Promise<boolean> {
+    const storage = getConfigStorage();
+    const preferences = await storage.getValue("preferences");
+    if (typeof preferences === "undefined") {
+        return false;
+    }
+    return preferences.startInBackground;
+}
+
+export async function setStartWithSession(enable: boolean): Promise<void> {
+    const autoLauncher = new AutoLaunch({
+        name: "Buttercup"
+    });
+
+    if (enable) {
+        autoLauncher.isEnabled().then((enabled) => {
+            if (!enabled) {
+                autoLauncher.enable();
+            }
+        });
+    } else {
+        autoLauncher.isEnabled().then((enabled) => {
+            if (enabled) {
+                autoLauncher.disable();
+            }
+        });
+    }
 }

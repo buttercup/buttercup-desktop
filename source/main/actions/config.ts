@@ -5,6 +5,7 @@ import { changeLanguage } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { startFileHost, stopFileHost } from "../services/fileHost";
 import { start as startBrowserAPI, stop as stopBrowserAPI } from "../services/browser/index";
+import { setStartWithSession } from "../services/config";
 import { Preferences } from "../types";
 
 export async function handleConfigUpdate(preferences: Preferences) {
@@ -15,9 +16,22 @@ export async function handleConfigUpdate(preferences: Preferences) {
     const language = getLanguage(preferences, locale);
     logInfo(` - Language updated: ${language}`);
     await changeLanguage(language);
+    logInfo(
+        ` - Auto clear clipboard: ${
+            preferences.autoClearClipboard ? preferences.autoClearClipboard + "s" : "Off"
+        }`
+    );
+    logInfo(
+        ` - Lock vaults after: ${
+            preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "Off"
+        }`
+    );
+    logInfo(` - Start in background: ${preferences.startInBackground ? "Enabled" : "Disabled"}`);
+    logInfo(
+        ` - Start with session launch: ${preferences.startWithSession ? "Enabled" : "Disabled"}`
+    );
+    await setStartWithSession(preferences.startWithSession);
     logInfo(` - File host: ${preferences.fileHostEnabled ? "Enabled" : "Disabled"}`);
-    logInfo(` - Auto clear clipboard: ${preferences.autoClearClipboard}s`);
-    logInfo(` - Lock vaults after: ${preferences.lockVaultsAfterTime}s`);
     if (preferences.fileHostEnabled) {
         await startBrowserAPI();
         await startFileHost();
