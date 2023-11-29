@@ -13,7 +13,7 @@ import { getPreferences } from "./preferences";
 import { applyCurrentUpdateState, applyReadyUpdateState } from "./update";
 import { initialisePresence } from "./presence";
 
-let __lastInit: Promise<void> = null;
+let __lastInit: Promise<void> | null = null;
 
 export async function initialise(rootElement: HTMLElement) {
     if (__lastInit) return __lastInit;

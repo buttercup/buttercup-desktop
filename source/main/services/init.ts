@@ -20,6 +20,7 @@ import { start as startBrowserAPI } from "./browser/index";
 import { generateBrowserKeys } from "./browserAuth";
 import { initialise as initialiseI18n, onLanguageChanged } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
+import { closeAndReopenMainWindow } from "./windows";
 
 export async function initialise() {
     processCLFlags();
@@ -52,6 +53,7 @@ export async function initialise() {
     onLanguageChanged(async () => {
         await updateTrayIcon();
         await updateAppMenu();
+        await closeAndReopenMainWindow();
     });
     await applyCurrentTheme();
     if (preferences.fileHostEnabled) {
