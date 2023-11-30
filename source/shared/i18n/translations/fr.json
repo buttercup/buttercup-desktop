@@ -185,6 +185,10 @@
             "title": "Ajout d’un fichier de coffre-fort"
         },
         "password-prompt": {
+            "biometric-fallback": {
+                "unlock-count-exceeded": "Nombre maximal de déverrouillages biométriques dépassé : mot de passe requis",
+                "unlock-period-exceeded": "Période de déverrouillage biométrique expirée : mot de passe requis"
+            },
             "button-cancel": "Annuler",
             "button-cancel-title": "Annuler le déverrouillage",
             "button-unlock": "Déverrouiller",
@@ -202,7 +206,8 @@
         "biometric-invalid-password": "Un mot de passe invalide a été fourni pour activer les données biométriques sur un coffre-fort.",
         "biometric-store-failed": "Échec du stockage des données biométriques",
         "biometric-unlock-failed": "Échec du déverrouillage du coffre-fort par la biométrie",
-        "fatal-boundary": "Une erreur fatale s’est produite – nous sommes désolés que cela soit arrivé. Veuillez vérifier les détails ci-dessous au cas où ils aideraient à diagnostiquer le problème :"
+        "fatal-boundary": "Une erreur fatale s’est produite – nous sommes désolés que cela soit arrivé. Veuillez vérifier les détails ci-dessous au cas où ils aideraient à diagnostiquer le problème :",
+        "vault-settings-fetch-failed": "Échec du téléchargement des paramètres du coffre-fort"
     },
     "file-host": {
         "code-copied": "Code du serveur de fichiers copié",
@@ -259,6 +264,11 @@
                 "description": "Le serveur de fichiers sécurisé permet à l’<strong>extension de navigateur Buttercup</strong> de se connecter aux coffres-forts locaux de cet ordinateur via cette application.",
                 "label": "Activer le serveur de fichiers sécurisé",
                 "title": "Serveur de fichiers sécurisé"
+            },
+            "startup-options": {
+                "title": "Options de démarrage",
+                "start-with-session" : "Démarrer automatiquement l'application lorsque ma session démarre",
+                "start-in-background": "Démarrer l'application en arrière-plan"
             },
             "theme": "Thème"
         },
@@ -329,6 +339,20 @@
             },
             "switch": "Activer les sauvegardes locales",
             "title": "Sauvegarde"
+        },
+        "biometric": {
+            "description": "Configurer les exigences de mot de passe lors de l'utilisation de la biométrie",
+            "enable-password-prompt-count": {
+                "label": "Nombre maximum de déverrouillages biométriques avant de demander de saisir le mot de passe",
+                "placeholder": "Nombre de déverrouillages biométriques",
+                "helper": "Laissez vide ou mettez à '0' pour désactiver"
+            },
+            "enable-password-prompt-timeout": {
+                "label": "Nombre maximum de jours avant de demander de saisir le mot de passe",
+                "placeholder": "Nombre de jours",
+                "helper": "Laissez vide ou mettez à '0' pour désactiver"
+            },
+            "title": "Biométrie"
         },
         "format": {
             "a-description": "Le format A est le format original du coffre-fort Buttercup qui utilise des deltas pour stocker la structure du coffre-fort.",
