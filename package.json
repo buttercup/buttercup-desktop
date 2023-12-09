@@ -203,7 +203,7 @@
     "@buttercup/secure-file-host": "^0.3.0",
     "@electron/remote": "^2.0.8",
     "auto-launch": "^5.0.6",
-    "buttercup": "^7.3.0",
+    "buttercup": "^7.4.0",
     "debounce": "^1.2.1",
     "debounce-promise": "^3.1.2",
     "delayable-setinterval": "^0.1.1",
