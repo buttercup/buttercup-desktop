@@ -1,12 +1,11 @@
-import AutoLaunch from "auto-launch";
 import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
 import { naiveClone } from "../../shared/library/clone";
 import { logErr, logInfo } from "../library/log";
-import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
-import { AppStartMode, Config, Preferences, VaultSettingsLocal } from "../types";
 import { runConfigMigrations } from "./migration";
+import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
+import { Config, VaultSettingsLocal } from "../types";
 
 const DEFAULT_CONFIG: Config = {
     browserClients: {},
@@ -80,16 +79,4 @@ export async function setVaultSettings(
 ): Promise<void> {
     const storage = getVaultSettingsStorage(sourceID);
     await storage.setValues(settings);
-}
-
-export async function setStartWithSession(enable: boolean): Promise<void> {
-    const autoLauncher = new AutoLaunch({
-        name: "Buttercup"
-    });
-    const isEnabled = await autoLauncher.isEnabled();
-    if (enable && !isEnabled) {
-        await autoLauncher.enable();
-    } else if (!enable && isEnabled) {
-        await autoLauncher.disable();
-    }
 }

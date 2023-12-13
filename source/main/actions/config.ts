@@ -4,8 +4,8 @@ import { getOSLocale } from "../services/locale";
 import { changeLanguage } from "../../shared/i18n/trans";
 import { getLanguage } from "../../shared/library/i18n";
 import { startFileHost, stopFileHost } from "../services/fileHost";
+import { setStartWithSession } from "../services/launch";
 import { start as startBrowserAPI, stop as stopBrowserAPI } from "../services/browser/index";
-import { setStartWithSession } from "../services/config";
 import { Preferences } from "../types";
 
 export async function handleConfigUpdate(preferences: Preferences) {

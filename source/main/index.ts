@@ -5,7 +5,7 @@ import { initialise } from "./services/init";
 import { openMainWindow } from "./services/windows";
 import { handleProtocolCall } from "./services/protocol";
 import { getConfigValue } from "./services/config";
-import { shouldShowMainWindow } from "./services/arguments";
+import { shouldShowMainWindow, wasAutostarted } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
 import { BUTTERCUP_PROTOCOL } from "./symbols";
 import { AppStartMode } from "./types";
@@ -74,9 +74,12 @@ app.whenReady()
     })
     .then(async () => {
         const preferences = await getConfigValue("preferences");
-        const hideInTray = preferences.startMode === AppStartMode.HiddenAlways;
-        if (!shouldShowMainWindow() || hideInTray) {
-            logInfo("Opening initial window disabled by CL or preferences");
+        const autostarted = wasAutostarted();
+        if (!shouldShowMainWindow() || preferences.startMode === AppStartMode.HiddenAlways) {
+            logInfo("Not opening initial window: disabled by CL or preferences");
+            return;
+        } else if (autostarted && preferences.startMode === AppStartMode.HiddenOnBoot) {
+            logInfo("Not opening initial window: disabled for autostart");
             return;
         }
         openMainWindow();
