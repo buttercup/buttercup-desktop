@@ -86,7 +86,8 @@ The following arguments can be provided to Buttercup, but are all optional.
 
 | Argument              | Description                           |
 |-----------------------|---------------------------------------|
-| `--no-window`         | Disables the automatic opening of the main window upon launch. Useful for when Buttercup is automatically started at boot time. |
+| `--autostart`         | Flag passed to Buttercup when launched automatically by the OS. |
+| `--hidden`            | Disables the automatic opening of the main window upon launch. |
 
 ### App config
 
