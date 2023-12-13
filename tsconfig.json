@@ -1,13 +1,14 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "strict": false,
         "esModuleInterop": true,
+        "lib": ["es5", "es6", "dom", "DOM.Iterable"],
+        "module": "commonjs",
         "outDir": "./build",
-        "skipLibCheck": true,
-        "strictNullChecks": false,
         "resolveJsonModule": true,
+        "skipLibCheck": true,
+        "strict": false,
+        "strictNullChecks": false,
+        "target": "es6",
         "types": ["node", "jest"]
     },
     "include": [
