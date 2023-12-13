@@ -16,6 +16,31 @@ export interface AppEnvironmentFlags {
     portable: boolean;
 }
 
+export enum AppStartMode {
+    HiddenOnBoot = "hiddenOnBoot",
+    HiddenAlways = "hiddenAlways",
+    None = "none"
+}
+
+export interface Config {
+    browserClients: Record<
+        string,
+        {
+            publicKey: string;
+        }
+    >;
+    browserPrivateKey: string | null;
+    browserPublicKey: string | null;
+    fileHostKey: null | string;
+    isMaximised: boolean;
+    preferences: Preferences;
+    selectedSource: null | string;
+    windowHeight: number;
+    windowWidth: number;
+    windowX: null | number;
+    windowY: null | number;
+}
+
 export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
 
 export interface Language {
@@ -35,8 +60,8 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
+    startMode: AppStartMode;
     startWithSession: boolean;
-    startInBackground: boolean;
     uiTheme: ThemeSource;
 }
 

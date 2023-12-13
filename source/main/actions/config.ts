@@ -26,7 +26,7 @@ export async function handleConfigUpdate(preferences: Preferences) {
             preferences.lockVaultsAfterTime ? preferences.lockVaultsAfterTime + "s" : "Off"
         }`
     );
-    logInfo(` - Start in background: ${preferences.startInBackground ? "Enabled" : "Disabled"}`);
+    logInfo(` - Background start: ${preferences.startMode}`);
     logInfo(
         ` - Start with session launch: ${preferences.startWithSession ? "Enabled" : "Disabled"}`
     );

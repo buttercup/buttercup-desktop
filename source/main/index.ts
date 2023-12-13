@@ -4,10 +4,11 @@ import "./ipc";
 import { initialise } from "./services/init";
 import { openMainWindow } from "./services/windows";
 import { handleProtocolCall } from "./services/protocol";
+import { getConfigValue } from "./services/config";
 import { shouldShowMainWindow } from "./services/arguments";
 import { logErr, logInfo } from "./library/log";
-import { BUTTERCUP_PROTOCOL, PLATFORM_MACOS } from "./symbols";
-import { getStartInBackground } from "./services/config";
+import { BUTTERCUP_PROTOCOL } from "./symbols";
+import { AppStartMode } from "./types";
 
 logInfo("Application starting");
 
@@ -72,7 +73,8 @@ app.whenReady()
         }
     })
     .then(async () => {
-        const hideInTray = await getStartInBackground();
+        const preferences = await getConfigValue("preferences");
+        const hideInTray = preferences.startMode === AppStartMode.HiddenAlways;
         if (!shouldShowMainWindow() || hideInTray) {
             logInfo("Opening initial window disabled by CL or preferences");
             return;
