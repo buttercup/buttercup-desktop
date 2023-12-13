@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import { useState as useHookState } from "@hookstate/core";
-import { Alignment, Button, ButtonGroup, Callout, Classes, Dialog, FormGroup, Intent, MenuItem, Slider, Switch } from "@blueprintjs/core";
+import { Alignment, Button, ButtonGroup, Callout, Classes, Dialog, FormGroup, Intent, MenuItem, Radio, RadioGroup, Slider, Switch } from "@blueprintjs/core";
 import { Select } from "@blueprintjs/select";
 import ms from "ms";
 import prettyMS from "pretty-ms";
@@ -14,7 +14,7 @@ import { showError, showSuccess } from "../services/notifications";
 import { setBusy } from "../state/app";
 import { t } from "../../shared/i18n/trans";
 import { PREFERENCES_DEFAULT } from "../../shared/symbols";
-import { Language, Preferences, ThemeSource } from "../types";
+import { AppStartMode, Language, Preferences, ThemeSource } from "../types";
 
 const { useCallback, useEffect, useMemo, useState } = React;
 const LanguageSelect = Select.ofType<Language>();
@@ -177,14 +177,18 @@ export function PreferencesDialog() {
                         startWithSession: evt.target.checked,
                     })}
                 />
-                <Switch
-                    checked={preferences.startInBackground}
-                    label={t("preferences.item.startup-options.start-in-background")}
-                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                <RadioGroup
+                    label={t("preferences.item.startup-options.background.title")}
+                    onChange={(evt: React.FormEvent<HTMLInputElement>) => setPreferences({
                         ...naiveClone(preferences),
-                        startInBackground: evt.target.checked
+                        startMode: evt.currentTarget.value as AppStartMode
                     })}
-                />
+                    selectedValue={preferences.startMode}
+                >
+                    <Radio label={t("preferences.item.startup-options.background.mode-none")} value={AppStartMode.None} />
+                    <Radio label={t("preferences.item.startup-options.background.mode-hidden-boot")} value={AppStartMode.HiddenOnBoot} />
+                    <Radio label={t("preferences.item.startup-options.background.mode-hidden-always")} value={AppStartMode.HiddenAlways} />
+                </RadioGroup>
             </FormGroup>
         </>
     );

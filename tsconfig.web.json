@@ -3,6 +3,7 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "jsx": "react",
+        "lib": ["es5", "es6", "dom", "DOM.Iterable"],
         "module": "commonjs",
         "outDir": "./build/renderer",
         "resolveJsonModule": true,

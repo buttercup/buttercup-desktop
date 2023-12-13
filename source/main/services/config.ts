@@ -1,30 +1,11 @@
-import AutoLaunch from "auto-launch";
 import fs from "fs/promises";
 import { VaultSourceID } from "buttercup";
 import { getConfigStorage, getVaultSettingsPath, getVaultSettingsStorage } from "./storage";
 import { naiveClone } from "../../shared/library/clone";
 import { logErr, logInfo } from "../library/log";
+import { runConfigMigrations } from "./migration";
 import { PREFERENCES_DEFAULT, VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
-import { Preferences, VaultSettingsLocal } from "../types";
-
-interface Config {
-    browserClients: Record<
-        string,
-        {
-            publicKey: string;
-        }
-    >;
-    browserPrivateKey: string | null;
-    browserPublicKey: string | null;
-    fileHostKey: null | string;
-    isMaximised: boolean;
-    preferences: Preferences;
-    selectedSource: null | string;
-    windowHeight: number;
-    windowWidth: number;
-    windowX: null | number;
-    windowY: null | number;
-}
+import { Config, VaultSettingsLocal } from "../types";
 
 const DEFAULT_CONFIG: Config = {
     browserClients: {},
@@ -55,6 +36,14 @@ export async function getVaultSettings(sourceID: VaultSourceID): Promise<VaultSe
 }
 
 export async function initialise(): Promise<void> {
+    // Run migrations
+    const storage = getConfigStorage();
+    const config = (await storage.getValues()) as unknown as Config;
+    const [updatedConfig, didMigrate] = runConfigMigrations(config);
+    if (didMigrate) {
+        logInfo("Detected config migration changes");
+        await storage.setValues(updatedConfig);
+    }
     // Initialise preferences
     const preferences = naiveClone(await getConfigValue("preferences"));
     for (const key in PREFERENCES_DEFAULT) {
@@ -63,6 +52,7 @@ export async function initialise(): Promise<void> {
             preferences[key] = PREFERENCES_DEFAULT[key];
         }
     }
+    // Save preferences
     await setConfigValue("preferences", preferences);
 }
 
@@ -89,33 +79,4 @@ export async function setVaultSettings(
 ): Promise<void> {
     const storage = getVaultSettingsStorage(sourceID);
     await storage.setValues(settings);
-}
-
-export async function getStartInBackground(): Promise<boolean> {
-    const storage = getConfigStorage();
-    const preferences = await storage.getValue("preferences");
-    if (typeof preferences === "undefined") {
-        return false;
-    }
-    return preferences.startInBackground;
-}
-
-export async function setStartWithSession(enable: boolean): Promise<void> {
-    const autoLauncher = new AutoLaunch({
-        name: "Buttercup"
-    });
-
-    if (enable) {
-        autoLauncher.isEnabled().then((enabled) => {
-            if (!enabled) {
-                autoLauncher.enable();
-            }
-        });
-    } else {
-        autoLauncher.isEnabled().then((enabled) => {
-            if (enabled) {
-                autoLauncher.disable();
-            }
-        });
-    }
 }

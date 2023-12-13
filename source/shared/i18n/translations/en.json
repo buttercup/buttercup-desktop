@@ -266,9 +266,14 @@
                 "title": "Secure file host"
             },
             "startup-options": {
-                "title": "Startup options",
+                "background": {
+                    "mode-hidden-always": "Hidden on execute",
+                    "mode-hidden-boot": "Hidden on boot/login",
+                    "mode-none": "Never",
+                    "title": "Start application in background"
+                },
                 "start-with-session" : "Auto-start application when my session launches",
-                "start-in-background": "Start application in background"
+                "title": "Startup options"
             },
             "theme": "Theme"
         },

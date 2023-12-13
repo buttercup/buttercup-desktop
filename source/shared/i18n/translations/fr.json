@@ -236,7 +236,7 @@
             "vault-lock-failed": "Le verrouillage du coffre-fort a échoué",
             "vault-save-failed": "La sauvegarde du coffre-fort a échoué",
             "vault-settings-load": "Échec du chargement des paramètres du coffre-fort",
-            "vault-settings-save": "Échec de l'enregistrement des paramètres du coffre-fort",            
+            "vault-settings-save": "Échec de l'enregistrement des paramètres du coffre-fort",
             "vault-unlock-failed": "Le déverrouillage du coffre-fort a échoué"
         },
         "export-success": "Exportation réussie du coffre-fort : {{name}}",
@@ -266,9 +266,11 @@
                 "title": "Serveur de fichiers sécurisé"
             },
             "startup-options": {
-                "title": "Options de démarrage",
+                "background": {
+                    "title": "Démarrer l'application en arrière-plan"
+                },
                 "start-with-session" : "Démarrer automatiquement l'application lorsque ma session démarre",
-                "start-in-background": "Démarrer l'application en arrière-plan"
+                "title": "Options de démarrage"
             },
             "theme": "Thème"
         },
@@ -315,7 +317,7 @@
         "locked-state": "Coffre-fort verrouillé",
         "pending-state": "Coffre-fort occupé",
         "unlocked-state": "Coffre-fort déverrouillé"
-    },    
+    },
     "vault-management": {
         "close-button": "Fermer",
         "close-button-title": "Gestion de la fermeture d'un coffre-fort",
