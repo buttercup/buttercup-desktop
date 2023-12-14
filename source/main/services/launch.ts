@@ -33,7 +33,7 @@ async function setStartWithSessionLinux(enable: boolean): Promise<void> {
     if (enable && !isEnabled) {
         const desktop = LINUX_DESKTOP.trim()
             .replace(/{{APP_NAME}}/g, "Buttercup")
-            .replace(/{{APP_PATH}}/g, process.execPath);
+            .replace(/{{APP_PATH}}/g, execPath);
         await fs.writeFile(autostartPath, desktop);
     } else if (!enable && isEnabled) {
         await fs.unlink(autostartPath);
