@@ -15,7 +15,6 @@ import { handleConfigUpdate } from "./config";
 import { t } from "../../shared/i18n/trans";
 import { isOSX } from "../../shared/library/platform";
 import { getIconForProvider, getNativeImageMenuIcon } from "../library/icons";
-import { Preferences } from "../types";
 import { logErr } from "../library/log";
 
 async function getContextMenu(): Promise<Menu> {
