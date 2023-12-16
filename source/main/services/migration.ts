@@ -8,7 +8,10 @@ const MIGRATIONS: Array<ConfigMigration> = [
     [
         "startInBackground",
         (config: Config) => {
-            if (typeof config.preferences["startInBackground"] === "boolean") {
+            if (
+                config.preferences &&
+                typeof config.preferences["startInBackground"] === "boolean"
+            ) {
                 const prefs = { ...config.preferences };
                 prefs.startMode = config.preferences["startInBackground"]
                     ? AppStartMode.HiddenAlways
