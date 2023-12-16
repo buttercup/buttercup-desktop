@@ -13,7 +13,7 @@ import { isPortable } from "../library/portability";
 import { getLogPath } from "./log";
 import { startUpdateWatcher } from "./update";
 import { registerGoogleDriveAuthHandlers } from "./googleDrive";
-import { processCLFlags } from "./arguments";
+import { processLaunchConfiguration } from "./arguments";
 import { supportsBiometricUnlock } from "./biometrics";
 import { startAutoVaultLockTimer } from "./autoLock";
 import { start as startBrowserAPI } from "./browser/index";
@@ -23,7 +23,7 @@ import { getLanguage } from "../../shared/library/i18n";
 import { closeAndReopenMainWindow } from "./windows";
 
 export async function initialise() {
-    processCLFlags();
+    processLaunchConfiguration();
     await initialiseLogging();
     logInfo("Application session started:", new Date());
     logInfo(`Logs location: ${getLogPath()}`);
