@@ -44,11 +44,13 @@ async function setStartWithSessionNative(enable: boolean): Promise<void> {
     const isEnabled = app.getLoginItemSettings().openAtLogin;
     if (enable && !isEnabled) {
         app.setLoginItemSettings({
+            openAsHidden: true,
             openAtLogin: true,
             args: ["--autostart"]
         });
     } else if (!enable && isEnabled) {
         app.setLoginItemSettings({
+            openAsHidden: false,
             openAtLogin: false,
             args: []
         });
