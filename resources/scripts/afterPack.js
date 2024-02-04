@@ -20,6 +20,12 @@ async function addElectronFuses(context) {
         : context.packager.appInfo.productFilename;
     const electronBinaryPath = path.join(context.appOutDir, `${executableName}${ext}`);
 
+    console.log(
+        `Configuring fuses for binary: ${electronBinaryPath} (reset adhoc: ${
+            electronPlatformName === "darwin" && arch === Arch.universal
+        })`
+    );
+
     await flipFuses(electronBinaryPath, {
         version: FuseVersion.V1,
         resetAdHocDarwinSignature: electronPlatformName === "darwin" && arch === Arch.universal,
@@ -36,6 +42,7 @@ async function addElectronFuses(context) {
 }
 
 module.exports = async (context) => {
+    console.log(`Checking package: ${context.electronPlatformName} @ ${context.arch}`);
     if (context.electronPlatformName !== "darwin" || context.arch === Arch.universal) {
         await addElectronFuses(context);
     }
