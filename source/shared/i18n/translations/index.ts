@@ -21,5 +21,4 @@ export default {
     pt_br,
     ro,
     zh_cn
- 
 };
