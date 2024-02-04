@@ -7,7 +7,7 @@ import fr from "./fr.json";
 import it from "./it.json";
 import ja from "./ja.json";
 import pl from "./pl.json";
-import pt_br from "./pt-br.json"
+import pt_br from "./pt-br.json";
 import ro from "./ro.json";
 import zh_cn from "./zh_cn.json";
 

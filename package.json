@@ -57,7 +57,7 @@
   "build": {
     "afterPack": "./resources/scripts/afterPack.js",
     "afterSign": "electron-builder-notarize",
-    "afterAllArtifactBuild": "./resources/scripts/fix-mac-zip.js",
+    "afterAllArtifactBuild": "./resources/scripts/afterAllArtifactBuild.js",
     "appId": "pw.buttercup.desktop",
     "asar": true,
     "productName": "Buttercup",
