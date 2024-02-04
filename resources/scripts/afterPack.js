@@ -28,7 +28,7 @@ async function addElectronFuses(context) {
 
     await flipFuses(electronBinaryPath, {
         version: FuseVersion.V1,
-        resetAdHocDarwinSignature: electronPlatformName === "darwin" && arch === Arch.universal,
+        resetAdHocDarwinSignature: electronPlatformName === "darwin",
         [FuseV1Options.EnableCookieEncryption]: true,
         [FuseV1Options.RunAsNode]: false,
         [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
@@ -43,7 +43,7 @@ async function addElectronFuses(context) {
 
 module.exports = async (context) => {
     console.log(`Checking package: ${context.electronPlatformName} @ ${context.arch}`);
-    if (context.electronPlatformName !== "darwin" || context.arch === Arch.universal) {
+    if (context.electronPlatformName !== "darwin" || context.arch === Arch.x64) {
         await addElectronFuses(context);
     }
 };
