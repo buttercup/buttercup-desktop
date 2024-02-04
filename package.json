@@ -55,6 +55,7 @@
   },
   "homepage": "https://github.com/buttercup/desktop#readme",
   "build": {
+    "afterPack": "./resources/scripts/afterPack.js",
     "afterSign": "electron-builder-notarize",
     "afterAllArtifactBuild": "./resources/scripts/fix-mac-zip.js",
     "appId": "pw.buttercup.desktop",
@@ -237,6 +238,7 @@
     "@blueprintjs/popover2": "^1.14.11",
     "@blueprintjs/select": "^4.9.24",
     "@buttercup/ui": "^6.3.0",
+    "@electron/fuses": "^1.7.0",
     "@hookstate/core": "^3.0.13",
     "@types/express": "^4.17.20",
     "@types/jest": "^29.5.7",
