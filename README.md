@@ -32,13 +32,17 @@ _It is very important to note that no one associated with Buttercup will ever re
 
 The current stable version is **2**. We recommend upgrading if you're still on v1, as it is no longer being actively maintained. You can still browse the v1 source and documentation [here](https://github.com/buttercup/buttercup-desktop/tree/v1).
 
+Buttercup is built on Node 20 LTS - no other platform is officially supported.
+
 ### Operating Systems
 
 Buttercup Desktop is officially supported on:
 
  * Most linux distributions (x64), such as Ubuntu
- * MacOS (x64, non-ARM)
- * Windows 10 (x64)
+ * MacOS (x64, Apple Silicon¹)
+ * Windows 10 / 11 (x64)
+
+ ¹ No builds yet
 
 #### Arch Linux
 
@@ -48,7 +52,7 @@ Some Arch users have reported the occasional segfault - if you experience this p
 
 #### 32bit builds (x86)
 
-There are some 32bit builds available, but please note that these are **not officially supported**. Issues, bug reports and questions regarding 32bit binaries are not allowed and will be closed without notice. PRs to fix 32bit support are permitted.
+Buttercup no longer provides 32bit builds, due to the complexity of supporting them in the build pipeline.
 
 ## Portability
 
