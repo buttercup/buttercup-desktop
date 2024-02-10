@@ -1,10 +1,10 @@
 {
     "_": "Italiano (IT)",
     "about": {
-        "description": "Un software gratuito, open-source e multi piattaforma per la gestione delle password.",
+        "description": "Un software gratuito, opensource e multi piattaforma per la gestione delle password.",
         "dialog": {
             "close-button": "Chiudi",
-            "close-button-title": "Chiudi la finestra informazioni"
+            "close-button-title": "Chiudi finestra informazioni"
         },
         "title": "Informazioni su Buttercup",
         "version": {
@@ -18,27 +18,27 @@
         "confirm": {
             "existing-password": "Inserisci la password dell'archivio:",
             "new-password": "Inserisci una nuova password per l'archivio:",
-            "password-placeholder": "Password dell'archivio..."
+            "password-placeholder": "Password archivio..."
         },
         "google-auth-button": "Accedi",
         "google-auth-button-title": "Accedi con Google Drive",
         "google-auth-error": "Autenticazione Google fallita",
         "loader": {
             "dropbox-auth": "Si aprirà una nuova finestra per l'autenticazione",
-            "file-prompt": "Si aprirà una finestra di dialogo per scegliere il file archivio",
+            "file-prompt": "Si aprirà una finestra per scegliere il file archivio",
             "google-auth": {
-                "instr-1": "Puoi scegliere il livello di autorizzazione che Buttercup utilizzerà durante l'accesso al tuo account <strong>Google Drive</strong>.",
-                "instr-2": "Selezionare un livello di autorizzazione <strong>aperto</strong> garantirà a Buttercup l'accesso a tutti i file e le cartelle nel tuo account e le condivisioni.",
-                "instr-3": "Selezionare un livello di autorizzazione <i>non-</i>aperto garantirà a Buttercup l'accesso ai file che sono stati creati o a cui ha avuto accesso precedentemente.",
+                "instr-1": "Puoi scegliere il livello di autorizzazione che Buttercup userà durante l'accesso all'account <strong>Google Drive</strong>.",
+                "instr-2": "Seleziona un livello di autorizzazione <strong>aperto</strong> garantirà a Buttercup l'accesso a tutti i file e le cartelle nell'account e alle condivisioni.",
+                "instr-3": "Seleziona un livello di autorizzazione <i>non-</i>aperto garantirà a Buttercup l'accesso ai file che sono stati creati o a cui ha avuto accesso precedentemente.",
                 "perm-label": "Permessi",
                 "perm-switch": "Apri"
             },
             "webdav-auth": {
                 "password-label": "Password",
                 "password-plc": "Password WebDAV",
-                "url-label": "Indirizzo WebDAV",
-                "username-label": "Username",
-                "username-plc": "Username WebDAV"
+                "url-label": "Servizio WebDAV",
+                "username-label": "Utente",
+                "username-plc": "Utente WebDAV"
             }
         },
         "page-choose-next": "Avanti",
@@ -49,7 +49,7 @@
         "page-confirm-finish-title": "Conferma aggiunta archivio",
         "title": "Aggiungi archivio",
         "webdav-continue": "Avanti",
-        "webdav-continue-title": "Connetti utilizzando WebDAV"
+        "webdav-continue-title": "Connetti usando WebDAV"
     },
     "add-vault-page": {
         "cta-button": "Aggiungi archivio",
@@ -57,20 +57,20 @@
         "title": "Un nuovo inizio"
     },
     "app-menu": {
-        "about": "Informazioni su Buttercup",
+        "about": "Info su Buttercup",
         "add-new-vault": "Nuovo archivio",
-        "biometrics": "Utilizza sblocco biometrico",
+        "biometrics": "Usa sblocco biometrico",
         "close-window": "Chiudi finestra",
         "connection": "Connessione",
-        "current": "Archivio corrente",
+        "current": "Archivio attuale",
         "debug": "Debug",
         "devtool": "Strumenti sviluppatore",
         "edit": "Modifica",
-        "enable-secure-file-host": "Abilita l'accesso dal browser",
+        "enable-secure-file-host": "Abilita accesso con il browser",
         "export": "Esporta",
         "import": "Importa",
         "lock-all": "Blocca tutti",
-        "lock-current-vault": "Blocca l'archivio corrente",
+        "lock-current-vault": "Blocca archivio attuale",
         "open": "Apri",
         "open-vault": "Apri archivio",
         "preferences": "Preferenze",
@@ -80,7 +80,7 @@
         "unlocked-vaults": "{{count}} archivio sbloccato",
         "unlocked-vaults_plural": "{{count}} archivi sbloccati",
         "vaults": "Archivi",
-        "view": "Schermata",
+        "view": "Vista",
         "window": "Finestra",
         "window-reposition": "Riposiziona"
     },
@@ -90,10 +90,22 @@
             "unlock-vault": "Sblocca archivio '{{name}}'"
         }
     },
+    "browser-access-dialog": {
+        "code-copied": "Codice di accesso al browser copiato",
+        "dialog": {
+            "close-button": "Chiudi",
+            "close-button-title": "Chiudi finestra connessione",
+            "instruction": {
+                "new-connection": "È stata stabilita una nuova connessione a questa applicazione, richiedendo l'accesso remoto a tutti i depositi desktop (mentre sono sbloccati).",
+                "use-code": "Usa il seguente codice per autorizzarlo."
+            },
+            "title": "Richiesta accesso al browser"
+        }
+    },
     "dialog": {
         "attachment-save": {
             "confirm-button": "Salva",
-            "title": "Scarica l'allegato"
+            "title": "Scarica allegato"
         },
         "biometric-reg": {
             "button-cancel": "Annulla",
@@ -102,7 +114,7 @@
             "button-reg-title": "Registra dati biometrici",
             "label": "Password archivio",
             "placeholder": "Password archivio...",
-            "success": "Dati biometrici registrati con successo",
+            "success": "Dati biometrici registrati correttamente",
             "title": "Registra dati biometrici"
         },
         "confirm-generic": {
@@ -117,29 +129,42 @@
             "add": {
                 "cancel": "Annulla",
                 "cancel-title": "Annulla creazione nuovo archivio",
-                "confirm": "Scegli la posizione dell'archivio",
-                "confirm-title": "Conferma il nome del nuovo archivio",
+                "confirm": "Scegli archivio destinazione",
+                "confirm-title": "Conferma nome nuovo archivio",
                 "description": "Inserisci un nome per il nuovo archivio:",
                 "title": "Aggiungi archivio"
             },
             "nav": {
                 "cancel-new": "Annulla nuovo archivio",
-                "create-new": "Crea nuovo archivio"
+                "create-new": "Nuovo archivio"
             }
         },
         "file-vault": {
             "add-existing": {
-                "bcup-filter": "Archivi di Buttercup",
+                "bcup-filter": "Archivi Buttercup",
                 "confirm-button": "Aggiungi",
                 "title": "Aggiungi archivio esistente"
             },
             "add-new": {
-                "bcup-filter": "Archivi di Buttercup",
+                "bcup-filter": "Archivi Buttercup",
                 "confirm-button": "Crea",
                 "title": "Aggiungi nuovo archivio"
             }
         },
-        "import-file-chooser": {
+        "google-reauth": {
+            "close-button": {
+                "text": "Annulla",
+                "title": "Annulla autenticazione"
+            },
+            "description": "Ri-autenticazione archivio Google Drive: {{vault}}",
+            "error": {
+                "reauth-failed": "Ri-autenticazione non riuscita"
+            },
+            "header": "Autenticazione scaduta per l'archivio",
+            "success": "Google Drive ri-autenticato correttamente: sblocca nuovamente",
+            "title": "Ri-autenticazione Google"
+        },
+         "import-file-chooser": {
             "submit-button": "Importa",
             "title": "Importa da {{importer}} archivio"
         },
@@ -160,7 +185,11 @@
             "title": "Aggiungi File archivio"
         },
         "password-prompt": {
-            "button-cancel": "Annulla",
+           "biometric-fallback": {
+                "unlock-count-exceeded": "N. massimo sblocchi biometrici superato: richiesta password",
+                "unlock-period-exceeded": "Periodo sblocco biometrico scaduto: richiesta password"
+            },
+             "button-cancel": "Annulla",
             "button-cancel-title": "Annulla sblocco",
             "button-unlock": "Sblocca",
             "button-unlock-title": "Conferma sblocco archivio",
@@ -170,42 +199,52 @@
         }
     },
     "error": {
-        "biometric-invalid-password": "Una password non valida è stata inserita per abilitare lo sblocco biometrico su un archivio",
-        "biometric-store-failed": "Salvataggio fallito dei dettagli biometrici",
-        "biometric-unlock-failed": "Sblocco biometrico dell'archivio fallito",
-        "fatal-boundary": "Errore fatale - ci scusiamo per l'accaduto. Si prega di controllare i dettagli sottostanti per effettuare una diagnosi dell'errore:"
+        "attachment-add": "Impossibile aggiungere allegati",
+        "attachment-delete": "Impossibile eliminare allegato",
+        "attachment-download": "Download allegato non riuscito",
+        "attachment-preview": "Anteprima allegato non riuscita",
+        "biometric-invalid-password": "Per abilitare lo sblocco biometrico su un archivio è stata inserita una password non valida",
+        "biometric-store-failed": "Salvataggio dettagli biometrici fallito",
+        "biometric-unlock-failed": "Sblocco biometrico archivio fallito",
+        "fatal-boundary": "Errore fatale. Per effettuare una diagnosi dell'errore controlla i dettagli sottostanti:",
+        "vault-settings-fetch-failed": "Impossibile recuperare le impostazioni dell'archivio"
     },
     "file-host": {
-        "code-copied": "Codice copiato",
+        "code-copied": "Codice file host copiato",
         "dialog": {
             "close-button": "Chiudi",
-            "close-button-title": "Chiudi finestra di connessione",
+            "close-button-title": "Chiudi finestra connessione",
             "instruction": {
-                "new-connection": "Una nuova connessione è stata effettuata a questa applicazione, che richiede accesso remoto al file system.",
-                "use-code": "Usa il seguente codice per autorizzarlo."
+                "new-connection": "È stata effettuata una nuova connessione a questa applicazione, che richiede un accesso remoto al file system.",
+                "use-code": "Per autorizzarlo usa il seguente codice."
             },
-            "title": "Connessione sicura File Host"
+            "title": "Connessione sicura file host"
         }
     },
-    "input-required": "(obbligatorio)",
+    "input-required": "(richiesto)",
     "notification": {
-        "attachment-downloaded": "Allegato salvato con successo",
-        "biometrics-disabled": "Autenticazione biometrica disabilitata per l'archivio",
+        "attachment-downloaded": "Allegato salvato correttamente",
+        "biometrics-disabled": "Autenticazione biometrica archvio disabilitata",
         "error": {
-            "biometrics-disable-failed": "Disabilitazione autenticazione biometrica per l'archivio fallita: {{error}}",
+            "biometrics-disable-failed": "Disabilitazione autenticazione biometrica archivio fallita: {{error}}",
             "import-failed": "Importazione fallita: {{error}}",
             "languages-load": "Caricamento lingue fallito",
             "preferences-load": "Caricamento preferenze fallito",
             "preferences-save": "Salvataggio preferenze fallito",
             "unknown-error": "Errore sconosciuto",
+            "vault-format-upgrade-failed": "Aggiornamento formato archivio fallito",
             "vault-lock-failed": "Blocco archivio fallito",
             "vault-save-failed": "Salvataggio archivio fallito",
+            "vault-settings-load": "Impossibile caricare impostazioni archivio",
+            "vault-settings-save": "Impossibile salvare impostazioni archivio",
             "vault-unlock-failed": "Sblocco archivio fallito"
         },
-        "export-success": "Archivio esportato con successo: {{name}}",
-        "import-success": "Archivio importato con successo: {{filename}}",
+        "export-success": "Archivio esportato correttamente: {{name}}",
+        "import-success": "Archivio importato correttamente: {{filename}}",
         "preferences-saved": "Preferenze salvate",
-        "vault-saved": "Archivio salvato"
+        "vault-removed": "Archivio rimosso: {{name}}",
+        "vault-saved": "Archivio salvato",
+        "vault-settings-saved": "Impostazioni archivio salvate"
     },
     "preferences": {
         "button": {
@@ -217,14 +256,24 @@
         "item": {
             "clear-clipboard": "Pulisci automaticamente gli appunti",
             "language": "Lingue",
-            "lock-vaults-after-time": "Blocco automatico degli archivi",
+            "lock-vaults-after-time": "Blocco automatico archivi",
             "lock-vaults-after-time-desc": "Blocca automaticamente gli archivi dopo un periodo di inattività.",
             "lock-vaults-window-closed": "Blocca gli archivi se la finestra viene chiusa",
             "lock-vaults-window-closed-label": "Blocco alla chiusura",
             "secure-file-host": {
-                "description": "Il secure file host consente all'<strong>Estensione del Browser di Buttercup</strong> di connettersi agli archivi locali su questo PC tramite questa applicazione.",
-                "label": "Abilita secure file host",
-                "title": "Secure file host"
+                "description": "Il file sicuro host consente all'<strong>Estensione browser Buttercup</strong> di connettersi agli archivi locali in questo computer tramite questa applicazione.",
+                "label": "Abilita file sicuro host",
+                "title": "Host file sicuro"
+            },
+            "startup-options": {
+                "background": {
+                    "mode-hidden-always": "Nascosto durante l'esecuzione",
+                    "mode-hidden-boot": "Nascosto all'avvio/accesso",
+                    "mode-none": "Mai",
+                    "title": "Avvia applicazione in background"
+                },
+                "start-with-session" : "Esecuzione automatica applicazione ad avvio sessione",
+                "title": "Opzioni avvio"
             },
             "theme": "Tema"
         },
@@ -240,7 +289,7 @@
     "search": {
         "modal": {
             "no-results": "Nessun risultato...",
-            "result-render-error": "Fallito il rendering dei risultati di ricerca"
+            "result-render-error": "Fallito il rendering dei risultati ricerca"
         }
     },
     "source-type": {
@@ -268,7 +317,9 @@
         "view": "Visualizza"
     },
     "vault-editor": {
-        "locked-state": "Archivio bloccato"
+        "locked-state": "Archivio bloccato",
+        "pending-state": "Archivio occupato",
+        "unlocked-state": "Archivio sbloccato"
     },
     "vault-management": {
         "close-button": "Chiudi",
@@ -276,16 +327,56 @@
         "remove-vault-dialog": {
             "cancel-button": "Annulla",
             "cancel-button-title": "Annulla rimozione",
-            "description": "Sei sicuro di voler rimuovere l'archivio \"{{title}}\"?",
+            "description": "Sei sicuro di voler rimuovere l'archivio '{{title}}'?",
             "remove-button": "Rimuovi",
-            "remove-button-title": "Conferma la rimozione dell'archivio",
+            "remove-button-title": "Conferma rimozione archivio",
             "title": "Rimuovi archivio"
         },
         "title": "Gestione archivi"
     },
+    "vault-settings": {
+        "backup": {
+            "description": "Esegui il backup sicuro dell'archivio localmente durante il salvataggio.",
+            "path": {
+                "helper": "Lascia vuoto per il percorso predefinito",
+                "label": "Percorso backup",
+                "placeholder": "Percorso assoluto backup"
+            },
+            "switch": "Abilita backup locale",
+            "title": "Backup"
+        },
+        "biometric": {
+            "description": "Imposta requisito password quando si usano i dati biometrici",
+            "enable-password-prompt-count": {
+                "label": "N. max sblocchi biometrici prima che venga richiesta la password",
+                "placeholder": "Numero sblocchi biometrici",
+                "helper": "Lascia vuoto o impostalo a '0' per disabilitarlo"
+            },
+            "enable-password-prompt-timeout": {
+                "label": "N. max giorni prima che venga richiesta la password",
+                "placeholder": "Numero di giorni",
+                "helper": "Lascia vuoto o impostalo a '0' per disabilitarlo"
+            },
+            "title": "Dati biometrici"
+        },
+        "format": {
+            "a-description": "Il formato A è il formato originale dell'archivio Buttercup che usa i delta per archiviare la struttura dell'archivio.",
+            "b-description": "Il formato B è il nuovo formato dell'archivio Buttercup che usa una struttura JSON per gestire la struttura e la cronologia dell'archivio.",
+            "a-upgrade-b": "Dovresti eseguire l'aggiornamento al formato B, che attualmente è <strong>stabile</strong>. Ti consigliamo di eseguire il backup dell'archivio prima di eseguire questa operazione.",
+            "description": "Gestisci formato e aggiornamenti dell'archivio attuale.",
+            "format-type": "Formato {{format}}",
+            "title": "Formato",
+            "upgrade-button": "Aggiorna"
+        },
+        "not-unlocked": "Per accedere a quest'area l'archivio deve essere sbloccato .",
+        "title": "Impostazioni archivio: {{title}}"
+    },
     "vault-tabs": {
         "context-menu": {
-            "unlock-vault": "Sblocca"
+            "lock-vault": "Blocco archivio",
+            "remove-vault": "Rimuovi archivio",
+            "unlock-vault": "Sblocca",
+            "vault-settings": "Impostazioni archivio"
         }
     }
 }
