@@ -267,6 +267,9 @@
             },
             "startup-options": {
                 "background": {
+                    "mode-hidden-always": "Caché à l'exécution",
+                    "mode-hidden-boot": "Caché au démarrage/à la connexion",
+                    "mode-none": "Jamais",
                     "title": "Démarrer l'application en arrière-plan"
                 },
                 "start-with-session" : "Démarrer automatiquement l'application lorsque ma session démarre",
