@@ -1,16 +1,16 @@
 import {
     SearchResult as CoreSearchResult,
-    VaultEntrySearch,
+    VaultSourceEntrySearch,
     VaultSource,
     VaultSourceID
 } from "buttercup";
 import { logInfo } from "../library/log";
 
 interface SearchCache {
-    [sourceID: string]: VaultEntrySearch;
+    [sourceID: string]: VaultSourceEntrySearch;
 }
 
-let __primarySearch: VaultEntrySearch = null;
+let __primarySearch: VaultSourceEntrySearch = null;
 const __searchCache: SearchCache = {};
 
 export async function searchAllVaultsByTerm(term: string): Promise<Array<CoreSearchResult>> {
@@ -40,9 +40,9 @@ export async function updateSearchCaches(unlockedSources: Array<VaultSource>) {
         delete __searchCache[missing];
     }
     for (const source of unlockedSources) {
-        __searchCache[source.id] = __searchCache[source.id] || new VaultEntrySearch([source.vault]);
+        __searchCache[source.id] = __searchCache[source.id] || new VaultSourceEntrySearch([source]);
     }
-    __primarySearch = new VaultEntrySearch(unlockedSources.map((source) => source.vault));
+    __primarySearch = new VaultSourceEntrySearch(unlockedSources);
     await Promise.all([
         __primarySearch.prepare(),
         ...Object.keys(__searchCache).map(async (sourceID) => {

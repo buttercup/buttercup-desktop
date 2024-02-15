@@ -39,7 +39,7 @@ function createRoutes(app: express.Application): void {
         saveExistingEntry
     );
     router.post("/vaults/:id/group/:gid/entry", requireClient, requireKeyAuth, saveNewEntry);
-    router.post("/vaults/:id/lock", requireClient, requireKeyAuth, promptVaultLock);
-    router.post("/vaults/:id/unlock", requireClient, requireKeyAuth, promptVaultUnlock);
+    router.post("/vaults/:id/lock", requireClient, promptVaultLock);
+    router.post("/vaults/:id/unlock", requireClient, promptVaultUnlock);
     app.use("/v1", router);
 }

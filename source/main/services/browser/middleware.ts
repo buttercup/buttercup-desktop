@@ -3,6 +3,7 @@ import { Layerr } from "layerr";
 import { decryptAPIPayload } from "./auth";
 import { BrowserAPIErrorType } from "../../types";
 import { getConfigValue } from "../config";
+import { logInfo } from "../../library/log";
 
 export async function requireClient(req: Request, res: Response, next: NextFunction) {
     const auth = req.get("Authorization");
@@ -38,6 +39,7 @@ export async function requireKeyAuth(req: Request, res: Response, next: NextFunc
         );
     }
     // Decrypt body
+    logInfo(`(api) auth client request: ${clientID}`);
     const decryptedStr = await decryptAPIPayload(clientID, req.body);
     if (/^application\/json/.test(bodyType)) {
         req.headers["content-type"] = bodyType;
