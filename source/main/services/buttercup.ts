@@ -164,6 +164,23 @@ export async function getAttachmentDetails(
     return source.attachmentManager.getAttachmentDetails(entry, attachmentID);
 }
 
+export async function getEntries(
+    entries: Array<{ entryID: EntryID; sourceID: VaultSourceID }>
+): Promise<Array<{ entry: Entry; sourceID: VaultSourceID }>> {
+    const vaultManager = getVaultManager();
+    return entries.reduce((output, item) => {
+        const source = vaultManager.getSourceForID(item.sourceID);
+        if (!source || source.status !== VaultSourceStatus.Unlocked) return output;
+        return [
+            ...output,
+            {
+                entry: source.vault.findEntryByID(item.entryID),
+                sourceID: item.sourceID
+            }
+        ];
+    }, []);
+}
+
 export function getSourceDescription(sourceID: VaultSourceID): VaultSourceDescription {
     const vaultManager = getVaultManager();
     const source = vaultManager.getSourceForID(sourceID);

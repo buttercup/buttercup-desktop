@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import createRouter from "express-promise-router";
 import { VERSION } from "../../library/build";
 import { handleAuthPing, processAuthRequest, processAuthResponse } from "./controllers/auth";
-import { searchEntries } from "./controllers/entries";
+import { searchEntries, searchSpecificEntries } from "./controllers/entries";
 import { getAllOTPs } from "./controllers/otp";
 import { getVaults, getVaultsTree, promptVaultLock, promptVaultUnlock } from "./controllers/vaults";
 import { handleError } from "./error";
@@ -29,6 +29,7 @@ function createRoutes(app: express.Application): void {
     router.post("/auth/response", processAuthResponse);
     router.post("/auth/test", requireClient, requireKeyAuth, handleAuthPing);
     router.get("/entries", requireClient, searchEntries);
+    router.post("/entries/specific", requireClient, requireKeyAuth, searchSpecificEntries);
     router.get("/otps", requireClient, getAllOTPs);
     router.get("/vaults", requireClient, getVaults);
     router.get("/vaults-tree", requireClient, getVaultsTree);

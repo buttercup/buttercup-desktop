@@ -21,7 +21,16 @@ export enum EntriesSearchType {
     URL = "url"
 }
 
-export const EntriesSearchPayloadSchema = z.discriminatedUnion("type", [
+export const EntriesSearchBodySchema = z.object({
+    entries: z.array(
+        z.object({
+            entryID: z.string().min(1),
+            sourceID: z.string().min(1)
+        })
+    )
+});
+
+export const EntriesSearchQuerySchema = z.discriminatedUnion("type", [
     z.object({
         term: z.string(),
         type: z.literal(EntriesSearchType.Term)
