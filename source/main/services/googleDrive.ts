@@ -8,7 +8,6 @@ import { logInfo, logWarn } from "../library/log";
 import {
     GOOGLE_AUTH_REDIRECT,
     GOOGLE_AUTH_TIMEOUT,
-    GOOGLE_DRIVE_SCOPES_PERMISSIVE,
     GOOGLE_DRIVE_SCOPES_STANDARD,
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET
@@ -25,11 +24,9 @@ export function addGoogleTokens(
     __googleDriveTokens[sourceID] = tokens;
 }
 
-async function authenticateGoogleDrive(
-    openPermissions: boolean = false
-): Promise<{ accessToken: string; refreshToken: string }> {
-    logInfo(`Authenticating Google Drive (permissive: ${openPermissions ? "yes" : "no"})`);
-    const scopes = openPermissions ? GOOGLE_DRIVE_SCOPES_PERMISSIVE : GOOGLE_DRIVE_SCOPES_STANDARD;
+async function authenticateGoogleDrive(): Promise<{ accessToken: string; refreshToken: string }> {
+    logInfo("Authenticating Google Drive");
+    const scopes = GOOGLE_DRIVE_SCOPES_STANDARD;
     const oauth2Client = getGoogleDriveOAuthClient();
     const url = oauth2Client.generateAuthUrl({
         access_type: "offline",
