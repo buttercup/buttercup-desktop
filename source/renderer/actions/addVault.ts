@@ -13,7 +13,7 @@ export async function addNewVaultTarget(
     datasourceConfig: DatasourceConfig,
     password: string,
     createNew: boolean,
-    fileNameOverride: string = null
+    fileNameOverride: string | null = null
 ): Promise<VaultSourceID> {
     setBusy(true);
     const addNewVaultPromise = new Promise<VaultSourceID>((resolve, reject) => {

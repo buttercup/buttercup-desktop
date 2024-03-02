@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Pots seleccionar el nivell de permisos que utilitzarà Buttercup al accedir a la teva compte de <strong>Google Drive</strong>.",
                 "instr-2": "Seleccionar una configuració de permís <strong>oberta</strong> atorgarà a Buttercup accés a tots els arxius i carpetes del seu compte i els recursos compartits connectats.",
-"instr-3": "Seleccionar una configuració <i>no</i> oberta atorgarà a Buttercup accés als arxius que ha creat / accedit prèviament.",
-                "perm-label": "Permisos",
-                "perm-switch": "Obert"
+                "instr-3": "Seleccionar una configuració <i>no</i> oberta atorgarà a Buttercup accés als arxius que ha creat / accedit prèviament."
             },
             "webdav-auth": {
                 "password-label": "Contrasenya",

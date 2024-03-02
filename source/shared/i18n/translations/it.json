@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Puoi scegliere il livello di autorizzazione che Buttercup userà durante l'accesso all'account <strong>Google Drive</strong>.",
                 "instr-2": "Seleziona un livello di autorizzazione <strong>aperto</strong> garantirà a Buttercup l'accesso a tutti i file e le cartelle nell'account e alle condivisioni.",
-                "instr-3": "Seleziona un livello di autorizzazione <i>non-</i>aperto garantirà a Buttercup l'accesso ai file che sono stati creati o a cui ha avuto accesso precedentemente.",
-                "perm-label": "Permessi",
-                "perm-switch": "Apri"
+                "instr-3": "Seleziona un livello di autorizzazione <i>non-</i>aperto garantirà a Buttercup l'accesso ai file che sono stati creati o a cui ha avuto accesso precedentemente."
             },
             "webdav-auth": {
                 "password-label": "Password",

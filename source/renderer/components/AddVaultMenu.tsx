@@ -11,11 +11,12 @@ import { testWebDAV } from "../actions/webdav";
 import { getFSInstance } from "../library/fsInterface";
 import { FileChooser } from "./standalone/FileChooser";
 import { addNewVaultTarget, getFileVaultParameters } from "../actions/addVault";
-import { showError } from "../services/notifications";
-import { authenticateGoogleDrive } from "../services/authGoogle";
+import { showError, showSuccess } from "../services/notifications";
+import { authenticateGoogleDrive, getGoogleDriveAuthURL, waitForGoogleAuthCode } from "../services/authGoogle";
 import { createEmptyVault as createEmptyGoogleDriveVault } from "../services/googleDrive";
 import { showWarning } from "../services/notifications";
 import { getIconForProvider } from "../library/icons";
+import { copyText } from "../actions/clipboard";
 import { t } from "../../shared/i18n/trans";
 import { DatasourceConfig, SourceType } from "../types";
 
@@ -25,9 +26,9 @@ interface WebDAVCredentialsState {
     password: string;
 }
 
-const { useCallback, useEffect, useState } = React;
+const { Fragment, useCallback, useEffect, useState } = React;
 
-const EMPTY_DATASOURCE_CONFIG = { type: null };
+const EMPTY_DATASOURCE_CONFIG: DatasourceConfig = { type: null };
 const EMPTY_WEBDAV_CREDENTIALS: WebDAVCredentialsState = { url: "", username: "", password: "" };
 const PAGE_TYPE = "type";
 const PAGE_AUTH = "auth";
@@ -110,16 +111,15 @@ export function AddVaultMenu() {
     const showAddVault = useHookState(SHOW_ADD_VAULT);
     const [previousShowAddVault, setPreviousShowAddVault] = useState(false);
     const [currentPage, setCurrentPage] = useState(PAGE_TYPE);
-    const [selectedType, setSelectedType] = useState<SourceType>(null);
-    const [selectedRemotePath, setSelectedRemotePath] = useState<string>(null);
+    const [selectedType, setSelectedType] = useState<SourceType | null>(null);
+    const [selectedRemotePath, setSelectedRemotePath] = useState<string | null>(null);
     const [datasourcePayload, setDatasourcePayload] = useState<DatasourceConfig>({ ...EMPTY_DATASOURCE_CONFIG });
-    const [fsInstance, setFsInstance] = useState<FileSystemInterface>(null);
+    const [fsInstance, setFsInstance] = useState<FileSystemInterface | null>(null);
     const [createNew, setCreateNew] = useState(false);
     const [vaultPassword, setVaultPassword] = useState("");
     const [webdavCredentials, setWebDAVCredentials] = useState<WebDAVCredentialsState>({ ...EMPTY_WEBDAV_CREDENTIALS });
     const [authenticatingGoogleDrive, setAuthenticatingGoogleDrive] = useState(false);
-    const [googleDriveOpenPerms, setGoogleDriveOpenPerms] = useState(false);
-    const [vaultFilenameOverride, setVaultFilenameOverride] = useState(null);
+    const [vaultFilenameOverride, setVaultFilenameOverride] = useState<string | null>(null);
     useEffect(() => {
         const newValue = showAddVault.get();
         if (previousShowAddVault !== newValue) {
@@ -136,7 +136,6 @@ export function AddVaultMenu() {
         setDatasourcePayload({ ...EMPTY_DATASOURCE_CONFIG });
         setWebDAVCredentials({ ...EMPTY_WEBDAV_CREDENTIALS });
         setVaultPassword("");
-        setGoogleDriveOpenPerms(false);
         setAuthenticatingGoogleDrive(false);
         setVaultFilenameOverride(null);
     }, []);
@@ -194,7 +193,7 @@ export function AddVaultMenu() {
     const handleAuthSubmit = useCallback(async () => {
         if (selectedType === SourceType.GoogleDrive) {
             try {
-                const { accessToken, refreshToken } = await authenticateGoogleDrive(googleDriveOpenPerms);
+                const { accessToken, refreshToken } = await authenticateGoogleDrive();
                 setDatasourcePayload({
                     ...datasourcePayload,
                     token: accessToken,
@@ -235,8 +234,35 @@ export function AddVaultMenu() {
             setFsInstance(getFSInstance(SourceType.WebDAV, newPayload));
             setCurrentPage(PAGE_CHOOSE);
         }
-    }, [selectedType, datasourcePayload, webdavCredentials, googleDriveOpenPerms]);
-    const handleSelectedPathChange = useCallback((parentIdentifier: string | null, identifier: string, isNew: boolean, fileName: string | null) => {
+    }, [selectedType, datasourcePayload, webdavCredentials]);
+    const handleAuthURLCopy = useCallback(async () => {
+        if (selectedType === SourceType.GoogleDrive) {
+            const url = getGoogleDriveAuthURL();
+            try {
+                await copyText(url);
+                showSuccess(t("add-vault-menu.copy-auth-link.url-copied"));
+            } catch (err) {
+                showError(err.message);
+            }
+            try {
+                const { accessToken, refreshToken } = await waitForGoogleAuthCode();
+                setDatasourcePayload({
+                    ...datasourcePayload,
+                    token: accessToken,
+                    refreshToken
+                });
+                setFsInstance(getFSInstance(SourceType.GoogleDrive, {
+                    token: accessToken
+                }));
+                setCurrentPage(PAGE_CHOOSE);
+            } catch (err) {
+                console.error(err);
+                showWarning(`${t("add-vault-menu.google-auth-error")}: ${err.message}`);
+                setAuthenticatingGoogleDrive(false);
+            }
+        }
+    }, [selectedType, datasourcePayload]);
+    const handleSelectedPathChange = useCallback((parentIdentifier: string | number | null, identifier: string, isNew: boolean, fileName: string | null) => {
         if (selectedType === SourceType.GoogleDrive) {
             setSelectedRemotePath(JSON.stringify([parentIdentifier, identifier]));
             setVaultFilenameOverride(fileName);
@@ -271,7 +297,7 @@ export function AddVaultMenu() {
     }, [selectedRemotePath, selectedType, datasourcePayload]);
     const handleFinalConfirm = useCallback(async () => {
         const datasource = { ...datasourcePayload };
-        if (selectedType === SourceType.GoogleDrive) {
+        if (selectedType === SourceType.GoogleDrive && selectedRemotePath && datasource.token) {
             const [parentIdentifier, identifier] = JSON.parse(selectedRemotePath);
             datasource.fileID = createNew
                 ? await createEmptyGoogleDriveVault(datasource.token, parentIdentifier, identifier, vaultPassword)
@@ -311,17 +337,6 @@ export function AddVaultMenu() {
                     <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-1") }} />
                     <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-2") }} />
                     <p dangerouslySetInnerHTML={{ __html: t("add-vault-menu.loader.google-auth.instr-3") }} />
-                    <WideFormGroup
-                        inline
-                        label={t("add-vault-menu.loader.google-auth.perm-label")}
-                    >
-                        <Switch
-                            disabled={authenticatingGoogleDrive}
-                            label={t("add-vault-menu.loader.google-auth.perm-switch")}
-                            checked={googleDriveOpenPerms}
-                            onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setGoogleDriveOpenPerms(evt.target.checked)}
-                        />
-                    </WideFormGroup>
                 </>
             )}
             {selectedType === SourceType.WebDAV && (
@@ -418,14 +433,23 @@ export function AddVaultMenu() {
                         </Button>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.GoogleDrive && (
-                        <Button
-                        disabled={authenticatingGoogleDrive}
-                            intent={Intent.PRIMARY}
-                            onClick={handleAuthSubmit}
-                            title={t("add-vault-menu.google-auth-button-title")}
-                        >
-                            {t("add-vault-menu.google-auth-button")}
-                        </Button>
+                        <Fragment>
+                            <Button
+                                intent={Intent.NONE}
+                                onClick={handleAuthURLCopy}
+                                title={t("add-vault-menu.copy-auth-link.title")}
+                            >
+                                {t("add-vault-menu.copy-auth-link.button")}
+                            </Button>
+                            <Button
+                                disabled={authenticatingGoogleDrive}
+                                intent={Intent.PRIMARY}
+                                onClick={handleAuthSubmit}
+                                title={t("add-vault-menu.google-auth-button-title")}
+                            >
+                                {t("add-vault-menu.google-auth-button")}
+                            </Button>
+                        </Fragment>
                     )}
                     {currentPage === PAGE_AUTH && selectedType === SourceType.WebDAV && (
                         <Button

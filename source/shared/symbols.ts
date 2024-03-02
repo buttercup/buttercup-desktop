@@ -11,10 +11,6 @@ export const GOOGLE_DRIVE_SCOPES_STANDARD = [
     ...GOOGLE_DRIVE_BASE_SCOPES,
     "https://www.googleapis.com/auth/drive.file" // Per-file access
 ];
-export const GOOGLE_DRIVE_SCOPES_PERMISSIVE = [
-    ...GOOGLE_DRIVE_BASE_SCOPES,
-    "https://www.googleapis.com/auth/drive"
-];
 export const GOOGLE_CLIENT_ID =
     "327941947801-fumr4be9juk0bu3ekfuq9fr5bm7trh30.apps.googleusercontent.com";
 export const GOOGLE_CLIENT_SECRET = "2zCBNDSXp1yIu5dyE5BVUWQZ";

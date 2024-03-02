@@ -20,6 +20,11 @@
             "new-password": "Enter a new primary vault password:",
             "password-placeholder": "Vault password..."
         },
+        "copy-auth-link": {
+            "button": "Copy URL",
+            "title": "Copy authentication URL",
+            "url-copied": "Authentication URL copied to clipboard"
+        },
         "google-auth-button": "Authenticate",
         "google-auth-button-title": "Authenticate with Google Drive",
         "google-auth-error": "Google authentication failed",
@@ -29,9 +34,7 @@
             "google-auth": {
                 "instr-1": "You may select the level of permission that Buttercup will use while accessing your <strong>Google Drive</strong> account.",
                 "instr-2": "Selecting an <strong>open</strong> permission setting will grant Buttercup access to all files and folders in your account and connected shares.",
-                "instr-3": "Selecting a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously.",
-                "perm-label": "Permissions",
-                "perm-switch": "Open"
+                "instr-3": "Selecting a <i>non-</i>open setting will grant Buttercup access to files that it has created/accessed previously."
             },
             "webdav-auth": {
                 "password-label": "Password",
