@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Poți selecta nivelul permisiunilor pe care Buttercup le va folosi în timp ce-ți accesează contul <strong>Google Drive</strong>.",
                 "instr-2": "Selectând permisiunea <strong>deschisă</strong>, vei permite aplicației Buttercup să acceseze toate fișierele și dosarele contului tău și totodată toate conexiunile împărtășite.",
-                "instr-3": "Selectând permisiunea <i>non-</i>deschisă, vei permite aplicației Buttercup să acceseze doar fișierele pe care le-a creat/accesat anterior.",
-                "perm-label": "Permisiune",
-                "perm-switch": "Deschisă"
+                "instr-3": "Selectând permisiunea <i>non-</i>deschisă, vei permite aplicației Buttercup să acceseze doar fișierele pe care le-a creat/accesat anterior."
             },
             "webdav-auth": {
                 "password-label": "Parolă",

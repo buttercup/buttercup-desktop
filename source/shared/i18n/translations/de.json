@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Du kannst die Berechtigung auswählen, die Buttercup nutzen wird, während es auf deinen <strong>Google Drive</strong> Konto zugreift.",
                 "instr-2": "Wenn Du eine <strong>offene</strong> Berechtigung auswählst, erlaubst Du Buttercup auf alle deine Dateien und Ordner deines Accounts und verbundenen Freigaben zuzugreifen.",
-                "instr-3": "Wenn Du eine <i>nicht-</i>offene Berechtigung auswählst, erlaubst Du Buttercup auf Dateien zuzugreifen, die zuvor erstellt oder auf die zuvor zugegriffen wurde.",
-                "perm-label": "Berechtigungen",
-                "perm-switch": "Offen"
+                "instr-3": "Wenn Du eine <i>nicht-</i>offene Berechtigung auswählst, erlaubst Du Buttercup auf Dateien zuzugreifen, die zuvor erstellt oder auf die zuvor zugegriffen wurde."
             },
             "webdav-auth": {
                 "password-label": "Passwort",

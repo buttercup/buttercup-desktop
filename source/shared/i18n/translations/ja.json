@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "あなたの <strong>Google Drive</strong> アカウントにアクセスする際に、Buttercupが使用する許可レベルを選択することができます。",
                 "instr-2": "<strong>open</strong> 設定を選択すると、アカウント内のすべてのファイルとフォルダ、および接続された共有へのアクセスが許可されます。",
-                "instr-3": "open<i>以外の</i> 設定を選択すると、Buttercupが以前に作成/アクセスしたファイルにアクセスできるようになります。",
-                "perm-label": "権限",
-                "perm-switch": "開く"
+                "instr-3": "open<i>以外の</i> 設定を選択すると、Buttercupが以前に作成/アクセスしたファイルにアクセスできるようになります。"
             },
             "webdav-auth": {
                 "password-label": "パスワード",

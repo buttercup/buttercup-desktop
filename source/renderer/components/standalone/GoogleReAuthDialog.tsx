@@ -35,7 +35,7 @@ export function GoogleReAuthDialog() {
     }, [googleReAuthState]);
     const authenticate = useCallback(() => {
         setBusy(true);
-        authenticateGoogleDrive(false)
+        authenticateGoogleDrive()
             .then(tokens => updateGoogleTokensForSource(sourceID, tokens))
             .then(() => {
                 setBusy(false);

@@ -5,7 +5,6 @@ import type { VaultSourceID } from "buttercup";
 import { logInfo } from "../library/log";
 import {
     GOOGLE_AUTH_REDIRECT,
-    GOOGLE_DRIVE_SCOPES_PERMISSIVE,
     GOOGLE_DRIVE_SCOPES_STANDARD,
     GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET
@@ -13,28 +12,14 @@ import {
 
 let __googleDriveOAuthClient: OAuth2Client | null = null;
 
-export async function authenticateGoogleDrive(
-    openPermissions: boolean = false
-): Promise<{ accessToken: string; refreshToken: string }> {
-    logInfo(`Authenticating Google Drive (permissive: ${openPermissions ? "yes" : "no"})`);
-    const scopes = openPermissions ? GOOGLE_DRIVE_SCOPES_PERMISSIVE : GOOGLE_DRIVE_SCOPES_STANDARD;
-    const oauth2Client = getGoogleDriveOAuthClient();
-    const url = oauth2Client.generateAuthUrl({
-        access_type: "offline",
-        scope: [...scopes],
-        prompt: "consent select_account"
-    });
-    logInfo(`Google Drive: Opening authentication URL: ${url}`);
+export async function authenticateGoogleDrive(): Promise<{
+    accessToken: string;
+    refreshToken: string;
+}> {
+    logInfo("Authenticating Google Drive");
+    const url = getGoogleDriveAuthURL();
     shell.openExternal(url);
-    const authCode = await listenForGoogleAuthCode();
-    logInfo("Google Drive:  Received auth code - exchanging for tokens");
-    const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
-    const { access_token: accessToken, refresh_token: refreshToken } = response.tokens;
-    logInfo("Google Drive: tokens received");
-    return {
-        accessToken,
-        refreshToken
-    };
+    return waitForGoogleAuthCode();
 }
 
 export async function authenticateGoogleDriveWithRefreshToken(
@@ -49,6 +34,16 @@ export async function authenticateGoogleDriveWithRefreshToken(
         accessToken: newAccessToken,
         refreshToken
     };
+}
+
+export function getGoogleDriveAuthURL(): string {
+    const scopes = GOOGLE_DRIVE_SCOPES_STANDARD;
+    const oauth2Client = getGoogleDriveOAuthClient();
+    return oauth2Client.generateAuthUrl({
+        access_type: "offline",
+        scope: [...scopes],
+        prompt: "consent select_account"
+    });
 }
 
 function getGoogleDriveOAuthClient(): OAuth2Client {
@@ -85,4 +80,20 @@ export async function updateGoogleTokensForSource(
     tokens: { accessToken: string; refreshToken: string }
 ): Promise<void> {
     await ipcRenderer.invoke("set-reauth-google-tokens", sourceID, tokens);
+}
+
+export async function waitForGoogleAuthCode(): Promise<{
+    accessToken: string;
+    refreshToken: string;
+}> {
+    const authCode = await listenForGoogleAuthCode();
+    logInfo("Google Drive:  Received auth code - exchanging for tokens");
+    const oauth2Client = getGoogleDriveOAuthClient();
+    const response = await oauth2Client.exchangeAuthCodeForToken(authCode);
+    const { access_token: accessToken, refresh_token: refreshToken } = response.tokens;
+    logInfo("Google Drive: tokens received");
+    return {
+        accessToken,
+        refreshToken
+    };
 }

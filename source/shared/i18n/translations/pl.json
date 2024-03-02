@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Możesz wybrać poziom uprawnień, których będzie używać Buttercup podczas uzyskiwania dostępu do twojego konta <strong>Google Drive</strong>.",
                 "instr-2": "Wybranie <strong>pełnych</strong> uprawnień zapewni Buttercup dostęp do wszystkich plików i folderów na twoim koncie oraz podłączonych udostępnień.",
-                "instr-3": "Wybranie <i>nie-</i>pełnych uprawnień zapewni Buttercup dostęp do plików, które menedżer haseł wcześniej utworzył lub do których uzyskał dostęp.",
-                "perm-label": "Uprawnienia",
-                "perm-switch": "Pełne"
+                "instr-3": "Wybranie <i>nie-</i>pełnych uprawnień zapewni Buttercup dostęp do plików, które menedżer haseł wcześniej utworzył lub do których uzyskał dostęp."
             },
             "webdav-auth": {
                 "password-label": "Hasło",

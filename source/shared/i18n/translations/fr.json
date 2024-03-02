@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Vous pouvez sélectionner le niveau de permission que Buttercup utilisera lors de l’accès à votre compte <strong>Google Drive</strong>.",
                 "instr-2": "En sélectionnant un paramètre de permission <strong>étendu</strong>, Buttercup aura accès à tous les fichiers et dossiers de votre compte et aux partages connectés.",
-                "instr-3": "La sélection d’un paramètre <i>non-</i>étendu permettra à Buttercup d'accéder aux fichiers qu’il a créés ou auxquels il a accédé précédemment.",
-                "perm-label": "Permissions",
-                "perm-switch": "Étendu"
+                "instr-3": "La sélection d’un paramètre <i>non-</i>étendu permettra à Buttercup d'accéder aux fichiers qu’il a créés ou auxquels il a accédé précédemment."
             },
             "webdav-auth": {
                 "password-label": "Mot de passe",

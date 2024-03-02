@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "Voit valita käyttöoikeustason, jota Buttercup käyttää käyttäessään <strong>Google Drive</strong> tiliäsi.",
                 "instr-2": "Selecting an <strong>open</strong> Avoimen käyttöoikeusasetuksen valitseminen antaa Buttercupille pääsyn kaikkiin tilisi tiedostoihin ja kansioihin sekä yhdistettyihin jaettuihin jakoihin.",
-                "instr-3": "<i>ei-</i>avoin asetuksen valitseminen antaa Buttercupille pääsyn tiedostoihin, jotka se on luonut tai käyttänyt aiemmin.",
-                "perm-label": "Käyttöoikeudet",
-                "perm-switch": "Avaa"
+                "instr-3": "<i>ei-</i>avoin asetuksen valitseminen antaa Buttercupille pääsyn tiedostoihin, jotka se on luonut tai käyttänyt aiemmin."
             },
             "webdav-auth": {
                 "password-label": "Salasana",

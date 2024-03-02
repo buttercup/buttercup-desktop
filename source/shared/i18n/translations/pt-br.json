@@ -29,9 +29,7 @@
             "google-auth": {
                 "instr-1": "É necessário selecionar o modelo de permissão que o Buttercup usará ao acessar sua conta do <strong>Google Drive</strong>.",
                 "instr-2": "Ao selecionar o modelo de permissão <strong>'Aberta'</strong>, será concedida ao Buttercup o acesso a todos os arquivos e pastas da sua conta e compartilhamentos conectados.",
-                "instr-3": "Selecionar a configuração <i>não-aberto</i> concederá ao Buttercup acesso aos arquivos que ele criou/acessou anteriormente.",
-                "perm-label": "Permissão",
-                "perm-switch": "Aberta" 
+                "instr-3": "Selecionar a configuração <i>não-aberto</i> concederá ao Buttercup acesso aos arquivos que ele criou/acessou anteriormente."
             },
             "webdav-auth": {
                 "password-label": "Senha",

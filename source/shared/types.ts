@@ -41,7 +41,10 @@ export interface Config {
     windowY: null | number;
 }
 
-export type DatasourceConfig = { [key: string]: string } & { type: SourceType };
+export interface DatasourceConfig {
+    type: SourceType | null;
+    [key: string]: string | null;
+}
 
 export interface Language {
     name: string;
