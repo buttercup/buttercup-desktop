@@ -20,6 +20,11 @@
             "new-password": "Inserisci una nuova password per l'archivio:",
             "password-placeholder": "Password archivio..."
         },
+        "copy-auth-link": {
+            "button": "Copia URL",
+            "title": "Copia URL autenticazione",
+            "url-copied": "URL autenticazione copiato negli appunti"
+        },
         "google-auth-button": "Accedi",
         "google-auth-button-title": "Accedi con Google Drive",
         "google-auth-error": "Autenticazione Google fallita",
