@@ -164,6 +164,13 @@ export async function getAttachmentDetails(
     return source.attachmentManager.getAttachmentDetails(entry, attachmentID);
 }
 
+export async function getEmptyVault(password: string): Promise<string> {
+    const creds = Credentials.fromPassword(password);
+    const vault = Vault.createWithDefaults();
+    const tds = new TextDatasource(Credentials.fromPassword(password));
+    return tds.save(vault.format.getHistory(), creds);
+}
+
 export async function getEntries(
     entries: Array<{ entryID: EntryID; sourceID: VaultSourceID }>
 ): Promise<Array<{ entry: Entry; sourceID: VaultSourceID }>> {
@@ -192,24 +199,6 @@ export function getSourceDescriptions(): Array<VaultSourceDescription> {
     return vaultManager.sources.map((source) => describeSource(source));
 }
 
-export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
-    const vaultManager = getVaultManager();
-    const source = vaultManager.getSourceForID(sourceID);
-    if (!source) {
-        throw new Error(`Cannot generate facade: No source found for ID: ${sourceID}`);
-    } else if (source.status !== VaultSourceStatus.Unlocked) {
-        throw new Error(`Cannot generate facade: Source is not unlocked: ${sourceID}`);
-    }
-    return createVaultFacade(source.vault);
-}
-
-export async function getEmptyVault(password: string): Promise<string> {
-    const creds = Credentials.fromPassword(password);
-    const vault = Vault.createWithDefaults();
-    const tds = new TextDatasource(Credentials.fromPassword(password));
-    return tds.save(vault.format.getHistory(), creds);
-}
-
 export function getSourceAttachmentsSupport(sourceID: VaultSourceID): boolean {
     const mgr = getVaultManager();
     const source = mgr.getSourceForID(sourceID);
@@ -230,6 +219,17 @@ export function getUnlockedSourceIDs(): Array<VaultSourceID> {
 export function getUnlockedSourcesCount(): number {
     const mgr = getVaultManager();
     return mgr.unlockedSources.length;
+}
+
+export function getVaultFacadeBySource(sourceID: VaultSourceID): VaultFacade {
+    const vaultManager = getVaultManager();
+    const source = vaultManager.getSourceForID(sourceID);
+    if (!source) {
+        throw new Error(`Cannot generate facade: No source found for ID: ${sourceID}`);
+    } else if (source.status !== VaultSourceStatus.Unlocked) {
+        throw new Error(`Cannot generate facade: Source is not unlocked: ${sourceID}`);
+    }
+    return createVaultFacade(source.vault);
 }
 
 export function getVaultFormat(sourceID: VaultSourceID): VaultFormatID {

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import { Layerr } from "layerr";
 import {
+    getSourceDescription,
     getSourceDescriptions,
     getSourceStatus,
     getUnlockedSourceIDs,
@@ -30,7 +31,15 @@ export async function getVaultsTree(req: Request, res: Response) {
         }),
         {}
     );
+    const names = sourceIDs.reduce(
+        (output: Record<string, string>, sourceID) => ({
+            ...output,
+            [sourceID]: getSourceDescription(sourceID)?.name ?? "Untitled vault"
+        }),
+        {}
+    );
     await respondJSON(res, {
+        names,
         tree
     });
 }
