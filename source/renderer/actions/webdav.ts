@@ -1,4 +1,4 @@
-import { createClient } from "webdav";
+import { AuthType, createClient } from "webdav";
 import { Layerr } from "layerr";
 import { logInfo } from "../library/log";
 
@@ -6,6 +6,7 @@ export async function testWebDAV(url: string, username?: string, password?: stri
     const authentication = !!(username && password);
     const client = authentication
         ? createClient(url, {
+              authType: AuthType.Auto,
               username,
               password
           })
