@@ -6,7 +6,7 @@ import {
 } from "@buttercup/file-interface";
 import { GoogleDriveClient } from "@buttercup/googledrive-client";
 import { DropboxClient } from "@buttercup/dropbox-client";
-import { createClient as createWebdavClient } from "webdav";
+import { AuthType, createClient as createWebdavClient } from "webdav";
 import { SourceType } from "../types";
 
 export interface FSInstanceSettings {
@@ -25,6 +25,7 @@ export function getFSInstance(type: SourceType, settings: FSInstanceSettings): F
         case SourceType.WebDAV:
             return new WebDAVInterface({
                 webdavClient: createWebdavClient(settings.endpoint as string, {
+                    authType: AuthType.Auto,
                     username: settings.username,
                     password: settings.password
                 })
