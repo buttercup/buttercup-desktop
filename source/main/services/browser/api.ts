@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
 import createRouter from "express-promise-router";
 import { VERSION } from "../../library/build";
 import { handleAuthPing, processAuthRequest, processAuthResponse } from "./controllers/auth";
@@ -14,6 +15,7 @@ export function buildApplication(): express.Application {
     app.disable("x-powered-by");
     app.use(express.text());
     app.use(express.json());
+    app.use(cors());
     app.use((req: Request, res: Response, next: NextFunction) => {
         res.set("Server", `ButtercupDesktop/${VERSION}`);
         next();
