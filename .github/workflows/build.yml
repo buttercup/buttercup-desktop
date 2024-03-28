@@ -71,5 +71,5 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: general-logs
-          path: *.log
+          path: ./*.log
 
