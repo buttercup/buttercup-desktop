@@ -66,10 +66,16 @@ jobs:
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
           USE_HARD_LINKS: false
 
+      - name: List files
+        if: always()
+        run: |
+            ls -la && cd .. && ls -la && cd -
+
       - name: Archive logs
         if: always()
         uses: actions/upload-artifact@v1
         with:
           name: general-logs
-          path: ./*.log
+          path: ../*.log
+          if-no-files-found: ignore
 
