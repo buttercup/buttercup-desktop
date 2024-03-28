@@ -40,13 +40,13 @@ jobs:
           node-version: 18
           architecture: ${{matrix.NODE_ARCHITECTURE}}
 
-      - name: Prepare for app notarization
-        if: startsWith(matrix.os, 'macos')
-        # Import Apple API key for app notarization on macOS
-        run: |
-            mkdir -p ~/private_keys/
-            echo '${{ secrets.api_key }}' > ~/private_keys/AuthKey_${{ secrets.api_key_id }}.p8
-            xcrun --find notarytool
+      # - name: Prepare for app notarization
+      #   if: startsWith(matrix.os, 'macos')
+      #   # Import Apple API key for app notarization on macOS
+      #   run: |
+      #       mkdir -p ~/private_keys/
+      #       echo '${{ secrets.api_key }}' > ~/private_keys/AuthKey_${{ secrets.api_key_id }}.p8
+
       - name: Build & Release app
         uses: CryogenicPlanet/action-electron-builder@v2
         with:
@@ -62,13 +62,15 @@ jobs:
           # release the app after building
           release: true
         env:
-          API_KEY_ID: ${{ secrets.api_key_id }}
-          API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
+          # API_KEY_ID: ${{ secrets.api_key_id }}
+          # API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
           USE_HARD_LINKS: false
           # macOS notarization envs
-          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          # APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          # APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
 
       - name: Archive notorization logs
         if: always()

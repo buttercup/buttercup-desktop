@@ -56,7 +56,6 @@
   "homepage": "https://github.com/buttercup/desktop#readme",
   "build": {
     "afterPack": "./resources/scripts/afterPack.js",
-    "afterSign": "electron-builder-notarize",
     "afterAllArtifactBuild": "./resources/scripts/afterAllArtifactBuild.js",
     "appId": "pw.buttercup.desktop",
     "asar": true,
@@ -107,7 +106,8 @@
       "entitlementsInherit": "./resources/build/entitlements.plist",
       "gatekeeperAssess": false,
       "hardenedRuntime": true,
-      "icon": "./resources/build/icon.icns"
+      "icon": "./resources/build/icon.icns",
+      "notarize": true
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
