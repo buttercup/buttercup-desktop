@@ -108,7 +108,7 @@
       "hardenedRuntime": true,
       "icon": "./resources/build/icon.icns",
       "notarize": {
-        "teamId": "${env.APPLE_TEAM_ID}"
+        "teamId": "9D8F4J769D"
       }
     },
     "dmg": {
