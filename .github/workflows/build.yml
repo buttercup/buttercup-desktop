@@ -66,10 +66,10 @@ jobs:
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
           USE_HARD_LINKS: false
 
-      - name: Archive logs
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: general-logs
-          path: *.log
+        - name: Archive logs
+          if: always()
+          uses: actions/upload-artifact@v1
+          with:
+            name: general-logs
+            path: *.log
 
