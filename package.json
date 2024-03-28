@@ -107,7 +107,9 @@
       "gatekeeperAssess": false,
       "hardenedRuntime": true,
       "icon": "./resources/build/icon.icns",
-      "notarize": true
+      "notarize": {
+        "teamId": "${env.APPLE_TEAM_ID}"
+      }
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
