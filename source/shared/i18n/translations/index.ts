@@ -6,6 +6,7 @@ import fi from "./fi.json";
 import fr from "./fr.json";
 import it from "./it.json";
 import ja from "./ja.json";
+import nl from "./nl.json";
 import pl from "./pl.json";
 import pt_br from "./pt-br.json";
 import ro from "./ro.json";
@@ -21,6 +22,7 @@ export default {
     fr,
     it,
     ja,
+    nl,
     pl,
     pt_br,
     ro,
