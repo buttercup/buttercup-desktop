@@ -76,6 +76,6 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: general-logs
-          path: ../*.log
+          path: ~/**/notarization-error.log
           if-no-files-found: ignore
 
