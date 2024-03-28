@@ -71,11 +71,11 @@ jobs:
         run: |
             ls -la && cd .. && ls -la && cd -
 
-      - name: Archive logs
+      - name: Archive notorization logs
         if: always()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
-          name: general-logs
-          path: ~/**/notarization-error.log
+          name: notorization-logs
+          path: notarization-error.log
           if-no-files-found: ignore
 
