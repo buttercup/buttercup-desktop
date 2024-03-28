@@ -48,7 +48,7 @@
     "vault",
     "security"
   ],
-  "author": "MadDev",
+  "author": "Vault Garden",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/buttercup/desktop/issues"
@@ -61,7 +61,7 @@
     "appId": "pw.buttercup.desktop",
     "asar": true,
     "productName": "Buttercup",
-    "copyright": "Copyright © MadDev Oy",
+    "copyright": "Copyright © Vault Garden",
     "files": [
       "build/**/*",
       "resources/**/*",
@@ -156,7 +156,7 @@
         "portable",
         "7z"
       ],
-      "publisherName": "MadDev Oy"
+      "publisherName": "Vault Garden"
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",

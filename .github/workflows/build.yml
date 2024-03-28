@@ -48,7 +48,7 @@ jobs:
             echo '${{ secrets.api_key }}' > ~/private_keys/AuthKey_${{ secrets.api_key_id }}.p8
             xcrun --find notarytool
       - name: Build & Release app
-        uses: samuelmeuli/action-electron-builder@v1
+        uses: CryogenicPlanet/action-electron-builder@v2
         with:
           args: ${{matrix.ELECTRON_ARGS}}
           mac_certs: ${{ secrets.mac_certs }}
@@ -66,11 +66,9 @@ jobs:
           API_KEY_ISSUER_ID: ${{ secrets.api_key_issuer_id }}
           NODE_ARCHITECTURE: ${{matrix.NODE_ARCHITECTURE}}
           USE_HARD_LINKS: false
-
-      - name: List files
-        if: always()
-        run: |
-            ls -la && cd .. && ls -la && cd -
+          # macOS notarization envs
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
 
       - name: Archive notorization logs
         if: always()
