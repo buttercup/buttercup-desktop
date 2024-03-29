@@ -32,7 +32,7 @@ export function BiometricRegistrationDialog() {
                 showError(info?.i18n && t(info.i18n) || err.message);
                 setPrompting(false);
             });
-    }, [close, currentVault]);
+    }, [close, currentVault, password]);
     const handleKeyPress = useCallback(event => {
         if (event.key === "Enter") {
             submitPassword();
