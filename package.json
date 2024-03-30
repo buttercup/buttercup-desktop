@@ -240,7 +240,7 @@
     "@blueprintjs/core": "^4.20.2",
     "@blueprintjs/popover2": "^1.14.11",
     "@blueprintjs/select": "^4.9.24",
-    "@buttercup/ui": "^6.3.0",
+    "@buttercup/ui": "^6.4.2",
     "@electron/fuses": "^1.7.0",
     "@hookstate/core": "^3.0.13",
     "@types/cors": "^2.8.17",
