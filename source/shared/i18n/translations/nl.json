@@ -1,0 +1,385 @@
+{
+    "_": "Dutch (NL)",
+    "about": {
+        "description": "Een gratis, open-source en cross-platform wachtwoord manager.",
+        "dialog": {
+            "close-button": "Sluiten",
+            "close-button-title": "Sluit Over-dialoogvenster"
+        },
+        "title": "Over",
+        "version": {
+            "core": "Core",
+            "desktop": "Desktop"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "Kies een kluisbestand of maak een nieuwe kluis aan:",
+        "choose-type-prompt": "Kies een kluis type om toe te voegen:",
+        "confirm": {
+            "existing-password": "Voer het primaire kluiswachtwoord in:",
+            "new-password": "Voer het nieuwe primaire kluiswachtwoord in:",
+            "password-placeholder": "Kluiswachtwoord..."
+        },
+        "copy-auth-link": {
+            "button": "Kopieer URL",
+            "title": "Kopieer authenticatie URL",
+            "url-copied": "Authenticatie URL gekopieerd naar klembord"
+        },
+        "google-auth-button": "Authenticatie",
+        "google-auth-button-title": "Authenticatie met Google Drive",
+        "google-auth-error": "Google authenticatie mislukt",
+        "loader": {
+            "dropbox-auth": "Een los venster opent voor authenticatie",
+            "file-prompt": "Een venster opent om een kluisbestand te kiezen",
+            "google-auth": {
+                "instr-1": "Je kunt het toestemmingsniveau selecteren dat Buttercup zal gebruiken bij het openen van jouw <strong>Google Drive</strong>-account.",
+                "instr-2": "Het selecteren van een <strong>open</strong> toestemmingsinstelling geeft Buttercup toegang tot alle bestanden en mappen in jouw account en gedeelde items.",
+                "instr-3": "Het selecteren van een <i>niet-</i>open instelling geeft Buttercup toegang tot bestanden die het eerder heeft aangemaakt/toegang toe heeft gehad."
+            },
+            "webdav-auth": {
+                "password-label": "Wachtwoord",
+                "password-plc": "WebDAV wachtwoord",
+                "url-label": "WebDAV service",
+                "username-label": "Gebruikersnaam",
+                "username-plc": "WebDAV wachtwoord"
+            }
+        },
+        "page-choose-next": "Volgende",
+        "page-choose-next-title": "Ga verder met toevoegen van kluis",
+        "page-confirm-cancel": "Annuleren",
+        "page-confirm-cancel-title": "Annuleer ontgrendelen",
+        "page-confirm-finish": "Toevoegen kluis",
+        "page-confirm-finish-title": "Bevestig kluis toevoegen",
+        "title": "Toevoegen kluis",
+        "webdav-continue": "Volgende",
+        "webdav-continue-title": "Verbind met WebDAV"
+    },
+    "add-vault-page": {
+        "cta-button": "Toevoegen kluis",
+        "description": "Er zijn nog geen kluizen toegevoegd...",
+        "title": "Een frisse start"
+    },
+    "app-menu": {
+        "about": "Over",
+        "add-new-vault": "Nieuwe aanmaken",
+        "biometrics": "Gebruik biometrisch ontgrendelen",
+        "close-window": "Sluit venster",
+        "connection": "Verbinding",
+        "current": "Huidige kluis",
+        "debug": "Debug",
+        "devtool": "Ontwikkeltool",
+        "edit": "Bewerken",
+        "enable-secure-file-host": "Activeer browsertoegang",
+        "export": "Exporteer",
+        "import": "Importeer",
+        "lock-all": "Vergrendel alle",
+        "lock-current-vault": "Vergrendel huidige kluis",
+        "open": "Openen",
+        "open-vault": "Open kluis",
+        "preferences": "Voorkeuren",
+        "quit": "Afsluiten",
+        "search": "Zoeken",
+        "unlock-vault": "Ontgrendelen",
+        "unlocked-vaults": "{{count}} ontgrendelde kluis",
+        "unlocked-vaults_plural": "{{count}} ontgrendelde kluizen",
+        "vaults": "Kluizen",
+        "view": "Bekijken",
+        "window": "Venster",
+        "window-reposition": "Herpositioneren"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "bewaar login voor kluis '{{name}}'",
+            "unlock-vault": "ontgrendel kluis '{{name}}'"
+        }
+    },
+    "browser-access-dialog": {
+        "code-copied": "Browser toegangscode gekopieerd",
+        "dialog": {
+            "close-button": "Sluit",
+            "close-button-title": "Sluit verbinding dialoog",
+            "instruction": {
+                "new-connection": "Er is een nieuwe verbinding tot stand gebracht met deze toepassing, waarbij externe toegang wordt aangevraagd tot alle kluizen op deze desktop (wanneer ontgrendeld).",
+                "use-code": "Gebruik de volgende code om te autoriseren."
+            },
+            "title": "Browser toegangsverzoek"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "Opslaan",
+            "title": "Download bijlage"
+        },
+        "biometric-reg": {
+            "button-cancel": "Annuleren",
+            "button-cancel-title": "Annuleer registratie",
+            "button-reg": "Registreren",
+            "button-reg-title": "Registreer biometrie",
+            "label": "Kluis wachtwoord",
+            "placeholder": "Kluis wachtwoord...",
+            "success": "Biometrie succesvol geregistreerd",
+            "title": "Registreer biometrie"
+        },
+        "confirm-generic": {
+            "cancel-button": "Annuleren",
+            "confirm-button": "Bevestigen"
+        },
+        "export-file-chooser": {
+            "submit-button": "Exporteren",
+            "title": "Exporteer kluis '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "Annuleer",
+                "cancel-title": "Annuleer aanmaken nieuwe kluis",
+                "confirm": "Doelkluis instellen",
+                "confirm-title": "Bevestig bestandsnaam nieuwe kluis",
+                "description": "Voer een bestandsnaam in voor de nieuwe kluis:",
+                "title": "Toevoegen kluis"
+            },
+            "nav": {
+                "cancel-new": "Annuleer aanmaken",
+                "create-new": "Nieuwe kluis"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup kluizen",
+                "confirm-button": "Toevoegen",
+                "title": "Voeg bestaande kluis toe"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup kluizen",
+                "confirm-button": "Aanmaken",
+                "title": "Maak nieuwe kluis"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "Annuleren",
+                "title": "Annuleer authenticatie"
+            },
+            "description": "Opnieuw authenticeren een Google Drive kluis: {{vault}}",
+            "error": {
+                "reauth-failed": "Opnieuw authenticeren mislukt"
+            },
+            "header": "Authenticatie verlopen voor kluis",
+            "success": "Google Drive succesvol opnieuw geauthenticeerd: ontgrendel opnieuw alstublieft",
+            "title": "Google opnieuw authenticeren"
+        },
+        "import-file-chooser": {
+            "submit-button": "Importeren",
+            "title": "Importeer vanuit {{importer}} kluis"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "Sluiten",
+                "title": "Prompt sluiten"
+            },
+            "button-existing": {
+                "text": "Bestaande laden",
+                "title": "Laad bestaand kluisbestand"
+            },
+            "button-new": {
+                "text": "Nieuwe aanmaken",
+                "title": "Nieuw kluisbestand aanmaken"
+            },
+            "prompt": "Wil je een <i>nieuwe</i> kluis maken, of een bestaande inladen?",
+            "title": "Kluisbestand toevoegen"
+        },
+        "password-prompt": {
+            "biometric-fallback": {
+                "unlock-count-exceeded": "Maximum biometrische ontgrendelingen bereikt: wachtwoord vereist",
+                "unlock-period-exceeded": "Biometrische ontgrendeltijd verlopen: wachtwoord vereist"
+            },
+            "button-cancel": "Annuleren",
+            "button-cancel-title": "Ontgrendeling annuleren",
+            "button-unlock": "Ontgrendelen",
+            "button-unlock-title": "Bevestig kluisontgrendeling",
+            "label": "Kluiswachtwoord",
+            "placeholder": "Kluiswachtwoord...",
+            "title": "Kluis ontgrendelen"
+        }
+    },
+    "error": {
+        "attachment-add": "Bijlage toevoegen mislukt",
+        "attachment-delete": "Bijlage verwijderen mislukt",
+        "attachment-download": "Bijlage downloaden mislukt",
+        "attachment-preview": "Bijlage voorvertonen mislukt",
+        "biometric-invalid-password": "Een onjuist wachtwoord is opgegeven voor het inschakelen van biometrie op een kluis",
+        "biometric-store-failed": "Opslaan van biometrische gegevens mislukt",
+        "biometric-unlock-failed": "Kluis ontgrendelen met biometrie mislukt",
+        "fatal-boundary": "Er is een fatale fout opgetreden - het spijt ons dat dit is gebeurd. Controleer alstublieft de details hieronder in geval ze helpen bij het diagnosticeren van het probleem:",
+        "vault-settings-fetch-failed": "Ophalen van kluisinstellingen mislukt"
+    },
+    "file-host": {
+        "code-copied": "Bestandshostcode gekopieerd",
+        "dialog": {
+            "close-button": "Sluiten",
+            "close-button-title": "Sluit verbinding dialoogvenster",
+            "instruction": {
+                "new-connection": "Er is een nieuwe verbinding tot stand gebracht met deze toepassing, waarbij externe toegang wordt aangevraagd tot het bestandssysteem.",
+                "use-code": "Gebruik de volgende code om te authoriseren."
+            },
+            "title": "Beveiligde bestandshostverbinding"
+        }
+    },
+    "input-required": "(vereist)",
+    "notification": {
+        "attachment-downloaded": "Bijlage succesvol opgeslagen",
+        "biometrics-disabled": "Biometrie uitgeschakeld voor kluis",
+        "error": {
+            "biometrics-disable-failed": "Biometrie uitschakelen voor kluis mislukt: {{error}}",
+            "import-failed": "Importeren mislukt: {{error}}",
+            "languages-load": "Laden van talen mislukt",
+            "preferences-load": "Laden van voorkeuren mislukt",
+            "preferences-save": "Opslaan van voorkeuren mislukt",
+            "unknown-error": "Onbekende fout",
+            "vault-format-upgrade-failed": "Upgraden van kluisformaat mislukt",
+            "vault-lock-failed": "Kluis vergrendelen mislukt",
+            "vault-save-failed": "Kluis opslaan mislukt",
+            "vault-settings-load": "Laden van kluisinstellingen mislukt",
+            "vault-settings-save": "Opslaan van kluisinstellingen mislukt",
+            "vault-unlock-failed": "Kluis ontgrendelen mislukt"
+        },
+        "export-success": "Kluis succesvol geëxporteerd: {{name}}",
+        "import-success": "Kluis succesvol geïmporteerd: {{filename}}",
+        "preferences-saved": "Voorkeuren opgeslagen",
+        "vault-removed": "Kluis verwijderd: {{name}}",
+        "vault-saved": "Kluis opgeslagen",
+        "vault-settings-saved": "Kluisinstellingen opgeslagen"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "Annuleren",
+            "cancel-title": "Annuleer voorkeuren update",
+            "save": "Opslaan",
+            "save-title": "Opslaan wijzigingen"
+        },
+        "item": {
+            "clear-clipboard": "Automatisch klembord leegmaken",
+            "language": "Taal",
+            "lock-vaults-after-time": "Kluizen vergrendelen na tijd",
+            "lock-vaults-after-time-desc": "Vergrendel kluizen automatisch na een bepaalde periode van inactiviteit.",
+            "lock-vaults-window-closed": "Kluizen vergrendelen bij het sluiten van kluisvenster",
+            "lock-vaults-window-closed-label": "Vergrendel bij sluiten",
+            "secure-file-host": {
+                "description": "De beveiligde bestandshost maakt verbinding met lokale kluizen op deze pc via de <strong>Buttercup Browser-extensie</strong>.",
+                "label": "Activeer beveiligde bestandshost",
+                "title": "Beveiligde bestandshost"
+            },
+            "startup-options": {
+                "background": {
+                    "mode-hidden-always": "Verborgen bij uitvoeren",
+                    "mode-hidden-boot": "Verborgen bij opstarten/aanmelden",
+                    "mode-none": "Nooit",
+                    "title": "Start toepassing op achtergrond"
+                },
+                "start-with-session" : "Toepassing automatisch starten wanneer mijn sessie wordt gestart",
+                "title": "Opstartopties"
+            },
+            "theme": "Thema"
+        },
+        "section": {
+            "connectivity": "Verbinding",
+            "debug": "Debug",
+            "general": "Algemeen",
+            "privacy": "Privacy",
+            "security": "Beveiliging"
+        },
+        "title": "Voorkeuren"
+    },
+    "search": {
+        "modal": {
+            "no-results": "Geen resultaten...",
+            "result-render-error": "Fout bij het renderen van zoekresultaat"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "Bestand",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "Donker",
+        "light": "Licht"
+    },
+    "update": {
+        "available": "Update beschikbaar: {{version}}",
+        "dialog": {
+            "close-button": "Sluiten",
+            "close-button-title": "Sluit update-informatie",
+            "title": "Upgrade naar {{version}}",
+            "update-button": "Update",
+            "update-button-title": "Update de toepassing nu"
+        },
+        "downloaded": "Update gedownload",
+        "installed-restart": "Herstarten",
+        "ready": "Update gereed: {{version}}",
+        "view": "Bekijken"
+    },
+    "vault-editor": {
+        "locked-state": "Kluis vergrendeld",
+        "pending-state": "Kluis bezig",
+        "unlocked-state": "Kluis ontgrendeld"
+    },
+    "vault-management": {
+        "close-button": "Sluiten",
+        "close-button-title": "Kluisbeheer sluiten",
+        "remove-vault-dialog": {
+            "cancel-button": "Annuleren",
+            "cancel-button-title": "Annuleer verwijderen",
+            "description": "Weet je zeker dat je de kluis \"{{title}}\" wilt verwijderen?",
+            "remove-button": "Verwijderen",
+            "remove-button-title": "Bevestig verwijderen kluis",
+            "title": "Verwijder kluis"
+        },
+        "title": "Kluizen"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "Maak veilig een lokale back-up van je kluis bij het opslaan.",
+            "path": {
+                "helper": "Laat leeg voor standaard pad",
+                "label": "Back-up pad",
+                "placeholder": "Absoluut back-up pad"
+            },
+            "switch": "Lokale back-ups inschakelen",
+            "title": "Back-up"
+        },
+        "biometric": {
+            "description": "Configureer wachtwoordvereiste bij gebruik van biometrie",
+            "enable-password-prompt-count": {
+                "label": "Maximaal aantal biometrische ontgrendelingen voordat je wordt gevraagd het wachtwoord in te voeren",
+                "placeholder": "Aantal biometrische ontgrendelingen",
+                "helper": "Laat leeg of stel in op '0' om uit te schakelen"
+            },
+            "enable-password-prompt-timeout": {
+                "label": "Maximaal aantal dagen voordat je wordt gevraagd het wachtwoord in te voeren",
+                "placeholder": "Aantal dagen",
+                "helper": "Laat leeg of stel in op '0' om uit te schakelen"
+            },
+            "title": "Biometrie"
+        },
+        "format": {
+            "a-description": "Formaat A is het oorspronkelijke Buttercup-kluisformaat dat delta's gebruikt om de kluisstructuur op te slaan.",
+            "b-description": "Formaat B is het nieuwe Buttercup-kluisformaat dat een JSON-structuur gebruikt om de kluisstructuur en -geschiedenis te beheren.",
+            "a-upgrade-b": "Je moet upgraden naar Formaat B, dat momenteel <strong>stabiel</strong> is. Het wordt aanbevolen om een back-up van jouw kluis te maken voordat je dit doet.",
+            "description": "Beheer huidig kluisformaat en updates.",
+            "format-type": "Formaat {{format}}",
+            "title": "Formaat",
+            "upgrade-button": "Upgrade"
+        },
+        "not-unlocked": "Kluis moet ontgrendeld zijn om toegang te krijgen tot dit gebied.",
+        "title": "Kluis instellingen: {{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "Vergrendelen kluis",
+            "remove-vault": "Verwijderen kluis",
+            "unlock-vault": "Ontgrendelen kluis",
+            "vault-settings": "Kluisinstellingen"
+        }
+    }
+}
