@@ -63,6 +63,7 @@ export interface Preferences {
     language: null | string;
     lockVaultsAfterTime: false | number;
     lockVaultsOnWindowClose: boolean;
+    prereleaseUpdates: boolean;
     startMode: AppStartMode;
     startWithSession: boolean;
     uiTheme: ThemeSource;

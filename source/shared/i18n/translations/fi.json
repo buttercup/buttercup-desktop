@@ -250,7 +250,6 @@
         },
         "section": {
             "connectivity": "Yhteydet",
-            "debug": "Vianmääritys",
             "general": "Yleinen",
             "privacy": "Yksityisyys",
             "security": "Turvallisuus"

@@ -22,6 +22,7 @@ export const PREFERENCES_DEFAULT: Preferences = {
     language: null,
     lockVaultsAfterTime: false, // seconds
     lockVaultsOnWindowClose: false,
+    prereleaseUpdates: false,
     startMode: AppStartMode.None,
     startWithSession: false,
     uiTheme: ThemeSource.System

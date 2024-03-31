@@ -36,13 +36,22 @@ export async function getVaultSettings(sourceID: VaultSourceID): Promise<VaultSe
 }
 
 export async function initialise(): Promise<void> {
-    // Run migrations
+    // Initialise config
     const storage = getConfigStorage();
     const config = (await storage.getValues()) as unknown as Config;
+    // Run migrations
     const [updatedConfig, didMigrate] = runConfigMigrations(config);
     if (didMigrate) {
         logInfo("Detected config migration changes");
         await storage.setValues(updatedConfig);
+    }
+    // Fill empty config values
+    for (const key in DEFAULT_CONFIG) {
+        const configKey = key as keyof Config;
+        if (typeof config[configKey] === "undefined") {
+            // Fill value
+            await setConfigValue(configKey, DEFAULT_CONFIG[configKey]);
+        }
     }
     // Initialise preferences
     const preferences = naiveClone(await getConfigValue("preferences"));

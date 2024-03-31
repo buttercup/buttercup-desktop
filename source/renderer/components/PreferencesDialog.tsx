@@ -26,6 +26,7 @@ const LOCK_VAULTS_TIME_MAX = ms("1d") / 1000;
 const PAGE_CONNECTIVITY = "connectivity";
 const PAGE_GENERAL = "general";
 const PAGE_SECURITY = "security";
+const PAGE_UPDATES = "updates";
 const THEME_AUTO_NAME = "Auto (OS)";
 
 const DialogFreeWidth = styled(Dialog)`
@@ -252,6 +253,23 @@ export function PreferencesDialog() {
             </FormGroup>
         </>
     );
+    const pageUpdates = () => (
+        <>
+            <FormGroup label={t("preferences.item.pre-release.title")}>
+                <Callout icon="lab-test" intent={Intent.WARNING}>
+                    <div dangerouslySetInnerHTML={{ __html: t("preferences.item.pre-release.description") }} />
+                </Callout>
+                <Switch
+                    checked={preferences.prereleaseUpdates}
+                    label={t("preferences.item.pre-release.label")}
+                    onChange={(evt: React.ChangeEvent<HTMLInputElement>) => setPreferences({
+                        ...naiveClone(preferences),
+                        prereleaseUpdates: evt.target.checked
+                    })}
+                />
+            </FormGroup>
+        </>
+    );
     // Render
     return (
         <DialogFreeWidth isOpen={showPreferences.get()} onClose={close}>
@@ -283,14 +301,10 @@ export function PreferencesDialog() {
                                     text={t("preferences.section.connectivity")}
                                 />
                                 <Button
-                                    disabled
-                                    icon="eye-off"
-                                    text={t("preferences.section.privacy")}
-                                />
-                                <Button
-                                    disabled
-                                    icon="lab-test"
-                                    text={t("preferences.section.debug")}
+                                    active={currentPage === PAGE_UPDATES}
+                                    icon="updated"
+                                    onClick={() => setCurrentPage(PAGE_UPDATES)}
+                                    text={t("preferences.section.updates")}
                                 />
                             </PreferencesMenu>
                         </PreferencesSidebar>
@@ -298,6 +312,7 @@ export function PreferencesDialog() {
                             {currentPage === PAGE_GENERAL && pageGeneral()}
                             {currentPage === PAGE_SECURITY && pageSecurity()}
                             {currentPage === PAGE_CONNECTIVITY && pageConnectivity()}
+                            {currentPage === PAGE_UPDATES && pageUpdates()}
                         </PageContent>
                     </PreferencesContent>
                 )}
