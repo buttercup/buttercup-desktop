@@ -158,7 +158,7 @@
         "portable",
         "7z"
       ],
-      "publisherName": "Vault Garden"
+      "publisherName": "MadDev Oy"
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
