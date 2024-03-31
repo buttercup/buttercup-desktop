@@ -8,6 +8,7 @@ import { clearDelayedInterval, setDelayedInterval } from "delayable-setinterval"
 import { getMainWindow } from "./windows";
 import { logErr, logInfo, logWarn } from "../library/log";
 import { fileExists } from "../library/file";
+import { getConfigValue } from "./config";
 import { UpdateProgressInfo } from "../types";
 
 const UPDATE_AUTO_CHECK = ms("30m");
@@ -80,6 +81,9 @@ async function checkForUpdateInternal() {
     __currentUpdate = null;
     __readyUpdate = null;
     __updateErrored = false;
+    const usePrerelease = await getConfigValue("prereleaseUpdates");
+    logInfo(`Using pre-release channel for updates: ${usePrerelease ? "yes" : "no"}`);
+    autoUpdater.allowPrerelease = usePrerelease;
     autoUpdater.autoDownload = false;
     autoUpdater.setFeedURL({
         provider: "github",

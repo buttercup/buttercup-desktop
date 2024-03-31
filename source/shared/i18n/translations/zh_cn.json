@@ -250,7 +250,6 @@
         },
         "section": {
             "connectivity": "连接",
-            "debug": "调试",
             "general": "常规",
             "privacy": "隐私",
             "security": "安全"

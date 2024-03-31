@@ -282,7 +282,6 @@
         },
         "section": {
             "connectivity": "Verbinding",
-            "debug": "Debug",
             "general": "Algemeen",
             "privacy": "Privacy",
             "security": "Beveiliging"

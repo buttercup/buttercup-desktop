@@ -263,6 +263,11 @@
             "lock-vaults-after-time-desc": "Automatically lock vaults after some period of inactivity.",
             "lock-vaults-window-closed": "Lock vaults if vault window closed",
             "lock-vaults-window-closed-label": "Lock on close",
+            "pre-release": {
+                "description": "Allow Buttercup to update from the <strong>pre-release channel</strong> in addition to the stable channel. <strong>Use at your own risk</strong>. Pre-release versions are rarely stable and can corrupt vault contents and preferences.",
+                "label": "Enable the pre-release update channel",
+                "title": "Pre-release updates"
+            },
             "secure-file-host": {
                 "description": "The secure file host allows the <strong>Buttercup Browser Extension</strong> to connect to local vaults on this PC via this application.",
                 "label": "Enable secure file host",
@@ -282,10 +287,9 @@
         },
         "section": {
             "connectivity": "Connectivity",
-            "debug": "Debug",
             "general": "General",
-            "privacy": "Privacy",
-            "security": "Security"
+            "security": "Security",
+            "updates": "Updates"
         },
         "title": "Preferences"
     },

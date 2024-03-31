@@ -223,7 +223,6 @@
         },
         "section": {
             "connectivity": "Conectividad",
-            "debug": "Depurar",
             "general": "General",
             "privacy": "Privacidad",
             "security": "Seguridad"
