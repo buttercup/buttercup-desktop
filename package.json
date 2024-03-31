@@ -109,7 +109,15 @@
       "icon": "./resources/build/icon.icns",
       "notarize": {
         "teamId": "9D8F4J769D"
-      }
+      },
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ]
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
