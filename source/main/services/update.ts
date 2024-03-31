@@ -81,9 +81,9 @@ async function checkForUpdateInternal() {
     __currentUpdate = null;
     __readyUpdate = null;
     __updateErrored = false;
-    const usePrerelease = await getConfigValue("prereleaseUpdates");
-    logInfo(`Using pre-release channel for updates: ${usePrerelease ? "yes" : "no"}`);
-    autoUpdater.allowPrerelease = usePrerelease;
+    const prefs = await getConfigValue("preferences");
+    logInfo(`Using pre-release channel for updates: ${prefs.prereleaseUpdates ? "yes" : "no"}`);
+    autoUpdater.allowPrerelease = prefs.prereleaseUpdates;
     autoUpdater.autoDownload = false;
     autoUpdater.setFeedURL({
         provider: "github",
