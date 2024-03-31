@@ -2,11 +2,14 @@ import i18next, { TOptions } from "i18next";
 import translations from "./translations/index";
 import { DEFAULT_LANGUAGE } from "../symbols";
 
+let __lastLanguage: string | null = null;
+
 export async function changeLanguage(lang: string) {
     await i18next.changeLanguage(lang);
 }
 
 export async function initialise(lang: string) {
+    __lastLanguage = lang;
     await i18next.init({
         lng: lang,
         fallbackLng: DEFAULT_LANGUAGE,
@@ -24,7 +27,11 @@ export async function initialise(lang: string) {
 }
 
 export function onLanguageChanged(callback: (lang: string) => void): () => void {
-    const cb = (lang: string) => callback(lang);
+    const cb = (lang: string) => {
+        if (__lastLanguage === lang) return;
+        __lastLanguage = lang;
+        callback(lang);
+    };
     i18next.on("languageChanged", cb);
     return () => {
         i18next.off("languageChanged", cb);
