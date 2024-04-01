@@ -5,9 +5,15 @@ import { logErr } from "../library/log";
 import { showError } from "../services/notifications";
 import { VaultSourceDescription } from "../types";
 
-export function useSourceDetails(sourceID: VaultSourceID): [VaultSourceDescription, () => void] {
-    const [details, setDetails] = useState<VaultSourceDescription>(null);
+export function useSourceDetails(
+    sourceID: VaultSourceID | null
+): [VaultSourceDescription | null, () => void] {
+    const [details, setDetails] = useState<VaultSourceDescription | null>(null);
     const updateDescription = useCallback(() => {
+        if (sourceID === null) {
+            setDetails(null);
+            return;
+        }
         ipcRenderer
             .invoke("get-vault-description", sourceID)
             .then((desc: VaultSourceDescription) => {

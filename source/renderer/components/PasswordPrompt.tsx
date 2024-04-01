@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useSingleState } from "react-obstate";
 import { Button, Classes, Colors, Dialog, FormGroup, InputGroup, Intent, NonIdealState } from "@blueprintjs/core";
 import { Layerr } from "layerr";
@@ -12,6 +12,7 @@ import { getVaultSettings, saveVaultSettings } from "../services/vaultSettings";
 import { showError } from "../services/notifications";
 import { logErr, logInfo } from "../library/log";
 import { t } from "../../shared/i18n/trans";
+import { useSourceDetails } from "../hooks/vault";
 import { VAULT_SETTINGS_DEFAULT } from "../../shared/symbols";
 import { VaultSettingsLocal } from "../../shared/types";
 
@@ -29,6 +30,15 @@ const FallbackText = styled.i`
     display: block;
     margin-bottom: 12px;
 `;
+const TitleSeparator = styled.span`
+    color: ${Colors.GRAY1};
+    font-weight: bold;
+    padding: 0px 6px;
+`;
+const VaultName = styled.span`
+    font-weight: 600;
+    font-style: italic;
+`;
 
 export function PasswordPrompt() {
     const emitter = useMemo(getPasswordEmitter, []);
@@ -37,6 +47,7 @@ export function PasswordPrompt() {
     const [currentPassword, setCurrentPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [sourceID] = useSingleState(VAULTS_STATE, "currentVault");
+    const [sourceDetails] = useSourceDetails(sourceID);
     const [settings, setSettings] = useState<VaultSettingsLocal | null>(null);
     const [promptedBiometrics, setPromptedBiometrics] = useState<boolean>(false);
     // Callbacks
@@ -145,7 +156,15 @@ export function PasswordPrompt() {
     // Render
     return (
         <Dialog isOpen={showPrompt} onClose={closePrompt}>
-            <div className={Classes.DIALOG_HEADER}>{t("dialog.password-prompt.title")}</div>
+            <div className={Classes.DIALOG_HEADER}>
+                <span>{t("dialog.password-prompt.title")}</span>
+                {sourceDetails && (
+                    <Fragment>
+                        <TitleSeparator>•</TitleSeparator>
+                        <VaultName>{sourceDetails.name}</VaultName>
+                    </Fragment>
+                )}
+            </div>
             <div className={Classes.DIALOG_BODY}>
                 {promptType === PromptType.Password && (
                     <>
