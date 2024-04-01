@@ -1,5 +1,5 @@
 {
-    "_": "Dutch (NL)",
+    "_": "Nederlands (NL)",
     "about": {
         "description": "Een gratis, open-source en cross-platform wachtwoord manager.",
         "dialog": {
@@ -14,7 +14,7 @@
     },
     "add-vault-menu": {
         "choose-file-prompt": "Kies een kluisbestand of maak een nieuwe kluis aan:",
-        "choose-type-prompt": "Kies een kluis type om toe te voegen:",
+        "choose-type-prompt": "Kies een kluistype om toe te voegen:",
         "confirm": {
             "existing-password": "Voer het primaire kluiswachtwoord in:",
             "new-password": "Voer het nieuwe primaire kluiswachtwoord in:",
@@ -41,7 +41,7 @@
                 "password-plc": "WebDAV wachtwoord",
                 "url-label": "WebDAV service",
                 "username-label": "Gebruikersnaam",
-                "username-plc": "WebDAV wachtwoord"
+                "username-plc": "WebDAV gebruikersnaam"
             }
         },
         "page-choose-next": "Volgende",
@@ -83,7 +83,7 @@
         "unlocked-vaults": "{{count}} ontgrendelde kluis",
         "unlocked-vaults_plural": "{{count}} ontgrendelde kluizen",
         "vaults": "Kluizen",
-        "view": "Bekijken",
+        "view": "Weergave",
         "window": "Venster",
         "window-reposition": "Herpositioneren"
     },
@@ -115,8 +115,8 @@
             "button-cancel-title": "Annuleer registratie",
             "button-reg": "Registreren",
             "button-reg-title": "Registreer biometrie",
-            "label": "Kluis wachtwoord",
-            "placeholder": "Kluis wachtwoord...",
+            "label": "Kluiswachtwoord",
+            "placeholder": "Kluiswachtwoord...",
             "success": "Biometrie succesvol geregistreerd",
             "title": "Registreer biometrie"
         },
@@ -191,6 +191,10 @@
             "biometric-fallback": {
                 "unlock-count-exceeded": "Maximum biometrische ontgrendelingen bereikt: wachtwoord vereist",
                 "unlock-period-exceeded": "Biometrische ontgrendeltijd verlopen: wachtwoord vereist"
+            },
+            "biometrics-enabled": {
+                "description": "Gebruik biometrische verificatie om automatisch te ontgrendelen of annuleer om in te loggen met een wachtwoord.",
+                "title": "Biometrische authenticatie actief"
             },
             "button-cancel": "Annuleren",
             "button-cancel-title": "Ontgrendeling annuleren",
@@ -340,9 +344,9 @@
         "backup": {
             "description": "Maak veilig een lokale back-up van je kluis bij het opslaan.",
             "path": {
-                "helper": "Laat leeg voor standaard pad",
-                "label": "Back-up pad",
-                "placeholder": "Absoluut back-up pad"
+                "helper": "Laat leeg voor standaardpad",
+                "label": "Back-uppad",
+                "placeholder": "Absoluut back-uppad"
             },
             "switch": "Lokale back-ups inschakelen",
             "title": "Back-up"
@@ -371,7 +375,7 @@
             "upgrade-button": "Upgrade"
         },
         "not-unlocked": "Kluis moet ontgrendeld zijn om toegang te krijgen tot dit gebied.",
-        "title": "Kluis instellingen: {{title}}"
+        "title": "Kluisinstellingen: {{title}}"
     },
     "vault-tabs": {
         "context-menu": {
