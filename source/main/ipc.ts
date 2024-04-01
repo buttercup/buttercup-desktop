@@ -351,9 +351,9 @@ ipcMain.handle("start-current-update", async () => {
 ipcMain.handle("toggle-auto-update", async (_, enable: boolean) => {
     await toggleAutoUpdate(enable);
     if (enable) {
-        logInfo("Enabled auto-update");
+        logInfo("Enabled vault auto-update");
     } else {
-        logInfo("Disabled auto-update");
+        logInfo("Disabled vault auto-update");
     }
 });
 

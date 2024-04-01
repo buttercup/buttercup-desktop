@@ -1,5 +1,6 @@
 import { app } from "electron";
 import { isOSX } from "../../shared/library/platform";
+import { disableUpdates } from "./update";
 
 let __autostarted = false,
     __showMainWindow = true;
@@ -21,6 +22,9 @@ export function processLaunchConfiguration() {
     }
     if (cl.hasSwitch("autostart")) {
         __autostarted = true;
+    }
+    if (cl.hasSwitch("no-update")) {
+        disableUpdates();
     }
 }
 

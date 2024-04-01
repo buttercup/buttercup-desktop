@@ -92,6 +92,7 @@ The following arguments can be provided to Buttercup, but are all optional.
 |-----------------------|---------------------------------------|
 | `--autostart`         | Flag passed to Buttercup when launched automatically by the OS. |
 | `--hidden`            | Disables the automatic opening of the main window upon launch. |
+| `--no-update`         | Disables automatic update checking. **Not recommended**: Use at your own risk. |
 
 ### App config
 
