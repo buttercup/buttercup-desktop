@@ -20,16 +20,17 @@ let __eventListenersAttached = false,
     __readyUpdate: UpdateInfo = null,
     __updateCheckTimer: string = null,
     __updateErrored: boolean = false,
-    __updateMuted: boolean = false;
+    __updateMuted: boolean = false,
+    __updatesDisabled: boolean = false;
 
 function attachEventListeners(updater = autoUpdater) {
     updater.on("error", (err: Error) => {
         __updateErrored = true;
         if (err?.message === "net::ERR_INTERNET_DISCONNECTED") {
-            logInfo("Update failed due to no internet connection");
+            logInfo("Updates: Update failed due to no internet connection");
             return;
         }
-        logErr("Error processing update", err);
+        logErr("Updates: Error processing update", err);
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-error", err.message);
@@ -42,9 +43,9 @@ function attachEventListeners(updater = autoUpdater) {
         }
     });
     updater.on("update-available", (updateInfo: UpdateInfo) => {
-        logInfo(`Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
+        logInfo(`Updates: Update available: ${updateInfo.version} (${updateInfo.releaseDate})`);
         if (__updateMuted) {
-            logInfo("Updates muted: will not notify");
+            logInfo("Updates: Updates muted: will not notify");
             return;
         }
         const win = getMainWindow();
@@ -53,16 +54,16 @@ function attachEventListeners(updater = autoUpdater) {
         }
     });
     updater.on("update-not-available", () => {
-        logInfo("No update available");
+        logInfo("Updates: No update available");
     });
     updater.on("update-downloaded", (updateInfo: UpdateInfo) => {
-        logInfo(`Update downloaded: ${updateInfo.version}`);
+        logInfo(`Updates: Updated build downloaded: ${updateInfo.version}`);
         const win = getMainWindow();
         if (win) {
             win.webContents.send("update-progress", JSON.stringify(null));
         }
         if (__updateErrored) {
-            logWarn("Skipping update-ready notification due to preview error");
+            logWarn("Updates: Skipping update-ready notification due to preview error");
             return;
         }
         __readyUpdate = updateInfo;
@@ -74,6 +75,7 @@ function attachEventListeners(updater = autoUpdater) {
 }
 
 async function checkForUpdateInternal() {
+    if (__updatesDisabled) return;
     if (!__eventListenersAttached) {
         __eventListenersAttached = true;
         attachEventListeners();
@@ -82,7 +84,9 @@ async function checkForUpdateInternal() {
     __readyUpdate = null;
     __updateErrored = false;
     const prefs = await getConfigValue("preferences");
-    logInfo(`Using pre-release channel for updates: ${prefs.prereleaseUpdates ? "yes" : "no"}`);
+    logInfo(
+        `Updates: Using pre-release channel for updates: ${prefs.prereleaseUpdates ? "yes" : "no"}`
+    );
     autoUpdater.allowPrerelease = prefs.prereleaseUpdates;
     autoUpdater.autoDownload = false;
     autoUpdater.setFeedURL({
@@ -93,18 +97,26 @@ async function checkForUpdateInternal() {
     if (isDev) {
         const hasDevConfig = await hasDevUpdate();
         if (!hasDevConfig) {
-            logInfo("Will not check for updates: In dev mode with no dev-app-update.yml");
+            logInfo("Updates: Will not check for updates: In dev mode with no dev-app-update.yml");
             return;
         }
     }
     logInfo("Checking for updates");
     try {
         await autoUpdater.checkForUpdates();
-    } catch (err) {}
+    } catch (err) {
+        logErr(`Updates: Update check failed: ${err.message}`);
+        logErr(err);
+    }
+}
+
+export function disableUpdates(): void {
+    __updatesDisabled = true;
+    logInfo("Updates: Updates have been manually disabled");
 }
 
 export function getCurrentUpdate(): UpdateInfo {
-    return !__updateMuted && __currentUpdate ? __currentUpdate : null;
+    return !__updateMuted && __currentUpdate && !__updatesDisabled ? __currentUpdate : null;
 }
 
 export function getReadyUpdate(): UpdateInfo {
@@ -120,7 +132,7 @@ export function installUpdate() {
 }
 
 export function muteUpdate() {
-    logInfo("Update notification muted");
+    logInfo("Updates: Update notification muted");
     __updateMuted = true;
 }
 
