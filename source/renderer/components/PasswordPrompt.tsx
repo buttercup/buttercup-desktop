@@ -206,8 +206,8 @@ export function PasswordPrompt() {
                 {promptType === PromptType.Biometric && (
                     <NonIdealState
                         icon="hand"
-                        title="Biometric authentication active"
-                        description="Complete biometric authentication to unlock automatically, or cancel it to show a password input."
+                        title={t("dialog.password-prompt.biometrics-enabled.title")}
+                        description={t("dialog.password-prompt.biometrics-enabled.description")}
                     />
                 )}
             </div>

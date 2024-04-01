@@ -192,6 +192,10 @@
                 "unlock-count-exceeded": "Maximum biometric unlock count exceeded: password required",
                 "unlock-period-exceeded": "Biometric unlock time period expired: password required"
             },
+            "biometrics-enabled": {
+                "description": "Use biometric authentication to unlock automatically, or cancel to log in with a password.",
+                "title": "Biometric authentication active"
+            },
             "button-cancel": "Cancel",
             "button-cancel-title": "Cancel unlock",
             "button-unlock": "Unlock",
