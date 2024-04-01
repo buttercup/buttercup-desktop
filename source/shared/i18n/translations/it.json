@@ -263,7 +263,12 @@
             "lock-vaults-after-time-desc": "Blocca automaticamente gli archivi dopo un periodo di inattività.",
             "lock-vaults-window-closed": "Blocca gli archivi se la finestra viene chiusa",
             "lock-vaults-window-closed-label": "Blocco alla chiusura",
-            "secure-file-host": {
+             "pre-release": {
+                "description": "Consenti a Buttercup di aggiornarsi dal <strong>canale pre-release</strong> oltre al canale stabile. <strong>Usalo a tuo rischio</strong>. Le versioni pre-release sono raramente stabili e possono danneggiare i contenuti e le preferenze dell'archivio.",
+                "label": "Abilita canale aggiornamento pre-release",
+                "title": "Aggiornamenti pre-release"
+            },
+           "secure-file-host": {
                 "description": "Il file sicuro host consente all'<strong>Estensione browser Buttercup</strong> di connettersi agli archivi locali in questo computer tramite questa applicazione.",
                 "label": "Abilita file sicuro host",
                 "title": "Host file sicuro"
@@ -282,9 +287,9 @@
         },
         "section": {
             "connectivity": "Connettività",
-            "general": "Generale",
-            "privacy": "Privacy",
-            "security": "Sicurezza"
+            "debug": "Debug",
+            "security": "Sicurezza",
+            "updates": "Aggiornamenti"
         },
         "title": "Preferenze"
     },
