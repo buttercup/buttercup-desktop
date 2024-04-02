@@ -192,6 +192,10 @@
                 "unlock-count-exceeded": "N. massimo sblocchi biometrici superato: richiesta password",
                 "unlock-period-exceeded": "Periodo sblocco biometrico scaduto: richiesta password"
             },
+            "biometrics-enabled": {
+                "description": "Usa l'autenticazione biometrica per sbloccare automaticamente o Annulla per accedere con una password.",
+                "title": "Autenticazione biometrica attiva"
+            },
              "button-cancel": "Annulla",
             "button-cancel-title": "Annulla sblocco",
             "button-unlock": "Sblocca",
