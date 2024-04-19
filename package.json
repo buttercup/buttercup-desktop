@@ -111,6 +111,7 @@
         "teamId": "9D8F4J769D"
       },
       "mergeASARs": false,
+      "singleArchFiles": "Contents/**/*",
       "target": [
         {
           "target": "dmg",
