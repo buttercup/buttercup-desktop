@@ -15,8 +15,8 @@ jobs:
       matrix:
         include:
         - os: macos-latest
-          NODE_ARCHITECTURE: x64
-          ELECTRON_ARGS: --x64
+          NODE_ARCHITECTURE: ""
+          ELECTRON_ARGS: --universal
 
         - os: ubuntu-latest
           NODE_ARCHITECTURE: x64
@@ -33,7 +33,7 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 20
           architecture: ${{matrix.NODE_ARCHITECTURE}}
 
       - name: Build & Release app
