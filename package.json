@@ -110,6 +110,7 @@
       "notarize": {
         "teamId": "9D8F4J769D"
       },
+      "mergeASARs": false,
       "target": [
         {
           "target": "dmg",
