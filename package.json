@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.28.0-4",
+  "version": "2.27.0",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -109,17 +109,7 @@
       "icon": "./resources/build/icon.icns",
       "notarize": {
         "teamId": "9D8F4J769D"
-      },
-      "mergeASARs": false,
-      "singleArchFiles": "Contents/**/*",
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "universal"
-          ]
-        }
-      ]
+      }
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",

@@ -15,8 +15,8 @@ jobs:
       matrix:
         include:
         - os: macos-latest
-          NODE_ARCHITECTURE: ""
-          ELECTRON_ARGS: --universal
+          NODE_ARCHITECTURE: x64
+          ELECTRON_ARGS: --x64
 
         - os: ubuntu-latest
           NODE_ARCHITECTURE: x64
