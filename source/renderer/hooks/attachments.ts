@@ -1,4 +1,4 @@
-import { VaultSourceID } from "buttercup";
+import { EntryID, VaultSourceID } from "buttercup";
 import { useCallback, useEffect, useState } from "react";
 import { useState as useHookState } from "@hookstate/core";
 import { Layerr } from "layerr";
@@ -18,7 +18,7 @@ export function useAttachments(sourceID: VaultSourceID) {
     const appBusyState = useHookState(BUSY);
     const [attachmentPreviews, setAttachmentPreviews] = useState({});
     const addAttachments = useCallback(
-        async (entryID, files) => {
+        async (entryID: EntryID, files) => {
             appBusyState.set(true);
             try {
                 await _addAttachments(sourceID, entryID, files);
@@ -30,7 +30,7 @@ export function useAttachments(sourceID: VaultSourceID) {
         [sourceID, appBusyState]
     );
     const deleteAttachment = useCallback(
-        async (entryID, attachmentID) => {
+        async (entryID: EntryID, attachmentID: string) => {
             appBusyState.set(true);
             try {
                 await _deleteAttachment(sourceID, entryID, attachmentID);
@@ -42,7 +42,7 @@ export function useAttachments(sourceID: VaultSourceID) {
         [attachmentPreviews, sourceID, appBusyState]
     );
     const downloadAttachment = useCallback(
-        async (entryID, attachmentID) => {
+        async (entryID: EntryID, attachmentID: string) => {
             appBusyState.set(true);
             try {
                 const didDownload = await _downloadAttachment(sourceID, entryID, attachmentID);
@@ -55,7 +55,7 @@ export function useAttachments(sourceID: VaultSourceID) {
         [sourceID, appBusyState]
     );
     const previewAttachment = useCallback(
-        async (entryID, attachmentID) => {
+        async (entryID: EntryID, attachmentID: string) => {
             if (attachmentPreviews[attachmentID]) return;
             try {
                 const data: Uint8Array = await _getAttachmentData(sourceID, entryID, attachmentID);

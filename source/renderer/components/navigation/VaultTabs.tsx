@@ -11,6 +11,7 @@ import { showVaultSettingsForSource } from "../../state/vaultSettings";
 import { t } from "../../../shared/i18n/trans";
 
 export interface Tab {
+    available: boolean;
     content: string;
     icon: string;
     id: VaultSourceID;
@@ -83,12 +84,12 @@ export function VaultTabs(props: VaultTabsProps) {
     const { onAddVault, onLockVault, onRemoveVault, onReorder, onSelectVault, onUnlockVault, sourceID } = props;
     const [rawVaults] = useSingleState(VAULTS_STATE, "vaultsList");
     const vaults = useMemo(() => sortVaults(rawVaults), [rawVaults]);
-    const tabs: Array<Tab> = useMemo(() => vaults.map(vault => ({
+    const tabs = useMemo(() => vaults.map(vault => ({
         content: vault.name,
         id: vault.id,
         icon: getIconForProvider(vault.type),
         available: vault.state === VaultSourceStatus.Unlocked
-    })), [vaults]);
+    } satisfies Tab)), [vaults]);
     return (
         <Tabs
             menu={(props: Partial<TabMenuProps> & { id: VaultSourceID; }) => (
