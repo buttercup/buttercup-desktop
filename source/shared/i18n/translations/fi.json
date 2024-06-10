@@ -334,5 +334,106 @@
             "unlock-vault": "Avaa holvin lukitus",
             "vault-settings": "Holvin asetukset"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Peruuta",
+                "cancel-title": "Peruuta liitteen poistaminen",
+                "delete": "Poista",
+                "delete-prompt": "Tämän liitteen poistaminen poistaa sen pysyvästi holvistasi.\nOletko varma että haluat poistaa sen?",
+                "delete-prompt-title": "Poista \"{{title}}\"",
+                "delete-title": "Vahvista liitteen poistaminen"
+            },
+            "delete": "Poista",
+            "delete-title": "Poista liite",
+            "download": "Lataa",
+            "download-title": "Lataa liite",
+            "drop-files": "Raahaa tiedosto(t) lisätäksesi holviin",
+            "drop-instruction": "Raahaa ja pudota lisätäksesi liitteitä"
+        },
+        "cancel": "Peruuta",
+        "custom-fields": {
+            "change-type": "Vaihda muoto:",
+            "delete-field": "Poista kenttä",
+            "field-type": {
+                "text": "Teksti (default)",
+                "note": "Muistiinpano",
+                "password": "Salasana",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Miksi et loisi uutta?",
+            "documents": "Dokumentit",
+            "filter-placeholder": "Suodata...",
+            "filters-no-matches": "Ei osumia",
+            "no-entries": "Ei dokumentteja",
+            "sort": {
+                "alphabetical-asc": "Aakkosjärjestys (nouseva)",
+                "alphabetical-desc": "Aakkosjärjestys (laskeva)",
+                "filter": "Suodata"
+            },
+            "trash": "Roskakori",
+            "trash-empty": "Se on tyhjä"
+        },
+        "entry": {
+            "add-custom-field-btn": "Lisää mukautettu kenttä",
+            "attachments": "Liitteet",
+            "cancel-edit": "Peruuta",
+            "custom-fields": "Mukautetut kentät",
+            "edit": "Muokkaa",
+            "edit-document": "Muokkaa dokumenttia",
+            "none-selected": {
+                "message": "Valitse tai luo uusi dokumentti",
+                "title": "Ei dokumenttia valittuna"
+            },
+            "save": "Tallenna",
+            "trash-move": {
+                "message": "Oletko varma että haluat siirtää tämän dokumentin Roskakoriin?",
+                "title": "Vahvista siirto Roskakoriin",
+                "trash-btn": "Siirrä Roskakoriin"
+            },
+            "untitled": "(Untitled)"
+        },
+        "entry-menu": {
+            "move-to": "Siirrä...",
+            "move-to-parent": "Siirrä {{group}}",
+            "move-to-trash": "Siirrä Roskakoriin"
+        },
+        "entry-type": {
+            "default-label": "Oletus",
+            "title": {
+                "credit_card": "Luotto-/pankkikortti",
+                "login": "Sisäänkirjautuminen",
+                "note": "Muistiinpano",
+                "ssh_key": "SSH-avain",
+                "website": "Nettisivu"
+            }
+        },
+        "group": {
+            "header": "Ryhmät",
+            "prompt": {
+                "cancel": "Peruuta",
+                "create": "Luo ryhmä",
+                "message": "Lisää ryhmän nimi:",
+                "rename": "Nimeä ryhmä uudelleen",
+                "save": "Tallenna"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Lisää uusi ryhmä",
+            "move-to": "Siirrä...",
+            "move-to-parent": "Siirrä {{group}}",
+            "move-to-root": "Siirrä juuritasolle",
+            "move-to-trash": "Siirrä Roskakoriin",
+            "rename-group": "Nimeä uudelleen"
+        },
+        "new-entry": {
+            "cta": "Uusi dokumentti"
+        },
+        "trash": {
+            "header": "Roskakori"
+        }
     }
 }

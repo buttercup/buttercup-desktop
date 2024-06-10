@@ -284,5 +284,125 @@
         "context-menu": {
             "unlock-vault": "Deschide"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Anulează",
+                "cancel-title": "Anulează ștergerea atașamentului",
+                "delete": "Șterge",
+                "delete-prompt": "Ștergând atașamentul, acesta va fi înlăturat permanent din seif.\nEști sigur(ă) ca doriți să-l ștergeți?",
+                "delete-prompt-title": "Șterge \"{{title}}\"",
+                "delete-title": "Confirmă ștergerea atașamentului"
+            },
+            "delete": "Șterge",
+            "delete-title": "Șterge atașamentul",
+            "download": "Descarcă",
+            "download-title": "Descarcă atașamentul",
+            "drop-files": "Plasează fișierul/fișierele pentru a le adăuga în seif",
+            "drop-instruction": "Folosește funcția de tragere și plasare pentru a adăuga atașamente"
+        },
+        "cancel": "Anulează",
+        "custom-fields": {
+            "change-type": "Schimbă Tipul:",
+            "delete-field": "Șterge Câmpul",
+            "field-type": {
+                "text": "Text (implicit)",
+                "note": "Notiță",
+                "password": "Parolă",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "De ce n-ai crea unul?",
+            "documents": "Documente",
+            "filter-placeholder": "Filtru...",
+            "filters-no-matches": "Niciun rezultat",
+            "no-entries": "Niciun Document",
+            "sort": {
+                "alphabetical-asc": "Alfabetic (crescător)",
+                "alphabetical-desc": "Alfabetic (descrescător)",
+                "filter": "Filtru"
+            },
+            "trash": "Coș de Gunoi",
+            "trash-empty": "Coșul este gol"
+        },
+        "entry": {
+            "add-custom-field-btn": "Adaugă Câmp Personalizat",
+            "attachments": "Atașamente",
+            "cancel-edit": "Anulează",
+            "click-to-edit": "Fă click pentru a edita",
+            "custom-fields": "Câmpuri Personalizate",
+            "edit": "Modifică",
+            "edit-document": "Modifică Documentul",
+            "field-controls": {
+                "password": {
+                    "hide": "Ascunde",
+                    "reveal": "Dezvăluie"
+                }
+            },
+            "none-selected": {
+                "message": "Selectează sau creează un nou document",
+                "title": "Niciun document selectat"
+            },
+            "save": "Salvează",
+            "save-disabled-title": {
+                "readonly": "Modificarea nu este posibilă momentan",
+                "untitled": "Titlul unor câmpuri lipsește"
+            },
+            "trash-move": {
+                "message": "Ești sigur(ă) că dorești să muți această intrare în Coșul de Gunoi?",
+                "title": "Confirmă mutarea în Coșul de Gunoi",
+                "trash-btn": "Mută în Coșul de Gunoi"
+            },
+            "untitled": "(Fără titlu)"
+        },
+        "entry-menu": {
+            "move-to": "Mută în...",
+            "move-to-parent": "Mută în {{group}}",
+            "move-to-trash": "Mută în Coșul de Gunoi"
+        },
+        "entry-type": {
+            "default-label": "Implicit",
+            "title": {
+                "credit_card": "Card Credit/Bancar",
+                "login": "Date de Logare",
+                "note": "Notiță",
+                "ssh_key": "Cheie SSH",
+                "website": "Site Web"
+            }
+        },
+        "group": {
+            "header": "Grupuri",
+            "prompt": {
+                "cancel": "Anulează",
+                "create": "Creează Grup",
+                "message": "Introdu titlul grupului:",
+                "rename": "Redenumește Grupul",
+                "save": "Salvează"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Adaugă Grup Nou",
+            "move-to": "Mută în...",
+            "move-to-parent": "Mută în {{group}}",
+            "move-to-root": "Mută la nivelul de bază",
+            "move-to-trash": "Move în Coșul de Gunoi",
+            "rename-group": "Redenumește"
+        },
+        "new-entry": {
+            "cta": "Intrare Nouă"
+        },
+        "trash": {
+            "close-button": "Închide",
+            "empty-button-title": "Golește Coșul de Gunoi",
+            "empty-confirm-dialog": {
+                "cancel-button": "Anulează",
+                "confirm-button": "Golește",
+                "message": "Ești sigur(ă) că dorești să golești coșul de gunoi?",
+                "title": "Golește Coșul"
+            },
+            "header": "Coș de Gunoi"
+        }
     }
 }

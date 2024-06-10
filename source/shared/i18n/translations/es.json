@@ -275,5 +275,106 @@
         "context-menu": {
             "unlock-vault": "Desbloquear"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Cancelar",
+                "cancel-title": "Cancelar la eliminación de fichero adjunto",
+                "delete": "Borrar",
+                "delete-prompt": "Si borras este fichero adjunto, se eliminará de forma permanente de tu bóveda.\n¿Está seguro que desea eliminarlo?",
+                "delete-prompt-title": "Borrar \"{{title}}\"",
+                "delete-title": "Confirmar borrado de ficheros"
+            },
+            "delete": "Borrar",
+            "delete-title": "Borrar fichero adjunto",
+            "download": "Descargar",
+            "download-title": "Descargar fichero adjunto",
+            "drop-files": "Arrastre fichero(s) para añadirlos a la bóveda",
+            "drop-instruction": "Arrastre y suelte para añadir ficheros adjuntos"
+        },
+        "cancel": "Cancelar",
+        "custom-fields": {
+            "change-type": "Tipo de cambio:",
+            "delete-field": "Borrar campo",
+            "field-type": {
+                "text": "Texto (por defecto)",
+                "note": "Nota",
+                "password": "Contraseña",
+                "otp": "Contraseña de un solo uso"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "¿Por qué no crear uno?",
+            "documents": "Documentos",
+            "filter-placeholder": "Filtro...",
+            "filters-no-matches": "No hay coincidencias",
+            "no-entries": "Sin documentos",
+            "sort": {
+                "alphabetical-asc": "Orden alfabético (ascendente)",
+                "alphabetical-desc": "Orden alfabético (descendente)",
+                "filter": "Filtro"
+            },
+            "trash": "Papelera",
+            "trash-empty": "Está vacía"
+        },
+        "entry": {
+            "add-custom-field-btn": "Añadir campo personalizado",
+            "attachments": "Adjuntos",
+            "cancel-edit": "Cancelar",
+            "custom-fields": "Campo personalizado",
+            "edit": "Editar",
+            "edit-document": "Editar documento",
+            "none-selected": {
+                "message": "Seleccione o cree un nuevo documento",
+                "title": "Ningún documento seleccionado"
+            },
+            "save": "Guardar",
+            "trash-move": {
+                "message": "¿Está seguro que desea mover esta entrada a la papelera?",
+                "title": "Confirmación para mover a la papelera",
+                "trash-btn": "Mover a la papelera"
+            },
+            "untitled": "(Sin título)"
+        },
+        "entry-menu": {
+            "move-to": "Mover a...",
+            "move-to-parent": "Mover a {{group}}",
+            "move-to-trash": "Mover a la papelera"
+        },
+        "entry-type": {
+            "default-label": "Por defecto",
+            "title": {
+                "credit_card": "Tarjeta de crédito/débito",
+                "login": "Inicio de sesión",
+                "note": "Nota",
+                "ssh_key": "Clave SSH",
+                "website": "Sitio web"
+            }
+        },
+        "group": {
+            "header": "Grupo",
+            "prompt": {
+                "cancel": "Cancelar",
+                "create": "Crear grupo",
+                "message": "Introduzca nombre para el grupo:",
+                "rename": "Renombrar grupo",
+                "save": "Guardar"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Añadir nuevo grupo",
+            "move-to": "Mover a...",
+            "move-to-parent": "Mover a {{group}}",
+            "move-to-root": "Mover a la raíz",
+            "move-to-trash": "Mover a la papelera",
+            "rename-group": "Renombrar"
+        },
+        "new-entry": {
+            "cta": "Nueva entrada"
+        },
+        "trash": {
+            "header": "Papelera"
+        }
     }
 }

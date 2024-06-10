@@ -319,7 +319,7 @@ const Attachments = ({
         <AttachmentsContainer>
             {attachments.length === 0 && (
                 <AttachmentDropInstruction>
-                    {t("attachments.drop-instruction")}
+                    {t("vault-ui.attachments.drop-instruction")}
                 </AttachmentDropInstruction>
             )}
             {attachments.map(attachment => {
@@ -422,18 +422,18 @@ const Attachments = ({
                             <Button
                                 intent={Intent.PRIMARY}
                                 onClick={() => onDownloadAttachment(previewingAttachment)}
-                                title={t("attachments.download-title")}
+                                title={t("vault-ui.attachments.download-title")}
                             >
-                                {t("attachments.download")}
+                                {t("vault-ui.attachments.download")}
                             </Button>
                             &nbsp;
                             <Button
                                 intent={Intent.DANGER}
                                 onClick={() => setDeletingAttachment(previewingAttachment)}
-                                title={t("attachments.delete-title")}
+                                title={t("vault-ui.attachments.delete-title")}
                                 disabled={readOnly}
                             >
-                                {t("attachments.delete")}
+                                {t("vault-ui.attachments.delete")}
                             </Button>
                         </div>
                     </Fragment>
@@ -448,8 +448,8 @@ const Attachments = ({
                             })}
                         </div>
                         <div className={Classes.DIALOG_BODY}>
-                            {t("attachments.confirm.delete-prompt")
-                                .split("\n")
+                            {t("vault-ui.attachments.confirm.delete-prompt")
+                                .split("vault-ui.\n")
                                 .map(line => (
                                     <p>{line}</p>
                                 ))}
@@ -464,16 +464,16 @@ const Attachments = ({
                                         setPreviewingAttachment(null);
                                         attachmentItem && onDeleteAttachment(attachmentItem);
                                     }}
-                                    title={t("attachments.confirm.delete-title")}
+                                    title={t("vault-ui.attachments.confirm.delete-title")}
                                     disabled={readOnly}
                                 >
-                                    {t("attachments.confirm.delete")}
+                                    {t("vault-ui.attachments.confirm.delete")}
                                 </Button>
                                 <Button
                                     onClick={() => setDeletingAttachment(null)}
-                                    title={t("attachments.confirm.cancel-title")}
+                                    title={t("vault-ui.attachments.confirm.cancel-title")}
                                 >
-                                    {t("attachments.confirm.cancel")}
+                                    {t("vault-ui.attachments.confirm.cancel")}
                                 </Button>
                             </div>
                         </div>
@@ -533,8 +533,8 @@ const FieldText = ({ entryFacade, field }) => {
                     <Button
                         text={
                             visible
-                                ? t("entry.field-controls.password.hide")
-                                : t("entry.field-controls.password.reveal")
+                                ? t("vault-ui.entry.field-controls.password.hide")
+                                : t("vault-ui.entry.field-controls.password.reveal")
                         }
                         small
                         onClick={() => toggleVisibility(!visible)}
@@ -644,7 +644,7 @@ const FieldRow = ({
     const label =
         editing && field.removeable ? (
             <EditableText
-                placeholder={t("entry.click-to-edit")}
+                placeholder={t("vault-ui.entry.click-to-edit")}
                 value={field.property}
                 onChange={value => {
                     onFieldNameUpdate(field, value);
@@ -663,7 +663,7 @@ const FieldRow = ({
             {FIELD_TYPE_OPTIONS.map(fieldTypeOption => (
                 <MenuItem
                     key={fieldTypeOption.type}
-                    text={`${t("custom-fields.change-type")} ${t(fieldTypeOption.i18nKey)}`}
+                    text={`${t("vault-ui.custom-fields.change-type")} ${t(fieldTypeOption.i18nKey)}`}
                     icon={fieldTypeOption.icon}
                     labelElement={
                         field.valueType === fieldTypeOption.type ? <Icon icon="small-tick" /> : undefined
@@ -675,7 +675,7 @@ const FieldRow = ({
             ))}
             <MenuDivider />
             <MenuItem
-                text={t("custom-fields.delete-field")}
+                text={t("vault-ui.custom-fields.delete-field")}
                 icon="trash"
                 onClick={() => onRemoveField(field)}
             />
@@ -833,7 +833,7 @@ const EntryDetailsContent = () => {
     return (
         <>
             <PaneHeader
-                title={editing ? t("entry.edit-document") : title(entry, t("entry.untitled"))}
+                title={editing ? t("vault-ui.entry.edit-document") : title(entry, t("vault-ui.entry.untitled"))}
             />
             <PaneContent>
                 {entry?.type === EntryType.CreditCard && (
@@ -855,7 +855,7 @@ const EntryDetailsContent = () => {
                 </FormContainer>
                 {editing || removeableFields.length > 0 && (
                     <CustomFieldsHeading>
-                        <span>{t("entry.custom-fields")}</span>
+                        <span>{t("vault-ui.entry.custom-fields")}</span>
                     </CustomFieldsHeading>
                 )}
                 {removeableFields.length > 0 && (
@@ -877,14 +877,14 @@ const EntryDetailsContent = () => {
                 {editing && (
                     <Button
                         onClick={onAddField}
-                        text={t("entry.add-custom-field-btn")}
+                        text={t("vault-ui.entry.add-custom-field-btn")}
                         icon="small-plus"
                     />
                 )}
                 {!editing && supportsAttachments && (
                     <Fragment>
                         <CustomFieldsHeading>
-                            <span>{t("entry.attachments")}</span>
+                            <span>{t("vault-ui.entry.attachments")}</span>
                         </CustomFieldsHeading>
                         {entry && (
                             <Attachments
@@ -913,7 +913,7 @@ const EntryDetailsContent = () => {
                             icon="edit"
                             disabled={readOnly || entry.parentID === trashID}
                         >
-                            {t("entry.edit")}
+                            {t("vault-ui.entry.edit")}
                         </Button>
                     )}
                     {editing && (
@@ -926,25 +926,25 @@ const EntryDetailsContent = () => {
                                     onClick={onSaveEdit}
                                     title={
                                         readOnly
-                                            ? t("entry.save-disabled-title.readonly")
+                                            ? t("vault-ui.entry.save-disabled-title.readonly")
                                             : hasUntitledFields
-                                            ? t("entry.save-disabled-title.untitled")
+                                            ? t("vault-ui.entry.save-disabled-title.untitled")
                                             : undefined
                                     }
                                 >
-                                    {t("entry.save")}
+                                    {t("vault-ui.entry.save")}
                                 </Button>
-                                <Button onClick={onCancelEdit}>{t("entry.cancel-edit")}</Button>
+                                <Button onClick={onCancelEdit}>{t("vault-ui.entry.cancel-edit")}</Button>
                             </div>
                             {entry && !entry.isNew && (
                                 <ConfirmButton
                                     danger
-                                    description={t("entry.trash-move.message")}
+                                    description={t("vault-ui.entry.trash-move.message")}
                                     disabled={readOnly}
                                     icon="trash"
                                     onClick={() => onMoveEntryToTrash(entry.id)}
-                                    primaryAction={t("entry.trash-move.trash-btn")}
-                                    title={t("entry.trash-move.title")}
+                                    primaryAction={t("vault-ui.entry.trash-move.trash-btn")}
+                                    title={t("vault-ui.entry.trash-move.title")}
                                 />
                             )}
                         </Fragment>
@@ -977,7 +977,7 @@ export const EntryDetails = () => {
                     <Fragment>
                         <AttachmentDropZone visible={isDragActive && !readOnly}>
                             <Icon icon="compressed" iconSize={30} />
-                            <span>{t("attachments.drop-files")}</span>
+                            <span>{t("vault-ui.attachments.drop-files")}</span>
                         </AttachmentDropZone>
                         <input {...getInputProps()} />
                     </Fragment>
@@ -988,8 +988,8 @@ export const EntryDetails = () => {
                     <PaneContent>
                         <NonIdealState
                             icon="document"
-                            title={t("entry.none-selected.title")}
-                            description={t("entry.none-selected.message")}
+                            title={t("vault-ui.entry.none-selected.title")}
+                            description={t("vault-ui.entry.none-selected.message")}
                         />
                     </PaneContent>
                 )}

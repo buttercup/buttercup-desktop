@@ -127,19 +127,19 @@ export const PaneHeader = ({
     const renderMenu = (
         <Menu>
             <MenuItem
-                text={t("entries-list.sort.alphabetical-asc")}
+                text={t("vault-ui.entries-list.sort.alphabetical-asc")}
                 labelElement={filter && filter.sortMode === EntriesSortMode.AlphaASC ? checkedIcon : ""}
                 icon="sort-alphabetical"
                 onClick={() => onSortModeChange(EntriesSortMode.AlphaASC)}
             />
             <MenuItem
-                text={t("entries-list.sort.alphabetical-desc")}
+                text={t("vault-ui.entries-list.sort.alphabetical-desc")}
                 labelElement={filter && filter.sortMode === EntriesSortMode.AlphaDESC ? checkedIcon : ""}
                 icon="sort-alphabetical-desc"
                 onClick={() => onSortModeChange(EntriesSortMode.AlphaDESC)}
             />
             <MenuItem
-                text={t("entries-list.sort.filter")}
+                text={t("vault-ui.entries-list.sort.filter")}
                 icon="search-text"
                 onClick={() => toggleFilter(!filterInputVisible)}
                 disabled={!!(filter && filter.term !== "")}
@@ -155,7 +155,7 @@ export const PaneHeader = ({
                         className={Classes.FILL}
                         leftIcon="search"
                         type="search"
-                        placeholder={t("entries-list.filter-placeholder")}
+                        placeholder={t("vault-ui.entries-list.filter-placeholder")}
                         value={filter.term}
                         onChange={e => onTermChange(e.target.value)}
                         onKeyDown={handleInputKeyPress}

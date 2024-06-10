@@ -14,7 +14,7 @@ const AddEntry = ({ disabled }) => {
                     key={entryType.type}
                     text={t(`entry-type.title.${entryType.type}`)}
                     icon={entryType.icon}
-                    label={entryType.default ? t("entry-type.default-label") : undefined}
+                    label={entryType.default ? t("vault-ui.entry-type.default-label") : undefined}
                     onClick={() => onAddEntry(entryType.type || defaultEntryType)}
                 />
             ))}
@@ -25,7 +25,7 @@ const AddEntry = ({ disabled }) => {
         <ButtonGroup fill>
             <Button
                 icon="plus"
-                text={t("new-entry.cta")}
+                text={t("vault-ui.new-entry.cta")}
                 onClick={() => onAddEntry(defaultEntryType)}
                 disabled={disabled}
                 fill

@@ -70,7 +70,7 @@ export const EntriesList = ({ className }: EntriesListProps) => {
     return (
         <PaneContainer className={className}>
             <PaneHeader
-                title={trashSelected ? t("entries-list.trash") : t("entries-list.documents")}
+                title={trashSelected ? t("vault-ui.entries-list.trash") : t("vault-ui.entries-list.documents")}
                 count={entries.length}
                 filter={filters}
                 onTermChange={term => onEntriesFilterTermChange(term)}
@@ -96,15 +96,15 @@ export const EntriesList = ({ className }: EntriesListProps) => {
                     </HotKeys>
                 )}
                 {entries.length === 0 && filters.term !== "" && (
-                    <NonIdealState title={t("entries-list.filters-no-matches")} />
+                    <NonIdealState title={t("vault-ui.entries-list.filters-no-matches")} />
                 )}
                 {entries.length === 0 && trashSelected && (
-                    <NonIdealState title={t("entries-list.trash-empty")} icon="trash" />
+                    <NonIdealState title={t("vault-ui.entries-list.trash-empty")} icon="trash" />
                 )}
                 {entries.length === 0 && filters.term && !trashSelected && (
                     <NonIdealState
-                        title={t("entries-list.no-entries")}
-                        description={t("entries-list.create-one-cta")}
+                        title={t("vault-ui.entries-list.no-entries")}
+                        description={t("vault-ui.entries-list.create-one-cta")}
                         icon="id-number"
                     />
                 )}

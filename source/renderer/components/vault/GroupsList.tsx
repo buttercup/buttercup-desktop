@@ -121,7 +121,7 @@ export const GroupsList = () => {
             {!parentNode && (
                 <Fragment>
                     <MenuItem
-                        text={t("group-menu.move-to-root")}
+                        text={t("vault-ui.group-menu.move-to-root")}
                         key="moveRoot"
                         icon="git-pull"
                         onClick={() => moveGroupToGroup(selectedGroupID, "0")}
@@ -182,23 +182,23 @@ export const GroupsList = () => {
                 <MenuItem text={groupFacade?.title} disabled />
                 <MenuDivider />
                 <MenuItem
-                    text={t("group-menu.add-new-group")}
+                    text={t("vault-ui.group-menu.add-new-group")}
                     icon="add"
                     onClick={() => groupFacade?.id && editGroup(null, groupFacade.id)}
                     disabled={readOnly}
                 />
                 <MenuItem
-                    text={t("group-menu.rename-group")}
+                    text={t("vault-ui.group-menu.rename-group")}
                     icon="edit"
                     onClick={() => editGroup(groupFacade)}
                     disabled={readOnly}
                 />
                 <MenuDivider />
-                <MenuItem text={t("group-menu.move-to")} icon="add-to-folder" disabled={readOnly}>
+                <MenuItem text={t("vault-ui.group-menu.move-to")} icon="add-to-folder" disabled={readOnly}>
                     {renderGroupsMenu(groups, null, node.id)}
                 </MenuItem>
                 <MenuItem
-                    text={t("group-menu.move-to-trash")}
+                    text={t("vault-ui.group-menu.move-to-trash")}
                     icon="trash"
                     onClick={() => moveToTrash(selectedGroupID)}
                     disabled={readOnly}
@@ -229,7 +229,7 @@ export const GroupsList = () => {
                 {!trashOpen && (
                     <Fragment>
                         <PaneHeader
-                            title={t("group.header")}
+                            title={t("vault-ui.group.header")}
                             count={groups.length}
                             filter={filters}
                             onAddItem={() => editGroup()}
@@ -260,7 +260,7 @@ export const GroupsList = () => {
                                 icon="trash"
                                 fill
                                 minimal
-                                text={t("trash.header")}
+                                text={t("vault-ui.trash.header")}
                                 alignText={Alignment.LEFT}
                                 active={trashSelected}
                                 onClick={handleTrashClick}
@@ -270,7 +270,7 @@ export const GroupsList = () => {
                 ) || (
                     <Fragment>
                         <PaneHeader
-                            title={t("trash.header")}
+                            title={t("vault-ui.trash.header")}
                             count={trashGroupCount}
                             filter={filters}
                             onTermChange={term => onGroupFilterTermChange(term)}
@@ -291,13 +291,13 @@ export const GroupsList = () => {
                                 minimal
                                 icon="undo"
                                 fill
-                                text={t("trash.close-button")}
+                                text={t("vault-ui.trash.close-button")}
                                 onClick={() => setTrashOpen(false)}
                             />
                             <Button
                                 icon="delete"
                                 minimal
-                                title={t("trash.empty-button-title")}
+                                title={t("vault-ui.trash.empty-button-title")}
                                 alignText={Alignment.LEFT}
                                 intent={Intent.DANGER}
                                 onClick={() => setEmptyingTrash(true)}
@@ -309,11 +309,11 @@ export const GroupsList = () => {
             <Dialog
                 icon="manually-entered-data"
                 onClose={closeEditDialog}
-                title={groupEditID === -1 ? t("group.prompt.create") : t("group.prompt.rename")}
+                title={groupEditID === -1 ? t("vault-ui.group.prompt.create") : t("vault-ui.group.prompt.rename")}
                 isOpen={groupEditID !== null}
             >
                 <div className={Classes.DIALOG_BODY}>
-                    <p>{t("group.prompt.message")}</p>
+                    <p>{t("vault-ui.group.prompt.message")}</p>
                     <InputGroup
                         leftIcon={groupEditID === -1 ? "folder-new" : "add-to-folder"}
                         onChange={evt => setNewGroupName(evt.target.value)}
@@ -328,9 +328,9 @@ export const GroupsList = () => {
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
                     <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                        <Button onClick={closeEditDialog}>{t("group.prompt.cancel")}</Button>
+                        <Button onClick={closeEditDialog}>{t("vault-ui.group.prompt.cancel")}</Button>
                         <Button intent={Intent.PRIMARY} onClick={submitGroupChange}>
-                            {t("group.prompt.save")}
+                            {t("vault-ui.group.prompt.save")}
                         </Button>
                     </div>
                 </div>
@@ -338,19 +338,19 @@ export const GroupsList = () => {
             <Dialog
                 icon="confirm"
                 onClose={closeEditDialog}
-                title={t("trash.empty-confirm-dialog.title")}
+                title={t("vault-ui.trash.empty-confirm-dialog.title")}
                 isOpen={emptyingTrash}
             >
                 <div className={Classes.DIALOG_BODY}>
-                    <p>{t("trash.empty-confirm-dialog.message")}</p>
+                    <p>{t("vault-ui.trash.empty-confirm-dialog.message")}</p>
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
                     <div className={Classes.DIALOG_FOOTER_ACTIONS}>
                         <Button onClick={() => setEmptyingTrash(false)}>
-                            {t("trash.empty-confirm-dialog.cancel-button")}
+                            {t("vault-ui.trash.empty-confirm-dialog.cancel-button")}
                         </Button>
                         <Button intent={Intent.DANGER} onClick={handleTrashEmpty}>
-                            {t("trash.empty-confirm-dialog.confirm-button")}
+                            {t("vault-ui.trash.empty-confirm-dialog.confirm-button")}
                         </Button>
                     </div>
                 </div>

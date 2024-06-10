@@ -173,12 +173,12 @@ export function Entry({ entry, selected, onClick, innerRef, ...props }) {
         setContextMenuVisibility(true);
         ContextMenu.show(
             <Menu>
-                <MenuItem text={t("entry-menu.move-to")} icon="add-to-folder">
+                <MenuItem text={t("vault-ui.entry-menu.move-to")} icon="add-to-folder">
                     {renderGroupsMenu(groups)}
                 </MenuItem>
                 {entry.parentID !== trashID && (
                     <MenuItem
-                        text={t("entry-menu.move-to-trash")}
+                        text={t("vault-ui.entry-menu.move-to-trash")}
                         icon="trash"
                         onClick={() => onMoveEntryToTrash(entry.id)}
                         disabled={readOnly}

@@ -270,7 +270,7 @@
                     "mode-none": "Jamais",
                     "title": "Démarrer l'application en arrière-plan"
                 },
-                "start-with-session" : "Démarrer automatiquement l'application lorsque ma session démarre",
+                "start-with-session": "Démarrer automatiquement l'application lorsque ma session démarre",
                 "title": "Options de démarrage"
             },
             "theme": "Thème"
@@ -374,6 +374,126 @@
             "remove-vault": "Supprimer le coffre-fort",
             "unlock-vault": "Déverrouiller",
             "vault-settings": "Paramètres du coffre-fort"
+        }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Annuler",
+                "cancel-title": "Annuler la suppression d'une pièce jointe",
+                "delete": "Supprimer",
+                "delete-prompt": "La suppression de cette pièce jointe la fera disparaître définitivement de votre fichier archive.\nÊtes-vous sûr de vouloir la supprimer ?",
+                "delete-prompt-title": "Supprimer \"{{title}}\"",
+                "delete-title": "Confirmer la suppression de la pièce jointe"
+            },
+            "delete": "Supprimer",
+            "delete-title": "Supprimer la pièce jointe",
+            "download": "Télécharger",
+            "download-title": "Télécharger la pièce jointe",
+            "drop-files": "Déposer le(s) fichier(s) à ajouter au fichier archive",
+            "drop-instruction": "Faites glisser et déposez pour ajouter des pièces jointes"
+        },
+        "cancel": "Annuler",
+        "custom-fields": {
+            "change-type": "Changer le type :",
+            "delete-field": "Supprimer le champ",
+            "field-type": {
+                "text": "Texte (par défaut)",
+                "note": "Note",
+                "password": "Mot de passe",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Pourquoi ne pas en créer un nouveau ?",
+            "documents": "Documents",
+            "filter-placeholder": "Filtrer...",
+            "filters-no-matches": "Aucune correspondance",
+            "no-entries": "Aucun document",
+            "sort": {
+                "alphabetical-asc": "Par ordre alphabétique (ascendant)",
+                "alphabetical-desc": "Par ordre alphabétique (descendant)",
+                "filter": "Filtrer"
+            },
+            "trash": "Corbeille",
+            "trash-empty": "Elle est vide"
+        },
+        "entry": {
+            "add-custom-field-btn": "Ajouter un champ personnalisé",
+            "attachments": "Attachements",
+            "cancel-edit": "Annuler",
+            "click-to-edit": "Cliquez pour éditer",
+            "custom-fields": "Champs personnalisés",
+            "edit": "Éditer",
+            "edit-document": "Éditer le document",
+            "field-controls": {
+                "password": {
+                    "hide": "Masquer",
+                    "reveal": "Révéler"
+                }
+            },
+            "none-selected": {
+                "message": "Sélectionner ou créer un nouveau document",
+                "title": "Aucun document sélectionné"
+            },
+            "save": "Sauvegarder",
+            "save-disabled-title": {
+                "readonly": "Impossible de modifier actuellement",
+                "untitled": "Certains champs n'ont pas de titre"
+            },
+            "trash-move": {
+                "message": "Êtes-vous sûr de vouloir déplacer cette entrée dans la corbeille ?",
+                "title": "Confirmer la mise à la corbeille",
+                "trash-btn": "Mettre à la corbeille"
+            },
+            "untitled": "(Sans titre)"
+        },
+        "entry-menu": {
+            "move-to": "Déplacer vers...",
+            "move-to-parent": "Déplacer vers {{group}}",
+            "move-to-trash": "Mettre à la corbeille"
+        },
+        "entry-type": {
+            "default-label": "Par défaut",
+            "title": {
+                "credit_card": "Carte bancaire ou de crédit",
+                "login": "Login",
+                "note": "Note",
+                "ssh_key": "Clé SSH",
+                "website": "Site web"
+            }
+        },
+        "group": {
+            "header": "Groupes",
+            "prompt": {
+                "cancel": "Annuler",
+                "create": "Créer un groupe",
+                "message": "Entrer le titre du groupe :",
+                "rename": "Renommer le groupe",
+                "save": "Sauvegarder"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Ajouter un nouveau groupe",
+            "move-to": "Déplacer vers...",
+            "move-to-parent": "Déplacer vers {{group}}",
+            "move-to-root": "Déplacer au niveau de la racine",
+            "move-to-trash": "Déplacer dans la corbeille",
+            "rename-group": "Renommer"
+        },
+        "new-entry": {
+            "cta": "Nouvelle entrée"
+        },
+        "trash": {
+            "close-button": "Fermer",
+            "empty-button-title": "Vider la corbeille",
+            "empty-confirm-dialog": {
+                "cancel-button": "Annuler",
+                "confirm-button": "Vider",
+                "message": "Êtes-vous sûr(e) de vouloir vider la corbeille ?",
+                "title": "Vider la corbeille"
+            },
+            "header": "Corbeille"
         }
     }
 }

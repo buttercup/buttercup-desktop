@@ -334,5 +334,125 @@
             "unlock-vault": "Desbloquear o cofre",
             "vault-settings": "Configurações do cofre"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Cancelar",
+                "cancel-title": "Cancelar a exclusão do anexo",
+                "delete": "Deletar",
+                "delete-prompt": "A exclusão deste anexo o removerá permanentemente do seu cofre.\nTem certeza de que deseja excluí-lo?",
+                "delete-prompt-title": "Deletar \"{{title}}\"",
+                "delete-title": "Confirme a exclusão do anexo"
+            },
+            "delete": "Deletar",
+            "delete-title": "Deletar anexo",
+            "download": "Download",
+            "download-title": "Baixar anexo",
+            "drop-files": "Solte o(s) arquivo(s) para adicionar ao cofre",
+            "drop-instruction": "Arraste e solte para adicionar anexos"
+        },
+        "cancel": "Cancelar",
+        "custom-fields": {
+            "change-type": "Alterar Tipo:",
+            "delete-field": "Deletar Campo",
+            "field-type": {
+                "text": "Texto (padrão)",
+                "note": "Nota",
+                "password": "Senha",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Por que não criar um?",
+            "documents": "Documentos",
+            "filter-placeholder": "Filtro...",
+            "filters-no-matches": "Sem combinações",
+            "no-entries": "Nenhum documento",
+            "sort": {
+                "alphabetical-asc": "Alfabético (crescente)",
+                "alphabetical-desc": "Alfabético (decrescente)",
+                "filter": "Filtro"
+            },
+            "trash": "Lixeira",
+            "trash-empty": "Está vazia"
+        },
+        "entry": {
+            "add-custom-field-btn": "Adicionar Campo Personalizado",
+            "attachments": "Anexos",
+            "cancel-edit": "Cancelar",
+            "click-to-edit": "Clique para editar",
+            "custom-fields": "Campos Personalizados",
+            "edit": "Editar",
+            "edit-document": "Editar Documento",
+            "field-controls": {
+                "password": {
+                    "hide": "Esconder",
+                    "reveal": "Revelar"
+                }
+            },
+            "none-selected": {
+                "message": "Selecione ou crie um novo documento",
+                "title": "Nenhum documento selecionado"
+            },
+            "save": "Salvar",
+            "save-disabled-title": {
+                "readonly": "Não é possível editar no momento",
+                "untitled": "Alguns campos estão sem títulos"
+            },
+            "trash-move": {
+                "message": "Tem certeza de que deseja mover esta entrada para a Lixeira?",
+                "title": "Confirmar mover para a Lixeira",
+                "trash-btn": "Mover para a Lixeira"
+            },
+            "untitled": "(Sem título)"
+        },
+        "entry-menu": {
+            "move-to": "Mover para...",
+            "move-to-parent": "Mover para {{grupo}}",
+            "move-to-trash": "Mover para a Lixeira"
+        },
+        "entry-type": {
+            "default-label": "Padrão",
+            "title": {
+                "credit_card": "Cartão de crédito/bancário",
+                "login": "Login",
+                "note": "Nota",
+                "ssh_key": "Chave SSH",
+                "website": "Website"
+            }
+        },
+        "group": {
+            "header": "Grupos",
+            "prompt": {
+                "cancel": "Cancelar",
+                "create": "Criar Grupo",
+                "message": "Digite o título do grupo:",
+                "rename": "Renomear grupo",
+                "save": "Salvar"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Adicionar Novo Grupo",
+            "move-to": "Mover para...",
+            "move-to-parent": "Mover para {{grupo}}",
+            "move-to-root": "Mover para a raiz",
+            "move-to-trash": "Mover para Lixeira",
+            "rename-group": "Renomear"
+        },
+        "new-entry": {
+            "cta": "Nova Entrada"
+        },
+        "trash": {
+            "close-button": "Fechar",
+            "empty-button-title": "Lixeira Vazia",
+            "empty-confirm-dialog": {
+                "cancel-button": "Cancelar",
+                "confirm-button": "Limpar",
+                "message": "Tem certeza de que deseja esvaziar a lixeira?",
+                "title": "Limpar Lixeira"
+            },
+            "header": "Lixeira"
+        }
     }
 }

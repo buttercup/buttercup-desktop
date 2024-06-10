@@ -20,7 +20,7 @@ export function ConfirmButton(
                 <H5>{title}</H5>
                 <p>{description}</p>
                 <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                    <Button text={t("cancel")} className={Classes.POPOVER_DISMISS} disabled={disabled} />
+                    <Button text={t("vault-ui.cancel")} className={Classes.POPOVER_DISMISS} disabled={disabled} />
                     <Button
                         text={primaryAction}
                         onClick={onClick}

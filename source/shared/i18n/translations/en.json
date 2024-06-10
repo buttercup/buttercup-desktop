@@ -284,7 +284,7 @@
                     "mode-none": "Never",
                     "title": "Start application in background"
                 },
-                "start-with-session" : "Auto-start application when my session launches",
+                "start-with-session": "Auto-start application when my session launches",
                 "title": "Startup options"
             },
             "theme": "Theme"
@@ -388,6 +388,126 @@
             "remove-vault": "Remove vault",
             "unlock-vault": "Unlock vault",
             "vault-settings": "Vault settings"
+        }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Cancel",
+                "cancel-title": "Cancel attachment deletion",
+                "delete": "Delete",
+                "delete-prompt": "Deleting this attachment will permanently remove it from your vault.\nAre you sure that you want to delete it?",
+                "delete-prompt-title": "Delete \"{{title}}\"",
+                "delete-title": "Confirm attachment deletion"
+            },
+            "delete": "Delete",
+            "delete-title": "Delete attachment",
+            "download": "Download",
+            "download-title": "Download attachment",
+            "drop-files": "Drop file(s) to add to vault",
+            "drop-instruction": "Drag and drop to add attachments"
+        },
+        "cancel": "Cancel",
+        "custom-fields": {
+            "change-type": "Change Type:",
+            "delete-field": "Delete Field",
+            "field-type": {
+                "text": "Text (default)",
+                "note": "Note",
+                "password": "Password",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Why not create one?",
+            "documents": "Documents",
+            "filter-placeholder": "Filter...",
+            "filters-no-matches": "No matches",
+            "no-entries": "No Documents",
+            "sort": {
+                "alphabetical-asc": "Alphabetical (ascending)",
+                "alphabetical-desc": "Alphabetical (descending)",
+                "filter": "Filter"
+            },
+            "trash": "Trash",
+            "trash-empty": "It's empty"
+        },
+        "entry": {
+            "add-custom-field-btn": "Add Custom Field",
+            "attachments": "Attachments",
+            "cancel-edit": "Cancel",
+            "click-to-edit": "Click to edit",
+            "custom-fields": "Custom Fields",
+            "edit": "Edit",
+            "edit-document": "Edit Document",
+            "field-controls": {
+                "password": {
+                    "hide": "Hide",
+                    "reveal": "Reveal"
+                }
+            },
+            "none-selected": {
+                "message": "Select or create a new document",
+                "title": "No document selected"
+            },
+            "save": "Save",
+            "save-disabled-title": {
+                "readonly": "Editing not possible right now",
+                "untitled": "Some fields are missing titles"
+            },
+            "trash-move": {
+                "message": "Are you sure you want to move this entry to Trash?",
+                "title": "Confirm move to Trash",
+                "trash-btn": "Move to Trash"
+            },
+            "untitled": "(Untitled)"
+        },
+        "entry-menu": {
+            "move-to": "Move to...",
+            "move-to-parent": "Move to {{group}}",
+            "move-to-trash": "Move to Trash"
+        },
+        "entry-type": {
+            "default-label": "Default",
+            "title": {
+                "credit_card": "Credit/Bank Card",
+                "login": "Login",
+                "note": "Note",
+                "ssh_key": "SSH Key",
+                "website": "Website"
+            }
+        },
+        "group": {
+            "header": "Groups",
+            "prompt": {
+                "cancel": "Cancel",
+                "create": "Create Group",
+                "message": "Enter group title:",
+                "rename": "Rename Group",
+                "save": "Save"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Add New Group",
+            "move-to": "Move to...",
+            "move-to-parent": "Move to {{group}}",
+            "move-to-root": "Move to root level",
+            "move-to-trash": "Move to Trash",
+            "rename-group": "Rename"
+        },
+        "new-entry": {
+            "cta": "New Entry"
+        },
+        "trash": {
+            "close-button": "Close",
+            "empty-button-title": "Empty Trash",
+            "empty-confirm-dialog": {
+                "cancel-button": "Cancel",
+                "confirm-button": "Empty",
+                "message": "Are you sure that you want to empty the trash?",
+                "title": "Empty Trash"
+            },
+            "header": "Trash"
         }
     }
 }
