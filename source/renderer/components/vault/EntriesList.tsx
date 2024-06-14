@@ -101,7 +101,7 @@ export const EntriesList = ({ className }: EntriesListProps) => {
                 {entries.length === 0 && trashSelected && (
                     <NonIdealState title={t("vault-ui.entries-list.trash-empty")} icon="trash" />
                 )}
-                {entries.length === 0 && filters.term && !trashSelected && (
+                {entries.length === 0 && !filters.term && !trashSelected && (
                     <NonIdealState
                         title={t("vault-ui.entries-list.no-entries")}
                         description={t("vault-ui.entries-list.create-one-cta")}

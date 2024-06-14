@@ -31,7 +31,6 @@ export interface VaultContextState {
 
     // Icons
     iconsEnabled: boolean;
-    iconsPath: string | null;
 
     // Editing
     readOnly: boolean;
@@ -68,7 +67,6 @@ export interface VaultProviderProps {
     attachmentPreviews?: Record<string, string> | null,
     children?: React.ReactNode;
     icons?: boolean;
-    iconsPath?: string | null;
     onAddAttachments: (entryID: EntryID, files: Array<File>) => Promise<void>;
     onDeleteAttachment: (entryID: EntryID, attachmentID: string) => Promise<void>;
     onDownloadAttachment: (entryID: EntryID, attachmentID: string) => Promise<void>;
@@ -93,7 +91,6 @@ export const VaultProvider = ({
     attachmentsMaxSize = Infinity,
     attachmentPreviews = null,
     icons = false,
-    iconsPath = null,
     onAddAttachments,
     onDeleteAttachment,
     onDownloadAttachment,
@@ -181,7 +178,6 @@ export const VaultProvider = ({
 
         // Icons
         iconsEnabled: icons,
-        iconsPath,
 
         // Editing
         readOnly,

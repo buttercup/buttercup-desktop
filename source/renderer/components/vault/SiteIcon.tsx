@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { DEFAULT_ENTRY_TYPE, EntryType } from "buttercup";
-import path from "path-posix";
 import ICON_LOGIN from "../../../../resources/images/login.png";
 import ICON_WEBSITE from "../../../../resources/images/website.png";
 import ICON_NOTE from "../../../../resources/images/note.png";
@@ -34,7 +33,7 @@ const IconContainer = styled.div`
 `;
 
 export function SiteIcon(props) {
-    const { className, domain = null, iconPath = null, type = DEFAULT_ENTRY_TYPE } = props;
+    const { className, domain = null, type = DEFAULT_ENTRY_TYPE } = props;
     const imgRef = useRef<HTMLImageElement | null>(null);
     const [dynamicState, setDynamicState] = useState(DYNAMIC_STATE_LOADING);
     const onImgError = useMemo(
@@ -67,16 +66,12 @@ export function SiteIcon(props) {
     }, [imgRef.current]);
     return (
         <IconContainer className={className}>
-            {dynamicState === DYNAMIC_STATE_LOADED || dynamicState === DYNAMIC_STATE_LOADING && (
+            {(dynamicState === DYNAMIC_STATE_LOADED || dynamicState === DYNAMIC_STATE_LOADING) && (
                 <img ref={imgRef} loading="lazy" />
             )}
-            {dynamicState === DYNAMIC_STATE_FAILED || dynamicState === DYNAMIC_STATE_LOADING && (
+            {(dynamicState === DYNAMIC_STATE_FAILED || dynamicState === DYNAMIC_STATE_LOADING) && (
                 <FallbackIcon
-                    src={
-                        iconPath
-                            ? path.join(iconPath, path.basename(ICON_TYPES[type]))
-                            : ICON_TYPES[type]
-                    }
+                    src={ICON_TYPES[type]}
                     dynamicLoading={dynamicState === DYNAMIC_STATE_LOADING}
                 />
             )}

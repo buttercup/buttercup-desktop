@@ -5,7 +5,6 @@ import { EntriesList } from "./EntriesList";
 import { EntryDetails } from "./EntryDetails";
 import { GroupsList } from "./GroupsList";
 
-// import "allotment/dist/style.css";
 import "./styles/vault-ui.sass";
 
 const GridWrapper = styled.div`
@@ -20,10 +19,10 @@ export const VaultUI = () => {
                 <Allotment.Pane>
                     <GroupsList />
                 </Allotment.Pane>
-                <Allotment.Pane>
+                <Allotment.Pane className="split-pane-entries">
                     <EntriesList />
                 </Allotment.Pane>
-                <Allotment.Pane>
+                <Allotment.Pane className="split-pane-entry-details">
                     <EntryDetails />
                 </Allotment.Pane>
             </Allotment>

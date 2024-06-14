@@ -137,7 +137,6 @@ export function VaultEditor(props: VaultEditorProps) {
                         attachmentsMaxSize={ATTACHMENTS_MAX_SIZE}
                         attachmentPreviews={attachmentPreviews}
                         icons
-                        iconsPath="icons"
                         onAddAttachments={addAttachments}
                         onDeleteAttachment={deleteAttachment}
                         onDownloadAttachment={downloadAttachment}

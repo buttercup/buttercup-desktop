@@ -114,7 +114,7 @@ const ContentWrapper = styled.div`
 export function Entry({ entry, selected, onClick, innerRef, ...props }) {
     const [contextMenuOpen, setContextMenuVisibility] = useState(false);
     const { groups, onMoveEntryToGroup, onMoveEntryToTrash, trashID } = useGroups();
-    const { iconsEnabled, iconsPath, readOnly } = useContext(VaultContext);
+    const { iconsEnabled, readOnly } = useContext(VaultContext);
     const mounted = useRef(false);
 
     useEffect(() => {
@@ -206,7 +206,6 @@ export function Entry({ entry, selected, onClick, innerRef, ...props }) {
             <ImageWrapper>
                 <SiteIcon
                     domain={iconsEnabled ? getEntryDomain(entry) : null}
-                    iconPath={iconsPath}
                     type={entry.type || DEFAULT_ENTRY_TYPE}
                 />
             </ImageWrapper>
