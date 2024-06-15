@@ -284,7 +284,7 @@
                     "mode-none": "Mai",
                     "title": "Avvia applicazione in background"
                 },
-                "start-with-session" : "Esecuzione automatica applicazione ad avvio sessione",
+                "start-with-session": "Esecuzione automatica applicazione ad avvio sessione",
                 "title": "Opzioni avvio"
             },
             "theme": "Tema"
@@ -388,6 +388,126 @@
             "remove-vault": "Rimuovi archivio",
             "unlock-vault": "Sblocca",
             "vault-settings": "Impostazioni archivio"
+        }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Annulla",
+                "cancel-title": "Annulla eliminazione allegati",
+                "delete": "Elimina",
+                "delete-prompt": "L'eliminazione di questo allegato lo rimuoverà definitivamente dal vault.\nSei sicuro di volerlo eliminare?",
+                "delete-prompt-title": "Elimina '{{title}}'",
+                "delete-title": "Conferma eliminazione allegato"
+            },
+            "delete": "Elimina",
+            "delete-title": "Elimina allegato",
+            "download": "Download",
+            "download-title": "Download allegato",
+            "drop-files": "TTrascina/rilascia i file da aggiungere al vault",
+            "drop-instruction": "Trascina/rilascia per aggiungere allegati"
+        },
+        "cancel": "Annulla",
+        "custom-fields": {
+            "change-type": "Modifica tipo:",
+            "delete-field": "Elimina campo",
+            "field-type": {
+                "text": "Testo (predefinito)",
+                "note": "Note",
+                "password": "Password",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Perché non crearne uno?",
+            "documents": "Documenti",
+            "filter-placeholder": "Filtro...",
+            "filters-no-matches": "Nessuna corrispondenza",
+            "no-entries": "Nessun documento",
+            "sort": {
+                "alphabetical-asc": "Alfabetico (ascendente)",
+                "alphabetical-desc": "Alfabetico (discendente)",
+                "filter": "Filtro"
+            },
+            "trash": "Cestino",
+            "trash-empty": "È vuoto"
+        },
+        "entry": {
+            "add-custom-field-btn": "Aggiungi campo personalizzato",
+            "attachments": "Allegati",
+            "cancel-edit": "Annulla",
+            "click-to-edit": "Clic per modifica",
+            "custom-fields": "Campi personalizzati",
+            "edit": "Modifica",
+            "edit-document": "Modifica documento",
+            "field-controls": {
+                "password": {
+                    "hide": "Nascondi",
+                    "reveal": "Visualizza"
+                }
+            },
+            "none-selected": {
+                "message": "Seleziona o crea un nuovo documento",
+                "title": "Nessun documento selezionato"
+            },
+            "save": "Salva",
+            "save-disabled-title": {
+                "readonly": "La modifica al momento non è possibile",
+                "untitled": "In alcuni campi mancano i titoli"
+            },
+            "trash-move": {
+                "message": "Sei sicuro di voler spostare questa voce nel Cestino?",
+                "title": "Conferma spostamento nel Cestino",
+                "trash-btn": "Sposta nel cestino"
+            },
+            "untitled": "(Senza titolo)"
+        },
+        "entry-menu": {
+            "move-to": "Spostati in...",
+            "move-to-parent": "Sposta in {{group}}",
+            "move-to-trash": "Sposta nel cestino"
+        },
+        "entry-type": {
+            "default-label": "Predefinita",
+            "title": {
+                "credit_card": "Carta di credito/bancario",
+                "login": "Accedi",
+                "note": "Note",
+                "ssh_key": "Chiave SSH",
+                "website": "Sito web"
+            }
+        },
+        "group": {
+            "header": "Gruppi",
+            "prompt": {
+                "cancel": "Annulla",
+                "create": "Crea gruppo",
+                "message": "Inserisci titolo gruppo:",
+                "rename": "Rinomina gruppo",
+                "save": "Salva"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Aggiungi nuovo gruppo",
+            "move-to": "Sposta in...",
+            "move-to-parent": "Spostati in {{group}}",
+            "move-to-root": "Sposta nel livello principale",
+            "move-to-trash": "Sposta nel cestino",
+            "rename-group": "Rinomina"
+        },
+        "new-entry": {
+            "cta": "Nuova voce"
+        },
+        "trash": {
+            "close-button": "Chiudi",
+            "empty-button-title": "Svuota cestino",
+            "empty-confirm-dialog": {
+                "cancel-button": "Annulla",
+                "confirm-button": "Vuoto",
+                "message": "Sei sicuro di voler svuotare il cestino?",
+                "title": "Svuota cestino"
+            },
+            "header": "Cestino"
         }
     }
 }
