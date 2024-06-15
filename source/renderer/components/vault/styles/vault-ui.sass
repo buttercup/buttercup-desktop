@@ -1,0 +1,31 @@
+@use 'sass:math'
+
+@import '~@fontsource/inter/index.css'
+
+@import "~normalize.css"
+@import "~@blueprintjs/core/lib/css/blueprint.css"
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css"
+@import "~@blueprintjs/popover2/lib/css/blueprint-popover2.css"
+
+@import "~allotment/dist/style.css"
+
+// Constants
+
+$bc-brand-colour: #00B7AC
+$bc-brand-colour-dark: #179E94
+
+// Blueprint overrides
+
+.bp4-input:focus, .bp4-input.bp4-active
+    box-shadow: inset 0 0 0 1px $bc-brand-colour, 0 0 0 2px rgba(45, 114, 210, 0.3), inset 0 1px 1px rgba(17, 20, 24, 0.2)
+
+a
+    color: $bc-brand-colour-dark
+
+    &:hover
+        color: $bc-brand-colour
+
+// Splitter
+
+.split-pane-entries, .split-pane-entry-details
+    background-color: #252A31 //rgb(48, 64, 77);

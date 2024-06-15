@@ -234,5 +234,106 @@
         "context-menu": {
             "unlock-vault": "Odblokuj"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Anuluj",
+                "cancel-title": "Anuluj usunięcie załącznika",
+                "delete": "Usuń",
+                "delete-prompt": "Usunięcie tego załącznika trwale usunie go z sejfu.\nCzy na pewno chcesz go usunąć?",
+                "delete-prompt-title": "Usuń \"{{title}}\"",
+                "delete-title": "Potwierdź usunięcie załącznika"
+            },
+            "delete": "Usuń",
+            "delete-title": "Usuń załącznik",
+            "download": "Pobierz",
+            "download-title": "Pobierz załącznik",
+            "drop-files": "Upuść plik(i), aby dodać je do sejfu",
+            "drop-instruction": "Przeciągnij i upuść, aby dodać załączniki"
+        },
+        "cancel": "Anuluj",
+        "custom-fields": {
+            "change-type": "Zmień rodzaj:",
+            "delete-field": "Usuń pole",
+            "field-type": {
+                "text": "Tekst (domyślne)",
+                "note": "Notatka",
+                "password": "Hasło",
+                "otp": "Hasło jednorazowe"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "A może by tak utworzyć nowy?",
+            "documents": "Dokumenty",
+            "filter-placeholder": "Filtr...",
+            "filters-no-matches": "Brak wyników",
+            "no-entries": "Brak dokumentów",
+            "sort": {
+                "alphabetical-asc": "Alfabetycznie (rosnąco)",
+                "alphabetical-desc": "Alfabetycznie (malejąco)",
+                "filter": "Filtr"
+            },
+            "trash": "Kosz",
+            "trash-empty": "Pusty"
+        },
+        "entry": {
+            "add-custom-field-btn": "Dodaj pole niestandardowe",
+            "attachments": "Załączniki",
+            "cancel-edit": "Anuluj",
+            "custom-fields": "Pola niestandardowe",
+            "edit": "Edytuj",
+            "edit-document": "Edytuj dokument",
+            "none-selected": {
+                "message": "Wybierz lub utwórz nowy dokument",
+                "title": "Nie wybrano żadnego dokumentu"
+            },
+            "save": "Zapisz",
+            "trash-move": {
+                "message": "Czy na pewno chcesz przenieść ten wpis do kosza?",
+                "title": "Potwierdź przeniesienie do kosza",
+                "trash-btn": "Przenieś do kosza"
+            },
+            "untitled": "(Bez nazwy)"
+        },
+        "entry-menu": {
+            "move-to": "Przenieś do...",
+            "move-to-parent": "Przenieś do {{group}}",
+            "move-to-trash": "Przenieś do kosza"
+        },
+        "entry-type": {
+            "default-label": "Domyślne",
+            "title": {
+                "credit_card": "Karta kredytowa/bankowa",
+                "login": "Nazwa użytkownika",
+                "note": "Notatka",
+                "ssh_key": "Klucz SSH",
+                "website": "Strona internetowa"
+            }
+        },
+        "group": {
+            "header": "Grupy",
+            "prompt": {
+                "cancel": "Anuluj",
+                "create": "Utwórz grupę",
+                "message": "Wpisz nazwę grupy:",
+                "rename": "Zmień nazwę grupy",
+                "save": "Zapisz"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Dodaj nową grupę",
+            "move-to": "Przenieś do...",
+            "move-to-parent": "Przenieś do {{group}}",
+            "move-to-root": "Przenieś do źródła",
+            "move-to-trash": "Przenieś do kosza",
+            "rename-group": "Zmień nazwę"
+        },
+        "new-entry": {
+            "cta": "Nowy wpis"
+        },
+        "trash": {
+            "header": "Kosz"
+        }
     }
 }

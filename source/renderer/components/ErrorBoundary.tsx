@@ -3,6 +3,15 @@ import styled from "styled-components";
 import { Callout, Intent } from "@blueprintjs/core";
 import { t } from "../../shared/i18n/trans";
 
+interface ErrorBoundaryProps {
+    children: JSX.Element;
+}
+
+interface ErrorBoundaryState {
+    error: Error | null;
+    errorStack: string | null;
+}
+
 const ErrorCallout = styled(Callout)`
     margin: 4px;
     box-sizing: border-box;
@@ -20,12 +29,12 @@ function stripBlanks(txt = '') {
         .join('\n');
 }
 
-export class ErrorBoundary extends Component {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     static getDerivedStateFromError(error: Error) {
         return { error };
     }
 
-    state = {
+    state: ErrorBoundaryState = {
         error: null,
         errorStack: null
     };

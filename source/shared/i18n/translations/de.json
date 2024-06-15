@@ -333,5 +333,125 @@
             "unlock-vault": "Entsperre Tresor",
             "vault-settings": "Tresoreinstellungen"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Abbrechen",
+                "cancel-title": "Löschen von Anhang abbrechen",
+                "delete": "Löschen",
+                "delete-prompt": "Das Löschen dieses Anhangs wird ihn permanent aus dem Tresor entfernen.\nBist Du sicher, dass Du diesen löschen möchtest?",
+                "delete-prompt-title": "Löschen von \"{{title}}\"",
+                "delete-title": "Bestätigung für das Löschen von Anhängen"
+            },
+            "delete": "Löschen",
+            "delete-title": "Anhang löschen",
+            "download": "Download",
+            "download-title": "Anhang herunterladen",
+            "drop-files": "Um Datei(en) zum Tresor hinzuzufügen, diese hier hin ziehen",
+            "drop-instruction": "Drag & Drop um Anhänge hinzuzufügen"
+        },
+        "cancel": "Abbrechen",
+        "custom-fields": {
+            "change-type": "Typ:",
+            "delete-field": "Feld löschen",
+            "field-type": {
+                "text": "Text (Standard)",
+                "note": "Notiz",
+                "password": "Passwort",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Wieso keinen neuen erstellen?",
+            "documents": "Dokumente",
+            "filter-placeholder": "Filter...",
+            "filters-no-matches": "Keine Ergebnisse",
+            "no-entries": "Keine Dokumente",
+            "sort": {
+                "alphabetical-asc": "Alphabetisch (aufsteigend)",
+                "alphabetical-desc": "Alphabetisch (absteigend)",
+                "filter": "Filter"
+            },
+            "trash": "Papierkorb",
+            "trash-empty": "ist leer"
+        },
+        "entry": {
+            "add-custom-field-btn": "Benutzerdefiniertes Feld hinzufügen",
+            "attachments": "Anhänge",
+            "cancel-edit": "Abbrechen",
+            "click-to-edit": "Zum bearbeiten klicken",
+            "custom-fields": "Benutzerdefinierte Felder",
+            "edit": "Bearbeiten",
+            "edit-document": "Dokument bearbeiten",
+            "field-controls": {
+                "password": {
+                    "hide": "Ausblenden",
+                    "reveal": "Anzeigen"
+                }
+            },
+            "none-selected": {
+                "message": "Auswählen oder Erstellen eines neuen Dokuments",
+                "title": "Kein Dokument ausgewählt"
+            },
+            "save": "Speichern",
+            "save-disabled-title": {
+                "readonly": "Bearbeiten ist derzeit nicht möglich",
+                "untitled": "Einige Felder wurden nicht benannt"
+            },
+            "trash-move": {
+                "message": "Bist Du sicher, dass Du diesen Eintrag in den Papierkorb verschieben möchtest?",
+                "title": "Bestätigung für in Papierkorb verschieben",
+                "trash-btn": "In Papierkorb verschieben"
+            },
+            "untitled": "(Unbenannt)"
+        },
+        "entry-menu": {
+            "move-to": "Verschieben nach...",
+            "move-to-parent": "In {{group}} verschieben",
+            "move-to-trash": "In Papierkorb verschieben"
+        },
+        "entry-type": {
+            "default-label": "Standard",
+            "title": {
+                "credit_card": "Kredit-/Bankkarte",
+                "login": "Benutzer",
+                "note": "Notiz",
+                "ssh_key": "SSH-Schlüssel",
+                "website": "Webseite"
+            }
+        },
+        "group": {
+            "header": "Gruppen",
+            "prompt": {
+                "cancel": "Abbrechen",
+                "create": "Gruppe erstellen",
+                "message": "Name der Gruppe:",
+                "rename": "Gruppe umbenennen",
+                "save": "Speichern"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Neue Gruppe hinzufügen",
+            "move-to": "Verschieben nach...",
+            "move-to-parent": "In {{group}} verschieben",
+            "move-to-root": "Auf Hauptebene verschieben",
+            "move-to-trash": "In Papierkorb verschieben",
+            "rename-group": "Umbenennen"
+        },
+        "new-entry": {
+            "cta": "Neuer Eintrag"
+        },
+        "trash": {
+            "close-button": "Schließen",
+            "empty-button-title": "Papierkorb leeren",
+            "empty-confirm-dialog": {
+                "cancel-button": "Abbrechen",
+                "confirm-button": "Leeren",
+                "message": "Bist Du sicher, dass Du den Papierkorb leeren möchtest?",
+                "title": "Papierkorb leeren"
+            },
+            "header": "Papierkorb"
+        }
     }
 }

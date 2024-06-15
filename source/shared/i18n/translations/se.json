@@ -1,0 +1,105 @@
+{
+    "_": "Svenska (SE)",
+    "vault-ui": {
+        "attachments": {
+          "confirm": {
+            "cancel": "Avbryt",
+            "cancel-title": "Avbryt raderandet av bilaga",
+            "delete": "Radera",
+            "delete-prompt": "Raderandet av denna bilaga kommer att radera den permanent från ditt valv.\nÄr du säker på att du vill radera den?",
+            "delete-prompt-title": "Radera \"{{title}}\"",
+            "delete-title": "Bekräfta raderandet av bilaga"
+          },
+          "delete": "Radera",
+          "delete-title": "Radera bilaga",
+          "download": "Ladda ner",
+          "download-title": "Ladda ner bilaga",
+          "drop-files": "Släpp en fil/filer för att lägga till i ditt valv",
+          "drop-instruction": "Dra och släpp för att lägga till bilagor"
+        },
+        "cancel": "Avbryt",
+        "custom-fields": {
+          "change-type": "Ändra format:",
+          "delete-field": "Radera fält",
+          "field-type": {
+            "text": "Text (default)",
+            "note": "Anteckning",
+            "password": "Lösenord",
+            "otp": "OTP"
+          }
+        },
+        "entries-list": {
+          "create-one-cta": "Varför inte skapa ett?",
+          "documents": "Dokument",
+          "filter-placeholder": "Filter...",
+          "filters-no-matches": "Inga träffar",
+          "no-entries": "Inga dokument",
+          "sort": {
+            "alphabetical-asc": "Alfabetisk (stigande)",
+            "alphabetical-desc": "Alfabetisk (fallande)",
+            "filter": "Filter"
+          },
+          "trash": "Skräp",
+          "trash-empty": "Den är tom"
+        },
+        "entry": {
+          "add-custom-field-btn": "Lägg till anpassat fält",
+          "attachments": "Bilagor",
+          "cancel-edit": "Avbryt",
+          "custom-fields": "Anpassade fält",
+          "edit": "Ändra",
+          "edit-document": "Ändra dokument",
+          "none-selected": {
+            "message": "Välj eller skapa nytt dokument",
+            "title": "Inget dokument valt"
+          },
+          "save": "Spara",
+          "trash-move": {
+            "message": "Är du säker att du vill flytta detta dokument till Skräp?",
+            "title": "Bekräfta flytt till Skräp",
+            "trash-btn": "Flytta till Skräp"
+          },
+          "untitled": "(Untitled)"
+        },
+        "entry-menu": {
+          "move-to": "Flytta till...",
+          "move-to-parent": "Flytta till {{group}}",
+          "move-to-trash": "Flytta till Skräp"
+        },
+        "entry-type": {
+          "default-label": "Standard",
+          "title": {
+            "credit_card": "Kredit-/Bankkort",
+            "login": "Inloggning",
+            "note": "Anteckning",
+            "ssh_key": "SSH-nyckel",
+            "website": "Nätsida"
+          }
+        },
+        "group": {
+          "header": "Grupper",
+          "prompt": {
+            "cancel": "Avbryt",
+            "create": "Skapa grupp",
+            "message": "Lägg till gruppnamn:",
+            "rename": "Ändra namn på grupp",
+            "save": "Spara"
+          }
+        },
+        "group-menu": {
+          "add-new-group": "Lägg till ny grupp",
+          "move-to": "Flytta till...",
+          "move-to-parent": "Flytta till {{group}}",
+          "move-to-root": "Flytta till rotnivå",
+          "move-to-trash": "Flytta till Skräp",
+          "rename-group": "Ändra namn"
+        },
+        "new-entry": {
+          "cta": "Nytt dokument"
+        },
+        "trash": {
+          "header": "Skräp"
+        }
+      }
+
+}

@@ -334,5 +334,106 @@
             "unlock-vault": "保管庫をアンロック",
             "vault-settings": "保管庫の設定"
         }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "キャンセル",
+                "cancel-title": "ファイルの追加をキャンセルする",
+                "delete": "削除",
+                "delete-prompt": "削除されたファイルは復元できません。\n本当に削除しますか？",
+                "delete-prompt-title": "\"{{title}}\"を削除する",
+                "delete-title": "削除する"
+            },
+            "delete": "削除",
+            "delete-title": "ファイルを削除する",
+            "download": "ダウンロード",
+            "download-title": "ファイルをダウンロード",
+            "drop-files": "ファイルをドロップして追加",
+            "drop-instruction": "ファイルをドロップして追加"
+        },
+        "cancel": "キャンセル",
+        "custom-fields": {
+            "change-type": "形式を変更:",
+            "delete-field": "フィールドを削除",
+            "field-type": {
+                "text": "テキスト(デフォルト)",
+                "note": "ノート",
+                "password": "パスワード",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "ドキュメントを追加する",
+            "documents": "ドキュメント",
+            "filter-placeholder": "検索する…",
+            "filters-no-matches": "該当するドキュメントがありません",
+            "no-entries": "ドキュメントがありません",
+            "sort": {
+                "alphabetical-asc": "アルファベット昇順 (aからz)",
+                "alphabetical-desc": "アルファベット降順 (zからa)",
+                "filter": "検索"
+            },
+            "trash": "ゴミ箱",
+            "trash-empty": "ゴミ箱は空です。"
+        },
+        "entry": {
+            "add-custom-field-btn": "カスタムフィールドを追加する",
+            "attachments": "添付ファイル",
+            "cancel-edit": "キャンセル",
+            "custom-fields": "カスタムフィールド",
+            "edit": "編集",
+            "edit-document": "ドキュメントを編集",
+            "none-selected": {
+                "message": "ドキュメントを選択するか新しいドキュメントを作成してください",
+                "title": "ドキュメントが選択されていません"
+            },
+            "save": "保存",
+            "trash-move": {
+                "message": "本当にゴミ箱に移動しますか？",
+                "title": "ゴミ箱に移動",
+                "trash-btn": "ゴミ箱に移動する"
+            },
+            "untitled": "(無題のドキュメント)"
+        },
+        "entry-menu": {
+            "move-to": "移動する",
+            "move-to-parent": "{{group}}へ移動",
+            "move-to-trash": "ゴミ箱へ移動"
+        },
+        "entry-type": {
+            "default-label": "デフォルト",
+            "title": {
+                "credit_card": "クレジット/キャッシュカード",
+                "login": "ログイン",
+                "note": "ノート",
+                "ssh_key": "SSH Key",
+                "website": "ウェブサイト"
+            }
+        },
+        "group": {
+            "header": "グループ",
+            "prompt": {
+                "cancel": "キャンセル",
+                "create": "グループを作る",
+                "message": "グループ名を入力:",
+                "rename": "グループ名を変更",
+                "save": "保存"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "グループを追加",
+            "move-to": "移動する",
+            "move-to-parent": "{{group}}へ移動",
+            "move-to-root": "ルートへ移動",
+            "move-to-trash": "ゴミ箱へ移動",
+            "rename-group": "名前を変更する"
+        },
+        "new-entry": {
+            "cta": "ドキュメントを追加"
+        },
+        "trash": {
+            "header": "ゴミ箱"
+        }
     }
 }

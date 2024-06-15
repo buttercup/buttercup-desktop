@@ -1,5 +1,6 @@
 import {
     SearchResult as CoreSearchResult,
+    EntryFacade,
     VaultFormatID,
     VaultSourceID,
     VaultSourceStatus
@@ -85,6 +86,10 @@ export enum ThemeSource {
     System = "system",
     Dark = "dark",
     Light = "light"
+}
+
+export interface UpdatedEntryFacade extends EntryFacade {
+    isNew?: boolean;
 }
 
 export interface UpdateProgressInfo {

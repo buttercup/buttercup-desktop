@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import { useState as useHookState } from "@hookstate/core";
 import { useSingleState } from "react-obstate";
 import { Intent, NonIdealState, Tag } from "@blueprintjs/core";
-import { VaultProvider, VaultUI, themes } from "@buttercup/ui";
+import { themes } from "@buttercup/ui";
 import { VaultFacade, VaultSourceStatus } from "buttercup";
 import styled, { ThemeProvider } from "styled-components";
 import { SearchContext } from "./search/SearchContext";
+import { VaultProvider } from "./vault/VaultContext";
+import { VaultUI } from "./vault/VaultUI";
 import { VAULTS_STATE } from "../state/vaults";
 import { SAVING } from "../state/app";
 import { fetchUpdatedFacade } from "../actions/facade";
@@ -23,7 +25,7 @@ import { t } from "../../shared/i18n/trans";
 import { ATTACHMENTS_MAX_SIZE } from "../../shared/symbols";
 import { Theme } from "../types";
 
-import "@buttercup/ui/dist/styles.css";
+// import "@buttercup/ui/dist/styles.css";
 
 const BENCH_IMAGE = require("../../../resources/images/bench.png").default;
 
@@ -135,7 +137,6 @@ export function VaultEditor(props: VaultEditorProps) {
                         attachmentsMaxSize={ATTACHMENTS_MAX_SIZE}
                         attachmentPreviews={attachmentPreviews}
                         icons
-                        iconsPath="icons"
                         onAddAttachments={addAttachments}
                         onDeleteAttachment={deleteAttachment}
                         onDownloadAttachment={downloadAttachment}

@@ -1,0 +1,105 @@
+{
+    "_": "Galician (GL)",
+    "vault-ui": {
+        "attachments": {
+          "confirm": {
+            "cancel": "Cancelar",
+            "cancel-title": "Cancelar a eliminación de arquivo adxunto",
+            "delete": "Eliminar",
+            "delete-prompt": "Ó eliminares este anexo, será borrado da bóveda permanentemente.\nSeguro que desexa eliminalo?",
+            "delete-prompt-title": "Eliminar \"{{title}}\"",
+            "delete-title": "Confirmar eliminado de arquivos adxuntos"
+          },
+          "delete": "Eliminar",
+          "delete-title": "Eliminar anexo",
+          "download": "Baixar",
+          "download-title": "Baixar anexo",
+          "drop-files": "Solte arquivo(s) para engadilo(s) á boveda",
+          "drop-instruction": "Arrastre e solte para engadir anexos"
+        },
+        "cancel": "Cancelar",
+        "custom-fields": {
+          "change-type": "Tipo de cambio:",
+          "delete-field": "Eliminar campo",
+          "field-type": {
+            "text": "Texto (por defecto)",
+            "note": "Nota",
+            "password": "Contrasinal",
+            "otp": "Contrasinal dun só uso"
+          }
+        },
+        "entries-list": {
+          "create-one-cta": "E por qué non crear un novo?",
+          "documents": "Documentos",
+          "filter-placeholder": "Filtrar...",
+          "filters-no-matches": "Sen coincidencias",
+          "no-entries": "Sen Documentos",
+          "sort": {
+            "alphabetical-asc": "Orde alfabético (ascendente)",
+            "alphabetical-desc": "Orde alfabético (descendente)",
+            "filter": "Filtro"
+          },
+          "trash": "Lixo",
+          "trash-empty": "Está baleiro"
+        },
+        "entry": {
+          "add-custom-field-btn": "Engadir novo campo",
+          "attachments": "Anexos",
+          "cancel-edit": "Cancelar",
+          "custom-fields": "Campo personalizado",
+          "edit": "Edit",
+          "edit-document": "Edit Document",
+          "none-selected": {
+            "message": "Escolle ou cree un novo documento",
+            "title": "Ningún documento escollido"
+          },
+          "save": "Gardar",
+          "trash-move": {
+            "message": "Estás seguro que desexas botar esta entrada no lixo?",
+            "title": "Confirmación botar no lixo",
+            "trash-btn": "Botar no lixo"
+          },
+          "untitled": "(Sen título)"
+        },
+        "entry-menu": {
+          "move-to": "Mover a...",
+          "move-to-parent": "Mover a {{group}}",
+          "move-to-trash": "Botar no lixo"
+        },
+        "entry-type": {
+          "default-label": "Por defecto",
+          "title": {
+            "credit_card": "Tarxeta crédito/débito",
+            "login": "Acceso",
+            "note": "Nota",
+            "ssh_key": "Chave SSH",
+            "website": "Páxina web"
+          }
+        },
+        "group": {
+          "header": "Cartafol",
+          "prompt": {
+            "cancel": "Cancelar",
+            "create": "Crear novo cartafol",
+            "message": "Dalle un nome ó cartafol:",
+            "rename": "Renomear cartafol",
+            "save": "Gardar"
+          }
+        },
+        "group-menu": {
+          "add-new-group": "Engadir un novo grupo",
+          "move-to": "Mover a...",
+          "move-to-parent": "Mover a {{group}}",
+          "move-to-root": "Mover á raiz",
+          "move-to-trash": "Botar no lixo",
+          "rename-group": "Renomear"
+        },
+        "new-entry": {
+          "cta": "Nova entrada"
+        },
+        "trash": {
+          "header": "Lixo"
+        }
+      }
+
+}

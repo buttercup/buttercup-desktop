@@ -279,7 +279,7 @@
                     "mode-none": "Nooit",
                     "title": "Start toepassing op achtergrond"
                 },
-                "start-with-session" : "Toepassing automatisch starten wanneer mijn sessie wordt gestart",
+                "start-with-session": "Toepassing automatisch starten wanneer mijn sessie wordt gestart",
                 "title": "Opstartopties"
             },
             "theme": "Thema"
@@ -383,6 +383,126 @@
             "remove-vault": "Verwijderen kluis",
             "unlock-vault": "Ontgrendelen kluis",
             "vault-settings": "Kluisinstellingen"
+        }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "Annuleren",
+                "cancel-title": "Annuleer bijlage verwijderen",
+                "delete": "Verwijderen",
+                "delete-prompt": "Het verwijderen van deze bijlage zal deze permanent uit je kluis verwijderen.\nWeet je zeker dat je het wilt verwijderen?",
+                "delete-prompt-title": "Verwijder \"{{title}}\"",
+                "delete-title": "Bevestig bijlage verwijderen"
+            },
+            "delete": "Verwijderen",
+            "delete-title": "Verwijder bijlage",
+            "download": "Downloaden",
+            "download-title": "Download bijlage",
+            "drop-files": "Sleep bestand(den) hierheen voor toevoegen aan kluis",
+            "drop-instruction": "Sleep en plaats om bijlagen toe te voegen"
+        },
+        "cancel": "Annuleren",
+        "custom-fields": {
+            "change-type": "Verander type:",
+            "delete-field": "Verwijder veld",
+            "field-type": {
+                "text": "Tekst (standaard)",
+                "note": "Notitie",
+                "password": "Wachtwoord",
+                "otp": "OTP"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "Waarom niet een nieuwe maken?",
+            "documents": "Documenten",
+            "filter-placeholder": "Filter...",
+            "filters-no-matches": "Geen overeenkomsten",
+            "no-entries": "Geen documenten",
+            "sort": {
+                "alphabetical-asc": "Alphabetisch (oplopend)",
+                "alphabetical-desc": "Alphabetisch (aflopend)",
+                "filter": "Filter"
+            },
+            "trash": "Prullenmand",
+            "trash-empty": "Het is leeg"
+        },
+        "entry": {
+            "add-custom-field-btn": "Toevoegen aangepast veld",
+            "attachments": "Bijlagen",
+            "cancel-edit": "Annuleren",
+            "click-to-edit": "Klik om te bewerken",
+            "custom-fields": "Aangepaste velden",
+            "edit": "Bewerken",
+            "edit-document": "Bewerk document",
+            "field-controls": {
+                "password": {
+                    "hide": "Verbergen",
+                    "reveal": "Tonen"
+                }
+            },
+            "none-selected": {
+                "message": "Selecteer of maak een nieuw document aan",
+                "title": "Geen document geselecteerd"
+            },
+            "save": "Opslaan",
+            "save-disabled-title": {
+                "readonly": "Bewerken is niet mogelijk op dit moment",
+                "untitled": "Sommige velden missen titels"
+            },
+            "trash-move": {
+                "message": "Weet je zeker dat je dit item wilt verplaatsen naar de prullenmand?",
+                "title": "Bevestig verplaatsen naar prullenmand",
+                "trash-btn": "Verplaats naar prullenmand"
+            },
+            "untitled": "(Zonder titel)"
+        },
+        "entry-menu": {
+            "move-to": "Verplaats naar...",
+            "move-to-parent": "Verplaats naar {{group}}",
+            "move-to-trash": "Verplaats naar prullenmand"
+        },
+        "entry-type": {
+            "default-label": "Standaard",
+            "title": {
+                "credit_card": "Creditcard/bankpas",
+                "login": "Login",
+                "note": "Notitie",
+                "ssh_key": "SSH-sleutel",
+                "website": "Website"
+            }
+        },
+        "group": {
+            "header": "Groepen",
+            "prompt": {
+                "cancel": "Annuleren",
+                "create": "Nieuwe groep",
+                "message": "Voer naam groep in:",
+                "rename": "Hernoem groep",
+                "save": "Opslaan"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "Nieuwe groep",
+            "move-to": "Verplaats naar...",
+            "move-to-parent": "Verplaats naar {{group}}",
+            "move-to-root": "Verplaats naar hoofdniveau",
+            "move-to-trash": "Verplaats naar prullenmand",
+            "rename-group": "Hernoemen"
+        },
+        "new-entry": {
+            "cta": "Nieuw item"
+        },
+        "trash": {
+            "close-button": "Sluiten",
+            "empty-button-title": "Leeg prullenmand",
+            "empty-confirm-dialog": {
+                "cancel-button": "Annuleren",
+                "confirm-button": "Legen",
+                "message": "Weet je zeker dat je de prullenmand wilt legen?",
+                "title": "Leeg prullenmand"
+            },
+            "header": "Prullenmand"
         }
     }
 }

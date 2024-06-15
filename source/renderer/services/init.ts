@@ -12,7 +12,7 @@ import { getOSLocale } from "./i18n";
 import { getPreferences } from "./preferences";
 import { applyCurrentUpdateState, applyReadyUpdateState } from "./update";
 import { initialisePresence } from "./presence";
-import { changeLanguage as changeUiLangage } from "@buttercup/ui";
+// import { changeLanguage as changeUiLangage } from "@buttercup/ui";
 
 let __lastInit: Promise<void> | null = null;
 
@@ -30,11 +30,11 @@ async function initialiseInternal(rootElement: HTMLElement) {
     const language = getLanguage(preferences, locale);
     logInfo(`Starting with language: ${language}`);
     await initialiseI18n(language);
-    await changeUiLangage(language);
+    // await changeUiLangage(language);
     onLanguageChanged((newLang) => {
         logInfo(`Language updated: ${newLang}`);
         changeLanguage(newLang);
-        changeUiLangage(language);
+        // changeUiLangage(language);
     });
     ipcRenderer.send("update-vault-windows");
     logInfo("Window opened and initialised");
