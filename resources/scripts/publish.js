@@ -20,6 +20,14 @@ async function buildMac() {
     console.log("Result:", result);
 }
 
+async function buildLinux() {
+    console.log("Building Linux...");
+    const result = await builder.build({
+        targets: builder.Platform.LINUX.createTarget()
+    });
+    console.log("Result:", result);
+}
+
 async function clean() {
     console.log("Cleaning...");
     await rimraf(BUILD_DIR);
@@ -33,7 +41,7 @@ async function routine(...callbacks) {
     }
 }
 
-routine(clean, buildApp, buildMac)
+routine(clean, buildApp, buildLinux)
     .then(() => {
         console.log("Done.");
     })
