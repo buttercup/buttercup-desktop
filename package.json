@@ -12,6 +12,7 @@
     "package:linux": "electron-builder --linux",
     "package:mac": "electron-builder --mac",
     "package:win": "electron-builder --win",
+    "publish": "node ./resources/scripts/publish.js",
     "release": "run-s build package",
     "set-version": "node ./resources/scripts/set-version.js",
     "start": "npm run start:main",
@@ -109,7 +110,11 @@
       "icon": "./resources/build/icon.icns",
       "notarize": {
         "teamId": "9D8F4J769D"
-      }
+      },
+      "target": [{
+        "target": "dmg",
+        "arch": ["x64"]
+      }]
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
@@ -158,7 +163,10 @@
         "portable",
         "7z"
       ],
-      "publisherName": "MadDev Oy"
+      "publisherName": [
+        "MadDev Oy",
+        "Vault Garden Oy"
+      ]
     },
     "nsis": {
       "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
