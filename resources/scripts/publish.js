@@ -12,18 +12,14 @@ async function buildApp() {
     await promisify(exec)("npm run build");
 }
 
-async function buildMac() {
-    console.log("Building Mac...");
+async function buildBundle() {
+    console.log("Assembling bundles...");
     const result = await builder.build({
-        targets: builder.Platform.MAC.createTarget()
-    });
-    console.log("Result:", result);
-}
-
-async function buildLinux() {
-    console.log("Building Linux...");
-    const result = await builder.build({
-        targets: builder.Platform.LINUX.createTarget()
+        targets: new Map([
+            ...builder.Platform.MAC.createTarget(),
+            ...builder.Platform.LINUX.createTarget(),
+            ...builder.Platform.WINDOWS.createTarget()
+        ])
     });
     console.log("Result:", result);
 }
@@ -41,7 +37,7 @@ async function routine(...callbacks) {
     }
 }
 
-routine(clean, buildApp, buildLinux)
+routine(clean, buildApp, buildBundle)
     .then(() => {
         console.log("Done.");
     })

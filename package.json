@@ -56,6 +56,13 @@
   },
   "homepage": "https://github.com/buttercup/desktop#readme",
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "buttercup",
+        "repo": "buttercup-desktop"
+      }
+    ],
     "afterPack": "./resources/scripts/afterPack.js",
     "afterAllArtifactBuild": "./resources/scripts/afterAllArtifactBuild.js",
     "appId": "pw.buttercup.desktop",
@@ -145,23 +152,25 @@
         ]
       }
     ],
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "buttercup",
-        "repo": "buttercup-desktop"
-      }
-    ],
     "directories": {
       "output": "dist"
     },
     "win": {
       "icon": "./resources/build/icon.ico",
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "target": [
-        "nsis",
-        "portable",
-        "7z"
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "7z",
+          "arch": ["x64"]
+        }
       ],
       "publisherName": [
         "MadDev Oy",
@@ -169,13 +178,13 @@
       ]
     },
     "nsis": {
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
       "oneClick": false,
       "perMachine": false,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
+      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
     }
   },
   "jest": {
