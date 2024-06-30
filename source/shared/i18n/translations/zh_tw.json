@@ -1,0 +1,513 @@
+{
+    "_": "繁體中文 (臺灣)",
+    "about": {
+        "description": "一款免費、開源且跨平臺的密碼管理器。",
+        "dialog": {
+            "close-button": "關閉",
+            "close-button-title": "關閉關於對話框"
+        },
+        "title": "關於",
+        "version": {
+            "core": "核心",
+            "desktop": "桌面版"
+        }
+    },
+    "add-vault-menu": {
+        "choose-file-prompt": "選擇一個保險箱檔案或建立一個新的保險箱：",
+        "choose-type-prompt": "選擇要新增的保險箱類型：",
+        "confirm": {
+            "existing-password": "輸入主要保險箱密碼：",
+            "new-password": "輸入新的主要保險箱密碼：",
+            "password-placeholder": "保險箱密碼..."
+        },
+        "copy-auth-link": {
+            "button": "複製網址",
+            "title": "複製驗證網址",
+            "url-copied": "驗證網址已複製到剪貼簿"
+        },
+        "google-auth-button": "進行驗證",
+        "google-auth-button-title": "使用 Google Drive 進行驗證",
+        "google-auth-error": "Google 驗證失敗",
+        "loader": {
+            "dropbox-auth": "將開啟一個獨立的視窗進行驗證",
+            "file-prompt": "將開啟一個對話框以選擇保險箱檔案",
+            "google-auth": {
+                "instr-1": "您可以選擇 Buttercup 在存取您的 <strong>Google Drive</strong> 帳戶時使用的權限等級。",
+                "instr-2": "選擇 <strong>開放</strong> 權限設定將授予 Buttercup 存取您帳戶中所有檔案和資料夾以及連線共享的權限。",
+                "instr-3": "選擇 <i>非</i>開放設定將授予 Buttercup 存取其先前建立/存取檔案的權限。"
+            },
+            "webdav-auth": {
+                "password-label": "密碼",
+                "password-plc": "WebDAV 密碼",
+                "url-label": "WebDAV 服務",
+                "username-label": "使用者名稱",
+                "username-plc": "WebDAV 使用者名稱"
+            }
+        },
+        "page-choose-next": "下一步",
+        "page-choose-next-title": "繼續新增保險箱",
+        "page-confirm-cancel": "取消",
+        "page-confirm-cancel-title": "取消解鎖",
+        "page-confirm-finish": "新增保險箱",
+        "page-confirm-finish-title": "確認新增保險箱",
+        "title": "新增保險箱",
+        "webdav-continue": "下一步",
+        "webdav-continue-title": "使用 WebDAV 連線"
+    },
+    "add-vault-page": {
+        "cta-button": "新增保險箱",
+        "description": "尚未新增任何保險箱...",
+        "title": "全新開始"
+    },
+    "app-menu": {
+        "about": "關於",
+        "add-new-vault": "新增新保險箱",
+        "biometrics": "使用生物識別解鎖",
+        "close-window": "關閉視窗",
+        "connection": "連線",
+        "current": "目前保險箱",
+        "debug": "除錯",
+        "devtool": "開發工具",
+        "edit": "編輯",
+        "enable-secure-file-host": "啟用瀏覽器存取",
+        "export": "匯出",
+        "import": "匯入",
+        "lock-all": "全部鎖定",
+        "lock-current-vault": "鎖定目前保險箱",
+        "open": "開啟",
+        "open-vault": "開啟保險箱",
+        "preferences": "偏好設定",
+        "quit": "結束",
+        "search": "搜尋",
+        "unlock-vault": "解鎖",
+        "unlocked-vaults": "{{count}} 個已解鎖的保險箱",
+        "unlocked-vaults_plural": "{{count}} 個已解鎖的保險箱",
+        "vaults": "保險箱",
+        "view": "檢視",
+        "window": "視窗",
+        "window-reposition": "重新定位"
+    },
+    "biometrics": {
+        "prompt": {
+            "store": "儲存保險箱 '{{name}}' 的登入",
+            "unlock-vault": "解鎖保險箱 '{{name}}'"
+        }
+    },
+    "browser-access-dialog": {
+        "code-copied": "瀏覽器存取代碼已複製",
+        "dialog": {
+            "close-button": "關閉",
+            "close-button-title": "關閉連線對話框",
+            "instruction": {
+                "new-connection": "已建立與此應用程式的新連線，請求遠端存取所有桌面保險箱（在解鎖時）。",
+                "use-code": "使用以下存取代碼進行授權。"
+            },
+            "title": "瀏覽器存取請求"
+        }
+    },
+    "dialog": {
+        "attachment-save": {
+            "confirm-button": "儲存",
+            "title": "下載附件"
+        },
+        "biometric-reg": {
+            "button-cancel": "取消",
+            "button-cancel-title": "取消註冊",
+            "button-reg": "註冊",
+            "button-reg-title": "註冊生物識別解鎖",
+            "label": "保險箱密碼",
+            "placeholder": "保險箱密碼...",
+            "success": "成功註冊生物識別解鎖",
+            "title": "註冊生物識別解鎖"
+        },
+        "confirm-generic": {
+            "cancel-button": "取消",
+            "confirm-button": "確認"
+        },
+        "export-file-chooser": {
+            "submit-button": "匯出",
+            "title": "匯出保險箱 '{{name}}'"
+        },
+        "file-chooser": {
+            "add": {
+                "cancel": "取消",
+                "cancel-title": "取消新保險箱建立",
+                "confirm": "設定保險箱目標",
+                "confirm-title": "確認新保險箱檔案名",
+                "description": "輸入新保險箱的檔案名：",
+                "title": "新增保險箱"
+            },
+            "nav": {
+                "cancel-new": "取消新建",
+                "create-new": "新建保險箱"
+            }
+        },
+        "file-vault": {
+            "add-existing": {
+                "bcup-filter": "Buttercup 保險箱",
+                "confirm-button": "新增",
+                "title": "新增現有保險箱"
+            },
+            "add-new": {
+                "bcup-filter": "Buttercup 保險箱",
+                "confirm-button": "建立",
+                "title": "新增新的保險箱"
+            }
+        },
+        "google-reauth": {
+            "close-button": {
+                "text": "取消",
+                "title": "取消驗證"
+            },
+            "description": "重新驗證 Google Drive 保險箱：{{vault}}",
+            "error": {
+                "reauth-failed": "重新驗證失敗"
+            },
+            "header": "保險箱的驗證已過期",
+            "success": "成功重新驗證 Google Drive：請再次解鎖",
+            "title": "Google 重新驗證"
+        },
+        "import-file-chooser": {
+            "submit-button": "匯入",
+            "title": "從 {{importer}} 保險箱匯入"
+        },
+        "new-file-prompt": {
+            "button-cancel": {
+                "text": "關閉",
+                "title": "關閉提示"
+            },
+            "button-existing": {
+                "text": "載入現有",
+                "title": "載入現有保險箱檔案"
+            },
+            "button-new": {
+                "text": "建立新的",
+                "title": "建立新的保險箱檔案"
+            },
+            "prompt": "您希望建立一個 <i>新的</i> 保險箱，還是讀取現有的？",
+            "title": "新增保險箱檔案"
+        },
+        "password-prompt": {
+            "biometric-fallback": {
+                "unlock-count-exceeded": "生物識別解鎖次數已達上限：需要輸入密碼",
+                "unlock-period-exceeded": "生物識別解鎖時效已過期：需要輸入密碼"
+            },
+            "biometrics-enabled": {
+                "description": "使用生物識別驗證自動解鎖，或取消以使用密碼登入。",
+                "title": "生物識別驗證已啟用"
+            },
+            "button-cancel": "取消",
+            "button-cancel-title": "取消解鎖",
+            "button-unlock": "解鎖",
+            "button-unlock-title": "確認保險箱解鎖",
+            "label": "保險箱密碼",
+            "placeholder": "保險箱密碼...",
+            "title": "保險箱解鎖"
+        }
+    },
+    "error": {
+        "attachment-add": "新增附件失敗",
+        "attachment-delete": "刪除附件失敗",
+        "attachment-download": "下載附件失敗",
+        "attachment-preview": "預覽附件失敗",
+        "biometric-invalid-password": "提供的密碼無效，無法在保險箱上啟用生物識別驗證",
+        "biometric-store-failed": "儲存生物識別驗證資訊失敗",
+        "biometric-unlock-failed": "使用生物識別解鎖保險箱失敗",
+        "fatal-boundary": "發生嚴重錯誤 - 我們很抱歉發生了這種情況。請檢視以下詳細資訊，以幫助診斷問題：",
+        "vault-settings-fetch-failed": "取得保險箱設定失敗"
+    },
+    "file-host": {
+        "code-copied": "檔案主機存取代碼已複製",
+        "dialog": {
+            "close-button": "關閉",
+            "close-button-title": "關閉連線對話框",
+            "instruction": {
+                "new-connection": "已建立與此應用程式的新連線，請求遠端存取檔案系統。",
+                "use-code": "使用以下存取代碼進行授權。"
+            },
+            "title": "安全檔案主機連線"
+        }
+    },
+    "input-required": "(必填)",
+    "notification": {
+        "attachment-downloaded": "附件已成功儲存",
+        "biometrics-disabled": "已為保險箱停用生物識別",
+        "error": {
+            "biometrics-disable-failed": "停用保險箱生物識別失敗：{{error}}",
+            "import-failed": "匯入失敗：{{error}}",
+            "languages-load": "載入語言失敗",
+            "preferences-load": "載入偏好設定失敗",
+            "preferences-save": "儲存偏好設定失敗",
+            "unknown-error": "未知錯誤",
+            "vault-format-upgrade-failed": "保險箱格式升級失敗",
+            "vault-lock-failed": "保險箱鎖定失敗",
+            "vault-save-failed": "保險箱儲存失敗",
+            "vault-settings-load": "載入保險箱設定失敗",
+            "vault-settings-save": "儲存保險箱設定失敗",
+            "vault-unlock-failed": "保險箱解鎖失敗"
+        },
+        "export-success": "成功匯出保險箱：{{name}}",
+        "import-success": "成功匯入保險箱：{{filename}}",
+        "preferences-saved": "偏好設定已儲存",
+        "vault-removed": "保險箱已移除：{{name}}",
+        "vault-saved": "保險箱已儲存",
+        "vault-settings-saved": "保險箱設定已儲存"
+    },
+    "preferences": {
+        "button": {
+            "cancel": "取消",
+            "cancel-title": "取消偏好設定更新",
+            "save": "儲存",
+            "save-title": "儲存更改"
+        },
+        "item": {
+            "clear-clipboard": "自動清除剪貼簿",
+            "language": "語言",
+            "lock-vaults-after-time": "一段時間後鎖定保險箱",
+            "lock-vaults-after-time-desc": "一段時間沒有活動將自動鎖定保險箱。",
+            "lock-vaults-window-closed": "保險箱視窗關閉時鎖定保險箱",
+            "lock-vaults-window-closed-label": "關閉時鎖定",
+            "pre-release": {
+                "description": "允許 Buttercup 除了從穩定版頻道更新，也允許從 <strong>預覽版發布頻道</strong> 更新。<strong>風險自負</strong>。預覽版發布版本相對不穩定，可能會損壞保險箱內容和偏好設定。",
+                "label": "啟用預覽版發布更新頻道",
+                "title": "預覽版發布更新"
+            },
+            "secure-file-host": {
+                "description": "安全檔案主機允許 <strong>Buttercup 瀏覽器擴充套件</strong> 透過此應用程式連線到本機保險箱。",
+                "label": "啟用安全檔案主機",
+                "title": "安全檔案主機"
+            },
+            "startup-options": {
+                "background": {
+                    "mode-hidden-always": "執行時隱藏",
+                    "mode-hidden-boot": "啟動/登入時隱藏",
+                    "mode-none": "永不",
+                    "title": "在背景中啟動應用程式"
+                },
+                "start-with-session": "我的會話啟動時自動啟動應用程式",
+                "title": "啟動選項"
+            },
+            "theme": "主題"
+        },
+        "section": {
+            "connectivity": "連線",
+            "general": "一般",
+            "security": "安全",
+            "updates": "更新"
+        },
+        "title": "偏好設定"
+    },
+    "search": {
+        "modal": {
+            "no-results": "沒有結果...",
+            "result-render-error": "渲染搜尋結果失敗"
+        }
+    },
+    "source-type": {
+        "dropbox": "Dropbox",
+        "file": "檔案",
+        "googledrive": "Google Drive",
+        "webdav": "WebDAV"
+    },
+    "theme": {
+        "dark": "深色",
+        "light": "淺色"
+    },
+    "update": {
+        "available": "有可用更新：{{version}}",
+        "dialog": {
+            "close-button": "關閉",
+            "close-button-title": "關閉更新資訊",
+            "title": "升級到 {{version}}",
+            "update-button": "更新",
+            "update-button-title": "立即更新應用程式"
+        },
+        "downloaded": "更新已下載",
+        "installed-restart": "重新啟動",
+        "ready": "更新已準備好：{{version}}",
+        "view": "檢視"
+    },
+    "vault-editor": {
+        "locked-state": "保險箱已鎖定",
+        "pending-state": "保險箱忙碌中",
+        "unlocked-state": "保險箱已解鎖"
+    },
+    "vault-management": {
+        "close-button": "關閉",
+        "close-button-title": "關閉保險箱管理",
+        "remove-vault-dialog": {
+            "cancel-button": "取消",
+            "cancel-button-title": "取消移除",
+            "description": "您確定要移除保險箱 \"{{title}}\" 嗎？",
+            "remove-button": "移除",
+            "remove-button-title": "確認移除保險箱",
+            "title": "移除保險箱"
+        },
+        "title": "保險箱"
+    },
+    "vault-settings": {
+        "backup": {
+            "description": "儲存時本機安全備份您的保險箱。",
+            "path": {
+                "helper": "留空以使用預設路徑",
+                "label": "備份路徑",
+                "placeholder": "絕對備份路徑"
+            },
+            "switch": "啟用本機備份",
+            "title": "備份"
+        },
+        "biometric": {
+            "description": "設定使用生物識別驗證時的密碼要求",
+            "enable-password-prompt-count": {
+                "label": "在提示輸入密碼之前的最大生物識別解鎖次數",
+                "placeholder": "生物識別解鎖次數",
+                "helper": "留空或設為 '0' 以停用"
+            },
+            "enable-password-prompt-timeout": {
+                "label": "在提示輸入密碼之前的最大天數",
+                "placeholder": "天數",
+                "helper": "留空或設為 '0' 以停用"
+            },
+            "title": "生物識別驗證"
+        },
+        "format": {
+            "a-description": "格式 A 是原始的 Buttercup 保險箱格式，使用增量儲存保險箱結構。",
+            "b-description": "格式 B 是新的 Buttercup 保險箱格式，使用 JSON 結構管理保險箱結構和歷史。",
+            "a-upgrade-b": "您應該升級到格式 B，這是目前 <strong>穩定</strong> 的版本。建議您在進行此操作之前備份您的保險箱。",
+            "description": "管理目前保險箱格式和更新。",
+            "format-type": "格式 {{format}}",
+            "title": "格式",
+            "upgrade-button": "升級"
+        },
+        "not-unlocked": "必須解鎖保險箱才能存取此區域。",
+        "title": "保險箱設定：{{title}}"
+    },
+    "vault-tabs": {
+        "context-menu": {
+            "lock-vault": "鎖定保險箱",
+            "remove-vault": "移除保險箱",
+            "unlock-vault": "解鎖保險箱",
+            "vault-settings": "保險箱設定"
+        }
+    },
+    "vault-ui": {
+        "attachments": {
+            "confirm": {
+                "cancel": "取消",
+                "cancel-title": "取消刪除附件",
+                "delete": "刪除",
+                "delete-prompt": "刪除此附件將永久從您的保險箱中移除。\n您確定要刪除它嗎？",
+                "delete-prompt-title": "刪除 \"{{title}}\"",
+                "delete-title": "確認刪除附件"
+            },
+            "delete": "刪除",
+            "delete-title": "刪除附件",
+            "download": "下載",
+            "download-title": "下載附件",
+            "drop-files": "拖放檔案以新增到保險箱",
+            "drop-instruction": "拖放以新增附件"
+        },
+        "cancel": "取消",
+        "custom-fields": {
+            "change-type": "更改類型：",
+            "delete-field": "刪除欄位",
+            "field-type": {
+                "text": "文字（預設）",
+                "note": "筆記",
+                "password": "密碼",
+                "otp": "一次性密碼"
+            }
+        },
+        "entries-list": {
+            "create-one-cta": "何不建立一個？",
+            "documents": "文件",
+            "filter-placeholder": "篩選...",
+            "filters-no-matches": "無符合結果",
+            "no-entries": "沒有文件",
+            "sort": {
+                "alphabetical-asc": "按字母順序（升序）",
+                "alphabetical-desc": "按字母順序（降序）",
+                "filter": "篩選"
+            },
+            "trash": "垃圾桶",
+            "trash-empty": "它是空的"
+        },
+        "entry": {
+            "add-custom-field-btn": "新增自定義欄位",
+            "attachments": "附件",
+            "cancel-edit": "取消",
+            "click-to-edit": "點選編輯",
+            "custom-fields": "自定義欄位",
+            "edit": "編輯",
+            "edit-document": "編輯文件",
+            "field-controls": {
+                "password": {
+                    "hide": "隱藏",
+                    "reveal": "顯示"
+                }
+            },
+            "none-selected": {
+                "message": "選擇或建立一個新文件",
+                "title": "未選擇文件"
+            },
+            "save": "儲存",
+            "save-disabled-title": {
+                "readonly": "目前無法編輯",
+                "untitled": "某些欄位缺少標題"
+            },
+            "trash-move": {
+                "message": "您確定要將此項目移到垃圾桶嗎？",
+                "title": "確認移到垃圾桶",
+                "trash-btn": "移到垃圾桶"
+            },
+            "untitled": "（無標題）"
+        },
+        "entry-menu": {
+            "move-to": "移動到...",
+            "move-to-parent": "移動到 {{group}}",
+            "move-to-trash": "移到垃圾桶"
+        },
+        "entry-type": {
+            "default-label": "預設",
+            "title": {
+                "credit_card": "信用卡、簽帳卡",
+                "login": "登入",
+                "note": "筆記",
+                "ssh_key": "SSH 金鑰",
+                "website": "網站"
+            }
+        },
+        "group": {
+            "header": "群組",
+            "prompt": {
+                "cancel": "取消",
+                "create": "建立群組",
+                "message": "輸入群組標題：",
+                "rename": "重新命名群組",
+                "save": "儲存"
+            }
+        },
+        "group-menu": {
+            "add-new-group": "新增新群組",
+            "move-to": "移動到...",
+            "move-to-parent": "移動到 {{group}}",
+            "move-to-root": "移動到最上層",
+            "move-to-trash": "移到垃圾桶",
+            "rename-group": "重新命名"
+        },
+        "new-entry": {
+            "cta": "新增項目"
+        },
+        "trash": {
+            "close-button": "關閉",
+            "empty-button-title": "清空垃圾桶",
+            "empty-confirm-dialog": {
+                "cancel-button": "取消",
+                "confirm-button": "清空",
+                "message": "您確定要清空垃圾桶嗎？",
+                "title": "清空垃圾桶"
+            },
+            "header": "垃圾桶"
+        }
+    }
+}
