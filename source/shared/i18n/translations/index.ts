@@ -14,6 +14,7 @@ import ro from "./ro.json";
 import ru from "./ru.json";
 import se from "./se.json";
 import zh_cn from "./zh_cn.json";
+import zh_tw from "./zh_tw.json";
 
 export default {
     en, // Keep as first item
@@ -32,5 +33,6 @@ export default {
     ro,
     ru,
     se,
-    zh_cn
+    zh_cn,
+    zh_tw
 };
