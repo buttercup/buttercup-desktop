@@ -1,6 +1,6 @@
 {
   "name": "Buttercup",
-  "version": "2.28.0-5",
+  "version": "2.28.0-6",
   "description": "Buttercup Password Manager",
   "main": "build/main/index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "package:linux": "electron-builder --linux",
     "package:mac": "electron-builder --mac",
     "package:win": "electron-builder --win",
+    "publish": "node ./resources/scripts/publish.js",
     "release": "run-s build package",
     "set-version": "node ./resources/scripts/set-version.js",
     "start": "npm run start:main",
@@ -55,6 +56,13 @@
   },
   "homepage": "https://github.com/buttercup/desktop#readme",
   "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "buttercup",
+        "repo": "buttercup-desktop"
+      }
+    ],
     "afterPack": "./resources/scripts/afterPack.js",
     "afterAllArtifactBuild": "./resources/scripts/afterAllArtifactBuild.js",
     "appId": "pw.buttercup.desktop",
@@ -109,7 +117,21 @@
       "icon": "./resources/build/icon.icns",
       "notarize": {
         "teamId": "9D8F4J769D"
-      }
+      },
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
     },
     "dmg": {
       "artifactName": "${productName}-${os}-x64-${version}.${ext}",
@@ -140,34 +162,46 @@
         ]
       }
     ],
-    "publish": [
-      {
-        "provider": "github",
-        "owner": "buttercup",
-        "repo": "buttercup-desktop"
-      }
-    ],
     "directories": {
       "output": "dist"
     },
     "win": {
       "icon": "./resources/build/icon.ico",
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}.${ext}",
       "target": [
-        "nsis",
-        "portable",
-        "7z"
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "7z",
+          "arch": [
+            "x64"
+          ]
+        }
       ],
-      "publisherName": "MadDev Oy"
+      "sign": "./resources/scripts/windowsSign.js",
+      "publisherName": [
+        "MadDev Oy",
+        "Vault Garden Oy"
+      ]
     },
     "nsis": {
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-installer.${ext}",
+      "artifactName": "${productName}-${os}-x64-${version}-installer.${ext}",
       "oneClick": false,
       "perMachine": false,
       "include": "./resources/build/installer.nsh"
     },
     "portable": {
-      "artifactName": "${productName}-${os}-${env.NODE_ARCHITECTURE}-${version}-portable.${ext}"
+      "artifactName": "${productName}-${os}-x64-${version}-portable.${ext}"
     }
   },
   "jest": {
@@ -254,6 +288,7 @@
     "allotment": "^1.20.2",
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
+    "chalk": "^4.1.2",
     "classnames": "^2.5.1",
     "concurrently": "^6.3.0",
     "copy-webpack-plugin": "^7.0.0",
