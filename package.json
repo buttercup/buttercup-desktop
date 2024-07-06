@@ -188,6 +188,7 @@
           ]
         }
       ],
+      "sign": "./resources/scripts/windowsSign.js",
       "publisherName": [
         "MadDev Oy",
         "Vault Garden Oy"
