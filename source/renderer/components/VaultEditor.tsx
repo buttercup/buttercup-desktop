@@ -25,8 +25,6 @@ import { t } from "../../shared/i18n/trans";
 import { ATTACHMENTS_MAX_SIZE } from "../../shared/symbols";
 import { Theme } from "../types";
 
-// import "@buttercup/ui/dist/styles.css";
-
 const BENCH_IMAGE = require("../../../resources/images/bench.png").default;
 
 interface VaultEditorProps {
