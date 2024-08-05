@@ -39,7 +39,7 @@ export function App() {
         >
             <ThemeProvider theme={themeType === Theme.Dark ? themes.dark : themes.light}>
                 <DndProvider backend={HTML5Backend}>
-                    <BaseContainer onCopy={() => userCopiedText(document.getSelection()?.toString() ?? "")}>
+                    <BaseContainer className={`theme-${themeType}`} onCopy={() => userCopiedText(document.getSelection()?.toString() ?? "")}>
                         <Router>
                             <Switch>
                                 <Route path="/add-vault">
