@@ -7,6 +7,13 @@ const chalk = require("chalk");
 
 const BUILD_DIR = resolve(__dirname, "../../build");
 const DIST_DIR = resolve(__dirname, "../../dist");
+const EXPECTED_ENV_VARS = [
+    "APPLE_ID",
+    "APPLE_APP_SPECIFIC_PASSWORD",
+    "APPLE_TEAM_ID",
+    "GH_TOKEN",
+    "WIN_YUBIKEY_PIN"
+];
 
 async function buildApp() {
     console.log("Building...");
@@ -29,6 +36,14 @@ async function buildBundle() {
     }
 }
 
+async function check() {
+    for (const envVar of EXPECTED_ENV_VARS) {
+        if (typeof process.env[envVar] !== "string") {
+            throw new Error(`Environment variable not set: ${envVar}`);
+        }
+    }
+}
+
 async function clean() {
     console.log("Cleaning...");
     await rimraf(BUILD_DIR);
@@ -42,7 +57,7 @@ async function routine(...callbacks) {
     }
 }
 
-routine(clean, buildApp, buildBundle)
+routine(check, clean, buildApp, buildBundle)
     .then(() => {
         console.log("Done.");
     })
