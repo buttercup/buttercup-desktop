@@ -22,7 +22,7 @@ export default function CreditCard(props) {
     });
     return (
         <Container>
-            <Card cvc={cc.cvv} expiry={cc.expiry} focused="" name={cc.name} number={cc.number} />
+            <Card cvc={cc.cvv} expiry={cc.expiry} focused name={cc.name} number={cc.number} />
         </Container>
     );
 }
