@@ -322,7 +322,7 @@ const Attachments = ({
                     {t("vault-ui.attachments.drop-instruction")}
                 </AttachmentDropInstruction>
             )}
-            {attachments.map(attachment => {
+            {attachments.map(attachment => (
                 <AttachmentItem
                     key={attachment.id}
                     title={attachment.name}
@@ -335,7 +335,7 @@ const Attachments = ({
                     <AttachmentItemSize>{attachment.sizeEncFriendly}</AttachmentItemSize>
                     <AttachmentItemTitle>{attachment.name}</AttachmentItemTitle>
                 </AttachmentItem>
-            })}
+            ))}
             <Drawer
                 icon={(previewingAttachment && previewingAttachment.icon) || undefined}
                 isOpen={!!previewingAttachment}
