@@ -443,7 +443,7 @@ const Attachments = ({
                 {deletingAttachment && (
                     <Fragment>
                         <div className={Classes.DIALOG_HEADER}>
-                            {t("attachments.confirm.delete-prompt-title", {
+                            {t("vault-ui.attachments.confirm.delete-prompt-title", {
                                 title: deletingAttachment?.name
                             })}
                         </div>

@@ -136,7 +136,7 @@ export const GroupsList = () => {
             {parentNode && (
                 <Fragment>
                     <MenuItem
-                        text={t("group-menu.move-to-parent", { group: parentNode.label })}
+                        text={t("vault-ui.group-menu.move-to-parent", { group: parentNode.label })}
                         key={parentNode.id}
                         icon={parentNode.icon}
                         onClick={() => moveGroupToGroup(selectedGroupID, parentNode.id)}
