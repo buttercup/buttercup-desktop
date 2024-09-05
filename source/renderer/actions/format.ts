@@ -14,12 +14,12 @@ export async function convertVaultToFormat(
         const converted = await ipcRenderer.invoke("convert-vault-format", sourceID, format);
         if (!converted) {
             logWarn(`Unable to convert vault forrmat: ${sourceID} (${format})`);
-            showWarning(t("vault-format-upgrade-failed"));
+            showWarning(t("notification.error.vault-format-upgrade-failed"));
             return;
         }
     } catch (err) {
         showError(
-            `${t("vault-format-upgrade-failed")}: ${
+            `${t("notification.error.vault-format-upgrade-failed")}: ${
                 err?.message ?? t("notification.error.unknown-error")
             }`
         );
