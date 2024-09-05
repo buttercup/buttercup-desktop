@@ -12,7 +12,7 @@ const AddEntry = ({ disabled }) => {
             {entryTypes.map(entryType => (
                 <MenuItem
                     key={entryType.type}
-                    text={t(`entry-type.title.${entryType.type}`)}
+                    text={t(`vault-ui.entry-type.title.${entryType.type}`)}
                     icon={entryType.icon}
                     label={entryType.default ? t("vault-ui.entry-type.default-label") : undefined}
                     onClick={() => onAddEntry(entryType.type || defaultEntryType)}
