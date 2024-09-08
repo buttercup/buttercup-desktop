@@ -37,7 +37,7 @@ export interface VaultContextState {
 
     batchDeleteItems: (action: { groupIDs?: Array<GroupID>; entryIDs?: Array<EntryID>; }) => void;
     onCollapseGroup: (group: GroupTreeNodeInfo) => void;
-    onCreateGroup: (parentID: GroupID, groupTitle: string) => void;
+    onCreateGroup: (parentID: GroupID | null, groupTitle: string) => void;
     onExpandGroup: (group: GroupTreeNodeInfo) => void;
     onSelectGroup: (groupID: GroupID | null) => void;
     onGroupFilterTermChange: (term: string) => void;

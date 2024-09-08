@@ -215,9 +215,6 @@ export const GroupsList = () => {
         if (groupEditID !== null && groupEditID !== -1) {
             onRenameGroup(groupEditID, newGroupName);
         } else {
-            if (!parentGroupID) {
-                throw new Error("No parent ID specified");
-            }
             onCreateGroup(parentGroupID, newGroupName);
         }
         closeEditDialog();
