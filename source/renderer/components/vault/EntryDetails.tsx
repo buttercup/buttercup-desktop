@@ -53,18 +53,22 @@ const FIELD_TYPE_OPTIONS: Array<{
     icon: IconName | MaybeElement;
     type: EntryPropertyValueType;
 }> = [
-    { type: EntryPropertyValueType.Text, i18nKey: "custom-fields.field-type.text", icon: "italic" },
+    {   type: EntryPropertyValueType.Text, 
+        i18nKey: "vault-ui.custom-fields.field-type.text", 
+        icon: "italic" },
     {
         type: EntryPropertyValueType.Note,
-        i18nKey: "custom-fields.field-type.note",
+        i18nKey: "vault-ui.custom-fields.field-type.note",
         icon: "align-left"
     },
     {
         type: EntryPropertyValueType.Password,
-        i18nKey: "custom-fields.field-type.password",
+        i18nKey: "vault-ui.custom-fields.field-type.password",
         icon: "key"
     },
-    { type: EntryPropertyValueType.OTP, i18nKey: "custom-fields.field-type.otp", icon: "time" }
+    {   type: EntryPropertyValueType.OTP,
+        i18nKey: "vault-ui.custom-fields.field-type.otp", 
+        icon: "time" }
 ];
 
 function iconName(mimeType) {
