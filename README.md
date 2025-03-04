@@ -6,6 +6,14 @@
 <img width="1406" alt="Buttercup Desktop screenshot" src="https://github.com/buttercup/buttercup-desktop/assets/3869469/1320b163-3e5c-4423-a4fd-8de7ffad2a0e">
 ²
 
+---
+
+⚠️ **Project Closure** ⚠️
+
+The Buttercup project has come to an end, and these repositories are in transition to becoming public archives. No public-facing resources will be removed, wherever possible. Please do not create issues or PRs - they will unfortunately be ignored. Discussion can be found [here](https://github.com/buttercup/buttercup-desktop/discussions/1395), and explanation [here](https://gist.github.com/perry-mitchell/43ebfcec4d874b77a704be1d4f2262e6).
+
+---
+
 ## About
 
 Buttercup is a free, open-source and cross-platform **password manager**, built on NodeJS with Typescript. It uses strong industry-standard encryption to protect your passwords and credentials (among other data you store in Buttercup vaults) at rest, within vault files (`.bcup`). Vaults can be loaded from and saved to a number of sources, such as the **local filesystem**, **Dropbox**, **Google Drive** or any **WebDAV**-enabled service (like _ownCloud_ or _Nextcloud_ ¹).
